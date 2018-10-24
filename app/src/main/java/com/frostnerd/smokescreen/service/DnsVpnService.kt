@@ -146,6 +146,12 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     override fun run() {
+        val prev = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler { t, e ->
+            e.printStackTrace()
+            prev.uncaughtException(t, e)
+        }
+
         val serverConfiguration:ServerConfiguration
         var foundConfig = AbstractHttpsDNSHandle.findKnownServerByUrl(serverUrl)
         serverConfiguration = foundConfig?.serverConfigurations?.values?.first() ?: ServerConfiguration.createSimpleServerConfig(serverUrl)
