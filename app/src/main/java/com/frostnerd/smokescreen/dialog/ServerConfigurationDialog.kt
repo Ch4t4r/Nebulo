@@ -13,7 +13,7 @@ import co.metalab.asyncawait.async
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
-import com.frostnerd.lifecycle.BaseDialog
+import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
@@ -70,6 +70,7 @@ class ServerConfigurationDialog(context: Context, callback:OnServersChosen) : Ba
             setCustomServerSyntaxCheck()
 
             if(customUrl) {
+                primaryServerWrap.visibility = View.VISIBLE
                 primaryServer.setText(primaryServerUrl)
                 secondaryServer.setText(secondaryServerUrl)
                 customServerOption.isChecked = true
