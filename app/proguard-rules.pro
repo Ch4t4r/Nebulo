@@ -68,3 +68,5 @@
 -dontwarn rx.observables.BlockingObservable
 -dontwarn retrofit2.Call
 -dontwarn retrofit2.Response
+
+-keepclassmembers enum * { *; }
