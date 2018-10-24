@@ -1,0 +1,70 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+def getArtifactoryUser() {
+    def user = System.getenv("ARTIFACTORY_USER")
+    if (user == null) {
+        user = artifactory_username
+    }
+
+    if (user == null) {
+        throw new Exception("Artifactory user not set!")
+    }
+
+    return user
+}
+
+def getArtifactoryPassword() {
+    def pw = System.getenv("ARTIFACTORY_PASSWORD")
+    if (pw == null) {
+        pw = artifactory_password
+    }
+    if (pw == null) {
+        throw new Exception("Artifactory password not set!")
+    }
+
+    return pw
+}
+
+ext.artifactory_username = getArtifactoryUser()
+ext.artifactory_password = getArtifactoryPassword()
+
+buildscript {
+    ext.kotlin_version = '1.2.71'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url 'https://artifactory.frostnerd.com/artifactory/libs-release-local'
+            credentials {
+                username = "$artifactory_username"
+                password = "$artifactory_password"
+            }
+        }
+        maven {
+            url 'https://artifactory.frostnerd.com/artifactory/libs-snapshot-local'
+            credentials {
+                username = "$artifactory_username"
+                password = "$artifactory_password"
+            }
+        }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

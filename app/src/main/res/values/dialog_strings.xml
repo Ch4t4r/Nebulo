@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_title_serverconfiguration">Server configuration</string>
+    <string name="dialog_serverconfiguration_customserver">Custom server</string>
+    <string name="dialog_serverconfiguration_customserver_hint">example-doh.com[/dns-query]</string>
+    <string name="dialog_serverconfiguration_primaryserver">Primary server</string>
+    <string name="dialog_serverconfiguration_secondaryserver">Secondary server</string>
+</resources>

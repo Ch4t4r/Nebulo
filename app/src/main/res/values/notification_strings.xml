@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_channel_default">Default Channel</string>
+    <string name="notification_channel_default_description">Default channel for posting notifications.</string>
+
+    <string name="notification_main_text">Queries are sent to %1$s</string>
+    <string name="notification_main_text_with_secondary">Queries are sent to %1$s and %2$s</string>
+    <string name="notification_main_subtext">%1$d queries this far</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_theme">Theme</string>
+    <string name="summary_theme">Sets the theme of this app</string>
+</resources>

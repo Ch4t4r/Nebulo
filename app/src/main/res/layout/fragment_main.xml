@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/statusImage"
+            android:layout_width="128dp"
+            android:layout_centerInParent="true"
+            android:layout_height="128dp"
+            android:contentDescription="TODO"
+            android:tint="?attr/inputElementColor"/>
+
+    <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageButton
+                android:id="@+id/serverButton"
+                android:src="@drawable/ic_main_server"
+                android:background="?attr/inputElementColor"
+                android:tint="?android:attr/textColor"
+                android:layout_width="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_height="48dp"/>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/startButton"
+                android:background="?attr/inputElementColor"
+                android:text="Start"
+                android:layout_toStartOf="@id/serverButton"
+                android:layout_marginEnd="8dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
