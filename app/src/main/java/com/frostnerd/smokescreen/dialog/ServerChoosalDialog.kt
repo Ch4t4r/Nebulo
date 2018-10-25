@@ -74,6 +74,8 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Stri
                     primaryServerUrl = configs.first().address.getUrl()
                     if(configs.size > 1) {
                         secondaryServerUrl = configs.last().address.getUrl()
+                    } else {
+                        secondaryServerUrl = null
                     }
                 }
             }
