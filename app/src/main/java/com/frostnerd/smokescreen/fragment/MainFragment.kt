@@ -32,12 +32,12 @@ import kotlinx.android.synthetic.main.fragment_main.*
  *
  * development@frostnerd.com
  */
-class MainFragment:Fragment() {
-    private val vpnRequestCode:Int = 1
+class MainFragment : Fragment() {
+    private val vpnRequestCode: Int = 1
     private var loadingAnimation: RotateAnimation? = null
-    private var proxyRunning:Boolean = false
+    private var proxyRunning: Boolean = false
     private var proxyStarting = false
-    private var vpnStateReceiver:BroadcastReceiver? = null
+    private var vpnStateReceiver: BroadcastReceiver? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,7 +51,7 @@ class MainFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         startButton.setOnClickListener {
-            if(proxyRunning) {
+            if (proxyRunning) {
                 DnsVpnService.sendCommand(requireContext(), Command.STOP)
                 proxyStarting = true
                 proxyRunning = false
@@ -61,9 +61,14 @@ class MainFragment:Fragment() {
             }
             updateStatusImage()
         }
-        vpnStateReceiver = requireContext().registerLocalReceiver(listOf(DnsVpnService.BROADCAST_VPN_ACTIVE, DnsVpnService.BROADCAST_VPN_INACTIVE)) {
-            if(it != null && it.action != null) {
-                when(it.action) {
+        vpnStateReceiver = requireContext().registerLocalReceiver(
+            listOf(
+                DnsVpnService.BROADCAST_VPN_ACTIVE,
+                DnsVpnService.BROADCAST_VPN_INACTIVE
+            )
+        ) {
+            if (it != null && it.action != null) {
+                when (it.action) {
                     DnsVpnService.BROADCAST_VPN_ACTIVE -> {
                         proxyStarting = false
                         proxyRunning = true
@@ -77,17 +82,15 @@ class MainFragment:Fragment() {
             }
         }
         serverButton.setOnClickListener {
-            ServerChoosalDialog(requireContext(), object:ServerChoosalDialog.OnServersChosen {
-                override fun serversChosen(primaryServerUrl: String, secondaryServerUrl: String?, customServers:Boolean) {
-                    val prefs = requireContext().getPreferences()
+            ServerChoosalDialog(requireContext()) { primaryServerUrl: String, secondaryServerUrl: String?, customServers: Boolean ->
+                val prefs = requireContext().getPreferences()
 
-                    prefs.putBoolean("doh_custom_server", customServers)
-                    prefs.putString("doh_server_url", primaryServerUrl)
-                    prefs.putString("doh_server_url_secondary", secondaryServerUrl)
+                prefs.putBoolean("doh_custom_server", customServers)
+                prefs.putString("doh_server_url", primaryServerUrl)
+                prefs.putString("doh_server_url_secondary", secondaryServerUrl)
 
-                    println("Saved $primaryServerUrl")
-                }
-            }).show()
+                println("Saved $primaryServerUrl, $secondaryServerUrl")
+            }.show()
         }
 
         updateStatusImage()
@@ -95,13 +98,13 @@ class MainFragment:Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(vpnStateReceiver != null) requireContext().unregisterLocalReceiver(vpnStateReceiver!!)
+        if (vpnStateReceiver != null) requireContext().unregisterLocalReceiver(vpnStateReceiver!!)
     }
 
     fun startVpn() {
         val prepare = VpnService.prepare(requireContext())
 
-        if(prepare == null) {
+        if (prepare == null) {
             requireContext().startService(Intent(requireContext(), DnsVpnService::class.java))
         } else {
             startActivityForResult(prepare, vpnRequestCode)
@@ -109,9 +112,9 @@ class MainFragment:Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == vpnRequestCode && resultCode == Activity.RESULT_OK) {
+        if (requestCode == vpnRequestCode && resultCode == Activity.RESULT_OK) {
             startVpn()
-        } else if(requestCode == vpnRequestCode) {
+        } else if (requestCode == vpnRequestCode) {
             proxyStarting = false
             updateStatusImage()
         }
@@ -126,13 +129,20 @@ class MainFragment:Fragment() {
             }
             proxyStarting -> {
                 startButton.setText(R.string.all_stop)
-                if(loadingAnimation == null) {
-                    loadingAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+                if (loadingAnimation == null) {
+                    loadingAnimation = RotateAnimation(
+                        0f,
+                        360f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f
+                    )
                     loadingAnimation?.repeatCount = Animation.INFINITE
                     loadingAnimation?.duration = 2300
                     loadingAnimation?.interpolator = LinearInterpolator()
                     statusImage.startAnimation(loadingAnimation)
-                } else if(!loadingAnimation!!.hasStarted() || loadingAnimation!!.hasEnded()) {
+                } else if (!loadingAnimation!!.hasStarted() || loadingAnimation!!.hasEnded()) {
                     statusImage.startAnimation(loadingAnimation)
                 }
                 statusImage.setImageResource(R.drawable.ic_spinner)

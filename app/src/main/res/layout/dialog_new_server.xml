@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:paddingLeft="@dimen/dialog_horizontal_margin"
+              android:paddingRight="@dimen/dialog_horizontal_margin"
+              android:paddingTop="@dimen/dialog_vertical_margin"
+              android:paddingBottom="@dimen/dialog_vertical_margin"
+              android:layout_height="match_parent">
+
+    <com.frostnerd.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            app:labelColorPrimary="?attr/foregroundElementColor"
+            app:labelColorSecondary="?attr/foregroundElementColor"
+            android:layout_marginTop="8dp"
+            app:revealDelay="0"
+            app:revealType="revealInstant"
+            app:labelText="@string/dialog_newserver_name"
+            app:hint="@string/dialog_newserver_name_hint"
+            app:allowCollapse="false"
+            app:minCharLength="1"
+            app:maxCharLength="50"
+            app:indicatorState="incorrect"
+            app:animationDuration="0"
+            android:id="@+id/serverNameWrap"
+            app:openKeyboardOnFocus="true"
+            android:layout_height="wrap_content">
+
+        <EditText
+                android:id="@+id/serverName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:text=""
+                android:nextFocusDown="@id/secondaryServer"
+                android:importantForAutofill="no"
+                android:textColor="?attr/foregroundElementColor">
+
+            <requestFocus/>
+        </EditText>
+    </com.frostnerd.materialedittext.MaterialEditText>
+
+    <com.frostnerd.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            app:labelColorPrimary="?attr/foregroundElementColor"
+            app:labelColorSecondary="?attr/foregroundElementColor"
+            android:layout_marginTop="8dp"
+            app:revealDelay="0"
+            app:revealType="revealInstant"
+            app:minCharLength="1"
+            app:labelText="@string/dialog_newserver_primaryserver"
+            app:hint="@string/dialog_newserver_primaryserver_hint"
+            app:allowCollapse="false"
+            app:animationDuration="0"
+            app:indicatorState="incorrect"
+            android:id="@+id/primaryServerWrap"
+            app:openKeyboardOnFocus="true"
+            android:layout_height="wrap_content">
+
+        <EditText
+                android:id="@+id/primaryServer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:text=""
+                android:nextFocusDown="@id/secondaryServer"
+                android:importantForAutofill="no"
+                android:textColor="?attr/foregroundElementColor">
+        </EditText>
+    </com.frostnerd.materialedittext.MaterialEditText>
+
+    <com.frostnerd.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            app:labelColorPrimary="?attr/foregroundElementColor"
+            app:labelColorSecondary="?attr/foregroundElementColor"
+            app:revealDelay="0"
+            android:layout_marginTop="8dp"
+            app:revealType="revealInstant"
+            app:labelText="@string/dialog_newserver_secondaryserver"
+            app:hint="@string/dialog_newserver_secondaryserver_hint"
+            android:id="@+id/secondaryServerWrap"
+            app:allowCollapse="false"
+            app:animationDuration="0"
+            android:layout_height="wrap_content">
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:nextFocusUp="@id/primaryServer"
+                android:inputType="text"
+                android:maxLines="1"
+                android:id="@+id/secondaryServer"
+                android:text=""
+                android:importantForAutofill="no"
+                android:textColor="?attr/foregroundElementColor">
+        </EditText>
+    </com.frostnerd.materialedittext.MaterialEditText>
+
+</LinearLayout>

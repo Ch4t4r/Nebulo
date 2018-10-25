@@ -2,20 +2,18 @@ package com.frostnerd.smokescreen.dialog
 
 import android.content.Context
 import android.content.DialogInterface
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import co.metalab.asyncawait.async
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.lifecyclemanagement.BaseDialog
-import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
+import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import kotlinx.android.synthetic.main.dialog_server_configuration.*
 
@@ -28,166 +26,113 @@ import kotlinx.android.synthetic.main.dialog_server_configuration.*
  *
  * development@frostnerd.com
  */
-class ServerChoosalDialog(context: Context, callback:OnServersChosen) : BaseDialog(context, context.getPreferences().getTheme().dialogStyle) {
-    private val knownServersMap = hashMapOf<String, HttpsUpstreamAddress>()
-    private var customUrl = false
-    private var primaryServerUrl:String
-    private var secondaryServerUrl:String? = null
-
-    private var oldPrimaryServerUrl:String
-    private var oldSecondaryServerUrl:String?
-
-    companion object {
-        val SERVER_URL_REGEX = Regex("^(?:https://)?([a-z0-9][a-z0-9-.]*[a-z0-9])(/[a-z0-9-.]+)*(/)?$", RegexOption.IGNORE_CASE)
-    }
+class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:String, secondaryServer:String?, customServer:Boolean) -> Unit) :
+    BaseDialog(context, context.getPreferences().getTheme().dialogStyle) {
+    private var customServers = false
+    private var primaryServerUrl: String
+    private var secondaryServerUrl: String? = null
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_server_configuration, null, false)
         setTitle(R.string.dialog_title_serverconfiguration)
         setView(view)
 
-        customUrl = context.getPreferences().isCustomServerUrl()
+        customServers = context.getPreferences().isCustomServerUrl()
         primaryServerUrl = context.getPreferences().getServerURl()
         secondaryServerUrl = context.getPreferences().getSecondaryServerURl()
-        oldPrimaryServerUrl = primaryServerUrl
-        oldSecondaryServerUrl = secondaryServerUrl
 
-        setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.cancel)
+        setButton(
+            DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.cancel)
         ) { _, _ -> }
-        setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.ok)
+        setButton(
+            DialogInterface.BUTTON_POSITIVE, context.getString(R.string.ok)
         ) { _, _ ->
-            if(customUrl) {
-                primaryServerUrl = primaryServer.text.toString()
-                secondaryServerUrl = if(!secondaryServer.text.isNullOrBlank()) {
-                    secondaryServer.text.toString()
-                } else null
-            } else secondaryServerUrl = null
-            callback.serversChosen(primaryServerUrl, secondaryServerUrl, customUrl)
+            onEntrySelected.invoke(primaryServerUrl, secondaryServerUrl, customServers)
         }
 
-        setOnShowListener {
+        setOnShowListener {_ ->
             addKnownServers()
-            setCustomServerSyntaxCheck()
 
-            if(customUrl) {
-                primaryServerWrap.visibility = View.VISIBLE
-                primaryServer.setText(primaryServerUrl)
-                secondaryServer.setText(secondaryServerUrl)
-                customServerOption.isChecked = true
-            } else {
-                primaryServerWrap.isEnabled = false
-                primaryServer.isEnabled = false
+            addServer.setOnClickListener {
+                NewServerDialog(context) { name, primaryServer, secondaryServer:String? ->
+                    val userServerConfiguration = UserServerConfiguration(name, primaryServer, secondaryServer)
+                    context.getDatabase().insert(userServerConfiguration)
+                    knownServersGroup.addView(createButtonForUserConfiguration(userServerConfiguration))
+                }.show()
+            }
+            knownServersGroup.setOnCheckedChangeListener { group, _ ->
+                val button = view.findViewById(group.checkedRadioButtonId) as RadioButton
+                val payload = button.tag
+
+                if(payload is UserServerConfiguration) {
+                    customServers = true
+                    primaryServerUrl = payload.primaryServerUrl
+                    secondaryServerUrl = payload.secondaryServerUrl
+                } else {
+                    val configs = payload as Set<HttpsDnsServerConfiguration>
+                    customServers = false
+                    primaryServerUrl = configs.first().address.getUrl()
+                    if(configs.size > 1) {
+                        secondaryServerUrl = configs.last().address.getUrl()
+                    }
+                }
             }
         }
-    }
-
-    private fun setCustomServerSyntaxCheck() {
-        primaryServer.addTextChangedListener(object:TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val valid = !s.isNullOrBlank() && SERVER_URL_REGEX.matches(s!!.toString())
-                if(valid) {
-                    if(secondaryServerWrap.visibility == View.GONE) {
-                        secondaryServerWrap.visibility = View.VISIBLE
-                    }
-                    primaryServerWrap.indicatorState = MaterialEditText.IndicatorState.UNDEFINED
-                }else if(!valid) {
-                    primaryServerWrap.indicatorState = MaterialEditText.IndicatorState.INCORRECT
-                }
-                primaryServerUrl = s?.toString() ?: primaryServerUrl
-                setOkButtonState()
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-        secondaryServer.addTextChangedListener(object:TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                secondaryServerUrl = s?.toString()
-                val valid = s.isNullOrEmpty() || SERVER_URL_REGEX.matches(s!!.toString())
-                secondaryServerWrap.indicatorState = if(valid) MaterialEditText.IndicatorState.UNDEFINED else MaterialEditText.IndicatorState.INCORRECT
-                setOkButtonState()
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-    }
-
-    private fun setOkButtonState() {
-        val enableButton = !customUrl || (!primaryServerUrl.isBlank() && SERVER_URL_REGEX.matches(primaryServerUrl) &&
-                (secondaryServerUrl.isNullOrBlank() || SERVER_URL_REGEX.matches(secondaryServerUrl!!)))
-
-        getButton(DialogInterface.BUTTON_POSITIVE).isEnabled = enableButton
-        getButton(DialogInterface.BUTTON_POSITIVE).visibility = if(enableButton) View.VISIBLE else View.INVISIBLE
     }
 
     private fun addKnownServers() {
-        context.async {
+        async {
+            val buttons = mutableListOf<RadioButton>()
             await {
                 for ((name, serverInfo) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS) {
                     if (!serverInfo.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS)) {
-                        knownServersMap[name] = serverInfo.servers[0].address
+                        buttons.add(0, createButtonForKnownConfiguration(name, serverInfo))
                     }
                 }
-            }
-            for (s in knownServersMap.keys.asSequence().sortedDescending()) {
-                val button = RadioButton(context)
-
-                button.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-                button.setTextColor(context.getPreferences().getTheme().getTextColor(context))
-                button.text = "$s (${knownServersMap[s]!!.FQDN})"
-                button.setOnCheckedChangeListener { _, isChecked ->
-                    if(isChecked) {
-                        customUrl = false
-                        primaryServerUrl = knownServersMap[s]!!.getUrl()
-                        secondaryServerUrl = null
-                    }
-                    setOkButtonState()
+                context.getDatabase().getAll(UserServerConfiguration::class.java).forEach {
+                    buttons.add(createButtonForUserConfiguration(it))
                 }
-                knownServersGroup.addView(button, 0)
-                if(!customUrl && knownServersMap[s]!!.getUrl() == primaryServerUrl) button.isChecked = true
             }
-            customServerOption.setOnCheckedChangeListener { _, isChecked ->
-                primaryServerWrap.isEnabled = isChecked
-                secondaryServerWrap.isEnabled = isChecked
-                primaryServer.isEnabled = isChecked
-                secondaryServer.isEnabled = isChecked
 
-                if (isChecked) {
-                    primaryServerWrap.visibility = View.VISIBLE
-
-                    oldSecondaryServerUrl = secondaryServerUrl
-                    oldPrimaryServerUrl = primaryServerUrl
-
-                    primaryServerUrl = primaryServer.text.toString()
-                    secondaryServerUrl = secondaryServer.text.toString()
-
-                    customUrl = true
-                    primaryServer.requestFocus()
-                    window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-
-                    val service = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-                    service?.showSoftInput(primaryServer, InputMethodManager.SHOW_IMPLICIT)
-                } else {
-                    primaryServerWrap.visibility = View.GONE
-                    primaryServerUrl = oldPrimaryServerUrl
-                    secondaryServerUrl = oldSecondaryServerUrl
-                }
-                setOkButtonState()
+            progress.visibility = View.GONE
+            for (button in buttons) {
+                knownServersGroup.addView(button)
             }
         }
+    }
+
+    private fun createButtonForKnownConfiguration(name:String, serverInfo:HttpsDnsServerInformation): RadioButton {
+        val button = RadioButton(context)
+        val configs = serverInfo.serverConfigurations.keys
+
+        button.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        button.setTextColor(context.getPreferences().getTheme().getTextColor(context))
+        if(configs.size == 1) button.text = "$name (${configs.first().address.FQDN})"
+        else button.text = "$name (${configs.first().address.FQDN}, ${configs.last().address.FQDN})"
+
+        button.tag = configs
+        return button
+    }
+
+    private fun createButtonForUserConfiguration(userConfiguration:UserServerConfiguration):RadioButton {
+        val button = RadioButton(context)
+        button.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        button.setTextColor(context.getPreferences().getTheme().getTextColor(context))
+
+        if(userConfiguration.secondaryServerUrl == null) button.text = "${userConfiguration.name} (${userConfiguration.primaryServerUrl})"
+        else button.text = "${userConfiguration.name} (${userConfiguration.primaryServerUrl}, ${userConfiguration.secondaryServerUrl})"
+
+        button.tag = userConfiguration
+        return button
     }
 
     override fun destroy() {
 
-    }
-
-    interface OnServersChosen {
-        fun serversChosen(primaryServerUrl:String, secondaryServerUrl:String?, customServers:Boolean)
     }
 }

@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_title_serverconfiguration">Server configuration</string>
-    <string name="dialog_serverconfiguration_customserver">Custom server</string>
-    <string name="dialog_serverconfiguration_customserver_hint">example-doh.com[/dns-query]</string>
-    <string name="dialog_serverconfiguration_primaryserver">Primary server</string>
-    <string name="dialog_serverconfiguration_secondaryserver">Secondary server</string>
+    <string name="dialog_serverconfiguration_addserver">Add a server</string>
+
+    <string name="dialog_newserver_title">Add a server</string>
+    <string name="dialog_newserver_name">Server name</string>
+    <string name="dialog_newserver_name_hint">Example</string>
+    <string name="dialog_newserver_primaryserver">Primary server</string>
+    <string name="dialog_newserver_primaryserver_hint">example-doh.com[/dns-query]</string>
+    <string name="dialog_newserver_secondaryserver">Secondary server (Optional)</string>
+    <string name="dialog_newserver_secondaryserver_hint">example-doh.com[/dns-query]</string>
 </resources>
