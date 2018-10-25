@@ -51,6 +51,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:text=""
+                    android:nextFocusDown="@id/secondaryServer"
                     android:importantForAutofill="no"
                     android:textColor="?attr/foregroundElementColor">
 
@@ -76,6 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
+                    android:nextFocusUp="@id/primaryServer"
                     android:inputType="text"
                     android:maxLines="1"
                     android:id="@+id/secondaryServer"
