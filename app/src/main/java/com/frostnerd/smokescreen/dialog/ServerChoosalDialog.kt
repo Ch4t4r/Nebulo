@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.dialog_server_configuration.*
  *
  * development@frostnerd.com
  */
-class ServerConfigurationDialog(context: Context, callback:OnServersChosen) : BaseDialog(context, context.getPreferences().getTheme().dialogStyle) {
+class ServerChoosalDialog(context: Context, callback:OnServersChosen) : BaseDialog(context, context.getPreferences().getTheme().dialogStyle) {
     private val knownServersMap = hashMapOf<String, HttpsUpstreamAddress>()
     private var customUrl = false
     private var primaryServerUrl:String

@@ -14,7 +14,7 @@ import android.view.animation.RotateAnimation
 import androidx.fragment.app.Fragment
 import com.frostnerd.general.Utils
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.dialog.ServerConfigurationDialog
+import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.getPreferences
@@ -77,7 +77,7 @@ class MainFragment:Fragment() {
             }
         }
         serverButton.setOnClickListener {
-            ServerConfigurationDialog(requireContext(), object:ServerConfigurationDialog.OnServersChosen {
+            ServerChoosalDialog(requireContext(), object:ServerChoosalDialog.OnServersChosen {
                 override fun serversChosen(primaryServerUrl: String, secondaryServerUrl: String?, customServers:Boolean) {
                     val prefs = requireContext().getPreferences()
 
