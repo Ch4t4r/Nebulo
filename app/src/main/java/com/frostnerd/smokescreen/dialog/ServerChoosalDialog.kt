@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.dialog
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.view.View
@@ -12,6 +13,7 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.database.DatabaseHelper
 import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
@@ -72,13 +74,14 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Stri
                     val configs = payload as Set<HttpsDnsServerConfiguration>
                     customServers = false
                     primaryServerUrl = configs.first().address.getUrl()
-                    if(configs.size > 1) {
-                        secondaryServerUrl = configs.last().address.getUrl()
+                    secondaryServerUrl = if(configs.size > 1) {
+                        configs.last().address.getUrl()
                     } else {
-                        secondaryServerUrl = null
+                        null
                     }
                 }
             }
+            checkCurrentConfiguration()
         }
     }
 
@@ -131,7 +134,33 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Stri
         else button.text = "${userConfiguration.name} (${userConfiguration.primaryServerUrl}, ${userConfiguration.secondaryServerUrl})"
 
         button.tag = userConfiguration
+        button.setOnLongClickListener {
+            showUserConfigDeleteDialog(userConfiguration)
+            true
+        }
         return button
+    }
+
+    private fun showUserConfigDeleteDialog(userConfiguration: UserServerConfiguration) {
+        AlertDialog.Builder(context, context.getPreferences().getTheme().dialogStyle)
+            .setTitle(R.string.dialog_deleteconfig_title)
+            .setMessage(context.getString(R.string.dialog_deleteconfig_text, userConfiguration.name))
+            .setNegativeButton(R.string.all_no) { _, _ -> }
+            .setPositiveButton(R.string.all_yes) { _, _ ->
+                context.getDatabase().delete(userConfiguration)
+                knownServersGroup.removeAllViews()
+
+                if(primaryServerUrl == userConfiguration.primaryServerUrl && secondaryServerUrl == userConfiguration.secondaryServerUrl) {
+                    // TODO Reset to default.
+                }
+
+                progress.visibility = View.VISIBLE
+                addKnownServers()
+            }.show()
+    }
+
+    fun checkCurrentConfiguration() {
+
     }
 
     override fun destroy() {

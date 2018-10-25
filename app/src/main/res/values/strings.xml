@@ -3,6 +3,8 @@
 
     <string name="all_stop">Stop</string>
     <string name="all_start">Start</string>
+    <string name="all_no">No</string>
+    <string name="all_yes">Yes</string>
 
     <string name="menu_main">Main screen</string>
     <string name="menu_dnsoverhttps">DNS over HTTPS</string>
