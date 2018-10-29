@@ -9,7 +9,7 @@ import android.system.OsConstants
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.networking.NetworkUtil
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.util.Preferences
+import com.frostnerd.smokescreen.util.preferences.AppSettings
 import android.content.pm.PackageManager
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -113,12 +113,12 @@ class DnsVpnService : VpnService(), Runnable {
     private fun createBuilder(): Builder {
         val builder = Builder()
 
-        val dummyServerIpv4 = Preferences.getInstance(this).dummyDnsAddressIpv4()
-        val dummyServerIpv6 = Preferences.getInstance(this).dummyDnsAddressIpv6()
+        val dummyServerIpv4 = AppSettings.getInstance(this).dummyDnsAddressIpv4()
+        val dummyServerIpv6 = AppSettings.getInstance(this).dummyDnsAddressIpv6()
 
         builder.addAddress("192.168.0.10", 24)
         builder.addAddress(NetworkUtil.randomLocalIPv6Address(), 48)
-        if (Preferences.getInstance(this).catchKnownDnsServers()) {
+        if (AppSettings.getInstance(this).catchKnownDnsServers()) {
             for (server in DnsServerInformation.KNOWN_DNS_SERVERS.values) {
                 for (ipv4Server in server.getIpv4Servers()) {
                     builder.addRoute(ipv4Server.address.address, 32)
@@ -137,7 +137,7 @@ class DnsVpnService : VpnService(), Runnable {
         builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
 
-        for (defaultBypassPackage in Preferences.getInstance(this).defaultBypassPackages()) {
+        for (defaultBypassPackage in AppSettings.getInstance(this).defaultBypassPackages()) {
             if (isPackageInstalled(defaultBypassPackage)) {
                 builder.addDisallowedApplication(defaultBypassPackage)
             }

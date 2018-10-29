@@ -5,9 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
-import com.frostnerd.smokescreen.util.Preferences
+import com.frostnerd.smokescreen.util.preferences.AppSettings
 
 /**
  * Copyright Daniel Wolf 2018
@@ -73,8 +71,8 @@ fun Context.unregisterLocalReceiver(receiver: BroadcastReceiver) {
     LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
 }
 
-fun Context.getPreferences(): Preferences {
-    return Preferences.getInstance(this)
+fun Context.getPreferences(): AppSettings {
+    return AppSettings.getInstance(this)
 }
 
 fun Array<*>.toStringArray():Array<String> {

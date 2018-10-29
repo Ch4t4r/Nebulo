@@ -10,7 +10,7 @@ import com.frostnerd.navigationdraweractivity.items.FragmentDrawerItem
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
-import com.frostnerd.smokescreen.util.Preferences
+import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.getPreferences
 
 class MainActivity : NavigationDrawerActivity() {
@@ -19,7 +19,7 @@ class MainActivity : NavigationDrawerActivity() {
     private var inputElementColor:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(Preferences.getInstance(this).getTheme().layoutStyle)
+        setTheme(AppSettings.getInstance(this).getTheme().layoutStyle)
         super.onCreate(savedInstanceState)
     }
 

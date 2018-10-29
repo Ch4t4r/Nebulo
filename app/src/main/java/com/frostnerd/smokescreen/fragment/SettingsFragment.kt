@@ -1,11 +1,10 @@
 package com.frostnerd.smokescreen.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.IntentUtil
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.util.Preferences
+import com.frostnerd.smokescreen.util.preferences.AppSettings
 
 /**
  * Copyright Daniel Wolf 2018
@@ -25,10 +24,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         super.onCreate(savedInstanceState)
         findPreference("theme").setOnPreferenceChangeListener { _, newValue ->
             val id = (newValue as? String)?.toInt() ?: newValue as Int
-            val newTheme = Preferences.Theme.findById(id)
+            val newTheme = AppSettings.Theme.findById(id)
 
             if(newTheme != null) {
-                Preferences.getInstance(requireContext()).setTheme(newTheme)
+                AppSettings.getInstance(requireContext()).setTheme(newTheme)
                 IntentUtil.restartActivity(requireActivity())
                 true
             } else {

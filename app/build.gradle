@@ -35,7 +35,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'com.frostnerd.utils:preferences:2.4.6'
+
+    implementation 'com.frostnerd.utils:preferenceskt:1.2.3'
     implementation 'com.frostnerd.utils:navigationdraweractivity:1.0.5'
     implementation 'com.frostnerd.utils:encrypteddnstunnelproxy:1.2.11'
     implementation 'com.frostnerd.utils:general:1.0.9'
