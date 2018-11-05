@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.smokescreen.util.preferences.AppSettings
+import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
+import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
 
 /**
  * Copyright Daniel Wolf 2018
@@ -71,8 +73,8 @@ fun Context.unregisterLocalReceiver(receiver: BroadcastReceiver) {
     LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
 }
 
-fun Context.getPreferences(): AppSettings {
-    return AppSettings.getInstance(this)
+fun Context.getPreferences(): AppSettingsSharedPreferences {
+    return AppSettings.fromSharedPreferences(this)
 }
 
 fun Array<*>.toStringArray():Array<String> {

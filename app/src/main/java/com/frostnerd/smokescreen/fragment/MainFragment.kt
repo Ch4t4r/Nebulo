@@ -12,6 +12,7 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import androidx.fragment.app.Fragment
+import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.general.Utils
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
@@ -82,13 +83,13 @@ class MainFragment : Fragment() {
             }
         }
         serverButton.setOnClickListener {
-            ServerChoosalDialog(requireContext()) { primaryServerUrl: String, secondaryServerUrl: String?, customServers: Boolean ->
+            ServerChoosalDialog(requireContext()) { primaryServerUrl: ServerConfiguration, secondaryServerUrl: ServerConfiguration?, customServers: Boolean ->
                 val prefs = requireContext().getPreferences()
-
-                prefs.putBoolean("doh_custom_server", customServers)
-                prefs.putString("doh_server_url", primaryServerUrl)
-                prefs.putString("doh_server_url_secondary", secondaryServerUrl)
-
+                prefs.edit {
+                    prefs.areCustomServers = customServers
+                    prefs.primaryServerConfig = primaryServerUrl
+                    prefs.secondaryServerConfig = secondaryServerUrl
+                }
                 println("Saved $primaryServerUrl, $secondaryServerUrl")
             }.show()
         }

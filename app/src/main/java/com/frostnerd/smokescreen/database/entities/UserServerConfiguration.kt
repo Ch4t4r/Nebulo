@@ -4,6 +4,7 @@ import com.frostnerd.database.orm.Entity
 import com.frostnerd.database.orm.annotations.RowID
 import com.frostnerd.database.orm.annotations.Table
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 
 /**
  * Copyright Daniel Wolf 2018

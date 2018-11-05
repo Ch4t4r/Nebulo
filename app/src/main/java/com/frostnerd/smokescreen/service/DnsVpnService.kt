@@ -43,8 +43,8 @@ class DnsVpnService : VpnService(), Runnable {
     private var vpnProxy: AsyncVPNTunnelProxy? = null
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
-    private lateinit var serverUrl: String
-    private var secondaryServerUrl: String? = null
+    private lateinit var primaryServer: ServerConfiguration
+    private var secondaryServer: ServerConfiguration? = null
 
     companion object {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
@@ -63,13 +63,13 @@ class DnsVpnService : VpnService(), Runnable {
         notificationBuilder.setContentTitle(getString(R.string.app_name))
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
 
-        serverUrl = getPreferences().getServerURl()
-        secondaryServerUrl = getPreferences().getSecondaryServerURl()
+        primaryServer = getPreferences().primaryServerConfig
+        secondaryServer = getPreferences().secondaryServerConfig
 
-        val text = if (secondaryServerUrl != null) {
-            getString(R.string.notification_main_text_with_secondary, serverUrl, secondaryServerUrl)
+        val text = if (secondaryServer != null) {
+            getString(R.string.notification_main_text_with_secondary, primaryServer.urlCreator.baseUrl, secondaryServer!!.urlCreator.baseUrl)
         } else {
-            getString(R.string.notification_main_text, serverUrl)
+            getString(R.string.notification_main_text, primaryServer.urlCreator.baseUrl)
         }
         notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
         updateNotification(0)
@@ -113,12 +113,12 @@ class DnsVpnService : VpnService(), Runnable {
     private fun createBuilder(): Builder {
         val builder = Builder()
 
-        val dummyServerIpv4 = AppSettings.getInstance(this).dummyDnsAddressIpv4()
-        val dummyServerIpv6 = AppSettings.getInstance(this).dummyDnsAddressIpv6()
+        val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
+        val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
 
         builder.addAddress("192.168.0.10", 24)
         builder.addAddress(NetworkUtil.randomLocalIPv6Address(), 48)
-        if (AppSettings.getInstance(this).catchKnownDnsServers()) {
+        if (getPreferences().catchKnownDnsServers) {
             for (server in DnsServerInformation.KNOWN_DNS_SERVERS.values) {
                 for (ipv4Server in server.getIpv4Servers()) {
                     builder.addRoute(ipv4Server.address.address, 32)
@@ -137,7 +137,7 @@ class DnsVpnService : VpnService(), Runnable {
         builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
 
-        for (defaultBypassPackage in AppSettings.getInstance(this).defaultBypassPackages()) {
+        for (defaultBypassPackage in getPreferences().defaultBypassPackages) {
             if (isPackageInstalled(defaultBypassPackage)) {
                 builder.addDisallowedApplication(defaultBypassPackage)
             }
@@ -152,19 +152,9 @@ class DnsVpnService : VpnService(), Runnable {
             prev.uncaughtException(t, e)
         }
 
-        val serverConfiguration:ServerConfiguration
-        var foundConfig = AbstractHttpsDNSHandle.findKnownServerByUrl(serverUrl)
-        serverConfiguration = foundConfig?.serverConfigurations?.values?.first() ?: ServerConfiguration.createSimpleServerConfig(serverUrl)
-        val secondaryConfig:ServerConfiguration?
-
-        if(!secondaryServerUrl.isNullOrEmpty()) {
-            foundConfig = AbstractHttpsDNSHandle.findKnownServerByUrl(serverUrl)
-            secondaryConfig = foundConfig?.serverConfigurations?.values?.first() ?: ServerConfiguration.createSimpleServerConfig(secondaryServerUrl!!)
-        } else secondaryConfig = null
-
         val list = mutableListOf<ServerConfiguration>()
-        list.add(serverConfiguration)
-        if(secondaryConfig != null) list.add(secondaryConfig)
+        list.add(primaryServer)
+        if(secondaryServer != null) list.add(secondaryServer!!)
 
         handle = ProxyHandler(
             list,

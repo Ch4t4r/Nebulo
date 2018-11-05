@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.dialog_new_server.*
 class NewServerDialog(
     context: Context,
     onServerAdded: (name: String, primaryServerUrl: String, secondaryServerUrl: String?) -> Unit
-) : BaseDialog(context, context.getPreferences().getTheme().dialogStyle) {
+) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
 
     companion object {
         val SERVER_URL_REGEX =
@@ -44,7 +44,7 @@ class NewServerDialog(
             DialogInterface.BUTTON_POSITIVE, context.getString(R.string.ok)
         ) { _, _ -> }
 
-        setOnShowListener { _ ->
+        setOnShowListener {
             addUrlTextWatcher(primaryServerWrap, primaryServer, false)
             addUrlTextWatcher(secondaryServerWrap, secondaryServer, true)
 

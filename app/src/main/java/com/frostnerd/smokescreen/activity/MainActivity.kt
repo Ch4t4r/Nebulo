@@ -19,7 +19,7 @@ class MainActivity : NavigationDrawerActivity() {
     private var inputElementColor:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(AppSettings.getInstance(this).getTheme().layoutStyle)
+        setTheme(getPreferences().theme.layoutStyle)
         super.onCreate(savedInstanceState)
     }
 
@@ -48,9 +48,9 @@ class MainActivity : NavigationDrawerActivity() {
     }
 
     override fun createStyleOptions(): StyleOptions {
-        backgroundColor = getPreferences().getTheme().resolveAttribute(theme, android.R.attr.colorBackground)
-        textColor = getPreferences().getTheme().resolveAttribute(theme, android.R.attr.textColor)
-        inputElementColor = getPreferences().getTheme().getColor(this, R.attr.inputElementColor, Color.WHITE)
+        backgroundColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.colorBackground)
+        textColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.textColor)
+        inputElementColor = getPreferences().theme.getColor(this, R.attr.inputElementColor, Color.WHITE)
 
         val options = StyleOptions()
         options.useDefaults()
@@ -61,7 +61,7 @@ class MainActivity : NavigationDrawerActivity() {
         options.listItemTextColor = textColor
         options.headerTextColor = textColor
         options.alphaSelected = 1f
-        options.iconTintLeft = getPreferences().getTheme().resolveAttribute(theme, R.attr.navDrawableColor)
+        options.iconTintLeft = getPreferences().theme.resolveAttribute(theme, R.attr.navDrawableColor)
         return options
     }
 

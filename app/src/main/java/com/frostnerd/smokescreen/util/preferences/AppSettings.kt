@@ -1,10 +1,12 @@
 package com.frostnerd.smokescreen.util.preferences
 
 import android.content.Context
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
 import com.frostnerd.preferenceskt.typedpreferences.SimpleTypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.booleanPref
+import com.frostnerd.preferenceskt.typedpreferences.types.optionalOf
 import com.frostnerd.preferenceskt.typedpreferences.types.stringPref
 import com.frostnerd.preferenceskt.typedpreferences.types.stringSetPref
 import com.frostnerd.smokescreen.BuildConfig
@@ -27,7 +29,7 @@ interface AppSettings {
     var dummyDnsAddressIpv4:String
     var dummyDnsAddressIpv6:String
     var defaultBypassPackages:Set<String>
-    var isCustomServerUrl:Boolean
+    var areCustomServers:Boolean
     var primaryServerConfig:ServerConfiguration
     var secondaryServerConfig:ServerConfiguration?
 }
@@ -41,9 +43,11 @@ class AppSettingsSharedPreferences(context: Context): AppSettings, SimpleTypedPr
         shouldContain(BuildConfig.APPLICATION_ID)
         shouldContain("com.android.vending")
     }
-    override var isCustomServerUrl: Boolean by booleanPref("doh_custom_server", false)
-    override var primaryServerConfig: ServerConfiguration by stringPref("doh_server_url", "dns.google.com")
-    override var secondaryServerConfig: ServerConfiguration? by stringPref("doh_server_url_secondary")
+    override var areCustomServers: Boolean by booleanPref("doh_custom_server", false)
+    override var primaryServerConfig: ServerConfiguration by ServerConfigurationPreference("doh_server_url_primary") {
+        AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS["Google DNS Stable"]!!.serverConfigurations.values.first()
+    }
+    override var secondaryServerConfig: ServerConfiguration? by optionalOf(ServerConfigurationPreference("doh_server_url_secondary", primaryServerConfig))
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

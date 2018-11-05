@@ -8,9 +8,7 @@ import android.widget.LinearLayout
 import android.widget.RadioButton
 import co.metalab.asyncawait.async
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
-import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerConfiguration
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.DatabaseHelper
@@ -28,20 +26,20 @@ import kotlinx.android.synthetic.main.dialog_server_configuration.*
  *
  * development@frostnerd.com
  */
-class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:String, secondaryServer:String?, customServer:Boolean) -> Unit) :
-    BaseDialog(context, context.getPreferences().getTheme().dialogStyle) {
+class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:ServerConfiguration, secondaryServer:ServerConfiguration?, customServer:Boolean) -> Unit) :
+    BaseDialog(context, context.getPreferences().theme.dialogStyle) {
     private var customServers = false
-    private var primaryServerUrl: String
-    private var secondaryServerUrl: String? = null
+    private var primaryServer: ServerConfiguration
+    private var secondaryServer: ServerConfiguration? = null
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_server_configuration, null, false)
         setTitle(R.string.dialog_title_serverconfiguration)
         setView(view)
 
-        customServers = context.getPreferences().isCustomServerUrl()
-        primaryServerUrl = context.getPreferences().getServerURl()
-        secondaryServerUrl = context.getPreferences().getSecondaryServerURl()
+        customServers = context.getPreferences().areCustomServers
+        primaryServer = context.getPreferences().primaryServerConfig
+        secondaryServer = context.getPreferences().secondaryServerConfig
 
         setButton(
             DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.cancel)
@@ -49,7 +47,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Stri
         setButton(
             DialogInterface.BUTTON_POSITIVE, context.getString(R.string.ok)
         ) { _, _ ->
-            onEntrySelected.invoke(primaryServerUrl, secondaryServerUrl, customServers)
+            onEntrySelected.invoke(primaryServer, secondaryServer, customServers)
         }
 
         setOnShowListener {_ ->
@@ -68,14 +66,16 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Stri
 
                 if(payload is UserServerConfiguration) {
                     customServers = true
-                    primaryServerUrl = payload.primaryServerUrl
-                    secondaryServerUrl = payload.secondaryServerUrl
+                    primaryServer = ServerConfiguration.createSimpleServerConfig(payload.primaryServerUrl)
+                    secondaryServer = if(payload.secondaryServerUrl != null) {
+                        ServerConfiguration.createSimpleServerConfig(payload.secondaryServerUrl!!)
+                    } else null
                 } else {
                     val configs = payload as Set<HttpsDnsServerConfiguration>
                     customServers = false
-                    primaryServerUrl = configs.first().address.getUrl()
-                    secondaryServerUrl = if(configs.size > 1) {
-                        configs.last().address.getUrl()
+                    primaryServer = configs.first().createServerConfiguration()
+                    secondaryServer = if(configs.size > 1) {
+                        configs.last().createServerConfiguration()
                     } else {
                         null
                     }
@@ -114,7 +114,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Stri
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-        button.setTextColor(context.getPreferences().getTheme().getTextColor(context))
+        button.setTextColor(context.getPreferences().theme.getTextColor(context))
         if(configs.size == 1) button.text = "$name (${configs.first().address.FQDN})"
         else button.text = "$name (${configs.first().address.FQDN}, ${configs.last().address.FQDN})"
 
@@ -128,7 +128,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Stri
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-        button.setTextColor(context.getPreferences().getTheme().getTextColor(context))
+        button.setTextColor(context.getPreferences().theme.getTextColor(context))
 
         if(userConfiguration.secondaryServerUrl == null) button.text = "${userConfiguration.name} (${userConfiguration.primaryServerUrl})"
         else button.text = "${userConfiguration.name} (${userConfiguration.primaryServerUrl}, ${userConfiguration.secondaryServerUrl})"
@@ -142,7 +142,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Stri
     }
 
     private fun showUserConfigDeleteDialog(userConfiguration: UserServerConfiguration) {
-        AlertDialog.Builder(context, context.getPreferences().getTheme().dialogStyle)
+        AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
             .setTitle(R.string.dialog_deleteconfig_title)
             .setMessage(context.getString(R.string.dialog_deleteconfig_text, userConfiguration.name))
             .setNegativeButton(R.string.all_no) { _, _ -> }
@@ -150,7 +150,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Stri
                 context.getDatabase().delete(userConfiguration)
                 knownServersGroup.removeAllViews()
 
-                if(primaryServerUrl == userConfiguration.primaryServerUrl && secondaryServerUrl == userConfiguration.secondaryServerUrl) {
+                if(primaryServer.urlCreator.baseUrl == userConfiguration.primaryServerUrl) {
                     // TODO Reset to default.
                 }
 

@@ -1,6 +1,6 @@
 package com.frostnerd.smokescreen.util.preferences
 
-import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
 import kotlin.reflect.KProperty
@@ -18,15 +18,47 @@ import kotlin.reflect.KProperty
 class ServerConfigurationPreference(key: String, defaultValue: (String) -> ServerConfiguration) :
     PreferenceTypeWithDefault<ServerConfiguration>(key, defaultValue) {
     constructor(key: String, defaultValue: ServerConfiguration) : this(key, { defaultValue })
+    private val encodedDivider = "/~~/"
 
     override fun getValue(thisRef: TypedPreferences, property: KProperty<*>): ServerConfiguration {
         if(thisRef.sharedPreferences.contains(key)) {
-
+            val encoded = thisRef.sharedPreferences.getString(key, "")!!
+            if(encoded.contains("/~~/")) {
+                val split = encoded.split("/~~/")
+                val requestType = RequestType.fromId(split[1].toInt())!!
+                val responseType = ResponseType.fromId(split[2].toInt())!!
+                return ServerConfiguration.createSimpleServerConfig(split[0], requestType, responseType)
+            } else {
+                for (value in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values) {
+                    val foundValue =  value.servers.firstOrNull {
+                        it.address.getUrl().contains(encoded)
+                    }
+                    if(foundValue != null) return value.createServerConfiguration(foundValue)
+                }
+                return ServerConfiguration.createSimpleServerConfig(encoded)
+            }
         } else return defaultValue(key)
     }
 
     override fun setValue(thisRef: TypedPreferences, property: KProperty<*>, value: ServerConfiguration) {
+        var encoded:String? = null
 
+        for (config in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values) {
+            for (serverConfiguration in config.serverConfigurations) {
+                if(serverConfiguration.value == value) {
+                    encoded = serverConfiguration.key.address.getUrl()
+                    break
+                }
+            }
+        }
+
+        if(encoded == null) {
+            encoded = value.urlCreator.baseUrl + encodedDivider + value.transportConfig.requestType.id +
+                    encodedDivider + value.transportConfig.responseType.id
+        }
+
+        thisRef.edit {
+            putString(key, encoded)
+        }
     }
-
 }
