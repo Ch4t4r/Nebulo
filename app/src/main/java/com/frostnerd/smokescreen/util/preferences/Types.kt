@@ -31,9 +31,10 @@ class ServerConfigurationPreference(key: String, defaultValue: (String) -> Serve
                 ServerConfiguration.createSimpleServerConfig(split[0], requestType, responseType)
             } else {
                 for (value in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values) {
-                    value.servers.firstOrNull {
-                        it.address.getUrl().contains(encoded)
+                    val config = value.servers.firstOrNull {
+                        it.address.getUrl().contains(encoded, ignoreCase = true)
                     }?.createServerConfiguration(value)
+                    if(config != null) return config
                 }
                 ServerConfiguration.createSimpleServerConfig(encoded)
             }
