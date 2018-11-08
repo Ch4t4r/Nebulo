@@ -10,6 +10,7 @@ import com.frostnerd.preferenceskt.typedpreferences.types.optionalOf
 import com.frostnerd.preferenceskt.typedpreferences.types.stringPref
 import com.frostnerd.preferenceskt.typedpreferences.types.stringSetPref
 import com.frostnerd.smokescreen.BuildConfig
+import java.lang.UnsupportedOperationException
 
 /**
  * Copyright Daniel Wolf 2018
@@ -45,9 +46,15 @@ class AppSettingsSharedPreferences(context: Context): AppSettings, SimpleTypedPr
     }
     override var areCustomServers: Boolean by booleanPref("doh_custom_server", false)
     override var primaryServerConfig: ServerConfiguration by ServerConfigurationPreference("doh_server_url_primary") {
+        AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(500)
         AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS["Google DNS Stable"]!!.serverConfigurations.values.first()
     }
-    override var secondaryServerConfig: ServerConfiguration? by optionalOf(ServerConfigurationPreference("doh_server_url_secondary", primaryServerConfig))
+    override var secondaryServerConfig: ServerConfiguration? by optionalOf(ServerConfigurationPreference("doh_server_url_secondary") {
+        AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(500)
+        val config = AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS["Google DNS Stable"]!!.serverConfigurations.values.last()
+        if(config != primaryServerConfig) config
+        else throw UnsupportedOperationException()
+    }, assignDefaultValue = true)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

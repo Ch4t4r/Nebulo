@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.util.preferences
 
+import android.content.SharedPreferences
 import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
@@ -16,31 +17,30 @@ import kotlin.reflect.KProperty
  */
 
 class ServerConfigurationPreference(key: String, defaultValue: (String) -> ServerConfiguration) :
-    PreferenceTypeWithDefault<ServerConfiguration>(key, defaultValue) {
+    PreferenceTypeWithDefault<SharedPreferences, ServerConfiguration>(key, defaultValue) {
     constructor(key: String, defaultValue: ServerConfiguration) : this(key, { defaultValue })
     private val encodedDivider = "/~~/"
 
-    override fun getValue(thisRef: TypedPreferences, property: KProperty<*>): ServerConfiguration {
+    override fun getValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>): ServerConfiguration {
         if(thisRef.sharedPreferences.contains(key)) {
             val encoded = thisRef.sharedPreferences.getString(key, "")!!
-            if(encoded.contains("/~~/")) {
+            return if(encoded.contains("/~~/")) {
                 val split = encoded.split("/~~/")
                 val requestType = RequestType.fromId(split[1].toInt())!!
                 val responseType = ResponseType.fromId(split[2].toInt())!!
-                return ServerConfiguration.createSimpleServerConfig(split[0], requestType, responseType)
+                ServerConfiguration.createSimpleServerConfig(split[0], requestType, responseType)
             } else {
                 for (value in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values) {
-                    val foundValue =  value.servers.firstOrNull {
+                    value.servers.firstOrNull {
                         it.address.getUrl().contains(encoded)
-                    }
-                    if(foundValue != null) return value.createServerConfiguration(foundValue)
+                    }?.createServerConfiguration(value)
                 }
-                return ServerConfiguration.createSimpleServerConfig(encoded)
+                ServerConfiguration.createSimpleServerConfig(encoded)
             }
         } else return defaultValue(key)
     }
 
-    override fun setValue(thisRef: TypedPreferences, property: KProperty<*>, value: ServerConfiguration) {
+    override fun setValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>, value: ServerConfiguration) {
         var encoded:String? = null
 
         for (config in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values) {

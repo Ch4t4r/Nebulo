@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.activity
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.DrawerItem
@@ -10,7 +11,6 @@ import com.frostnerd.navigationdraweractivity.items.FragmentDrawerItem
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
-import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.getPreferences
 
 class MainActivity : NavigationDrawerActivity() {
@@ -21,6 +21,7 @@ class MainActivity : NavigationDrawerActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
         super.onCreate(savedInstanceState)
+        AbstractHttpsDNSHandle // Loads the known servers.
     }
 
     override fun createDrawerItems(): MutableList<DrawerItem> {

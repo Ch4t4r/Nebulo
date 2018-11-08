@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.util.preferences
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -75,14 +76,14 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
     }
 }
 
-class ThemePreference(key:String, defaultValue:Theme): PreferenceTypeWithDefault<Theme>(key, defaultValue) {
+class ThemePreference(key:String, defaultValue:Theme): PreferenceTypeWithDefault<SharedPreferences, Theme>(key, defaultValue) {
 
-    override fun getValue(thisRef: TypedPreferences, property: KProperty<*>): Theme {
+    override fun getValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>): Theme {
         return if(thisRef.sharedPreferences.contains(key)) Theme.findById(thisRef.sharedPreferences.getInt(key, Theme.MONO.id))!!
         else defaultValue(key)
     }
 
-    override fun setValue(thisRef: TypedPreferences, property: KProperty<*>, value: Theme) {
+    override fun setValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>, value: Theme) {
         thisRef.edit {
             putInt(key, value.id)
         }

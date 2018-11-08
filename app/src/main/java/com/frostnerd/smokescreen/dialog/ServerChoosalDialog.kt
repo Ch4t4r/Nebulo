@@ -81,7 +81,6 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
                     }
                 }
             }
-            checkCurrentConfiguration()
         }
     }
 
@@ -103,6 +102,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
             for (button in buttons) {
                 knownServersGroup.addView(button)
             }
+            checkCurrentConfiguration()
         }
     }
 
@@ -159,8 +159,34 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
             }.show()
     }
 
-    fun checkCurrentConfiguration() {
+    private fun checkCurrentConfiguration() {
+        println(knownServersGroup.childCount)
+        for (id:Int in 0 until knownServersGroup.childCount) {
+            val child = knownServersGroup.getChildAt(id) as RadioButton
+            val payload = child.tag
+            if(payload is UserServerConfiguration) {
+                if(!customServers) continue
+                if(primaryServer.urlCreator.baseUrl != payload.primaryServerUrl) continue
+                if(secondaryServer?.urlCreator?.baseUrl != payload.secondaryServerUrl) continue
+                child.isChecked = true
+                break
+            } else {
+                val configs = payload as Set<HttpsDnsServerConfiguration>
+                val primaryCandidate = configs.first().createServerConfiguration()
+                val secondaryCandidate = if(configs.size > 1) {
+                    configs.last().createServerConfiguration()
+                } else {
+                    null
+                }
 
+                println(primaryCandidate == primaryServer)
+                println(secondaryCandidate)
+                if(primaryCandidate == primaryServer && secondaryCandidate == secondaryServer) {
+                    child.isChecked = true
+                    break
+                }
+            }
+        }
     }
 
     override fun destroy() {
