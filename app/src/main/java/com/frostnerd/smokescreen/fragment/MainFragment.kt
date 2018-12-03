@@ -11,9 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
-import androidx.fragment.app.Fragment
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
-import com.frostnerd.general.Utils
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
@@ -22,6 +20,8 @@ import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.registerLocalReceiver
 import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
+import androidx.fragment.app.Fragment
+import com.frostnerd.baselibrary.service.isServiceRunning
 
 
 /**
@@ -47,7 +47,7 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        proxyRunning = Utils.isServiceRunning(requireContext(), DnsVpnService::class.java)
+        proxyRunning = requireContext().isServiceRunning(DnsVpnService::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
