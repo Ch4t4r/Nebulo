@@ -2,9 +2,9 @@ package com.frostnerd.smokescreen.fragment
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
-import com.frostnerd.general.IntentUtil
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.restart
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.Theme
 
@@ -30,7 +30,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
             if(newTheme != null) {
                 requireContext().getPreferences().theme = newTheme
-                IntentUtil.restartActivity(requireActivity())
+                requireActivity().restart()
                 true
             } else {
                 false

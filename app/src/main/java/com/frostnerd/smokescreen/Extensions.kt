@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen
 
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -91,4 +92,11 @@ fun IntArray.toStringArray():Array<String> {
         stringArray[index] = value.toString()
     }
     return stringArray as Array<String>
+}
+
+fun Activity.restart() {
+    val intent = intent
+        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
+    finish()
+    startActivity(intent)
 }
