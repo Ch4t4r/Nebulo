@@ -181,8 +181,6 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
                     null
                 }
 
-                println(primaryCandidate == primaryServer)
-                println(secondaryCandidate)
                 if(primaryCandidate == primaryServer && secondaryCandidate == secondaryServer) {
                     child.isChecked = true
                     break
