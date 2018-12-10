@@ -50,7 +50,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
             onEntrySelected.invoke(primaryServer, secondaryServer, customServers)
         }
 
-        setOnShowListener {_ ->
+        setOnShowListener {
             addKnownServers()
 
             addServer.setOnClickListener {
@@ -88,9 +88,11 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
         async {
             val buttons = mutableListOf<RadioButton>()
             await {
-                for ((name, serverInfo) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS) {
+                for ((_, serverInfo) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.toSortedMap(compareByDescending {
+                    AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[it]!!.name
+                })) {
                     if (!serverInfo.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS)) {
-                        buttons.add(0, createButtonForKnownConfiguration(name, serverInfo))
+                        buttons.add(0, createButtonForKnownConfiguration(serverInfo.name, serverInfo))
                     }
                 }
                 context.getDatabase().getAll(UserServerConfiguration::class.java).forEach {

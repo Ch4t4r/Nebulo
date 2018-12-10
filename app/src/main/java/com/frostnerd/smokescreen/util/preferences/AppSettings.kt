@@ -47,11 +47,11 @@ class AppSettingsSharedPreferences(context: Context): AppSettings, SimpleTypedPr
     override var areCustomServers: Boolean by booleanPref("doh_custom_server", false)
     override var primaryServerConfig: ServerConfiguration by ServerConfigurationPreference("doh_server_url_primary") {
         AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(500)
-        AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS["Google DNS Stable"]!!.serverConfigurations.values.first()
+        AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[0]!!.serverConfigurations.values.first()
     }
     override var secondaryServerConfig: ServerConfiguration? by optionalOf(ServerConfigurationPreference("doh_server_url_secondary") {
         AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(500)
-        val config = AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS["Google DNS Stable"]!!.serverConfigurations.values.last()
+        val config = AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[0]!!.serverConfigurations.values.last()
         if(config != primaryServerConfig) config
         else throw UnsupportedOperationException()
     }, assignDefaultValue = true)

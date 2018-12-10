@@ -24,19 +24,13 @@ class ServerConfigurationPreference(key: String, defaultValue: (String) -> Serve
     override fun getValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>): ServerConfiguration {
         if(thisRef.sharedPreferences.contains(key)) {
             val encoded = thisRef.sharedPreferences.getString(key, "")!!
-            return if(encoded.contains("/~~/")) {
-                val split = encoded.split("/~~/")
+            return if(encoded.contains(encodedDivider)) {
+                val split = encoded.split(encodedDivider)
                 val requestType = RequestType.fromId(split[1].toInt())!!
                 val responseType = ResponseType.fromId(split[2].toInt())!!
                 ServerConfiguration.createSimpleServerConfig(split[0], requestType, responseType)
             } else {
-                for (value in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values) {
-                    val config = value.servers.firstOrNull {
-                        it.address.getUrl().contains(encoded, ignoreCase = true)
-                    }?.createServerConfiguration(value)
-                    if(config != null) return config
-                }
-                ServerConfiguration.createSimpleServerConfig(encoded)
+                return AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[encoded.toInt()]!!.serverConfigurations.entries.first().value
             }
         } else return defaultValue(key)
     }
@@ -44,10 +38,10 @@ class ServerConfigurationPreference(key: String, defaultValue: (String) -> Serve
     override fun setValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>, value: ServerConfiguration) {
         var encoded:String? = null
 
-        for (config in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values) {
+        for ((id,config) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS) {
             for (serverConfiguration in config.serverConfigurations) {
                 if(serverConfiguration.value == value) {
-                    encoded = serverConfiguration.key.address.getUrl()
+                    encoded = id.toString()
                     break
                 }
             }
