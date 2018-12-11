@@ -79,13 +79,13 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
 class ThemePreference(key:String, defaultValue:Theme): PreferenceTypeWithDefault<SharedPreferences, Theme>(key, defaultValue) {
 
     override fun getValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>): Theme {
-        return if(thisRef.sharedPreferences.contains(key)) Theme.findById(thisRef.sharedPreferences.getInt(key, Theme.MONO.id))!!
+        return if(thisRef.sharedPreferences.contains(key)) Theme.findById(thisRef.sharedPreferences.getString(key, Theme.MONO.id.toString())!!.toInt())!!
         else defaultValue(key)
     }
 
     override fun setValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>, value: Theme) {
         thisRef.edit {
-            putInt(key, value.id)
+            putString(key, value.id.toString())
         }
     }
 
