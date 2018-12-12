@@ -6,12 +6,16 @@ import androidx.fragment.app.Fragment
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
+import com.frostnerd.navigationdraweractivity.items.ClickableDrawerItem
+import com.frostnerd.navigationdraweractivity.items.DividerDrawerItem
 import com.frostnerd.navigationdraweractivity.items.DrawerItem
 import com.frostnerd.navigationdraweractivity.items.FragmentDrawerItem
+import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.showInfoTextDialog
 
 class MainActivity : NavigationDrawerActivity() {
     private var textColor: Int = 0
@@ -42,6 +46,30 @@ class MainActivity : NavigationDrawerActivity() {
                 fragmentCreator = object : FragmentDrawerItem.FragmentCreator {
                     override fun getFragment(arguments: Bundle?): Fragment {
                         return SettingsFragment()
+                    }
+                })
+        )
+        items.add(DividerDrawerItem())
+        items.add(
+            ClickableDrawerItem(getString(R.string.menu_about),
+                iconLeft = getDrawable(R.drawable.ic_binoculars),
+                clickListener = object :ClickableDrawerItem.ClickListener {
+                    override fun onClick(
+                        item: ClickableDrawerItem,
+                        drawerActivity: NavigationDrawerActivity,
+                        arguments: Bundle?
+                    ): Boolean {
+                        showInfoTextDialog(this@MainActivity,
+                            getString(R.string.menu_about),
+                            getString(R.string.about_app, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE))
+                        return false
+                    }
+
+                    override fun onLongClick(
+                        item: ClickableDrawerItem,
+                        drawerActivity: NavigationDrawerActivity
+                    ): Boolean {
+                       return false
                     }
                 })
         )

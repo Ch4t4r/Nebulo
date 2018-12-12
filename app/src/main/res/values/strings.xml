@@ -9,8 +9,13 @@
     <string name="menu_main">Main screen</string>
     <string name="menu_dnsoverhttps">DNS over HTTPS</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_about">About this app</string>
+
+
     <string name="main_dnssurveillance_infotext">Be aware that the DNS server you are connected to is able to record which sites you are visiting. Check the respective privacy statements for more information.</string>
     <string name="main_dnssurveillance_privacystatement">Privacy statement of %1s</string>
+
+    <string name="about_app">This app is open source. The source code can be accessed at smokescreen.app/source.\nFurthermore the app doesn\'t contain ads and does not track or collect any data about you.\n\nVersion %1s\nBuild %2d\n\n&#169; Daniel Wolf 2018\nAll rights reserved.\n<a href="mailto:support@frostnerd.com">support@frostnerd.com</a></string>
 
     <string-array name="theme">
         <item>Mono</item>
