@@ -10,6 +10,7 @@
     <string name="menu_dnsoverhttps">DNS over HTTPS</string>
     <string name="menu_settings">Settings</string>
     <string name="main_dnssurveillance_infotext">Be aware that the DNS server you are connected to is able to record which sites you are visiting. Check the respective privacy statements for more information.</string>
+    <string name="main_dnssurveillance_privacystatement">Privacy statement of %1s</string>
 
     <string-array name="theme">
         <item>Mono</item>

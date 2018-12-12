@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.fragment
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Intent
+import android.net.Uri
 import android.net.VpnService
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
 import androidx.fragment.app.Fragment
 import com.frostnerd.baselibrary.service.isServiceRunning
+import java.net.URL
 
 
 /**
@@ -85,6 +87,7 @@ class MainFragment : Fragment() {
         }
         serverButton.setOnClickListener {
             ServerChoosalDialog(requireContext()) { primaryServerUrl: ServerConfiguration, secondaryServerUrl: ServerConfiguration?, customServers: Boolean ->
+                updatePrivacyPolicyLink(primaryServerUrl)
                 val prefs = requireContext().getPreferences()
                 prefs.edit {
                     prefs.areCustomServers = customServers
@@ -94,7 +97,13 @@ class MainFragment : Fragment() {
                 println("Saved $primaryServerUrl, $secondaryServerUrl")
             }.show()
         }
-
+        updatePrivacyPolicyLink(requireContext().getPreferences().primaryServerConfig)
+        privacyStatementText.setOnClickListener {
+            val i = Intent(Intent.ACTION_VIEW)
+            val url = it.tag as URL
+            i.data = Uri.parse(url.toURI().toString())
+            startActivity(i)
+        }
         updateStatusImage()
     }
 
@@ -154,6 +163,18 @@ class MainFragment : Fragment() {
                 statusImage.setImageResource(R.drawable.ic_lock_open)
                 statusImage.clearAnimation()
             }
+        }
+    }
+
+    fun updatePrivacyPolicyLink(serverConfiguration: ServerConfiguration) {
+        val url = serverConfiguration.serverInformation?.specification?.privacyPolicyURL
+
+        if(url != null) {
+            privacyStatementText.text = getString(R.string.main_dnssurveillance_privacystatement, serverConfiguration.serverInformation!!.name)
+            privacyStatementText.tag = url
+            privacyStatementText.visibility = View.VISIBLE
+        } else {
+            privacyStatementText.visibility = View.GONE
         }
     }
 }
