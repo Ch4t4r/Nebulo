@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="contentdescription_main_infoimage">Information icon</string>
+    <string name="contentdescription_main_servericon">Server icon</string>
+    <string name="contentdescription_main_statusimage">Image indicating whether the app is running</string>
+</resources>
