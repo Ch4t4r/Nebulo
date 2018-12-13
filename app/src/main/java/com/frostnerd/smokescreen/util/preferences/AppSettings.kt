@@ -43,7 +43,7 @@ interface AppSettings {
 class AppSettingsSharedPreferences(context: Context): AppSettings, SimpleTypedPreferences(context) {
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
-    override var catchKnownDnsServers: Boolean by booleanPref("doh_custom_server", false)
+    override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", false)
     override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "8.8.8.8")
     override var dummyDnsAddressIpv6: String by stringPref("dummy_dns_ipv6", "2001:4860:4860::8888")
     override val defaultBypassPackages: Set<String> by restrictedCollection(stringSetPref("default_bypass_packages", hashSetOf(BuildConfig.APPLICATION_ID, "com.android.vending"))) {
