@@ -23,6 +23,7 @@ import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
 import androidx.fragment.app.Fragment
 import com.frostnerd.general.service.isServiceRunning
+import java.net.URL
 
 
 /**
