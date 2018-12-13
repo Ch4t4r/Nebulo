@@ -51,8 +51,11 @@ class NewServerDialog(
             getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                 if (inputsValid()) {
                     val name = serverName.text.toString()
-                    val primary = primaryServer.text.toString()
-                    val secondary = if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString()
+                    var primary = primaryServer.text.toString()
+                    var secondary = if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString()
+
+                    if(!primary.startsWith("https")) primary = "https://$primary"
+                    if(secondary != null && !secondary.startsWith("https")) secondary = "https://$secondary"
 
                     onServerAdded.invoke(name, primary, secondary)
                     dismiss()
