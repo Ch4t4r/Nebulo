@@ -2,4 +2,7 @@
 <resources>
     <string name="title_theme">Theme</string>
     <string name="summary_theme">Sets the theme of this app</string>
+
+    <string name="title_start_on_boot">Start on boot</string>
+    <string name="summary_start_on_boot">Start the app when the phone is turned on</string>
 </resources>

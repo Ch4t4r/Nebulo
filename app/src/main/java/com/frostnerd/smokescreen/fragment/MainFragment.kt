@@ -21,7 +21,7 @@ import com.frostnerd.smokescreen.registerLocalReceiver
 import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
 import androidx.fragment.app.Fragment
-import com.frostnerd.baselibrary.service.isServiceRunning
+import com.frostnerd.general.service.isServiceRunning
 
 
 /**
