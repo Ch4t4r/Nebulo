@@ -123,7 +123,7 @@ class DnsVpnService : VpnService(), Runnable {
         builder.addAddress("192.168.0.10", 24)
         builder.addAddress(NetworkUtil.randomLocalIPv6Address(), 48)
         if (getPreferences().catchKnownDnsServers) {
-            for (server in DnsServerInformation.KNOWN_DNS_SERVERS.values) {
+            for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
                 for (ipv4Server in server.getIpv4Servers()) {
                     builder.addRoute(ipv4Server.address.address, 32)
                 }
