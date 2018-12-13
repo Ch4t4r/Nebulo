@@ -10,14 +10,15 @@ import android.system.OsConstants
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.networking.NetworkUtil
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.util.preferences.AppSettings
 import android.content.pm.PackageManager
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 import com.frostnerd.smokescreen.BuildConfig
+import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.getPreferences
@@ -60,28 +61,19 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
-        fileDescriptor = createBuilder().establish()
         notificationBuilder = NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
         notificationBuilder.setContentTitle(getString(R.string.app_name))
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
-        notificationBuilder.setContentIntent(PendingIntent.getActivity(this, 1,
-            Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT))
-
-        primaryServer = getPreferences().primaryServerConfig
-        secondaryServer = getPreferences().secondaryServerConfig
-
-        val text = if (secondaryServer != null) {
-            getString(R.string.notification_main_text_with_secondary, primaryServer.urlCreator.baseUrl, secondaryServer!!.urlCreator.baseUrl)
-        } else {
-            getString(R.string.notification_main_text, primaryServer.urlCreator.baseUrl)
-        }
-        notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
+        notificationBuilder.setContentIntent(
+            PendingIntent.getActivity(
+                this, 1,
+                Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        )
         updateNotification(0)
-
-        Thread(this).start()
     }
 
-    private fun updateNotification(queryCount:Int) {
+    private fun updateNotification(queryCount: Int) {
         notificationBuilder.setSubText(getString(R.string.notification_main_subtext, queryCount))
         startForeground(1, notificationBuilder.build())
     }
@@ -98,11 +90,45 @@ class DnsVpnService : VpnService(), Runnable {
                 }
             }
         }
+        if (!this::primaryServer.isInitialized) {
+            if (intent != null) {
+                primaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl))
+                    ServerConfiguration.createSimpleServerConfig(
+                        intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)
+                    )
+                else getPreferences().primaryServerConfig
+
+                secondaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
+                    ServerConfiguration.createSimpleServerConfig(intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
+                else getPreferences().secondaryServerConfig
+            } else {
+                primaryServer = getPreferences().primaryServerConfig
+                secondaryServer = getPreferences().secondaryServerConfig
+            }
+            val text = if (secondaryServer != null) {
+                getString(
+                    R.string.notification_main_text_with_secondary,
+                    primaryServer.urlCreator.baseUrl,
+                    secondaryServer!!.urlCreator.baseUrl
+                )
+            } else {
+                getString(R.string.notification_main_text, primaryServer.urlCreator.baseUrl)
+            }
+            notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
+        }
+        updateNotification(0)
+        establishVpn()
         return Service.START_STICKY
     }
 
+    private fun establishVpn() {
+        if (fileDescriptor == null) {
+            fileDescriptor = createBuilder().establish()
+            Thread(this).start()
+        }
+    }
+
     private fun destroy() {
-        println("Destroying....")
         if (!destroyed) {
             vpnProxy?.stop()
             fileDescriptor?.close()
@@ -158,13 +184,13 @@ class DnsVpnService : VpnService(), Runnable {
 
         val list = mutableListOf<ServerConfiguration>()
         list.add(primaryServer)
-        if(secondaryServer != null) list.add(secondaryServer!!)
+        if (secondaryServer != null) list.add(secondaryServer!!)
 
         handle = ProxyHandler(
             list,
             connectTimeout = 500,
             scheduler = SyncScheduler()
-        , queryCountCallback = ::updateNotification
+            , queryCountCallback = ::updateNotification
         )
         dnsProxy = SmokeProxy(handle!!, this)
         vpnProxy = AsyncVPNTunnelProxy(dnsProxy!!, ThreadScheduler())
@@ -183,10 +209,10 @@ class DnsVpnService : VpnService(), Runnable {
     }
 }
 
-fun AbstractHttpsDNSHandle.Companion.findKnownServerByUrl(url:String): HttpsDnsServerInformation? {
+fun AbstractHttpsDNSHandle.Companion.findKnownServerByUrl(url: String): HttpsDnsServerInformation? {
     for (info in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values) {
         for (server in info.servers) {
-            if(server.address.getUrl().contains(url, true)) return info
+            if (server.address.getUrl().contains(url, true)) return info
         }
     }
     return null
