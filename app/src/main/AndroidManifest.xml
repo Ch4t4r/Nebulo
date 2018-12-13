@@ -25,6 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".activity.BackgroundVpnConfigureActivity"
+                android:launchMode="singleInstance"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+
         <service
                 android:name=".service.DnsVpnService"
                 android:permission="android.permission.BIND_VPN_SERVICE"
@@ -36,10 +41,18 @@
                     android:name="android.net.VpnService.SUPPORTS_ALWAYS_ON"
                     android:value="true"/>
         </service>
-        <receiver android:name=".receiver.BootReceiver">
-            <intent-filter>
+        <receiver
+                android:name=".receiver.BootReceiver"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter android:priority="500">
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <!-- for htc -->
+
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.intent.action.MEDIA_MOUNTED"/>
             </intent-filter>
         </receiver>
     </application>

@@ -5,6 +5,8 @@
     <string name="all_start">Start</string>
     <string name="all_no">No</string>
     <string name="all_yes">Yes</string>
+    <string name="information">Information</string>
+    <string name="open_app">Open app</string>
 
     <string name="menu_main">Main screen</string>
     <string name="menu_dnsoverhttps">DNS over HTTPS</string>

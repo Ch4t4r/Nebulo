@@ -3,8 +3,8 @@ package com.frostnerd.smokescreen.receiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.service.DnsVpnService
 
 /**
  * Copyright Daniel Wolf 2018
@@ -20,7 +20,7 @@ class BootReceiver : BroadcastReceiver() {
         if (intent.action != null) {
             if (intent.action!! == Intent.ACTION_BOOT_COMPLETED || intent.action!! == Intent.ACTION_LOCKED_BOOT_COMPLETED) {
                 if (context.getPreferences().startAppOnBoot) {
-                    context.startService(Intent(context, DnsVpnService::class.java))
+                    BackgroundVpnConfigureActivity.prepareVpn(context)
                 }
             }
         }
