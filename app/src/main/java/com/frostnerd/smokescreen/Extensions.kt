@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
@@ -28,6 +29,12 @@ fun Context.registerReceiver(intentFilter: IntentFilter, receiver:(intent: Inten
     }
     this.registerReceiver(actualReceiver, intentFilter)
     return actualReceiver
+}
+
+fun Context.startForegroundServiceCompat(intent:Intent) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        startForegroundService(intent)
+    } else startService(intent)
 }
 
 fun Context.registerReceiver(filteredActions: List<String>, receiver:(intent: Intent?) -> Unit): BroadcastReceiver {
