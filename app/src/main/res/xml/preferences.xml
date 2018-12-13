@@ -9,4 +9,10 @@
             android:key="theme"
             android:summary="@string/summary_theme"
             android:title="@string/title_theme"/>
+
+    <CheckBoxPreference
+            android:defaultValue="true"
+            android:summary="@string/summary_start_on_boot"
+            android:title="@string/title_start_on_boot"
+            android:key="start_on_boot"/>
 </PreferenceScreen>

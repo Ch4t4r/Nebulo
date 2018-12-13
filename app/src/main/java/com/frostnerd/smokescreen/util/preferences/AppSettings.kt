@@ -3,12 +3,11 @@ package com.frostnerd.smokescreen.util.preferences
 import android.content.Context
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.general.CombinedIterator
+import com.frostnerd.general.combineIterators
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
 import com.frostnerd.preferenceskt.typedpreferences.SimpleTypedPreferences
-import com.frostnerd.preferenceskt.typedpreferences.types.booleanPref
-import com.frostnerd.preferenceskt.typedpreferences.types.optionalOf
-import com.frostnerd.preferenceskt.typedpreferences.types.stringPref
-import com.frostnerd.preferenceskt.typedpreferences.types.stringSetPref
+import com.frostnerd.preferenceskt.typedpreferences.types.*
 import com.frostnerd.smokescreen.BuildConfig
 import java.lang.UnsupportedOperationException
 
@@ -29,18 +28,25 @@ interface AppSettings {
     var catchKnownDnsServers:Boolean
     var dummyDnsAddressIpv4:String
     var dummyDnsAddressIpv6:String
-    var defaultBypassPackages:Set<String>
+    val defaultBypassPackages:Set<String>
+    var userBypassPackages:MutableSet<String>
     var areCustomServers:Boolean
     var primaryServerConfig:ServerConfiguration
     var secondaryServerConfig:ServerConfiguration?
+
+    var startAppOnBoot:Boolean
+
+    val bypassPackagesIterator: CombinedIterator<String>
+        get() = combineIterators(defaultBypassPackages.iterator(), userBypassPackages.iterator())
 }
 
 class AppSettingsSharedPreferences(context: Context): AppSettings, SimpleTypedPreferences(context) {
+    override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var catchKnownDnsServers: Boolean by booleanPref("doh_custom_server", false)
     override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "8.8.8.8")
     override var dummyDnsAddressIpv6: String by stringPref("dummy_dns_ipv6", "2001:4860:4860::8888")
-    override var defaultBypassPackages: Set<String> by restrictedCollection(stringSetPref("default_bypass_packages", hashSetOf(BuildConfig.APPLICATION_ID, "com.android.vending"))) {
+    override val defaultBypassPackages: Set<String> by restrictedCollection(stringSetPref("default_bypass_packages", hashSetOf(BuildConfig.APPLICATION_ID, "com.android.vending"))) {
         shouldContain(BuildConfig.APPLICATION_ID)
         shouldContain("com.android.vending")
     }
@@ -55,6 +61,7 @@ class AppSettingsSharedPreferences(context: Context): AppSettings, SimpleTypedPr
         if(config != primaryServerConfig) config
         else throw UnsupportedOperationException()
     }, assignDefaultValue = true)
+    override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf())
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
