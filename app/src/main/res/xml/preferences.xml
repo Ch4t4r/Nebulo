@@ -15,4 +15,9 @@
             android:summary="@string/summary_start_on_boot"
             android:title="@string/title_start_on_boot"
             android:key="start_on_boot"/>
+
+    <Preference
+            android:key="app_exclusion_list"
+            android:title="@string/title_excluded_apps"
+            android:summary="@string/summary_excluded_apps"/>
 </PreferenceScreen>

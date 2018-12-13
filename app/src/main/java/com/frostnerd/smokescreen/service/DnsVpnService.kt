@@ -109,10 +109,11 @@ class DnsVpnService : VpnService(), Runnable {
                 getString(
                     R.string.notification_main_text_with_secondary,
                     primaryServer.urlCreator.baseUrl,
-                    secondaryServer!!.urlCreator.baseUrl
+                    secondaryServer!!.urlCreator.baseUrl,
+                    getPreferences().totalBypassPackageCount
                 )
             } else {
-                getString(R.string.notification_main_text, primaryServer.urlCreator.baseUrl)
+                getString(R.string.notification_main_text, primaryServer.urlCreator.baseUrl, getPreferences().totalBypassPackageCount)
             }
             notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
         }
@@ -167,7 +168,7 @@ class DnsVpnService : VpnService(), Runnable {
         builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
 
-        for (defaultBypassPackage in getPreferences().defaultBypassPackages) {
+        for (defaultBypassPackage in getPreferences().bypassPackagesIterator) {
             if (isPackageInstalled(defaultBypassPackage)) {
                 builder.addDisallowedApplication(defaultBypassPackage)
             }

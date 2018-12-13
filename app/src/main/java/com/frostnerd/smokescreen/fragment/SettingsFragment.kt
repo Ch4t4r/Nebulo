@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.fragment
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.restart
 import com.frostnerd.smokescreen.util.preferences.AppSettings
@@ -28,13 +29,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val id = (newValue as? String)?.toInt() ?: newValue as Int
             val newTheme = Theme.findById(id)
 
-            if(newTheme != null) {
+            if (newTheme != null) {
                 requireContext().getPreferences().theme = newTheme
                 requireActivity().restart()
                 true
             } else {
                 false
             }
+        }
+        findPreference("app_exclusion_list").setOnPreferenceClickListener {
+            val dialog = AppChoosalDialog(
+                requireActivity(),
+                requireContext().getPreferences().userBypassPackages,
+                requireContext().getPreferences().defaultBypassPackages
+            ) { selected ->
+                requireContext().getPreferences().userBypassPackages = selected
+            }.createDialog()
+            dialog.setTitle("Test")
+            dialog.show()
+            true
         }
     }
 

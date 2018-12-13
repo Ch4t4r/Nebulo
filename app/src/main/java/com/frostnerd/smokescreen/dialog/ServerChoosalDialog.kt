@@ -162,7 +162,6 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
     }
 
     private fun checkCurrentConfiguration() {
-        println(knownServersGroup.childCount)
         for (id:Int in 0 until knownServersGroup.childCount) {
             val child = knownServersGroup.getChildAt(id) as RadioButton
             val payload = child.tag

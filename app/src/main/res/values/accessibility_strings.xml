@@ -3,4 +3,5 @@
     <string name="contentdescription_main_infoimage">Information icon</string>
     <string name="contentdescription_main_servericon">Server icon</string>
     <string name="contentdescription_main_statusimage">Image indicating whether the app is running</string>
+    <string name="contentdescription_shared_app_icon">App icon</string>
 </resources>

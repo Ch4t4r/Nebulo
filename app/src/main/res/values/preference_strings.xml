@@ -5,4 +5,7 @@
 
     <string name="title_start_on_boot">Start on boot</string>
     <string name="summary_start_on_boot">Start the app when the phone is turned on</string>
+    
+    <string name="title_excluded_apps">Excluded apps</string>
+    <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use dns-over-https anymore.</string>
 </resources>
