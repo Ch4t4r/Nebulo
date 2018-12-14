@@ -169,11 +169,13 @@ class AppChoosalDialog(
         val systemAppMask = ApplicationInfo.FLAG_SYSTEM or ApplicationInfo.FLAG_UPDATED_SYSTEM_APP
         filteredPackets.clear()
         filteredPackets.addAll(installedPackages)
-        if (labelSearchTerm != previousSearchTerm) filteredPackets.retainAll {
+        if (labelSearchTerm != previousSearchTerm && !labelSearchTerm.isNullOrBlank()) filteredPackets.retainAll {
             labels[it.packageName]!!.contains(labelSearchTerm!!, true)
         }
-        if (previousShowSystemApps != showSystemApps) filteredPackets.retainAll {
-            it.flags and systemAppMask == 0
+        if (previousShowSystemApps != showSystemApps && !showSystemApps) {
+            filteredPackets.retainAll {
+                 it.flags and systemAppMask == 0
+            }
         }
     }
 
