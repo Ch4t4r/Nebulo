@@ -119,7 +119,7 @@ class AppChoosalDialog(
                     }
                     systemAppCheckbox.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
-                    view.findViewById<View>(R.id.searchWrap).visibility = View.VISIBLE
+                    // view.findViewById<View>(R.id.searchWrap).visibility = View.VISIBLE
 
                     val searchEditText = view.findViewById<EditText>(R.id.search)
                     searchEditText.addTextChangedListener(object : TextWatcher {
