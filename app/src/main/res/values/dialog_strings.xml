@@ -14,5 +14,7 @@
     <string name="dialog_deleteconfig_title">Delete configuration?</string>
     <string name="dialog_deleteconfig_text">Do you want to delete the configuration %1$s?</string>
 
+    <string name="dialog_appchoosal_showsystemapps">Show system apps</string>
+
     <string name="dialog_excludedapps_infotext">%1d apps are excluded by default and not listed here.</string>
 </resources>

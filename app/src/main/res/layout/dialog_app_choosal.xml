@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:paddingLeft="@dimen/dialog_horizontal_margin"
@@ -13,6 +14,61 @@
             android:id="@+id/text"
             android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:id="@+id/searchWrap"
+            android:layout_height="wrap_content">
+
+        <ImageButton
+                android:layout_width="24dp"
+                android:id="@+id/clearSearch"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_times"
+                android:contentDescription="@string/contentdescription_clear_search"
+                android:layout_marginStart="8dp"
+                android:layout_alignParentEnd="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_height="24dp"/>
+
+        <com.frostnerd.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                app:image="@drawable/ic_search"
+                app:iconTint="?attr/foregroundElementColor"
+                app:allowCollapse="false"
+                app:animationDuration="0"
+                app:indicatorState="undefined"
+                app:indicatorVisibilityWhenUnused="hidden"
+                app:revealType="revealInstant"
+                android:layout_toStartOf="@id/clearSearch"
+                android:layout_alignParentStart="true"
+                app:revealDelay="0"
+                app:labelText="@string/search"
+                android:layout_height="wrap_content">
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:textColor="?attr/foregroundElementColor"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:hint="@string/hint_searchterm"
+                    android:id="@+id/search"
+                    android:inputType="text"/>
+        </com.frostnerd.materialedittext.MaterialEditText>
+
+    </RelativeLayout>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:text="@string/dialog_appchoosal_showsystemapps"
+            android:id="@+id/showSystemApps"
+            android:textColor="?android:attr/textColor"
+            android:visibility="gone"
+            android:checked="true"
+            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
