@@ -18,11 +18,13 @@ import com.frostnerd.smokescreen.getPreferences
 class AutostartReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != null) {
-            if (context.getPreferences().startAppOnBoot) {
-                BackgroundVpnConfigureActivity.prepareVpn(context)
-            } else if(context.getPreferences().startAppAfterUpdate && intent.action == Intent.ACTION_MY_PACKAGE_REPLACED) {
-                BackgroundVpnConfigureActivity.prepareVpn(context)
+            var startService = false
+            when {
+                intent.action == Intent.ACTION_MY_PACKAGE_REPLACED -> startService = context.getPreferences().startAppAfterUpdate
+                intent.action == Intent.ACTION_PACKAGE_REPLACED -> startService = intent.data?.schemeSpecificPart == context.packageName && context.getPreferences().startAppAfterUpdate
+                context.getPreferences().startAppOnBoot -> startService = true
             }
+            if(startService) BackgroundVpnConfigureActivity.prepareVpn(context)
         }
     }
 }
