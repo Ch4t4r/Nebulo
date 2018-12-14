@@ -11,7 +11,6 @@ import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.database.DatabaseHelper
 import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
@@ -137,27 +136,31 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
 
         button.tag = userConfiguration
         button.setOnLongClickListener {
-            showUserConfigDeleteDialog(userConfiguration)
+            showUserConfigDeleteDialog(userConfiguration, button)
             true
         }
         return button
     }
 
-    private fun showUserConfigDeleteDialog(userConfiguration: UserServerConfiguration) {
+    private fun showUserConfigDeleteDialog(userConfiguration: UserServerConfiguration, button:RadioButton) {
         AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
             .setTitle(R.string.dialog_deleteconfig_title)
             .setMessage(context.getString(R.string.dialog_deleteconfig_text, userConfiguration.name))
             .setNegativeButton(R.string.all_no) { _, _ -> }
             .setPositiveButton(R.string.all_yes) { _, _ ->
                 context.getDatabase().delete(userConfiguration)
-                knownServersGroup.removeAllViews()
 
-                if(primaryServer.urlCreator.baseUrl == userConfiguration.primaryServerUrl) {
-                    // TODO Reset to default.
+                if(button.isChecked) {
+                    context.getPreferences().primaryServerConfig = AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[0]!!.serverConfigurations.values.first()
+                    primaryServer = context.getPreferences().primaryServerConfig
+
+                    val config = AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[0]!!.serverConfigurations.values.last()
+                    if (config != primaryServer) context.getPreferences().secondaryServerConfig = config
+
+                    secondaryServer = context.getPreferences().secondaryServerConfig
+                    customServers = false
                 }
-
-                progress.visibility = View.VISIBLE
-                addKnownServers()
+                knownServersGroup.removeView(button)
             }.show()
     }
 
