@@ -4,6 +4,7 @@
     <string name="menu_main">Main screen</string>
     <string name="menu_dnsoverhttps">DNS over HTTPS</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_rate">Rate</string>
     <string name="menu_about">About this app</string>
 
 </resources>

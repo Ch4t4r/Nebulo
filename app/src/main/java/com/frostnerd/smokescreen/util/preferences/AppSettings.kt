@@ -38,6 +38,8 @@ interface AppSettings {
     var startAppOnBoot: Boolean
     var startAppAfterUpdate:Boolean
 
+    var hasRatedApp:Boolean
+
     val bypassPackagesIterator: CombinedIterator<String>
         get() = combineIterators(defaultBypassPackages.iterator(), userBypassPackages.iterator())
     val totalBypassPackageCount: Int
@@ -45,6 +47,8 @@ interface AppSettings {
 }
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context) {
+    override var hasRatedApp:Boolean by booleanPref("has_rated_app", false)
+
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
 

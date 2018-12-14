@@ -1,6 +1,8 @@
 package com.frostnerd.smokescreen.activity
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
@@ -39,6 +41,13 @@ class MainActivity : NavigationDrawerActivity() {
                     SettingsFragment()
                 })
             divider()
+            clickableItem(getString(R.string.menu_rate),
+                iconLeft = getDrawable(R.drawable.ic_star),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    rateApp()
+                    false
+                })
             clickableItem(getString(R.string.menu_about),
                 iconLeft = getDrawable(R.drawable.ic_binoculars),
                 onLongClick = null,
@@ -51,6 +60,21 @@ class MainActivity : NavigationDrawerActivity() {
                     false
                 })
         }
+    }
+
+    private fun rateApp() {
+        val appPackageName = this.packageName
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
+        } catch (e: android.content.ActivityNotFoundException) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                )
+            )
+        }
+        getPreferences().hasRatedApp = true
     }
 
     override fun createStyleOptions(): StyleOptions {
