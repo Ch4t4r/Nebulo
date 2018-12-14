@@ -34,7 +34,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
 
         fun prepareVpn(context: Context, primaryServerUrl: String? = null, secondaryServerUrl: String? = null) {
             val vpnIntent = VpnService.prepare(context)
-            if(vpnIntent == null){
+            if (vpnIntent == null) {
                 startService(context, primaryServerUrl, secondaryServerUrl)
             } else {
                 val intent = Intent(context, BackgroundVpnConfigureActivity::class.java)
@@ -45,14 +45,19 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
             }
         }
 
-        private fun startService(context: Context, primaryServerUrl: String? = null, secondaryServerUrl: String? = null) {
+        private fun startService(
+            context: Context,
+            primaryServerUrl: String? = null,
+            secondaryServerUrl: String? = null
+        ) {
             val intent = Intent(context, DnsVpnService::class.java)
-            intent.putExtra(extraKeyPrimaryUrl, primaryServerUrl)
-            intent.putExtra(extraKeySecondaryUrl, secondaryServerUrl)
+            if (primaryServerUrl != null) intent.putExtra(extraKeyPrimaryUrl, primaryServerUrl)
+            if (secondaryServerUrl != null) intent.putExtra(extraKeySecondaryUrl, secondaryServerUrl)
             context.startForegroundServiceCompat(intent)
         }
     }
-    var requestTime:Long = -1
+
+    var requestTime: Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.dialogStyle)
@@ -72,11 +77,11 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == VPN_REQUEST_CODE) {
-            if(resultCode == Activity.RESULT_OK) {
+        if (requestCode == VPN_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
                 startService()
                 finish()
-            } else if(resultCode == Activity.RESULT_CANCELED) {
+            } else if (resultCode == Activity.RESULT_CANCELED) {
                 if (System.currentTimeMillis() - requestTime <= 500) { // Most likely the system denied the request automatically
                     showPermissionDenialDialog()
                 } else {
