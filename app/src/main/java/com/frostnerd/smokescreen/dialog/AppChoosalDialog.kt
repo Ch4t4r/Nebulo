@@ -36,6 +36,7 @@ class AppChoosalDialog(
     private val context: Activity,
     selectedApps: Set<String>,
     private val hiddenAppPackages:Set<String> = emptySet(),
+    val infoText:String?,
     val dataCallback: (selectedApps: MutableSet<String>) -> Unit
 ) {
     private val dialogBuilder by lazy { AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle) }
@@ -97,6 +98,8 @@ class AppChoosalDialog(
                 context.runOnUiThread {
                     list.layoutManager = LinearLayoutManager(context)
                     list.adapter = adapter
+                    if(infoText.isNullOrBlank()) view.findViewById<TextView>(R.id.text).visibility = View.GONE
+                    else view.findViewById<TextView>(R.id.text).text = infoText
                     progressBar.visibility = View.GONE
                 }
             }
