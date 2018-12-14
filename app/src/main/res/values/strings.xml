@@ -12,8 +12,9 @@
     <string name="main_dnssurveillance_privacystatement">Privacy statement of %1s</string>
 
     <string name="about_app">This app is open source. The source code can be accessed at smokescreen.app/source.\nFurthermore the app doesn\'t contain ads and does not track or collect any data about you.\n\nVersion %1s\nBuild %2d\n\n&#169; Daniel Wolf 2018\nAll rights reserved.\n<a href="mailto:support@frostnerd.com">support@frostnerd.com</a></string>
-
     <string name="support_contact_mail">support@frostnerd.com</string>
+
+    <string name="app_share_text">Hey, I found this app which encrypts your DNS queries to give you more privacy and security. Check it out here: https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen</string>
 
     <string-array name="theme">
         <item>Mono</item>

@@ -46,6 +46,17 @@ class MainActivity : NavigationDrawerActivity() {
                     rateApp()
                     false
                 })
+            clickableItem(getString(R.string.menu_share_app),
+                iconLeft = getDrawable(R.drawable.ic_share),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    val intent = Intent(Intent.ACTION_SEND)
+                    intent.type = "text/plain"
+                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+                    intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_share_text))
+                    startActivity(Intent.createChooser(intent, getString(R.string.menu_share_app)))
+                    false
+                })
             clickableItem(getString(R.string.menu_contact_developer),
                 iconLeft = getDrawable(R.drawable.ic_envelope),
                 onLongClick = null,
