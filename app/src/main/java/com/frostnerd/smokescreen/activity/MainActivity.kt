@@ -3,18 +3,16 @@ package com.frostnerd.smokescreen.activity
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.*
-import com.frostnerd.smokescreen.BuildConfig
-import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
-import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.showInfoTextDialog
 
 class MainActivity : NavigationDrawerActivity() {
     private var textColor: Int = 0
@@ -46,6 +44,19 @@ class MainActivity : NavigationDrawerActivity() {
                 onLongClick = null,
                 onSimpleClick = { _, _, _ ->
                     rateApp()
+                    false
+                })
+            clickableItem(getString(R.string.menu_contact_developer),
+                iconLeft = getDrawable(R.drawable.ic_envelope),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    showEmailChooser(
+                        getString(R.string.menu_contact_developer),
+                        getString(R.string.app_name),
+                        getString(R.string.support_contact_mail),
+                        "\n\n\n\n\n\nSystem:\nApp version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n" +
+                                "Android: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})"
+                    )
                     false
                 })
             clickableItem(getString(R.string.menu_about),
