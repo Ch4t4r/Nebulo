@@ -103,8 +103,11 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="autoMirrored" value="true" />
-                            <entry key="outputName" value="ic_binoculars" />
-                            <entry key="sourceFile" value="E:\Dev\fontawesome-pro-5.6.0-desktop\svgs\solid\binoculars.svg" />
+                            <entry key="height" value="28" />
+                            <entry key="outputName" value="ic_star" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="E:\Dev\fontawesome-pro-5.6.0-desktop\svgs\solid\star.svg" />
+                            <entry key="width" value="32" />
                           </map>
                         </option>
                       </PersistentState>
