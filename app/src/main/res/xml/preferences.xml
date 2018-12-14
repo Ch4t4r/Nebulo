@@ -16,6 +16,12 @@
             android:title="@string/title_start_on_boot"
             android:key="start_on_boot"/>
 
+    <CheckBoxPreference
+            android:key="start_after_update"
+            android:title="@string/title_start_after_update"
+            android:summary="@string/summary_start_after_update"
+            android:defaultValue="true"/>
+
     <Preference
             android:key="app_exclusion_list"
             android:title="@string/title_excluded_apps"

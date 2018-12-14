@@ -36,6 +36,7 @@ interface AppSettings {
     var secondaryServerConfig: ServerConfiguration?
 
     var startAppOnBoot: Boolean
+    var startAppAfterUpdate:Boolean
 
     val bypassPackagesIterator: CombinedIterator<String>
         get() = combineIterators(defaultBypassPackages.iterator(), userBypassPackages.iterator())
@@ -45,6 +46,8 @@ interface AppSettings {
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context) {
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
+    override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
+
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", false)
     override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "8.8.8.8")
