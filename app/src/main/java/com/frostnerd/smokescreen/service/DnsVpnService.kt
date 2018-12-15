@@ -27,6 +27,7 @@ import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.AsyncVPNTunnelProxy
 import com.frostnerd.vpntunnelproxy.SyncScheduler
 import com.frostnerd.vpntunnelproxy.ThreadScheduler
+import com.frostnerd.vpntunnelproxy.TrafficStats
 import java.io.Serializable
 
 
@@ -52,6 +53,8 @@ class DnsVpnService : VpnService(), Runnable {
     companion object {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
         const val BROADCAST_VPN_INACTIVE = BuildConfig.APPLICATION_ID + ".VPN_INACTIVE"
+        var currentTrafficStats: TrafficStats? = null
+            private set
 
         fun sendCommand(context: Context, command: Command) {
             context.startService(Intent(context, DnsVpnService::class.java).putExtra("command", command))
@@ -138,6 +141,7 @@ class DnsVpnService : VpnService(), Runnable {
             vpnProxy?.stop()
             fileDescriptor?.close()
         }
+        currentTrafficStats = null
     }
 
     override fun onDestroy() {
@@ -203,6 +207,7 @@ class DnsVpnService : VpnService(), Runnable {
 
 
         vpnProxy!!.run(fileDescriptor!!)
+        currentTrafficStats = vpnProxy!!.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
     }
 
