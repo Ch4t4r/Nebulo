@@ -113,7 +113,11 @@ class DnsVpnService : VpnService(), Runnable {
                     getPreferences().totalBypassPackageCount
                 )
             } else {
-                getString(R.string.notification_main_text, primaryServer.urlCreator.baseUrl, getPreferences().totalBypassPackageCount)
+                getString(
+                    R.string.notification_main_text,
+                    primaryServer.urlCreator.baseUrl,
+                    getPreferences().totalBypassPackageCount
+                )
             }
             notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
         }
@@ -138,6 +142,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onDestroy() {
         super.onDestroy()
+        destroy()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
     }
 
