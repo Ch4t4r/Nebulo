@@ -42,7 +42,6 @@ class MainFragment : Fragment() {
     private var proxyStarting = false
     private var vpnStateReceiver: BroadcastReceiver? = null
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
@@ -50,7 +49,7 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         proxyRunning = requireContext().isServiceRunning(DnsVpnService::class.java)
-        updateStatusImage()
+        updateVpnIndicators()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,7 +62,7 @@ class MainFragment : Fragment() {
                 startVpn()
                 proxyStarting = true
             }
-            updateStatusImage()
+            updateVpnIndicators()
         }
         vpnStateReceiver = requireContext().registerLocalReceiver(
             listOf(
@@ -82,7 +81,7 @@ class MainFragment : Fragment() {
                         proxyStarting = false
                     }
                 }
-                updateStatusImage()
+                updateVpnIndicators()
             }
         }
         serverButton.setOnClickListener {
@@ -104,7 +103,7 @@ class MainFragment : Fragment() {
             i.data = Uri.parse(url.toURI().toString())
             startActivity(i)
         }
-        updateStatusImage()
+        updateVpnIndicators()
     }
 
     override fun onDestroy() {
@@ -127,11 +126,11 @@ class MainFragment : Fragment() {
             startVpn()
         } else if (requestCode == vpnRequestCode) {
             proxyStarting = false
-            updateStatusImage()
+            updateVpnIndicators()
         }
     }
 
-    fun updateStatusImage() {
+    private fun updateVpnIndicators() {
         when {
             proxyRunning -> {
                 statusImage.setImageResource(R.drawable.ic_lock)
@@ -166,7 +165,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    fun updatePrivacyPolicyLink(serverConfiguration: ServerConfiguration) {
+    private fun updatePrivacyPolicyLink(serverConfiguration: ServerConfiguration) {
         val url = serverConfiguration.serverInformation?.specification?.privacyPolicyURL
 
         if(url != null) {
