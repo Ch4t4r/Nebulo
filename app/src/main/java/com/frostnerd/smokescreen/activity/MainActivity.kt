@@ -23,6 +23,10 @@ class MainActivity : NavigationDrawerActivity() {
         setTheme(getPreferences().theme.layoutStyle)
         super.onCreate(savedInstanceState)
         AbstractHttpsDNSHandle // Loads the known servers.
+        setCardView { viewParent, suggestedHeight ->
+            val view = layoutInflater.inflate(R.layout.menu_cardview, null, false)
+            view
+        }
     }
 
     override fun createDrawerItems(): MutableList<DrawerItem> {

@@ -205,7 +205,6 @@ class DnsVpnService : VpnService(), Runnable {
         dnsProxy = SmokeProxy(handle!!, this)
         vpnProxy = AsyncVPNTunnelProxy(dnsProxy!!, ThreadScheduler())
 
-
         vpnProxy!!.run(fileDescriptor!!)
         currentTrafficStats = vpnProxy!!.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))

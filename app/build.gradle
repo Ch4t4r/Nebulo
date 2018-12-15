@@ -36,7 +36,7 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'com.frostnerd.utilskt:preferences:1.3.5'
-    implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.1.0'
+    implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.1.8'
     implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.2.27'
     implementation 'com.frostnerd.utilskt:general:1.0.6'
     implementation 'com.frostnerd.utils:materialedittext:1.0.17'
@@ -48,6 +48,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation "androidx.preference:preference:1.0.0"
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     testImplementation 'junit:junit:4.12'
