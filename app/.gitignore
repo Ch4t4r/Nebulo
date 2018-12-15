@@ -1,1 +1,3 @@
-/build
+build/
+release/
+!build/outputs/mapping/release/mapping.txt
