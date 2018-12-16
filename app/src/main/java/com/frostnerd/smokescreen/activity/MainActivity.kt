@@ -24,7 +24,7 @@ class MainActivity : NavigationDrawerActivity() {
         super.onCreate(savedInstanceState)
         AbstractHttpsDNSHandle // Loads the known servers.
         setCardView { viewParent, suggestedHeight ->
-            val view = layoutInflater.inflate(R.layout.menu_cardview, null, false)
+            val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             view
         }
     }
