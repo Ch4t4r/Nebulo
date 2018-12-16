@@ -24,10 +24,8 @@ import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.util.proxy.ProxyHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
-import com.frostnerd.vpntunnelproxy.AsyncVPNTunnelProxy
-import com.frostnerd.vpntunnelproxy.SyncScheduler
-import com.frostnerd.vpntunnelproxy.ThreadScheduler
 import com.frostnerd.vpntunnelproxy.TrafficStats
+import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import java.io.Serializable
 
 
@@ -44,7 +42,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var fileDescriptor: ParcelFileDescriptor? = null
     private var handle: ProxyHandler? = null
     private var dnsProxy: SmokeProxy? = null
-    private var vpnProxy: AsyncVPNTunnelProxy? = null
+    private var vpnProxy: VPNTunnelProxy? = null
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var primaryServer: ServerConfiguration
@@ -91,55 +89,70 @@ class DnsVpnService : VpnService(), Runnable {
                     stopForeground(true)
                     stopSelf()
                 }
+                Command.RESTART -> {
+                    recreateVpn()
+                }
             }
         }
-        if (!this::primaryServer.isInitialized) {
-            if (intent != null) {
-                primaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl))
-                    ServerConfiguration.createSimpleServerConfig(
-                        intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)
-                    )
-                else getPreferences().primaryServerConfig
+        if(!destroyed) {
+            if (!this::primaryServer.isInitialized) {
+                if (intent != null) {
+                    primaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl))
+                        ServerConfiguration.createSimpleServerConfig(
+                            intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)
+                        )
+                    else getPreferences().primaryServerConfig
 
-                secondaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
-                    ServerConfiguration.createSimpleServerConfig(intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
-                else getPreferences().secondaryServerConfig
-            } else {
-                primaryServer = getPreferences().primaryServerConfig
-                secondaryServer = getPreferences().secondaryServerConfig
+                    secondaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
+                        ServerConfiguration.createSimpleServerConfig(intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
+                    else getPreferences().secondaryServerConfig
+                } else {
+                    primaryServer = getPreferences().primaryServerConfig
+                    secondaryServer = getPreferences().secondaryServerConfig
+                }
+                val text = if (secondaryServer != null) {
+                    getString(
+                        R.string.notification_main_text_with_secondary,
+                        primaryServer.urlCreator.baseUrl,
+                        secondaryServer!!.urlCreator.baseUrl,
+                        getPreferences().totalBypassPackageCount
+                    )
+                } else {
+                    getString(
+                        R.string.notification_main_text,
+                        primaryServer.urlCreator.baseUrl,
+                        getPreferences().totalBypassPackageCount
+                    )
+                }
+                notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
             }
-            val text = if (secondaryServer != null) {
-                getString(
-                    R.string.notification_main_text_with_secondary,
-                    primaryServer.urlCreator.baseUrl,
-                    secondaryServer!!.urlCreator.baseUrl,
-                    getPreferences().totalBypassPackageCount
-                )
-            } else {
-                getString(
-                    R.string.notification_main_text,
-                    primaryServer.urlCreator.baseUrl,
-                    getPreferences().totalBypassPackageCount
-                )
-            }
-            notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
+            updateNotification(0)
+            establishVpn()
+            return Service.START_STICKY
+        } else {
+            return Service.START_NOT_STICKY
         }
-        updateNotification(0)
-        establishVpn()
-        return Service.START_STICKY
     }
 
     private fun establishVpn() {
         if (fileDescriptor == null) {
             fileDescriptor = createBuilder().establish()
-            Thread(this).start()
+            run()
         }
+    }
+
+    private fun recreateVpn() {
+        destroy()
+        establishVpn()
     }
 
     private fun destroy() {
         if (!destroyed) {
             vpnProxy?.stop()
             fileDescriptor?.close()
+            vpnProxy = null
+            fileDescriptor = null
+            destroyed = true;
         }
         currentTrafficStats = null
     }
@@ -199,11 +212,10 @@ class DnsVpnService : VpnService(), Runnable {
         handle = ProxyHandler(
             list,
             connectTimeout = 500,
-            scheduler = SyncScheduler()
-            , queryCountCallback = ::updateNotification
+            queryCountCallback = ::updateNotification
         )
         dnsProxy = SmokeProxy(handle!!, this)
-        vpnProxy = AsyncVPNTunnelProxy(dnsProxy!!, ThreadScheduler())
+        vpnProxy = VPNTunnelProxy(dnsProxy!!)
 
         vpnProxy!!.run(fileDescriptor!!)
         currentTrafficStats = vpnProxy!!.trafficStats
@@ -229,5 +241,5 @@ fun AbstractHttpsDNSHandle.Companion.findKnownServerByUrl(url: String): HttpsDns
 }
 
 enum class Command : Serializable {
-    STOP
+    STOP, RESTART
 }

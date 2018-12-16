@@ -3,7 +3,6 @@ package com.frostnerd.smokescreen.util.proxy
 import com.frostnerd.dnstunnelproxy.DnsPacketProxy
 import com.frostnerd.dnstunnelproxy.SimpleDnsCache
 import com.frostnerd.smokescreen.service.DnsVpnService
-import com.frostnerd.vpntunnelproxy.AsyncVPNTunnelProxy
 
 /**
  * Copyright Daniel Wolf 2018
