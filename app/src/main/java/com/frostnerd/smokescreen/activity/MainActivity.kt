@@ -74,6 +74,16 @@ class MainActivity : NavigationDrawerActivity() {
                     )
                     false
                 })
+            if(isPackageInstalled(this@MainActivity, "org.telegram.messenger")) {
+                clickableItem(getString(R.string.menu_telegram_group),
+                    onLongClick = null,
+                    iconLeft = getDrawable(R.drawable.ic_comments),
+                    onSimpleClick = { _, _, _ ->
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://join?invite=I54nRleveRG3xwAa3StNCg"))
+                        startActivity(intent)
+                        false
+                    })
+            }
             clickableItem(getString(R.string.menu_about),
                 iconLeft = getDrawable(R.drawable.ic_binoculars),
                 onLongClick = null,

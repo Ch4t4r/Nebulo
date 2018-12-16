@@ -7,6 +7,11 @@ import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.widget.TextView
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
+import android.content.Intent
+
+
 
 /**
  * Copyright Daniel Wolf 2018
@@ -31,4 +36,11 @@ fun showInfoTextDialog(context:Context, title:String, text:String): androidx.app
     textView?.movementMethod = LinkMovementMethod.getInstance()
     textView?.setLinkTextColor(Color.parseColor("#64B5F6"))
     return dialog
+}
+
+fun isPackageInstalled(context: Context, packageName: String): Boolean {
+    val packageManager = context.packageManager
+    val intent = packageManager.getLaunchIntentForPackage(packageName) ?: return false
+    val list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+    return list.size > 0
 }
