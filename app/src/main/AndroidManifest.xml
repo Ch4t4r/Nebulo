@@ -26,6 +26,18 @@
             </intent-filter>
         </activity>
         <activity
+                android:name=".activity.ServerImportActivity"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                        android:mimeType="application/octet-stream"
+                        android:pathPattern=".*\\.dohserver"
+                        />
+            </intent-filter>
+        </activity>
+        <activity
                 android:name=".activity.BackgroundVpnConfigureActivity"
                 android:launchMode="singleInstance"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
@@ -41,7 +53,10 @@
                     android:name="android.net.VpnService.SUPPORTS_ALWAYS_ON"
                     android:value="true"/>
         </service>
-        <service android:name=".service.VpnRestartService" android:exported="false" />
+        <service
+                android:name=".service.VpnRestartService"
+                android:exported="false"/>
+
         <receiver
                 android:name=".receiver.AutostartReceiver"
                 android:enabled="true"
@@ -58,8 +73,8 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                <data android:scheme="package"/>
             </intent-filter>
         </receiver>
     </application>
