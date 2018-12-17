@@ -1,7 +1,6 @@
 package com.frostnerd.smokescreen.dialog
 
 import android.app.Activity
-import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.ListDataSource
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
-import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import kotlinx.coroutines.GlobalScope
@@ -38,6 +36,7 @@ class AppChoosalDialog(
     private val context: Activity,
     selectedApps: Set<String>,
     private val hiddenAppPackages: Set<String> = emptySet(),
+    private val defaultChosenUnselectablePackages:Set<String> = emptySet(),
     val infoText: String?,
     val dataCallback: (selectedApps: MutableSet<String>) -> Unit
 ) {
@@ -186,8 +185,11 @@ class AppChoosalDialog(
 
         init {
             checkBox.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) currentSelectedApps.add(itemView.tag as String)
-                else currentSelectedApps.remove(itemView.tag as String)
+                val packageName = itemView.tag as String
+                if(!defaultChosenUnselectablePackages.contains(packageName)) {
+                    if (isChecked) currentSelectedApps.add(packageName)
+                    else currentSelectedApps.remove(packageName)
+                }
             }
             itemView.setOnClickListener {
                 checkBox.isChecked = !checkBox.isChecked
@@ -201,6 +203,12 @@ class AppChoosalDialog(
             })
             title.text = labels.getOrPut(info.packageName) { info.loadLabel(packageManager).toString() }
             checkBox.isChecked = currentSelectedApps.contains(info.packageName)
+            if(defaultChosenUnselectablePackages.contains(info.packageName)) {
+                checkBox.isChecked = true
+                checkBox.isEnabled = false
+            } else {
+                checkBox.isEnabled = true
+            }
         }
 
         override fun destroy() {

@@ -41,8 +41,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val dialog = AppChoosalDialog(
                 requireActivity(),
                 requireContext().getPreferences().userBypassPackages,
-                requireContext().getPreferences().defaultBypassPackages,
-                getString(R.string.dialog_excludedapps_infotext, requireContext().getPreferences().defaultBypassPackages.size)
+                defaultChosenUnselectablePackages = requireContext().getPreferences().defaultBypassPackages,
+                infoText = getString(R.string.dialog_excludedapps_infotext, requireContext().getPreferences().defaultBypassPackages.size)
             ) { selected ->
                 requireContext().getPreferences().userBypassPackages = selected
             }.createDialog()

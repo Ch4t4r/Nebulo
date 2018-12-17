@@ -16,5 +16,5 @@
 
     <string name="dialog_appchoosal_showsystemapps">Show system apps</string>
 
-    <string name="dialog_excludedapps_infotext">%1d apps are excluded by default and not listed here.</string>
+    <string name="dialog_excludedapps_infotext">%1d apps are excluded by default and cannot be de-selected</string>
 </resources>
