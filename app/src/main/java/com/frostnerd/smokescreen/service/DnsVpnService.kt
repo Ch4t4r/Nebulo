@@ -123,8 +123,8 @@ class DnsVpnService : VpnService(), Runnable {
         updateNotification(0)
     }
 
-    private fun updateNotification(queryCount: Int) {
-        notificationBuilder.setSubText(getString(R.string.notification_main_subtext, queryCount + queryCountOffset))
+    private fun updateNotification(queryCount: Int? = null) {
+        if(queryCount != null) notificationBuilder.setSubText(getString(R.string.notification_main_subtext, queryCount + queryCountOffset))
         startForeground(1, notificationBuilder.build())
     }
 
@@ -141,8 +141,8 @@ class DnsVpnService : VpnService(), Runnable {
                 Command.RESTART -> {
                     if (intent.getBooleanExtra("fetch_servers", false)) {
                         setServerConfiguration(intent)
-                        setNotificationText()
                     }
+                    setNotificationText()
                     recreateVpn()
                 }
             }

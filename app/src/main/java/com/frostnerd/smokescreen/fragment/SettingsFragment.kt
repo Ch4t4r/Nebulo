@@ -2,11 +2,12 @@ package com.frostnerd.smokescreen.fragment
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.restart
-import com.frostnerd.smokescreen.util.preferences.AppSettings
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Theme
 
 /**
@@ -44,7 +45,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 defaultChosenUnselectablePackages = requireContext().getPreferences().defaultBypassPackages,
                 infoText = getString(R.string.dialog_excludedapps_infotext, requireContext().getPreferences().defaultBypassPackages.size)
             ) { selected ->
-                requireContext().getPreferences().userBypassPackages = selected
+                if(selected.size != requireContext().getPreferences().userBypassPackages.size) {
+                    requireContext().getPreferences().userBypassPackages = selected
+                    if(requireContext().isServiceRunning(DnsVpnService::class.java)) {
+                        DnsVpnService.restartVpn(requireContext(), false)
+                    }
+                }
             }.createDialog()
             dialog.setTitle(R.string.title_excluded_apps)
             dialog.show()
