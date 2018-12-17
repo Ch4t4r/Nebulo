@@ -18,6 +18,22 @@ import com.frostnerd.smokescreen.R
 class Notifications {
 
     companion object {
+        fun servicePersistentNotificationChannel(context: Context):String {
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    "service_foreground_notification",
+                    context.getString(R.string.notification_channel_foreground_service),
+                    NotificationManager.IMPORTANCE_DEFAULT
+                )
+                channel.enableLights(false)
+                channel.enableVibration(false)
+                channel.description = context.getString(R.string.notification_channel_foreground_service_description)
+                channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+                (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
+            }
+            return "service_foreground_notification"
+        }
+
         fun getDefaultNotificationChannelId(context: Context): String {
             if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(

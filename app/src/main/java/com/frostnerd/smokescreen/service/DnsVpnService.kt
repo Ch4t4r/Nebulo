@@ -62,7 +62,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
-        notificationBuilder = NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
+        notificationBuilder = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
         notificationBuilder.setContentTitle(getString(R.string.app_name))
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
         notificationBuilder.setContentIntent(

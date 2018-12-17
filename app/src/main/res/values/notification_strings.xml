@@ -3,6 +3,9 @@
     <string name="notification_channel_default">Default Channel</string>
     <string name="notification_channel_default_description">Default channel for posting notifications.</string>
 
+    <string name="notification_channel_foreground_service">Permanent Notification Channel</string>
+    <string name="notification_channel_foreground_service_description">Channel used for notifications which can\'t be removed by the user</string>
+
     <string name="notification_main_text">Queries are sent to %1$s\n\n%2$d Apps on the blacklist</string>
     <string name="notification_main_text_with_secondary">Queries are sent to %1$s and %2$s\n\n%3$d Apps on the blacklist</string>
     <string name="notification_main_subtext">%1$d queries so far</string>
