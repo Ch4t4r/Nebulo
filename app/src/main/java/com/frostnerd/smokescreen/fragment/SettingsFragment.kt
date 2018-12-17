@@ -46,7 +46,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             ) { selected ->
                 requireContext().getPreferences().userBypassPackages = selected
             }.createDialog()
-            dialog.setTitle("Test")
+            dialog.setTitle(R.string.title_excluded_apps)
             dialog.show()
             true
         }
