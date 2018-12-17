@@ -113,6 +113,7 @@ class DnsVpnService : VpnService(), Runnable {
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
         notificationBuilder.setOngoing(true)
         notificationBuilder.setAutoCancel(false)
+        notificationBuilder.setSound(null)
         notificationBuilder.setUsesChronometer(true)
         notificationBuilder.setContentIntent(
             PendingIntent.getActivity(

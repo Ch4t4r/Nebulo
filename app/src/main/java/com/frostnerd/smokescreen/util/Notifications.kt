@@ -27,6 +27,7 @@ class Notifications {
                 )
                 channel.enableLights(false)
                 channel.enableVibration(false)
+                channel.setSound(null, null)
                 channel.description = context.getString(R.string.notification_channel_foreground_service_description)
                 channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
                 (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
