@@ -38,8 +38,8 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
                 DnsVpnService.startVpn(context, primaryServerUrl, secondaryServerUrl)
             } else {
                 val intent = Intent(context, BackgroundVpnConfigureActivity::class.java)
-                intent.putExtra(extraKeyPrimaryUrl, primaryServerUrl)
-                intent.putExtra(extraKeySecondaryUrl, secondaryServerUrl)
+                if(primaryServerUrl != null) intent.putExtra(extraKeyPrimaryUrl, primaryServerUrl)
+                if(secondaryServerUrl != null) intent.putExtra(extraKeySecondaryUrl, secondaryServerUrl)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
             }
