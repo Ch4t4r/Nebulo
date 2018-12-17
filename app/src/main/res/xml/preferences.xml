@@ -22,6 +22,12 @@
             android:summary="@string/summary_start_after_update"
             android:defaultValue="true"/>
 
+    <CheckBoxPreference
+            android:key="disallow_other_vpns"
+            android:title="@string/title_disallow_other_vpns"
+            android:summary="@string/summary_disallow_other_vpns"
+            android:defaultValue="false"/>
+
     <Preference
             android:key="app_exclusion_list"
             android:title="@string/title_excluded_apps"

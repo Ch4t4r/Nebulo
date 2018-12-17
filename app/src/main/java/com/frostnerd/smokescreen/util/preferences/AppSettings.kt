@@ -37,6 +37,7 @@ interface AppSettings {
 
     var startAppOnBoot: Boolean
     var startAppAfterUpdate:Boolean
+    var disallowOtherVpns:Boolean
 
     var hasRatedApp:Boolean
 
@@ -51,6 +52,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
+    override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
 
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", false)

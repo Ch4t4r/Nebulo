@@ -12,6 +12,8 @@ import com.frostnerd.networking.NetworkUtil
 import com.frostnerd.smokescreen.R
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
@@ -66,8 +68,14 @@ class DnsVpnService : VpnService(), Runnable {
 
         fun startVpn(context: Context, primaryServerUrl: String? = null, secondaryServerUrl: String? = null) {
             val intent = Intent(context, DnsVpnService::class.java)
-            if(primaryServerUrl != null) intent.putExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl, primaryServerUrl)
-            if(secondaryServerUrl != null) intent.putExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl, secondaryServerUrl)
+            if (primaryServerUrl != null) intent.putExtra(
+                BackgroundVpnConfigureActivity.extraKeyPrimaryUrl,
+                primaryServerUrl
+            )
+            if (secondaryServerUrl != null) intent.putExtra(
+                BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
+                secondaryServerUrl
+            )
             context.startForegroundServiceCompat(intent)
         }
 
@@ -79,8 +87,14 @@ class DnsVpnService : VpnService(), Runnable {
 
         fun restartVpn(context: Context, primaryServerUrl: String?, secondaryServerUrl: String?) {
             val bundle = Bundle()
-            if(primaryServerUrl != null) bundle.putString(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl, primaryServerUrl)
-            if(secondaryServerUrl != null) bundle.putString(BackgroundVpnConfigureActivity.extraKeySecondaryUrl, secondaryServerUrl)
+            if (primaryServerUrl != null) bundle.putString(
+                BackgroundVpnConfigureActivity.extraKeyPrimaryUrl,
+                primaryServerUrl
+            )
+            if (secondaryServerUrl != null) bundle.putString(
+                BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
+                secondaryServerUrl
+            )
             sendCommand(context, Command.RESTART, bundle)
         }
 
@@ -152,7 +166,7 @@ class DnsVpnService : VpnService(), Runnable {
                 primaryServer = ServerConfiguration.createSimpleServerConfig(primaryUserServerUrl!!)
             } else {
                 primaryUserServerUrl = null
-                getPreferences().primaryServerConfig
+                primaryServer = getPreferences().primaryServerConfig
             }
 
             if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl)) {
@@ -229,6 +243,17 @@ class DnsVpnService : VpnService(), Runnable {
         }
         destroy()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
+    }
+
+    override fun onRevoke() {
+        destroy()
+        stopForeground(true)
+        stopSelf()
+        if (getPreferences().disallowOtherVpns) {
+            Handler(Looper.getMainLooper()).postDelayed({
+                BackgroundVpnConfigureActivity.prepareVpn(this, primaryUserServerUrl, secondaryUserServerUrl)
+            }, 250)
+        }
     }
 
     private fun createBuilder(): Builder {
