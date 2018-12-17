@@ -11,6 +11,7 @@ import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.networking.NetworkUtil
 import com.frostnerd.smokescreen.R
 import android.content.pm.PackageManager
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
@@ -47,6 +48,7 @@ class DnsVpnService : VpnService(), Runnable {
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var primaryServer: ServerConfiguration
     private var secondaryServer: ServerConfiguration? = null
+    private var queryCountOffset:Long = 0
 
     companion object {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
@@ -54,8 +56,23 @@ class DnsVpnService : VpnService(), Runnable {
         var currentTrafficStats: TrafficStats? = null
             private set
 
-        fun sendCommand(context: Context, command: Command) {
-            context.startService(Intent(context, DnsVpnService::class.java).putExtra("command", command))
+        fun restartVpn(context: Context, fetchServersFromSettings: Boolean) {
+            val bundle = Bundle()
+            bundle.putBoolean("fetch_servers", fetchServersFromSettings)
+            sendCommand(context, Command.RESTART, bundle)
+        }
+
+        fun restartVpn(context: Context, primaryServerUrl: String, secondaryServerUrl: String?) {
+            val bundle = Bundle()
+            bundle.putString(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl, primaryServerUrl)
+            bundle.putString(BackgroundVpnConfigureActivity.extraKeySecondaryUrl, secondaryServerUrl)
+            sendCommand(context, Command.RESTART, bundle)
+        }
+
+        fun sendCommand(context: Context, command: Command, extras: Bundle? = null) {
+            val intent = Intent(context, DnsVpnService::class.java).putExtra("command", command)
+            if (extras != null) intent.putExtras(extras)
+            context.startService(intent)
         }
     }
 
@@ -78,7 +95,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun updateNotification(queryCount: Int) {
-        notificationBuilder.setSubText(getString(R.string.notification_main_subtext, queryCount))
+        notificationBuilder.setSubText(getString(R.string.notification_main_subtext, queryCount + queryCountOffset))
         startForeground(1, notificationBuilder.build())
     }
 
@@ -93,48 +110,63 @@ class DnsVpnService : VpnService(), Runnable {
                     stopSelf()
                 }
                 Command.RESTART -> {
+                    if (intent.getBooleanExtra("fetch_servers", false)) {
+                        setServerConfiguration(intent)
+                        setNotificationText()
+                    }
                     recreateVpn()
                 }
             }
-        }
-        if(!destroyed) {
-            if (!this::primaryServer.isInitialized) {
-                if (intent != null) {
-                    primaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl))
-                        ServerConfiguration.createSimpleServerConfig(
-                            intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)
-                        )
-                    else getPreferences().primaryServerConfig
-
-                    secondaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
-                        ServerConfiguration.createSimpleServerConfig(intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
-                    else getPreferences().secondaryServerConfig
-                } else {
-                    primaryServer = getPreferences().primaryServerConfig
-                    secondaryServer = getPreferences().secondaryServerConfig
-                }
-                val text = if (secondaryServer != null) {
-                    getString(
-                        R.string.notification_main_text_with_secondary,
-                        primaryServer.urlCreator.baseUrl,
-                        secondaryServer!!.urlCreator.baseUrl,
-                        getPreferences().totalBypassPackageCount
-                    )
-                } else {
-                    getString(
-                        R.string.notification_main_text,
-                        primaryServer.urlCreator.baseUrl,
-                        getPreferences().totalBypassPackageCount
-                    )
-                }
-                notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
-            }
-            updateNotification(0)
-            establishVpn()
-            return Service.START_STICKY
         } else {
-            return Service.START_NOT_STICKY
+            if (!destroyed) {
+                if (!this::primaryServer.isInitialized) {
+                    setServerConfiguration(intent)
+                    setNotificationText()
+                }
+                updateNotification(0)
+                establishVpn()
+            }
         }
+        return if (destroyed) Service.START_NOT_STICKY else Service.START_STICKY
+    }
+
+    private fun setServerConfiguration(intent: Intent?) {
+        if (intent != null) {
+            primaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl))
+                ServerConfiguration.createSimpleServerConfig(
+                    intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)
+                )
+            else getPreferences().primaryServerConfig
+
+            secondaryServer = if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
+                ServerConfiguration.createSimpleServerConfig(
+                    intent.getStringExtra(
+                        BackgroundVpnConfigureActivity.extraKeySecondaryUrl
+                    )
+                )
+            else getPreferences().secondaryServerConfig
+        } else {
+            primaryServer = getPreferences().primaryServerConfig
+            secondaryServer = getPreferences().secondaryServerConfig
+        }
+    }
+
+    private fun setNotificationText() {
+        val text = if (secondaryServer != null) {
+            getString(
+                R.string.notification_main_text_with_secondary,
+                primaryServer.urlCreator.baseUrl,
+                secondaryServer!!.urlCreator.baseUrl,
+                getPreferences().totalBypassPackageCount
+            )
+        } else {
+            getString(
+                R.string.notification_main_text,
+                primaryServer.urlCreator.baseUrl,
+                getPreferences().totalBypassPackageCount
+            )
+        }
+        notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
     }
 
     private fun establishVpn() {
@@ -146,16 +178,18 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun recreateVpn() {
         destroy()
+        destroyed = false
         establishVpn()
     }
 
     private fun destroy() {
         if (!destroyed) {
+            queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
             vpnProxy = null
             fileDescriptor = null
-            destroyed = true;
+            destroyed = true
         }
         currentTrafficStats = null
     }
