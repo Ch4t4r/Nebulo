@@ -35,7 +35,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
         fun prepareVpn(context: Context, primaryServerUrl: String? = null, secondaryServerUrl: String? = null) {
             val vpnIntent = VpnService.prepare(context)
             if (vpnIntent == null) {
-                startService(context, primaryServerUrl, secondaryServerUrl)
+                DnsVpnService.startVpn(context, primaryServerUrl, secondaryServerUrl)
             } else {
                 val intent = Intent(context, BackgroundVpnConfigureActivity::class.java)
                 intent.putExtra(extraKeyPrimaryUrl, primaryServerUrl)
@@ -43,17 +43,6 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
             }
-        }
-
-        private fun startService(
-            context: Context,
-            primaryServerUrl: String? = null,
-            secondaryServerUrl: String? = null
-        ) {
-            val intent = Intent(context, DnsVpnService::class.java)
-            if (primaryServerUrl != null) intent.putExtra(extraKeyPrimaryUrl, primaryServerUrl)
-            if (secondaryServerUrl != null) intent.putExtra(extraKeySecondaryUrl, secondaryServerUrl)
-            context.startForegroundServiceCompat(intent)
         }
     }
 
@@ -93,7 +82,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
     }
 
     private fun startService() {
-        startService(this, intent.extras?.getString(extraKeyPrimaryUrl), intent.extras?.getString(extraKeySecondaryUrl))
+        DnsVpnService.startVpn(this, intent.extras?.getString(extraKeyPrimaryUrl), intent.extras?.getString(extraKeySecondaryUrl))
     }
 
     private fun showPermissionDenialDialog() {

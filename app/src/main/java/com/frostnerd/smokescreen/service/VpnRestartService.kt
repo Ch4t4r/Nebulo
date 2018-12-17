@@ -39,7 +39,10 @@ class VpnRestartService : Service() {
         builder.setContentText(getString(R.string.notification_vpnrestart_text))
 
         startForeground(NOTIFICATION_ID, builder.build())
-        startForegroundServiceCompat(Intent(this, DnsVpnService::class.java))
+        val restartIntent = Intent(this, DnsVpnService::class.java)
+        if (intent != null && intent.extras != null)
+            restartIntent.putExtras(intent.extras!!)
+        startForegroundServiceCompat(restartIntent)
         stopForeground(true)
         stopSelf()
         return START_NOT_STICKY
