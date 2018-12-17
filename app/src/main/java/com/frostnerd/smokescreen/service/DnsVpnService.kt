@@ -191,13 +191,15 @@ class DnsVpnService : VpnService(), Runnable {
                 R.string.notification_main_text_with_secondary,
                 primaryServer.urlCreator.baseUrl,
                 secondaryServer!!.urlCreator.baseUrl,
-                getPreferences().totalBypassPackageCount
+                getPreferences().totalBypassPackageCount,
+                dnsProxy?.cache?.livingCachedEntries() ?: 0
             )
         } else {
             getString(
                 R.string.notification_main_text,
                 primaryServer.urlCreator.baseUrl,
-                getPreferences().totalBypassPackageCount
+                getPreferences().totalBypassPackageCount,
+                dnsProxy?.cache?.livingCachedEntries() ?: 0
             )
         }
         notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
@@ -306,7 +308,10 @@ class DnsVpnService : VpnService(), Runnable {
         handle = ProxyHandler(
             list,
             connectTimeout = 500,
-            queryCountCallback = ::updateNotification
+            queryCountCallback = {
+                setNotificationText()
+                updateNotification(it)
+            }
         )
         dnsProxy = SmokeProxy(handle!!, this)
         vpnProxy = VPNTunnelProxy(dnsProxy!!)

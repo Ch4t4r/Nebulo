@@ -17,4 +17,6 @@ import com.frostnerd.smokescreen.service.DnsVpnService
 class SmokeProxy(dnsHandle: ProxyHandler, vpnService: DnsVpnService) :
     DnsPacketProxy(listOf(dnsHandle), vpnService, SimpleDnsCache()) {
 
+    val cache = super.dnsCache!! as SimpleDnsCache
+
 }
