@@ -65,6 +65,9 @@ class DnsVpnService : VpnService(), Runnable {
         notificationBuilder = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
         notificationBuilder.setContentTitle(getString(R.string.app_name))
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
+        notificationBuilder.setOngoing(true)
+        notificationBuilder.setAutoCancel(false)
+        notificationBuilder.setUsesChronometer(true)
         notificationBuilder.setContentIntent(
             PendingIntent.getActivity(
                 this, 1,
