@@ -90,7 +90,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
                 for ((_, serverInfo) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.toSortedMap(compareByDescending {
                     AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[it]!!.name
                 })) {
-                    if (!serverInfo.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS)) {
+                    if (!serverInfo.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !context.resources.getBoolean(R.bool.hide_adblocking_servers)) {
                         buttons.add(0, createButtonForKnownConfiguration(serverInfo.name, serverInfo))
                     }
                 }

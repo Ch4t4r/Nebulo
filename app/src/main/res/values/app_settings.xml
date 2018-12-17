@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <bool name="keep_service_alive">true</bool>
+    <bool name="hide_adblocking_servers">true</bool>
 </resources>
