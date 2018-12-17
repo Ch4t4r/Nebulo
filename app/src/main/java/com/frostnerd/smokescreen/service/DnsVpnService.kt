@@ -23,6 +23,7 @@ import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.startForegroundServiceCompat
 import com.frostnerd.smokescreen.util.proxy.ProxyHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
@@ -196,6 +197,9 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onDestroy() {
         super.onDestroy()
+        if(!destroyed && resources.getBoolean(R.bool.keep_service_alive)) {
+            startForegroundServiceCompat(Intent(this, VpnRestartService::class.java))
+        }
         destroy()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
     }

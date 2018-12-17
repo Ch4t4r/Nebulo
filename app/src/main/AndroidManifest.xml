@@ -41,6 +41,7 @@
                     android:name="android.net.VpnService.SUPPORTS_ALWAYS_ON"
                     android:value="true"/>
         </service>
+        <service android:name=".service.VpnRestartService" />
         <receiver
                 android:name=".receiver.AutostartReceiver"
                 android:enabled="true"

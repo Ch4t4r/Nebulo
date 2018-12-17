@@ -9,4 +9,7 @@
     <string name="notification_main_text">Queries are sent to %1$s\n\n%2$d Apps on the blacklist</string>
     <string name="notification_main_text_with_secondary">Queries are sent to %1$s and %2$s\n\n%3$d Apps on the blacklist</string>
     <string name="notification_main_subtext">%1$d queries so far</string>
+
+    <string name="notification_vpnrestart_title">Restarting Vpn</string>
+    <string name="notification_vpnrestart_text">The Vpn service will be restarted soon.</string>
 </resources>
