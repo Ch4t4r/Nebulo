@@ -2,4 +2,10 @@
 <resources>
     <bool name="keep_service_alive">true</bool>
     <bool name="hide_adblocking_servers">true</bool>
+
+    <string-array name="interface_address_prefixes">
+        <item>192.168.0</item>
+        <item>172.18.234</item>
+        <item>10.18.234</item>
+    </string-array>
 </resources>

@@ -31,6 +31,7 @@ import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import java.io.Serializable
+import java.lang.IllegalArgumentException
 
 
 /**
@@ -125,7 +126,12 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun updateNotification(queryCount: Int? = null) {
-        if(queryCount != null) notificationBuilder.setSubText(getString(R.string.notification_main_subtext, queryCount + queryCountOffset))
+        if (queryCount != null) notificationBuilder.setSubText(
+            getString(
+                R.string.notification_main_subtext,
+                queryCount + queryCountOffset
+            )
+        )
         startForeground(1, notificationBuilder.build())
     }
 
@@ -264,9 +270,30 @@ class DnsVpnService : VpnService(), Runnable {
 
         val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
         val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
+        var couldSetAddress = false
+        for (prefix in resources.getStringArray(R.array.interface_address_prefixes)) {
+            try {
+                builder.addAddress("$prefix.134", 24)
+                couldSetAddress = true
+            } catch (ignored: IllegalArgumentException) {
+            }
+        }
 
-        builder.addAddress("192.168.0.10", 24)
-        builder.addAddress(NetworkUtil.randomLocalIPv6Address(), 48)
+        if (!couldSetAddress) {
+            builder.addAddress("192.168.0.10", 24)
+        }
+        couldSetAddress = false
+
+        var tries = 0
+        do {
+            try {
+                builder.addAddress(NetworkUtil.randomLocalIPv6Address(), 48)
+                couldSetAddress = true
+            } catch (e: IllegalArgumentException) {
+                if(tries >= 5) throw e
+            }
+        } while(!couldSetAddress && ++tries < 5)
+
         if (getPreferences().catchKnownDnsServers) {
             for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
                 for (ipv4Server in server.getIpv4Servers()) {
