@@ -296,6 +296,7 @@ class DnsVpnService : VpnService(), Runnable {
                 builder.addAddress("$prefix.134", 24)
                 couldSetAddress = true
                 log("Ipv4-Address set to $prefix.134.")
+                break
             } catch (ignored: IllegalArgumentException) {
                 log("Couldn't set Ipv4-Address $prefix.134")
             }
@@ -314,6 +315,7 @@ class DnsVpnService : VpnService(), Runnable {
                 builder.addAddress(addr, 48)
                 couldSetAddress = true
                 log("Ipv6-Address set to $addr")
+                break
             } catch (e: IllegalArgumentException) {
                 if(tries >= 5) throw e
                 log("Couldn't set Ipv6-Address $addr, try $tries")
