@@ -37,4 +37,10 @@
             android:key="send_logs"
             android:title="@string/title_send_logs"
             android:summary="@string/summary_send_logs"/>
+
+    <CheckBoxPreference
+            android:key="force_ipv6"
+            android:defaultValue="false"
+            android:title="@string/title_force_ipv6"
+            android:summary="@string/summary_force_ipv6"/>
 </PreferenceScreen>

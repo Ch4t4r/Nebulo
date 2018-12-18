@@ -10,6 +10,8 @@ import android.system.OsConstants
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.networking.NetworkUtil
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -29,6 +31,10 @@ import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import java.io.Serializable
 import java.lang.IllegalArgumentException
+import java.net.Inet6Address
+import java.net.NetworkInterface
+import java.net.NetworkInterface.getNetworkInterfaces
+import java.util.*
 
 
 /**
@@ -289,21 +295,25 @@ class DnsVpnService : VpnService(), Runnable {
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
         val builder = Builder()
+        val useIpv6 = getPreferences().forceIpv6 || hasDeviceIpv6Address()
 
         val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
         val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
         log("Dummy address for Ipv4: $dummyServerIpv4")
         log("Dummy address for Ipv6: $dummyServerIpv6")
+        log("Using IPv6: $useIpv6")
 
         var couldSetAddress = false
-        for (prefix in resources.getStringArray(R.array.interface_address_prefixes)) {
+        for (address in resources.getStringArray(R.array.interface_address_prefixes)) {
+            val prefix = address.split("/")[0]
+            val mask = address.split("/")[1].toInt()
             try {
-                builder.addAddress("$prefix.134", 24)
+                builder.addAddress("$prefix.134", mask)
                 couldSetAddress = true
-                log("Ipv4-Address set to $prefix.134.")
+                log("Ipv4-Address set to $prefix.134./$mask")
                 break
             } catch (ignored: IllegalArgumentException) {
-                log("Couldn't set Ipv4-Address $prefix.134")
+                log("Couldn't set Ipv4-Address $prefix.134/$mask")
             }
         }
 
@@ -314,7 +324,7 @@ class DnsVpnService : VpnService(), Runnable {
         couldSetAddress = false
 
         var tries = 0
-        do {
+        if(useIpv6) do {
             val addr = NetworkUtil.randomLocalIPv6Address()
             try {
                 builder.addAddress(addr, 48)
@@ -343,11 +353,11 @@ class DnsVpnService : VpnService(), Runnable {
         } else log("Not intercepting traffic towards known DNS servers.")
         builder.setSession(getString(R.string.app_name))
         builder.addDnsServer(dummyServerIpv4)
-        builder.addDnsServer(dummyServerIpv6)
+        if(useIpv6) builder.addDnsServer(dummyServerIpv6)
         builder.addRoute(dummyServerIpv4, 32)
-        builder.addRoute(dummyServerIpv6, 128)
+        if(useIpv6) builder.addRoute(dummyServerIpv6, 128)
         builder.allowFamily(OsConstants.AF_INET)
-        builder.allowFamily(OsConstants.AF_INET6)
+        if(useIpv6) builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
 
         log("Applying ${getPreferences().totalBypassPackageCount} disallowed packages.")
@@ -357,6 +367,23 @@ class DnsVpnService : VpnService(), Runnable {
             } else log("Package $defaultBypassPackage not installed, thus not bypassing")
         }
         return builder
+    }
+
+    private fun hasDeviceIpv6Address(): Boolean {
+        val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        for (network in mgr.allNetworks) {
+            val info = mgr.getNetworkInfo(network)
+            if(info.isConnected) {
+                val linkProperties = mgr.getLinkProperties(network)
+                for (linkAddress in linkProperties.linkAddresses) {
+                    if (linkAddress.address is Inet6Address && !linkAddress.address.isLoopbackAddress) {
+                        println(linkAddress)
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
 
     override fun run() {

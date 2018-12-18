@@ -17,4 +17,7 @@
 
     <string name="title_send_logs">Send logs</string>
     <string name="summary_send_logs">Click here to send the logs to the developer - this isn\'t done automatically</string>
+
+    <string name="title_force_ipv6">Force Ipv6</string>
+    <string name="summary_force_ipv6">Force the app to accept IPv6 requests, even when the device doesn\'t use IPv6.</string>
 </resources>
