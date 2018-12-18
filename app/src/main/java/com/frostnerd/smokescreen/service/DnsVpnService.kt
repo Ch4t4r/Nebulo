@@ -9,7 +9,6 @@ import android.os.ParcelFileDescriptor
 import android.system.OsConstants
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.networking.NetworkUtil
-import com.frostnerd.smokescreen.R
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
@@ -20,12 +19,10 @@ import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
-import com.frostnerd.smokescreen.BuildConfig
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.util.Notifications
-import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.startForegroundServiceCompat
 import com.frostnerd.smokescreen.util.proxy.ProxyHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
@@ -109,6 +106,8 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
+        Thread.setDefaultUncaughtExceptionHandler((application as SmokeScreen).customUncaughtExceptionHandler)
+
         notificationBuilder = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
         notificationBuilder.setContentTitle(getString(R.string.app_name))
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
@@ -322,12 +321,6 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     override fun run() {
-        val prev = Thread.getDefaultUncaughtExceptionHandler()
-        Thread.setDefaultUncaughtExceptionHandler { t, e ->
-            e.printStackTrace()
-            prev.uncaughtException(t, e)
-        }
-
         val list = mutableListOf<ServerConfiguration>()
         list.add(primaryServer)
         if (secondaryServer != null) list.add(secondaryServer!!)
