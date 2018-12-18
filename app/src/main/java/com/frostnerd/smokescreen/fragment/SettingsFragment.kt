@@ -7,13 +7,10 @@ import android.os.Bundle
 import androidx.core.content.FileProvider
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
-import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.restart
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Theme
-import com.frostnerd.smokescreen.zipAllLogFiles
 
 /**
  * Copyright Daniel Wolf 2018
@@ -31,10 +28,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        log("Fragment created")
         findPreference("theme").setOnPreferenceChangeListener { _, newValue ->
             val id = (newValue as? String)?.toInt() ?: newValue as Int
             val newTheme = Theme.findById(id)
 
+            log("Updated theme to $newValue")
             if (newTheme != null) {
                 requireContext().getPreferences().theme = newTheme
                 requireActivity().restart()
@@ -54,6 +53,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 )
             ) { selected ->
                 if (selected.size != requireContext().getPreferences().userBypassPackages.size) {
+                    log("Updated the list of user bypass packages to $selected")
                     requireContext().getPreferences().userBypassPackages = selected
                     if (requireContext().isServiceRunning(DnsVpnService::class.java)) {
                         DnsVpnService.restartVpn(requireContext(), false)
@@ -65,6 +65,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
         findPreference("send_logs").setOnPreferenceClickListener {
+            log("Trying to send logs..")
             val zipFile = requireContext().zipAllLogFiles()
             if (zipFile != null) {
                 val zipUri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", zipFile)
@@ -82,11 +83,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         Intent.FLAG_GRANT_READ_URI_PERMISSION
                     )
                 }
-
                 emailIntent.putExtra(Intent.EXTRA_STREAM, zipUri)
                 emailIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                log("Now choosing chooser for E-Mail intent")
                 startActivity(Intent.createChooser(emailIntent, getString(R.string.title_send_logs)))
-            }
+            } else log("Cannot send, zip file is null.")
             true
         }
     }

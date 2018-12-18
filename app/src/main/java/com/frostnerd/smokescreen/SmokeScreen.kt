@@ -26,6 +26,16 @@ class SmokeScreen : Application() {
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
+        log("Application created.")
     }
 
+    override fun onLowMemory() {
+        super.onLowMemory()
+        log("The system seems to have low memory")
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        log("Memory has been trimmed with level $level")
+    }
 }

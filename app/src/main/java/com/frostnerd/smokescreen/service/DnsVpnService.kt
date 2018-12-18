@@ -107,6 +107,7 @@ class DnsVpnService : VpnService(), Runnable {
     override fun onCreate() {
         super.onCreate()
         Thread.setDefaultUncaughtExceptionHandler((application as SmokeScreen).customUncaughtExceptionHandler)
+        log("Service onCreate()")
 
         notificationBuilder = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
         notificationBuilder.setContentTitle(getString(R.string.app_name))
@@ -122,6 +123,7 @@ class DnsVpnService : VpnService(), Runnable {
             )
         )
         updateNotification(0)
+        log("Service created.")
     }
 
     private fun updateNotification(queryCount: Int? = null) {
@@ -135,17 +137,21 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        log("Service onStartCommand", intent = intent)
         if (intent != null && intent.hasExtra("command")) {
             val command = intent.getSerializableExtra("command") as Command
 
             when (command) {
                 Command.STOP -> {
+                    log("Received STOP command, stopping service.")
                     destroy()
                     stopForeground(true)
                     stopSelf()
                 }
                 Command.RESTART -> {
+                    log("Received RESTART command, restarting vpn.")
                     if (intent.getBooleanExtra("fetch_servers", false)) {
+                        log("Re-fetching the servers (from intent or settings)")
                         setServerConfiguration(intent)
                     }
                     setNotificationText()
@@ -153,6 +159,7 @@ class DnsVpnService : VpnService(), Runnable {
                 }
             }
         } else {
+            log("No command passed, fetching servers and establishing connection if needed")
             if (!destroyed) {
                 if (!this::primaryServer.isInitialized) {
                     setServerConfiguration(intent)
@@ -166,6 +173,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun setServerConfiguration(intent: Intent?) {
+        log("Updating server configuration..")
         if (intent != null) {
             if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)) {
                 primaryUserServerUrl = intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)
@@ -188,6 +196,7 @@ class DnsVpnService : VpnService(), Runnable {
             primaryUserServerUrl = null
             secondaryUserServerUrl = null
         }
+        log("Server configuration updated to $primaryServer and $secondaryServer")
     }
 
     private fun setNotificationText() {
@@ -211,19 +220,22 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun establishVpn() {
+        log("Establishing VPN")
         if (fileDescriptor == null) {
             fileDescriptor = createBuilder().establish()
             run()
-        }
+        } else log("Connection already running, no need to establish.")
     }
 
     private fun recreateVpn() {
+        log("Recreating the VPN (destroying & establishing)")
         destroy()
         destroyed = false
         establishVpn()
     }
 
     private fun destroy() {
+        log("Destroying the service")
         if (!destroyed) {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
@@ -237,7 +249,9 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onDestroy() {
         super.onDestroy()
+        log("onDestroy() called (Was destroyed from within: $destroyed")
         if (!destroyed && resources.getBoolean(R.bool.keep_service_alive)) {
+            log("The service wasn't destroyed from within and keep_service_alive is true, restarting VPN.")
             val restartIntent = Intent(this, VpnRestartService::class.java)
             if (primaryUserServerUrl != null) restartIntent.putExtra(
                 BackgroundVpnConfigureActivity.extraKeyPrimaryUrl,
@@ -248,16 +262,19 @@ class DnsVpnService : VpnService(), Runnable {
                 secondaryUserServerUrl
             )
             startForegroundServiceCompat(restartIntent)
+        } else {
+            destroy()
+            LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
         }
-        destroy()
-        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
     }
 
     override fun onRevoke() {
+        log("onRevoke() called")
         destroy()
         stopForeground(true)
         stopSelf()
         if (getPreferences().disallowOtherVpns) {
+            println("Disallow other VPNs is true, restarting in 250ms")
             Handler(Looper.getMainLooper()).postDelayed({
                 BackgroundVpnConfigureActivity.prepareVpn(this, primaryUserServerUrl, secondaryUserServerUrl)
             }, 250)
@@ -265,44 +282,58 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun createBuilder(): Builder {
+        log("Creating the VpnBuilder.")
         val builder = Builder()
 
         val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
         val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
+        log("Dummy address for Ipv4: $dummyServerIpv4")
+        log("Dummy address for Ipv6: $dummyServerIpv6")
+
         var couldSetAddress = false
         for (prefix in resources.getStringArray(R.array.interface_address_prefixes)) {
             try {
                 builder.addAddress("$prefix.134", 24)
                 couldSetAddress = true
+                log("Ipv4-Address set to $prefix.134.")
             } catch (ignored: IllegalArgumentException) {
+                log("Couldn't set Ipv4-Address $prefix.134")
             }
         }
 
         if (!couldSetAddress) {
             builder.addAddress("192.168.0.10", 24)
+            log("Couldn't set any dynamic address, trying 192.168.0.10...")
         }
         couldSetAddress = false
 
         var tries = 0
         do {
+            val addr = NetworkUtil.randomLocalIPv6Address()
             try {
-                builder.addAddress(NetworkUtil.randomLocalIPv6Address(), 48)
+                builder.addAddress(addr, 48)
                 couldSetAddress = true
+                log("Ipv6-Address set to $addr")
             } catch (e: IllegalArgumentException) {
                 if(tries >= 5) throw e
+                log("Couldn't set Ipv6-Address $addr, try $tries")
             }
         } while(!couldSetAddress && ++tries < 5)
 
         if (getPreferences().catchKnownDnsServers) {
+            log("Interception of requests towards known DNS servers is enabled, adding routes.")
             for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
+                log("Adding all routes for ${server.name}")
                 for (ipv4Server in server.getIpv4Servers()) {
+                    log("Adding route for Ipv4 ${ipv4Server.address.address}")
                     builder.addRoute(ipv4Server.address.address, 32)
                 }
                 for (ipv6Server in server.getIpv6Servers()) {
+                    log("Adding route for Ipv6 ${ipv6Server.address.address}")
                     builder.addRoute(ipv6Server.address.address, 128)
                 }
             }
-        }
+        } else log("Not intercepting traffic towards known DNS servers.")
         builder.setSession(getString(R.string.app_name))
         builder.addDnsServer(dummyServerIpv4)
         builder.addDnsServer(dummyServerIpv6)
@@ -312,19 +343,23 @@ class DnsVpnService : VpnService(), Runnable {
         builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
 
+        log("Applying ${getPreferences().totalBypassPackageCount} disallowed packages.")
         for (defaultBypassPackage in getPreferences().bypassPackagesIterator) {
-            if (isPackageInstalled(defaultBypassPackage)) {
+            if (isPackageInstalled(defaultBypassPackage)) { //TODO Check what is faster: catching the exception, or checking ourselves
                 builder.addDisallowedApplication(defaultBypassPackage)
-            }
+            } else log("Package $defaultBypassPackage not installed, thus not bypassing")
         }
         return builder
     }
 
     override fun run() {
+        log("run() called")
         val list = mutableListOf<ServerConfiguration>()
         list.add(primaryServer)
         if (secondaryServer != null) list.add(secondaryServer!!)
+        log("Using servers: $1", formatArgs = *arrayOf(list))
 
+        log("Creating handle.")
         handle = ProxyHandler(
             list,
             connectTimeout = 500,
@@ -333,10 +368,14 @@ class DnsVpnService : VpnService(), Runnable {
                 updateNotification(it)
             }
         )
+        log("Handle created, creating DNS proxy")
         dnsProxy = SmokeProxy(handle!!, this)
+        log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!)
 
+        log("VPN proxy creating, trying to run...")
         vpnProxy!!.run(fileDescriptor!!)
+        log("VPN proxy started.")
         currentTrafficStats = vpnProxy!!.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
     }

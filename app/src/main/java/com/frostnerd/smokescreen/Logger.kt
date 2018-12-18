@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import androidx.fragment.app.Fragment
 import java.io.*
 import java.lang.IllegalStateException
 import java.lang.StringBuilder
@@ -21,15 +22,16 @@ import java.util.zip.ZipOutputStream
  * development@frostnerd.com
  */
 
-fun Context.log(text: String, tag: String? = this::class.java.simpleName) {
+
+fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs:Any) {
     if (!Logger.crashed && Logger.enabledGlobally) {
-        Logger.getInstance(this).log(text, tag)
+        Logger.getInstance(this).log(text, tag, formatArgs)
     }
 }
 
-fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?) {
+fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs:Any) {
     if (!Logger.crashed && Logger.enabledGlobally) {
-        Logger.getInstance(this).log(text, tag, intent)
+        Logger.getInstance(this).log(text, tag, intent, formatArgs)
     }
 }
 
@@ -42,6 +44,29 @@ fun Context.log(e: Throwable) {
 fun Context.closeLogger() {
     if (Logger.isOpen())
         Logger.getInstance(this).destroy()
+}
+
+fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs:Any) {
+    if (!Logger.crashed && Logger.enabledGlobally) {
+        Logger.getInstance(requireContext()).log(text, tag, formatArgs)
+    }
+}
+
+fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs:Any) {
+    if (!Logger.crashed && Logger.enabledGlobally) {
+        Logger.getInstance(requireContext()).log(text, tag, intent, formatArgs)
+    }
+}
+
+fun Fragment.log(e: Throwable) {
+    if (!Logger.crashed && Logger.enabledGlobally) {
+        Logger.getInstance(requireContext()).log(e)
+    }
+}
+
+fun Fragment.closeLogger() {
+    if (Logger.isOpen())
+        Logger.getInstance(requireContext()).destroy()
 }
 
 class Logger private constructor(context: Context) {
@@ -129,7 +154,7 @@ class Logger private constructor(context: Context) {
         fileWriter.close()
     }
 
-    fun log(text: String, tag: String? = "Info") {
+    fun log(text: String, tag: String? = "Info", vararg formatArgs:Any) {
         if (enabled) {
             val textBuilder = StringBuilder()
             textBuilder.append("[")
@@ -140,7 +165,13 @@ class Logger private constructor(context: Context) {
             textBuilder.append("[")
             if (tag != null) textBuilder.append(tag)
             textBuilder.append("]: ")
-            textBuilder.append(text)
+            textBuilder.append(text.let {
+                var newString = it
+                formatArgs.forEachIndexed { index, arg ->
+                    newString = newString.replace("$${index+1}", arg.toString())
+                }
+                newString
+            })
             textBuilder.append("\n")
 
             fileWriter.write(textBuilder.toString())
@@ -168,8 +199,8 @@ class Logger private constructor(context: Context) {
         }
     }
 
-    fun log(text: String, tag: String? = "Info", intent: Intent?) {
-        log(text + " -- ${describeIntent(intent)}", tag)
+    fun log(text: String, tag: String? = "Info", intent: Intent?, vararg formatArgs:Any) {
+        log(text + " -- ${describeIntent(intent)}", tag, formatArgs)
     }
 }
 

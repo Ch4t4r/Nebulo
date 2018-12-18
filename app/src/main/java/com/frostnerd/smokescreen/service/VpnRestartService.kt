@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.startForegroundServiceCompat
 import com.frostnerd.smokescreen.util.Notifications
 
@@ -32,6 +33,7 @@ class VpnRestartService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        log("Trying to restart the VPN Service.")
         val builder = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
         builder.setSmallIcon(R.mipmap.ic_launcher)
         builder.setOngoing(true)
@@ -42,8 +44,11 @@ class VpnRestartService : Service() {
         val restartIntent = Intent(this, DnsVpnService::class.java)
         if (intent != null && intent.extras != null)
             restartIntent.putExtras(intent.extras!!)
+
+        log("Starting the service", intent = restartIntent)
         startForegroundServiceCompat(restartIntent)
         stopForeground(true)
+        log("Stopping self")
         stopSelf()
         return START_NOT_STICKY
     }
