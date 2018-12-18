@@ -21,13 +21,13 @@ import java.util.zip.ZipOutputStream
  * development@frostnerd.com
  */
 
-fun Context.log(text: String, tag: String? = "Info") {
+fun Context.log(text: String, tag: String? = this::class.java.simpleName) {
     if (!Logger.crashed && Logger.enabledGlobally) {
         Logger.getInstance(this).log(text, tag)
     }
 }
 
-fun Context.log(text: String, tag: String? = "Info", intent: Intent?) {
+fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?) {
     if (!Logger.crashed && Logger.enabledGlobally) {
         Logger.getInstance(this).log(text, tag, intent)
     }
