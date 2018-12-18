@@ -106,7 +106,12 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
-        Thread.setDefaultUncaughtExceptionHandler((application as SmokeScreen).customUncaughtExceptionHandler)
+        Thread.setDefaultUncaughtExceptionHandler { t, e ->
+            destroy()
+            stopForeground(true)
+            stopSelf()
+            (application as SmokeScreen).customUncaughtExceptionHandler.uncaughtException(t,e)
+        }
         log("Service onCreate()")
 
         notificationBuilder = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
