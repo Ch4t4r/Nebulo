@@ -14,4 +14,7 @@
 
     <string name="title_excluded_apps">Excluded apps</string>
     <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use dns-over-https anymore.</string>
+
+    <string name="title_send_logs">Send logs</string>
+    <string name="summary_send_logs">Click here to send the logs to the developer - this isn\'t done automatically</string>
 </resources>

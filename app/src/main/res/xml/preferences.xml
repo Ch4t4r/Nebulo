@@ -32,4 +32,9 @@
             android:key="app_exclusion_list"
             android:title="@string/title_excluded_apps"
             android:summary="@string/summary_excluded_apps"/>
+
+    <Preference
+            android:key="send_logs"
+            android:title="@string/title_send_logs"
+            android:summary="@string/summary_send_logs"/>
 </PreferenceScreen>

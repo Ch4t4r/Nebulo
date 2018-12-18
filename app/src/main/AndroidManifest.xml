@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
 
-
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -77,6 +76,16 @@
                 <data android:scheme="package"/>
             </intent-filter>
         </receiver>
+        <provider
+                android:authorities="com.frostnerd.smokescreen.LogZipProvider"
+                android:name="androidx.core.content.FileProvider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/log_file_paths"
+                    />
+        </provider>
     </application>
 
 </manifest>

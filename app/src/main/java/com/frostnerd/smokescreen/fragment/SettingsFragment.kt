@@ -1,6 +1,10 @@
 package com.frostnerd.smokescreen.fragment
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import androidx.core.content.FileProvider
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
@@ -9,6 +13,7 @@ import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.restart
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Theme
+import com.frostnerd.smokescreen.zipAllLogFiles
 
 /**
  * Copyright Daniel Wolf 2018
@@ -43,17 +48,45 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 requireActivity(),
                 requireContext().getPreferences().userBypassPackages,
                 defaultChosenUnselectablePackages = requireContext().getPreferences().defaultBypassPackages,
-                infoText = getString(R.string.dialog_excludedapps_infotext, requireContext().getPreferences().defaultBypassPackages.size)
+                infoText = getString(
+                    R.string.dialog_excludedapps_infotext,
+                    requireContext().getPreferences().defaultBypassPackages.size
+                )
             ) { selected ->
-                if(selected.size != requireContext().getPreferences().userBypassPackages.size) {
+                if (selected.size != requireContext().getPreferences().userBypassPackages.size) {
                     requireContext().getPreferences().userBypassPackages = selected
-                    if(requireContext().isServiceRunning(DnsVpnService::class.java)) {
+                    if (requireContext().isServiceRunning(DnsVpnService::class.java)) {
                         DnsVpnService.restartVpn(requireContext(), false)
                     }
                 }
             }.createDialog()
             dialog.setTitle(R.string.title_excluded_apps)
             dialog.show()
+            true
+        }
+        findPreference("send_logs").setOnPreferenceClickListener {
+            val zipFile = requireContext().zipAllLogFiles()
+            if (zipFile != null) {
+                val zipUri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", zipFile)
+                val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "support@frostnerd.com", null))
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " -- logs")
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "")
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, "support@frostnerd.com")
+                for (receivingApps in requireContext().packageManager.queryIntentActivities(
+                    emailIntent,
+                    PackageManager.MATCH_DEFAULT_ONLY
+                )) {
+                    requireContext().grantUriPermission(
+                        receivingApps.activityInfo.packageName,
+                        zipUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                }
+
+                emailIntent.putExtra(Intent.EXTRA_STREAM, zipUri)
+                emailIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                startActivity(Intent.createChooser(emailIntent, getString(R.string.title_send_logs)))
+            }
             true
         }
     }
