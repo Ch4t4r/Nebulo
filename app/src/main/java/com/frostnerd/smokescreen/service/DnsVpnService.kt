@@ -285,7 +285,7 @@ class DnsVpnService : VpnService(), Runnable {
         stopForeground(true)
         stopSelf()
         if (getPreferences().disallowOtherVpns) {
-            println("Disallow other VPNs is true, restarting in 250ms")
+            log("Disallow other VPNs is true, restarting in 250ms")
             Handler(Looper.getMainLooper()).postDelayed({
                 BackgroundVpnConfigureActivity.prepareVpn(this, primaryUserServerUrl, secondaryUserServerUrl)
             }, 250)
@@ -377,7 +377,6 @@ class DnsVpnService : VpnService(), Runnable {
                 val linkProperties = mgr.getLinkProperties(network)
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet6Address && !linkAddress.address.isLoopbackAddress) {
-                        println(linkAddress)
                         return true
                     }
                 }
