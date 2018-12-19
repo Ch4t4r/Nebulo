@@ -5,7 +5,6 @@
         <ListPreference
                 android:defaultValue="1"
                 android:entries="@array/theme"
-                android:icon="@drawable/ic_palette"
                 android:entryValues="@array/themeValues"
                 android:key="theme"
                 android:summary="@string/summary_theme"
