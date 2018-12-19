@@ -7,7 +7,6 @@ import android.content.Intent
 import android.net.VpnService
 import android.os.ParcelFileDescriptor
 import android.system.OsConstants
-import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.networking.NetworkUtil
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
@@ -17,11 +16,14 @@ import android.os.Handler
 import android.os.Looper
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.BuildConfig
+import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.util.Notifications
@@ -29,6 +31,9 @@ import com.frostnerd.smokescreen.util.proxy.ProxyHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
+import org.minidns.dnsmessage.Question
+import org.minidns.dnsname.DnsName
+import org.minidns.record.Record
 import java.io.Serializable
 import java.lang.IllegalArgumentException
 import java.net.Inet6Address
@@ -417,7 +422,19 @@ class DnsVpnService : VpnService(), Runnable {
             }
         )
         log("Handle created, creating DNS proxy")
-        dnsProxy = SmokeProxy(handle!!, this)
+        val dnsCache:SimpleDnsCache?
+        dnsCache = if(getPreferences().useDnsCache) {
+            val cacheControl:CacheControl = if(!getPreferences().useDefaultDnsCacheTime) {
+                val cacheTime = getPreferences().customDnsCacheTime.toLong()
+                object:CacheControl {
+                    override suspend fun getTtl(question: Question, record: Record<*>): Long = cacheTime
+                    override suspend fun getTtl(dnsName: DnsName, type: Record.TYPE, record: Record<*>): Long = cacheTime
+                    override fun shouldCache(question: Question): Boolean = true
+                }
+            } else DefaultCacheControl()
+            SimpleDnsCache(cacheControl, CacheStrategy(getPreferences().maxCacheSize))
+        } else null
+        dnsProxy = SmokeProxy(handle!!, this, dnsCache)
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!)
 

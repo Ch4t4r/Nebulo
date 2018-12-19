@@ -18,8 +18,8 @@ import org.minidns.dnsmessage.DnsMessage
  * development@frostnerd.com
  */
 
-class SmokeProxy(dnsHandle: ProxyHandler, vpnService: DnsVpnService) :
-    DnsPacketProxy(listOf(dnsHandle), vpnService, SimpleDnsCache(), queryListener = object:QueryListener {
+class SmokeProxy(dnsHandle: ProxyHandler, vpnService: DnsVpnService, val cache: SimpleDnsCache?) :
+    DnsPacketProxy(listOf(dnsHandle), vpnService, cache, queryListener = object:QueryListener {
         override suspend fun onDeviceQuery(questionMessage: DnsMessage) {
             vpnService.log("Query from device: $questionMessage")
         }
@@ -30,7 +30,6 @@ class SmokeProxy(dnsHandle: ProxyHandler, vpnService: DnsVpnService) :
 
     }) {
 
-    val cache = super.dnsCache!! as SimpleDnsCache
 
     override suspend fun informFailedRequest(request: FutureAnswer) {
         super.informFailedRequest(request)

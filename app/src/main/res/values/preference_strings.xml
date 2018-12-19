@@ -20,4 +20,18 @@
 
     <string name="title_force_ipv6">Force Ipv6</string>
     <string name="summary_force_ipv6">Force the app to accept IPv6 requests, even when the device doesn\'t use IPv6.</string>
+
+    <string name="preference_category_cache">Cache control</string>
+    
+    <string name="title_dnscache_enabled">Use DNS cache</string>
+    <string name="summary_dnscache_enabled">Enables the apps DNS cache. The cache memorizes old requests to answer future questions faster</string>
+
+    <string name="title_dnscache_maxsize">Maximum Cache size</string>
+    <string name="summary_dnscache_maxsize">Sets the maximum of entries the cache can hold at any time</string>
+
+    <string name="title_dnscache_usedefaulttimes">Default cache time</string>
+    <string name="summary_dnscache_usedefaulttimes">Cache requests for the default time communicated by the server</string>
+
+    <string name="title_dnscache_customcachetime">Custom cache time (Seconds)</string>
+    <string name="summary_dnscache_customcachetime">Changes the amount of time old requests are cached.\nCurrent: %1d Seconds.</string>
 </resources>

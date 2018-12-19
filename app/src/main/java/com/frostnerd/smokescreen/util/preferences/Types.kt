@@ -3,7 +3,10 @@ package com.frostnerd.smokescreen.util.preferences
 import android.content.SharedPreferences
 import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
+import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceType
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
+import com.frostnerd.preferenceskt.typedpreferences.types.default.IntPreferenceWithDefault
+import com.frostnerd.preferenceskt.typedpreferences.types.optional.IntPreference
 import kotlin.reflect.KProperty
 
 /**
@@ -57,3 +60,22 @@ class ServerConfigurationPreference(key: String, defaultValue: (String) -> Serve
         }
     }
 }
+
+class StringBasedIntPreferenceWithDefault<PrefType: SharedPreferences>(key: String, defaultValue: (key:String) -> Int) : PreferenceTypeWithDefault<PrefType, Int>(key, defaultValue) {
+    constructor(key:String, defaultValue:Int):this(key, { defaultValue })
+
+    override fun getValue(thisRef: TypedPreferences<PrefType>, property: KProperty<*>): Int {
+        return if (thisRef.sharedPreferences.contains(key)) {
+            thisRef.sharedPreferences.getString(key, "-1")!!.toInt()
+        } else defaultValue(key)
+    }
+
+    override fun setValue(thisRef: TypedPreferences<PrefType>, property: KProperty<*>, value: Int) {
+        thisRef.edit {
+            putString(key, value.toString())
+        }
+    }
+}
+
+fun <PrefType : SharedPreferences> stringBasedIntPref(key: String, defaultValue: Int): StringBasedIntPreferenceWithDefault<PrefType> = StringBasedIntPreferenceWithDefault(key, defaultValue)
+fun <PrefType : SharedPreferences> stringBasedIntPref(key: String, defaultValue: (key: String) -> Int): StringBasedIntPreferenceWithDefault<PrefType> = StringBasedIntPreferenceWithDefault(key, defaultValue)

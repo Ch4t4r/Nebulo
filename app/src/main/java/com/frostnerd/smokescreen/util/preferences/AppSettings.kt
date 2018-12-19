@@ -25,22 +25,32 @@ interface AppSettings {
         internal var instance: AppSettingsSharedPreferences? = null
     }
 
-    var theme: Theme
     var catchKnownDnsServers: Boolean
     var dummyDnsAddressIpv4: String
     var dummyDnsAddressIpv6: String
     val defaultBypassPackages: Set<String>
-    var userBypassPackages: MutableSet<String>
     var areCustomServers: Boolean
     var primaryServerConfig: ServerConfiguration
     var secondaryServerConfig: ServerConfiguration?
 
+    // ###### Settings (in order)
+    // No Category
+    var theme: Theme
     var startAppOnBoot: Boolean
-    var startAppAfterUpdate:Boolean
-    var disallowOtherVpns:Boolean
-    var forceIpv6:Boolean
+    var startAppAfterUpdate: Boolean
+    var disallowOtherVpns: Boolean
+    var userBypassPackages: MutableSet<String>
+    var forceIpv6: Boolean
 
-    var hasRatedApp:Boolean
+    // Cache category
+    var useDnsCache: Boolean
+    var maxCacheSize:Int
+    var useDefaultDnsCacheTime: Boolean
+    var customDnsCacheTime: Int
+    // ###### End of settings
+
+
+    var hasRatedApp: Boolean
 
     val bypassPackagesIterator: CombinedIterator<String>
         get() = combineIterators(defaultBypassPackages.iterator(), userBypassPackages.iterator())
@@ -49,14 +59,20 @@ interface AppSettings {
 }
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context) {
-    override var hasRatedApp:Boolean by booleanPref("has_rated_app", false)
+    override var hasRatedApp: Boolean by booleanPref("has_rated_app", false)
 
+    override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
     override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
+    override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf())
     override var forceIpv6: Boolean by booleanPref("force_ipv6", false)
 
-    override var theme: Theme by ThemePreference("theme", Theme.MONO)
+    override var useDnsCache: Boolean by booleanPref("dnscache_enabled", true)
+    override var maxCacheSize:Int by stringBasedIntPref("dnscache_maxsize", 1000)
+    override var useDefaultDnsCacheTime: Boolean by booleanPref("dnscache_use_default_time", true)
+    override var customDnsCacheTime: Int by stringBasedIntPref("dnscache_custom_time", 100)
+
     override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", false)
     override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "8.8.8.8")
     override var dummyDnsAddressIpv6: String by stringPref("dummy_dns_ipv6", "2001:4860:4860::8888")
@@ -80,7 +96,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         if (config != primaryServerConfig) config
         else throw UnsupportedOperationException()
     }, assignDefaultValue = true)
-    override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf())
+
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

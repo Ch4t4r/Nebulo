@@ -4,8 +4,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.widget.CheckBox
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
+import androidx.preference.CheckBoxPreference
+import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.*
@@ -44,25 +47,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
         findPreference("app_exclusion_list").setOnPreferenceClickListener {
-            val dialog = AppChoosalDialog(
-                requireActivity(),
-                requireContext().getPreferences().userBypassPackages,
-                defaultChosenUnselectablePackages = requireContext().getPreferences().defaultBypassPackages,
-                infoText = getString(
-                    R.string.dialog_excludedapps_infotext,
-                    requireContext().getPreferences().defaultBypassPackages.size
-                )
-            ) { selected ->
-                if (selected.size != requireContext().getPreferences().userBypassPackages.size) {
-                    log("Updated the list of user bypass packages to $selected")
-                    requireContext().getPreferences().userBypassPackages = selected
-                    if (requireContext().isServiceRunning(DnsVpnService::class.java)) {
-                        DnsVpnService.restartVpn(requireContext(), false)
-                    }
-                }
-            }.createDialog()
-            dialog.setTitle(R.string.title_excluded_apps)
-            dialog.show()
+            showExcludedAppsDialog()
             true
         }
         findPreference("send_logs").setOnPreferenceClickListener {
@@ -74,6 +59,57 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else log("Cannot send, zip file is null.")
             true
         }
+        processCacheCategory()
+    }
+
+    private fun processCacheCategory() {
+        val cacheEnabled = findPreference("dnscache_enabled") as CheckBoxPreference
+        val cacheMaxSize = findPreference("dnscache_maxsize") as EditTextPreference
+        val useDefaultTime = findPreference("dnscache_use_default_time") as CheckBoxPreference
+        val cacheTime = findPreference("dnscache_custom_time") as EditTextPreference
+
+        val updateState = { isCacheEnabled:Boolean, isUsingDefaultTime:Boolean ->
+            cacheMaxSize.isEnabled = isCacheEnabled
+            useDefaultTime.isEnabled = isCacheEnabled
+            cacheTime.isEnabled = isCacheEnabled && !isUsingDefaultTime
+        }
+        updateState(cacheEnabled.isChecked, useDefaultTime.isChecked)
+        cacheTime.summary = getString(R.string.summary_dnscache_customcachetime, requireContext().getPreferences().customDnsCacheTime)
+
+        cacheEnabled.setOnPreferenceChangeListener { _, newValue ->
+            updateState(newValue as Boolean, useDefaultTime.isChecked)
+            true
+        }
+        useDefaultTime.setOnPreferenceChangeListener { _, newValue ->
+            updateState(cacheEnabled.isChecked, newValue as Boolean)
+            true
+        }
+        cacheTime.setOnPreferenceChangeListener { _, newValue ->
+            cacheTime.summary = getString(R.string.summary_dnscache_customcachetime, newValue.toString().toInt())
+            true
+        }
+    }
+
+    private fun showExcludedAppsDialog() {
+        val dialog = AppChoosalDialog(
+            requireActivity(),
+            requireContext().getPreferences().userBypassPackages,
+            defaultChosenUnselectablePackages = requireContext().getPreferences().defaultBypassPackages,
+            infoText = getString(
+                R.string.dialog_excludedapps_infotext,
+                requireContext().getPreferences().defaultBypassPackages.size
+            )
+        ) { selected ->
+            if (selected.size != requireContext().getPreferences().userBypassPackages.size) {
+                log("Updated the list of user bypass packages to $selected")
+                requireContext().getPreferences().userBypassPackages = selected
+                if (requireContext().isServiceRunning(DnsVpnService::class.java)) {
+                    DnsVpnService.restartVpn(requireContext(), false)
+                }
+            }
+        }.createDialog()
+        dialog.setTitle(R.string.title_excluded_apps)
+        dialog.show()
     }
 
     private fun showLogExportDialog(zipUri:Uri) {
