@@ -39,4 +39,6 @@
 
     <string name="title_send_logs">Send logs</string>
     <string name="summary_send_logs">Click here to send the logs to the developer.</string>
+
+    <string name="preference_category_network">Network</string>
 </resources>

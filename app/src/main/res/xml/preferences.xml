@@ -33,12 +33,6 @@
             android:title="@string/title_excluded_apps"
             android:summary="@string/summary_excluded_apps"/>
 
-    <CheckBoxPreference
-            android:key="force_ipv6"
-            android:defaultValue="false"
-            android:title="@string/title_force_ipv6"
-            android:summary="@string/summary_force_ipv6"/>
-
     <PreferenceCategory android:title="@string/preference_category_cache">
         <CheckBoxPreference
                 android:key="dnscache_enabled"
@@ -74,5 +68,13 @@
                 android:key="send_logs"
                 android:title="@string/title_send_logs"
                 android:summary="@string/summary_send_logs"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preference_category_network">
+        <CheckBoxPreference
+                android:key="force_ipv6"
+                android:defaultValue="false"
+                android:title="@string/title_force_ipv6"
+                android:summary="@string/summary_force_ipv6"/>
     </PreferenceCategory>
 </PreferenceScreen>
