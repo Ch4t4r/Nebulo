@@ -72,6 +72,7 @@ fun Fragment.closeLogger() {
 class Logger private constructor(context: Context) {
     private val logFile: File
     private val fileWriter: BufferedWriter
+    private val printToConsole = BuildConfig.DEBUG
     var enabled: Boolean = true
 
     init {
@@ -173,7 +174,7 @@ class Logger private constructor(context: Context) {
                 newString
             })
             textBuilder.append("\n")
-
+            if(printToConsole) println(textBuilder)
             fileWriter.write(textBuilder.toString())
             fileWriter.flush()
         }
