@@ -36,6 +36,7 @@ import org.minidns.dnsname.DnsName
 import org.minidns.record.Record
 import java.io.Serializable
 import java.lang.IllegalArgumentException
+import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.NetworkInterface
 import java.net.NetworkInterface.getNetworkInterfaces
@@ -313,31 +314,34 @@ class DnsVpnService : VpnService(), Runnable {
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
         val builder = Builder()
-        val useIpv6 = getPreferences().forceIpv6 || hasDeviceIpv6Address()
+        val useIpv6 = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
+        val useIpv4 = !useIpv6 || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
         val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
         val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
         log("Dummy address for Ipv4: $dummyServerIpv4")
         log("Dummy address for Ipv6: $dummyServerIpv6")
         log("Using IPv6: $useIpv6")
+        log("Using IPv4: $useIpv4")
 
         var couldSetAddress = false
-        for (address in resources.getStringArray(R.array.interface_address_prefixes)) {
-            val prefix = address.split("/")[0]
-            val mask = address.split("/")[1].toInt()
-            try {
-                builder.addAddress("$prefix.134", mask)
-                couldSetAddress = true
-                log("Ipv4-Address set to $prefix.134./$mask")
-                break
-            } catch (ignored: IllegalArgumentException) {
-                log("Couldn't set Ipv4-Address $prefix.134/$mask")
+        if(useIpv4) {
+            for (address in resources.getStringArray(R.array.interface_address_prefixes)) {
+                val prefix = address.split("/")[0]
+                val mask = address.split("/")[1].toInt()
+                try {
+                    builder.addAddress("$prefix.134", mask)
+                    couldSetAddress = true
+                    log("Ipv4-Address set to $prefix.134./$mask")
+                    break
+                } catch (ignored: IllegalArgumentException) {
+                    log("Couldn't set Ipv4-Address $prefix.134/$mask")
+                }
             }
-        }
-
-        if (!couldSetAddress) {
-            builder.addAddress("192.168.0.10", 24)
-            log("Couldn't set any dynamic address, trying 192.168.0.10...")
+            if (!couldSetAddress) {
+                builder.addAddress("192.168.0.10", 24)
+                log("Couldn't set any IPv4 dynamic address, trying 192.168.0.10...")
+            }
         }
         couldSetAddress = false
 
@@ -361,23 +365,27 @@ class DnsVpnService : VpnService(), Runnable {
             log("Interception of requests towards known DNS servers is enabled, adding routes.")
             for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
                 log("Adding all routes for ${server.name}")
-                for (ipv4Server in server.getIpv4Servers()) {
+                if(useIpv4)  for (ipv4Server in server.getIpv4Servers()) {
                     log("Adding route for Ipv4 ${ipv4Server.address.address}")
                     builder.addRoute(ipv4Server.address.address, 32)
-                }
-                for (ipv6Server in server.getIpv6Servers()) {
+                } else log("Not adding routes of IPv4 servers.")
+                if(useIpv6)for (ipv6Server in server.getIpv6Servers()) {
                     log("Adding route for Ipv6 ${ipv6Server.address.address}")
                     builder.addRoute(ipv6Server.address.address, 128)
-                }
+                } else log("Not adding routes of IPv6 servers.")
             }
         } else log("Not intercepting traffic towards known DNS servers.")
         builder.setSession(getString(R.string.app_name))
-        builder.addDnsServer(dummyServerIpv4)
-        builder.addDnsServer(dummyServerIpv6)
-        builder.addRoute(dummyServerIpv4, 32)
-        builder.addRoute(dummyServerIpv6, 128)
-        builder.allowFamily(OsConstants.AF_INET)
-        if(useIpv6) builder.allowFamily(OsConstants.AF_INET6)
+        if(useIpv4) {
+            builder.addDnsServer(dummyServerIpv4)
+            builder.addRoute(dummyServerIpv4, 32)
+            builder.allowFamily(OsConstants.AF_INET)
+        }
+        if(useIpv6) {
+            builder.addDnsServer(dummyServerIpv6)
+            builder.addRoute(dummyServerIpv6, 128)
+            builder.allowFamily(OsConstants.AF_INET6)
+        }
         builder.setBlocking(true)
 
         log("Applying ${getPreferences().totalBypassPackageCount} disallowed packages.")
@@ -387,6 +395,22 @@ class DnsVpnService : VpnService(), Runnable {
             } else log("Package $defaultBypassPackage not installed, thus not bypassing")
         }
         return builder
+    }
+
+    private fun hasDeviceIpv4Address(): Boolean {
+        val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        for (network in mgr.allNetworks) {
+            val info = mgr.getNetworkInfo(network)
+            if(info.isConnected) {
+                val linkProperties = mgr.getLinkProperties(network)
+                for (linkAddress in linkProperties.linkAddresses) {
+                    if (linkAddress.address is Inet4Address && !linkAddress.address.isLoopbackAddress) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
 
     private fun hasDeviceIpv6Address(): Boolean {

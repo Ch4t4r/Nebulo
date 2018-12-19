@@ -62,6 +62,30 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         processCacheCategory()
         processLoggingCategory()
+        processNetworkCategory()
+    }
+
+    private fun processNetworkCategory() {
+        val ipv6 = findPreference("ipv6_enabled") as CheckBoxPreference
+        val ipv4 = findPreference("ipv4_enabled") as CheckBoxPreference
+        val forceIpv6 = findPreference("force_ipv6") as CheckBoxPreference
+        val forceIpv4 = findPreference("force_ipv4") as CheckBoxPreference
+
+        val updateState = { ipv6Enabled:Boolean, ipv4Enabled:Boolean ->
+            ipv4.isEnabled = ipv6Enabled
+            ipv6.isEnabled = ipv4Enabled
+            forceIpv6.isEnabled = ipv6Enabled && ipv6.isEnabled
+            forceIpv4.isEnabled = ipv4Enabled && ipv4.isEnabled
+        }
+        updateState(ipv6.isChecked, ipv4.isChecked)
+        ipv6.setOnPreferenceChangeListener { _, newValue ->
+            updateState(newValue as Boolean, ipv4.isChecked)
+            true
+        }
+        ipv4.setOnPreferenceChangeListener { _, newValue ->
+            updateState(ipv6.isChecked, newValue as Boolean)
+            true
+        }
     }
 
     private fun processCacheCategory() {

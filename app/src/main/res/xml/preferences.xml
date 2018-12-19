@@ -72,6 +72,21 @@
                 android:summary="@string/summary_disallow_other_vpns"
                 android:defaultValue="false"/>
         <CheckBoxPreference
+                android:key="ipv4_enabled"
+                android:title="@string/title_enable_ipv4"
+                android:defaultValue="true"
+                android:summary="@string/summary_enable_ipv4"/>
+        <CheckBoxPreference
+                android:key="force_ipv4"
+                android:defaultValue="false"
+                android:title="@string/title_force_ipv4"
+                android:summary="@string/summary_force_ipv4"/>
+        <CheckBoxPreference
+                android:key="ipv6_enabled"
+                android:title="@string/title_enable_ipv6"
+                android:defaultValue="true"
+                android:summary="@string/summary_enable_ipv6"/>
+        <CheckBoxPreference
                 android:key="force_ipv6"
                 android:defaultValue="false"
                 android:title="@string/title_force_ipv6"

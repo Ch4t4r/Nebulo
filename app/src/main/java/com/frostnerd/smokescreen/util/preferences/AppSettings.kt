@@ -38,9 +38,7 @@ interface AppSettings {
     var theme: Theme
     var startAppOnBoot: Boolean
     var startAppAfterUpdate: Boolean
-    var disallowOtherVpns: Boolean
     var userBypassPackages: MutableSet<String>
-    var forceIpv6: Boolean
 
     // Cache category
     var useDnsCache: Boolean
@@ -50,6 +48,13 @@ interface AppSettings {
 
     // Logging category
     var loggingEnabled:Boolean
+
+    // Network category
+    var disallowOtherVpns: Boolean
+    var enableIpv6:Boolean
+    var enableIpv4:Boolean
+    var forceIpv6: Boolean
+    var forceIpv4:Boolean
     // ###### End of settings
 
 
@@ -67,9 +72,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
-    override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
     override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf())
-    override var forceIpv6: Boolean by booleanPref("force_ipv6", false)
 
     override var useDnsCache: Boolean by booleanPref("dnscache_enabled", true)
     override var maxCacheSize:Int by stringBasedIntPref("dnscache_maxsize", 1000)
@@ -77,6 +80,12 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var customDnsCacheTime: Int by stringBasedIntPref("dnscache_custom_time", 100)
 
     override var loggingEnabled: Boolean by booleanPref("logging_enabled", BuildConfig.VERSION_NAME.contains("alpha", true))
+
+    override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
+    override var enableIpv6: Boolean by booleanPref("ipv6_enabled", true)
+    override var enableIpv4: Boolean by booleanPref("ipv4_enabled", true)
+    override var forceIpv6: Boolean by booleanPref("force_ipv6", false)
+    override var forceIpv4: Boolean by booleanPref("force_ipv4", false)
 
     override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", false)
     override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "8.8.8.8")
