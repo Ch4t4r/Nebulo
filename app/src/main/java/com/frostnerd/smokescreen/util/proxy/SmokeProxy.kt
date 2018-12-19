@@ -1,8 +1,12 @@
 package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.dnstunnelproxy.DnsPacketProxy
+import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.dnstunnelproxy.SimpleDnsCache
+import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.vpntunnelproxy.FutureAnswer
+import org.minidns.dnsmessage.DnsMessage
 
 /**
  * Copyright Daniel Wolf 2018
@@ -15,8 +19,21 @@ import com.frostnerd.smokescreen.service.DnsVpnService
  */
 
 class SmokeProxy(dnsHandle: ProxyHandler, vpnService: DnsVpnService) :
-    DnsPacketProxy(listOf(dnsHandle), vpnService, SimpleDnsCache()) {
+    DnsPacketProxy(listOf(dnsHandle), vpnService, SimpleDnsCache(), queryListener = object:QueryListener {
+        override suspend fun onDeviceQuery(questionMessage: DnsMessage) {
+            vpnService.log("Query from device: $questionMessage")
+        }
+
+        override suspend fun onQueryResponse(responseMessage: DnsMessage, fromUpstream: Boolean) {
+            vpnService.log("Response to device: $responseMessage")
+        }
+
+    }) {
 
     val cache = super.dnsCache!! as SimpleDnsCache
 
+    override suspend fun informFailedRequest(request: FutureAnswer) {
+        super.informFailedRequest(request)
+        vpnService.log("Query from ${request.time} failed.")
+    }
 }
