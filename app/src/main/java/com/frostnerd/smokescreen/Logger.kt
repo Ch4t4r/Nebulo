@@ -38,6 +38,20 @@ fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent
 fun Context.log(e: Throwable) {
     if (!Logger.crashed && Logger.enabledGlobally) {
         Logger.getInstance(this).log(e)
+    } else {
+        val stackTrace = Logger.stacktraceToString(e)
+        val errorFile =
+            File(Logger.getLogDir(this).parentFile, "${Logger.logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err")
+
+        if (errorFile.canWrite() && errorFile.createNewFile()) {
+            val writer = BufferedWriter(FileWriter(errorFile, false))
+            writer.write("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n")
+            writer.write("Android SDK version: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})\n")
+            writer.write("Device: ${Build.MODEL} from ${Build.MANUFACTURER} (Device: ${Build.DEVICE}, Product: ${Build.PRODUCT})\n")
+            writer.write("------------------------------\n")
+            writer.write("$stackTrace\n")
+            writer.close()
+        }
     }
 }
 
@@ -55,21 +69,15 @@ fun Context.deleteAllLogs() {
 }
 
 fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs:Any) {
-    if (!Logger.crashed && Logger.enabledGlobally) {
-        Logger.getInstance(requireContext()).log(text, tag, formatArgs)
-    }
+    requireContext().log(text, tag, formatArgs)
 }
 
 fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs:Any) {
-    if (!Logger.crashed && Logger.enabledGlobally) {
-        Logger.getInstance(requireContext()).log(text, tag, intent, formatArgs)
-    }
+    requireContext().log(text, tag, intent, formatArgs)
 }
 
 fun Fragment.log(e: Throwable) {
-    if (!Logger.crashed && Logger.enabledGlobally) {
-        Logger.getInstance(requireContext()).log(e)
-    }
+    requireContext().log(e)
 }
 
 fun Fragment.closeLogger() {
