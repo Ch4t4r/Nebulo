@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.startForegroundServiceCompat
 import com.frostnerd.smokescreen.util.Notifications
@@ -41,12 +42,12 @@ class VpnRestartService : Service() {
         builder.setContentText(getString(R.string.notification_vpnrestart_text))
 
         startForeground(NOTIFICATION_ID, builder.build())
-        val restartIntent = Intent(this, DnsVpnService::class.java)
-        if (intent != null && intent.extras != null)
-            restartIntent.putExtras(intent.extras!!)
 
-        log("Starting the service", intent = restartIntent)
-        startForegroundServiceCompat(restartIntent)
+        log("Starting the background configure")
+        BackgroundVpnConfigureActivity.prepareVpn(this,
+            intent?.extras?.getString(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl),
+            intent?.extras?.getString(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
+
         stopForeground(true)
         log("Stopping self")
         stopSelf()
