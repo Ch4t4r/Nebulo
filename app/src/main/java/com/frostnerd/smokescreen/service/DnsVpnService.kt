@@ -324,18 +324,20 @@ class DnsVpnService : VpnService(), Runnable {
         couldSetAddress = false
 
         var tries = 0
-        if(useIpv6) do {
-            val addr = NetworkUtil.randomLocalIPv6Address()
-            try {
-                builder.addAddress(addr, 48)
-                couldSetAddress = true
-                log("Ipv6-Address set to $addr")
-                break
-            } catch (e: IllegalArgumentException) {
-                if(tries >= 5) throw e
-                log("Couldn't set Ipv6-Address $addr, try $tries")
-            }
-        } while(!couldSetAddress && ++tries < 5)
+        if(useIpv6) {
+            do {
+                val addr = NetworkUtil.randomLocalIPv6Address()
+                try {
+                    builder.addAddress(addr, 48)
+                    couldSetAddress = true
+                    log("Ipv6-Address set to $addr")
+                    break
+                } catch (e: IllegalArgumentException) {
+                    if(tries >= 5) throw e
+                    log("Couldn't set Ipv6-Address $addr, try $tries")
+                }
+            } while(!couldSetAddress && ++tries < 5)
+        }
 
         if (getPreferences().catchKnownDnsServers) {
             log("Interception of requests towards known DNS servers is enabled, adding routes.")
@@ -353,9 +355,9 @@ class DnsVpnService : VpnService(), Runnable {
         } else log("Not intercepting traffic towards known DNS servers.")
         builder.setSession(getString(R.string.app_name))
         builder.addDnsServer(dummyServerIpv4)
-        if(useIpv6) builder.addDnsServer(dummyServerIpv6)
+        builder.addDnsServer(dummyServerIpv6)
         builder.addRoute(dummyServerIpv4, 32)
-        if(useIpv6) builder.addRoute(dummyServerIpv6, 128)
+        builder.addRoute(dummyServerIpv6, 128)
         builder.allowFamily(OsConstants.AF_INET)
         if(useIpv6) builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
