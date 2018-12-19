@@ -171,13 +171,26 @@ class DnsVpnService : VpnService(), Runnable {
             }
         } else {
             log("No command passed, fetching servers and establishing connection if needed")
-            if (!destroyed) {
-                if (!this::primaryServer.isInitialized) {
-                    setServerConfiguration(intent)
-                    setNotificationText()
-                }
+            log("Checking whether The VPN is prepared")
+            if(VpnService.prepare(this) != null) {
+                log("The VPN isn't prepared, stopping self and starting Background configure")
                 updateNotification(0)
-                establishVpn()
+                stopForeground(true)
+                destroy()
+                stopSelf()
+                BackgroundVpnConfigureActivity.prepareVpn(this,
+                    intent?.extras?.getString(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl),
+                    intent?.extras?.getString(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
+            } else {
+                log("The VPN is prepared, proceeding.")
+                if (!destroyed) {
+                    if (!this::primaryServer.isInitialized) {
+                        setServerConfiguration(intent)
+                        setNotificationText()
+                    }
+                    updateNotification(0)
+                    establishVpn()
+                }
             }
         }
         return if (destroyed) Service.START_NOT_STICKY else Service.START_STICKY
