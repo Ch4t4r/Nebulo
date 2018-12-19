@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.service.isServiceRunning
@@ -69,6 +70,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val zipFile = requireContext().zipAllLogFiles()
             if (zipFile != null) {
                 val zipUri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", zipFile)
+                showLogExportDialog(zipUri)
+            } else log("Cannot send, zip file is null.")
+            true
+        }
+    }
+
+    private fun showLogExportDialog(zipUri:Uri) {
+        AlertDialog.Builder(requireContext(), requireContext().getPreferences().theme.dialogStyle)
+            .setTitle(R.string.title_send_logs)
+            .setMessage(R.string.dialog_logexport_text)
+            .setCancelable(true)
+            .setPositiveButton(R.string.dialog_logexport_email) { dialog, _ ->
+                log("User choose to send logs over E-Mail")
                 val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "support@frostnerd.com", null))
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " -- logs")
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "")
@@ -85,11 +99,32 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 }
                 emailIntent.putExtra(Intent.EXTRA_STREAM, zipUri)
                 emailIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                log("Now choosing chooser for E-Mail intent")
                 startActivity(Intent.createChooser(emailIntent, getString(R.string.title_send_logs)))
-            } else log("Cannot send, zip file is null.")
-            true
-        }
+                log("Now choosing chooser for E-Mail intent")
+                dialog.dismiss()
+            }
+            .setNeutralButton(R.string.dialog_logexport_general) { dialog, _ ->
+                log("User choose to send logs via general export")
+                val generalIntent = Intent(Intent.ACTION_SEND)
+                generalIntent.putExtra(Intent.EXTRA_TEXT, "")
+                generalIntent.type = "application/zip"
+                generalIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " -- logs")
+                for (receivingApps in requireContext().packageManager.queryIntentActivities(
+                    generalIntent,
+                    PackageManager.MATCH_DEFAULT_ONLY
+                )) {
+                    requireContext().grantUriPermission(
+                        receivingApps.activityInfo.packageName,
+                        zipUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                }
+                generalIntent.putExtra(Intent.EXTRA_STREAM, zipUri)
+                generalIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                log("Now choosing chooser for general export")
+                startActivity(Intent.createChooser(generalIntent, getString(R.string.title_send_logs)))
+                dialog.dismiss()
+            }.show()
     }
 
 }

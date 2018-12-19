@@ -24,4 +24,8 @@
     <string name="dialog_serverimportfailed_title">Import failed</string>
     <string name="dialog_serverimportfailed_text">The server could not be imported.</string>
 
+    <string name="dialog_logexport_text">How to you want to share the logs?</string>
+    <string name="dialog_logexport_general">General export</string>
+    <string name="dialog_logexport_email">E-Mail</string>
+
 </resources>
