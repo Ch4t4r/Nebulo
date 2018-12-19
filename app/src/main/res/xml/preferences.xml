@@ -63,6 +63,11 @@
                 android:key="send_logs"
                 android:title="@string/title_send_logs"
                 android:summary="@string/summary_send_logs"/>
+
+        <Preference
+                android:key="delete_logs"
+                android:title="@string/title_delete_all_logs"
+                android:summary="@string/summary_delete_all_logs"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/preference_category_network">

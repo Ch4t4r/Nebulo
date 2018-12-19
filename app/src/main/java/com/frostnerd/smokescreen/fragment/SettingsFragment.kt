@@ -60,6 +60,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else log("Cannot send, zip file is null.")
             true
         }
+        findPreference("delete_logs").setOnPreferenceClickListener {
+            showLogDeletionDialog()
+            true
+        }
         processCacheCategory()
         processLoggingCategory()
         processNetworkCategory()
@@ -71,7 +75,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val forceIpv6 = findPreference("force_ipv6") as CheckBoxPreference
         val forceIpv4 = findPreference("force_ipv4") as CheckBoxPreference
 
-        val updateState = { ipv6Enabled:Boolean, ipv4Enabled:Boolean ->
+        val updateState = { ipv6Enabled: Boolean, ipv4Enabled: Boolean ->
             ipv4.isEnabled = ipv6Enabled
             ipv6.isEnabled = ipv4Enabled
             forceIpv6.isEnabled = ipv6Enabled && ipv6.isEnabled
@@ -122,15 +126,33 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun processLoggingCategory() {
         val loggingEnabled = findPreference("logging_enabled") as CheckBoxPreference
         val sendLogs = findPreference("send_logs")
+        val deleteLogs = findPreference("delete_logs")
         loggingEnabled.isChecked = requireContext().getPreferences().loggingEnabled
         sendLogs.isEnabled = loggingEnabled.isChecked
+        deleteLogs.isEnabled = loggingEnabled.isChecked
         loggingEnabled.setOnPreferenceChangeListener { _, newValue ->
             val enabled = newValue as Boolean
             if (!enabled) log("Logging disabled from settings.") // Log before disabling
             Logger.enabledGlobally = (enabled)
+            if (!enabled) requireContext().closeLogger()
             if (enabled) log("Logging enabled from settings.") // Log after enabling
+            sendLogs.isEnabled = enabled
+            deleteLogs.isEnabled = enabled
             true
         }
+    }
+
+    private fun showLogDeletionDialog() {
+        AlertDialog.Builder(requireContext(), requireContext().getPreferences().theme.dialogStyle)
+            .setTitle(R.string.title_delete_all_logs)
+            .setMessage(R.string.dialog_deletelogs_text)
+            .setPositiveButton(R.string.all_yes) { dialog, _ ->
+                requireContext().deleteAllLogs()
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.all_no) { dialog, _ ->
+                dialog.dismiss()
+            }.setCancelable(true).show()
     }
 
     private fun showExcludedAppsDialog() {

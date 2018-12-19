@@ -46,6 +46,14 @@ fun Context.closeLogger() {
         Logger.getInstance(this).destroy()
 }
 
+fun Context.deleteAllLogs() {
+    if(Logger.isOpen())
+        Logger.getInstance(this).destroy()
+    Logger.getLogDir(this).listFiles().forEach {
+        it.delete()
+    }
+}
+
 fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs:Any) {
     if (!Logger.crashed && Logger.enabledGlobally) {
         Logger.getInstance(requireContext()).log(text, tag, formatArgs)

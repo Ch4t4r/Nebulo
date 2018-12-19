@@ -28,4 +28,5 @@
     <string name="dialog_logexport_general">General export</string>
     <string name="dialog_logexport_email">E-Mail</string>
 
+    <string name="dialog_deletelogs_text">Are you sure that you want to delete all logs?</string>
 </resources>
