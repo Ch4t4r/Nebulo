@@ -47,6 +47,9 @@ interface AppSettings {
     var maxCacheSize:Int
     var useDefaultDnsCacheTime: Boolean
     var customDnsCacheTime: Int
+
+    // Logging category
+    var loggingEnabled:Boolean
     // ###### End of settings
 
 
@@ -72,6 +75,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var maxCacheSize:Int by stringBasedIntPref("dnscache_maxsize", 1000)
     override var useDefaultDnsCacheTime: Boolean by booleanPref("dnscache_use_default_time", true)
     override var customDnsCacheTime: Int by stringBasedIntPref("dnscache_custom_time", 100)
+
+    override var loggingEnabled: Boolean by booleanPref("logging_enabled", BuildConfig.VERSION_NAME.contains("alpha", true))
 
     override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", false)
     override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "8.8.8.8")

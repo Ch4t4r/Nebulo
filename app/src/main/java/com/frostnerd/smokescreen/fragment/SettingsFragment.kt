@@ -54,12 +54,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             log("Trying to send logs..")
             val zipFile = requireContext().zipAllLogFiles()
             if (zipFile != null) {
-                val zipUri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", zipFile)
+                val zipUri =
+                    FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", zipFile)
                 showLogExportDialog(zipUri)
             } else log("Cannot send, zip file is null.")
             true
         }
         processCacheCategory()
+        processLoggingCategory()
     }
 
     private fun processCacheCategory() {
@@ -68,13 +70,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val useDefaultTime = findPreference("dnscache_use_default_time") as CheckBoxPreference
         val cacheTime = findPreference("dnscache_custom_time") as EditTextPreference
 
-        val updateState = { isCacheEnabled:Boolean, isUsingDefaultTime:Boolean ->
+        val updateState = { isCacheEnabled: Boolean, isUsingDefaultTime: Boolean ->
             cacheMaxSize.isEnabled = isCacheEnabled
             useDefaultTime.isEnabled = isCacheEnabled
             cacheTime.isEnabled = isCacheEnabled && !isUsingDefaultTime
         }
         updateState(cacheEnabled.isChecked, useDefaultTime.isChecked)
-        cacheTime.summary = getString(R.string.summary_dnscache_customcachetime, requireContext().getPreferences().customDnsCacheTime)
+        cacheTime.summary = getString(
+            R.string.summary_dnscache_customcachetime,
+            requireContext().getPreferences().customDnsCacheTime
+        )
 
         cacheEnabled.setOnPreferenceChangeListener { _, newValue ->
             updateState(newValue as Boolean, useDefaultTime.isChecked)
@@ -86,6 +91,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         cacheTime.setOnPreferenceChangeListener { _, newValue ->
             cacheTime.summary = getString(R.string.summary_dnscache_customcachetime, newValue.toString().toInt())
+            true
+        }
+    }
+
+    private fun processLoggingCategory() {
+        val loggingEnabled = findPreference("logging_enabled") as CheckBoxPreference
+        val sendLogs = findPreference("send_logs")
+        loggingEnabled.isChecked = requireContext().getPreferences().loggingEnabled
+        sendLogs.isEnabled = loggingEnabled.isChecked
+        loggingEnabled.setOnPreferenceChangeListener { _, newValue ->
+            val enabled = newValue as Boolean
+            if (!enabled) log("Logging disabled from settings.") // Log before disabling
+            Logger.enabledGlobally = (enabled)
+            if (enabled) log("Logging enabled from settings.") // Log after enabling
             true
         }
     }
@@ -112,7 +131,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         dialog.show()
     }
 
-    private fun showLogExportDialog(zipUri:Uri) {
+    private fun showLogExportDialog(zipUri: Uri) {
         AlertDialog.Builder(requireContext(), requireContext().getPreferences().theme.dialogStyle)
             .setTitle(R.string.title_send_logs)
             .setMessage(R.string.dialog_logexport_text)

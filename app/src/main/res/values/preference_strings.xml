@@ -15,9 +15,6 @@
     <string name="title_excluded_apps">Excluded apps</string>
     <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use dns-over-https anymore.</string>
 
-    <string name="title_send_logs">Send logs</string>
-    <string name="summary_send_logs">Click here to send the logs to the developer - this isn\'t done automatically</string>
-
     <string name="title_force_ipv6">Force Ipv6</string>
     <string name="summary_force_ipv6">Force the app to accept IPv6 requests, even when the device doesn\'t use IPv6.</string>
 
@@ -34,4 +31,12 @@
 
     <string name="title_dnscache_customcachetime">Custom cache time (Seconds)</string>
     <string name="summary_dnscache_customcachetime">Changes the amount of time old requests are cached.\nCurrent: %1d Seconds.</string>
+
+    <string name="preference_category_logging">Logging</string>
+
+    <string name="title_enable_logging">Enable logging</string>
+    <string name="summary_enable_logging">Enables logging of debug information (contains statistic data). These logs aren\'t send automatically.</string>
+
+    <string name="title_send_logs">Send logs</string>
+    <string name="summary_send_logs">Click here to send the logs to the developer.</string>
 </resources>

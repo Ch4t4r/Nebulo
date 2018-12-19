@@ -33,11 +33,6 @@
             android:title="@string/title_excluded_apps"
             android:summary="@string/summary_excluded_apps"/>
 
-    <Preference
-            android:key="send_logs"
-            android:title="@string/title_send_logs"
-            android:summary="@string/summary_send_logs"/>
-
     <CheckBoxPreference
             android:key="force_ipv6"
             android:defaultValue="false"
@@ -67,5 +62,17 @@
                 android:summary="@string/summary_dnscache_customcachetime"
                 android:title="@string/title_dnscache_customcachetime"
                 android:defaultValue="100"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preference_category_logging">
+        <CheckBoxPreference
+                android:title="@string/title_enable_logging"
+                android:summary="@string/summary_enable_logging"
+                android:key="logging_enabled"/>
+
+        <Preference
+                android:key="send_logs"
+                android:title="@string/title_send_logs"
+                android:summary="@string/summary_send_logs"/>
     </PreferenceCategory>
 </PreferenceScreen>

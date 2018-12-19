@@ -21,6 +21,7 @@ class MainActivity : NavigationDrawerActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
         super.onCreate(savedInstanceState)
+        Logger.enabledGlobally = getPreferences().loggingEnabled
         AbstractHttpsDNSHandle // Loads the known servers.
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)

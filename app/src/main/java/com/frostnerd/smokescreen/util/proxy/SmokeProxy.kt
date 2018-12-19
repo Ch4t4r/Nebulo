@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.util.proxy
 import com.frostnerd.dnstunnelproxy.DnsPacketProxy
 import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.dnstunnelproxy.SimpleDnsCache
+import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.vpntunnelproxy.FutureAnswer
@@ -19,16 +20,24 @@ import org.minidns.dnsmessage.DnsMessage
  */
 
 class SmokeProxy(dnsHandle: ProxyHandler, vpnService: DnsVpnService, val cache: SimpleDnsCache?) :
-    DnsPacketProxy(listOf(dnsHandle), vpnService, cache, queryListener = object:QueryListener {
-        override suspend fun onDeviceQuery(questionMessage: DnsMessage) {
-            vpnService.log("Query from device: $questionMessage")
-        }
+    DnsPacketProxy(
+        listOf(dnsHandle),
+        vpnService,
+        cache,
+        queryListener = if (vpnService.getPreferences().loggingEnabled) object : QueryListener {
+            override suspend fun onDeviceQuery(questionMessage: DnsMessage) {
+                vpnService.log("Query from device: $questionMessage")
+            }
 
-        override suspend fun onQueryResponse(responseMessage: DnsMessage, fromUpstream: Boolean) {
-            vpnService.log("Response to device: $responseMessage")
-        }
+            override suspend fun onQueryResponse(responseMessage: DnsMessage, fromUpstream: Boolean) {
+                if (!fromUpstream) {
+                    vpnService.log("Returned from cache: $responseMessage")
+                } else {
+                    vpnService.log("Response from upstream: $responseMessage")
+                }
+            }
 
-    }) {
+        } else null) {
 
 
     override suspend fun informFailedRequest(request: FutureAnswer) {
