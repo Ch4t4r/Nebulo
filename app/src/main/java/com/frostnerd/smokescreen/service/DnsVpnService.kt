@@ -113,6 +113,12 @@ class DnsVpnService : VpnService(), Runnable {
             if (extras != null) intent.putExtras(extras)
             context.startService(intent)
         }
+
+        fun commandIntent(context: Context, command: Command, extras: Bundle? = null): Intent {
+            val intent = Intent(context, DnsVpnService::class.java).putExtra("command", command)
+            if (extras != null) intent.putExtras(extras)
+            return intent
+        }
     }
 
 
@@ -122,10 +128,15 @@ class DnsVpnService : VpnService(), Runnable {
             destroy()
             stopForeground(true)
             stopSelf()
-            (application as SmokeScreen).customUncaughtExceptionHandler.uncaughtException(t,e)
+            (application as SmokeScreen).customUncaughtExceptionHandler.uncaughtException(t, e)
         }
         log("Service onCreate()")
+        createNotification()
+        log("Service created.")
+    }
 
+    private fun createNotification() {
+        log("Creating notification")
         notificationBuilder = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
         notificationBuilder.setContentTitle(getString(R.string.app_name))
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
@@ -139,8 +150,12 @@ class DnsVpnService : VpnService(), Runnable {
                 Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
             )
         )
+        val stopPendingIntent = PendingIntent.getService(this, 1, commandIntent(this, Command.STOP), PendingIntent.FLAG_CANCEL_CURRENT)
+        val stopAction = NotificationCompat.Action(R.drawable.ic_stop, getString(R.string.all_stop), stopPendingIntent)
+
+        notificationBuilder.addAction(stopAction)
         updateNotification(0)
-        log("Service created.")
+        log("Notification created and posted.")
     }
 
     private fun updateNotification(queryCount: Int? = null) {
@@ -178,15 +193,17 @@ class DnsVpnService : VpnService(), Runnable {
         } else {
             log("No command passed, fetching servers and establishing connection if needed")
             log("Checking whether The VPN is prepared")
-            if(VpnService.prepare(this) != null) {
+            if (VpnService.prepare(this) != null) {
                 log("The VPN isn't prepared, stopping self and starting Background configure")
                 updateNotification(0)
                 stopForeground(true)
                 destroy()
                 stopSelf()
-                BackgroundVpnConfigureActivity.prepareVpn(this,
+                BackgroundVpnConfigureActivity.prepareVpn(
+                    this,
                     intent?.extras?.getString(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl),
-                    intent?.extras?.getString(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
+                    intent?.extras?.getString(BackgroundVpnConfigureActivity.extraKeySecondaryUrl)
+                )
             } else {
                 log("The VPN is prepared, proceeding.")
                 if (!destroyed) {
@@ -315,7 +332,8 @@ class DnsVpnService : VpnService(), Runnable {
         log("Creating the VpnBuilder.")
         val builder = Builder()
         val useIpv6 = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
-        val useIpv4 = !useIpv6 || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
+        val useIpv4 =
+            !useIpv6 || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
         val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
         val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
@@ -325,7 +343,7 @@ class DnsVpnService : VpnService(), Runnable {
         log("Using IPv4: $useIpv4")
 
         var couldSetAddress = false
-        if(useIpv4) {
+        if (useIpv4) {
             for (address in resources.getStringArray(R.array.interface_address_prefixes)) {
                 val prefix = address.split("/")[0]
                 val mask = address.split("/")[1].toInt()
@@ -346,7 +364,7 @@ class DnsVpnService : VpnService(), Runnable {
         couldSetAddress = false
 
         var tries = 0
-        if(useIpv6) {
+        if (useIpv6) {
             do {
                 val addr = NetworkUtil.randomLocalIPv6Address()
                 try {
@@ -355,33 +373,33 @@ class DnsVpnService : VpnService(), Runnable {
                     log("Ipv6-Address set to $addr")
                     break
                 } catch (e: IllegalArgumentException) {
-                    if(tries >= 5) throw e
+                    if (tries >= 5) throw e
                     log("Couldn't set Ipv6-Address $addr, try $tries")
                 }
-            } while(!couldSetAddress && ++tries < 5)
+            } while (!couldSetAddress && ++tries < 5)
         }
 
         if (getPreferences().catchKnownDnsServers) {
             log("Interception of requests towards known DNS servers is enabled, adding routes.")
             for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
                 log("Adding all routes for ${server.name}")
-                if(useIpv4)  for (ipv4Server in server.getIpv4Servers()) {
+                if (useIpv4) for (ipv4Server in server.getIpv4Servers()) {
                     log("Adding route for Ipv4 ${ipv4Server.address.address}")
                     builder.addRoute(ipv4Server.address.address, 32)
                 } else log("Not adding routes of IPv4 servers.")
-                if(useIpv6)for (ipv6Server in server.getIpv6Servers()) {
+                if (useIpv6) for (ipv6Server in server.getIpv6Servers()) {
                     log("Adding route for Ipv6 ${ipv6Server.address.address}")
                     builder.addRoute(ipv6Server.address.address, 128)
                 } else log("Not adding routes of IPv6 servers.")
             }
         } else log("Not intercepting traffic towards known DNS servers.")
         builder.setSession(getString(R.string.app_name))
-        if(useIpv4) {
+        if (useIpv4) {
             builder.addDnsServer(dummyServerIpv4)
             builder.addRoute(dummyServerIpv4, 32)
             builder.allowFamily(OsConstants.AF_INET)
         }
-        if(useIpv6) {
+        if (useIpv6) {
             builder.addDnsServer(dummyServerIpv6)
             builder.addRoute(dummyServerIpv6, 128)
             builder.allowFamily(OsConstants.AF_INET6)
@@ -401,7 +419,7 @@ class DnsVpnService : VpnService(), Runnable {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
             val info = mgr.getNetworkInfo(network)
-            if(info.isConnected) {
+            if (info.isConnected) {
                 val linkProperties = mgr.getLinkProperties(network)
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet4Address && !linkAddress.address.isLoopbackAddress) {
@@ -417,7 +435,7 @@ class DnsVpnService : VpnService(), Runnable {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
             val info = mgr.getNetworkInfo(network)
-            if(info.isConnected) {
+            if (info.isConnected) {
                 val linkProperties = mgr.getLinkProperties(network)
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet6Address && !linkAddress.address.isLoopbackAddress) {
@@ -446,13 +464,15 @@ class DnsVpnService : VpnService(), Runnable {
             }
         )
         log("Handle created, creating DNS proxy")
-        val dnsCache:SimpleDnsCache?
-        dnsCache = if(getPreferences().useDnsCache) {
-            val cacheControl:CacheControl = if(!getPreferences().useDefaultDnsCacheTime) {
+        val dnsCache: SimpleDnsCache?
+        dnsCache = if (getPreferences().useDnsCache) {
+            val cacheControl: CacheControl = if (!getPreferences().useDefaultDnsCacheTime) {
                 val cacheTime = getPreferences().customDnsCacheTime.toLong()
-                object:CacheControl {
+                object : CacheControl {
                     override suspend fun getTtl(question: Question, record: Record<*>): Long = cacheTime
-                    override suspend fun getTtl(dnsName: DnsName, type: Record.TYPE, record: Record<*>): Long = cacheTime
+                    override suspend fun getTtl(dnsName: DnsName, type: Record.TYPE, record: Record<*>): Long =
+                        cacheTime
+
                     override fun shouldCache(question: Question): Boolean = true
                 }
             } else DefaultCacheControl()
