@@ -45,6 +45,11 @@
     *;
 }
 
+-assumenosideeffects class java.io.PrintStream {
+     public void println(%);
+     public void println(**);
+ }
+
 # okhttp related, https://github.com/square/okhttp/blob/5fe3cc2d089810032671d6135ad137af6f491d28/README.md#proguard
 -dontwarn okhttp3.**
 -dontwarn okio.**
