@@ -33,6 +33,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onPause() {
         super.onPause()
+        log("Pausing fragment")
         if (preferenceListener != null) requireContext().getPreferences().sharedPreferences.unregisterOnSharedPreferenceChangeListener(
             preferenceListener
         )
@@ -41,11 +42,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onResume() {
         super.onResume()
+        log("Resuming fragment")
         preferenceListener = { _, key ->
             requireContext().getPreferences().notifyPreferenceChangedFromExternal(key)
         }
         requireContext().getPreferences().sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceListener)
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
