@@ -50,6 +50,11 @@
      public void println(**);
  }
 
+-assumenosideeffects class android.util.Log {
+     public static *** d(...);
+     public static *** v(...);
+}
+
 # okhttp related, https://github.com/square/okhttp/blob/5fe3cc2d089810032671d6135ad137af6f491d28/README.md#proguard
 -dontwarn okhttp3.**
 -dontwarn okio.**
