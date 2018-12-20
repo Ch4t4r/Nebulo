@@ -38,6 +38,8 @@
                 android:key="dnscache_maxsize"
                 android:summary="@string/summary_dnscache_maxsize"
                 android:title="@string/title_dnscache_maxsize"
+                android:inputType="number"
+                android:digits="012345789"
                 android:defaultValue="1000"/>
         <CheckBoxPreference
                 android:key="dnscache_use_default_time"
@@ -47,7 +49,8 @@
                 />
         <EditTextPreference
                 android:key="dnscache_custom_time"
-                android:inputType="numberDecimal"
+                android:inputType="number"
+                android:digits="012345789"
                 android:summary="@string/summary_dnscache_customcachetime"
                 android:title="@string/title_dnscache_customcachetime"
                 android:defaultValue="100"/>

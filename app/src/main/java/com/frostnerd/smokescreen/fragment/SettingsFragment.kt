@@ -4,12 +4,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.widget.CheckBox
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.preference.CheckBoxPreference
 import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceFragmentCompat
+import com.frostnerd.general.isInt
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
@@ -98,6 +98,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val useDefaultTime = findPreference("dnscache_use_default_time") as CheckBoxPreference
         val cacheTime = findPreference("dnscache_custom_time") as EditTextPreference
 
+
         val updateState = { isCacheEnabled: Boolean, isUsingDefaultTime: Boolean ->
             cacheMaxSize.isEnabled = isCacheEnabled
             useDefaultTime.isEnabled = isCacheEnabled
@@ -109,6 +110,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             requireContext().getPreferences().customDnsCacheTime
         )
 
+        cacheMaxSize.setOnPreferenceChangeListener { _, newValue ->
+            newValue.toString().isInt()
+        }
         cacheEnabled.setOnPreferenceChangeListener { _, newValue ->
             updateState(newValue as Boolean, useDefaultTime.isChecked)
             true
@@ -118,8 +122,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
         cacheTime.setOnPreferenceChangeListener { _, newValue ->
-            cacheTime.summary = getString(R.string.summary_dnscache_customcachetime, newValue.toString().toInt())
-            true
+            if(newValue.toString().isInt()) {
+                cacheTime.summary = getString(R.string.summary_dnscache_customcachetime, newValue.toString().toInt())
+                true
+            } else {
+                false
+            }
         }
     }
 
