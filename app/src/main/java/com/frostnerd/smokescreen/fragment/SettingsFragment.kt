@@ -112,6 +112,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun processCacheCategory() {
         val cacheEnabled = findPreference("dnscache_enabled") as CheckBoxPreference
+        val keepAcrossLaunches = findPreference("dnscache_keepacrosslaunches") as CheckBoxPreference
         val cacheMaxSize = findPreference("dnscache_maxsize") as EditTextPreference
         val useDefaultTime = findPreference("dnscache_use_default_time") as CheckBoxPreference
         val cacheTime = findPreference("dnscache_custom_time") as EditTextPreference
@@ -121,6 +122,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             cacheMaxSize.isEnabled = isCacheEnabled
             useDefaultTime.isEnabled = isCacheEnabled
             cacheTime.isEnabled = isCacheEnabled && !isUsingDefaultTime
+            keepAcrossLaunches.isEnabled = isCacheEnabled
         }
         updateState(cacheEnabled.isChecked, useDefaultTime.isChecked)
         cacheTime.summary = getString(

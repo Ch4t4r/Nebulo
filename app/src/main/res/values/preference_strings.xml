@@ -18,6 +18,9 @@
     
     <string name="title_dnscache_enabled">Use DNS cache</string>
     <string name="summary_dnscache_enabled">Enables the apps DNS cache. The cache memorizes old requests to answer future questions faster</string>
+    
+    <string name="title_dnscache_keepacrosslaunches">Keep DNS cache</string>
+    <string name="summary_dnscache_keepacrosslaunches">Keep the DNS cache across multiple launches</string>
 
     <string name="title_dnscache_maxsize">Maximum Cache size</string>
     <string name="summary_dnscache_maxsize">Sets the maximum of entries the cache can hold at any time</string>

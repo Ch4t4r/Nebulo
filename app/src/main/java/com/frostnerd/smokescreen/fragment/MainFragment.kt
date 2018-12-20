@@ -23,6 +23,7 @@ import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
 import androidx.fragment.app.Fragment
 import com.frostnerd.general.service.isServiceRunning
+import com.frostnerd.smokescreen.database.getDatabase
 import java.net.URL
 
 
@@ -50,6 +51,7 @@ class MainFragment : Fragment() {
         super.onResume()
         proxyRunning = requireContext().isServiceRunning(DnsVpnService::class.java)
         updateVpnIndicators()
+        requireContext().getDatabase()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

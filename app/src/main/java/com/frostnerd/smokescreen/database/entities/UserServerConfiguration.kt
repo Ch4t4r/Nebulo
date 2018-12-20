@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.database.entities
 
 import com.frostnerd.database.orm.Entity
+import com.frostnerd.database.orm.annotations.Named
 import com.frostnerd.database.orm.annotations.RowID
 import com.frostnerd.database.orm.annotations.Table
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
@@ -19,8 +20,11 @@ import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 class UserServerConfiguration():Entity() {
     @RowID
     var rowid:Long = -1
+    @Named(name="name")
     lateinit var name:String
+    @Named(name="primaryServerUrl")
     lateinit var primaryServerUrl:String
+    @Named(name="secondaryServerUrl")
     var secondaryServerUrl:String? = null
 
     constructor(name:String, primaryServerUrl:String, secondaryServerUrl:String?):this() {

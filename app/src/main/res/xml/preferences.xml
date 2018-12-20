@@ -34,6 +34,11 @@
                 android:title="@string/title_dnscache_enabled"
                 android:summary="@string/summary_dnscache_enabled"
                 android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:key="dnscache_keepacrosslaunches"
+                android:title="@string/title_dnscache_keepacrosslaunches"
+                android:defaultValue="false"
+                android:summary="@string/summary_dnscache_keepacrosslaunches"/>
         <EditTextPreference
                 android:key="dnscache_maxsize"
                 android:summary="@string/summary_dnscache_maxsize"

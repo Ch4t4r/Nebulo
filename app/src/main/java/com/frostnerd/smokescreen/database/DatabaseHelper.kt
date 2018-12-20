@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.database
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.frostnerd.database.orm.Entity
+import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
 
 /**
@@ -19,8 +20,8 @@ class DatabaseHelper private constructor(context: Context) :
     com.frostnerd.database.DatabaseHelper(context, NAME, VERSION, ENTITIES) {
     companion object {
         val NAME = "data"
-        val VERSION = 1
-        val ENTITIES: Set<Class<out Entity>> = setOf(UserServerConfiguration::class.java)
+        val VERSION = 2
+        val ENTITIES: Set<Class<out Entity>> = setOf(UserServerConfiguration::class.java, CachedResponse::class.java)
         private var INSTANCE: DatabaseHelper? = null
 
         fun getInstance(context: Context): DatabaseHelper {

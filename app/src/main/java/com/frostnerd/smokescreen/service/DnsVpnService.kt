@@ -14,8 +14,10 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Base64
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.frostnerd.database.orm.statementoptions.queryoptions.WhereCondition
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
@@ -27,6 +29,8 @@ import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.activity.MainActivity
+import com.frostnerd.smokescreen.database.entities.CachedResponse
+import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.proxy.ProxyHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
@@ -35,8 +39,11 @@ import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import org.minidns.dnsmessage.Question
 import org.minidns.dnsname.DnsName
 import org.minidns.record.Record
+import java.io.ByteArrayInputStream
+import java.io.DataInputStream
 import java.io.Serializable
 import java.lang.IllegalArgumentException
+import java.net.CacheRequest
 import java.net.Inet4Address
 import java.net.Inet6Address
 
@@ -148,7 +155,8 @@ class DnsVpnService : VpnService(), Runnable {
             "dnscache_maxsize",
             "dnscache_use_default_time",
             "dnscache_custom_time",
-            "user_bypass_packages"
+            "user_bypass_packages",
+            "dnscache_keepacrosslaunches"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
             log("The Preference $key has changed, restarting the VPN.")
@@ -290,6 +298,7 @@ class DnsVpnService : VpnService(), Runnable {
         if (fileDescriptor == null) {
             fileDescriptor = createBuilder().establish()
             run()
+            updateNotification()
         } else log("Connection already running, no need to establish.")
     }
 
@@ -508,8 +517,22 @@ class DnsVpnService : VpnService(), Runnable {
             }
         )
         log("Handle created, creating DNS proxy")
+
+        dnsProxy = SmokeProxy(handle!!, this, createDnsCache())
+        log("DnsProxy created, creating VPN proxy")
+        vpnProxy = VPNTunnelProxy(dnsProxy!!)
+
+        log("VPN proxy creating, trying to run...")
+        vpnProxy!!.run(fileDescriptor!!)
+        log("VPN proxy started.")
+        currentTrafficStats = vpnProxy!!.trafficStats
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
+    }
+
+    private fun createDnsCache():SimpleDnsCache? {
         val dnsCache: SimpleDnsCache?
         dnsCache = if (getPreferences().useDnsCache) {
+            log("Creating DNS Cache.")
             val cacheControl: CacheControl = if (!getPreferences().useDefaultDnsCacheTime) {
                 val cacheTime = getPreferences().customDnsCacheTime.toLong()
                 object : CacheControl {
@@ -520,17 +543,84 @@ class DnsVpnService : VpnService(), Runnable {
                     override fun shouldCache(question: Question): Boolean = true
                 }
             } else DefaultCacheControl()
-            SimpleDnsCache(cacheControl, CacheStrategy(getPreferences().maxCacheSize))
-        } else null
-        dnsProxy = SmokeProxy(handle!!, this, dnsCache)
-        log("DnsProxy created, creating VPN proxy")
-        vpnProxy = VPNTunnelProxy(dnsProxy!!)
+            val onClearCache:((currentCache:Map<String, Map<Record.TYPE, Map<Record<*>, Long>>>) -> Unit)? = if(getPreferences().keepDnsCacheAcrossLaunches) {
+                { cache ->
+                    log("Persisting current cache to Database.")
+                    var persisted = 0
+                    for(entry in cache) {
+                        for(cachedType in entry.value) {
+                            val recordsToPersist:MutableMap<Record<*>, Long> = mutableMapOf()
+                            for(cachedRecord in cachedType.value) {
+                                if(cachedRecord.value > System.currentTimeMillis()) {
+                                    recordsToPersist[cachedRecord.key] = cachedRecord.value
+                                    persisted++
+                                }
+                            }
 
-        log("VPN proxy creating, trying to run...")
-        vpnProxy!!.run(fileDescriptor!!)
-        log("VPN proxy started.")
-        currentTrafficStats = vpnProxy!!.trafficStats
-        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
+                            if(!recordsToPersist.isEmpty()) {
+                                persistCachedResponses(entry.key, cachedType.key, recordsToPersist)
+                            }
+                        }
+                    }
+                    log("Cache persisted [$persisted records]")
+                }
+            } else null
+            SimpleDnsCache(cacheControl, CacheStrategy(getPreferences().maxCacheSize), onClearCache = onClearCache)
+        } else {
+            log("Not creating DNS cache, is disabled.")
+            null
+        }
+        if(dnsCache != null) log("Cache created.")
+
+        // Restores persisted cache
+        if(dnsCache != null && getPreferences().keepDnsCacheAcrossLaunches) {
+            log("Restoring old cache")
+            var restored = 0
+            var tooOld = 0
+            for (cachedResponse in getDatabase().select(CachedResponse::class.java)) {
+                val records = mutableMapOf<Record<*>, Long>()
+                for (record in cachedResponse.records) {
+                    if(record.value > System.currentTimeMillis()) {
+                        val bytes = Base64.decode(record.key, Base64.NO_WRAP)
+                        val stream = DataInputStream(ByteArrayInputStream(bytes))
+                        records[Record.parse(stream, bytes)] = record.value
+                        restored++
+                    } else tooOld++
+                }
+                dnsCache.addToCache(DnsName.from(cachedResponse.dnsName), Record.TYPE.getType(cachedResponse.type), records)
+            }
+            log("$restored old records restored, deleting persisted cache. $tooOld records were too old.")
+            getDatabase().deleteAll(CachedResponse::class.java)
+            log("Persisted cache deleted.")
+        }
+        return dnsCache
+    }
+
+    private fun persistCachedResponses(
+        dnsName: String,
+        type: Record.TYPE,
+        recordsToPersist: MutableMap<Record<*>, Long>
+    ) {
+        val database = getDatabase()
+        val entities = database.select(
+            CachedResponse::class.java,
+            WhereCondition.equal("type", type.value.toString()),
+            WhereCondition.equal("dnsName", dnsName)
+        )
+        val entity:CachedResponse
+        if(!entities.isEmpty()) {
+            entity = entities[0]
+        } else {
+            entity = CachedResponse()
+            entity.dnsName = dnsName
+            entity.type = type.value
+        }
+        for (record in recordsToPersist) {
+            entity.records[Base64.encodeToString(record.key.toByteArray(), Base64.NO_WRAP)] = record.value
+        }
+
+        if(!entities.isEmpty()) database.update(entity)
+        else database.insert(entity)
     }
 
     private fun isPackageInstalled(packageName: String): Boolean {

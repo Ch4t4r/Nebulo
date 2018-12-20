@@ -42,6 +42,7 @@ interface AppSettings {
 
     // Cache category
     var useDnsCache: Boolean
+    var keepDnsCacheAcrossLaunches:Boolean
     var maxCacheSize:Int
     var useDefaultDnsCacheTime: Boolean
     var customDnsCacheTime: Int
@@ -75,6 +76,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf())
 
     override var useDnsCache: Boolean by booleanPref("dnscache_enabled", true)
+    override var keepDnsCacheAcrossLaunches: Boolean by booleanPref("dnscache_keepacrosslaunches", false)
     override var maxCacheSize:Int by stringBasedIntPref("dnscache_maxsize", 1000)
     override var useDefaultDnsCacheTime: Boolean by booleanPref("dnscache_use_default_time", true)
     override var customDnsCacheTime: Int by stringBasedIntPref("dnscache_custom_time", 100)
