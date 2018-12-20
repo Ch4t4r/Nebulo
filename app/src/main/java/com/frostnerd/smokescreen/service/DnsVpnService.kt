@@ -4,13 +4,13 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.VpnService
 import android.os.ParcelFileDescriptor
 import android.system.OsConstants
 import com.frostnerd.networking.NetworkUtil
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -21,6 +21,7 @@ import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
+import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
@@ -38,9 +39,6 @@ import java.io.Serializable
 import java.lang.IllegalArgumentException
 import java.net.Inet4Address
 import java.net.Inet6Address
-import java.net.NetworkInterface
-import java.net.NetworkInterface.getNetworkInterfaces
-import java.util.*
 
 
 /**
@@ -60,6 +58,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var primaryServer: ServerConfiguration
+    private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
     private var secondaryServer: ServerConfiguration? = null
     private var queryCountOffset: Long = 0
 
@@ -133,7 +132,29 @@ class DnsVpnService : VpnService(), Runnable {
         log("Service onCreate()")
         createNotification()
         updateServiceTile()
+        subscribeToSettings()
         log("Service created.")
+    }
+
+    private fun subscribeToSettings() {
+        log("Subscribing to settings for automated restart")
+        val relevantSettings = mutableSetOf(
+            "ipv4_enabled",
+            "ipv6_enabled",
+            "force_ipv6",
+            "force_ipv4",
+            "catch_known_servers",
+            "dnscache_enabled",
+            "dnscache_maxsize",
+            "dnscache_use_default_time",
+            "dnscache_custom_time",
+            "user_bypass_packages"
+        )
+        settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
+            log("The Preference $key has changed, restarting the VPN.")
+            recreateVpn(key == "doh_server_url_primary" || key == "doh_server_url_secondary", null)
+        }
+        log("Subscribed.")
     }
 
     private fun createNotification() {
@@ -151,7 +172,8 @@ class DnsVpnService : VpnService(), Runnable {
                 Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
             )
         )
-        val stopPendingIntent = PendingIntent.getService(this, 1, commandIntent(this, Command.STOP), PendingIntent.FLAG_CANCEL_CURRENT)
+        val stopPendingIntent =
+            PendingIntent.getService(this, 1, commandIntent(this, Command.STOP), PendingIntent.FLAG_CANCEL_CURRENT)
         val stopAction = NotificationCompat.Action(R.drawable.ic_stop, getString(R.string.all_stop), stopPendingIntent)
 
         notificationBuilder.addAction(stopAction)
@@ -183,12 +205,8 @@ class DnsVpnService : VpnService(), Runnable {
                 }
                 Command.RESTART -> {
                     log("Received RESTART command, restarting vpn.")
-                    if (intent.getBooleanExtra("fetch_servers", false)) {
-                        log("Re-fetching the servers (from intent or settings)")
-                        setServerConfiguration(intent)
-                    }
                     setNotificationText()
-                    recreateVpn()
+                    recreateVpn(intent.getBooleanExtra("fetch_servers", false), intent)
                 }
             }
         } else {
@@ -275,15 +293,32 @@ class DnsVpnService : VpnService(), Runnable {
         } else log("Connection already running, no need to establish.")
     }
 
-    private fun recreateVpn() {
+    private fun recreateVpn(reloadServerConfiguration: Boolean, intent: Intent?) {
         log("Recreating the VPN (destroying & establishing)")
         destroy()
-        destroyed = false
-        establishVpn()
+        if (VpnService.prepare(this) == null) {
+            log("VpnService is still prepared, establishing VPN.")
+            destroyed = false
+            if (reloadServerConfiguration) {
+                log("Re-fetching the servers (from intent or settings)")
+                setServerConfiguration(intent)
+            }
+            establishVpn()
+        } else {
+            log("VpnService isn't prepared, launching BackgroundVpnConfigureActivity.")
+            BackgroundVpnConfigureActivity.prepareVpn(
+                this,
+                primaryUserServerUrl,
+                secondaryUserServerUrl
+            )
+            log("BackgroundVpnConfigureActivity launched, stopping service.")
+            stopForeground(true)
+            stopSelf()
+        }
     }
 
     private fun destroy() {
-        log("Destroying the service")
+        log("Destroying the VPN")
         if (!destroyed) {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
@@ -291,13 +326,18 @@ class DnsVpnService : VpnService(), Runnable {
             vpnProxy = null
             fileDescriptor = null
             destroyed = true
-        }
+            log("VPN destroyed.")
+        } else log("VPN is already destroyed.")
         currentTrafficStats = null
     }
 
     override fun onDestroy() {
         super.onDestroy()
         log("onDestroy() called (Was destroyed from within: $destroyed")
+        log("Unregistering settings listener")
+        getPreferences().unregisterOnChangeListener(settingsSubscription)
+        log("Unregistered.")
+
         if (!destroyed && resources.getBoolean(R.bool.keep_service_alive)) {
             log("The service wasn't destroyed from within and keep_service_alive is true, restarting VPN.")
             val restartIntent = Intent(this, VpnRestartService::class.java)

@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.fragment
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -10,10 +11,8 @@ import androidx.preference.CheckBoxPreference
 import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.isInt
-import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
-import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Theme
 
 /**
@@ -26,8 +25,27 @@ import com.frostnerd.smokescreen.util.preferences.Theme
  * development@frostnerd.com
  */
 class SettingsFragment : PreferenceFragmentCompat() {
+    private var preferenceListener: ((SharedPreferences, String) -> Unit)? = null
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (preferenceListener != null) requireContext().getPreferences().sharedPreferences.unregisterOnSharedPreferenceChangeListener(
+            preferenceListener
+        )
+        preferenceListener = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        preferenceListener = { _, key ->
+            requireContext().getPreferences().notifyPreferenceChangedFromExternal(key)
+        }
+        requireContext().getPreferences().sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceListener)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -122,7 +140,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
         cacheTime.setOnPreferenceChangeListener { _, newValue ->
-            if(newValue.toString().isInt()) {
+            if (newValue.toString().isInt()) {
                 cacheTime.summary = getString(R.string.summary_dnscache_customcachetime, newValue.toString().toInt())
                 true
             } else {
@@ -176,9 +194,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (selected.size != requireContext().getPreferences().userBypassPackages.size) {
                 log("Updated the list of user bypass packages to $selected")
                 requireContext().getPreferences().userBypassPackages = selected
-                if (requireContext().isServiceRunning(DnsVpnService::class.java)) {
-                    DnsVpnService.restartVpn(requireContext(), false)
-                }
             }
         }.createDialog()
         dialog.setTitle(R.string.title_excluded_apps)

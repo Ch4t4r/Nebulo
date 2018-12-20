@@ -31,14 +31,14 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
     BLUE(4, R.style.AppTheme_Blue, R.style.DialogTheme_Blue, R.style.PreferenceTheme_Blue);
 
     @ColorInt
-    fun getColor(context: Context, @AttrRes attribute: Int, @ColorInt defaultValue:Int = Color.BLACK):Int {
+    fun getColor(context: Context, @AttrRes attribute: Int, @ColorInt defaultValue: Int = Color.BLACK): Int {
         val ta = context.obtainStyledAttributes(layoutStyle, intArrayOf(attribute))
         @ColorInt val color = ta.getColor(0, defaultValue)
         ta.recycle()
         return color
     }
 
-    fun getDrawable(context: Context, @AttrRes attribute:Int): Drawable? {
+    fun getDrawable(context: Context, @AttrRes attribute: Int): Drawable? {
         val ta = context.obtainStyledAttributes(layoutStyle, intArrayOf(attribute))
         val drawable = ta.getDrawable(0)
         ta.recycle()
@@ -57,7 +57,7 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
     }
 
     @ColorInt
-    fun getTextColor(context: Context):Int {
+    fun getTextColor(context: Context): Int {
         return getColor(context, android.R.attr.textColor)
     }
 
@@ -66,7 +66,7 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
             return values().find { it.id == id }
         }
 
-        fun ids():IntArray {
+        fun ids(): IntArray {
             val arr = IntArray(values().size)
             for ((i, value) in values().withIndex()) {
                 arr[i] = value.id
@@ -76,16 +76,23 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
     }
 }
 
-class ThemePreference(key:String, defaultValue:Theme): PreferenceTypeWithDefault<SharedPreferences, Theme>(key, defaultValue) {
+class ThemePreference(key: String, defaultValue: Theme) :
+    PreferenceTypeWithDefault<SharedPreferences, Theme>(key, defaultValue) {
 
     override fun getValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>): Theme {
-        return if(thisRef.sharedPreferences.contains(key)) Theme.findById(thisRef.sharedPreferences.getString(key, Theme.MONO.id.toString())!!.toInt())!!
+        return if (thisRef.sharedPreferences.contains(key)) Theme.findById(
+            thisRef.sharedPreferences.getString(
+                key,
+                Theme.MONO.id.toString()
+            )!!.toInt()
+        )!!
         else defaultValue(key)
     }
 
     override fun setValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>, value: Theme) {
-        thisRef.edit {
+        thisRef.edit { listener ->
             putString(key, value.id.toString())
+            listener(key, value)
         }
     }
 

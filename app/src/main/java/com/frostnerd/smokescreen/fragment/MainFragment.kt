@@ -93,9 +93,6 @@ class MainFragment : Fragment() {
                     prefs.primaryServerConfig = primaryServerUrl
                     prefs.secondaryServerConfig = secondaryServerUrl
                 }
-                if(proxyRunning) {
-                    DnsVpnService.restartVpn(requireContext(), true)
-                }
                 println("Saved $primaryServerUrl, $secondaryServerUrl")
             }.show()
         }

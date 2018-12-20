@@ -137,6 +137,8 @@ class MainActivity : NavigationDrawerActivity() {
     override fun useItemBackStack(): Boolean = true
 
     override fun onItemClicked(item: DrawerItem, handle: Boolean) {
-
+        if(item is BasicDrawerItem) {
+            log("Menu item was clicked: '${item.title}'")
+        }
     }
 }

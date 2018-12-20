@@ -22,47 +22,57 @@ import kotlin.reflect.KProperty
 class ServerConfigurationPreference(key: String, defaultValue: (String) -> ServerConfiguration) :
     PreferenceTypeWithDefault<SharedPreferences, ServerConfiguration>(key, defaultValue) {
     constructor(key: String, defaultValue: ServerConfiguration) : this(key, { defaultValue })
+
     private val encodedDivider = "/~~/"
 
     override fun getValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>): ServerConfiguration {
-        if(thisRef.sharedPreferences.contains(key)) {
+        if (thisRef.sharedPreferences.contains(key)) {
             val encoded = thisRef.sharedPreferences.getString(key, "")!!
-            return if(encoded.contains(encodedDivider)) {
+            return if (encoded.contains(encodedDivider)) {
                 val split = encoded.split(encodedDivider)
                 val requestType = RequestType.fromId(split[1].toInt())!!
                 val responseType = ResponseType.fromId(split[2].toInt())!!
                 ServerConfiguration.createSimpleServerConfig(split[0], requestType, responseType)
             } else {
-                return AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[encoded.toInt()]!!.serverConfigurations.entries.first().value
+                return AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[encoded.toInt()]!!.serverConfigurations.entries.first()
+                    .value
             }
         } else return defaultValue(key)
     }
 
-    override fun setValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>, value: ServerConfiguration) {
-        var encoded:String? = null
+    override fun setValue(
+        thisRef: TypedPreferences<SharedPreferences>,
+        property: KProperty<*>,
+        value: ServerConfiguration
+    ) {
+        var encoded: String? = null
 
-        for ((id,config) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS) {
+        for ((id, config) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS) {
             for (serverConfiguration in config.serverConfigurations) {
-                if(serverConfiguration.value == value) {
+                if (serverConfiguration.value == value) {
                     encoded = id.toString()
                     break
                 }
             }
         }
 
-        if(encoded == null) {
+        if (encoded == null) {
             encoded = value.urlCreator.baseUrl + encodedDivider + value.transportConfig.requestType.id +
                     encodedDivider + value.transportConfig.responseType.id
         }
 
-        thisRef.edit {
+        thisRef.edit {listener ->
             putString(key, encoded)
+            listener(key, value)
         }
     }
 }
 
-class StringBasedIntPreferenceWithDefault<PrefType: SharedPreferences>(key: String, defaultValue: (key:String) -> Int) : PreferenceTypeWithDefault<PrefType, Int>(key, defaultValue) {
-    constructor(key:String, defaultValue:Int):this(key, { defaultValue })
+class StringBasedIntPreferenceWithDefault<PrefType : SharedPreferences>(
+    key: String,
+    defaultValue: (key: String) -> Int
+) : PreferenceTypeWithDefault<PrefType, Int>(key, defaultValue) {
+    constructor(key: String, defaultValue: Int) : this(key, { defaultValue })
 
     override fun getValue(thisRef: TypedPreferences<PrefType>, property: KProperty<*>): Int {
         return if (thisRef.sharedPreferences.contains(key)) {
@@ -71,11 +81,19 @@ class StringBasedIntPreferenceWithDefault<PrefType: SharedPreferences>(key: Stri
     }
 
     override fun setValue(thisRef: TypedPreferences<PrefType>, property: KProperty<*>, value: Int) {
-        thisRef.edit {
+        thisRef.edit { listener ->
             putString(key, value.toString())
+            listener(key, value)
         }
     }
 }
 
-fun <PrefType : SharedPreferences> stringBasedIntPref(key: String, defaultValue: Int): StringBasedIntPreferenceWithDefault<PrefType> = StringBasedIntPreferenceWithDefault(key, defaultValue)
-fun <PrefType : SharedPreferences> stringBasedIntPref(key: String, defaultValue: (key: String) -> Int): StringBasedIntPreferenceWithDefault<PrefType> = StringBasedIntPreferenceWithDefault(key, defaultValue)
+fun <PrefType : SharedPreferences> stringBasedIntPref(
+    key: String,
+    defaultValue: Int
+): StringBasedIntPreferenceWithDefault<PrefType> = StringBasedIntPreferenceWithDefault(key, defaultValue)
+
+fun <PrefType : SharedPreferences> stringBasedIntPref(
+    key: String,
+    defaultValue: (key: String) -> Int
+): StringBasedIntPreferenceWithDefault<PrefType> = StringBasedIntPreferenceWithDefault(key, defaultValue)
