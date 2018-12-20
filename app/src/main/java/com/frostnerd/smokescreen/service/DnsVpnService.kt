@@ -304,6 +304,8 @@ class DnsVpnService : VpnService(), Runnable {
                 setServerConfiguration(intent)
             }
             establishVpn()
+            updateNotification(0)
+            setNotificationText()
         } else {
             log("VpnService isn't prepared, launching BackgroundVpnConfigureActivity.")
             BackgroundVpnConfigureActivity.prepareVpn(
