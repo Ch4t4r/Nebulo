@@ -56,6 +56,15 @@
         <service
                 android:name=".service.VpnRestartService"
                 android:exported="false"/>
+        <service
+                android:name=".service.StartStopTileService"
+                android:label="@string/quicksettings_start_text"
+                android:icon="@drawable/ic_play"
+                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
 
         <receiver
                 android:name=".receiver.AutostartReceiver"

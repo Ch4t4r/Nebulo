@@ -132,6 +132,7 @@ class DnsVpnService : VpnService(), Runnable {
         }
         log("Service onCreate()")
         createNotification()
+        updateServiceTile()
         log("Service created.")
     }
 
@@ -313,6 +314,7 @@ class DnsVpnService : VpnService(), Runnable {
             destroy()
             LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
         }
+        updateServiceTile()
     }
 
     override fun onRevoke() {

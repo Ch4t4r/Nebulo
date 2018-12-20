@@ -5,6 +5,9 @@
     <string name="contentdescription_main_statusimage">Image indicating whether the app is running</string>
     <string name="contentdescription_shared_app_icon">App icon</string>
     <string name="contentdescription_clear_search">Clear search</string>
+
+    <string name="contentdescription_start_app">Start the app</string>
+    <string name="contentdescription_stop_app">Stop the app</string>
     
     <string name="hint_searchterm">Term to be searched</string>
 </resources>
