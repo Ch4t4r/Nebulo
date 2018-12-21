@@ -43,7 +43,7 @@ fun Context.log(e: Throwable) {
         val errorFile =
             File(Logger.getLogDir(this).parentFile, "${Logger.logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err")
 
-        if (errorFile.canWrite() && errorFile.createNewFile()) {
+        if (errorFile.createNewFile()) {
             val writer = BufferedWriter(FileWriter(errorFile, false))
             writer.write("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n")
             writer.write("Android SDK version: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})\n")
@@ -203,7 +203,7 @@ class Logger private constructor(context: Context) {
             val errorFile =
                 File(logFile.parentFile, "${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err")
 
-            if (errorFile.canWrite() && errorFile.createNewFile()) {
+            if (errorFile.createNewFile()) {
                 val writer = BufferedWriter(FileWriter(errorFile, false))
                 writer.write("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n")
                 writer.write("Android SDK version: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})\n")
