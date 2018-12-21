@@ -104,5 +104,11 @@
                 android:defaultValue="false"
                 android:title="@string/title_force_ipv6"
                 android:summary="@string/summary_force_ipv6"/>
+
+        <CheckBoxPreference
+                android:key="bypass_searchdomains"
+                android:title="title_bypass_searchdomains"
+                android:defaultValue="true"
+                android:summary="summary_bypass_searchdomains"/>
     </PreferenceCategory>
 </PreferenceScreen>
