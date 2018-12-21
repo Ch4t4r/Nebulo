@@ -107,8 +107,8 @@
 
         <CheckBoxPreference
                 android:key="bypass_searchdomains"
-                android:title="title_bypass_searchdomains"
+                android:title="@string/title_bypass_searchdomains"
                 android:defaultValue="true"
-                android:summary="summary_bypass_searchdomains"/>
+                android:summary="@string/summary_bypass_searchdomains"/>
     </PreferenceCategory>
 </PreferenceScreen>
