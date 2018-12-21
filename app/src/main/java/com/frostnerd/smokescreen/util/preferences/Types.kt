@@ -27,7 +27,7 @@ class ServerConfigurationPreference(key: String, defaultValue: (String) -> Serve
 
     override fun getValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>): ServerConfiguration {
         if (thisRef.sharedPreferences.contains(key)) {
-            val encoded = thisRef.sharedPreferences.getString(key, "")!!
+            val encoded = thisRef.sharedPreferences.getString(key, "0")!!
             return if (encoded.contains(encodedDivider)) {
                 val split = encoded.split(encodedDivider)
                 val requestType = RequestType.fromId(split[1].toInt())!!
