@@ -32,7 +32,10 @@ class DatabaseHelper private constructor(context: Context) :
         }
     }
 
-    override fun onBeforeUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
+    override fun onBeforeUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        if(oldVersion < 2) {
+            getSQLHandler(CachedResponse::class.java).createTable(db)
+        }
     }
 
     override fun onAfterUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
