@@ -157,7 +157,8 @@ class DnsVpnService : VpnService(), Runnable {
             "dnscache_use_default_time",
             "dnscache_custom_time",
             "user_bypass_packages",
-            "dnscache_keepacrosslaunches"
+            "dnscache_keepacrosslaunches",
+            "bypass_searchdomains"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
             log("The Preference $key has changed, restarting the VPN.")
