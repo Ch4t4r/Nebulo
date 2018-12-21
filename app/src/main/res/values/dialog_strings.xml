@@ -29,4 +29,7 @@
     <string name="dialog_logexport_email">E-Mail</string>
 
     <string name="dialog_deletelogs_text">Are you sure that you want to delete all logs?</string>
+
+    <string name="dialog_error_title">Crashreport</string>
+    <string name="dialog_error_text">It looks like the app has crashed. Do you want to the error log files to the developer?</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.frostnerd.smokescreen
 
 import android.app.Application
+import android.content.Intent
+import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import kotlin.system.exitProcess
 
 /**
@@ -17,6 +19,9 @@ class SmokeScreen : Application() {
     val customUncaughtExceptionHandler: Thread.UncaughtExceptionHandler =
         Thread.UncaughtExceptionHandler { t, e ->
             log(e)
+            if(BuildConfig.VERSION_NAME.contains("alpha",true) && getPreferences().loggingEnabled) {
+                startActivity(Intent(this, ErrorDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            }
             closeLogger()
             defaultUncaughtExceptionHandler?.uncaughtException(t, e)
             exitProcess(0)

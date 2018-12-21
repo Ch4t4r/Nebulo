@@ -41,6 +41,15 @@
                 android:name=".activity.BackgroundVpnConfigureActivity"
                 android:launchMode="singleInstance"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+        <activity
+                android:name=".activity.ErrorDialogActivity"
+                android:autoRemoveFromRecents="true"
+                android:clearTaskOnLaunch="true"
+                android:excludeFromRecents="true"
+                android:launchMode="singleTop"
+                android:noHistory="true"
+                android:process=".ErrorProcess"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
 
         <service
                 android:name=".service.DnsVpnService"

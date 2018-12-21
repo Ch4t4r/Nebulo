@@ -51,7 +51,6 @@ class MainFragment : Fragment() {
         super.onResume()
         proxyRunning = requireContext().isServiceRunning(DnsVpnService::class.java)
         updateVpnIndicators()
-        requireContext().getDatabase()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
