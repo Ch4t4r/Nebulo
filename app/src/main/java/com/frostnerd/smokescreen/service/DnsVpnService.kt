@@ -32,6 +32,7 @@ import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.proxy.ProxyBypassHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
@@ -518,7 +519,7 @@ class DnsVpnService : VpnService(), Runnable {
         )
         log("Handle created, creating DNS proxy")
 
-        dnsProxy = SmokeProxy(handle!!, this, createDnsCache())
+        dnsProxy = SmokeProxy(handle!!, createProxyBypassHandlers(),this, createDnsCache())
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!)
 
@@ -527,6 +528,34 @@ class DnsVpnService : VpnService(), Runnable {
         log("VPN proxy started.")
         currentTrafficStats = vpnProxy!!.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
+    }
+
+    /**
+     * Creates bypass handlers for each network and its associated search domains
+     * Requests for .*SEARCHDOMAIN won't use doh and are sent to the DNS servers of the network they originated from.
+     */
+    private fun createProxyBypassHandlers(): MutableList<ProxyBypassHandler> {
+        log("Creating bypass handlers for search domains of connected networks.")
+        val bypassHandlers = mutableListOf<ProxyBypassHandler>()
+        val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        for (network in mgr.allNetworks) {
+            val networkInfo = mgr.getNetworkInfo(network)
+            if (networkInfo.isConnected) {
+                val linkProperties = mgr.getLinkProperties(network)
+                if (!linkProperties.domains.isNullOrBlank()) {
+                    log("Bypassing domains ${linkProperties.domains} for network of type ${networkInfo.typeName}")
+                    val domains = linkProperties.domains.split(",").toList()
+                    bypassHandlers.add(
+                        ProxyBypassHandler(
+                            domains,
+                            linkProperties.dnsServers[0]!!
+                        )
+                    )
+                }
+            }
+        }
+        log("${bypassHandlers.size} bypass handlers created.")
+        return bypassHandlers
     }
 
     private fun createDnsCache():SimpleDnsCache? {

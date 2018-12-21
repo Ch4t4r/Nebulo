@@ -5,6 +5,7 @@ import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
 import org.minidns.dnsmessage.DnsMessage
+import java.lang.RuntimeException
 import java.net.InetAddress
 
 /**
@@ -22,6 +23,11 @@ class ProxyHandler(
     val queryCountCallback:((queryCount:Int) -> Unit)? = null
 ) :
     AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
+    override val handlesSpecificRequests: Boolean = false
+
+    override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
+        throw RuntimeException("Won't ever be called")
+    }
 
     constructor(
         serverConfiguration: ServerConfiguration,
