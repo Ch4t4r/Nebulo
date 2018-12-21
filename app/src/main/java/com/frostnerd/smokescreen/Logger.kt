@@ -229,9 +229,7 @@ fun Context.zipAllLogFiles(): File? {
     if (zipFile.exists() && (!zipFile.canRead() || !zipFile.canWrite())) return null
     if (zipFile.exists()) zipFile.delete()
 
-    val filesToBeZipped = dir.listFiles { pathname ->
-        pathname.name.endsWith(".log") || pathname.name.endsWith(".err")
-    }
+    val filesToBeZipped = dir.listFiles()
     val dest = FileOutputStream(zipFile)
     val out = ZipOutputStream(BufferedOutputStream(dest))
     val buffer = ByteArray(2048)
