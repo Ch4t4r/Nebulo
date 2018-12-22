@@ -26,7 +26,11 @@ import com.frostnerd.smokescreen.util.preferences.Theme
  * development@frostnerd.com
  */
 class SettingsFragment : PreferenceFragmentCompat() {
-    private var preferenceListener: ((SharedPreferences, String) -> Unit)? = null
+    private var preferenceListener: SharedPreferences.OnSharedPreferenceChangeListener = object:SharedPreferences.OnSharedPreferenceChangeListener {
+        override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String) {
+            requireContext().getPreferences().notifyPreferenceChangedFromExternal(key)
+        }
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
@@ -35,19 +39,35 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onPause() {
         super.onPause()
         log("Pausing fragment")
-        if (preferenceListener != null) requireContext().getPreferences().sharedPreferences.unregisterOnSharedPreferenceChangeListener(
-            preferenceListener
-        )
-        preferenceListener = null
+        removePreferenceListener()
     }
 
     override fun onResume() {
         super.onResume()
         log("Resuming fragment")
-        preferenceListener = { _, key ->
-            requireContext().getPreferences().notifyPreferenceChangedFromExternal(key)
-        }
+        createPreferenceListener()
+    }
+
+    override fun onDetach() {
+        log("Fragment detached.")
+        removePreferenceListener()
+        super.onDetach()
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        log("Fragment attached.")
+        createPreferenceListener()
+    }
+
+    private fun createPreferenceListener() {
         requireContext().getPreferences().sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceListener)
+    }
+
+    private fun removePreferenceListener() {
+        requireContext().getPreferences().sharedPreferences.unregisterOnSharedPreferenceChangeListener(
+            preferenceListener
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +79,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
             log("Updated theme to $newValue")
             if (newTheme != null) {
+                removePreferenceListener()
                 requireContext().getPreferences().theme = newTheme
                 requireActivity().restart()
                 true
