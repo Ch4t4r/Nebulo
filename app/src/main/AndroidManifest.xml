@@ -49,7 +49,18 @@
                 android:launchMode="singleTop"
                 android:noHistory="true"
                 android:process=".ErrorProcess"
-                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+        <activity
+                android:name=".tasker.ConfigureActivity"
+                android:exported="true"
+                android:icon="@mipmap/ic_launcher"
+                android:label="@string/app_name"
+                android:uiOptions="splitActionBarWhenNarrow"
+                android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+            </intent-filter>
+        </activity>
 
         <service
                 android:name=".service.DnsVpnService"
@@ -95,6 +106,15 @@
                 <data android:scheme="package"/>
             </intent-filter>
         </receiver>
+        <receiver
+                android:name=".tasker.FireReceiver"
+                android:exported="true"
+                android:process=":background">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+            </intent-filter>
+        </receiver>
+
         <provider
                 android:authorities="com.frostnerd.smokescreen.LogZipProvider"
                 android:name="androidx.core.content.FileProvider"
