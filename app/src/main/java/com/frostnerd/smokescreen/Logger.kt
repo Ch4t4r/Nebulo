@@ -23,13 +23,13 @@ import java.util.zip.ZipOutputStream
  */
 
 
-fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs:Any) {
+fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {
     if (!Logger.crashed && Logger.enabledGlobally) {
         Logger.getInstance(this).log(text, tag, formatArgs)
     }
 }
 
-fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs:Any) {
+fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs: Any) {
     if (!Logger.crashed && Logger.enabledGlobally) {
         Logger.getInstance(this).log(text, tag, intent, formatArgs)
     }
@@ -41,7 +41,10 @@ fun Context.log(e: Throwable) {
     } else {
         val stackTrace = Logger.stacktraceToString(e)
         val errorFile =
-            File(Logger.getLogDir(this).parentFile, "${Logger.logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err")
+            File(
+                Logger.getLogDir(this).parentFile,
+                "${Logger.logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err"
+            )
 
         if (errorFile.createNewFile()) {
             val writer = BufferedWriter(FileWriter(errorFile, false))
@@ -61,23 +64,23 @@ fun Context.closeLogger() {
 }
 
 fun Context.deleteAllLogs() {
-    if(Logger.isOpen())
+    if (Logger.isOpen())
         Logger.getInstance(this).destroy()
     Logger.getLogDir(this).listFiles().forEach {
         it.delete()
     }
 }
 
-fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs:Any) {
-    requireContext().log(text, tag, formatArgs)
+fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {
+    if (context != null) requireContext().log(text, tag, formatArgs)
 }
 
-fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs:Any) {
-    requireContext().log(text, tag, intent, formatArgs)
+fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs: Any) {
+    if (context != null) requireContext().log(text, tag, intent, formatArgs)
 }
 
 fun Fragment.log(e: Throwable) {
-    requireContext().log(e)
+    if (context != null) requireContext().log(e)
 }
 
 fun Fragment.closeLogger() {
@@ -171,7 +174,7 @@ class Logger private constructor(context: Context) {
         fileWriter.close()
     }
 
-    fun log(text: String, tag: String? = "Info", vararg formatArgs:Any) {
+    fun log(text: String, tag: String? = "Info", vararg formatArgs: Any) {
         if (enabled) {
             val textBuilder = StringBuilder()
             textBuilder.append("[")
@@ -185,12 +188,12 @@ class Logger private constructor(context: Context) {
             textBuilder.append(text.let {
                 var newString = it
                 formatArgs.forEachIndexed { index, arg ->
-                    newString = newString.replace("$${index+1}", arg.toString())
+                    newString = newString.replace("$${index + 1}", arg.toString())
                 }
                 newString
             })
             textBuilder.append("\n")
-            if(printToConsole) println(textBuilder)
+            if (printToConsole) println(textBuilder)
             fileWriter.write(textBuilder.toString())
             fileWriter.flush()
         }
@@ -216,7 +219,7 @@ class Logger private constructor(context: Context) {
         }
     }
 
-    fun log(text: String, tag: String? = "Info", intent: Intent?, vararg formatArgs:Any) {
+    fun log(text: String, tag: String? = "Info", intent: Intent?, vararg formatArgs: Any) {
         log(text + " -- ${describeIntent(intent)}", tag, formatArgs)
     }
 }
@@ -241,7 +244,7 @@ fun Context.zipAllLogFiles(): File? {
         out.putNextEntry(entry)
         do {
             val count = inStream.read(buffer, 0, buffer.size)
-            if(count >= 0) out.write(buffer, 0, count)
+            if (count >= 0) out.write(buffer, 0, count)
         } while (count != -1)
         out.flush()
         inStream.close()
