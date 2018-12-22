@@ -542,9 +542,9 @@ class DnsVpnService : VpnService(), Runnable {
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             for (network in mgr.allNetworks) {
                 val networkInfo = mgr.getNetworkInfo(network)
-                if (networkInfo.isConnected) {
+                if (networkInfo != null && networkInfo.isConnected) {
                     val linkProperties = mgr.getLinkProperties(network)
-                    if (!linkProperties.domains.isNullOrBlank()) {
+                    if (linkProperties != null && !linkProperties.domains.isNullOrBlank()) {
                         log("Bypassing domains ${linkProperties.domains} for network of type ${networkInfo.typeName}")
                         val domains = linkProperties.domains.split(",").toList()
                         bypassHandlers.add(
