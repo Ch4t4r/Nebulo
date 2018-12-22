@@ -303,6 +303,7 @@ class DnsVpnService : VpnService(), Runnable {
         if (fileDescriptor == null) {
             fileDescriptor = createBuilder().establish()
             run()
+            setNotificationText()
             updateNotification()
         } else log("Connection already running, no need to establish.")
     }
