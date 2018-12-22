@@ -23,6 +23,7 @@ import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
+import com.frostnerd.general.CombinedIterator
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.BuildConfig
@@ -69,6 +70,7 @@ class DnsVpnService : VpnService(), Runnable {
     private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
     private var secondaryServer: ServerConfiguration? = null
     private var queryCountOffset: Long = 0
+    private var packageBypassAmount = 0
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -158,7 +160,8 @@ class DnsVpnService : VpnService(), Runnable {
             "dnscache_custom_time",
             "user_bypass_packages",
             "dnscache_keepacrosslaunches",
-            "bypass_searchdomains"
+            "bypass_searchdomains",
+            "user_bypass_blacklist"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
             log("The Preference $key has changed, restarting the VPN.")
@@ -278,17 +281,17 @@ class DnsVpnService : VpnService(), Runnable {
     private fun setNotificationText() {
         val text = if (secondaryServer != null) {
             getString(
-                R.string.notification_main_text_with_secondary,
+                if(getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
                 primaryServer.urlCreator.baseUrl,
                 secondaryServer!!.urlCreator.baseUrl,
-                getPreferences().totalBypassPackageCount,
+                packageBypassAmount,
                 dnsProxy?.cache?.livingCachedEntries() ?: 0
             )
         } else {
             getString(
-                R.string.notification_main_text,
+                if(getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
                 primaryServer.urlCreator.baseUrl,
-                getPreferences().totalBypassPackageCount,
+                packageBypassAmount,
                 dnsProxy?.cache?.livingCachedEntries() ?: 0
             )
         }
@@ -461,11 +464,27 @@ class DnsVpnService : VpnService(), Runnable {
         }
         builder.setBlocking(true)
 
-        log("Applying ${getPreferences().totalBypassPackageCount} disallowed packages.")
-        for (defaultBypassPackage in getPreferences().bypassPackagesIterator) {
-            if (isPackageInstalled(defaultBypassPackage)) { //TODO Check what is faster: catching the exception, or checking ourselves
-                builder.addDisallowedApplication(defaultBypassPackage)
-            } else log("Package $defaultBypassPackage not installed, thus not bypassing")
+        log("Applying disallowed packages.")
+        val userBypass = getPreferences().userBypassPackages
+        val defaultBypass = getPreferences().defaultBypassPackages
+        if(getPreferences().isBypassBlacklist || userBypass.size == 0) {
+            log("Mode is set to blacklist, bypassing ${userBypass.size + defaultBypass.size} packages.")
+            for (defaultBypassPackage in CombinedIterator(userBypass.iterator(), defaultBypass.iterator())) {
+                if (isPackageInstalled(defaultBypassPackage)) { //TODO Check what is faster: catching the exception, or checking ourselves
+                    builder.addDisallowedApplication(defaultBypassPackage)
+                } else log("Package $defaultBypassPackage not installed, thus not bypassing")
+            }
+            packageBypassAmount = userBypass.size + defaultBypass.size
+        } else {
+            log("Mode is set to whitelist, whitelisting ${userBypass.size} packages.")
+            for (pkg in userBypass) {
+                if(!defaultBypass.contains(pkg)) {
+                    if (isPackageInstalled(pkg)) { //TODO Check what is faster: catching the exception, or checking ourselves
+                        builder.addAllowedApplication(pkg)
+                        packageBypassAmount++
+                    } else log("Package $pkg not installed, thus not bypassing")
+                } else log("Not whitelisting $pkg, it is blacklisted by default.")
+            }
         }
         return builder
     }

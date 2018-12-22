@@ -69,6 +69,16 @@
             android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"/>
 
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:text="@string/dialog_appchoosal_whitelist"
+            android:id="@+id/whitelist"
+            android:textColor="?android:attr/textColor"
+            android:visibility="gone"
+            android:checked="true"
+            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

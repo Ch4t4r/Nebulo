@@ -208,8 +208,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
             infoText = getString(
                 R.string.dialog_excludedapps_infotext,
                 requireContext().getPreferences().defaultBypassPackages.size
-            )
-        ) { selected ->
+            ),
+            blackList = requireContext().getPreferences().isBypassBlacklist
+        ) { selected, isBlacklist ->
+            println("BLACKLIST: $isBlacklist")
+            requireContext().getPreferences().isBypassBlacklist = isBlacklist
             if (selected.size != requireContext().getPreferences().userBypassPackages.size) {
                 log("Updated the list of user bypass packages to $selected")
                 requireContext().getPreferences().userBypassPackages = selected

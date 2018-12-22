@@ -35,10 +35,11 @@ import java.lang.IllegalStateException
 class AppChoosalDialog(
     private val context: Activity,
     selectedApps: Set<String>,
+    var blackList:Boolean = true,
     private val hiddenAppPackages: Set<String> = emptySet(),
     private val defaultChosenUnselectablePackages:Set<String> = emptySet(),
     val infoText: String?,
-    val dataCallback: (selectedApps: MutableSet<String>) -> Unit
+    val dataCallback: (selectedApps: MutableSet<String>, blackList:Boolean) -> Unit
 ) {
     private val dialogBuilder by lazy { AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle) }
     private val layoutInflater by lazy { LayoutInflater.from(context) }
@@ -65,7 +66,7 @@ class AppChoosalDialog(
     fun createDialog(): AlertDialog {
         dialogBuilder.setCancelable(true)
         dialogBuilder.setPositiveButton(R.string.ok) { dialog, _ ->
-            dataCallback(currentSelectedApps)
+            dataCallback(currentSelectedApps, blackList)
             dialog.dismiss()
         }
         dialogBuilder.setNegativeButton(R.string.cancel) { dialog, _ ->
@@ -117,6 +118,14 @@ class AppChoosalDialog(
                         filterPackagesInBackground(labelSearchTerm, !isChecked, adapter)
                     }
                     systemAppCheckbox.visibility = View.VISIBLE
+                    val whiteListCheckBox = view.findViewById<CheckBox>(R.id.whitelist)
+                    whiteListCheckBox.isChecked = !blackList
+                    whiteListCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                        blackList = !isChecked
+                        filterPackagesInBackground(labelSearchTerm, showSystemApps, adapter)
+                    }
+                    whiteListCheckBox.visibility = View.VISIBLE
+
                     progressBar.visibility = View.GONE
                     // view.findViewById<View>(R.id.searchWrap).visibility = View.VISIBLE
 
@@ -192,7 +201,10 @@ class AppChoosalDialog(
                 }
             }
             itemView.setOnClickListener {
-                checkBox.isChecked = !checkBox.isChecked
+                val packageName = itemView.tag as String
+                if(!defaultChosenUnselectablePackages.contains(packageName)) {
+                    checkBox.isChecked = !checkBox.isChecked
+                }
             }
         }
 
@@ -204,7 +216,7 @@ class AppChoosalDialog(
             title.text = labels.getOrPut(info.packageName) { info.loadLabel(packageManager).toString() }
             checkBox.isChecked = currentSelectedApps.contains(info.packageName)
             if(defaultChosenUnselectablePackages.contains(info.packageName)) {
-                checkBox.isChecked = true
+                checkBox.isChecked = blackList
                 checkBox.isEnabled = false
             } else {
                 checkBox.isEnabled = true

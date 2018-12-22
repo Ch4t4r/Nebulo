@@ -39,6 +39,7 @@ interface AppSettings {
     var startAppOnBoot: Boolean
     var startAppAfterUpdate: Boolean
     var userBypassPackages: MutableSet<String>
+    var isBypassBlacklist:Boolean
 
     // Cache category
     var useDnsCache: Boolean
@@ -61,11 +62,6 @@ interface AppSettings {
 
 
     var hasRatedApp: Boolean
-
-    val bypassPackagesIterator: CombinedIterator<String>
-        get() = combineIterators(defaultBypassPackages.iterator(), userBypassPackages.iterator())
-    val totalBypassPackageCount: Int
-        get() = defaultBypassPackages.size + userBypassPackages.size
 }
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context) {
@@ -75,6 +71,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
     override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf())
+    override var isBypassBlacklist: Boolean by booleanPref("user_bypass_blacklist", true)
 
     override var useDnsCache: Boolean by booleanPref("dnscache_enabled", true)
     override var keepDnsCacheAcrossLaunches: Boolean by booleanPref("dnscache_keepacrosslaunches", false)
