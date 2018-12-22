@@ -29,7 +29,6 @@ class FireReceiver : BroadcastReceiver() {
                     when (action) {
                         "start" -> {
                             val running = context.isServiceRunning(DnsVpnService::class.java)
-                            println("RUNNING: $running, START: $startIfRunning")
                             if (startIfRunning || !running) {
                                 val primaryServer = extras.getString(TaskerHelper.DATA_KEY_PRIMARYSERVER, null)
                                 val secondaryServer = extras.getString(TaskerHelper.DATA_KEY_SECONDARYSERVER, null)
