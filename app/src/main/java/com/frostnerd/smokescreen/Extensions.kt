@@ -5,6 +5,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -118,4 +121,19 @@ fun Context.showEmailChooser(chooserTitle: String, subject: String, recipent: St
     intent.putExtra(Intent.EXTRA_EMAIL, recipent)
     intent.putExtra(Intent.EXTRA_TEXT, text)
     startActivity(Intent.createChooser(intent, chooserTitle))
+}
+
+fun ConnectivityManager.isMobileNetwork(network: Network): Boolean {
+    val capabilities = getNetworkCapabilities(network)
+    return capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+}
+
+fun ConnectivityManager.isWifiNetwork(network: Network): Boolean {
+    val capabilities = getNetworkCapabilities(network)
+    return capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+}
+
+fun ConnectivityManager.isVpnNetwork(network: Network): Boolean {
+    val capabilities = getNetworkCapabilities(network)
+    return capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
 }
