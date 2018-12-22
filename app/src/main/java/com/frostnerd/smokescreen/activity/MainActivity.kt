@@ -33,15 +33,11 @@ class MainActivity : NavigationDrawerActivity() {
         return createMenu {
             fragmentItem(getString(R.string.menu_dnsoverhttps),
                 iconLeft = getDrawable(R.drawable.ic_menu_dnsoverhttps),
-                fragmentCreator = {
-                    MainFragment()
-                }
+                fragmentCreator = singleInstanceFragment { MainFragment() }
             )
             fragmentItem(getString(R.string.menu_settings),
                 iconLeft = getDrawable(R.drawable.ic_menu_settings),
-                fragmentCreator = {
-                    SettingsFragment()
-                })
+                fragmentCreator = singleInstanceFragment { SettingsFragment() })
             divider()
             clickableItem(getString(R.string.menu_rate),
                 iconLeft = getDrawable(R.drawable.ic_star),
