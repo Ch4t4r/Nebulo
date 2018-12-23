@@ -81,3 +81,7 @@
 -dontwarn retrofit2.Response
 
 -keepclassmembers enum * { *; }
+
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
+}

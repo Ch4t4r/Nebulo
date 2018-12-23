@@ -37,6 +37,8 @@ import com.frostnerd.smokescreen.util.proxy.ProxyHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.minidns.dnsmessage.Question
 import org.minidns.dnsname.DnsName
 import org.minidns.record.Record
@@ -44,7 +46,6 @@ import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
 import java.lang.IllegalArgumentException
-import java.net.CacheRequest
 import java.net.Inet4Address
 import java.net.Inet6Address
 
@@ -598,6 +599,7 @@ class DnsVpnService : VpnService(), Runnable {
                 { cache ->
                     log("Persisting current cache to Database.")
                     var persisted = 0
+                    val entries = mutableListOf<CachedResponse>()
                     for(entry in cache) {
                         for(cachedType in entry.value) {
                             val recordsToPersist:MutableMap<Record<*>, Long> = mutableMapOf()
@@ -609,9 +611,13 @@ class DnsVpnService : VpnService(), Runnable {
                             }
 
                             if(!recordsToPersist.isEmpty()) {
-                                persistCachedResponses(entry.key, cachedType.key, recordsToPersist)
+                                entries.add(createPersistedCacheEntry(entry.key, cachedType.key, recordsToPersist))
                             }
                         }
+                    }
+                    GlobalScope.launch {
+                        val dao = getDatabase().cachedResponseDao()
+                        dao.insertAll(entries)
                     }
                     log("Cache persisted [$persisted records]")
                 }
@@ -628,32 +634,32 @@ class DnsVpnService : VpnService(), Runnable {
             log("Restoring old cache")
             var restored = 0
             var tooOld = 0
-            val dao = getDatabase().cachedResponseDao()
-            for (cachedResponse in dao.getAll()) {
-                val records = mutableMapOf<Record<*>, Long>()
-                for (record in cachedResponse.records) {
-                    if(record.value > System.currentTimeMillis()) {
-                        val bytes = Base64.decode(record.key, Base64.NO_WRAP)
-                        val stream = DataInputStream(ByteArrayInputStream(bytes))
-                        records[Record.parse(stream, bytes)] = record.value
-                        restored++
-                    } else tooOld++
+            GlobalScope.launch {
+                for (cachedResponse in getDatabase().cachedResponseRepository().getAllAsync(GlobalScope)) {
+                    val records = mutableMapOf<Record<*>, Long>()
+                    for (record in cachedResponse.records) {
+                        if(record.value > System.currentTimeMillis()) {
+                            val bytes = Base64.decode(record.key, Base64.NO_WRAP)
+                            val stream = DataInputStream(ByteArrayInputStream(bytes))
+                            records[Record.parse(stream, bytes)] = record.value
+                            restored++
+                        } else tooOld++
+                    }
+                    dnsCache.addToCache(DnsName.from(cachedResponse.dnsName), cachedResponse.type, records)
                 }
-                dnsCache.addToCache(DnsName.from(cachedResponse.dnsName), cachedResponse.type, records)
+                getDatabase().cachedResponseDao().deleteAll()
             }
             log("$restored old records restored, deleting persisted cache. $tooOld records were too old.")
-            dao.deleteAll()
             log("Persisted cache deleted.")
         }
         return dnsCache
     }
 
-    private fun persistCachedResponses(
+    private fun createPersistedCacheEntry(
         dnsName: String,
         type: Record.TYPE,
         recordsToPersist: MutableMap<Record<*>, Long>
-    ) {
-        val dao = getDatabase().cachedResponseDao()
+    ): CachedResponse {
         val entity = CachedResponse(
             dnsName,
             type,
@@ -662,7 +668,7 @@ class DnsVpnService : VpnService(), Runnable {
         for (record in recordsToPersist) {
             entity.records[Base64.encodeToString(record.key.toByteArray(), Base64.NO_WRAP)] = record.value
         }
-        dao.insert(entity)
+        return entity
     }
 
     private fun isPackageInstalled(packageName: String): Boolean {

@@ -4,8 +4,10 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import co.metalab.asyncawait.async
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
+import kotlinx.coroutines.*
 
 /**
  * Copyright Daniel Wolf 2018
@@ -23,6 +25,10 @@ interface CachedResponseDao {
 
     @Insert
     fun insertAll(vararg cachedResponses: CachedResponse)
+
+    @Insert
+    fun insertAll(cachedResponses: List<CachedResponse>)
+
 
     @Insert
     fun insert(cachedResponse: CachedResponse)
