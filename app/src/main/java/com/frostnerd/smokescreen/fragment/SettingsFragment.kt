@@ -211,7 +211,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             ),
             blackList = requireContext().getPreferences().isBypassBlacklist
         ) { selected, isBlacklist ->
-            println("BLACKLIST: $isBlacklist")
             requireContext().getPreferences().isBypassBlacklist = isBlacklist
             if (selected.size != requireContext().getPreferences().userBypassPackages.size) {
                 log("Updated the list of user bypass packages to $selected")

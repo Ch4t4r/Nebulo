@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -34,6 +35,8 @@ android {
 }
 
 dependencies {
+    def room_version = "2.1.0-alpha03"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -44,11 +47,15 @@ dependencies {
     implementation 'com.frostnerd.utils:materialedittext:1.0.17'
     implementation 'com.frostnerd.utils:design:1.0.17'
     implementation 'com.frostnerd.utilskt:networking:1.0.0'
-    implementation 'com.frostnerd.utils:database:1.1.16'
     implementation 'com.frostnerd.utilskt:adapters:1.0.1'
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation "androidx.preference:preference:1.0.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-coroutines:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 

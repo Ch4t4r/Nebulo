@@ -54,8 +54,8 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
 
             addServer.setOnClickListener {
                 NewServerDialog(context) { name, primaryServer, secondaryServer:String? ->
-                    val userServerConfiguration = UserServerConfiguration(name, primaryServer, secondaryServer)
-                    context.getDatabase().insert(userServerConfiguration)
+                    val userServerConfiguration = UserServerConfiguration(name=name, primaryServerUrl = primaryServer, secondaryServerUrl = secondaryServer)
+                    context.getDatabase().userServerConfigurationDao().insert(userServerConfiguration)
                     knownServersGroup.addView(createButtonForUserConfiguration(userServerConfiguration))
                 }.show()
             }
@@ -94,7 +94,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
                         buttons.add(0, createButtonForKnownConfiguration(serverInfo.name, serverInfo))
                     }
                 }
-                context.getDatabase().getAll(UserServerConfiguration::class.java).forEach {
+                context.getDatabase().userServerConfigurationDao().getAll().forEach {
                     buttons.add(createButtonForUserConfiguration(it))
                 }
             }
@@ -148,7 +148,7 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
             .setMessage(context.getString(R.string.dialog_deleteconfig_text, userConfiguration.name))
             .setNegativeButton(R.string.all_no) { _, _ -> }
             .setPositiveButton(R.string.all_yes) { _, _ ->
-                context.getDatabase().delete(userConfiguration)
+                context.getDatabase().userServerConfigurationDao().delete(userConfiguration)
 
                 if(button.isChecked) {
                     context.getPreferences().primaryServerConfig = AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[0]!!.serverConfigurations.values.first()

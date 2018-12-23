@@ -17,7 +17,6 @@ import android.os.Looper
 import android.util.Base64
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.frostnerd.database.orm.statementoptions.queryoptions.WhereCondition
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
@@ -629,7 +628,8 @@ class DnsVpnService : VpnService(), Runnable {
             log("Restoring old cache")
             var restored = 0
             var tooOld = 0
-            for (cachedResponse in getDatabase().select(CachedResponse::class.java)) {
+            val dao = getDatabase().cachedResponseDao()
+            for (cachedResponse in dao.getAll()) {
                 val records = mutableMapOf<Record<*>, Long>()
                 for (record in cachedResponse.records) {
                     if(record.value > System.currentTimeMillis()) {
@@ -639,10 +639,10 @@ class DnsVpnService : VpnService(), Runnable {
                         restored++
                     } else tooOld++
                 }
-                dnsCache.addToCache(DnsName.from(cachedResponse.dnsName), Record.TYPE.getType(cachedResponse.type), records)
+                dnsCache.addToCache(DnsName.from(cachedResponse.dnsName), cachedResponse.type, records)
             }
             log("$restored old records restored, deleting persisted cache. $tooOld records were too old.")
-            getDatabase().deleteAll(CachedResponse::class.java)
+            dao.deleteAll()
             log("Persisted cache deleted.")
         }
         return dnsCache
@@ -653,26 +653,16 @@ class DnsVpnService : VpnService(), Runnable {
         type: Record.TYPE,
         recordsToPersist: MutableMap<Record<*>, Long>
     ) {
-        val database = getDatabase()
-        val entities = database.select(
-            CachedResponse::class.java,
-            WhereCondition.equal("type", type.value.toString()),
-            WhereCondition.equal("dnsName", dnsName)
+        val dao = getDatabase().cachedResponseDao()
+        val entity = CachedResponse(
+            dnsName,
+            type,
+            mutableMapOf()
         )
-        val entity:CachedResponse
-        if(!entities.isEmpty()) {
-            entity = entities[0]
-        } else {
-            entity = CachedResponse()
-            entity.dnsName = dnsName
-            entity.type = type.value
-        }
         for (record in recordsToPersist) {
             entity.records[Base64.encodeToString(record.key.toByteArray(), Base64.NO_WRAP)] = record.value
         }
-
-        if(!entities.isEmpty()) database.update(entity)
-        else database.insert(entity)
+        dao.insert(entity)
     }
 
     private fun isPackageInstalled(packageName: String): Boolean {

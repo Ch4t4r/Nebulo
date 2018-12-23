@@ -1,11 +1,11 @@
 package com.frostnerd.smokescreen.database.entities
 
-import com.frostnerd.database.orm.Entity
-import com.frostnerd.database.orm.annotations.Named
-import com.frostnerd.database.orm.annotations.RowID
-import com.frostnerd.database.orm.annotations.Table
-import com.frostnerd.database.orm.annotations.ValueSerializer
-import com.frostnerd.smokescreen.database.serializers.LongSerializer
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.TypeConverters
+import com.frostnerd.smokescreen.database.converters.DnsRecordMapConverter
+import com.frostnerd.smokescreen.database.converters.DnsTypeConverter
+import org.minidns.record.Record
 
 /**
  * Copyright Daniel Wolf 2018
@@ -16,18 +16,10 @@ import com.frostnerd.smokescreen.database.serializers.LongSerializer
  *
  * development@frostnerd.com
  */
-@Table(name = "CachedResponse")
-class CachedResponse : Entity() {
-    @RowID
-    var rowid:Long = -1
-
-    @Named(name="dnsName")
-    lateinit var dnsName:String
-
-    @Named(name="type")
-    var type:Int = -99
-
-    @Named(name="records")
-    @ValueSerializer(usedSerializer = LongSerializer::class)
-    var records:MutableMap<String, Long> = mutableMapOf()
-}
+@Entity(tableName = "CachedResponse", primaryKeys = ["dnsName", "type"])
+@TypeConverters(DnsTypeConverter::class, DnsRecordMapConverter::class)
+data class CachedResponse(
+    @ColumnInfo(name = "dnsName") var dnsName: String,
+    @ColumnInfo(name = "type") var type: Record.TYPE,
+    @ColumnInfo(name = "records") var records: MutableMap<String, Long>
+)

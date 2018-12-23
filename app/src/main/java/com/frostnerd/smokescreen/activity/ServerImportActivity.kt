@@ -1,20 +1,17 @@
 package com.frostnerd.smokescreen.activity
 
-import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.JsonReader
 import android.util.JsonToken
 import android.view.Window
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.database.DatabaseHelper
 import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
+import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.showInfoTextDialog
 import java.io.InputStreamReader
 import java.lang.Exception
 import java.net.URL
@@ -114,8 +111,12 @@ class ServerImportActivity : BaseActivity() {
             }
             .setPositiveButton(R.string.all_yes) { dialog, _ ->
                 dialog.cancel()
-                val configToSave = UserServerConfiguration(config.name!!, config.primaryUrl!!, config.secondaryUrl)
-                DatabaseHelper.getInstance(this@ServerImportActivity).insert(configToSave)
+                val configToSave = UserServerConfiguration(
+                    name = config.name!!,
+                    primaryServerUrl = config.primaryUrl!!,
+                    secondaryServerUrl = config.secondaryUrl
+                )
+                getDatabase().userServerConfigurationDao().insert(configToSave)
 
                 val intent = Intent(this, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
