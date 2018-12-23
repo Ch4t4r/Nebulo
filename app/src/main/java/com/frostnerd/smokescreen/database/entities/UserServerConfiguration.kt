@@ -1,9 +1,8 @@
 package com.frostnerd.smokescreen.database.entities
 
-import com.frostnerd.database.orm.Entity
-import com.frostnerd.database.orm.annotations.Named
-import com.frostnerd.database.orm.annotations.RowID
-import com.frostnerd.database.orm.annotations.Table
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 
@@ -16,26 +15,19 @@ import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
  *
  * development@frostnerd.com
  */
-@Table(name = "UserServerConfiguration")
-class UserServerConfiguration():Entity() {
-    @RowID
-    var rowid:Long = -1
-    @Named(name="name")
-    lateinit var name:String
-    @Named(name="primaryServerUrl")
-    lateinit var primaryServerUrl:String
-    @Named(name="secondaryServerUrl")
-    var secondaryServerUrl:String? = null
 
-    constructor(name:String, primaryServerUrl:String, secondaryServerUrl:String?):this() {
-        this.name = name
-        this.primaryServerUrl = primaryServerUrl
-        this.secondaryServerUrl = secondaryServerUrl
-    }
+@Entity(tableName = "UserServerConfiguration")
+data class UserServerConfiguration(
+    @PrimaryKey(autoGenerate = true) var id: Int = -1,
+    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "primaryServerUrl") var primaryServerUrl: String,
+    @ColumnInfo(name = "secondaryServerUrl") var secondaryServerUrl: String? = null
+) {
+    fun createPrimaryServerConfiguration(): ServerConfiguration =
+        ServerConfiguration.createSimpleServerConfig(primaryServerUrl)
 
-    fun createPrimaryServerConfiguration():ServerConfiguration = ServerConfiguration.createSimpleServerConfig(primaryServerUrl)
-    fun createSecondaryServerConfiguration():ServerConfiguration? {
-        return if(secondaryServerUrl != null) {
+    fun createSecondaryServerConfiguration(): ServerConfiguration? {
+        return if (secondaryServerUrl != null) {
             ServerConfiguration.createSimpleServerConfig(secondaryServerUrl!!)
         } else null
     }
