@@ -100,7 +100,11 @@ class Logger private constructor(context: Context) {
 
         if ((!logDir.exists() && !logDir.mkdirs()) || !logFile.createNewFile() || !logFile.canWrite()) {
             Logger.crashed = true
-            throw IllegalStateException("Could not create log file.")
+            val exactError:String
+            exactError = if(!logDir.exists() && !logDir.mkdirs()) "Could not create log folder"
+            else if(!logFile.createNewFile()) "Creating new log file failed"
+            else "Could not write to created log file"
+            throw IllegalStateException("Could not create log file. ($exactError)")
         }
         fileWriter = BufferedWriter(FileWriter(logFile, false))
 
