@@ -682,15 +682,6 @@ class DnsVpnService : VpnService(), Runnable {
     }
 }
 
-fun AbstractHttpsDNSHandle.Companion.findKnownServerByUrl(url: String): HttpsDnsServerInformation? {
-    for (info in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values) {
-        for (server in info.servers) {
-            if (server.address.getUrl().contains(url, true)) return info
-        }
-    }
-    return null
-}
-
 enum class Command : Serializable {
     STOP, RESTART
 }

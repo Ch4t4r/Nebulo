@@ -31,8 +31,9 @@ class ServerConfigurationPreference(key: String, defaultValue: (String) -> Serve
                 val responseType = ResponseType.fromId(split[2].toInt())!!
                 ServerConfiguration.createSimpleServerConfig(split[0], requestType, responseType)
             } else {
-                return AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[encoded.toInt()]!!.serverConfigurations.entries.first()
-                    .value
+                return AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
+                    it[encoded.toInt()]!!.serverConfigurations.entries.first().value
+                }
             }
         } else return defaultValue(key)
     }
@@ -44,11 +45,13 @@ class ServerConfigurationPreference(key: String, defaultValue: (String) -> Serve
     ) {
         var encoded: String? = null
 
-        for ((id, config) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS) {
-            for (serverConfiguration in config.serverConfigurations) {
-                if (serverConfiguration.value == value) {
-                    encoded = id.toString()
-                    break
+        AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
+            for ((id, config) in it) {
+                for (serverConfiguration in config.serverConfigurations) {
+                    if (serverConfiguration.value == value) {
+                        encoded = id.toString()
+                        break
+                    }
                 }
             }
         }

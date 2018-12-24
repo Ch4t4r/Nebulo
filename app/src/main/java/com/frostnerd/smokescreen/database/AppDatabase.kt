@@ -7,6 +7,7 @@ import com.frostnerd.smokescreen.database.dao.UserServerConfigurationDao
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
 import com.frostnerd.smokescreen.database.repository.CachedResponseRepository
+import com.frostnerd.smokescreen.database.repository.UserServerConfigurationRepository
 
 /**
  * Copyright Daniel Wolf 2018
@@ -24,4 +25,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun cachedResponseDao(): CachedResponseDao
 
     fun cachedResponseRepository() = CachedResponseRepository(cachedResponseDao())
+    fun userServerConfigurationRepository() = UserServerConfigurationRepository(userServerConfigurationDao())
 }

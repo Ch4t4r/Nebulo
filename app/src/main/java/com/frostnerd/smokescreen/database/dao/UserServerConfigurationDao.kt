@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
 
 /**
@@ -22,6 +23,9 @@ interface UserServerConfigurationDao {
 
     @Insert
     fun insertAll(vararg configurations: UserServerConfiguration)
+
+    @Insert
+    fun insertAll(configurations: List<UserServerConfiguration>)
 
     @Insert
     fun insert(configuration: UserServerConfiguration)
