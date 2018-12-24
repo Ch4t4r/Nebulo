@@ -100,9 +100,8 @@ class Logger private constructor(context: Context) {
 
         if ((!logDir.exists() && !logDir.mkdirs()) || !logFile.createNewFile() || !logFile.canWrite()) {
             Logger.crashed = true
-            val exactError:String
-            exactError = if(!logDir.exists() && !logDir.mkdirs()) "Could not create log folder"
-            else if(!logFile.createNewFile()) "Creating new log file failed"
+            val exactError: String = if (!logDir.exists() && !logDir.mkdirs()) "Could not create log folder"
+            else if (!logFile.createNewFile()) "Creating new log file failed"
             else "Could not write to created log file"
             throw IllegalStateException("Could not create log file. ($exactError)")
         }
