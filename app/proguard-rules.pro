@@ -2,6 +2,18 @@
 -keepattributes SourceFile,LineNumberTable
 -renamesourcefileattribute SourceFile
 
+-dontwarn org.slf4j.impl.*
+-keep class org.slf4j.** {
+    *;
+}
+-keep class org.pcap4j.** {
+    *;
+}
+-dontwarn java.awt.*
+-dontwarn org.slf4j.impl.StaticMDCBinder
+-dontwarn org.slf4j.impl.StaticMarkerBinder
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+
 # Removes debug prints of packet4j
 -assumenosideeffects class org.slf4j.Logger {
     public void debug(...);
