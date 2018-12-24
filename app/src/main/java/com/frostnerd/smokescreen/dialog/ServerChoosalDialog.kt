@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RadioButton
-import co.metalab.asyncawait.async
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.lifecyclemanagement.BaseDialog
@@ -15,6 +14,10 @@ import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import kotlinx.android.synthetic.main.dialog_server_configuration.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 /**
  * Copyright Daniel Wolf 2018
@@ -27,6 +30,7 @@ import kotlinx.android.synthetic.main.dialog_server_configuration.*
  */
 class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:ServerConfiguration, secondaryServer:ServerConfiguration?, customServer:Boolean) -> Unit) :
     BaseDialog(context, context.getPreferences().theme.dialogStyle) {
+    private var populationJob: Job? = null
     private var customServers = false
     private var primaryServer: ServerConfiguration
     private var secondaryServer: ServerConfiguration? = null
@@ -84,26 +88,26 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
     }
 
     private fun addKnownServers() {
-        async {
+        populationJob = GlobalScope.launch {
             val buttons = mutableListOf<RadioButton>()
-            await {
-                for ((_, serverInfo) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.toSortedMap(compareByDescending {
-                    AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[it]!!.name
-                })) {
-                    if (!serverInfo.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !context.resources.getBoolean(R.bool.hide_adblocking_servers)) {
-                        buttons.add(0, createButtonForKnownConfiguration(serverInfo.name, serverInfo))
-                    }
-                }
-                context.getDatabase().userServerConfigurationDao().getAll().forEach {
-                    buttons.add(createButtonForUserConfiguration(it))
+            for ((_, serverInfo) in AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.toSortedMap(compareByDescending {
+                AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[it]!!.name
+            })) {
+                if (!serverInfo.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !context.resources.getBoolean(R.bool.hide_adblocking_servers)) {
+                    buttons.add(0, createButtonForKnownConfiguration(serverInfo.name, serverInfo))
                 }
             }
-
-            progress.visibility = View.GONE
-            for (button in buttons) {
-                knownServersGroup.addView(button)
+            context.getDatabase().userServerConfigurationDao().getAll().forEach {
+                buttons.add(createButtonForUserConfiguration(it))
             }
-            checkCurrentConfiguration()
+            launch(Dispatchers.Main) {
+                progress.visibility = View.GONE
+                for (button in buttons) {
+                    knownServersGroup.addView(button)
+                }
+                checkCurrentConfiguration()
+                populationJob = null
+            }
         }
     }
 
@@ -192,6 +196,6 @@ class ServerChoosalDialog(context: Context, onEntrySelected: (primaryServer:Serv
     }
 
     override fun destroy() {
-
+        populationJob?.cancel()
     }
 }
