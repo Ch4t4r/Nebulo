@@ -10,7 +10,6 @@ import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.DnsVpnService
-import com.frostnerd.smokescreen.startForegroundServiceCompat
 
 /**
  * Copyright Daniel Wolf 2018

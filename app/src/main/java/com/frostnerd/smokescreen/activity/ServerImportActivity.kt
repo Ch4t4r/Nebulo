@@ -13,7 +13,6 @@ import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import java.io.InputStreamReader
-import java.lang.Exception
 import java.net.URL
 
 /**

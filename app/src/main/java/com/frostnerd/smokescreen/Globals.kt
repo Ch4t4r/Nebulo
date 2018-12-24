@@ -1,16 +1,12 @@
 package com.frostnerd.smokescreen
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Color
-import android.text.Html
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.widget.TextView
-import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
-import android.content.Intent
-
 
 
 /**

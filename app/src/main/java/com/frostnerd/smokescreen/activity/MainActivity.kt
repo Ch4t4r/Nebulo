@@ -8,7 +8,10 @@ import android.os.Bundle
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
-import com.frostnerd.navigationdraweractivity.items.*
+import com.frostnerd.navigationdraweractivity.items.BasicDrawerItem
+import com.frostnerd.navigationdraweractivity.items.DrawerItem
+import com.frostnerd.navigationdraweractivity.items.createMenu
+import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment

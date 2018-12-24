@@ -3,13 +3,10 @@ package com.frostnerd.smokescreen.util.preferences
 import android.content.Context
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
-import com.frostnerd.general.CombinedIterator
-import com.frostnerd.general.combineIterators
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
 import com.frostnerd.preferenceskt.typedpreferences.SimpleTypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.*
 import com.frostnerd.smokescreen.BuildConfig
-import java.lang.UnsupportedOperationException
 
 /**
  * Copyright Daniel Wolf 2018

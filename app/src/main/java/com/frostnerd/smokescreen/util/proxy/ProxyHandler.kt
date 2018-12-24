@@ -5,7 +5,6 @@ import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
 import org.minidns.dnsmessage.DnsMessage
-import java.lang.RuntimeException
 import java.net.InetAddress
 
 /**

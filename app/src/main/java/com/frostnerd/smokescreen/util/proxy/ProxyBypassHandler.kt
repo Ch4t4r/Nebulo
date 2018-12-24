@@ -2,7 +2,6 @@ package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.dnstunnelproxy.AbstractUDPDnsHandle
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
-import com.frostnerd.dnstunnelproxy.getInetAddressByNameLater
 import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
 import org.minidns.dnsmessage.DnsMessage

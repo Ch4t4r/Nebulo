@@ -5,15 +5,14 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.VpnService
-import android.os.ParcelFileDescriptor
-import android.system.OsConstants
-import com.frostnerd.networking.NetworkUtil
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
+import android.net.VpnService
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.ParcelFileDescriptor
+import android.system.OsConstants
 import android.util.Base64
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -23,6 +22,7 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 import com.frostnerd.general.CombinedIterator
+import com.frostnerd.networking.NetworkUtil
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.BuildConfig
@@ -45,7 +45,6 @@ import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
-import java.lang.IllegalArgumentException
 import java.net.Inet4Address
 import java.net.Inet6Address
 

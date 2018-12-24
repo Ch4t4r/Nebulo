@@ -12,18 +12,17 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import androidx.fragment.app.Fragment
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
-import com.frostnerd.smokescreen.service.Command
-import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.registerLocalReceiver
+import com.frostnerd.smokescreen.service.Command
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
-import androidx.fragment.app.Fragment
-import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.smokescreen.database.getDatabase
 import java.net.URL
 
 
