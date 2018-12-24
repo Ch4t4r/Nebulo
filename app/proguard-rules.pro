@@ -1,5 +1,6 @@
 -optimizationpasses 5
 -keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
 
 # Removes debug prints of packet4j
 -assumenosideeffects class org.slf4j.Logger {
