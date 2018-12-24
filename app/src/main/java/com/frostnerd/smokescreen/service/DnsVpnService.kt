@@ -133,6 +133,7 @@ class DnsVpnService : VpnService(), Runnable {
     override fun onCreate() {
         super.onCreate()
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
+            log("Encountered an uncaught exception")
             destroy()
             stopForeground(true)
             stopSelf()
@@ -371,6 +372,7 @@ class DnsVpnService : VpnService(), Runnable {
             LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
         }
         updateServiceTile()
+        log("onDestroy() done.")
     }
 
     override fun onRevoke() {
