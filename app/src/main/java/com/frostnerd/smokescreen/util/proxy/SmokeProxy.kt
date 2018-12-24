@@ -31,6 +31,7 @@ class SmokeProxy(
             it.add(dnsHandle)
             it
         }.toList(),
+        null,
         vpnService,
         cache,
         queryListener = if (vpnService.getPreferences().loggingEnabled) object : QueryListener {
@@ -49,7 +50,7 @@ class SmokeProxy(
         } else null) {
 
 
-    override suspend fun informFailedRequest(request: FutureAnswer) {
+    override fun informFailedRequest(request: FutureAnswer) {
         super.informFailedRequest(request)
         vpnService.log("Query from ${request.time} failed.")
     }
