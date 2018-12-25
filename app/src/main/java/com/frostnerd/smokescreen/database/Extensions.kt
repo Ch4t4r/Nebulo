@@ -1,9 +1,13 @@
 package com.frostnerd.smokescreen.database
 
 import android.content.Context
+import android.util.Base64
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import org.minidns.record.Record
+import java.io.ByteArrayInputStream
+import java.io.DataInputStream
 
 /**
  * Copyright Daniel Wolf 2018
@@ -41,4 +45,9 @@ private fun migration(from: Int, to: Int, migrate: (database: SupportSQLiteDatab
             migrate.invoke(database)
         }
     }
+}
+
+fun recordFromBase64(base64:String):Record<*> {
+    val bytes = Base64.decode(base64, Base64.NO_WRAP)
+    return Record.parse(DataInputStream(ByteArrayInputStream(bytes)), bytes)
 }

@@ -13,8 +13,11 @@ import com.frostnerd.navigationdraweractivity.items.DrawerItem
 import com.frostnerd.navigationdraweractivity.items.createMenu
 import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : NavigationDrawerActivity() {
     private var textColor: Int = 0
@@ -29,6 +32,12 @@ class MainActivity : NavigationDrawerActivity() {
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             view
+        }
+        GlobalScope.launch {
+            val all = getDatabase().dnsQueryRepository().getAllAsync(GlobalScope)
+            for (dnsQuery in all) {
+                println(dnsQuery)
+            }
         }
     }
 
