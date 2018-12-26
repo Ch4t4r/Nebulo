@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
@@ -98,6 +99,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         findPreference("delete_logs").setOnPreferenceClickListener {
             showLogDeletionDialog()
             true
+        }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val hideIconPreference = findPreference("hide_notification_icon")
+            hideIconPreference.isEnabled = false
+            hideIconPreference.isVisible = false
         }
         processCacheCategory()
         processLoggingCategory()
