@@ -20,7 +20,7 @@ import java.io.DataInputStream
  */
 
 private var INSTANCE: AppDatabase? = null
-private val MIGRATION_2_3 = migration(2, 3) {
+private val MIGRATION_2_3 = migration(2) {
     it.execSQL("DROP TABLE CachedResponse")
     it.execSQL("CREATE TABLE CachedResponse(type INTEGER NOT NULL, dnsName TEXT NOT NULL, records TEXT NOT NULL, PRIMARY KEY(dnsName, type))")
     it.execSQL("ALTER TABLE UserServerConfiguration RENAME TO OLD_UserServerConfiguration")
@@ -39,7 +39,7 @@ fun Context.getDatabase(): AppDatabase {
     return INSTANCE!!
 }
 
-private fun migration(from: Int, to: Int, migrate: (database: SupportSQLiteDatabase) -> Unit): Migration {
+private fun migration(from: Int, to: Int = AppDatabase.currentVersion, migrate: (database: SupportSQLiteDatabase) -> Unit): Migration {
     return object : Migration(from, to) {
         override fun migrate(database: SupportSQLiteDatabase) {
             migrate.invoke(database)

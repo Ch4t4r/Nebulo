@@ -22,8 +22,12 @@ import com.frostnerd.smokescreen.database.repository.UserServerConfigurationRepo
  * development@frostnerd.com
  */
 
-@Database(entities = [UserServerConfiguration::class, CachedResponse::class, DnsQuery::class], version = 4)
+@Database(entities = [UserServerConfiguration::class, CachedResponse::class, DnsQuery::class], version = AppDatabase.currentVersion)
 abstract class AppDatabase : RoomDatabase() {
+    companion object {
+        const val currentVersion:Int = 4
+    }
+
     abstract fun userServerConfigurationDao(): UserServerConfigurationDao
     abstract fun cachedResponseDao(): CachedResponseDao
     abstract fun dnsQueryDao():DnsQueryDao
