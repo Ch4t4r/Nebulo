@@ -42,7 +42,7 @@ class QueryLogFragment : Fragment() {
                 source.currentSize()
             }
             bindModelView = { viewHolder, position, data ->
-                viewHolder.itemView.findViewById<TextView>(R.id.text).text = data.name + " " + data.type
+                viewHolder.itemView.findViewById<TextView>(R.id.text).text = data.shortName + " " + data.type + "(" + data.name + ")"
             }
             bindNonModelView = { viewHolder, position ->
 

@@ -1,11 +1,7 @@
 package com.frostnerd.smokescreen.database.entities
 
 import android.util.Base64
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Relation
-import androidx.room.TypeConverters
-import com.frostnerd.smokescreen.database.converters.DnsRecordMapConverter
+import androidx.room.*
 import com.frostnerd.smokescreen.database.converters.DnsTypeConverter
 import com.frostnerd.smokescreen.database.converters.StringListConverter
 import com.frostnerd.smokescreen.database.recordFromBase64
@@ -31,6 +27,27 @@ data class DnsQuery(
     var responseTime: Long = 0,
     var responses: MutableList<String>
 ) {
+    @delegate:Ignore
+    val shortName:String by lazy { calculateShortName() }
+
+    companion object {
+        private val SHORT_DOMAIN_REGEX = "^((?:[^.]{1,3}\\.)+)([\\w]{4,})(?:\\.(?:[^.]*))*\$".toRegex()
+    }
+
+    /**
+     * Returns a shortened representation of the name.
+     * E.g frostnerd.com for ads.frostnerd.com, or "dgfhd" for "dgfhd"
+     */
+    private fun calculateShortName():String {
+        val match = SHORT_DOMAIN_REGEX.matchEntire(name.reversed())
+        if(match != null) {
+            if(match.groups.size == 3) {
+                return match.groupValues[2].reversed() + match.groupValues[1].reversed()
+            }
+            return name
+        } else return name
+    }
+
     fun getParsedResponses(): List<Record<*>> {
         val responses = mutableListOf<Record<*>>()
         for (response in this.responses) {
