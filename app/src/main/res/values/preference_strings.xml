@@ -14,6 +14,14 @@
     <string name="title_excluded_apps">Excluded apps</string>
     <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use dns-over-https anymore.</string>
 
+    <string name="preference_category_notification">Notification</string>
+
+    <string name="title_show_notification_on_lockscreen">Show on lockscreen</string>
+    <string name="summary_show_notification_on_lockscreen">Sets whether to show the notification on the lockscreen</string>
+
+    <string name="title_notification_hide_icon">Hide icon</string>
+    <string name="summary_notification_hide_icon">Hide the icon from the navigation bar on the top</string>
+
     <string name="preference_category_cache">Cache control</string>
     
     <string name="title_dnscache_enabled">Use DNS cache</string>
