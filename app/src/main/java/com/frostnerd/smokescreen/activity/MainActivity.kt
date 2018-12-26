@@ -15,6 +15,7 @@ import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.fragment.MainFragment
+import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -50,6 +51,14 @@ class MainActivity : NavigationDrawerActivity() {
             fragmentItem(getString(R.string.menu_settings),
                 iconLeft = getDrawable(R.drawable.ic_menu_settings),
                 fragmentCreator = singleInstanceFragment { SettingsFragment() })
+            if (getPreferences().queryLoggingEnabled) {
+                divider()
+                fragmentItem(getString(R.string.menu_querylogging),
+                    iconLeft = getDrawable(R.drawable.ic_eye),
+                    fragmentCreator = {
+                        QueryLogFragment()
+                    })
+            }
             divider()
             clickableItem(getString(R.string.menu_rate),
                 iconLeft = getDrawable(R.drawable.ic_star),
@@ -82,7 +91,7 @@ class MainActivity : NavigationDrawerActivity() {
                     )
                     false
                 })
-            if(isPackageInstalled(this@MainActivity, "org.telegram.messenger")) {
+            if (isPackageInstalled(this@MainActivity, "org.telegram.messenger")) {
                 clickableItem(getString(R.string.menu_telegram_group),
                     onLongClick = null,
                     iconLeft = getDrawable(R.drawable.ic_comments),
@@ -145,7 +154,7 @@ class MainActivity : NavigationDrawerActivity() {
     override fun useItemBackStack(): Boolean = true
 
     override fun onItemClicked(item: DrawerItem, handle: Boolean) {
-        if(item is BasicDrawerItem) {
+        if (item is BasicDrawerItem) {
             log("Menu item was clicked: '${item.title}'")
         }
     }

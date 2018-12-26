@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 
@@ -16,6 +17,9 @@ import com.frostnerd.smokescreen.database.entities.DnsQuery
 interface DnsQueryDao {
     @Query("SELECT * FROM DnsQuery")
     fun getAll(): List<DnsQuery>
+
+    @Query("SELECT * FROM DnsQuery")
+    fun getAllLive(): LiveData<List<DnsQuery>>
 
     @Query("SELECT MAX(id) FROM DnsQuery")
     fun getLastInsertedId():Long
