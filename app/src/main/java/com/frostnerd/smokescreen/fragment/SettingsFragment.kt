@@ -27,14 +27,18 @@ import com.frostnerd.smokescreen.util.preferences.Theme
  * development@frostnerd.com
  */
 class SettingsFragment : PreferenceFragmentCompat() {
-    private var preferenceListener: SharedPreferences.OnSharedPreferenceChangeListener = object:SharedPreferences.OnSharedPreferenceChangeListener {
-        override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String) {
+    private var werePreferencesAdded = false
+    private var preferenceListener: SharedPreferences.OnSharedPreferenceChangeListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             requireContext().getPreferences().notifyPreferenceChangedFromExternal(key)
         }
-    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        log("Adding preferences from resources...")
         setPreferencesFromResource(R.xml.preferences, rootKey)
+        log("Preferences added.")
+        werePreferencesAdded = true
+        createPreferenceListener()
     }
 
     override fun onPause() {
@@ -46,7 +50,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onResume() {
         super.onResume()
         log("Resuming fragment")
-        createPreferenceListener()
+        if (werePreferencesAdded) createPreferenceListener()
     }
 
     override fun onDetach() {
@@ -58,7 +62,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         log("Fragment attached.")
-        createPreferenceListener()
+        if (werePreferencesAdded) createPreferenceListener()
     }
 
     private fun createPreferenceListener() {
@@ -100,7 +104,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             showLogDeletionDialog()
             true
         }
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val hideIconPreference = findPreference("hide_notification_icon")
             hideIconPreference.isEnabled = false
             hideIconPreference.isVisible = false
