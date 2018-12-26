@@ -20,7 +20,7 @@ import java.io.DataInputStream
  */
 
 private var INSTANCE: AppDatabase? = null
-private val MIGRATION_2_3 = migration(2) {
+private val MIGRATION_2_X = migration(2) {
     it.execSQL("DROP TABLE CachedResponse")
     it.execSQL("CREATE TABLE CachedResponse(type INTEGER NOT NULL, dnsName TEXT NOT NULL, records TEXT NOT NULL, PRIMARY KEY(dnsName, type))")
     it.execSQL("ALTER TABLE UserServerConfiguration RENAME TO OLD_UserServerConfiguration")
@@ -33,7 +33,8 @@ fun Context.getDatabase(): AppDatabase {
     if (INSTANCE == null) {
         INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
             .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_3)
+            .addMigrations(MIGRATION_2_X)
+            .addMigrations(emptyMigration(3, 4))
             .build()
     }
     return INSTANCE!!
@@ -45,6 +46,10 @@ private fun migration(from: Int, to: Int = AppDatabase.currentVersion, migrate: 
             migrate.invoke(database)
         }
     }
+}
+
+private fun emptyMigration(from:Int, to:Int = AppDatabase.currentVersion): Migration {
+    return migration(from, to) { }
 }
 
 fun recordFromBase64(base64:String):Record<*> {
