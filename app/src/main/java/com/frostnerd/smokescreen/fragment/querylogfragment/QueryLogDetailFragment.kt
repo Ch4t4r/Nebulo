@@ -84,7 +84,11 @@ class QueryLogDetailFragment : Fragment() {
             }
             longName.text = query.name
             type.text = query.type.name
-            askedServer.text = query.askedServer ?: "-"
+            if(query.fromCache) {
+                askedServer.text = "CACHE"
+            } else {
+                askedServer.text = query.askedServer ?: "-"
+            }
         }
     }
 
