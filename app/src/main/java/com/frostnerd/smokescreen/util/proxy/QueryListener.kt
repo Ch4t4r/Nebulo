@@ -41,7 +41,8 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
                 name = questionMessage.question.name.toString(),
                 askedServer = null,
                 questionTime = System.currentTimeMillis(),
-                responses = mutableListOf()
+                responses = mutableListOf(),
+                fromCache = false
             )
             val dao = context.getDatabase().dnsQueryDao()
             dao.insert(query)
@@ -59,17 +60,17 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
             }
         }
 
-        if (fromUpstream && logQueriesToDb) {
+        if (logQueriesToDb) {
             val query = waitingQueryLogs[responseMessage.id]
             if (query != null) {
                 query.responseTime = System.currentTimeMillis()
                 for (answer in responseMessage.answerSection) {
                     query.addResponse(answer)
                 }
+                query.fromCache = !fromUpstream
                 context.getDatabase().dnsQueryRepository().updateAsync(query)
+                waitingQueryLogs.remove(responseMessage.id)
             }
-        } else if(logQueriesToDb) {
-            waitingQueryLogs.remove(responseMessage.id)
         }
     }
 

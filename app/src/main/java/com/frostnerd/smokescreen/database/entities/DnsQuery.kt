@@ -23,6 +23,7 @@ data class DnsQuery(
     val type: Record.TYPE,
     val name: String,
     var askedServer: String?,
+    var fromCache:Boolean,
     val questionTime: Long,
     var responseTime: Long = 0,
     var responses: MutableList<String>
