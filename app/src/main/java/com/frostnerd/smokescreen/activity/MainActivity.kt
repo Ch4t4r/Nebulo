@@ -34,12 +34,6 @@ class MainActivity : NavigationDrawerActivity() {
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             view
         }
-        GlobalScope.launch {
-            val all = getDatabase().dnsQueryRepository().getAllAsync(GlobalScope)
-            for (dnsQuery in all) {
-                println(dnsQuery)
-            }
-        }
     }
 
     override fun createDrawerItems(): MutableList<DrawerItem> {

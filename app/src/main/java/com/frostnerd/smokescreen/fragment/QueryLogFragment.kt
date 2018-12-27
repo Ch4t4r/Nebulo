@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.frostnerd.cacheadapter.ModelAdapterBuilder
+import androidx.fragment.app.FragmentPagerAdapter
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.database.getDatabase
-import com.frostnerd.smokescreen.util.LiveDataSource
-import kotlinx.android.synthetic.main.fragment_querylog.*
+import com.frostnerd.smokescreen.database.entities.DnsQuery
+import com.frostnerd.smokescreen.fragment.querylogfragment.QueryLogDetailFragment
+import com.frostnerd.smokescreen.fragment.querylogfragment.QueryLogListFragment
+import kotlinx.android.synthetic.main.fragment_querylog_main.*
 
 /**
  * Copyright Daniel Wolf 2018
@@ -24,35 +22,53 @@ import kotlinx.android.synthetic.main.fragment_querylog.*
  * development@frostnerd.com
  */
 class QueryLogFragment : Fragment() {
+    lateinit var listFragment: QueryLogListFragment
+    lateinit var detailFragment: QueryLogDetailFragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return layoutInflater.inflate(R.layout.fragment_querylog, container, false)
+        return inflater.inflate(R.layout.fragment_querylog_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val live = requireContext().getDatabase().dnsQueryDao().getAllLive()
-        val source = LiveDataSource(this, live, true) {
-            list.smoothScrollToPosition(0)
+        listFragment = QueryLogListFragment()
+        detailFragment = QueryLogDetailFragment()
+
+        viewpager.adapter = createViewAdapter()
+        tabLayout.setupWithViewPager(viewpager)
+    }
+
+    fun displayQueryDetailed(query:DnsQuery, switchToDetailView:Boolean = true) {
+        val hadQuery = detailFragment.isShowingQuery()
+        detailFragment.showQuery(query)
+
+        if(!hadQuery) viewpager.adapter?.notifyDataSetChanged()
+        else {
+            val tab = tabLayout.getTabAt(1)
+            tab?.text = query.shortName
         }
-        val adapter = ModelAdapterBuilder.newBuilder(source) {
-            viewBuilder = { parent, viewType ->
-                layoutInflater.inflate(R.layout.item_logged_query, parent, false)
-            }
-            getItemCount = {
-                source.currentSize()
-            }
-            bindModelView = { viewHolder, position, data ->
-                viewHolder.itemView.findViewById<TextView>(R.id.text).text = data.shortName + " " + data.type + "(" + data.name + ")"
-            }
-            bindNonModelView = { viewHolder, position ->
+        if(switchToDetailView) viewpager.currentItem = 1
+    }
 
+    private fun createViewAdapter(): FragmentPagerAdapter {
+        return object : FragmentPagerAdapter(childFragmentManager) {
+            override fun getItem(position: Int): Fragment {
+                return when (position) {
+                    0 -> listFragment
+                    else -> detailFragment
+                }
             }
-            runOnUiThread = {
-                requireActivity().runOnUiThread(it)
-            }
-        }.build()
 
-        list.layoutManager = LinearLayoutManager(requireContext())
-        list.adapter = adapter
+            override fun getCount(): Int {
+                return if (detailFragment.isShowingQuery()) 2 else 1
+            }
+
+            override fun getPageTitle(position: Int): CharSequence? {
+                return when (position) {
+                    0 -> getString(R.string.menu_querylogging)
+                    else -> detailFragment.currentQuery?.shortName
+                }
+            }
+
+        }
     }
 }
