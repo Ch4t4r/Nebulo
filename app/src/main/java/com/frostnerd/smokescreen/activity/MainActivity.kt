@@ -109,6 +109,15 @@ class MainActivity : NavigationDrawerActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        val fragment = currentFragment
+        if(fragment != null && fragment is BackpressFragment) {
+            if(!fragment.onBackPressed()) super.onBackPressed()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     private fun rateApp() {
         val appPackageName = this.packageName
         try {

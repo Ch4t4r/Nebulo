@@ -40,3 +40,7 @@ fun isPackageInstalled(context: Context, packageName: String): Boolean {
     val list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
     return list.size > 0
 }
+
+interface BackpressFragment {
+    fun onBackPressed():Boolean
+}

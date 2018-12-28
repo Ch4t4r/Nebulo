@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import com.frostnerd.smokescreen.BackpressFragment
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.fragment.querylogfragment.QueryLogDetailFragment
@@ -21,12 +22,19 @@ import kotlinx.android.synthetic.main.fragment_querylog_main.*
  *
  * development@frostnerd.com
  */
-class QueryLogFragment : Fragment() {
+class QueryLogFragment : Fragment(), BackpressFragment {
     lateinit var listFragment: QueryLogListFragment
     lateinit var detailFragment: QueryLogDetailFragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_querylog_main, container, false)
+    }
+
+    override fun onBackPressed(): Boolean {
+        return if(viewpager.currentItem == 1) {
+            viewpager.currentItem = 0
+            true
+        } else false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
