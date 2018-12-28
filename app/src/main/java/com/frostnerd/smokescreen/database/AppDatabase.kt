@@ -3,10 +3,13 @@ package com.frostnerd.smokescreen.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.frostnerd.smokescreen.database.dao.CachedResponseDao
+import com.frostnerd.smokescreen.database.dao.DnsQueryDao
 import com.frostnerd.smokescreen.database.dao.UserServerConfigurationDao
 import com.frostnerd.smokescreen.database.entities.CachedResponse
+import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
 import com.frostnerd.smokescreen.database.repository.CachedResponseRepository
+import com.frostnerd.smokescreen.database.repository.DnsQueryRepository
 import com.frostnerd.smokescreen.database.repository.UserServerConfigurationRepository
 
 /**
@@ -19,11 +22,17 @@ import com.frostnerd.smokescreen.database.repository.UserServerConfigurationRepo
  * development@frostnerd.com
  */
 
-@Database(entities = [UserServerConfiguration::class, CachedResponse::class], version = 3)
+@Database(entities = [UserServerConfiguration::class, CachedResponse::class, DnsQuery::class], version = AppDatabase.currentVersion)
 abstract class AppDatabase : RoomDatabase() {
+    companion object {
+        const val currentVersion:Int = 4
+    }
+
     abstract fun userServerConfigurationDao(): UserServerConfigurationDao
     abstract fun cachedResponseDao(): CachedResponseDao
+    abstract fun dnsQueryDao():DnsQueryDao
 
     fun cachedResponseRepository() = CachedResponseRepository(cachedResponseDao())
     fun userServerConfigurationRepository() = UserServerConfigurationRepository(userServerConfigurationDao())
+    fun dnsQueryRepository() = DnsQueryRepository(dnsQueryDao())
 }

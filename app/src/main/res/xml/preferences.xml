@@ -125,4 +125,12 @@
                 android:defaultValue="true"
                 android:summary="@string/summary_bypass_searchdomains"/>
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preference_category_querylogging">
+        <CheckBoxPreference
+                android:key="log_dns_queries"
+                android:title="@string/title_log_queries"
+                android:summary="@string/summary_log_queries"
+                android:defaultValue="false"/>
+    </PreferenceCategory>
 </PreferenceScreen>

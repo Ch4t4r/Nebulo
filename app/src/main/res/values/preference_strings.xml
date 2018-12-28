@@ -23,10 +23,10 @@
     <string name="summary_notification_hide_icon">Hide the icon from the navigation bar on the top</string>
 
     <string name="preference_category_cache">Cache control</string>
-    
+
     <string name="title_dnscache_enabled">Use DNS cache</string>
     <string name="summary_dnscache_enabled">Enables the apps DNS cache. The cache memorizes old requests to answer future questions faster</string>
-    
+
     <string name="title_dnscache_keepacrosslaunches">Keep DNS cache</string>
     <string name="summary_dnscache_keepacrosslaunches">Keep the DNS cache across multiple launches</string>
 
@@ -69,4 +69,9 @@
 
     <string name="title_bypass_searchdomains">Searchdomains bypass</string>
     <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network.</string>
+
+    <string name="preference_category_querylogging">Query logging</string>
+
+    <string name="title_log_queries">Query logging</string>
+    <string name="summary_log_queries">Log all queries and their responses</string>
 </resources>

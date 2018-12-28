@@ -59,6 +59,9 @@ interface AppSettings {
     var forceIpv6: Boolean
     var forceIpv4:Boolean
     var bypassSearchdomains:Boolean
+
+    // Query logging category
+    var queryLoggingEnabled:Boolean
     // ###### End of settings
 
 
@@ -91,6 +94,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var forceIpv6: Boolean by booleanPref("force_ipv6", false)
     override var forceIpv4: Boolean by booleanPref("force_ipv4", false)
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
+
+    override var queryLoggingEnabled: Boolean by booleanPref("log_dns_queries", false)
 
     override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", false)
     override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "8.8.8.8")

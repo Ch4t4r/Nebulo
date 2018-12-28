@@ -1,9 +1,13 @@
 package com.frostnerd.smokescreen.database
 
 import android.content.Context
+import android.util.Base64
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import org.minidns.record.Record
+import java.io.ByteArrayInputStream
+import java.io.DataInputStream
 
 /**
  * Copyright Daniel Wolf 2018
@@ -16,7 +20,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
  */
 
 private var INSTANCE: AppDatabase? = null
-private val MIGRATION_2_3 = migration(2, 3) {
+private val MIGRATION_2_X = migration(2) {
     it.execSQL("DROP TABLE CachedResponse")
     it.execSQL("CREATE TABLE CachedResponse(type INTEGER NOT NULL, dnsName TEXT NOT NULL, records TEXT NOT NULL, PRIMARY KEY(dnsName, type))")
     it.execSQL("ALTER TABLE UserServerConfiguration RENAME TO OLD_UserServerConfiguration")
@@ -29,16 +33,26 @@ fun Context.getDatabase(): AppDatabase {
     if (INSTANCE == null) {
         INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
             .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_3)
+            .addMigrations(MIGRATION_2_X)
+            .addMigrations(emptyMigration(3, 4))
             .build()
     }
     return INSTANCE!!
 }
 
-private fun migration(from: Int, to: Int, migrate: (database: SupportSQLiteDatabase) -> Unit): Migration {
+private fun migration(from: Int, to: Int = AppDatabase.currentVersion, migrate: (database: SupportSQLiteDatabase) -> Unit): Migration {
     return object : Migration(from, to) {
         override fun migrate(database: SupportSQLiteDatabase) {
             migrate.invoke(database)
         }
     }
+}
+
+private fun emptyMigration(from:Int, to:Int = AppDatabase.currentVersion): Migration {
+    return migration(from, to) { }
+}
+
+fun recordFromBase64(base64:String):Record<*> {
+    val bytes = Base64.decode(base64, Base64.NO_WRAP)
+    return Record.parse(DataInputStream(ByteArrayInputStream(bytes)), bytes)
 }

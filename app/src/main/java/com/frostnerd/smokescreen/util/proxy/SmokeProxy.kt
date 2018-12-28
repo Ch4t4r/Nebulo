@@ -24,7 +24,8 @@ class SmokeProxy(
     dnsHandle: ProxyHandler,
     proxyBypassHandles: List<ProxyBypassHandler>,
     vpnService: DnsVpnService,
-    val cache: SimpleDnsCache?
+    val cache: SimpleDnsCache?,
+    queryListener: QueryListener?
 ) :
     DnsPacketProxy(
         (proxyBypassHandles as List<DnsHandle>).toMutableList().let {
@@ -34,24 +35,5 @@ class SmokeProxy(
         null,
         vpnService,
         cache,
-        queryListener = if (vpnService.getPreferences().loggingEnabled) object : QueryListener {
-            override suspend fun onDeviceQuery(questionMessage: DnsMessage) {
-                vpnService.log("Query from device: $questionMessage")
-            }
-
-            override suspend fun onQueryResponse(responseMessage: DnsMessage, fromUpstream: Boolean) {
-                if (!fromUpstream) {
-                    vpnService.log("Returned from cache: $responseMessage")
-                } else {
-                    vpnService.log("Response from upstream: $responseMessage")
-                }
-            }
-
-        } else null) {
-
-
-    override fun informFailedRequest(request: FutureAnswer) {
-        super.informFailedRequest(request)
-        vpnService.log("Query from ${request.time} failed.")
-    }
-}
+        queryListener = queryListener
+    )

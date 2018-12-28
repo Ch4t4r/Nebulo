@@ -163,6 +163,7 @@ class DnsVpnService : VpnService(), Runnable {
             "bypass_searchdomains",
             "user_bypass_blacklist",
             "doh_server_url_primary",
+            "log_dns_queries",
             "show_notification_on_lockscreen",
             "hide_notification_icon"
         )
@@ -553,7 +554,7 @@ class DnsVpnService : VpnService(), Runnable {
         )
         log("Handle created, creating DNS proxy")
 
-        dnsProxy = SmokeProxy(handle!!, createProxyBypassHandlers(),this, createDnsCache())
+        dnsProxy = SmokeProxy(handle!!, createProxyBypassHandlers(),this, createDnsCache(), createQueryLogger())
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!)
 
@@ -563,6 +564,13 @@ class DnsVpnService : VpnService(), Runnable {
         currentTrafficStats = vpnProxy?.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
     }
+
+    private fun createQueryLogger(): QueryListener? {
+        return if(getPreferences().loggingEnabled || getPreferences().queryLoggingEnabled) {
+            com.frostnerd.smokescreen.util.proxy.QueryListener(this)
+        } else null
+    }
+
 
     /**
      * Creates bypass handlers for each network and its associated search domains
