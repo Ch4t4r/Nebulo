@@ -77,4 +77,7 @@
 
     <string name="title_log_queries">Query logging</string>
     <string name="summary_log_queries">Log all queries and their responses</string>
+
+    <string name="title_export_queries">Export queries</string>
+    <string name="summary_export_queries">Export queries as CSV</string>
 </resources>

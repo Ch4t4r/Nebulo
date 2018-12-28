@@ -17,6 +17,7 @@ import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.isInt
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.util.preferences.Theme
 
@@ -112,7 +113,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             hideIconPreference.isEnabled = false
             hideIconPreference.isVisible = false
         }
-        if(!requireContext().getPreferences().isUsingKeweon()){
+        if (!requireContext().getPreferences().isUsingKeweon()) {
             val terminateKeweonPreference = findPreference("null_terminate_keweon")
             terminateKeweonPreference.isVisible = false
             terminateKeweonPreference.isEnabled = false
@@ -121,6 +122,38 @@ class SettingsFragment : PreferenceFragmentCompat() {
         processCacheCategory()
         processLoggingCategory()
         processNetworkCategory()
+        processQueryCategory()
+    }
+
+    private fun processQueryCategory() {
+        val queryLogging = findPreference("log_dns_queries")
+        val exportQueries = findPreference("export_dns_queries")
+
+        exportQueries.setOnPreferenceClickListener {
+            requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext()) {file ->
+                println("File created")
+                val uri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
+                val exportIntent = Intent(Intent.ACTION_SEND)
+                exportIntent.putExtra(Intent.EXTRA_TEXT, "")
+                exportIntent.type = "text/csv"
+                exportIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " -- Logged Queries")
+                for (receivingApps in requireContext().packageManager.queryIntentActivities(
+                    exportIntent,
+                    PackageManager.MATCH_DEFAULT_ONLY
+                )) {
+                    requireContext().grantUriPermission(
+                        receivingApps.activityInfo.packageName,
+                        uri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                }
+                exportIntent.putExtra(Intent.EXTRA_STREAM, uri)
+                exportIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                startActivity(Intent.createChooser(exportIntent, getString(R.string.title_export_queries)))
+            }
+            println("Clicked")
+            true
+        }
     }
 
     @SuppressLint("NewApi")

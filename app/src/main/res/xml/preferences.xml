@@ -138,5 +138,11 @@
                 android:title="@string/title_log_queries"
                 android:summary="@string/summary_log_queries"
                 android:defaultValue="false"/>
+
+        <Preference
+                android:key="export_dns_queries"
+                android:title="@string/title_export_queries"
+                android:dependency="log_dns_queries"
+                android:summary="@string/summary_export_queries"/>
     </PreferenceCategory>
 </PreferenceScreen>

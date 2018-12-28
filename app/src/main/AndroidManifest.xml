@@ -58,7 +58,7 @@
                 android:uiOptions="splitActionBarWhenNarrow"
                 android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING"/>
             </intent-filter>
         </activity>
 
@@ -111,7 +111,7 @@
                 android:exported="true"
                 android:process=":background">
             <intent-filter>
-                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING"/>
             </intent-filter>
         </receiver>
 
