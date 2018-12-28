@@ -59,6 +59,7 @@ interface AppSettings {
     var forceIpv6: Boolean
     var forceIpv4:Boolean
     var bypassSearchdomains:Boolean
+    var nullTerminateKeweon:Boolean
 
     // Query logging category
     var queryLoggingEnabled:Boolean
@@ -66,6 +67,10 @@ interface AppSettings {
 
 
     var hasRatedApp: Boolean
+
+    fun isUsingKeweon():Boolean {
+        return primaryServerConfig.urlCreator.baseUrl.contains("sec.keweon.center")
+    }
 }
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context) {
@@ -94,6 +99,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var forceIpv6: Boolean by booleanPref("force_ipv6", false)
     override var forceIpv4: Boolean by booleanPref("force_ipv4", false)
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
+    override var nullTerminateKeweon: Boolean by booleanPref("null_terminate_keweon", false)
 
     override var queryLoggingEnabled: Boolean by booleanPref("log_dns_queries", false)
 

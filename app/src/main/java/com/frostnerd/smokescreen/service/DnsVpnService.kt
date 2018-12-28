@@ -550,7 +550,8 @@ class DnsVpnService : VpnService(), Runnable {
             queryCountCallback = {
                 setNotificationText()
                 updateNotification(it)
-            }
+            },
+            nullRouteKeweon = getPreferences().isUsingKeweon() && getPreferences().nullTerminateKeweon
         )
         log("Handle created, creating DNS proxy")
 
