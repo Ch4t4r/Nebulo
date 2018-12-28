@@ -163,10 +163,17 @@ class DnsVpnService : VpnService(), Runnable {
             "bypass_searchdomains",
             "user_bypass_blacklist",
             "doh_server_url_primary",
-            "log_dns_queries"
+            "log_dns_queries",
+            "show_notification_on_lockscreen",
+            "hide_notification_icon"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
             log("The Preference $key has changed, restarting the VPN.")
+            if(key == "show_notification_on_lockscreen" || key == "hide_notification_icon") {
+                log("Recreating the notification because of the change in preferences")
+                createNotification()
+                setNotificationText()
+            }
             recreateVpn(key == "doh_server_url_primary" || key == "doh_server_url_secondary", null)
         }
         log("Subscribed.")
@@ -175,6 +182,10 @@ class DnsVpnService : VpnService(), Runnable {
     private fun createNotification() {
         log("Creating notification")
         notificationBuilder = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
+        if(getPreferences().hideNotificationIcon)
+            notificationBuilder.priority = NotificationCompat.PRIORITY_MIN
+        if(!getPreferences().showNotificationOnLockscreen)
+            notificationBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET)
         notificationBuilder.setContentTitle(getString(R.string.app_name))
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
         notificationBuilder.setOngoing(true)
@@ -548,9 +559,9 @@ class DnsVpnService : VpnService(), Runnable {
         vpnProxy = VPNTunnelProxy(dnsProxy!!)
 
         log("VPN proxy creating, trying to run...")
-        vpnProxy!!.run(fileDescriptor!!)
+        vpnProxy?.run(fileDescriptor!!)
         log("VPN proxy started.")
-        currentTrafficStats = vpnProxy!!.trafficStats
+        currentTrafficStats = vpnProxy?.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
     }
 

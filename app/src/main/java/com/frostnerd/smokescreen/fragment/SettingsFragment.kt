@@ -1,11 +1,15 @@
 package com.frostnerd.smokescreen.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.preference.CheckBoxPreference
@@ -26,14 +30,18 @@ import com.frostnerd.smokescreen.util.preferences.Theme
  * development@frostnerd.com
  */
 class SettingsFragment : PreferenceFragmentCompat() {
-    private var preferenceListener: SharedPreferences.OnSharedPreferenceChangeListener = object:SharedPreferences.OnSharedPreferenceChangeListener {
-        override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String) {
+    private var werePreferencesAdded = false
+    private var preferenceListener: SharedPreferences.OnSharedPreferenceChangeListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             requireContext().getPreferences().notifyPreferenceChangedFromExternal(key)
         }
-    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        log("Adding preferences from resources...")
         setPreferencesFromResource(R.xml.preferences, rootKey)
+        log("Preferences added.")
+        werePreferencesAdded = true
+        createPreferenceListener()
     }
 
     override fun onPause() {
@@ -45,7 +53,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onResume() {
         super.onResume()
         log("Resuming fragment")
-        createPreferenceListener()
+        if (werePreferencesAdded) createPreferenceListener()
     }
 
     override fun onDetach() {
@@ -57,7 +65,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         log("Fragment attached.")
-        createPreferenceListener()
+        if (werePreferencesAdded) createPreferenceListener()
     }
 
     private fun createPreferenceListener() {
@@ -99,9 +107,31 @@ class SettingsFragment : PreferenceFragmentCompat() {
             showLogDeletionDialog()
             true
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val hideIconPreference = findPreference("hide_notification_icon")
+            hideIconPreference.isEnabled = false
+            hideIconPreference.isVisible = false
+        }
+        processGeneralCategory()
         processCacheCategory()
         processLoggingCategory()
         processNetworkCategory()
+    }
+
+    @SuppressLint("NewApi")
+    private fun processGeneralCategory() {
+        val startOnBoot = findPreference("start_on_boot") as CheckBoxPreference
+        startOnBoot.setOnPreferenceChangeListener { preference, newValue ->
+            if (newValue == false) true
+            else {
+                if (requireContext().isAppBatteryOptimized()) {
+                    showBatteryOptimizationDialog {
+                        startOnBoot.isChecked = true
+                    }
+                    false
+                } else true
+            }
+        }
     }
 
     private fun processNetworkCategory() {
@@ -133,7 +163,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val cacheMaxSize = findPreference("dnscache_maxsize") as EditTextPreference
         val useDefaultTime = findPreference("dnscache_use_default_time") as CheckBoxPreference
         val cacheTime = findPreference("dnscache_custom_time") as EditTextPreference
-
 
         val updateState = { isCacheEnabled: Boolean, isUsingDefaultTime: Boolean ->
             cacheMaxSize.isEnabled = isCacheEnabled
@@ -198,6 +227,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
             .setNegativeButton(R.string.all_no) { dialog, _ ->
                 dialog.dismiss()
             }.setCancelable(true).show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun showBatteryOptimizationDialog(enablePreference: () -> Unit) {
+        AlertDialog.Builder(requireContext(), requireContext().getPreferences().theme.dialogStyle)
+            .setTitle(R.string.dialog_batteryoptimization_title)
+            .setMessage(R.string.dialog_batteryoptimization_message)
+            .setNegativeButton(R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton(R.string.dialog_batteryoptimization_whitelist) { dialog, _ ->
+                startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS))
+                dialog.dismiss()
+            }
+            .setNeutralButton(R.string.dialog_batteryoptimization_ignore) { dialog, _ ->
+                enablePreference()
+                dialog.dismiss()
+            }.show()
     }
 
     private fun showExcludedAppsDialog() {

@@ -10,10 +10,13 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
+import android.os.PowerManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 
 /**
  * Copyright Daniel Wolf 2018
@@ -90,6 +93,12 @@ fun Context.unregisterLocalReceiver(receiver: BroadcastReceiver) {
 
 fun Context.getPreferences(): AppSettingsSharedPreferences {
     return AppSettings.fromSharedPreferences(this)
+}
+
+fun Context.isAppBatteryOptimized(): Boolean {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false
+    val pwrm = getSystemService(Context.POWER_SERVICE) as PowerManager
+    return !pwrm.isIgnoringBatteryOptimizations(packageName)
 }
 
 fun Array<*>.toStringArray(): Array<String> {

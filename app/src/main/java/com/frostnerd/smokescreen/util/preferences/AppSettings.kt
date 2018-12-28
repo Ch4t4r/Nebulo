@@ -38,6 +38,10 @@ interface AppSettings {
     var userBypassPackages: MutableSet<String>
     var isBypassBlacklist:Boolean
 
+    // Notification category
+    var showNotificationOnLockscreen:Boolean
+    var hideNotificationIcon:Boolean
+
     // Cache category
     var useDnsCache: Boolean
     var keepDnsCacheAcrossLaunches:Boolean
@@ -72,6 +76,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
     override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf())
     override var isBypassBlacklist: Boolean by booleanPref("user_bypass_blacklist", true)
+
+    override var showNotificationOnLockscreen: Boolean by booleanPref("show_notification_on_lockscreen", true)
+    override var hideNotificationIcon: Boolean by booleanPref("hide_notification_icon", false)
 
     override var useDnsCache: Boolean by booleanPref("dnscache_enabled", true)
     override var keepDnsCacheAcrossLaunches: Boolean by booleanPref("dnscache_keepacrosslaunches", false)
