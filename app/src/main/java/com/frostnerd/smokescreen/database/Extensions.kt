@@ -26,6 +26,11 @@ private val MIGRATION_2_X = migration(2) {
     it.execSQL("ALTER TABLE UserServerConfiguration RENAME TO OLD_UserServerConfiguration")
     it.execSQL("CREATE TABLE UserServerConfiguration(id INTEGER NOT NULL PRIMARY KEY, name TEXT NOT NULL, primaryServerUrl TEXT NOT NULL, secondaryServerUrl TEXT)")
     it.execSQL("INSERT INTO UserServerConfiguration SELECT ROWID as id, name, primaryServerUrl, secondaryServerUrl FROM OLD_UserServerConfiguration")
+    MIGRATION_3_4.migrate(it)
+
+}
+private val MIGRATION_3_4 = migration(3, 4) {
+    it.execSQL("CREATE TABLE IF NOT EXISTS `DnsQuery` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `fromCache` INTEGER NOT NULL, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)")
 }
 
 
@@ -33,7 +38,7 @@ fun Context.getDatabase(): AppDatabase {
     if (INSTANCE == null) {
         INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
             .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_X)
+            .addMigrations(MIGRATION_2_X, MIGRATION_3_4)
             .addMigrations(emptyMigration(3, 4))
             .build()
     }
