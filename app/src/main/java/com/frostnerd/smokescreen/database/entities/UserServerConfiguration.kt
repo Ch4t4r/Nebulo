@@ -18,7 +18,7 @@ import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 
 @Entity(tableName = "UserServerConfiguration")
 data class UserServerConfiguration(
-    @PrimaryKey(autoGenerate = true) var id: Int = -1,
+    @PrimaryKey(autoGenerate = true) var id: Int =0,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "primaryServerUrl") var primaryServerUrl: String,
     @ColumnInfo(name = "secondaryServerUrl") var secondaryServerUrl: String? = null
