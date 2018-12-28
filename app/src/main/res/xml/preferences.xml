@@ -124,6 +124,12 @@
                 android:title="@string/title_bypass_searchdomains"
                 android:defaultValue="true"
                 android:summary="@string/summary_bypass_searchdomains"/>
+
+        <CheckBoxPreference
+                android:key="null_terminate_keweon"
+                android:defaultValue="false"
+                android:title="@string/title_nullterminate_keweon"
+                android:summary="@string/summary_nullterminate_keweon"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/preference_category_querylogging">

@@ -70,6 +70,9 @@
     <string name="title_bypass_searchdomains">Searchdomains bypass</string>
     <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network.</string>
 
+    <string name="title_nullterminate_keweon">Null-terminate keweon</string>
+    <string name="summary_nullterminate_keweon">Null-terminates domains blocked by keweon, which scraps ad-traffic entirely instead of it being sent to keweon</string>
+
     <string name="preference_category_querylogging">Query logging</string>
 
     <string name="title_log_queries">Query logging</string>
