@@ -31,7 +31,7 @@ class ProxyHandler(
     AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
     override val handlesSpecificRequests: Boolean = false
     private val keweonIpv4BlockIPs = setOf("45.32.152.171")
-    private val keweonIpv6BlockIPs = setOf("2001:19f0:6c01:d6::171")
+    private val keweonIpv6BlockIPs = setOf("2001:19f0:6c01:d6::171", "2001:19f0:6c01:d6:0:0:0:171")
     private val nullRouteIpv4: Inet4Address by lazy {
         Inet4Address.getByName("0.0.0.0") as Inet4Address
     }
