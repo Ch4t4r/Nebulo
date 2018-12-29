@@ -541,7 +541,8 @@ class DnsVpnService : VpnService(), Runnable {
         val list = mutableListOf<ServerConfiguration>()
         list.add(primaryServer)
         if (secondaryServer != null) list.add(secondaryServer!!)
-        log("Using servers: $1", formatArgs = *arrayOf(list))
+        log("Using primary server: $primaryServer")
+        log("Using secondary server: $secondaryServer")
 
         log("Creating handle.")
         handle = ProxyHandler(
