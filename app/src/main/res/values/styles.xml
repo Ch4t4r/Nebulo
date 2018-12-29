@@ -284,7 +284,7 @@
     <style name="PreferenceTheme_True_Black" parent="PreferenceThemeOverlay">
         <item name="colorPrimary">#263238</item>
         <item name="colorPrimaryDark">#263238</item>
-        <item name="colorAccent">#424242</item>
+        <item name="colorAccent">#9E9E9E</item>
         <item name="android:windowBackground">@drawable/background_true_black</item>
 
         <item name="android:textColor">@color/preference_primary_color_true_black</item>
