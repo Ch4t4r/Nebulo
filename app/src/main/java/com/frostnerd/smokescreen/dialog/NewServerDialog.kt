@@ -6,6 +6,8 @@ import android.os.Vibrator
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import com.frostnerd.dnstunnelproxy.Decision
+import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
@@ -23,12 +25,12 @@ import kotlinx.android.synthetic.main.dialog_new_server.*
  */
 class NewServerDialog(
     context: Context,
-    onServerAdded: (name: String, primaryServerUrl: String, secondaryServerUrl: String?) -> Unit
+    onServerAdded: (serverInfo: HttpsDnsServerInformation) -> Unit
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
 
     companion object {
         val SERVER_URL_REGEX =
-            Regex("^(?:https://)?([a-z0-9][a-z0-9-.]*[a-z0-9])(/[a-z0-9-.]+)*(/)?$", RegexOption.IGNORE_CASE)
+            Regex("^(?:https://)?([a-z0-9][a-z0-9-.]*[a-z0-9])(?::[1-9][0-9]{0,4})?(/[a-z0-9-.]+)*(/)?$", RegexOption.IGNORE_CASE)
     }
 
     init {
@@ -54,10 +56,9 @@ class NewServerDialog(
                     var primary = primaryServer.text.toString()
                     var secondary = if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString()
 
-                    if(!primary.startsWith("https")) primary = "https://$primary"
-                    if(secondary != null && !secondary.startsWith("https")) secondary = "https://$secondary"
-
-                    onServerAdded.invoke(name, primary, secondary)
+                    if (primary.startsWith("https")) primary = primary.replace("https://", "")
+                    if (secondary != null && secondary.startsWith("https")) secondary = secondary.replace("https://", "")
+                    invokeCallback(name, primary, secondary, onServerAdded)
                     dismiss()
                 } else {
                     val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -65,6 +66,46 @@ class NewServerDialog(
                 }
             }
         }
+    }
+
+    private fun invokeCallback(name:String, primary:String, secondary:String?, onServerAdded:(HttpsDnsServerInformation) -> Unit) {
+        val requestType = mapOf(RequestType.WIREFORMAT_POST to ResponseType.WIREFORMAT)
+        val serverInfo = mutableListOf<HttpsDnsServerConfiguration>()
+        serverInfo.add(HttpsDnsServerConfiguration(address = createUpstreamAddress(primary), requestTypes = requestType, experimental = false))
+        if(!secondary.isNullOrBlank()) serverInfo.add(HttpsDnsServerConfiguration(address = createUpstreamAddress(secondary), requestTypes = requestType, experimental = false))
+        onServerAdded.invoke(
+            HttpsDnsServerInformation(
+                name,
+                HttpsDnsServerSpecification(
+                    Decision.UNKNOWN,
+                    Decision.UNKNOWN,
+                    Decision.UNKNOWN,
+                    Decision.UNKNOWN
+                ),
+                serverInfo,
+                emptyList()
+            )
+        )
+    }
+
+    private fun createUpstreamAddress(url:String): HttpsUpstreamAddress {
+        var host = ""
+        var port:Int? = null
+        var path:String? = null
+        if(url.contains(":")) {
+            host = url.split(":")[0]
+            port = url.split(":")[1].split("/")[0].toInt()
+            if(port > 65535) port = null
+        }
+        if(url.contains("/")) {
+            path = url.split("/")[1]
+            if(host == "") host = url.split("/")[0]
+        }
+        if(host == "") host = url
+        return if(port != null && path != null) HttpsUpstreamAddress(host, port, path)
+        else if(port != null) HttpsUpstreamAddress(host, port)
+        else if(path != null) HttpsUpstreamAddress(host, urlPath = path)
+        else HttpsUpstreamAddress(host)
     }
 
     fun addUrlTextWatcher(materialEditText: MaterialEditText, editText: EditText, emptyAllowed: Boolean) {

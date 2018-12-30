@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.util.preferences
 
 import android.content.Context
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
 import com.frostnerd.preferenceskt.typedpreferences.SimpleTypedPreferences
@@ -29,6 +30,7 @@ interface AppSettings {
     var areCustomServers: Boolean
     var primaryServerConfig: ServerConfiguration
     var secondaryServerConfig: ServerConfiguration?
+    var userServers: Set<UserServerConfiguration>
 
     // ###### Settings (in order)
     // No Category
@@ -36,40 +38,61 @@ interface AppSettings {
     var startAppOnBoot: Boolean
     var startAppAfterUpdate: Boolean
     var userBypassPackages: MutableSet<String>
-    var isBypassBlacklist:Boolean
+    var isBypassBlacklist: Boolean
 
     // Notification category
-    var showNotificationOnLockscreen:Boolean
-    var hideNotificationIcon:Boolean
+    var showNotificationOnLockscreen: Boolean
+    var hideNotificationIcon: Boolean
 
     // Cache category
     var useDnsCache: Boolean
-    var keepDnsCacheAcrossLaunches:Boolean
-    var maxCacheSize:Int
+    var keepDnsCacheAcrossLaunches: Boolean
+    var maxCacheSize: Int
     var useDefaultDnsCacheTime: Boolean
     var customDnsCacheTime: Int
 
     // Logging category
-    var loggingEnabled:Boolean
+    var loggingEnabled: Boolean
 
     // Network category
     var disallowOtherVpns: Boolean
-    var enableIpv6:Boolean
-    var enableIpv4:Boolean
+    var enableIpv6: Boolean
+    var enableIpv4: Boolean
     var forceIpv6: Boolean
-    var forceIpv4:Boolean
-    var bypassSearchdomains:Boolean
-    var nullTerminateKeweon:Boolean
+    var forceIpv4: Boolean
+    var bypassSearchdomains: Boolean
+    var nullTerminateKeweon: Boolean
 
     // Query logging category
-    var queryLoggingEnabled:Boolean
+    var queryLoggingEnabled: Boolean
     // ###### End of settings
 
 
     var hasRatedApp: Boolean
 
-    fun isUsingKeweon():Boolean {
+    fun isUsingKeweon(): Boolean {
         return primaryServerConfig.urlCreator.baseUrl.contains("sec.keweon.center")
+    }
+
+    fun addUserServerConfiguration(info:HttpsDnsServerInformation):UserServerConfiguration {
+        var max = 0
+        for (server in userServers) {
+            if (server.id >= max) max = server.id + 1
+        }
+        val mutableServers = userServers.toMutableSet()
+        val config = UserServerConfiguration(max, info)
+        mutableServers.add(config)
+        userServers = mutableServers
+        return config
+    }
+
+    fun removeUserServerConfiguration(config:UserServerConfiguration) {
+        val mutableServers = userServers.toMutableSet()
+        val iterator = mutableServers.iterator()
+        for (configuration in iterator) {
+            if(config.id == configuration.id) iterator.remove()
+        }
+        userServers = mutableServers
     }
 }
 
@@ -87,11 +110,14 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     override var useDnsCache: Boolean by booleanPref("dnscache_enabled", true)
     override var keepDnsCacheAcrossLaunches: Boolean by booleanPref("dnscache_keepacrosslaunches", false)
-    override var maxCacheSize:Int by stringBasedIntPref("dnscache_maxsize", 1000)
+    override var maxCacheSize: Int by stringBasedIntPref("dnscache_maxsize", 1000)
     override var useDefaultDnsCacheTime: Boolean by booleanPref("dnscache_use_default_time", true)
     override var customDnsCacheTime: Int by stringBasedIntPref("dnscache_custom_time", 100)
 
-    override var loggingEnabled: Boolean by booleanPref("logging_enabled", BuildConfig.VERSION_NAME.contains("alpha", true))
+    override var loggingEnabled: Boolean by booleanPref(
+        "logging_enabled",
+        BuildConfig.VERSION_NAME.contains("alpha", true)
+    )
 
     override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
     override var enableIpv6: Boolean by booleanPref("ipv6_enabled", true)
@@ -103,6 +129,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     override var queryLoggingEnabled: Boolean by booleanPref("log_dns_queries", false)
 
+    override var userServers: Set<UserServerConfiguration> by UserServerConfigurationPreference(
+        "user_servers"
+    ) { mutableSetOf() }
     override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", false)
     override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "8.8.8.8")
     override var dummyDnsAddressIpv6: String by stringPref("dummy_dns_ipv6", "2001:4860:4860::8888")

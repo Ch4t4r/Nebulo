@@ -1,19 +1,19 @@
 package com.frostnerd.smokescreen.activity
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.JsonReader
-import android.util.JsonToken
 import android.view.Window
 import androidx.appcompat.app.AlertDialog
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.lifecyclemanagement.BaseActivity
+import com.frostnerd.smokescreen.Logger
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.database.entities.UserServerConfiguration
-import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.ServerImportDialog
 import com.frostnerd.smokescreen.getPreferences
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonToken
 import java.io.InputStreamReader
-import java.net.URL
 
 /**
  * Copyright Daniel Wolf 2018
@@ -37,12 +37,14 @@ class ServerImportActivity : BaseActivity() {
         actionBar?.hide()
 
         var couldImport = false
+        var exception:java.lang.Exception? = null
         if (intent != null) {
             val data = intent.data
             if (data != null) {
                 couldImport = try {
                     importServerFromUri(data)
                 } catch (e: Exception) {
+                    exception = e
                     e.printStackTrace()
                     false
                 }
@@ -51,7 +53,7 @@ class ServerImportActivity : BaseActivity() {
         if (!couldImport) {
             AlertDialog.Builder(this, getPreferences().theme.dialogStyle)
                 .setTitle(R.string.dialog_serverimportfailed_title)
-                .setMessage(R.string.dialog_serverimportfailed_text)
+                .setMessage(if(exception != null) getString(R.string.dialog_serverimportfailed_text_exception, Logger.stacktraceToString(exception)) else getString(R.string.dialog_serverimportfailed_text))
                 .setNeutralButton(R.string.ok) { dialog, _ ->
                     dialog.cancel()
                 }
@@ -69,90 +71,48 @@ class ServerImportActivity : BaseActivity() {
         val inputStream = resolver.openInputStream(uri)
         if (inputStream != null) {
             val reader = JsonReader(InputStreamReader(inputStream))
-            if (reader.peek() == JsonToken.BEGIN_OBJECT) {
-                reader.beginObject()
-                val config = ImportedServerConfiguration()
-                while (reader.hasNext() && reader.peek() == JsonToken.NAME) {
-                    val name = reader.nextName()
-                    when (name.toLowerCase()) {
-                        "name" -> config.name = reader.nextString()
-                        "primary" -> config.primaryUrl = reader.nextString()
-                        "secondary" -> config.secondaryUrl = reader.nextString()
-                        else -> reader.skipValue()
-                    }
-                }
-
-                if (config.isValid()) {
-                    importServer(config)
-                    return true
-                }
-            }
+            val rtrn = readJson(reader)
             reader.close()
+            return rtrn
         }
         return false
     }
 
-    private fun importServer(config: ImportedServerConfiguration) {
-        val dialog = AlertDialog.Builder(this, getPreferences().theme.dialogStyle)
-            .setTitle(getString(R.string.dialog_serverimport_title, config.name))
-            .setMessage(
-                getString(
-                    R.string.dialog_serverimport_text,
-                    config.name,
-                    config.primaryUrl,
-                    config.secondaryUrl ?: ""
-                )
-            )
-            .setCancelable(false)
-            .setNegativeButton(R.string.all_no) { dialog, _ ->
-                dialog.cancel()
+    private fun readJson(reader: JsonReader): Boolean {
+        val servers = mutableListOf<HttpsDnsServerInformation>()
+        val adapter = HttpsDnsServerInformationTypeAdapter()
+        val readServer = {
+            val server = adapter.read(reader)
+            if (server != null) {
+                servers.add(server)
+                true
+            } else false
+        }
+        if (readJsonArray(reader, false, readServer))
+        else if (reader.peek() == JsonToken.BEGIN_OBJECT) {
+            if (!readServer()) return false
+        } else return false
+
+        return if (servers.isEmpty()) false
+        else {
+            val dialog = ServerImportDialog(this, servers)
+            dialog.setOnDismissListener {
                 finish()
             }
-            .setPositiveButton(R.string.all_yes) { dialog, _ ->
-                dialog.cancel()
-                val configToSave = UserServerConfiguration(
-                    name = config.name!!,
-                    primaryServerUrl = config.primaryUrl!!,
-                    secondaryServerUrl = config.secondaryUrl
-                )
-                getDatabase().userServerConfigurationDao().insert(configToSave)
-
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                startActivity(intent)
-                finish()
-            }.create()
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.show()
+            dialog.show()
+            true
+        }
     }
 
-    private inner class ImportedServerConfiguration {
-        var name: String? = null
-        var primaryUrl: String? = null
-        var secondaryUrl: String? = null
-
-        fun isValid(): Boolean {
-            var valid = name != null && primaryUrl != null
-            valid = valid && isValidHttpsUrl(primaryUrl)
-            valid = valid && (secondaryUrl == null || isValidHttpsUrl(secondaryUrl))
-            return valid
-        }
-
-        private fun isValidHttpsUrl(possibleUrl: String?): Boolean {
-            if (possibleUrl == null) return false
-
-            try {
-                return URL(possibleUrl).protocol == "https"
-            } catch (e: Exception) {
-
+    private fun readJsonArray(reader: JsonReader, skip: Boolean = true, nextEntry: () -> Any): Boolean {
+        if (reader.peek() == JsonToken.BEGIN_ARRAY) {
+            reader.beginArray()
+            while (reader.peek() != JsonToken.END_ARRAY) {
+                nextEntry()
             }
-            return false
-        }
-
-        override fun toString(): String {
-            return "ImportedServerConfiguration(name=$name, primaryUrl=$primaryUrl, secondaryUrl=$secondaryUrl)"
-        }
-
-
+            reader.endArray()
+            return true
+        } else if (skip) reader.skipValue()
+        return false
     }
 }

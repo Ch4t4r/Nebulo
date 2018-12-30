@@ -131,7 +131,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         exportQueries.setOnPreferenceClickListener {
             requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext()) {file ->
-                println("File created")
                 val uri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
                 val exportIntent = Intent(Intent.ACTION_SEND)
                 exportIntent.putExtra(Intent.EXTRA_TEXT, "")
@@ -151,7 +150,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 exportIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                 startActivity(Intent.createChooser(exportIntent, getString(R.string.title_export_queries)))
             }
-            println("Clicked")
             true
         }
     }

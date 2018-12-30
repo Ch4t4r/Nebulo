@@ -19,11 +19,16 @@
 
     <string name="dialog_excludedapps_infotext">%1d apps are excluded by default and cannot be de-selected</string>
 
-    <string name="dialog_serverimport_title">Import of %1s</string>
-    <string name="dialog_serverimport_text">Do you want to add the server %1s into the list of servers?\n\nPrimary URL: %2s\nSecondary URL: %3s</string>
+    <string name="dialog_serverimport_title">Import of %1d server(s)</string>
+    <string name="dialog_serverimport_done">Done</string>
+    <string name="dialog_serverimport_priority">Priority %1d</string>
+    <string name="dialog_serverimport_experimental">Experimental</string>
+    <string name="dialog_serverimport_queriesencrytped">Queries encrypted:</string>
+    <string name="dialog_serverimport_text">Please select the server(s) you wish to import.\n\nServers where queries are not encrypted only accept the query in the GET-parameters of the URL. Whilst they can be read, no one can modify them.</string>
 
     <string name="dialog_serverimportfailed_title">Import failed</string>
-    <string name="dialog_serverimportfailed_text">The server could not be imported.</string>
+    <string name="dialog_serverimportfailed_text">The server(s) could not be imported.</string>
+    <string name="dialog_serverimportfailed_text_exception">The server(s) could not be imported.\n(%1s)</string>
 
     <string name="dialog_logexport_text">How to you want to share the logs?</string>
     <string name="dialog_logexport_general">General export</string>
