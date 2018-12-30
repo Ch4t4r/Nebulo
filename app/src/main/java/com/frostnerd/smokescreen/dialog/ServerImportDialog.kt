@@ -70,6 +70,7 @@ class ServerImportDialog(context: Context, val servers: List<HttpsDnsServerInfor
                 viewHolder.itemView.tag = position
                 val server = servers[position]
                 viewHolder.display(context, server)
+                viewHolder.selected.isChecked = selectedServerPositions.contains(position)
             }
         }
         serverList.adapter = adapter.build()
@@ -80,6 +81,7 @@ class ServerImportDialog(context: Context, val servers: List<HttpsDnsServerInfor
         prefs.edit {
             for (selectedServerPosition in selectedServerPositions) {
                 val server = servers[selectedServerPosition]
+                println("Importing $server")
                 prefs.addUserServerConfiguration(server)
             }
         }
@@ -90,12 +92,12 @@ class ServerImportDialog(context: Context, val servers: List<HttpsDnsServerInfor
         val urls = itemView.findViewById<TextView>(R.id.urls)
         val capabilities = itemView.findViewById<TextView>(R.id.capabilities)
         val queriesEncrypted = itemView.findViewById<CheckBox>(R.id.queriesEncrypted)
+        val selected = itemView.findViewById<CheckBox>(R.id.checkbox)
 
         override fun destroy() {
         }
 
         fun display(context: Context, server: HttpsDnsServerInformation) {
-
             name.text = server.name
             capabilities.text = buildString {
                 for (capability in server.capabilities) {
