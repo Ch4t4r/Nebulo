@@ -86,6 +86,19 @@ interface AppSettings {
         return config
     }
 
+    fun addUserServerConfiguration(infos:List<HttpsDnsServerInformation>) {
+        var max = 0
+        for (server in userServers) {
+            if (server.id >= max) max = server.id + 1
+        }
+        val mutableServers = userServers.toMutableSet()
+        for (info in infos) {
+            val config = UserServerConfiguration(max++, info)
+            mutableServers.add(config)
+        }
+        userServers = mutableServers
+    }
+
     fun removeUserServerConfiguration(config:UserServerConfiguration) {
         val mutableServers = userServers.toMutableSet()
         val iterator = mutableServers.iterator()

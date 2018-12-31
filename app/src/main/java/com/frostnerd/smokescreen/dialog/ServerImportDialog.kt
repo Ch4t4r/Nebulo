@@ -79,11 +79,10 @@ class ServerImportDialog(context: Context, val servers: List<HttpsDnsServerInfor
     private fun doImport() {
         val prefs = context.getPreferences()
         prefs.edit {
-            for (selectedServerPosition in selectedServerPositions) {
-                val server = servers[selectedServerPosition]
-                println("Importing $server")
-                prefs.addUserServerConfiguration(server)
+            val servers = servers.filterIndexed { index, item ->
+                selectedServerPositions.contains(index)
             }
+            prefs.addUserServerConfiguration(servers)
         }
     }
 

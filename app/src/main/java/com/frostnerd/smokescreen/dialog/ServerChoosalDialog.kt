@@ -60,11 +60,11 @@ class ServerChoosalDialog(
             addKnownServers()
 
             addServer.setOnClickListener {
-                NewServerDialog(context) {
+                NewServerDialog(context) {info ->
                     knownServersGroup.addView(
                         createButtonForUserConfiguration(
                             context.getPreferences().addUserServerConfiguration(
-                                it
+                                info
                             )
                         )
                     )
