@@ -17,9 +17,12 @@ import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.isInt
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.util.preferences.Theme
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * Copyright Daniel Wolf 2018
@@ -128,6 +131,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun processQueryCategory() {
         val queryLogging = findPreference("log_dns_queries")
         val exportQueries = findPreference("export_dns_queries")
+
+        queryLogging.setOnPreferenceChangeListener { _, newValue ->
+            requireContext().getPreferences().queryLoggingEnabled = newValue as Boolean
+            (requireActivity() as MainActivity).reloadMenuItems()
+            true
+        }
 
         exportQueries.setOnPreferenceClickListener {
             requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext()) {file ->
