@@ -132,8 +132,8 @@ class ServerChoosalDialog(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         button.setTextColor(context.getPreferences().theme.getTextColor(context))
-        if (configs.size == 1) button.text = "$name (${configs.first().address.FQDN})"
-        else button.text = "$name (${configs.first().address.FQDN}, ${configs.last().address.FQDN})"
+        if (configs.size == 1) button.text = "$name (${configs.first().address.getUrl(true)})"
+        else button.text = "$name (${configs.first().address.FQDN}, ${configs.last().address.getUrl(true)})"
 
         button.tag = configs
         return button
@@ -151,9 +151,9 @@ class ServerChoosalDialog(
         val secondaryConfig = userConfiguration.serverInformation.servers.getOrNull(1)
 
         if (secondaryConfig == null) button.text =
-                "${userConfiguration.serverInformation.name} (${primaryConfig.address.getUrl()})"
+                "${userConfiguration.serverInformation.name} (${primaryConfig.address.getUrl(true)})"
         else button.text =
-                "${userConfiguration.serverInformation.name} (${primaryConfig.address.getUrl()}, ${secondaryConfig.address.getUrl()})"
+                "${userConfiguration.serverInformation.name} (${primaryConfig.address.getUrl(true)}, ${secondaryConfig.address.getUrl()})"
 
 
         button.tag = userConfiguration
