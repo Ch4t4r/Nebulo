@@ -27,6 +27,8 @@
         </activity>
         <activity
                 android:name=".activity.ServerImportActivity"
+                android:autoRemoveFromRecents="true"
+                android:noHistory="true"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW"/>
