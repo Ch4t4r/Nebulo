@@ -563,7 +563,10 @@ class DnsVpnService : VpnService(), Runnable {
         log("VPN proxy creating, trying to run...")
         fileDescriptor?.let {
             vpnProxy?.run(it)
-        } ?: recreateVpn(false, null)
+        } ?: kotlin.run {
+            recreateVpn(false, null)
+            return
+        }
         log("VPN proxy started.")
         currentTrafficStats = vpnProxy?.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
