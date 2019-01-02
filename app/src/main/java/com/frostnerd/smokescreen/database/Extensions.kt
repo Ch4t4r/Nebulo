@@ -5,6 +5,7 @@ import android.util.Base64
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.frostnerd.smokescreen.Logger
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
@@ -21,16 +22,22 @@ import java.io.DataInputStream
 
 private var INSTANCE: AppDatabase? = null
 private val MIGRATION_2_X = migration(2) {
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 2 to the current version (${AppDatabase.currentVersion}")
     it.execSQL("DROP TABLE CachedResponse")
     it.execSQL("CREATE TABLE CachedResponse(type INTEGER NOT NULL, dnsName TEXT NOT NULL, records TEXT NOT NULL, PRIMARY KEY(dnsName, type))")
-    it.execSQL("DROP TABLE UserServerConfiguration")
+    it.execSQL("DROP TABLE IF EXISTS UserServerConfiguration")
     MIGRATION_3_4.migrate(it)
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 2 to current version completed")
 }
 private val MIGRATION_3_4 = migration(3, 4) {
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 3 to 4")
     it.execSQL("CREATE TABLE IF NOT EXISTS `DnsQuery` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `fromCache` INTEGER NOT NULL, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)")
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 3 to 4 completed")
 }
 private val MIGRATION_4_5 = migration(4,5) {
-    it.execSQL("DROP TABLE UserServerConfiguration")
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 4 to 5")
+    it.execSQL("DROP TABLE  IF EXISTS UserServerConfiguration")
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 4 to 5 completed")
 }
 
 

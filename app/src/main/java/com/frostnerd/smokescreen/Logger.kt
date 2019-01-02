@@ -128,6 +128,11 @@ class Logger private constructor(context: Context) {
             return instance!!
         }
 
+        fun logIfOpen(tag: String, text: String) {
+            if (enabledGlobally && !crashed)
+                instance?.log(text, tag)
+        }
+
         fun isOpen(): Boolean {
             return instance != null && !crashed
         }
