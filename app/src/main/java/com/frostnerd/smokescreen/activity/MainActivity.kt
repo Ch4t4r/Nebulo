@@ -13,6 +13,7 @@ import com.frostnerd.navigationdraweractivity.items.DrawerItem
 import com.frostnerd.navigationdraweractivity.items.createMenu
 import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
@@ -102,7 +103,7 @@ class MainActivity : NavigationDrawerActivity() {
                     showInfoTextDialog(
                         this@MainActivity,
                         getString(R.string.menu_about),
-                        getString(R.string.about_app, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
+                        getString(R.string.about_app, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE, AppDatabase.currentVersion)
                     )
                     false
                 })
