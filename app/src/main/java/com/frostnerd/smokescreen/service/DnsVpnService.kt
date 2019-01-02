@@ -561,7 +561,9 @@ class DnsVpnService : VpnService(), Runnable {
         vpnProxy = VPNTunnelProxy(dnsProxy!!)
 
         log("VPN proxy creating, trying to run...")
-        vpnProxy?.run(fileDescriptor!!)
+        fileDescriptor?.let {
+            vpnProxy?.run(it)
+        } ?: recreateVpn(false, null)
         log("VPN proxy started.")
         currentTrafficStats = vpnProxy?.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
