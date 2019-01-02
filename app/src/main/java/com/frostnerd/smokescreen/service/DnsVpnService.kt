@@ -39,6 +39,7 @@ import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.dnsname.DnsName
 import org.minidns.record.Record
@@ -616,9 +617,15 @@ class DnsVpnService : VpnService(), Runnable {
             val cacheControl: CacheControl = if (!getPreferences().useDefaultDnsCacheTime) {
                 val cacheTime = getPreferences().customDnsCacheTime.toLong()
                 object : CacheControl {
+                    override suspend fun getTtl(
+                        answerMessage: DnsMessage,
+                        dnsName: DnsName,
+                        type: Record.TYPE,
+                        record: Record<*>
+                    ): Long = cacheTime
+
                     override suspend fun getTtl(question: Question, record: Record<*>): Long = cacheTime
-                    override suspend fun getTtl(dnsName: DnsName, type: Record.TYPE, record: Record<*>): Long =
-                        cacheTime
+
 
                     override fun shouldCache(question: Question): Boolean = true
                 }
