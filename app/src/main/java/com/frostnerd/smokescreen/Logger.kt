@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.fragment.app.Fragment
+import com.frostnerd.smokescreen.database.AppDatabase
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -106,6 +107,7 @@ class Logger private constructor(context: Context) {
         fileWriter = BufferedWriter(FileWriter(logFile, false))
 
         log("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
+        log("Database version: ${AppDatabase.currentVersion}")
         log("Android SDK version: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})")
         log("Device: ${Build.MODEL} from ${Build.MANUFACTURER} (Device: ${Build.DEVICE}, Product: ${Build.PRODUCT})")
         log("Language: ${Locale.getDefault().displayLanguage}")
