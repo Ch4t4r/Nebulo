@@ -524,7 +524,7 @@ class DnsVpnService : VpnService(), Runnable {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
             val info = mgr.getNetworkInfo(network)
-            if (info.isConnected) {
+            if (info != null && info.isConnected) {
                 val linkProperties = mgr.getLinkProperties(network)
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet6Address && !linkAddress.address.isLoopbackAddress) {
