@@ -48,6 +48,7 @@ import java.io.DataInputStream
 import java.io.Serializable
 import java.net.Inet4Address
 import java.net.Inet6Address
+import java.net.InetAddress
 
 
 /**
@@ -537,6 +538,18 @@ class DnsVpnService : VpnService(), Runnable {
         return false
     }
 
+    private fun getDhcpDnsServers():List<InetAddress> {
+        val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        for (network in mgr.allNetworks) {
+            val info = mgr.getNetworkInfo(network)
+            if (info != null && info.isConnected) {
+                val linkProperties = mgr.getLinkProperties(network)
+                return linkProperties.dnsServers
+            }
+        }
+        return emptyList()
+    }
+
     override fun run() {
         log("run() called")
         val list = mutableListOf<ServerConfiguration>()
@@ -584,8 +597,8 @@ class DnsVpnService : VpnService(), Runnable {
      * Creates bypass handlers for each network and its associated search domains
      * Requests for .*SEARCHDOMAIN won't use doh and are sent to the DNS servers of the network they originated from.
      */
-    private fun createProxyBypassHandlers(): MutableList<ProxyBypassHandler> {
-        val bypassHandlers = mutableListOf<ProxyBypassHandler>()
+    private fun createProxyBypassHandlers(): MutableList<DnsHandle> {
+        val bypassHandlers = mutableListOf<DnsHandle>()
         if(getPreferences().bypassSearchdomains) {
             log("Creating bypass handlers for search domains of connected networks.")
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -607,6 +620,8 @@ class DnsVpnService : VpnService(), Runnable {
             }
             log("${bypassHandlers.size} bypass handlers created.")
         } else log("Not creating bypass handlers for search domains, bypass is disabled.")
+        val dhcpServers = getDhcpDnsServers()
+        if(!dhcpServers.isEmpty()) bypassHandlers.add(CaptivePortalUdpDnsHandle(targetDnsServer = { dhcpServers.first() }))
         return bypassHandlers
     }
 

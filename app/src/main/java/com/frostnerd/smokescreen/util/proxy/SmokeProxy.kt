@@ -22,13 +22,13 @@ import org.minidns.dnsmessage.DnsMessage
 
 class SmokeProxy(
     dnsHandle: ProxyHandler,
-    proxyBypassHandles: List<ProxyBypassHandler>,
+    proxyBypassHandles: List<DnsHandle>,
     vpnService: DnsVpnService,
     val cache: SimpleDnsCache?,
     queryListener: QueryListener?
 ) :
     DnsPacketProxy(
-        (proxyBypassHandles as List<DnsHandle>).toMutableList().let {
+        proxyBypassHandles.toMutableList().let {
             it.add(dnsHandle)
             it
         }.toList(),
