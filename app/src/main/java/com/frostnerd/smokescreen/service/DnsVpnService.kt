@@ -645,6 +645,7 @@ class DnsVpnService : VpnService(), Runnable {
             val dhcpServers = getDhcpDnsServers()
             if(!dhcpServers.isEmpty()) bypassHandlers.add(CaptivePortalUdpDnsHandle(targetDnsServer = { dhcpServers.first() }))
         }
+        bypassHandlers.add(NoConnectionDnsHandle(NoConnectionDnsHandle.Behavior.DROP_PACKETS, null))
         return bypassHandlers
     }
 

@@ -1,12 +1,14 @@
 package com.frostnerd.smokescreen.util.proxy
 
 import android.content.Context
+import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
 import org.minidns.dnsmessage.DnsMessage
+import javax.xml.transform.Source
 
 /**
  * Copyright Daniel Wolf 2018
@@ -51,13 +53,10 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
         }
     }
 
-    override suspend fun onQueryResponse(responseMessage: DnsMessage, fromUpstream: Boolean) {
+    override suspend fun onQueryResponse(responseMessage: DnsMessage, source: QueryListener.Source) {
         if (writeQueriesToLog) {
-            if (!fromUpstream) {
-                context.log("Returned from cache: $responseMessage")
-            } else {
-                context.log("Response from upstream: $responseMessage")
-            }
+            context.log("Returned from $source: $responseMessage")
+            context.log("Response from upstream: $responseMessage")
         }
 
         if (logQueriesToDb) {
@@ -67,7 +66,7 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
                 for (answer in responseMessage.answerSection) {
                     query.addResponse(answer)
                 }
-                query.fromCache = !fromUpstream
+                query.fromCache = (source == QueryListener.Source.CACHE || source == QueryListener.Source.CACHE_AND_LOCALRESOLVER)
                 context.getDatabase().dnsQueryRepository().updateAsync(query)
                 waitingQueryLogs.remove(responseMessage.id)
             }
