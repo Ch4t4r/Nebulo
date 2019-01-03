@@ -49,6 +49,7 @@ interface AppSettings {
     var keepDnsCacheAcrossLaunches: Boolean
     var maxCacheSize: Int
     var useDefaultDnsCacheTime: Boolean
+    var minimumCacheTime:Int
     var customDnsCacheTime: Int
 
     // Logging category
@@ -126,6 +127,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var keepDnsCacheAcrossLaunches: Boolean by booleanPref("dnscache_keepacrosslaunches", false)
     override var maxCacheSize: Int by stringBasedIntPref("dnscache_maxsize", 1000)
     override var useDefaultDnsCacheTime: Boolean by booleanPref("dnscache_use_default_time", true)
+    override var minimumCacheTime: Int by stringBasedIntPref("dnscache_minimum_time", 10)
     override var customDnsCacheTime: Int by stringBasedIntPref("dnscache_custom_time", 100)
 
     override var loggingEnabled: Boolean by booleanPref(

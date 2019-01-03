@@ -668,7 +668,7 @@ class DnsVpnService : VpnService(), Runnable {
 
                     override fun shouldCache(question: Question): Boolean = true
                 }
-            } else DefaultCacheControl()
+            } else DefaultCacheControl(getPreferences().minimumCacheTime.toLong())
             val onClearCache:((currentCache:Map<String, Map<Record.TYPE, Map<Record<*>, Long>>>) -> Unit)? = if(getPreferences().keepDnsCacheAcrossLaunches) {
                 { cache ->
                     log("Persisting current cache to Database.")

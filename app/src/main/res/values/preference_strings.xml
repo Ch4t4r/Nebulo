@@ -36,6 +36,9 @@
     <string name="title_dnscache_usedefaulttimes">Default cache time</string>
     <string name="summary_dnscache_usedefaulttimes">Cache requests for the default time communicated by the server</string>
 
+    <string name="title_dnscache_minimum_cache_time">Minimum cache time</string>
+    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached.\nCurrent: %1d Seconds.</string>
+
     <string name="title_dnscache_customcachetime">Custom cache time (Seconds)</string>
     <string name="summary_dnscache_customcachetime">Changes the amount of time old requests are cached.\nCurrent: %1d Seconds.</string>
 

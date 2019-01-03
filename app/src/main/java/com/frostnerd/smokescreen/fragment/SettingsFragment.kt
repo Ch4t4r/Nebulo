@@ -23,6 +23,7 @@ import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.util.preferences.Theme
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlin.reflect.jvm.internal.impl.util.Check
 
 /**
  * Copyright Daniel Wolf 2018
@@ -207,6 +208,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val keepAcrossLaunches = findPreference("dnscache_keepacrosslaunches") as CheckBoxPreference
         val cacheMaxSize = findPreference("dnscache_maxsize") as EditTextPreference
         val useDefaultTime = findPreference("dnscache_use_default_time") as CheckBoxPreference
+        val minCacheTime = findPreference("dnscache_minimum_time") as EditTextPreference
         val cacheTime = findPreference("dnscache_custom_time") as EditTextPreference
 
         val updateState = { isCacheEnabled: Boolean, isUsingDefaultTime: Boolean ->
@@ -214,11 +216,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
             useDefaultTime.isEnabled = isCacheEnabled
             cacheTime.isEnabled = isCacheEnabled && !isUsingDefaultTime
             keepAcrossLaunches.isEnabled = isCacheEnabled
+            minCacheTime.isEnabled = isUsingDefaultTime && isCacheEnabled
         }
         updateState(cacheEnabled.isChecked, useDefaultTime.isChecked)
         cacheTime.summary = getString(
             R.string.summary_dnscache_customcachetime,
             requireContext().getPreferences().customDnsCacheTime
+        )
+        minCacheTime.summary = getString(
+            R.string.summary_dnscache_minimum_cache_time,
+            requireContext().getPreferences().minimumCacheTime
         )
 
         cacheMaxSize.setOnPreferenceChangeListener { _, newValue ->
@@ -235,6 +242,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         cacheTime.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().isInt()) {
                 cacheTime.summary = getString(R.string.summary_dnscache_customcachetime, newValue.toString().toInt())
+                true
+            } else {
+                false
+            }
+        }
+        minCacheTime.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue.toString().isInt()) {
+                minCacheTime.summary = getString(R.string.summary_dnscache_minimum_cache_time, newValue.toString().toInt())
                 true
             } else {
                 false
