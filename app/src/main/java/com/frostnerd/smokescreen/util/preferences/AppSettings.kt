@@ -62,6 +62,7 @@ interface AppSettings {
     var forceIpv4: Boolean
     var bypassSearchdomains: Boolean
     var nullTerminateKeweon: Boolean
+    var pauseOnCaptivePortal:Boolean
 
     // Query logging category
     var queryLoggingEnabled: Boolean
@@ -139,6 +140,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var forceIpv4: Boolean by booleanPref("force_ipv4", false)
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
     override var nullTerminateKeweon: Boolean by booleanPref("null_terminate_keweon", false)
+    override var pauseOnCaptivePortal: Boolean by booleanPref("pause_on_captive_portal", true)
 
     override var queryLoggingEnabled: Boolean by booleanPref("log_dns_queries", false)
 

@@ -130,6 +130,12 @@
                 android:defaultValue="false"
                 android:title="@string/title_nullterminate_keweon"
                 android:summary="@string/summary_nullterminate_keweon"/>
+
+        <CheckBoxPreference
+                android:key="pause_on_captive_portal"
+                android:defaultValue="true"
+                android:title="@string/title_pause_on_captiveportal"
+                android:summary="@string/summary_pause_on_captiveportal"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/preference_category_querylogging">

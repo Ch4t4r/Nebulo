@@ -167,7 +167,8 @@ class DnsVpnService : VpnService(), Runnable {
             "doh_server_url_primary",
             "log_dns_queries",
             "show_notification_on_lockscreen",
-            "hide_notification_icon"
+            "hide_notification_icon",
+            "pause_on_captive_portal"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
             log("The Preference $key has changed, restarting the VPN.")
@@ -620,8 +621,10 @@ class DnsVpnService : VpnService(), Runnable {
             }
             log("${bypassHandlers.size} bypass handlers created.")
         } else log("Not creating bypass handlers for search domains, bypass is disabled.")
-        val dhcpServers = getDhcpDnsServers()
-        if(!dhcpServers.isEmpty()) bypassHandlers.add(CaptivePortalUdpDnsHandle(targetDnsServer = { dhcpServers.first() }))
+        if(getPreferences().pauseOnCaptivePortal) {
+            val dhcpServers = getDhcpDnsServers()
+            if(!dhcpServers.isEmpty()) bypassHandlers.add(CaptivePortalUdpDnsHandle(targetDnsServer = { dhcpServers.first() }))
+        }
         return bypassHandlers
     }
 
