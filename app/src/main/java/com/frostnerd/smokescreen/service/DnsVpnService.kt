@@ -168,7 +168,8 @@ class DnsVpnService : VpnService(), Runnable {
             "log_dns_queries",
             "show_notification_on_lockscreen",
             "hide_notification_icon",
-            "pause_on_captive_portal"
+            "pause_on_captive_portal",
+            "null_terminate_keweon"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
             log("The Preference $key has changed, restarting the VPN.")
