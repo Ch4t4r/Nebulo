@@ -6,19 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.net.ConnectivityManager
-import android.net.VpnService
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.ParcelFileDescriptor
+import android.net.*
+import android.os.*
 import android.system.OsConstants
 import android.util.Base64
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.*
-import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 import com.frostnerd.general.CombinedIterator
@@ -69,6 +63,7 @@ class DnsVpnService : VpnService(), Runnable {
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var primaryServer: ServerConfiguration
     private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
+    private lateinit var networkCallback:ConnectivityManager.NetworkCallback
     private var secondaryServer: ServerConfiguration? = null
     private var queryCountOffset: Long = 0
     private var packageBypassAmount = 0
@@ -145,7 +140,30 @@ class DnsVpnService : VpnService(), Runnable {
         createNotification()
         updateServiceTile()
         subscribeToSettings()
+        addNetworkChangeListener()
         log("Service created.")
+    }
+
+    private fun addNetworkChangeListener() {
+        val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onLost(network: Network?) {
+                super.onLost(network)
+                handleChange()
+            }
+
+            override fun onAvailable(network: Network?) {
+                super.onAvailable(network)
+                handleChange()
+            }
+
+            private fun handleChange() {
+                if (fileDescriptor != null) recreateVpn(false, null)
+            }
+        }
+        val builder = NetworkRequest.Builder()
+        builder.addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
+        mgr.registerNetworkCallback(builder.build(), networkCallback)
     }
 
     private fun subscribeToSettings() {
@@ -327,7 +345,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun recreateVpn(reloadServerConfiguration: Boolean, intent: Intent?) {
         log("Recreating the VPN (destroying & establishing)")
-        destroy()
+        destroy(false)
         if (VpnService.prepare(this) == null) {
             log("VpnService is still prepared, establishing VPN.")
             destroyed = false
@@ -351,12 +369,13 @@ class DnsVpnService : VpnService(), Runnable {
         }
     }
 
-    private fun destroy() {
+    private fun destroy(isStoppingCompletely:Boolean = true) {
         log("Destroying the VPN")
         if (!destroyed) {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
+            if(isStoppingCompletely) (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).unregisterNetworkCallback(networkCallback)
             vpnProxy = null
             fileDescriptor = null
             destroyed = true
@@ -513,7 +532,7 @@ class DnsVpnService : VpnService(), Runnable {
         for (network in mgr.allNetworks) {
             val info = mgr.getNetworkInfo(network)
             if (info.isConnected) {
-                val linkProperties = mgr.getLinkProperties(network)
+                val linkProperties = mgr.getLinkProperties(network) ?: continue
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet4Address && !linkAddress.address.isLoopbackAddress) {
                         return true
@@ -529,7 +548,7 @@ class DnsVpnService : VpnService(), Runnable {
         for (network in mgr.allNetworks) {
             val info = mgr.getNetworkInfo(network)
             if (info != null && info.isConnected) {
-                val linkProperties = mgr.getLinkProperties(network)
+                val linkProperties = mgr.getLinkProperties(network) ?: continue
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet6Address && !linkAddress.address.isLoopbackAddress) {
                         return true
@@ -545,7 +564,7 @@ class DnsVpnService : VpnService(), Runnable {
         for (network in mgr.allNetworks) {
             val info = mgr.getNetworkInfo(network)
             if (info != null && info.isConnected) {
-                val linkProperties = mgr.getLinkProperties(network)
+                val linkProperties = mgr.getLinkProperties(network) ?: continue
                 return linkProperties.dnsServers
             }
         }
