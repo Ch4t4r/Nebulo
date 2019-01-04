@@ -15,6 +15,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 /**
  * Copyright Daniel Wolf 2019
@@ -122,7 +123,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
                     urlsToUse.shuffle()
                     for (url in urlsToUse) {
                         openWithChrome(if(url.startsWith("http")) url else "http://$url")
-                        delay(45000)
+                        delay(20000 + Random.nextLong(0, 25000))
                         DnsVpnService.restartVpn(context, false)
                         delay(3000)
                     }
