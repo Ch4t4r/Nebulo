@@ -30,7 +30,7 @@ class NewServerDialog(
 
     companion object {
         val SERVER_URL_REGEX =
-            Regex("^(?:https://)?([a-z0-9][a-z0-9-.]*[a-z0-9])(?::[1-9][0-9]{0,4})?(/[a-z0-9-.]+)*(/)?$", RegexOption.IGNORE_CASE)
+            Regex("^\\s*(?:https://)?([a-z0-9][a-z0-9-.]*[a-z0-9])(?::[1-9][0-9]{0,4})?(/[a-z0-9-.]+)*(/)?\\s*$", RegexOption.IGNORE_CASE)
     }
 
     init {
@@ -53,8 +53,8 @@ class NewServerDialog(
             getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                 if (inputsValid()) {
                     val name = serverName.text.toString()
-                    var primary = primaryServer.text.toString()
-                    var secondary = if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString()
+                    var primary = primaryServer.text.toString().trim()
+                    var secondary = if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString().trim()
 
                     if (primary.startsWith("https")) primary = primary.replace("https://", "")
                     if (secondary != null && secondary.startsWith("https")) secondary = secondary.replace("https://", "")
