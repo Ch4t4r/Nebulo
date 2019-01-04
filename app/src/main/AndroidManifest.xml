@@ -37,6 +37,7 @@
                 <data
                         android:mimeType="*/*"
                         android:scheme="content"
+                        android:host="*"
                         android:pathPattern=".*\\.dohserver"
                         tools:ignore="AppLinkUrlError"/>
             </intent-filter>
@@ -46,6 +47,7 @@
                 <data
                         android:mimeType="*/*"
                         android:scheme="file"
+                        android:host="*"
                         android:pathPattern=".*\\.dohserver"
                         tools:ignore="AppLinkUrlError"/>
             </intent-filter>
@@ -74,6 +76,7 @@
                 <data
                         android:mimeType="*/*"
                         android:scheme="content"
+                        android:host="*"
                         android:pathPattern=".*\\.querycsv"
                         tools:ignore="AppLinkUrlError"/>
             </intent-filter>
