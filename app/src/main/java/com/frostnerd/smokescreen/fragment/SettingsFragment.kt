@@ -139,7 +139,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             (requireActivity() as MainActivity).reloadMenuItems()
             true
         }
-
+        exportQueries.summary = getString(R.string.summary_export_queries, requireContext().getDatabase().dnsQueryDao().getCount())
         exportQueries.setOnPreferenceClickListener {
             requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext()) {file ->
                 val uri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)

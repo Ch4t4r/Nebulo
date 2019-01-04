@@ -24,6 +24,9 @@ interface DnsQueryDao {
     @Query("SELECT MAX(id) FROM DnsQuery")
     fun getLastInsertedId():Long
 
+    @Query("SELECT COUNT(*) FROM DnsQuery")
+    fun getCount():Int
+
     @Insert
     fun insertAll(vararg dnsQueries: DnsQuery)
 
