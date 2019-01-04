@@ -125,7 +125,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
                         openWithChrome(if(url.startsWith("http")) url else "http://$url")
                         delay(20000 + Random.nextLong(0, 25000))
                         DnsVpnService.restartVpn(context, false)
-                        delay(3000)
+                        delay(1500)
                     }
                 }
                 job = null
