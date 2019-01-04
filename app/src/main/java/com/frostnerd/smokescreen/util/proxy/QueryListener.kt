@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.util.proxy
 
 import android.content.Context
+import com.frostnerd.dnstunnelproxy.DnsHandle
 import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.smokescreen.database.entities.DnsQuery
@@ -8,7 +9,6 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
 import org.minidns.dnsmessage.DnsMessage
-import javax.xml.transform.Source
 
 /**
  * Copyright Daniel Wolf 2018
@@ -25,7 +25,11 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
     private val waitingQueryLogs: MutableMap<Int, DnsQuery> = mutableMapOf()
     private val askedServer = context.getPreferences().primaryServerConfig.urlCreator.baseUrl
 
-    override suspend fun onQueryForwarded(questionMessage: DnsMessage, destination: UpstreamAddress) {
+    override suspend fun onQueryForwarded(questionMessage: DnsMessage, destination: UpstreamAddress, usedHandle:DnsHandle) {
+        if(writeQueriesToLog) {
+            context.log("Query with ID ${questionMessage.id} forwarded by $usedHandle")
+        }
+
         if (logQueriesToDb) {
             val query = waitingQueryLogs[questionMessage.id]!!
             query.askedServer = askedServer
