@@ -154,6 +154,10 @@
                 android:defaultValue="false"/>
 
         <Preference
+                android:key="generate_queries"
+                android:title="Generate queries"/>
+
+        <Preference
                 android:key="export_dns_queries"
                 android:title="@string/title_export_queries"
                 android:dependency="log_dns_queries"
