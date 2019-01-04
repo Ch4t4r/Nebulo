@@ -2,6 +2,7 @@
     <string name="app_name">SmokeScreen</string>
 
     <string name="activity_label_import_queries">Import queries</string>
+    <string name="activity_label_import_servers">Import server(s)</string>
 
     <string name="all_stop">Stop</string>
     <string name="all_start">Start</string>

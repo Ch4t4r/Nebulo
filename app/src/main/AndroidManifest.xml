@@ -29,6 +29,7 @@
                 android:name=".activity.ServerImportActivity"
                 android:autoRemoveFromRecents="true"
                 android:noHistory="true"
+                android:label="@string/activity_label_import_servers"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
