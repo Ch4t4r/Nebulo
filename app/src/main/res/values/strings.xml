@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">SmokeScreen</string>
 
+    <string name="activity_label_import_queries">Import queries</string>
+
     <string name="all_stop">Stop</string>
     <string name="all_start">Start</string>
     <string name="all_no">No</string>

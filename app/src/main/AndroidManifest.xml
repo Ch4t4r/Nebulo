@@ -49,15 +49,34 @@
                         tools:ignore="AppLinkUrlError"/>
             </intent-filter>
             <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" />
-                <data android:scheme="http" />
-                <data android:pathPattern="/servers/.*" />
-                <data android:host="www.smokescreen.app" />
-                <data android:host="smokescreen.app" />
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="https"/>
+                <data android:scheme="http"/>
+                <data android:pathPattern="/servers/.*"/>
+                <data android:host="www.smokescreen.app"/>
+                <data android:host="smokescreen.app"/>
             </intent-filter>
+        </activity>
+        <activity
+                android:name=".activity.QueryImportActivity"
+                android:autoRemoveFromRecents="true"
+                android:noHistory="true"
+                android:label="@string/activity_label_import_queries"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                        android:mimeType="*/*"
+                        android:scheme="content"
+                        android:pathPattern=".*\\.querycsv"
+                        tools:ignore="AppLinkUrlError"/>
+            </intent-filter>
+
         </activity>
         <activity
                 android:name=".activity.BackgroundVpnConfigureActivity"
