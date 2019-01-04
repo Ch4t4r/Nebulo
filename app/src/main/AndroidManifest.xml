@@ -30,14 +30,25 @@
                 android:autoRemoveFromRecents="true"
                 android:noHistory="true"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
-            <intent-filter tools:ignore="AppLinkUrlError">
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data
-                        android:mimeType="application/octet-stream"
+                        android:mimeType="*/*"
+                        android:scheme="content"
                         android:pathPattern=".*\\.dohserver"
-                        />
+                        tools:ignore="AppLinkUrlError"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                        android:mimeType="*/*"
+                        android:scheme="file"
+                        android:pathPattern=".*\\.dohserver"
+                        tools:ignore="AppLinkUrlError"/>
+            </intent-filter>
+
         </activity>
         <activity
                 android:name=".activity.BackgroundVpnConfigureActivity"
