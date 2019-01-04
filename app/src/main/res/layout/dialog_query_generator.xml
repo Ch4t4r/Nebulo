@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/dialog_horizontal_margin"
+              android:paddingRight="@dimen/dialog_horizontal_margin"
+              android:paddingTop="@dimen/dialog_vertical_margin"
+              android:paddingBottom="@dimen/dialog_vertical_margin"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <EditText
+            android:layout_width="match_parent"
+            android:hint="Iterations"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:id="@+id/iterations"
+            android:layout_height="wrap_content"/>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:textColor="?android:attr/textColor"
+            android:text="Open base domains"
+            android:id="@+id/baseDomains"
+            android:layout_height="wrap_content"/>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:textColor="?android:attr/textColor"
+            android:text="Open deep urls"
+            android:id="@+id/deepurls"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

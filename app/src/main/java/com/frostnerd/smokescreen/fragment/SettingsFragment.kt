@@ -20,11 +20,8 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
-import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
 import com.frostnerd.smokescreen.util.preferences.Theme
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * Copyright Daniel Wolf 2018
@@ -167,66 +164,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
         generateQueries.setOnPreferenceClickListener {
-            val openWithChrome = { url:String ->
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.setPackage("com.android.chrome")
-                startActivity(intent)
-        }
-            val websites = setOf("bild.de", "washingtonpost.com", "cnn.com", "bbc.com", "nytimes.com", "huffingtonpost.com",
-                "reuters.com", "abcnews.go.com", "timesofindia.indiatimes.com", "theguardian.com", "bloomberg.com",
-                "Oneindia.com", "News18.com", "Hindustantimes.com", "Firstpost.com", "Indianexpress.com", "Manoramaonline.com",
-                "spiegel.de", "focus.de", "n-tv.de", "welt.de", "faz.net", "stern.de", "t3n.de", "facebook.com", "twitter.com",
-                "baidu.com", "yahoo.com", "instagram.com", "vk.com", "wikipedia.org", "qq.com", "taobao.com", "tmail.com",
-                "google.co.in", "google.com", "google.de", "reddit.com", "sohu.com", "live.com", "jd.com", "yandex.ru",
-                "weibo.com", "sina.com.cn", "google.co.jp", "360.cn", "login.tmail.com", "blogspot.com", "netflix.com",
-                "google.com.hk", "linkedin.com", "google.com.br", "google.co.uk", "yahoo.co.jp", "csdn.net", "pages.tmail.com",
-                "twitch.tv", "google.ru", "google.fr", "alipay.com", "office.com", "ebay.com", "microsoft.com", "bing.com",
-                "microsoftonline.com", "aliexpress.com", "msn.com", "naver.com", "ebay-kleinanzeigen.de", "paypal.com",
-                "t-online.de", "chip.de", "heise.de", "golem.de", "otto.de", "postbank.de", "whatsapp.com", "mobile.de",
-                "wetter.com", "wetter.de", "tumblr.com", "booking.com", "idealo.de", "bahn.de", "amazon.com", "amazon.de",
-                "ebay.de", "google.ch", "20min.ch", "blinck.ch", "srf.ch", "ricardo.ch", "bluewin.ch", "sbb.ch",
-                "postfinance.ch", "digitec.ch", "admin.ch", "gmx.de", "imdb.net", "gmx.at", "gmx.de", "tribunnews.com",
-                "stackoverflow.com", "apple.com", "wordpress.com", "imgur.com", "wikia.com", "amazon.co.uk", "pinterest.com",
-                "adobe.com", "amazon.in", "dropbox.com", "quora.com", "google.es", "google.cn", "amazonaws.com",
-                "salesforce.com", "chase.com", "spotify.com", "telegram.org", "steampowered.com", "skype.com", "sky.de",
-                "sky.com", "teamspeak.com", "maps.google.com", "9gag.com", "vw.de", "discord.gg", "nytimes.com",
-                "stackexchange.com", "craigslist.com", "soundcloud.com", "vimeo.com", "panda.tv", "ask.com",
-                "steamcommunity.com", "softonic.com", "dailymotion.com", "ebay.co.uk", "godaddy.com", "discordapp.com",
-                "vice.com", "walmart.com", "alibaba.com", "amazon.es", "cnet.com", "google.pl", "yelp.com", "duckduckgo.com",
-                "blogger.com", "wellsfargo.com", "deviantart.com", "wikihow.com", "dailymail.co.uk", "shutterstock.com",
-                "gamepedia.com", "amazon.ca", "udemy.com", "ikea.de", "ikea.com", "speedtest.com", "medium.com", "hulu.com",
-                "tripadvisor.com", "archive.org", "forbes.com", "airbnb.com", "genius.com", "americanexpress.com", "google.com.ua",
-                "businessinsider.com", "bitcoin.com", "bitcoin.de", "glassdor.com", "fiverr.com", "crunchyroll.com",
-                "sourceforge.net", "samsung.com", "fedex.com", "target.com", "google.gr", "dell.com", "lenovo.com",
-                "playstation.com", "siteadvisor.com", "hola.com", "oracle.com", "cnbc.com", "news.google.de", "upwork.com",
-                "icloud.com", "wp.pl", "nike.com", "web.de", "sohu.com", "weibo.com", "csdn.net", "mail.ru", "t.co", "naver.com",
-                "github.com", "msn.de", "googleusercontent.com", "lovoo.com","tinder.com","lovoo.de","tinder.de","gmail.com",
-                "viber.com", "hp.com", "snapchat.com", "minecraft.net", "minecraft.de", "minecraft.com", "mojang.com",
-                "bitmoji.com", "messenger.com", "cleanmasterofficial.com", "king.com", "itunes.apple.com", "line.me",
-                "flipboard.com", "translate.google.com", "uber.com", "pandora.com", "wish.com", "tiktok.com",
-                "fortnite.com", "epicgames.com", "geoguessr.com", "asoftmurmur.com", "camelcamelcamel.com",
-                "hackertyper.net", "xkcd.com", "flickr.com", "bit.ly", "w3.org", "europa.eu", "wp.com", "statcounter.com",
-                "jimdo.com", "weebly.com", "mozilla.org", "myspace.com", "stumpleupon.com", "gravatar.com",
-                "digg.com", "wixsite.com", "wix.com", "e-recht24.de", "slideshare.net", "telegraph.co.uk", "amzn.to",
-                "livejournal.com", "bing.com", "time.com", "immobilienscout24.de", "check24.de", "computerbild.de",
-                "dhl.de", "chefkoch.de", "booking.com", "mediamarkt.de", "idealo.de", "zdf.de", "gutefrage.net",
-                "pr0gramm.com", "statista.com", "germanglobe.com", "alexa.com", "tribunnews.com",
-                "Bukalapak.com", "Detik.com", "Google.co.id", "Tokopedia.com", "kompas.com", "Liputan6.com", "okezone.com",
-                "Sindonews.com", "grid.id", "Kumparan.com", "Merdeka.com", "Blibli.com", "Kapanlagi.com", "Uzone.id",
-                "Alodokter.com", "cnnindonesia.com", "viva.co.id", "viva.com", "brilio.net", "vidio.com", "Tempo.co",
-                "suara.com", "bola.net", "shopee.co.id", "wowkeren.com", "popads.net", "Academia.edu", "imdb.com",
-                "Instructure.com", "Etsy.com", "Bankofamerica.com", "force.com", "zillow.com", "bestbuy.com",
-                "Mercadolivre.com.br", "globo.com", "bet365.com", "fbcdn.net"
-                ).toList().shuffled()
-            GlobalScope.launch {
-                for (website in websites) {
-                    openWithChrome("http://$website")
-                    delay(30000)
-                    DnsVpnService.restartVpn(requireContext(), false)
-                    delay(2000)
-                }
-            }
+            QueryGeneratorDialog(requireContext())
             true
         }
     }
