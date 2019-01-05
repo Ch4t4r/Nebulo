@@ -39,6 +39,9 @@ class ProxyHandler(
         Inet6Address.getByName("::") as Inet6Address
     }
 
+    override fun name(): String {
+        return "ProxyHandler"
+    }
 
     override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
         throw RuntimeException("Won't ever be called")
