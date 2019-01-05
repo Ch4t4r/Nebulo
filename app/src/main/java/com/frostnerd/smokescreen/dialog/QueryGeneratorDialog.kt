@@ -15,6 +15,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import kotlin.random.Random
 
 /**
@@ -138,11 +139,15 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
             job = GlobalScope.launch {
                 context.log("Generating queries for ${urlsToUse.size} urls $runCount times", "[QueryGenerator]")
                 val callWithChrome = useChrome.isChecked
+                var domainCount = 0
                 for(i in 0 until runCount) {
                     urlsToUse.shuffle()
                     for (url in urlsToUse) {
                         openUrl(callWithChrome, if(url.startsWith("http")) url else "http://$url")
                         delay(20000 + Random.nextLong(0, 20000))
+                        if(++domainCount % 20 == 0 && callWithChrome) {
+                            killChrome()
+                        }
                         DnsVpnService.restartVpn(context, false)
                         delay(1500)
                     }
@@ -154,6 +159,15 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
             dialog.dismiss()
         }
         show()
+    }
+
+    private fun killChrome() {
+        try {
+            val process = Runtime.getRuntime().exec("su && ps -ef | grep chrome | grep -v grep | awk '{print \$2}' | xargs kill -9")
+            process.waitFor()
+        } catch (ex:Exception) {
+            ex.printStackTrace()
+        }
     }
 
     private fun showLoadingDialog() {
