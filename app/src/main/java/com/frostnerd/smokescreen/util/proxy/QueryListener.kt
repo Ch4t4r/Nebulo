@@ -31,7 +31,7 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
         }
 
         if (logQueriesToDb) {
-            val query = waitingQueryLogs[questionMessage.id]!!
+            val query = waitingQueryLogs[questionMessage.id] ?: return
             query.askedServer = askedServer
             context.getDatabase().dnsQueryDao().update(query)
         }
