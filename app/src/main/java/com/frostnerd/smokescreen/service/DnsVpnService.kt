@@ -530,9 +530,9 @@ class DnsVpnService : VpnService(), Runnable {
     private fun hasDeviceIpv4Address(): Boolean {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
-            val info = mgr.getNetworkInfo(network)
-            val capabilities = mgr.getNetworkCapabilities(network)
-            if (info != null && info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
+            val info = mgr.getNetworkInfo(network) ?: continue
+            val capabilities = mgr.getNetworkCapabilities(network) ?: continue
+            if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet4Address && !linkAddress.address.isLoopbackAddress) {
@@ -547,9 +547,9 @@ class DnsVpnService : VpnService(), Runnable {
     private fun hasDeviceIpv6Address(): Boolean {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
-            val info = mgr.getNetworkInfo(network)
-            val capabilities = mgr.getNetworkCapabilities(network)
-            if (info != null && info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
+            val info = mgr.getNetworkInfo(network) ?: continue
+            val capabilities = mgr.getNetworkCapabilities(network) ?: continue
+            if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet6Address && !linkAddress.address.isLoopbackAddress) {
@@ -564,9 +564,9 @@ class DnsVpnService : VpnService(), Runnable {
     private fun getDhcpDnsServers():List<InetAddress> {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
-            val info = mgr.getNetworkInfo(network)
-            val capabilities = mgr.getNetworkCapabilities(network)
-            if (info != null && info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
+            val info = mgr.getNetworkInfo(network) ?: continue
+            val capabilities = mgr.getNetworkCapabilities(network) ?: continue
+            if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
                 return linkProperties.dnsServers
             }
@@ -627,10 +627,10 @@ class DnsVpnService : VpnService(), Runnable {
             log("Creating bypass handlers for search domains of connected networks.")
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             for (network in mgr.allNetworks) {
-                val networkInfo = mgr.getNetworkInfo(network)
-                if (networkInfo != null && networkInfo.isConnected && !mgr.isVpnNetwork(network)) {
-                    val linkProperties = mgr.getLinkProperties(network)
-                    if (linkProperties != null && !linkProperties.domains.isNullOrBlank()) {
+                val networkInfo = mgr.getNetworkInfo(network) ?: continue
+                if (networkInfo.isConnected && !mgr.isVpnNetwork(network)) {
+                    val linkProperties = mgr.getLinkProperties(network) ?: continue
+                    if (!linkProperties.domains.isNullOrBlank()) {
                         log("Bypassing domains ${linkProperties.domains} for network of type ${networkInfo.typeName}")
                         val domains = linkProperties.domains.split(",").toList()
                         bypassHandlers.add(
