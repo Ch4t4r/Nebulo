@@ -28,6 +28,10 @@ class ProxyBypassHandler(val searchDomains:List<String>, val destinationDnsServe
         }
     }
 
+    override fun name(): String {
+        return "ProxyBypassHandler[$searchDomains]"
+    }
+
     override suspend fun forwardDnsQuestion(
         dnsMessage: DnsMessage,
         originalEnvelope: IpPacket,
