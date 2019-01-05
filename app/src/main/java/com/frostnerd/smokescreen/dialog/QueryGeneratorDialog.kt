@@ -123,6 +123,8 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
         val iterations = view.findViewById<EditText>(R.id.iterations)
         val callDomains = view.findViewById<CheckBox>(R.id.baseDomains)
         val callDeepurls = view.findViewById<CheckBox>(R.id.deepurls)
+        val useChrome = view.findViewById<CheckBox>(R.id.useChrome)
+
         setView(view)
         setButton(DialogInterface.BUTTON_POSITIVE, "Go") { dialog, _ ->
             val urlsToUse:MutableList<String> = mutableListOf()
@@ -135,10 +137,11 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
             val runCount = iterations.text.toString().toIntOrNull() ?: 1
             job = GlobalScope.launch {
                 context.log("Generating queries for ${urlsToUse.size} urls $runCount times", "[QueryGenerator]")
+                val callWithChrome = useChrome.isChecked
                 for(i in 0 until runCount) {
                     urlsToUse.shuffle()
                     for (url in urlsToUse) {
-                        openWithChrome(if(url.startsWith("http")) url else "http://$url")
+                        openUrl(callWithChrome, if(url.startsWith("http")) url else "http://$url")
                         delay(20000 + Random.nextLong(0, 20000))
                         DnsVpnService.restartVpn(context, false)
                         delay(1500)
@@ -169,12 +172,13 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
         } else loadingDialog?.show()
     }
 
-    private fun openWithChrome(url:String){
+    private fun openUrl(withChrome:Boolean, url:String){
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-        intent.setPackage("com.aplustech.minimalbrowserxfree")
+        if(withChrome) intent.setPackage("com.android.chrome")
+        else intent.setPackage("com.aplustech.minimalbrowserxfree")
         context.startActivity(intent)
     }
 }

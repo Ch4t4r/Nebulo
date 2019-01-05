@@ -30,4 +30,11 @@
             android:id="@+id/deepurls"
             android:layout_height="wrap_content"/>
 
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:textColor="?android:attr/textColor"
+            android:text="Open deep urls"
+            android:id="@+id/useChrome"
+            android:layout_height="wrap_content"/>
+
 </LinearLayout>
