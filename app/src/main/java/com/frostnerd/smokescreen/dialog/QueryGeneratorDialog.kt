@@ -123,7 +123,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
                     urlsToUse.shuffle()
                     for (url in urlsToUse) {
                         openWithChrome(if(url.startsWith("http")) url else "http://$url")
-                        delay(20000 + Random.nextLong(0, 25000))
+                        delay(20000 + Random.nextLong(0, 20000))
                         DnsVpnService.restartVpn(context, false)
                         delay(1500)
                     }
@@ -155,8 +155,10 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
 
     private fun openWithChrome(url:String){
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.setPackage("com.android.chrome")
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+        intent.setPackage("com.aplustech.minimalbrowserxfree")
         context.startActivity(intent)
     }
 }
