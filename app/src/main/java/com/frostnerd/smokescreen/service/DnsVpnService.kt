@@ -531,7 +531,8 @@ class DnsVpnService : VpnService(), Runnable {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
             val info = mgr.getNetworkInfo(network)
-            if (info != null && info.isConnected) {
+            val capabilities = mgr.getNetworkCapabilities(network)
+            if (info != null && info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet4Address && !linkAddress.address.isLoopbackAddress) {
@@ -547,7 +548,8 @@ class DnsVpnService : VpnService(), Runnable {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
             val info = mgr.getNetworkInfo(network)
-            if (info != null && info.isConnected) {
+            val capabilities = mgr.getNetworkCapabilities(network)
+            if (info != null && info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet6Address && !linkAddress.address.isLoopbackAddress) {
@@ -563,7 +565,8 @@ class DnsVpnService : VpnService(), Runnable {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
             val info = mgr.getNetworkInfo(network)
-            if (info != null && info.isConnected) {
+            val capabilities = mgr.getNetworkCapabilities(network)
+            if (info != null && info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
                 return linkProperties.dnsServers
             }
