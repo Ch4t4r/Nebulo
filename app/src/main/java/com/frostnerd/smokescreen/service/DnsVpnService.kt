@@ -648,7 +648,9 @@ class DnsVpnService : VpnService(), Runnable {
             val dhcpServers = getDhcpDnsServers()
             if(!dhcpServers.isEmpty()) bypassHandlers.add(CaptivePortalUdpDnsHandle(targetDnsServer = { dhcpServers.first() }))
         }
-        bypassHandlers.add(NoConnectionDnsHandle(NoConnectionDnsHandle.Behavior.DROP_PACKETS, null))
+        bypassHandlers.add(NoConnectionDnsHandle(NoConnectionDnsHandle.Behavior.DROP_PACKETS) {
+            log("Connection changed to connected=$it", "NoConnectionDnsHandle-Listener")
+        })
         return bypassHandlers
     }
 

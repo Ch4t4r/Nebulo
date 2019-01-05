@@ -91,6 +91,7 @@ class Logger private constructor(context: Context) {
     private val logFile: File
     private val fileWriter: BufferedWriter
     private val printToConsole = BuildConfig.DEBUG
+    private lateinit var oldPrintStream:PrintStream
     var enabled: Boolean = true
 
     init {
@@ -112,6 +113,13 @@ class Logger private constructor(context: Context) {
         log("Device: ${Build.MODEL} from ${Build.MANUFACTURER} (Device: ${Build.DEVICE}, Product: ${Build.PRODUCT})")
         log("Language: ${Locale.getDefault().displayLanguage}")
         log("------------------------------", tag = null)
+        oldPrintStream = System.err
+        System.setErr(object: PrintStream(oldPrintStream) {
+            override fun println(x: String?) {
+                super.println(x)
+                log(x ?: "", "System.Err")
+            }
+        })
     }
 
     companion object {
@@ -180,6 +188,7 @@ class Logger private constructor(context: Context) {
         enabled = false
         instance = null
         fileWriter.close()
+        System.setErr(oldPrintStream)
     }
 
     fun log(text: String, tag: String? = "Info", vararg formatArgs: Any) {
