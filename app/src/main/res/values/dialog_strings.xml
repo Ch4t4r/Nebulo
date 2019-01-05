@@ -30,7 +30,7 @@
     <string name="dialog_serverimportfailed_text">The server(s) could not be imported.</string>
     <string name="dialog_serverimportfailed_text_exception">The server(s) could not be imported.\n(%1s)</string>
 
-    <string name="dialog_logexport_text">How to you want to share the logs?</string>
+    <string name="dialog_logexport_text">How do you want to share the logs?</string>
     <string name="dialog_logexport_general">General export</string>
     <string name="dialog_logexport_email">E-Mail</string>
 
