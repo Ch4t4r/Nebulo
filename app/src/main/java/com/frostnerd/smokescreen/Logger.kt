@@ -91,7 +91,8 @@ class Logger private constructor(context: Context) {
     private val logFile: File
     private val fileWriter: BufferedWriter
     private val printToConsole = BuildConfig.DEBUG
-    private lateinit var oldPrintStream:PrintStream
+    private var oldPrintStream:PrintStream
+    private var oldSystemOut: PrintStream
     var enabled: Boolean = true
 
     init {
@@ -114,10 +115,17 @@ class Logger private constructor(context: Context) {
         log("Language: ${Locale.getDefault().displayLanguage}")
         log("------------------------------", tag = null)
         oldPrintStream = System.err
+        oldSystemOut = System.out
         System.setErr(object: PrintStream(oldPrintStream) {
             override fun println(x: String?) {
                 super.println(x)
                 log(x ?: "", "System.Err")
+            }
+        })
+        System.setOut(object:PrintStream(oldSystemOut) {
+            override fun println(x: String?) {
+                super.println(x)
+                log(x ?: "", "System.Out")
             }
         })
     }
