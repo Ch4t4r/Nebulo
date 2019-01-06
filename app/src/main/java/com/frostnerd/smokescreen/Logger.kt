@@ -197,6 +197,7 @@ class Logger private constructor(context: Context) {
         instance = null
         fileWriter.close()
         System.setErr(oldPrintStream)
+        System.setOut(oldSystemOut)
     }
 
     fun log(text: String, tag: String? = "Info", vararg formatArgs: Any) {
