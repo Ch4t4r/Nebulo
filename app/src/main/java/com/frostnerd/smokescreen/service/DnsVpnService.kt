@@ -213,6 +213,7 @@ class DnsVpnService : VpnService(), Runnable {
         notificationBuilder.setOngoing(true)
         notificationBuilder.setAutoCancel(false)
         notificationBuilder.setSound(null)
+        notificationBuilder.setOnlyAlertOnce(true)
         notificationBuilder.setUsesChronometer(true)
         notificationBuilder.setContentIntent(
             PendingIntent.getActivity(
