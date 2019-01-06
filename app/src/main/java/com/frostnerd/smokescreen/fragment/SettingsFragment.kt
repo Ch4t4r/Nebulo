@@ -132,7 +132,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val exportQueries = findPreference("export_dns_queries")
         val generateQueries = findPreference("generate_queries")
 
-        if(!BuildConfig.DEBUG) generateQueries.isVisible = false
+        generateQueries.isVisible = !BuildConfig.DEBUG || BuildConfig.VERSION_NAME.contains("debug", true)
 
         queryLogging.setOnPreferenceChangeListener { _, newValue ->
             requireContext().getPreferences().queryLoggingEnabled = newValue as Boolean
