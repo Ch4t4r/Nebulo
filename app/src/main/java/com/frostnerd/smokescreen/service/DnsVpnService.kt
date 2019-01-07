@@ -196,7 +196,9 @@ class DnsVpnService : VpnService(), Runnable {
             "show_notification_on_lockscreen",
             "hide_notification_icon",
             "pause_on_captive_portal",
-            "null_terminate_keweon"
+            "null_terminate_keweon",
+            "allow_ipv6_traffic",
+            "allow_ipv4_traffic"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
             log("The Preference $key has changed, restarting the VPN.")
@@ -503,13 +505,11 @@ class DnsVpnService : VpnService(), Runnable {
         if (useIpv4) {
             builder.addDnsServer(dummyServerIpv4)
             builder.addRoute(dummyServerIpv4, 32)
-            builder.allowFamily(OsConstants.AF_INET)
-        }
+        } else if(getPreferences().allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv6 connections work anymore.
         if (useIpv6) {
             builder.addDnsServer(dummyServerIpv6)
             builder.addRoute(dummyServerIpv6, 128)
-            builder.allowFamily(OsConstants.AF_INET6)
-        }
+        } else if(getPreferences().allowIpv6Traffic) builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
 
         log("Applying disallowed packages.")

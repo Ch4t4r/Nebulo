@@ -100,17 +100,17 @@
                 android:summary="@string/summary_delete_all_logs"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/preference_category_network">
-        <CheckBoxPreference
-                android:key="disallow_other_vpns"
-                android:title="@string/title_disallow_other_vpns"
-                android:summary="@string/summary_disallow_other_vpns"
-                android:defaultValue="false"/>
+    <PreferenceCategory android:title="@string/preference_category_ip">
         <CheckBoxPreference
                 android:key="ipv4_enabled"
                 android:title="@string/title_enable_ipv4"
                 android:defaultValue="true"
                 android:summary="@string/summary_enable_ipv4"/>
+        <CheckBoxPreference
+                android:key="allow_ipv4_traffic"
+                android:title="@string/title_allow_ipv4_traffic"
+                android:summary="@string/summary_allow_ipv4_traffic"
+                />
         <CheckBoxPreference
                 android:key="force_ipv4"
                 android:defaultValue="false"
@@ -122,10 +122,25 @@
                 android:defaultValue="true"
                 android:summary="@string/summary_enable_ipv6"/>
         <CheckBoxPreference
+                android:key="allow_ipv6_traffic"
+                android:title="@string/title_allow_ipv6_traffic"
+                android:summary="@string/summary_allow_ipv6_traffic"
+                />
+        <CheckBoxPreference
                 android:key="force_ipv6"
                 android:defaultValue="false"
                 android:title="@string/title_force_ipv6"
                 android:summary="@string/summary_force_ipv6"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preference_category_network">
+        <CheckBoxPreference
+                android:key="disallow_other_vpns"
+                android:title="@string/title_disallow_other_vpns"
+                android:summary="@string/summary_disallow_other_vpns"
+                android:defaultValue="false"/>
+
 
         <CheckBoxPreference
                 android:key="bypass_searchdomains"

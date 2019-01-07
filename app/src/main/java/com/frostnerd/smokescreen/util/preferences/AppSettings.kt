@@ -64,12 +64,18 @@ interface AppSettings {
     // Logging category
     var loggingEnabled: Boolean
 
-    // Network category
-    var disallowOtherVpns: Boolean
+
+    // IP category
     var enableIpv6: Boolean
     var enableIpv4: Boolean
     var forceIpv6: Boolean
     var forceIpv4: Boolean
+    var allowIpv6Traffic:Boolean
+    var allowIpv4Traffic:Boolean
+
+    // Network category
+    var disallowOtherVpns: Boolean
+
     var bypassSearchdomains: Boolean
     var nullTerminateKeweon: Boolean
     var pauseOnCaptivePortal:Boolean
@@ -144,11 +150,15 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         BuildConfig.VERSION_NAME.contains("alpha", true)
     )
 
-    override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
     override var enableIpv6: Boolean by booleanPref("ipv6_enabled", true)
     override var enableIpv4: Boolean by booleanPref("ipv4_enabled", true)
     override var forceIpv6: Boolean by booleanPref("force_ipv6", false)
     override var forceIpv4: Boolean by booleanPref("force_ipv4", false)
+    override var allowIpv4Traffic: Boolean by booleanPref("allow_ipv4_traffic", true)
+    override var allowIpv6Traffic: Boolean by booleanPref("allow_ipv6_traffic", true)
+
+
+    override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
     override var nullTerminateKeweon: Boolean by booleanPref("null_terminate_keweon", false)
     override var pauseOnCaptivePortal: Boolean by booleanPref("pause_on_captive_portal", true)
