@@ -200,14 +200,15 @@ class DnsVpnService : VpnService(), Runnable {
             "allow_ipv6_traffic",
             "allow_ipv4_traffic"
         )
-        settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
-            log("The Preference $key has changed, restarting the VPN.")
-            if(key == "show_notification_on_lockscreen" || key == "hide_notification_icon") {
+        settingsSubscription = getPreferences().listenForChanges(relevantSettings) { changes ->
+            log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
+            if("hide_notification_icon" in changes || "hide_notification_icon" in changes) {
                 log("Recreating the notification because of the change in preferences")
                 createNotification()
                 setNotificationText()
             }
-            recreateVpn(key == "doh_server_url_primary" || key == "doh_server_url_secondary", null)
+            val reload = "doh_server_url_primary" in changes || "doh_server_url_secondary" in changes
+            recreateVpn(reload, null)
         }
         log("Subscribed.")
     }
@@ -439,6 +440,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
         val builder = Builder()
+
         val useIpv6 = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
         val useIpv4 =
             !useIpv6 || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
