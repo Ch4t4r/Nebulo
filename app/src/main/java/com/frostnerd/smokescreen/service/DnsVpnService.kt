@@ -115,14 +115,20 @@ class DnsVpnService : VpnService(), Runnable {
         fun restartVpn(context: Context, primaryServerUrl: String?, secondaryServerUrl: String?) {
             if(context.isServiceRunning(DnsVpnService::class.java)) {
                 val bundle = Bundle()
-                if (primaryServerUrl != null) bundle.putString(
-                    BackgroundVpnConfigureActivity.extraKeyPrimaryUrl,
-                    primaryServerUrl
-                )
-                if (secondaryServerUrl != null) bundle.putString(
-                    BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
-                    secondaryServerUrl
-                )
+                if (primaryServerUrl != null) {
+                    bundle.putString(
+                        BackgroundVpnConfigureActivity.extraKeyPrimaryUrl,
+                        primaryServerUrl
+                    )
+                    bundle.putBoolean("fetch_servers", true)
+                }
+                if (secondaryServerUrl != null) {
+                    bundle.putString(
+                        BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
+                        secondaryServerUrl
+                    )
+                    bundle.putBoolean("fetch_servers", true)
+                }
                 sendCommand(context, Command.RESTART, bundle)
             } else startVpn(context, primaryServerUrl, secondaryServerUrl)
         }
@@ -272,8 +278,8 @@ class DnsVpnService : VpnService(), Runnable {
                 }
                 Command.RESTART -> {
                     log("Received RESTART command, restarting vpn.")
-                    setNotificationText()
                     recreateVpn(intent.getBooleanExtra("fetch_servers", false), intent)
+                    setNotificationText()
                 }
             }
         } else {
@@ -333,11 +339,13 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun setNotificationText() {
+        val secondaryServer = getSecondaryServer()
+        val primaryServer = getPrimaryServer()
         val text = if (secondaryServer != null) {
             getString(
                 if(getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
                 primaryServer.urlCreator.baseUrl,
-                secondaryServer!!.urlCreator.baseUrl,
+                secondaryServer.urlCreator.baseUrl,
                 packageBypassAmount,
                 dnsProxy?.cache?.livingCachedEntries() ?: 0
             )
@@ -592,13 +600,24 @@ class DnsVpnService : VpnService(), Runnable {
         return emptyList()
     }
 
+    private fun getPrimaryServer(): ServerConfiguration {
+        return if(primaryUserServerUrl != null) ServerConfiguration.createSimpleServerConfig(primaryUserServerUrl!!)
+        else primaryServer
+    }
+
+    private fun getSecondaryServer(): ServerConfiguration? {
+        return if(secondaryUserServerUrl != null) ServerConfiguration.createSimpleServerConfig(secondaryUserServerUrl!!)
+        else secondaryServer
+    }
+
     override fun run() {
         log("run() called")
         val list = mutableListOf<ServerConfiguration>()
-        list.add(primaryServer)
-        if (secondaryServer != null) list.add(secondaryServer!!)
-        log("Using primary server: $primaryServer")
-        log("Using secondary server: $secondaryServer")
+        list.add(getPrimaryServer())
+        val secondary = getSecondaryServer()
+        if (secondary != null) list.add(secondary)
+        log("Using primary server: ${list.first()}")
+        log("Using secondary server: ${list.getOrNull(1)}")
 
         log("Creating handle.")
         handle = ProxyHandler(
