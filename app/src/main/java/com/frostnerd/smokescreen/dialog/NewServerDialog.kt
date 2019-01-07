@@ -34,6 +34,7 @@ import kotlinx.android.synthetic.main.dialog_new_server.*
  */
 class NewServerDialog(
     context: Context,
+    title:String? = null,
     onServerAdded: (serverInfo: HttpsDnsServerInformation) -> Unit
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
 
@@ -44,7 +45,8 @@ class NewServerDialog(
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_server, null, false)
-        setTitle(R.string.dialog_newserver_title)
+        if(title != null) setTitle(title)
+        else setTitle(R.string.dialog_newserver_title)
         setView(view)
 
         setButton(

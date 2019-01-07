@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
 
     <application
             android:name=".SmokeScreen"
@@ -25,6 +26,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".activity.ShortcutActivity"
+                android:exported="true"
+                android:launchMode="singleTop"
+                android:noHistory="true"
+                android:autoRemoveFromRecents="true"
+                android:taskAffinity="com.frostnerd.smokescreen.ShortcutTask"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
         <activity
                 android:name=".activity.ServerImportActivity"
                 android:autoRemoveFromRecents="true"

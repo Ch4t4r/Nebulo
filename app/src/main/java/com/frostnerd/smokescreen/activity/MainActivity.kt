@@ -15,6 +15,7 @@ import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
@@ -49,10 +50,10 @@ class MainActivity : NavigationDrawerActivity() {
         super.onCreate(savedInstanceState)
         Logger.enabledGlobally = getPreferences().loggingEnabled
         AbstractHttpsDNSHandle // Loads the known servers.
-        setCardView { viewParent, suggestedHeight ->
+        /*setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             view
-        }
+        }*/
     }
 
     override fun createDrawerItems(): MutableList<DrawerItem> {
@@ -72,6 +73,16 @@ class MainActivity : NavigationDrawerActivity() {
                         QueryLogFragment()
                     })
             }
+            divider()
+            clickableItem(getString(R.string.menu_create_shortcut),
+                iconLeft = getDrawable(R.drawable.ic_external_link),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    NewServerDialog(this@MainActivity, title = getString(R.string.menu_create_shortcut), onServerAdded = {
+                        ShortcutActivity.createShortcut(this@MainActivity, it)
+                    }).show()
+                    false
+                })
             divider()
             clickableItem(getString(R.string.menu_rate),
                 iconLeft = getDrawable(R.drawable.ic_star),
