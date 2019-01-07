@@ -16,6 +16,7 @@ import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 import com.frostnerd.general.CombinedIterator
+import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.networking.NetworkUtil
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
@@ -104,22 +105,26 @@ class DnsVpnService : VpnService(), Runnable {
         }
 
         fun restartVpn(context: Context, fetchServersFromSettings: Boolean) {
-            val bundle = Bundle()
-            bundle.putBoolean("fetch_servers", fetchServersFromSettings)
-            sendCommand(context, Command.RESTART, bundle)
+            if(context.isServiceRunning(DnsVpnService::class.java)) {
+                val bundle = Bundle()
+                bundle.putBoolean("fetch_servers", fetchServersFromSettings)
+                sendCommand(context, Command.RESTART, bundle)
+            } else startVpn(context)
         }
 
         fun restartVpn(context: Context, primaryServerUrl: String?, secondaryServerUrl: String?) {
-            val bundle = Bundle()
-            if (primaryServerUrl != null) bundle.putString(
-                BackgroundVpnConfigureActivity.extraKeyPrimaryUrl,
-                primaryServerUrl
-            )
-            if (secondaryServerUrl != null) bundle.putString(
-                BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
-                secondaryServerUrl
-            )
-            sendCommand(context, Command.RESTART, bundle)
+            if(context.isServiceRunning(DnsVpnService::class.java)) {
+                val bundle = Bundle()
+                if (primaryServerUrl != null) bundle.putString(
+                    BackgroundVpnConfigureActivity.extraKeyPrimaryUrl,
+                    primaryServerUrl
+                )
+                if (secondaryServerUrl != null) bundle.putString(
+                    BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
+                    secondaryServerUrl
+                )
+                sendCommand(context, Command.RESTART, bundle)
+            } else startVpn(context, primaryServerUrl, secondaryServerUrl)
         }
 
         fun sendCommand(context: Context, command: Command, extras: Bundle? = null) {
