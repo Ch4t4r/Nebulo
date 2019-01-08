@@ -1,0 +1,40 @@
+image: openjdk:8-jdk
+variables:
+  ANDROID_COMPILE_SDK: "28"
+  ANDROID_BUILD_TOOLS: "28.0.2"
+  ANDROID_SDK_TOOLS: "26.1.1"
+
+stages:
+ - build
+
+before_script:
+  - source /home/public/android-sdk-linux/initAndroid.sh -s ${ANDROID_COMPILE_SDK} -b ${ANDROID_BUILD_TOOLS}
+
+
+build_debug:
+  stage: build
+  script:
+    - /./home/public/gitrunner/changeAppVersion.sh app/build.gradle " $CI_COMMIT_REF_NAME\_$CI_PIPELINE_ID" --append
+    - ./gradlew assembleDebug --stacktrace
+  artifacts:
+    paths:
+    - app/build/outputs/apk/debug/app-debug.apk
+  except:
+    - /^no_ci.*$/
+    - /^no_build.*$/
+    - /^no_build_no_tests.*$/
+    - /^no_build_no_deploy.*$/
+
+build_release:
+  stage: build
+  script:
+   - ./gradlew clean check assembleRelease --stacktrace -Pandroid.injected.signing.store.file=$KEYSTORE_FILE -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=$KEYSTORE_KEY_NAME -Pandroid.injected.signing.key.password=$KEYSTORE_KEY_PASSWORD -x test
+  except:
+    - /^no_ci.*$/
+    - /^no_build.*$/
+    - /^no_build_no_tests.*$/
+    - /^no_build_no_deploy.*$/
+  artifacts:
+    paths:
+    - app/release/release.apk
+
