@@ -469,8 +469,8 @@ class DnsVpnService : VpnService(), Runnable {
         val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
         log("Dummy address for Ipv4: $dummyServerIpv4")
         log("Dummy address for Ipv6: $dummyServerIpv6")
-        log("Using IPv6: $useIpv6, Ipv6 Traffic allowed: $allowIpv4Traffic")
-        log("Using IPv4: $useIpv4, Ipv4 Traffic allowed: $allowIpv6Traffic")
+        log("Using IPv4: $useIpv4 (device has IPv4: $deviceHasIpv4), Ipv4 Traffic allowed: $allowIpv4Traffic")
+        log("Using IPv6: $useIpv6 (device has IPv6: $deviceHasIpv6), Ipv6 Traffic allowed: $allowIpv6Traffic")
 
         var couldSetAddress = false
         if (useIpv4) {
