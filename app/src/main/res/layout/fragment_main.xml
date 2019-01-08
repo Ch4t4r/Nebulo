@@ -34,6 +34,7 @@
                 android:drawableStart="@drawable/ic_info_circle"
                 android:text="@string/main_dnssurveillance_infotext"
                 android:drawablePadding="8dp"
+                android:contentDescription="@string/contentdescription_main_infoimage"
                 android:layout_marginBottom="8dp"
                 android:layout_height="wrap_content"/>
 
