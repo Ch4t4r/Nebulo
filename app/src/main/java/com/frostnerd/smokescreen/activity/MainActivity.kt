@@ -14,13 +14,10 @@ import com.frostnerd.navigationdraweractivity.items.createMenu
 import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.AppDatabase
-import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

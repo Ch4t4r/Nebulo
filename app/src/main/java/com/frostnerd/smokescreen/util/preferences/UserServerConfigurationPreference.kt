@@ -3,7 +3,6 @@ package com.frostnerd.smokescreen.util.preferences
 import android.content.SharedPreferences
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
-import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
 import com.google.gson.stream.JsonReader

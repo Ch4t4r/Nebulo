@@ -7,10 +7,12 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
-import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
 import kotlinx.android.synthetic.main.dialog_server_configuration.*

@@ -1,6 +1,5 @@
 package com.frostnerd.smokescreen.fragment.querylogfragment
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +8,6 @@ import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import kotlinx.android.synthetic.main.fragment_querylog_detail.*
-import java.text.DateFormat
-import java.util.*
 
 
 /*

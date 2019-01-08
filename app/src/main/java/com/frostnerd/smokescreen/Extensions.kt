@@ -15,8 +15,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.contract
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

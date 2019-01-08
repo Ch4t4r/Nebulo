@@ -1,7 +1,6 @@
 package com.frostnerd.smokescreen.database.repository
 
 import android.content.Context
-import androidx.room.Insert
 import com.frostnerd.smokescreen.database.converters.StringListConverter
 import com.frostnerd.smokescreen.database.dao.DnsQueryDao
 import com.frostnerd.smokescreen.database.entities.DnsQuery
@@ -9,7 +8,6 @@ import kotlinx.coroutines.*
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
-import java.lang.StringBuilder
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

@@ -4,11 +4,7 @@ import com.frostnerd.dnstunnelproxy.DnsHandle
 import com.frostnerd.dnstunnelproxy.DnsPacketProxy
 import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.dnstunnelproxy.SimpleDnsCache
-import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.service.DnsVpnService
-import com.frostnerd.vpntunnelproxy.FutureAnswer
-import org.minidns.dnsmessage.DnsMessage
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

@@ -2,10 +2,6 @@ package com.frostnerd.smokescreen.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ShortcutInfo
-import android.content.pm.ShortcutManager
-import android.graphics.drawable.Icon
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -13,7 +9,6 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.general.StringUtil
-import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.service.DnsVpnService
 
@@ -56,8 +51,8 @@ class ShortcutActivity : AppCompatActivity() {
             val targetIntent = Intent(context, ShortcutActivity::class.java)
             targetIntent.action = "${context.packageName}.dummy_action"
             targetIntent.putExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl, primaryServerUrl)
-            targetIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            targetIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            targetIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            targetIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             if (secondaryServerUrl != null) targetIntent.putExtra(
                 BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
                 secondaryServerUrl

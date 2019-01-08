@@ -1,7 +1,10 @@
 package com.frostnerd.smokescreen.database.entities
 
 import android.util.Base64
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.frostnerd.smokescreen.database.converters.DnsTypeConverter
 import com.frostnerd.smokescreen.database.converters.StringListConverter
 import com.frostnerd.smokescreen.database.recordFromBase64
