@@ -36,6 +36,6 @@ build_release:
     - /^no_build_no_deploy.*$/
   artifacts:
     paths:
-    - app/release/release.apk
+    - app/build/outputs/apk/release/app-release.apk
     - app/build/outputs/mapping/release/mapping.txt
 
