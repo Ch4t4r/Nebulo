@@ -462,12 +462,15 @@ class DnsVpnService : VpnService(), Runnable {
         val useIpv4 =
             !useIpv6 || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || deviceHasIpv4))
 
+        val allowIpv4Traffic = useIpv4 || getPreferences().allowIpv4Traffic
+        val allowIpv6Traffic = useIpv6 || getPreferences().allowIpv6Traffic
+
         val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
         val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
         log("Dummy address for Ipv4: $dummyServerIpv4")
         log("Dummy address for Ipv6: $dummyServerIpv6")
-        log("Using IPv6: $useIpv6")
-        log("Using IPv4: $useIpv4")
+        log("Using IPv6: $useIpv6, Ipv6 Traffic allowed: $allowIpv4Traffic")
+        log("Using IPv4: $useIpv4, Ipv4 Traffic allowed: $allowIpv6Traffic")
 
         var couldSetAddress = false
         if (useIpv4) {
@@ -524,11 +527,11 @@ class DnsVpnService : VpnService(), Runnable {
         if (useIpv4) {
             builder.addDnsServer(dummyServerIpv4)
             builder.addRoute(dummyServerIpv4, 32)
-        } else if(deviceHasIpv4 && getPreferences().allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
+        } else if(deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
         if (useIpv6) {
             builder.addDnsServer(dummyServerIpv6)
             builder.addRoute(dummyServerIpv6, 128)
-        } else if(deviceHasIpv6 && getPreferences().allowIpv6Traffic) builder.allowFamily(OsConstants.AF_INET6)
+        } else if(deviceHasIpv6 && allowIpv6Traffic) builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
 
         log("Applying disallowed packages.")
