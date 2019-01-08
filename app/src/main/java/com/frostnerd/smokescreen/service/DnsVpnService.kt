@@ -453,6 +453,10 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val activeNetwork = (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetwork
+            log("Current active network: $activeNetwork")
+        }
         val builder = Builder()
 
         val deviceHasIpv6 = hasDeviceIpv6Address()
