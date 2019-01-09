@@ -23,14 +23,23 @@ import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
 import com.frostnerd.smokescreen.util.preferences.Theme
 
-/**
- * Copyright Daniel Wolf 2018
- * All rights reserved.
- * Code may NOT be used without proper permission, neither in binary nor in source form.
- * All redistributions of this software in source code must retain this copyright header
- * All redistributions of this software in binary form must visibly inform users about usage of this software
+/*
+ * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
  *
- * development@frostnerd.com
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class SettingsFragment : PreferenceFragmentCompat() {
     private var werePreferencesAdded = false
@@ -123,6 +132,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         processGeneralCategory()
         processCacheCategory()
         processLoggingCategory()
+        processIPCategory()
         processNetworkCategory()
         processQueryCategory()
     }
@@ -185,17 +195,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    private fun processNetworkCategory() {
+    private fun processIPCategory() {
         val ipv6 = findPreference("ipv6_enabled") as CheckBoxPreference
         val ipv4 = findPreference("ipv4_enabled") as CheckBoxPreference
         val forceIpv6 = findPreference("force_ipv6") as CheckBoxPreference
         val forceIpv4 = findPreference("force_ipv4") as CheckBoxPreference
+        val allowIpv6Traffic = findPreference("allow_ipv6_traffic") as CheckBoxPreference
+        val allowIpv4Traffic = findPreference("allow_ipv4_traffic") as CheckBoxPreference
 
         val updateState = { ipv6Enabled: Boolean, ipv4Enabled: Boolean ->
             ipv4.isEnabled = ipv6Enabled
             ipv6.isEnabled = ipv4Enabled
             forceIpv6.isEnabled = ipv6Enabled && ipv6.isEnabled
             forceIpv4.isEnabled = ipv4Enabled && ipv4.isEnabled
+            allowIpv6Traffic.isEnabled = !ipv6Enabled
+            allowIpv4Traffic.isEnabled = !ipv4Enabled
+            if(!ipv6.isChecked && ipv6Enabled) allowIpv6Traffic.isChecked = true
+            if(!ipv4.isChecked && ipv4Enabled) allowIpv4Traffic.isChecked = true
         }
         updateState(ipv6.isChecked, ipv4.isChecked)
         ipv6.setOnPreferenceChangeListener { _, newValue ->
@@ -206,6 +222,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             updateState(ipv6.isChecked, newValue as Boolean)
             true
         }
+    }
+
+    private fun processNetworkCategory() {
+
     }
 
     private fun processCacheCategory() {

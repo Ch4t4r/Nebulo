@@ -53,10 +53,8 @@
     <string name="title_delete_all_logs">Delete all logs</string>
     <string name="summary_delete_all_logs">Deletes all logs stored on your device.</string>
 
-    <string name="preference_category_network">Network</string>
 
-    <string name="title_disallow_other_vpns">Disallow other VPNs</string>
-    <string name="summary_disallow_other_vpns">Don\'t allow other VPNs to start if the app isn\'t explicitly stopped</string>
+    <string name="preference_category_ip">IP settings</string>
 
     <string name="title_enable_ipv6">Enable Ipv6</string>
     <string name="summary_enable_ipv6">Use IPv6, if the device has an IPv6 address assigned</string>
@@ -69,6 +67,18 @@
 
     <string name="title_force_ipv4">Force Ipv4</string>
     <string name="summary_force_ipv4">Force the app to accept IPv4 requests, even when the device doesn\'t use IPv4.</string>
+
+    <string name="title_allow_ipv4_traffic">Allow IPv4 traffic</string>
+    <string name="summary_allow_ipv4_traffic">Allow IPv4 traffic to be used, even if IPv4 is disabled.\nIf disabled no IPv4 connections are allowed while the app is running.</string>
+
+    <string name="title_allow_ipv6_traffic">Allow IPv6 traffic</string>
+    <string name="summary_allow_ipv6_traffic">Allow IPv6 traffic to be used, even if IPv4 is disabled.\nIf disabled no IPv6 connections are allowed while the app is running.</string>
+
+
+    <string name="preference_category_network">Network</string>
+
+    <string name="title_disallow_other_vpns">Disallow other VPNs</string>
+    <string name="summary_disallow_other_vpns">Don\'t allow other VPNs to start if the app isn\'t explicitly stopped</string>
 
     <string name="title_bypass_searchdomains">Searchdomains bypass</string>
     <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network.</string>

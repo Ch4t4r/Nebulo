@@ -14,13 +14,29 @@ import com.frostnerd.navigationdraweractivity.items.createMenu
 import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.AppDatabase
-import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
+/*
+ * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can contact the developer at daniel.wolf@frostnerd.com.
+ */
 class MainActivity : NavigationDrawerActivity() {
     private var textColor: Int = 0
     private var backgroundColor: Int = 0
@@ -31,10 +47,10 @@ class MainActivity : NavigationDrawerActivity() {
         super.onCreate(savedInstanceState)
         Logger.enabledGlobally = getPreferences().loggingEnabled
         AbstractHttpsDNSHandle // Loads the known servers.
-        setCardView { viewParent, suggestedHeight ->
+        /*setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             view
-        }
+        }*/
     }
 
     override fun createDrawerItems(): MutableList<DrawerItem> {
@@ -54,6 +70,16 @@ class MainActivity : NavigationDrawerActivity() {
                         QueryLogFragment()
                     })
             }
+            divider()
+            clickableItem(getString(R.string.menu_create_shortcut),
+                iconLeft = getDrawable(R.drawable.ic_external_link),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    NewServerDialog(this@MainActivity, title = getString(R.string.menu_create_shortcut), onServerAdded = {
+                        ShortcutActivity.createShortcut(this@MainActivity, it)
+                    }).show()
+                    false
+                })
             divider()
             clickableItem(getString(R.string.menu_rate),
                 iconLeft = getDrawable(R.drawable.ic_star),
@@ -103,7 +129,12 @@ class MainActivity : NavigationDrawerActivity() {
                     showInfoTextDialog(
                         this@MainActivity,
                         getString(R.string.menu_about),
-                        getString(R.string.about_app, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE, AppDatabase.currentVersion)
+                        getString(
+                            R.string.about_app,
+                            BuildConfig.VERSION_NAME,
+                            BuildConfig.VERSION_CODE,
+                            AppDatabase.currentVersion
+                        )
                     )
                     false
                 })
@@ -112,8 +143,8 @@ class MainActivity : NavigationDrawerActivity() {
 
     override fun onBackPressed() {
         val fragment = currentFragment
-        if(fragment != null && fragment is BackpressFragment) {
-            if(!fragment.onBackPressed()) super.onBackPressed()
+        if (fragment != null && fragment is BackpressFragment) {
+            if (!fragment.onBackPressed()) super.onBackPressed()
         } else {
             super.onBackPressed()
         }

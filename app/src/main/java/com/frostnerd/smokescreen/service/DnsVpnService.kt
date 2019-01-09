@@ -16,6 +16,7 @@ import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 import com.frostnerd.general.CombinedIterator
+import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.networking.NetworkUtil
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
@@ -45,14 +46,23 @@ import java.net.Inet6Address
 import java.net.InetAddress
 
 
-/**
- * Copyright Daniel Wolf 2018
- * All rights reserved.
- * Code may NOT be used without proper permission, neither in binary nor in source form.
- * All redistributions of this software in source code must retain this copyright header
- * All redistributions of this software in binary form must visibly inform users about usage of this software
+/*
+ * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
  *
- * development@frostnerd.com
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class DnsVpnService : VpnService(), Runnable {
     private var fileDescriptor: ParcelFileDescriptor? = null
@@ -95,22 +105,32 @@ class DnsVpnService : VpnService(), Runnable {
         }
 
         fun restartVpn(context: Context, fetchServersFromSettings: Boolean) {
-            val bundle = Bundle()
-            bundle.putBoolean("fetch_servers", fetchServersFromSettings)
-            sendCommand(context, Command.RESTART, bundle)
+            if(context.isServiceRunning(DnsVpnService::class.java)) {
+                val bundle = Bundle()
+                bundle.putBoolean("fetch_servers", fetchServersFromSettings)
+                sendCommand(context, Command.RESTART, bundle)
+            } else startVpn(context)
         }
 
         fun restartVpn(context: Context, primaryServerUrl: String?, secondaryServerUrl: String?) {
-            val bundle = Bundle()
-            if (primaryServerUrl != null) bundle.putString(
-                BackgroundVpnConfigureActivity.extraKeyPrimaryUrl,
-                primaryServerUrl
-            )
-            if (secondaryServerUrl != null) bundle.putString(
-                BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
-                secondaryServerUrl
-            )
-            sendCommand(context, Command.RESTART, bundle)
+            if(context.isServiceRunning(DnsVpnService::class.java)) {
+                val bundle = Bundle()
+                if (primaryServerUrl != null) {
+                    bundle.putString(
+                        BackgroundVpnConfigureActivity.extraKeyPrimaryUrl,
+                        primaryServerUrl
+                    )
+                    bundle.putBoolean("fetch_servers", true)
+                }
+                if (secondaryServerUrl != null) {
+                    bundle.putString(
+                        BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
+                        secondaryServerUrl
+                    )
+                    bundle.putBoolean("fetch_servers", true)
+                }
+                sendCommand(context, Command.RESTART, bundle)
+            } else startVpn(context, primaryServerUrl, secondaryServerUrl)
         }
 
         fun sendCommand(context: Context, command: Command, extras: Bundle? = null) {
@@ -187,16 +207,20 @@ class DnsVpnService : VpnService(), Runnable {
             "show_notification_on_lockscreen",
             "hide_notification_icon",
             "pause_on_captive_portal",
-            "null_terminate_keweon"
+            "null_terminate_keweon",
+            "allow_ipv6_traffic",
+            "allow_ipv4_traffic"
         )
-        settingsSubscription = getPreferences().listenForChanges(relevantSettings) { key, _, _ ->
-            log("The Preference $key has changed, restarting the VPN.")
-            if(key == "show_notification_on_lockscreen" || key == "hide_notification_icon") {
+        settingsSubscription = getPreferences().listenForChanges(relevantSettings) { changes ->
+            log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
+            log("Detailed changes: $changes")
+            if("hide_notification_icon" in changes || "hide_notification_icon" in changes) {
                 log("Recreating the notification because of the change in preferences")
                 createNotification()
                 setNotificationText()
             }
-            recreateVpn(key == "doh_server_url_primary" || key == "doh_server_url_secondary", null)
+            val reload = "doh_server_url_primary" in changes || "doh_server_url_secondary" in changes
+            recreateVpn(reload, null)
         }
         log("Subscribed.")
     }
@@ -213,6 +237,7 @@ class DnsVpnService : VpnService(), Runnable {
         notificationBuilder.setOngoing(true)
         notificationBuilder.setAutoCancel(false)
         notificationBuilder.setSound(null)
+        notificationBuilder.setOnlyAlertOnce(true)
         notificationBuilder.setUsesChronometer(true)
         notificationBuilder.setContentIntent(
             PendingIntent.getActivity(
@@ -253,8 +278,8 @@ class DnsVpnService : VpnService(), Runnable {
                 }
                 Command.RESTART -> {
                     log("Received RESTART command, restarting vpn.")
-                    setNotificationText()
                     recreateVpn(intent.getBooleanExtra("fetch_servers", false), intent)
+                    setNotificationText()
                 }
             }
         } else {
@@ -314,11 +339,13 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun setNotificationText() {
+        val secondaryServer = getSecondaryServer()
+        val primaryServer = getPrimaryServer()
         val text = if (secondaryServer != null) {
             getString(
                 if(getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
                 primaryServer.urlCreator.baseUrl,
-                secondaryServer!!.urlCreator.baseUrl,
+                secondaryServer.urlCreator.baseUrl,
                 packageBypassAmount,
                 dnsProxy?.cache?.livingCachedEntries() ?: 0
             )
@@ -426,17 +453,31 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val activeNetwork = (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetwork
+            log("Current active network: $activeNetwork")
+        }
         val builder = Builder()
-        val useIpv6 = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
+
+        val deviceHasIpv6 = hasDeviceIpv6Address()
+        val deviceHasIpv4 = hasDeviceIpv4Address()
+
+        val dhcpDnsServer = getDhcpDnsServers()
+
+        val useIpv6 = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || deviceHasIpv6)
         val useIpv4 =
-            !useIpv6 || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
+            !useIpv6 || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || deviceHasIpv4))
+
+        val allowIpv4Traffic = useIpv4 || getPreferences().allowIpv4Traffic
+        val allowIpv6Traffic = useIpv6 || getPreferences().allowIpv6Traffic
 
         val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
         val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
         log("Dummy address for Ipv4: $dummyServerIpv4")
         log("Dummy address for Ipv6: $dummyServerIpv6")
-        log("Using IPv6: $useIpv6")
-        log("Using IPv4: $useIpv4")
+        log("Using IPv4: $useIpv4 (device has IPv4: $deviceHasIpv4), Ipv4 Traffic allowed: $allowIpv4Traffic")
+        log("Using IPv6: $useIpv6 (device has IPv6: $deviceHasIpv6), Ipv6 Traffic allowed: $allowIpv6Traffic")
+        log("DHCP Dns servers: $dhcpDnsServer")
 
         var couldSetAddress = false
         if (useIpv4) {
@@ -453,8 +494,8 @@ class DnsVpnService : VpnService(), Runnable {
                 }
             }
             if (!couldSetAddress) {
-                builder.addAddress("192.168.0.10", 24)
                 log("Couldn't set any IPv4 dynamic address, trying 192.168.0.10...")
+                builder.addAddress("192.168.0.10", 24)
             }
         }
         couldSetAddress = false
@@ -493,13 +534,22 @@ class DnsVpnService : VpnService(), Runnable {
         if (useIpv4) {
             builder.addDnsServer(dummyServerIpv4)
             builder.addRoute(dummyServerIpv4, 32)
-            builder.allowFamily(OsConstants.AF_INET)
-        }
+            dhcpDnsServer.forEach {
+                if(it is Inet4Address) {
+                    builder.addRoute(it, 32)
+                }
+            }
+        } else if(deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
+
         if (useIpv6) {
             builder.addDnsServer(dummyServerIpv6)
             builder.addRoute(dummyServerIpv6, 128)
-            builder.allowFamily(OsConstants.AF_INET6)
-        }
+            dhcpDnsServer.forEach {
+                if(it is Inet6Address) {
+                    builder.addRoute(it, 128)
+                }
+            }
+        } else if(deviceHasIpv6 && allowIpv6Traffic) builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
 
         log("Applying disallowed packages.")
@@ -534,13 +584,16 @@ class DnsVpnService : VpnService(), Runnable {
             val capabilities = mgr.getNetworkCapabilities(network) ?: continue
             if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
+                log("Checking for IPv4 address in connected non-VPN network ${info.typeName}")
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet4Address && !linkAddress.address.isLoopbackAddress) {
+                        log("IPv4 address found.")
                         return true
                     }
                 }
             }
         }
+        log("No IPv4 addresses found.")
         return false
     }
 
@@ -551,13 +604,16 @@ class DnsVpnService : VpnService(), Runnable {
             val capabilities = mgr.getNetworkCapabilities(network) ?: continue
             if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
+                log("Checking for IPv6 address in connected non-VPN network ${info.typeName}")
                 for (linkAddress in linkProperties.linkAddresses) {
                     if (linkAddress.address is Inet6Address && !linkAddress.address.isLoopbackAddress) {
+                        log("IPv6 address found.")
                         return true
                     }
                 }
             }
         }
+        log("No IPv6 addresses found.")
         return false
     }
 
@@ -574,13 +630,24 @@ class DnsVpnService : VpnService(), Runnable {
         return emptyList()
     }
 
+    private fun getPrimaryServer(): ServerConfiguration {
+        return if(primaryUserServerUrl != null) ServerConfiguration.createSimpleServerConfig(primaryUserServerUrl!!)
+        else primaryServer
+    }
+
+    private fun getSecondaryServer(): ServerConfiguration? {
+        return if(secondaryUserServerUrl != null) ServerConfiguration.createSimpleServerConfig(secondaryUserServerUrl!!)
+        else secondaryServer
+    }
+
     override fun run() {
         log("run() called")
         val list = mutableListOf<ServerConfiguration>()
-        list.add(primaryServer)
-        if (secondaryServer != null) list.add(secondaryServer!!)
-        log("Using primary server: $primaryServer")
-        log("Using secondary server: $secondaryServer")
+        list.add(getPrimaryServer())
+        val secondary = getSecondaryServer()
+        if (secondary != null) list.add(secondary)
+        log("Using primary server: ${list.first()}")
+        log("Using secondary server: ${list.getOrNull(1)}")
 
         log("Creating handle.")
         handle = ProxyHandler(

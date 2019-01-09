@@ -1,0 +1,5 @@
+<lint>
+    <issue id="InvalidPackage">
+        <ignore path="**/jna*.jar"/>
+    </issue>
+</lint>

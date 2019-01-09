@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
 
     <application
             android:name=".SmokeScreen"
@@ -17,7 +18,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme_Mono"
-            tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="GoogleAppIndexingWarning"
+            android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -25,6 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".activity.ShortcutActivity"
+                android:exported="true"
+                android:launchMode="singleTop"
+                android:noHistory="true"
+                android:autoRemoveFromRecents="true"
+                android:taskAffinity="com.frostnerd.smokescreen.ShortcutTask"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
         <activity
                 android:name=".activity.ServerImportActivity"
                 android:autoRemoveFromRecents="true"

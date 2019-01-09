@@ -7,10 +7,12 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
-import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
 import kotlinx.android.synthetic.main.dialog_server_configuration.*
@@ -19,14 +21,23 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-/**
- * Copyright Daniel Wolf 2018
- * All rights reserved.
- * Code may NOT be used without proper permission, neither in binary nor in source form.
- * All redistributions of this software in source code must retain this copyright header
- * All redistributions of this software in binary form must visibly inform users about usage of this software
+/*
+ * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
  *
- * development@frostnerd.com
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ServerChoosalDialog(
     context: Context,
@@ -60,7 +71,7 @@ class ServerChoosalDialog(
             addKnownServers()
 
             addServer.setOnClickListener {
-                NewServerDialog(context) {info ->
+                NewServerDialog(context, title = null) {info ->
                     knownServersGroup.addView(
                         createButtonForUserConfiguration(
                             context.getPreferences().addUserServerConfiguration(
