@@ -28,7 +28,6 @@ import com.frostnerd.smokescreen.service.DnsVpnService
 class SmokeProxy(
     dnsHandle: ProxyHandler,
     proxyBypassHandles: List<DnsHandle>,
-    vpnService: DnsVpnService,
     val cache: SimpleDnsCache?,
     queryListener: QueryListener?
 ) :
@@ -38,7 +37,6 @@ class SmokeProxy(
             it
         }.toList(),
         null,
-        vpnService,
         cache,
         queryListener = queryListener
     )

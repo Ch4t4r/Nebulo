@@ -4,6 +4,7 @@ import com.frostnerd.dnstunnelproxy.AbstractUDPDnsHandle
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
+import com.frostnerd.vpntunnelproxy.TunnelHandle
 import org.minidns.dnsmessage.DnsMessage
 import org.pcap4j.packet.IpPacket
 import java.net.DatagramPacket
@@ -42,13 +43,14 @@ class ProxyBypassHandler(val searchDomains:List<String>, val destinationDnsServe
     }
 
     override suspend fun forwardDnsQuestion(
+        deviceWriteToken: TunnelHandle.DeviceWriteToken,
         dnsMessage: DnsMessage,
         originalEnvelope: IpPacket,
         realDestination: UpstreamAddress
     ) {
         val bytes = dnsMessage.toArray()
         val packet = DatagramPacket(bytes, bytes.size, realDestination.address, realDestination.port)
-        sendPacketToUpstreamDNSServer(packet, originalEnvelope)
+        sendPacketToUpstreamDNSServer(deviceWriteToken, packet, originalEnvelope)
     }
 
     override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean {

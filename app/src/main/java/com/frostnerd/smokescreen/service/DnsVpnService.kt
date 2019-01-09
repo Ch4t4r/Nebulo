@@ -32,8 +32,7 @@ import com.frostnerd.smokescreen.util.proxy.ProxyHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.dnsname.DnsName
@@ -661,9 +660,10 @@ class DnsVpnService : VpnService(), Runnable {
         )
         log("Handle created, creating DNS proxy")
 
-        dnsProxy = SmokeProxy(handle!!, createProxyBypassHandlers(),this, createDnsCache(), createQueryLogger())
+        dnsProxy = SmokeProxy(handle!!, createProxyBypassHandlers(), createDnsCache(), createQueryLogger())
         log("DnsProxy created, creating VPN proxy")
-        vpnProxy = VPNTunnelProxy(dnsProxy!!)
+        vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
+            newFixedThreadPoolContext(3, "proxy-pool")))
 
         log("VPN proxy creating, trying to run...")
         fileDescriptor?.let {
@@ -715,7 +715,7 @@ class DnsVpnService : VpnService(), Runnable {
             val dhcpServers = getDhcpDnsServers()
             if(!dhcpServers.isEmpty()) bypassHandlers.add(CaptivePortalUdpDnsHandle(targetDnsServer = { dhcpServers.first() }))
         }
-        bypassHandlers.add(NoConnectionDnsHandle(NoConnectionDnsHandle.Behavior.DROP_PACKETS) {
+        bypassHandlers.add(NoConnectionDnsHandle(getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager, NoConnectionDnsHandle.Behavior.DROP_PACKETS) {
             log("Connection changed to connected=$it", "NoConnectionDnsHandle-Listener")
         })
         return bypassHandlers
