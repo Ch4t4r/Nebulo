@@ -63,6 +63,8 @@ class ProxyHandler(
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
         if(!nullRouteKeweon) return dnsMessage
+        val questionName = dnsMessage.question.name
+        if(questionName.contains("keweon") || questionName.contains("i.hate.ads")) return dnsMessage
         val newRecords = mutableListOf<Record<*>>()
         var changed = false
         for (record in dnsMessage.answerSection) {
