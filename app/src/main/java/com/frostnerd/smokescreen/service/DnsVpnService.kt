@@ -663,7 +663,7 @@ class DnsVpnService : VpnService(), Runnable {
         dnsProxy = SmokeProxy(handle!!, createProxyBypassHandlers(), createDnsCache(), createQueryLogger())
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
-            newFixedThreadPoolContext(3, "proxy-pool")))
+            newFixedThreadPoolContext(3, "proxy-pool")), logger = null)
 
         log("VPN proxy creating, trying to run...")
         fileDescriptor?.let {
