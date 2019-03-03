@@ -60,6 +60,7 @@ interface AppSettings {
     var useDefaultDnsCacheTime: Boolean
     var minimumCacheTime:Int
     var customDnsCacheTime: Int
+    var nxDomainCacheTime:Int
 
     // Logging category
     var loggingEnabled: Boolean
@@ -144,7 +145,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var useDefaultDnsCacheTime: Boolean by booleanPref("dnscache_use_default_time", true)
     override var minimumCacheTime: Int by stringBasedIntPref("dnscache_minimum_time", 10)
     override var customDnsCacheTime: Int by stringBasedIntPref("dnscache_custom_time", 100)
-
+    override var nxDomainCacheTime: Int by stringBasedIntPref("dnscache_nxdomain_cachetime", 1800)
     override var loggingEnabled: Boolean by booleanPref(
         "logging_enabled",
         BuildConfig.VERSION_NAME.contains("alpha", true)

@@ -727,13 +727,16 @@ class DnsVpnService : VpnService(), Runnable {
             log("Creating DNS Cache.")
             val cacheControl: CacheControl = if (!getPreferences().useDefaultDnsCacheTime) {
                 val cacheTime = getPreferences().customDnsCacheTime.toLong()
+                val nxDomainCacheTime = getPreferences().nxDomainCacheTime.toLong()
                 object : CacheControl {
                     override suspend fun getTtl(
                         answerMessage: DnsMessage,
                         dnsName: DnsName,
                         type: Record.TYPE,
                         record: Record<*>
-                    ): Long = cacheTime
+                    ): Long {
+                        return if(answerMessage.responseCode == DnsMessage.RESPONSE_CODE.NX_DOMAIN) nxDomainCacheTime else cacheTime
+                    }
 
                     override suspend fun getTtl(question: Question, record: Record<*>): Long = cacheTime
 

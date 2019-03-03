@@ -42,6 +42,9 @@
     <string name="title_dnscache_customcachetime">Custom cache time (Seconds)</string>
     <string name="summary_dnscache_customcachetime">Changes the amount of time old requests are cached.\nCurrent: %1d Seconds.</string>
 
+    <string name="title_dnscache_nxdomaincachetime">Cache time for NXDomain (Seconds)</string>
+    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time old NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds.</string>
+
     <string name="preference_category_logging">Logging</string>
 
     <string name="title_enable_logging">Enable logging</string>

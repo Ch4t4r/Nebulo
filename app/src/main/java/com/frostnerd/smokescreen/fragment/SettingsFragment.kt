@@ -235,11 +235,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val useDefaultTime = findPreference("dnscache_use_default_time") as CheckBoxPreference
         val minCacheTime = findPreference("dnscache_minimum_time") as EditTextPreference
         val cacheTime = findPreference("dnscache_custom_time") as EditTextPreference
+        val nxDomainCacheTime = findPreference("dnscache_nxdomain_cachetime") as EditTextPreference
 
         val updateState = { isCacheEnabled: Boolean, isUsingDefaultTime: Boolean ->
             cacheMaxSize.isEnabled = isCacheEnabled
             useDefaultTime.isEnabled = isCacheEnabled
             cacheTime.isEnabled = isCacheEnabled && !isUsingDefaultTime
+            nxDomainCacheTime.isEnabled = cacheTime.isEnabled
             keepAcrossLaunches.isEnabled = isCacheEnabled
             minCacheTime.isEnabled = isUsingDefaultTime && isCacheEnabled
         }
@@ -247,6 +249,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         cacheTime.summary = getString(
             R.string.summary_dnscache_customcachetime,
             requireContext().getPreferences().customDnsCacheTime
+        )
+        nxDomainCacheTime.summary = getString(
+            R.string.summary_dnscache_nxdomaincachetime,
+            requireContext().getPreferences().nxDomainCacheTime
         )
         minCacheTime.summary = getString(
             R.string.summary_dnscache_minimum_cache_time,
@@ -267,6 +273,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         cacheTime.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().isInt()) {
                 cacheTime.summary = getString(R.string.summary_dnscache_customcachetime, newValue.toString().toInt())
+                true
+            } else {
+                false
+            }
+        }
+        nxDomainCacheTime.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue.toString().isInt()) {
+                cacheTime.summary = getString(R.string.summary_dnscache_nxdomaincachetime, newValue.toString().toInt())
                 true
             } else {
                 false
