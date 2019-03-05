@@ -280,7 +280,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         nxDomainCacheTime.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().isInt()) {
-                cacheTime.summary = getString(R.string.summary_dnscache_nxdomaincachetime, newValue.toString().toInt())
+                nxDomainCacheTime.summary = getString(R.string.summary_dnscache_nxdomaincachetime, newValue.toString().toInt())
                 true
             } else {
                 false
