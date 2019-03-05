@@ -9,8 +9,8 @@ android {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 19
-        versionName "1.0-Alpha"
+        versionCode 20
+        versionName "1.0-Beta"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         kapt {
