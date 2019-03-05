@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
@@ -152,17 +153,28 @@ class MainActivity : NavigationDrawerActivity() {
 
     private fun rateApp() {
         val appPackageName = this.packageName
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
-        } catch (e: android.content.ActivityNotFoundException) {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+        val openStore = {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
+            } catch (e: android.content.ActivityNotFoundException) {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    )
                 )
-            )
+            }
+            getPreferences().hasRatedApp = true
         }
-        getPreferences().hasRatedApp = true
+        AlertDialog.Builder(this, getPreferences().theme.dialogStyle)
+            .setMessage(R.string.dialog_rate_confirmation)
+            .setPositiveButton(R.string.all_yes) { _, _ ->
+                openStore()
+            }
+            .setNegativeButton(R.string.all_no) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun createStyleOptions(): StyleOptions {

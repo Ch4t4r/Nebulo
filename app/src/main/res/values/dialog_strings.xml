@@ -43,4 +43,6 @@
     <string name="dialog_batteryoptimization_message">On some device the app won\'t be notified that the app has finished booting unless battery optimizations are disabled for it.\nThe app is currently not whitelisted from the battery optimization, do you want to do this?\n\nYou should test whether it works with optimization enabled before disabling it.</string>
     <string name="dialog_batteryoptimization_whitelist">Disable</string>
     <string name="dialog_batteryoptimization_ignore">Ignore</string>
+
+    <string name="dialog_rate_confirmation">Do you want to open the play store to rate the app?</string>
 </resources>
