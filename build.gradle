@@ -33,9 +33,13 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'http://storage.googleapis.com/r8-releases/raw'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.android.tools:r8:1.4.57'
+        classpath 'com.android.tools.build:gradle:3.3.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
