@@ -666,7 +666,8 @@ class DnsVpnService : VpnService(), Runnable {
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(3, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger {
             override fun logException(ex: Exception, terminal: Boolean) {
-                log(ex)
+                if(terminal) log(ex)
+                else log(Logger.stacktraceToString(ex), "VPN-LIBRARY")
             }
 
             override fun logMessage(message: String, level: Level) {
