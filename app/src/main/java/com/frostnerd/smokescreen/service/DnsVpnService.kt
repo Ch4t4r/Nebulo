@@ -43,6 +43,7 @@ import java.io.Serializable
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
+import java.util.logging.Level
 
 
 /*
@@ -663,7 +664,17 @@ class DnsVpnService : VpnService(), Runnable {
         dnsProxy = SmokeProxy(handle!!, createProxyBypassHandlers(), createDnsCache(), createQueryLogger())
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
-            newFixedThreadPoolContext(3, "proxy-pool")), logger = null)
+            newFixedThreadPoolContext(3, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger {
+            override fun logException(ex: Exception, terminal: Boolean) {
+                log(ex)
+            }
+
+            override fun logMessage(message: String, level: Level) {
+                if(level >= Level.INFO) {
+                    log(message, "VPN-LIBRARY, $level")
+                }
+            }
+        })
 
         log("VPN proxy creating, trying to run...")
         fileDescriptor?.let {

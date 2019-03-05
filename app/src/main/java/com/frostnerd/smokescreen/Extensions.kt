@@ -15,6 +15,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
+import java.util.logging.Level
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -152,4 +153,8 @@ fun ConnectivityManager.isWifiNetwork(network: Network): Boolean {
 fun ConnectivityManager.isVpnNetwork(network: Network): Boolean {
     val capabilities = getNetworkCapabilities(network)
     return capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+}
+
+operator fun Level.compareTo(otherLevel:Level):Int {
+    return this.intValue() - otherLevel.intValue()
 }
