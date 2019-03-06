@@ -37,5 +37,5 @@ build_release:
   artifacts:
     paths:
     - app/build/outputs/apk/release/app-release.apk
-    - app/build/outputs/mapping/release/mapping.txt
+    - app/build/outputs/r8/release/mapping.txt
 
