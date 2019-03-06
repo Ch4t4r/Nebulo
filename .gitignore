@@ -11,6 +11,7 @@ captures/
 .idea/caches
 
 !/app/build/outputs/mapping/release/mapping.txt
+!app/build/outputs/mapping/r8/release/mapping.txt
 
 
 # Created by https://www.gitignore.io/api/intellij
