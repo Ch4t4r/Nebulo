@@ -169,11 +169,17 @@ class DnsVpnService : VpnService(), Runnable {
         networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onLost(network: Network?) {
                 super.onLost(network)
+                val activeNetwork = mgr.activeNetworkInfo
+                val networkInfo = mgr.getNetworkInfo(network)
+                log("Network lost: $network, info: $networkInfo, current active network: $activeNetwork")
                 handleChange()
             }
 
             override fun onAvailable(network: Network?) {
                 super.onAvailable(network)
+                val activeNetwork = mgr.activeNetworkInfo
+                val networkInfo = mgr.getNetworkInfo(network)
+                log("Network became available: $network, info: $networkInfo, current active network: $activeNetwork")
                 handleChange()
             }
 
@@ -413,7 +419,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onDestroy() {
         super.onDestroy()
-        log("onDestroy() called (Was destroyed from within: $destroyed")
+        log("onDestroy() called (Was destroyed from within: $destroyed)")
         log("Unregistering settings listener")
         getPreferences().unregisterOnChangeListener(settingsSubscription)
         log("Unregistered.")
