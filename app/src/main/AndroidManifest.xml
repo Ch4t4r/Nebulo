@@ -3,21 +3,23 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.frostnerd.smokescreen">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
 
     <application
+            android:name=".SmokeScreen"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme_Mono"
-            tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="GoogleAppIndexingWarning"
+            android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -25,6 +27,96 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".activity.ShortcutActivity"
+                android:exported="true"
+                android:launchMode="singleTop"
+                android:noHistory="true"
+                android:autoRemoveFromRecents="true"
+                android:taskAffinity="com.frostnerd.smokescreen.ShortcutTask"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+        <activity
+                android:name=".activity.ServerImportActivity"
+                android:autoRemoveFromRecents="true"
+                android:noHistory="true"
+                android:label="@string/activity_label_import_servers"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                        android:mimeType="*/*"
+                        android:scheme="content"
+                        android:host="*"
+                        android:pathPattern=".*\\.dohserver"
+                        tools:ignore="AppLinkUrlError"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                        android:mimeType="*/*"
+                        android:scheme="file"
+                        android:host="*"
+                        android:pathPattern=".*\\.dohserver"
+                        tools:ignore="AppLinkUrlError"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="https"/>
+                <data android:scheme="http"/>
+                <data android:pathPattern="/servers/.*"/>
+                <data android:host="www.smokescreen.app"/>
+                <data android:host="smokescreen.app"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".activity.QueryImportActivity"
+                android:autoRemoveFromRecents="true"
+                android:noHistory="true"
+                android:label="@string/activity_label_import_queries"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                        android:mimeType="*/*"
+                        android:scheme="content"
+                        android:host="*"
+                        android:pathPattern=".*\\.querycsv"
+                        tools:ignore="AppLinkUrlError"/>
+            </intent-filter>
+
+        </activity>
+        <activity
+                android:name=".activity.BackgroundVpnConfigureActivity"
+                android:launchMode="singleInstance"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+        <activity
+                android:name=".activity.ErrorDialogActivity"
+                android:autoRemoveFromRecents="true"
+                android:clearTaskOnLaunch="true"
+                android:excludeFromRecents="true"
+                android:launchMode="singleTop"
+                android:noHistory="true"
+                android:process=".ErrorProcess"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+        <activity
+                android:name=".tasker.ConfigureActivity"
+                android:exported="true"
+                android:icon="@mipmap/ic_launcher"
+                android:label="@string/app_name"
+                android:uiOptions="splitActionBarWhenNarrow"
+                android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING"/>
+            </intent-filter>
+        </activity>
+
         <service
                 android:name=".service.DnsVpnService"
                 android:permission="android.permission.BIND_VPN_SERVICE"
@@ -36,6 +128,58 @@
                     android:name="android.net.VpnService.SUPPORTS_ALWAYS_ON"
                     android:value="true"/>
         </service>
+        <service
+                android:name=".service.VpnRestartService"
+                android:exported="false"/>
+        <service
+                android:name=".service.StartStopTileService"
+                android:label="@string/quicksettings_start_text"
+                android:icon="@drawable/ic_play"
+                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
+        <receiver
+                android:name=".receiver.AutostartReceiver"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <!-- for htc -->
+
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+                android:name=".tasker.FireReceiver"
+                android:exported="true"
+                android:process=":background">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING"/>
+            </intent-filter>
+        </receiver>
+
+        <provider
+                android:authorities="com.frostnerd.smokescreen.LogZipProvider"
+                android:name="androidx.core.content.FileProvider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/log_file_paths"
+                    />
+        </provider>
     </application>
 
 </manifest>

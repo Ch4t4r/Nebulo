@@ -83,10 +83,10 @@
         <item name="android:colorBackground">@color/trueBlackBackgroundColor</item>
         <item name="navDrawableColor">#616161</item>
 
-        <item name="android:textColor">#616161</item>
-        <item name="android:textColorSecondary">#424242</item>
-        <item name="android:textColorHighlight">#424242</item>
-        <item name="android:editTextColor">#424242</item>
+        <item name="android:textColor">#BDBDBD</item>
+        <item name="android:textColorSecondary">#9E9E9E</item>
+        <item name="android:textColorHighlight">#9E9E9E</item>
+        <item name="android:editTextColor">#9E9E9E</item>
         <item name="cardColor">#37474F</item>
         <item name="cardStrokeColor">#37474F</item>
         <item name="inputElementColor">#37474F</item>
@@ -189,14 +189,14 @@
         <item name="colorAccent">#424242</item>
         <item name="android:windowBackground">@drawable/background_true_black</item>
 
-        <item name="android:textColor">#616161</item>
-        <item name="android:textColorPrimary">#616161</item>
-        <item name="android:textColorSecondary">#424242</item>
-        <item name="android:textColorHighlight">#424242</item>
-        <item name="android:textColorTertiary">#424242</item>
-        <item name="android:textColorAlertDialogListItem">#424242</item>
-        <item name="textColorAlertDialogListItem">#424242</item>
-        <item name="android:editTextColor">#424242</item>
+        <item name="android:textColor">#BDBDBD</item>
+        <item name="android:textColorPrimary">#BDBDBD</item>
+        <item name="android:textColorSecondary">#9E9E9E</item>
+        <item name="android:textColorHighlight">#9E9E9E</item>
+        <item name="android:textColorTertiary">#9E9E9E</item>
+        <item name="android:textColorAlertDialogListItem">#9E9E9E</item>
+        <item name="textColorAlertDialogListItem">#9E9E9E</item>
+        <item name="android:editTextColor">#9E9E9E</item>
         <item name="foregroundElementColor">#9E9E9E</item>
 
         <item name="color">#424242</item>
@@ -284,7 +284,7 @@
     <style name="PreferenceTheme_True_Black" parent="PreferenceThemeOverlay">
         <item name="colorPrimary">#263238</item>
         <item name="colorPrimaryDark">#263238</item>
-        <item name="colorAccent">#424242</item>
+        <item name="colorAccent">#9E9E9E</item>
         <item name="android:windowBackground">@drawable/background_true_black</item>
 
         <item name="android:textColor">@color/preference_primary_color_true_black</item>

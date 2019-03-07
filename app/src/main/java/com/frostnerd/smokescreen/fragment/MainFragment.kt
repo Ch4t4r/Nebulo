@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.fragment
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Intent
+import android.net.Uri
 import android.net.VpnService
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,27 +12,37 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import androidx.fragment.app.Fragment
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
-import com.frostnerd.smokescreen.service.Command
-import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.registerLocalReceiver
+import com.frostnerd.smokescreen.service.Command
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
-import androidx.fragment.app.Fragment
-import com.frostnerd.baselibrary.service.isServiceRunning
+import java.net.URL
 
 
-/**
- * Copyright Daniel Wolf 2018
- * All rights reserved.
- * Code may NOT be used without proper permission, neither in binary nor in source form.
- * All redistributions of this software in source code must retain this copyright header
- * All redistributions of this software in binary form must visibly inform users about usage of this software
+/*
+ * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
  *
- * development@frostnerd.com
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class MainFragment : Fragment() {
     private val vpnRequestCode: Int = 1
@@ -40,7 +51,6 @@ class MainFragment : Fragment() {
     private var proxyStarting = false
     private var vpnStateReceiver: BroadcastReceiver? = null
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
@@ -48,7 +58,7 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         proxyRunning = requireContext().isServiceRunning(DnsVpnService::class.java)
-        updateStatusImage()
+        updateVpnIndicators()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,7 +71,7 @@ class MainFragment : Fragment() {
                 startVpn()
                 proxyStarting = true
             }
-            updateStatusImage()
+            updateVpnIndicators()
         }
         vpnStateReceiver = requireContext().registerLocalReceiver(
             listOf(
@@ -80,11 +90,12 @@ class MainFragment : Fragment() {
                         proxyStarting = false
                     }
                 }
-                updateStatusImage()
+                updateVpnIndicators()
             }
         }
         serverButton.setOnClickListener {
             ServerChoosalDialog(requireContext()) { primaryServerUrl: ServerConfiguration, secondaryServerUrl: ServerConfiguration?, customServers: Boolean ->
+                updatePrivacyPolicyLink(primaryServerUrl)
                 val prefs = requireContext().getPreferences()
                 prefs.edit {
                     prefs.areCustomServers = customServers
@@ -94,8 +105,14 @@ class MainFragment : Fragment() {
                 println("Saved $primaryServerUrl, $secondaryServerUrl")
             }.show()
         }
-
-        updateStatusImage()
+        updatePrivacyPolicyLink(requireContext().getPreferences().primaryServerConfig)
+        privacyStatementText.setOnClickListener {
+            val i = Intent(Intent.ACTION_VIEW)
+            val url = it.tag as URL
+            i.data = Uri.parse(url.toURI().toString())
+            startActivity(i)
+        }
+        updateVpnIndicators()
     }
 
     override fun onDestroy() {
@@ -118,11 +135,11 @@ class MainFragment : Fragment() {
             startVpn()
         } else if (requestCode == vpnRequestCode) {
             proxyStarting = false
-            updateStatusImage()
+            updateVpnIndicators()
         }
     }
 
-    fun updateStatusImage() {
+    private fun updateVpnIndicators() {
         when {
             proxyRunning -> {
                 statusImage.setImageResource(R.drawable.ic_lock)
@@ -154,6 +171,18 @@ class MainFragment : Fragment() {
                 statusImage.setImageResource(R.drawable.ic_lock_open)
                 statusImage.clearAnimation()
             }
+        }
+    }
+
+    private fun updatePrivacyPolicyLink(serverConfiguration: ServerConfiguration) {
+        val url = serverConfiguration.serverInformation?.specification?.privacyPolicyURL
+
+        if(url != null) {
+            privacyStatementText.text = getString(R.string.main_dnssurveillance_privacystatement, serverConfiguration.serverInformation!!.name)
+            privacyStatementText.tag = url
+            privacyStatementText.visibility = View.VISIBLE
+        } else {
+            privacyStatementText.visibility = View.GONE
         }
     }
 }

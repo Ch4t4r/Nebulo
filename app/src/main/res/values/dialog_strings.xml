@@ -13,4 +13,36 @@
 
     <string name="dialog_deleteconfig_title">Delete configuration?</string>
     <string name="dialog_deleteconfig_text">Do you want to delete the configuration %1$s?</string>
+
+    <string name="dialog_appchoosal_showsystemapps">Show system apps</string>
+    <string name="dialog_appchoosal_whitelist">Only use DoH in selected apps</string>
+
+    <string name="dialog_excludedapps_infotext">%1d apps are excluded by default and cannot be de-selected</string>
+
+    <string name="dialog_serverimport_title">Import of %1d server(s)</string>
+    <string name="dialog_serverimport_done">Done</string>
+    <string name="dialog_serverimport_priority">Priority %1d</string>
+    <string name="dialog_serverimport_experimental">Experimental</string>
+    <string name="dialog_serverimport_queriesencrytped">Queries encrypted:</string>
+    <string name="dialog_serverimport_text">Please select the server(s) you wish to import.\n\nServers where queries are not encrypted only accept the query in the GET-parameters of the URL. Whilst they can be read, no one can modify them.</string>
+
+    <string name="dialog_serverimportfailed_title">Import failed</string>
+    <string name="dialog_serverimportfailed_text">The server(s) could not be imported.</string>
+    <string name="dialog_serverimportfailed_text_exception">The server(s) could not be imported.\n(%1s)</string>
+
+    <string name="dialog_logexport_text">How do you want to share the logs?</string>
+    <string name="dialog_logexport_general">General export</string>
+    <string name="dialog_logexport_email">E-Mail</string>
+
+    <string name="dialog_deletelogs_text">Are you sure that you want to delete all logs?</string>
+
+    <string name="dialog_error_title">Crashreport</string>
+    <string name="dialog_error_text">It looks like the app has crashed. Do you want to send the error log files to the developer?</string>
+
+    <string name="dialog_batteryoptimization_title">Battery optimization</string>
+    <string name="dialog_batteryoptimization_message">On some device the app won\'t be notified that the app has finished booting unless battery optimizations are disabled for it.\nThe app is currently not whitelisted from the battery optimization, do you want to do this?\n\nYou should test whether it works with optimization enabled before disabling it.</string>
+    <string name="dialog_batteryoptimization_whitelist">Disable</string>
+    <string name="dialog_batteryoptimization_ignore">Ignore</string>
+
+    <string name="dialog_rate_confirmation">Do you want to open the play store to rate the app?</string>
 </resources>

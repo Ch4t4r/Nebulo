@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/dialog_horizontal_margin"
+            android:paddingRight="@dimen/dialog_horizontal_margin"
+            android:paddingTop="@dimen/dialog_vertical_margin"
+            android:paddingBottom="@dimen/dialog_vertical_margin"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:text="@string/tasker_action"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="12dp"
+                    android:layout_height="wrap_content"/>
+
+            <Spinner
+                    android:layout_width="wrap_content"
+                    android:id="@+id/spinner"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/startConfigWrap"
+                android:orientation="vertical"
+                android:layout_marginTop="28dp"
+                android:layout_height="wrap_content">
+
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:text="@string/tasker_start_if_running"
+                    android:textColor="?android:attr/textColor"
+                    android:checked="true"
+                    android:id="@+id/startIfRunning"
+                    android:layout_height="wrap_content"/>
+
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:text="@string/tasker_use_default_configuration"
+                    android:textColor="?android:attr/textColor"
+                    android:checked="true"
+                    android:id="@+id/useServersFromConfig"
+                    android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/serverConfigWrap"
+                    android:layout_marginTop="18dp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                <com.frostnerd.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        app:labelColorPrimary="?attr/foregroundElementColor"
+                        app:labelColorSecondary="?attr/foregroundElementColor"
+                        app:revealDelay="0"
+                        app:revealType="revealInstant"
+                        app:minCharLength="1"
+                        app:labelText="@string/dialog_newserver_primaryserver"
+                        app:hint="@string/dialog_newserver_primaryserver_hint"
+                        app:allowCollapse="false"
+                        app:animationDuration="0"
+                        app:indicatorState="incorrect"
+                        android:id="@+id/primaryServerWrap"
+                        android:layout_height="wrap_content">
+
+                    <EditText
+                            android:id="@+id/primaryServer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:text=""
+                            android:nextFocusDown="@id/secondaryServer"
+                            android:importantForAutofill="no"
+                            android:textColor="?attr/foregroundElementColor">
+                    </EditText>
+                </com.frostnerd.materialedittext.MaterialEditText>
+
+                <com.frostnerd.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        app:labelColorPrimary="?attr/foregroundElementColor"
+                        app:labelColorSecondary="?attr/foregroundElementColor"
+                        app:revealDelay="0"
+                        android:layout_marginTop="8dp"
+                        app:revealType="revealInstant"
+                        app:labelText="@string/dialog_newserver_secondaryserver"
+                        app:hint="@string/dialog_newserver_secondaryserver_hint"
+                        android:id="@+id/secondaryServerWrap"
+                        app:allowCollapse="false"
+                        app:animationDuration="0"
+                        android:layout_height="wrap_content">
+
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:nextFocusUp="@id/primaryServer"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:id="@+id/secondaryServer"
+                            android:text=""
+                            android:importantForAutofill="no"
+                            android:textColor="?attr/foregroundElementColor">
+                    </EditText>
+                </com.frostnerd.materialedittext.MaterialEditText>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

@@ -1,11 +1,39 @@
 *.iml
+*.iws
+
 .gradle
-/local.properties
-/.idea/caches/build_file_checksums.ser
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
+local.properties
 .DS_Store
-/build
-/captures
+build/
+captures/
 .externalNativeBuild
+.idea/assetWizardSettings.xml
+.idea/caches
+
+!/app/build/outputs/mapping/release/mapping.txt
+!app/build/outputs/mapping/r8/release/mapping.txt
+
+
+# Created by https://www.gitignore.io/api/intellij
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries

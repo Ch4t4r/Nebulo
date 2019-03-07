@@ -1,0 +1,182 @@
+package com.frostnerd.smokescreen.tasker
+
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import com.frostnerd.lifecyclemanagement.BaseActivity
+import com.frostnerd.materialedittext.MaterialEditText
+import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.dialog.NewServerDialog
+import kotlinx.android.synthetic.main.activity_tasker_configure.*
+
+/*
+ * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can contact the developer at daniel.wolf@frostnerd.com.
+ */
+class ConfigureActivity : BaseActivity() {
+    override fun getConfiguration(): Configuration {
+        return Configuration.withDefaults()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_tasker_configure)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        createLayout()
+        applyOldConfiguration()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            saveConfiguration()
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun applyOldConfiguration() {
+        if (intent != null && intent.extras != null) {
+            val settings = intent.extras!!.getBundle(TaskerHelper.EXTRAS_BUNDLE_KEY)
+            if (settings != null) {
+                val action = settings.getString(TaskerHelper.DATA_KEY_ACTION, "start")
+                when (action) {
+                    "stop" -> {
+                        spinner.setSelection(1)
+                    }
+                    "start" -> {
+                        spinner.setSelection(0)
+                        startIfRunning.isChecked = settings.getBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, true)
+                        useServersFromConfig.isChecked = !settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER)
+                        if (!useServersFromConfig.isChecked) {
+                            primaryServer.setText(settings.getString(TaskerHelper.DATA_KEY_PRIMARYSERVER))
+                            secondaryServer.setText(settings.getString(TaskerHelper.DATA_KEY_SECONDARYSERVER))
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun createLayout() {
+        useServersFromConfig.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                serverConfigWrap.visibility = View.GONE
+            } else {
+                serverConfigWrap.visibility = View.VISIBLE
+            }
+        }
+        val adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
+            this,
+            R.array.tasker_action_values,
+            R.layout.item_tasker_action_spinner_item
+        )
+        adapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (position == 0) {
+                    startConfigWrap.visibility = View.VISIBLE
+                } else {
+                    startConfigWrap.visibility = View.GONE
+                }
+            }
+        }
+        addUrlTextWatcher(primaryServerWrap, primaryServer, false)
+        addUrlTextWatcher(secondaryServerWrap, secondaryServer, true)
+    }
+
+    private fun addUrlTextWatcher(materialEditText: MaterialEditText, editText: EditText, emptyAllowed: Boolean) {
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                val valid = (emptyAllowed && s.isBlank()) || NewServerDialog.SERVER_URL_REGEX.matches(s.toString())
+
+                materialEditText.indicatorState = if (valid) {
+                    if (s.isBlank()) MaterialEditText.IndicatorState.UNDEFINED
+                    else MaterialEditText.IndicatorState.CORRECT
+                } else MaterialEditText.IndicatorState.INCORRECT
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
+    }
+
+    override fun onBackPressed() {
+        saveConfiguration()
+        super.onBackPressed()
+    }
+
+    private fun saveConfiguration() {
+        var valid = true
+        val action = if (spinner.selectedItemPosition == 0) "start" else "stop"
+        val resultIntent = Intent()
+        val settings = Bundle()
+        settings.putString(TaskerHelper.DATA_KEY_ACTION, action)
+        resultIntent.putExtra(
+            TaskerHelper.EXTRAS_BLURB_KEY,
+            resources.getStringArray(R.array.tasker_action_values)[spinner.selectedItemPosition]
+        )
+        if (action == "start") {
+            settings.putBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, startIfRunning.isChecked)
+            if (!useServersFromConfig.isChecked) {
+                if (primaryServerWrap.indicatorState != MaterialEditText.IndicatorState.INCORRECT &&
+                    secondaryServerWrap.indicatorState != MaterialEditText.IndicatorState.INCORRECT
+                ) {
+                    var primary = primaryServer.text.toString()
+                    var secondary = if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString()
+                    if (!primary.startsWith("https")) primary = "https://$primary"
+                    if (secondary != null && !secondary.startsWith("https")) secondary = "https://$secondary"
+
+                    settings.putString(TaskerHelper.DATA_KEY_PRIMARYSERVER, primary)
+                    settings.putString(TaskerHelper.DATA_KEY_SECONDARYSERVER, secondary)
+                    if (secondary != null) {
+                        resultIntent.putExtra(
+                            TaskerHelper.EXTRAS_BLURB_KEY,
+                            getString(R.string.tasker_start_app_custom_urls, primary, secondary)
+                        )
+                    } else {
+                        resultIntent.putExtra(
+                            TaskerHelper.EXTRAS_BLURB_KEY,
+                            getString(R.string.tasker_start_app_custom_url, primary)
+                        )
+                    }
+                    settings.putBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, startIfRunning.isChecked)
+                } else {
+                    valid = false
+                }
+            }
+        }
+        if (valid) {
+            resultIntent.putExtra(TaskerHelper.EXTRAS_BUNDLE_KEY, settings)
+            setResult(Activity.RESULT_OK, resultIntent)
+        } else setResult(Activity.RESULT_CANCELED)
+    }
+}

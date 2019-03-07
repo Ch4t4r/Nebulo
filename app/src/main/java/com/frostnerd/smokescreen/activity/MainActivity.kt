@@ -1,51 +1,180 @@
 package com.frostnerd.smokescreen.activity
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
+import com.frostnerd.navigationdraweractivity.items.BasicDrawerItem
 import com.frostnerd.navigationdraweractivity.items.DrawerItem
-import com.frostnerd.navigationdraweractivity.items.FragmentDrawerItem
-import com.frostnerd.smokescreen.R
+import com.frostnerd.navigationdraweractivity.items.createMenu
+import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
+import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.database.AppDatabase
+import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.MainFragment
+import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
-import com.frostnerd.smokescreen.getPreferences
 
+/*
+ * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can contact the developer at daniel.wolf@frostnerd.com.
+ */
 class MainActivity : NavigationDrawerActivity() {
     private var textColor: Int = 0
     private var backgroundColor: Int = 0
-    private var inputElementColor:Int = 0
+    private var inputElementColor: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
         super.onCreate(savedInstanceState)
+        Logger.enabledGlobally = getPreferences().loggingEnabled
         AbstractHttpsDNSHandle // Loads the known servers.
+        /*setCardView { viewParent, suggestedHeight ->
+            val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
+            view
+        }*/
     }
 
     override fun createDrawerItems(): MutableList<DrawerItem> {
-        val items = mutableListOf<DrawerItem>()
-
-        items.add(
-            FragmentDrawerItem(getString(R.string.menu_dnsoverhttps),
+        return createMenu {
+            fragmentItem(getString(R.string.menu_dnsoverhttps),
                 iconLeft = getDrawable(R.drawable.ic_menu_dnsoverhttps),
-                fragmentCreator = object : FragmentDrawerItem.FragmentCreator {
-                    override fun getFragment(arguments: Bundle?): Fragment {
-                        return MainFragment()
-                    }
+                fragmentCreator = singleInstanceFragment { MainFragment() }
+            )
+            fragmentItem(getString(R.string.menu_settings),
+                iconLeft = getDrawable(R.drawable.ic_menu_settings),
+                fragmentCreator = singleInstanceFragment { SettingsFragment() })
+            if (getPreferences().queryLoggingEnabled) {
+                divider()
+                fragmentItem(getString(R.string.menu_querylogging),
+                    iconLeft = getDrawable(R.drawable.ic_eye),
+                    fragmentCreator = {
+                        QueryLogFragment()
+                    })
+            }
+            divider()
+            clickableItem(getString(R.string.menu_create_shortcut),
+                iconLeft = getDrawable(R.drawable.ic_external_link),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    NewServerDialog(this@MainActivity, title = getString(R.string.menu_create_shortcut), onServerAdded = {
+                        ShortcutActivity.createShortcut(this@MainActivity, it)
+                    }).show()
+                    false
                 })
-        )
-        items.add(
-            FragmentDrawerItem(getString(R.string.menu_settings),
-                iconLeft =  getDrawable(R.drawable.ic_menu_settings),
-                fragmentCreator = object : FragmentDrawerItem.FragmentCreator {
-                    override fun getFragment(arguments: Bundle?): Fragment {
-                        return SettingsFragment()
-                    }
+            divider()
+            clickableItem(getString(R.string.menu_rate),
+                iconLeft = getDrawable(R.drawable.ic_star),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    rateApp()
+                    false
                 })
-        )
-        return items
+            clickableItem(getString(R.string.menu_share_app),
+                iconLeft = getDrawable(R.drawable.ic_share),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    val intent = Intent(Intent.ACTION_SEND)
+                    intent.type = "text/plain"
+                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+                    intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_share_text))
+                    startActivity(Intent.createChooser(intent, getString(R.string.menu_share_app)))
+                    false
+                })
+            clickableItem(getString(R.string.menu_contact_developer),
+                iconLeft = getDrawable(R.drawable.ic_envelope),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    showEmailChooser(
+                        getString(R.string.menu_contact_developer),
+                        getString(R.string.app_name),
+                        getString(R.string.support_contact_mail),
+                        "\n\n\n\n\n\nSystem:\nApp version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n" +
+                                "Android: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})"
+                    )
+                    false
+                })
+            if (isPackageInstalled(this@MainActivity, "org.telegram.messenger")) {
+                clickableItem(getString(R.string.menu_telegram_group),
+                    onLongClick = null,
+                    iconLeft = getDrawable(R.drawable.ic_comments),
+                    onSimpleClick = { _, _, _ ->
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://join?invite=I54nRleveRG3xwAa3StNCg"))
+                        startActivity(intent)
+                        false
+                    })
+            }
+            clickableItem(getString(R.string.menu_about),
+                iconLeft = getDrawable(R.drawable.ic_binoculars),
+                onLongClick = null,
+                onSimpleClick = { _, _, _ ->
+                    showInfoTextDialog(
+                        this@MainActivity,
+                        getString(R.string.menu_about),
+                        getString(
+                            R.string.about_app,
+                            BuildConfig.VERSION_NAME,
+                            BuildConfig.VERSION_CODE,
+                            AppDatabase.currentVersion
+                        )
+                    )
+                    false
+                })
+        }
+    }
+
+    override fun onBackPressed() {
+        val fragment = currentFragment
+        if (fragment != null && fragment is BackpressFragment) {
+            if (!fragment.onBackPressed()) super.onBackPressed()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun rateApp() {
+        val appPackageName = this.packageName
+        val openStore = {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
+            } catch (e: android.content.ActivityNotFoundException) {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    )
+                )
+            }
+            getPreferences().hasRatedApp = true
+        }
+        AlertDialog.Builder(this, getPreferences().theme.dialogStyle)
+            .setMessage(R.string.dialog_rate_confirmation)
+            .setPositiveButton(R.string.all_yes) { _, _ ->
+                openStore()
+            }
+            .setNegativeButton(R.string.all_no) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun createStyleOptions(): StyleOptions {
@@ -72,6 +201,8 @@ class MainActivity : NavigationDrawerActivity() {
     override fun useItemBackStack(): Boolean = true
 
     override fun onItemClicked(item: DrawerItem, handle: Boolean) {
-
+        if (item is BasicDrawerItem) {
+            log("Menu item was clicked: '${item.title}'")
+        }
     }
 }

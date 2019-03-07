@@ -1,5 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="preference_category_general">General</string>
+
     <string name="title_theme">Theme</string>
     <string name="summary_theme">Sets the theme of this app</string>
+
+    <string name="title_start_on_boot">Start on boot</string>
+    <string name="summary_start_on_boot">Start the app when the phone is turned on</string>
+
+    <string name="title_start_after_update">Start after update</string>
+    <string name="summary_start_after_update">Start the app after it has been updated</string>
+
+    <string name="title_excluded_apps">Excluded apps</string>
+    <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use dns-over-https anymore.</string>
+
+    <string name="preference_category_notification">Notification</string>
+
+    <string name="title_show_notification_on_lockscreen">Show on lockscreen</string>
+    <string name="summary_show_notification_on_lockscreen">Sets whether to show the notification on the lockscreen</string>
+
+    <string name="title_notification_hide_icon">Hide icon</string>
+    <string name="summary_notification_hide_icon">Hide the icon from the navigation bar on the top</string>
+
+    <string name="preference_category_cache">Cache control</string>
+
+    <string name="title_dnscache_enabled">Use DNS cache</string>
+    <string name="summary_dnscache_enabled">Enables the apps DNS cache. The cache memorizes old requests to answer future questions faster</string>
+
+    <string name="title_dnscache_keepacrosslaunches">Keep DNS cache</string>
+    <string name="summary_dnscache_keepacrosslaunches">Keep the DNS cache across multiple launches</string>
+
+    <string name="title_dnscache_maxsize">Maximum Cache size</string>
+    <string name="summary_dnscache_maxsize">Sets the maximum of entries the cache can hold at any time</string>
+
+    <string name="title_dnscache_usedefaulttimes">Default cache time</string>
+    <string name="summary_dnscache_usedefaulttimes">Cache requests for the default time communicated by the server</string>
+
+    <string name="title_dnscache_minimum_cache_time">Minimum cache time</string>
+    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached.\nCurrent: %1d Seconds.</string>
+
+    <string name="title_dnscache_customcachetime">Custom cache time (Seconds)</string>
+    <string name="summary_dnscache_customcachetime">Changes the amount of time old requests are cached.\nCurrent: %1d Seconds.</string>
+
+    <string name="title_dnscache_nxdomaincachetime">Cache time for NXDomain (Seconds)</string>
+    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time old NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds.</string>
+
+    <string name="preference_category_logging">Logging</string>
+
+    <string name="title_enable_logging">Enable logging</string>
+    <string name="summary_enable_logging">Enables logging of debug information (contains statistic data). These logs aren\'t send automatically.</string>
+
+    <string name="title_send_logs">Send logs</string>
+    <string name="summary_send_logs">Click here to send the logs to the developer.</string>
+
+    <string name="title_delete_all_logs">Delete all logs</string>
+    <string name="summary_delete_all_logs">Deletes all logs stored on your device.</string>
+
+
+    <string name="preference_category_ip">IP settings</string>
+
+    <string name="title_enable_ipv6">Enable Ipv6</string>
+    <string name="summary_enable_ipv6">Use IPv6, if the device has an IPv6 address assigned</string>
+
+    <string name="title_enable_ipv4">Enable Ipv4</string>
+    <string name="summary_enable_ipv4">Use IPv4, if the device has an IPv4 address assigned</string>
+
+    <string name="title_force_ipv6">Force Ipv6</string>
+    <string name="summary_force_ipv6">Force the app to accept IPv6 requests, even when the device doesn\'t use IPv6.</string>
+
+    <string name="title_force_ipv4">Force Ipv4</string>
+    <string name="summary_force_ipv4">Force the app to accept IPv4 requests, even when the device doesn\'t use IPv4.</string>
+
+    <string name="title_allow_ipv4_traffic">Allow IPv4 traffic</string>
+    <string name="summary_allow_ipv4_traffic">Allow IPv4 traffic to be used, even if IPv4 is disabled.\nIf disabled no IPv4 connections are allowed while the app is running.</string>
+
+    <string name="title_allow_ipv6_traffic">Allow IPv6 traffic</string>
+    <string name="summary_allow_ipv6_traffic">Allow IPv6 traffic to be used, even if IPv4 is disabled.\nIf disabled no IPv6 connections are allowed while the app is running.</string>
+
+
+    <string name="preference_category_network">Network</string>
+
+    <string name="title_disallow_other_vpns">Disallow other VPNs</string>
+    <string name="summary_disallow_other_vpns">Don\'t allow other VPNs to start if the app isn\'t explicitly stopped</string>
+
+    <string name="title_bypass_searchdomains">Searchdomains bypass</string>
+    <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network.</string>
+
+    <string name="title_nullterminate_keweon">Null-terminate keweon</string>
+    <string name="summary_nullterminate_keweon">Null-terminates domains blocked by keweon, which scraps ad-traffic entirely instead of it being sent to keweon</string>
+
+    <string name="title_pause_on_captiveportal">Pause on captive portal</string>
+    <string name="summary_pause_on_captiveportal">Don\'t use DoH if a captive portal is detected. It will automatically be resumed shortly after logging in.\nDisabling it might prevent you from opening the captive portal site to log in.</string>
+
+    <string name="preference_category_querylogging">Query logging</string>
+
+    <string name="title_log_queries">Query logging</string>
+    <string name="summary_log_queries">Log all queries and their responses</string>
+
+    <string name="title_export_queries">Export queries</string>
+    <string name="summary_export_queries">Export queries as CSV (%1d queries)</string>
 </resources>

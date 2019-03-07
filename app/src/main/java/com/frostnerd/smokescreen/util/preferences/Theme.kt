@@ -14,14 +14,23 @@ import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefa
 import com.frostnerd.smokescreen.R
 import kotlin.reflect.KProperty
 
-/**
- * Copyright Daniel Wolf 2018
- * All rights reserved.
- * Code may NOT be used without proper permission, neither in binary nor in source form.
- * All redistributions of this software in source code must retain this copyright header
- * All redistributions of this software in binary form must visibly inform users about usage of this software
+/*
+ * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
  *
- * development@frostnerd.com
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
 enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dialogStyle: Int, @StyleRes val preferenceStyle: Int) {
@@ -31,14 +40,14 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
     BLUE(4, R.style.AppTheme_Blue, R.style.DialogTheme_Blue, R.style.PreferenceTheme_Blue);
 
     @ColorInt
-    fun getColor(context: Context, @AttrRes attribute: Int, @ColorInt defaultValue:Int = Color.BLACK):Int {
+    fun getColor(context: Context, @AttrRes attribute: Int, @ColorInt defaultValue: Int = Color.BLACK): Int {
         val ta = context.obtainStyledAttributes(layoutStyle, intArrayOf(attribute))
         @ColorInt val color = ta.getColor(0, defaultValue)
         ta.recycle()
         return color
     }
 
-    fun getDrawable(context: Context, @AttrRes attribute:Int): Drawable? {
+    fun getDrawable(context: Context, @AttrRes attribute: Int): Drawable? {
         val ta = context.obtainStyledAttributes(layoutStyle, intArrayOf(attribute))
         val drawable = ta.getDrawable(0)
         ta.recycle()
@@ -57,7 +66,7 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
     }
 
     @ColorInt
-    fun getTextColor(context: Context):Int {
+    fun getTextColor(context: Context): Int {
         return getColor(context, android.R.attr.textColor)
     }
 
@@ -66,7 +75,7 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
             return values().find { it.id == id }
         }
 
-        fun ids():IntArray {
+        fun ids(): IntArray {
             val arr = IntArray(values().size)
             for ((i, value) in values().withIndex()) {
                 arr[i] = value.id
@@ -76,16 +85,23 @@ enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dial
     }
 }
 
-class ThemePreference(key:String, defaultValue:Theme): PreferenceTypeWithDefault<SharedPreferences, Theme>(key, defaultValue) {
+class ThemePreference(key: String, defaultValue: Theme) :
+    PreferenceTypeWithDefault<SharedPreferences, Theme>(key, defaultValue) {
 
     override fun getValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>): Theme {
-        return if(thisRef.sharedPreferences.contains(key)) Theme.findById(thisRef.sharedPreferences.getInt(key, Theme.MONO.id))!!
+        return if (thisRef.sharedPreferences.contains(key)) Theme.findById(
+            thisRef.sharedPreferences.getString(
+                key,
+                Theme.MONO.id.toString()
+            )!!.toInt()
+        )!!
         else defaultValue(key)
     }
 
     override fun setValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>, value: Theme) {
-        thisRef.edit {
-            putInt(key, value.id)
+        thisRef.edit { listener ->
+            putString(key, value.id.toString())
+            listener(key, value)
         }
     }
 
