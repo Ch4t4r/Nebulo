@@ -150,7 +150,8 @@ class DnsVpnService : VpnService(), Runnable {
     override fun onCreate() {
         super.onCreate()
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
-            log("Encountered an uncaught exception: ${e.message}")
+            log("Encountered an uncaught exception.")
+            log(Logger.stacktraceToString(e))
             destroy()
             stopForeground(true)
             stopSelf()
