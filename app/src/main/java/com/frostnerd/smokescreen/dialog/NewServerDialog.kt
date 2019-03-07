@@ -12,6 +12,7 @@ import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.log
 import kotlinx.android.synthetic.main.dialog_new_server.*
 
 /*
@@ -100,6 +101,7 @@ class NewServerDialog(
     }
 
     private fun createUpstreamAddress(url:String): HttpsUpstreamAddress {
+        context.log("Creating HttpsUpstreamAddress for `$url`")
         var host = ""
         var port:Int? = null
         var path:String? = null
