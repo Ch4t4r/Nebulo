@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.util.preferences
 
 import android.content.SharedPreferences
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
@@ -89,4 +90,4 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
     }
 }
 
-class UserServerConfiguration(val id:Int, val serverInformation:HttpsDnsServerInformation)
+class UserServerConfiguration(val id:Int, val serverInformation:DnsServerInformation<*>)
