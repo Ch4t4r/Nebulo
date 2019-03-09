@@ -12,7 +12,11 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.dnstunnelproxy.DnsServerSpecification
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
@@ -23,6 +27,7 @@ import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.item_imported_server.view.*
 import java.net.URL
 
 
@@ -94,18 +99,16 @@ class MainFragment : Fragment() {
             }
         }
         serverButton.setOnClickListener {
-            ServerChoosalDialog(requireContext()) { primaryServerUrl: ServerConfiguration, secondaryServerUrl: ServerConfiguration?, customServers: Boolean ->
-                updatePrivacyPolicyLink(primaryServerUrl)
+            ServerChoosalDialog(requireContext() as AppCompatActivity) { config ->
+                updatePrivacyPolicyLink(config)
                 val prefs = requireContext().getPreferences()
                 prefs.edit {
-                    prefs.areCustomServers = customServers
-                    prefs.primaryServerConfig = primaryServerUrl
-                    prefs.secondaryServerConfig = secondaryServerUrl
+                    prefs.dnsServerConfig = config
                 }
-                println("Saved $primaryServerUrl, $secondaryServerUrl")
+                println("Saved $config")
             }.show()
         }
-        updatePrivacyPolicyLink(requireContext().getPreferences().primaryServerConfig)
+        updatePrivacyPolicyLink(requireContext().getPreferences().dnsServerConfig)
         privacyStatementText.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW)
             val url = it.tag as URL
@@ -174,11 +177,11 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun updatePrivacyPolicyLink(serverConfiguration: ServerConfiguration) {
-        val url = serverConfiguration.serverInformation?.specification?.privacyPolicyURL
+    private fun updatePrivacyPolicyLink(serverInfo:DnsServerInformation<*>) {
+        val url = serverInfo.specification.privacyPolicyURL
 
         if(url != null) {
-            privacyStatementText.text = getString(R.string.main_dnssurveillance_privacystatement, serverConfiguration.serverInformation!!.name)
+            privacyStatementText.text = getString(R.string.main_dnssurveillance_privacystatement, serverInfo.name)
             privacyStatementText.tag = url
             privacyStatementText.visibility = View.VISIBLE
         } else {

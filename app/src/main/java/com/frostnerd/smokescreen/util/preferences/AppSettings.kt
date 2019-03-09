@@ -39,7 +39,6 @@ interface AppSettings {
     var dummyDnsAddressIpv4: String
     var dummyDnsAddressIpv6: String
     val defaultBypassPackages: Set<String>
-    var areCustomServers: Boolean
     var dnsServerConfig: DnsServerInformation<*>
     var userServers: Set<UserServerConfiguration>
 
@@ -96,7 +95,7 @@ interface AppSettings {
         }
     }
 
-    fun addUserServerConfiguration(info:HttpsDnsServerInformation):UserServerConfiguration {
+    fun addUserServerConfiguration(info:DnsServerInformation<*>):UserServerConfiguration {
         var max = 0
         for (server in userServers) {
             if (server.id >= max) max = server.id + 1
@@ -108,7 +107,7 @@ interface AppSettings {
         return config
     }
 
-    fun addUserServerConfiguration(infos:List<HttpsDnsServerInformation>) {
+    fun addUserServerConfiguration(infos:List<DnsServerInformation<*>>) {
         var max = 0
         for (server in userServers) {
             if (server.id >= max) max = server.id + 1
@@ -185,7 +184,6 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         shouldContain(BuildConfig.APPLICATION_ID)
         shouldContain("com.android.vending")
     }
-    override var areCustomServers: Boolean by booleanPref("doh_custom_server", false)
     override var dnsServerConfig: DnsServerInformation<*> by DnsServerInformationPreference("dns_server_config") {
         AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
             knownServers.getValue(0)

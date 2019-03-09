@@ -7,7 +7,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import com.frostnerd.dnstunnelproxy.Decision
+import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
+import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
@@ -35,19 +39,27 @@ import kotlinx.android.synthetic.main.dialog_new_server.*
  */
 class NewServerDialog(
     context: Context,
-    title:String? = null,
-    onServerAdded: (serverInfo: HttpsDnsServerInformation) -> Unit
+    title: String? = null,
+    val dnsOverHttps: Boolean,
+    onServerAdded: (serverInfo: DnsServerInformation<*>) -> Unit
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
 
     companion object {
         val SERVER_URL_REGEX =
-            Regex("^\\s*(?:https://)?([a-z0-9][a-z0-9-.]*[a-z0-9])(?::[1-9][0-9]{0,4})?(/[a-z0-9-.]+)*(/)?\\s*$", RegexOption.IGNORE_CASE)
+            Regex(
+                "^\\s*(?:https://)?([a-z0-9][a-z0-9-.]*[a-z0-9])(?::[1-9][0-9]{0,4})?(/[a-z0-9-.]+)*(/)?\\s*$",
+                RegexOption.IGNORE_CASE
+            )
+        val TLS_REGEX = Regex("^\\s*([a-z0-9][a-z0-9-.]*[a-z0-9])(?::[1-9][0-9]{0,4})?\\s*$", RegexOption.IGNORE_CASE)
     }
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_server, null, false)
-        if(title != null) setTitle(title)
-        else setTitle(R.string.dialog_newserver_title)
+        if (title != null) setTitle(title)
+        else {
+            if (dnsOverHttps) setTitle(R.string.dialog_newserver_title_https)
+            else setTitle(R.string.dialog_newserver_title_tls)
+        }
         setView(view)
 
         setButton(
@@ -66,10 +78,12 @@ class NewServerDialog(
                 if (inputsValid()) {
                     val name = serverName.text.toString()
                     var primary = primaryServer.text.toString().trim()
-                    var secondary = if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString().trim()
+                    var secondary =
+                        if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString().trim()
 
                     if (primary.startsWith("https")) primary = primary.replace("https://", "")
-                    if (secondary != null && secondary.startsWith("https")) secondary = secondary.replace("https://", "")
+                    if (secondary != null && secondary.startsWith("https")) secondary =
+                        secondary.replace("https://", "")
                     invokeCallback(name, primary, secondary, onServerAdded)
                     dismiss()
                 } else {
@@ -80,51 +94,116 @@ class NewServerDialog(
         }
     }
 
-    private fun invokeCallback(name:String, primary:String, secondary:String?, onServerAdded:(HttpsDnsServerInformation) -> Unit) {
-        val requestType = mapOf(RequestType.WIREFORMAT_POST to ResponseType.WIREFORMAT)
-        val serverInfo = mutableListOf<HttpsDnsServerConfiguration>()
-        serverInfo.add(HttpsDnsServerConfiguration(address = createUpstreamAddress(primary), requestTypes = requestType, experimental = false))
-        if(!secondary.isNullOrBlank()) serverInfo.add(HttpsDnsServerConfiguration(address = createUpstreamAddress(secondary), requestTypes = requestType, experimental = false))
-        onServerAdded.invoke(
-            HttpsDnsServerInformation(
-                name,
-                HttpsDnsServerSpecification(
-                    Decision.UNKNOWN,
-                    Decision.UNKNOWN,
-                    Decision.UNKNOWN,
-                    Decision.UNKNOWN
-                ),
-                serverInfo,
-                emptyList()
+    private fun invokeCallback(
+        name: String,
+        primary: String,
+        secondary: String?,
+        onServerAdded: (DnsServerInformation<*>) -> Unit
+    ) {
+        if (dnsOverHttps) {
+            val requestType = mapOf(RequestType.WIREFORMAT_POST to ResponseType.WIREFORMAT)
+            val serverInfo = mutableListOf<HttpsDnsServerConfiguration>()
+            serverInfo.add(
+                HttpsDnsServerConfiguration(
+                    address = createHttpsUpstreamAddress(primary),
+                    requestTypes = requestType,
+                    experimental = false
+                )
             )
-        )
+            if (!secondary.isNullOrBlank()) serverInfo.add(
+                HttpsDnsServerConfiguration(
+                    address = createHttpsUpstreamAddress(
+                        secondary
+                    ), requestTypes = requestType, experimental = false
+                )
+            )
+            onServerAdded.invoke(
+                HttpsDnsServerInformation(
+                    name,
+                    HttpsDnsServerSpecification(
+                        Decision.UNKNOWN,
+                        Decision.UNKNOWN,
+                        Decision.UNKNOWN,
+                        Decision.UNKNOWN
+                    ),
+                    serverInfo,
+                    emptyList()
+                )
+            )
+        } else {
+            val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
+            serverInfo.add(
+                DnsServerConfiguration(
+                    address = createTlsUpstreamAddress(primary),
+                    experimental = false,
+                    supportedProtocols = listOf(TLS),
+                    preferredProtocol = TLS
+                )
+            )
+            if (!secondary.isNullOrBlank()) serverInfo.add(
+                DnsServerConfiguration(
+                    address = createTlsUpstreamAddress(
+                        secondary
+                    ), experimental = false, supportedProtocols = listOf(TLS), preferredProtocol = TLS
+                )
+            )
+            onServerAdded.invoke(
+                DnsServerInformation(
+                    name,
+                    HttpsDnsServerSpecification(
+                        Decision.UNKNOWN,
+                        Decision.UNKNOWN,
+                        Decision.UNKNOWN,
+                        Decision.UNKNOWN
+                    ),
+                    serverInfo,
+                    emptyList()
+                )
+            )
+        }
     }
 
-    private fun createUpstreamAddress(url:String): HttpsUpstreamAddress {
+    private fun createHttpsUpstreamAddress(url: String): HttpsUpstreamAddress {
         context.log("Creating HttpsUpstreamAddress for `$url`")
         var host = ""
-        var port:Int? = null
-        var path:String? = null
-        if(url.contains(":")) {
+        var port: Int? = null
+        var path: String? = null
+        if (url.contains(":")) {
             host = url.split(":")[0]
             port = url.split(":")[1].split("/")[0].toInt()
-            if(port > 65535) port = null
+            if (port > 65535) port = null
         }
-        if(url.contains("/")) {
+        if (url.contains("/")) {
             path = url.split("/")[1]
-            if(host == "") host = url.split("/")[0]
+            if (host == "") host = url.split("/")[0]
         }
-        if(host == "") host = url
-        return if(port != null && path != null) HttpsUpstreamAddress(host, port, path)
-        else if(port != null) HttpsUpstreamAddress(host, port)
-        else if(path != null) HttpsUpstreamAddress(host, urlPath = path)
+        if (host == "") host = url
+        return if (port != null && path != null) HttpsUpstreamAddress(host, port, path)
+        else if (port != null) HttpsUpstreamAddress(host, port)
+        else if (path != null) HttpsUpstreamAddress(host, urlPath = path)
         else HttpsUpstreamAddress(host)
+    }
+
+    private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
+        context.log("Creating TLSUpstreamAddress for `$host`")
+        var parsedHost = ""
+        var port: Int? = null
+        if (host.contains(":")) {
+            parsedHost = host.split(":")[0]
+            port = host.split(":")[1].split("/")[0].toInt()
+            if (port > 65535) port = null
+        } else parsedHost = host
+        return if (port != null) TLSUpstreamAddress(parsedHost, port)
+        else TLSUpstreamAddress(parsedHost)
     }
 
     fun addUrlTextWatcher(materialEditText: MaterialEditText, editText: EditText, emptyAllowed: Boolean) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                val valid = (emptyAllowed && s.isBlank()) || SERVER_URL_REGEX.matches(s.toString())
+                val valid =
+                    (emptyAllowed && s.isBlank()) || (dnsOverHttps && SERVER_URL_REGEX.matches(s.toString())) || (!dnsOverHttps && TLS_REGEX.matches(
+                        s.toString()
+                    ))
 
                 materialEditText.indicatorState = if (valid) {
                     if (s.isBlank()) MaterialEditText.IndicatorState.UNDEFINED

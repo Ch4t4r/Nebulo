@@ -3,16 +3,21 @@ package com.frostnerd.smokescreen.util.preferences
 import android.content.SharedPreferences
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
+import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
+import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
+import com.frostnerd.smokescreen.hasTlsServer
 import java.lang.IllegalStateException
 import kotlin.reflect.KProperty
+import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.jvm.isAccessible
 
 /*
- * Copyright (C) {YEAR} Daniel Wolf (Ch4t4r)
+ * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,6 +38,11 @@ class DnsServerInformationPreference(key: String, defaultValue: (String) -> DnsS
     PreferenceTypeWithDefault<SharedPreferences, DnsServerInformation<*>>(key, defaultValue) {
     private val tlsTypeAdapter = DnsServerInformationTypeAdapter()
     private val httpsTypeAdapter = HttpsDnsServerInformationTypeAdapter()
+
+    init {
+        TLSUpstreamAddress
+        HttpsUpstreamAddress
+    }
 
     override fun getValue(
         thisRef: TypedPreferences<SharedPreferences>,
@@ -57,12 +67,11 @@ class DnsServerInformationPreference(key: String, defaultValue: (String) -> DnsS
         property: KProperty<*>,
         value: DnsServerInformation<*>
     ) {
-        val type = if(value.servers.any {
-            it is TLSUpstreamAddress
-        }) "tls" else "https"
+        val type = if(value.hasTlsServer()) "tls" else "https"
         val json:String = if(type == "tls") tlsTypeAdapter.toJson(value)
         else httpsTypeAdapter.toJson(value as HttpsDnsServerInformation)
-        thisRef.edit {
+        thisRef.edit {listener ->
+            listener(key, value)
             putString(key + "_type", type)
             putString(key, json)
         }

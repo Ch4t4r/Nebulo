@@ -12,6 +12,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
@@ -157,4 +160,16 @@ fun ConnectivityManager.isVpnNetwork(network: Network): Boolean {
 
 operator fun Level.compareTo(otherLevel:Level):Int {
     return this.intValue() - otherLevel.intValue()
+}
+
+fun DnsServerInformation<*>.hasTlsServer():Boolean {
+    return this.servers.any {
+        it.address is TLSUpstreamAddress
+    }
+}
+
+fun DnsServerInformation<*>.hasHttpsServer():Boolean {
+    return this.servers.any {
+        it is HttpsUpstreamAddress
+    }
 }

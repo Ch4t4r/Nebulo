@@ -4,9 +4,11 @@ import android.content.Context
 import com.frostnerd.dnstunnelproxy.DnsHandle
 import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.hasTlsServer
 import com.frostnerd.smokescreen.log
 import org.minidns.dnsmessage.DnsMessage
 
@@ -32,7 +34,16 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
     private val writeQueriesToLog = context.getPreferences().loggingEnabled
     private val logQueriesToDb = context.getPreferences().queryLoggingEnabled
     private val waitingQueryLogs: MutableMap<Int, DnsQuery> = mutableMapOf()
-    private val askedServer = context.getPreferences().primaryServerConfig.urlCreator.baseUrl
+    private val askedServer:String
+
+    init {
+        val config = context.getPreferences().dnsServerConfig
+        askedServer = if(config.hasTlsServer()) {
+            "tls::" + config.servers.first().address.FQDN!!
+        } else {
+            "https::" + (config as HttpsDnsServerInformation).serverConfigurations.values.first().urlCreator.baseUrl
+        }
+    }
 
     override suspend fun onQueryForwarded(questionMessage: DnsMessage, destination: UpstreamAddress, usedHandle:DnsHandle) {
         if(writeQueriesToLog) {

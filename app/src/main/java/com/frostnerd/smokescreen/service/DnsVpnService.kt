@@ -13,8 +13,10 @@ import android.util.Base64
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
+import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.general.CombinedIterator
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.networking.NetworkUtil
@@ -28,7 +30,8 @@ import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.proxy.ProxyBypassHandler
-import com.frostnerd.smokescreen.util.proxy.ProxyHandler
+import com.frostnerd.smokescreen.util.proxy.ProxyHttpsHandler
+import com.frostnerd.smokescreen.util.proxy.ProxyTlsHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
@@ -66,15 +69,14 @@ import java.util.logging.Level
  */
 class DnsVpnService : VpnService(), Runnable {
     private var fileDescriptor: ParcelFileDescriptor? = null
-    private var handle: ProxyHandler? = null
+    private var handle: ProxyHttpsHandler? = null
     private var dnsProxy: SmokeProxy? = null
     private var vpnProxy: VPNTunnelProxy? = null
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
-    private lateinit var primaryServer: ServerConfiguration
+    private lateinit var serverConfig:DnsServerConfiguration
     private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
     private lateinit var networkCallback:ConnectivityManager.NetworkCallback
-    private var secondaryServer: ServerConfiguration? = null
     private var queryCountOffset: Long = 0
     private var packageBypassAmount = 0
 
@@ -209,14 +211,14 @@ class DnsVpnService : VpnService(), Runnable {
             "dnscache_keepacrosslaunches",
             "bypass_searchdomains",
             "user_bypass_blacklist",
-            "doh_server_url_primary",
             "log_dns_queries",
             "show_notification_on_lockscreen",
             "hide_notification_icon",
             "pause_on_captive_portal",
             "null_terminate_keweon",
             "allow_ipv6_traffic",
-            "allow_ipv4_traffic"
+            "allow_ipv4_traffic",
+            "dns_server_config"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings) { changes ->
             log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
@@ -226,7 +228,7 @@ class DnsVpnService : VpnService(), Runnable {
                 createNotification()
                 setNotificationText()
             }
-            val reload = "doh_server_url_primary" in changes || "doh_server_url_secondary" in changes
+            val reload = "dns_server_config" in changes
             recreateVpn(reload, null)
         }
         log("Subscribed.")
@@ -306,7 +308,7 @@ class DnsVpnService : VpnService(), Runnable {
             } else {
                 log("The VPN is prepared, proceeding.")
                 if (!destroyed) {
-                    if (!this::primaryServer.isInitialized) {
+                    if (!this::serverConfig.isInitialized) {
                         setServerConfiguration(intent)
                         setNotificationText()
                     }
@@ -323,43 +325,48 @@ class DnsVpnService : VpnService(), Runnable {
         if (intent != null) {
             if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)) {
                 primaryUserServerUrl = intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)
-                primaryServer = ServerConfiguration.createSimpleServerConfig(primaryUserServerUrl!!)
             } else {
                 primaryUserServerUrl = null
-                primaryServer = getPreferences().primaryServerConfig
             }
 
             if (intent.hasExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl)) {
-                secondaryUserServerUrl = intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl)
-                secondaryServer = ServerConfiguration.createSimpleServerConfig(secondaryUserServerUrl!!)
+                if(primaryUserServerUrl == null) primaryUserServerUrl = intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl)
+                else secondaryUserServerUrl = intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl)
             } else {
                 secondaryUserServerUrl = null
-                secondaryServer = getPreferences().secondaryServerConfig
             }
         } else {
-            primaryServer = getPreferences().primaryServerConfig
-            secondaryServer = getPreferences().secondaryServerConfig
             primaryUserServerUrl = null
             secondaryUserServerUrl = null
         }
-        log("Server configuration updated to $primaryServer and $secondaryServer")
+        serverConfig = getServerConfig()
+        log("Server configuration updated to $serverConfig")
     }
 
     private fun setNotificationText() {
-        val secondaryServer = getSecondaryServer()
-        val primaryServer = getPrimaryServer()
+        val primaryServer:String
+        val secondaryServer:String?
+        if(serverConfig.httpsConfiguration != null) {
+            notificationBuilder.setContentTitle(getString(R.string.notification_main_title_https))
+            primaryServer = serverConfig.httpsConfiguration!![0].urlCreator.baseUrl
+            secondaryServer = serverConfig.httpsConfiguration!!.getOrNull(1)?.urlCreator?.baseUrl
+        } else {
+            notificationBuilder.setContentTitle(getString(R.string.notification_main_title_tls))
+            primaryServer = serverConfig.tlsConfiguration!![0].FQDN!!
+            secondaryServer = serverConfig.tlsConfiguration!!.getOrNull(1)?.FQDN
+        }
         val text = if (secondaryServer != null) {
             getString(
                 if(getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
-                primaryServer.urlCreator.baseUrl,
-                secondaryServer.urlCreator.baseUrl,
+                primaryServer,
+                secondaryServer,
                 packageBypassAmount,
                 dnsProxy?.cache?.livingCachedEntries() ?: 0
             )
         } else {
             getString(
                 if(getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
-                primaryServer.urlCreator.baseUrl,
+                primaryServer,
                 packageBypassAmount,
                 dnsProxy?.cache?.livingCachedEntries() ?: 0
             )
@@ -637,38 +644,55 @@ class DnsVpnService : VpnService(), Runnable {
         return emptyList()
     }
 
-    private fun getPrimaryServer(): ServerConfiguration {
-        return if(primaryUserServerUrl != null) ServerConfiguration.createSimpleServerConfig(primaryUserServerUrl!!)
-        else primaryServer
-    }
-
-    private fun getSecondaryServer(): ServerConfiguration? {
-        return if(secondaryUserServerUrl != null) ServerConfiguration.createSimpleServerConfig(secondaryUserServerUrl!!)
-        else secondaryServer
+    private fun getServerConfig(): DnsServerConfiguration {
+        TLSUpstreamAddress
+        return if(primaryUserServerUrl != null) {
+            val configList = mutableListOf(ServerConfiguration.createSimpleServerConfig(primaryUserServerUrl!!))
+            if(secondaryUserServerUrl != null) configList.add(ServerConfiguration.createSimpleServerConfig(secondaryUserServerUrl!!))
+            DnsServerConfiguration( configList, null)
+        }
+        else {
+            val config = getPreferences().dnsServerConfig
+            if(config.hasTlsServer()) {
+                DnsServerConfiguration(null, config.servers.map {
+                    it.address as TLSUpstreamAddress
+                })
+            } else {
+                DnsServerConfiguration((config as HttpsDnsServerInformation).serverConfigurations.map {
+                    it.value
+                }, null)
+            }
+        }
     }
 
     override fun run() {
         log("run() called")
-        val list = mutableListOf<ServerConfiguration>()
-        list.add(getPrimaryServer())
-        val secondary = getSecondaryServer()
-        if (secondary != null) list.add(secondary)
-        log("Using primary server: ${list.first()}")
-        log("Using secondary server: ${list.getOrNull(1)}")
+        log("Starting with config: $serverConfig")
 
         log("Creating handle.")
-        handle = ProxyHandler(
-            list,
-            connectTimeout = 500,
-            queryCountCallback = {
-                setNotificationText()
-                updateNotification(it)
-            },
-            nullRouteKeweon = getPreferences().isUsingKeweon() && getPreferences().nullTerminateKeweon
-        )
+        val handle:DnsHandle
+        if(serverConfig.httpsConfiguration != null) {
+            handle = ProxyHttpsHandler(
+                serverConfig.httpsConfiguration!!,
+                connectTimeout = 500,
+                queryCountCallback = {
+                    setNotificationText()
+                    updateNotification(it)
+                },
+                nullRouteKeweon = getPreferences().isUsingKeweon() && getPreferences().nullTerminateKeweon
+            )
+        } else {
+            handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
+                connectTimeout = 500,
+                queryCountCallback = {
+                    setNotificationText()
+                    updateNotification(it)
+                },
+                nullRouteKeweon = getPreferences().isUsingKeweon() && getPreferences().nullTerminateKeweon)
+        }
         log("Handle created, creating DNS proxy")
 
-        dnsProxy = SmokeProxy(handle!!, createProxyBypassHandlers(), createDnsCache(), createQueryLogger())
+        dnsProxy = SmokeProxy(handle, createProxyBypassHandlers(), createDnsCache(), createQueryLogger())
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(3, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger {
@@ -851,3 +875,5 @@ class DnsVpnService : VpnService(), Runnable {
 enum class Command : Serializable {
     STOP, RESTART
 }
+
+data class DnsServerConfiguration(val httpsConfiguration:List<ServerConfiguration>?, val tlsConfiguration:List<TLSUpstreamAddress>?)

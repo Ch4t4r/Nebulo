@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.BasicDrawerItem
@@ -77,8 +78,8 @@ class MainActivity : NavigationDrawerActivity() {
                 onLongClick = null,
                 onSimpleClick = { _, _, _ ->
                     NewServerDialog(this@MainActivity, title = getString(R.string.menu_create_shortcut), onServerAdded = {
-                        ShortcutActivity.createShortcut(this@MainActivity, it)
-                    }).show()
+                        ShortcutActivity.createShortcut(this@MainActivity, it as HttpsDnsServerInformation)
+                    }, dnsOverHttps = true).show()
                     false
                 })
             divider()

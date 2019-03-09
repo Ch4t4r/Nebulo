@@ -9,19 +9,36 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_height="match_parent">
-    <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            app:tabSelectedTextColor="?attr/inputElementColor"
-            app:tabIndicatorColor="?attr/inputElementColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/addServer"
-            app:tabMode="scrollable"/>
 
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager"
+    <Spinner
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:id="@+id/spinner"
+            android:layout_height="wrap_content"/>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_below="@id/spinner"
+            android:layout_above="@id/addServer"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_height="wrap_content">
+
+        <ProgressBar
+                android:layout_width="64dp"
+                android:id="@+id/progress"
+                android:indeterminate="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="64dp"/>
+
+        <RadioGroup
+                android:id="@+id/knownServersGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        </RadioGroup>
+
+
+    </LinearLayout>
 
     <Button
             android:layout_width="match_parent"
