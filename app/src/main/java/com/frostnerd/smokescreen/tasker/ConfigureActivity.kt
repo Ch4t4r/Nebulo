@@ -10,10 +10,16 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.dialog.NewServerDialog
+import com.frostnerd.smokescreen.fromServerUrls
+import com.frostnerd.smokescreen.hasHttpsServer
+import com.frostnerd.smokescreen.tlsServerFromHosts
 import kotlinx.android.synthetic.main.activity_tasker_configure.*
 
 /*
@@ -35,6 +41,8 @@ import kotlinx.android.synthetic.main.activity_tasker_configure.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ConfigureActivity : BaseActivity() {
+    private var validationRegex = NewServerDialog.SERVER_URL_REGEX
+
     override fun getConfiguration(): Configuration {
         return Configuration.withDefaults()
     }
@@ -62,15 +70,38 @@ class ConfigureActivity : BaseActivity() {
                 val action = settings.getString(TaskerHelper.DATA_KEY_ACTION, "start")
                 when (action) {
                     "stop" -> {
-                        spinner.setSelection(1)
+                        actionType.setSelection(1)
                     }
                     "start" -> {
-                        spinner.setSelection(0)
+                        actionType.setSelection(0)
                         startIfRunning.isChecked = settings.getBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, true)
-                        useServersFromConfig.isChecked = !settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER)
+                        useServersFromConfig.isChecked =
+                            !settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER) && !settings.containsKey(
+                                BackgroundVpnConfigureActivity.extraKeyServerConfig
+                            )
                         if (!useServersFromConfig.isChecked) {
-                            primaryServer.setText(settings.getString(TaskerHelper.DATA_KEY_PRIMARYSERVER))
-                            secondaryServer.setText(settings.getString(TaskerHelper.DATA_KEY_SECONDARYSERVER))
+                            if (settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER)) {
+                                serverType.setSelection(0)
+                                primaryServer.setText(settings.getString(TaskerHelper.DATA_KEY_PRIMARYSERVER))
+                                secondaryServer.setText(settings.getString(TaskerHelper.DATA_KEY_SECONDARYSERVER))
+                            } else {
+                                val info = BackgroundVpnConfigureActivity.readServerInfoFromIntent(settings)
+                                if (info != null) {
+                                    if (info.hasHttpsServer()) {
+                                        validationRegex = NewServerDialog.SERVER_URL_REGEX
+                                        serverType.setSelection(0)
+                                        val httpsInfo = info as HttpsDnsServerInformation
+                                        val configs = httpsInfo.serverConfigurations.values.toTypedArray()
+                                        primaryServer.setText(configs.getOrNull(0)?.urlCreator?.baseUrl)
+                                        secondaryServer.setText(configs.getOrNull(1)?.urlCreator?.baseUrl)
+                                    } else {
+                                        validationRegex = NewServerDialog.TLS_REGEX
+                                        serverType.setSelection(1)
+                                        primaryServer.setText(info.servers.getOrNull(0)?.address?.FQDN)
+                                        secondaryServer.setText(info.servers.getOrNull(1)?.address?.FQDN)
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -82,7 +113,9 @@ class ConfigureActivity : BaseActivity() {
         useServersFromConfig.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 serverConfigWrap.visibility = View.GONE
+                serverType.visibility = View.GONE
             } else {
+                serverType.visibility = View.VISIBLE
                 serverConfigWrap.visibility = View.VISIBLE
             }
         }
@@ -92,8 +125,8 @@ class ConfigureActivity : BaseActivity() {
             R.layout.item_tasker_action_spinner_item
         )
         adapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
-        spinner.adapter = adapter
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        actionType.adapter = adapter
+        actionType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
@@ -105,6 +138,24 @@ class ConfigureActivity : BaseActivity() {
                 }
             }
         }
+        val spinnerAdapter = ArrayAdapter<String>(
+            this, android.R.layout.simple_spinner_item,
+            arrayListOf(
+                this.getString(R.string.dialog_serverconfiguration_https),
+                this.getString(R.string.dialog_serverconfiguration_tls)
+            )
+        )
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        serverType.adapter = spinnerAdapter
+        serverType.setSelection(0)
+        serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                validationRegex = if (position == 0) NewServerDialog.SERVER_URL_REGEX else NewServerDialog.TLS_REGEX
+                primaryServer.text = primaryServer.text
+                secondaryServer.text = secondaryServer.text
+            }
+        }
         addUrlTextWatcher(primaryServerWrap, primaryServer, false)
         addUrlTextWatcher(secondaryServerWrap, secondaryServer, true)
     }
@@ -112,7 +163,7 @@ class ConfigureActivity : BaseActivity() {
     private fun addUrlTextWatcher(materialEditText: MaterialEditText, editText: EditText, emptyAllowed: Boolean) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                val valid = (emptyAllowed && s.isBlank()) || NewServerDialog.SERVER_URL_REGEX.matches(s.toString())
+                val valid = (emptyAllowed && s.isBlank()) || validationRegex.matches(s.toString())
 
                 materialEditText.indicatorState = if (valid) {
                     if (s.isBlank()) MaterialEditText.IndicatorState.UNDEFINED
@@ -136,13 +187,13 @@ class ConfigureActivity : BaseActivity() {
 
     private fun saveConfiguration() {
         var valid = true
-        val action = if (spinner.selectedItemPosition == 0) "start" else "stop"
+        val action = if (actionType.selectedItemPosition == 0) "start" else "stop"
         val resultIntent = Intent()
         val settings = Bundle()
         settings.putString(TaskerHelper.DATA_KEY_ACTION, action)
         resultIntent.putExtra(
             TaskerHelper.EXTRAS_BLURB_KEY,
-            resources.getStringArray(R.array.tasker_action_values)[spinner.selectedItemPosition]
+            resources.getStringArray(R.array.tasker_action_values)[actionType.selectedItemPosition]
         )
         if (action == "start") {
             settings.putBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, startIfRunning.isChecked)
@@ -152,20 +203,38 @@ class ConfigureActivity : BaseActivity() {
                 ) {
                     var primary = primaryServer.text.toString()
                     var secondary = if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString()
-                    if (!primary.startsWith("https")) primary = "https://$primary"
-                    if (secondary != null && !secondary.startsWith("https")) secondary = "https://$secondary"
+                    if (primary.startsWith("https")) primary = primary.replace("https://", "")
+                    if (secondary != null && secondary.startsWith("https")) secondary =
+                        secondary.replace("https://", "")
+                    val mode:String
 
-                    settings.putString(TaskerHelper.DATA_KEY_PRIMARYSERVER, primary)
-                    settings.putString(TaskerHelper.DATA_KEY_SECONDARYSERVER, secondary)
+                    if (serverType.selectedItemPosition == 1) {
+                        mode = getString(R.string.tasker_mode_dot)
+                        BackgroundVpnConfigureActivity.writeServerInfoToIntent(
+                            DnsServerInformation.tlsServerFromHosts(
+                                primary,
+                                secondary
+                            ), settings
+                        )
+                    } else {
+                        mode = getString(R.string.tasker_mode_doh)
+                        BackgroundVpnConfigureActivity.writeServerInfoToIntent(
+                            HttpsDnsServerInformation.fromServerUrls(
+                                primary,
+                                secondary
+                            ), settings
+                        )
+                    }
+
                     if (secondary != null) {
                         resultIntent.putExtra(
                             TaskerHelper.EXTRAS_BLURB_KEY,
-                            getString(R.string.tasker_start_app_custom_urls, primary, secondary)
+                            getString(R.string.tasker_start_app_custom_urls, primary, secondary, mode)
                         )
                     } else {
                         resultIntent.putExtra(
                             TaskerHelper.EXTRAS_BLURB_KEY,
-                            getString(R.string.tasker_start_app_custom_url, primary)
+                            getString(R.string.tasker_start_app_custom_url, primary, mode)
                         )
                     }
                     settings.putBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, startIfRunning.isChecked)

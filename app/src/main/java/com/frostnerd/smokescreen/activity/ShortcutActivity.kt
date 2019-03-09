@@ -7,9 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.dnstunnelproxy.Decision
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.general.StringUtil
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.fromServerUrls
+import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.service.DnsVpnService
 
 /*
@@ -35,28 +39,26 @@ class ShortcutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (intent != null) {
-            val primaryUrl = intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl)!!
-            val secondaryUrl = intent.getStringExtra(BackgroundVpnConfigureActivity.extraKeySecondaryUrl) ?: null
-            DnsVpnService.restartVpn(this, primaryUrl, secondaryUrl)
+        if(intent != null) {
+            if(intent.extras?.containsKey("primary_url") == true) {
+                val primaryUrl = intent.getStringExtra("primary_url")!!
+                val secondaryUrl = intent.getStringExtra("secondary_url") ?: null
+                DnsVpnService.restartVpn(this, HttpsDnsServerInformation.fromServerUrls(primaryUrl, secondaryUrl))
+            } else {
+                DnsVpnService.restartVpn(this, BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent))
+            }
         }
         finish()
     }
 
     companion object {
-        fun createShortcut(context: Context, info: HttpsDnsServerInformation) {
+        fun createShortcut(context: Context, info: DnsServerInformation<*>) {
             val shortcutName = info.name
-            val primaryServerUrl = info.servers.first().address.getUrl()
-            val secondaryServerUrl = info.servers.getOrNull(1)?.address?.getUrl()
             val targetIntent = Intent(context, ShortcutActivity::class.java)
             targetIntent.action = "${context.packageName}.dummy_action"
-            targetIntent.putExtra(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl, primaryServerUrl)
+            BackgroundVpnConfigureActivity.writeServerInfoToIntent(info, targetIntent)
             targetIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             targetIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            if (secondaryServerUrl != null) targetIntent.putExtra(
-                BackgroundVpnConfigureActivity.extraKeySecondaryUrl,
-                secondaryServerUrl
-            )
 
             if (ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
                 val shortcutInf = ShortcutInfoCompat.Builder(context, StringUtil.randomString(30))

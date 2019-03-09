@@ -6,10 +6,18 @@ import android.content.Intent
 import android.net.VpnService
 import android.os.Bundle
 import android.view.Window
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
+import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.toJson
+import java.lang.IllegalArgumentException
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -36,23 +44,74 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
     }
 
     companion object {
-        val extraKeyPrimaryUrl = "primary_url"
-        val extraKeySecondaryUrl = "secondary_url"
-        private val VPN_REQUEST_CODE = 1
+        const val extraKeyServerConfig = "server_config"
+        const val extraKeyServerType = "config_type"
+        private const val VPN_REQUEST_CODE = 1
 
-        fun prepareVpn(context: Context, primaryServerUrl: String? = null, secondaryServerUrl: String? = null) {
+        fun prepareVpn(context: Context, serverInfo:DnsServerInformation<*>? = null) {
             val vpnIntent = VpnService.prepare(context)
             if (vpnIntent == null) {
-                DnsVpnService.startVpn(context, primaryServerUrl, secondaryServerUrl)
+                DnsVpnService.startVpn(context, serverInfo)
             } else {
                 val intent = Intent(context, BackgroundVpnConfigureActivity::class.java)
-                if(primaryServerUrl != null) intent.putExtra(extraKeyPrimaryUrl, primaryServerUrl)
-                if(secondaryServerUrl != null) intent.putExtra(extraKeySecondaryUrl, secondaryServerUrl)
+                if(serverInfo != null) {
+                    writeServerInfoToIntent(serverInfo, intent)
+                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
             }
         }
+
+        fun writeServerInfoToIntent(info:DnsServerInformation<*>, intent:Intent) {
+            intent.putExtra(extraKeyServerConfig, info.toJson())
+            intent.putExtra(extraKeyServerType, getServerInfoType(info))
+        }
+
+        fun writeServerInfoToIntent(info:DnsServerInformation<*>, bundle:Bundle) {
+            bundle.putString(extraKeyServerConfig, info.toJson())
+            bundle.putString(extraKeyServerType, getServerInfoType(info))
+        }
+
+        fun readServerInfoFromIntent(intent:Intent?):DnsServerInformation<*>? {
+            if(intent == null) return null
+            if(intent.extras?.containsKey(extraKeyServerConfig) == true) {
+                if(intent.extras?.containsKey(extraKeyServerType) == true) {
+                    return serverInfoFromJson(intent.extras!!.getString(extraKeyServerConfig)!!, intent.extras!!.getString(extraKeyServerType)!!)
+                }
+            }
+            return null
+        }
+
+        fun readServerInfoFromIntent(bundle:Bundle?):DnsServerInformation<*>? {
+            if(bundle == null) return null
+            if(bundle.containsKey(extraKeyServerConfig)) {
+                if(bundle.containsKey(extraKeyServerType)) {
+                    return serverInfoFromJson(bundle.getString(extraKeyServerConfig)!!, bundle.getString(extraKeyServerType)!!)
+                }
+            }
+            return null
+        }
+
+        fun getServerInfoType(serverInfo: DnsServerInformation<*>): String {
+            return when {
+                serverInfo is HttpsDnsServerInformation -> "https"
+                serverInfo.servers.any {
+                    it.address is TLSUpstreamAddress
+                } -> "tls"
+                else -> "unknown"
+            }
+        }
+
+        fun serverInfoFromJson(json:String, type:String):DnsServerInformation<*> {
+            TLSUpstreamAddress
+            HttpsUpstreamAddress
+            return when(type) {
+                "tls" -> DnsServerInformationTypeAdapter().fromJson(json)
+                "https" -> HttpsDnsServerInformationTypeAdapter().fromJson(json)
+                else -> throw IllegalArgumentException()
+        }
     }
+}
 
     var requestTime: Long = -1
 
@@ -90,7 +149,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
     }
 
     private fun startService() {
-        DnsVpnService.startVpn(this, intent.extras?.getString(extraKeyPrimaryUrl), intent.extras?.getString(extraKeySecondaryUrl))
+        DnsVpnService.startVpn(this, readServerInfoFromIntent(intent))
     }
 
     private fun showPermissionDenialDialog() {

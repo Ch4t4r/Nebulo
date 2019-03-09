@@ -78,7 +78,7 @@ class MainActivity : NavigationDrawerActivity() {
                 onLongClick = null,
                 onSimpleClick = { _, _, _ ->
                     NewServerDialog(this@MainActivity, title = getString(R.string.menu_create_shortcut), onServerAdded = {
-                        ShortcutActivity.createShortcut(this@MainActivity, it as HttpsDnsServerInformation)
+                        ShortcutActivity.createShortcut(this@MainActivity, it)
                     }, dnsOverHttps = true).show()
                     false
                 })
