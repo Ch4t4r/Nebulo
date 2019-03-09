@@ -1,4 +1,4 @@
-package com.frostnerd.smokescreen.dialog.serverchoosaldialog
+package com.frostnerd.smokescreen.dialog
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -11,7 +11,6 @@ import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.hasTlsServer
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
@@ -99,12 +98,13 @@ class ServerChoosalDialog(
         }
         view.findViewById<Button>(R.id.addServer).setOnClickListener {
             NewServerDialog(context, title = null, dnsOverHttps = spinner.selectedItemPosition == 0) { info ->
-                knownServersGroup.addView(
-                    createButtonForUserConfiguration(
-                        context.getPreferences().addUserServerConfiguration(
-                            info
-                        )
+                val config = createButtonForUserConfiguration(
+                    context.getPreferences().addUserServerConfiguration(
+                        info
                     )
+                )
+                if(info.hasTlsServer() == currentSelectedServer.hasTlsServer())knownServersGroup.addView(
+                    config
                 )
             }.show()
         }
