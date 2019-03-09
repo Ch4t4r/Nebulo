@@ -103,11 +103,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="autoMirrored" value="true" />
-                            <entry key="height" value="32" />
-                            <entry key="outputName" value="ic_play" />
-                            <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="E:\Dev\fontawesome-pro-5.6.0-desktop\svgs\solid\play.svg" />
-                            <entry key="width" value="28" />
+                            <entry key="outputName" value="ic_shield" />
+                            <entry key="sourceFile" value="E:\Dev\fontawesome-pro-5.6.0-desktop\svgs\solid\shield.svg" />
                           </map>
                         </option>
                       </PersistentState>

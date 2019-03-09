@@ -5,6 +5,9 @@ import android.content.DialogInterface
 import android.os.Vibrator
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import com.frostnerd.dnstunnelproxy.Decision
 import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
@@ -40,9 +43,10 @@ import kotlinx.android.synthetic.main.dialog_new_server.*
 class NewServerDialog(
     context: Context,
     title: String? = null,
-    val dnsOverHttps: Boolean,
+    var dnsOverHttps: Boolean,
     onServerAdded: (serverInfo: DnsServerInformation<*>) -> Unit
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
+    private var validationRegex = NewServerDialog.SERVER_URL_REGEX
 
     companion object {
         val SERVER_URL_REGEX =
@@ -89,6 +93,25 @@ class NewServerDialog(
                 } else {
                     val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                     vibrator.vibrate(250)
+                }
+            }
+            val spinnerAdapter = ArrayAdapter<String>(
+                context, android.R.layout.simple_spinner_item,
+                arrayListOf(
+                    context.getString(R.string.dialog_serverconfiguration_https),
+                    context.getString(R.string.dialog_serverconfiguration_tls)
+                )
+            )
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            serverType.adapter = spinnerAdapter
+            serverType.setSelection(if(dnsOverHttps) 0 else 1)
+            serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    validationRegex = if (position == 0) NewServerDialog.SERVER_URL_REGEX else NewServerDialog.TLS_REGEX
+                    dnsOverHttps = position == 0
+                    primaryServer.text = primaryServer.text
+                    secondaryServer.text = secondaryServer.text
                 }
             }
         }
