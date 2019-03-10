@@ -31,13 +31,15 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_height="64dp"/>
 
-        <RadioGroup
-                android:id="@+id/knownServersGroup"
+        <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-        </RadioGroup>
-
-
+            <RadioGroup
+                    android:id="@+id/knownServersGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            </RadioGroup>
+        </ScrollView>
     </LinearLayout>
 
     <Button
