@@ -102,7 +102,7 @@ class NewServerDialog(
                     context.getString(R.string.dialog_serverconfiguration_tls)
                 )
             )
-            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
             serverType.adapter = spinnerAdapter
             serverType.setSelection(if(dnsOverHttps) 0 else 1)
             serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

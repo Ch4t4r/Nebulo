@@ -138,15 +138,15 @@ class ConfigureActivity : BaseActivity() {
                 }
             }
         }
-        val spinnerAdapter = ArrayAdapter<String>(
+        val typeAdapter = ArrayAdapter<String>(
             this, android.R.layout.simple_spinner_item,
             arrayListOf(
                 this.getString(R.string.dialog_serverconfiguration_https),
                 this.getString(R.string.dialog_serverconfiguration_tls)
             )
         )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        serverType.adapter = spinnerAdapter
+        typeAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
+        serverType.adapter = typeAdapter
         serverType.setSelection(0)
         serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}

@@ -73,7 +73,7 @@ class ServerChoosalDialog(
                 context.getString(R.string.dialog_serverconfiguration_tls)
             )
         )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
         val spinner = view.findViewById<Spinner>(R.id.spinner)
         spinner.adapter = spinnerAdapter
         spinner.setSelection(if (isCurrentServerTls) 1 else 0)
