@@ -36,12 +36,12 @@ import com.frostnerd.smokescreen.hasTlsServer
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class ServerImportDialog(context: Context, servers: List<DnsServerInformation<*>>) :
+class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformation<*>>) :
     AlertDialog(context, context.getPreferences().theme.dialogStyle) {
     private val selectedServerPositions = mutableSetOf<Int>()
-    val servers = servers.sortedByDescending {
+    val servers = loadedServers.sortedByDescending {
         (it is HttpsDnsServerInformation)
-    }.sortedByDescending {
+    }.sortedBy {
         it.name
     }
 
