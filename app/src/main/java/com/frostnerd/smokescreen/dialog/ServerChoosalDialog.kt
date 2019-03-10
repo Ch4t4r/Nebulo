@@ -103,7 +103,7 @@ class ServerChoosalDialog(
                         info
                     )
                 )
-                if(info.hasTlsServer() == currentSelectedServer.hasTlsServer())knownServersGroup.addView(
+                if (info.hasTlsServer() == currentSelectedServer.hasTlsServer()) knownServersGroup.addView(
                     config
                 )
             }.show()
@@ -165,6 +165,7 @@ class ServerChoosalDialog(
                 } else {
                     payload as DnsServerInformation<*>
                 }
+            if (info.hasTlsServer() != currentSelectedServer.hasTlsServer()) continue
             if (info.name != currentSelectedServer.name) continue
             if (info.servers.size < currentSelectedServer.servers.size) continue
             val primaryMatches: Boolean
