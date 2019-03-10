@@ -103,7 +103,7 @@ class ServerChoosalDialog(
                         info
                     )
                 )
-                if (info.hasTlsServer() == currentSelectedServer.hasTlsServer()) knownServersGroup.addView(
+                if (info.hasTlsServer() == defaultConfig.any { it.hasTlsServer() }) knownServersGroup.addView(
                     config
                 )
             }.show()
