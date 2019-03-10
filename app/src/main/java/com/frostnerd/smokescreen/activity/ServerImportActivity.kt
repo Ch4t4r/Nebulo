@@ -3,8 +3,11 @@ package com.frostnerd.smokescreen.activity
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
+import com.frostnerd.general.readJsonArray
+import com.frostnerd.general.readJsonObject
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.Logger
 import com.frostnerd.smokescreen.R
@@ -13,10 +16,13 @@ import com.frostnerd.smokescreen.getPreferences
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import kotlinx.coroutines.*
+import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.io.StringReader
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.stream.Collectors
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -40,6 +46,7 @@ class ServerImportActivity : BaseActivity() {
     override fun getConfiguration(): Configuration {
         return Configuration.withDefaults()
     }
+
     private var importJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +59,7 @@ class ServerImportActivity : BaseActivity() {
         if (intent != null) {
             val data = intent.data
             if (data != null) {
-                importJob =  GlobalScope.launch {
+                importJob = GlobalScope.launch {
                     var exception: java.lang.Exception? = null
                     val couldImport: Boolean = try {
                         importServerFromUri(data)
@@ -95,7 +102,7 @@ class ServerImportActivity : BaseActivity() {
     }
 
     private suspend fun importServerFromUri(uri: Uri): Boolean {
-        return GlobalScope.async {
+        return withContext(Dispatchers.Default) {
             val inputStream: InputStream?
             if (uri.scheme == "content" || uri.schemeSpecificPart == "file") {
                 val resolver = contentResolver
@@ -109,29 +116,53 @@ class ServerImportActivity : BaseActivity() {
                 connection.connectTimeout = 5000
                 inputStream = connection.inputStream
             } else inputStream = null
-            if(inputStream != null) {
-                val reader = JsonReader(InputStreamReader(inputStream))
-                val rtrn = readJson(reader)
-                reader.close()
+            if (inputStream != null) {
+                val stream = InputStreamReader(inputStream)
+                val rtrn = readJson(BufferedReader(stream).lines().collect(Collectors.joining("\n")))
+                stream.close()
                 rtrn
             } else false
-        }.await()
+        }
     }
 
-    private fun readJson(reader: JsonReader): Boolean {
-        val servers = mutableListOf<HttpsDnsServerInformation>()
-        val adapter = HttpsDnsServerInformationTypeAdapter()
-        val readServer = {
-            val server = adapter.read(reader)
+    private fun readJson(jsonString: String): Boolean {
+        val servers = mutableListOf<DnsServerInformation<*>>()
+        val httpsAdapter = HttpsDnsServerInformationTypeAdapter()
+        val tlsAdapter = DnsServerInformationTypeAdapter()
+        val serverTypes = mutableListOf<Boolean>() //True when the server is DoH
+        val reader = JsonReader(StringReader(jsonString))
+        val readServerType:(String, JsonToken) -> Unit = { nameLowerCase: String, _: JsonToken ->
+            if (nameLowerCase == "type") serverTypes.add(reader.nextString() == "doh")
+            else reader.skipValue()
+
+        }
+        if (reader.readJsonArray {
+                val previousSize = serverTypes.size
+                if (reader.readJsonObject(block = readServerType) && serverTypes.size == previousSize) serverTypes.add(
+                    true
+                )
+            }) else {
+            val previousSize = serverTypes.size
+            if (reader.readJsonObject(block = readServerType) && serverTypes.size == previousSize) serverTypes.add(true)
+        }
+        val actualReader = JsonReader(StringReader(jsonString))
+        val readServer = { https: Boolean ->
+            println("HTTPS: $https")
+            val server = if (https) httpsAdapter.read(actualReader) else tlsAdapter.read(actualReader)
+            println("Read: $server")
             if (server != null) {
                 servers.add(server)
                 true
             } else false
         }
-        if (readJsonArray(reader, false, readServer))
-        else if (reader.peek() == JsonToken.BEGIN_OBJECT) {
-            if (!readServer()) return false
-        } else return false
+        var index = 0
+        val isArray = actualReader.readJsonArray(false) {
+            readServer(serverTypes[index++])
+        }
+        if (!isArray) {
+            if (actualReader.peek() == JsonToken.BEGIN_OBJECT && !readServer(serverTypes[0])) return false
+            return false
+        }
 
         return if (servers.isEmpty()) false
         else {
@@ -144,17 +175,5 @@ class ServerImportActivity : BaseActivity() {
             }
             true
         }
-    }
-
-    private fun readJsonArray(reader: JsonReader, skip: Boolean = true, nextEntry: () -> Any): Boolean {
-        if (reader.peek() == JsonToken.BEGIN_ARRAY) {
-            reader.beginArray()
-            while (reader.peek() != JsonToken.END_ARRAY) {
-                nextEntry()
-            }
-            reader.endArray()
-            return true
-        } else if (skip) reader.skipValue()
-        return false
     }
 }

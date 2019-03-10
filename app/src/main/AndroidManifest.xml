@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.INSTALL_SHORTCUT"/>
 
     <application
             android:name=".SmokeScreen"
@@ -44,21 +44,35 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
+
                 <data
                         android:mimeType="*/*"
                         android:scheme="content"
                         android:host="*"
                         android:pathPattern=".*\\.dohserver"
                         tools:ignore="AppLinkUrlError"/>
+                <data
+                        android:mimeType="*/*"
+                        android:scheme="content"
+                        android:host="*"
+                        android:pathPattern=".*\\.nebuloserver"
+                        tools:ignore="AppLinkUrlError"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
+
                 <data
                         android:mimeType="*/*"
                         android:scheme="file"
                         android:host="*"
                         android:pathPattern=".*\\.dohserver"
+                        tools:ignore="AppLinkUrlError"/>
+                <data
+                        android:mimeType="*/*"
+                        android:scheme="content"
+                        android:host="*"
+                        android:pathPattern=".*\\.nebuloserver"
                         tools:ignore="AppLinkUrlError"/>
             </intent-filter>
             <intent-filter android:autoVerify="true">

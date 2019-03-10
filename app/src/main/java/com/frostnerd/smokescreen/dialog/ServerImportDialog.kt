@@ -9,11 +9,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.AdapterBuilder
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.RequestType
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.hasTlsServer
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -33,9 +36,14 @@ import com.frostnerd.smokescreen.getPreferences
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class ServerImportDialog(context: Context, val servers: List<HttpsDnsServerInformation>) :
+class ServerImportDialog(context: Context, servers: List<DnsServerInformation<*>>) :
     AlertDialog(context, context.getPreferences().theme.dialogStyle) {
     private val selectedServerPositions = mutableSetOf<Int>()
+    val servers = servers.sortedByDescending {
+        (it is HttpsDnsServerInformation)
+    }.sortedByDescending {
+        it.name
+    }
 
     init {
         setTitle(context.getString(R.string.dialog_serverimport_title, servers.size))
@@ -99,13 +107,13 @@ class ServerImportDialog(context: Context, val servers: List<HttpsDnsServerInfor
         val name: TextView = itemView.findViewById(R.id.name)
         val urls = itemView.findViewById<TextView>(R.id.urls)
         val capabilities = itemView.findViewById<TextView>(R.id.capabilities)
-        val queriesEncrypted = itemView.findViewById<CheckBox>(R.id.queriesEncrypted)
         val selected = itemView.findViewById<CheckBox>(R.id.checkbox)
+        val serverType = itemView.findViewById<TextView>(R.id.serverType)
 
         override fun destroy() {
         }
 
-        fun display(context: Context, server: HttpsDnsServerInformation) {
+        fun display(context: Context, server: DnsServerInformation<*>) {
             name.text = server.name
             capabilities.text = buildString {
                 for (capability in server.capabilities) {
@@ -115,22 +123,27 @@ class ServerImportDialog(context: Context, val servers: List<HttpsDnsServerInfor
             }
             if (capabilities.text.isNullOrBlank()) capabilities.visibility = View.GONE
             else capabilities.visibility = View.VISIBLE
-            queriesEncrypted.isChecked = server.servers.any {
-                it.requestTypes.containsKey(RequestType.WIREFORMAT_POST)
-            }
             urls.text = buildString {
-                for (dohServer in server.servers) {
+                for (serverConfiguration in server.servers) {
                     append("- ")
-                    append(dohServer.address.getUrl())
+                    val address = serverConfiguration.address
+                    if(address is HttpsUpstreamAddress) {
+                        append(address.getUrl())
+                    } else {
+                        append(address.FQDN)
+                    }
                     append(" (")
-                    append(context.getString(R.string.dialog_serverimport_priority, dohServer.priority))
-                    if (dohServer.experimental) {
+                    append(context.getString(R.string.dialog_serverimport_priority, serverConfiguration.priority))
+                    if (serverConfiguration.experimental) {
                         append(", ")
                         append(context.getString(R.string.dialog_serverimport_experimental))
                     }
                     append(")")
                 }
             }
+            if(server.hasTlsServer()) {
+                serverType.setText(R.string.dialog_serverimport_servertype_dot)
+            } else serverType.setText(R.string.dialog_serverimport_servertype_doh)
         }
     }
 }
