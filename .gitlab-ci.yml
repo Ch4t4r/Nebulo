@@ -38,4 +38,6 @@ build_release:
     paths:
     - app/build/outputs/apk/release/app-release.apk
     - app/build/outputs/r8/release/mapping.txt
+  only:
+    - master
 
