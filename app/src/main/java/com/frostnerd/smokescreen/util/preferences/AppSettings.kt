@@ -151,7 +151,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var nxDomainCacheTime: Int by stringBasedIntPref("dnscache_nxdomain_cachetime", 1800)
     override var loggingEnabled: Boolean by booleanPref(
         "logging_enabled",
-        BuildConfig.VERSION_NAME.contains("alpha", true)
+        BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
     )
 
     override var enableIpv6: Boolean by booleanPref("ipv6_enabled", true)

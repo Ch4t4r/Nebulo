@@ -29,7 +29,8 @@ class SmokeScreen : Application() {
         Thread.UncaughtExceptionHandler { t, e ->
             e.printStackTrace()
             log(e)
-            if(BuildConfig.VERSION_NAME.contains("alpha",true) && getPreferences().loggingEnabled) {
+            val isPrerelease = BuildConfig.VERSION_NAME.contains("alpha",true) || BuildConfig.VERSION_NAME.contains("beta",true)
+            if(isPrerelease && getPreferences().loggingEnabled) {
                 startActivity(Intent(this, ErrorDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             }
             closeLogger()
