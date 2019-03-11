@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dialog_title_serverconfiguration">Server configuration</string>
+    <string name="dialog_serverconfiguration_title">Server configuration</string>
+    <string name="dialog_serverconfiguration_https">Dns-over-https (DoH)</string>
+    <string name="dialog_serverconfiguration_tls">Dns-over-tls (DoT)</string>
     <string name="dialog_serverconfiguration_addserver">Add a server</string>
 
-    <string name="dialog_newserver_title">Add a server</string>
+    <string name="dialog_newserver_title_https">Add a server (DoH)</string>
+    <string name="dialog_newserver_title_tls">Add a server (DoT)</string>
     <string name="dialog_newserver_name">Server name</string>
     <string name="dialog_newserver_name_hint">Example</string>
     <string name="dialog_newserver_primaryserver">Primary server</string>
@@ -23,8 +26,9 @@
     <string name="dialog_serverimport_done">Done</string>
     <string name="dialog_serverimport_priority">Priority %1d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
-    <string name="dialog_serverimport_queriesencrytped">Queries encrypted:</string>
-    <string name="dialog_serverimport_text">Please select the server(s) you wish to import.\n\nServers where queries are not encrypted only accept the query in the GET-parameters of the URL. Whilst they can be read, no one can modify them.</string>
+    <string name="dialog_serverimport_servertype_doh">Type: Dns-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Type: Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_text">Please select the server(s) you wish to import.\n\nServers which are already imported will be duplicate if you select them.</string>
 
     <string name="dialog_serverimportfailed_title">Import failed</string>
     <string name="dialog_serverimportfailed_text">The server(s) could not be imported.</string>

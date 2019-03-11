@@ -12,6 +12,14 @@ import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.frostnerd.dnstunnelproxy.Decision
+import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
+import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
+import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
@@ -157,4 +165,101 @@ fun ConnectivityManager.isVpnNetwork(network: Network): Boolean {
 
 operator fun Level.compareTo(otherLevel:Level):Int {
     return this.intValue() - otherLevel.intValue()
+}
+
+fun DnsServerInformation<*>.hasTlsServer():Boolean {
+    return this.servers.any {
+        it.address is TLSUpstreamAddress
+    }
+}
+
+fun DnsServerInformation<*>.hasHttpsServer():Boolean {
+    return this.servers.any {
+        it is HttpsUpstreamAddress
+    }
+}
+
+fun DnsServerInformation<*>.toJson():String {
+    return if(hasTlsServer()) {
+        DnsServerInformationTypeAdapter().toJson(this)
+    } else {
+        HttpsDnsServerInformationTypeAdapter().toJson(this as HttpsDnsServerInformation)
+    }
+}
+
+fun HttpsDnsServerInformation.Companion.fromServerUrls(primaryUrl:String, secondaryUrl:String?): HttpsDnsServerInformation {
+    val serverInfo = mutableListOf<HttpsDnsServerConfiguration>()
+    val requestType = mapOf(RequestType.WIREFORMAT_POST to ResponseType.WIREFORMAT)
+    serverInfo.add(
+        HttpsDnsServerConfiguration(address = createHttpsUpstreamAddress(primaryUrl), experimental = false, requestTypes = requestType)
+    )
+    if(secondaryUrl != null)
+        serverInfo.add(
+            HttpsDnsServerConfiguration(address = createHttpsUpstreamAddress(secondaryUrl), experimental = false, requestTypes = requestType)
+        )
+    return HttpsDnsServerInformation(
+        "shortcutServer",
+        specification = HttpsDnsServerSpecification(
+            Decision.UNKNOWN,
+            Decision.UNKNOWN,
+            Decision.UNKNOWN,
+            Decision.UNKNOWN
+        ),
+        servers = serverInfo,
+        capabilities = emptyList()
+    )
+}
+
+fun DnsServerInformation.Companion.tlsServerFromHosts(primaryHost:String, secondaryHost:String?): DnsServerInformation<TLSUpstreamAddress> {
+    val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
+    serverInfo.add(
+        DnsServerConfiguration(address = createTlsUpstreamAddress(primaryHost), experimental = false, preferredProtocol = TLS, supportedProtocols = listOf(TLS))
+    )
+    if(secondaryHost != null)
+        serverInfo.add(
+            DnsServerConfiguration(address = createTlsUpstreamAddress(secondaryHost), experimental = false, preferredProtocol = TLS, supportedProtocols = listOf(TLS))
+        )
+    return DnsServerInformation(
+        "shortcutServer",
+        specification = HttpsDnsServerSpecification(
+            Decision.UNKNOWN,
+            Decision.UNKNOWN,
+            Decision.UNKNOWN,
+            Decision.UNKNOWN
+        ),
+        servers = serverInfo,
+        capabilities = emptyList()
+    )
+}
+
+private fun createHttpsUpstreamAddress(url: String): HttpsUpstreamAddress {
+    var host = ""
+    var port: Int? = null
+    var path: String? = null
+    if (url.contains(":")) {
+        host = url.split(":")[0]
+        port = url.split(":")[1].split("/")[0].toInt()
+        if (port > 65535) port = null
+    }
+    if (url.contains("/")) {
+        path = url.split("/")[1]
+        if (host == "") host = url.split("/")[0]
+    }
+    if (host == "") host = url
+    return if (port != null && path != null) HttpsUpstreamAddress(host, port, path)
+    else if (port != null) HttpsUpstreamAddress(host, port)
+    else if (path != null) HttpsUpstreamAddress(host, urlPath = path)
+    else HttpsUpstreamAddress(host)
+}
+
+private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
+    var parsedHost = ""
+    var port: Int? = null
+    if (host.contains(":")) {
+        parsedHost = host.split(":")[0]
+        port = host.split(":")[1].split("/")[0].toInt()
+        if (port > 65535) port = null
+    } else parsedHost = host
+    return if (port != null) TLSUpstreamAddress(parsedHost, port)
+    else TLSUpstreamAddress(parsedHost)
 }

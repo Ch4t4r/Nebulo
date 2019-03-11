@@ -50,8 +50,7 @@ class VpnRestartService : Service() {
 
         log("Starting the background configure")
         BackgroundVpnConfigureActivity.prepareVpn(this,
-            intent?.extras?.getString(BackgroundVpnConfigureActivity.extraKeyPrimaryUrl),
-            intent?.extras?.getString(BackgroundVpnConfigureActivity.extraKeySecondaryUrl))
+            BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent))
 
         stopForeground(true)
         log("Stopping self")

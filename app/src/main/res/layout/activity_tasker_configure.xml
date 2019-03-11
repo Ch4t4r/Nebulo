@@ -28,7 +28,7 @@
 
             <Spinner
                     android:layout_width="wrap_content"
-                    android:id="@+id/spinner"
+                    android:id="@+id/actionType"
                     android:layout_height="wrap_content"/>
         </LinearLayout>
 
@@ -53,6 +53,13 @@
                     android:textColor="?android:attr/textColor"
                     android:checked="true"
                     android:id="@+id/useServersFromConfig"
+                    android:layout_height="wrap_content"/>
+
+            <Spinner
+                    android:layout_width="match_parent"
+                    android:id="@+id/serverType"
+                    android:visibility="gone"
+                    android:layout_marginTop="12dp"
                     android:layout_height="wrap_content"/>
 
             <LinearLayout

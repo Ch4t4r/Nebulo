@@ -3,7 +3,10 @@ package com.frostnerd.smokescreen.tasker
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
+import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
+import com.frostnerd.smokescreen.fromServerUrls
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
 
@@ -39,14 +42,13 @@ class FireReceiver : BroadcastReceiver() {
                         "start" -> {
                             val running = context.isServiceRunning(DnsVpnService::class.java)
                             if (startIfRunning || !running) {
-                                val primaryServer = extras.getString(TaskerHelper.DATA_KEY_PRIMARYSERVER, null)
-                                val secondaryServer = extras.getString(TaskerHelper.DATA_KEY_SECONDARYSERVER, null)
-                                if (running) {
-                                    if(primaryServer != null) {
-                                        DnsVpnService.restartVpn(context, primaryServer, secondaryServer)
-                                    } else DnsVpnService.restartVpn(context, true)
+                                if(extras.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER)) {
+                                    val primaryUrl = intent.getStringExtra(TaskerHelper.DATA_KEY_PRIMARYSERVER)!!
+                                    val secondaryUrl = intent.getStringExtra(TaskerHelper.DATA_KEY_SECONDARYSERVER) ?: null
+                                    DnsVpnService.restartVpn(context, HttpsDnsServerInformation.fromServerUrls(primaryUrl, secondaryUrl))
                                 } else {
-                                    DnsVpnService.startVpn(context, primaryServer, secondaryServer)
+                                    val info = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
+                                    DnsVpnService.restartVpn(context, info)
                                 }
                             }
                         }

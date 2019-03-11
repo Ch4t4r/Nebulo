@@ -1,11 +1,14 @@
 package com.frostnerd.smokescreen.util.preferences
 
 import android.content.Context
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
 import com.frostnerd.preferenceskt.typedpreferences.SimpleTypedPreferences
+import com.frostnerd.preferenceskt.typedpreferences.buildMigration
 import com.frostnerd.preferenceskt.typedpreferences.types.*
 import com.frostnerd.smokescreen.BuildConfig
 
@@ -36,9 +39,7 @@ interface AppSettings {
     var dummyDnsAddressIpv4: String
     var dummyDnsAddressIpv6: String
     val defaultBypassPackages: Set<String>
-    var areCustomServers: Boolean
-    var primaryServerConfig: ServerConfiguration
-    var secondaryServerConfig: ServerConfiguration?
+    var dnsServerConfig: DnsServerInformation<*>
     var userServers: Set<UserServerConfiguration>
 
     // ###### Settings (in order)
@@ -89,10 +90,12 @@ interface AppSettings {
     var hasRatedApp: Boolean
 
     fun isUsingKeweon(): Boolean {
-        return primaryServerConfig.urlCreator.baseUrl.contains("sec.keweon.center")
+        return dnsServerConfig.servers.any {
+            it.address.FQDN?.contains("keweon") ?: false
+        }
     }
 
-    fun addUserServerConfiguration(info:HttpsDnsServerInformation):UserServerConfiguration {
+    fun addUserServerConfiguration(info:DnsServerInformation<*>):UserServerConfiguration {
         var max = 0
         for (server in userServers) {
             if (server.id >= max) max = server.id + 1
@@ -104,7 +107,7 @@ interface AppSettings {
         return config
     }
 
-    fun addUserServerConfiguration(infos:List<HttpsDnsServerInformation>) {
+    fun addUserServerConfiguration(infos:List<DnsServerInformation<*>>) {
         var max = 0
         for (server in userServers) {
             if (server.id >= max) max = server.id + 1
@@ -127,7 +130,7 @@ interface AppSettings {
     }
 }
 
-class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context) {
+class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context, version = 1, migrate = migration) {
     override var hasRatedApp: Boolean by booleanPref("has_rated_app", false)
 
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
@@ -181,20 +184,11 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         shouldContain(BuildConfig.APPLICATION_ID)
         shouldContain("com.android.vending")
     }
-    override var areCustomServers: Boolean by booleanPref("doh_custom_server", false)
-    override var primaryServerConfig: ServerConfiguration by ServerConfigurationPreference("doh_server_url_primary") {
+    override var dnsServerConfig: DnsServerInformation<*> by DnsServerInformationPreference("dns_server_config") {
         AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
-            knownServers[0]!!.serverConfigurations.values.first()
+            knownServers.getValue(0)
         }
     }
-    override var secondaryServerConfig: ServerConfiguration? by optionalOf(ServerConfigurationPreference("doh_server_url_secondary") {
-        val config = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
-            knownServers[0]!!.serverConfigurations.values.last()
-        }
-        if (config != primaryServerConfig) config
-        else throw UnsupportedOperationException()
-    }, assignDefaultValue = true)
-
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
@@ -204,5 +198,11 @@ fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSh
         instance!!
     } else {
         instance!!
+    }
+}
+
+private val migration = buildMigration {
+    initialMigration { _, _ ->
+
     }
 }

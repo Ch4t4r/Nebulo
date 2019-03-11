@@ -1,19 +1,18 @@
 package com.frostnerd.smokescreen.dialog
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.RadioButton
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
-import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerConfiguration
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
-import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.hasTlsServer
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
 import kotlinx.android.synthetic.main.dialog_server_configuration.*
 import kotlinx.coroutines.Dispatchers
@@ -40,23 +39,21 @@ import kotlinx.coroutines.launch
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ServerChoosalDialog(
-    context: Context,
-    onEntrySelected: (primaryServer: ServerConfiguration, secondaryServer: ServerConfiguration?, customServer: Boolean) -> Unit
+    context: AppCompatActivity,
+    onEntrySelected: (config: DnsServerInformation<*>) -> Unit
 ) :
     BaseDialog(context, context.getPreferences().theme.dialogStyle) {
     private var populationJob: Job? = null
-    private var customServers = false
-    private var primaryServer: ServerConfiguration
-    private var secondaryServer: ServerConfiguration? = null
+    private var currentSelectedServer: DnsServerInformation<*>
+    lateinit var defaultConfig: List<DnsServerInformation<*>>
+    lateinit var userConfig: List<UserServerConfiguration>
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_server_configuration, null, false)
-        setTitle(R.string.dialog_title_serverconfiguration)
+        setTitle(R.string.dialog_serverconfiguration_title)
         setView(view)
 
-        customServers = context.getPreferences().areCustomServers
-        primaryServer = context.getPreferences().primaryServerConfig
-        secondaryServer = context.getPreferences().secondaryServerConfig
+        currentSelectedServer = context.getPreferences().dnsServerConfig
 
         setButton(
             DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.cancel)
@@ -64,63 +61,87 @@ class ServerChoosalDialog(
         setButton(
             DialogInterface.BUTTON_POSITIVE, context.getString(R.string.ok)
         ) { _, _ ->
-            onEntrySelected.invoke(primaryServer, secondaryServer, customServers)
+            onEntrySelected.invoke(currentSelectedServer)
         }
+        val isCurrentServerTls = currentSelectedServer.hasTlsServer()
+        loadServerData(isCurrentServerTls)
 
-        setOnShowListener {
-            addKnownServers()
+        val spinnerAdapter = ArrayAdapter<String>(
+            context, android.R.layout.simple_spinner_item,
+            arrayListOf(
+                context.getString(R.string.dialog_serverconfiguration_https),
+                context.getString(R.string.dialog_serverconfiguration_tls)
+            )
+        )
+        spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
+        val spinner = view.findViewById<Spinner>(R.id.spinner)
+        spinner.adapter = spinnerAdapter
+        spinner.setSelection(if (isCurrentServerTls) 1 else 0)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                loadServerData(position == 1)
+                knownServersGroup.removeAllViews()
+                addKnownServers()
+            }
+        }
+        view.findViewById<RadioGroup>(R.id.knownServersGroup).setOnCheckedChangeListener { group, _ ->
+            val button = view.findViewById(group.checkedRadioButtonId) as RadioButton
+            val payload = button.tag
 
-            addServer.setOnClickListener {
-                NewServerDialog(context, title = null) {info ->
-                    knownServersGroup.addView(
-                        createButtonForUserConfiguration(
-                            context.getPreferences().addUserServerConfiguration(
-                                info
-                            )
-                        )
+            currentSelectedServer = if (payload is UserServerConfiguration) {
+                payload.serverInformation
+            } else {
+                payload as DnsServerInformation<*>
+            }
+            markCurrentSelectedServer()
+        }
+        view.findViewById<Button>(R.id.addServer).setOnClickListener {
+            NewServerDialog(context, title = null, dnsOverHttps = spinner.selectedItemPosition == 0) { info ->
+                val config = createButtonForUserConfiguration(
+                    context.getPreferences().addUserServerConfiguration(
+                        info
                     )
-                }.show()
-            }
-            knownServersGroup.setOnCheckedChangeListener { group, _ ->
-                val button = view.findViewById(group.checkedRadioButtonId) as RadioButton
-                val payload = button.tag
+                )
+                if (info.hasTlsServer() == defaultConfig.any { it.hasTlsServer() }) knownServersGroup.addView(
+                    config
+                )
+            }.show()
+        }
+        addKnownServers()
+    }
 
-                if (payload is UserServerConfiguration) {
-                    customServers = true
-                    primaryServer = payload.serverInformation.servers.first()
-                        .createServerConfiguration(payload.serverInformation)
-                    secondaryServer = payload.serverInformation.servers.getOrNull(1)
-                        ?.createServerConfiguration(payload.serverInformation)
-                } else {
-                    val configs = payload as Set<HttpsDnsServerConfiguration>
-                    customServers = false
-                    primaryServer = configs.first().createServerConfiguration()
-                    secondaryServer = if (configs.size > 1) {
-                        configs.last().createServerConfiguration()
-                    } else {
-                        null
-                    }
-                }
+    private fun loadServerData(tls: Boolean) {
+        if (tls) {
+            defaultConfig = AbstractTLSDnsHandle.waitUntilKnownServersArePopulated {
+                it.values.toList()
             }
+            userConfig = context.getPreferences().userServers.filter {
+                !it.isHttpsServer()
+            }.toList()
+        } else {
+            defaultConfig = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
+                it.values.toList()
+            }
+            userConfig = context.getPreferences().userServers.filter {
+                it.isHttpsServer()
+            }.toList()
         }
     }
 
     private fun addKnownServers() {
         populationJob = GlobalScope.launch {
             val buttons = mutableListOf<RadioButton>()
-            AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated { knownServers ->
-                for ((_, serverInfo) in knownServers.toSortedMap(compareByDescending {
-                    knownServers[it]!!.name
-                })) {
-                    if (!serverInfo.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !context.resources.getBoolean(
-                            R.bool.hide_adblocking_servers
-                        )
-                    ) {
-                        buttons.add(0, createButtonForKnownConfiguration(serverInfo.name, serverInfo))
-                    }
-                }
+            defaultConfig.sortedByDescending {
+                it.name
+            }.filter {
+                !it.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !context.resources.getBoolean(
+                    R.bool.hide_adblocking_servers
+                )
+            }.forEach {
+                buttons.add(0, createButtonForKnownConfiguration(it))
             }
-            context.getPreferences().userServers.forEach {
+            userConfig.forEach {
                 buttons.add(createButtonForUserConfiguration(it))
             }
             launch(Dispatchers.Main) {
@@ -128,25 +149,69 @@ class ServerChoosalDialog(
                 for (button in buttons) {
                     knownServersGroup.addView(button)
                 }
-                checkCurrentConfiguration()
+                markCurrentSelectedServer()
                 populationJob = null
             }
         }
     }
 
-    private fun createButtonForKnownConfiguration(name: String, serverInfo: HttpsDnsServerInformation): RadioButton {
-        val button = RadioButton(context)
-        val configs = serverInfo.serverConfigurations.keys
+    fun markCurrentSelectedServer() {
+        for (id in 0 until knownServersGroup.childCount) {
+            val child = knownServersGroup.getChildAt(id) as RadioButton
+            val payload = child.tag
+            val info =
+                if (payload is UserServerConfiguration) {
+                    payload.serverInformation
+                } else {
+                    payload as DnsServerInformation<*>
+                }
+            if (info.hasTlsServer() != currentSelectedServer.hasTlsServer()) continue
+            if (info.name != currentSelectedServer.name) continue
+            if (info.servers.size < currentSelectedServer.servers.size) continue
+            val primaryMatches: Boolean
+            val secondaryMatches: Boolean
+            if (info.hasTlsServer()) {
+                primaryMatches = info.servers[0].address.FQDN == currentSelectedServer.servers[0].address.FQDN
+                secondaryMatches =
+                    currentSelectedServer.servers.size == 1 || (info.servers[1].address.FQDN == currentSelectedServer.servers[1].address.FQDN)
+            } else {
+                val httpsInfo = info as HttpsDnsServerInformation
+                val currentHttpsInfo = currentSelectedServer as HttpsDnsServerInformation
+                primaryMatches =
+                    httpsInfo.serverConfigurations.values.first().urlCreator.baseUrl == currentHttpsInfo.serverConfigurations.values.first().urlCreator.baseUrl
+                secondaryMatches = currentHttpsInfo.serverConfigurations.size == 1 ||
+                        httpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.baseUrl == currentHttpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.baseUrl
+            }
+            if (primaryMatches && secondaryMatches) {
+                child.isChecked = true
+                break
+            }
+        }
+    }
 
+    private fun createButtonForKnownConfiguration(info: DnsServerInformation<*>): RadioButton {
+        val button = RadioButton(context)
+
+        val name = info.name
+        val primaryServer: String
+        val secondaryServer: String?
+        if (info.hasTlsServer()) {
+            primaryServer = info.servers[0].address.FQDN!!
+            secondaryServer = info.servers.getOrNull(1)?.address?.FQDN
+        } else {
+            val configs = (info as HttpsDnsServerInformation).servers
+            primaryServer = configs[0].address.getUrl(true)
+            secondaryServer = configs.getOrNull(1)?.address?.getUrl(true)
+        }
         button.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         button.setTextColor(context.getPreferences().theme.getTextColor(context))
-        if (configs.size == 1) button.text = "$name (${configs.first().address.getUrl(true)})"
-        else button.text = "$name (${configs.first().address.FQDN}, ${configs.last().address.getUrl(true)})"
+        if (secondaryServer == null) button.text = "$name ($primaryServer)"
+        else button.text = "$name ($primaryServer, $secondaryServer)"
 
-        button.tag = configs
+        button.tag = info
         return button
     }
 
@@ -158,13 +223,23 @@ class ServerChoosalDialog(
         )
         button.setTextColor(context.getPreferences().theme.getTextColor(context))
 
-        val primaryConfig = userConfiguration.serverInformation.servers.first()
-        val secondaryConfig = userConfiguration.serverInformation.servers.getOrNull(1)
+        val info = userConfiguration.serverInformation
+        val primaryServer: String
+        val secondaryServer: String?
+        if (info.hasTlsServer()) {
+            primaryServer = info.servers[0].address.FQDN!!
+            secondaryServer = info.servers.getOrNull(1)?.address?.FQDN
+        } else {
+            val configs = (info as HttpsDnsServerInformation).servers
+            primaryServer = configs[0].address.getUrl(true)
+            secondaryServer = configs.getOrNull(1)?.address?.getUrl(true)
+        }
 
-        if (secondaryConfig == null) button.text =
-                "${userConfiguration.serverInformation.name} (${primaryConfig.address.getUrl(true)})"
+
+        if (secondaryServer == null) button.text =
+            "${userConfiguration.serverInformation.name} ($primaryServer)"
         else button.text =
-                "${userConfiguration.serverInformation.name} (${primaryConfig.address.getUrl(true)}, ${secondaryConfig.address.getUrl()})"
+            "${userConfiguration.serverInformation.name} ($primaryServer, $secondaryServer)"
 
 
         button.tag = userConfiguration
@@ -178,57 +253,24 @@ class ServerChoosalDialog(
     private fun showUserConfigDeleteDialog(userConfiguration: UserServerConfiguration, button: RadioButton) {
         AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
             .setTitle(R.string.dialog_deleteconfig_title)
-            .setMessage(context.getString(R.string.dialog_deleteconfig_text, userConfiguration.serverInformation.name))
+            .setMessage(
+                context.getString(
+                    R.string.dialog_deleteconfig_text,
+                    userConfiguration.serverInformation.name
+                )
+            )
             .setNegativeButton(R.string.all_no) { _, _ -> }
             .setPositiveButton(R.string.all_yes) { _, _ ->
                 context.getPreferences().removeUserServerConfiguration(userConfiguration)
 
                 if (button.isChecked) {
-                    context.getPreferences().primaryServerConfig =
-                            AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[0]!!.serverConfigurations.values.first()
-                    primaryServer = context.getPreferences().primaryServerConfig
-
-                    val config = AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[0]!!.serverConfigurations.values.last()
-                    if (config != primaryServer) context.getPreferences().secondaryServerConfig = config
-
-                    secondaryServer = context.getPreferences().secondaryServerConfig
-                    customServers = false
+                    currentSelectedServer =
+                        if (userConfiguration.isHttpsServer()) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[0]!! else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS[0]!!
+                    markCurrentSelectedServer()
+                    context.getPreferences().dnsServerConfig = currentSelectedServer
                 }
                 knownServersGroup.removeView(button)
             }.show()
-    }
-
-    private fun checkCurrentConfiguration() {
-        for (id: Int in 0 until knownServersGroup.childCount) {
-            val child = knownServersGroup.getChildAt(id) as RadioButton
-            val payload = child.tag
-            if (payload is UserServerConfiguration) {
-                if (!customServers) continue
-                if (primaryServer.urlCreator.baseUrl != payload.serverInformation.servers.first().createServerConfiguration(
-                        payload.serverInformation
-                    ).urlCreator.baseUrl
-                ) continue
-                if (secondaryServer?.urlCreator?.baseUrl != payload.serverInformation.servers.getOrNull(1)?.createServerConfiguration(
-                        payload.serverInformation
-                    )?.urlCreator?.baseUrl
-                ) continue
-                child.isChecked = true
-                break
-            } else {
-                val configs = payload as Set<HttpsDnsServerConfiguration>
-                val primaryCandidate = configs.first().createServerConfiguration()
-                val secondaryCandidate = if (configs.size > 1) {
-                    configs.last().createServerConfiguration()
-                } else {
-                    null
-                }
-
-                if (primaryCandidate == primaryServer && secondaryCandidate == secondaryServer) {
-                    child.isChecked = true
-                    break
-                }
-            }
-        }
     }
 
     override fun destroy() {

@@ -1,10 +1,16 @@
 package com.frostnerd.smokescreen.util.preferences
 
 import android.content.SharedPreferences
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
+import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
+import com.frostnerd.smokescreen.hasHttpsServer
+import com.frostnerd.smokescreen.hasTlsServer
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
@@ -32,6 +38,9 @@ import kotlin.reflect.KProperty
  */
 class UserServerConfigurationPreference(key: String, defaultValue: (String) -> Set<UserServerConfiguration>) :
     PreferenceTypeWithDefault<SharedPreferences, Set<UserServerConfiguration>>(key, defaultValue) {
+    private val tlsTypeAdapter = DnsServerInformationTypeAdapter()
+    private val httpsTypeAdapter = HttpsDnsServerInformationTypeAdapter()
+
 
     override fun getValue(
         thisRef: TypedPreferences<SharedPreferences>,
@@ -40,17 +49,18 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
         return if (thisRef.sharedPreferences.contains(key)) {
             val reader = JsonReader(StringReader(thisRef.sharedPreferences.getString(key, "")))
             val servers = mutableSetOf<UserServerConfiguration>()
-            val adapter = HttpsDnsServerInformationTypeAdapter()
             if (reader.peek() == JsonToken.BEGIN_ARRAY) {
                 reader.beginArray()
                 while (reader.peek() != JsonToken.END_ARRAY) {
                     reader.beginObject()
                     var id = 0
-                    var info:HttpsDnsServerInformation? = null
-                    while(reader.peek() != JsonToken.END_OBJECT) {
-                        when(reader.nextName().toLowerCase()) {
+                    var info: DnsServerInformation<*>? = null
+                    while (reader.peek() != JsonToken.END_OBJECT) {
+                        when (reader.nextName().toLowerCase()) {
                             "id" -> id = reader.nextInt()
-                            "server" -> info = adapter.read(reader)!!
+                            "server_https", "server" -> info = httpsTypeAdapter.read(reader)!!
+                            "server_tls" -> info = tlsTypeAdapter.read(reader)!!
+
                         }
                     }
                     reader.endObject()
@@ -70,14 +80,18 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
     ) {
         val stringWriter = StringWriter()
         val jsonWriter = JsonWriter(stringWriter)
-        val adapter = HttpsDnsServerInformationTypeAdapter()
         jsonWriter.beginArray()
         for (server in value) {
             jsonWriter.beginObject()
             jsonWriter.name("id")
             jsonWriter.value(server.id)
-            jsonWriter.name("server")
-            adapter.write(jsonWriter, server.serverInformation)
+            if(server.isHttpsServer()) {
+                jsonWriter.name("server_https")
+                httpsTypeAdapter.write(jsonWriter, server.serverInformation as HttpsDnsServerInformation)
+            } else {
+                jsonWriter.name("server_tls")
+                tlsTypeAdapter.write(jsonWriter, server.serverInformation)
+            }
             jsonWriter.endObject()
         }
         jsonWriter.endArray()
@@ -89,4 +103,8 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
     }
 }
 
-class UserServerConfiguration(val id:Int, val serverInformation:HttpsDnsServerInformation)
+class UserServerConfiguration(val id: Int, val serverInformation: DnsServerInformation<*>) {
+    fun isHttpsServer(): Boolean {
+        return serverInformation is HttpsDnsServerInformation || serverInformation.hasHttpsServer()
+    }
+}

@@ -20,13 +20,14 @@ package com.frostnerd.smokescreen.tasker
  */
 
 internal object TaskerHelper {
-    val ACTION_FIRE = "com.twofortyfouram.locale.intent.action.FIRE_SETTING"
-    val EXTRAS_BUNDLE_KEY = "com.twofortyfouram.locale.intent.extra.BUNDLE"
-    val EXTRAS_BLURB_KEY = "com.twofortyfouram.locale.intent.extra.BLURB"
+    const val ACTION_FIRE = "com.twofortyfouram.locale.intent.action.FIRE_SETTING"
+    const val EXTRAS_BUNDLE_KEY = "com.twofortyfouram.locale.intent.extra.BUNDLE"
+    const val EXTRAS_BLURB_KEY = "com.twofortyfouram.locale.intent.extra.BLURB"
 
-    val DATA_KEY_ACTION = "action"
-    val DATA_KEY_STARTIFRUNNING = "start_if_running"
-    val DATA_KEY_PRIMARYSERVER = "primaryServer"
-    val DATA_KEY_SECONDARYSERVER = "secondaryServer"
-
+    const val DATA_KEY_ACTION = "action"
+    const val DATA_KEY_STARTIFRUNNING = "start_if_running"
+    @Deprecated("URLs aren't used anymore, the function from BackgroundVpnConfigureActivity instead")
+    const val DATA_KEY_PRIMARYSERVER = "primaryServer"
+    @Deprecated("URLs aren't used anymore, the function from BackgroundVpnConfigureActivity instead")
+    const val DATA_KEY_SECONDARYSERVER = "secondaryServer"
 }

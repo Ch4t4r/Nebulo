@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.BasicDrawerItem
@@ -48,6 +49,7 @@ class MainActivity : NavigationDrawerActivity() {
         super.onCreate(savedInstanceState)
         Logger.enabledGlobally = getPreferences().loggingEnabled
         AbstractHttpsDNSHandle // Loads the known servers.
+        AbstractTLSDnsHandle
         /*setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             view
@@ -78,7 +80,7 @@ class MainActivity : NavigationDrawerActivity() {
                 onSimpleClick = { _, _, _ ->
                     NewServerDialog(this@MainActivity, title = getString(R.string.menu_create_shortcut), onServerAdded = {
                         ShortcutActivity.createShortcut(this@MainActivity, it)
-                    }).show()
+                    }, dnsOverHttps = true).show()
                     false
                 })
             divider()
