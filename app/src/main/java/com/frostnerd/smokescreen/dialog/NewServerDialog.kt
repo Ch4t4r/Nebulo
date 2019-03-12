@@ -13,6 +13,7 @@ import com.frostnerd.dnstunnelproxy.Decision
 import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseDialog
@@ -104,7 +105,7 @@ class NewServerDialog(
             )
             spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
             serverType.adapter = spinnerAdapter
-            serverType.setSelection(if(dnsOverHttps) 0 else 1)
+            serverType.setSelection(if (dnsOverHttps) 0 else 1)
             serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -201,7 +202,17 @@ class NewServerDialog(
             if (host == "") host = url.split("/")[0]
         }
         if (host == "") host = url
-        return if (port != null && path != null) HttpsUpstreamAddress(host, port, path)
+
+        return AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated { allServer ->
+            if(path != null) emptyList()
+            else allServer.values.filter {
+                it.servers.any { server ->
+                    server.address.FQDN == host && (port == null || server.address.port == port)
+                }
+            }
+        }.firstOrNull()?.servers?.firstOrNull {
+            it.address.FQDN == host
+        }?.address ?: if (port != null && path != null) HttpsUpstreamAddress(host, port, path)
         else if (port != null) HttpsUpstreamAddress(host, port)
         else if (path != null) HttpsUpstreamAddress(host, urlPath = path)
         else HttpsUpstreamAddress(host)
@@ -209,14 +220,22 @@ class NewServerDialog(
 
     private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
         context.log("Creating TLSUpstreamAddress for `$host`")
-        var parsedHost = ""
+        val parsedHost:String
         var port: Int? = null
         if (host.contains(":")) {
             parsedHost = host.split(":")[0]
             port = host.split(":")[1].split("/")[0].toInt()
             if (port > 65535) port = null
         } else parsedHost = host
-        return if (port != null) TLSUpstreamAddress(parsedHost, port)
+        return AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { allServer ->
+            allServer.values.filter {
+                it.servers.any { server ->
+                    server.address.FQDN == parsedHost && (port == null || server.address.port == port)
+                }
+            }
+        }.firstOrNull()?.servers?.firstOrNull {
+            it.address.FQDN == parsedHost
+        }?.address ?: if (port != null) TLSUpstreamAddress(parsedHost, port)
         else TLSUpstreamAddress(parsedHost)
     }
 
