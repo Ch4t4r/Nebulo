@@ -319,8 +319,8 @@ class DnsVpnService : VpnService(), Runnable {
             secondaryServer = serverConfig.httpsConfiguration!!.getOrNull(1)?.urlCreator?.baseUrl
         } else {
             notificationBuilder.setContentTitle(getString(R.string.notification_main_title_tls))
-            primaryServer = serverConfig.tlsConfiguration!![0].FQDN!!
-            secondaryServer = serverConfig.tlsConfiguration!!.getOrNull(1)?.FQDN
+            primaryServer = serverConfig.tlsConfiguration!![0].formatToString()
+            secondaryServer = serverConfig.tlsConfiguration!!.getOrNull(1)?.formatToString()
         }
         val text = if (secondaryServer != null) {
             getString(

@@ -196,8 +196,8 @@ class ServerChoosalDialog(
         val primaryServer: String
         val secondaryServer: String?
         if (info.hasTlsServer()) {
-            primaryServer = info.servers[0].address.FQDN!!
-            secondaryServer = info.servers.getOrNull(1)?.address?.FQDN
+            primaryServer = info.servers[0].address.formatToString()
+            secondaryServer = info.servers.getOrNull(1)?.address?.formatToString()
         } else {
             val configs = (info as HttpsDnsServerInformation).servers
             primaryServer = configs[0].address.getUrl(true)
@@ -227,8 +227,8 @@ class ServerChoosalDialog(
         val primaryServer: String
         val secondaryServer: String?
         if (info.hasTlsServer()) {
-            primaryServer = info.servers[0].address.FQDN!!
-            secondaryServer = info.servers.getOrNull(1)?.address?.FQDN
+            primaryServer = info.servers[0].address.formatToString()
+            secondaryServer = info.servers.getOrNull(1)?.address?.formatToString()
         } else {
             val configs = (info as HttpsDnsServerInformation).servers
             primaryServer = configs[0].address.getUrl(true)
