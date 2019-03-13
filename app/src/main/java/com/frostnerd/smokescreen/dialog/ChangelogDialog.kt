@@ -25,7 +25,7 @@ import java.util.*
  * development@frostnerd.com
  */
 
-class ChangelogDialog(context: Context, versionToStartFrom:Int, val showOptOut:Boolean):AlertDialog(context, context.getPreferences().theme.dialogStyle) {
+class ChangelogDialog(context: Context, versionToStartFrom:Int, val showOptOut:Boolean, val showInfoText:Boolean = true):AlertDialog(context, context.getPreferences().theme.dialogStyle) {
     companion object {
         fun showNewVersionChangelog(context: Context) {
             val previousVersion = context.getPreferences().previousInstalledVersion
@@ -68,6 +68,7 @@ class ChangelogDialog(context: Context, versionToStartFrom:Int, val showOptOut:B
             if(!showOptOut) {
                 dontShowAgain.visibility = View.GONE
             }
+            if(!showInfoText) view.findViewById<TextView>(R.id.changelogInfoText).visibility = View.GONE
             val adapter = AdapterBuilder.withViewHolder<ChangelogViewHolder> {
                 this.viewBuilder = { parent, _ ->
                     layoutInflater.inflate(R.layout.item__dialog_changelog, parent, false)

@@ -139,7 +139,11 @@ class MainActivity : NavigationDrawerActivity() {
                             BuildConfig.VERSION_NAME,
                             BuildConfig.VERSION_CODE,
                             AppDatabase.currentVersion
-                        )
+                        ),
+                        positiveButton = getString(R.string.dialog_about_changelog) to { dialog, _ ->
+                            dialog.dismiss()
+                            ChangelogDialog(this@MainActivity, 22, showOptOut = false, showInfoText = false).show()
+                        }
                     )
                     false
                 })

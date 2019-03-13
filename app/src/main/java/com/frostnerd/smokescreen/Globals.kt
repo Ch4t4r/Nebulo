@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.text.SpannableString
@@ -28,15 +29,20 @@ import android.widget.TextView
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-fun showInfoTextDialog(context:Context, title:String, text:String): androidx.appcompat.app.AlertDialog {
+fun showInfoTextDialog(context:Context, title:String, text:String,
+                       positiveButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
+                       negativeButton:Pair<String, (DialogInterface, Int) -> Unit>? = null): androidx.appcompat.app.AlertDialog {
     val stringWithLinks = SpannableString(text)
     Linkify.addLinks(stringWithLinks, Linkify.ALL)
 
-    val dialog = androidx.appcompat.app.AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+    val dialogBuilder = androidx.appcompat.app.AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
         .setTitle(title)
         .setMessage(stringWithLinks)
         .setNeutralButton(R.string.ok, null)
-        .show()
+    if(positiveButton != null) dialogBuilder.setPositiveButton(positiveButton.first, positiveButton.second)
+    if(negativeButton != null) dialogBuilder.setNegativeButton(negativeButton.first, negativeButton.second)
+
+    val dialog = dialogBuilder.show()
     val textView = dialog.findViewById<TextView>(android.R.id.message)
     textView?.movementMethod = LinkMovementMethod.getInstance()
     textView?.setLinkTextColor(Color.parseColor("#64B5F6"))

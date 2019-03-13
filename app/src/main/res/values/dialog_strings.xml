@@ -53,4 +53,6 @@
     <string name="dialog_changelog_title">Changelog</string>
     <string name="dialog_changelog_infotext">The app has been updated since you last opened it. In the following list you can see the changelog. Check the box below and you won\'t see this message in the future.</string>
     <string name="dialog_changelog_dont_show_again">Don\'t show again</string>
+    
+    <string name="dialog_about_changelog">Changelog</string>
 </resources>
