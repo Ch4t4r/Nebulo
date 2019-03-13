@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="changelog_build_23">
+        <item>1.0 Beta</item>
+        <item>Non-default ports are now shown for DoT servers</item>
+        <item>Added this dialog to highlight changes</item>
+    </string-array>
+</resources>
