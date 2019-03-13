@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:paddingLeft="@dimen/dialog_horizontal_margin"
+                android:paddingRight="@dimen/dialog_horizontal_margin"
+                android:paddingTop="@dimen/dialog_vertical_margin"
+                android:paddingBottom="@dimen/dialog_vertical_margin"
+                android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/dialog_changelog_infotext"
+            android:layout_alignParentTop="true"
+            android:id="@+id/changelogInfoText"
+            android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/list"
+            android:layout_marginTop="6dp"
+            android:layout_below="@id/changelogInfoText"
+            android:layout_above="@id/dontShowAgain"
+            android:layout_height="wrap_content"/>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:text="@string/dialog_changelog_dont_show_again"
+            android:textColor="?android:attr/textColor"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/dontShowAgain"
+            android:layout_height="wrap_content"/>
+
+</RelativeLayout>

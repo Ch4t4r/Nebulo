@@ -88,6 +88,8 @@ interface AppSettings {
 
 
     var hasRatedApp: Boolean
+    var previousInstalledVersion:Int // Maintained in ChangelogDialog
+    var showChangelog:Boolean // Maintained in ChangelogDialog
 
     fun isUsingKeweon(): Boolean {
         return dnsServerConfig.servers.any {
@@ -132,6 +134,8 @@ interface AppSettings {
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context, version = 1, migrate = migration) {
     override var hasRatedApp: Boolean by booleanPref("has_rated_app", false)
+    override var previousInstalledVersion:Int by intPref("previous_version", 22)
+    override var showChangelog:Boolean by booleanPref("show_changelog", true)
 
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)

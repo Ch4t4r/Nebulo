@@ -16,6 +16,7 @@ import com.frostnerd.navigationdraweractivity.items.createMenu
 import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.AppDatabase
+import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
@@ -54,6 +55,7 @@ class MainActivity : NavigationDrawerActivity() {
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             view
         }*/
+        ChangelogDialog.showNewVersionChangelog(this)
     }
 
     override fun createDrawerItems(): MutableList<DrawerItem> {
