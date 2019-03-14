@@ -4,6 +4,7 @@
         <item>1.0 Beta (Build 23)</item>
         <item>Non-default ports are now shown for DoT servers</item>
         <item>Added this dialog to highlight changes</item>
+        <item>The query export setting now shows a dialog indicating whether it is loading</item>
         <item>Fixed the server import not working on OS versions below Android 7</item>
     </string-array>
 </resources>
