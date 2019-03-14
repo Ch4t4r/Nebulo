@@ -7,8 +7,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
 
     <application
             android:name=".SmokeScreen"
@@ -20,6 +22,12 @@
             android:theme="@style/AppTheme_Mono"
             tools:ignore="GoogleAppIndexingWarning"
             android:fullBackupContent="@xml/backup_descriptor">
+        <activity
+                android:name=".activity.PinActivity"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
+                android:launchMode="singleTop">
+
+        </activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

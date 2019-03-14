@@ -26,6 +26,8 @@ import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.activity.MainActivity
+import com.frostnerd.smokescreen.activity.PinActivity
+import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.util.Notifications
@@ -264,10 +266,16 @@ class DnsVpnService : VpnService(), Runnable {
 
             when (command) {
                 Command.STOP -> {
-                    log("Received STOP command, stopping service.")
-                    destroy()
-                    stopForeground(true)
-                    stopSelf()
+                    log("Received STOP command.")
+                    if(PinActivity.shouldValidatePin(this, intent)) {
+                        log("The pin has to be validated before actually stopping.")
+                        PinActivity.askForPin(this, PinType.STOP_SERVICE)
+                    } else {
+                        log("No need to ask for pin, stopping.")
+                        destroy()
+                        stopForeground(true)
+                        stopSelf()
+                    }
                 }
                 Command.RESTART -> {
                     log("Received RESTART command, restarting vpn.")
