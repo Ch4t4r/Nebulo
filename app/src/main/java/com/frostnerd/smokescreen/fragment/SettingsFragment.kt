@@ -152,24 +152,26 @@ class SettingsFragment : PreferenceFragmentCompat() {
         exportQueries.summary = getString(R.string.summary_export_queries, requireContext().getDatabase().dnsQueryDao().getCount())
         exportQueries.setOnPreferenceClickListener {
             requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext()) {file ->
-                val uri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
-                val exportIntent = Intent(Intent.ACTION_SEND)
-                exportIntent.putExtra(Intent.EXTRA_TEXT, "")
-                exportIntent.type = "text/csv"
-                exportIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " -- Logged Queries")
-                for (receivingApps in requireContext().packageManager.queryIntentActivities(
-                    exportIntent,
-                    PackageManager.MATCH_DEFAULT_ONLY
-                )) {
-                    requireContext().grantUriPermission(
-                        receivingApps.activityInfo.packageName,
-                        uri,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    )
+                if(!isDetached && !isRemoving) {
+                    val uri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
+                    val exportIntent = Intent(Intent.ACTION_SEND)
+                    exportIntent.putExtra(Intent.EXTRA_TEXT, "")
+                    exportIntent.type = "text/csv"
+                    exportIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " -- Logged Queries")
+                    for (receivingApps in requireContext().packageManager.queryIntentActivities(
+                        exportIntent,
+                        PackageManager.MATCH_DEFAULT_ONLY
+                    )) {
+                        requireContext().grantUriPermission(
+                            receivingApps.activityInfo.packageName,
+                            uri,
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        )
+                    }
+                    exportIntent.putExtra(Intent.EXTRA_STREAM, uri)
+                    exportIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    startActivity(Intent.createChooser(exportIntent, getString(R.string.title_export_queries)))
                 }
-                exportIntent.putExtra(Intent.EXTRA_STREAM, uri)
-                exportIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                startActivity(Intent.createChooser(exportIntent, getString(R.string.title_export_queries)))
             }
             true
         }
