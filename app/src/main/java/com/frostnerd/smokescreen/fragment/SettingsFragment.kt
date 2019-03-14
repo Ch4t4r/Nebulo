@@ -136,6 +136,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
         processIPCategory()
         processNetworkCategory()
         processQueryCategory()
+        processPinCategory()
+    }
+
+    private fun processPinCategory() {
+        val pinValue = findPreference("pin") as EditTextPreference
+
+        pinValue.setOnPreferenceChangeListener { _, newValue ->
+            println(newValue)
+            if(newValue.toString().isNotEmpty() && newValue.toString().isInt()) {
+                pinValue.summary = getString(R.string.summary_preference_change_pin, newValue.toString())
+                true
+            } else {
+                false
+            }
+        }
+        pinValue.summary = getString(R.string.summary_preference_change_pin, requireContext().getPreferences().pin.toString())
+        if(!requireContext().canUseFingerprintAuthentication()) findPreference("pin_allow_fingerprint").isVisible = false
     }
 
     private fun processQueryCategory() {
