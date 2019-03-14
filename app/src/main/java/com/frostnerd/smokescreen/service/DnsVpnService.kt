@@ -660,9 +660,9 @@ class DnsVpnService : VpnService(), Runnable {
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(3, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger {
-            override fun logException(ex: Exception, terminal: Boolean) {
+            override fun logException(ex: Exception, terminal: Boolean, level: Level) {
                 if(terminal) log(ex)
-                else log(Logger.stacktraceToString(ex), "VPN-LIBRARY")
+                else log(Logger.stacktraceToString(ex), "VPN-LIBRARY, $level")
             }
 
             override fun logMessage(message: String, level: Level) {
