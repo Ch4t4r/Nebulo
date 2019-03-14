@@ -66,6 +66,28 @@
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
                     android:textStyle="italic"
+                    android:text="Protocol"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/protocol"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/ic_lock_white"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="italic"
                     android:text="Latency"
                     android:layout_height="wrap_content"/>
 

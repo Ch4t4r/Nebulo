@@ -68,10 +68,15 @@ class QueryLogDetailFragment : Fragment() {
             }
             longName.text = query.name
             type.text = query.type.name
+            protocol.text = when {
+                query.askedServer == null -> ""
+                query.askedServer!!.startsWith("https") -> getString(R.string.fragment_querydetail_mode_doh)
+                else -> getString(R.string.fragment_querydetail_mode_dot)
+            }
             if(query.fromCache) {
                 resolvedBy.text = "Cache"
             } else {
-                resolvedBy.text = query.askedServer ?: "-"
+                resolvedBy.text = query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
             }
         }
     }

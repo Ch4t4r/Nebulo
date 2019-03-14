@@ -23,6 +23,9 @@
     <string name="quicksettings_stop_text">Stop Nebulo</string>
     <string name="quicksettings_start_text">Start Nebulo</string>
 
+    <string name="fragment_querydetail_mode_dot">Dns-over-TLS</string>
+    <string name="fragment_querydetail_mode_doh">Dns-over-HTTPS</string>
+
     <string-array name="theme">
         <item>Mono</item>
         <item>Dark</item>

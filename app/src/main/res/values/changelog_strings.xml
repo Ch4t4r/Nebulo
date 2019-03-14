@@ -6,5 +6,6 @@
         <item>Added this dialog to highlight changes</item>
         <item>The query export setting now shows a dialog indicating whether it is loading</item>
         <item>Fixed the server import not working on OS versions below Android 7</item>
+        <item>The query log now shows the protocol used to send the query</item>
     </string-array>
 </resources>
