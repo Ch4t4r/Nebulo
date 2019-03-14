@@ -118,10 +118,17 @@ class ServerImportActivity : BaseActivity() {
             } else inputStream = null
             if (inputStream != null) {
                 val stream = InputStreamReader(inputStream)
-                val rtrn = readJson(BufferedReader(stream).lines().collect(Collectors.joining("\n")))
+                val rtrn = readJson(readStreamFully(stream))
                 stream.close()
                 rtrn
             } else false
+        }
+    }
+
+    private fun readStreamFully(reader:InputStreamReader): String {
+        val bufferedReader = BufferedReader(reader)
+        return bufferedReader.useLines {
+            it.joinToString(separator = "\n")
         }
     }
 
