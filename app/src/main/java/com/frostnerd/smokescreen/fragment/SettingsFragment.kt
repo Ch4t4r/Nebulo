@@ -15,6 +15,7 @@ import androidx.core.content.FileProvider
 import androidx.preference.CheckBoxPreference
 import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceFragmentCompat
+import com.frostnerd.design.dialogs.LoadingDialog
 import com.frostnerd.general.isInt
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.MainActivity
@@ -151,6 +152,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         exportQueries.summary = getString(R.string.summary_export_queries, requireContext().getDatabase().dnsQueryDao().getCount())
         exportQueries.setOnPreferenceClickListener {
+            val loadingDialog:LoadingDialog?
+            if(requireContext().getDatabase().dnsQueryDao().getCount() >= 100) {
+                loadingDialog = LoadingDialog(requireContext(), R.string.dialog_query_export_title, R.string.dialog_query_export_message)
+            } else loadingDialog = null
+            loadingDialog?.show()
             requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext()) {file ->
                 if(!isDetached && !isRemoving) {
                     val uri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
@@ -172,6 +178,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     exportIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                     startActivity(Intent.createChooser(exportIntent, getString(R.string.title_export_queries)))
                 }
+                loadingDialog?.dismiss()
             }
             true
         }
