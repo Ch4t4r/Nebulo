@@ -237,7 +237,7 @@ class DnsVpnService : VpnService(), Runnable {
         notificationBuilder.setContentIntent(
             PendingIntent.getActivity(
                 this, 1,
-                Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
+                Intent(this, PinActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
             )
         )
         val stopPendingIntent =

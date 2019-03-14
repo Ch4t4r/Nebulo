@@ -26,14 +26,15 @@
                 android:name=".activity.PinActivity"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
                 android:launchMode="singleTop">
-
-        </activity>
-        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+        </activity>
+        <activity android:name=".activity.MainActivity">
+
         </activity>
         <activity
                 android:name=".activity.ShortcutActivity"
