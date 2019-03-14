@@ -108,7 +108,7 @@ class Logger private constructor(context: Context) {
         val logDir = getLogDir(context)
         logFile = File(logDir, "${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log")
 
-        if ((!logDir.exists() && !logDir.mkdirs()) || !logFile.createNewFile() || !logFile.canWrite()) {
+        if ((!logDir.exists() && !logDir.mkdirs()) || (!logFile.exists() && !logFile.createNewFile()) || !logFile.canWrite()) {
             Logger.crashed = true
             val exactError: String = if (!logDir.exists() && !logDir.mkdirs()) "Could not create log folder"
             else if (!logFile.createNewFile()) "Creating new log file failed"
