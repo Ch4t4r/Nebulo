@@ -61,7 +61,7 @@ class PinActivity: BaseActivity() {
         setTheme(getPreferences().theme.dialogStyle)
         super.onCreate(savedInstanceState)
         if(!getPreferences().enablePin) {
-            onPinPassed()
+            onPinPassed(false)
         } else {
             val view = layoutInflater.inflate(R.layout.dialog_pin, null, false)
             val handler = Handler()
@@ -132,10 +132,14 @@ class PinActivity: BaseActivity() {
         return intent?.getSerializableExtra("pin_type") as? PinType ?: PinType.APP
     }
 
-    private fun onPinPassed() {
+    private fun onPinPassed(pinEnabled:Boolean = true) {
         when(getPinType()) {
             PinType.APP -> {
-                startActivity(Intent(this, MainActivity::class.java).putExtras(intent?.extras?.getBundle("extras") ?: Bundle()))
+                val startIntent = Intent(this, MainActivity::class.java)
+                startIntent.putExtras(intent?.extras?.getBundle("extras") ?: Bundle())
+                startIntent.putExtra("pin_validated", true)
+                if(pinEnabled) startIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                startActivity(startIntent)
             }
             PinType.STOP_SERVICE -> {
                 val bundle = intent?.extras?.getBundle("extras") ?: Bundle()
