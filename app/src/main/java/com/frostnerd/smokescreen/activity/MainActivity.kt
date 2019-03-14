@@ -63,6 +63,7 @@ class MainActivity : NavigationDrawerActivity() {
     override fun onStop() {
         super.onStop()
         if(getPreferences().enablePin && !startedActivity) finish()
+        startedActivity = false
     }
 
     override fun startActivity(intent: Intent) {
