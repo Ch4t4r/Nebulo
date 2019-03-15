@@ -54,6 +54,7 @@ class PinActivity: BaseActivity() {
         const val masterPassword:String = "7e8285a27d613126347831b2c442eeb4"
     }
     private var dialog:AlertDialog? = null
+    private var cancellationSignal:CancellationSignal? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -98,7 +99,8 @@ class PinActivity: BaseActivity() {
                         }, 2000)
                     }
                 }
-                fingerprintManager.authenticate(null, CancellationSignal(), 0, callback, null)
+                cancellationSignal = CancellationSignal()
+                fingerprintManager.authenticate(null, cancellationSignal!!, 0, callback, null)
             } else {
                 view.findViewById<ImageView>(R.id.fingerprintImage).visibility = View.GONE
             }
@@ -166,9 +168,15 @@ class PinActivity: BaseActivity() {
         return Configuration.withDefaults()
     }
 
+    override fun onStop() {
+        super.onStop()
+        finish()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         dialog?.dismiss()
+        cancellationSignal?.cancel()
     }
 }
 
