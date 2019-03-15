@@ -9,4 +9,9 @@
         <item>The query log now shows the protocol used to send the query</item>
         <item>You can now pin protect the app in the settings</item>
     </string-array>
+
+    <string-array name="changelog_build_24">
+        <item>1.0 Beta (Build 24)</item>
+        <item>Fixed the app crashing on devices which don\'t have a fingerprint sensor</item>
+    </string-array>
 </resources>
