@@ -50,8 +50,8 @@ import kotlin.contracts.contract
 
 fun Context.canUseFingerprintAuthentication(): Boolean {
     if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) return false
-    val mgr = getSystemService(Context.FINGERPRINT_SERVICE) as FingerprintManager
-    if(!mgr.isHardwareDetected) return false
+    val mgr = getSystemService(Context.FINGERPRINT_SERVICE) as? FingerprintManager
+    if(mgr == null || !mgr.isHardwareDetected) return false
     else if(!mgr.hasEnrolledFingerprints()) return false
     val keyguard = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
     if(!keyguard.isKeyguardSecure) return false
