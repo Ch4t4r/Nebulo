@@ -26,8 +26,7 @@
                 android:name=".activity.PinActivity"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
                 android:noHistory="true"
-                android:autoRemoveFromRecents="true"
-                android:launchMode="singleTop">
+                android:autoRemoveFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
