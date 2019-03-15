@@ -60,42 +60,6 @@ class MainActivity : NavigationDrawerActivity() {
         ChangelogDialog.showNewVersionChangelog(this)
     }
 
-    override fun onStop() {
-        super.onStop()
-        if(getPreferences().enablePin && !startedActivity) finish()
-        startedActivity = false
-    }
-
-    override fun startActivity(intent: Intent) {
-        startedActivity = true
-        super.startActivity(intent)
-    }
-
-    override fun startActivityForResult(intent: Intent, requestCode: Int) {
-        startedActivity = true
-        super.startActivityForResult(intent, requestCode)
-    }
-
-    override fun startActivityFromFragment(fragment: android.app.Fragment, intent: Intent, requestCode: Int) {
-        startedActivity = true
-        super.startActivityFromFragment(fragment, intent, requestCode)
-    }
-
-    override fun startActivityFromFragment(fragment: android.app.Fragment, intent: Intent, requestCode: Int, options: Bundle?) {
-        startedActivity = true
-        super.startActivityFromFragment(fragment, intent, requestCode, options)
-    }
-
-    override fun startActivityFromFragment(fragment: Fragment, intent: Intent, requestCode: Int) {
-        startedActivity = true
-        super.startActivityFromFragment(fragment, intent, requestCode)
-    }
-
-    override fun startActivityFromFragment(fragment: Fragment, intent: Intent, requestCode: Int, options: Bundle?) {
-        startedActivity = true
-        super.startActivityFromFragment(fragment, intent, requestCode, options)
-    }
-
     override fun createDrawerItems(): MutableList<DrawerItem> {
         return createMenu {
             fragmentItem(getString(R.string.menu_dnsoverhttps),

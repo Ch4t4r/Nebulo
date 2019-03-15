@@ -140,7 +140,7 @@ class PinActivity: BaseActivity() {
                 val startIntent = Intent(this, MainActivity::class.java)
                 startIntent.putExtras(intent?.extras?.getBundle("extras") ?: Bundle())
                 startIntent.putExtra("pin_validated", true)
-                if(pinEnabled) startIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                //if(pinEnabled) startIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                 startActivity(startIntent)
             }
             PinType.STOP_SERVICE -> {
