@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.activity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.fragment.showLogExportDialog
 
@@ -24,8 +25,7 @@ import com.frostnerd.smokescreen.fragment.showLogExportDialog
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class ErrorDialogActivity: AppCompatActivity() {
-
+class ErrorDialogActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val dialog = AlertDialog.Builder(this)
@@ -41,9 +41,16 @@ class ErrorDialogActivity: AppCompatActivity() {
                 dialog.dismiss()
                 finish()
             }
+            .setOnDismissListener {
+                finish()
+            }
             .setCancelable(false).create()
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
+    }
+
+    override fun getConfiguration(): Configuration {
+        return Configuration.withDefaults()
     }
 
 }
