@@ -59,7 +59,7 @@
     <string name="dialog_query_export_title">Exporting queries…</string>
     <string name="dialog_query_export_message">Please wait while the queries are being exported</string>
 
-    <string name="dialog_pin_message">Please provider your PIN.</string>
+    <string name="dialog_pin_message">Please provide your PIN.</string>
     <string name="dialog_pin_hint">PIN</string>
     <string name="dialog_pin_inputlabel">PIN</string>
 </resources>
