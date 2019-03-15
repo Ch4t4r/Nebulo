@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              tools:context=".activity.PinActivity"
+              android:layout_width="match_parent"
+              android:paddingLeft="@dimen/dialog_horizontal_margin"
+              android:paddingRight="@dimen/dialog_horizontal_margin"
+              android:paddingTop="@dimen/dialog_vertical_margin"
+              android:paddingBottom="@dimen/dialog_vertical_margin"
+              android:layout_height="match_parent">
+
+    <com.frostnerd.materialedittext.MaterialEditText
+            android:id="@+id/pinInputMet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:allowCollapse="false"
+            app:animationDuration="0"
+            app:hint="@string/dialog_pin_hint"
+            app:indicatorState="undefined"
+            app:indicatorVisibilityWhenUnused="hidden"
+            app:labelColorPrimary="?attr/foregroundElementColor"
+            app:labelColorSecondary="?attr/foregroundElementColor"
+            app:iconTint="?attr/foregroundElementColor"
+            app:labelText="@string/dialog_pin_inputlabel"
+            app:revealDelay="0"
+            app:revealType="revealInstant">
+
+        <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/pinInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/inputElementColor"
+                android:cursorVisible="true"
+                android:inputType="numberPassword"
+                android:textColor="?attr/foregroundElementColor"/>
+    </com.frostnerd.materialedittext.MaterialEditText>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fingerprintImage"
+            android:layout_width="48dp"
+            app:srcCompat="@drawable/ic_fingerprint"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+</LinearLayout>

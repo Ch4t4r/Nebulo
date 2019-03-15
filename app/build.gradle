@@ -23,6 +23,9 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())

@@ -22,6 +22,18 @@
     <string name="title_notification_hide_icon">Hide icon</string>
     <string name="summary_notification_hide_icon">Hide the icon from the navigation bar on the top</string>
 
+
+    <string name="preference_category_pin">PIN protection</string>
+
+    <string name="title_preference_enable_pin">Pin</string>
+    <string name="summary_preference_enable_pin">Ask for a PIN when opening or stopping the app</string>
+
+    <string name="title_preference_pin_use_fingerprint">Allow fingerprint</string>
+    <string name="summary_preference_pin_use_fingerprint">Allow your fingerprint to be used instead of the pin.</string>
+
+    <string name="title_preference_change_pin">Change pin</string>
+    <string name="summary_preference_change_pin">Change the pin. Only numeric values are allowed.\nCurrent pin: %1s</string>
+
     <string name="preference_category_cache">Cache control</string>
 
     <string name="title_dnscache_enabled">Use DNS cache</string>

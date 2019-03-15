@@ -156,7 +156,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
         androidx.appcompat.app.AlertDialog.Builder(this, getPreferences().theme.dialogStyle)
             .setTitle(getString(R.string.app_name) + " - " + getString(R.string.information))
             .setPositiveButton(R.string.open_app) { _, _ ->
-                val intent = Intent(this@BackgroundVpnConfigureActivity, MainActivity::class.java)
+                val intent = Intent(this@BackgroundVpnConfigureActivity, PinActivity::class.java)
                 startActivity(intent)
                 finish()
             }

@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
@@ -44,6 +45,7 @@ class MainActivity : NavigationDrawerActivity() {
     private var textColor: Int = 0
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
+    private var startedActivity = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
@@ -56,6 +58,42 @@ class MainActivity : NavigationDrawerActivity() {
             view
         }*/
         ChangelogDialog.showNewVersionChangelog(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if(getPreferences().enablePin && !startedActivity) finish()
+        startedActivity = false
+    }
+
+    override fun startActivity(intent: Intent) {
+        startedActivity = true
+        super.startActivity(intent)
+    }
+
+    override fun startActivityForResult(intent: Intent, requestCode: Int) {
+        startedActivity = true
+        super.startActivityForResult(intent, requestCode)
+    }
+
+    override fun startActivityFromFragment(fragment: android.app.Fragment, intent: Intent, requestCode: Int) {
+        startedActivity = true
+        super.startActivityFromFragment(fragment, intent, requestCode)
+    }
+
+    override fun startActivityFromFragment(fragment: android.app.Fragment, intent: Intent, requestCode: Int, options: Bundle?) {
+        startedActivity = true
+        super.startActivityFromFragment(fragment, intent, requestCode, options)
+    }
+
+    override fun startActivityFromFragment(fragment: Fragment, intent: Intent, requestCode: Int) {
+        startedActivity = true
+        super.startActivityFromFragment(fragment, intent, requestCode)
+    }
+
+    override fun startActivityFromFragment(fragment: Fragment, intent: Intent, requestCode: Int, options: Bundle?) {
+        startedActivity = true
+        super.startActivityFromFragment(fragment, intent, requestCode, options)
     }
 
     override fun createDrawerItems(): MutableList<DrawerItem> {

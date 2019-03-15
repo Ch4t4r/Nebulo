@@ -1,10 +1,13 @@
 package com.frostnerd.smokescreen
 
 import android.app.Activity
+import android.app.KeyguardManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.hardware.biometrics.BiometricPrompt
+import android.hardware.fingerprint.FingerprintManager
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
@@ -24,6 +27,7 @@ import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
 import java.util.logging.Level
+import kotlin.contracts.contract
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -43,6 +47,16 @@ import java.util.logging.Level
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
+
+fun Context.canUseFingerprintAuthentication(): Boolean {
+    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) return false
+    val mgr = getSystemService(Context.FINGERPRINT_SERVICE) as FingerprintManager
+    if(!mgr.isHardwareDetected) return false
+    else if(!mgr.hasEnrolledFingerprints()) return false
+    val keyguard = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+    if(!keyguard.isKeyguardSecure) return false
+    return true
+}
 
 fun Context.registerReceiver(intentFilter: IntentFilter, receiver: (intent: Intent?) -> Unit): BroadcastReceiver {
     val actualReceiver = object : BroadcastReceiver() {

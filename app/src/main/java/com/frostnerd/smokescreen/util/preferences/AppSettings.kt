@@ -54,6 +54,11 @@ interface AppSettings {
     var showNotificationOnLockscreen: Boolean
     var hideNotificationIcon: Boolean
 
+    // Pin category
+    var enablePin:Boolean
+    var allowFingerprintForPin:Boolean
+    var pin:Int
+
     // Cache category
     var useDnsCache: Boolean
     var keepDnsCacheAcrossLaunches: Boolean
@@ -146,6 +151,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var showNotificationOnLockscreen: Boolean by booleanPref("show_notification_on_lockscreen", true)
     override var hideNotificationIcon: Boolean by booleanPref("hide_notification_icon", false)
 
+    override var enablePin:Boolean by booleanPref("enable_pin", false)
+    override var allowFingerprintForPin:Boolean by booleanPref("pin_allow_fingerprint", true)
+    override var pin: Int by stringBasedIntPref("pin", 1234)
     override var useDnsCache: Boolean by booleanPref("dnscache_enabled", true)
     override var keepDnsCacheAcrossLaunches: Boolean by booleanPref("dnscache_keepacrosslaunches", false)
     override var maxCacheSize: Int by stringBasedIntPref("dnscache_maxsize", 1000)
