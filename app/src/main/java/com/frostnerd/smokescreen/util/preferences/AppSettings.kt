@@ -139,7 +139,7 @@ interface AppSettings {
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context, version = 1, migrate = migration) {
     override var hasRatedApp: Boolean by booleanPref("has_rated_app", false)
-    override var previousInstalledVersion:Int by intPref("previous_version", 22)
+    override var previousInstalledVersion:Int by intPref("previous_version", BuildConfig.VERSION_CODE)
     override var showChangelog:Boolean by booleanPref("show_changelog", true)
 
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
