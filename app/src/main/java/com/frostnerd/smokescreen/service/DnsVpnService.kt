@@ -501,14 +501,17 @@ class DnsVpnService : VpnService(), Runnable {
             log("Interception of requests towards known DNS servers is enabled, adding routes.")
             for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
                 log("Adding all routes for ${server.name}")
-                if (useIpv4) for (ipv4Server in server.getIpv4Servers()) {
-                    log("Adding route for Ipv4 ${ipv4Server.address.address}")
-                    builder.addRoute(ipv4Server.address.address, 32)
-                } else log("Not adding routes of IPv4 servers.")
-                if (useIpv6) for (ipv6Server in server.getIpv6Servers()) {
-                    log("Adding route for Ipv6 ${ipv6Server.address.address}")
-                    builder.addRoute(ipv6Server.address.address, 128)
-                } else log("Not adding routes of IPv6 servers.")
+                server.servers.forEach {
+                    it.address.addresses.forEach { address ->
+                        if (address is Inet6Address && useIpv6) {
+                            log("Adding route for Ipv6 $address")
+                            builder.addRoute(address, 32)
+                        } else if (address is Inet4Address && useIpv4) {
+                            log("Adding route for Ipv4 $address")
+                            builder.addRoute(address, 128)
+                        }
+                    }
+                }
             }
         } else log("Not intercepting traffic towards known DNS servers.")
         builder.setSession(getString(R.string.app_name))
@@ -516,11 +519,11 @@ class DnsVpnService : VpnService(), Runnable {
             builder.addDnsServer(dummyServerIpv4)
             builder.addRoute(dummyServerIpv4, 32)
             dhcpDnsServer.forEach {
-                if(it is Inet4Address) {
+                if (it is Inet4Address) {
                     builder.addRoute(it, 32)
+                    }
                 }
-            }
-        } else if(deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
+            } else if (deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
 
         if (useIpv6) {
             builder.addDnsServer(dummyServerIpv6)
@@ -663,6 +666,9 @@ class DnsVpnService : VpnService(), Runnable {
                 nullRouteKeweon = getPreferences().isUsingKeweon() && getPreferences().nullTerminateKeweon)
         }
         log("Handle created, creating DNS proxy")
+        handle.ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
+        handle.ipv4Enabled =
+            !handle.ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
         dnsProxy = SmokeProxy(handle, createProxyBypassHandlers(), createDnsCache(), createQueryLogger())
         log("DnsProxy created, creating VPN proxy")
