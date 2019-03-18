@@ -49,7 +49,7 @@ class ProxyBypassHandler(val searchDomains:List<String>, val destinationDnsServe
         realDestination: UpstreamAddress
     ) {
         val bytes = dnsMessage.toArray()
-        val packet = DatagramPacket(bytes, bytes.size, realDestination.address, realDestination.port)
+        val packet = DatagramPacket(bytes, bytes.size, realDestination.addresses.first(), realDestination.port)
         sendPacketToUpstreamDNSServer(deviceWriteToken, packet, originalEnvelope)
     }
 

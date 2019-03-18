@@ -38,7 +38,7 @@ class ProxyTlsHandler(
         realDestination: UpstreamAddress
     ) {
         val data = dnsMessage.toArray()
-        sendPacketToUpstreamDNSServer(deviceWriteToken, DatagramPacket(data, 0, data.size, realDestination.address, realDestination.port), originalEnvelope)
+        sendPacketToUpstreamDNSServer(deviceWriteToken, DatagramPacket(data, 0, data.size, selectAddress(realDestination), realDestination.port), originalEnvelope)
     }
 
     override fun informFailedRequest(request: FutureAnswer) {
