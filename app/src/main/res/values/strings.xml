@@ -4,6 +4,8 @@
     <string name="activity_label_import_queries">Import queries</string>
     <string name="activity_label_import_servers">Import server(s)</string>
 
+    <string name="activity_label_enable_logging">Export logs/Enable logging</string>
+
     <string name="all_stop">Stop</string>
     <string name="all_start">Start</string>
     <string name="all_no">No</string>

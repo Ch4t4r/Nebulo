@@ -46,6 +46,36 @@
                 android:taskAffinity="com.frostnerd.smokescreen.ShortcutTask"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
         <activity
+                android:name=".activity.LoggingDialogActivity"
+                android:autoRemoveFromRecents="true"
+                android:label="@string/activity_label_enable_logging"
+                android:process=":logexport"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
+                android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                        android:mimeType="*/*"
+                        android:scheme="content"
+                        android:host="*"
+                        android:pathPattern=".*\\.nebulologgingkey"
+                        tools:ignore="AppLinkUrlError"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                        android:mimeType="*/*"
+                        android:scheme="file"
+                        android:host="*"
+                        android:pathPattern=".*\\.nebulologgingkey"
+                        tools:ignore="AppLinkUrlError"/>
+            </intent-filter>
+        </activity>
+        <activity
                 android:name=".activity.ServerImportActivity"
                 android:autoRemoveFromRecents="true"
                 android:noHistory="true"

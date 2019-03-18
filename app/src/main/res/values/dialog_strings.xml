@@ -62,4 +62,6 @@
     <string name="dialog_pin_message">Please provide your PIN.</string>
     <string name="dialog_pin_hint">PIN</string>
     <string name="dialog_pin_inputlabel">PIN</string>
+
+    <string name="dialog_enable_logging">Do you want to enable logging? Logs contain statistic information, debug information and actions in the app. Generated logs aren\'t shared unless you do so yourself.</string>
 </resources>
