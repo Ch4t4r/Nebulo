@@ -429,7 +429,6 @@ private fun Context.showLogExportDialog(zipUri: Uri, onDismiss: (() -> Unit)? = 
             emailIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
             startActivity(Intent.createChooser(emailIntent, getString(R.string.title_send_logs)))
             log("Now choosing chooser for E-Mail intent")
-            onDismiss?.invoke()
             dialog.dismiss()
         }
         .setNeutralButton(R.string.dialog_logexport_general) { dialog, _ ->
@@ -452,9 +451,15 @@ private fun Context.showLogExportDialog(zipUri: Uri, onDismiss: (() -> Unit)? = 
             generalIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
             log("Now choosing chooser for general export")
             startActivity(Intent.createChooser(generalIntent, getString(R.string.title_send_logs)))
-            onDismiss?.invoke()
             dialog.dismiss()
-        }.create()
+        }
+        .setOnDismissListener {
+            onDismiss?.invoke()
+        }
+        .setNegativeButton(R.string.cancel) { dialog, _ ->
+            dialog.dismiss()
+        }
+        .create()
     dialog.setCanceledOnTouchOutside(false)
     dialog.show()
 }
