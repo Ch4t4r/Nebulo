@@ -171,9 +171,9 @@ class ServerChoosalDialog(
             val primaryMatches: Boolean
             val secondaryMatches: Boolean
             if (info.hasTlsServer()) {
-                primaryMatches = info.servers[0].address.FQDN == currentSelectedServer.servers[0].address.FQDN
+                primaryMatches = info.servers[0].address.host == currentSelectedServer.servers[0].address.host
                 secondaryMatches =
-                    currentSelectedServer.servers.size == 1 || (info.servers[1].address.FQDN == currentSelectedServer.servers[1].address.FQDN)
+                    currentSelectedServer.servers.size == 1 || (info.servers[1].address.host == currentSelectedServer.servers[1].address.host)
             } else {
                 val httpsInfo = info as HttpsDnsServerInformation
                 val currentHttpsInfo = currentSelectedServer as HttpsDnsServerInformation

@@ -130,7 +130,7 @@ class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformat
                     if(address is HttpsUpstreamAddress) {
                         append(address.getUrl())
                     } else {
-                        append(address.FQDN)
+                        append(address.host)
                     }
                     append(" (")
                     append(context.getString(R.string.dialog_serverimport_priority, serverConfiguration.priority))

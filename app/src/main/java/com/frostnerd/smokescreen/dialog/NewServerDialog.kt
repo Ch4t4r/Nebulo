@@ -207,11 +207,11 @@ class NewServerDialog(
             if(path != null) emptyList()
             else allServer.values.filter {
                 it.servers.any { server ->
-                    server.address.FQDN == host && (port == null || server.address.port == port)
+                    server.address.host == host && (port == null || server.address.port == port)
                 }
             }
         }.firstOrNull()?.servers?.firstOrNull {
-            it.address.FQDN == host
+            it.address.host == host
         }?.address ?: if (port != null && path != null) HttpsUpstreamAddress(host, port, path)
         else if (port != null) HttpsUpstreamAddress(host, port)
         else if (path != null) HttpsUpstreamAddress(host, urlPath = path)
@@ -230,11 +230,11 @@ class NewServerDialog(
         return AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { allServer ->
             allServer.values.filter {
                 it.servers.any { server ->
-                    server.address.FQDN == parsedHost && (port == null || server.address.port == port)
+                    server.address.host == parsedHost && (port == null || server.address.port == port)
                 }
             }
         }.firstOrNull()?.servers?.firstOrNull {
-            it.address.FQDN == parsedHost
+            it.address.host == parsedHost
         }?.address ?: if (port != null) TLSUpstreamAddress(parsedHost, port)
         else TLSUpstreamAddress(parsedHost)
     }

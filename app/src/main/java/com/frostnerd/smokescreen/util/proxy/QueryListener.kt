@@ -39,7 +39,7 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
     init {
         val config = context.getPreferences().dnsServerConfig
         askedServer = if(config.hasTlsServer()) {
-            "tls::" + config.servers.first().address.FQDN!!
+            "tls::" + config.servers.first().address.host!!
         } else {
             "https::" + (config as HttpsDnsServerInformation).serverConfigurations.values.first().urlCreator.baseUrl
         }

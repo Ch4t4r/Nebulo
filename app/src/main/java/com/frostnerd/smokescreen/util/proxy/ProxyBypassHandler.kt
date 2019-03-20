@@ -31,6 +31,7 @@ import java.net.InetAddress
 class ProxyBypassHandler(val searchDomains:List<String>, val destinationDnsServer:InetAddress):AbstractUDPDnsHandle() {
     override val handlesSpecificRequests: Boolean = true
 
+
     override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
         val name = dnsMessage.question.name
         return searchDomains.any {
@@ -49,7 +50,7 @@ class ProxyBypassHandler(val searchDomains:List<String>, val destinationDnsServe
         realDestination: UpstreamAddress
     ) {
         val bytes = dnsMessage.toArray()
-        val packet = DatagramPacket(bytes, bytes.size, realDestination.addresses.first(), realDestination.port)
+        val packet = DatagramPacket(bytes, bytes.size, destinationDnsServer, realDestination.port)
         sendPacketToUpstreamDNSServer(deviceWriteToken, packet, originalEnvelope)
     }
 

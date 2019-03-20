@@ -502,7 +502,7 @@ class DnsVpnService : VpnService(), Runnable {
             for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
                 log("Adding all routes for ${server.name}")
                 server.servers.forEach {
-                    it.address.addresses.forEach { address ->
+                    it.address.addressCreator.resolveOrGetResult().forEach { address ->
                         if (address is Inet6Address && useIpv6) {
                             log("Adding route for Ipv6 $address")
                             builder.addRoute(address, 32)

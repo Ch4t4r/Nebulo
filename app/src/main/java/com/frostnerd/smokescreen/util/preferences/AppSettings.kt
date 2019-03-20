@@ -98,7 +98,7 @@ interface AppSettings {
 
     fun isUsingKeweon(): Boolean {
         return dnsServerConfig.servers.any {
-            it.address.FQDN?.contains("keweon") ?: false
+            it.address.host?.contains("keweon") ?: false
         }
     }
 

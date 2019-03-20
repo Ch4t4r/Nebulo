@@ -97,8 +97,8 @@ class ConfigureActivity : BaseActivity() {
                                     } else {
                                         validationRegex = NewServerDialog.TLS_REGEX
                                         serverType.setSelection(1)
-                                        primaryServer.setText(info.servers.getOrNull(0)?.address?.FQDN)
-                                        secondaryServer.setText(info.servers.getOrNull(1)?.address?.FQDN)
+                                        primaryServer.setText(info.servers.getOrNull(0)?.address?.host)
+                                        secondaryServer.setText(info.servers.getOrNull(1)?.address?.host)
                                     }
                                 }
                             }
