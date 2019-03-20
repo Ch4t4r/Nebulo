@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.util.proxy
 
+import com.frostnerd.dnstunnelproxy.AddressCreator
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
@@ -39,6 +40,7 @@ class ProxyHttpsHandler(
 ) :
     AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
     override val handlesSpecificRequests: Boolean = false
+    private val dummyUpstreamAddress = UpstreamAddress(AddressCreator.fromHostAddress("0.0.0.0"), 0)
 
     override fun name(): String {
         return "ProxyHttpsHandler"
@@ -60,7 +62,7 @@ class ProxyHttpsHandler(
 
     override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
         queryCountCallback?.invoke(dnsPacketProxy?.tunnelHandle?.trafficStats?.packetsReceivedFromDevice?.toInt() ?: 0)
-        return UpstreamAddress(destinationAddress, port)
+        return dummyUpstreamAddress
     }
 
     override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = true
