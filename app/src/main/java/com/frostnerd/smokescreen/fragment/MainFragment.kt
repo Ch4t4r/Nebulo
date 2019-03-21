@@ -24,6 +24,8 @@ import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.net.URL
 
 
@@ -104,12 +106,19 @@ class MainFragment : Fragment() {
                 println("Saved $config")
             }.show()
         }
-        updatePrivacyPolicyLink(requireContext().getPreferences().dnsServerConfig)
         privacyStatementText.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW)
             val url = it.tag as URL
             i.data = Uri.parse(url.toURI().toString())
             startActivity(i)
+        }
+        GlobalScope.launch {
+            val config = requireContext().getPreferences().dnsServerConfig
+            if(isAdded && !isDetached) {
+                requireActivity().runOnUiThread {
+                    updatePrivacyPolicyLink(config)
+                }
+            }
         }
         updateVpnIndicators()
     }
