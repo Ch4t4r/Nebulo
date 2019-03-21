@@ -44,6 +44,22 @@ class Notifications {
             return "service_foreground_notification"
         }
 
+        fun noConnectionNotificationChannelId(context: Context):String {
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    "noConnectionChannel",
+                    context.getString(R.string.notification_channel_noconnection),
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+                channel.enableLights(false)
+                channel.enableVibration(true)
+                channel.description = context.getString(R.string.notification_channel_noconnection_description)
+                channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+                (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
+            }
+            return "noConnectionChannel"
+        }
+
         fun getDefaultNotificationChannelId(context: Context): String {
             if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(

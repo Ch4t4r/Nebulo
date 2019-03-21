@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.service
 
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
@@ -15,7 +16,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
-import com.frostnerd.encrypteddnstunnelproxy.createSimpleServerConfig
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.general.CombinedIterator
 import com.frostnerd.general.service.isServiceRunning
@@ -25,7 +25,6 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
-import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
@@ -76,6 +75,8 @@ class DnsVpnService : VpnService(), Runnable {
     private var vpnProxy: VPNTunnelProxy? = null
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
+    private lateinit var noConnectionNotificationBuilder: NotificationCompat.Builder
+    private var noConnectionNotificationShown = false
     private lateinit var serverConfig:DnsServerConfiguration
     private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
     private lateinit var networkCallback:ConnectivityManager.NetworkCallback
@@ -259,6 +260,25 @@ class DnsVpnService : VpnService(), Runnable {
         startForeground(1, notificationBuilder.build())
     }
 
+    private fun showNoConnectionNotification() {
+        if(!this::noConnectionNotificationBuilder.isInitialized) {
+            noConnectionNotificationBuilder = NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
+            noConnectionNotificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
+            noConnectionNotificationBuilder.setOngoing(true)
+            noConnectionNotificationBuilder.setSmallIcon(R.drawable.ic_times)
+            noConnectionNotificationBuilder.setContentTitle(getString(R.string.notification_noconnection_title))
+            noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
+            noConnectionNotificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(getString(R.string.notification_noconnection_text)))
+        }
+        if(!noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(2, noConnectionNotificationBuilder.build())
+        noConnectionNotificationShown = true
+    }
+
+    private fun hideNoConnectionNotification() {
+        if(noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(2)
+        noConnectionNotificationShown = false
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("Service onStartCommand", intent = intent)
         if (intent != null && intent.hasExtra("command")) {
@@ -315,6 +335,14 @@ class DnsVpnService : VpnService(), Runnable {
         log("Updating server configuration..")
         userServerConfig = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
         serverConfig = getServerConfig()
+        serverConfig.tlsConfiguration?.forEach {
+            it.addressCreator.whenResolveFailed {
+                showNoConnectionNotification()
+            }
+            it.addressCreator.whenResolveFinishedSuccessfully {
+                hideNoConnectionNotification()
+            }
+        }
         log("Server configuration updated to $serverConfig")
     }
 
@@ -387,6 +415,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun destroy(isStoppingCompletely:Boolean = true) {
         log("Destroying the VPN")
         if (!destroyed) {
+            hideNoConnectionNotification()
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
