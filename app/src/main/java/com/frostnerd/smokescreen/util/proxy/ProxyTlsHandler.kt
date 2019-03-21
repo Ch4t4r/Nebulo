@@ -1,7 +1,6 @@
 package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
-import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.vpntunnelproxy.FutureAnswer
@@ -9,7 +8,10 @@ import com.frostnerd.vpntunnelproxy.ReceivedAnswer
 import com.frostnerd.vpntunnelproxy.TunnelHandle
 import org.minidns.dnsmessage.DnsMessage
 import org.pcap4j.packet.IpPacket
+import java.lang.IllegalStateException
 import java.net.DatagramPacket
+import java.net.Inet4Address
+import java.net.Inet6Address
 import java.net.InetAddress
 import javax.net.ssl.SSLSession
 
@@ -37,8 +39,21 @@ class ProxyTlsHandler(
         originalEnvelope: IpPacket,
         realDestination: UpstreamAddress
     ) {
-        val data = dnsMessage.toArray()
-        sendPacketToUpstreamDNSServer(deviceWriteToken, DatagramPacket(data, 0, data.size, selectAddress(realDestination), realDestination.port), originalEnvelope)
+        val destination = selectAddressOrNull(realDestination)
+        if(destination != null) {
+            val data = dnsMessage.toArray()
+            sendPacketToUpstreamDNSServer(deviceWriteToken, DatagramPacket(data, 0, data.size, destination, realDestination.port), originalEnvelope)
+        } else {
+            val response = dnsMessage.asBuilder().setQrFlag(true).setResponseCode(DnsMessage.RESPONSE_CODE.SERVER_FAIL)
+            dnsPacketProxy?.writeUDPDnsPacketToDevice(deviceWriteToken, response.build().toArray(), originalEnvelope)
+        }
+    }
+
+    private fun selectAddressOrNull(upstreamAddress: UpstreamAddress):InetAddress? {
+        val resolveResult = upstreamAddress.addressCreator.resolveOrGetResultOrNull(true) ?: return null
+        return resolveResult.firstOrNull {
+            (ipv4Enabled && it is Inet4Address) || (ipv6Enabled && it is Inet6Address)
+        } ?: throw IllegalStateException("The given UpstreamAddress doesn't have an address for the requested IP version (IPv4: $ipv4Enabled, IPv6: $ipv6Enabled)")
     }
 
     override fun informFailedRequest(request: FutureAnswer) {
