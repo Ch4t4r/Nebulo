@@ -3,12 +3,11 @@ package com.frostnerd.smokescreen.util.preferences
 import android.content.Context
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
-import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
-import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
 import com.frostnerd.preferenceskt.typedpreferences.SimpleTypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.buildMigration
+import com.frostnerd.preferenceskt.typedpreferences.cache.ExpirationCacheControl
+import com.frostnerd.preferenceskt.typedpreferences.cache.buildCacheStrategy
 import com.frostnerd.preferenceskt.typedpreferences.types.*
 import com.frostnerd.smokescreen.BuildConfig
 
@@ -34,6 +33,8 @@ interface AppSettings {
     companion object {
         internal var instance: AppSettingsSharedPreferences? = null
     }
+    val cacheControl:ExpirationCacheControl
+
 
     var catchKnownDnsServers: Boolean
     var dummyDnsAddressIpv4: String
@@ -138,6 +139,12 @@ interface AppSettings {
 }
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context, version = 1, migrate = migration) {
+    override val cacheControl: ExpirationCacheControl = ExpirationCacheControl(buildCacheStrategy {
+        this.allKeys {
+            neverExpires()
+        }
+    })
+
     override var hasRatedApp: Boolean by booleanPref("has_rated_app", false)
     override var previousInstalledVersion:Int by intPref("previous_version", BuildConfig.VERSION_CODE)
     override var showChangelog:Boolean by booleanPref("show_changelog", true)
@@ -181,13 +188,13 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     override var queryLoggingEnabled: Boolean by booleanPref("log_dns_queries", false)
 
-    override var userServers: Set<UserServerConfiguration> by UserServerConfigurationPreference(
+    override var userServers: Set<UserServerConfiguration> by cache(UserServerConfigurationPreference(
         "user_servers"
-    ) { mutableSetOf() }
+    ) { mutableSetOf() }, cacheControl)
     override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", false)
     override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "8.8.8.8")
     override var dummyDnsAddressIpv6: String by stringPref("dummy_dns_ipv6", "2001:4860:4860::8888")
-    override val defaultBypassPackages: Set<String> by restrictedCollection(
+    override val defaultBypassPackages: Set<String> by cache(restrictedCollection(
         stringSetPref(
             "default_bypass_packages",
             hashSetOf(BuildConfig.APPLICATION_ID, "com.android.vending")
@@ -195,12 +202,12 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     ) {
         shouldContain(BuildConfig.APPLICATION_ID)
         shouldContain("com.android.vending")
-    }
-    override var dnsServerConfig: DnsServerInformation<*> by DnsServerInformationPreference("dns_server_config") {
+    }, cacheControl)
+    override var dnsServerConfig: DnsServerInformation<*> by cache(DnsServerInformationPreference("dns_server_config") {
         AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
             knownServers.getValue(0)
         }
-    }
+    }, cacheControl)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
@@ -214,7 +221,7 @@ fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSh
 }
 
 private val migration = buildMigration {
-    initialMigration { _, _ ->
+    initialMigration { _, _, _ ->
 
     }
 }
