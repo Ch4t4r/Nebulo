@@ -336,6 +336,7 @@ class DnsVpnService : VpnService(), Runnable {
         userServerConfig = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
         serverConfig = getServerConfig()
         serverConfig.tlsConfiguration?.forEach {
+            it.addressCreator.resolveOrGetResultOrNull(true)
             it.addressCreator.whenResolveFailed {
                 showNoConnectionNotification()
             }
@@ -396,6 +397,8 @@ class DnsVpnService : VpnService(), Runnable {
             if (reloadServerConfiguration) {
                 log("Re-fetching the servers (from intent or settings)")
                 setServerConfiguration(intent)
+            } else serverConfig.tlsConfiguration?.forEach {
+                it.addressCreator.resolveOrGetResultOrNull(true)
             }
             establishVpn()
             setNotificationText()
