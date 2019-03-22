@@ -335,12 +335,12 @@ class DnsVpnService : VpnService(), Runnable {
         log("Updating server configuration..")
         userServerConfig = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
         serverConfig = getServerConfig()
-        serverConfig.tlsConfiguration?.forEach {
-            it.addressCreator.resolveOrGetResultOrNull(true)
-            it.addressCreator.whenResolveFailed {
+        serverConfig.forEachAddress { _, address ->
+            address.addressCreator.resolveOrGetResultOrNull(true)
+            address.addressCreator.whenResolveFailed {
                 showNoConnectionNotification()
             }
-            it.addressCreator.whenResolveFinishedSuccessfully {
+            address.addressCreator.whenResolveFinishedSuccessfully {
                 hideNoConnectionNotification()
             }
         }
@@ -397,8 +397,8 @@ class DnsVpnService : VpnService(), Runnable {
             if (reloadServerConfiguration) {
                 log("Re-fetching the servers (from intent or settings)")
                 setServerConfiguration(intent)
-            } else serverConfig.tlsConfiguration?.forEach {
-                it.addressCreator.resolveOrGetResultOrNull(true)
+            } else serverConfig.forEachAddress { _, address ->
+                address.addressCreator.resolveOrGetResultOrNull(true)
             }
             establishVpn()
             setNotificationText()
@@ -886,4 +886,14 @@ enum class Command : Serializable {
     STOP, RESTART
 }
 
-data class DnsServerConfiguration(val httpsConfiguration:List<ServerConfiguration>?, val tlsConfiguration:List<TLSUpstreamAddress>?)
+data class DnsServerConfiguration(val httpsConfiguration:List<ServerConfiguration>?, val tlsConfiguration:List<TLSUpstreamAddress>?) {
+
+    fun forEachAddress(block:(isHttps:Boolean, UpstreamAddress) -> Unit) {
+        httpsConfiguration?.forEach {
+            block(true, it.urlCreator.address)
+        }
+        tlsConfiguration?.forEach {
+            block(false, it)
+        }
+    }
+}
