@@ -92,8 +92,8 @@ class ConfigureActivity : BaseActivity() {
                                         serverType.setSelection(0)
                                         val httpsInfo = info as HttpsDnsServerInformation
                                         val configs = httpsInfo.serverConfigurations.values.toTypedArray()
-                                        primaryServer.setText(configs.getOrNull(0)?.urlCreator?.baseUrl)
-                                        secondaryServer.setText(configs.getOrNull(1)?.urlCreator?.baseUrl)
+                                        primaryServer.setText(configs.getOrNull(0)?.urlCreator?.address?.getUrl(true))
+                                        secondaryServer.setText(configs.getOrNull(1)?.urlCreator?.address?.getUrl(true))
                                     } else {
                                         validationRegex = NewServerDialog.TLS_REGEX
                                         serverType.setSelection(1)

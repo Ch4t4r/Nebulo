@@ -178,9 +178,9 @@ class ServerChoosalDialog(
                 val httpsInfo = info as HttpsDnsServerInformation
                 val currentHttpsInfo = currentSelectedServer as HttpsDnsServerInformation
                 primaryMatches =
-                    httpsInfo.serverConfigurations.values.first().urlCreator.baseUrl == currentHttpsInfo.serverConfigurations.values.first().urlCreator.baseUrl
+                    httpsInfo.serverConfigurations.values.first().urlCreator.address.getUrl() == currentHttpsInfo.serverConfigurations.values.first().urlCreator.address.getUrl()
                 secondaryMatches = currentHttpsInfo.serverConfigurations.size == 1 ||
-                        httpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.baseUrl == currentHttpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.baseUrl
+                        httpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.address.getUrl() == currentHttpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.address.getUrl()
             }
             if (primaryMatches && secondaryMatches) {
                 child.isChecked = true

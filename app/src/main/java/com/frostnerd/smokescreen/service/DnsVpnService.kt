@@ -352,8 +352,8 @@ class DnsVpnService : VpnService(), Runnable {
         val secondaryServer:String?
         if(serverConfig.httpsConfiguration != null) {
             notificationBuilder.setContentTitle(getString(R.string.notification_main_title_https))
-            primaryServer = serverConfig.httpsConfiguration!![0].urlCreator.baseUrl
-            secondaryServer = serverConfig.httpsConfiguration!!.getOrNull(1)?.urlCreator?.baseUrl
+            primaryServer = serverConfig.httpsConfiguration!![0].urlCreator.address.getUrl(true)
+            secondaryServer = serverConfig.httpsConfiguration!!.getOrNull(1)?.urlCreator?.address?.getUrl(true)
         } else {
             notificationBuilder.setContentTitle(getString(R.string.notification_main_title_tls))
             primaryServer = serverConfig.tlsConfiguration!![0].formatToString()

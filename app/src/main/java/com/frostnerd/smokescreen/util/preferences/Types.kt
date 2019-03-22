@@ -66,7 +66,7 @@ class ServerConfigurationPreference(key: String, defaultValue: (String) -> Serve
         }
 
         if (encoded == null) {
-            encoded = value.urlCreator.baseUrl + encodedDivider + value.transportConfig.requestType.id +
+            encoded = value.urlCreator.address.getUrl() + encodedDivider + value.transportConfig.requestType.id +
                     encodedDivider + value.transportConfig.responseType.id
         }
 

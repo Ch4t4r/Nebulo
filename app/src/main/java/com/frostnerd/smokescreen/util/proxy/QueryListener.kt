@@ -41,7 +41,7 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
         askedServer = if(config.hasTlsServer()) {
             "tls::" + config.servers.first().address.host!!
         } else {
-            "https::" + (config as HttpsDnsServerInformation).serverConfigurations.values.first().urlCreator.baseUrl
+            "https::" + (config as HttpsDnsServerInformation).serverConfigurations.values.first().urlCreator.address.getUrl(false)
         }
     }
 
