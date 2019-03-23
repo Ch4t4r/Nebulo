@@ -82,6 +82,7 @@ class DnsVpnService : VpnService(), Runnable {
     private lateinit var networkCallback:ConnectivityManager.NetworkCallback
     private var queryCountOffset: Long = 0
     private var packageBypassAmount = 0
+    private var connectedToANetwork:Boolean? = null
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -418,7 +419,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun destroy(isStoppingCompletely:Boolean = true) {
         log("Destroying the VPN")
         if (!destroyed) {
-            hideNoConnectionNotification()
+            if(!isStoppingCompletely && connectedToANetwork == true) hideNoConnectionNotification()
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
@@ -770,6 +771,8 @@ class DnsVpnService : VpnService(), Runnable {
         }
         bypassHandlers.add(NoConnectionDnsHandle(getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager, NoConnectionDnsHandle.Behavior.DROP_PACKETS) {
             log("Connection changed to connected=$it", "NoConnectionDnsHandle-Listener")
+            connectedToANetwork = it
+            if(!it) showNoConnectionNotification()
         })
         return bypassHandlers
     }
