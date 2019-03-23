@@ -14,4 +14,12 @@
         <item>1.0 Beta (Build 24)</item>
         <item>Fixed the app crashing on devices which don\'t have a fingerprint sensor</item>
     </string-array>
+
+    <string-array name="changelog_build_25">
+        <item>1.0 Beta (Build 25)</item>
+        <item>Improved handling of IPv6/IPv6 - the app now works reliable in networks which only support either</item>
+        <item>Added new DNS servers</item>
+        <item>A notification is now shown when there is no/a bad connection</item>
+        <item>The app doesn\'t crash anymore if an unknown host is used - it shows the aforementioned notification instead</item>
+    </string-array>
 </resources>
