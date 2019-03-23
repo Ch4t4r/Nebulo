@@ -418,8 +418,8 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun destroy(isStoppingCompletely:Boolean = true) {
         log("Destroying the VPN")
+        if(isStoppingCompletely || connectedToANetwork == true) hideNoConnectionNotification()
         if (!destroyed) {
-            if(!isStoppingCompletely && connectedToANetwork == true) hideNoConnectionNotification()
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
@@ -773,6 +773,7 @@ class DnsVpnService : VpnService(), Runnable {
             log("Connection changed to connected=$it", "NoConnectionDnsHandle-Listener")
             connectedToANetwork = it
             if(!it) showNoConnectionNotification()
+            else hideNoConnectionNotification()
         })
         return bypassHandlers
     }
