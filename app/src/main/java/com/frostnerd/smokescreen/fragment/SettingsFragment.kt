@@ -408,7 +408,6 @@ private fun Context.showLogExportDialog(zipUri: Uri, onDismiss: (() -> Unit)? = 
     val dialog = AlertDialog.Builder(this, this.getPreferences().theme.dialogStyle)
         .setTitle(R.string.title_send_logs)
         .setMessage(R.string.dialog_logexport_text)
-        .setCancelable(true)
         .setPositiveButton(R.string.dialog_logexport_email) { dialog, _ ->
             log("User choose to send logs over E-Mail")
             val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "support@frostnerd.com", null))
