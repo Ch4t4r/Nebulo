@@ -175,7 +175,7 @@ class DnsVpnService : VpnService(), Runnable {
             }
 
             private fun handleChange() {
-                serverConfig.forEachAddress { _, upstreamAddress ->
+                if(this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
                     upstreamAddress.addressCreator.reset()
                     upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
                 }
