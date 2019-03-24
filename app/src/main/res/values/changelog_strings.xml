@@ -22,4 +22,12 @@
         <item>A notification is now shown when there is no/a bad connection</item>
         <item>The app doesn\'t crash anymore if an unknown host is used - it shows the aforementioned notification instead</item>
     </string-array>
+
+    <string-array name="changelog_build_26">
+        <item>1.0 Beta (Build 26)</item>
+        <item>The app doesn\'t crash anymore for servers which only have IPv4 addresses when the network only has IPv6 addresses</item>
+        <item>Fixed the no connection notification not vanishing properly</item>
+        <item>The no connection notification can now be dismissed</item>
+        <item>The app had the wrong servers of UncensoredDNS</item>
+    </string-array>
 </resources>
