@@ -175,6 +175,10 @@ class DnsVpnService : VpnService(), Runnable {
             }
 
             private fun handleChange() {
+                serverConfig.forEachAddress { _, upstreamAddress ->
+                    upstreamAddress.addressCreator.reset()
+                    upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
+                }
                 if (fileDescriptor != null) recreateVpn(false, null)
             }
         }
