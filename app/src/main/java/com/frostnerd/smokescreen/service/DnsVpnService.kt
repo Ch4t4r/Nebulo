@@ -269,7 +269,7 @@ class DnsVpnService : VpnService(), Runnable {
         if(!this::noConnectionNotificationBuilder.isInitialized) {
             noConnectionNotificationBuilder = NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
             noConnectionNotificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
-            noConnectionNotificationBuilder.setOngoing(true)
+            noConnectionNotificationBuilder.setOngoing(false)
             noConnectionNotificationBuilder.setSmallIcon(R.drawable.ic_times)
             noConnectionNotificationBuilder.setContentTitle(getString(R.string.notification_noconnection_title))
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
