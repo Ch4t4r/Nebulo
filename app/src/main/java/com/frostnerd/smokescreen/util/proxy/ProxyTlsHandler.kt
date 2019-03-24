@@ -52,8 +52,8 @@ class ProxyTlsHandler(
     private fun selectAddressOrNull(upstreamAddress: UpstreamAddress):InetAddress? {
         val resolveResult = upstreamAddress.addressCreator.resolveOrGetResultOrNull(true) ?: return null
         return resolveResult.firstOrNull {
-            (ipv4Enabled && it is Inet4Address) || (ipv6Enabled && it is Inet6Address)
-        } ?: throw IllegalStateException("The given UpstreamAddress doesn't have an address for the requested IP version (IPv4: $ipv4Enabled, IPv6: $ipv6Enabled)")
+            (ipv4Enabled && ipv6Enabled) || (ipv4Enabled && it is Inet4Address) || (ipv6Enabled && it is Inet6Address)
+        } ?: (resolveResult.firstOrNull() ?: throw IllegalStateException("The given UpstreamAddress doesn't have an address for the requested IP version (IPv4: $ipv4Enabled, IPv6: $ipv6Enabled)"))
     }
 
     override fun informFailedRequest(request: FutureAnswer) {
