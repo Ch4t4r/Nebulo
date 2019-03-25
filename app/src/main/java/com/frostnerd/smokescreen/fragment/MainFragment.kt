@@ -107,10 +107,12 @@ class MainFragment : Fragment() {
             }.show()
         }
         privacyStatementText.setOnClickListener {
-            val i = Intent(Intent.ACTION_VIEW)
-            val url = it.tag as URL
-            i.data = Uri.parse(url.toURI().toString())
-            startActivity(i)
+            if(it.tag != null) {
+                val i = Intent(Intent.ACTION_VIEW)
+                val url = it.tag as URL
+                i.data = Uri.parse(url.toURI().toString())
+                startActivity(i)
+            }
         }
         GlobalScope.launch {
             val config = requireContext().getPreferences().dnsServerConfig
