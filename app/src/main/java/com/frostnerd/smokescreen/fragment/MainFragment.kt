@@ -97,7 +97,7 @@ class MainFragment : Fragment() {
             }
         }
         serverButton.setOnClickListener {
-            ServerChoosalDialog(requireContext() as AppCompatActivity) { config ->
+            ServerChoosalDialog(requireActivity() as AppCompatActivity) { config ->
                 updatePrivacyPolicyLink(config)
                 val prefs = requireContext().getPreferences()
                 prefs.edit {
