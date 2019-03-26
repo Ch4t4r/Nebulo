@@ -115,8 +115,9 @@ class MainFragment : Fragment() {
             }
         }
         GlobalScope.launch {
-            val config = requireContext().getPreferences().dnsServerConfig
-            if(isAdded && !isDetached) {
+            val context = context
+            if (isAdded && !isDetached && context != null) {
+                val config = context.getPreferences().dnsServerConfig
                 requireActivity().runOnUiThread {
                     updatePrivacyPolicyLink(config)
                 }
