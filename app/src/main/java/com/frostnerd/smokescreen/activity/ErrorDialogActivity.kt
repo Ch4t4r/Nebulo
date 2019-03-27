@@ -41,9 +41,6 @@ class ErrorDialogActivity : BaseActivity() {
                 dialog.dismiss()
                 finish()
             }
-            .setOnDismissListener {
-                finish()
-            }
             .setCancelable(false).create()
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
