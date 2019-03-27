@@ -8,8 +8,10 @@ import com.frostnerd.smokescreen.database.AppDatabase
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.locks.ReentrantLock
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+import kotlin.concurrent.withLock
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -102,6 +104,7 @@ class Logger private constructor(context: Context) {
     private val printToConsole = BuildConfig.DEBUG
     private var oldPrintStream:PrintStream
     private var oldSystemOut: PrintStream
+    private val lock = ReentrantLock()
     var enabled: Boolean = true
 
     init {
@@ -211,26 +214,28 @@ class Logger private constructor(context: Context) {
 
     fun log(text: String, tag: String? = "Info", vararg formatArgs: Any) {
         if (enabled) {
-            val textBuilder = StringBuilder()
-            textBuilder.append("[")
-            textBuilder.append(System.currentTimeMillis())
-            textBuilder.append("][")
-            textBuilder.append(timeStampFormatter.format(System.currentTimeMillis()))
-            textBuilder.append("]>")
-            textBuilder.append("[")
-            if (tag != null) textBuilder.append(tag)
-            textBuilder.append("]: ")
-            textBuilder.append(text.let {
-                var newString = it
-                formatArgs.forEachIndexed { index, arg ->
-                    newString = newString.replace("$${index + 1}", arg.toString())
-                }
-                newString
-            })
-            textBuilder.append("\n")
-            if (printToConsole) println(textBuilder)
-            fileWriter.write(textBuilder.toString())
-            fileWriter.flush()
+            lock.withLock {
+                val textBuilder = StringBuilder()
+                textBuilder.append("[")
+                textBuilder.append(System.currentTimeMillis())
+                textBuilder.append("][")
+                textBuilder.append(timeStampFormatter.format(System.currentTimeMillis()))
+                textBuilder.append("]>")
+                textBuilder.append("[")
+                if (tag != null) textBuilder.append(tag)
+                textBuilder.append("]: ")
+                textBuilder.append(text.let {
+                    var newString = it
+                    formatArgs.forEachIndexed { index, arg ->
+                        newString = newString.replace("$${index + 1}", arg.toString())
+                    }
+                    newString
+                })
+                textBuilder.append("\n")
+                if (printToConsole) println(textBuilder)
+                fileWriter.write(textBuilder.toString())
+                fileWriter.flush()
+            }
         }
     }
 
