@@ -34,19 +34,19 @@ import kotlin.concurrent.withLock
 
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {
-    if (!Logger.crashed && Logger.enabledGlobally) {
+    if (Logger.enabledGlobally) {
         Logger.getInstance(this).log(text, tag, formatArgs)
     }
 }
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs: Any) {
-    if (!Logger.crashed && Logger.enabledGlobally) {
+    if (Logger.enabledGlobally) {
         Logger.getInstance(this).log(text, tag, intent, formatArgs)
     }
 }
 
 fun Context.log(e: Throwable) {
-    if (!Logger.crashed && Logger.enabledGlobally) {
+    if (Logger.enabledGlobally) {
         Logger.getInstance(this).log(e)
     } else {
         val stackTrace = Logger.stacktraceToString(e)
@@ -111,13 +111,7 @@ class Logger private constructor(context: Context) {
         val logDir = getLogDir(context)
         logFile = File(logDir, "${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log")
 
-        if ((!logDir.exists() && !logDir.mkdirs()) || (!logFile.exists() && !logFile.createNewFile()) || !logFile.canWrite()) {
-            Logger.crashed = true
-            val exactError: String = if (!logDir.exists() && !logDir.mkdirs()) "Could not create log folder"
-            else if (!logFile.createNewFile()) "Creating new log file failed"
-            else "Could not write to created log file"
-            throw IllegalStateException("Could not create log file. ($exactError)")
-        }
+        logFile.createNewFile()
         fileWriter = BufferedWriter(FileWriter(logFile, false))
 
         log("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
@@ -143,7 +137,6 @@ class Logger private constructor(context: Context) {
     }
 
     companion object {
-        internal var crashed: Boolean = false
         private var instance: Logger? = null
         var enabledGlobally = true
         var timeStampFormatter = SimpleDateFormat("EEE MMM dd.yy kk:mm:ss", Locale.US)
@@ -157,12 +150,12 @@ class Logger private constructor(context: Context) {
         }
 
         fun logIfOpen(tag: String, text: String) {
-            if (enabledGlobally && !crashed)
+            if (enabledGlobally)
                 instance?.log(text, tag)
         }
 
         fun isOpen(): Boolean {
-            return instance != null && !crashed
+            return instance != null
         }
 
         fun getLogDir(context: Context): File {
