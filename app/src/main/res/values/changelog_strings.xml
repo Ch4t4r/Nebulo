@@ -30,4 +30,11 @@
         <item>The no connection notification can now be dismissed</item>
         <item>The app had the wrong servers of UncensoredDNS</item>
     </string-array>
+
+    <string-array name="changelog_build_27">
+        <item>1.0 Beta (Build 27)</item>
+        <item>Fixed a lot of crashes</item>
+        <item>Logs can now be shared again when the app crashes</item>
+        <item>The notification shown when the app has no/a bad connection is now turned off by default and can be enabled in the settings</item>
+    </string-array>
 </resources>
