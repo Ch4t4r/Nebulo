@@ -110,7 +110,7 @@ class Logger private constructor(context: Context) {
     init {
         val logDir = getLogDir(context)
         logFile = File(logDir, "${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log")
-
+        logDir.mkdirs()
         logFile.createNewFile()
         fileWriter = BufferedWriter(FileWriter(logFile, false))
 
