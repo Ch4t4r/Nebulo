@@ -266,6 +266,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun showNoConnectionNotification() {
+        if(!getPreferences().showNoConnectionNotification) return
         if(!this::noConnectionNotificationBuilder.isInitialized) {
             noConnectionNotificationBuilder = NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
             noConnectionNotificationBuilder.priority = NotificationCompat.PRIORITY_HIGH

@@ -189,6 +189,12 @@
                 android:defaultValue="true"
                 android:title="@string/title_pause_on_captiveportal"
                 android:summary="@string/summary_pause_on_captiveportal"/>
+
+        <CheckBoxPreference
+                android:key="show_no_connection_notification"
+                android:title="@string/title_show_noconnection_notification"
+                android:summary="@string/summary_show_noconnection_notification"
+                android:defaultValue="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/preference_category_querylogging">

@@ -8,8 +8,10 @@ import com.frostnerd.smokescreen.database.AppDatabase
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.locks.ReentrantLock
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+import kotlin.concurrent.withLock
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -32,19 +34,19 @@ import java.util.zip.ZipOutputStream
 
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {
-    if (!Logger.crashed && Logger.enabledGlobally) {
+    if (Logger.enabledGlobally) {
         Logger.getInstance(this).log(text, tag, formatArgs)
     }
 }
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs: Any) {
-    if (!Logger.crashed && Logger.enabledGlobally) {
+    if (Logger.enabledGlobally) {
         Logger.getInstance(this).log(text, tag, intent, formatArgs)
     }
 }
 
 fun Context.log(e: Throwable) {
-    if (!Logger.crashed && Logger.enabledGlobally) {
+    if (Logger.enabledGlobally) {
         Logger.getInstance(this).log(e)
     } else {
         val stackTrace = Logger.stacktraceToString(e)
@@ -102,19 +104,14 @@ class Logger private constructor(context: Context) {
     private val printToConsole = BuildConfig.DEBUG
     private var oldPrintStream:PrintStream
     private var oldSystemOut: PrintStream
+    private val lock = ReentrantLock()
     var enabled: Boolean = true
 
     init {
         val logDir = getLogDir(context)
         logFile = File(logDir, "${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log")
-
-        if ((!logDir.exists() && !logDir.mkdirs()) || (!logFile.exists() && !logFile.createNewFile()) || !logFile.canWrite()) {
-            Logger.crashed = true
-            val exactError: String = if (!logDir.exists() && !logDir.mkdirs()) "Could not create log folder"
-            else if (!logFile.createNewFile()) "Creating new log file failed"
-            else "Could not write to created log file"
-            throw IllegalStateException("Could not create log file. ($exactError)")
-        }
+        logDir.mkdirs()
+        logFile.createNewFile()
         fileWriter = BufferedWriter(FileWriter(logFile, false))
 
         log("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
@@ -140,7 +137,6 @@ class Logger private constructor(context: Context) {
     }
 
     companion object {
-        internal var crashed: Boolean = false
         private var instance: Logger? = null
         var enabledGlobally = true
         var timeStampFormatter = SimpleDateFormat("EEE MMM dd.yy kk:mm:ss", Locale.US)
@@ -154,12 +150,12 @@ class Logger private constructor(context: Context) {
         }
 
         fun logIfOpen(tag: String, text: String) {
-            if (enabledGlobally && !crashed)
+            if (enabledGlobally)
                 instance?.log(text, tag)
         }
 
         fun isOpen(): Boolean {
-            return instance != null && !crashed
+            return instance != null
         }
 
         fun getLogDir(context: Context): File {
@@ -211,26 +207,28 @@ class Logger private constructor(context: Context) {
 
     fun log(text: String, tag: String? = "Info", vararg formatArgs: Any) {
         if (enabled) {
-            val textBuilder = StringBuilder()
-            textBuilder.append("[")
-            textBuilder.append(System.currentTimeMillis())
-            textBuilder.append("][")
-            textBuilder.append(timeStampFormatter.format(System.currentTimeMillis()))
-            textBuilder.append("]>")
-            textBuilder.append("[")
-            if (tag != null) textBuilder.append(tag)
-            textBuilder.append("]: ")
-            textBuilder.append(text.let {
-                var newString = it
-                formatArgs.forEachIndexed { index, arg ->
-                    newString = newString.replace("$${index + 1}", arg.toString())
-                }
-                newString
-            })
-            textBuilder.append("\n")
-            if (printToConsole) println(textBuilder)
-            fileWriter.write(textBuilder.toString())
-            fileWriter.flush()
+            lock.withLock {
+                val textBuilder = StringBuilder()
+                textBuilder.append("[")
+                textBuilder.append(System.currentTimeMillis())
+                textBuilder.append("][")
+                textBuilder.append(timeStampFormatter.format(System.currentTimeMillis()))
+                textBuilder.append("]>")
+                textBuilder.append("[")
+                if (tag != null) textBuilder.append(tag)
+                textBuilder.append("]: ")
+                textBuilder.append(text.let {
+                    var newString = it
+                    formatArgs.forEachIndexed { index, arg ->
+                        newString = newString.replace("$${index + 1}", arg.toString())
+                    }
+                    newString
+                })
+                textBuilder.append("\n")
+                if (printToConsole) println(textBuilder)
+                fileWriter.write(textBuilder.toString())
+                fileWriter.flush()
+            }
         }
     }
 

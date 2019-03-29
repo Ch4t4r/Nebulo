@@ -104,6 +104,10 @@
     <string name="title_pause_on_captiveportal">Pause on captive portal</string>
     <string name="summary_pause_on_captiveportal">Don\'t use DoH if a captive portal is detected. It will automatically be resumed shortly after logging in.\nDisabling it might prevent you from opening the captive portal site to log in.</string>
 
+    <string name="title_show_noconnection_notification">Notification on no connection</string>
+    <string name="summary_show_noconnection_notification">Show a notification when the app has no or a bad connection</string>
+
+
     <string name="preference_category_querylogging">Query logging</string>
 
     <string name="title_log_queries">Query logging</string>
