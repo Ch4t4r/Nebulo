@@ -36,5 +36,6 @@
         <item>Fixed a lot of crashes</item>
         <item>Logs can now be shared again when the app crashes</item>
         <item>The notification shown when the app has no/a bad connection is now turned off by default and can be enabled in the settings</item>
+        <item>Added a pause button to the notification</item>
     </string-array>
 </resources>
