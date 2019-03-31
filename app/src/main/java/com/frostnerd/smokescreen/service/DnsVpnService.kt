@@ -80,6 +80,7 @@ class DnsVpnService : VpnService(), Runnable {
     private lateinit var serverConfig:DnsServerConfiguration
     private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
     private lateinit var networkCallback:ConnectivityManager.NetworkCallback
+    private var pauseNotificationAction:NotificationCompat.Action? = null
     private var queryCountOffset: Long = 0
     private var packageBypassAmount = 0
     private var connectedToANetwork:Boolean? = null
@@ -250,7 +251,11 @@ class DnsVpnService : VpnService(), Runnable {
             PendingIntent.getService(this, 1, commandIntent(this, Command.STOP), PendingIntent.FLAG_CANCEL_CURRENT)
         val stopAction = NotificationCompat.Action(R.drawable.ic_stop, getString(R.string.all_stop), stopPendingIntent)
 
+        val pausePendingIntent =
+            PendingIntent.getService(this, 1, commandIntent(this, Command.PAUSE_RESUME), PendingIntent.FLAG_CANCEL_CURRENT)
+        pauseNotificationAction = NotificationCompat.Action(R.drawable.ic_stat_pause, getString(R.string.all_pause), pausePendingIntent)
         notificationBuilder.addAction(stopAction)
+        notificationBuilder.addAction(pauseNotificationAction)
         updateNotification(0)
         log("Notification created and posted.")
     }
@@ -307,6 +312,18 @@ class DnsVpnService : VpnService(), Runnable {
                     log("Received RESTART command, restarting vpn.")
                     recreateVpn(intent.getBooleanExtra("fetch_servers", false), intent)
                     setNotificationText()
+                }
+                Command.PAUSE_RESUME -> {
+                    if(vpnProxy != null) {
+                        destroy(false)
+                        pauseNotificationAction?.title = getString(R.string.all_resume)
+                        pauseNotificationAction?.icon = R.drawable.ic_stat_resume
+                    } else {
+                        recreateVpn(false, null)
+                        pauseNotificationAction?.title = getString(R.string.all_pause)
+                        pauseNotificationAction?.icon = R.drawable.ic_stat_pause
+                    }
+                    updateNotification()
                 }
             }
         } else {
@@ -892,7 +909,7 @@ class DnsVpnService : VpnService(), Runnable {
 }
 
 enum class Command : Serializable {
-    STOP, RESTART
+    STOP, RESTART, PAUSE_RESUME
 }
 
 data class DnsServerConfiguration(val httpsConfiguration:List<ServerConfiguration>?, val tlsConfiguration:List<TLSUpstreamAddress>?) {

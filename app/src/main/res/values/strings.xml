@@ -8,6 +8,8 @@
 
     <string name="all_stop">Stop</string>
     <string name="all_start">Start</string>
+    <string name="all_pause">Pause</string>
+    <string name="all_resume">Resume</string>
     <string name="all_no">No</string>
     <string name="all_yes">Yes</string>
     <string name="information">Information</string>
