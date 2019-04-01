@@ -252,7 +252,7 @@ class DnsVpnService : VpnService(), Runnable {
         val stopAction = NotificationCompat.Action(R.drawable.ic_stop, getString(R.string.all_stop), stopPendingIntent)
 
         val pausePendingIntent =
-            PendingIntent.getService(this, 1, commandIntent(this, Command.PAUSE_RESUME), PendingIntent.FLAG_CANCEL_CURRENT)
+            PendingIntent.getService(this, 2, commandIntent(this, Command.PAUSE_RESUME), PendingIntent.FLAG_CANCEL_CURRENT)
         pauseNotificationAction = NotificationCompat.Action(R.drawable.ic_stat_pause, getString(R.string.all_pause), pausePendingIntent)
         notificationBuilder.addAction(stopAction)
         notificationBuilder.addAction(pauseNotificationAction)
