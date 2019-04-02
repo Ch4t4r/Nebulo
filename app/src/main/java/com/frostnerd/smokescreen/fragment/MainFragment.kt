@@ -97,7 +97,7 @@ class MainFragment : Fragment() {
             }
         }
         serverButton.setOnClickListener {
-            ServerChoosalDialog(requireContext() as AppCompatActivity) { config ->
+            ServerChoosalDialog(requireActivity() as AppCompatActivity) { config ->
                 updatePrivacyPolicyLink(config)
                 val prefs = requireContext().getPreferences()
                 prefs.edit {
@@ -107,14 +107,17 @@ class MainFragment : Fragment() {
             }.show()
         }
         privacyStatementText.setOnClickListener {
-            val i = Intent(Intent.ACTION_VIEW)
-            val url = it.tag as URL
-            i.data = Uri.parse(url.toURI().toString())
-            startActivity(i)
+            if(it.tag != null) {
+                val i = Intent(Intent.ACTION_VIEW)
+                val url = it.tag as URL
+                i.data = Uri.parse(url.toURI().toString())
+                startActivity(i)
+            }
         }
         GlobalScope.launch {
-            val config = requireContext().getPreferences().dnsServerConfig
-            if(isAdded && !isDetached) {
+            val context = context
+            if (isAdded && !isDetached && context != null) {
+                val config = context.getPreferences().dnsServerConfig
                 requireActivity().runOnUiThread {
                     updatePrivacyPolicyLink(config)
                 }

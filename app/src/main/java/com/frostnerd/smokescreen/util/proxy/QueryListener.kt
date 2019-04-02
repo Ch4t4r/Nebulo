@@ -80,7 +80,6 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
     override suspend fun onQueryResponse(responseMessage: DnsMessage, source: QueryListener.Source) {
         if (writeQueriesToLog) {
             context.log("Returned from $source: $responseMessage")
-            context.log("Response from upstream: $responseMessage")
         }
 
         if (logQueriesToDb) {
