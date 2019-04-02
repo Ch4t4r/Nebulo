@@ -704,7 +704,7 @@ class DnsVpnService : VpnService(), Runnable {
         if(serverConfig.httpsConfiguration != null) {
             handle = ProxyHttpsHandler(
                 serverConfig.httpsConfiguration!!,
-                connectTimeout = 500,
+                connectTimeout = 5000,
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)
