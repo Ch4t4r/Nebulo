@@ -57,7 +57,7 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
         }
     }
 
-    override suspend fun onDeviceQuery(questionMessage: DnsMessage) {
+    override suspend fun onDeviceQuery(questionMessage: DnsMessage, srcPort: Short) {
         if (writeQueriesToLog) {
             context.log("Query from device: $questionMessage")
         }
