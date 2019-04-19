@@ -47,6 +47,8 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/atomicfu.kotlin_module'
+        exclude 'META-INF/library_release.kotlin_module'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
