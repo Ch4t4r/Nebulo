@@ -75,7 +75,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         super.onDetach()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         log("Fragment attached.")
         if (werePreferencesAdded) createPreferenceListener()

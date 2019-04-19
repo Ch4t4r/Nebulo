@@ -213,7 +213,8 @@ class DnsVpnService : VpnService(), Runnable {
             "allow_ipv4_traffic",
             "dns_server_config"
         )
-        settingsSubscription = getPreferences().listenForChanges(relevantSettings) { changes ->
+        settingsSubscription = getPreferences().listenForChanges(relevantSettings, getPreferences().preferenceChangeListener {
+                changes ->
             log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
             log("Detailed changes: $changes")
             if("hide_notification_icon" in changes || "hide_notification_icon" in changes) {
@@ -223,7 +224,7 @@ class DnsVpnService : VpnService(), Runnable {
             }
             val reload = "dns_server_config" in changes
             recreateVpn(reload, null)
-        }
+        })
         log("Subscribed.")
     }
 
