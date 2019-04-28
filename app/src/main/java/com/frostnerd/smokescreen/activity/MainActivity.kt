@@ -124,7 +124,7 @@ class MainActivity : NavigationDrawerActivity() {
                     onLongClick = null,
                     iconLeft = getDrawable(R.drawable.ic_comments),
                     onSimpleClick = { _, _, _ ->
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://join?invite=I54nRleveRG3xwAa3StNCg"))
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://join?invite=I54nRleveRGP8IPmcIdySg"))
                         startActivity(intent)
                         false
                     })
