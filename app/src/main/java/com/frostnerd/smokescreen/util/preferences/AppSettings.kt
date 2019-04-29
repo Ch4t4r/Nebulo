@@ -2,7 +2,7 @@ package com.frostnerd.smokescreen.util.preferences
 
 import android.content.Context
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
-import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
 import com.frostnerd.preferenceskt.typedpreferences.SimpleTypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.buildMigration
@@ -206,8 +206,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         shouldContain("com.android.vending")
     }, cacheControl)
     override var dnsServerConfig: DnsServerInformation<*> by cache(DnsServerInformationPreference("dns_server_config") {
-        AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
-            knownServers.getValue(0)
+        AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
+            knownServers.getValue(9)
         }
     }, cacheControl)
 }
