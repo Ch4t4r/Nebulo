@@ -100,7 +100,8 @@ interface AppSettings {
 
     fun isUsingKeweon(): Boolean {
         return dnsServerConfig.servers.any {
-            it.address.host?.contains("keweon") ?: false
+            val host = it.address.host ?: ""
+            host.contains("keweon") || host.contains("asecdns.com") || host.contains("asecdns.ch")
         }
     }
 
