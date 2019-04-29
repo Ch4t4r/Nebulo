@@ -38,4 +38,13 @@
         <item>The notification shown when the app has no/a bad connection is now turned off by default and can be enabled in the settings</item>
         <item>Added a pause button to the notification</item>
     </string-array>
+
+    <string-array name="changelog_build_28">
+        <item>1.0 Beta (Build 28)</item>
+        <item>The stop button in the notification works again</item>
+        <item>A higher timeout is now used for DoH servers (should improve network on bad connections)</item>
+        <item>Fixed some DoT servers not working</item>
+        <item>UncensoredDns is now used as default server</item>
+        <item>Small performance improvements</item>
+    </string-array>
 </resources>
