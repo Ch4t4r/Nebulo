@@ -57,6 +57,7 @@ class MainActivity : NavigationDrawerActivity() {
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             view
         }*/
+        supportActionBar?.elevation = 0f
         ChangelogDialog.showNewVersionChangelog(this)
     }
 
@@ -202,6 +203,7 @@ class MainActivity : NavigationDrawerActivity() {
         options.headerTextColor = textColor
         options.alphaSelected = 1f
         options.iconTintLeft = getPreferences().theme.resolveAttribute(theme, R.attr.navDrawableColor)
+        options.separatorColor = options.iconTintLeft
         return options
     }
 
