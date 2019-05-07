@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="changelog_build_29">
+        <item>1.0 Beta-Adblock (Build 29)</item>
+        <item>Servers which block ads are now shown in non-playstore builds (including this one!)</item>
+        <item>Added AdGuard DNS</item>
+    </string-array>
+</resources>
