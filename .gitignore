@@ -4,14 +4,13 @@
 .gradle
 local.properties
 .DS_Store
-build/
+/build/**
 captures/
 .externalNativeBuild
 .idea/assetWizardSettings.xml
 .idea/caches
 
-!/app/build/outputs/mapping/release/mapping.txt
-!app/build/outputs/mapping/r8/release/mapping.txt
+!app/build/outputs/mapping/**/mapping.txt
 
 
 # Created by https://www.gitignore.io/api/intellij
