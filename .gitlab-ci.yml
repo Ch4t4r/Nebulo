@@ -37,7 +37,7 @@ build_release:
   artifacts:
     paths:
     - app/build/outputs/apk/normal/release/*.apk
-    - app/build/outputs/r8/normal/release/mapping.txt
+    - app/build/outputs/mapping/normal/release/mapping.txt
   only:
     - master
 
@@ -53,6 +53,6 @@ build_fdroid:
   artifacts:
     paths:
       - app/build/outputs/apk/adblocker/fdroid/*.apk
-      - app/build/outputs/r8/adblocker/fdroid/mapping.txt
+      - app/build/outputs/mapping/adblocker/fdroid/mapping.txt
   only:
     - master
