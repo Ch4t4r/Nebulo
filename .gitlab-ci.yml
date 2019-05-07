@@ -18,7 +18,7 @@ build_debug:
     - ./gradlew assembleNormalDebug --stacktrace
   artifacts:
     paths:
-    - app/build/outputs/apk/debug/app-debug.apk
+    - app/build/outputs/apk/normal/debug/*.apk
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
@@ -36,8 +36,8 @@ build_release:
     - /^no_build_no_deploy.*$/
   artifacts:
     paths:
-    - app/build/outputs/apk/release/app-release.apk
-    - app/build/outputs/r8/release/mapping.txt
+    - app/build/outputs/apk/normal/release/*.apk
+    - app/build/outputs/r8/normal/release/mapping.txt
   only:
     - master
 
@@ -52,7 +52,7 @@ build_fdroid:
     - /^no_build_no_deploy.*$/
   artifacts:
     paths:
-      - app/build/outputs/apk/fdroid/app-fdroid.apk
-      - app/build/outputs/r8/fdroid/mapping.txt
+      - app/build/outputs/apk/adblocker/fdroid/*.apk
+      - app/build/outputs/r8/adblocker/fdroid/mapping.txt
   only:
     - master
