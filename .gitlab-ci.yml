@@ -52,7 +52,7 @@ build_fdroid:
     - /^no_build_no_deploy.*$/
   artifacts:
     paths:
-      - app/build/outputs/apk/fdroid/app-release.apk
+      - app/build/outputs/apk/fdroid/app-fdroid.apk
       - app/build/outputs/r8/fdroid/mapping.txt
   only:
     - master

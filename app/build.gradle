@@ -62,7 +62,7 @@ dependencies {
 
     implementation 'com.frostnerd.utilskt:preferences:1.5.7'
     implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.3.12'
-    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.5.83'
+    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.5.84'
     implementation 'com.frostnerd.utilskt:general:1.0.14'
     implementation 'com.frostnerd.utils:materialedittext:1.0.17'
     implementation 'com.frostnerd.utils:design:1.0.17'

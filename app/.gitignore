@@ -1,5 +1,5 @@
-build/
-release/
-fdroid/
+/build/
+/release/
+/fdroid/
 !build/outputs/mapping/release/mapping.txt
 !build/outputs/mapping/fdroid/mapping.txt
