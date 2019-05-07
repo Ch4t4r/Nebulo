@@ -44,7 +44,7 @@ build_release:
 build_fdroid:
   stage: build
   script:
-    - ./gradlew clean check assembleAdblockerRelease --stacktrace -x test
+    - ./gradlew clean check assembleAdblockerFdroid --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
@@ -52,7 +52,7 @@ build_fdroid:
     - /^no_build_no_deploy.*$/
   artifacts:
     paths:
-      - app/build/outputs/apk/adblocker/release/*.apk
-      - app/build/outputs/mapping/adblocker/release/mapping.txt
+      - app/build/outputs/apk/adblocker/fdroid/*.apk
+      - app/build/outputs/mapping/adblocker/fdroid/mapping.txt
   only:
     - master
