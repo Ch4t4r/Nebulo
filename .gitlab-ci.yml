@@ -41,3 +41,18 @@ build_release:
   only:
     - master
 
+build_fdroid:
+  stage: build
+  script:
+    - ./gradlew clean check assembleFdroid --stacktrace -Pandroid.injected.signing.store.file=$KEYSTORE_FILE -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=$KEYSTORE_KEY_NAME -Pandroid.injected.signing.key.password=$KEYSTORE_KEY_PASSWORD -x test
+  except:
+    - /^no_ci.*$/
+    - /^no_build.*$/
+    - /^no_build_no_tests.*$/
+    - /^no_build_no_deploy.*$/
+  artifacts:
+    paths:
+      - app/build/outputs/apk/fdroid/app-release.apk
+      - app/build/outputs/r8/fdroid/mapping.txt
+  only:
+    - master

@@ -37,6 +37,10 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        fdroid {
+            initWith release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'fdroid-proguard-rules.pro'
+        }
     }
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
