@@ -59,7 +59,8 @@ android {
     productFlavors {
         adblocker {
             dimension "version"
-            versionNameSuffix "-fdroid"
+            versionNameSuffix "-adblock"
+            versionCode 29
         }
         normal {
             dimension "version"
