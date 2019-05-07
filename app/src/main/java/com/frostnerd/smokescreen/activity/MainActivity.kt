@@ -83,19 +83,36 @@ class MainActivity : NavigationDrawerActivity() {
                 iconLeft = getDrawable(R.drawable.ic_external_link),
                 onLongClick = null,
                 onSimpleClick = { _, _, _ ->
-                    NewServerDialog(this@MainActivity, title = getString(R.string.menu_create_shortcut), onServerAdded = {
-                        ShortcutActivity.createShortcut(this@MainActivity, it)
-                    }, dnsOverHttps = true).show()
+                    NewServerDialog(
+                        this@MainActivity,
+                        title = getString(R.string.menu_create_shortcut),
+                        onServerAdded = {
+                            ShortcutActivity.createShortcut(this@MainActivity, it)
+                        },
+                        dnsOverHttps = true
+                    ).show()
                     false
                 })
             divider()
-            clickableItem(getString(R.string.menu_rate),
-                iconLeft = getDrawable(R.drawable.ic_star),
-                onLongClick = null,
-                onSimpleClick = { _, _, _ ->
-                    rateApp()
-                    false
-                })
+            if (isPackageInstalled(this@MainActivity, "com.android.vending")) {
+                clickableItem(getString(R.string.menu_rate),
+                    iconLeft = getDrawable(R.drawable.ic_star),
+                    onLongClick = null,
+                    onSimpleClick = { _, _, _ ->
+                        rateApp()
+                        false
+                    })
+            }
+            if (isPackageInstalled(this@MainActivity, "org.fdroid.fdroid")) {
+                clickableItem("Show on F-Droid",
+                    iconLeft = getDrawable(R.drawable.ic_box_open),
+                    onLongClick = null,
+                    onSimpleClick = { _, _, _ ->
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")).setPackage("org.fdroid.fdroid"))
+                        false
+                    }
+                )
+            }
             clickableItem(getString(R.string.menu_share_app),
                 iconLeft = getDrawable(R.drawable.ic_share),
                 onLongClick = null,
