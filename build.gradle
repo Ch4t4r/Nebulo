@@ -1,5 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+static def getSystemVariableOrDefault(String variable, String defaultValue) {
+    def value = System.getenv(variable)
+    if(value == null) {
+        return defaultValue
+    }
+    return value
+}
+
 def getArtifactoryUser() {
     def user = System.getenv("ARTIFACTORY_USER")
     if (user == null) {

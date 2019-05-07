@@ -1,0 +1,1 @@
+-printmapping app/build/outputs/mapping/r8/fdroid/mapping.txt

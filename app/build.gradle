@@ -3,7 +3,23 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+def debugKeyPath = new File(System.properties['user.home'], ".android/debug.keystore")
+
 android {
+    signingConfigs {
+        fromVariablesOrDebug {
+            storeFile new File(getSystemVariableOrDefault("KEYSTORE_FILE", debugKeyPath.path))
+            storePassword getSystemVariableOrDefault("KEYSTORE_PASSWORD", "android")
+            keyAlias = getSystemVariableOrDefault("KEYSTORE_KEY_NAME", "androiddebugkey")
+            keyPassword getSystemVariableOrDefault("KEYSTORE_KEY_PASSWORD", "android")
+        }
+        release {
+            storeFile new File(getSystemVariableOrDefault("KEYSTORE_FILE", ""))
+            storePassword getSystemVariableOrDefault("KEYSTORE_PASSWORD", "")
+            keyAlias = getSystemVariableOrDefault("KEYSTORE_KEY_NAME", "")
+            keyPassword getSystemVariableOrDefault("KEYSTORE_KEY_PASSWORD", "")
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.frostnerd.smokescreen"
@@ -36,6 +52,21 @@ android {
             debuggable false
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        fdroid {
+            initWith release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'fdroid-proguard-rules.pro'
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        adblocker {
+            dimension "version"
+            versionNameSuffix "-fdroid"
+        }
+        normal {
+            dimension "version"
         }
     }
     packagingOptions {
@@ -58,7 +89,7 @@ dependencies {
 
     implementation 'com.frostnerd.utilskt:preferences:1.5.7'
     implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.3.12'
-    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.5.83'
+    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.5.84'
     implementation 'com.frostnerd.utilskt:general:1.0.14'
     implementation 'com.frostnerd.utils:materialedittext:1.0.17'
     implementation 'com.frostnerd.utils:design:1.0.17'

@@ -15,10 +15,10 @@ build_debug:
   stage: build
   script:
     - /./home/public/gitrunner/changeAppVersion.sh app/build.gradle " $CI_COMMIT_REF_NAME\_$CI_PIPELINE_ID" --append
-    - ./gradlew assembleDebug --stacktrace
+    - ./gradlew assembleNormalDebug --stacktrace
   artifacts:
     paths:
-    - app/build/outputs/apk/debug/app-debug.apk
+    - app/build/outputs/apk/normal/debug/*.apk
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
@@ -28,7 +28,7 @@ build_debug:
 build_release:
   stage: build
   script:
-   - ./gradlew clean check assembleRelease --stacktrace -Pandroid.injected.signing.store.file=$KEYSTORE_FILE -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=$KEYSTORE_KEY_NAME -Pandroid.injected.signing.key.password=$KEYSTORE_KEY_PASSWORD -x test
+   - ./gradlew clean check assembleNormalRelease --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
@@ -36,8 +36,23 @@ build_release:
     - /^no_build_no_deploy.*$/
   artifacts:
     paths:
-    - app/build/outputs/apk/release/app-release.apk
-    - app/build/outputs/r8/release/mapping.txt
+    - app/build/outputs/apk/normal/release/*.apk
+    - app/build/outputs/r8/normal/release/mapping.txt
   only:
     - master
 
+build_fdroid:
+  stage: build
+  script:
+    - ./gradlew clean check assembleAdblockerFdroid --stacktrace -x test
+  except:
+    - /^no_ci.*$/
+    - /^no_build.*$/
+    - /^no_build_no_tests.*$/
+    - /^no_build_no_deploy.*$/
+  artifacts:
+    paths:
+      - app/build/outputs/apk/adblocker/fdroid/*.apk
+      - app/build/outputs/r8/adblocker/fdroid/mapping.txt
+  only:
+    - master
