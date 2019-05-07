@@ -28,7 +28,7 @@ build_debug:
 build_release:
   stage: build
   script:
-   - ./gradlew clean check assembleRelease --stacktrace -Pandroid.injected.signing.store.file=$KEYSTORE_FILE -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=$KEYSTORE_KEY_NAME -Pandroid.injected.signing.key.password=$KEYSTORE_KEY_PASSWORD -x test
+   - ./gradlew clean check assembleRelease --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
@@ -44,7 +44,7 @@ build_release:
 build_fdroid:
   stage: build
   script:
-    - ./gradlew clean check assembleFdroid --stacktrace -Pandroid.injected.signing.store.file=$KEYSTORE_FILE -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=$KEYSTORE_KEY_NAME -Pandroid.injected.signing.key.password=$KEYSTORE_KEY_PASSWORD -x test
+    - ./gradlew clean check assembleFdroid --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/

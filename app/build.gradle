@@ -3,7 +3,23 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+def debugKeyPath = new File(System.properties['user.home'], ".android/debug.keystore")
+
 android {
+    signingConfigs {
+        fromVariablesOrDebug {
+            storeFile new File(getSystemVariableOrDefault("KEYSTORE_FILE", debugKeyPath.path))
+            storePassword getSystemVariableOrDefault("KEYSTORE_PASSWORD", "android")
+            keyAlias = getSystemVariableOrDefault("KEYSTORE_KEY_NAME", "androiddebugkey")
+            keyPassword getSystemVariableOrDefault("KEYSTORE_KEY_PASSWORD", "android")
+        }
+        release {
+            storeFile new File(getSystemVariableOrDefault("KEYSTORE_FILE", ""))
+            storePassword getSystemVariableOrDefault("KEYSTORE_PASSWORD", "")
+            keyAlias = getSystemVariableOrDefault("KEYSTORE_KEY_NAME", "")
+            keyPassword getSystemVariableOrDefault("KEYSTORE_KEY_PASSWORD", "")
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.frostnerd.smokescreen"
@@ -36,6 +52,7 @@ android {
             debuggable false
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         fdroid {
             initWith release
