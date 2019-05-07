@@ -59,6 +59,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'fdroid-proguard-rules.pro'
         }
     }
+    flavorDimensions "version"
+    productFlavors {
+        adblocker {
+            dimension "version"
+            versionNameSuffix "-fdroid"
+        }
+        normal {
+            dimension "version"
+        }
+    }
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
         exclude 'META-INF/library_release.kotlin_module'
