@@ -15,6 +15,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
 import java.lang.Exception
 import kotlin.random.Random
 
@@ -322,12 +325,15 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
             val runCount = iterations.text.toString().toIntOrNull() ?: 1
             job = GlobalScope.launch {
                 context.log("Generating queries for ${urlsToUse.size} urls $runCount times", "[QueryGenerator]")
+                val logFileWriter = BufferedWriter(FileWriter(File(context.filesDir, "querygenlog.txt"), true))
                 val callWithChrome = useChrome.isChecked
                 var domainCount = 0
                 for(i in 0 until runCount) {
                     urlsToUse.shuffle()
                     for (url in urlsToUse) {
                         openUrl(callWithChrome, if(url.startsWith("http")) url else "http://$url")
+                        logFileWriter.write(System.currentTimeMillis().toString() + " '" + url + "'\n")
+                        logFileWriter.flush()
                         delay(20000 + Random.nextLong(0, 20000))
                         if(++domainCount % 20 == 0 && callWithChrome) {
                             killChrome()
