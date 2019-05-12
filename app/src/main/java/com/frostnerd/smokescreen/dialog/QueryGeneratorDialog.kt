@@ -11,6 +11,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.service.DnsVpnService
+import kotlinx.android.synthetic.main.dialog_query_generator.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -312,6 +313,8 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
         val callDomains = view.findViewById<CheckBox>(R.id.baseDomains)
         val callDeepurls = view.findViewById<CheckBox>(R.id.deepurls)
         val useChrome = view.findViewById<CheckBox>(R.id.useChrome)
+        val useRandomDelay = view.findViewById<CheckBox>(R.id.randomTimeout)
+        val delay = view.findViewById<EditText>(R.id.delay)
 
         setView(view)
         setButton(DialogInterface.BUTTON_POSITIVE, "Go") { dialog, _ ->
@@ -334,7 +337,8 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
                         openUrl(callWithChrome, if(url.startsWith("http")) url else "http://$url")
                         logFileWriter.write(System.currentTimeMillis().toString() + " '" + url + "'\n")
                         logFileWriter.flush()
-                        delay(20000 + Random.nextLong(0, 20000))
+                        val delayMs = delay.text.toString().toLong() + if(randomTimeout.isChecked) Random.nextLong(0, 20000) else 0
+                        delay(delayMs)
                         if(++domainCount % 20 == 0 && callWithChrome) {
                             killChrome()
                         }

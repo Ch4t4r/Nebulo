@@ -17,6 +17,16 @@
             android:id="@+id/iterations"
             android:layout_height="wrap_content"/>
 
+    <EditText
+            android:layout_width="match_parent"
+            android:hint="Base delay time"
+            android:digits="0123456789"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:id="@+id/delay"
+            android:text="20000"
+            android:layout_height="wrap_content"/>
+
     <CheckBox
             android:layout_width="wrap_content"
             android:textColor="?android:attr/textColor"
@@ -29,6 +39,13 @@
             android:textColor="?android:attr/textColor"
             android:text="Open deep urls"
             android:id="@+id/deepurls"
+            android:layout_height="wrap_content"/>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:id="@+id/randomTimeout"
+            android:textColor="?android:attr/textColor"
+            android:text="Add random delay"
             android:layout_height="wrap_content"/>
 
     <CheckBox
