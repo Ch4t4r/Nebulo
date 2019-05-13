@@ -79,7 +79,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var noConnectionNotificationShown = false
     private lateinit var serverConfig:DnsServerConfiguration
     private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
-    private lateinit var networkCallback:ConnectivityManager.NetworkCallback
+    private var networkCallback:ConnectivityManager.NetworkCallback? = null
     private var pauseNotificationAction:NotificationCompat.Action? = null
     private var queryCountOffset: Long = 0
     private var packageBypassAmount = 0
@@ -446,7 +446,10 @@ class DnsVpnService : VpnService(), Runnable {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
-            if(isStoppingCompletely) (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).unregisterNetworkCallback(networkCallback)
+            if(isStoppingCompletely && networkCallback != null) {
+                (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).unregisterNetworkCallback(networkCallback)
+                networkCallback = null
+            }
             vpnProxy = null
             fileDescriptor = null
             destroyed = true
