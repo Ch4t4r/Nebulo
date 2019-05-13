@@ -27,6 +27,9 @@ interface DnsQueryDao {
     @Query("SELECT * FROM DnsQuery")
     fun getAll(): List<DnsQuery>
 
+    @Query("SELECT * FROM DnsQuery LIMIT :limit OFFSET :offset")
+    fun getAll(limit:Long, offset:Long):List<DnsQuery>
+
     @Query("SELECT * FROM DnsQuery")
     fun getAllLive(): LiveData<List<DnsQuery>>
 

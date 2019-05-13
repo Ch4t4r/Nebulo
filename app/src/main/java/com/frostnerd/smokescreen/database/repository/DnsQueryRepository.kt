@@ -60,26 +60,32 @@ class DnsQueryRepository(val dnsQueryDao: DnsQueryDao) {
         val exportFile = File(exportDir, "queries.csv")
         exportFile.delete()
         return GlobalScope.launch {
-            val all = getAllAsync(this)
             val outStream = BufferedWriter(FileWriter(exportFile))
             outStream.write("Name,Short Name,Type Name,Type ID,Asked Server,Answered from Cache,Question time,Response Time,Responses(JSON-Array of Base64)")
             outStream.newLine()
             val builder = StringBuilder()
             val responseConverter = StringListConverter()
-            for (query in all) {
-                builder.append(query.name).append(",")
-                builder.append(query.shortName).append(",")
-                builder.append(query.type.name).append(",")
-                builder.append(query.type.value).append(",")
-                builder.append(query.askedServer).append(",")
-                builder.append(query.fromCache).append(",")
-                builder.append(query.questionTime).append(",")
-                builder.append(query.responseTime).append(",")
-                builder.append("\"").append(responseConverter.someObjectListToString(query.responses).replace(",", ";").replace("\"", "'")).append("\"")
-                outStream.write(builder.toString())
-                outStream.newLine()
-                outStream.flush()
-                builder.clear()
+
+            var total = 0L
+            val count = dnsQueryDao.getCount()
+            for(i in 0..count step 5000) {
+                val all = dnsQueryDao.getAll(5000, i.toLong())
+                for (query in all) {
+                    total++
+                    builder.append(query.name).append(",")
+                    builder.append(query.shortName).append(",")
+                    builder.append(query.type.name).append(",")
+                    builder.append(query.type.value).append(",")
+                    builder.append(query.askedServer).append(",")
+                    builder.append(query.fromCache).append(",")
+                    builder.append(query.questionTime).append(",")
+                    builder.append(query.responseTime).append(",")
+                    builder.append("\"").append(responseConverter.someObjectListToString(query.responses).replace(",", ";").replace("\"", "'")).append("\"")
+                    outStream.write(builder.toString())
+                    outStream.newLine()
+                    outStream.flush()
+                    builder.clear()
+                }
             }
             outStream.close()
             fileReadyCallback(exportFile)
