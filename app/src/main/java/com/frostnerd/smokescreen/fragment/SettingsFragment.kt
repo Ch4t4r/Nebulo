@@ -174,7 +174,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 loadingDialog = LoadingDialog(requireContext(), R.string.dialog_query_export_title, R.string.dialog_query_export_message)
             } else loadingDialog = null
             loadingDialog?.show()
-            requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext()) {file ->
+            requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext(), {file ->
                 if(!isDetached && !isRemoving) {
                     val uri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
                     val exportIntent = Intent(Intent.ACTION_SEND)
@@ -196,7 +196,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     startActivity(Intent.createChooser(exportIntent, getString(R.string.title_export_queries)))
                 }
                 loadingDialog?.dismiss()
-            }
+            }, { count, totalCount ->
+                activity?.runOnUiThread {
+                    loadingDialog?.appendToMessage("\n\n$count/$totalCount")
+                }
+            })
             true
         }
         generateQueries.setOnPreferenceClickListener {

@@ -54,7 +54,9 @@ class DnsQueryRepository(val dnsQueryDao: DnsQueryDao) {
         }.await()
     }
 
-    fun exportQueriesAsCsvAsync(context: Context, fileReadyCallback:(createdFile: File) ->Unit):Job {
+    fun exportQueriesAsCsvAsync(context: Context,
+                                fileReadyCallback:(createdFile: File) ->Unit,
+                                countUpdateCallback:(count:Long, total:Int) -> Unit):Job {
         val exportDir = File(context.filesDir, "queryexport/")
         exportDir.mkdirs()
         val exportFile = File(exportDir, "queries.csv")
@@ -85,6 +87,7 @@ class DnsQueryRepository(val dnsQueryDao: DnsQueryDao) {
                     outStream.newLine()
                     outStream.flush()
                     builder.clear()
+                    if(total % 250 == 0L) countUpdateCallback(total, count)
                 }
             }
             outStream.close()
