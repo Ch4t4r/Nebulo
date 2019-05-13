@@ -3,6 +3,8 @@ package com.frostnerd.smokescreen
 import android.app.Application
 import android.content.Intent
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
+import io.sentry.Sentry
+import io.sentry.android.AndroidSentryClientFactory
 import kotlin.system.exitProcess
 
 /*
@@ -39,6 +41,7 @@ class SmokeScreen : Application() {
         }
 
     override fun onCreate() {
+        Sentry.init("https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2", AndroidSentryClientFactory(this))
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
