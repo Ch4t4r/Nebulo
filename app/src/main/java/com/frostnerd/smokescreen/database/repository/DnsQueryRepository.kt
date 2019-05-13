@@ -4,6 +4,7 @@ import android.content.Context
 import com.frostnerd.smokescreen.database.converters.StringListConverter
 import com.frostnerd.smokescreen.database.dao.DnsQueryDao
 import com.frostnerd.smokescreen.database.entities.DnsQuery
+import com.frostnerd.smokescreen.getPreferences
 import kotlinx.coroutines.*
 import java.io.BufferedWriter
 import java.io.File
@@ -60,17 +61,23 @@ class DnsQueryRepository(val dnsQueryDao: DnsQueryDao) {
         val exportDir = File(context.filesDir, "queryexport/")
         exportDir.mkdirs()
         val exportFile = File(exportDir, "queries.csv")
-        exportFile.delete()
+        val start = context.getPreferences().exportedQueryCount
+        val existed = if(start == 0 && exportFile.exists()) {
+            exportFile.delete()
+            false
+        } else exportFile.exists()
         return GlobalScope.launch {
-            val outStream = BufferedWriter(FileWriter(exportFile))
-            outStream.write("Name,Short Name,Type Name,Type ID,Asked Server,Answered from Cache,Question time,Response Time,Responses(JSON-Array of Base64)")
-            outStream.newLine()
+            val outStream = BufferedWriter(FileWriter(exportFile, true))
+            if(!existed) {
+                outStream.write("Name,Short Name,Type Name,Type ID,Asked Server,Answered from Cache,Question time,Response Time,Responses(JSON-Array of Base64)")
+                outStream.newLine()
+            }
             val builder = StringBuilder()
             val responseConverter = StringListConverter()
 
-            var total = 0L
             val count = dnsQueryDao.getCount()
-            for(i in 0..count step 5000) {
+            var total = start.toLong()
+            for(i in start..count step 5000) {
                 val all = dnsQueryDao.getAll(5000, i.toLong())
                 for (query in all) {
                     total++
@@ -91,6 +98,7 @@ class DnsQueryRepository(val dnsQueryDao: DnsQueryDao) {
                 }
             }
             outStream.close()
+            context.getPreferences().exportedQueryCount = count
             fileReadyCallback(exportFile)
         }
     }
