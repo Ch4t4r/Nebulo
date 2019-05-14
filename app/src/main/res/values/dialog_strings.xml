@@ -79,8 +79,33 @@
         <item>App data</item>
         <item>Operating system data</item>
     </string-array>
-    <string-array name="dialog_crashreportingusages_data_user"></string-array>
-    <string-array name="dialog_crashreportingusages_data_device"></string-array>
-    <string-array name="dialog_crashreportingusages_data_app"></string-array>
-    <string-array name="dialog_crashreportingusages_data_os"></string-array>
+    <string-array name="dialog_crashreportingusages_data_user">
+        <item>Random ID used to track crashes</item>
+    </string-array>
+    <string-array name="dialog_crashreportingusages_data_device">
+        <item>Architecture (x86, arm, …)</item>
+        <item>Orientation (landscape, portrait)</item>
+        <item>Free/used memory (RAM)</item>
+        <item>Charging state (yes/no)</item>
+        <item>Online at time of crash (yes/no)</item>
+        <item>Screen resolution</item>
+        <item>Manufacturer</item>
+        <item>Brand</item>
+        <item>Model</item>
+        <item>Language</item>
+    </string-array>
+    <string-array name="dialog_crashreportingusages_data_app">
+        <item>Start time of app</item>
+        <item>App version</item>
+        <item>Database version</item>
+        <item>Dns server name</item>
+        <item>Primary dns server</item>
+        <item>Secondary dns server</item>
+    </string-array>
+    <string-array name="dialog_crashreportingusages_data_os">
+        <item>Name (e.g. Android)</item>
+        <item>Version (e.g. 8.1.0)</item>
+        <item>Kernel version</item>
+        <item>Rooted (yes/no)</item>
+    </string-array>
 </resources>
