@@ -4,9 +4,11 @@ import android.app.Application
 import android.content.Intent
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.database.AppDatabase
+import com.github.anrwatchdog.ANRWatchDog
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
 import io.sentry.event.User
+import java.lang.RuntimeException
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -49,6 +51,9 @@ class SmokeScreen : Application() {
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
         log("Application created.")
+        ANRWatchDog().setANRListener {
+            log(RuntimeException(it))
+        }
     }
 
     fun initSentry(forceEnabled:Boolean = false) {
