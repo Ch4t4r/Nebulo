@@ -50,13 +50,17 @@ class SmokeScreen : Application() {
         log("Application created.")
     }
 
-    private fun initSentry() {
-        Sentry.init("https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2", AndroidSentryClientFactory(this))
-        Sentry.getStoredClient().addTag("user.language", Locale.getDefault().displayLanguage)
-        Sentry.getStoredClient().addTag("app.database_version", AppDatabase.currentVersion.toString())
-        Sentry.getStoredClient().addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
-        Sentry.getStoredClient().addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
-        Sentry.getStoredClient().addTag("app.dns_server_secondary", getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString())
+    fun initSentry(forceEnabled:Boolean = false) {
+        if(forceEnabled || getPreferences().crashReportingEnabled) {
+            Sentry.init("https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2", AndroidSentryClientFactory(this))
+            Sentry.getStoredClient().addTag("user.language", Locale.getDefault().displayLanguage)
+            Sentry.getStoredClient().addTag("app.database_version", AppDatabase.currentVersion.toString())
+            Sentry.getStoredClient().addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
+            Sentry.getStoredClient().addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
+            Sentry.getStoredClient().addTag("app.dns_server_secondary", getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString())
+        } else {
+            Sentry.close()
+        }
     }
 
     override fun onLowMemory() {
