@@ -64,4 +64,10 @@
     <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Do you want to enable logging? Logs contain statistic information, debug information and actions in the app. Generated logs aren\'t shared unless you do so yourself.</string>
+
+    <string name="dialog_crashreporting_title">Automatic crash reporting</string>
+    <string name="dialog_crashreporting_positive">Enable crash reporting</string>
+    <string name="dialog_crashreporting_negative">No, thanks.</string>
+    <string name="dialog_crashreporting_message">Thank you for being a tester for the app!\n\nThis app is using Sentry.io (open-source, self-hosted) to make it easier to track app crashes as soon as they occur. If and only if enabled the app is going to transmit crash reports when the app encounters a crash. These reports contain additional data about the app and your device. This includes an id which is used to track crashes coming from the same user, but can\'t be used to track anything else. Enabling the crash reporting is optional but would help me out greatly.\nReports are sent securely over HTTPS. \n\nClick on one of the categories below to see what kind of data is transmitted.</string>
+    <string name="dialog_crashreporting_message_notester">Thank you for using Nebulo!\n\nThis app is using Sentry.io (open-source, self-hosted) to make it easier to track app crashes as soon as they occur. If and only if enabled the app is going to transmit crash reports when the app encounters a crash. These reports contain additional data about the app and your device. This includes an id which is used to track crashes coming from the same user, but can\'t be used to track anything else. Enabling the crash reporting is optional but would make fixing bugs easier and faster.\nReports are sent securely over HTTPS \n\nClick on one of the categories below to see what kind of data is transmitted.</string>
 </resources>

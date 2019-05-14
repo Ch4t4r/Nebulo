@@ -21,6 +21,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
+import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
 import com.frostnerd.smokescreen.util.preferences.Theme
 import io.sentry.Sentry
@@ -354,6 +355,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
             sendLogs.isEnabled = enabled
             deleteLogs.isEnabled = enabled
             true
+        }
+        crashReporting.setOnPreferenceClickListener {
+            if(requireContext().getPreferences().crashReportingConsent) {
+                true
+            } else {
+                CrashReportingEnableDialog(requireContext(), onConsentGiven = {
+                    crashReporting.isChecked = true
+                }).show()
+                false
+            }
         }
         crashReporting.setOnPreferenceChangeListener { _, newValue ->
             if (!(newValue as Boolean)) {

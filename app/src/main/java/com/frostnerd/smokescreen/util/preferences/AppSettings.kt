@@ -42,6 +42,7 @@ interface AppSettings {
     val defaultBypassPackages: Set<String>
     var dnsServerConfig: DnsServerInformation<*>
     var userServers: Set<UserServerConfiguration>
+    var crashReportingConsent:Boolean
 
     // ###### Settings (in order)
     // No Category
@@ -153,6 +154,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var previousInstalledVersion:Int by nonOptionalOf(intPref("previous_version"),true, BuildConfig.VERSION_CODE)
     override var showChangelog:Boolean by booleanPref("show_changelog", true)
     override var exportedQueryCount:Int by intPref("exported_query_count", 0)
+    override var crashReportingConsent: Boolean by booleanPref("sentry_consent", false)
 
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
