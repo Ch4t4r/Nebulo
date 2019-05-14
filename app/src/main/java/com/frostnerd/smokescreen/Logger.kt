@@ -33,8 +33,8 @@ import kotlin.concurrent.withLock
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-private fun logErrorSentry(e:Throwable) {
-    Sentry.capture(e)
+private fun Context.logErrorSentry(e:Throwable) {
+    if(getPreferences().crashReportingEnabled) Sentry.capture(e)
 }
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {

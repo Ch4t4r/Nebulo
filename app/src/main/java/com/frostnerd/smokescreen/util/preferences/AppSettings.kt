@@ -71,6 +71,7 @@ interface AppSettings {
 
     // Logging category
     var loggingEnabled: Boolean
+    var crashReportingEnabled:Boolean
 
 
     // IP category
@@ -176,6 +177,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         "logging_enabled",
         BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
     )
+    override var crashReportingEnabled: Boolean by booleanPref("enable_sentry", false)
 
     override var enableIpv6: Boolean by booleanPref("ipv6_enabled", true)
     override var enableIpv4: Boolean by booleanPref("ipv4_enabled", true)
