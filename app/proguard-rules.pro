@@ -3,6 +3,10 @@
 -renamesourcefileattribute SourceFile
 
 -dontwarn org.slf4j.impl.*
+-dontwarn javax.naming.*
+-dontwarn javax.servlet.http.*
+-dontwarn javax.servlet.*
+
 -keep class org.slf4j.** {
     *;
 }
