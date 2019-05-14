@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.text.Html
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
@@ -32,12 +33,14 @@ import android.widget.TextView
 fun showInfoTextDialog(context:Context, title:String, text:String,
                        positiveButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
                        negativeButton:Pair<String, (DialogInterface, Int) -> Unit>? = null): androidx.appcompat.app.AlertDialog {
-    val stringWithLinks = SpannableString(text)
+    var stringWithLinks = SpannableString(text)
     Linkify.addLinks(stringWithLinks, Linkify.ALL)
+
+    val span = Html.fromHtml(stringWithLinks.toString().replace("\n", "<br>"))
 
     val dialogBuilder = androidx.appcompat.app.AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
         .setTitle(title)
-        .setMessage(stringWithLinks)
+        .setMessage(span)
         .setNeutralButton(R.string.ok, null)
     if(positiveButton != null) dialogBuilder.setPositiveButton(positiveButton.first, positiveButton.second)
     if(negativeButton != null) dialogBuilder.setNegativeButton(negativeButton.first, negativeButton.second)
@@ -45,6 +48,7 @@ fun showInfoTextDialog(context:Context, title:String, text:String,
     val dialog = dialogBuilder.show()
     val textView = dialog.findViewById<TextView>(android.R.id.message)
     textView?.movementMethod = LinkMovementMethod.getInstance()
+    textView?.linksClickable = true
     textView?.setLinkTextColor(Color.parseColor("#64B5F6"))
     return dialog
 }

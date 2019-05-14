@@ -112,4 +112,11 @@
 
     <string name="dialog_clearqueries_title">Clear all queries</string>
     <string name="dialog_clearqueries_message">Are you sure you want to clear the logged queries? This cannot be reversed.</string>
+
+    <string name="dialog_credits_title">Credits</string>
+    <string name="dialog_credits_message" formatted="true">
+        - App icon by <![CDATA[<a href="https://dribbble.com/rkbdi">RKBDI</a>]]> .\n\n
+        \n
+        Want to see your name here? Feel free to <![CDATA[<a href="https://git.frostnerd.com/PublicAndroidApps/smokescreen">contribute</a>]]>.
+    </string>
 </resources>

@@ -10,6 +10,7 @@
     <string name="menu_contact_developer">Contact developer</string>
     <string name="menu_telegram_group">Telegram group</string>
     <string name="menu_privacypolicy">Privacy policy</string>
+    <string name="menu_credits">Credits</string>
     <string name="menu_about">About this app</string>
     
     <string name="menu_cardview_title">Realtime stats</string>

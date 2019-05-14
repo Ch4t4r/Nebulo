@@ -165,6 +165,16 @@ class MainActivity : NavigationDrawerActivity() {
                     dialog.show()
                     false
                 })
+            clickableItem(getString(R.string.menu_credits),
+                iconLeft = getDrawable(R.drawable.ic_thumbs_up),
+                onLongClick = null,
+                onSimpleClick = { _, _ , _ ->
+                    println(getString(R.string.dialog_credits_message))
+                    showInfoTextDialog(this@MainActivity,
+                        getString(R.string.dialog_credits_title),
+                        getString(R.string.dialog_credits_message))
+                    false
+                })
             clickableItem(getString(R.string.menu_about),
                 iconLeft = getDrawable(R.drawable.ic_binoculars),
                 onLongClick = null,
