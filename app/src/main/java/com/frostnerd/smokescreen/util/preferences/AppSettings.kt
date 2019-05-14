@@ -43,6 +43,7 @@ interface AppSettings {
     var dnsServerConfig: DnsServerInformation<*>
     var userServers: Set<UserServerConfiguration>
     var crashReportingConsent:Boolean
+    var crashReportingConsentAsked:Boolean
 
     // ###### Settings (in order)
     // No Category
@@ -141,6 +142,12 @@ interface AppSettings {
         }
         userServers = mutableServers
     }
+
+    fun shouldShowCrashReportingConsentDialog(): Boolean {
+        return BuildConfig.VERSION_NAME.let {
+            it.contains("alpha", true) || it.contains("beta", true)
+        } && !crashReportingConsent && !crashReportingConsentAsked
+    }
 }
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context, version = 1, migrate = migration) {
@@ -155,6 +162,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var showChangelog:Boolean by booleanPref("show_changelog", true)
     override var exportedQueryCount:Int by intPref("exported_query_count", 0)
     override var crashReportingConsent: Boolean by booleanPref("sentry_consent", false)
+    override var crashReportingConsentAsked: Boolean by booleanPref("sentry_consent_asked", false)
 
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
