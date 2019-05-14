@@ -3,8 +3,10 @@ package com.frostnerd.smokescreen
 import android.app.Application
 import android.content.Intent
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
+import com.frostnerd.smokescreen.database.AppDatabase
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
+import java.util.*
 import kotlin.system.exitProcess
 
 /*
@@ -41,11 +43,20 @@ class SmokeScreen : Application() {
         }
 
     override fun onCreate() {
-        Sentry.init("https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2", AndroidSentryClientFactory(this))
+        initSentry()
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
         log("Application created.")
+    }
+
+    private fun initSentry() {
+        Sentry.init("https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2", AndroidSentryClientFactory(this))
+        Sentry.getStoredClient().addTag("user.language", Locale.getDefault().displayLanguage)
+        Sentry.getStoredClient().addTag("app.database_version", AppDatabase.currentVersion.toString())
+        Sentry.getStoredClient().addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
+        Sentry.getStoredClient().addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
+        Sentry.getStoredClient().addTag("app.dns_server_secondary", getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString() ?: "")
     }
 
     override fun onLowMemory() {
