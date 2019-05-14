@@ -128,6 +128,12 @@
                 android:key="delete_logs"
                 android:title="@string/title_delete_all_logs"
                 android:summary="@string/summary_delete_all_logs"/>
+
+        <CheckBoxPreference
+                android:key="enable_sentry"
+                android:title="@string/title_enable_sentry"
+                android:defaultValue="false"
+                android:summary="@string/summary_enable_sentry"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/preference_category_ip">

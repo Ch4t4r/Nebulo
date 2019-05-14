@@ -21,8 +21,10 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
+import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
 import com.frostnerd.smokescreen.util.preferences.Theme
+import io.sentry.Sentry
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -144,15 +146,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         pinValue.setOnPreferenceChangeListener { _, newValue ->
             println(newValue)
-            if(newValue.toString().isNotEmpty() && newValue.toString().isInt()) {
+            if (newValue.toString().isNotEmpty() && newValue.toString().isInt()) {
                 pinValue.summary = getString(R.string.summary_preference_change_pin, newValue.toString())
                 true
             } else {
                 false
             }
         }
-        pinValue.summary = getString(R.string.summary_preference_change_pin, requireContext().getPreferences().pin.toString())
-        if(!requireContext().canUseFingerprintAuthentication()) findPreference("pin_allow_fingerprint").isVisible = false
+        pinValue.summary =
+            getString(R.string.summary_preference_change_pin, requireContext().getPreferences().pin.toString())
+        if (!requireContext().canUseFingerprintAuthentication()) findPreference("pin_allow_fingerprint").isVisible =
+            false
     }
 
     private fun processQueryCategory() {
@@ -167,16 +171,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
             (requireActivity() as MainActivity).reloadMenuItems()
             true
         }
-        exportQueries.summary = getString(R.string.summary_export_queries, requireContext().getDatabase().dnsQueryDao().getCount())
+        exportQueries.summary =
+            getString(R.string.summary_export_queries, requireContext().getDatabase().dnsQueryDao().getCount())
         exportQueries.setOnPreferenceClickListener {
-            val loadingDialog:LoadingDialog?
-            if(requireContext().getDatabase().dnsQueryDao().getCount() >= 100) {
-                loadingDialog = LoadingDialog(requireContext(), R.string.dialog_query_export_title, R.string.dialog_query_export_message)
+            val loadingDialog: LoadingDialog?
+            if (requireContext().getDatabase().dnsQueryDao().getCount() >= 100) {
+                loadingDialog = LoadingDialog(
+                    requireContext(),
+                    R.string.dialog_query_export_title,
+                    R.string.dialog_query_export_message
+                )
             } else loadingDialog = null
             loadingDialog?.show()
-            requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext(), {file ->
-                if(!isDetached && !isRemoving) {
-                    val uri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
+            requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext(), { file ->
+                if (!isDetached && !isRemoving) {
+                    val uri =
+                        FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
                     val exportIntent = Intent(Intent.ACTION_SEND)
                     exportIntent.putExtra(Intent.EXTRA_TEXT, "")
                     exportIntent.type = "text/csv"
@@ -240,8 +250,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             forceIpv4.isEnabled = ipv4Enabled && ipv4.isEnabled
             allowIpv6Traffic.isEnabled = !ipv6Enabled
             allowIpv4Traffic.isEnabled = !ipv4Enabled
-            if(!ipv6.isChecked && ipv6Enabled) allowIpv6Traffic.isChecked = true
-            if(!ipv4.isChecked && ipv4Enabled) allowIpv4Traffic.isChecked = true
+            if (!ipv6.isChecked && ipv6Enabled) allowIpv6Traffic.isChecked = true
+            if (!ipv4.isChecked && ipv4Enabled) allowIpv4Traffic.isChecked = true
         }
         updateState(ipv6.isChecked, ipv4.isChecked)
         ipv6.setOnPreferenceChangeListener { _, newValue ->
@@ -310,7 +320,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         nxDomainCacheTime.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().isInt()) {
-                nxDomainCacheTime.summary = getString(R.string.summary_dnscache_nxdomaincachetime, newValue.toString().toInt())
+                nxDomainCacheTime.summary =
+                    getString(R.string.summary_dnscache_nxdomaincachetime, newValue.toString().toInt())
                 true
             } else {
                 false
@@ -318,7 +329,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         minCacheTime.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().isInt()) {
-                minCacheTime.summary = getString(R.string.summary_dnscache_minimum_cache_time, newValue.toString().toInt())
+                minCacheTime.summary =
+                    getString(R.string.summary_dnscache_minimum_cache_time, newValue.toString().toInt())
                 true
             } else {
                 false
@@ -330,6 +342,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val loggingEnabled = findPreference("logging_enabled") as CheckBoxPreference
         val sendLogs = findPreference("send_logs")
         val deleteLogs = findPreference("delete_logs")
+        val crashReporting = findPreference("enable_sentry") as CheckBoxPreference
         loggingEnabled.isChecked = requireContext().getPreferences().loggingEnabled
         sendLogs.isEnabled = loggingEnabled.isChecked
         deleteLogs.isEnabled = loggingEnabled.isChecked
@@ -341,6 +354,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (enabled) log("Logging enabled from settings.") // Log after enabling
             sendLogs.isEnabled = enabled
             deleteLogs.isEnabled = enabled
+            true
+        }
+        crashReporting.setOnPreferenceClickListener {
+            if(requireContext().getPreferences().crashReportingConsent) {
+                true
+            } else {
+                CrashReportingEnableDialog(requireContext(), onConsentGiven = {
+                    crashReporting.isChecked = true
+                }).show()
+                false
+            }
+        }
+        crashReporting.setOnPreferenceChangeListener { _, newValue ->
+            if (!(newValue as Boolean)) {
+                Sentry.close()
+            } else {
+                (requireContext().applicationContext as SmokeScreen).initSentry(true)
+            }
             true
         }
     }

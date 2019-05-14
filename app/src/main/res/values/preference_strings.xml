@@ -57,6 +57,7 @@
     <string name="title_dnscache_nxdomaincachetime">Cache time for NXDomain (Seconds)</string>
     <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time old NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds.</string>
 
+
     <string name="preference_category_logging">Logging</string>
 
     <string name="title_enable_logging">Enable logging</string>
@@ -67,6 +68,9 @@
 
     <string name="title_delete_all_logs">Delete all logs</string>
     <string name="summary_delete_all_logs">Deletes all logs stored on your device.</string>
+
+    <string name="title_enable_sentry">Enable crash reporting</string>
+    <string name="summary_enable_sentry">Automatically send crash reports to the developer. Data is only transmitted on crashes.</string>
 
 
     <string name="preference_category_ip">IP settings</string>

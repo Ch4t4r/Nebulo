@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
@@ -18,10 +17,13 @@ import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
+import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
+import com.frostnerd.smokescreen.dialog.LicensesDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
+import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -59,6 +61,9 @@ class MainActivity : NavigationDrawerActivity() {
         }*/
         supportActionBar?.elevation = 0f
         ChangelogDialog.showNewVersionChangelog(this)
+        if(getPreferences().shouldShowCrashReportingConsentDialog()) {
+            CrashReportingEnableDialog(this).show()
+        }
     }
 
     override fun createDrawerItems(): MutableList<DrawerItem> {
@@ -147,6 +152,19 @@ class MainActivity : NavigationDrawerActivity() {
                         false
                     })
             }
+            clickableItem(getString(R.string.menu_privacypolicy),
+                iconLeft = getDrawable(R.drawable.ic_gavel),
+                onLongClick = null,
+                onSimpleClick = { _, _ ,_ ->
+                    val dialog = AlertDialog.Builder(this@MainActivity, getPreferences().theme.dialogStyle)
+                    dialog.setTitle(R.string.menu_privacypolicy)
+                    val view = layoutInflater.inflate(R.layout.dialog_privacypolicy, null, false)
+                    dialog.setView(view)
+                    view.webView.loadUrl("file:///android_res/raw/privacy_policy.html")
+                    dialog.setNeutralButton(R.string.all_close, null)
+                    dialog.show()
+                    false
+                })
             clickableItem(getString(R.string.menu_about),
                 iconLeft = getDrawable(R.drawable.ic_binoculars),
                 onLongClick = null,
@@ -156,13 +174,18 @@ class MainActivity : NavigationDrawerActivity() {
                         getString(R.string.menu_about),
                         getString(
                             R.string.about_app,
-                            BuildConfig.VERSION_NAME,
+                            BuildConfig.VERSION_NAME + if(BuildConfig.DEBUG) " DEBUG" else "",
                             BuildConfig.VERSION_CODE,
-                            AppDatabase.currentVersion
+                            AppDatabase.currentVersion,
+                            if(getPreferences().crashReportingEnabled) getPreferences().crashReportingUUID else "---"
                         ),
                         positiveButton = getString(R.string.dialog_about_changelog) to { dialog, _ ->
                             dialog.dismiss()
                             ChangelogDialog(this@MainActivity, 22, showOptOut = false, showInfoText = false).show()
+                        },
+                        negativeButton = getString(R.string.dialog_about_licenses) to { dialog, _ ->
+                            dialog.dismiss()
+                            LicensesDialog(this@MainActivity).show()
                         }
                     )
                     false

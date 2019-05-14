@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.database.AppDatabase
+import io.sentry.Sentry
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,6 +33,9 @@ import kotlin.concurrent.withLock
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
+private fun Context.logErrorSentry(e:Throwable) {
+    if(getPreferences().crashReportingEnabled) Sentry.capture(e)
+}
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {
     if (Logger.enabledGlobally) {
@@ -46,6 +50,7 @@ fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent
 }
 
 fun Context.log(e: Throwable) {
+    logErrorSentry(e)
     if (Logger.enabledGlobally) {
         Logger.getInstance(this).log(e)
     } else {

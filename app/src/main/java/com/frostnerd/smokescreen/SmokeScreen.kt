@@ -3,6 +3,11 @@ package com.frostnerd.smokescreen
 import android.app.Application
 import android.content.Intent
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
+import com.frostnerd.smokescreen.database.AppDatabase
+import io.sentry.Sentry
+import io.sentry.android.AndroidSentryClientFactory
+import io.sentry.event.User
+import java.util.*
 import kotlin.system.exitProcess
 
 /*
@@ -30,7 +35,7 @@ class SmokeScreen : Application() {
             e.printStackTrace()
             log(e)
             val isPrerelease = BuildConfig.VERSION_NAME.contains("alpha",true) || BuildConfig.VERSION_NAME.contains("beta",true)
-            if(isPrerelease && getPreferences().loggingEnabled) {
+            if(isPrerelease && getPreferences().loggingEnabled && !getPreferences().crashReportingEnabled) {
                 startActivity(Intent(this, ErrorDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             }
             closeLogger()
@@ -39,10 +44,25 @@ class SmokeScreen : Application() {
         }
 
     override fun onCreate() {
+        initSentry()
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
         log("Application created.")
+    }
+
+    fun initSentry(forceEnabled:Boolean = false) {
+        if(forceEnabled || getPreferences().crashReportingEnabled) {
+            Sentry.init("https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2", AndroidSentryClientFactory(this))
+            Sentry.getContext().user = User(getPreferences().crashReportingUUID, null, null, null)
+            Sentry.getStoredClient().addTag("user.language", Locale.getDefault().displayLanguage)
+            Sentry.getStoredClient().addTag("app.database_version", AppDatabase.currentVersion.toString())
+            Sentry.getStoredClient().addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
+            Sentry.getStoredClient().addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
+            Sentry.getStoredClient().addTag("app.dns_server_secondary", getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString())
+        } else {
+            Sentry.close()
+        }
     }
 
     override fun onLowMemory() {

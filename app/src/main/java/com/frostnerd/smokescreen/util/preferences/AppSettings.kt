@@ -10,6 +10,7 @@ import com.frostnerd.preferenceskt.typedpreferences.cache.ExpirationCacheControl
 import com.frostnerd.preferenceskt.typedpreferences.cache.buildCacheStrategy
 import com.frostnerd.preferenceskt.typedpreferences.types.*
 import com.frostnerd.smokescreen.BuildConfig
+import java.util.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -42,6 +43,9 @@ interface AppSettings {
     val defaultBypassPackages: Set<String>
     var dnsServerConfig: DnsServerInformation<*>
     var userServers: Set<UserServerConfiguration>
+    var crashReportingConsent:Boolean
+    var crashReportingConsentAsked:Boolean
+    var crashReportingUUID:String
 
     // ###### Settings (in order)
     // No Category
@@ -71,6 +75,7 @@ interface AppSettings {
 
     // Logging category
     var loggingEnabled: Boolean
+    var crashReportingEnabled:Boolean
 
 
     // IP category
@@ -139,6 +144,12 @@ interface AppSettings {
         }
         userServers = mutableServers
     }
+
+    fun shouldShowCrashReportingConsentDialog(): Boolean {
+        return BuildConfig.VERSION_NAME.let {
+            it.contains("alpha", true) || it.contains("beta", true)
+        } && !crashReportingConsent && !crashReportingConsentAsked
+    }
 }
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context, version = 1, migrate = migration) {
@@ -152,6 +163,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var previousInstalledVersion:Int by nonOptionalOf(intPref("previous_version"),true, BuildConfig.VERSION_CODE)
     override var showChangelog:Boolean by booleanPref("show_changelog", true)
     override var exportedQueryCount:Int by intPref("exported_query_count", 0)
+    override var crashReportingConsent: Boolean by booleanPref("sentry_consent", false)
+    override var crashReportingConsentAsked: Boolean by booleanPref("sentry_consent_asked", false)
+    override var crashReportingUUID: String by nonOptionalOf(stringPref("sentry_id"), true, UUID.randomUUID().toString())
 
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
@@ -176,6 +190,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         "logging_enabled",
         BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
     )
+    override var crashReportingEnabled: Boolean by booleanPref("enable_sentry", false)
 
     override var enableIpv6: Boolean by booleanPref("ipv6_enabled", true)
     override var enableIpv4: Boolean by booleanPref("ipv4_enabled", true)
