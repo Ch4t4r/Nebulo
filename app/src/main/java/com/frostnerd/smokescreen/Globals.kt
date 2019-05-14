@@ -8,7 +8,10 @@ import android.text.Html
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
+import android.view.LayoutInflater
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
 
 
 /*
@@ -29,6 +32,16 @@ import android.widget.TextView
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
+
+fun showPrivacyPolicyDialog(context: Context) {
+    val dialog = AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+    dialog.setTitle(R.string.menu_privacypolicy)
+    val view = LayoutInflater.from(context).inflate(R.layout.dialog_privacypolicy, null, false)
+    dialog.setView(view)
+    view.webView.loadUrl("file:///android_res/raw/privacy_policy.html")
+    dialog.setNeutralButton(R.string.all_close, null)
+    dialog.show()
+}
 
 fun showInfoTextDialog(context:Context, title:String, text:String,
                        positiveButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,

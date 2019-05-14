@@ -156,13 +156,7 @@ class MainActivity : NavigationDrawerActivity() {
                 iconLeft = getDrawable(R.drawable.ic_gavel),
                 onLongClick = null,
                 onSimpleClick = { _, _ ,_ ->
-                    val dialog = AlertDialog.Builder(this@MainActivity, getPreferences().theme.dialogStyle)
-                    dialog.setTitle(R.string.menu_privacypolicy)
-                    val view = layoutInflater.inflate(R.layout.dialog_privacypolicy, null, false)
-                    dialog.setView(view)
-                    view.webView.loadUrl("file:///android_res/raw/privacy_policy.html")
-                    dialog.setNeutralButton(R.string.all_close, null)
-                    dialog.show()
+                    showPrivacyPolicyDialog(this@MainActivity)
                     false
                 })
             clickableItem(getString(R.string.menu_credits),

@@ -7,10 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import com.frostnerd.lifecyclemanagement.BaseDialog
-import com.frostnerd.smokescreen.BuildConfig
-import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.SmokeScreen
-import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.*
 import io.sentry.Sentry
 import kotlinx.android.synthetic.main.dialog_crashreportingusages.view.*
 import kotlinx.android.synthetic.main.dialog_crashreportingusages_listgroup.view.*
@@ -45,6 +42,8 @@ class CrashReportingEnableDialog(
         setTitle(R.string.dialog_crashreporting_title)
         setMessage(context.getString(if (showTesterText) R.string.dialog_crashreporting_message else R.string.dialog_crashreporting_message_notester))
         setView(view)
+        setCancelable(false)
+        setCanceledOnTouchOutside(false)
         setButton(
             DialogInterface.BUTTON_POSITIVE,
             context.getString(R.string.dialog_crashreporting_positive)
@@ -80,7 +79,14 @@ class CrashReportingEnableDialog(
                 usagesDialog.setNeutralButton(R.string.all_close) { _, _ ->
 
                 }
-                usagesDialog.show()
+                usagesDialog.setPositiveButton(R.string.menu_privacypolicy, null)
+                val actualDialog = usagesDialog.create()
+                actualDialog.setOnShowListener {
+                    actualDialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                        showPrivacyPolicyDialog(context)
+                    }
+                }
+                actualDialog.show()
             }
         }
     }
