@@ -2,12 +2,18 @@ package com.frostnerd.smokescreen.dialog
 
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Typeface
+import android.view.View
+import android.view.ViewGroup
+import android.widget.BaseExpandableListAdapter
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.SmokeScreen
 import com.frostnerd.smokescreen.getPreferences
 import io.sentry.Sentry
+import kotlinx.android.synthetic.main.dialog_crashreportingusages.view.*
+import kotlinx.android.synthetic.main.dialog_crashreportingusages_listgroup.view.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -31,7 +37,7 @@ class CrashReportingEnableDialog(
     context: Context, showTesterText: Boolean = BuildConfig.VERSION_NAME.let {
         it.contains("alpha", true) || it.contains("beta", true)
     },
-    onConsentGiven:(() -> Unit)? = null
+    onConsentGiven: (() -> Unit)? = null
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
 
     init {
@@ -39,7 +45,10 @@ class CrashReportingEnableDialog(
         setTitle(R.string.dialog_crashreporting_title)
         setMessage(context.getString(if (showTesterText) R.string.dialog_crashreporting_message else R.string.dialog_crashreporting_message_notester))
         setView(view)
-        setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.dialog_crashreporting_positive)) { dialog, _ ->
+        setButton(
+            DialogInterface.BUTTON_POSITIVE,
+            context.getString(R.string.dialog_crashreporting_positive)
+        ) { dialog, _ ->
             context.getPreferences().crashReportingEnabled = true
             context.getPreferences().crashReportingConsent = true
             context.getPreferences().crashReportingConsentAsked = true
@@ -47,15 +56,79 @@ class CrashReportingEnableDialog(
             onConsentGiven?.invoke()
             dialog.dismiss()
         }
-        setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.dialog_crashreporting_negative)) { dialog, _ ->
+        setButton(
+            DialogInterface.BUTTON_NEGATIVE,
+            context.getString(R.string.dialog_crashreporting_negative)
+        ) { dialog, _ ->
             context.getPreferences().crashReportingEnabled = false
             context.getPreferences().crashReportingConsent = false
             context.getPreferences().crashReportingConsentAsked = true
             Sentry.close()
             dialog.dismiss()
         }
+        setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.dialog_crashreporting_neutral)) { _, _ ->
+
+        }
+        setOnShowListener {
+            getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener {
+                val usagesDialog = Builder(context, context.getPreferences().theme.dialogStyle)
+                usagesDialog.setTitle(R.string.dialog_crashreportingusages_title)
+                usagesDialog.setMessage(R.string.dialog_crashreportingusages_message)
+                val view = layoutInflater.inflate(R.layout.dialog_crashreportingusages, null, false)
+                usagesDialog.setView(view)
+                view.list.setAdapter(UsedDataListAdapter())
+                usagesDialog.setNeutralButton(R.string.all_close) { _, _ ->
+
+                }
+                usagesDialog.show()
+            }
+        }
     }
 
     override fun destroy() {
+    }
+
+    private inner class UsedDataListAdapter() : BaseExpandableListAdapter() {
+        private val titles = context.resources.getStringArray(R.array.dialog_crashreportingusages_data)
+        private val children = listOf(
+            context.resources.getStringArray(R.array.dialog_crashreportingusages_data_user),
+            context.resources.getStringArray(R.array.dialog_crashreportingusages_data_device),
+            context.resources.getStringArray(R.array.dialog_crashreportingusages_data_app),
+            context.resources.getStringArray(R.array.dialog_crashreportingusages_data_os)
+        )
+
+        override fun getGroup(groupPosition: Int): Any = titles[groupPosition]
+        override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean = false
+        override fun hasStableIds(): Boolean = true
+        override fun getChildrenCount(groupPosition: Int): Int = children[groupPosition].size
+        override fun getChild(groupPosition: Int, childPosition: Int): Any = children[groupPosition][childPosition]
+        override fun getGroupId(groupPosition: Int): Long = groupPosition.toLong()
+        override fun getChildId(groupPosition: Int, childPosition: Int): Long = groupPosition*100L + childPosition
+        override fun getGroupCount(): Int = titles.size
+
+        override fun getGroupView(
+            groupPosition: Int,
+            isExpanded: Boolean,
+            convertView: View?,
+            parent: ViewGroup?
+        ): View {
+            val view = convertView ?: layoutInflater.inflate(R.layout.dialog_crashreportingusages_listgroup, parent, false)
+            view.text.text = titles[groupPosition]
+            view.text.setTypeface(null, Typeface.BOLD)
+            return view
+        }
+
+        override fun getChildView(
+            groupPosition: Int,
+            childPosition: Int,
+            isLastChild: Boolean,
+            convertView: View?,
+            parent: ViewGroup?
+        ): View {
+            val view = convertView ?: layoutInflater.inflate(R.layout.dialog_crashreportingusages_listitem, parent, false)
+            view.text.text = children[groupPosition][childPosition]
+            view.text.setTypeface(null, Typeface.BOLD)
+            return view
+        }
     }
 }
