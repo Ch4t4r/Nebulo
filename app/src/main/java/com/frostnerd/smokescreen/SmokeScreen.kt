@@ -6,6 +6,7 @@ import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.database.AppDatabase
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
+import io.sentry.event.User
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -53,6 +54,7 @@ class SmokeScreen : Application() {
     fun initSentry(forceEnabled:Boolean = false) {
         if(forceEnabled || getPreferences().crashReportingEnabled) {
             Sentry.init("https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2", AndroidSentryClientFactory(this))
+            Sentry.getContext().user = User(getPreferences().crashReportingUUID, null, null, null)
             Sentry.getStoredClient().addTag("user.language", Locale.getDefault().displayLanguage)
             Sentry.getStoredClient().addTag("app.database_version", AppDatabase.currentVersion.toString())
             Sentry.getStoredClient().addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
