@@ -236,7 +236,7 @@ class DnsVpnService : VpnService(), Runnable {
         if(!getPreferences().showNotificationOnLockscreen)
             notificationBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET)
         notificationBuilder.setContentTitle(getString(R.string.app_name))
-        notificationBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
+        notificationBuilder.setSmallIcon(R.drawable.ic_mainnotification)
         notificationBuilder.setOngoing(true)
         notificationBuilder.setAutoCancel(false)
         notificationBuilder.setSound(null)
