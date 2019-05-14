@@ -160,9 +160,10 @@ class MainActivity : NavigationDrawerActivity() {
                         getString(R.string.menu_about),
                         getString(
                             R.string.about_app,
-                            BuildConfig.VERSION_NAME,
+                            BuildConfig.VERSION_NAME + if(BuildConfig.DEBUG) " DEBUG" else "",
                             BuildConfig.VERSION_CODE,
-                            AppDatabase.currentVersion
+                            AppDatabase.currentVersion,
+                            if(getPreferences().crashReportingEnabled) getPreferences().crashReportingUUID else "---"
                         ),
                         positiveButton = getString(R.string.dialog_about_changelog) to { dialog, _ ->
                             dialog.dismiss()
