@@ -33,9 +33,14 @@ import kotlin.concurrent.withLock
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-private val publishedExceptions = mutableSetOf<Throwable>()
-private fun Context.logErrorSentry(e:Throwable) {
-    if(getPreferences().crashReportingEnabled && publishedExceptions.add(e)) Sentry.capture(e)
+private val publishedExceptions = mutableMapOf<Throwable, Set<StackTraceElement>>()
+private fun Context.logErrorSentry(e: Throwable) {
+    if (publishedExceptions.any {
+            it.value.all { elem ->
+                e.stackTrace.contains(elem)
+            }
+        } || publishedExceptions.put(e, e.stackTrace.toHashSet()) != null) return
+    else if (getPreferences().crashReportingEnabled) Sentry.capture(e)
 }
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {
@@ -108,7 +113,7 @@ class Logger private constructor(context: Context) {
     private val logFile: File
     private val fileWriter: BufferedWriter
     private val printToConsole = BuildConfig.DEBUG
-    private var oldPrintStream:PrintStream
+    private var oldPrintStream: PrintStream
     private var oldSystemOut: PrintStream
     private val lock = ReentrantLock()
     var enabled: Boolean = true
@@ -128,13 +133,13 @@ class Logger private constructor(context: Context) {
         log("------------------------------", tag = null)
         oldPrintStream = System.err
         oldSystemOut = System.out
-        System.setErr(object: PrintStream(oldPrintStream) {
+        System.setErr(object : PrintStream(oldPrintStream) {
             override fun println(x: String?) {
                 super.println(x)
                 log(x ?: "", "System.Err")
             }
         })
-        System.setOut(object:PrintStream(oldSystemOut) {
+        System.setOut(object : PrintStream(oldSystemOut) {
             override fun println(x: String?) {
                 super.println(x)
                 log(x ?: "", "System.Out")
@@ -278,7 +283,7 @@ fun Context.zipAllLogFiles(): File? {
 
     val queryGenLogFile = File(filesDir, "querygenlog.txt")
 
-    if(queryGenLogFile.exists()) {
+    if (queryGenLogFile.exists()) {
         filesToBeZipped += queryGenLogFile
     }
     for (f in filesToBeZipped) {
