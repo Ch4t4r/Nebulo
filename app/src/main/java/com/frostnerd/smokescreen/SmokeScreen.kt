@@ -35,7 +35,7 @@ class SmokeScreen : Application() {
             e.printStackTrace()
             log(e)
             val isPrerelease = BuildConfig.VERSION_NAME.contains("alpha",true) || BuildConfig.VERSION_NAME.contains("beta",true)
-            if(isPrerelease && getPreferences().loggingEnabled) {
+            if(isPrerelease && getPreferences().loggingEnabled && !getPreferences().crashReportingEnabled) {
                 startActivity(Intent(this, ErrorDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             }
             closeLogger()
