@@ -56,7 +56,7 @@ class SmokeScreen : Application() {
         Sentry.getStoredClient().addTag("app.database_version", AppDatabase.currentVersion.toString())
         Sentry.getStoredClient().addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
         Sentry.getStoredClient().addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
-        Sentry.getStoredClient().addTag("app.dns_server_secondary", getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString() ?: "")
+        Sentry.getStoredClient().addTag("app.dns_server_secondary", getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString())
     }
 
     override fun onLowMemory() {
