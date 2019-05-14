@@ -5,3 +5,5 @@
 !/build/outputs/mapping/release/mapping.txt
 !/build/outputs/mapping/fdroid/mapping.txt
 !/build/outputs/mapping/**/mapping.txt
+!/build/outputs/mapping/normal/release/mapping.txt
+!/build/outputs/mapping/adblocker/fdroid/mapping.txt
