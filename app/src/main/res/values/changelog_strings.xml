@@ -50,11 +50,6 @@
 
     <string-array name="changelog_build_29">
         <item>1.0 Beta (Build 29)</item>
-        <item>F-Droid only release</item>
-    </string-array>
-
-    <string-array name="changelog_build_30">
-        <item>1.0 Beta (Build 30)</item>
         <item>Added new app icon (thanks to RKBDI)</item>
         <item>Added automatic crash reporting (opt-in)</item>
         <item>Added privacy policy</item>
