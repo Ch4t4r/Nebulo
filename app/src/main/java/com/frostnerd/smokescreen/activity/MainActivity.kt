@@ -23,6 +23,7 @@ import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
+import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -151,6 +152,19 @@ class MainActivity : NavigationDrawerActivity() {
                         false
                     })
             }
+            clickableItem(getString(R.string.menu_privacypolicy),
+                iconLeft = getDrawable(R.drawable.ic_gavel),
+                onLongClick = null,
+                onSimpleClick = { _, _ ,_ ->
+                    val dialog = AlertDialog.Builder(this@MainActivity, getPreferences().theme.dialogStyle)
+                    dialog.setTitle(R.string.menu_privacypolicy)
+                    val view = layoutInflater.inflate(R.layout.dialog_privacypolicy, null, false)
+                    dialog.setView(view)
+                    view.webView.loadUrl("file:///android_res/raw/privacy_policy.html")
+                    dialog.setNeutralButton(R.string.all_close, null)
+                    dialog.show()
+                    false
+                })
             clickableItem(getString(R.string.menu_about),
                 iconLeft = getDrawable(R.drawable.ic_binoculars),
                 onLongClick = null,
