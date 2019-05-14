@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
@@ -19,6 +18,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
+import com.frostnerd.smokescreen.dialog.LicensesDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
@@ -168,6 +168,10 @@ class MainActivity : NavigationDrawerActivity() {
                         positiveButton = getString(R.string.dialog_about_changelog) to { dialog, _ ->
                             dialog.dismiss()
                             ChangelogDialog(this@MainActivity, 22, showOptOut = false, showInfoText = false).show()
+                        },
+                        negativeButton = getString(R.string.dialog_about_licenses) to { dialog, _ ->
+                            dialog.dismiss()
+                            LicensesDialog(this@MainActivity).show()
                         }
                     )
                     false
