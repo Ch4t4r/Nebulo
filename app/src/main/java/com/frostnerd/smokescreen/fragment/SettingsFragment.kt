@@ -163,6 +163,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val queryLogging = findPreference("log_dns_queries")
         val exportQueries = findPreference("export_dns_queries")
         val generateQueries = findPreference("generate_queries")
+        val clearQueries = findPreference("clear_dns_queries")
 
         generateQueries.isVisible = BuildConfig.DEBUG || BuildConfig.VERSION_NAME.contains("debug", true)
 
@@ -215,6 +216,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         generateQueries.setOnPreferenceClickListener {
             QueryGeneratorDialog(requireContext())
+            true
+        }
+        clearQueries.setOnPreferenceClickListener {
+            val dialog = AlertDialog.Builder(requireContext(), requireContext().getPreferences().theme.dialogStyle)
+            dialog.setMessage(R.string.dialog_clearqueries_message)
+            dialog.setTitle(R.string.dialog_clearqueries_title)
+            dialog.setPositiveButton(R.string.all_yes) { d, _ ->
+                requireContext().getDatabase().dnsQueryDao().deleteAll()
+                exportQueries.summary =
+                    getString(R.string.summary_export_queries, 0)
+                d.dismiss()
+            }
+            dialog.setNegativeButton(R.string.cancel) { d, _ ->
+                d.dismiss()
+            }
+            dialog.show()
             true
         }
     }

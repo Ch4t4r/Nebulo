@@ -109,4 +109,7 @@
         <item>Kernel version</item>
         <item>Rooted (yes/no)</item>
     </string-array>
+
+    <string name="dialog_clearqueries_title">Clear all queries</string>
+    <string name="dialog_clearqueries_message">Are you sure you want to clear the logged queries? This cannot be reversed.</string>
 </resources>

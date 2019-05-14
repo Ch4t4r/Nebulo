@@ -58,5 +58,6 @@
         <item>Added automatic crash reporting (opt-in)</item>
         <item>Added privacy policy</item>
         <item>Fixed a lot of crashes</item>
+        <item>Added a setting to clear logged queries</item>
     </string-array>
 </resources>

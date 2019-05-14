@@ -219,5 +219,12 @@
                 android:title="@string/title_export_queries"
                 android:dependency="log_dns_queries"
                 android:summary="@string/summary_export_queries"/>
+
+        <Preference
+                android:key="clear_dns_queries"
+                android:title="@string/title_delete_queries"
+                android:summary="@string/summary_delete_queries"
+                android:dependency="log_dns_queries"
+                />
     </PreferenceCategory>
 </PreferenceScreen>

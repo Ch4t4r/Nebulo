@@ -119,4 +119,7 @@
 
     <string name="title_export_queries">Export queries</string>
     <string name="summary_export_queries">Export queries as CSV (%1d queries)</string>
+
+    <string name="title_delete_queries">Clear queries</string>
+    <string name="summary_delete_queries">Click here to delete all logged queries.</string>
 </resources>
