@@ -50,7 +50,6 @@ class CrashReportingEnableDialog(
         ) { dialog, _ ->
             context.getPreferences().crashReportingEnabled = true
             context.getPreferences().crashReportingConsent = true
-            context.getPreferences().crashReportingConsentAsked = true
             (context.applicationContext as SmokeScreen).initSentry(true)
             onConsentGiven?.invoke()
             dialog.dismiss()
@@ -61,7 +60,6 @@ class CrashReportingEnableDialog(
         ) { dialog, _ ->
             context.getPreferences().crashReportingEnabled = false
             context.getPreferences().crashReportingConsent = false
-            context.getPreferences().crashReportingConsentAsked = true
             Sentry.close()
             dialog.dismiss()
         }
@@ -88,6 +86,7 @@ class CrashReportingEnableDialog(
                 }
                 actualDialog.show()
             }
+            context.getPreferences().crashReportingConsentAsked = true
         }
     }
 
