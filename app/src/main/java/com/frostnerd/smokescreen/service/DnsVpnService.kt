@@ -605,7 +605,7 @@ class DnsVpnService : VpnService(), Runnable {
                     builder.addDisallowedApplication(defaultBypassPackage)
                 } else log("Package $defaultBypassPackage not installed, thus not bypassing")
             }
-            packageBypassAmount = userBypass.size + defaultBypass.size
+            packageBypassAmount = userBypass.size
         } else {
             log("Mode is set to whitelist, whitelisting ${userBypass.size} packages.")
             for (pkg in userBypass) {
