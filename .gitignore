@@ -8,6 +8,7 @@ local.properties
 captures/
 .externalNativeBuild
 .idea/assetWizardSettings.xml
+.idea/markdown-navigator/profiles_settings.xml
 .idea/caches
 
 !app/build/outputs/mapping/**/mapping.txt

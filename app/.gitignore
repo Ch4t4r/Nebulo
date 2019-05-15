@@ -2,6 +2,7 @@
 /release/
 /fdroid/
 /adblocker/
+/normal/
 !/build/outputs/mapping/release/mapping.txt
 !/build/outputs/mapping/fdroid/mapping.txt
 !/build/outputs/mapping/**/mapping.txt
