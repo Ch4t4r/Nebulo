@@ -26,6 +26,8 @@ import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
+import io.sentry.Sentry
+import io.sentry.SentryClient
 import java.util.logging.Level
 import kotlin.contracts.contract
 
@@ -123,6 +125,11 @@ fun Context.unregisterLocalReceiver(receiver: BroadcastReceiver) {
 
 fun Context.getPreferences(): AppSettingsSharedPreferences {
     return AppSettings.fromSharedPreferences(this)
+}
+
+fun Context.getSentryIfEnabled(): SentryClient? {
+    return if(getPreferences().crashReportingEnabled) Sentry.getStoredClient()
+    else null
 }
 
 fun Context.isAppBatteryOptimized(): Boolean {

@@ -8,8 +8,11 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.getSentryIfEnabled
 import com.frostnerd.smokescreen.hasTlsServer
 import com.frostnerd.smokescreen.log
+import io.sentry.event.Event
+import io.sentry.event.EventBuilder
 import org.minidns.dnsmessage.DnsMessage
 
 /*
@@ -61,7 +64,9 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
         if (writeQueriesToLog) {
             context.log("Query from device: $questionMessage")
         }
-        if (logQueriesToDb) {
+        if(questionMessage.questions.size == 0) {
+            context.getSentryIfEnabled()?.sendEvent(EventBuilder().withLevel(Event.Level.WARNING).withMessage("DnsMessage contains no question: $questionMessage"))
+        } else if (logQueriesToDb) {
             val query = DnsQuery(
                 type = questionMessage.question.type,
                 name = questionMessage.question.name.toString(),
