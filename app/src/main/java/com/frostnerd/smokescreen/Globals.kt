@@ -38,7 +38,7 @@ fun showPrivacyPolicyDialog(context: Context) {
     dialog.setTitle(R.string.menu_privacypolicy)
     val view = LayoutInflater.from(context).inflate(R.layout.dialog_privacypolicy, null, false)
     dialog.setView(view)
-    view.webView.loadUrl("file:///android_res/raw/privacy_policy.html")
+    view.webView.loadUrl("file:///android_asset/privacy_policy.html")
     dialog.setNeutralButton(R.string.all_close, null)
     dialog.show()
 }
