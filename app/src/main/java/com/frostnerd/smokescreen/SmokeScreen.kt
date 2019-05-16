@@ -1,14 +1,19 @@
 package com.frostnerd.smokescreen
 
 import android.app.Application
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import androidx.core.app.NotificationCompat
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
+import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
+import com.frostnerd.smokescreen.util.Notifications
 import com.github.anrwatchdog.ANRWatchDog
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
 import io.sentry.event.User
-import java.lang.RuntimeException
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -31,19 +36,45 @@ import kotlin.system.exitProcess
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class SmokeScreen : Application() {
+    companion object {
+        const val NOTIFICATION_ID_APP_CRASH = 3
+    }
+
     private var defaultUncaughtExceptionHandler: Thread.UncaughtExceptionHandler? = null
     val customUncaughtExceptionHandler: Thread.UncaughtExceptionHandler =
         Thread.UncaughtExceptionHandler { t, e ->
             e.printStackTrace()
             log(e)
-            val isPrerelease = BuildConfig.VERSION_NAME.contains("alpha",true) || BuildConfig.VERSION_NAME.contains("beta",true)
-            if(isPrerelease && getPreferences().loggingEnabled && !getPreferences().crashReportingEnabled) {
+            val isPrerelease =
+                BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
+            if (isPrerelease && getPreferences().loggingEnabled && !getPreferences().crashReportingEnabled) {
                 startActivity(Intent(this, ErrorDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            } else if (isPrerelease && getPreferences().crashReportingEnabled) {
+                showCrashNotification()
             }
             closeLogger()
             defaultUncaughtExceptionHandler?.uncaughtException(t, e)
             exitProcess(0)
         }
+
+    private fun showCrashNotification() {
+        val notification = NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
+            .setSmallIcon(R.drawable.ic_cloud_strikethrough)
+            .setOngoing(false)
+            .setAutoCancel(true)
+            .setContentIntent(
+                PendingIntent.getActivity(
+                    this, 1,
+                    Intent(this, PinActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            )
+            .setContentTitle(getString(R.string.notification_appcrash_title))
+        notification.setStyle(NotificationCompat.BigTextStyle(notification).bigText(getString(R.string.notification_appcrash_message)))
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
+            NOTIFICATION_ID_APP_CRASH,
+            notification.build()
+        )
+    }
 
     override fun onCreate() {
         initSentry()
@@ -56,17 +87,25 @@ class SmokeScreen : Application() {
         }
     }
 
-    fun initSentry(forceEnabled:Boolean = false) {
-        if(forceEnabled || getPreferences().crashReportingEnabled) {
-            Sentry.init("https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2", AndroidSentryClientFactory(this))
+    fun initSentry(forceEnabled: Boolean = false) {
+        if (forceEnabled || getPreferences().crashReportingEnabled) {
+            Sentry.init(
+                "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
+                AndroidSentryClientFactory(this)
+            )
             Sentry.getContext().user = User(getPreferences().crashReportingUUID, null, null, null)
             Sentry.getStoredClient().addTag("user.language", Locale.getDefault().displayLanguage)
             Sentry.getStoredClient().addTag("app.database_version", AppDatabase.currentVersion.toString())
             Sentry.getStoredClient().addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
-            Sentry.getStoredClient().addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
-            Sentry.getStoredClient().addTag("app.dns_server_secondary", getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString())
+            Sentry.getStoredClient()
+                .addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
+            Sentry.getStoredClient().addTag(
+                "app.dns_server_secondary",
+                getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
+            )
             Sentry.getStoredClient().addTag("app.debug", BuildConfig.DEBUG.toString())
-            Sentry.getStoredClient().addTag("app.installer_package", packageManager.getInstallerPackageName(packageName))
+            Sentry.getStoredClient()
+                .addTag("app.installer_package", packageManager.getInstallerPackageName(packageName))
         } else {
             Sentry.close()
         }

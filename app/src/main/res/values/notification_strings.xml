@@ -22,4 +22,7 @@
 
     <string name="notification_vpnrestart_title">Restarting Vpn</string>
     <string name="notification_vpnrestart_text">The Vpn service will be restarted soon.</string>
+
+    <string name="notification_appcrash_title">Nebulo has crashed</string>
+    <string name="notification_appcrash_message">Nebulo has crashed. Click here to go to the main menu and to restart the app, if necessary.</string>
 </resources>
