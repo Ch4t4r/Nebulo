@@ -59,7 +59,7 @@ class SmokeScreen : Application() {
 
     private fun showCrashNotification() {
         val notification = NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
-            .setSmallIcon(R.drawable.ic_cloud_strikethrough)
+            .setSmallIcon(R.drawable.ic_cloud_warn)
             .setOngoing(false)
             .setAutoCancel(true)
             .setContentIntent(
