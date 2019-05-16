@@ -58,6 +58,8 @@ interface AppSettings {
     // Notification category
     var showNotificationOnLockscreen: Boolean
     var hideNotificationIcon: Boolean
+    var allowPauseInNotification:Boolean
+    var allowStopInNotification:Boolean
 
     // Pin category
     var enablePin:Boolean
@@ -175,6 +177,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     override var showNotificationOnLockscreen: Boolean by booleanPref("show_notification_on_lockscreen", true)
     override var hideNotificationIcon: Boolean by booleanPref("hide_notification_icon", false)
+    override var allowPauseInNotification: Boolean by booleanPref("notification_allow_pause", true)
+    override var allowStopInNotification: Boolean by booleanPref("notification_allow_stop", true)
 
     override var enablePin:Boolean by booleanPref("enable_pin", false)
     override var allowFingerprintForPin:Boolean by booleanPref("pin_allow_fingerprint", true)

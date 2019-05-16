@@ -248,15 +248,18 @@ class DnsVpnService : VpnService(), Runnable {
                 Intent(this, PinActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
             )
         )
-        val stopPendingIntent =
-            PendingIntent.getService(this, 1, commandIntent(this, Command.STOP), PendingIntent.FLAG_CANCEL_CURRENT)
-        val stopAction = NotificationCompat.Action(R.drawable.ic_stop, getString(R.string.all_stop), stopPendingIntent)
-
-        val pausePendingIntent =
-            PendingIntent.getService(this, 2, commandIntent(this, Command.PAUSE_RESUME), PendingIntent.FLAG_CANCEL_CURRENT)
-        pauseNotificationAction = NotificationCompat.Action(R.drawable.ic_stat_pause, getString(R.string.all_pause), pausePendingIntent)
-        notificationBuilder.addAction(stopAction)
-        notificationBuilder.addAction(pauseNotificationAction)
+        if(getPreferences().allowStopInNotification) {
+            val stopPendingIntent =
+                PendingIntent.getService(this, 1, commandIntent(this, Command.STOP), PendingIntent.FLAG_CANCEL_CURRENT)
+            val stopAction = NotificationCompat.Action(R.drawable.ic_stop, getString(R.string.all_stop), stopPendingIntent)
+            notificationBuilder.addAction(stopAction)
+        }
+        if(getPreferences().allowPauseInNotification) {
+            val pausePendingIntent =
+                PendingIntent.getService(this, 2, commandIntent(this, Command.PAUSE_RESUME), PendingIntent.FLAG_CANCEL_CURRENT)
+            pauseNotificationAction = NotificationCompat.Action(R.drawable.ic_stat_pause, getString(R.string.all_pause), pausePendingIntent)
+            notificationBuilder.addAction(pauseNotificationAction)
+        }
         updateNotification(0)
         log("Notification created and posted.")
     }

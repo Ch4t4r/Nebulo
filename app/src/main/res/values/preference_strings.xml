@@ -14,6 +14,8 @@
     <string name="title_excluded_apps">Excluded apps</string>
     <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use dns-over-https anymore.</string>
 
+
+
     <string name="preference_category_notification">Notification</string>
 
     <string name="title_show_notification_on_lockscreen">Show on lockscreen</string>
@@ -21,6 +23,12 @@
 
     <string name="title_notification_hide_icon">Hide icon</string>
     <string name="summary_notification_hide_icon">Hide the icon from the navigation bar on the top</string>
+
+    <string name="title_notification_allow_stop">Allow stopping</string>
+    <string name="summary_notification_allow_stop">Allow the app to be stopped from the notification</string>
+
+    <string name="title_notification_allow_pause">Allow pausing</string>
+    <string name="summary_notification_allow_pause">Allow the app to be paused from the notification</string>
 
 
     <string name="preference_category_pin">PIN protection</string>
