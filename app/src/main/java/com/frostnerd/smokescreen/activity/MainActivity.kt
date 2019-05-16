@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
@@ -23,6 +24,7 @@ import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
 
 /*
@@ -62,7 +64,12 @@ class MainActivity : NavigationDrawerActivity() {
         supportActionBar?.elevation = 0f
         ChangelogDialog.showNewVersionChangelog(this)
         if(getPreferences().shouldShowCrashReportingConsentDialog()) {
-            CrashReportingEnableDialog(this).show()
+            CrashReportingEnableDialog(this, onConsentGiven = {
+                val bar = Snackbar.make(findViewById<View>(android.R.id.content), R.string.crashreporting_thankyou, Snackbar.LENGTH_INDEFINITE)
+                    bar.setAction(R.string.crashreporting_thankyou_gotit) {
+                        bar.dismiss()
+                    }.show()
+            }).show()
         }
     }
 
