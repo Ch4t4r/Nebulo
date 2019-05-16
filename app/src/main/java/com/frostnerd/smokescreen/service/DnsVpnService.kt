@@ -280,7 +280,7 @@ class DnsVpnService : VpnService(), Runnable {
             noConnectionNotificationBuilder = NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
             noConnectionNotificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
             noConnectionNotificationBuilder.setOngoing(false)
-            noConnectionNotificationBuilder.setSmallIcon(R.drawable.ic_times)
+            noConnectionNotificationBuilder.setSmallIcon(R.drawable.ic_cloud_strikethrough)
             noConnectionNotificationBuilder.setContentTitle(getString(R.string.notification_noconnection_title))
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
             noConnectionNotificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(getString(R.string.notification_noconnection_text)))
