@@ -115,7 +115,9 @@
 
     <string name="dialog_credits_title">Credits</string>
     <string name="dialog_credits_message" formatted="true">
-        - App icon by <![CDATA[<a href="https://dribbble.com/rkbdi">RKBDI</a>]]> .\n\n
+        - App icon by <![CDATA[<a href="https://dribbble.com/rkbdi">RKBDI</a>]]> .\n
+        > The app and notification icons are remixes of the cloud icon from material.io
+        \n
         \n
         Want to see your name here? Feel free to <![CDATA[<a href="https://git.frostnerd.com/PublicAndroidApps/smokescreen">contribute</a>]]>.
     </string>
