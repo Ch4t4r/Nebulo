@@ -58,7 +58,7 @@
     </string-array>
 
     <string-array name="changelog_build_30">
-        <item>1.0 Beta (Build 29)</item>
+        <item>1.0 Beta (Build 30)</item>
         <item>Added new notification icon</item>
         <item>Fixed the privacy policy not loading</item>
         <item>Clarified the blacklist/whitelist text in the notification</item>
