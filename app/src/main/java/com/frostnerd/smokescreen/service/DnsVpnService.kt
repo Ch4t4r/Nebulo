@@ -830,6 +830,7 @@ class DnsVpnService : VpnService(), Runnable {
             val onClearCache:((currentCache:Map<String, Map<Record.TYPE, Map<Record<*>, Long>>>) -> Unit)? = if(getPreferences().keepDnsCacheAcrossLaunches) {
                 { cache ->
                     log("Persisting current cache to Database.")
+                    getDatabase().cachedResponseDao().deleteAll()
                     var persisted = 0
                     val entries = mutableListOf<CachedResponse>()
                     for(entry in cache) {
