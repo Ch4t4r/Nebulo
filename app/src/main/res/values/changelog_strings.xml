@@ -56,4 +56,12 @@
         <item>Fixed a lot of crashes</item>
         <item>Added a setting to clear logged queries</item>
     </string-array>
+
+    <string-array name="changelog_build_30">
+        <item>1.0 Beta (Build 29)</item>
+        <item>Added new notification icon</item>
+        <item>Fixed the privacy policy not loading</item>
+        <item>Clarified the blacklist/whitelist text in the notification</item>
+        <item>Fixed a few crashes</item>
+    </string-array>
 </resources>
