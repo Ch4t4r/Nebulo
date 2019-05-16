@@ -142,7 +142,6 @@ class DnsVpnService : VpnService(), Runnable {
         super.onCreate()
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             log("Encountered an uncaught exception.")
-            log(Logger.stacktraceToString(e))
             destroy()
             stopForeground(true)
             stopSelf()
