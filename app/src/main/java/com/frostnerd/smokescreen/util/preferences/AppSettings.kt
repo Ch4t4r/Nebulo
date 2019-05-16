@@ -105,6 +105,8 @@ interface AppSettings {
     var previousInstalledVersion:Int // Maintained in ChangelogDialog
     var showChangelog:Boolean // Maintained in ChangelogDialog
     var exportedQueryCount:Int
+    var totalAppLaunches:Int
+    var askedForGroupJoin:Boolean
 
     fun isUsingKeweon(): Boolean {
         return dnsServerConfig.servers.any {
@@ -168,6 +170,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var crashReportingConsent: Boolean by booleanPref("sentry_consent", false)
     override var crashReportingConsentAsked: Boolean by booleanPref("sentry_consent_asked", false)
     override var crashReportingUUID: String by nonOptionalOf(stringPref("sentry_id"), true, UUID.randomUUID().toString())
+    override var totalAppLaunches: Int by intPref("total_app_launches", 0)
+    override var askedForGroupJoin: Boolean by booleanPref("asked_group_join", false)
 
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)

@@ -26,6 +26,7 @@ import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
+import kotlin.random.Random
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -70,6 +71,21 @@ class MainActivity : NavigationDrawerActivity() {
                         bar.dismiss()
                     }.show()
             }).show()
+        }
+        getPreferences().totalAppLaunches += 1
+        if(getPreferences().totalAppLaunches >= 5 &&
+            !getPreferences().askedForGroupJoin &&
+            Random.nextInt(0,100) < 15 &&
+                isPackageInstalled(this, "org.telegram.messenger")) {
+            getPreferences().askedForGroupJoin = true
+            showInfoTextDialog(this, getString(R.string.dialog_join_group_title), getString(R.string.dialog_join_group_message),
+                getString(R.string.dialog_join_group_positive) to { dialog, _ ->
+                    dialog.dismiss()
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://join?invite=I54nRleveRGP8IPmcIdySg"))
+                    startActivity(intent)
+                }, getString(R.string.dialog_crashreporting_negative) to { dialog, _ ->
+                    dialog.dismiss()
+                }, null)
         }
     }
 
