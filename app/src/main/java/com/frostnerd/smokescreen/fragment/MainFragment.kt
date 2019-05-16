@@ -107,7 +107,7 @@ class MainFragment : Fragment() {
             }.show()
         }
         privacyStatementText.setOnClickListener {
-            if(it.tag != null) {
+            if (it.tag != null) {
                 val i = Intent(Intent.ACTION_VIEW)
                 val url = it.tag as URL
                 i.data = Uri.parse(url.toURI().toString())
@@ -118,9 +118,7 @@ class MainFragment : Fragment() {
             val context = context
             if (isAdded && !isDetached && context != null) {
                 val config = context.getPreferences().dnsServerConfig
-                requireActivity().runOnUiThread {
-                    updatePrivacyPolicyLink(config)
-                }
+                updatePrivacyPolicyLink(config)
             }
         }
         updateVpnIndicators()
@@ -185,15 +183,16 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun updatePrivacyPolicyLink(serverInfo:DnsServerInformation<*>) {
-        val url = serverInfo.specification.privacyPolicyURL
-
-        if(url != null) {
-            privacyStatementText.text = getString(R.string.main_dnssurveillance_privacystatement, serverInfo.name)
-            privacyStatementText.tag = url
-            privacyStatementText.visibility = View.VISIBLE
-        } else {
-            privacyStatementText.visibility = View.GONE
+    private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
+        requireActivity().runOnUiThread {
+            val url = serverInfo.specification.privacyPolicyURL
+            if (url != null) {
+                privacyStatementText.text = getString(R.string.main_dnssurveillance_privacystatement, serverInfo.name)
+                privacyStatementText.tag = url
+                privacyStatementText.visibility = View.VISIBLE
+            } else {
+                privacyStatementText.visibility = View.GONE
+            }
         }
     }
 }
