@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
@@ -184,14 +185,15 @@ class MainFragment : Fragment() {
     }
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
-        requireActivity().runOnUiThread {
+        activity?.runOnUiThread {
             val url = serverInfo.specification.privacyPolicyURL
-            if (url != null) {
-                privacyStatementText.text = getString(R.string.main_dnssurveillance_privacystatement, serverInfo.name)
-                privacyStatementText.tag = url
-                privacyStatementText.visibility = View.VISIBLE
-            } else {
-                privacyStatementText.visibility = View.GONE
+            val text = view?.findViewById<TextView>(R.id.privacyStatementText)
+            if (url != null && text != null) {
+                text.text = getString(R.string.main_dnssurveillance_privacystatement, serverInfo.name)
+                text.tag = url
+                text.visibility = View.VISIBLE
+            } else if(text != null){
+                text.visibility = View.GONE
             }
         }
     }
