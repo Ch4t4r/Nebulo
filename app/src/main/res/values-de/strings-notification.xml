@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="notification_channel_default">Standard-Channel</string>
+    <string name="notification_channel_default_description">Standard-Channel zum anzeigen von Benachrichtigungen.</string>
+
+    <string name="notification_channel_foreground_service">Dauerhafter Benachrichtigungskanal</string>
+    <string name="notification_channel_foreground_service_description">Kanal welcher zum anzeigen von permanenten Benachrichtigungen genutzt wird</string>
+
+    <string name="notification_channel_noconnection">Kanal für Verbindungswarnungen</string>
+    <string name="notification_channel_noconnection_description">Kanal welcher benutzt wird, um Benachrichtungen zu zeigen, wenn der Betrieb der App unterbrochen ist</string>
+
+    <string name="notification_main_text">Anfragen werden an %1$s gesendet
+\n
+\n%2$d Apps sind von DoH/DoT ausgeschlossen
+\n%3$d Einträge im Cache</string>
+    <string name="notification_main_text_with_secondary">Anfragen werden an %1$s und %2$s gesendet
+\n
+\n%3$d Apps sind von DoH/DoT ausgeschlossen
+\n%4$d Einträge im Cache</string>
+    <string name="notification_main_text_whitelist">Anfragen werden an %1$s gesendet
+\n
+\n%2$d Apps nutzen DoH/DoT
+\n%3$d Einträge im Cache</string>
+    <string name="notification_main_text_with_secondary_whitelist">Anfragen werden an %1$s und%2$s gesendet
+\n
+\n%3$d Apps nutzen DoH/DoT
+\n%4$d Einträge im Cache</string>
+    <string name="notification_main_title_tls">Nebulo (DoT)</string>
+    <string name="notification_main_title_https">Nebulo (DoH)</string>
+    <string name="notification_main_subtext">Bisher %1$d Anfragen</string>
+
+    <string name="notification_noconnection_title">Keine Verbindung</string>
+    <string name="notification_noconnection_text">Die App leitet aktuell deine DNS Anfragen nicht weiter, da du entweder keine, oder nur eine schlechte Verbindung hast.</string>
+
+    <string name="notification_vpnrestart_title">Starte Vpn neu</string>
+    <string name="notification_vpnrestart_text">Der Vpn wird bald neu gestartet.</string>
+
+    <string name="notification_appcrash_title">Nebulo ist abgestürzt</string>
+    <string name="notification_appcrash_message">Nebulo ist abgestürzt. Klicke hier, um in das Hauptmenü zu gelangen und, falls nötig, die App neuzustarten.</string>
+</resources>
