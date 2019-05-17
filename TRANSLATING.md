@@ -24,8 +24,9 @@ You can generally use the service without creating an account, but if you do the
  - Your IP-address (only saved when trying to log in, or logging in), used in an audit log to combat spam and malicious actors.
  - A session ID as a cookie to keep you logged in (only stored when logging in)
     - A cookie is a small file on your device the website can read from and write to
-
+    
 Without creating an account (or trying to log in), no personal data is collected. IP addresses aren't logged on the HTTP server.
+It is analyzed and [publicly displayed](https://weblate.frostnerd.com/stats/) which users contributed the most translations and which users were active the most.
 No collected data is shared with any third party.
 No collected data is analyzed automatically except for the usages described above.
 
