@@ -10,9 +10,9 @@
     <string name="dialog_newserver_name">Server name</string>
     <string name="dialog_newserver_name_hint">Example</string>
     <string name="dialog_newserver_primaryserver">Primary server</string>
-    <string name="dialog_newserver_primaryserver_hint">example-doh.com[/dns-query]</string>
+    <string name="dialog_newserver_primaryserver_hint" translatable="false">example-doh.com[/dns-query]</string>
     <string name="dialog_newserver_secondaryserver">Secondary server (Optional)</string>
-    <string name="dialog_newserver_secondaryserver_hint">example-doh.com[/dns-query]</string>
+    <string name="dialog_newserver_secondaryserver_hint" translatable="false">example-doh.com[/dns-query]</string>
 
     <string name="dialog_deleteconfig_title">Delete configuration?</string>
     <string name="dialog_deleteconfig_text">Do you want to delete the configuration %1$s?</string>
