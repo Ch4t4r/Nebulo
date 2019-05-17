@@ -1,8 +1,13 @@
-![Icon](app/src/main/res/mipmap-mdpi/ic_launcher_round.png) 
+![Icon](app/src/main/res/mipmap-mdpi/ic_launcher_round.png)  
 
 # Nebulo
 Nebulo is a free, open-source, non-root and small sized DNS changer utilizing dns-over-https and dns-over-tls to bring privacy and security to your phone.
 It is fast, contains no ads or tracking and offers a lot of flexibility.
+
+# Help wanted
+Requesting your support: the app is getting closer to a proper release but it's still missing an important aspect: translations.
+Translations are important to reach as broad of an audience as possible and for non-english speakers to be able to use the app to it's full extent.
+Head over to the [translation guide](TRANSLATING.md) to see how you can help!
 
 # Installation
 The app is distributed over the play store, F-Droid and as .apk file.
@@ -70,6 +75,8 @@ This work contains third-party content, namely:
    - License: [MIT](https://opensource.org/licenses/MIT)
 - [Font Awesome icons](https://fontawesome.com/)
    - License: Font Awesome Pro License, held by Daniel Wolf
+- [Weblate](https://weblate.org) for managing translations
+   - License: GPLv3
 
 # Cloning
 Feel free to clone this software. However, there are a few things to notice:
@@ -77,3 +84,15 @@ Feel free to clone this software. However, there are a few things to notice:
    - These libraries are distributed using an Artifactory server. This server is not public, but I do hand out credentials on request.
    - Alternatively, replace the dependencies (`implementation 'com.frostnerd.utilskt:....`) with git sub-modules (`implementation project(...)`) after cloning the libraries.
 - I own a Font Awesome Pro license and use a lot of their icons. Most of the icons used in this project are accessible with a Font Awesome Free license, but not all necessarily are. Either you have to own a license yourself, or check whether a particular icon is also usable with the Free license.
+
+</br>
+
+</br>
+
+</br>
+
+<a href="https://weblate.frostnerd.com/engage/nebulo/?utm_source=widget">
+<img src="https://weblate.frostnerd.com/widgets/nebulo/-/svg-badge.svg" alt="Übersetzungsstatus" />
+</a> 
+
+[![pipeline status](https://git.frostnerd.com/PublicAndroidApps/smokescreen/badges/master/pipeline.svg)](https://git.frostnerd.com/PublicAndroidApps/smokescreen/commits/master)
