@@ -1,2 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="tasker_start_if_running">Starten, auch wenn es bereits läuft (überschreibt möglicherweise laufende Konfiguration)</string>
+    <string name="tasker_use_default_configuration">Benutze die im Hauptmenü angegebenen Server</string>
+    <string name="tasker_action">Aktion</string>
+    <string name="tasker_start_app_custom_url">Starte die app mit %1s (Modus: %2s)</string>
+    <string name="tasker_start_app_custom_urls">Starte die app mit %1s and %2s (Modus: %3s)</string>
+    <string name="tasker_mode_doh">DoH</string>
+    <string name="tasker_mode_dot">DoT</string>
+    </resources>
