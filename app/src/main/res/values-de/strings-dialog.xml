@@ -1,3 +1,103 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="dialog_serverconfiguration_title">Serverkonfiguration</string>
-    </resources>
+    <string name="dialog_serverconfiguration_https">Dns-über-https (DoH)</string>
+    <string name="dialog_serverconfiguration_tls">Dns-über-tls (DoT)</string>
+    <string name="dialog_serverconfiguration_addserver">Neuer Server</string>
+
+    <string name="dialog_newserver_title_https">Neuer Server (DoH)</string>
+    <string name="dialog_newserver_title_tls">Neuer Server (DoT)</string>
+    <string name="dialog_newserver_name">Servername</string>
+    <string name="dialog_newserver_name_hint">Beispiel</string>
+    <string name="dialog_newserver_primaryserver">Primärer Server</string>
+    <string name="dialog_newserver_secondaryserver">Sekundärer Server (Optional)</string>
+    <string name="dialog_deleteconfig_title">Konfiguration löschen\?</string>
+    <string name="dialog_deleteconfig_text">Möchtest du die Konfiguration %1$s löschen\?</string>
+
+    <string name="dialog_appchoosal_showsystemapps">Zeige Systemapps</string>
+    <string name="dialog_appchoosal_whitelist">Nutze DoH nur in ausgewählten Apps</string>
+
+    <string name="dialog_excludedapps_infotext">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</string>
+
+    <string name="dialog_serverimport_title">Import von %1d Servern</string>
+    <string name="dialog_serverimport_done">Fertig</string>
+    <string name="dialog_serverimport_priority">Priorität %1d</string>
+    <string name="dialog_serverimport_experimental">Experimental</string>
+    <string name="dialog_serverimport_servertype_doh">Typ: Dns-über-https (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Typ: Dns-über-tls (DoT)</string>
+    <string name="dialog_serverimport_text">Bitte wähle die Server aus, welche du importieren möchtest.
+\n
+\nServer welche bereits importiert wurden werden, falls hier nochmal ausgewählt, doppelt angezeigt werden.</string>
+
+    <string name="dialog_serverimportfailed_title">Import fehlgeschlagen</string>
+    <string name="dialog_serverimportfailed_text">Die Server konnten nicht importiert werden.</string>
+    <string name="dialog_serverimportfailed_text_exception">Die Server konnten nicht importiert werden.
+\n(%1s)</string>
+
+    <string name="dialog_logexport_text">Wie möchtest du die Logs teilen\?</string>
+    <string name="dialog_logexport_general">Generell</string>
+    <string name="dialog_logexport_email">E-Mail</string>
+
+    <string name="dialog_deletelogs_text">Bist du dir sicher, dass du alle Logs löschen willst\?</string>
+
+    <string name="dialog_error_title">Absturzmeldung</string>
+    <string name="dialog_error_text">Es sieht so aus, als sei die App abgestürzt. Möchtest du die Logs an den Entwickler schicken\?</string>
+
+    <string name="dialog_batteryoptimization_title">Batterieoptimierungen</string>
+    <string name="dialog_batteryoptimization_message">Auf einigen Geräten wird die App nicht darüber informiert, dass das Gerät fertig gestartet wurde, wenn die Batterieoptimierungen für diese App aktiv sind.
+\nDie App ist aktuell nicht von diesen Optimierungen ausgeschlossen, möchtest du dies vornehmen\?
+\n
+\nBevor du diese deaktivierst solltest du testen, ob es auch ohne deaktivieren dieser funktioniert.</string>
+    <string name="dialog_batteryoptimization_whitelist">Deaktivieren</string>
+    <string name="dialog_batteryoptimization_ignore">Ignorieren</string>
+
+    <string name="dialog_rate_confirmation">Möchtest du den Play Store öffnen, um die App zu bewerten\?</string>
+
+    <string name="dialog_changelog_title">Änderungsprotokoll</string>
+    <string name="dialog_changelog_infotext">Die App wurde seitdem du sie zuletzt geöffnet hast geupdated. In the folgenden Liste siehst du die Änderungen. Klicke die Box unten an, um diesen Dialog in Zukunft nicht mehr zu sehen.</string>
+    <string name="dialog_changelog_dont_show_again">Nicht mehr zeigen</string>
+
+    <string name="dialog_about_changelog">Änderungsprotokoll</string>
+    <string name="dialog_about_licenses">Lizenzen</string>
+
+    <string name="dialog_query_export_title">Exportiere Anfragen…</string>
+    <string name="dialog_query_export_message">Bitte warte solange bis die Anfragen exportiert wurden</string>
+
+    <string name="dialog_pin_message">Bitte gebe deine PIN an.</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_pin_inputlabel">PIN</string>
+
+    <string name="dialog_enable_logging">Möchtest du die Protokollierung aktivieren\? Die Protokolle enthalten statistische, sowie Testinformationen und ausgeführte Aktionen in der App. Die Protokolle werden niemals automatisch verschickt.</string>
+
+    <string name="dialog_crashreporting_title">Automatische Absturzmeldung</string>
+    <string name="dialog_crashreportingusages_title">Übertragene Daten</string>
+    <string name="dialog_crashreportingusages_message">Klicke auf eine der Gruppen um zu sehen, welche Daten bei einem Absturz übertragen werden.</string>
+    <string name="dialog_crashreporting_positive">Absturzmeldungen aktivieren</string>
+    <string name="dialog_crashreporting_negative">Nein, Danke.</string>
+    <string name="dialog_crashreporting_neutral">Daten ansehen</string>
+    <string name="dialog_crashreporting_message">Danke, dass du ein Tester in dieser App bist!
+\n
+\nDiese App nutzt open-source und selbst gehostete Software aus dritter Hand, um die Verfolgung von Abstürzen leichter zu machen. Wenn (und auch nur wenn) aktiviert, wird die App bei einem Absturz automatisch Daten über den Absturz übermitteln. Diese Meldungen enthalten zusatzlich zur Absturzmeldung weitere statistische Daten über dein Gerät. Dies umfasst eine zufällig erstellte Zeichekette, welche zum Identifizieren von Abstürzen auf dem gleichen Gerät genutzt wird. Diese kann nicht dafür genutzt werden, anderweitige Aktionen zu verfolgen. Das Aktivieren der Absturzmeldungen ist optional, würde mir aber sehr helfen.
+\nMeldungen werden sicher über HTTPS übertragen.
+\n
+\nKlicke auf \"Daten ansehen\" um einzusehen, welche Arten von Daten übermittelt werden. Dort befindet sich ebenfalls ein Link zur Datenschutzerklärung.</string>
+    <string name="dialog_crashreporting_message_notester">Danke, dass du Nebulo benutzt!
+\n
+\nDiese App nutzt open-source und selbst gehostete Software aus dritter Hand, um die Verfolgung von Abstürzen leichter zu machen. Wenn (und auch nur wenn) aktiviert, wird die App bei einem Absturz automatisch Daten über den Absturz übermitteln. Diese Meldungen enthalten zusatzlich zur Absturzmeldung weitere statistische Daten über dein Gerät. Dies umfasst eine zufällig erstellte Zeichekette, welche zum Identifizieren von Abstürzen auf dem gleichen Gerät genutzt wird. Diese kann nicht dafür genutzt werden, anderweitige Aktionen zu verfolgen. Das Aktivieren der Absturzmeldungen ist optional, würde mir aber sehr helfen.
+\nMeldungen werden sicher über HTTPS übertragen.
+\n
+\nKlicke auf \"Daten ansehen\" um einzusehen, welche Arten von Daten übermittelt werden. Dort befindet sich ebenfalls ein Link zur Datenschutzerklärung.</string>
+    <string name="dialog_clearqueries_title">Alle Anfragen leeren</string>
+    <string name="dialog_clearqueries_message">Bist du dir sicher, dass du alle gespeicherten Anfragen löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
+
+    <string name="dialog_credits_title">Danksagungen</string>
+    <string name="dialog_credits_message" formatted="true">- App icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
+\n 
+\n Möchtest du deinen Namen hier sehen\? Trage noch heute &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;etwas bei&lt;/a&gt;.</string>
+
+    <string name="dialog_join_group_title">Der Gemeinde beitreten</string>
+    <string name="dialog_join_group_message">Hallo!
+\n
+\nWusstest du schon, dass diese App eine Telegramgruppe hat\? Die Gruppe enthält reguläre Updates und ist der perfekte Platz, um Fragen zu stellen und Diskussionen anzuregen.
+\nWir sind eine großartige Gemeinde von über 120 Personen, möchtest du ein Teil davon werden\?</string>
+    <string name="dialog_join_group_positive">Gerne!</string>
+</resources>
