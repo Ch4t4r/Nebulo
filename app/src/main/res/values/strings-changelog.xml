@@ -64,4 +64,12 @@
         <item>Clarified the blacklist/whitelist text in the notification</item>
         <item>Fixed a few crashes</item>
     </string-array>
+
+    <string-array name="changelog_build_31">
+        <item>1.0 Beta (Build 31)</item>
+        <item>Added partial German translation</item>
+        <item>Added settings to disable the stop/pause buttons of the notification</item>
+        <item>A notification is now shown if the app crashes and automatic crash reporting is enabled</item>
+        <item>Fixed a few crashes</item>
+    </string-array>
 </resources>
