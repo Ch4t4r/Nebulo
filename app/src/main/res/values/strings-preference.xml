@@ -107,6 +107,9 @@
     <string name="title_disallow_other_vpns">Disallow other VPNs</string>
     <string name="summary_disallow_other_vpns">Don\'t allow other VPNs to start if the app isn\'t explicitly stopped</string>
 
+    <string name="title_catch_other_dns_servers">Intercept other DNS traffic</string>
+    <string name="summary_catch_other_dns_servers">Intercept traffic of known DNS servers and transmit it using Nebulo</string>
+
     <string name="title_bypass_searchdomains">Searchdomains bypass</string>
     <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network.</string>
 

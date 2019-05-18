@@ -580,10 +580,10 @@ class DnsVpnService : VpnService(), Runnable {
                         addresses.forEach { address ->
                             if (address is Inet6Address && useIpv6) {
                                 log("Adding route for Ipv6 $address")
-                                builder.addRoute(address, 32)
+                                builder.addRoute(address, 128)
                             } else if (address is Inet4Address && useIpv4) {
                                 log("Adding route for Ipv4 $address")
-                                builder.addRoute(address, 128)
+                                builder.addRoute(address, 32)
                             }
                         }
                     }
