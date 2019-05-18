@@ -7,4 +7,5 @@
     <string name="activity_label_enable_logging">Exporter/Permettre la journalisation</string>
 
     <string name="all_stop">Arrêter</string>
+    <string name="all_start">démarrer</string>
     </resources>
