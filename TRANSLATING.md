@@ -43,14 +43,15 @@ Here's a quick tutorial on how to contribute a translation.
    - After creating an account you'll receive an e-mail with a confirmation link.
 3. When logged in, [open the project](https://weblate.frostnerd.com/projects/nebulo/).
 4. [Select one of the components](material/translating/project_overview.png) you want to contribute a translation to
-5. Choose an existing language, or [start translating to a new language](material/translating/start_translation)
+5. If necessary, accept the contributor agreement ( [at the top of the page](material/translating/agreement.png))
+6. Choose an existing language, or [start translating to a new language](material/translating/start_translation.png)
    - English is the default, it can't be edited
-6. You'll be [shown a page](material/translating/component_overview.png) which gives an overview of the current translation state
-7. [Select](material/translating/translation_overview.png) one of "All strings", "Strings needing action", "Not translated strings" or "Strings needing action without suggestions" or "Translated strings".
-8. You'll be taken to the [translation editor](material/translating/translation_editor.png) (I choose "Not translated strings")
-9. You can now select the translation source (English texts) and enter translations or suggestions for the language.
+7. You'll be [shown a page](material/translating/component_overview.png) which gives an overview of the current translation state
+8. [Select](material/translating/translation_overview.png) one of "All strings", "Strings needing action", "Not translated strings" or "Strings needing action without suggestions" or "Translated strings".
+9. You'll be taken to the [translation editor](material/translating/translation_editor.png) (I choose "Not translated strings")
+10. You can now select the translation source (English texts) and enter translations or suggestions for the language.
    - You can also switch to [Zen mode](material/translating/translation_editor_zen.png) using the button in the right corner.
-10. There is much more this tool is able to do, feel free to experiment (or read [the docs](https://docs.weblate.org/en/weblate-3.6.1/index.html))!
+11. There is much more this tool is able to do, feel free to experiment (or read [the docs](https://docs.weblate.org/en/weblate-3.6.1/index.html))!
 
 # License
 All your translations become part of this project and are thus managed under the [GPLv3 license](LICENSE) .

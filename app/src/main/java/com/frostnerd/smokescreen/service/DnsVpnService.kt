@@ -210,13 +210,19 @@ class DnsVpnService : VpnService(), Runnable {
             "null_terminate_keweon",
             "allow_ipv6_traffic",
             "allow_ipv4_traffic",
-            "dns_server_config"
+            "dns_server_config",
+            "notification_allow_stop",
+            "notification_allow_pause"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings, getPreferences().preferenceChangeListener {
                 changes ->
             log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
             log("Detailed changes: $changes")
             if("hide_notification_icon" in changes || "hide_notification_icon" in changes) {
+                log("Recreating the notification because of the change in preferences")
+                createNotification()
+                setNotificationText()
+            } else if("notification_allow_pause" in changes || "notification_allow_stop" in changes) {
                 log("Recreating the notification because of the change in preferences")
                 createNotification()
                 setNotificationText()
