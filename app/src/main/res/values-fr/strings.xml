@@ -2,9 +2,9 @@
 <resources><string name="app_name">Nebulo</string>
 
     <string name="activity_label_import_queries">Importer des requêtes</string>
-    <string name="activity_label_import_servers">importer les serveurs</string>
+    <string name="activity_label_import_servers">Importer les serveurs</string>
 
     <string name="activity_label_enable_logging">Exporter/Permettre la journalisation</string>
 
-    <string name="all_stop">arrêter</string>
+    <string name="all_stop">Arrêter</string>
     </resources>
