@@ -725,7 +725,7 @@ class DnsVpnService : VpnService(), Runnable {
             )
         } else {
             handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
-                connectTimeout = 500,
+                connectTimeout = 2000,
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)
