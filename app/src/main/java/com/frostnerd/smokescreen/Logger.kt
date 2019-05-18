@@ -117,10 +117,12 @@ class Logger private constructor(context: Context) {
     private var oldSystemOut: PrintStream
     private val lock = ReentrantLock()
     var enabled: Boolean = true
+    private val id:Int
 
     init {
         val logDir = getLogDir(context)
-        logFile = File(logDir, "${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log")
+        id = ++context.getPreferences().lastLogId
+        logFile = File(logDir, "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log")
         logDir.mkdirs()
         logFile.createNewFile()
         fileWriter = BufferedWriter(FileWriter(logFile, false))
@@ -248,7 +250,7 @@ class Logger private constructor(context: Context) {
             val stackTrace = stacktraceToString(e)
             log(stackTrace)
             val errorFile =
-                File(logFile.parentFile, "${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err")
+                File(logFile.parentFile, "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err")
 
             if (errorFile.createNewFile()) {
                 val writer = BufferedWriter(FileWriter(errorFile, false))

@@ -46,6 +46,7 @@ interface AppSettings {
     var crashReportingConsent:Boolean
     var crashReportingConsentAsked:Boolean
     var crashReportingUUID:String
+    var lastLogId:Int
 
     // ###### Settings (in order)
     // No Category
@@ -172,6 +173,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var crashReportingUUID: String by nonOptionalOf(stringPref("sentry_id"), true, UUID.randomUUID().toString())
     override var totalAppLaunches: Int by intPref("total_app_launches", 0)
     override var askedForGroupJoin: Boolean by booleanPref("asked_group_join", false)
+    override var lastLogId: Int by intPref("last_log_id", 0)
 
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
