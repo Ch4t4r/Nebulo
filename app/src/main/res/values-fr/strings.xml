@@ -1,2 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">Nebulo</string>
+
+    <string name="activity_label_import_queries">Importer des requêtes</string>
+    <string name="activity_label_import_servers">importer les serveurs</string>
+
+    <string name="activity_label_enable_logging">Exporter/Permettre la journalisation</string>
+
+    <string name="all_stop">arrêter</string>
+    </resources>
