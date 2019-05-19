@@ -46,4 +46,13 @@
     <string name="crashreporting_thankyou">Thank you! If you change your mind, head to the settings.</string>
     <string name="crashreporting_thankyou_gotit">Got it!</string>
 
+    <string name="about_share">Share</string>
+    <string name="about_licenses">Open-source licenses</string>
+    <string name="about_changelog">Changelog</string>
+    <string name="about_contact_developer">Contact developer</string>
+    <string name="about_telegram_group">Telegram group</string>
+    <string name="about_privacypolicy">Privacy policy</string>
+    <string name="about_credits">Credits</string>
+    <string name="about_info">General information</string>
+
 </resources>

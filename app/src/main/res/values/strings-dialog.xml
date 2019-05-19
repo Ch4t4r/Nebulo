@@ -11,14 +11,16 @@
     <string name="dialog_newserver_name_hint">Example</string>
     <string name="dialog_newserver_primaryserver">Primary server</string>
     <string name="dialog_newserver_primaryserver_hint" translatable="false">example-doh.com[/dns-query]</string>
+    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false">example-dot.com[:443]</string>
     <string name="dialog_newserver_secondaryserver">Secondary server (Optional)</string>
     <string name="dialog_newserver_secondaryserver_hint" translatable="false">example-doh.com[/dns-query]</string>
+    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false">example-dot.com[:443]</string>
 
     <string name="dialog_deleteconfig_title">Delete configuration?</string>
     <string name="dialog_deleteconfig_text">Do you want to delete the configuration %1$s?</string>
 
     <string name="dialog_appchoosal_showsystemapps">Show system apps</string>
-    <string name="dialog_appchoosal_whitelist">Only use DoH in selected apps</string>
+    <string name="dialog_appchoosal_whitelist">Only use DoH/DoT in selected apps</string>
 
     <string name="dialog_excludedapps_infotext">%1d apps are excluded by default and cannot be de-selected</string>
 

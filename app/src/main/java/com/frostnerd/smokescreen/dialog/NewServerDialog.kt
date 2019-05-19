@@ -22,6 +22,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
 import kotlinx.android.synthetic.main.dialog_new_server.*
+import kotlinx.android.synthetic.main.dialog_new_server.view.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -60,6 +61,10 @@ class NewServerDialog(
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_server, null, false)
+        if(!dnsOverHttps) {
+            view.primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
+            view.secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
+        }
         if (title != null) setTitle(title)
         else {
             if (dnsOverHttps) setTitle(R.string.dialog_newserver_title_https)

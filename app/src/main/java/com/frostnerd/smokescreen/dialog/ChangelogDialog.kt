@@ -32,7 +32,7 @@ class ChangelogDialog(context: Context, versionToStartFrom:Int, val showOptOut:B
             if(previousVersion != BuildConfig.VERSION_CODE) {
                 context.getPreferences().previousInstalledVersion = BuildConfig.VERSION_CODE
                 if(context.getPreferences().showChangelog) {
-                    ChangelogDialog(context, 22, true).show()
+                    ChangelogDialog(context, previousVersion, true).show()
                 }
             }
         }

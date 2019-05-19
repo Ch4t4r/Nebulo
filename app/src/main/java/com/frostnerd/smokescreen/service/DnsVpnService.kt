@@ -47,6 +47,7 @@ import java.io.Serializable
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
+import java.util.concurrent.TimeoutException
 import java.util.logging.Level
 
 
@@ -368,9 +369,15 @@ class DnsVpnService : VpnService(), Runnable {
         userServerConfig = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
         serverConfig = getServerConfig()
         serverConfig.forEachAddress { _, address ->
-            address.addressCreator.resolveOrGetResultOrNull(true)
+            if(!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(true)
             address.addressCreator.whenResolveFailed {
                 showNoConnectionNotification()
+                if(it is TimeoutException) {
+                    address.addressCreator.resolveOrGetResultOrNull(true)
+                    address.addressCreator.whenResolveFinishedSuccessfully {
+                        hideNoConnectionNotification()
+                    }
+                }
             }
             address.addressCreator.whenResolveFinishedSuccessfully {
                 hideNoConnectionNotification()
@@ -569,15 +576,18 @@ class DnsVpnService : VpnService(), Runnable {
             for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
                 log("Adding all routes for ${server.name}")
                 server.servers.forEach {
-                    it.address.addressCreator.resolveOrGetResult().forEach { address ->
-                        if (address is Inet6Address && useIpv6) {
-                            log("Adding route for Ipv6 $address")
-                            builder.addRoute(address, 32)
-                        } else if (address is Inet4Address && useIpv4) {
-                            log("Adding route for Ipv4 $address")
-                            builder.addRoute(address, 128)
+                    it.address.addressCreator.whenResolveFinishedSuccessfully { addresses ->
+                        addresses.forEach { address ->
+                            if (address is Inet6Address && useIpv6) {
+                                log("Adding route for Ipv6 $address")
+                                builder.addRoute(address, 128)
+                            } else if (address is Inet4Address && useIpv4) {
+                                log("Adding route for Ipv4 $address")
+                                builder.addRoute(address, 32)
+                            }
                         }
                     }
+                    if(!it.address.addressCreator.startedResolve && !it.address.addressCreator.isCurrentlyResolving()) it.address.addressCreator.resolveOrGetResultOrNull(true, true)
                 }
             }
         } else log("Not intercepting traffic towards known DNS servers.")
@@ -725,7 +735,7 @@ class DnsVpnService : VpnService(), Runnable {
             )
         } else {
             handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
-                connectTimeout = 500,
+                connectTimeout = 2000,
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)

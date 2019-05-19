@@ -77,7 +77,7 @@ class CrashReportingEnableDialog(
                 usagesDialog.setNeutralButton(R.string.all_close) { _, _ ->
 
                 }
-                usagesDialog.setPositiveButton(R.string.menu_privacypolicy, null)
+                usagesDialog.setPositiveButton(R.string.about_privacypolicy, null)
                 val actualDialog = usagesDialog.create()
                 actualDialog.setOnShowListener {
                     actualDialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {

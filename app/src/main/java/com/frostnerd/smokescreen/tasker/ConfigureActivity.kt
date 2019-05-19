@@ -21,6 +21,7 @@ import com.frostnerd.smokescreen.fromServerUrls
 import com.frostnerd.smokescreen.hasHttpsServer
 import com.frostnerd.smokescreen.tlsServerFromHosts
 import kotlinx.android.synthetic.main.activity_tasker_configure.*
+import kotlinx.android.synthetic.main.dialog_new_server.view.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -154,6 +155,13 @@ class ConfigureActivity : BaseActivity() {
                 validationRegex = if (position == 0) NewServerDialog.SERVER_URL_REGEX else NewServerDialog.TLS_REGEX
                 primaryServer.text = primaryServer.text
                 secondaryServer.text = secondaryServer.text
+                if(position == 1) {
+                    primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint)
+                    secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint)
+                } else {
+                    primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
+                    secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
+                }
             }
         }
         addUrlTextWatcher(primaryServerWrap, primaryServer, false)

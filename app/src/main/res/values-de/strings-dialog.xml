@@ -14,7 +14,7 @@
     <string name="dialog_deleteconfig_text">Möchtest du die Konfiguration %1$s löschen\?</string>
 
     <string name="dialog_appchoosal_showsystemapps">Zeige Systemapps</string>
-    <string name="dialog_appchoosal_whitelist">Nutze DoH nur in ausgewählten Apps</string>
+    <string name="dialog_appchoosal_whitelist">Nutze DoH/DoT nur in ausgewählten Apps</string>
 
     <string name="dialog_excludedapps_infotext">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</string>
 
