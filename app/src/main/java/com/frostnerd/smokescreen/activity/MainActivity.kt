@@ -65,7 +65,8 @@ class MainActivity : NavigationDrawerActivity() {
         }*/
         supportActionBar?.elevation = 0f
         ChangelogDialog.showNewVersionChangelog(this)
-        if(getPreferences().shouldShowCrashReportingConsentDialog()) {
+        getPreferences().totalAppLaunches += 1
+        if(getPreferences().totalAppLaunches >= 3 && getPreferences().shouldShowCrashReportingConsentDialog()) {
             CrashReportingEnableDialog(this, onConsentGiven = {
                 val bar = Snackbar.make(findViewById<View>(android.R.id.content), R.string.crashreporting_thankyou, Snackbar.LENGTH_INDEFINITE)
                     bar.setAction(R.string.crashreporting_thankyou_gotit) {
@@ -73,7 +74,6 @@ class MainActivity : NavigationDrawerActivity() {
                     }.show()
             }).show()
         }
-        getPreferences().totalAppLaunches += 1
         if(getPreferences().totalAppLaunches >= 5 &&
             !getPreferences().askedForGroupJoin &&
             Random.nextInt(0,100) < 15 &&
