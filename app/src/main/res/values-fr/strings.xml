@@ -14,4 +14,7 @@
     <string name="all_yes">Oui</string>
     <string name="information">Information</string>
     <string name="open_app">Ouvrer l\'application.</string>
+    <string name="all_close">Fermer</string>
+
+    <string name="main_dnssurveillance_infotext">Notez que le serveur DNS auquel vous êtes connecté est capable d\'enregistrer les sites que vous visitez. Consultez les déclarations de confidentialité respectives pour plus d\'informations.</string>
     </resources>
