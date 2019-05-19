@@ -21,6 +21,7 @@ import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.LicensesDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
+import com.frostnerd.smokescreen.fragment.AboutFragment
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
@@ -141,82 +142,9 @@ class MainActivity : NavigationDrawerActivity() {
                     }
                 )
             }
-            clickableItem(getString(R.string.menu_share_app),
-                iconLeft = getDrawable(R.drawable.ic_share),
-                onLongClick = null,
-                onSimpleClick = { _, _, _ ->
-                    val intent = Intent(Intent.ACTION_SEND)
-                    intent.type = "text/plain"
-                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
-                    intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_share_text))
-                    startActivity(Intent.createChooser(intent, getString(R.string.menu_share_app)))
-                    false
-                })
-            clickableItem(getString(R.string.menu_contact_developer),
-                iconLeft = getDrawable(R.drawable.ic_envelope),
-                onLongClick = null,
-                onSimpleClick = { _, _, _ ->
-                    showEmailChooser(
-                        getString(R.string.menu_contact_developer),
-                        getString(R.string.app_name),
-                        getString(R.string.support_contact_mail),
-                        "\n\n\n\n\n\nSystem:\nApp version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n" +
-                                "Android: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})"
-                    )
-                    false
-                })
-            if (isPackageInstalled(this@MainActivity, "org.telegram.messenger")) {
-                clickableItem(getString(R.string.menu_telegram_group),
-                    onLongClick = null,
-                    iconLeft = getDrawable(R.drawable.ic_comments),
-                    onSimpleClick = { _, _, _ ->
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://join?invite=I54nRleveRGP8IPmcIdySg"))
-                        startActivity(intent)
-                        false
-                    })
-            }
-            clickableItem(getString(R.string.menu_privacypolicy),
-                iconLeft = getDrawable(R.drawable.ic_gavel),
-                onLongClick = null,
-                onSimpleClick = { _, _ ,_ ->
-                    showPrivacyPolicyDialog(this@MainActivity)
-                    false
-                })
-            clickableItem(getString(R.string.menu_credits),
-                iconLeft = getDrawable(R.drawable.ic_thumbs_up),
-                onLongClick = null,
-                onSimpleClick = { _, _ , _ ->
-                    println(getString(R.string.dialog_credits_message))
-                    showInfoTextDialog(this@MainActivity,
-                        getString(R.string.dialog_credits_title),
-                        getString(R.string.dialog_credits_message))
-                    false
-                })
-            clickableItem(getString(R.string.menu_about),
+            fragmentItem(getString(R.string.menu_about),
                 iconLeft = getDrawable(R.drawable.ic_binoculars),
-                onLongClick = null,
-                onSimpleClick = { _, _, _ ->
-                    showInfoTextDialog(
-                        this@MainActivity,
-                        getString(R.string.menu_about),
-                        getString(
-                            R.string.about_app,
-                            BuildConfig.VERSION_NAME + if(BuildConfig.DEBUG) " DEBUG" else "",
-                            BuildConfig.VERSION_CODE,
-                            AppDatabase.currentVersion,
-                            if(getPreferences().crashReportingEnabled) getPreferences().crashReportingUUID else "---"
-                        ),
-                        positiveButton = getString(R.string.dialog_about_changelog) to { dialog, _ ->
-                            dialog.dismiss()
-                            ChangelogDialog(this@MainActivity, 22, showOptOut = false, showInfoText = false).show()
-                        },
-                        negativeButton = getString(R.string.dialog_about_licenses) to { dialog, _ ->
-                            dialog.dismiss()
-                            LicensesDialog(this@MainActivity).show()
-                        }
-                    )
-                    false
-                })
+                fragmentCreator = singleInstanceFragment { AboutFragment() })
         }
     }
 

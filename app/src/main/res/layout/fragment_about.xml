@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:text="@string/about_privacypolicy"
+            android:textSize="17sp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:id="@+id/privacyPolicy"
+            android:layout_height="wrap_content"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/licenses"
+            android:textSize="18sp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/about_licenses"
+            android:layout_height="wrap_content"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:text="@string/about_contact_developer"
+            android:textSize="17sp"
+            android:id="@+id/contact"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_height="wrap_content"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:textSize="17sp"
+            android:id="@+id/credits"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/about_credits"
+            android:layout_height="wrap_content"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:textSize="17sp"
+            android:text="@string/about_changelog"
+            android:id="@+id/changelog"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_height="wrap_content"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:textSize="17sp"
+            android:id="@+id/group"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/about_telegram_group"
+            android:layout_height="wrap_content"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:text="@string/about_share"
+            android:textSize="17sp"
+            android:id="@+id/share"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_height="wrap_content"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:text="@string/about_info"
+            android:textSize="17sp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:id="@+id/about"
+            android:layout_height="wrap_content"/>
+</LinearLayout>
