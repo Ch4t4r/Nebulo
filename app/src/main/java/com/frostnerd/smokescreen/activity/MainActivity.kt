@@ -70,10 +70,12 @@ class MainActivity : NavigationDrawerActivity() {
                 runResolveNow = true
             )?.firstOrNull()?.hostAddress ?: "-"
 
-            view.dns2.text = server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
+            view.dns2.text = (server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
                 retryIfError = true,
                 runResolveNow = true
-            )?.lastOrNull()?.hostAddress ?: "-"
+            )?.lastOrNull()?.hostAddress ?: "-").let {
+                if(it == view.dns1.text.toString()) "-" else it
+            }
             view
         }
         supportActionBar?.elevation = 0f
