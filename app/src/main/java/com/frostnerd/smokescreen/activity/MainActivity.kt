@@ -27,6 +27,7 @@ import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
+import kotlinx.android.synthetic.main.menu_cardview.view.*
 import kotlin.random.Random
 
 /*
@@ -60,10 +61,21 @@ class MainActivity : NavigationDrawerActivity() {
         Logger.enabledGlobally = getPreferences().loggingEnabled
         AbstractHttpsDNSHandle // Loads the known servers.
         AbstractTLSDnsHandle
-        /*setCardView { viewParent, suggestedHeight ->
+        setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
+            val server = getPreferences().dnsServerConfig
+            view.serverName.text = server.name
+            view.dns1.text = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
+                retryIfError = true,
+                runResolveNow = true
+            )?.firstOrNull()?.hostAddress ?: "-"
+
+            view.dns2.text = server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
+                retryIfError = true,
+                runResolveNow = true
+            )?.lastOrNull()?.hostAddress ?: "-"
             view
-        }*/
+        }
         supportActionBar?.elevation = 0f
         ChangelogDialog.showNewVersionChangelog(this)
         getPreferences().totalAppLaunches += 1
