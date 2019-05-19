@@ -42,4 +42,13 @@
     <string name="crashreporting_thankyou">Vielen Dank! Geh in die Einstellungen, um dies zu ändern.</string>
     <string name="crashreporting_thankyou_gotit">Verstanden!</string>
 
+<string name="about_share">Teilen</string>
+    <string name="about_licenses">Open-source Lizenzen</string>
+    <string name="about_changelog">Änderungsprotokoll</string>
+    <string name="about_contact_developer">Den Entwickler kontaktieren</string>
+    <string name="about_telegram_group">Telegramgruppe</string>
+    <string name="about_privacypolicy">Datenschutzerklärung</string>
+    <string name="about_credits">Danksagungen</string>
+    <string name="about_info">Generelle Informationen</string>
+
 </resources>
