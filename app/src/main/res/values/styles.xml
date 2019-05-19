@@ -26,6 +26,7 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
     </style>
 
     <style name="AppTheme_Dark" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -53,6 +54,7 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
     </style>
 
     <style name="AppTheme_Mono" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -80,6 +82,7 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
     </style>
 
     <style name="AppTheme_True_Black" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -107,6 +110,7 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
     </style>
 
     <style name="DialogTheme_Blue" parent="Theme.AppCompat.Light.Dialog.Alert">
