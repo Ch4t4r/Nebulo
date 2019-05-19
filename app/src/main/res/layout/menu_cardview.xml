@@ -8,7 +8,7 @@
     <ImageView
             android:layout_width="42dp"
             android:layout_gravity="center_vertical"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/ic_launcher_flat"
             android:layout_height="42dp"/>
 
     <LinearLayout
