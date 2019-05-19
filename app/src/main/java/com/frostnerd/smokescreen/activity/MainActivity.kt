@@ -3,7 +3,6 @@ package com.frostnerd.smokescreen.activity
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -15,18 +14,16 @@ import com.frostnerd.navigationdraweractivity.items.BasicDrawerItem
 import com.frostnerd.navigationdraweractivity.items.DrawerItem
 import com.frostnerd.navigationdraweractivity.items.createMenu
 import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
+import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
-import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
-import com.frostnerd.smokescreen.dialog.LicensesDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.AboutFragment
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
 import kotlinx.android.synthetic.main.menu_cardview.view.*
 import kotlin.random.Random
 
@@ -54,6 +51,7 @@ class MainActivity : NavigationDrawerActivity() {
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
     private var startedActivity = false
+    private var settingsSubscription:TypedPreferences<*>.OnPreferenceChangeListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
@@ -63,19 +61,27 @@ class MainActivity : NavigationDrawerActivity() {
         AbstractTLSDnsHandle
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
-            val server = getPreferences().dnsServerConfig
-            view.serverName.text = server.name
-            view.dns1.text = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
-                retryIfError = true,
-                runResolveNow = true
-            )?.firstOrNull()?.hostAddress ?: "-"
+            val update = {
+                val server = getPreferences().dnsServerConfig
+                view.serverName.text = server.name
+                view.dns1.text = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
+                    retryIfError = true,
+                    runResolveNow = true
+                )?.firstOrNull()?.hostAddress ?: "-"
 
-            view.dns2.text = (server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
-                retryIfError = true,
-                runResolveNow = true
-            )?.lastOrNull()?.hostAddress ?: "-").let {
-                if(it == view.dns1.text.toString()) "-" else it
+                view.dns2.text = (server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
+                    retryIfError = true,
+                    runResolveNow = true
+                )?.lastOrNull()?.hostAddress ?: "-").let {
+                    if(it == view.dns1.text.toString()) "-" else it
+                }
             }
+            update()
+            settingsSubscription = getPreferences().listenForChanges("dns_server_config", getPreferences().preferenceChangeListener {
+                runOnUiThread {
+                    update()
+                }
+            })
             view
         }
         supportActionBar?.elevation = 0f
@@ -161,6 +167,12 @@ class MainActivity : NavigationDrawerActivity() {
                 iconLeft = getDrawable(R.drawable.ic_info),
                 fragmentCreator = singleInstanceFragment { AboutFragment() })
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        settingsSubscription?.unregister()
+        settingsSubscription = null
     }
 
     override fun onBackPressed() {
