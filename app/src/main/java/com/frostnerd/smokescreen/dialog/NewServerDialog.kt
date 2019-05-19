@@ -61,15 +61,7 @@ class NewServerDialog(
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_server, null, false)
-        if(!dnsOverHttps) {
-            view.primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
-            view.secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
-        }
-        if (title != null) setTitle(title)
-        else {
-            if (dnsOverHttps) setTitle(R.string.dialog_newserver_title_https)
-            else setTitle(R.string.dialog_newserver_title_tls)
-        }
+        setHintAndTitle(view,dnsOverHttps, title)
         setView(view)
 
         setButton(
@@ -113,14 +105,28 @@ class NewServerDialog(
             serverType.setSelection(if (dnsOverHttps) 0 else 1)
             serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
                     validationRegex = if (position == 0) NewServerDialog.SERVER_URL_REGEX else NewServerDialog.TLS_REGEX
                     dnsOverHttps = position == 0
+                    setHintAndTitle(view, dnsOverHttps, title)
                     primaryServer.text = primaryServer.text
                     secondaryServer.text = secondaryServer.text
                 }
             }
         }
+    }
+
+    private fun setHintAndTitle(view:View, dnsOverHttps: Boolean, titleOverride:String?) {
+        if (dnsOverHttps) {
+            if(titleOverride == null) setTitle(R.string.dialog_newserver_title_https)
+            view.primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint)
+            view.secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint)
+        }else {
+            if(titleOverride == null) setTitle(R.string.dialog_newserver_title_tls)
+            view.primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
+            view.secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
+        }
+        if(titleOverride != null) setTitle(titleOverride)
     }
 
     private fun invokeCallback(
