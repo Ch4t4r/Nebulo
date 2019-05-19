@@ -48,6 +48,7 @@ import kotlin.random.Random
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class MainActivity : NavigationDrawerActivity() {
+    override val drawerOverActionBar: Boolean = true
     private var textColor: Int = 0
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
