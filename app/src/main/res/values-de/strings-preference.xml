@@ -137,4 +137,7 @@
 
     <string name="title_delete_queries">Anfragen leeren</string>
     <string name="summary_delete_queries">Klicke hier, um alle gespeicherten Anfragen zu löschen.</string>
-</resources>
+<string name="title_catch_other_dns_servers">Anderen DNS-Traffic abfangen</string>
+    <string name="summary_catch_other_dns_servers">Fange den Traffic von bekannten DNS Servern ab und leite ihn durch Nebulo sicher weiter</string>
+
+    </resources>
