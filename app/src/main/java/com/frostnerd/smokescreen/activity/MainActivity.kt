@@ -144,7 +144,7 @@ class MainActivity : NavigationDrawerActivity() {
                 )
             }
             fragmentItem(getString(R.string.menu_about),
-                iconLeft = getDrawable(R.drawable.ic_binoculars),
+                iconLeft = getDrawable(R.drawable.ic_info),
                 fragmentCreator = singleInstanceFragment { AboutFragment() })
         }
     }
