@@ -57,7 +57,7 @@
             <ImageButton
                     android:id="@+id/serverButton"
                     android:src="@drawable/ic_main_server"
-                    android:background="?attr/inputElementColor"
+                    android:background="@drawable/main_roundbuttons"
                     android:tint="?android:attr/textColor"
                     android:layout_width="48dp"
                     android:contentDescription="@string/contentdescription_main_servericon"
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/startButton"
-                    android:background="?attr/inputElementColor"
+                    android:background="@drawable/main_roundbuttons"
                     android:text="Start"
                     android:layout_toStartOf="@id/serverButton"
                     android:layout_marginEnd="8dp"
