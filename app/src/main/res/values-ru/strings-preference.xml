@@ -1,2 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preference_category_general">Общие настройки</string>
+
+    <string name="title_theme">Тема</string>
+    <string name="summary_theme">Выбрать тему приложения</string>
+
+    <string name="title_start_on_boot">Запуск при загрузке ОС</string>
+    <string name="summary_start_on_boot">Запуск приложения при включении телефона</string>
+
+    <string name="title_start_after_update">Запуск приложения после обновления</string>
+    <string name="summary_start_after_update">Запуск Nebulo после того как была установлена новая версия приложения</string>
+
+    <string name="title_excluded_apps">Исключенные приложения</string>
+    <string name="summary_excluded_apps">Исключите приложения, которые не должны использовать dns-over-https, например те, которым не нужен доступ в Интернет.</string>
+
+
+
+    <string name="preference_category_notification">Уведомления</string>
+
+    <string name="title_show_notification_on_lockscreen">Показывать уведомления на заблокированном экране</string>
+    <string name="summary_show_notification_on_lockscreen">Укажите, какие данные будут отображаться в уведомлении на экране блокировки</string>
+
+    <string name="title_notification_hide_icon">Скрыть иконку</string>
+    <string name="summary_notification_hide_icon">Скрыть иконку из статус бара</string>
+
+    <string name="title_notification_allow_stop">Разрешить остановку Nebulo</string>
+    <string name="summary_notification_allow_stop">Разрешить остановку прямо из уведомления</string>
+
+    <string name="title_notification_allow_pause">Разрешить паузу из уведомления</string>
+    <string name="summary_notification_allow_pause">Добавить кнопку паузы в уведомлении</string>
+
+
+    <string name="preference_category_pin">Защита приложения</string>
+
+    <string name="title_preference_enable_pin">Pin код</string>
+    <string name="summary_preference_enable_pin">Запрашивать PIN код для открытия или остановки приложения</string>
+
+    <string name="title_preference_pin_use_fingerprint">Сканер отпечатка</string>
+    <string name="summary_preference_pin_use_fingerprint">Разрешить использовать сканер отпечатка вместо PIN кода.</string>
+
+    <string name="title_preference_change_pin">Изменить PIN код</string>
+    <string name="summary_preference_change_pin">Изменить PIN код. Допустимы только циферные значения. 
+\nТекущий PIN: %1s</string>
+
+    <string name="preference_category_cache">Настройки кеширования</string>
+
+    <string name="title_dnscache_enabled">Использовать кэш DNS</string>
+    <string name="summary_dnscache_enabled">Включить DNS кэширование. В кэше хранятся предыдущие результаты резолвинга доменов для более быстрого ответа на последующие запросы</string>
+
+    <string name="title_dnscache_keepacrosslaunches">Хранить DNS кэш</string>
+    <string name="summary_dnscache_keepacrosslaunches">Сохранять кэш DNS даже при перезапуске приложения</string>
+
+    <string name="title_dnscache_maxsize">Максимальный размер Кэша</string>
+    <string name="summary_dnscache_maxsize">Установите максимальное количество хранимых запросов, независимо от времени</string>
+
+    <string name="title_dnscache_usedefaulttimes">Время кэширования</string>
+    <string name="summary_dnscache_usedefaulttimes">Хранить кэш запросов в течении времени, указанного сервером</string>
+
+    <string name="title_dnscache_minimum_cache_time">Минимальное время хранения кэша</string>
+    <string name="summary_dnscache_minimum_cache_time">Минимальное время хранения кэшированных запросов.
+\nТекущее значение: %1d Секунд.</string>
+
+    <string name="title_dnscache_customcachetime">Изменение времени хранения кэша (в секундах)</string>
+    <string name="summary_dnscache_customcachetime">Изменить время хранения предыдущих кэшированных запросов.
+\nТекущее значение: %1d Секунд.</string>
+
+    <string name="title_dnscache_nxdomaincachetime">Время кэширования для NXDomain (Секунды)</string>
+    <string name="summary_dnscache_nxdomaincachetime">Изменить значение времени для кэшированных запросов NXDomain. Это повышает производительность для несуществующих доменов (например, если они заблокированы)
+\nТекущее значение:% 1d Секунд.</string>
+
+
+    <string name="preference_category_logging">Логирование</string>
+
+    <string name="title_enable_logging">Включение логирования</string>
+    <string name="summary_enable_logging">Включить лог для отладочной информации (содержит статистическую информацию). Этот лог не будет отправляться автоматически.</string>
+
+    <string name="title_send_logs">Отправка логов</string>
+    <string name="summary_send_logs">Нажмите здесь для отправки лог файлов разработчику.</string>
+
+    <string name="title_delete_all_logs">Удаление всех имеющихся логов</string>
+    <string name="summary_delete_all_logs">Удалит все логи, которые хранятся на вашем девайсе.</string>
+
+    <string name="title_enable_sentry">Включить отчет о неожиданном падении приложения</string>
+    <string name="summary_enable_sentry">Автоматически отсылаемые разработчику отчеты о падении. Данные отчета будут отправлены только в случае неожиданного падения приложения.</string>
+
+
+    <string name="preference_category_ip">IP настройки</string>
+
+    <string name="title_enable_ipv6">Поддержка IPv6</string>
+    <string name="summary_enable_ipv6">Использовать IPv6, если ваш девайс имеет назначенный IPv6 адрес</string>
+
+    <string name="title_enable_ipv4">Поддержка IPv4</string>
+    <string name="summary_enable_ipv4">Использовать IPv4, если ваш девайс имеет назначенный IPv4 адрес</string>
+
+    <string name="title_force_ipv6">Принудительный IPv6</string>
+    <string name="summary_force_ipv6">Принудительно принимать IPv6 запросы, даже если девайс не использует протокол IPv6.</string>
+
+    <string name="title_force_ipv4">Принудительный IPv4</string>
+    <string name="summary_force_ipv4">Принудительно принимать IPv4 запросы, даже если девайс не использует протокол IPv4.</string>
+
+    <string name="title_allow_ipv4_traffic">Разрешить принимать IPv4</string>
+    <string name="summary_allow_ipv4_traffic">Разрешить использовать IPv4 трафик, даже если IPv4 отключен.
+\nЕсли данная настройка отключена, то IPv4 подключения будут запрещены пока запущено приложение.</string>
+
+    <string name="title_allow_ipv6_traffic">Разрешить IPv6 трафик</string>
+    <string name="summary_allow_ipv6_traffic">Разрешить использовать IPv6 трафик, даже если IPv6 отключен.
+\nЕсли данная настройка отключена, то IPv6 подключения будут запрещены пока запущено приложение.</string>
+
+
+    <string name="preference_category_network">Сетевые настройки</string>
+
+    <string name="title_disallow_other_vpns">Запрет других VPN</string>
+    <string name="summary_disallow_other_vpns">Не разрешать запуск других VPN, если приложение не было остановлено принудительно</string>
+
+    <string name="title_catch_other_dns_servers">Перехватывать остальной DNS трафик</string>
+    <string name="summary_catch_other_dns_servers">Перехватывать трафик известных DNS серверов и отправлять с помощью Nebulo</string>
+
+    <string name="title_bypass_searchdomains">Исключение для резолвинга локальных доменов (Searchdomains bypass)</string>
+    <string name="summary_bypass_searchdomains">Отправлять запросы search domains к DNS серверу вашей локальной сети (например, домены *.local)
+\nЭта пункт настройки очень рекомендуется оставить включенным. Эти запросы не покидают пределов вашей сети.</string>
+
+    <string name="title_pause_on_captiveportal">Приостанавливать Nebulo на captive portal</string>
+    <string name="summary_pause_on_captiveportal">Не использовать серверы DoH/DoT при обнаружении captive portal (специальный сетевой сервис для авторизации. К примеру, в коммерческой Wi-Fi сети). 
+\nNebulo автоматически продолжит перенаправлять DNS запросы после успешной авторизации на портале.</string>
+
+    <string name="title_show_noconnection_notification">Уведомление об отсутствии соединения с сервером DoH/DoT</string>
+    <string name="summary_show_noconnection_notification">Показывать уведомление когда соединение с сервером отсутствует, либо работает неисправно</string>
+
+
+    <string name="preference_category_querylogging">Логирование DNS запросов</string>
+
+    <string name="title_log_queries">Логирование DNS запросов</string>
+    <string name="summary_log_queries">Логировать все DNS запросы, а также ответы сервера</string>
+
+    <string name="title_export_queries">Экспорт лога DNS запросов</string>
+    <string name="summary_export_queries">Экспортировать лог запросов в CSV файл (%1d queries)</string>
+
+    <string name="title_delete_queries">Очистить лог запросов</string>
+    <string name="summary_delete_queries">Нажмите здесь для удаления всех запросов из лога.</string>
+</resources>
