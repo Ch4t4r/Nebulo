@@ -1,2 +1,107 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_serverconfiguration_title">Настройки сервера</string>
+    <string name="dialog_serverconfiguration_https">Dns-over-https (DoH)</string>
+    <string name="dialog_serverconfiguration_tls">Dns-over-tls (DoT)</string>
+    <string name="dialog_serverconfiguration_addserver">Добавить сервер</string>
+
+    <string name="dialog_newserver_title_https">Добавить сервер (DoH)</string>
+    <string name="dialog_newserver_title_tls">Добавить сервер (DoT)</string>
+    <string name="dialog_newserver_name">Имя сервера</string>
+    <string name="dialog_newserver_name_hint">Имя сервера (можно кратко)</string>
+    <string name="dialog_newserver_primaryserver">Первичный DNS сервер</string>
+    <string name="dialog_newserver_secondaryserver">Вторичный DNS сервер (Опционально)</string>
+    <string name="dialog_deleteconfig_title">Удаление сервера</string>
+    <string name="dialog_deleteconfig_text">Вы действительно хотите удалить сервер %1$s\?</string>
+
+    <string name="dialog_appchoosal_showsystemapps">Показать системные приложения</string>
+    <string name="dialog_appchoosal_whitelist">Использовать DoH/DoT только в отмеченных приложениях</string>
+
+    <string name="dialog_excludedapps_infotext">Исключенные приложения по умолчанию (%1d)</string>
+
+    <string name="dialog_serverimport_title">Импортировать %1d сервер(а)</string>
+    <string name="dialog_serverimport_done">Готово</string>
+    <string name="dialog_serverimport_priority">Приоритет %1d</string>
+    <string name="dialog_serverimport_experimental">Экспериментальный</string>
+    <string name="dialog_serverimport_servertype_doh">Используемый протокол: Dns-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Используемый протокол: Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_text">Выберите сервер(ы) для импорта.
+\nЕсли вы отметите уже добавленные ранее конфигурации сервера, то они будут продублированы.</string>
+
+    <string name="dialog_serverimportfailed_title">Ошибка импорта конфигурации</string>
+    <string name="dialog_serverimportfailed_text">Ошибка импорта</string>
+    <string name="dialog_serverimportfailed_text_exception">Конфигурации не могут быть импортированы.
+\n(%1s)</string>
+
+    <string name="dialog_logexport_text">Выберите предпочитаемый способ экспорта лог файлов</string>
+    <string name="dialog_logexport_general">Общий экспорт в файл</string>
+    <string name="dialog_logexport_email">Отправка e-mail разработчику</string>
+
+    <string name="dialog_deletelogs_text">Вы действительно хотите удалить все логи приложения\?</string>
+
+    <string name="dialog_error_title">Отчет об ошибках</string>
+    <string name="dialog_error_text">Похоже, что приложение неожиданно завершилось. Отправить отчет об ошибках разработчику приложения\?</string>
+
+    <string name="dialog_batteryoptimization_title">Оптимизация расхода батареи</string>
+    <string name="dialog_batteryoptimization_message">На некоторых девайсах приложение не оповещается должным образом о перезагрузке системы, пока не отключена оптимизация батареи для этого приложения.
+\nВ данный момент включена оптимизация батареи для Nebulo, хотите ее отключить\?
+\n
+\nЛучшим решением будет проверка самостоятельного запуска Nebulo после рестарта системы при включенной оптимизации батареи.</string>
+    <string name="dialog_batteryoptimization_whitelist">Отключить энергосбережение для данного приложения</string>
+    <string name="dialog_batteryoptimization_ignore">Не отключать</string>
+
+    <string name="dialog_rate_confirmation">Запустить play store для оценки приложения\?</string>
+
+    <string name="dialog_changelog_title">Список изменений</string>
+    <string name="dialog_changelog_infotext">Обнаружена новая версия приложения. Список изменений вы можете увидеть ниже.</string>
+    <string name="dialog_changelog_dont_show_again">Не показывать это уведомление в дальнейшем</string>
+
+    <string name="dialog_about_changelog">Список изменений</string>
+    <string name="dialog_about_licenses">Список лицензий</string>
+
+    <string name="dialog_query_export_title">Экспорт DNS запросов…</string>
+    <string name="dialog_query_export_message">Пожалуйста, подождите завершения экспорта</string>
+
+    <string name="dialog_pin_message">Введите новый PIN</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_pin_inputlabel">PIN</string>
+
+    <string name="dialog_enable_logging">Включить логирование\? Лог будет включать в себя статистическую информацию, данные для отладки и действия в приложении. Сформированные логи хранятся локально.</string>
+
+    <string name="dialog_crashreporting_title">Автоматический отчет об ошибках</string>
+    <string name="dialog_crashreportingusages_title">Данные для отправки</string>
+    <string name="dialog_crashreportingusages_message">Выберите тип отчета чтобы увидеть какая информация будет передана разработчику в случае падения приложения.</string>
+    <string name="dialog_crashreporting_positive">Включить отчет об ошибках в случае падения приложения</string>
+    <string name="dialog_crashreporting_negative">Нет, спасибо.</string>
+    <string name="dialog_crashreporting_neutral">Посмотреть данные</string>
+    <string name="dialog_crashreporting_message">Спасибо за помощь в тестировании приложения!
+\n
+\nЭто приложение использует ПО с открытым исходным кодом, которое расположено на собственном сервере разработчика для более быстрой и качественной обработки отчетов. Отчеты будут сформированы и отправлены только в случае неожиданного падения приложения.
+\nОтчет о неожиданном завершении приложения содержит в себе необходимую информацию о приложении, а также некоторую информацию о вашей системе.
+\nВ отчете также будет передан идентификатор, который используется для понимания что отчеты приходят от одного и того же пользователя, и больше ни для чего.
+\nВключение формирования и отправки отчетов о неожиданном падении приложения является необязательным, но очень сильно помогает разработке.
+\nОтчеты отправляются через защищенный HTTPS канал.
+\n
+\nНажмите на \'просмотр данных\' для ознакомления с данными, которые будут отправлены в отчете. Также вы можете ознакомиться с политикой конфиденциальности по ссылке.</string>
+    <string name="dialog_crashreporting_message_notester">Спасибо за помощь в тестировании приложения!
+\n
+\nЭто приложение использует ПО с открытым исходным кодом, которое расположено на собственном сервере разработчика для более быстрой и качественной обработки отчетов. Отчеты будут сформированы и отправлены только в случае неожиданного падения приложения.
+\nОтчет о неожиданном завершении приложения содержит в себе необходимую информацию о приложении, а также некоторую информацию о вашей системе.
+\nВ отчете также будет передан идентификатор, который используется для понимания что отчеты приходят от одного и того же пользователя, и больше ни для чего.
+\nВключение формирования и отправки отчетов о неожиданном падении приложения является необязательным, но очень сильно помогает разработке.
+\nОтчеты отправляются через защищенный HTTPS канал.
+\n
+\nНажмите на \'просмотр данных\' для ознакомления с данными, которые будут отправлены в отчете. Также вы можете ознакомиться с политикой конфиденциальности по ссылке.</string>
+    <string name="dialog_clearqueries_title">Очистить список DNS запросов</string>
+    <string name="dialog_clearqueries_message">Вы действительно хотите очистить список запросов\? Это действие необратимо.</string>
+
+    <string name="dialog_credits_title">Участники</string>
+    <string name="dialog_credits_message" formatted="true">- Логотип приложения &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
+\n 
+\n 
+\n Хотите увидеть свое имя здесь\? Можете внести свой&lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;вклад в разработку &lt;/a&gt;.</string>
+
+    <string name="dialog_join_group_title">Присоединиться к сообществу</string>
+    <string name="dialog_join_group_message">Эй, вы знаете, что у этого приложения есть свой чат в Telegram\? В нем выкладываются все последние обновления и также это лучшее место для вопросов и дискуссий о приложении.
+\nУ нас отличное комьюнити из более чем 120 человек, может хотите к нам присоединиться\?</string>
+    <string name="dialog_join_group_positive">О да!</string>
+</resources>
