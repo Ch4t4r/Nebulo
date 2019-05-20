@@ -366,7 +366,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         loggingEnabled.setOnPreferenceChangeListener { _, newValue ->
             val enabled = newValue as Boolean
             if (!enabled) log("Logging disabled from settings.") // Log before disabling
-            Logger.enabledGlobally = (enabled)
+            Logger.setEnabled(enabled)
             if (!enabled) requireContext().closeLogger()
             if (enabled) log("Logging enabled from settings.") // Log after enabling
             sendLogs.isEnabled = enabled
