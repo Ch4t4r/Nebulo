@@ -1,2 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">Nebulo</string>
+
+    <string name="activity_label_import_queries">Импортировать запросы</string>
+    <string name="activity_label_import_servers">Импортировать сервер</string>
+
+    <string name="activity_label_enable_logging">Экспорт файлов лога/ Включить логирование</string>
+
+    <string name="all_stop">остановить</string>
+    <string name="all_start">подключить</string>
+    <string name="all_pause">пауза</string>
+    <string name="all_resume">возобновить</string>
+    <string name="all_no">Нет</string>
+    <string name="all_yes">Да</string>
+    <string name="information">Информация</string>
+    <string name="open_app">Открыть приложение</string>
+    <string name="all_close">Закрыть</string>
+
+    <string name="main_dnssurveillance_infotext">Имейте в виду, что DNS-сервер, к которому вы подключаетесь, может собирать метаданные, а также вести логирование доменов, которые посещаете вы или запрашивает ваша ОС. Проверьте соответствующее заявление о конфиденциальности.</string>
+    <string name="main_dnssurveillance_privacystatement">Заявление о конфиденциальности %1s</string>
+
+    <string name="about_app">Это приложение с открытым исходным кодом. Исходный код опубликован на сайте &lt;a href=https://smokescreen.app/source&gt;smokescreen.app/source&lt;/a&gt;.
+\n
+\nКроме того, приложение не содержит рекламу, не отслеживает и не собирает данные. 
+\n
+\nВерсия приложения %1s
+\n
+\nВерсия сборки %2d
+\n
+\nВерсия базы данных %3d
+\n
+\nИдентификатор отчета об ошибках: %4s
+\n
+\n© Daniel Wolf 2019
+\n
+\nРаспространяется в соответствии с лицензией GNU GPLv3.
+\n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
+    <string name="app_share_text">Приложение, которое шифрует DNS запросы для большей приватности и безопасности. https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
+
+    <string name="quicksettings_stop_text">остановить Nebulo</string>
+    <string name="quicksettings_start_text">подключить Nebulo</string>
+
+    <string name="fragment_querydetail_mode_dot">Dns-over-TLS</string>
+    <string name="fragment_querydetail_mode_doh">Dns-over-HTTPS</string>
+
+    <string name="crashreporting_thankyou">Спасибо! Отключить отправку отчетов вы можете в настройках.</string>
+    <string name="crashreporting_thankyou_gotit">Понятно!</string>
+
+    <string name="about_share">Рассказать другу</string>
+    <string name="about_licenses">Используемые лицензии</string>
+    <string name="about_changelog">Список изменений</string>
+    <string name="about_contact_developer">Связь с разработчиком</string>
+    <string name="about_telegram_group">Telegram чат</string>
+    <string name="about_privacypolicy">Политика конфиденциальности</string>
+    <string name="about_credits">Участники</string>
+    <string name="about_info">О программе</string>
+
+</resources>
