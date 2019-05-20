@@ -1,2 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="menu_dnsoverhttps">DNS over HTTPS</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_querylogging">Лог DNS запросов</string>
+    <string name="menu_create_shortcut">Добавить конфигурацию сервера</string>
+    <string name="menu_rate">Оценить</string>
+    <string name="menu_about">О приложении</string>
+    
+    <string name="menu_cardview_title">Realtime статистика</string>
+
+</resources>
