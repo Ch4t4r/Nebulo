@@ -10,7 +10,7 @@
     <string name="dialog_newserver_name_hint">Имя сервера (можно кратко)</string>
     <string name="dialog_newserver_primaryserver">Первичный DNS сервер</string>
     <string name="dialog_newserver_secondaryserver">Вторичный DNS сервер (Опционально)</string>
-    <string name="dialog_deleteconfig_title">Удаление сервера</string>
+    <string name="dialog_deleteconfig_title">Удаление сервера\?</string>
     <string name="dialog_deleteconfig_text">Вы действительно хотите удалить сервер %1$s\?</string>
 
     <string name="dialog_appchoosal_showsystemapps">Показать системные приложения</string>
@@ -28,7 +28,7 @@
 \nЕсли вы отметите уже добавленные ранее конфигурации сервера, то они будут продублированы.</string>
 
     <string name="dialog_serverimportfailed_title">Ошибка импорта конфигурации</string>
-    <string name="dialog_serverimportfailed_text">Ошибка импорта</string>
+    <string name="dialog_serverimportfailed_text">Ошибка импорта.</string>
     <string name="dialog_serverimportfailed_text_exception">Конфигурации не могут быть импортированы.
 \n(%1s)</string>
 
@@ -61,7 +61,7 @@
     <string name="dialog_query_export_title">Экспорт DNS запросов…</string>
     <string name="dialog_query_export_message">Пожалуйста, подождите завершения экспорта</string>
 
-    <string name="dialog_pin_message">Введите новый PIN</string>
+    <string name="dialog_pin_message">Введите новый PIN.</string>
     <string name="dialog_pin_hint">PIN</string>
     <string name="dialog_pin_inputlabel">PIN</string>
 
