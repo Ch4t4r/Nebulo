@@ -1,2 +1,104 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_serverconfiguration_title">Sunucu yapılandırması</string>
+    <string name="dialog_serverconfiguration_https">HTTPS üzerinden DNS (DoH)</string>
+    <string name="dialog_serverconfiguration_tls">TLS üzerinden DNS (DoT)</string>
+    <string name="dialog_serverconfiguration_addserver">Bir sunucu ekle</string>
+
+    <string name="dialog_newserver_title_https">Bir sunucu ekle (DoH)</string>
+    <string name="dialog_newserver_title_tls">Bir sunucu ekle (DoT)</string>
+    <string name="dialog_newserver_name">Sunucu adı</string>
+    <string name="dialog_newserver_name_hint">Örnek</string>
+    <string name="dialog_newserver_primaryserver">Birincil sunucu</string>
+    <string name="dialog_newserver_secondaryserver">İkincil sunucu (İsteğe bağlı)</string>
+    <string name="dialog_deleteconfig_title">Yapılandırma silinsin mi\?</string>
+    <string name="dialog_deleteconfig_text">%1$s yapılandırmasını silmek istiyor musunuz\?</string>
+
+    <string name="dialog_appchoosal_showsystemapps">Sistem uygulamalarını göster</string>
+    <string name="dialog_appchoosal_whitelist">Seçili uygulamalarda yalnızca DoH/DoT kullanın</string>
+
+    <string name="dialog_excludedapps_infotext">%1d uygulama varsayılan olarak hariç tutulur ve seçilemez</string>
+
+    <string name="dialog_serverimport_title">% 1d sunucunun içe aktarılması</string>
+    <string name="dialog_serverimport_done">Tamamlandı</string>
+    <string name="dialog_serverimport_priority">Öncelik %1d</string>
+    <string name="dialog_serverimport_experimental">Deneysel</string>
+    <string name="dialog_serverimport_servertype_doh">Tür: HTTPS üzerinden DNS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Tür: TLS üzerinden DNS (DoT)</string>
+    <string name="dialog_serverimport_text">Lütfen almak istediğiniz sunucuları seçin.
+\n
+\nZaten içe aktarılmış olan sunucuları seçerseniz, çoğaltılır.</string>
+
+    <string name="dialog_serverimportfailed_title">İçe aktarma başarısız oldu</string>
+    <string name="dialog_serverimportfailed_text">Sunucu(lar) alınamadı.</string>
+    <string name="dialog_serverimportfailed_text_exception">Sunucu(lar) alınamadı.
+\n(%1s)</string>
+
+    <string name="dialog_logexport_text">Günlükleri nasıl paylaşmak istersiniz\?</string>
+    <string name="dialog_logexport_general">Genel ihracat</string>
+    <string name="dialog_logexport_email">E-Posta</string>
+
+    <string name="dialog_deletelogs_text">Tüm günlükleri silmek istediğinize emin misiniz\?</string>
+
+    <string name="dialog_error_title">Çökme raporu</string>
+    <string name="dialog_error_text">Uygulama çöktü gibi görünüyor. Hata günlüğünü geliştiriciye göndermek ister misiniz\?</string>
+
+    <string name="dialog_batteryoptimization_title">Pil iyileştirmesi</string>
+    <string name="dialog_batteryoptimization_message">Bazı cihazlarda, pil iyileştirmeleri devre dışı bırakılmadığı sürece, uygulamanın önyükleme işlemini tamamladığı bildirilmez.
+\nUygulama şu anda pil iyileştirmesinden beyaz listeye alınmadı, bunu yapmak ister misiniz\?
+\n
+\nDevre dışı bırakmadan önce, iyileştirme etkinken çalışıp çalışmadığını denemelisiniz.</string>
+    <string name="dialog_batteryoptimization_whitelist">Devre dışı</string>
+    <string name="dialog_batteryoptimization_ignore">Yoksay</string>
+
+    <string name="dialog_rate_confirmation">Uygulamayı değerlendirmek için mağazayı açmak istiyor musunuz\?</string>
+
+    <string name="dialog_changelog_title">Değişiklikler</string>
+    <string name="dialog_changelog_infotext">En son açtığınızdan beri uygulama güncellendi. Aşağıdaki listede değişiklikleri görebilirsiniz. Aşağıdaki kutuyu işaretleyin, gelecekte bu mesajı görmeyeceksiniz.</string>
+    <string name="dialog_changelog_dont_show_again">Tekrar gösterme</string>
+
+    <string name="dialog_about_changelog">Değişiklikler</string>
+    <string name="dialog_about_licenses">Lisanslar</string>
+
+    <string name="dialog_query_export_title">Sorgular dışa aktarılıyor…</string>
+    <string name="dialog_query_export_message">Sorgular dışa aktarılırken lütfen bekleyin</string>
+
+    <string name="dialog_pin_message">Lütfen PIN’inizi girin.</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_pin_inputlabel">PIN</string>
+
+    <string name="dialog_enable_logging">Günlüğe kaydetmeyi etkinleştirmek ister misiniz\? Kayıtlar istatistik bilgileri, hata ayıklama bilgilerini ve uygulamadaki eylemleri içerir. Oluşturduğunuz günlükler siz yapmazsanız paylaşılmaz.</string>
+
+    <string name="dialog_crashreporting_title">Otomatik kilitlenme raporlaması</string>
+    <string name="dialog_crashreportingusages_title">İletilen veri</string>
+    <string name="dialog_crashreportingusages_message">Çökmelerde hangi verilerin iletildiğini görmek için gruplardan birine tıklayın.</string>
+    <string name="dialog_crashreporting_positive">Çökme raporlamasını etkinleştir</string>
+    <string name="dialog_crashreporting_negative">Hayır teşekkürler.</string>
+    <string name="dialog_crashreporting_neutral">Verilere bakın</string>
+    <string name="dialog_crashreporting_message">Uygulama için bir deneyici olduğunuz için teşekkür ederiz!
+\n
+\nBu uygulama, çökmeleri en kısa sürede izlemelerini kolaylaştırmak için açık kaynaklı ve kendi kendine barındırılan üçüncü taraf yazılımları kullanıyor. Eğer sadece etkinse, uygulama bir çökme ile karşılaştığında çökme raporları iletir. Bu raporlar uygulama ve cihazınız hakkında ek veriler içerir. Bu, aynı kullanıcıdan gelen çökmeleri izlemek için kullanılan, ancak başka hiçbir şeyi izlemek için kullanılamayan bir kimliği içerir. Kilitlenme raporlamasını etkinleştirmek isteğe bağlıdır ancak bana çok yardımcı olur.
+\nRaporlar HTTPS üzerinden güvenli bir şekilde gönderilir.
+\n
+\nHangi tür verilerin iletildiğini ve gizlilik politikasına bir bağlantı olduğunu görmek için aşağıdaki \'Verilere bakın\' seçeneğini tıklayın.</string>
+    <string name="dialog_crashreporting_message_notester">Nebulo\'yu kullandığınız için teşekkür ederiz!
+\n
+\nBu uygulama, çökmeleri en kısa sürede izlemelerini kolaylaştırmak için açık kaynaklı ve kendi kendine barındırılan üçüncü taraf yazılımları kullanıyor. Eğer sadece etkinse, uygulama bir çökme ile karşılaştığında çökme raporları iletir. Bu raporlar uygulama ve cihazınız hakkında ek veriler içerir. Bu, aynı kullanıcıdan gelen çökmeleri izlemek için kullanılan, ancak başka hiçbir şeyi izlemek için kullanılamayan bir kimliği içerir. Çökme raporlamasını etkinleştirmek isteğe bağlıdır ancak bana çok yardımcı olur.
+\nRaporlar HTTPS üzerinden güvenli bir şekilde gönderilir.
+\n
+\nHangi tür verilerin iletildiğini ve gizlilik politikasına bir bağlantı olduğunu görmek için aşağıdaki \'Verilere bakın\' seçeneğini tıklayın.</string>
+    <string name="dialog_clearqueries_title">Tüm sorguları temizle</string>
+    <string name="dialog_clearqueries_message">Günlüğe kaydedilen sorguları silmek istediğinize emin misiniz\? Bu geri alınamaz.</string>
+
+    <string name="dialog_credits_title">Katkıcılar</string>
+    <string name="dialog_credits_message" formatted="true">"- &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; tarafından uygulama simgesi.
+\n 
+\n 
+\n  İsmini burada görmek ister misin\? &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;Katkı&lt;/a&gt;da bulunmaktan çekinmeyin."</string>
+
+    <string name="dialog_join_group_title">Topluluğa katıl</string>
+    <string name="dialog_join_group_message">Selamün Aleyküm
+\n
+\nBu uygulamanın bir Telegram grubu olduğunu biliyor muydunuz\? Düzenli güncellemeler içerir ve tartışmalar ve sorular için mükemmel bir yerdir.
+\n120 kişiden büyük bir topluluğuz, bunun bir parçası olmak ister misiniz\?</string>
+    <string name="dialog_join_group_positive">Evet!</string>
+</resources>
