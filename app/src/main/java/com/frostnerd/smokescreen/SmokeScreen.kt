@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
+import com.frostnerd.smokescreen.activity.LoggingDialogActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.util.Notifications
@@ -69,6 +70,16 @@ class SmokeScreen : Application() {
                 )
             )
             .setContentTitle(getString(R.string.notification_appcrash_title))
+        if (getPreferences().loggingEnabled) {
+            val pendingIntent = PendingIntent.getActivity(
+                this,
+                1,
+                Intent(this, LoggingDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                PendingIntent.FLAG_CANCEL_CURRENT
+            )
+            notification.addAction(R.drawable.ic_share, getString(R.string.title_send_logs), pendingIntent)
+        }
+
         notification.setStyle(NotificationCompat.BigTextStyle(notification).bigText(getString(R.string.notification_appcrash_message)))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
             NOTIFICATION_ID_APP_CRASH,

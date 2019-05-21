@@ -72,10 +72,10 @@ class PinActivity: BaseActivity() {
                 .setOnDismissListener {
                     finish()
                 }
-                .setNegativeButton(R.string.cancel) { dialog, _ ->
+                .setNegativeButton(android.R.string.cancel) { dialog, _ ->
                     dialog.dismiss()
                 }
-                .setPositiveButton(R.string.ok) {_, _ -> }
+                .setPositiveButton(android.R.string.ok) {_, _ -> }
                 .show()
             if(getPreferences().allowFingerprintForPin && canUseFingerprintAuthentication() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 val fingerprintImage = view.findViewById<AppCompatImageView>(R.id.fingerprintImage)

@@ -73,11 +73,11 @@ class AppChoosalDialog(
 
     fun createDialog(): AlertDialog {
         dialogBuilder.setCancelable(true)
-        dialogBuilder.setPositiveButton(R.string.ok) { dialog, _ ->
+        dialogBuilder.setPositiveButton(android.R.string.ok) { dialog, _ ->
             dataCallback(currentSelectedApps, blackList)
             dialog.dismiss()
         }
-        dialogBuilder.setNegativeButton(R.string.cancel) { dialog, _ ->
+        dialogBuilder.setNegativeButton(android.R.string.cancel) { dialog, _ ->
             dialog.dismiss()
         }
         dialogBuilder.setView(view)

@@ -160,7 +160,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
                 startActivity(intent)
                 finish()
             }
-            .setNegativeButton(R.string.cancel) { dialog, _ ->
+            .setNegativeButton(android.R.string.cancel) { dialog, _ ->
                 dialog.cancel()
                 finish()
             }
