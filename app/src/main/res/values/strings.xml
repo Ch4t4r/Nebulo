@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nebulo</string>
+    <string name="app_name" translatable="false">Nebulo</string>
 
     <string name="activity_label_import_queries">Import queries</string>
     <string name="activity_label_import_servers">Import server(s)</string>
@@ -27,8 +27,8 @@
     <string name="quicksettings_stop_text">Stop Nebulo</string>
     <string name="quicksettings_start_text">Start Nebulo</string>
 
-    <string name="fragment_querydetail_mode_dot">Dns-over-TLS</string>
-    <string name="fragment_querydetail_mode_doh">Dns-over-HTTPS</string>
+    <string name="fragment_querydetail_mode_dot" translatable="false">Dns-over-TLS</string>
+    <string name="fragment_querydetail_mode_doh" translatable="false">Dns-over-HTTPS</string>
 
     <string-array name="theme">
         <item>Mono</item>

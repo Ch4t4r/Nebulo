@@ -112,7 +112,7 @@ class MainActivity : NavigationDrawerActivity() {
 
     override fun createDrawerItems(): MutableList<DrawerItem> {
         return createMenu {
-            fragmentItem(getString(R.string.menu_dnsoverhttps),
+            fragmentItem(getString(R.string.menu_main),
                 iconLeft = getDrawable(R.drawable.ic_menu_dnsoverhttps),
                 fragmentCreator = singleInstanceFragment { MainFragment() }
             )
@@ -153,7 +153,7 @@ class MainActivity : NavigationDrawerActivity() {
                     })
             }
             if (isPackageInstalled(this@MainActivity, "org.fdroid.fdroid")) {
-                clickableItem("Show on F-Droid",
+                clickableItem(getString(R.string.menu_show_on_fdroid),
                     iconLeft = getDrawable(R.drawable.ic_box_open),
                     onLongClick = null,
                     onSimpleClick = { _, _, _ ->
