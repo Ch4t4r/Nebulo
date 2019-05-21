@@ -153,7 +153,7 @@ class MainActivity : NavigationDrawerActivity() {
                     })
             }
             if (isPackageInstalled(this@MainActivity, "org.fdroid.fdroid")) {
-                clickableItem("Show on F-Droid",
+                clickableItem(getString(R.string.menu_show_on_fdroid),
                     iconLeft = getDrawable(R.drawable.ic_box_open),
                     onLongClick = null,
                     onSimpleClick = { _, _, _ ->
