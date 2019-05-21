@@ -112,7 +112,7 @@ class MainActivity : NavigationDrawerActivity() {
 
     override fun createDrawerItems(): MutableList<DrawerItem> {
         return createMenu {
-            fragmentItem(getString(R.string.menu_dnsoverhttps),
+            fragmentItem(getString(R.string.menu_main),
                 iconLeft = getDrawable(R.drawable.ic_menu_dnsoverhttps),
                 fragmentCreator = singleInstanceFragment { MainFragment() }
             )

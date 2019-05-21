@@ -6,8 +6,8 @@
     <string name="tasker_action">Action</string>
     <string name="tasker_start_app_custom_url">Start the app with %1s (Mode: %2s)</string>
     <string name="tasker_start_app_custom_urls">Start the app with %1s and %2s (Mode: %3s)</string>
-    <string name="tasker_mode_doh">DoH</string>
-    <string name="tasker_mode_dot">DoT</string>
+    <string name="tasker_mode_doh" translatable="false">DoH</string>
+    <string name="tasker_mode_dot" translatable="false">DoT</string>
     <string-array name="tasker_action_values">
         <item>Start the app</item>
         <item>Stop the app</item>
