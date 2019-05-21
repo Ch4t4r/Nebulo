@@ -127,7 +127,7 @@
 \nDevre dışı bırakmak, oturum açmak için giriş portalını açmanızı engelleyebilir.</string>
 
     <string name="title_show_noconnection_notification">Bağlantı yok bildirimi</string>
-    <string name="summary_show_noconnection_notification">Uygulamanın bağlantısı yokken ya da kötü olduğunda bir bildirim göster</string>
+    <string name="summary_show_noconnection_notification">Uygulamanın bağlantısı kötü ya da yokken bir bildirim göster</string>
 
 
     <string name="preference_category_querylogging">Sorgu günlüğü</string>
