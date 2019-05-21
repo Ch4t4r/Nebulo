@@ -14,7 +14,7 @@
     <string name="dialog_deleteconfig_text">%1$s yapılandırmasını silmek istiyor musunuz\?</string>
 
     <string name="dialog_appchoosal_showsystemapps">Sistem uygulamalarını göster</string>
-    <string name="dialog_appchoosal_whitelist">Seçili uygulamalarda yalnızca DoH/DoT kullanın</string>
+    <string name="dialog_appchoosal_whitelist">Yalnızca seçili uygulamalarda DoH/DoT kullanın</string>
 
     <string name="dialog_excludedapps_infotext">%1d uygulama varsayılan olarak hariç tutulur ve seçilemez</string>
 
