@@ -49,7 +49,7 @@ class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformat
         setTitle(context.getString(R.string.dialog_serverimport_title, servers.size))
         setCancelable(false)
         setCanceledOnTouchOutside(false)
-        setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel)) { dialog, _ ->
+        setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel)) { dialog, _ ->
             dialog.dismiss()
         }
         setButton(

@@ -228,7 +228,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     getString(R.string.summary_export_queries, 0)
                 d.dismiss()
             }
-            dialog.setNegativeButton(R.string.cancel) { d, _ ->
+            dialog.setNegativeButton(android.R.string.cancel) { d, _ ->
                 d.dismiss()
             }
             dialog.show()
@@ -411,7 +411,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         AlertDialog.Builder(requireContext(), requireContext().getPreferences().theme.dialogStyle)
             .setTitle(R.string.dialog_batteryoptimization_title)
             .setMessage(R.string.dialog_batteryoptimization_message)
-            .setNegativeButton(R.string.cancel) { dialog, _ ->
+            .setNegativeButton(android.R.string.cancel) { dialog, _ ->
                 dialog.dismiss()
             }
             .setPositiveButton(R.string.dialog_batteryoptimization_whitelist) { dialog, _ ->
@@ -507,7 +507,7 @@ private fun Context.showLogExportDialog(zipUri: Uri, onDismiss: (() -> Unit)? = 
         .setOnDismissListener {
             onDismiss?.invoke()
         }
-        .setNegativeButton(R.string.cancel) { dialog, _ ->
+        .setNegativeButton(android.R.string.cancel) { dialog, _ ->
             dialog.dismiss()
         }
         .create()

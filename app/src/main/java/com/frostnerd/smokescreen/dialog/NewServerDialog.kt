@@ -65,11 +65,11 @@ class NewServerDialog(
         setView(view)
 
         setButton(
-            DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.cancel)
+            DialogInterface.BUTTON_NEUTRAL, context.getString(android.R.string.cancel)
         ) { _, _ -> }
 
         setButton(
-            DialogInterface.BUTTON_POSITIVE, context.getString(R.string.ok)
+            DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok)
         ) { _, _ -> }
 
         setOnShowListener {

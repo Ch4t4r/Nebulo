@@ -79,7 +79,7 @@ class ServerImportActivity : BaseActivity() {
                                         Logger.stacktraceToString(exception)
                                     ) else getString(R.string.dialog_serverimportfailed_text)
                                 )
-                                .setNeutralButton(R.string.ok) { dialog, _ ->
+                                .setNeutralButton(android.R.string.ok) { dialog, _ ->
                                     dialog.cancel()
                                 }
                                 .setOnCancelListener {
