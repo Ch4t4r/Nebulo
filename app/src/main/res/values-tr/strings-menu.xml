@@ -8,4 +8,5 @@
     
     <string name="menu_cardview_title">Gerçek zamanlı istatistikler</string>
 
-</resources>
+<string name="menu_main">Uygulama durumu</string>
+    </resources>
