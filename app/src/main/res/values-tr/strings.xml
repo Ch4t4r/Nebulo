@@ -1,2 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">Nebulo</string>
+
+    <string name="activity_label_import_queries">Sorguları içe aktar</string>
+    <string name="activity_label_import_servers">Sunucuları içe aktar</string>
+
+    <string name="activity_label_enable_logging">Günlükleri dışa aktar/Günlüğü etkinleştir</string>
+
+    <string name="all_stop">Dur</string>
+    <string name="all_start">Başla</string>
+    <string name="all_pause">Duraklat</string>
+    <string name="all_resume">Devam et</string>
+    <string name="all_no">Hayır</string>
+    <string name="all_yes">Evet</string>
+    <string name="information">Bilgi</string>
+    <string name="open_app">Uygulamayı aç</string>
+    <string name="all_close">Kapat</string>
+
+    <string name="main_dnssurveillance_infotext">Bağlandığınız DNS sunucusunun hangi siteleri ziyaret ettiğinizi kaydedebildiğini unutmayın. Daha fazla bilgi için ilgili gizlilik bildirimlerini kontrol edin.</string>
+    <string name="main_dnssurveillance_privacystatement">%1s’in gizlilik beyanı</string>
+
+    <string name="about_app">Bu uygulama açık kaynak. Kaynak koduna &lt;a href=https://smokescreen.app/source&gt;smokescreen.app/source&lt;/a&gt; adresinden erişilebilir.
+\nAyrıca, uygulama reklam içermez ve sizinle ilgili hiçbir veri izlemez veya toplamaz.
+\n
+\nSürüm: %1s
+\nDerleme: %2d
+\nVeritabanı sürümü: %3d
+\nCrashreport Kimliği: %4s
+\n
+\n© Daniel Wolf 2019
+\nGPLv3 kapsamında lisanslanmıştır.
+\n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
+    <string name="app_share_text">Selam, size daha fazla gizlilik ve güvenlik sağlamak için DNS sorgularınızı şifreleyen bu uygulamayı buldum. Buradan kontrol edin: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
+
+    <string name="quicksettings_stop_text">Nebulo\'yu Durdur</string>
+    <string name="quicksettings_start_text">Nebulo\'yu Başlat</string>
+
+    <string name="fragment_querydetail_mode_dot">TLS üzerinden DNS</string>
+    <string name="fragment_querydetail_mode_doh">HTTPS üzerinden DNS</string>
+
+    <string name="crashreporting_thankyou">Teşekkür ederim! Fikrinizi değiştirirseniz, ayarlara gidin.</string>
+    <string name="crashreporting_thankyou_gotit">Anladım!</string>
+
+    <string name="about_share">Paylaş</string>
+    <string name="about_licenses">Açık kaynaklı lisanslar</string>
+    <string name="about_changelog">Değişiklikler</string>
+    <string name="about_contact_developer">Geliştirici başvurun</string>
+    <string name="about_telegram_group">Telegram grubu</string>
+    <string name="about_privacypolicy">Gizlilik politikası</string>
+    <string name="about_credits">Katkıcılar</string>
+    <string name="about_info">Genel bilgi</string>
+
+</resources>
