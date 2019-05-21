@@ -154,7 +154,7 @@ class MainActivity : NavigationDrawerActivity() {
             }
             if (isPackageInstalled(this@MainActivity, "org.fdroid.fdroid")) {
                 clickableItem(getString(R.string.menu_show_on_fdroid),
-                    iconLeft = getDrawable(R.drawable.ic_box_open),
+                    iconLeft = getDrawable(R.drawable.ic_adb),
                     onLongClick = null,
                     onSimpleClick = { _, _, _ ->
                         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")).setPackage("org.fdroid.fdroid"))
