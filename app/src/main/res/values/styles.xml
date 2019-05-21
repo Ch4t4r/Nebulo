@@ -24,6 +24,10 @@
         <item name="alertDialogTheme">@style/DialogTheme_Blue</item>
         <item name="preferenceTheme">@style/PreferenceTheme_Blue</item>
 
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?android:attr/statusBarColor</item>
     </style>
 
     <style name="AppTheme_Dark" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -49,6 +53,10 @@
         <item name="alertDialogTheme">@style/DialogTheme_Dark</item>
         <item name="preferenceTheme">@style/PreferenceTheme_Dark</item>
 
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?android:attr/statusBarColor</item>
     </style>
 
     <style name="AppTheme_Mono" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -73,6 +81,11 @@
         <item name="dialogTheme">@style/DialogTheme_Mono</item>
         <item name="alertDialogTheme">@style/DialogTheme_Mono</item>
         <item name="preferenceTheme">@style/PreferenceTheme_Mono</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?android:attr/statusBarColor</item>
     </style>
 
     <style name="AppTheme_True_Black" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -97,6 +110,11 @@
         <item name="dialogTheme">@style/DialogTheme_True_Black</item>
         <item name="alertDialogTheme">@style/DialogTheme_True_Black</item>
         <item name="preferenceTheme">@style/PreferenceTheme_True_Black</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?android:attr/statusBarColor</item>
     </style>
 
     <style name="DialogTheme_Blue" parent="Theme.AppCompat.Light.Dialog.Alert">

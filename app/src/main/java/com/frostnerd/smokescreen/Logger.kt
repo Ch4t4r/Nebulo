@@ -44,20 +44,20 @@ private fun Context.logErrorSentry(e: Throwable) {
 }
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {
-    if (Logger.enabledGlobally) {
+    if (Logger.isEnabled(this)) {
         Logger.getInstance(this).log(text, tag, formatArgs)
     }
 }
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs: Any) {
-    if (Logger.enabledGlobally) {
+    if (Logger.isEnabled(this)) {
         Logger.getInstance(this).log(text, tag, intent, formatArgs)
     }
 }
 
 fun Context.log(e: Throwable) {
     logErrorSentry(e)
-    if (Logger.enabledGlobally) {
+    if (Logger.isEnabled(this)) {
         Logger.getInstance(this).log(e)
     } else {
         val stackTrace = Logger.stacktraceToString(e)
@@ -151,9 +151,9 @@ class Logger private constructor(context: Context) {
 
     companion object {
         private var instance: Logger? = null
-        var enabledGlobally = true
         var timeStampFormatter = SimpleDateFormat("EEE MMM dd.yy kk:mm:ss", Locale.US)
         var logFileNameTimeStampFormatter = SimpleDateFormat("dd_MM_yyyy___kk_mm_ss", Locale.US)
+        private var enabled:Boolean? = null
 
         internal fun getInstance(context: Context): Logger {
             if (instance == null) {
@@ -162,8 +162,19 @@ class Logger private constructor(context: Context) {
             return instance!!
         }
 
+        internal fun isEnabled(context: Context):Boolean {
+            return enabled ?: run {
+                enabled = context.getPreferences().loggingEnabled
+                enabled!!
+            }
+        }
+
+        internal fun setEnabled(enabled:Boolean) {
+            this.enabled = enabled
+        }
+
         fun logIfOpen(tag: String, text: String) {
-            if (enabledGlobally)
+            if (enabled == true)
                 instance?.log(text, tag)
         }
 

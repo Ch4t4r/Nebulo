@@ -8,110 +8,183 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
             android:layout_width="match_parent"
-            android:text="@string/about_privacypolicy"
-            android:textSize="17sp"
+            android:id="@+id/privacyPolicy"
+            android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:id="@+id/privacyPolicy"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/ic_gavel"
+                android:layout_height="30dp"/>
 
-    <TextView
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/about_privacypolicy"
+                android:textSize="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:id="@+id/licenses"
-            android:textSize="18sp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="@string/about_licenses"
-            android:layout_height="wrap_content"/>
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/ic_copyright"
+                android:layout_height="30dp"/>
 
-    <TextView
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/about_licenses"
+                android:textSize="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="match_parent"
-            android:text="@string/about_contact_developer"
-            android:textSize="17sp"
             android:id="@+id/contact"
+            android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/ic_envelope"
+                android:layout_height="30dp"/>
 
-    <TextView
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/about_contact_developer"
+                android:textSize="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="match_parent"
-            android:textSize="17sp"
             android:id="@+id/credits"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="@string/about_credits"
-            android:layout_height="wrap_content"/>
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/ic_thumbs_up"
+                android:layout_height="30dp"/>
 
-    <TextView
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/about_credits"
+                android:textSize="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="match_parent"
-            android:textSize="17sp"
-            android:text="@string/about_changelog"
             android:id="@+id/changelog"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:layout_height="wrap_content"/>
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/ic_bullet_list"
+                android:layout_height="30dp"/>
 
-    <TextView
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/about_changelog"
+                android:textSize="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="match_parent"
-            android:textSize="17sp"
             android:id="@+id/group"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="@string/about_telegram_group"
-            android:layout_height="wrap_content"/>
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/ic_tg_group"
+                android:layout_height="30dp"/>
 
-    <TextView
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/about_telegram_group"
+                android:textSize="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="match_parent"
-            android:text="@string/about_share"
-            android:textSize="17sp"
             android:id="@+id/share"
+            android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/ic_share"
+                android:layout_height="30dp"/>
 
-    <TextView
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/about_share"
+                android:textSize="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="match_parent"
-            android:text="@string/about_info"
-            android:textSize="17sp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:id="@+id/about"
-            android:layout_height="wrap_content"/>
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/ic_info"
+                android:layout_height="30dp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/about_info"
+                android:textSize="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>

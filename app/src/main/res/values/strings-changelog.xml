@@ -72,4 +72,14 @@
         <item>A notification is now shown if the app crashes and automatic crash reporting is enabled</item>
         <item>Fixed a few crashes</item>
     </string-array>
+
+    <string-array name="changelog_build_32">
+        <item>1.0 Beta (Build 32)</item>
+        <item>Overhauled the UI a bit</item>
+        <item>Dns-over-TLS now works more reliable in bad networks</item>
+        <item>Added a setting to intercept foreign DNS traffic (for example because of async DNS)</item>
+        <item>Added a view to the drawer which shows the current server in use and the IP-addresses it resolves to</item>
+        <item>The app now uses different internal addresses</item>
+        <item>Fixed a few crashes and app freezes</item>
+    </string-array>
 </resources>

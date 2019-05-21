@@ -3,7 +3,6 @@ package com.frostnerd.smokescreen.activity
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -15,18 +14,17 @@ import com.frostnerd.navigationdraweractivity.items.BasicDrawerItem
 import com.frostnerd.navigationdraweractivity.items.DrawerItem
 import com.frostnerd.navigationdraweractivity.items.createMenu
 import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
+import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
-import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
-import com.frostnerd.smokescreen.dialog.LicensesDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.AboutFragment
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
+import kotlinx.android.synthetic.main.menu_cardview.view.*
 import kotlin.random.Random
 
 /*
@@ -48,24 +46,47 @@ import kotlin.random.Random
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class MainActivity : NavigationDrawerActivity() {
+    override val drawerOverActionBar: Boolean = true
     private var textColor: Int = 0
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
     private var startedActivity = false
+    private var settingsSubscription:TypedPreferences<*>.OnPreferenceChangeListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
         super.onCreate(savedInstanceState)
-        Logger.enabledGlobally = getPreferences().loggingEnabled
         AbstractHttpsDNSHandle // Loads the known servers.
         AbstractTLSDnsHandle
-        /*setCardView { viewParent, suggestedHeight ->
+        setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
+            val update = {
+                val server = getPreferences().dnsServerConfig
+                view.serverName.text = server.name
+                view.dns1.text = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
+                    retryIfError = true,
+                    runResolveNow = true
+                )?.firstOrNull()?.hostAddress ?: "-"
+
+                view.dns2.text = (server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
+                    retryIfError = true,
+                    runResolveNow = true
+                )?.lastOrNull()?.hostAddress ?: "-").let {
+                    if(it == view.dns1.text.toString()) "-" else it
+                }
+            }
+            update()
+            settingsSubscription = getPreferences().listenForChanges("dns_server_config", getPreferences().preferenceChangeListener {
+                runOnUiThread {
+                    update()
+                }
+            })
             view
-        }*/
+        }
         supportActionBar?.elevation = 0f
         ChangelogDialog.showNewVersionChangelog(this)
-        if(getPreferences().shouldShowCrashReportingConsentDialog()) {
+        getPreferences().totalAppLaunches += 1
+        if(getPreferences().totalAppLaunches >= 3 && getPreferences().shouldShowCrashReportingConsentDialog()) {
             CrashReportingEnableDialog(this, onConsentGiven = {
                 val bar = Snackbar.make(findViewById<View>(android.R.id.content), R.string.crashreporting_thankyou, Snackbar.LENGTH_INDEFINITE)
                     bar.setAction(R.string.crashreporting_thankyou_gotit) {
@@ -73,7 +94,6 @@ class MainActivity : NavigationDrawerActivity() {
                     }.show()
             }).show()
         }
-        getPreferences().totalAppLaunches += 1
         if(getPreferences().totalAppLaunches >= 5 &&
             !getPreferences().askedForGroupJoin &&
             Random.nextInt(0,100) < 15 &&
@@ -92,7 +112,7 @@ class MainActivity : NavigationDrawerActivity() {
 
     override fun createDrawerItems(): MutableList<DrawerItem> {
         return createMenu {
-            fragmentItem(getString(R.string.menu_dnsoverhttps),
+            fragmentItem(getString(R.string.menu_main),
                 iconLeft = getDrawable(R.drawable.ic_menu_dnsoverhttps),
                 fragmentCreator = singleInstanceFragment { MainFragment() }
             )
@@ -143,9 +163,15 @@ class MainActivity : NavigationDrawerActivity() {
                 )
             }
             fragmentItem(getString(R.string.menu_about),
-                iconLeft = getDrawable(R.drawable.ic_binoculars),
+                iconLeft = getDrawable(R.drawable.ic_info),
                 fragmentCreator = singleInstanceFragment { AboutFragment() })
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        settingsSubscription?.unregister()
+        settingsSubscription = null
     }
 
     override fun onBackPressed() {

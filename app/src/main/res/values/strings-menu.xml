@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="menu_dnsoverhttps">DNS over HTTPS</string>
+    <string name="menu_main">App status</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_querylogging">Logged queries</string>
     <string name="menu_create_shortcut">Create a server shortcut</string>
