@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="contentdescription_main_infoimage">Bilgi simgesi</string>
+    <string name="contentdescription_main_servericon">Sunucu simgesi</string>
+    <string name="contentdescription_main_statusimage">Uygulamanın çalışıp çalışmadığını gösteren resim</string>
+    <string name="contentdescription_shared_app_icon">Uygulama simgesi</string>
+    <string name="contentdescription_clear_search">Aramayı Temizle</string>
+
+    <string name="contentdescription_start_app">Uygulamayı başlat</string>
+    <string name="contentdescription_stop_app">Uygulamayı durdur</string>
+    
+    <string name="hint_searchterm">Aranacak terim</string>
+</resources>
