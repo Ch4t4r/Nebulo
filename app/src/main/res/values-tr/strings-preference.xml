@@ -95,7 +95,7 @@
     <string name="title_force_ipv6">IPv6\'yı zorla</string>
     <string name="summary_force_ipv6">Cihaz IPv6 kullanmıyorken bile uygulamayı IPv6 isteklerini kabul etmeye zorlayın.</string>
 
-    <string name="title_force_ipv4">Ipv4\'ü zorla</string>
+    <string name="title_force_ipv4">IPv4\'ü zorla</string>
     <string name="summary_force_ipv4">Cihaz IPv4 kullanmıyorsa bile, uygulamayı IPv4 isteklerini kabul etmeye zorlayın.</string>
 
     <string name="title_allow_ipv4_traffic">IPv4 trafiğine izin ver</string>
