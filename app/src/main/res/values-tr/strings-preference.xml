@@ -1,2 +1,143 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preference_category_general">Genel</string>
+
+    <string name="title_theme">Tema</string>
+    <string name="summary_theme">Bu uygulamanın temasını ayarlar</string>
+
+    <string name="title_start_on_boot">Açılışta başla</string>
+    <string name="summary_start_on_boot">Telefon açıldığında uygulamayı başlatın</string>
+
+    <string name="title_start_after_update">Güncellemeden sonra başla</string>
+    <string name="summary_start_after_update">Uygulama güncellendikten sonra başlat</string>
+
+    <string name="title_excluded_apps">Dışlanan uygulamalar</string>
+    <string name="summary_excluded_apps">Örneğin, artık Internet\'e bağlanamıyorlarsa, uygulamaları hariç tutun. Seçilen uygulamalar artık HTTPS üzerinden DNS kullanmayacak.</string>
+
+
+
+    <string name="preference_category_notification">Bildirim</string>
+
+    <string name="title_show_notification_on_lockscreen">Kilit ekranında göster</string>
+    <string name="summary_show_notification_on_lockscreen">Kilit ekranında bildirimin gösterilip gösterilmeyeceğini ayarlar</string>
+
+    <string name="title_notification_hide_icon">Simgeyi gizle</string>
+    <string name="summary_notification_hide_icon">Üstteki gezinti çubuğundan simgeyi gizleyin</string>
+
+    <string name="title_notification_allow_stop">Durdurmaya izin ver</string>
+    <string name="summary_notification_allow_stop">Uygulamanın bildirimden durdurulmasına izin ver</string>
+
+    <string name="title_notification_allow_pause">Duraklatmaya izin ver</string>
+    <string name="summary_notification_allow_pause">Uygulamanın bildirimden duraklatılmasına izin ver</string>
+
+
+    <string name="preference_category_pin">PIN koruması</string>
+
+    <string name="title_preference_enable_pin">PIN</string>
+    <string name="summary_preference_enable_pin">Uygulamayı açarken veya durdururken bir PIN isteyin</string>
+
+    <string name="title_preference_pin_use_fingerprint">Parmak izine izin ver</string>
+    <string name="summary_preference_pin_use_fingerprint">Parmak izinizin PIN yerine kullanılmasına izin verin.</string>
+
+    <string name="title_preference_change_pin">PIN\'i değiştir</string>
+    <string name="summary_preference_change_pin">PIN\'i değiştirin. Sadece sayısal değerlere izin verilir.
+\nGeçerli PIN: %1s</string>
+
+    <string name="preference_category_cache">Önbellek kontrolü</string>
+
+    <string name="title_dnscache_enabled">DNS önbelleğini kullan</string>
+    <string name="summary_dnscache_enabled">Uygulamaların DNS önbelleğini etkinleştirir. Önbellek, eski sorguları daha hızlı cevaplamak için eski istekleri ezberler</string>
+
+    <string name="title_dnscache_keepacrosslaunches">DNS önbelleğini koru</string>
+    <string name="summary_dnscache_keepacrosslaunches">DNS önbelleğini birden çok başlatma boyunca tutun</string>
+
+    <string name="title_dnscache_maxsize">Azami Önbellek boyutu</string>
+    <string name="summary_dnscache_maxsize">Önbelleğin istediği zaman alabileceği azami girdi sayısını belirler</string>
+
+    <string name="title_dnscache_usedefaulttimes">Varsayılan önbellek süresi</string>
+    <string name="summary_dnscache_usedefaulttimes">Sorgu önbelleğini sunucu tarafından belirtilen süre boyunca saklayın</string>
+
+    <string name="title_dnscache_minimum_cache_time">Asgari önbellek süresi</string>
+    <string name="summary_dnscache_minimum_cache_time">Önbellekte asgari saklama süresi.
+\nGeçerli: %1d Saniye.</string>
+
+    <string name="title_dnscache_customcachetime">Özel önbellek süresi (Saniye)</string>
+    <string name="summary_dnscache_customcachetime">Eski isteklerin önbelleğe alınma süresini değiştirir.
+\nGeçerli: %1d Saniye.</string>
+
+    <string name="title_dnscache_nxdomaincachetime">Nxdomain için önbellek süresi (saniye)</string>
+    <string name="summary_dnscache_nxdomaincachetime">Eski NXDOMAIN isteklerinin önbelleğe alınma süresini değiştirir. Bu, mevcut olmayan alan adlarının başarımını artırır (ör. Engellenmişlerse)
+\nGeçerli: %1d Saniye.</string>
+
+
+    <string name="preference_category_logging">Günlük</string>
+
+    <string name="title_enable_logging">Günlüğü etkinleştir</string>
+    <string name="summary_enable_logging">Hata ayıklama bilgilerinin günlüğe kaydedilmesini sağlar (istatistik verileri içerir). Bu günlükler otomatik olarak gönderilmez.</string>
+
+    <string name="title_send_logs">Günlükleri gönder</string>
+    <string name="summary_send_logs">Günlükleri geliştiriciye göndermek için burayı tıklayın.</string>
+
+    <string name="title_delete_all_logs">Tüm günlükleri sil</string>
+    <string name="summary_delete_all_logs">Cihazınızda depolanan tüm günlükleri siler.</string>
+
+    <string name="title_enable_sentry">Çökme raporlamasını etkinleştir</string>
+    <string name="summary_enable_sentry">Çökme raporlarını geliştiriciye otomatik olarak gönderin. Veri yalnızca çökmelerde iletilir.</string>
+
+
+    <string name="preference_category_ip">IP ayarları</string>
+
+    <string name="title_enable_ipv6">IPv6\'yı etkinleştir</string>
+    <string name="summary_enable_ipv6">Aygıtta atanmış bir IPv6 adresi varsa, IPv6\'yı kullanın</string>
+
+    <string name="title_enable_ipv4">IPv4\'ü etkinleştir</string>
+    <string name="summary_enable_ipv4">Atanmış bir IPv4 adresi varsa, IPv4 kullanın</string>
+
+    <string name="title_force_ipv6">IPv6\'yı zorla</string>
+    <string name="summary_force_ipv6">Cihaz IPv6 kullanmıyorken bile uygulamayı IPv6 isteklerini kabul etmeye zorlayın.</string>
+
+    <string name="title_force_ipv4">Ipv4\'ü zorla</string>
+    <string name="summary_force_ipv4">Cihaz IPv4 kullanmıyorsa bile, uygulamayı IPv4 isteklerini kabul etmeye zorlayın.</string>
+
+    <string name="title_allow_ipv4_traffic">IPv4 trafiğine izin ver</string>
+    <string name="summary_allow_ipv4_traffic">IPv4 devre dışı olsa bile IPv4 trafiğinin kullanılmasına izin verin.
+\nDevre dışı bırakılırsa, uygulama çalışırken IPv4 bağlantılarına izin verilmez.</string>
+
+    <string name="title_allow_ipv6_traffic">IPv6 trafiğine izin ver</string>
+    <string name="summary_allow_ipv6_traffic">IPv4 devre dışı olsa bile IPv6 trafiğinin kullanılmasına izin verin.
+\nDevre dışı bırakılırsa, uygulama çalışırken hiçbir IPv6 bağlantısına izin verilmez.</string>
+
+
+    <string name="preference_category_network">Ağ</string>
+
+    <string name="title_disallow_other_vpns">Diğer VPN\'lere izin verme</string>
+    <string name="summary_disallow_other_vpns">Uygulama açıkça durdurulmadığında diğer VPN’lerin başlatılmasına izin verme</string>
+
+    <string name="title_catch_other_dns_servers">Diğer DNS trafiğini engelle</string>
+    <string name="summary_catch_other_dns_servers">Bilinen DNS sunucularının trafiğini durdurun ve Nebulo kullanarak iletin</string>
+
+    <string name="title_bypass_searchdomains">Arama alanadlarını atla</string>
+    <string name="summary_bypass_searchdomains">Arama alanadlarını (örneğin, MyPC.local veya MyPc.fritz.box), DoH sunucusu yerine ağınızın DNS sunucusuna gönderin.
+\nBu şiddetle tavsiye edilir. Bu sorgular ağınızı terk etmez.</string>
+
+    <string name="title_nullterminate_keweon">Keweon boş sonlandırma</string>
+    <string name="summary_nullterminate_keweon">Engellenen alanları keweon tarafından boş sonlandırır, bu da reklam trafiğini tamamen keweon\'a gönderilmek yerine hurdaya çıkarır</string>
+
+    <string name="title_pause_on_captiveportal">Giriş portalında duraklat</string>
+    <string name="summary_pause_on_captiveportal">Giriş portalı tespit edilirse DoH kullanmayın. Giriş yaptıktan kısa bir süre sonra otomatik olarak devam edilecektir.
+\nDevre dışı bırakmak, oturum açmak için giriş portalını açmanızı engelleyebilir.</string>
+
+    <string name="title_show_noconnection_notification">Bağlantı yok bildirimi</string>
+    <string name="summary_show_noconnection_notification">Uygulamanın bağlantısı yokken ya da kötü olduğunda bir bildirim göster</string>
+
+
+    <string name="preference_category_querylogging">Sorgu günlüğü</string>
+
+    <string name="title_log_queries">Sorgu günlüğü</string>
+    <string name="summary_log_queries">Tüm sorguları ve cevaplarını günlüğe kaydet</string>
+
+    <string name="title_export_queries">Sorguları dışa aktar</string>
+    <string name="summary_export_queries">Sorguları CSV olarak dışa aktar (%1d sorgu)</string>
+
+    <string name="title_delete_queries">Sorguları temizle</string>
+    <string name="summary_delete_queries">Günlüğe kaydedilen tüm sorguları silmek için buraya tıklayın.</string>
+</resources>
