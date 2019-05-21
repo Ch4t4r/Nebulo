@@ -9,4 +9,6 @@
     
     <string name="menu_cardview_title">Echtzeit Statistik</string>
 
-</resources>
+<string name="menu_show_on_fdroid">Auf F-Droid anzeigen</string>
+    
+    </resources>
