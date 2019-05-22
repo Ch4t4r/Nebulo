@@ -1,2 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="tasker_start_if_running">Start, zelfs als het al actief is (kan configuratie overschrijven)</string>
+    <string name="tasker_use_default_configuration">Gebruik de servers die in het menu zijn geselecteerd</string>
+    <string name="tasker_action">Actie</string>
+    <string name="tasker_start_app_custom_url">Start de app met %1s (modus: %2s)</string>
+    <string name="tasker_start_app_custom_urls">Start de app met %1s en %2s (modus: %3s)</string>
+    </resources>
