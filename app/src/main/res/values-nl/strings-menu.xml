@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="menu_main">App status</string>
+    <string name="menu_settings">Instellingen</string>
+    <string name="menu_querylogging">Geregistreerde zoekopdrachten</string>
+    <string name="menu_create_shortcut">Maak een server snelkoppeling</string>
+    <string name="menu_rate">Beoordeel</string>
+    <string name="menu_about">Over deze app</string>
+    <string name="menu_show_on_fdroid">Toon in F-Droid</string>
+    
+    <string name="menu_cardview_title">Realtime statistieken</string>
+
+</resources>
