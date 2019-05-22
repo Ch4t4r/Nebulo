@@ -1,2 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="activity_label_import_servers">Importeer server(s)</string>
+
+    <string name="activity_label_enable_logging">Exporteer log/Loggen inschakelen</string>
+
+    <string name="all_stop">Stop</string>
+    <string name="all_start">Start</string>
+    <string name="all_pause">Pause</string>
+    <string name="all_resume">Hervatten</string>
+    <string name="all_no">Nee</string>
+    <string name="all_yes">Ja</string>
+    <string name="information">Informatie</string>
+    <string name="open_app">Open app</string>
+    <string name="all_close">Sluit</string>
+
+    <string name="main_dnssurveillance_privacystatement">Privacyverklaring van %1s</string>
+
+    <string name="quicksettings_stop_text">Stop Nebulo</string>
+    <string name="quicksettings_start_text">Start Nebulo</string>
+
+    <string name="crashreporting_thankyou">Bedankt! Als u van gedachten verandert, ga dan naar de instellingen.</string>
+    <string name="crashreporting_thankyou_gotit">Ik snap het!</string>
+
+    <string name="about_share">Deel</string>
+    <string name="about_licenses">Open-source licenties</string>
+    <string name="about_changelog">Changelog</string>
+    <string name="about_contact_developer">Contact ontwikkelaar</string>
+    <string name="about_telegram_group">Telegram groep</string>
+    <string name="about_privacypolicy">Privacybeleid</string>
+    <string name="about_credits">Credits</string>
+    <string name="about_info">Algemene informatie</string>
+
+</resources>
