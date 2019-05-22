@@ -1,2 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="all_stop">Stop</string>
+    <string name="all_start">Start</string>
+    <string name="all_pause">Pauza</string>
+    <string name="all_resume">Wznów</string>
+    <string name="all_no">Nie</string>
+    <string name="all_yes">Tak</string>
+    <string name="information">Informacje</string>
+    <string name="open_app">Uruchom aplikację</string>
+    <string name="all_close">Zamknij</string>
+
+    <string name="main_dnssurveillance_infotext">Pamiętaj, że serwer DNS, z którym jesteś połączony, może rejestrować odwiedzane witryny. Sprawdź jego oświadczenie o ochronie prywatności, aby uzyskać więcej informacji.</string>
+    <string name="main_dnssurveillance_privacystatement">Oświadczenie o ochronie prywatności %1s</string>
+
+    <string name="app_share_text">Cześć, znalazłem aplikację, która szyfruje zapytania DNS, aby zapewnić więcej prywatności i bezpieczeństwa. Zobacz więcej: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
+
+    <string name="quicksettings_stop_text">Zatrzymaj Nebulo</string>
+    <string name="quicksettings_start_text">Uruchom Nebulo</string>
+
+    <string name="about_share">Udostępnij</string>
+    </resources>
