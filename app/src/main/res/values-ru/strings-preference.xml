@@ -23,11 +23,11 @@
     <string name="title_notification_hide_icon">Скрыть иконку</string>
     <string name="summary_notification_hide_icon">Скрыть иконку из статус бара</string>
 
-    <string name="title_notification_allow_stop">Разрешить остановку Nebulo</string>
+    <string name="title_notification_allow_stop">Разрешить остановку</string>
     <string name="summary_notification_allow_stop">Разрешить остановку прямо из уведомления</string>
 
-    <string name="title_notification_allow_pause">Разрешить паузу из уведомления</string>
-    <string name="summary_notification_allow_pause">Добавить кнопку паузы в уведомлении</string>
+    <string name="title_notification_allow_pause">Разрешить паузу</string>
+    <string name="summary_notification_allow_pause">Разрешить паузу прямо из уведомления</string>
 
 
     <string name="preference_category_pin">Защита приложения</string>
@@ -120,7 +120,7 @@
 \nЭта пункт настройки очень рекомендуется оставить включенным. Эти запросы не покидают пределов вашей сети.</string>
 
     <string name="title_pause_on_captiveportal">Приостанавливать Nebulo на captive portal</string>
-    <string name="summary_pause_on_captiveportal">Не использовать серверы DoH/DoT при обнаружении captive portal (специальный сетевой сервис для авторизации. К примеру, в коммерческой Wi-Fi сети). 
+    <string name="summary_pause_on_captiveportal">Не использовать серверы DoH/DoT при обнаружении captive portal (специальный сетевой сервис для авторизации. Такие сервисы используются, к примеру, в коммерческих Wi-Fi сетях). 
 \nNebulo автоматически продолжит перенаправлять DNS запросы после успешной авторизации на портале.</string>
 
     <string name="title_show_noconnection_notification">Уведомление об отсутствии соединения с сервером DoH/DoT</string>
@@ -137,4 +137,7 @@
 
     <string name="title_delete_queries">Очистить лог запросов</string>
     <string name="summary_delete_queries">Нажмите здесь для удаления всех запросов из лога.</string>
-</resources>
+<string name="title_nullterminate_keweon">Терминация ответов от keweon</string>
+    <string name="summary_nullterminate_keweon">Прекращать обработку ответов, которые сервер keweon считает рекламными (отправлять в 0.0.0.0)</string>
+
+    </resources>
