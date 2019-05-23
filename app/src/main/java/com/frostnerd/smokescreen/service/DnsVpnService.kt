@@ -683,6 +683,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun getDhcpDnsServers():List<InetAddress> {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
+            if(network != null) continue
             val info = mgr.getNetworkInfo(network) ?: continue
             val capabilities = mgr.getNetworkCapabilities(network) ?: continue
             if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
@@ -794,6 +795,7 @@ class DnsVpnService : VpnService(), Runnable {
             log("Creating bypass handlers for search domains of connected networks.")
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             for (network in mgr.allNetworks) {
+                if(network != null) continue
                 val networkInfo = mgr.getNetworkInfo(network) ?: continue
                 if (networkInfo.isConnected && !mgr.isVpnNetwork(network)) {
                     val linkProperties = mgr.getLinkProperties(network) ?: continue
