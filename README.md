@@ -52,6 +52,8 @@ There are several ways for you to contact the developer:
 # Credits
 A list of some extraordinary people who contributed to this project:
  - App icon and notification icon by [RKBDI](http://dribbble.com/rkbdi).
+ - Turkish translation by Kemal Oktay Aktoğan
+ - Russian translation by [bruleto](https://t.me/bruleto)
 <br/>
 <br/>
 
