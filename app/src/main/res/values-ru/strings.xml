@@ -29,7 +29,7 @@
 \n 
 \nВерсия базы данных %3d 
 \n 
-\nИдентификатор отчета о падении: %4s 
+\nИдентификатор отчета об ошибках: %4s 
 \n 
 \n© Daniel Wolf 2019 
 \n 
@@ -54,5 +54,7 @@
     <string name="about_privacypolicy">Политика конфиденциальности</string>
     <string name="about_credits">Участники</string>
     <string name="about_info">О программе</string>
+
+<string name="about_help_translating">Помочь с переводом на другой язык</string>
 
 </resources>

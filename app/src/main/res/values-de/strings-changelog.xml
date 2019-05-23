@@ -1,2 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_23_1">Nicht-standard Ports werden nun für DoT Server angezeigt</string>
+    <string name="changelog_build_23_2">Es wurde dieser Dialog zum Hervorheben von Änderungen hinzugefügt</string>
+    <string name="changelog_build_23_3">Der Anfragenexport zeigt nun einen Dialog mit Fortschrittsanzeige</string>
+    <string name="changelog_build_23_4">Es wurde ein Fehler behoben, wo der durch welchen der Serverimport unter Android 7 nicht funktioniert hat</string>
+    <string name="changelog_build_23_5">Das Anfragenprotokoll zeigt nun das eingesetzte Protokoll</string>
+    <string name="changelog_build_23_6">Die App kann nun mit einem PIN geschützt werden</string>
+    <string name="changelog_build_24_1">Es wurde ein Fehler behoben, durch welchen die App auf Geräten ohne Fingerabdrucksensor abgestürzt ist</string>
+    <string name="changelog_build_25_1">Das Verhalten von IPv6/IPv4 wurde verbessert - die App funktioniert nun zuverlässiger in Netzwerken, welche nur eins von beiden unterstützen</string>
+    <string name="changelog_build_25_2">Es wurden neue DNS server hinzugefügt</string>
+    <string name="changelog_build_25_3">Es wird nun eine Benachrichtigung angezeigt, wenn eine schlechte oder keine Benachrichtigung vorliegt</string>
+    <string name="changelog_build_25_4">Die App stürzt nicht mehr ab, wenn ein unbekannter Host benutzt wird - es zeigt anstatt die vorher genannte Benachrichtigung</string>
+    <string name="changelog_build_26_1">Die App stürzt nicht mehr ab, wenn der Server nur IPv4 unterstützt und das Netzwerk nur IPv6</string>
+    <string name="changelog_build_26_2">Die Benachrichtigung bei schlechter Verbindung verschwindet nun korrekt</string>
+    <string name="changelog_build_26_3">Die Benachrichtigung bei schlechter Verbindung kann nun entfernt werden</string>
+    <string name="changelog_build_26_4">Die App nutzt nun die richtigen Server von UncensoredDNS</string>
+    <string name="changelog_build_27_1">Es wurden eine menge Fehler behoben</string>
+    <string name="changelog_build_27_2">Die Protokolle können nun wieder geteilt werden, wenn die App abstürzt</string>
+    <string name="changelog_build_27_3">DIe Benachrichtigung bei schlechter Verbindung ist nun standardmäßig deaktiviert und kann in den Einstellungen aktiviert werden</string>
+    <string name="changelog_build_27_4">Es wurde ein Pause Knopf zur Benachrichtigung hinzugefügt</string>
+    <string name="changelog_build_28_1">Der Stop Knopf in der Benachrichtigung funktioniert nun wieder</string>
+    <string name="changelog_build_28_2">Es wird nun ein höheres Timeout für DoH Server genutzt</string>
+    <string name="changelog_build_28_3">Es wurde behoben, dass einige DoT Server nicht funktionieren</string>
+    <string name="changelog_build_28_4">UncensoredDns ist nun der Standardserver</string>
+    <string name="changelog_build_28_5">Kleinere Performanceverbesserungen</string>
+    <string name="changelog_build_29_1">Die App hat nun ein neues Icon (Danke an RKBDI)</string>
+    <string name="changelog_build_29_2">Es wurde eine Toll für automatische Absturzmeldungen hinzugefügt</string>
+    <string name="changelog_build_29_3">Datenschutzerklärung hinzugefügt</string>
+    <string name="changelog_build_29_4">Es wurden eine menge Abstürze behoben</string>
+    <string name="changelog_build_29_5">Es wurde eine Einstellung zum Löschen von gespeicherten Anfragen hinzugefügt</string>
+    <string name="changelog_build_30_1">Es wurde ein neues Icon für die Benachrichtigung hinzugefügt</string>
+    <string name="changelog_build_30_2">Es wurde ein Fehler behoben, durch den die Datenschutzerklärung nicht geladen hat</string>
+    <string name="changelog_build_30_3">Der Blacklist/Whitelist Text in der Benachrichtigung wurde verbessert</string>
+    <string name="changelog_build_30_4">Es wurden einige Abstürze behoben</string>
+    <string name="changelog_build_31_1">Die App wurde teilweise auf Deutsch übersetzt</string>
+    <string name="changelog_build_31_2">Es wurde eine Einstellung hinzugefügt, um die Stop/Pause Knöpfe in der Benachrichtigung zu entfernen</string>
+    <string name="changelog_build_31_3">Es wird nun eine Benachrichtigung angezeigt, wenn die Abstürzt und die automatische Absturzmeldung aktiv ist</string>
+    <string name="changelog_build_31_4">Es wurden einige Abstürze behoben</string>
+    <string name="changelog_build_32_1">Die Oberfläche wurde ein wenig überarbeitet</string>
+    <string name="changelog_build_32_2">Dns-over-TLS funktioniert nun besser in schlechten Netzwerken</string>
+    <string name="changelog_build_32_3">Es wurde eine Einstellung zum Abfangen von fremden DNS-Anfragen hinzugefügt (sinnvoll bei asynchronem DNS)</string>
+    <string name="changelog_build_32_4">Es wurde eine Ansicht zum Seitenmenü hinzugefügt, welche den aktuell genutzten Server und deren IP-Adressen anzeigt</string>
+    <string name="changelog_build_32_5">Die App nutzt intern nun andere Adressen</string>
+    <string name="changelog_build_32_6">Es wurden einige Abstürze und Einfrierer behoben</string>
+    </resources>
