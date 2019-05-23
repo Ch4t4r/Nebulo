@@ -433,7 +433,7 @@ class DnsVpnService : VpnService(), Runnable {
         if (VpnService.prepare(this) == null) {
             log("VpnService is still prepared, establishing VPN.")
             destroyed = false
-            if (reloadServerConfiguration) {
+            if (reloadServerConfiguration || !this::serverConfig.isInitialized) {
                 log("Re-fetching the servers (from intent or settings)")
                 setServerConfiguration(intent)
             } else serverConfig.forEachAddress { _, address ->
