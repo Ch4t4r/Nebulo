@@ -34,6 +34,7 @@ class ProxyBypassHandler(val searchDomains:List<String>, val destinationDnsServe
     private val upstreamAddress = UpstreamAddress(destinationDnsServer, 53)
 
     override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
+        if(dnsMessage.questions.isEmpty()) return false
         val name = dnsMessage.question.name
         return searchDomains.any {
             name.endsWith(it)
