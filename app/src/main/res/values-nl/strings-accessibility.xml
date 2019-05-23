@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="contentdescription_main_infoimage">Informatie icoon</string>
+    <string name="contentdescription_main_servericon">Server icoon</string>
+    <string name="contentdescription_main_statusimage">Afbeelding die aangeeft of de app actief is</string>
+    <string name="contentdescription_shared_app_icon">App icoon</string>
+    <string name="contentdescription_clear_search">De zoekgeschiedenis wissen</string>
+
+    <string name="contentdescription_start_app">Start de app</string>
+    <string name="contentdescription_stop_app">Stop de app</string>
+    
+    <string name="hint_searchterm">Te zoeken term</string>
+</resources>

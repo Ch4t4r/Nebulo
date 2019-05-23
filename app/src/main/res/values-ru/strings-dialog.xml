@@ -10,7 +10,7 @@
     <string name="dialog_newserver_name_hint">Имя сервера (можно кратко)</string>
     <string name="dialog_newserver_primaryserver">Первичный DNS сервер</string>
     <string name="dialog_newserver_secondaryserver">Вторичный DNS сервер (Опционально)</string>
-    <string name="dialog_deleteconfig_title">Удаление сервера\?</string>
+    <string name="dialog_deleteconfig_title">Удалить сервер\?</string>
     <string name="dialog_deleteconfig_text">Вы действительно хотите удалить сервер %1$s\?</string>
 
     <string name="dialog_appchoosal_showsystemapps">Показать системные приложения</string>
@@ -95,10 +95,13 @@
     <string name="dialog_clearqueries_message">Вы действительно хотите очистить список запросов\? Это действие необратимо.</string>
 
     <string name="dialog_credits_title">Участники</string>
-    <string name="dialog_credits_message" formatted="true">- Логотип приложения &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
+    <string name="dialog_credits_message" formatted="true">- Логотип приложения &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; . 
+\n- Перевод на турецкий Kemal Oktay Aktoğan
+\n- Перевод на русский &lt;a href=https://t.me/bruleto&gt;bruleto&lt;/a&gt;
+\n
+\n
 \n 
-\n 
-\n Хотите увидеть свое имя здесь\? Можете внести свой&lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;вклад в разработку &lt;/a&gt;.</string>
+\n Хотите увидеть свое имя здесь\? Можете внести свой &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;вклад в разработку &lt;/a&gt;.</string>
 
     <string name="dialog_join_group_title">Присоединиться к сообществу</string>
     <string name="dialog_join_group_message">Эй, вы знаете, что у этого приложения есть свой чат в Telegram\? В нем выкладываются все последние обновления и также это лучшее место для вопросов и дискуссий о приложении.
