@@ -18,4 +18,10 @@
     <string name="dialog_crashreportingusages_data_app_2">Version</string>
     <string name="dialog_crashreportingusages_data_app_3">Datenbankversion</string>
     <string name="dialog_crashreportingusages_data_app_4">Dns Servername</string>
+    <string name="dialog_crashreportingusages_data_app_5">Primärer DNS server</string>
+    <string name="dialog_crashreportingusages_data_app_6">Sekundärer DNS server</string>
+    <string name="dialog_crashreportingusages_data_os_1">Name (z.B. Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Version (z.B. 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Kernelversion</string>
+    <string name="dialog_crashreportingusages_data_os_4">Gerootet (ja/nein)</string>
     </resources>
