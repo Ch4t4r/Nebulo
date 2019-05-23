@@ -8,13 +8,13 @@
     <string name="notification_channel_noconnection">Verbindings waarschuwingskanaal</string>
     <string name="notification_channel_noconnection_description">Kanaal dat wordt gebruikt voor het weergeven van meldingen wanneer er geen verbinding beschikbaar lijkt te zijn</string>
 
-    <string name="notification_main_text">Aanvragen worden verzonden naar% 1 $ s % 2 $ d Apps zijn uitgesloten van DoH / DoT % 3 $ d vermeldingen in de cache</string>
-    <string name="notification_main_text_with_secondary">Aanvragen worden verzonden naar% 1 $ s en% 2 $ s % 3 $ d Apps zijn uitgesloten van DoH / DoT % 4 $ d vermeldingen in de cache</string>
-    <string name="notification_main_text_whitelist">Aanvragen worden verzonden naar% 1 $ s % 2 $ d Apps gebruiken DoH / DoT % 3 $ d vermeldingen in de cache</string>
-    <string name="notification_main_text_with_secondary_whitelist">Aanvragen worden verzonden naar% 1 $ s en% 2 $ s % 3 $ d Apps gebruiken DoH / DoT % 4 $ d vermeldingen in de cache</string>
+    <string name="notification_main_text">Aanvragen worden verzonden naar %1$s %2$d Apps zijn uitgesloten van DoH / DoT %3$d vermeldingen in de cache</string>
+    <string name="notification_main_text_with_secondary">Aanvragen worden verzonden naar %1$s en %2$s %3$d Apps zijn uitgesloten van DoH / DoT %4$d vermeldingen in de cache</string>
+    <string name="notification_main_text_whitelist">Aanvragen worden verzonden naar %1$s %2$d Apps gebruiken DoH / DoT %3$d vermeldingen in de cache</string>
+    <string name="notification_main_text_with_secondary_whitelist">Aanvragen worden verzonden naar %1$s en %2$s %3$d Apps gebruiken DoH / DoT %4$d vermeldingen in de cache</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">% 1 $ d aanvragen tot nu toe</string>
+    <string name="notification_main_subtext">%1$d aanvragen tot nu toe</string>
 
     <string name="notification_noconnection_title">Geen verbinding</string>
     <string name="notification_noconnection_text">De app stuurt momenteel uw DNS-aanvragen niet door omdat u geen of een slechte verbinding heeft.</string>

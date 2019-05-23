@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="menu_dnsoverhttps">HTTPS üzerinden DNS</string>
+<resources>
     <string name="menu_settings">Ayarlar</string>
     <string name="menu_querylogging">Günlüğe kaydedilen sorgular</string>
     <string name="menu_create_shortcut">Bir sunucu ekle</string>

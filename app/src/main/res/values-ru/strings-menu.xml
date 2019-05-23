@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="menu_dnsoverhttps">DNS over HTTPS</string>
+<resources>
     <string name="menu_settings">Настройки</string>
     <string name="menu_querylogging">Лог DNS запросов</string>
     <string name="menu_create_shortcut">Добавить конфигурацию сервера</string>
