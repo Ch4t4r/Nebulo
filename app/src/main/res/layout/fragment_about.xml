@@ -168,6 +168,28 @@
 
     <LinearLayout
             android:layout_width="match_parent"
+            android:id="@+id/translating"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/ic_language"
+                android:layout_height="30dp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/about_help_translating"
+                android:textSize="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
             android:id="@+id/about"
             android:orientation="horizontal"
             android:paddingTop="8dp"

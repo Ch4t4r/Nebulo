@@ -13,6 +13,7 @@ import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.LicensesDialog
 import kotlinx.android.synthetic.main.fragment_about.view.*
+import java.util.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -85,11 +86,21 @@ class AboutFragment : Fragment() {
                 getString(R.string.menu_about),
                 getString(
                     R.string.about_app,
-                    BuildConfig.VERSION_NAME + if(BuildConfig.DEBUG) " DEBUG" else "",
+                    BuildConfig.VERSION_NAME + if (BuildConfig.DEBUG) " DEBUG" else "",
                     BuildConfig.VERSION_CODE,
                     AppDatabase.currentVersion,
-                    if(context!!.getPreferences().crashReportingEnabled) context!!.getPreferences().crashReportingUUID else "---"
-                ))
+                    if (context!!.getPreferences().crashReportingEnabled) context!!.getPreferences().crashReportingUUID else "---"
+                )
+            )
+        }
+        val languageCode = Locale.getDefault().toString()
+        if (!resources.getStringArray(R.array.missing_languages).any {
+                languageCode.startsWith(it)
+            }) view.translating.visibility = View.GONE
+        else view.translating.setOnClickListener {
+            showInfoTextDialog(context!!, getString(R.string.about_help_translating),
+                getString(R.string.dialog_help_translating_message),
+                neutralButton = getString(R.string.all_close) to null)
         }
     }
 }

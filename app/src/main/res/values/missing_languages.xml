@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="missing_languages" translatable="false">
+        <item>fr</item>
+        <item>hi</item>
+        <item>id</item>
+        <item>fa</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>es</item>
+        <item>ar</item>
+        <item>bn</item>
+        <item>zh</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>ko</item>
+        <item>ms</item>
+        <item>vi</item>
+    </string-array>
+
+</resources>

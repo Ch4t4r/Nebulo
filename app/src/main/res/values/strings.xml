@@ -54,5 +54,6 @@
     <string name="about_privacypolicy">Privacy policy</string>
     <string name="about_credits">Credits</string>
     <string name="about_info">General information</string>
+    <string name="about_help_translating">Help translating</string>
 
 </resources>
