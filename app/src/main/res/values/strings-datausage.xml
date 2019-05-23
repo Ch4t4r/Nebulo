@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="dialog_crashreportingusages_data_1">User data</string>
+    <string name="dialog_crashreportingusages_data_2">Device data</string>
+    <string name="dialog_crashreportingusages_data_3">App data</string>
+    <string name="dialog_crashreportingusages_data_4">Operating system data</string>
+    <string-array name="dialog_crashreportingusages_data">
+        <item>@string/dialog_crashreportingusages_data_1</item>
+        <item>@string/dialog_crashreportingusages_data_2</item>
+        <item>@string/dialog_crashreportingusages_data_3</item>
+        <item>@string/dialog_crashreportingusages_data_4</item>
+    </string-array>
+
+    <string name="dialog_crashreportingusages_data_user_1">Random ID used to track crashes</string>
+    <string-array name="dialog_crashreportingusages_data_user">
+        <item>@string/dialog_crashreportingusages_data_user_1</item>
+    </string-array>
+
+    <string name="dialog_crashreportingusages_data_device_1">Architecture (x86, arm, …)</string>
+    <string name="dialog_crashreportingusages_data_device_2">Orientation (landscape, portrait)</string>
+    <string name="dialog_crashreportingusages_data_device_3">Free/used memory (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_4">Charging state (yes/no)</string>
+    <string name="dialog_crashreportingusages_data_device_5">Online at time of crash (yes/no)</string>
+    <string name="dialog_crashreportingusages_data_device_6">Screen resolution</string>
+    <string name="dialog_crashreportingusages_data_device_7">Manufacturer</string>
+    <string name="dialog_crashreportingusages_data_device_8">Brand</string>
+    <string name="dialog_crashreportingusages_data_device_9">Model</string>
+    <string name="dialog_crashreportingusages_data_device_10">Language</string>
+    <string-array name="dialog_crashreportingusages_data_device">
+        <item>@string/dialog_crashreportingusages_data_device_1</item>
+        <item>@string/dialog_crashreportingusages_data_device_2</item>
+        <item>@string/dialog_crashreportingusages_data_device_3</item>
+        <item>@string/dialog_crashreportingusages_data_device_4</item>
+        <item>@string/dialog_crashreportingusages_data_device_5</item>
+        <item>@string/dialog_crashreportingusages_data_device_6</item>
+        <item>@string/dialog_crashreportingusages_data_device_7</item>
+        <item>@string/dialog_crashreportingusages_data_device_8</item>
+        <item>@string/dialog_crashreportingusages_data_device_9</item>
+        <item>@string/dialog_crashreportingusages_data_device_10</item>
+    </string-array>
+
+    <string name="dialog_crashreportingusages_data_app_1">Start time of app</string>
+    <string name="dialog_crashreportingusages_data_app_2">App version</string>
+    <string name="dialog_crashreportingusages_data_app_3">Database version</string>
+    <string name="dialog_crashreportingusages_data_app_4">Dns server name</string>
+    <string name="dialog_crashreportingusages_data_app_5">Primary dns server</string>
+    <string name="dialog_crashreportingusages_data_app_6">Secondary dns server</string>
+    <string-array name="dialog_crashreportingusages_data_app">
+        <item>@string/dialog_crashreportingusages_data_app_1</item>
+        <item>@string/dialog_crashreportingusages_data_app_2</item>
+        <item>@string/dialog_crashreportingusages_data_app_3</item>
+        <item>@string/dialog_crashreportingusages_data_app_4</item>
+        <item>@string/dialog_crashreportingusages_data_app_5</item>
+        <item>@string/dialog_crashreportingusages_data_app_6</item>
+    </string-array>
+
+    <string name="dialog_crashreportingusages_data_os_1">Name (e.g. Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Version (e.g. 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Kernel version</string>
+    <string name="dialog_crashreportingusages_data_os_4">Rooted (yes/no)</string>
+    <string-array name="dialog_crashreportingusages_data_os">
+        <item>@string/dialog_crashreportingusages_data_os_1</item>
+        <item>@string/dialog_crashreportingusages_data_os_2</item>
+        <item>@string/dialog_crashreportingusages_data_os_3</item>
+        <item>@string/dialog_crashreportingusages_data_os_4</item>
+    </string-array>
+</resources>
