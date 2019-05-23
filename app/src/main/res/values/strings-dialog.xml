@@ -84,7 +84,8 @@
     <string name="dialog_credits_message" formatted="true">
         - App icon by <![CDATA[<a href="https://dribbble.com/rkbdi">RKBDI</a>]]> .\n
         - Turkish translation by Kemal Oktay Aktoğan\n
-        - Russian translation by bruleto
+        - Russian translation by bruleto\n
+        - Dutch translation by Bas Koedijk
         \n
         \n
         Want to see your name here? Feel free to <![CDATA[<a href="https://git.frostnerd.com/PublicAndroidApps/smokescreen">contribute</a>]]>.
@@ -94,6 +95,6 @@
     <string name="dialog_join_group_message">Hey there!\n\nDid you know that this app has a Telegram group? It contains regular updates and is the perfect place for discussions and questions.\nWe are a great community of over 120 people, would you like to be a part of it?</string>
     <string name="dialog_join_group_positive">Yeah!</string>
 
-    <string name="dialog_help_translating_message">This app is translated to a few languages, but even more are missing or incomplete - including yours.
+    <string name="dialog_help_translating_message" translatable="false">This app is translated to a few languages, but even more are missing or incomplete - including yours.
         \n\nThat\'s why I\'m kindly asking for your help translating this app to reach as broad of an audience as possible. If you are willing to help translating this app into your language feel free to either contact me or <![CDATA[<a href="https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/TRANSLATING.md">read here on how to help.</a>]]></string>
 </resources>

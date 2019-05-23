@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_crashreportingusages_data_1">Данные пользователя</string>
+    <string name="dialog_crashreportingusages_data_2">Данные устройства</string>
+    <string name="dialog_crashreportingusages_data_3">Данные приложения</string>
+    <string name="dialog_crashreportingusages_data_4">Данные операционной системы</string>
+    <string name="dialog_crashreportingusages_data_user_1">Случайный идентификатор, используемый для отслеживания отчетов</string>
+    <string name="dialog_crashreportingusages_data_device_1">Архитектура устройства (x86, arm, …)</string>
+    <string name="dialog_crashreportingusages_data_device_2">Ориентация экрана (портретная, альбомная)</string>
+    <string name="dialog_crashreportingusages_data_device_3">Свободная/используемая память (ОЗУ)</string>
+    <string name="dialog_crashreportingusages_data_device_4">Состояние зарядки (заряжается/не заряжается)</string>
+    <string name="dialog_crashreportingusages_data_device_5">Использовалось ли во время падения (да/нет)</string>
+    <string name="dialog_crashreportingusages_data_device_6">Разрешение экрана</string>
+    <string name="dialog_crashreportingusages_data_device_7">Производитель</string>
+    <string name="dialog_crashreportingusages_data_device_8">Марка</string>
+    <string name="dialog_crashreportingusages_data_device_9">Модель</string>
+    <string name="dialog_crashreportingusages_data_device_10">Язык</string>
+    <string name="dialog_crashreportingusages_data_app_1">Время старта приложения</string>
+    <string name="dialog_crashreportingusages_data_app_2">Версия приложения</string>
+    <string name="dialog_crashreportingusages_data_app_3">Версия базы данных</string>
+    <string name="dialog_crashreportingusages_data_app_4">Имя используемого DNS сервера</string>
+    <string name="dialog_crashreportingusages_data_app_5">Первичный DNS сервер</string>
+    <string name="dialog_crashreportingusages_data_app_6">Вторичный DNS сервер</string>
+    <string name="dialog_crashreportingusages_data_os_1">Название (напр. Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Версия (напр. 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Версия ядра</string>
+    <string name="dialog_crashreportingusages_data_os_4">Наличие root (да/нет)</string>
+    </resources>
