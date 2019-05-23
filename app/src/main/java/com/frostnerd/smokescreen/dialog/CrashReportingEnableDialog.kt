@@ -38,10 +38,8 @@ class CrashReportingEnableDialog(
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
 
     init {
-        val view = layoutInflater.inflate(R.layout.dialog_crashreporting, null, false)
         setTitle(R.string.dialog_crashreporting_title)
         setMessage(context.getString(if (showTesterText) R.string.dialog_crashreporting_message else R.string.dialog_crashreporting_message_notester))
-        setView(view)
         setCancelable(false)
         setCanceledOnTouchOutside(false)
         setButton(
