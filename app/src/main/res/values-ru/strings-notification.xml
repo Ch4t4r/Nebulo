@@ -8,11 +8,11 @@
     <string name="notification_channel_noconnection">Канал для уведомления об отсутствии соединения</string>
     <string name="notification_channel_noconnection_description">Канал, используемый для отображения уведомлений при отсутствии соединения</string>
 
-    <string name="notification_main_text">Запросов к %1$s
+    <string name="notification_main_text">Запросы идут к %1$s
 \n
 \n%2$d исключенных приложений
 \n%3$d записей в кэше</string>
-    <string name="notification_main_text_with_secondary">Запросов к %1$s и %2$s
+    <string name="notification_main_text_with_secondary">Запросы идут к %1$s и %2$
 \n
 \n%3$d исключенных приложений
 \n%4$d записей в кэше</string>

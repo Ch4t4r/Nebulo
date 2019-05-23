@@ -64,9 +64,7 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
         if (writeQueriesToLog) {
             context.log("Query from device: $questionMessage")
         }
-        if(questionMessage.questions.size == 0) {
-            context.getSentryIfEnabled()?.sendEvent(EventBuilder().withLevel(Event.Level.WARNING).withMessage("DnsMessage contains no question: $questionMessage"))
-        } else if (logQueriesToDb) {
+        if (logQueriesToDb) {
             val query = DnsQuery(
                 type = questionMessage.question.type,
                 name = questionMessage.question.name.toString(),
