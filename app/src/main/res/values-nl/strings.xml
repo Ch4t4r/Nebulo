@@ -45,4 +45,6 @@
 \n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
     <string name="app_share_text">Hé, ik heb deze app gevonden die uw DNS-zoekopdrachten codeert om u meer privacy en veiligheid te bieden. Bekijk het hier: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
 
-    </resources>
+    <string name="about_help_translating">Help met vertalen</string>
+
+</resources>
