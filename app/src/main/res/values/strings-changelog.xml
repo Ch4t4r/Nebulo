@@ -1,85 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="changelog_build_23_1">Non-default ports are now shown for DoT servers</string>
+    <string name="changelog_build_23_2">Added this dialog to highlight changes</string>
+    <string name="changelog_build_23_3">The query export setting now shows a dialog indicating whether it is loading</string>
+    <string name="changelog_build_23_4">Fixed the server import not working on OS versions below Android 7</string>
+    <string name="changelog_build_23_5">The query log now shows the protocol used to send the query</string>
+    <string name="changelog_build_23_6">You can now pin protect the app in the settings</string>
     <string-array name="changelog_build_23">
         <item>1.0 Beta (Build 23)</item>
-        <item>Non-default ports are now shown for DoT servers</item>
-        <item>Added this dialog to highlight changes</item>
-        <item>The query export setting now shows a dialog indicating whether it is loading</item>
-        <item>Fixed the server import not working on OS versions below Android 7</item>
-        <item>The query log now shows the protocol used to send the query</item>
-        <item>You can now pin protect the app in the settings</item>
+        <item>@string/changelog_build_23_1</item>
+        <item>@string/changelog_build_23_2</item>
+        <item>@string/changelog_build_23_3</item>
+        <item>@string/changelog_build_23_4</item>
+        <item>@string/changelog_build_23_5</item>
+        <item>@string/changelog_build_23_6</item>
     </string-array>
 
+    <string name="changelog_build_24_1">Fixed the app crashing on devices which don\'t have a fingerprint sensor</string>
     <string-array name="changelog_build_24">
         <item>1.0 Beta (Build 24)</item>
-        <item>Fixed the app crashing on devices which don\'t have a fingerprint sensor</item>
+        <item>@string/changelog_build_24_1</item>
     </string-array>
 
+    <string name="changelog_build_25_1">Improved handling of IPv6/IPv6 - the app now works reliable in networks which only support either</string>
+    <string name="changelog_build_25_2">Added new DNS servers</string>
+    <string name="changelog_build_25_3">A notification is now shown when there is no/a bad connection</string>
+    <string name="changelog_build_25_4">The app doesn\'t crash anymore if an unknown host is used - it shows the aforementioned notification instead</string>
     <string-array name="changelog_build_25">
         <item>1.0 Beta (Build 25)</item>
-        <item>Improved handling of IPv6/IPv6 - the app now works reliable in networks which only support either</item>
-        <item>Added new DNS servers</item>
-        <item>A notification is now shown when there is no/a bad connection</item>
-        <item>The app doesn\'t crash anymore if an unknown host is used - it shows the aforementioned notification instead</item>
+        <item>@string/changelog_build_25_1</item>
+        <item>@string/changelog_build_25_2</item>
+        <item>@string/changelog_build_25_3</item>
+        <item>@string/changelog_build_25_4</item>
     </string-array>
 
+
+    <string name="changelog_build_26_1">The app doesn\'t crash anymore for servers which only have IPv4 addresses when the network only has IPv6 addresses</string>
+    <string name="changelog_build_26_2">Fixed the no connection notification not vanishing properly</string>
+    <string name="changelog_build_26_3">The no connection notification can now be dismissed</string>
+    <string name="changelog_build_26_4">The app had the wrong servers of UncensoredDNS</string>
     <string-array name="changelog_build_26">
         <item>1.0 Beta (Build 26)</item>
-        <item>The app doesn\'t crash anymore for servers which only have IPv4 addresses when the network only has IPv6 addresses</item>
-        <item>Fixed the no connection notification not vanishing properly</item>
-        <item>The no connection notification can now be dismissed</item>
-        <item>The app had the wrong servers of UncensoredDNS</item>
+        <item>@string/changelog_build_26_1</item>
+        <item>@string/changelog_build_26_2</item>
+        <item>@string/changelog_build_26_3</item>
+        <item>@string/changelog_build_26_4</item>
     </string-array>
 
+    <string name="changelog_build_27_1">Fixed a lot of crashes</string>
+    <string name="changelog_build_27_2">Logs can now be shared again when the app crashes</string>
+    <string name="changelog_build_27_3">The notification shown when the app has no/a bad connection is now turned off by default and can be enabled in the settings</string>
+    <string name="changelog_build_27_4">Added a pause button to the notification</string>
     <string-array name="changelog_build_27">
         <item>1.0 Beta (Build 27)</item>
-        <item>Fixed a lot of crashes</item>
-        <item>Logs can now be shared again when the app crashes</item>
-        <item>The notification shown when the app has no/a bad connection is now turned off by default and can be enabled in the settings</item>
-        <item>Added a pause button to the notification</item>
+        <item>@string/changelog_build_27_1</item>
+        <item>@string/changelog_build_27_2</item>
+        <item>@string/changelog_build_27_3</item>
+        <item>@string/changelog_build_27_4</item>
     </string-array>
 
+    <string name="changelog_build_28_1">The stop button in the notification works again</string>
+    <string name="changelog_build_28_2">A higher timeout is now used for DoH servers (should improve network on bad connections)</string>
+    <string name="changelog_build_28_3">Fixed some DoT servers not working</string>
+    <string name="changelog_build_28_4">UncensoredDns is now used as default server</string>
+    <string name="changelog_build_28_5">Small performance improvements</string>
     <string-array name="changelog_build_28">
         <item>1.0 Beta (Build 28)</item>
-        <item>The stop button in the notification works again</item>
-        <item>A higher timeout is now used for DoH servers (should improve network on bad connections)</item>
-        <item>Fixed some DoT servers not working</item>
-        <item>UncensoredDns is now used as default server</item>
-        <item>Small performance improvements</item>
+        <item>@string/changelog_build_28_1</item>
+        <item>@string/changelog_build_28_2</item>
+        <item>@string/changelog_build_28_3</item>
+        <item>@string/changelog_build_28_4</item>
+        <item>@string/changelog_build_28_5</item>
     </string-array>
 
+    <string name="changelog_build_29_1">Added new app icon (thanks to RKBDI)</string>
+    <string name="changelog_build_29_2">Added automatic crash reporting (opt-in)</string>
+    <string name="changelog_build_29_3">Added privacy policy</string>
+    <string name="changelog_build_29_4">Fixed a lot of crashes</string>
+    <string name="changelog_build_29_5">Added a setting to clear logged queries</string>
     <string-array name="changelog_build_29">
         <item>1.0 Beta (Build 29)</item>
-        <item>Added new app icon (thanks to RKBDI)</item>
-        <item>Added automatic crash reporting (opt-in)</item>
-        <item>Added privacy policy</item>
-        <item>Fixed a lot of crashes</item>
-        <item>Added a setting to clear logged queries</item>
+        <item>@string/changelog_build_29_1</item>
+        <item>@string/changelog_build_29_2</item>
+        <item>@string/changelog_build_29_3</item>
+        <item>@string/changelog_build_29_4</item>
+        <item>@string/changelog_build_29_5</item>
     </string-array>
 
+    <string name="changelog_build_30_1">Added new notification icon</string>
+    <string name="changelog_build_30_2">Fixed the privacy policy not loading</string>
+    <string name="changelog_build_30_3">Clarified the blacklist/whitelist text in the notification</string>
+    <string name="changelog_build_30_4">Fixed a few crashes</string>
     <string-array name="changelog_build_30">
         <item>1.0 Beta (Build 30)</item>
-        <item>Added new notification icon</item>
-        <item>Fixed the privacy policy not loading</item>
-        <item>Clarified the blacklist/whitelist text in the notification</item>
-        <item>Fixed a few crashes</item>
+        <item>@string/changelog_build_30_1</item>
+        <item>@string/changelog_build_30_2</item>
+        <item>@string/changelog_build_30_3</item>
+        <item>@string/changelog_build_30_4</item>
     </string-array>
 
+    <string name="changelog_build_31_1">Added partial German translation</string>
+    <string name="changelog_build_31_2">Added settings to disable the stop/pause buttons of the notification</string>
+    <string name="changelog_build_31_3">A notification is now shown if the app crashes and automatic crash reporting is enabled</string>
+    <string name="changelog_build_31_4">Fixed a few crashes</string>
     <string-array name="changelog_build_31">
         <item>1.0 Beta (Build 31)</item>
-        <item>Added partial German translation</item>
-        <item>Added settings to disable the stop/pause buttons of the notification</item>
-        <item>A notification is now shown if the app crashes and automatic crash reporting is enabled</item>
-        <item>Fixed a few crashes</item>
+        <item>@string/changelog_build_31_1</item>
+        <item>@string/changelog_build_31_2</item>
+        <item>@string/changelog_build_31_3</item>
+        <item>@string/changelog_build_31_4</item>
     </string-array>
 
+    <string name="changelog_build_32_1">Overhauled the UI a bit</string>
+    <string name="changelog_build_32_2">Dns-over-TLS now works more reliable in bad networks</string>
+    <string name="changelog_build_32_3">Added a setting to intercept foreign DNS traffic (for example because of async DNS)</string>
+    <string name="changelog_build_32_4">Added a view to the drawer which shows the current server in use and the IP-addresses it resolves to</string>
+    <string name="changelog_build_32_5">The app now uses different internal addresses</string>
+    <string name="changelog_build_32_6">Fixed a few crashes and app freezes</string>
     <string-array name="changelog_build_32">
         <item>1.0 Beta (Build 32)</item>
-        <item>Overhauled the UI a bit</item>
-        <item>Dns-over-TLS now works more reliable in bad networks</item>
-        <item>Added a setting to intercept foreign DNS traffic (for example because of async DNS)</item>
-        <item>Added a view to the drawer which shows the current server in use and the IP-addresses it resolves to</item>
-        <item>The app now uses different internal addresses</item>
-        <item>Fixed a few crashes and app freezes</item>
+        <item>@string/changelog_build_32_1</item>
+        <item>@string/changelog_build_32_2</item>
+        <item>@string/changelog_build_32_3</item>
+        <item>@string/changelog_build_32_4</item>
+        <item>@string/changelog_build_32_5</item>
+        <item>@string/changelog_build_32_6</item>
     </string-array>
 </resources>

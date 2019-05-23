@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="changelog_build_29_1">Servers which block ads are now shown in non-playstore builds (including this one!)</string>
+    <string name="changelog_build_29_2">Added AdGuard DNS</string>
     <string-array name="changelog_build_29">
         <item>1.0 Beta-Adblock (Build 29)</item>
-        <item>Servers which block ads are now shown in non-playstore builds (including this one!)</item>
-        <item>Added AdGuard DNS</item>
+        <item>@string/changelog_build_29_1</item>
+        <item>@string/changelog_build_29_2</item>
     </string-array>
 
     <string-array name="changelog_build_30">
         <item>1.0 Beta-Adblock (Build 30)</item>
-        <item>Added new app icon (thanks to RKBDI)</item>
-        <item>Added automatic crash reporting (opt-in)</item>
-        <item>Added privacy policy</item>
-        <item>Fixed a lot of crashes</item>
-        <item>Added a setting to clear logged queries</item>
+        <item>@string/changelog_build_29_1</item>
+        <item>@string/changelog_build_29_2</item>
+        <item>@string/changelog_build_29_3</item>
+        <item>@string/changelog_build_29_4</item>
+        <item>@string/changelog_build_29_5</item>
     </string-array>
 
     <string-array name="changelog_build_31">
         <item>1.0 Beta-Adblock (Build 31)</item>
-        <item>Added new notification icon</item>
-        <item>Fixed the privacy policy not loading</item>
-        <item>Clarified the blacklist/whitelist text in the notification</item>
-        <item>Fixed a few crashes</item>
+        <item>@string/changelog_build_30_1</item>
+        <item>@string/changelog_build_30_2</item>
+        <item>@string/changelog_build_30_3</item>
+        <item>@string/changelog_build_30_4</item>
     </string-array>
 
     <string-array name="changelog_build_32">
         <item>1.0 Beta-Adblock (Build 32)</item>
-        <item>Added partial German translation</item>
-        <item>Added settings to disable the stop/pause buttons of the notification</item>
-        <item>A notification is now shown if the app crashes and automatic crash reporting is enabled</item>
-        <item>Fixed a few crashes</item>
+        <item>@string/changelog_build_31_1</item>
+        <item>@string/changelog_build_31_2</item>
+        <item>@string/changelog_build_31_3</item>
+        <item>@string/changelog_build_31_4</item>
     </string-array>
 
     <string-array name="changelog_build_33">
         <item>1.0 Beta-Adblock (Build 33)</item>
-        <item>Overhauled the UI a bit</item>
-        <item>Dns-over-TLS now works more reliable in bad networks</item>
-        <item>Added a setting to intercept foreign DNS traffic (for example because of async DNS)</item>
-        <item>Added a view to the drawer which shows the current server in use and the IP-addresses it resolves to</item>
-        <item>The app now uses different internal addresses</item>
-        <item>Fixed a few crashes and app freezes</item>
+        <item>@string/changelog_build_32_1</item>
+        <item>@string/changelog_build_32_2</item>
+        <item>@string/changelog_build_32_3</item>
+        <item>@string/changelog_build_32_4</item>
+        <item>@string/changelog_build_32_5</item>
+        <item>@string/changelog_build_32_6</item>
     </string-array>
 </resources>
