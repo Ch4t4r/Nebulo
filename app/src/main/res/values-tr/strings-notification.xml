@@ -11,19 +11,19 @@
     <string name="notification_main_text">Sorgular %1$s adresine gönderilir
 \n
 \n%2$d Uygulama, DoH/DoT’den hariç tutuldu
-\nÖnbellekte %3$d girdi</string>
+\n%3$d girdi önbellekte</string>
     <string name="notification_main_text_with_secondary">Sorgular %1$s ve %2$s adresine gönderilir
 \n
 \n%3$d Uygulama, DoH/DoT’den hariç tutuldu
-\nÖnbellekte %4$d girdi</string>
+\n%4$d girdi önbellekte</string>
     <string name="notification_main_text_whitelist">Sorgular %1$s adresine gönderilir
 \n
 \n%2$d Uygulama DoH/DoT kullanıyor
-\nÖnbellekte %3$d girdi</string>
+\n%3$d girdi önbellekte</string>
     <string name="notification_main_text_with_secondary_whitelist">Sorgular %1$s ve %2$s adresine gönderilir
 \n
 \n%3$d Uygulama DoH/DoT kullanıyor
-\nÖnbellekte %4$d girdi</string>
+\n%4$d girdi önbellekte</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">Şu ana kadar %1$d sorgu</string>

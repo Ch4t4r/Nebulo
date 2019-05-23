@@ -2,11 +2,13 @@
 <resources><string name="menu_dnsoverhttps">HTTPS üzerinden DNS</string>
     <string name="menu_settings">Ayarlar</string>
     <string name="menu_querylogging">Günlüğe kaydedilen sorgular</string>
-    <string name="menu_create_shortcut">Sunucu kısayolu oluştur</string>
+    <string name="menu_create_shortcut">Bir sunucu ekle</string>
     <string name="menu_rate">Oran</string>
     <string name="menu_about">Bu uygulama hakkında</string>
     
     <string name="menu_cardview_title">Gerçek zamanlı istatistikler</string>
 
 <string name="menu_main">Uygulama durumu</string>
+    <string name="menu_show_on_fdroid">F-Droid\'de Göster</string>
+    
     </resources>

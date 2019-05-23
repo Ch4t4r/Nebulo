@@ -14,7 +14,7 @@
     <string name="dialog_deleteconfig_text">%1$s yapılandırmasını silmek istiyor musunuz\?</string>
 
     <string name="dialog_appchoosal_showsystemapps">Sistem uygulamalarını göster</string>
-    <string name="dialog_appchoosal_whitelist">Seçili uygulamalarda yalnızca DoH/DoT kullanın</string>
+    <string name="dialog_appchoosal_whitelist">Yalnızca seçili uygulamalarda DoH/DoT kullanın</string>
 
     <string name="dialog_excludedapps_infotext">%1d uygulama varsayılan olarak hariç tutulur ve seçilemez</string>
 
@@ -90,10 +90,11 @@
     <string name="dialog_clearqueries_message">Günlüğe kaydedilen sorguları silmek istediğinize emin misiniz\? Bu geri alınamaz.</string>
 
     <string name="dialog_credits_title">Katkıcılar</string>
-    <string name="dialog_credits_message" formatted="true">"- &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; tarafından uygulama simgesi.
-\n 
-\n 
-\n  İsmini burada görmek ister misin\? &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;Katkı&lt;/a&gt;da bulunmaktan çekinmeyin."</string>
+    <string name="dialog_credits_message" formatted="true">- &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; tarafından uygulama simgesi. 
+\n- Türkçe çevirisi Kemal Oktay Aktoğan
+\n- Rusça çeviri tarafından bruleto
+\n
+\nİsmini burada görmek ister misin\? &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;Katkı&lt;/a&gt;da bulunmaktan çekinmeyin.</string>
 
     <string name="dialog_join_group_title">Topluluğa katıl</string>
     <string name="dialog_join_group_message">Selamün Aleyküm
