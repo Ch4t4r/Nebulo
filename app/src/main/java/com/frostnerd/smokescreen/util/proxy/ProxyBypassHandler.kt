@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.dnstunnelproxy.AbstractUDPDnsHandle
+import com.frostnerd.dnstunnelproxy.ParsedPacket
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
@@ -46,7 +47,7 @@ class ProxyBypassHandler(val searchDomains:List<String>, val destinationDnsServe
     override suspend fun forwardDnsQuestion(
         deviceWriteToken: TunnelHandle.DeviceWriteToken,
         dnsMessage: DnsMessage,
-        originalEnvelope: IpPacket,
+        originalEnvelope: ParsedPacket,
         realDestination: UpstreamAddress
     ) {
         val bytes = dnsMessage.toArray()
