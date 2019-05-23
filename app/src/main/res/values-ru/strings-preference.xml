@@ -80,8 +80,8 @@
     <string name="title_delete_all_logs">Удаление всех имеющихся логов</string>
     <string name="summary_delete_all_logs">Удалит все логи, которые хранятся на вашем девайсе.</string>
 
-    <string name="title_enable_sentry">Включить отчет о неожиданном падении приложения</string>
-    <string name="summary_enable_sentry">Автоматически отсылаемые разработчику отчеты о падении. Данные отчета будут отправлены только в случае неожиданного падения приложения.</string>
+    <string name="title_enable_sentry">Включить отчет об ошибках приложения</string>
+    <string name="summary_enable_sentry">Автоматически отсылать разработчику отчеты об ошибках. Будут отправлены только в случае неожиданного падения приложения.</string>
 
 
     <string name="preference_category_ip">IP настройки</string>
