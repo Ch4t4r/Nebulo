@@ -41,4 +41,17 @@
     <string name="dialog_error_text">Het lijkt erop dat de app is gecrasht. Wilt u het foutenlogboek verzenden naar de ontwikkelaar\?</string>
 
     <string name="dialog_batteryoptimization_title">Batterij optimalisatie</string>
+    <string name="dialog_batteryoptimization_message">Op sommige apparaten wordt de app niet op de hoogte gebracht dat het apparaat is opgestart, tenzij batterij-optimalisaties zijn uitgeschakeld.
+\nDe app staat momenteel niet op de witte lijst van de batterij-optimalisatie, wil je dit doen\?
+\n
+\nU moet testen of het werkt met optimalisatie ingeschakeld voordat u het uitschakelt.</string>
+    <string name="dialog_batteryoptimization_whitelist">Uitschakelen</string>
+    <string name="dialog_batteryoptimization_ignore">Negeren</string>
+
+    <string name="dialog_rate_confirmation">Wilt u de Play Store openen om de app te beoordelen\?</string>
+
+    <string name="dialog_changelog_title">Changelog</string>
+    <string name="dialog_changelog_infotext">De app is bijgewerkt sinds je hem voor het laatst hebt geopend. In de volgende lijst ziet u de changelog. Vink het vak hieronder aan en je ziet dit bericht in de toekomst niet meer.</string>
+    <string name="dialog_changelog_dont_show_again">Niet meer laten zien</string>
+
     </resources>
