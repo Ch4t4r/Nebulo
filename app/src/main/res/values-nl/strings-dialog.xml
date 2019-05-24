@@ -14,11 +14,11 @@
     <string name="dialog_appchoosal_showsystemapps">Systeem-apps weergeven</string>
     <string name="dialog_appchoosal_whitelist">Gebruik alleen DoH / DoT in geselecteerde apps</string>
 
-    <string name="dialog_excludedapps_infotext">% 1d-apps zijn standaard uitgesloten en kunnen niet worden gedeselecteerd</string>
+    <string name="dialog_excludedapps_infotext">%1d apps zijn standaard uitgesloten en kunnen niet worden gedeselecteerd</string>
 
-    <string name="dialog_serverimport_title">Import van% 1d server (s)</string>
+    <string name="dialog_serverimport_title">Import van %1d server (s)</string>
     <string name="dialog_serverimport_done">Klaar</string>
-    <string name="dialog_serverimport_priority">Prioriteit% 1d</string>
+    <string name="dialog_serverimport_priority">Prioriteit %1d</string>
     <string name="dialog_serverimport_experimental">Experimenteel</string>
     <string name="dialog_serverimport_servertype_doh">Type: Dns-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Type: Dns-over-TLS (DoT)</string>
@@ -29,7 +29,7 @@
     <string name="dialog_serverimportfailed_title">Importeren mislukt</string>
     <string name="dialog_serverimportfailed_text">De server(s) kunnen niet worden geïmporteerd.</string>
     <string name="dialog_serverimportfailed_text_exception">De server(s) kunnen niet worden geïmporteerd.
-\n(% 1s)</string>
+\n(%1s)</string>
 
     <string name="dialog_logexport_text">Hoe wil je de logboeken delen\?</string>
     <string name="dialog_logexport_general">Algemeen</string>
