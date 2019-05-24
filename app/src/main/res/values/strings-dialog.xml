@@ -46,7 +46,7 @@
     <string name="dialog_error_text">It looks like the app has crashed. Do you want to send the error log files to the developer?</string>
 
     <string name="dialog_batteryoptimization_title">Battery optimization</string>
-    <string name="dialog_batteryoptimization_message">On some device the app won\'t be notified that the app has finished booting unless battery optimizations are disabled for it.\nThe app is currently not whitelisted from the battery optimization, do you want to do this?\n\nYou should test whether it works with optimization enabled before disabling it.</string>
+    <string name="dialog_batteryoptimization_message">On some device the app won\'t be notified that the device has finished booting unless battery optimizations are disabled for it.\nThe app is currently not whitelisted from the battery optimization, do you want to do this?\n\nYou should test whether it works with optimization enabled before disabling it.</string>
     <string name="dialog_batteryoptimization_whitelist">Disable</string>
     <string name="dialog_batteryoptimization_ignore">Ignore</string>
 
