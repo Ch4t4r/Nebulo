@@ -54,4 +54,8 @@
     <string name="dialog_changelog_infotext">De app is bijgewerkt sinds je hem voor het laatst hebt geopend. In de volgende lijst ziet u de changelog. Vink het vak hieronder aan en je ziet dit bericht in de toekomst niet meer.</string>
     <string name="dialog_changelog_dont_show_again">Niet meer laten zien</string>
 
+    <string name="dialog_about_changelog">Changelog</string>
+    <string name="dialog_about_licenses">licenties</string>
+
+    <string name="dialog_query_export_title">Zoekopdrachten exporteren…</string>
     </resources>
