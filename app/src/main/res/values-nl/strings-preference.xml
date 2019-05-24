@@ -40,7 +40,7 @@
 
     <string name="title_preference_change_pin">Verander pincode</string>
     <string name="summary_preference_change_pin">Verander de pincode. Alleen numerieke waarden zijn toegestaan.
-\nHuidige pincode:% 1s</string>
+\nHuidige pincode: %1s</string>
 
     <string name="preference_category_cache">Cache controle</string>
 
@@ -65,7 +65,7 @@
 \nHuidig: %1d Seconden.</string>
 
     <string name="title_dnscache_nxdomaincachetime">Cache tijd voor NXDomain (seconden)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die oude NXDOMAIN-aanvragen in het cachegeheugen hebben. Dit verbetert de prestaties voor niet-bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)Huidig:% 1d seconden.</string>
+    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die oude NXDOMAIN-aanvragen in het cachegeheugen hebben. Dit verbetert de prestaties voor niet-bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)Huidig: %1d seconden.</string>
 
 
     <string name="preference_category_logging">Logboekregistratie</string>
@@ -135,7 +135,7 @@
     <string name="summary_log_queries">Sla alle DNS-verzoeken en hun antwoorden op</string>
 
     <string name="title_export_queries">Exporteer DNS-verzoeken</string>
-    <string name="summary_export_queries">Exporteer DNS-verzoeken als CSV (% 1d verzoeken)</string>
+    <string name="summary_export_queries">Exporteer DNS-verzoeken als CSV (%1d verzoeken)</string>
 
     <string name="title_delete_queries">Wis DNS-verzoeken</string>
     <string name="summary_delete_queries">Klik hier om alle geregistreerde DNS-verzoeken te verwijderen.</string>
