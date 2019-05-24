@@ -118,4 +118,25 @@
     <string name="summary_bypass_searchdomains">Stuur zoekdomeinen (bijvoorbeeld MyPC.local of MyPc.fritz.box) naar de Dns-server van uw netwerk in plaats van de DoH-server.
 \nDit wordt sterk aanbevolen. Die verzoeken verlaten uw netwerk niet.</string>
 
-    </resources>
+    <string name="title_nullterminate_keweon">Keweon Null-terminate</string>
+    <string name="summary_nullterminate_keweon">Null-terminate domeinen van Keweon verwerpen reclame aanvragen volledig in plaats van ze naar Keweon te sturen</string>
+
+    <string name="title_pause_on_captiveportal">Pauzeer bij inlogpagina</string>
+    <string name="summary_pause_on_captiveportal">Stuur geen DNS-aanvragen naar de geconfigureerde server als u zich moet aanmelden op een inlogpagina. Het zal automatisch worden hervat kort na het inloggen.
+\nAls u deze optie uitschakelt, is het u misschien niet toegestaan de inlogpagina te openen.</string>
+
+    <string name="title_show_noconnection_notification">Melding bij geen verbinding</string>
+    <string name="summary_show_noconnection_notification">Laat een melding zien wanneer de app geen of een slechte verbinding heeft</string>
+
+
+    <string name="preference_category_querylogging">Logboekregistratie</string>
+
+    <string name="title_log_queries">DNS logboekregistratie</string>
+    <string name="summary_log_queries">Sla alle DNS-verzoeken en hun antwoorden op</string>
+
+    <string name="title_export_queries">Exporteer DNS-verzoeken</string>
+    <string name="summary_export_queries">Exporteer DNS-verzoeken als CSV (% 1d verzoeken)</string>
+
+    <string name="title_delete_queries">Wis DNS-verzoeken</string>
+    <string name="summary_delete_queries">Klik hier om alle geregistreerde DNS-verzoeken te verwijderen.</string>
+</resources>
