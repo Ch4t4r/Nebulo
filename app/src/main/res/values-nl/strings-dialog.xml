@@ -1,2 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_serverconfiguration_title">Server configuratie</string>
+    <string name="dialog_serverconfiguration_addserver">Server toevoegen</string>
+
+    <string name="dialog_newserver_title_https">Voeg een server toe (DoH)</string>
+    <string name="dialog_newserver_title_tls">Voeg een server toe (DoT)</string>
+    <string name="dialog_newserver_name">Server naam</string>
+    <string name="dialog_newserver_name_hint">Voorbeeld</string>
+    <string name="dialog_newserver_primaryserver">Primaire server</string>
+    <string name="dialog_newserver_secondaryserver">Secundaire server (Optioneel)</string>
+    <string name="dialog_deleteconfig_title">Verwijder configuratie\?</string>
+    <string name="dialog_deleteconfig_text">Wilt u de configuratie %1$s\? verwijderen\?</string>
+
+    <string name="dialog_appchoosal_showsystemapps">Systeem-apps weergeven</string>
+    <string name="dialog_appchoosal_whitelist">Gebruik alleen DoH / DoT in geselecteerde apps</string>
+
+    <string name="dialog_excludedapps_infotext">% 1d-apps zijn standaard uitgesloten en kunnen niet worden gedeselecteerd</string>
+
+    <string name="dialog_serverimport_title">Import van% 1d server (s)</string>
+    <string name="dialog_serverimport_done">Klaar</string>
+    <string name="dialog_serverimport_priority">Prioriteit% 1d</string>
+    <string name="dialog_serverimport_experimental">Experimenteel</string>
+    <string name="dialog_serverimport_servertype_doh">Type: Dns-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Type: Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_text">Selecteer de servers die u wilt importeren.
+\n 
+\nAls u serverconfiguraties markeert die al zijn toegevoegd, worden deze gedupliceerd.</string>
+
+    <string name="dialog_serverimportfailed_title">Importeren mislukt</string>
+    <string name="dialog_serverimportfailed_text">De server(s) kunnen niet worden geïmporteerd.</string>
+    <string name="dialog_serverimportfailed_text_exception">De server(s) kunnen niet worden geïmporteerd.
+\n(% 1s)</string>
+
+    <string name="dialog_logexport_text">Hoe wil je de logboeken delen\?</string>
+    <string name="dialog_logexport_general">Algemeen</string>
+    <string name="dialog_logexport_email">E-Mail</string>
+
+    <string name="dialog_deletelogs_text">Weet je zeker dat je alle logboeken wilt verwijderen\?</string>
+
+    <string name="dialog_error_title">Crash-rapport</string>
+    <string name="dialog_error_text">Het lijkt erop dat de app is gecrasht. Wilt u het foutenlogboek verzenden naar de ontwikkelaar\?</string>
+
+    <string name="dialog_batteryoptimization_title">Batterij optimalisatie</string>
+    </resources>
