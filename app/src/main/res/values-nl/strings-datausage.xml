@@ -1,2 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_crashreportingusages_data_1">Gebruikersgegevens</string>
+    <string name="dialog_crashreportingusages_data_2">Apparaatgegevens</string>
+    <string name="dialog_crashreportingusages_data_3">App gegevens</string>
+    <string name="dialog_crashreportingusages_data_4">Besturingssysteemgegevens</string>
+    <string name="dialog_crashreportingusages_data_user_1">Willekeurige ID gebruikt om crashes op te sporen</string>
+    <string name="dialog_crashreportingusages_data_device_1">Architectuur (x86, arm, ...)</string>
+    <string name="dialog_crashreportingusages_data_device_2">Oriëntatie (landschap, portret)</string>
+    <string name="dialog_crashreportingusages_data_device_3">Vrij / gebruikt geheugen (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_4">Oplaadstatus (ja / nee)</string>
+    <string name="dialog_crashreportingusages_data_device_5">Online op het moment van crash (ja / nee)</string>
+    <string name="dialog_crashreportingusages_data_device_6">Schermresolutie</string>
+    <string name="dialog_crashreportingusages_data_device_7">Fabrikant</string>
+    <string name="dialog_crashreportingusages_data_device_8">Merk</string>
+    <string name="dialog_crashreportingusages_data_device_9">Model</string>
+    <string name="dialog_crashreportingusages_data_device_10">Taal</string>
+    <string name="dialog_crashreportingusages_data_app_1">Starttijd van de app</string>
+    <string name="dialog_crashreportingusages_data_app_2">App versie</string>
+    <string name="dialog_crashreportingusages_data_app_3">Database versie</string>
+    <string name="dialog_crashreportingusages_data_app_4">Dns-servernaam</string>
+    <string name="dialog_crashreportingusages_data_app_5">Primaire DNS-server</string>
+    <string name="dialog_crashreportingusages_data_app_6">Secundaire DNS-server</string>
+    <string name="dialog_crashreportingusages_data_os_1">Naam (bijvoorbeeld Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Versie (bijvoorbeeld 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Kernel-versie</string>
+    <string name="dialog_crashreportingusages_data_os_4">Rooted (ja / nee)</string>
+    </resources>
