@@ -18,7 +18,7 @@
 
     <string name="dialog_excludedapps_infotext">%1d uygulama varsayılan olarak hariç tutulur ve seçilemez</string>
 
-    <string name="dialog_serverimport_title">% 1d sunucunun içe aktarılması</string>
+    <string name="dialog_serverimport_title">%1d sunucunun içe aktarılması</string>
     <string name="dialog_serverimport_done">Tamamlandı</string>
     <string name="dialog_serverimport_priority">Öncelik %1d</string>
     <string name="dialog_serverimport_experimental">Deneysel</string>
