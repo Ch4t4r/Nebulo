@@ -44,7 +44,7 @@
 
     <string name="preference_category_cache">Cache controle</string>
 
-    <string name="title_dnscache_enabled">Gebruik DNS cache</string>
+    <string name="title_dnscache_enabled">Gebruik DNS-cache</string>
     <string name="summary_dnscache_enabled">Schakelt DNS-cache in. Het cachegeheugen onthoudt oude verzoeken om toekomstige vragen sneller te beantwoorden</string>
 
     <string name="title_dnscache_keepacrosslaunches">DNS-cache behouden</string>
@@ -65,19 +65,19 @@
 \nHuidig: %1d Seconden.</string>
 
     <string name="title_dnscache_nxdomaincachetime">Cache tijd voor NXDomain (seconden)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die oude NXDOMAIN-aanvragen in het cachegeheugen hebben. Dit verbetert de prestaties voor niet-bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)Huidig: %1d seconden.</string>
+    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die oude NXDOMAIN-verzoeken in het cachegeheugen hebben. Dit verbetert de prestaties voor niet bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)Huidig: %1d seconden.</string>
 
 
-    <string name="preference_category_logging">Logboekregistratie</string>
+    <string name="preference_category_logging">Loggen</string>
 
-    <string name="title_enable_logging">Logboekregistratie inschakelen</string>
-    <string name="summary_enable_logging">Maakt het loggen van foutopsporingsinformatie mogelijk (bevat statistische gegevens). Deze logboeken worden niet automatisch verzonden.</string>
+    <string name="title_enable_logging">Loggen inschakelen</string>
+    <string name="summary_enable_logging">Maakt het loggen van foutopsporingsinformatie mogelijk (bevat statistische gegevens). Deze logs worden niet automatisch verzonden.</string>
 
-    <string name="title_send_logs">Verzend logboek</string>
-    <string name="summary_send_logs">Klik hier om de logboeken naar de ontwikkelaar te sturen.</string>
+    <string name="title_send_logs">Verzend logs</string>
+    <string name="summary_send_logs">Klik hier om de logs naar de ontwikkelaar te sturen.</string>
 
-    <string name="title_delete_all_logs">Verwijder alle logboeken</string>
-    <string name="summary_delete_all_logs">Verwijdert alle logboeken die op uw apparaat zijn opgeslagen.</string>
+    <string name="title_delete_all_logs">Verwijder alle logs</string>
+    <string name="summary_delete_all_logs">Verwijdert alle logs die op uw apparaat zijn opgeslagen.</string>
 
     <string name="title_enable_sentry">Schakel crash rapportage in</string>
     <string name="summary_enable_sentry">Stuur automatisch crashmeldingen naar de ontwikkelaar. Gegevens worden alleen bij crashes overgedragen.</string>
@@ -129,9 +129,9 @@
     <string name="summary_show_noconnection_notification">Laat een melding zien wanneer de app geen of een slechte verbinding heeft</string>
 
 
-    <string name="preference_category_querylogging">Logboekregistratie</string>
+    <string name="preference_category_querylogging">Dns-verzoeken beheren</string>
 
-    <string name="title_log_queries">DNS logboekregistratie</string>
+    <string name="title_log_queries">DNS-verzoeken loggen</string>
     <string name="summary_log_queries">Sla alle DNS-verzoeken en hun antwoorden op</string>
 
     <string name="title_export_queries">Exporteer DNS-verzoeken</string>
