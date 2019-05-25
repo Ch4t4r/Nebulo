@@ -31,11 +31,11 @@
     <string name="dialog_serverimportfailed_text_exception">De server(s) kunnen niet worden geïmporteerd.
 \n(%1s)</string>
 
-    <string name="dialog_logexport_text">Hoe wil je de logboeken delen\?</string>
+    <string name="dialog_logexport_text">Hoe wil je de logs delen\?</string>
     <string name="dialog_logexport_general">Algemeen</string>
     <string name="dialog_logexport_email">E-Mail</string>
 
-    <string name="dialog_deletelogs_text">Weet je zeker dat je alle logboeken wilt verwijderen\?</string>
+    <string name="dialog_deletelogs_text">Weet je zeker dat je alle logs wilt verwijderen\?</string>
 
     <string name="dialog_error_title">Crash-rapport</string>
     <string name="dialog_error_text">Het lijkt erop dat de app is gecrasht. Wilt u het foutenlogboek verzenden naar de ontwikkelaar\?</string>
@@ -64,7 +64,7 @@
     <string name="dialog_pin_hint">PIN</string>
     <string name="dialog_pin_inputlabel">PIN</string>
 
-    <string name="dialog_enable_logging">Wilt u logboekregistratie inschakelen\? Logs bevatten statistische informatie, foutopsporingsinformatie en acties in de app. Gegenereerde logboeken worden niet gedeeld tenzij u dit zelf doet.</string>
+    <string name="dialog_enable_logging">Wilt u loggen inschakelen\? Logbestanden bevatten statistische informatie, foutopsporingsinformatie en acties in de app. Gegenereerde logbestanden worden niet gedeeld tenzij u dit zelf doet.</string>
 
     <string name="dialog_crashreporting_title">Automatische crash rapportage</string>
     <string name="dialog_crashreportingusages_title">Doorgestuurde gegevens</string>
