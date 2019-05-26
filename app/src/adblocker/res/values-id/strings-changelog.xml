@@ -1,2 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_29_1">Server yang memblokir iklan sekarang ditampilkan di pembuatan non-playstore (termasuk yang ini!)</string>
+    <string name="changelog_build_29_2">Menambahkan DNS AdGuard</string>
+    </resources>
