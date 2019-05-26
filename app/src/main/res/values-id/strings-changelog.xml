@@ -1,2 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_23_1">Port non-default sekarang ditampilkan untuk server DoT</string>
+    <string name="changelog_build_23_2">Menambahkan dialog untuk menyoroti perubahan</string>
+    <string name="changelog_build_23_3">Permintaan ekspor sekarang menunjukkan dialog yang menunjukkan apakah itu memuat</string>
+    <string name="changelog_build_23_4">Memperbaiki impor server yang tidak berfungsi pada versi OS di bawah Android 7</string>
+    <string name="changelog_build_23_5">Log kueri sekarang menunjukkan protokol yang digunakan untuk mengirim kueri</string>
+    <string name="changelog_build_23_6">Sekarang Anda dapat menyematkan aplikasi di setelan</string>
+    <string name="changelog_build_24_1">Memperbaiki apl yang usang di perangkat yang tidak memiliki sensor sidik jari</string>
+    <string name="changelog_build_25_1">Penanganan IPv6/IPv6 yang ditingkatkan - apl kini berfungsi andal dalam jaringan yang hanya mendukung keduanya</string>
+    <string name="changelog_build_25_2">Menambahkan server DNS baru</string>
+    <string name="changelog_build_25_3">Pemberitahuan sekarang ditampilkan ketika koneksi buruk</string>
+    <string name="changelog_build_25_4">Apl tidak rusak lagi jika host yang tidak dikenal digunakan - itu menunjukkan notifikasi tersebut sebagai gantinya</string>
+    <string name="changelog_build_26_1">Apl tidak lagi rusak untuk server yang hanya memiliki alamat IPv4 ketika jaringan hanya memiliki alamat IPv6</string>
+    <string name="changelog_build_26_2">Memperbaiki pemberitahuan koneksi yang hilang</string>
+    <string name="changelog_build_26_3">Pemberitahuan tidak ada koneksi sekarang dapat diberhentikan</string>
+    <string name="changelog_build_26_4">Apl ini memiliki server yang salah dari UncensoredDNS</string>
+    <string name="changelog_build_27_1">Memperbaiki banyak kerusakan</string>
+    <string name="changelog_build_27_2">Log sekarang dapat dibagikan ketika apl rusak</string>
+    <string name="changelog_build_27_3">Pemberitahuan yang ditampilkan ketika koneksi yang buruk sekarang dimatikan secara default dan dapat diaktifkan di pengaturan</string>
+    <string name="changelog_build_27_4">Menambahkan tombol jeda ke pemberitahuan</string>
+    <string name="changelog_build_28_1">Tombol berhenti di pemberitahuan berfungsi lagi</string>
+    <string name="changelog_build_28_2">Timeout yang lebih tinggi sekarang digunakan untuk server DoH (meningkatkan jaringan pada koneksi yang buruk)</string>
+    <string name="changelog_build_28_3">Memperbaiki beberapa server DoT yang tidak berfungsi</string>
+    <string name="changelog_build_28_4">UncensoredDns sekarang digunakan sebagai server default</string>
+    <string name="changelog_build_28_5">Peningkatan kinerja</string>
+    <string name="changelog_build_29_1">Menambahkan ikon baru (terima kasih RKBDI)</string>
+    <string name="changelog_build_29_2">Menambahkan pelaporan kerusakan otomatis (opt-in)</string>
+    <string name="changelog_build_29_3">Menambahkan kebijakan privasi</string>
+    <string name="changelog_build_29_4">Memperbaiki kerusakan</string>
+    <string name="changelog_build_29_5">Menambahkan pengaturan untuk menghapus kueri yang dicatat</string>
+    <string name="changelog_build_30_1">Menambahkan ikon notifikasi baru</string>
+    <string name="changelog_build_30_2">Memperbaiki kebijakan privasi yang tidak dimuat</string>
+    <string name="changelog_build_30_3">Mengklarifikasi teks daftar hitam/daftar putih dalam pemberitahuan</string>
+    <string name="changelog_build_30_4">Memperbaiki kerusakan</string>
+    <string name="changelog_build_31_1">Menambahkan sebagian terjemahan bahasa Jerman</string>
+    <string name="changelog_build_31_2">Pengaturan ditambahkan untuk menonaktifkan tombol stop/pause dari notifikasi</string>
+    <string name="changelog_build_31_3">Pemberitahuan sekarang ditampilkan jika aplikasi rusak dan pelaporan kerusakan otomatis diaktifkan</string>
+    <string name="changelog_build_31_4">Memperbaiki kerusakan</string>
+    <string name="changelog_build_32_1">Merombak UI</string>
+    <string name="changelog_build_32_2">Dns-over-TLS sekarang berfungsi lebih andal di jaringan yang buruk</string>
+    <string name="changelog_build_32_3">Menambahkan pengaturan untuk mencegat lalu lintas DNS asing (misalnya karena DNS async)</string>
+    <string name="changelog_build_32_4">Menambahkan tampilan ke laci yang menunjukkan server saat ini digunakan dan alamat IP yang diputuskannya</string>
+    <string name="changelog_build_32_5">Aplikasi sekarang menggunakan alamat internal yang berbeda</string>
+    <string name="changelog_build_32_6">Memperbaiki kerusakan dan pembekuan aplikasi</string>
+    </resources>
