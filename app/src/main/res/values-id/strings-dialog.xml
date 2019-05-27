@@ -1,4 +1,106 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="dialog_serverconfiguration_addserver">Tambah Server</string>
+<resources><string name="dialog_serverconfiguration_addserver">Tambahkan server</string>
+
+    <string name="dialog_serverconfiguration_title">Konfigurasi server</string>
+    <string name="dialog_newserver_title_https">Tambahkan server (DoH)</string>
+    <string name="dialog_newserver_title_tls">Tambahkan server (DoT)</string>
+    <string name="dialog_newserver_name">Nama server</string>
+    <string name="dialog_newserver_name_hint">Contoh</string>
+    <string name="dialog_newserver_primaryserver">Server primer</string>
+    <string name="dialog_newserver_secondaryserver">Server sekunder (Opsional)</string>
+    <string name="dialog_deleteconfig_title">Hapus konfigurasi\?</string>
+    <string name="dialog_deleteconfig_text">Anda ingin menghapus konfigurasi %1$s\?</string>
+
+    <string name="dialog_appchoosal_showsystemapps">Tampilkan apl sistem</string>
+    <string name="dialog_appchoosal_whitelist">Hanya gunakan DoH/DoT di apl yang dipilih</string>
+
+    <string name="dialog_excludedapps_infotext">%1d apl dikecualikan secara default dan tidak dapat dipilih</string>
+
+    <string name="dialog_serverimport_title">Impor server %1d</string>
+    <string name="dialog_serverimport_done">Selesai</string>
+    <string name="dialog_serverimport_priority">Prioritas %1d</string>
+    <string name="dialog_serverimport_experimental">Eksperimental</string>
+    <string name="dialog_serverimport_servertype_doh">Jenis: Dns-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Jenis: Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_text">Silakan pilih server yang ingin Anda impor.
+\n
+\nServer yang sudah diimpor akan diduplikat jika Anda memilihnya.</string>
+
+    <string name="dialog_serverimportfailed_title">Gagal mengimpor</string>
+    <string name="dialog_serverimportfailed_text">Server tidak dapat diimpor.</string>
+    <string name="dialog_serverimportfailed_text_exception">Server tidak dapat diimpor.
+\n(%1d)</string>
+
+    <string name="dialog_logexport_text">Bagaimana Anda ingin membagikan log\?</string>
+    <string name="dialog_logexport_general">Ekspor umum</string>
+    <string name="dialog_logexport_email">Email</string>
+
+    <string name="dialog_deletelogs_text">Apakah Anda yakin ingin menghapus semua log\?</string>
+
+    <string name="dialog_error_title">Laporan kerusakan</string>
+    <string name="dialog_error_text">Sepertinya aplikasi rusak. Apakah Anda ingin mengirim file log kerusakan ke pengembang\?</string>
+
+    <string name="dialog_batteryoptimization_title">Optimalisasi baterai</string>
+    <string name="dialog_batteryoptimization_message">Pada beberapa perangkat apl ini tidak akan diberi tahu bahwa apl telah selesai booting kecuali optimasi baterai dinonaktifkan.
+\nApl ini tidak masuk daftar putih dari optimasi baterai, apakah Anda ingin melakukan ini\?
+\n
+\nAnda harus menguji apakah itu berfungsi dengan pengoptimalan sebelum menonaktifkannya.</string>
+    <string name="dialog_batteryoptimization_whitelist">Nonaktifkan</string>
+    <string name="dialog_batteryoptimization_ignore">Mengabaikan</string>
+
+    <string name="dialog_rate_confirmation">Apakah Anda ingin membuka Play Store untuk memberi penilaian apl ini\?</string>
+
+    <string name="dialog_changelog_title">Log perubahan</string>
+    <string name="dialog_changelog_infotext">Apl ini telah diperbarui sejak Anda terakhir kali membukanya. Dalam daftar berikut, Anda dapat melihat log perubahan. Centang kotak di bawah dan Anda tidak akan melihat pesan ini di masa mendatang.</string>
+    <string name="dialog_changelog_dont_show_again">Jangan perlihatkan lagi</string>
+
+    <string name="dialog_about_changelog">Log perubahan</string>
+    <string name="dialog_about_licenses">Lisensi</string>
+
+    <string name="dialog_query_export_title">Mengekspor kueri…</string>
+    <string name="dialog_query_export_message">Harap tunggu permintaan sedang diekspor</string>
+
+    <string name="dialog_pin_message">Harap berikan PIN Anda.</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_pin_inputlabel">PIN</string>
+
+    <string name="dialog_enable_logging">Apakah Anda ingin mengaktifkan pencatatan\? Log berisi informasi statistik, informasi debug, dan tindakan di apl. Log yang dibuat tidak akan dibagikan kecuali Anda melakukannya sendiri.</string>
+
+    <string name="dialog_crashreporting_title">Pelaporan kerusakan otomatis</string>
+    <string name="dialog_crashreportingusages_title">Data yang dikirimkan</string>
+    <string name="dialog_crashreportingusages_message">Klik pada salah satu grup untuk melihat data mana yang dikirim disaat terjadi kerusakan.</string>
+    <string name="dialog_crashreporting_positive">Aktifkan pelaporan kerusakan</string>
+    <string name="dialog_crashreporting_negative">Tidak, terimakasih.</string>
+    <string name="dialog_crashreporting_neutral">Lihat data</string>
+    <string name="dialog_crashreporting_message">Terimakasih telah menjadi penguji untuk apl ini!
+\n
+\nApl ini menggunakan perangkat lunak pihak ketiga open-source dan self-host untuk membuatnya lebih mudah untuk melacak kerusakan setelah terjadi. Jika diaktifkan, apl akan mengirimkan laporan ketika mengalami kerusakan. Laporan ini berisi data tambahan tentang apl dan perangkat Anda. Ini termasuk id yang digunakan untuk melacak kerusakan yang berasal dari pengguna yang sama, tetapi tidak dapat digunakan untuk melacak hal lain. Mengaktifkan pelaporan kerusakan adalah opsional tetapi akan sangat membantu saya.
+\nLaporan dikirim dengan aman melalui HTTPS.
+\n
+\nKlik \'Lihat data\' di bawah untuk melihat jenis data apa yang dikirimkan dan untuk tautan ke kebijakan privasi.</string>
+    <string name="dialog_crashreporting_message_notester">Terimakasih telah menggunakan Nebulo!
+\n
+\nApl ini menggunakan perangkat lunak pihak ketiga open-source dan self-host untuk membuatnya lebih mudah untuk melacak kerusakan di apl segera setelah terjadi. Jika dan hanya jika diaktifkan, apl akan mengirimkan laporan kerusakan saat apl mengalami kerusakan. Laporan ini berisi data tambahan tentang apl dan perangkat Anda. Ini termasuk id yang digunakan untuk melacak kerusakan yang berasal dari pengguna yang sama, tetapi tidak dapat digunakan untuk melacak hal lain. Mengaktifkan pelaporan kerusakan adalah opsional tetapi akan membantu memperbaiki bug lebih mudah dan lebih cepat.
+\nLaporan dikirim dengan aman melalui HTTPS
+\n
+\nKlik \'Lihat data\' di bawah untuk melihat jenis data apa yang dikirimkan dan untuk tautan ke kebijakan privasi.</string>
+
+    <string name="dialog_clearqueries_title">Hapus semua kueri</string>
+    <string name="dialog_clearqueries_message">Apakah Anda yakin ingin menghapus pertanyaan yang dicatat\? Ini tidak bisa dikembalikan.</string>
+
+    <string name="dialog_credits_title">Kredit</string>
+    <string name="dialog_credits_message" formatted="true">- Ikon aplikasi oleh &lt;a href=https://dribbble.com/rkbdi&gt; RKBDI &lt;/a&gt;.
+\n - Terjemahan Turki oleh Kemal Oktay Aktoğan
+\n - Terjemahan Rusia oleh bruleto
+\n - Terjemahan Belanda oleh Bas Koedijk
+\n 
+\n Ingin melihat nama Anda di sini\? Silakan &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt; berkontribusi &lt;/a&gt;.</string>
+
+    <string name="dialog_join_group_title">Bergabunglah dengan komunitas</string>
+    <string name="dialog_join_group_message">Hai!
+\n
+\nTahukah Anda bahwa apl ini memiliki grup Telegram\? Ini berisi pembaruan rutin dan merupakan tempat yang sempurna untuk berdiskusi dan bertanya.
+\nKami adalah komunitas hebat dengan lebih dari 120 orang, apakah Anda ingin menjadi bagian darinya\?</string>
+    <string name="dialog_join_group_positive">Ya!</string>
 
     </resources>
