@@ -1,2 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="activity_label_import_queries">Impor kueri</string>
+    <string name="activity_label_import_servers">Impor server</string>
+
+    <string name="activity_label_enable_logging">Ekspor log/Aktifkan pencatatan</string>
+
+    <string name="all_stop">Berhenti</string>
+    <string name="all_start">Mulai</string>
+    <string name="all_pause">Jeda</string>
+    <string name="all_resume">Lanjut</string>
+    <string name="all_no">Tidak</string>
+    <string name="all_yes">Ya</string>
+    <string name="information">Informasi</string>
+    <string name="open_app">Buka apl</string>
+    <string name="all_close">Tutup</string>
+
+    <string name="main_dnssurveillance_infotext">Perlu diketahui bahwa server DNS yang terhubung dengan Anda dapat merekam situs mana yang Anda kunjungi. Periksa pernyataan privasi untuk informasi lebih lanjut.</string>
+    <string name="main_dnssurveillance_privacystatement">Pernyataan privasi %1s</string>
+
+    <string name="about_app">Apl ini adalah open source. Kode sumber dapat diakses di &lt;a href=https://smokescreen.app/source&gt; smokescreen.app/source &lt;/a&gt;.
+\nSelain itu apl ini tidak mengandung iklan dan tidak melacak atau mengumpulkan data tentang Anda.
+\n
+\nVersi %1s
+\nBuatan %2d
+\nVersi basis data %3d
+\nID laporan kerusakan: %4s
+\n
+\n© Daniel Wolf 2019
+\nDilisensikan berdasarkan GPLv3.
+\n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
+    <string name="app_share_text">Hai, saya menemukan aplikasi ini yang mengenkripsi kueri DNS Anda untuk memberi Anda lebih banyak privasi dan keamanan. Lihat di sini: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
+
+    <string name="quicksettings_stop_text">Hentikan Nebulo</string>
+    <string name="quicksettings_start_text">Mulai Nebulo</string>
+
+    <string name="crashreporting_thankyou">Terima kasih! Jika Anda berubah pikiran, pergilah ke setelan.</string>
+    <string name="crashreporting_thankyou_gotit">Baik</string>
+
+    <string name="about_share">Bagi</string>
+    <string name="about_licenses">Lisensi Open-source</string>
+    <string name="about_changelog">Log perubahan</string>
+    <string name="about_contact_developer">Kontak pengembang</string>
+    <string name="about_telegram_group">Grup Telegram</string>
+    <string name="about_privacypolicy">Kebijakan privasi</string>
+    <string name="about_credits">Kredit</string>
+    <string name="about_info">Informasi umum</string>
+    <string name="about_help_translating">Bantu menerjemahkan</string>
+
+</resources>
