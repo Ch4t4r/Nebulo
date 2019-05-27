@@ -28,15 +28,15 @@
 \n© Daniel Wolf 2019
 \nDilisensikan berdasarkan GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
-    <string name="app_share_text">Hai, saya menemukan aplikasi ini yang mengenkripsi kueri DNS Anda untuk memberi Anda lebih banyak privasi dan keamanan. Lihat di sini: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
+    <string name="app_share_text">Hai, saya menemukan apl ini yang mengenkripsi kueri DNS Anda untuk memberi Anda lebih banyak privasi dan keamanan. Lihat di sini: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
 
     <string name="quicksettings_stop_text">Hentikan Nebulo</string>
     <string name="quicksettings_start_text">Mulai Nebulo</string>
 
-    <string name="crashreporting_thankyou">Terima kasih! Jika Anda berubah pikiran, pergilah ke setelan.</string>
+    <string name="crashreporting_thankyou">Terimakasih! Jika Anda berubah pikiran, pergilah ke setelan.</string>
     <string name="crashreporting_thankyou_gotit">Baik!</string>
 
-    <string name="about_share">Bagi</string>
+    <string name="about_share">Membagi</string>
     <string name="about_licenses">Lisensi Open-source</string>
     <string name="about_changelog">Log perubahan</string>
     <string name="about_contact_developer">Kontak pengembang</string>
