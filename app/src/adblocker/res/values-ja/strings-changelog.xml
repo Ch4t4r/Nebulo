@@ -1,2 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_29_1">広告をブロックするサーバはノンプレイストアで表示されます（これも含む）</string>
+    <string name="changelog_build_29_2">「AdGuard DNS」を追加しました</string>
+    </resources>
