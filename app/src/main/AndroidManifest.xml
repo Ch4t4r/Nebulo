@@ -170,6 +170,7 @@
                 <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.SpeedTestActivity"/>
 
         <service
                 android:name=".service.DnsVpnService"

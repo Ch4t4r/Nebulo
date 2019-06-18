@@ -55,6 +55,17 @@
                 android:layout_height="wrap_content">
 
             <ImageButton
+                    android:id="@+id/speedTest"
+                    android:src="@drawable/ic_wifi"
+                    android:background="@drawable/main_roundbuttons"
+                    android:tint="?android:attr/textColor"
+                    android:layout_width="48dp"
+                    android:layout_toStartOf="@id/serverButton"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/contentdescription_main_servericon"
+                    android:layout_height="48dp"/>
+
+            <ImageButton
                     android:id="@+id/serverButton"
                     android:src="@drawable/ic_main_server"
                     android:background="@drawable/main_roundbuttons"
@@ -70,7 +81,7 @@
                     android:id="@+id/startButton"
                     android:background="@drawable/main_roundbuttons"
                     android:text="Start"
-                    android:layout_toStartOf="@id/serverButton"
+                    android:layout_toStartOf="@id/speedTest"
                     android:layout_marginEnd="8dp"
                     style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_height="wrap_content"/>
