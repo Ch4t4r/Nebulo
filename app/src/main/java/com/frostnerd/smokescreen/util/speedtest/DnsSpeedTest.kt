@@ -5,10 +5,7 @@ import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
-import okhttp3.Dns
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
+import okhttp3.*
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
@@ -16,6 +13,8 @@ import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.lang.Exception
 import java.net.*
+import java.time.Duration
+import java.time.temporal.TemporalUnit
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLSocketFactory
 import kotlin.random.Random
@@ -39,11 +38,12 @@ import kotlin.random.Random
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int = 2500) {
+class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int = 2500, val readTimeout:Int = 1500) {
     private val httpClient by lazy {
         OkHttpClient.Builder()
             .dns(httpsDnsClient)
             .connectTimeout(3, TimeUnit.SECONDS)
+            .readTimeout(readTimeout.toLong(), TimeUnit.MILLISECONDS)
             .build()
     }
     private val httpsDnsClient by lazy {
@@ -61,6 +61,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
      * @return The average response time (in ms)
      */
     fun runTest(@IntRange(from = 1) passes: Int): Int? {
+        println("Running test for ${server.name}")
         var ttl = 0
         for (i in 0 until passes) {
             if (server is HttpsDnsServerInformation) {
@@ -91,9 +92,10 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
                 return null
             }
         }
+        var response:Response? = null
         try {
             val start = System.currentTimeMillis()
-            val response = httpClient.newCall(requestBuilder.build()).execute()
+            response = httpClient.newCall(requestBuilder.build()).execute()
             if(!response.isSuccessful) return null
             val body = response.body() ?: return null
             val bytes = body.bytes()
@@ -106,8 +108,9 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
             }
             return time
         } catch (ex: Exception) {
-            ex.printStackTrace()
             return null
+        } finally {
+            if(response?.body() != null) response.close()
         }
     }
 
@@ -120,6 +123,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
             val msg = createTestDnsPacket()
             val start = System.currentTimeMillis()
             socket.connect(InetSocketAddress(addr[0], address.port), connectTimeout)
+            socket.soTimeout = readTimeout
             val data: ByteArray = msg.toArray()
             val outputStream = DataOutputStream(socket.getOutputStream())
             val size = data.size
@@ -138,7 +142,6 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
             if(!testResponse(DnsMessage(readData))) return null
             return time
         } catch (ex: Exception) {
-            ex.printStackTrace()
             return null
         } finally {
             socket?.close()

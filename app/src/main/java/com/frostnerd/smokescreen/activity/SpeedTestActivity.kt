@@ -1,6 +1,38 @@
 package com.frostnerd.smokescreen.activity
 
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Bundle
+import android.view.View
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.frostnerd.cacheadapter.AdapterBuilder
+import com.frostnerd.cacheadapter.DataSource
+import com.frostnerd.cacheadapter.ListDataSource
+import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseActivity
+import com.frostnerd.lifecyclemanagement.BaseViewHolder
+import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
+import com.frostnerd.lifecyclemanagement.launchWithLifecylce
+import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
+import kotlinx.android.synthetic.main.activity_speedtest.*
+import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.item_dns_speed.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import android.R.attr.bottom
+import android.graphics.Rect
+import androidx.lifecycle.Lifecycle
+import com.frostnerd.design.DesignUtil
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.smokescreen.showInfoTextDialog
+
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -21,9 +53,213 @@ import com.frostnerd.lifecyclemanagement.BaseActivity
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-class SpeedTestActivity :BaseActivity() {
+class SpeedTestActivity : BaseActivity() {
+    private var testRunning = false
+    private var testJob: Job? = null
+    private var testResults:List<SpeedTest>? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_speedtest)
+        setSupportActionBar(toolBar)
+        startTest.setOnClickListener {
+            startTest()
+            testResults = null
+            startTest.isEnabled = false
+            abort.visibility = View.VISIBLE
+            info.visibility = View.GONE
+        }
+        abort.setOnClickListener {
+            abort.visibility = View.GONE
+            testJob?.cancel()
+            startTest.isEnabled = true
+            testRunning = false
+            info.visibility = View.VISIBLE
+            startTest.text = getString(R.string.window_speedtest_runtest)
+        }
+        info.setOnClickListener {
+            if(testResults != null) {
+                val dotCount = testResults!!.count { it.server !is HttpsDnsServerInformation }
+                val dotReachable = testResults!!.count { it.server !is HttpsDnsServerInformation && it.latency != null}
+                val dotNotReachable = dotCount - dotReachable
+
+                val dohCount = testResults!!.size - dotCount
+                val dohReachable = testResults!!.count { it.server is HttpsDnsServerInformation && it.latency != null}
+                val dohNotReachable = dohCount - dohReachable
+
+                val avgLatency = testResults!!.sumBy { it.latency ?: 0 }/testResults!!.size
+                val fastestServer = testResults!!.minBy { it.latency ?: Integer.MAX_VALUE}
+                val slowestServer = testResults!!.minBy { it.latency ?: 0}
+
+                showInfoTextDialog(this,
+                    getString(R.string.dialog_speedresult_title),
+                    getString(R.string.dialog_speedresult_message,
+                        testResults!!.size,
+                        dotReachable,
+                        dotNotReachable,
+                        dohReachable,
+                        dohNotReachable,
+                        avgLatency,
+                        fastestServer?.server?.name ?: "-",
+                        slowestServer?.server?.name ?: "-"
+                        ))
+            }
+        }
+        serverList.layoutManager = LinearLayoutManager(this)
+        serverList.addItemDecoration(SpaceItemDecorator())
+    }
+
+    private fun startTest() {
+        serverList.adapter = null
+        testJob = launchWithLifecylce(false) {
+            val dnsServers = AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.values +
+                    AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values +
+                    getPreferences().userServers.map {
+                        it.serverInformation
+                    }
+            startTest.text = "0/${dnsServers.size}"
+            val testResults = dnsServers.map {
+                SpeedTest(it, null)
+            }.toMutableList()
+            this@SpeedTestActivity.testResults = testResults
+            val showUseServerDialog = { test:SpeedTest ->
+                showInfoTextDialog(this@SpeedTestActivity,
+                    getString(R.string.dialog_speedtest_useserver_title),
+                    getString(R.string.dialog_speedtest_useserver_message,
+                        test.server.name,
+                        testResults.indexOf(test) + 1,
+                        testResults.size,
+                        test.latency!!
+                        ),
+                    getString(R.string.all_yes) to { dialog, _ ->
+                        getPreferences().dnsServerConfig = test.server
+                        dialog.dismiss()
+                    }, getString(R.string.all_no) to { dialog, _ ->
+                        dialog.dismiss()
+                    }, null)
+            }
+            val adapter = AdapterBuilder.withViewHolder({ SpeedViewHolder(it, showUseServerDialog) }) {
+                viewBuilder = { parent, _ ->
+                    layoutInflater.inflate(R.layout.item_dns_speed, parent, false)
+                }
+                getItemCount = {
+                    testResults.size
+                }
+                bindView = { viewHolder, position ->
+                    viewHolder.display(testResults[position])
+                }
+            }.build()
+            runOnUiThread {
+                serverList.adapter = adapter
+            }
+            val testsLeft = testResults.shuffled()
+            var cnt = 0
+            testsLeft.forEach {
+                if(!(testJob?.isCancelled ?: true)) {
+                    it.started = true
+                    val res = DnsSpeedTest(it.server, 500, 750).runTest(3)
+                    if (res != null) it.latency = res
+                    else it.error = true
+                    testResults.sortBy {
+                        it.latency ?: Integer.MAX_VALUE
+                    }
+                    runOnUiThread {
+                        cnt++
+                        adapter.notifyDataSetChanged()
+                        startTest.text = "$cnt/${dnsServers.size}"
+                    }
+                }
+            }
+
+            if(!(testJob?.isCancelled ?: true))runOnUiThread {
+                startTest.isEnabled = true
+                abort.visibility = View.GONE
+                startTest.text = getString(R.string.window_speedtest_runtest)
+                testRunning = false
+                info.visibility = View.VISIBLE
+            }
+        }
+    }
+
     override fun getConfiguration(): Configuration {
         return Configuration.withDefaults()
+    }
+
+    private inner class SpeedViewHolder(view: View, private val showUseServerDialog:(SpeedTest) -> Any) : BaseViewHolder(view) {
+        val name = view.name
+        val servers = view.servers
+        val progress = view.progress
+        val latency = view.latency
+        val serverType = view.serverType
+        val nameWrap = view.nameWrap
+        private var defaultTextColor = latency.currentTextColor
+
+        fun display(speedTest: SpeedTest) {
+            if(speedTest.latency != null) {
+                val listener:(View) ->Unit = { showUseServerDialog(speedTest) }
+                itemView.setOnClickListener(listener)
+                nameWrap.setOnClickListener(listener)
+            } else {
+                itemView.setOnClickListener(null)
+                nameWrap.setOnClickListener(null)
+            }
+            name.text = speedTest.server.name
+            servers.text = buildString {
+                speedTest.server.servers.forEach {
+                    append(it.address.formatToString())
+                    append("\n")
+                }
+            }
+            serverType.text = if(speedTest.server is HttpsDnsServerInformation) getString(R.string.tasker_mode_doh)
+            else getString(R.string.tasker_mode_dot)
+            if (speedTest.latency == null) {
+                when {
+                    speedTest.error -> {
+                        latency.text = "- ms"
+                        latency.setTextColor(Color.RED)
+                        progress.visibility = View.INVISIBLE
+                        latency.visibility = View.VISIBLE
+                    }
+                    speedTest.started -> {
+                        progress.visibility = View.VISIBLE
+                        latency.visibility = View.INVISIBLE
+                    }
+                    else -> {
+                        latency.text = "? ms"
+                        latency.visibility = View.VISIBLE
+                        progress.visibility = View.INVISIBLE
+                        latency.setTextColor(defaultTextColor)
+                    }
+                }
+            } else {
+                latency.text = "${speedTest.latency} ms"
+                latency.setTextColor(defaultTextColor)
+                progress.visibility = View.INVISIBLE
+                latency.visibility = View.VISIBLE
+            }
+        }
+
+        override fun destroy() {}
+    }
+
+    private class SpeedTest(val server: DnsServerInformation<*>, var latency: Int?) {
+        var error: Boolean = false
+        var started:Boolean = false
+    }
+
+    private inner class SpaceItemDecorator() : RecyclerView.ItemDecoration() {
+        private val decorationHeight: Int = DesignUtil.dpToPixels(12f, this@SpeedTestActivity).toInt()
+
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            super.getItemOffsets(outRect, view, parent, state)
+
+            val itemPosition = parent.getChildAdapterPosition(view)
+            val totalCount = parent.adapter!!.itemCount
+
+            if (itemPosition >= 0 && itemPosition < totalCount - 1) {
+                outRect.bottom = decorationHeight
+            }
+        }
     }
 
 }
