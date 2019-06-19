@@ -97,4 +97,17 @@
 
     <string name="dialog_help_translating_message" translatable="false">This app is translated to a few languages, but even more are missing or incomplete - including yours.
         \n\nThat\'s why I\'m kindly asking for your help translating this app to reach as broad of an audience as possible. If you are willing to help translating this app into your language feel free to either contact me or <![CDATA[<a href="https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/TRANSLATING.md">read here on how to help.</a>]]></string>
+
+    <string name="dialog_speedresult_title">Speed test results</string>
+    <string name="dialog_speedresult_message">
+        %1d servers tested\n
+        %2d DoT servers reachable, %3d not reachable\n
+        %4d DoH servers reachable, %5d not reachable\n
+        Average response time: %6d ms.\n\n
+        Fastest server: %7s\n
+        Slowest server: %8s
+    </string>
+
+    <string name="dialog_speedtest_useserver_title">Select server</string>
+    <string name="dialog_speedtest_useserver_message">Do you want to use the server %1s? It ranked %2d out of %3d with a response time of %4d ms.</string>
 </resources>
