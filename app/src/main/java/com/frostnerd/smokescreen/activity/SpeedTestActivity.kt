@@ -1,37 +1,27 @@
 package com.frostnerd.smokescreen.activity
 
-import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.AdapterBuilder
-import com.frostnerd.cacheadapter.DataSource
-import com.frostnerd.cacheadapter.ListDataSource
+import com.frostnerd.design.DesignUtil
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
-import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.showInfoTextDialog
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.activity_speedtest.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.item_dns_speed.view.*
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
-import android.R.attr.bottom
-import android.graphics.Rect
-import androidx.lifecycle.Lifecycle
-import com.frostnerd.design.DesignUtil
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
-import com.frostnerd.smokescreen.showInfoTextDialog
 
 
 /*
@@ -55,8 +45,10 @@ import com.frostnerd.smokescreen.showInfoTextDialog
 
 class SpeedTestActivity : BaseActivity() {
     private var testRunning = false
+    private var wasStartedBefore = false
     private var testJob: Job? = null
-    private var testResults:List<SpeedTest>? = null
+    private var testResults:MutableList<SpeedTest>? = null
+    private var listAdapter:RecyclerView.Adapter<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +56,6 @@ class SpeedTestActivity : BaseActivity() {
         setSupportActionBar(toolBar)
         startTest.setOnClickListener {
             startTest()
-            testResults = null
             startTest.isEnabled = false
             abort.visibility = View.VISIBLE
             info.visibility = View.GONE
@@ -72,6 +63,7 @@ class SpeedTestActivity : BaseActivity() {
         abort.setOnClickListener {
             abort.visibility = View.GONE
             testJob?.cancel()
+            testJob = null
             startTest.isEnabled = true
             testRunning = false
             info.visibility = View.VISIBLE
@@ -107,17 +99,17 @@ class SpeedTestActivity : BaseActivity() {
         }
         serverList.layoutManager = LinearLayoutManager(this)
         serverList.addItemDecoration(SpaceItemDecorator())
+        prepareList()
     }
 
-    private fun startTest() {
-        serverList.adapter = null
-        testJob = launchWithLifecylce(false) {
+    private fun prepareList(joinWithJob:Boolean = true) {
+        launchWithLifecylce(true) {
+            if(joinWithJob) testJob?.join()
             val dnsServers = AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.values +
                     AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values +
                     getPreferences().userServers.map {
                         it.serverInformation
                     }
-            startTest.text = "0/${dnsServers.size}"
             val testResults = dnsServers.map {
                 SpeedTest(it, null)
             }.toMutableList()
@@ -130,7 +122,7 @@ class SpeedTestActivity : BaseActivity() {
                         testResults.indexOf(test) + 1,
                         testResults.size,
                         test.latency!!
-                        ),
+                    ),
                     getString(R.string.all_yes) to { dialog, _ ->
                         getPreferences().dnsServerConfig = test.server
                         dialog.dismiss()
@@ -138,7 +130,7 @@ class SpeedTestActivity : BaseActivity() {
                         dialog.dismiss()
                     }, null)
             }
-            val adapter = AdapterBuilder.withViewHolder({ SpeedViewHolder(it, showUseServerDialog) }) {
+            listAdapter = AdapterBuilder.withViewHolder({ SpeedViewHolder(it, showUseServerDialog) }) {
                 viewBuilder = { parent, _ ->
                     layoutInflater.inflate(R.layout.item_dns_speed, parent, false)
                 }
@@ -150,32 +142,44 @@ class SpeedTestActivity : BaseActivity() {
                 }
             }.build()
             runOnUiThread {
-                serverList.adapter = adapter
+                serverList.adapter = listAdapter
             }
-            val testsLeft = testResults.shuffled()
+        }
+    }
+
+    private fun startTest() {
+        if(wasStartedBefore) prepareList(true)
+        testJob = launchWithLifecylce(false) {
+            testRunning = true
+            wasStartedBefore = true
+            val testsLeft = testResults!!.shuffled()
             var cnt = 0
+            startTest.text = "0/${testsLeft.size}"
             testsLeft.forEach {
-                if(!(testJob?.isCancelled ?: true)) {
+                if(testJob?.isCancelled == false) {
                     it.started = true
                     val res = DnsSpeedTest(it.server, 500, 750).runTest(3)
+
                     if (res != null) it.latency = res
                     else it.error = true
-                    testResults.sortBy {
+
+                    testResults!!.sortBy {
                         it.latency ?: Integer.MAX_VALUE
                     }
                     runOnUiThread {
                         cnt++
-                        adapter.notifyDataSetChanged()
-                        startTest.text = "$cnt/${dnsServers.size}"
+                        listAdapter!!.notifyDataSetChanged()
+                        startTest.text = "$cnt/${testResults!!.size}"
                     }
                 }
             }
 
-            if(!(testJob?.isCancelled ?: true))runOnUiThread {
+            if(testJob?.isCancelled == false)runOnUiThread {
                 startTest.isEnabled = true
                 abort.visibility = View.GONE
                 startTest.text = getString(R.string.window_speedtest_runtest)
                 testRunning = false
+                testJob = null
                 info.visibility = View.VISIBLE
             }
         }
