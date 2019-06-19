@@ -328,10 +328,12 @@ class DnsVpnService : VpnService(), Runnable {
                         destroy(false)
                         pauseNotificationAction?.title = getString(R.string.all_resume)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_resume
+                        notificationBuilder.setSmallIcon(R.drawable.ic_notification_paused)
                     } else {
                         recreateVpn(false, null)
                         pauseNotificationAction?.title = getString(R.string.all_pause)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_pause
+                        notificationBuilder.setSmallIcon(R.drawable.ic_mainnotification)
                     }
                     updateNotification()
                 }
