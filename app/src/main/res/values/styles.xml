@@ -8,6 +8,7 @@
         <item name="android:colorBackground">@color/defaultBackgroundColor</item>
         <item name="navDrawableColor">#FFF</item>
 
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:textColor">#EEEEEE</item>
         <item name="android:textColorPrimary">#EEEEEE</item>
         <item name="android:textColorSecondary">#EEEEEE</item>
@@ -38,6 +39,7 @@
         <item name="android:colorBackground">@color/darkBackgroundColor</item>
         <item name="navDrawableColor">#BDBDBD</item>
 
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:textColor">#BDBDBD</item>
         <item name="android:textColorSecondary">#E0E0E0</item>
         <item name="android:textColorHighlight">#E0E0E0</item>
@@ -67,6 +69,7 @@
         <item name="android:colorBackground">@color/monoBackgroundColor</item>
         <item name="navDrawableColor">#E0E0E0</item>
 
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:textColor">#E0E0E0</item>
         <item name="android:textColorSecondary">#BDBDBD</item>
         <item name="android:textColorHighlight">#B0BEC5</item>
@@ -88,6 +91,11 @@
         <item name="android:navigationBarColor">?android:attr/statusBarColor</item>
     </style>
 
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">?android:attr/textColor</item>
+    </style>
+
     <style name="AppTheme_True_Black" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">#263238</item>
         <item name="colorPrimaryDark">#263238</item>
@@ -96,6 +104,7 @@
         <item name="android:colorBackground">@color/trueBlackBackgroundColor</item>
         <item name="navDrawableColor">#616161</item>
 
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:textColor">#BDBDBD</item>
         <item name="android:textColorSecondary">#9E9E9E</item>
         <item name="android:textColorHighlight">#9E9E9E</item>
