@@ -1,2 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_29_1">Reklamları engelleyen sunucular artık Google Play Store dışındaki derlemelerde gösteriliyor (bu da dahil!)</string>
+    <string name="changelog_build_29_2">AdGuard DNS\'si eklendi</string>
+    </resources>
