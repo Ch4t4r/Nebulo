@@ -91,9 +91,10 @@
 
     <string name="dialog_credits_title">Katkıcılar</string>
     <string name="dialog_credits_message" formatted="true">- &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; tarafından uygulama simgesi. 
-\n- Türkçe çevirisi Kemal Oktay Aktoğan
-\n- Rusça çeviri tarafından bruleto
-\n
+\n- Türkçe çevirisi Kemal Oktay Aktoğan 
+\n- Rusça çeviri tarafından bruleto 
+\n- Almanca çevirisi Bas Koedjik
+\n 
 \nİsmini burada görmek ister misin\? &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;Katkı&lt;/a&gt;da bulunmaktan çekinmeyin.</string>
 
     <string name="dialog_join_group_title">Topluluğa katıl</string>
