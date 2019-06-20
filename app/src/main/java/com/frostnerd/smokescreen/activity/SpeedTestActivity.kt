@@ -82,7 +82,7 @@ class SpeedTestActivity : BaseActivity() {
 
                 val avgLatency = testResults!!.sumBy { it.latency ?: 0 }/testResults!!.size
                 val fastestServer = testResults!!.minBy { it.latency ?: Integer.MAX_VALUE}
-                val slowestServer = testResults!!.minBy { it.latency ?: 0}
+                val slowestServer = testResults!!.maxBy { it.latency ?: 0}
 
                 showInfoTextDialog(this,
                     getString(R.string.dialog_speedresult_title),
