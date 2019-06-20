@@ -49,6 +49,7 @@ class SpeedTestActivity : BaseActivity() {
     private var testJob: Job? = null
     private var testResults:MutableList<SpeedTest>? = null
     private var listAdapter:RecyclerView.Adapter<*>? = null
+    private var prepareListJob:Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,9 +103,8 @@ class SpeedTestActivity : BaseActivity() {
         prepareList()
     }
 
-    private fun prepareList(joinWithJob:Boolean = true) {
-        launchWithLifecylce(true) {
-            if(joinWithJob) testJob?.join()
+    private fun prepareList() {
+        prepareListJob = launchWithLifecylce(true) {
             val dnsServers = AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.values +
                     AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values +
                     getPreferences().userServers.map {
@@ -144,12 +144,14 @@ class SpeedTestActivity : BaseActivity() {
             runOnUiThread {
                 serverList.adapter = listAdapter
             }
+            prepareListJob = null
         }
     }
 
     private fun startTest() {
-        if(wasStartedBefore) prepareList(true)
+        if(wasStartedBefore) prepareList()
         testJob = launchWithLifecylce(false) {
+            prepareListJob?.join()
             testRunning = true
             wasStartedBefore = true
             val testsLeft = testResults!!.shuffled()
