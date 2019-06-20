@@ -193,7 +193,7 @@
                 android:key="catch_known_servers"
                 android:title="@string/title_catch_other_dns_servers"
                 android:summary="@string/summary_catch_other_dns_servers"
-                android:defaultValue="false"/>
+                android:defaultValue="true"/>
 
         <CheckBoxPreference
                 android:key="bypass_searchdomains"
