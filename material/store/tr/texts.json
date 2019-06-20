@@ -1,4 +1,4 @@
 {
-  "main": "",
-  "shortText": ""
+    "main": "inen bir web sitesine giderken, mesela.com diyelim, cihazınız belirli sunuculara -DNS sunucularına- web sitesinin nasıl adresleneceğini sorar. DNS, küçük değişiklikler dışında 1987’de oluşturulduğundan bu yana dokunulmamış, eski bir protokoldür. Doğal olarak İnternet bu dönemde çok değişti ve protokolü bazı yönleriyle yetersiz hale getirdi.\n\nBu uygulama, DNS ile ilgili en büyük sorunlardan birini ele alıyor: Şifreleme\nİnternetteki neredeyse tüm trafik artık şifreli olsa da, DNS istekleri ve yanıtları(yani bir alanadı için sorgular), şifreli olarak alınmıyor. Bu, saldırganların isteklerinize müdahale etmesini, okumasını ve değiştirmesini sağlar.\n\nNebulo, DNS isteklerinizi güvenli bir şekilde hedef sunucuya göndermek için HTTP üzerinden DNS ve TLS üzerinden DNS uygulayan bir DNS değiştiricisidir. Bu şekilde yalnızca siz ve DNS sunucusu gönderdiğiniz istekleri okuyabilir.\n\nÇekirdek özellikleri:\n- Uygulamayı bir kez yapılandırın ve sonra unutun. İlk yapılandırmadan sonra tamamen kendi başına çalışır\n- Reklam ve izleme yok\n- Özel sunucular kullanılabilir\n- Düşük pil tüketimi",
+    "shortText": "Eski standartlara güvenli bir muâdil."
 }
