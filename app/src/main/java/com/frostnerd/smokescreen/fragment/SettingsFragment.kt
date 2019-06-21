@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.preference.CheckBoxPreference
 import androidx.preference.EditTextPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.design.dialogs.LoadingDialog
 import com.frostnerd.general.isInt
@@ -91,6 +92,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         requireContext().getPreferences().sharedPreferences.unregisterOnSharedPreferenceChangeListener(
             preferenceListener
         )
+    }
+
+    fun findPreference(key:String): Preference {
+        return super.findPreference<Preference>(key)!!
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

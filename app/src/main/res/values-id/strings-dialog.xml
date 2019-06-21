@@ -29,7 +29,7 @@
     <string name="dialog_serverimportfailed_title">Gagal mengimpor</string>
     <string name="dialog_serverimportfailed_text">Server tidak dapat diimpor.</string>
     <string name="dialog_serverimportfailed_text_exception">Server tidak dapat diimpor.
-\n(%1d)</string>
+\n(%1s)</string>
 
     <string name="dialog_logexport_text">Bagaimana Anda ingin membagikan log\?</string>
     <string name="dialog_logexport_general">Ekspor umum</string>

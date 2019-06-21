@@ -328,10 +328,12 @@ class DnsVpnService : VpnService(), Runnable {
                         destroy(false)
                         pauseNotificationAction?.title = getString(R.string.all_resume)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_resume
+                        notificationBuilder.setSmallIcon(R.drawable.ic_notification_paused)
                     } else {
                         recreateVpn(false, null)
                         pauseNotificationAction?.title = getString(R.string.all_pause)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_pause
+                        notificationBuilder.setSmallIcon(R.drawable.ic_mainnotification)
                     }
                     updateNotification()
                 }
@@ -753,7 +755,7 @@ class DnsVpnService : VpnService(), Runnable {
         dnsProxy = SmokeProxy(handle, createProxyBypassHandlers(), createDnsCache(), createQueryLogger())
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
-            newFixedThreadPoolContext(3, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger {
+            newFixedThreadPoolContext(1, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger {
             override fun logException(ex: Exception, terminal: Boolean, level: Level) {
                 if(terminal) log(ex)
                 else log(Logger.stacktraceToString(ex), "VPN-LIBRARY, $level")

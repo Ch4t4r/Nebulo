@@ -54,6 +54,7 @@ A list of some extraordinary people who contributed to this project:
  - App icon and notification icon by [RKBDI](http://dribbble.com/rkbdi).
  - Turkish translation by Kemal Oktay Aktoğan
  - Russian translation by [bruleto](https://t.me/bruleto)
+ - Dutch translation by Bas Koedijk
 <br/>
 <br/>
 
