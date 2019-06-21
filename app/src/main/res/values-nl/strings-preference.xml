@@ -40,11 +40,11 @@
 
     <string name="title_preference_change_pin">Verander pincode</string>
     <string name="summary_preference_change_pin">Verander de pincode. Alleen numerieke waarden zijn toegestaan.
-\nHuidige pincode:% 1s</string>
+\nHuidige pincode: %1s</string>
 
     <string name="preference_category_cache">Cache controle</string>
 
-    <string name="title_dnscache_enabled">Gebruik DNS cache</string>
+    <string name="title_dnscache_enabled">Gebruik DNS-cache</string>
     <string name="summary_dnscache_enabled">Schakelt DNS-cache in. Het cachegeheugen onthoudt oude verzoeken om toekomstige vragen sneller te beantwoorden</string>
 
     <string name="title_dnscache_keepacrosslaunches">DNS-cache behouden</string>
@@ -65,19 +65,19 @@
 \nHuidig: %1d Seconden.</string>
 
     <string name="title_dnscache_nxdomaincachetime">Cache tijd voor NXDomain (seconden)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die oude NXDOMAIN-aanvragen in het cachegeheugen hebben. Dit verbetert de prestaties voor niet-bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)Huidig:% 1d seconden.</string>
+    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die oude NXDOMAIN-verzoeken in het cachegeheugen hebben. Dit verbetert de prestaties voor niet bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)Huidig: %1d seconden.</string>
 
 
-    <string name="preference_category_logging">Logboekregistratie</string>
+    <string name="preference_category_logging">Loggen</string>
 
-    <string name="title_enable_logging">Logboekregistratie inschakelen</string>
-    <string name="summary_enable_logging">Maakt het loggen van foutopsporingsinformatie mogelijk (bevat statistische gegevens). Deze logboeken worden niet automatisch verzonden.</string>
+    <string name="title_enable_logging">Loggen inschakelen</string>
+    <string name="summary_enable_logging">Maakt het loggen van foutopsporingsinformatie mogelijk (bevat statistische gegevens). Deze logs worden niet automatisch verzonden.</string>
 
-    <string name="title_send_logs">Verzend logboek</string>
-    <string name="summary_send_logs">Klik hier om de logboeken naar de ontwikkelaar te sturen.</string>
+    <string name="title_send_logs">Verzend logs</string>
+    <string name="summary_send_logs">Klik hier om de logs naar de ontwikkelaar te sturen.</string>
 
-    <string name="title_delete_all_logs">Verwijder alle logboeken</string>
-    <string name="summary_delete_all_logs">Verwijdert alle logboeken die op uw apparaat zijn opgeslagen.</string>
+    <string name="title_delete_all_logs">Verwijder alle logs</string>
+    <string name="summary_delete_all_logs">Verwijdert alle logs die op uw apparaat zijn opgeslagen.</string>
 
     <string name="title_enable_sentry">Schakel crash rapportage in</string>
     <string name="summary_enable_sentry">Stuur automatisch crashmeldingen naar de ontwikkelaar. Gegevens worden alleen bij crashes overgedragen.</string>
@@ -118,4 +118,25 @@
     <string name="summary_bypass_searchdomains">Stuur zoekdomeinen (bijvoorbeeld MyPC.local of MyPc.fritz.box) naar de Dns-server van uw netwerk in plaats van de DoH-server.
 \nDit wordt sterk aanbevolen. Die verzoeken verlaten uw netwerk niet.</string>
 
-    </resources>
+    <string name="title_nullterminate_keweon">Keweon Null-terminate</string>
+    <string name="summary_nullterminate_keweon">Null-terminate domeinen van Keweon verwerpen reclame aanvragen volledig in plaats van ze naar Keweon te sturen</string>
+
+    <string name="title_pause_on_captiveportal">Pauzeer bij inlogpagina</string>
+    <string name="summary_pause_on_captiveportal">Stuur geen DNS-aanvragen naar de geconfigureerde server als u zich moet aanmelden op een inlogpagina. Het zal automatisch worden hervat kort na het inloggen.
+\nAls u deze optie uitschakelt, is het u misschien niet toegestaan de inlogpagina te openen.</string>
+
+    <string name="title_show_noconnection_notification">Melding bij geen verbinding</string>
+    <string name="summary_show_noconnection_notification">Laat een melding zien wanneer de app geen of een slechte verbinding heeft</string>
+
+
+    <string name="preference_category_querylogging">Dns-verzoeken beheren</string>
+
+    <string name="title_log_queries">DNS-verzoeken loggen</string>
+    <string name="summary_log_queries">Sla alle DNS-verzoeken en hun antwoorden op</string>
+
+    <string name="title_export_queries">Exporteer DNS-verzoeken</string>
+    <string name="summary_export_queries">Exporteer DNS-verzoeken als CSV (%1d verzoeken)</string>
+
+    <string name="title_delete_queries">Wis DNS-verzoeken</string>
+    <string name="summary_delete_queries">Klik hier om alle geregistreerde DNS-verzoeken te verwijderen.</string>
+</resources>

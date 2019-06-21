@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="menu_main">Status apl</string>
+    <string name="menu_settings">Setelan</string>
+    <string name="menu_querylogging">Kueri yang dicatat</string>
+    <string name="menu_create_shortcut">Buat pintasan server</string>
+    <string name="menu_rate">Menilai</string>
+    <string name="menu_about">Tentang</string>
+    <string name="menu_show_on_fdroid">Tampilkan di F-Droid</string>
+    
+    <string name="menu_cardview_title">Statistik waktu nyata</string>
+
+</resources>

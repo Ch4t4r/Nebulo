@@ -1,4 +1,4 @@
 {
-  "main": "",
-  "shortText": ""
+    "main": "Saat bernavigasi ke situs web yang dikenal dengan nama, katakan example.com, perangkat Anda menanyakan server tertentu - server DNS - cara menangani situs web tersebut. DNS adalah protokol lama, kecuali untuk perubahan yang lebih kecil, belum tersentuh sejak dibuat pada tahun 1987. Secara alami Internet banyak berubah saat ini, membuat protokol ketinggalan zaman dalam beberapa aspek intinya.\n\nAplikasi ini menangani salah satu masalah besar dengan DNS: Enkripsi.\nSementara hampir semua lalu lintas di Internet dienkripsi, DNS meminta (misal. Pertanyaan untuk nama alamat) dan jawabannya tidak. Ini memungkinkan orang yang melakukan kejahatan mencegat, membaca dan memodifikasi permintaan Anda.\n\nNebulo adalah pengubah DNS yang mengimplementasikan DNS-over-HTTPs dan DNS-over-TLS untuk mengirim permintaan DNS Anda dengan aman ke server target. Dengan cara ini hanya Anda dan server DNS yang dapat membaca permintaan yang Anda kirim.\n\nFitur inti:\n - Konfigurasikan aplikasi sekali dan kemudian lupakan. Setelah konfigurasi awal berfungsi sepenuhnya dengan otomatis\n - Tidak ada iklan dan tidak ada pelacakan\n - Server khusus dapat digunakan\n - Konsumsi baterai rendah",
+    "shortText": "Alternatif yang aman untuk versi standar yang lama."
 }

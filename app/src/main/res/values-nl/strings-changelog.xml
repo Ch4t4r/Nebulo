@@ -1,2 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_23_1">Niet-standaard poorten worden nu weergegeven voor DoT-servers</string>
+    <string name="changelog_build_23_2">Dit dialoogvenster is toegevoegd om wijzigingen te markeren</string>
+    <string name="changelog_build_23_3">Het exporteren van DNS-aanvragen toont nu een dialoogvenster met voortgangsbalk</string>
+    <string name="changelog_build_23_4">De serverimport verholpen die niet werkte op OS-versies lager dan Android 7</string>
+    <string name="changelog_build_23_5">Het DNS-verzoek logboek toont nu het protocol dat is gebruikt om het verzoek te verzenden</string>
+    <string name="changelog_build_23_6">De app kan nu worden beveiligd met een pincode</string>
+    <string name="changelog_build_24_1">Er is een probleem opgelost waardoor de app op apparaten crashte zonder een vingerafdruksensor</string>
+    <string name="changelog_build_25_1">Verbeterde afhandeling van IPv6 / IPv4 - de app werkt nu betrouwbaar in netwerken die slechts één van deze ondersteunen</string>
+    <string name="changelog_build_25_2">Nieuwe DNS-servers toegevoegd</string>
+    <string name="changelog_build_25_3">Er wordt nu een melding weergegeven als er geen / een slechte verbinding is</string>
+    <string name="changelog_build_25_4">De app crasht niet meer als een onbekende host wordt gebruikt; in plaats daarvan wordt de eerder genoemde melding weergegeven</string>
+    <string name="changelog_build_26_1">De app crasht niet meer als de server alleen IPv4 ondersteunt en het netwerk alleen IPv6 ondersteunt</string>
+    <string name="changelog_build_26_2">Oplossing voor het probleem dat de geen-verbindingsmelding niet goed verdwijnt</string>
+    <string name="changelog_build_26_3">De melding dat er geen verbinding is, kan nu worden afgewezen</string>
+    <string name="changelog_build_26_4">De app had de verkeerde servers van UncensoredDNS</string>
+    <string name="changelog_build_27_1">Veel crashes opgelost</string>
+    <string name="changelog_build_27_2">Logs kunnen nu weer worden gedeeld wanneer de app crasht</string>
+    <string name="changelog_build_27_3">De melding die wordt weergegeven wanneer de app geen / een slechte verbinding heeft, is nu standaard uitgeschakeld en kan worden ingeschakeld in de instellingen</string>
+    <string name="changelog_build_27_4">Een pauzeknop toegevoegd aan de notificatie</string>
+    <string name="changelog_build_28_1">De stopknop in de melding werkt opnieuw</string>
+    <string name="changelog_build_28_2">Een hogere time-out wordt nu gebruikt voor DoH-servers (voor netwerken met een slechte verbinding)</string>
+    <string name="changelog_build_28_3">Opgelost dat sommige DoT servers niet werkten</string>
+    <string name="changelog_build_28_4">UncensoredDns wordt nu gebruikt als standaardserver</string>
+    <string name="changelog_build_28_5">Kleine prestatieverbeteringen</string>
+    <string name="changelog_build_29_1">Nieuw app-icoon toegevoegd (met dank aan RKBDI)</string>
+    <string name="changelog_build_29_2">Automatische crash rapportage toegevoegd (opt-in)</string>
+    <string name="changelog_build_29_3">Privacybeleid toegevoegd</string>
+    <string name="changelog_build_29_4">Veel crashes opgelost</string>
+    <string name="changelog_build_29_5">Een instelling toegevoegd om vastgelegde zoekopdrachten te wissen</string>
+    <string name="changelog_build_30_1">Nieuw notificatie icoon toegevoegd</string>
+    <string name="changelog_build_30_2">Verholpen dat het privacybeleid niet werd geladen</string>
+    <string name="changelog_build_30_3">De Blacklist/whitelist tekst in de notificatie is verbeterd</string>
+    <string name="changelog_build_30_4">Enkele crashes opgelost</string>
+    <string name="changelog_build_31_1">Gedeeltelijke Duitse vertaling toegevoegd</string>
+    <string name="changelog_build_31_2">Instellingen toegevoegd om de stop- / pauze knop van de notificatie uit te schakelen</string>
+    <string name="changelog_build_31_3">Er wordt nu een melding weergegeven als de app crasht en automatische crashrapportage is ingeschakeld</string>
+    <string name="changelog_build_31_4">Enkele crashes opgelost</string>
+    <string name="changelog_build_32_1">De gebruikersinterface een beetje aangepast</string>
+    <string name="changelog_build_32_2">DNS-over-TLS werkt nu betrouwbaarder in slechte netwerken</string>
+    <string name="changelog_build_32_3">Een instelling toegevoegd om vreemd DNS-verkeer te onderscheppen (bijvoorbeeld vanwege Async DNS)</string>
+    <string name="changelog_build_32_4">Er is een weergave toegevoegd aan het menu met de momenteel gebruikte server en hun IP-adressen</string>
+    <string name="changelog_build_32_5">De app maakt nu gebruik van verschillende interne adressen</string>
+    <string name="changelog_build_32_6">Enkele crashes verholpen en app vastlopers verholpen</string>
+    </resources>

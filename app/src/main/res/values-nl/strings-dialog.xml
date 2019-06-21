@@ -1,2 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_serverconfiguration_title">Server configuratie</string>
+    <string name="dialog_serverconfiguration_addserver">Server toevoegen</string>
+
+    <string name="dialog_newserver_title_https">Voeg een server toe (DoH)</string>
+    <string name="dialog_newserver_title_tls">Voeg een server toe (DoT)</string>
+    <string name="dialog_newserver_name">Server naam</string>
+    <string name="dialog_newserver_name_hint">Voorbeeld</string>
+    <string name="dialog_newserver_primaryserver">Primaire server</string>
+    <string name="dialog_newserver_secondaryserver">Secundaire server (Optioneel)</string>
+    <string name="dialog_deleteconfig_title">Verwijder configuratie\?</string>
+    <string name="dialog_deleteconfig_text">Wilt u de configuratie %1$s\? verwijderen\?</string>
+
+    <string name="dialog_appchoosal_showsystemapps">Systeem-apps weergeven</string>
+    <string name="dialog_appchoosal_whitelist">Gebruik alleen DoH / DoT in geselecteerde apps</string>
+
+    <string name="dialog_excludedapps_infotext">%1d apps zijn standaard uitgesloten en kunnen niet worden gedeselecteerd</string>
+
+    <string name="dialog_serverimport_title">Import van %1d server (s)</string>
+    <string name="dialog_serverimport_done">Klaar</string>
+    <string name="dialog_serverimport_priority">Prioriteit %1d</string>
+    <string name="dialog_serverimport_experimental">Experimenteel</string>
+    <string name="dialog_serverimport_servertype_doh">Type: Dns-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Type: Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_text">Selecteer de servers die u wilt importeren.
+\n 
+\nAls u serverconfiguraties markeert die al zijn toegevoegd, worden deze gedupliceerd.</string>
+
+    <string name="dialog_serverimportfailed_title">Importeren mislukt</string>
+    <string name="dialog_serverimportfailed_text">De server(s) kunnen niet worden geïmporteerd.</string>
+    <string name="dialog_serverimportfailed_text_exception">De server(s) kunnen niet worden geïmporteerd.
+\n(%1s)</string>
+
+    <string name="dialog_logexport_text">Hoe wil je de logs delen\?</string>
+    <string name="dialog_logexport_general">Algemeen</string>
+    <string name="dialog_logexport_email">E-Mail</string>
+
+    <string name="dialog_deletelogs_text">Weet je zeker dat je alle logs wilt verwijderen\?</string>
+
+    <string name="dialog_error_title">Crash-rapport</string>
+    <string name="dialog_error_text">Het lijkt erop dat de app is gecrasht. Wilt u het foutenlogboek verzenden naar de ontwikkelaar\?</string>
+
+    <string name="dialog_batteryoptimization_title">Batterij optimalisatie</string>
+    <string name="dialog_batteryoptimization_message">Op sommige apparaten wordt de app niet op de hoogte gebracht dat het apparaat is opgestart, tenzij batterij-optimalisaties zijn uitgeschakeld.
+\nDe app staat momenteel niet op de witte lijst van de batterij-optimalisatie, wil je dit doen\?
+\n
+\nU moet testen of het werkt met optimalisatie ingeschakeld voordat u het uitschakelt.</string>
+    <string name="dialog_batteryoptimization_whitelist">Uitschakelen</string>
+    <string name="dialog_batteryoptimization_ignore">Negeren</string>
+
+    <string name="dialog_rate_confirmation">Wilt u de Play Store openen om de app te beoordelen\?</string>
+
+    <string name="dialog_changelog_title">Changelog</string>
+    <string name="dialog_changelog_infotext">De app is bijgewerkt sinds je hem voor het laatst hebt geopend. In de volgende lijst ziet u de changelog. Vink het vak hieronder aan en je ziet dit bericht in de toekomst niet meer.</string>
+    <string name="dialog_changelog_dont_show_again">Niet meer laten zien</string>
+
+    <string name="dialog_about_changelog">Changelog</string>
+    <string name="dialog_about_licenses">licenties</string>
+
+    <string name="dialog_query_export_title">Zoekopdrachten exporteren…</string>
+    <string name="dialog_query_export_message">Even geduld terwijl de DNS-verzoeken worden geëxporteerd</string>
+
+    <string name="dialog_pin_message">Geef uw pincode op.</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_pin_inputlabel">PIN</string>
+
+    <string name="dialog_enable_logging">Wilt u loggen inschakelen\? Logbestanden bevatten statistische informatie, foutopsporingsinformatie en acties in de app. Gegenereerde logbestanden worden niet gedeeld tenzij u dit zelf doet.</string>
+
+    <string name="dialog_crashreporting_title">Automatische crash rapportage</string>
+    <string name="dialog_crashreportingusages_title">Doorgestuurde gegevens</string>
+    <string name="dialog_crashreportingusages_message">Klik op een van de groepen om te zien welke gegevens worden verzonden bij een crash.</string>
+    <string name="dialog_crashreporting_positive">Schakel crashrapportage in</string>
+    <string name="dialog_crashreporting_negative">Nee bedankt.</string>
+    <string name="dialog_crashreporting_neutral">Zie gegevens</string>
+    <string name="dialog_crashreporting_message">Bedankt dat je een tester bent voor de app!
+\n
+\nDeze app maakt gebruik van open source en zelf gehoste software van derden om app-crashes gemakkelijker te volgen zodra ze zich voordoen. Als en alleen als ingeschakeld, verzendt de app crashmeldingen wanneer de app een crash tegenkomt. Deze rapporten bevatten aanvullende gegevens over de app en uw apparaat. Dit bevat een ID die wordt gebruikt om crashes van dezelfde gebruiker bij te houden, maar kan niet worden gebruikt om iets anders te volgen. Het inschakelen van de crashrapportage is optioneel maar zou mij enorm helpen.
+\nRapporten worden veilig verzonden via HTTPS.
+\n
+\nKlik hieronder op \'Zie gegevens\' om te zien wat voor soort gegevens worden verzonden en voor een link naar het privacybeleid.</string>
+    <string name="dialog_crashreporting_message_notester">Bedankt voor het gebruik van Nebulo!
+\n
+\nDeze app maakt gebruik van open source en zelf gehoste software van derden om app-crashes gemakkelijker te volgen zodra ze zich voordoen. Als en alleen als ingeschakeld, verzendt de app crashmeldingen wanneer de app een crash tegenkomt. Deze rapporten bevatten aanvullende gegevens over de app en uw apparaat. Dit bevat een ID die wordt gebruikt om crashes van dezelfde gebruiker bij te houden, maar kan niet worden gebruikt om iets anders te volgen. Het inschakelen van de crashrapportage is optioneel maar zou mij enorm helpen.
+\nRapporten worden veilig verzonden via HTTPS.
+\n
+\nKlik hieronder op \'Zie gegevens\' om te zien wat voor soort gegevens worden verzonden en voor een link naar het privacybeleid.</string>
+
+    <string name="dialog_clearqueries_title">Alle aanvragen wissen</string>
+    <string name="dialog_clearqueries_message">Weet u zeker dat u de geregistreerde zoekopdrachten wilt wissen\? Dit kan niet worden teruggedraaid.</string>
+
+    <string name="dialog_credits_title">Dankwoord</string>
+    <string name="dialog_credits_message" formatted="true">- App-icoon door &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;.
+\n- Turkse vertaling door Kemal Oktay Aktoğan
+\n- Russische vertaling door bruleto
+\n- Nederlandse vertaling door Bas Koedijk
+\n 
+\n Wil je je naam hier zien\? Aarzel niet om &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt; een bijdrage te leveren &lt;/a&gt;.</string>
+
+    <string name="dialog_join_group_title">Word lid van de community</string>
+    <string name="dialog_join_group_message">Hallo daar!
+\n
+\nWist je dat deze app een Telegram-groep heeft\? Het bevat regelmatige updates en is de perfecte plaats voor discussies en vragen.
+\nWij zijn een geweldige community van meer dan 120 mensen, wilt u er deel van uitmaken\?</string>
+    <string name="dialog_join_group_positive">Ja!</string>
+
+    </resources>

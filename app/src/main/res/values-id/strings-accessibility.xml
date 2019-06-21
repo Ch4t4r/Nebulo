@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="contentdescription_main_infoimage">Ikon informasi</string>
+    <string name="contentdescription_main_servericon">Ikon server</string>
+    <string name="contentdescription_main_statusimage">Gambar yang menunjukkan apakah apl sedang berjalan</string>
+    <string name="contentdescription_shared_app_icon">Ikon apl</string>
+    <string name="contentdescription_clear_search">Bersihkan pencarian</string>
+
+    <string name="contentdescription_start_app">Memulai apl</string>
+    <string name="contentdescription_stop_app">Hentikan apl</string>
+    
+    <string name="hint_searchterm">Istilah untuk dicari</string>
+</resources>

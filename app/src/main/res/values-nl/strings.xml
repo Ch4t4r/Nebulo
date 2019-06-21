@@ -32,16 +32,16 @@
 
 <string name="activity_label_import_queries">Importeer zoekopdrachten</string>
     <string name="main_dnssurveillance_infotext">Houd er rekening mee dat de DNS-server waarmee u bent verbonden, in staat is om op te nemen welke sites u bezoekt. Raadpleeg de respectieve privacyverklaringen voor meer informatie.</string>
-    <string name="about_app">Deze app is open source. De broncode is toegankelijk via &lt;a href=https://smokescreen.app/source&gt; smokescreen.app/source &lt;/a&gt;.
-\nVerder bevat de app geen advertenties en worden er geen gegevens over u bijgehouden of verzameld.
-\n
-\nVersie% 1s
-\nBouw% 2d
-\nDatabaseversie% 3d
-\nCrashreport-ID:% 4s
-\n
-\n© Daniel Wolf 2019
-\nGelicentieerd onder GPLv3.
+    <string name="about_app">Deze app is open source. De broncode is toegankelijk via &lt;a href=https://smokescreen.app/source&gt; smokescreen.app/source &lt;/a&gt;. 
+\nVerder bevat de app geen advertenties en worden er geen gegevens over u bijgehouden of verzameld. 
+\n 
+\nVersie %1s 
+\nBouw %2d 
+\nDatabaseversie %3d 
+\nCrashreport-ID: %4s 
+\n 
+\n© Daniel Wolf 2019 
+\nGelicentieerd onder GPLv3. 
 \n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
     <string name="app_share_text">Hé, ik heb deze app gevonden die uw DNS-zoekopdrachten codeert om u meer privacy en veiligheid te bieden. Bekijk het hier: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
 

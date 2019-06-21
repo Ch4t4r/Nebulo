@@ -1,2 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_crashreportingusages_data_1">Kullanıcı verisi</string>
+    <string name="dialog_crashreportingusages_data_2">Cihaz verisi</string>
+    <string name="dialog_crashreportingusages_data_3">Uygulama verisi</string>
+    <string name="dialog_crashreportingusages_data_4">İşletim sistemi verileri</string>
+    <string name="dialog_crashreportingusages_data_user_1">Çökmeleri izlemek için kullanılan rastgele kimlik</string>
+    <string name="dialog_crashreportingusages_data_device_1">Mimari (x86, arm, …)</string>
+    <string name="dialog_crashreportingusages_data_device_2">Döndürme (yatay, dikey)</string>
+    <string name="dialog_crashreportingusages_data_device_3">Boş/kullanılan bellek (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_4">Şarj durumu (evet/hayır)</string>
+    <string name="dialog_crashreportingusages_data_device_5">Çökme anında çevrimiçi miydi (evet/hayır)</string>
+    <string name="dialog_crashreportingusages_data_device_6">Ekran çözünürlüğü</string>
+    <string name="dialog_crashreportingusages_data_device_7">Üretici firma</string>
+    <string name="dialog_crashreportingusages_data_device_8">Marka</string>
+    <string name="dialog_crashreportingusages_data_device_9">Model</string>
+    <string name="dialog_crashreportingusages_data_device_10">Dil</string>
+    <string name="dialog_crashreportingusages_data_app_1">Uygulamanın başlangıç zamanı</string>
+    <string name="dialog_crashreportingusages_data_app_2">Uygulama sürümü</string>
+    <string name="dialog_crashreportingusages_data_app_3">Veritabanı sürümü</string>
+    <string name="dialog_crashreportingusages_data_app_4">DNS sunucusu adı</string>
+    <string name="dialog_crashreportingusages_data_app_5">Birincil DNS Sunucusu</string>
+    <string name="dialog_crashreportingusages_data_app_6">İkincil DNS sunucusu</string>
+    <string name="dialog_crashreportingusages_data_os_1">İsim (ör. Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Sürüm (örneğin, 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Çekirdek sürümü</string>
+    <string name="dialog_crashreportingusages_data_os_4">Köklü (evet/hayır)</string>
+    </resources>

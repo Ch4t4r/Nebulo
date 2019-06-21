@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="contentdescription_main_infoimage">情報アイコン</string>
+    <string name="contentdescription_main_servericon">サーバアイコン</string>
+    <string name="contentdescription_main_statusimage">アプリが起動しているかどうかを示すイメージ</string>
+    <string name="contentdescription_shared_app_icon">アプリアイコン</string>
+    <string name="contentdescription_clear_search">サーチをクリアする</string>
+
+    <string name="contentdescription_start_app">アプリを起動する</string>
+    <string name="contentdescription_stop_app">アプリを停止する</string>
+    
+    <string name="hint_searchterm">検索する用語</string>
+</resources>

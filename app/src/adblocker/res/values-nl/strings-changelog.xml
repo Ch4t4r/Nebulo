@@ -1,2 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_29_1">Servers die advertenties blokkeren, worden nu weergegeven in niet-Play store-versies (inclusief deze!)</string>
+    <string name="changelog_build_29_2">AdGuard DNS toegevoegd</string>
+    </resources>

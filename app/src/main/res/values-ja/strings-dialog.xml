@@ -1,2 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_serverconfiguration_title">サーバー構成</string>
+    <string name="dialog_serverconfiguration_addserver">サーバーを追加する</string>
+
+    <string name="dialog_newserver_title_https">サーバーを追加する（DoH）</string>
+    <string name="dialog_newserver_title_tls">サーバーを追加する（DoT）</string>
+    <string name="dialog_newserver_name">サーバーの名前</string>
+    <string name="dialog_newserver_name_hint">例</string>
+    <string name="dialog_newserver_primaryserver">プライマリサーバ</string>
+    <string name="dialog_newserver_secondaryserver">セコンダリーサーバ（オプション）</string>
+    <string name="dialog_deleteconfig_title">設定を削除しますか？</string>
+    <string name="dialog_deleteconfig_text">設定％1 $ sを削除しますか？</string>
+
+    <string name="dialog_appchoosal_showsystemapps">システムアプリを表示する</string>
+    <string name="dialog_appchoosal_whitelist">選択したアプリでのみDoH / DoTを使用する</string>
+
+    <string name="dialog_excludedapps_infotext">％1dのアプリはデフォルトで除外されており、選択を解除できません</string>
+
+    <string name="dialog_serverimport_title">％1dサーバーのインポート</string>
+    <string name="dialog_serverimport_done">完了</string>
+    <string name="dialog_serverimport_priority">優先度％1d</string>
+    <string name="dialog_serverimport_experimental">実験的</string>
+    <string name="dialog_serverimport_servertype_doh">タイプ：Dns-over-HTTPS（DoH）</string>
+    <string name="dialog_serverimport_servertype_dot">タイプ：Dns-over-TLS（DoT）</string>
+    <string name="dialog_serverimport_text">インポートしたいサーバーを選択してください。
+\nすでにインポートされているサーバーは、選択すると複製されます。</string>
+
+    <string name="dialog_serverimportfailed_title">インポートに失敗しました</string>
+    <string name="dialog_serverimportfailed_text">サーバーをインポートできませんでした。</string>
+    <string name="dialog_serverimportfailed_text_exception">サーバーをインポートできませんでした。
+\n（％1s）</string>
+
+    <string name="dialog_logexport_text">ログをどのように共有しますか？</string>
+    <string name="dialog_logexport_general">一般輸出</string>
+    <string name="dialog_logexport_email">メール</string>
+
+    <string name="dialog_deletelogs_text">すべてのログを削除してよろしいですか？</string>
+
+    <string name="dialog_error_title">クラッシュレポート</string>
+    <string name="dialog_error_text">アプリがクラッシュしたようです。 エラーログファイルを開発者に送信しますか？</string>
+
+    <string name="dialog_batteryoptimization_title">バッテリーの最適化</string>
+    </resources>

@@ -1,2 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_crashreportingusages_data_1">Data pengguna</string>
+    <string name="dialog_crashreportingusages_data_2">Data perangkat</string>
+    <string name="dialog_crashreportingusages_data_3">Data apl</string>
+    <string name="dialog_crashreportingusages_data_4">Data sistem operasi</string>
+    <string name="dialog_crashreportingusages_data_user_1">ID acak yang digunakan untuk melacak kerusakan</string>
+    <string name="dialog_crashreportingusages_data_device_1">Arsitektur (x86, arm, ...)</string>
+    <string name="dialog_crashreportingusages_data_device_2">Orientasi (lanskap, potret)</string>
+    <string name="dialog_crashreportingusages_data_device_3">Memori bebas/digunakan (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_4">Status pengisian daya (ya/tidak)</string>
+    <string name="dialog_crashreportingusages_data_device_5">Online disaat rusak (ya/tidak)</string>
+    <string name="dialog_crashreportingusages_data_device_6">Resolusi layar</string>
+    <string name="dialog_crashreportingusages_data_device_7">Pabrikan</string>
+    <string name="dialog_crashreportingusages_data_device_8">Merek</string>
+    <string name="dialog_crashreportingusages_data_device_9">Model</string>
+    <string name="dialog_crashreportingusages_data_device_10">Bahasa</string>
+    <string name="dialog_crashreportingusages_data_app_1">Mulai waktu apl</string>
+    <string name="dialog_crashreportingusages_data_app_2">Versi apl</string>
+    <string name="dialog_crashreportingusages_data_app_3">Versi basis data</string>
+    <string name="dialog_crashreportingusages_data_app_4">Nama server dns</string>
+    <string name="dialog_crashreportingusages_data_app_5">Server dns primer</string>
+    <string name="dialog_crashreportingusages_data_app_6">Server dns sekunder</string>
+    <string name="dialog_crashreportingusages_data_os_1">Nama (misal. Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Versi (misal. 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Versi kernel</string>
+    <string name="dialog_crashreportingusages_data_os_4">Ter-root (ya/tidak)</string>
+    </resources>
