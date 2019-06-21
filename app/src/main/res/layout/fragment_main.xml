@@ -80,7 +80,7 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/startButton"
                     android:background="@drawable/main_roundbuttons"
-                    android:text="Start"
+                    android:text="@string/all_start"
                     android:layout_toStartOf="@id/speedTest"
                     android:layout_marginEnd="8dp"
                     style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
