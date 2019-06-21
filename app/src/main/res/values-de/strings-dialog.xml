@@ -103,4 +103,15 @@
 \nWusstest du schon, dass diese App eine Telegramgruppe hat\? Die Gruppe enthält reguläre Updates und ist der perfekte Platz, um Fragen zu stellen und Diskussionen anzuregen.
 \nWir sind eine großartige Gemeinde von über 120 Personen, möchtest du ein Teil davon werden\?</string>
     <string name="dialog_join_group_positive">Gerne!</string>
+<string name="dialog_speedresult_title">Ergebnisse des Geschwindigkeitstests</string>
+    <string name="dialog_speedresult_message">%1d Server getestet
+\n%2d DoT Server erreichbar, %3d nicht erreichbar
+\n%4d DoH Server erreichbar, %5d nicht erreichbar
+\nDurchschnittliche Antwortzeit: %6d ms.
+\n
+\nSchnellster Server: %7s
+\nLangsamster Server: %8s</string>
+
+    <string name="dialog_speedtest_useserver_title">Server auswählen</string>
+    <string name="dialog_speedtest_useserver_message">Möchtest du den Server %1s nutzen\? Er erreichte Platz %2d von %3d mit einer durchschnittlichen Antwortzeit von %4d ms.</string>
 </resources>
