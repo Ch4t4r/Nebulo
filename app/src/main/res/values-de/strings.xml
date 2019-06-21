@@ -53,4 +53,9 @@
 
 <string name="about_help_translating">Hilf beim Übersetzen</string>
 
+<string name="activity_label_speed_test">Geschwindigkeitsvergleich</string>
+
+    <string name="window_speedtest_runtest">Den Test starten</string>
+    <string name="window_speedtest_useserver">Diesen Server nutzen</string>
+
 </resources>
