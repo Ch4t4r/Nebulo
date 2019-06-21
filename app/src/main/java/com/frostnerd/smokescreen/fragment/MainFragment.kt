@@ -119,6 +119,9 @@ class MainFragment : Fragment() {
                 startActivity(i)
             }
         }
+        dnsRules.setOnClickListener {
+            startActivity(Intent(context!!, DnsRuleActivity::class.java))
+        }
         GlobalScope.launch {
             val context = context
             if (isAdded && !isDetached && context != null) {

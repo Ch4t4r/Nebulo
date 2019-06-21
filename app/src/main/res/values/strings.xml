@@ -60,4 +60,5 @@
     <string name="window_speedtest_runtest">Start the test</string>
     <string name="window_speedtest_useserver">Use this server</string>
 
+    <string name="button_main_dnsrules">DNS rules</string>
 </resources>
