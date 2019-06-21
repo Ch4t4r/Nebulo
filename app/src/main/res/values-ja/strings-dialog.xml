@@ -9,16 +9,16 @@
     <string name="dialog_newserver_primaryserver">プライマリサーバ</string>
     <string name="dialog_newserver_secondaryserver">セコンダリーサーバ（オプション）</string>
     <string name="dialog_deleteconfig_title">設定を削除しますか？</string>
-    <string name="dialog_deleteconfig_text">設定％1 $ sを削除しますか？</string>
+    <string name="dialog_deleteconfig_text">設定%1sを削除しますか？</string>
 
     <string name="dialog_appchoosal_showsystemapps">システムアプリを表示する</string>
     <string name="dialog_appchoosal_whitelist">選択したアプリでのみDoH / DoTを使用する</string>
 
-    <string name="dialog_excludedapps_infotext">％1dのアプリはデフォルトで除外されており、選択を解除できません</string>
+    <string name="dialog_excludedapps_infotext">%1dのアプリはデフォルトで除外されており、選択を解除できません</string>
 
-    <string name="dialog_serverimport_title">％1dサーバーのインポート</string>
+    <string name="dialog_serverimport_title">%1dサーバーのインポート</string>
     <string name="dialog_serverimport_done">完了</string>
-    <string name="dialog_serverimport_priority">優先度％1d</string>
+    <string name="dialog_serverimport_priority">優先度%1d</string>
     <string name="dialog_serverimport_experimental">実験的</string>
     <string name="dialog_serverimport_servertype_doh">タイプ：Dns-over-HTTPS（DoH）</string>
     <string name="dialog_serverimport_servertype_dot">タイプ：Dns-over-TLS（DoT）</string>
@@ -28,7 +28,7 @@
     <string name="dialog_serverimportfailed_title">インポートに失敗しました</string>
     <string name="dialog_serverimportfailed_text">サーバーをインポートできませんでした。</string>
     <string name="dialog_serverimportfailed_text_exception">サーバーをインポートできませんでした。
-\n（％1s）</string>
+\n（%1s）</string>
 
     <string name="dialog_logexport_text">ログをどのように共有しますか？</string>
     <string name="dialog_logexport_general">一般輸出</string>
