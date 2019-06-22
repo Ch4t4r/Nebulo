@@ -175,7 +175,7 @@
                 android:theme="@style/AppTheme_Mono"
                 android:label="@string/activity_label_speed_test"
                 />
-        <activity android:name=".fragment.DnsRuleActivity"/>
+        <activity android:name=".activity.DnsRuleActivity"/>
 
         <service
                 android:name=".service.DnsVpnService"

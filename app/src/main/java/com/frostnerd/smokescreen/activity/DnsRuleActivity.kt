@@ -1,9 +1,7 @@
-package com.frostnerd.smokescreen.fragment
+package com.frostnerd.smokescreen.activity
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.ListDataSource
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
@@ -47,7 +45,11 @@ class DnsRuleActivity : BaseActivity() {
             it.name
         }
         adapterDataSource = ListDataSource(sourceAdapterList)
-        sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder ({ view -> SourceViewHolder(view) }, adapterDataSource) {
+        sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder ({ view ->
+            SourceViewHolder(
+                view
+            )
+        }, adapterDataSource) {
 
 
         }.build()
