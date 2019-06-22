@@ -61,4 +61,7 @@
     <string name="window_speedtest_useserver">Use this server</string>
 
     <string name="button_main_dnsrules">DNS rules</string>
+
+    <string name="window_dnsrules_customhosts">Custom hosts</string>
+    <string name="window_dnsrules_customhosts_message">Define all your custom hosts here.</string>
 </resources>

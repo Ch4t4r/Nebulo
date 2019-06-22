@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.database.dao
 
 import androidx.room.Dao
+import androidx.room.Query
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -23,4 +24,6 @@ import androidx.room.Dao
 @Dao
 interface DnsRuleDao {
 
+    @Query("DELETE FROM DnsRule")
+    fun deleteAll()
 }

@@ -2,15 +2,18 @@ package com.frostnerd.smokescreen.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.ListDataSource
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.database.entities.HostSource
+import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.util.rules.HostSource
 import kotlinx.android.synthetic.main.activity_dns_rules.*
+import kotlinx.android.synthetic.main.item_datasource.view.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -31,28 +34,84 @@ import kotlinx.android.synthetic.main.activity_dns_rules.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class DnsRuleActivity : BaseActivity() {
-    private lateinit var sourceAdapter:RecyclerView.Adapter<*>
-    private lateinit var sourceAdapterList:List<HostSource>
-    private lateinit var adapterDataSource:ListDataSource<HostSource>
+    private lateinit var sourceAdapter: RecyclerView.Adapter<*>
+    private lateinit var sourceAdapterList: MutableList<HostSource>
+    private lateinit var adapterDataSource: ListDataSource<HostSource>
+    private var cnt = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dns_rules)
+        println(getPreferences().sharedPreferences.all)
         addSource.setOnClickListener {
-
+            val newSource = HostSource("HerpDerp" + cnt++, "https://test.frostnerd.com/" + cnt)
+            if (!sourceAdapterList.contains(newSource)) {
+                val insertPos = sourceAdapterList.indexOfFirst {
+                    it.name > newSource.name
+                }.let {
+                    println("POS: $it")
+                    if (it - 1 < 0) 0
+                    else it - 1
+                }
+                sourceAdapterList.add(insertPos, newSource)
+                sourceAdapter.notifyItemInserted(insertPos)
+                getDatabase().hostSourceDao().insert(newSource)
+            }
         }
-        sourceAdapterList = getPreferences().hostSources.sortedBy {
-            it.name
-        }
+        sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
         adapterDataSource = ListDataSource(sourceAdapterList)
-        sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder ({ view ->
-            SourceViewHolder(
-                view
-            )
+        sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder({ view, type ->
+            if (type == 0) {
+                SourceViewHolder(view, deleteSource = {
+                    val pos = sourceAdapterList.indexOf(it)
+                    sourceAdapterList.removeAt(pos)
+                    sourceAdapter.notifyItemRemoved(pos)
+                    getDatabase().hostSourceDao().delete(it)
+                }, changeSourceStatus = { hostSource, enabled ->
+                    hostSource.enabled = enabled
+                    getDatabase().hostSourceDao().update(hostSource)
+                })
+            } else {
+                CustomRulesViewHolder(view, changeSourceStatus = {
+                    getPreferences().customHostsEnabled = it
+                }, clearRules = {
+                    getDatabase().dnsRuleRepository().deleteAllAsync()
+                })
+            }
         }, adapterDataSource) {
+            viewBuilder = { parent, type ->
+                layoutInflater.inflate(
+                    if (type == 0) R.layout.item_datasource else R.layout.item_datasource_rules,
+                    parent,
+                    false
+                )
+            }
+            getItemCount = {
+                sourceAdapterList.size + 1
+            }
+            bindModelView = { viewHolder, _, data ->
+                (viewHolder as SourceViewHolder).display(data)
+            }
+            bindNonModelView = { viewHolder, position ->
+                (viewHolder as CustomRulesViewHolder).apply {
+                    this.enabled.isChecked = getPreferences().customHostsEnabled
+                    this.clear.setOnClickListener {
 
+                    }
+                }
+            }
+            getViewType = { position ->
+                if (position == getItemCount() - 1) 1
+                else 0
+            }
+            runOnUiThread = {
+                this@DnsRuleActivity.runOnUiThread(it)
+            }
 
         }.build()
+        list.layoutManager = LinearLayoutManager(this)
+        list.recycledViewPool.setMaxRecycledViews(1, 1)
+        list.adapter = sourceAdapter
     }
 
     override fun getConfiguration(): Configuration {
@@ -60,7 +119,56 @@ class DnsRuleActivity : BaseActivity() {
     }
 
 
-    private class SourceViewHolder(view: View):BaseViewHolder(view) {
+    private class SourceViewHolder(
+        view: View,
+        deleteSource: (HostSource) -> Unit,
+        changeSourceStatus: (HostSource, enabled: Boolean) -> Unit
+    ) : BaseViewHolder(view) {
+        val text = view.text
+        val subText = view.subText
+        val enabled = view.enable
+        val delete = view.delete
+        lateinit var source: HostSource
+
+        init {
+            delete.setOnClickListener {
+                deleteSource(source)
+            }
+            enabled.setOnCheckedChangeListener { _, isChecked ->
+                changeSourceStatus(source, isChecked)
+            }
+            view.cardContent.setOnClickListener {
+                enabled.isChecked = !enabled.isChecked
+            }
+        }
+
+        fun display(source: HostSource) {
+            this.source = source
+            text.text = source.name
+            enabled.isChecked = source.enabled
+            subText.text = source.source
+        }
+
+        override fun destroy() {}
+    }
+
+    private class CustomRulesViewHolder(view: View, changeSourceStatus: (Boolean) -> Unit, clearRules: () -> Unit) :
+        BaseViewHolder(view) {
+        val clear = view.delete
+        val enabled = view.enable
+
+        init {
+            enabled.setOnCheckedChangeListener { _, isChecked ->
+                changeSourceStatus(isChecked)
+            }
+            clear.setOnClickListener {
+                clearRules()
+            }
+            view.cardContent.setOnClickListener {
+                enabled.isChecked = !enabled.isChecked
+            }
+        }
+
         override fun destroy() {}
     }
 }

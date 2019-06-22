@@ -10,8 +10,6 @@ import com.frostnerd.preferenceskt.typedpreferences.cache.ExpirationCacheControl
 import com.frostnerd.preferenceskt.typedpreferences.cache.buildCacheStrategy
 import com.frostnerd.preferenceskt.typedpreferences.types.*
 import com.frostnerd.smokescreen.BuildConfig
-import com.frostnerd.smokescreen.util.rules.HostSource
-import com.frostnerd.smokescreen.util.rules.HostSourcePreference
 import java.util.*
 
 /*
@@ -241,7 +239,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         }
     }, cacheControl)
 
-    var hostSources:Set<HostSource> by HostSourcePreference("hostsource").toSetPreference(emptySet())
+    var customHostsEnabled:Boolean by booleanPref("custom_hosts", false)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
