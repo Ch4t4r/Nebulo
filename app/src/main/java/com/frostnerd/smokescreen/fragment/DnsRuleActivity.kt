@@ -1,8 +1,18 @@
 package com.frostnerd.smokescreen.fragment
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.frostnerd.cacheadapter.ListDataSource
+import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.lifecyclemanagement.BaseActivity
+import com.frostnerd.lifecyclemanagement.BaseViewHolder
+import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.rules.HostSource
+import kotlinx.android.synthetic.main.activity_dns_rules.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -23,9 +33,32 @@ import com.frostnerd.lifecyclemanagement.BaseActivity
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class DnsRuleActivity : BaseActivity() {
+    private lateinit var sourceAdapter:RecyclerView.Adapter<*>
+    private lateinit var sourceAdapterList:List<HostSource>
+    private lateinit var adapterDataSource:ListDataSource<HostSource>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_dns_rules)
+        addSource.setOnClickListener {
+
+        }
+        sourceAdapterList = getPreferences().hostSources.sortedBy {
+            it.name
+        }
+        adapterDataSource = ListDataSource(sourceAdapterList)
+        sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder ({ view -> SourceViewHolder(view) }, adapterDataSource) {
+
+
+        }.build()
+    }
 
     override fun getConfiguration(): Configuration {
         return Configuration.withDefaults()
     }
 
+
+    private class SourceViewHolder(view: View):BaseViewHolder(view) {
+        override fun destroy() {}
+    }
 }
