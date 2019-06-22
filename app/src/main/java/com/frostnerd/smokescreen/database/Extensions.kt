@@ -36,6 +36,7 @@ private val MIGRATION_2_X = migration(2) {
     it.execSQL("CREATE TABLE CachedResponse(type INTEGER NOT NULL, dnsName TEXT NOT NULL, records TEXT NOT NULL, PRIMARY KEY(dnsName, type))")
     it.execSQL("DROP TABLE IF EXISTS UserServerConfiguration")
     MIGRATION_3_4.migrate(it)
+    MIGRATION_5_6.migrate(it)
     Logger.logIfOpen("DB_MIGRATION", "Migration from 2 to current version completed")
 }
 private val MIGRATION_3_4 = migration(3, 4) {
@@ -43,10 +44,15 @@ private val MIGRATION_3_4 = migration(3, 4) {
     it.execSQL("CREATE TABLE IF NOT EXISTS `DnsQuery` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `fromCache` INTEGER NOT NULL, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 3 to 4 completed")
 }
-private val MIGRATION_4_5 = migration(4,5) {
+private val MIGRATION_4_5 = migration(4, 5) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 4 to 5")
-    it.execSQL("DROP TABLE  IF EXISTS UserServerConfiguration")
+    it.execSQL("DROP TABLE IF EXISTS UserServerConfiguration")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 4 to 5 completed")
+}
+private val MIGRATION_5_6 = migration(5, 6) {
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 5 to 6")
+    it.execSQL("CREATE TABLE IF NOT EXISTS `DnsRule` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `ttl` INTEGER NOT NULL, `record` TEXT NOT NULL)")
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 5 to 6 completed")
 }
 
 
@@ -54,13 +60,17 @@ fun Context.getDatabase(): AppDatabase {
     if (INSTANCE == null) {
         INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
             .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5)
+            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
             .build()
     }
     return INSTANCE!!
 }
 
-private fun migration(from: Int, to: Int = AppDatabase.currentVersion, migrate: (database: SupportSQLiteDatabase) -> Unit): Migration {
+private fun migration(
+    from: Int,
+    to: Int = AppDatabase.currentVersion,
+    migrate: (database: SupportSQLiteDatabase) -> Unit
+): Migration {
     return object : Migration(from, to) {
         override fun migrate(database: SupportSQLiteDatabase) {
             migrate.invoke(database)
@@ -68,11 +78,11 @@ private fun migration(from: Int, to: Int = AppDatabase.currentVersion, migrate: 
     }
 }
 
-private fun emptyMigration(from:Int, to:Int = AppDatabase.currentVersion): Migration {
+private fun emptyMigration(from: Int, to: Int = AppDatabase.currentVersion): Migration {
     return migration(from, to) { }
 }
 
-fun recordFromBase64(base64:String):Record<*> {
+fun recordFromBase64(base64: String): Record<*> {
     val bytes = Base64.decode(base64, Base64.NO_WRAP)
     return Record.parse(DataInputStream(ByteArrayInputStream(bytes)), bytes)
 }
