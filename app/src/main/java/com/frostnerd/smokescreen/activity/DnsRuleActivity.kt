@@ -49,9 +49,11 @@ class DnsRuleActivity : BaseActivity() {
                 val insertPos = sourceAdapterList.indexOfFirst {
                     it.name > newSource.name
                 }.let {
-                    println("POS: $it")
-                    if (it - 1 < 0) 0
-                    else it - 1
+                    when (it) {
+                        0 -> 0
+                        -1 -> sourceAdapterList.size - 1
+                        else -> it
+                    }
                 }
                 sourceAdapterList.add(insertPos, newSource)
                 sourceAdapter.notifyItemInserted(insertPos)
