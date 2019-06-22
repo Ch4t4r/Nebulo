@@ -97,7 +97,7 @@ dependencies {
     implementation 'com.frostnerd.utils:materialedittext:1.0.20'
     implementation 'com.frostnerd.utils:design:1.0.17'
     implementation 'com.frostnerd.utilskt:networking:1.0.3'
-    implementation 'com.frostnerd.utilskt:adapters:1.0.6'
+    implementation 'com.frostnerd.utilskt:adapters:1.1.0'
 
     implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
     implementation "androidx.preference:preference:1.1.0-beta01"

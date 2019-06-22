@@ -66,7 +66,7 @@ class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformat
         val serverList = view.findViewById<RecyclerView>(R.id.serverList)
 
         serverList.layoutManager = LinearLayoutManager(context)
-        val adapter = AdapterBuilder.withViewHolder({ itemView -> ServerViewHolder(itemView) }) {
+        val adapter = AdapterBuilder.withViewHolder({ itemView, _ -> ServerViewHolder(itemView) }) {
             getItemCount = {
                 servers.count()
             }

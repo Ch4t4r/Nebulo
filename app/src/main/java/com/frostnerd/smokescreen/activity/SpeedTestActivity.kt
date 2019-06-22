@@ -130,7 +130,7 @@ class SpeedTestActivity : BaseActivity() {
                         dialog.dismiss()
                     }, null)
             }
-            listAdapter = AdapterBuilder.withViewHolder({ SpeedViewHolder(it, showUseServerDialog) }) {
+            listAdapter = AdapterBuilder.withViewHolder({ view, _ -> SpeedViewHolder(view, showUseServerDialog) }) {
                 viewBuilder = { parent, _ ->
                     layoutInflater.inflate(R.layout.item_dns_speed, parent, false)
                 }

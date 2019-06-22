@@ -73,7 +73,7 @@ class ChangelogDialog(context: Context, versionToStartFrom:Int, val showOptOut:B
                 this.viewBuilder = { parent, _ ->
                     layoutInflater.inflate(R.layout.item__dialog_changelog, parent, false)
                 }
-                this.viewHolderBuilder = {view ->
+                this.viewHolderBuilder = { view, _ ->
                     ChangelogViewHolder(view)
                 }
                 this.getItemCount = {
