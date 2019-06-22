@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.item_datasource.view.*
 
@@ -42,7 +43,6 @@ class DnsRuleActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dns_rules)
-        println(getPreferences().sharedPreferences.all)
         addSource.setOnClickListener {
             val newSource = HostSource("HerpDerp" + cnt++, "https://test.frostnerd.com/" + cnt)
             if (!sourceAdapterList.contains(newSource)) {
@@ -113,6 +113,7 @@ class DnsRuleActivity : BaseActivity() {
         }.build()
         list.layoutManager = LinearLayoutManager(this)
         list.recycledViewPool.setMaxRecycledViews(1, 1)
+        list.addItemDecoration(SpaceItemDecorator(this))
         list.adapter = sourceAdapter
     }
 
