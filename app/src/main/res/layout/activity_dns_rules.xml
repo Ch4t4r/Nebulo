@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                     android:layout_width="match_parent"
-                                                     android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="?android:attr/textColor"
+            android:theme="@style/AppTheme_Mono"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:id="@+id/list"
-            android:layout_above="@id/addSource"
+            android:layout_below="@id/toolBar"
+            android:layout_above="@id/fabWrap"
             android:layout_height="match_parent"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:id="@+id/addSource"
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/fabWrap"
+            android:gravity="center_horizontal"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_plus"
-            android:layout_height="wrap_content"/>
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:id="@+id/addSource"
+                android:src="@drawable/ic_plus"
+                android:layout_height="wrap_content"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:id="@+id/refresh"
+                android:src="@drawable/ic_refresh"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
 
 </RelativeLayout>

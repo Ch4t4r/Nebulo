@@ -4,6 +4,7 @@
     <string name="activity_label_import_queries">Import queries</string>
     <string name="activity_label_import_servers">Import server(s)</string>
     <string name="activity_label_speed_test">Server speed comparison</string>
+    <string name="activity_label_dns_rules">Dns rules</string>
 
     <string name="activity_label_enable_logging">Export logs/Enable logging</string>
 
