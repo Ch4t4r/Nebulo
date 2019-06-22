@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "207633d815093431015a9df18f6521b0",
+    "identityHash": "be58818eae851a6b386c96630cd3b3c2",
     "entities": [
       {
         "tableName": "CachedResponse",
@@ -101,7 +101,7 @@
       },
       {
         "tableName": "DnsRule",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `ttl` INTEGER NOT NULL, `record` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `ttl` INTEGER NOT NULL, `record` TEXT NOT NULL, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -132,6 +132,12 @@
             "columnName": "record",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "importedFrom",
+            "columnName": "importedFrom",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -140,16 +146,60 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
-        "foreignKeys": []
+        "indices": [
+          {
+            "name": "index_DnsRule_importedFrom",
+            "unique": false,
+            "columnNames": [
+              "importedFrom"
+            ],
+            "createSql": "CREATE  INDEX `index_DnsRule_importedFrom` ON `${TABLE_NAME}` (`importedFrom`)"
+          },
+          {
+            "name": "index_DnsRule_host",
+            "unique": false,
+            "columnNames": [
+              "host"
+            ],
+            "createSql": "CREATE  INDEX `index_DnsRule_host` ON `${TABLE_NAME}` (`host`)"
+          },
+          {
+            "name": "index_DnsRule_host_type",
+            "unique": false,
+            "columnNames": [
+              "host",
+              "type"
+            ],
+            "createSql": "CREATE  INDEX `index_DnsRule_host_type` ON `${TABLE_NAME}` (`host`, `type`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "HostSource",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "importedFrom"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       },
       {
         "tableName": "HostSource",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL, `enabled` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "enabled",
+            "columnName": "enabled",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -163,12 +213,6 @@
             "fieldPath": "source",
             "columnName": "source",
             "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "enabled",
-            "columnName": "enabled",
-            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -185,7 +229,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '207633d815093431015a9df18f6521b0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'be58818eae851a6b386c96630cd3b3c2')"
     ]
   }
 }

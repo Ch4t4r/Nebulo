@@ -1,10 +1,7 @@
 package com.frostnerd.smokescreen.database.entities
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.frostnerd.smokescreen.database.converters.DnsTypeConverter
-import com.frostnerd.smokescreen.database.converters.StringListConverter
 import org.minidns.record.Record
 
 /*
@@ -25,12 +22,23 @@ import org.minidns.record.Record
  * 
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-@Entity(tableName = "DnsRule")
+@Entity(
+    tableName = "DnsRule",
+    foreignKeys = [ForeignKey(
+        entity = HostSource::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("importedFrom"),
+        onDelete = ForeignKey.CASCADE
+    )],
+    indices = [Index("importedFrom"), Index("host"), Index("host", "type")]
+    )
 @TypeConverters(DnsTypeConverter::class)
 data class DnsRule(
-    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val type: Record.TYPE,
     val host: String,
     val ttl: Long,
-    val record: String
-)
+    val record: String,
+    val importedFrom: Long? = null
+) {
+    @PrimaryKey(autoGenerate = true) var id: Long = 0
+}

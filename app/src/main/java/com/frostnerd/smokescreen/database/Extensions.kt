@@ -51,7 +51,7 @@ private val MIGRATION_4_5 = migration(4, 5) {
 }
 private val MIGRATION_5_6 = migration(5, 6) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 5 to 6")
-    it.execSQL("CREATE TABLE IF NOT EXISTS `DnsRule` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `ttl` INTEGER NOT NULL, `record` TEXT NOT NULL)")
+    it.execSQL("CREATE TABLE IF NOT EXISTS `DnsRule` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `ttl` INTEGER NOT NULL, `record` TEXT NOT NULL, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )")
     it.execSQL("CREATE TABLE IF NOT EXISTS `HostSource` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL, `enabled` INTEGER NOT NULL)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 5 to 6 completed")
 }
