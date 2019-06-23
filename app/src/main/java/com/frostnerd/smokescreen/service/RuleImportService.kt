@@ -127,8 +127,8 @@ class RuleImportService : Service() {
             getDatabase().hostSourceDao().getAllEnabled().forEach {
                 log("Importing HostSource $it")
                 if(importJob != null && importJob?.isCancelled == false) {
-                    count++
                     updateNotification(it, count, maxCount.toInt())
+                    count++
                     if (it.isFileSource) {
                         try {
                             val file = File(it.source)
