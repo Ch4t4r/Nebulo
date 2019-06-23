@@ -12,6 +12,7 @@ import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.RuleImportService
 import com.frostnerd.smokescreen.showInfoTextDialog
@@ -49,20 +50,21 @@ class DnsRuleActivity : BaseActivity() {
         setContentView(R.layout.activity_dns_rules)
         setSupportActionBar(toolBar)
         addSource.setOnClickListener {
-            val newSource = HostSource("HerpDerp" + cnt++, "https://test.frostnerd.com/" + cnt)
-            if (!sourceAdapterList.contains(newSource)) {
-                val insertPos = sourceAdapterList.indexOfFirst {
-                    it.name > newSource.name
-                }.let {
-                    when (it) {
-                        0 -> 0
-                        -1 -> sourceAdapterList.size - 1
-                        else -> it
+            NewHostSourceDialog(this) {
+                if (!sourceAdapterList.contains(it)) {
+                    val insertPos = sourceAdapterList.indexOfFirst {
+                        it.name > it.name
+                    }.let {
+                        when (it) {
+                            0 -> 0
+                            -1 -> sourceAdapterList.size - 1
+                            else -> it
+                        }
                     }
+                    sourceAdapterList.add(insertPos, it)
+                    sourceAdapter.notifyItemInserted(insertPos)
+                    getDatabase().hostSourceDao().insert(it)
                 }
-                sourceAdapterList.add(insertPos, newSource)
-                sourceAdapter.notifyItemInserted(insertPos)
-                getDatabase().hostSourceDao().insert(newSource)
             }
         }
         refresh.setOnClickListener {
