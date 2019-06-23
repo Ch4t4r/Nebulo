@@ -13,6 +13,7 @@ import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.repository.CachedResponseRepository
 import com.frostnerd.smokescreen.database.repository.DnsQueryRepository
 import com.frostnerd.smokescreen.database.repository.DnsRuleRepository
+import com.frostnerd.smokescreen.database.repository.HostSourceRepository
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -47,4 +48,5 @@ abstract class AppDatabase : RoomDatabase() {
     fun cachedResponseRepository() = CachedResponseRepository(cachedResponseDao())
     fun dnsQueryRepository() = DnsQueryRepository(dnsQueryDao())
     fun dnsRuleRepository() = DnsRuleRepository(dnsRuleDao())
+    fun hostSourceRepository() = HostSourceRepository(hostSourceDao())
 }

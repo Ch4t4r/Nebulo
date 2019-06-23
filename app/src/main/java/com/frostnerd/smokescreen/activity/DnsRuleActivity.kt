@@ -84,7 +84,7 @@ class DnsRuleActivity : BaseActivity() {
                             val pos = sourceAdapterList.indexOf(it)
                             sourceAdapterList.removeAt(pos)
                             sourceAdapter.notifyItemRemoved(pos)
-                            getDatabase().hostSourceDao().delete(it)
+                            getDatabase().hostSourceRepository().deleteAsync(it)
                             dialog.dismiss()
                         }, getString(R.string.all_no) to { dialog, _ ->
                             dialog.dismiss()
