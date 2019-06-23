@@ -29,7 +29,7 @@ interface DnsRuleDao {
     @Query("DELETE FROM DnsRule")
     fun deleteAll()
 
-    @Query("DELETE FROM DnsRule WHERE importedFrom IS NULL")
+    @Query("DELETE FROM DnsRule WHERE importedFrom IS NOT NULL")
     fun deleteAllExceptUserRules()
 
     @Insert
