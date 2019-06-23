@@ -240,6 +240,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     }, cacheControl)
 
     var customHostsEnabled:Boolean by booleanPref("custom_hosts", false)
+    var dnsRulesEnabled:Boolean by booleanPref("dns_rules_enabled", false)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

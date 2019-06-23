@@ -2,7 +2,9 @@ package com.frostnerd.smokescreen.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
+import android.widget.Switch
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.ListDataSource
@@ -141,6 +143,14 @@ class DnsRuleActivity : BaseActivity() {
         list.recycledViewPool.setMaxRecycledViews(1, 1)
         list.addItemDecoration(SpaceItemDecorator(this))
         list.adapter = sourceAdapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_dnsrule, menu)
+        menu?.getItem(0)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)?.setOnCheckedChangeListener { _, isChecked ->
+            getPreferences().dnsRulesEnabled = isChecked
+        }
+        return true
     }
 
     override fun getConfiguration(): Configuration {
