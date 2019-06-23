@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.service
 
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
@@ -55,6 +56,9 @@ class RuleImportService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if(intent != null && intent.hasExtra("abort")) {
+            importJob?.cancel()
+        }
         createNotification()
         startWork()
         return START_STICKY
@@ -72,6 +76,9 @@ class RuleImportService : Service() {
             notification!!.setContentTitle(getString(R.string.notification_ruleimport_title))
             notification!!.setContentText(getString(R.string.notification_ruleimport_secondarymessage))
             notification!!.setProgress(100, 0, true)
+            val abortPendingAction = PendingIntent.getService(this, 1, Intent(this, RuleImportService::class.java).putExtra("abort", true), PendingIntent.FLAG_CANCEL_CURRENT)
+            val abortAction = NotificationCompat.Action(R.drawable.ic_times, getString(R.string.all_abort), abortPendingAction)
+            notification!!.addAction(abortAction)
         }
         startForeground(3, notification!!.build())
     }
@@ -96,15 +103,17 @@ class RuleImportService : Service() {
             var count = 0
             val maxCount = getDatabase().hostSourceDao().getEnabledCount()
             getDatabase().hostSourceDao().getAllEnabled().forEach {
-                count++
-                updateNotification(it, count, maxCount.toInt())
-                if (it.isFileSource) {
-                    TODO()
-                } else {
-                    val request = Request.Builder().url(it.source)
-                    val response = httpClient.newCall(request.build()).execute()
-                    if (response.isSuccessful) {
-                        processLines(it, response.body()!!.byteStream())
+                if(importJob != null && importJob?.isCancelled == false) {
+                    count++
+                    updateNotification(it, count, maxCount.toInt())
+                    if (it.isFileSource) {
+                        TODO()
+                    } else {
+                        val request = Request.Builder().url(it.source)
+                        val response = httpClient.newCall(request.build()).execute()
+                        if (response.isSuccessful) {
+                            processLines(it, response.body()!!.byteStream())
+                        }
                     }
                 }
             }
@@ -123,16 +132,20 @@ class RuleImportService : Service() {
         )
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
             lines.forEach { line ->
-                if (!line.trim().startsWith("#") && !line.trim().startsWith("!") && !line.isBlank()) {
-                    val iterator = parsers.iterator()
-                    for ((matcher, hosts) in iterator) {
-                        if (matcher.reset(line).matches()) {
-                            hosts.add(processLine(matcher))
-                            commitLines(source, parsers)
-                        } else {
-                            iterator.remove()
+                if(importJob != null && importJob?.isCancelled == false) {
+                    if (!line.trim().startsWith("#") && !line.trim().startsWith("!") && !line.isBlank()) {
+                        val iterator = parsers.iterator()
+                        for ((matcher, hosts) in iterator) {
+                            if (matcher.reset(line).matches()) {
+                                hosts.add(processLine(matcher))
+                                commitLines(source, parsers)
+                            } else {
+                                iterator.remove()
+                            }
                         }
                     }
+                } else {
+                    return@useLines
                 }
             }
         }
