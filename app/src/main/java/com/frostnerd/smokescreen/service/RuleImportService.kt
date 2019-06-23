@@ -174,7 +174,7 @@ class RuleImportService : Service() {
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
-                                hosts.second.add(processLine(matcher))
+                                hosts.second.addAll(processLine(matcher))
                                 commitLines(source, parsers)
                             } else {
                                 log("Matcher $matcher mismatch for line $line")
@@ -208,18 +208,18 @@ class RuleImportService : Service() {
         }
     }
 
-    private fun processLine(matcher: Matcher): Host {
+    private fun processLine(matcher: Matcher): Collection<Host> {
         when {
-            matcher.groupCount() == 1 -> return Host(matcher.group(1), "0.0.0.0", Record.TYPE.ANY)
+            matcher.groupCount() == 1 -> return listOf(Host(matcher.group(1), "0.0.0.0", Record.TYPE.A), Host(matcher.group(1), "::1", Record.TYPE.AAAA))
             matcher == DNSMASQ_MATCHER -> {
                 val host = matcher.group(1)
                 val target = matcher.group(2)
-                return Host(host, target, if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A)
+                return listOf(Host(host, target, if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A))
             }
             matcher == HOSTS_MATCHER -> {
                 val target = matcher.group(1)
                 val host = matcher.group(2)
-                return Host(host, target, if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A)
+                return listOf(Host(host, target, if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A))
             }
         }
         throw IllegalStateException()
