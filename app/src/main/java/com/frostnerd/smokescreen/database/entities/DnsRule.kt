@@ -28,7 +28,7 @@ import org.minidns.record.Record
         entity = HostSource::class,
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("importedFrom"),
-        onDelete = ForeignKey.CASCADE
+        onDelete = ForeignKey.NO_ACTION
     )],
     indices = [Index("importedFrom"), Index("host"), Index("host", "type")]
     )

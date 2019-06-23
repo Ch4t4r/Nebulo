@@ -53,4 +53,7 @@ interface DnsRuleDao {
 
     @Query("SELECT target FROM DnsRule WHERE host=:host AND type = :type LIMIT 1")
     fun findRuleTarget(host:String, type:Record.TYPE):String?
+
+    @Query("DELETE FROM DnsRule WHERE importedFrom=:sourceId")
+    fun deleteAllFromSource(sourceId: Long)
 }
