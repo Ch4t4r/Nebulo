@@ -16,9 +16,7 @@ import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.minidns.record.Record
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
+import java.io.*
 import java.lang.IllegalStateException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -118,7 +116,14 @@ class RuleImportService : Service() {
                     count++
                     updateNotification(it, count, maxCount.toInt())
                     if (it.isFileSource) {
-                        TODO()
+                        try {
+                            val file = File(it.source)
+                            if(file.canRead()) {
+                                processLines(it, FileInputStream(file))
+                            }
+                        } catch (ex:Exception) {
+                            ex.printStackTrace()
+                        }
                     } else {
                         val request = Request.Builder().url(it.source)
                         val response = httpClient.newCall(request.build()).execute()
