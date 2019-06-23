@@ -57,11 +57,21 @@ class RuleImportService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if(intent != null && intent.hasExtra("abort")) {
-            importJob?.cancel()
+            abortImport()
         }
         createNotification()
         startWork()
         return START_STICKY
+    }
+
+    private fun abortImport() {
+        importJob?.let {
+            it.cancel()
+            val dnsRuleDao = getDatabase().dnsRuleDao()
+            dnsRuleDao.deleteStagedRules()
+            dnsRuleDao.commitStaging()
+        }
+        importJob = null
     }
 
     private fun createNotification() {
@@ -99,7 +109,8 @@ class RuleImportService : Service() {
 
     private fun startWork() {
         importJob = GlobalScope.launch {
-            getDatabase().dnsRuleDao().deleteAllExceptUserRules()
+            val dnsRuleDao = getDatabase().dnsRuleDao()
+            dnsRuleDao.markNonUserRulesForDeletion()
             var count = 0
             val maxCount = getDatabase().hostSourceDao().getEnabledCount()
             getDatabase().hostSourceDao().getAllEnabled().forEach {
@@ -116,6 +127,10 @@ class RuleImportService : Service() {
                         }
                     }
                 }
+            }
+            if(importJob != null && importJob?.isCancelled == false) {
+                dnsRuleDao.deleteMarkedRules()
+                dnsRuleDao.commitStaging()
             }
             importJob = null
             stopForeground(true)
@@ -187,7 +202,7 @@ class RuleImportService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        importJob?.cancel()
+        abortImport()
     }
 
     override fun onBind(intent: Intent?): IBinder? {

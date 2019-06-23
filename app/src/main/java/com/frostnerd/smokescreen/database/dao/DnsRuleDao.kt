@@ -29,8 +29,17 @@ interface DnsRuleDao {
     @Query("DELETE FROM DnsRule")
     fun deleteAll()
 
-    @Query("DELETE FROM DnsRule WHERE importedFrom IS NOT NULL")
-    fun deleteAllExceptUserRules()
+    @Query("UPDATE DnsRule SET stagingType=1 WHERE importedFrom IS NOT NULL")
+    fun markNonUserRulesForDeletion()
+
+    @Query("DELETE FROM DnsRule WHERE stagingType=1")
+    fun deleteMarkedRules()
+
+    @Query("DELETE FROM DnsRule WHERE stagingType=2")
+    fun deleteStagedRules()
+
+    @Query("UPDATE DnsRule SET stagingType=NULL")
+    fun commitStaging()
 
     @Insert
     fun insertAll(rules:Collection<DnsRule>)

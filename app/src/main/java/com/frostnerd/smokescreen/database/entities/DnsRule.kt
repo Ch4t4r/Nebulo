@@ -40,4 +40,9 @@ data class DnsRule(
     val importedFrom: Long? = null
 ) {
     @PrimaryKey(autoGenerate = true) var id: Long = 0
+
+    // Null = none
+    // 1 = marked delete
+    // 2 = marked insert
+    var stagingType:Int? = null
 }
