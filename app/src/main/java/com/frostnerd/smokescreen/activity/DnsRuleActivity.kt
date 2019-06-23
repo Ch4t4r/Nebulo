@@ -14,6 +14,7 @@ import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.RuleImportService
+import com.frostnerd.smokescreen.showInfoTextDialog
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.activity_dns_rules.toolBar
@@ -72,10 +73,18 @@ class DnsRuleActivity : BaseActivity() {
         sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder({ view, type ->
             if (type == 0) {
                 SourceViewHolder(view, deleteSource = {
-                    val pos = sourceAdapterList.indexOf(it)
-                    sourceAdapterList.removeAt(pos)
-                    sourceAdapter.notifyItemRemoved(pos)
-                    getDatabase().hostSourceDao().delete(it)
+                    showInfoTextDialog(this,
+                        getString(R.string.dialog_deletehostsource_title, it.name),
+                        getString(R.string.dialog_deletehostsource_message, it.name),
+                        getString(R.string.all_yes) to { dialog, _ ->
+                            val pos = sourceAdapterList.indexOf(it)
+                            sourceAdapterList.removeAt(pos)
+                            sourceAdapter.notifyItemRemoved(pos)
+                            getDatabase().hostSourceDao().delete(it)
+                            dialog.dismiss()
+                        }, getString(R.string.all_no) to { dialog, _ ->
+                            dialog.dismiss()
+                        }, null)
                 }, changeSourceStatus = { hostSource, enabled ->
                     hostSource.enabled = enabled
                     getDatabase().hostSourceDao().update(hostSource)
@@ -84,7 +93,15 @@ class DnsRuleActivity : BaseActivity() {
                 CustomRulesViewHolder(view, changeSourceStatus = {
                     getPreferences().customHostsEnabled = it
                 }, clearRules = {
-                    getDatabase().dnsRuleRepository().deleteAllAsync()
+                    showInfoTextDialog(this,
+                        getString(R.string.dialog_clearuserrules_title),
+                        getString(R.string.dialog_clearuserrules_message),
+                        getString(R.string.all_yes) to { dialog, _ ->
+                            getDatabase().dnsRuleRepository().deleteAllAsync()
+                            dialog.dismiss()
+                        }, getString(R.string.all_no) to { dialog, _ ->
+                            dialog.dismiss()
+                        }, null)
                 })
             }
         }, adapterDataSource) {

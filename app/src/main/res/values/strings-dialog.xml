@@ -110,4 +110,10 @@
 
     <string name="dialog_speedtest_useserver_title">Select server</string>
     <string name="dialog_speedtest_useserver_message">Do you want to use the server %1s? It ranked %2d out of %3d with a response time of %4d ms.</string>
+
+    <string name="dialog_deletehostsource_title">Delete %1s?</string>
+    <string name="dialog_deletehostsource_message">Are you sure you want to delete the host source %1s? This cannot be undone, the hosts from this source will be removed.</string>
+
+    <string name="dialog_clearuserrules_title">Clear all dns rules?</string>
+    <string name="dialog_clearuserrules_message">Are you want to clear all dns rules? This cannot be undone.</string>
 </resources>
