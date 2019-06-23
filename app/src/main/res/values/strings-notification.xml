@@ -29,4 +29,7 @@
     <string name="notification_ruleimport_title">DNS rule import</string>
     <string name="notification_ruleimport_message">Importing DNS rules from %1s (%2s)</string>
     <string name="notification_ruleimport_secondarymessage">Preparing import…</string>
+
+    <string name="notification_ruleimportfinished_title">DNS rule import finished</string>
+    <string name="notification_ruleimportfinished_message">%1d rules have been imported.</string>
 </resources>

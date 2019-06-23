@@ -1,7 +1,9 @@
 package com.frostnerd.smokescreen.service
 
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
@@ -9,6 +11,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.util.Notifications
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -48,6 +51,7 @@ class RuleImportService : Service() {
     private val DOMAINS_MATCHER = Pattern.compile("^([A-Za-z0-9][A-Za-z0-9\\-.]+)").matcher("")
     private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^$").matcher("")
     private var notification: NotificationCompat.Builder? = null
+    private var ruleCount:Int = 0
 
     private val httpClient by lazy {
         OkHttpClient()
@@ -91,6 +95,15 @@ class RuleImportService : Service() {
         startForeground(3, notification!!.build())
     }
 
+    private fun showSuccessNotification() {
+        val successNotification = NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
+        successNotification.setSmallIcon(R.drawable.ic_mainnotification)
+        successNotification.setAutoCancel(true)
+        successNotification.setContentTitle(getString(R.string.notification_ruleimportfinished_title))
+        successNotification.setContentText(getString(R.string.notification_ruleimportfinished_message, ruleCount))
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(4, successNotification.build())
+    }
+
     private fun updateNotification(source: HostSource, count:Int, maxCount:Int) {
         if (notification != null) {
             notification?.setContentText(
@@ -112,6 +125,7 @@ class RuleImportService : Service() {
             var count = 0
             val maxCount = getDatabase().hostSourceDao().getEnabledCount()
             getDatabase().hostSourceDao().getAllEnabled().forEach {
+                log("Importing HostSource $it")
                 if(importJob != null && importJob?.isCancelled == false) {
                     count++
                     updateNotification(it, count, maxCount.toInt())
@@ -129,6 +143,8 @@ class RuleImportService : Service() {
                         val response = httpClient.newCall(request.build()).execute()
                         if (response.isSuccessful) {
                             processLines(it, response.body()!!.byteStream())
+                        } else {
+                            log("Downloading resource of $it failed.")
                         }
                     }
                 }
@@ -138,6 +154,7 @@ class RuleImportService : Service() {
                 dnsRuleDao.commitStaging()
             }
             importJob = null
+            showSuccessNotification()
             stopForeground(true)
             stopSelf()
         }
@@ -145,22 +162,24 @@ class RuleImportService : Service() {
 
     private fun processLines(source: HostSource, stream: InputStream) {
         val parsers = mutableMapOf(
-            DNSMASQ_MATCHER to mutableListOf<Host>(),
-            HOSTS_MATCHER to mutableListOf(),
-            DOMAINS_MATCHER to mutableListOf(),
-            ADBLOCK_MATCHER to mutableListOf()
+            DNSMASQ_MATCHER to (0 to mutableListOf<Host>()),
+            HOSTS_MATCHER to (0 to mutableListOf()),
+            DOMAINS_MATCHER to (0 to mutableListOf()),
+            ADBLOCK_MATCHER to (0 to mutableListOf())
         )
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
             lines.forEach { line ->
                 if(importJob != null && importJob?.isCancelled == false) {
-                    if (!line.trim().startsWith("#") && !line.trim().startsWith("!") && !line.isBlank()) {
+                    if (parsers.isNotEmpty() && !line.trim().startsWith("#") && !line.trim().startsWith("!") && !line.isBlank()) {
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
-                                hosts.add(processLine(matcher))
+                                hosts.second.add(processLine(matcher))
                                 commitLines(source, parsers)
                             } else {
-                                iterator.remove()
+                                log("Matcher $matcher mismatch for line $line")
+                                if(hosts.first > 5) iterator.remove()
+                                else parsers[matcher] = hosts.copy(hosts.first + 1)
                             }
                         }
                     }
@@ -174,15 +193,16 @@ class RuleImportService : Service() {
 
     private fun commitLines(
         source: HostSource,
-        parsers: Map<Matcher, MutableList<Host>>,
+        parsers: Map<Matcher, Pair<Int, MutableList<Host>>>,
         forceCommit: Boolean = false
     ) {
         if (parsers.size == 1) {
-            val hosts = parsers[parsers.keys.first()]!!
+            val hosts = parsers[parsers.keys.first()]!!.second
             if (hosts.size > 5000 || forceCommit) {
                 getDatabase().dnsRuleDao().insertAll(hosts.map {
                     DnsRule(it.type, it.host, it.target, source.id)
                 })
+                ruleCount += hosts.size
                 hosts.clear()
             }
         }
