@@ -3,7 +3,10 @@ package com.frostnerd.smokescreen.database.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.TypeConverters
+import com.frostnerd.smokescreen.database.converters.DnsTypeConverter
 import com.frostnerd.smokescreen.database.entities.DnsRule
+import org.minidns.record.Record
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -24,6 +27,7 @@ import com.frostnerd.smokescreen.database.entities.DnsRule
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 @Dao
+@TypeConverters(DnsTypeConverter::class)
 interface DnsRuleDao {
 
     @Query("DELETE FROM DnsRule")
@@ -46,4 +50,7 @@ interface DnsRuleDao {
 
     @Query("SELECT COUNT(*) FROM DnsRule")
     fun getCount():Long
+
+    @Query("SELECT target FROM DnsRule WHERE host=:host AND type = :type LIMIT 1")
+    fun findRuleTarget(host:String, type:Record.TYPE):String?
 }

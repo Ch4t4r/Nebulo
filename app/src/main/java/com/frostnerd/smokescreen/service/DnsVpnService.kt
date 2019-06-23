@@ -40,10 +40,13 @@ import kotlinx.coroutines.*
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.dnsname.DnsName
+import org.minidns.record.A
+import org.minidns.record.AAAA
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
+import java.lang.IllegalStateException
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
@@ -213,7 +216,8 @@ class DnsVpnService : VpnService(), Runnable {
             "allow_ipv4_traffic",
             "dns_server_config",
             "notification_allow_stop",
-            "notification_allow_pause"
+            "notification_allow_pause",
+            "dns_rules_enabled"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings, getPreferences().preferenceChangeListener {
                 changes ->
@@ -752,7 +756,7 @@ class DnsVpnService : VpnService(), Runnable {
         handle.ipv4Enabled =
             !handle.ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
-        dnsProxy = SmokeProxy(handle, createProxyBypassHandlers(), createDnsCache(), createQueryLogger())
+        dnsProxy = SmokeProxy(handle, createProxyBypassHandlers(), createDnsCache(), createQueryLogger(), createLocalResolver())
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(1, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger {
@@ -910,6 +914,44 @@ class DnsVpnService : VpnService(), Runnable {
             log("Persisted cache deleted.")
         }
         return dnsCache
+    }
+
+    private fun createLocalResolver():LocalResolver? {
+        if(getPreferences().dnsRulesEnabled) {
+            return object:LocalResolver(false) {
+                private val dao = getDatabase().dnsRuleDao()
+                private val resolveResults = mutableMapOf<Question, String>()
+
+                override suspend fun canResolve(question: Question): Boolean {
+                    return if(question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA) {
+                        false
+                    } else {
+                        val resolveResult = dao.findRuleTarget(question.name.toString(), question.type)
+                        if (resolveResult != null) {
+                            resolveResults[question] = resolveResult
+                            true
+                        } else false
+                    }
+                }
+
+                override suspend fun resolve(question: Question): List<Record<*>> {
+                    val result = resolveResults.remove(question)
+                    return result?.let {
+                        val data = if(question.type == Record.TYPE.A) {
+                            A(it)
+                        } else {
+                            AAAA(it)
+                        }
+                        listOf(Record(question.name.toString(), question.type, question.clazz.value, 9999, data))
+                    } ?: throw IllegalStateException()
+                }
+
+                override fun cleanup() {}
+
+            }
+        } else {
+            return null
+        }
     }
 
     private fun createPersistedCacheEntry(
