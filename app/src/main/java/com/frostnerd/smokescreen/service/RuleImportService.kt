@@ -94,8 +94,8 @@ class RuleImportService : Service() {
         importJob = GlobalScope.launch {
             getDatabase().dnsRuleDao().deleteAllExceptUserRules()
             var count = 0
-            val maxCount = getDatabase().hostSourceDao().getCount()
-            getDatabase().hostSourceDao().getAll().forEach {
+            val maxCount = getDatabase().hostSourceDao().getEnabledCount()
+            getDatabase().hostSourceDao().getAllEnabled().forEach {
                 count++
                 updateNotification(it, count, maxCount.toInt())
                 if (it.isFileSource) {

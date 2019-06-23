@@ -37,6 +37,12 @@ interface HostSourceDao {
     @Query("SELECT * FROM HostSource ORDER BY name ASC")
     fun getAll(): List<HostSource>
 
+    @Query("SELECT * FROM HostSource WHERE enabled > 0")
+    fun getAllEnabled(): List<HostSource>
+
     @Query("SELECT COUNT(*) FROM HostSource")
-    fun getCount():Long
+    fun getCount(): Long
+
+    @Query("SELECT COUNT(*) FROM HostSource WHERE enabled > 0")
+    fun getEnabledCount(): Long
 }
