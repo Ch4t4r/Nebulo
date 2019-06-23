@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "be58818eae851a6b386c96630cd3b3c2",
+    "identityHash": "4ca420a8d5d5420e65d499a53e6f16b1",
     "entities": [
       {
         "tableName": "CachedResponse",
@@ -101,7 +101,7 @@
       },
       {
         "tableName": "DnsRule",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `ttl` INTEGER NOT NULL, `record` TEXT NOT NULL, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `target` TEXT NOT NULL, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -122,14 +122,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "ttl",
-            "columnName": "ttl",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "record",
-            "columnName": "record",
+            "fieldPath": "target",
+            "columnName": "target",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -164,13 +158,12 @@
             "createSql": "CREATE  INDEX `index_DnsRule_host` ON `${TABLE_NAME}` (`host`)"
           },
           {
-            "name": "index_DnsRule_host_type",
+            "name": "index_DnsRule_host_isIpv6",
             "unique": false,
             "columnNames": [
-              "host",
-              "type"
+              "host"
             ],
-            "createSql": "CREATE  INDEX `index_DnsRule_host_type` ON `${TABLE_NAME}` (`host`, `type`)"
+            "createSql": "CREATE  INDEX `index_DnsRule_host_isIpv6` ON `${TABLE_NAME}` (`host`)"
           }
         ],
         "foreignKeys": [
@@ -229,7 +222,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'be58818eae851a6b386c96630cd3b3c2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ca420a8d5d5420e65d499a53e6f16b1')"
     ]
   }
 }

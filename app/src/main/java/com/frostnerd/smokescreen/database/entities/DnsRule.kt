@@ -34,10 +34,9 @@ import org.minidns.record.Record
     )
 @TypeConverters(DnsTypeConverter::class)
 data class DnsRule(
-    val type: Record.TYPE,
+    val type:Record.TYPE,
     val host: String,
-    val ttl: Long,
-    val record: String,
+    val target: String,
     val importedFrom: Long? = null
 ) {
     @PrimaryKey(autoGenerate = true) var id: Long = 0

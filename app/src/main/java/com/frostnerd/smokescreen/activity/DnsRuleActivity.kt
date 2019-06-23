@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.service.RuleImportService
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.activity_dns_rules.toolBar
@@ -61,6 +63,9 @@ class DnsRuleActivity : BaseActivity() {
                 sourceAdapter.notifyItemInserted(insertPos)
                 getDatabase().hostSourceDao().insert(newSource)
             }
+        }
+        refresh.setOnClickListener {
+            startService(Intent(this, RuleImportService::class.java))
         }
         sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
         adapterDataSource = ListDataSource(sourceAdapterList)

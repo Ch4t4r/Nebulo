@@ -1,7 +1,9 @@
 package com.frostnerd.smokescreen.database.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
+import com.frostnerd.smokescreen.database.entities.DnsRule
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -29,4 +31,10 @@ interface DnsRuleDao {
 
     @Query("DELETE FROM DnsRule WHERE importedFrom IS NULL")
     fun deleteAllExceptUserRules()
+
+    @Insert
+    fun insertAll(rules:Collection<DnsRule>)
+
+    @Query("SELECT COUNT(*) FROM DnsRule")
+    fun getCount():Long
 }
