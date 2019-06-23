@@ -57,7 +57,7 @@ class DnsRuleActivity : BaseActivity() {
                     }.let {
                         when (it) {
                             0 -> 0
-                            -1 -> sourceAdapterList.size - 1
+                            -1 -> sourceAdapterList.size
                             else -> it
                         }
                     }
@@ -65,7 +65,7 @@ class DnsRuleActivity : BaseActivity() {
                     sourceAdapter.notifyItemInserted(insertPos)
                     getDatabase().hostSourceDao().insert(it)
                 }
-            }
+            }.show()
         }
         refresh.setOnClickListener {
             startService(Intent(this, RuleImportService::class.java))

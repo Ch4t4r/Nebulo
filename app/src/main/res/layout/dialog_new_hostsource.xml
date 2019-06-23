@@ -1,64 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
-    <com.frostnerd.materialedittext.MaterialEditText
+    <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            app:image="@drawable/ic_search"
-            app:iconTint="?attr/foregroundElementColor"
-            app:allowCollapse="false"
-            app:animationDuration="0"
-            app:indicatorState="undefined"
-            app:indicatorVisibilityWhenUnused="hidden"
-            app:revealType="revealInstant"
-            app:revealDelay="0"
-            app:labelText="@string/search"
-            android:id="@+id/metName"
+            android:id="@+id/nameTil"
+            app:errorEnabled="true"
             android:layout_height="wrap_content">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:textColor="?attr/foregroundElementColor"
-                android:layout_height="wrap_content"
-                android:importantForAutofill="no"
-                android:hint="@string/hint_searchterm"
+                android:hint="@string/dialog_newhostsource_name"
                 android:id="@+id/name"
-                android:inputType="text"/>
-    </com.frostnerd.materialedittext.MaterialEditText>
+                android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <com.frostnerd.materialedittext.MaterialEditText
+
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                app:image="@drawable/ic_search"
-                app:iconTint="?attr/foregroundElementColor"
-                app:allowCollapse="false"
-                app:animationDuration="0"
-                app:indicatorState="undefined"
-                app:indicatorVisibilityWhenUnused="hidden"
-                app:revealType="revealInstant"
-                app:revealDelay="0"
-                android:id="@+id/metSource"
-                app:labelText="@string/search"
+                android:id="@+id/urlTil"
+                app:errorEnabled="true"
                 android:layout_height="wrap_content">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:textColor="?attr/foregroundElementColor"
-                    android:layout_height="wrap_content"
-                    android:importantForAutofill="no"
-                    android:hint="@string/hint_searchterm"
-                    android:id="@+id/host"
-                    android:inputType="text"/>
-        </com.frostnerd.materialedittext.MaterialEditText>
-
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_height="wrap_content"/>
+                    android:hint="@string/dialog_newhostsource_url"
+                    android:id="@+id/url"
+                    android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
     </RelativeLayout>
 </LinearLayout>

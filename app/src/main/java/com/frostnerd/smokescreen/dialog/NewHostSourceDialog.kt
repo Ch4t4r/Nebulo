@@ -2,10 +2,13 @@ package com.frostnerd.smokescreen.dialog
 
 import android.content.Context
 import android.content.DialogInterface
+import android.webkit.URLUtil
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.getPreferences
+import kotlinx.android.synthetic.main.dialog_new_hostsource.*
+import kotlinx.android.synthetic.main.dialog_new_hostsource.view.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -30,14 +33,39 @@ class NewHostSourceDialog (context: Context, onSourceCreated:(HostSource) -> Uni
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_hostsource, null, false)
         setView(view)
+        setTitle(R.string.dialog_newhostsource_title)
         setButton(DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok)) { dialog, _ ->
             dialog.dismiss()
         }
         setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel)) { dialog, _ ->
             dialog.dismiss()
         }
+        view.name.setOnFocusChangeListener { _, hasFocus ->
+            if(hasFocus) nameTil.error = null
+        }
+        view.url.setOnFocusChangeListener { _, hasFocus ->
+            if(hasFocus) urlTil.error = null
+        }
         setOnShowListener {
-
+            getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                var valid = true
+                if(name.text.isNullOrBlank()) {
+                    nameTil.error = context.getString(R.string.dialog_newhostsource_error_name_empty)
+                    valid = false
+                } else {
+                    nameTil.error = null
+                }
+                if(url.text.isNullOrBlank() || !URLUtil.isValidUrl(url.text.toString())) {
+                    urlTil.error = context.getString(R.string.dialog_newhostsource_url_invalid)
+                    valid = false
+                } else {
+                    urlTil.error = null
+                }
+                if(valid) {
+                    onSourceCreated(HostSource(name.text.toString(), url.text.toString()))
+                    dismiss()
+                }
+            }
         }
     }
 }
