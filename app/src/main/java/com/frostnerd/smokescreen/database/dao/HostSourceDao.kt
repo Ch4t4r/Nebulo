@@ -36,4 +36,7 @@ interface HostSourceDao {
 
     @Query("SELECT * FROM HostSource ORDER BY name ASC")
     fun getAll(): List<HostSource>
+
+    @Query("SELECT COUNT(*) FROM HostSource")
+    fun getCount():Long
 }
