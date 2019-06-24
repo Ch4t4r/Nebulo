@@ -52,7 +52,7 @@ class RuleImportService : Service() {
     private val DOMAINS_MATCHER = Pattern.compile("^([A-Za-z0-9][A-Za-z0-9\\-.]+)").matcher("")
     private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^$").matcher("")
     private var notification: NotificationCompat.Builder? = null
-    private var ruleCount:Int = 0
+    private var ruleCount: Int = 0
 
     companion object {
         const val BROADCAST_IMPORT_DONE = "com.frostnerd.nebulo.RULE_IMPORT_DONE"
@@ -63,7 +63,7 @@ class RuleImportService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if(intent != null && intent.hasExtra("abort")) {
+        if (intent != null && intent.hasExtra("abort")) {
             abortImport()
         }
         createNotification()
@@ -74,11 +74,9 @@ class RuleImportService : Service() {
     private fun abortImport() {
         importJob?.let {
             it.cancel()
-            GlobalScope.launch {
-                val dnsRuleDao = getDatabase().dnsRuleDao()
-                dnsRuleDao.deleteStagedRules()
-                dnsRuleDao.commitStaging()
-            }
+            val dnsRuleDao = getDatabase().dnsRuleDao()
+            dnsRuleDao.deleteStagedRules()
+            dnsRuleDao.commitStaging()
         }
         importJob = null
     }
@@ -95,8 +93,14 @@ class RuleImportService : Service() {
             notification!!.setContentTitle(getString(R.string.notification_ruleimport_title))
             notification!!.setContentText(getString(R.string.notification_ruleimport_secondarymessage))
             notification!!.setProgress(100, 0, true)
-            val abortPendingAction = PendingIntent.getService(this, 1, Intent(this, RuleImportService::class.java).putExtra("abort", true), PendingIntent.FLAG_CANCEL_CURRENT)
-            val abortAction = NotificationCompat.Action(R.drawable.ic_times, getString(R.string.all_abort), abortPendingAction)
+            val abortPendingAction = PendingIntent.getService(
+                this,
+                1,
+                Intent(this, RuleImportService::class.java).putExtra("abort", true),
+                PendingIntent.FLAG_CANCEL_CURRENT
+            )
+            val abortAction =
+                NotificationCompat.Action(R.drawable.ic_times, getString(R.string.all_abort), abortPendingAction)
             notification!!.addAction(abortAction)
         }
         startForeground(3, notification!!.build())
@@ -111,7 +115,7 @@ class RuleImportService : Service() {
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(4, successNotification.build())
     }
 
-    private fun updateNotification(source: HostSource, count:Int, maxCount:Int) {
+    private fun updateNotification(source: HostSource, count: Int, maxCount: Int) {
         if (notification != null) {
             notification?.setContentText(
                 getString(
@@ -133,30 +137,35 @@ class RuleImportService : Service() {
             val maxCount = getDatabase().hostSourceDao().getEnabledCount()
             getDatabase().hostSourceDao().getAllEnabled().forEach {
                 log("Importing HostSource $it")
-                if(importJob != null && importJob?.isCancelled == false) {
+                if (importJob != null && importJob?.isCancelled == false) {
                     updateNotification(it, count, maxCount.toInt())
                     count++
                     if (it.isFileSource) {
+                        var stream:FileInputStream? = null
                         try {
                             val file = File(it.source)
-                            if(file.canRead()) {
-                                processLines(it, FileInputStream(file))
+                            if (file.canRead()) {
+                                stream = FileInputStream(file)
+                                processLines(it, stream)
                             }
-                        } catch (ex:Exception) {
+                        } catch (ex: Exception) {
                             ex.printStackTrace()
+                        } finally {
+                            stream?.close()
                         }
                     } else {
                         val request = Request.Builder().url(it.source)
                         val response = httpClient.newCall(request.build()).execute()
                         if (response.isSuccessful) {
                             processLines(it, response.body()!!.byteStream())
+                            response.close()
                         } else {
                             log("Downloading resource of $it failed.")
                         }
                     }
                 }
             }
-            if(importJob != null && importJob?.isCancelled == false) {
+            if (importJob != null && importJob?.isCancelled == false) {
                 dnsRuleDao.deleteMarkedRules()
                 dnsRuleDao.commitStaging()
             }
@@ -176,7 +185,7 @@ class RuleImportService : Service() {
         )
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
             lines.forEach { line ->
-                if(importJob != null && importJob?.isCancelled == false) {
+                if (importJob != null && importJob?.isCancelled == false) {
                     if (parsers.isNotEmpty() && !line.trim().startsWith("#") && !line.trim().startsWith("!") && !line.isBlank()) {
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
@@ -185,7 +194,7 @@ class RuleImportService : Service() {
                                 commitLines(source, parsers)
                             } else {
                                 log("Matcher $matcher mismatch for line $line")
-                                if(hosts.first > 5) iterator.remove()
+                                if (hosts.first > 5) iterator.remove()
                                 else parsers[matcher] = hosts.copy(hosts.first + 1)
                             }
                         }
