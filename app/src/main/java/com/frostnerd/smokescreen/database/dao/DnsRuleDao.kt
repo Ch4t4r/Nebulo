@@ -46,13 +46,13 @@ interface DnsRuleDao {
     fun commitStaging()
 
     @Insert
-    fun insertAll(rules:Collection<DnsRule>)
+    fun insertAll(rules: Collection<DnsRule>)
 
     @Query("SELECT COUNT(*) FROM DnsRule")
-    fun getCount():Long
+    fun getCount(): Long
 
-    @Query("SELECT target FROM DnsRule WHERE host=:host AND type = :type LIMIT 1")
-    fun findRuleTarget(host:String, type:Record.TYPE):String?
+    @Query("SELECT target FROM DnsRule WHERE host=:host AND type = :type AND (importedFrom is NULL OR (SELECT enabled FROM HostSource h WHERE h.id=importedFrom) = 1) LIMIT 1")
+    fun findRuleTarget(host: String, type: Record.TYPE): String?
 
     @Query("DELETE FROM DnsRule WHERE importedFrom=:sourceId")
     fun deleteAllFromSource(sourceId: Long)
