@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+                android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolBar"
@@ -13,33 +13,47 @@
             android:theme="@style/AppTheme_Mono"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:id="@+id/list"
+            android:paddingLeft="@dimen/dialog_horizontal_margin"
+            android:paddingRight="@dimen/dialog_horizontal_margin"
+            android:paddingTop="@dimen/dialog_vertical_margin"
             android:layout_below="@id/toolBar"
-            android:layout_above="@id/fabWrap"
-            android:layout_height="match_parent"/>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:id="@+id/fabWrap"
-            android:gravity="center_horizontal"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dialog_vertical_margin"
             android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/list"
+                android:layout_above="@id/fabWrap"
+                android:layout_height="match_parent"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:id="@+id/addSource"
-                android:src="@drawable/ic_plus"
-                android:layout_height="wrap_content"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/fabWrap"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:id="@+id/refresh"
-                android:src="@drawable/ic_refresh"
-                android:layout_height="wrap_content"/>
-    </LinearLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:id="@+id/addSource"
+                    android:src="@drawable/ic_plus"
+                    android:elevation="0dp"
+                    android:layout_height="wrap_content"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:id="@+id/refresh"
+                    android:src="@drawable/ic_refresh"
+                    android:elevation="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
 
 
 </RelativeLayout>
