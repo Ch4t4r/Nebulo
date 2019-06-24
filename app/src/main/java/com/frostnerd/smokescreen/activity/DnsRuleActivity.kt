@@ -112,7 +112,6 @@ class DnsRuleActivity : BaseActivity() {
                 CustomRulesViewHolder(view, changeSourceStatus = {
                     getPreferences().customHostsEnabled = it
                 }, clearRules = {
-                    println("CLEAR RULES")
                     showInfoTextDialog(this,
                         getString(R.string.dialog_clearuserrules_title),
                         getString(R.string.dialog_clearuserrules_message),
