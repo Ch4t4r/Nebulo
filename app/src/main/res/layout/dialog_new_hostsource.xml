@@ -3,12 +3,17 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
+              android:paddingLeft="@dimen/dialog_horizontal_margin"
+              android:paddingRight="@dimen/dialog_horizontal_margin"
+              android:paddingTop="@dimen/dialog_vertical_margin"
+              android:paddingBottom="@dimen/dialog_vertical_margin"
               android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:id="@+id/nameTil"
             app:errorEnabled="true"
+            android:textColorHint="?android:attr/textColorSecondary"
             android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -26,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/urlTil"
                 app:errorEnabled="true"
+                android:textColorHint="?android:attr/textColorSecondary"
                 android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
