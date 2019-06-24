@@ -27,6 +27,8 @@ import kotlinx.android.synthetic.main.item_datasource.view.cardContent
 import kotlinx.android.synthetic.main.item_datasource.view.delete
 import kotlinx.android.synthetic.main.item_datasource.view.enable
 import kotlinx.android.synthetic.main.item_datasource.view.text
+import kotlinx.android.synthetic.main.item_datasource_rules.view.*
+import kotlin.text.clear
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -110,6 +112,7 @@ class DnsRuleActivity : BaseActivity() {
                 CustomRulesViewHolder(view, changeSourceStatus = {
                     getPreferences().customHostsEnabled = it
                 }, clearRules = {
+                    println("CLEAR RULES")
                     showInfoTextDialog(this,
                         getString(R.string.dialog_clearuserrules_title),
                         getString(R.string.dialog_clearuserrules_message),
@@ -138,9 +141,6 @@ class DnsRuleActivity : BaseActivity() {
             bindNonModelView = { viewHolder, position ->
                 (viewHolder as CustomRulesViewHolder).apply {
                     this.enabled.isChecked = getPreferences().customHostsEnabled
-                    this.clear.setOnClickListener {
-
-                    }
                 }
             }
             getViewType = { position ->
@@ -229,7 +229,7 @@ class DnsRuleActivity : BaseActivity() {
 
     private class CustomRulesViewHolder(view: View, changeSourceStatus: (Boolean) -> Unit, clearRules: () -> Unit) :
         BaseViewHolder(view) {
-        val clear = view.delete
+        val clear = view.clear
         val enabled = view.enable
 
         init {
