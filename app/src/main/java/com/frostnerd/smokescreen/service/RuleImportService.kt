@@ -213,17 +213,21 @@ class RuleImportService : Service() {
         }
     }
 
+    private val wwwRegex = Regex("^www\\.")
     private fun processLine(matcher: Matcher): Collection<Host> {
         when {
-            matcher.groupCount() == 1 -> return listOf(Host(matcher.group(1), "0.0.0.0", Record.TYPE.A), Host(matcher.group(1), "::1", Record.TYPE.AAAA))
+            matcher.groupCount() == 1 -> {
+                val host = matcher.group(1).replace(wwwRegex, "")
+                return listOf(Host(host, "0.0.0.0", Record.TYPE.A), Host(host, "::1", Record.TYPE.AAAA))
+            }
             matcher == DNSMASQ_MATCHER -> {
-                val host = matcher.group(1)
+                val host = matcher.group(1).replace(wwwRegex, "")
                 val target = matcher.group(2)
                 return listOf(Host(host, target, if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A))
             }
             matcher == HOSTS_MATCHER -> {
                 val target = matcher.group(1)
-                val host = matcher.group(2)
+                val host = matcher.group(2).replace(wwwRegex, "")
                 return listOf(Host(host, target, if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A))
             }
         }
