@@ -117,7 +117,7 @@ class DnsRuleActivity : BaseActivity() {
                         getString(R.string.dialog_clearuserrules_title),
                         getString(R.string.dialog_clearuserrules_message),
                         getString(R.string.all_yes) to { dialog, _ ->
-                            getDatabase().dnsRuleRepository().deleteAllAsync()
+                            getDatabase().dnsRuleRepository().deleteAllUserRulesAsync()
                             dialog.dismiss()
                         }, getString(R.string.all_no) to { dialog, _ ->
                             dialog.dismiss()

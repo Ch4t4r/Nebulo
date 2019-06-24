@@ -30,8 +30,8 @@ import org.minidns.record.Record
 @TypeConverters(DnsTypeConverter::class)
 interface DnsRuleDao {
 
-    @Query("DELETE FROM DnsRule")
-    fun deleteAll()
+    @Query("DELETE FROM DnsRule WHERE importedFrom IS NULL")
+    fun deleteAllUserRules()
 
     @Query("UPDATE DnsRule SET stagingType=1 WHERE importedFrom IS NOT NULL")
     fun markNonUserRulesForDeletion()

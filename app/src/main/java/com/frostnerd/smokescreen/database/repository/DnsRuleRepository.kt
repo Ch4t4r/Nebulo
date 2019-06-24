@@ -27,9 +27,9 @@ import kotlinx.coroutines.launch
  */
 class DnsRuleRepository(val dnsRuleDao: DnsRuleDao) {
 
-    fun deleteAllAsync(coroutineScope: CoroutineScope = GlobalScope) {
+    fun deleteAllUserRulesAsync(coroutineScope: CoroutineScope = GlobalScope) {
         coroutineScope.launch {
-            dnsRuleDao.deleteAll()
+            dnsRuleDao.deleteAllUserRules()
         }
     }
 
