@@ -80,6 +80,8 @@ This work contains third-party content, namely:
    - License: Font Awesome Pro License, held by Daniel Wolf
 - [Weblate](https://weblate.org) for managing translations
    - License: GPLv3
+- [FABProgressCircle](https://github.com/JorgeCastilloPrz/FABProgressCircle) for showing a loading indicator around floating action buttons
+   - License: [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
 # Cloning
 Feel free to clone this software. However, there are a few things to notice:

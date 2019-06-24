@@ -43,13 +43,18 @@
                     android:elevation="0dp"
                     android:layout_height="wrap_content"/>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <com.github.jorgecastilloprz.FABProgressCircle
                     android:layout_width="wrap_content"
-                    android:id="@+id/refresh"
-                    android:src="@drawable/ic_refresh"
-                    android:elevation="0dp"
+                    android:id="@+id/refreshProgress"
                     android:layout_marginStart="8dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:layout_width="wrap_content"
+                        android:id="@+id/refresh"
+                        android:src="@drawable/ic_refresh"
+                        android:elevation="0dp"
+                        android:layout_height="wrap_content"/>
+            </com.github.jorgecastilloprz.FABProgressCircle>
         </LinearLayout>
     </RelativeLayout>
 

@@ -1,6 +1,8 @@
 package com.frostnerd.smokescreen.activity
 
+import android.content.BroadcastReceiver
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -9,15 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.ListDataSource
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
+import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
-import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
-import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.RuleImportService
-import com.frostnerd.smokescreen.showInfoTextDialog
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.activity_dns_rules.toolBar
@@ -45,6 +46,7 @@ class DnsRuleActivity : BaseActivity() {
     private lateinit var sourceAdapter: RecyclerView.Adapter<*>
     private lateinit var sourceAdapterList: MutableList<HostSource>
     private lateinit var adapterDataSource: ListDataSource<HostSource>
+    private var importDoneReceiver:BroadcastReceiver? = null
     private var cnt = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +73,8 @@ class DnsRuleActivity : BaseActivity() {
         }
         refresh.setOnClickListener {
             startService(Intent(this, RuleImportService::class.java))
+            it.isEnabled = false
+            refreshProgress.show()
         }
         sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
         adapterDataSource = ListDataSource(sourceAdapterList)
@@ -144,6 +148,29 @@ class DnsRuleActivity : BaseActivity() {
         list.recycledViewPool.setMaxRecycledViews(1, 1)
         list.addItemDecoration(SpaceItemDecorator(this))
         list.adapter = sourceAdapter
+        if(isServiceRunning(RuleImportService::class.java)) {
+            refresh.isEnabled = false
+            refreshProgress.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+                refreshProgress.show()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        importDoneReceiver = registerLocalReceiver(IntentFilter(RuleImportService.BROADCAST_IMPORT_DONE)) {
+            refresh.isEnabled = true
+            refreshProgress.hide()
+        }
+        if(!isServiceRunning(RuleImportService::class.java) && !refresh.isEnabled) {
+            refresh.isEnabled = true
+            refreshProgress.hide()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterLocalReceiver(importDoneReceiver)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

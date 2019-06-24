@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.log
+import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.Notifications
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -52,6 +53,10 @@ class RuleImportService : Service() {
     private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^$").matcher("")
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount:Int = 0
+
+    companion object {
+        const val BROADCAST_IMPORT_DONE = "com.frostnerd.nebulo.RULE_IMPORT_DONE"
+    }
 
     private val httpClient by lazy {
         OkHttpClient()
@@ -228,6 +233,7 @@ class RuleImportService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         abortImport()
+        sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
     }
 
     override fun onBind(intent: Intent?): IBinder? {
