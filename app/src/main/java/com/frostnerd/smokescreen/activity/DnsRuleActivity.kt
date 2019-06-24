@@ -73,9 +73,12 @@ class DnsRuleActivity : BaseActivity() {
             }.show()
         }
         refresh.setOnClickListener {
-            startService(Intent(this, RuleImportService::class.java))
-            it.isEnabled = false
-            refreshProgress.show()
+            if(isServiceRunning(RuleImportService::class.java)) {
+                startService(Intent(this, RuleImportService::class.java).putExtra("abort", true))
+            } else {
+                startService(Intent(this, RuleImportService::class.java))
+                refreshProgress.show()
+            }
         }
         sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
         adapterDataSource = ListDataSource(sourceAdapterList)

@@ -74,9 +74,11 @@ class RuleImportService : Service() {
     private fun abortImport() {
         importJob?.let {
             it.cancel()
-            val dnsRuleDao = getDatabase().dnsRuleDao()
-            dnsRuleDao.deleteStagedRules()
-            dnsRuleDao.commitStaging()
+            GlobalScope.launch {
+                val dnsRuleDao = getDatabase().dnsRuleDao()
+                dnsRuleDao.deleteStagedRules()
+                dnsRuleDao.commitStaging()
+            }
         }
         importJob = null
     }
