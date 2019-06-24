@@ -51,8 +51,8 @@ interface DnsRuleDao {
     @Query("SELECT COUNT(*) FROM DnsRule")
     fun getCount(): Long
 
-    @Query("SELECT target FROM DnsRule WHERE host=:host AND type = :type AND (importedFrom is NULL OR (SELECT enabled FROM HostSource h WHERE h.id=importedFrom) = 1) LIMIT 1")
-    fun findRuleTarget(host: String, type: Record.TYPE): String?
+    @Query("SELECT target FROM DnsRule WHERE host=:host AND type = :type AND (importedFrom is NULL OR (SELECT enabled FROM HostSource h WHERE h.id=importedFrom) = 1) AND (importedFrom IS NOT NULL OR :useUserRules=1)LIMIT 1")
+    fun findRuleTarget(host: String, type: Record.TYPE, useUserRules:Boolean): String?
 
     @Query("DELETE FROM DnsRule WHERE importedFrom=:sourceId")
     fun deleteAllFromSource(sourceId: Long)

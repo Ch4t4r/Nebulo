@@ -922,13 +922,14 @@ class DnsVpnService : VpnService(), Runnable {
                 private val dao = getDatabase().dnsRuleDao()
                 private val resolveResults = mutableMapOf<Question, String>()
                 private val wwwRegex = Regex("^www\\.")
+                private val useUserRules = getPreferences().customHostsEnabled
 
                 override suspend fun canResolve(question: Question): Boolean {
                     return if(question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA) {
                         false
                     } else {
                         val uniformQuestion = question.name.toString().replace(wwwRegex, "")
-                        val resolveResult = dao.findRuleTarget(uniformQuestion, question.type)
+                        val resolveResult = dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
                         if (resolveResult != null) {
                             resolveResults[question] = resolveResult
                             true

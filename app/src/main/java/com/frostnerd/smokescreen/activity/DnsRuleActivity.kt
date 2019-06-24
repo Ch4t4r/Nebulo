@@ -23,6 +23,10 @@ import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.activity_dns_rules.toolBar
 import kotlinx.android.synthetic.main.item_datasource.view.*
+import kotlinx.android.synthetic.main.item_datasource.view.cardContent
+import kotlinx.android.synthetic.main.item_datasource.view.delete
+import kotlinx.android.synthetic.main.item_datasource.view.enable
+import kotlinx.android.synthetic.main.item_datasource.view.text
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
