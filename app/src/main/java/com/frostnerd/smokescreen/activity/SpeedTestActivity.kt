@@ -54,6 +54,7 @@ class SpeedTestActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_speedtest)
         setSupportActionBar(toolBar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         startTest.setOnClickListener {
             startTest()
             startTest.isEnabled = false

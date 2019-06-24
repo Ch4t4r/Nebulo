@@ -53,6 +53,7 @@ class DnsRuleActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dns_rules)
         setSupportActionBar(toolBar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         addSource.setOnClickListener {
             NewHostSourceDialog(this) {
                 if (!sourceAdapterList.contains(it)) {
