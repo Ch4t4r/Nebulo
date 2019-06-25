@@ -31,7 +31,8 @@ import java.net.Inet6Address
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class DnsRuleDialog(context:Context, dnsRule: DnsRule? = null, onRuleCreated:(DnsRule) -> Unit): AlertDialog(context, context.getPreferences().theme.dialogStyle) {
+class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (DnsRule) -> Unit) :
+    AlertDialog(context, context.getPreferences().theme.dialogStyle) {
     init {
         val view = layoutInflater.inflate(R.layout.dialog_create_dnsrule, null, false)
         setView(view)
@@ -48,50 +49,78 @@ class DnsRuleDialog(context:Context, dnsRule: DnsRule? = null, onRuleCreated:(Dn
                 view.host.error = null
                 view.ipv4Til.error = null
                 view.ipv6Til.error = null
-                if(view.host.text.isNullOrBlank()) {
+                if (view.host.text.isNullOrBlank()) {
                     view.host.error = context.getString(R.string.dialog_newdnsrule_host_invalid)
                     valid = false
                 } else {
                     val ipv4Valid = isIpv4Address(view.ipv4Address.text.toString())
                     val ipv6Valid = isIpv6Address(view.ipv6Address.text.toString())
                     val bothEmpty = view.ipv4Address.text.isNullOrEmpty() && view.ipv6Address.text.isNullOrEmpty()
-                    if(!ipv4Valid || bothEmpty) {
+                    if (!ipv4Valid || bothEmpty) {
                         valid = false
                         view.ipv4Address.error = context.getString(R.string.dialog_newdnsrule_ipv4_invalid)
                     }
-                    if(!ipv6Valid || bothEmpty) {
+                    if (!ipv6Valid || bothEmpty) {
                         valid = false
                         view.ipv6Address.error = context.getString(R.string.dialog_newdnsrule_ipv6_invalid)
                     }
                 }
                 if (valid) {
                     dismiss()
+                    val type = when {
+                        !view.ipv4Address.text.isNullOrBlank() && !view.ipv6Address.text.isNullOrBlank() -> {
+                            Record.TYPE.ANY
+                        }
+                        !view.ipv4Address.text.isNullOrBlank() -> Record.TYPE.A
+                        else -> Record.TYPE.AAAA
+                    }
+                    val primaryTarget = when (type) {
+                        Record.TYPE.A, Record.TYPE.ANY -> view.ipv4Address.text.toString()
+                        else -> view.ipv6Address.text.toString()
+                    }
+                    val secondaryTarget = when (type) {
+                        Record.TYPE.AAAA, Record.TYPE.ANY -> view.ipv6Address.text.toString()
+                        else -> null
+                    }
+                    val newRule = dnsRule?.copy(
+                        type = type,
+                        host = view.host.text.toString(),
+                        target = primaryTarget,
+                        ipv6Target = secondaryTarget
+                    ) ?: DnsRule(Record.TYPE.A, view.host.text.toString(), view.ipv4Address.text.toString())
                     onRuleCreated(
-                        dnsRule?.copy(host = view.host.text.toString(), target = view.ipv4Address.text.toString())
-                            ?: DnsRule(Record.TYPE.A, view.host.text.toString(), view.ipv4Address.text.toString())
+                        newRule
                     )
                 }
             }
         }
-        if(dnsRule != null) {
+        if (dnsRule != null) {
             view.host.setText(dnsRule.host)
+            when {
+                dnsRule.type == Record.TYPE.A -> view.ipv4Address.setText(dnsRule.target)
+                dnsRule.type == Record.TYPE.AAAA -> view.ipv4Address.setText(dnsRule.target)
+                dnsRule.type == Record.TYPE.ANY -> {
+                    view.ipv4Address.setText(dnsRule.target)
+                    view.ipv6Address.setText(dnsRule.ipv6Target)
+                }
+            }
         }
     }
 
-    private fun isIpv4Address(text:String?): Boolean {
+    private fun isIpv4Address(text: String?): Boolean {
         return text.isNullOrBlank() || try {
             Inet4Address.getByName(text)
             true
-        } catch (ex:Exception) {
+        } catch (ex: Exception) {
             false
         }
     }
 
-    private fun isIpv6Address(text:String?): Boolean {
+    private fun isIpv6Address(text: String?): Boolean {
         return text.isNullOrBlank() || try {
             Inet6Address.getByName(text)
             true
-        } catch (ex:Exception) {
+        } catch (ex: Exception) {
             false
         }
     }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "d58aeff97d571489a0d8406a0863c0e0",
+    "identityHash": "bc5641edd5decbd17c2316602e2828c1",
     "entities": [
       {
         "tableName": "CachedResponse",
@@ -101,7 +101,7 @@
       },
       {
         "tableName": "DnsRule",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stagingType` INTEGER, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `target` TEXT NOT NULL, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stagingType` INTEGER, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `target` TEXT NOT NULL, `ipv6Target` TEXT, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -132,6 +132,12 @@
             "columnName": "target",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "ipv6Target",
+            "columnName": "ipv6Target",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "importedFrom",
@@ -229,7 +235,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd58aeff97d571489a0d8406a0863c0e0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bc5641edd5decbd17c2316602e2828c1')"
     ]
   }
 }

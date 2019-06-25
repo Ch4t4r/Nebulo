@@ -216,7 +216,7 @@ class RuleImportService : Service() {
             val hosts = parsers[parsers.keys.first()]!!.second
             if (hosts.size > 5000 || forceCommit) {
                 getDatabase().dnsRuleDao().insertAll(hosts.map {
-                    DnsRule(it.type, it.host, it.target, source.id)
+                    DnsRule(it.type, it.host, it.target, null, source.id)
                 })
                 ruleCount += hosts.size
                 hosts.clear()

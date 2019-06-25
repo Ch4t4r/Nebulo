@@ -37,6 +37,7 @@ data class DnsRule(
     val type:Record.TYPE,
     val host: String,
     val target: String,
+    val ipv6Target:String? = null,
     val importedFrom: Long? = null
 ) {
     @PrimaryKey(autoGenerate = true) var id: Long = 0
