@@ -24,4 +24,10 @@ class HostSourceRepository(val hostSourceDao: HostSourceDao) {
             hostSourceDao.delete(hostSource)
         }
     }
+
+    fun insertAllAsync(sources:Collection<HostSource>, coroutineScope: CoroutineScope = GlobalScope) {
+        coroutineScope.launch {
+            hostSourceDao.insertAll(sources)
+        }
+    }
 }

@@ -355,9 +355,27 @@ class DnsRuleActivity : BaseActivity() {
             dnsRule = rule
             text.text = rule.host
         }
-
-
         override fun destroy() {}
+    }
 
+    companion object {
+        val defaultHostSources:List<HostSource> by lazy {
+            mutableListOf(
+                HostSource("Energized Basic", "https://raw.githubusercontent.com/EnergizedProtection/block/master/basic/formats/domains.txt"),
+                HostSource("Energized Blu", "https://raw.githubusercontent.com/EnergizedProtection/block/master/blu/formats/domains.txt"),
+                HostSource("Energized Spark", "https://raw.githubusercontent.com/EnergizedProtection/block/master/spark/formats/domains.txt"),
+                HostSource("Energized Porn", "https://raw.githubusercontent.com/EnergizedProtection/block/master/porn/formats/domains.txt"),
+                HostSource("Energized Ultimate", "https://raw.githubusercontent.com/EnergizedProtection/block/master/ultimate/formats/domains.txt"),
+                HostSource("AdAway", "https://adaway.org/hosts.txt"),
+                HostSource("StevenBlack unified", "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"),
+                HostSource("CoinBlockerList", "https://zerodot1.gitlab.io/CoinBlockerLists/hosts"),
+                HostSource("Malewaredomainlist.com", "http://www.malwaredomainlist.com/hostslist/hosts.txt"),
+                HostSource("PiHoleBlocklist Android tracking", "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/android-tracking.txt"),
+                HostSource("Quidsup NoTrack Tracker Blocklist", "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt"),
+                HostSource("someonewhocares.org", "https://someonewhocares.org/hosts/zero/hosts")
+            ).apply {
+                forEach { it.enabled = false }
+            }
+        }
     }
 }

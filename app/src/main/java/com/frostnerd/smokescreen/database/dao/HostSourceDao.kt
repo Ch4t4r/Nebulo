@@ -28,6 +28,9 @@ interface HostSourceDao {
     @Insert
     fun insert(hostSource: HostSource)
 
+    @Insert
+    fun insertAll(hostSources: Collection<HostSource>)
+
     @Update
     fun update(hostSource: HostSource)
 

@@ -241,6 +241,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     var customHostsEnabled:Boolean by booleanPref("custom_hosts", true)
     var dnsRulesEnabled:Boolean by booleanPref("dns_rules_enabled", false)
+    var hostSourcesPopulated:Boolean by booleanPref("dns_rules_sources_populated", false)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
