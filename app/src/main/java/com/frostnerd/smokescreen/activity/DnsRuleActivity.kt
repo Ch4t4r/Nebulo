@@ -248,9 +248,11 @@ class DnsRuleActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_dnsrule, menu)
-        menu?.getItem(0)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)?.setOnCheckedChangeListener { _, isChecked ->
+        val switch =  menu?.getItem(0)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)
+        switch?.setOnCheckedChangeListener { _, isChecked ->
             getPreferences().dnsRulesEnabled = isChecked
         }
+        switch?.isChecked = getPreferences().dnsRulesEnabled
         return true
     }
 
