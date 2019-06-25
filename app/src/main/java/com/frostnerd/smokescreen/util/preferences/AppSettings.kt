@@ -239,7 +239,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         }
     }, cacheControl)
 
-    var customHostsEnabled:Boolean by booleanPref("custom_hosts", false)
+    var customHostsEnabled:Boolean by booleanPref("custom_hosts", true)
     var dnsRulesEnabled:Boolean by booleanPref("dns_rules_enabled", false)
 }
 
