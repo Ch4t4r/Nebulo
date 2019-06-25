@@ -251,6 +251,7 @@ class DnsRuleActivity : BaseActivity() {
         val switch =  menu?.getItem(0)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)
         switch?.setOnCheckedChangeListener { _, isChecked ->
             getPreferences().dnsRulesEnabled = isChecked
+            overlay.visibility = if(isChecked) View.GONE else View.VISIBLE
         }
         switch?.isChecked = getPreferences().dnsRulesEnabled
         return true

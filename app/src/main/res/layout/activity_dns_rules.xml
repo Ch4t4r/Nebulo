@@ -21,6 +21,7 @@
             android:layout_below="@id/toolBar"
             android:paddingBottom="@dimen/dialog_vertical_margin"
             android:layout_height="wrap_content">
+
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:id="@+id/list"
@@ -57,8 +58,11 @@
             </com.github.jorgecastilloprz.FABProgressCircle>
         </LinearLayout>
     </RelativeLayout>
-
-
-
-
+    <View
+            android:layout_width="match_parent"
+            android:id="@+id/overlay"
+            android:clickable="true"
+            android:layout_below="@id/toolBar"
+            android:background="#40212121"
+            android:layout_height="match_parent"/>
 </RelativeLayout>
