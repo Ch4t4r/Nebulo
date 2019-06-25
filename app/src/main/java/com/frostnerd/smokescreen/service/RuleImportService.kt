@@ -45,12 +45,12 @@ import java.util.regex.Pattern
  */
 class RuleImportService : Service() {
     private var importJob: Job? = null
-    private val DNSMASQ_MATCHER = Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))").matcher("")
+    private val DNSMASQ_MATCHER = Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:$|\\s+.*)").matcher("")
     private val HOSTS_MATCHER =
         Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([a-zA-Z0-9.]+).*")
             .matcher("")
-    private val DOMAINS_MATCHER = Pattern.compile("^([A-Za-z0-9][A-Za-z0-9\\-.]+)").matcher("")
-    private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^$").matcher("")
+    private val DOMAINS_MATCHER = Pattern.compile("^([A-Za-z0-9][A-Za-z0-9\\-.]+)(?:\$|\\s+.*)").matcher("")
+    private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("")
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
 
@@ -164,11 +164,13 @@ class RuleImportService : Service() {
                         }
                     }
                 }
+                log("Import of $it finished")
             }
             if (importJob != null && importJob?.isCancelled == false) {
                 dnsRuleDao.deleteMarkedRules()
                 dnsRuleDao.commitStaging()
             }
+            log("All imports finished.")
             importJob = null
             showSuccessNotification()
             stopForeground(true)
@@ -193,9 +195,13 @@ class RuleImportService : Service() {
                                 hosts.second.addAll(processLine(matcher))
                                 commitLines(source, parsers)
                             } else {
-                                log("Matcher $matcher mismatch for line $line")
-                                if (hosts.first > 5) iterator.remove()
-                                else parsers[matcher] = hosts.copy(hosts.first + 1)
+                                if (hosts.first > 5) {
+                                    log("Matcher $matcher failed 5 times, last for $line. Removing.")
+                                    iterator.remove()
+                                } else parsers[matcher] = hosts.copy(hosts.first + 1)
+                                if(parsers.isEmpty()) {
+                                    log("No parsers left. Aborting.")
+                                }
                             }
                         }
                     }
