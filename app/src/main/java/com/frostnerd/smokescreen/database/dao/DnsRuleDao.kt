@@ -27,6 +27,9 @@ import org.minidns.record.Record
 @TypeConverters(DnsTypeConverter::class)
 interface DnsRuleDao {
 
+    @Update
+    fun update(dnsRule: DnsRule)
+
     @Insert
     fun insert(dnsRule: DnsRule)
 

@@ -173,6 +173,7 @@ class DnsRuleActivity : BaseActivity() {
                     sourceAdapter.notifyItemRemoved(sourceAdapterList.size + 1 + index)
                 }, editRule = {
                     DnsRuleDialog(this, it) { newRule ->
+                        getDatabase().dnsRuleRepository().updateAsync(newRule)
                         val index = userDnsRules.indexOf(it)
                         userDnsRules[index] = newRule
                         sourceAdapter.notifyItemChanged(sourceAdapterList.size + 1 + index)

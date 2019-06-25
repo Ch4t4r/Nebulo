@@ -28,6 +28,12 @@ import kotlinx.coroutines.launch
  */
 class DnsRuleRepository(val dnsRuleDao: DnsRuleDao) {
 
+    fun updateAsync(dnsRule: DnsRule, coroutineScope: CoroutineScope = GlobalScope) {
+        coroutineScope.launch {
+            dnsRuleDao.update(dnsRule)
+        }
+    }
+
     fun insertAsync(dnsRule: DnsRule, coroutineScope: CoroutineScope = GlobalScope) {
         coroutineScope.launch {
             dnsRuleDao.insert(dnsRule)
