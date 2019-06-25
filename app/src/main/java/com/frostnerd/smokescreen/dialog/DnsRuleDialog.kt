@@ -97,8 +97,14 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
         if (dnsRule != null) {
             view.host.setText(dnsRule.host)
             when {
-                dnsRule.type == Record.TYPE.A -> view.ipv4Address.setText(dnsRule.target)
-                dnsRule.type == Record.TYPE.AAAA -> view.ipv6Address.setText(dnsRule.target)
+                dnsRule.type == Record.TYPE.A -> {
+                    view.ipv4Address.setText(dnsRule.target)
+                    view.ipv6Address.text = null
+                }
+                dnsRule.type == Record.TYPE.AAAA -> {
+                    view.ipv4Address.text = null
+                    view.ipv6Address.setText(dnsRule.target)
+                }
                 dnsRule.type == Record.TYPE.ANY -> {
                     view.ipv4Address.setText(dnsRule.target)
                     view.ipv6Address.setText(dnsRule.ipv6Target)
