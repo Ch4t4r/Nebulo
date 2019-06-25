@@ -47,9 +47,9 @@ class RuleImportService : Service() {
     private var importJob: Job? = null
     private val DNSMASQ_MATCHER = Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:$|\\s+.*)").matcher("")
     private val HOSTS_MATCHER =
-        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([a-zA-Z0-9.]+).*")
+        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([a-zA-Z0-9._\\-]+).*")
             .matcher("")
-    private val DOMAINS_MATCHER = Pattern.compile("^([A-Za-z0-9][A-Za-z0-9\\-.]+)(?:\$|\\s+.*)").matcher("")
+    private val DOMAINS_MATCHER = Pattern.compile("^([A-Za-z0-9][A-Za-z_0-9\\-.]+)(?:\$|\\s+.*)").matcher("")
     private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("")
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
@@ -196,7 +196,7 @@ class RuleImportService : Service() {
                                 commitLines(source, parsers)
                             } else {
                                 if (hosts.first > 5) {
-                                    log("Matcher $matcher failed 5 times, last for $line. Removing.")
+                                    log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
                                     iterator.remove()
                                 } else parsers[matcher] = hosts.copy(hosts.first + 1)
                                 if(parsers.isEmpty()) {
