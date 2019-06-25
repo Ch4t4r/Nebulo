@@ -44,29 +44,49 @@
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
                 android:id="@+id/buttonWrap"
+                android:orientation="vertical"
                 android:layout_height="wrap_content">
 
-            <Switch
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_height="wrap_content">
+                <Switch
+                        android:layout_width="wrap_content"
+                        android:id="@+id/enable"
+                        android:checked="false"
+                        android:layout_height="wrap_content"/>
+
+                <ImageButton
+                        android:layout_width="48dp"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:src="@drawable/ic_delete_sweep"
+                        android:id="@+id/clear"
+                        android:tint="?android:attr/textColor"
+                        android:layout_height="48dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
                     android:layout_width="wrap_content"
-                    android:id="@+id/enable"
-                    android:checked="false"
-                    android:layout_height="wrap_content"/>
-
-            <ImageButton
-                    android:layout_width="48dp"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:src="@drawable/ic_filter_list"
-                    android:id="@+id/openList"
-                    android:tint="?android:attr/textColor"
-                    android:layout_height="48dp"/>
-
-            <ImageButton
-                    android:layout_width="48dp"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:src="@drawable/ic_delete_sweep"
-                    android:id="@+id/clear"
-                    android:tint="?android:attr/textColor"
-                    android:layout_height="48dp"/>
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                <ImageButton
+                        android:layout_width="48dp"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:src="@drawable/ic_filter_list"
+                        android:id="@+id/openList"
+                        android:tint="?android:attr/textColor"
+                        android:layout_height="48dp"/>
+                <ImageButton
+                        android:layout_width="48dp"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:src="@drawable/ic_plus"
+                        android:id="@+id/add"
+                        android:scaleType="fitXY"
+                        android:tint="?android:attr/textColor"
+                        android:layout_height="48dp"/>
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 

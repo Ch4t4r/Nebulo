@@ -146,19 +146,6 @@ class DnsRuleActivity : BaseActivity() {
                         sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
                         userRuleCount = 0
                     }
-                })
-                else -> CustomRuleHostViewHolder(view, deleteRule =  {
-                    val index = userDnsRules.indexOf(it)
-                    userDnsRules.remove(it)
-                    getDatabase().dnsRuleRepository().removeAsync(it)
-                    userRuleCount -= 1
-                    sourceAdapter.notifyItemRemoved(sourceAdapterList.size + 1 + index)
-                }, editRule = {
-                    DnsRuleDialog(this, it) { newRule ->
-                        val index = userDnsRules.indexOf(it)
-                        userDnsRules[index] = newRule
-                        sourceAdapter.notifyItemChanged(sourceAdapterList.size + 1 + index)
-                    }.show()
                 }, createRule = {
                     DnsRuleDialog(this, onRuleCreated = { newRule ->
                         val insertPos = userDnsRules.indexOfFirst {
@@ -176,6 +163,19 @@ class DnsRuleActivity : BaseActivity() {
                             sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
                         }
                     }).show()
+                })
+                else -> CustomRuleHostViewHolder(view, deleteRule =  {
+                    val index = userDnsRules.indexOf(it)
+                    userDnsRules.remove(it)
+                    getDatabase().dnsRuleRepository().removeAsync(it)
+                    userRuleCount -= 1
+                    sourceAdapter.notifyItemRemoved(sourceAdapterList.size + 1 + index)
+                }, editRule = {
+                    DnsRuleDialog(this, it) { newRule ->
+                        val index = userDnsRules.indexOf(it)
+                        userDnsRules[index] = newRule
+                        sourceAdapter.notifyItemChanged(sourceAdapterList.size + 1 + index)
+                    }.show()
                 })
             }
         }, adapterDataSource) {
@@ -293,11 +293,13 @@ class DnsRuleActivity : BaseActivity() {
     private class CustomRulesViewHolder(view: View,
                                         changeSourceStatus: (Boolean) -> Unit,
                                         clearRules: () -> Unit,
-                                        changeRuleVisibility:(showRules:Boolean) -> Unit) :
+                                        changeRuleVisibility:(showRules:Boolean) -> Unit,
+                                        createRule:() -> Unit) :
         BaseViewHolder(view) {
         val clear = view.clear
         val enabled = view.enable
         val openList = view.openList
+        val add = view.add
         private var elementsShown = false
 
         init {
@@ -319,6 +321,9 @@ class DnsRuleActivity : BaseActivity() {
             view.cardContent.setOnClickListener {
                 enabled.isChecked = !enabled.isChecked
             }
+            add.setOnClickListener {
+                createRule()
+            }
         }
 
         override fun destroy() {}
@@ -326,12 +331,10 @@ class DnsRuleActivity : BaseActivity() {
 
     private class CustomRuleHostViewHolder(view:View,
                                            deleteRule:(DnsRule) -> Unit,
-                                           editRule:(DnsRule) -> Unit,
-                                           createRule:() -> Unit):BaseViewHolder(view) {
+                                           editRule:(DnsRule) -> Unit):BaseViewHolder(view) {
         val text = view.text
         val delete = view.delete
         val cardContent = view.cardContent
-        val add = view.add
         lateinit var dnsRule:DnsRule
 
         init {
@@ -340,9 +343,6 @@ class DnsRuleActivity : BaseActivity() {
             }
             cardContent.setOnClickListener {
                 editRule(dnsRule)
-            }
-            add.setOnClickListener {
-                createRule()
             }
         }
 

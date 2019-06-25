@@ -47,15 +47,6 @@
                     android:id="@+id/delete"
                     android:tint="?android:attr/textColor"
                     android:layout_height="48dp"/>
-
-            <ImageButton
-                    android:layout_width="48dp"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:src="@drawable/ic_plus"
-                    android:id="@+id/add"
-                    android:scaleType="fitXY"
-                    android:tint="?android:attr/textColor"
-                    android:layout_height="48dp"/>
         </LinearLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
