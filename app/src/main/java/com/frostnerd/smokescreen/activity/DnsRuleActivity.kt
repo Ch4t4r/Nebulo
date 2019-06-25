@@ -157,9 +157,10 @@ class DnsRuleActivity : BaseActivity() {
                                 else -> it
                             }
                         }
-                        userRuleCount += 1
+                        getDatabase().dnsRuleRepository().insertAsync(newRule)
                         userDnsRules.add(insertPos, newRule)
                         if(showUserRules) {
+                            userRuleCount += 1
                             sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
                         }
                     }).show()

@@ -39,7 +39,7 @@
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:layout_width="wrap_content"
                     android:id="@+id/addSource"
-                    android:src="@drawable/ic_plus"
+                    android:src="@drawable/ic_add"
                     android:elevation="0dp"
                     android:layout_height="wrap_content"/>
 

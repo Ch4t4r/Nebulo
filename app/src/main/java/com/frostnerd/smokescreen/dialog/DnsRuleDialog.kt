@@ -1,9 +1,17 @@
 package com.frostnerd.smokescreen.dialog
 
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
+import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.getPreferences
+import kotlinx.android.synthetic.main.dialog_create_dnsrule.view.*
+import kotlinx.android.synthetic.main.dialog_create_dnsrule.view.ipv4Address
+import org.minidns.record.Record
+import java.lang.Exception
+import java.net.Inet4Address
+import java.net.Inet6Address
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -23,4 +31,68 @@ import com.frostnerd.smokescreen.getPreferences
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class DnsRuleDialog(context:Context, dnsRule: DnsRule? = null, onRuleCreated:(DnsRule) -> Unit): AlertDialog(context, context.getPreferences().theme.dialogStyle)
+class DnsRuleDialog(context:Context, dnsRule: DnsRule? = null, onRuleCreated:(DnsRule) -> Unit): AlertDialog(context, context.getPreferences().theme.dialogStyle) {
+    init {
+        val view = layoutInflater.inflate(R.layout.dialog_create_dnsrule, null, false)
+        setView(view)
+        setTitle(R.string.dialog_newdnsrule_title)
+        setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        setButton(DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok)) { _, _ ->
+
+        }
+        setOnShowListener {
+            getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                var valid = true
+                view.host.error = null
+                view.ipv4Til.error = null
+                view.ipv6Til.error = null
+                if(view.host.text.isNullOrBlank()) {
+                    view.host.error = context.getString(R.string.dialog_newdnsrule_host_invalid)
+                    valid = false
+                } else {
+                    val ipv4Valid = isIpv4Address(view.ipv4Address.text.toString())
+                    val ipv6Valid = isIpv6Address(view.ipv6Address.text.toString())
+                    val bothEmpty = view.ipv4Address.text.isNullOrEmpty() && view.ipv6Address.text.isNullOrEmpty()
+                    if(!ipv4Valid || bothEmpty) {
+                        valid = false
+                        view.ipv4Address.error = context.getString(R.string.dialog_newdnsrule_ipv4_invalid)
+                    }
+                    if(!ipv6Valid || bothEmpty) {
+                        valid = false
+                        view.ipv6Address.error = context.getString(R.string.dialog_newdnsrule_ipv6_invalid)
+                    }
+                }
+                if (valid) {
+                    dismiss()
+                    onRuleCreated(
+                        dnsRule?.copy(host = view.host.text.toString(), target = view.ipv4Address.text.toString())
+                            ?: DnsRule(Record.TYPE.A, view.host.text.toString(), view.ipv4Address.text.toString())
+                    )
+                }
+            }
+        }
+        if(dnsRule != null) {
+            view.host.setText(dnsRule.host)
+        }
+    }
+
+    private fun isIpv4Address(text:String?): Boolean {
+        return text.isNullOrBlank() || try {
+            Inet4Address.getByName(text)
+            true
+        } catch (ex:Exception) {
+            false
+        }
+    }
+
+    private fun isIpv6Address(text:String?): Boolean {
+        return text.isNullOrBlank() || try {
+            Inet6Address.getByName(text)
+            true
+        } catch (ex:Exception) {
+            false
+        }
+    }
+}
