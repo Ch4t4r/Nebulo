@@ -19,6 +19,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
 import com.frostnerd.smokescreen.service.RuleImportService
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
@@ -30,6 +31,7 @@ import kotlinx.android.synthetic.main.item_datasource.view.delete
 import kotlinx.android.synthetic.main.item_datasource.view.enable
 import kotlinx.android.synthetic.main.item_datasource.view.text
 import kotlinx.android.synthetic.main.item_datasource_rules.view.*
+import kotlinx.android.synthetic.main.item_dnsrule_host.view.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -65,10 +67,10 @@ class DnsRuleActivity : BaseActivity() {
             userDnsRules = it.toMutableList()
         }, coroutineScope = LifecycleCoroutineScope(this, ui = false))
         addSource.setOnClickListener {
-            NewHostSourceDialog(this) {
-                if (!sourceAdapterList.contains(it)) {
+            NewHostSourceDialog(this) { newSource ->
+                if (!sourceAdapterList.contains(newSource)) {
                     val insertPos = sourceAdapterList.indexOfFirst {
-                        it.name > it.name
+                        it.name > newSource.name
                     }.let {
                         when (it) {
                             0 -> 0
@@ -76,9 +78,9 @@ class DnsRuleActivity : BaseActivity() {
                             else -> it
                         }
                     }
-                    sourceAdapterList.add(insertPos, it)
+                    sourceAdapterList.add(insertPos, newSource)
                     sourceAdapter.notifyItemInserted(insertPos)
-                    getDatabase().hostSourceDao().insert(it)
+                    getDatabase().hostSourceDao().insert(newSource)
                 }
             }.show()
         }
@@ -145,13 +147,36 @@ class DnsRuleActivity : BaseActivity() {
                         userRuleCount = 0
                     }
                 })
-                else -> CustomRuleHostViewHolder(view) {
+                else -> CustomRuleHostViewHolder(view, deleteRule =  {
                     val index = userDnsRules.indexOf(it)
                     userDnsRules.remove(it)
                     getDatabase().dnsRuleRepository().removeAsync(it)
                     userRuleCount -= 1
                     sourceAdapter.notifyItemRemoved(sourceAdapterList.size + 1 + index)
-                }
+                }, editRule = {
+                    DnsRuleDialog(this, it) { newRule ->
+                        val index = userDnsRules.indexOf(it)
+                        userDnsRules[index] = newRule
+                        sourceAdapter.notifyItemChanged(sourceAdapterList.size + 1 + index)
+                    }.show()
+                }, createRule = {
+                    DnsRuleDialog(this, onRuleCreated = { newRule ->
+                        val insertPos = userDnsRules.indexOfFirst {
+                            it.host > newRule.host
+                        }.let {
+                            when (it) {
+                                0 -> 0
+                                -1 -> userDnsRules.size
+                                else -> it
+                            }
+                        }
+                        userRuleCount += 1
+                        userDnsRules.add(insertPos, newRule)
+                        if(showUserRules) {
+                            sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                        }
+                    }).show()
+                })
             }
         }, adapterDataSource) {
             viewBuilder = { parent, type ->
@@ -300,14 +325,24 @@ class DnsRuleActivity : BaseActivity() {
     }
 
     private class CustomRuleHostViewHolder(view:View,
-                                           deleteRule:(DnsRule) -> Unit):BaseViewHolder(view) {
+                                           deleteRule:(DnsRule) -> Unit,
+                                           editRule:(DnsRule) -> Unit,
+                                           createRule:() -> Unit):BaseViewHolder(view) {
         val text = view.text
         val delete = view.delete
+        val cardContent = view.cardContent
+        val add = view.add
         lateinit var dnsRule:DnsRule
 
         init {
             delete.setOnClickListener {
                 deleteRule(dnsRule)
+            }
+            cardContent.setOnClickListener {
+                editRule(dnsRule)
+            }
+            add.setOnClickListener {
+                createRule()
             }
         }
 
