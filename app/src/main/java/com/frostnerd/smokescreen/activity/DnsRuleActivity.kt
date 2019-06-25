@@ -315,9 +315,9 @@ class DnsRuleActivity : BaseActivity() {
             }
             openList.setOnClickListener {
                 if(elementsShown) {
-                    openList.animate().rotationBy(-180f).setDuration(350).start()
+                    openList.animate().rotationBy(-90f).setDuration(350).start()
                 } else {
-                    openList.animate().rotationBy(180f).setDuration(350).start()
+                    openList.animate().rotationBy(90f).setDuration(350).start()
                 }
                 changeRuleVisibility(!elementsShown)
                 elementsShown = !elementsShown
