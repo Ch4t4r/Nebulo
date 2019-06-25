@@ -1,9 +1,6 @@
 package com.frostnerd.smokescreen.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.frostnerd.smokescreen.database.converters.DnsTypeConverter
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import org.minidns.record.Record
@@ -51,9 +48,21 @@ interface DnsRuleDao {
     @Query("SELECT COUNT(*) FROM DnsRule")
     fun getCount(): Long
 
+    @Query("SELECT COUNT(*) FROM DnsRule WHERE importedFrom IS NULL")
+    fun getUserCount():Long
+
     @Query("SELECT target FROM DnsRule WHERE host=:host AND type = :type AND (importedFrom is NULL OR (SELECT enabled FROM HostSource h WHERE h.id=importedFrom) = 1) AND (importedFrom IS NOT NULL OR :useUserRules=1)LIMIT 1")
     fun findRuleTarget(host: String, type: Record.TYPE, useUserRules:Boolean): String?
 
     @Query("DELETE FROM DnsRule WHERE importedFrom=:sourceId")
     fun deleteAllFromSource(sourceId: Long)
+
+    @Query("SELECT * FROM DnsRule WHERE importedFrom IS NULL ORDER BY host LIMIT :limit OFFSET :offset")
+    fun getAllUserRules(offset:Int, limit:Int):List<DnsRule>
+
+    @Query("SELECT * FROM DnsRule WHERE importedFrom IS NULL ORDER BY host")
+    fun getAllUserRules():List<DnsRule>
+
+    @Delete
+    fun remove(rule:DnsRule)
 }

@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.database.repository
 
 import com.frostnerd.smokescreen.database.dao.DnsQueryDao
 import com.frostnerd.smokescreen.database.dao.DnsRuleDao
+import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
@@ -36,6 +37,24 @@ class DnsRuleRepository(val dnsRuleDao: DnsRuleDao) {
     fun deleteAllFromSourceAsync(hostSource: HostSource, coroutineScope: CoroutineScope = GlobalScope) {
         coroutineScope.launch {
             dnsRuleDao.deleteAllFromSource(hostSource.id)
+        }
+    }
+
+    fun getUserCountAsync(block:(count:Long) -> Unit,coroutineScope: CoroutineScope = GlobalScope) {
+        coroutineScope.launch {
+            block(dnsRuleDao.getUserCount())
+        }
+    }
+
+    fun getUserRulesAsnc(block:(List<DnsRule>) -> Unit, coroutineScope: CoroutineScope = GlobalScope) {
+        coroutineScope.launch {
+            block(dnsRuleDao.getAllUserRules())
+        }
+    }
+
+    fun removeAsync(rule:DnsRule, coroutineScope: CoroutineScope = GlobalScope) {
+        coroutineScope.launch {
+            dnsRuleDao.remove(rule)
         }
     }
 }

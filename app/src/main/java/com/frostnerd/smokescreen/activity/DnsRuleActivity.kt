@@ -14,7 +14,9 @@ import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
+import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
@@ -28,7 +30,6 @@ import kotlinx.android.synthetic.main.item_datasource.view.delete
 import kotlinx.android.synthetic.main.item_datasource.view.enable
 import kotlinx.android.synthetic.main.item_datasource.view.text
 import kotlinx.android.synthetic.main.item_datasource_rules.view.*
-import kotlin.text.clear
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -53,13 +54,16 @@ class DnsRuleActivity : BaseActivity() {
     private lateinit var sourceAdapterList: MutableList<HostSource>
     private lateinit var adapterDataSource: ListDataSource<HostSource>
     private var importDoneReceiver:BroadcastReceiver? = null
-    private var cnt = 0
+    private lateinit var userDnsRules:MutableList<DnsRule>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dns_rules)
         setSupportActionBar(toolBar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        getDatabase().dnsRuleRepository().getUserRulesAsnc(block = {
+            userDnsRules = it.toMutableList()
+        }, coroutineScope = LifecycleCoroutineScope(this, ui = false))
         addSource.setOnClickListener {
             NewHostSourceDialog(this) {
                 if (!sourceAdapterList.contains(it)) {
@@ -88,9 +92,11 @@ class DnsRuleActivity : BaseActivity() {
         }
         sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
         adapterDataSource = ListDataSource(sourceAdapterList)
+        var showUserRules = false
+        var userRuleCount = 0
         sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder({ view, type ->
-            if (type == 0) {
-                SourceViewHolder(view, deleteSource = {
+            when (type) {
+                0 -> SourceViewHolder(view, deleteSource = {
                     showInfoTextDialog(this,
                         getString(R.string.dialog_deletehostsource_title, it.name),
                         getString(R.string.dialog_deletehostsource_message, it.name),
@@ -108,8 +114,7 @@ class DnsRuleActivity : BaseActivity() {
                     hostSource.enabled = enabled
                     getDatabase().hostSourceDao().update(hostSource)
                 })
-            } else {
-                CustomRulesViewHolder(view, changeSourceStatus = {
+                1 -> CustomRulesViewHolder(view, changeSourceStatus = {
                     getPreferences().customHostsEnabled = it
                 }, clearRules = {
                     showInfoTextDialog(this,
@@ -121,30 +126,59 @@ class DnsRuleActivity : BaseActivity() {
                         }, getString(R.string.all_no) to { dialog, _ ->
                             dialog.dismiss()
                         }, null)
+                }, changeRuleVisibility = {
+                    showUserRules = !showUserRules
+                    if(showUserRules) {
+                        getDatabase().dnsRuleRepository().getUserCountAsync(coroutineScope = LifecycleCoroutineScope(this, ui = false), block= {
+                            userRuleCount = it.toInt()
+                            runOnUiThread {
+                                sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                            }
+                        })
+                    } else {
+                        sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
+                        userRuleCount = 0
+                    }
                 })
+                else -> CustomRuleHostViewHolder(view) {
+                    val index = userDnsRules.indexOf(it)
+                    userDnsRules.remove(it)
+                    getDatabase().dnsRuleRepository().removeAsync(it)
+                    userRuleCount -= 1
+                    sourceAdapter.notifyItemRemoved(sourceAdapterList.size + 1 + index)
+                }
             }
         }, adapterDataSource) {
             viewBuilder = { parent, type ->
                 layoutInflater.inflate(
-                    if (type == 0) R.layout.item_datasource else R.layout.item_datasource_rules,
+                    when (type) {
+                        0 -> R.layout.item_datasource
+                        1 -> R.layout.item_datasource_rules
+                        else -> R.layout.item_dnsrule_host
+                    },
                     parent,
                     false
                 )
             }
             getItemCount = {
-                sourceAdapterList.size + 1
+                sourceAdapterList.size + 1 + userRuleCount
             }
             bindModelView = { viewHolder, _, data ->
                 (viewHolder as SourceViewHolder).display(data)
             }
             bindNonModelView = { viewHolder, position ->
-                (viewHolder as CustomRulesViewHolder).apply {
-                    this.enabled.isChecked = getPreferences().customHostsEnabled
+                if(viewHolder is CustomRulesViewHolder) {
+                    viewHolder.enabled.isChecked = getPreferences().customHostsEnabled
+                } else if(viewHolder is CustomRuleHostViewHolder) {
+                    viewHolder.display(userDnsRules[position - sourceAdapterList.size - 1])
                 }
             }
             getViewType = { position ->
-                if (position == getItemCount() - 1) 1
-                else 0
+                when {
+                    position < sourceAdapterList.size -> 0
+                    position == sourceAdapterList.size -> 1
+                    else -> 2
+                }
             }
             runOnUiThread = {
                 this@DnsRuleActivity.runOnUiThread(it)
@@ -226,10 +260,15 @@ class DnsRuleActivity : BaseActivity() {
         override fun destroy() {}
     }
 
-    private class CustomRulesViewHolder(view: View, changeSourceStatus: (Boolean) -> Unit, clearRules: () -> Unit) :
+    private class CustomRulesViewHolder(view: View,
+                                        changeSourceStatus: (Boolean) -> Unit,
+                                        clearRules: () -> Unit,
+                                        changeRuleVisibility:(showRules:Boolean) -> Unit) :
         BaseViewHolder(view) {
         val clear = view.clear
         val enabled = view.enable
+        val openList = view.openList
+        private var elementsShown = false
 
         init {
             enabled.setOnCheckedChangeListener { _, isChecked ->
@@ -238,11 +277,42 @@ class DnsRuleActivity : BaseActivity() {
             clear.setOnClickListener {
                 clearRules()
             }
+            openList.setOnClickListener {
+                if(elementsShown) {
+                    openList.animate().rotationBy(-180f).setDuration(350).start()
+                } else {
+                    openList.animate().rotationBy(180f).setDuration(350).start()
+                }
+                changeRuleVisibility(!elementsShown)
+                elementsShown = !elementsShown
+            }
             view.cardContent.setOnClickListener {
                 enabled.isChecked = !enabled.isChecked
             }
         }
 
         override fun destroy() {}
+    }
+
+    private class CustomRuleHostViewHolder(view:View,
+                                           deleteRule:(DnsRule) -> Unit):BaseViewHolder(view) {
+        val text = view.text
+        val delete = view.delete
+        lateinit var dnsRule:DnsRule
+
+        init {
+            delete.setOnClickListener {
+                deleteRule(dnsRule)
+            }
+        }
+
+        fun display(rule:DnsRule) {
+            dnsRule = rule
+            text.text = rule.host
+        }
+
+
+        override fun destroy() {}
+
     }
 }
