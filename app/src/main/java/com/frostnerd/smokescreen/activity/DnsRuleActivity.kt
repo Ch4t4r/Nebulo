@@ -136,12 +136,10 @@ class DnsRuleActivity : BaseActivity() {
                 }, changeRuleVisibility = {
                     showUserRules = !showUserRules
                     if(showUserRules) {
-                        getDatabase().dnsRuleRepository().getUserCountAsync(coroutineScope = LifecycleCoroutineScope(this, ui = false), block= {
-                            userRuleCount = it.toInt()
-                            runOnUiThread {
-                                sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
-                            }
-                        })
+                        userRuleCount = userDnsRules.size
+                        runOnUiThread {
+                            sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                        }
                     } else {
                         sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
                         userRuleCount = 0
@@ -159,9 +157,17 @@ class DnsRuleActivity : BaseActivity() {
                         }
                         getDatabase().dnsRuleRepository().insertAsync(newRule)
                         userDnsRules.add(insertPos, newRule)
-                        if(showUserRules) {
+                        val wereRulesShown = showUserRules
+                        showUserRules = true
+                        if(wereRulesShown) {
                             userRuleCount += 1
                             sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                        } else {
+                            userRuleCount = userDnsRules.size
+                            runOnUiThread {
+                                sourceAdapter.notifyItemChanged(sourceAdapterList.size)
+                                sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                            }
                         }
                     }).show()
                 })
@@ -201,6 +207,10 @@ class DnsRuleActivity : BaseActivity() {
             bindNonModelView = { viewHolder, position ->
                 if(viewHolder is CustomRulesViewHolder) {
                     viewHolder.enabled.isChecked = getPreferences().customHostsEnabled
+                    if(!viewHolder.elementsShown && showUserRules) {
+                        viewHolder.animateCaretSpin()
+                        viewHolder.elementsShown = true
+                    }
                 } else if(viewHolder is CustomRuleHostViewHolder) {
                     viewHolder.display(userDnsRules[position - sourceAdapterList.size - 1])
                 }
@@ -305,7 +315,7 @@ class DnsRuleActivity : BaseActivity() {
         val enabled = view.enable
         val openList = view.openList
         val add = view.add
-        private var elementsShown = false
+        var elementsShown = false
 
         init {
             enabled.setOnCheckedChangeListener { _, isChecked ->
@@ -315,11 +325,7 @@ class DnsRuleActivity : BaseActivity() {
                 clearRules()
             }
             openList.setOnClickListener {
-                if(elementsShown) {
-                    openList.animate().rotationBy(-90f).setDuration(350).start()
-                } else {
-                    openList.animate().rotationBy(90f).setDuration(350).start()
-                }
+                animateCaretSpin()
                 changeRuleVisibility(!elementsShown)
                 elementsShown = !elementsShown
             }
@@ -328,6 +334,14 @@ class DnsRuleActivity : BaseActivity() {
             }
             add.setOnClickListener {
                 createRule()
+            }
+        }
+
+        fun animateCaretSpin(){
+            if(elementsShown) {
+                openList.animate().rotationBy(-90f).setDuration(350).start()
+            } else {
+                openList.animate().rotationBy(90f).setDuration(350).start()
             }
         }
 
