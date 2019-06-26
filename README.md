@@ -84,7 +84,7 @@ This work contains third-party content, namely:
 # Cloning
 Feel free to clone this software. However, there are a few things to notice:
 - This app uses some of my own libraries which are only accessible when logged into this GitLab instance. Signing up is free and no tracking is in place.
-   - These libraries are distributed using an Artifactory server. This server is not public, but I do hand out credentials on request.
+   - These libraries are distributed using an Artifactory server. **This server is not public, but I do hand out credentials on request**.
    - Alternatively, replace the dependencies (`implementation 'com.frostnerd.utilskt:....`) with git sub-modules (`implementation project(...)`) after cloning the libraries.
 - I own a Font Awesome Pro license and use a lot of their icons. Most of the icons used in this project are accessible with a Font Awesome Free license, but not all necessarily are. Either you have to own a license yourself, or check whether a particular icon is also usable with the Free license.
 
