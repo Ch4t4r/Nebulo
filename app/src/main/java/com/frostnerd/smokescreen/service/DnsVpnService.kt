@@ -604,9 +604,9 @@ class DnsVpnService : VpnService(), Runnable {
             dhcpDnsServer.forEach {
                 if (it is Inet4Address) {
                     builder.addRoute(it, 32)
-                    }
                 }
-            } else if (deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
+            }
+        } else if (deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
 
         if (useIpv6) {
             builder.addDnsServer(dummyServerIpv6)
@@ -689,7 +689,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun getDhcpDnsServers():List<InetAddress> {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
-            if(network != null) continue
+            if(network == null) continue
             val info = mgr.getNetworkInfo(network) ?: continue
             val capabilities = mgr.getNetworkCapabilities(network) ?: continue
             if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
@@ -801,7 +801,7 @@ class DnsVpnService : VpnService(), Runnable {
             log("Creating bypass handlers for search domains of connected networks.")
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             for (network in mgr.allNetworks) {
-                if(network != null) continue
+                if(network == null) continue
                 val networkInfo = mgr.getNetworkInfo(network) ?: continue
                 if (networkInfo.isConnected && !mgr.isVpnNetwork(network)) {
                     val linkProperties = mgr.getLinkProperties(network) ?: continue
