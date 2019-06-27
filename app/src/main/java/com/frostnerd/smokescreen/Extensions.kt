@@ -119,8 +119,12 @@ fun Context.registerLocalReceiver(
     return actualReceiver
 }
 
-fun Context.unregisterLocalReceiver(receiver: BroadcastReceiver) {
-    LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
+fun Context.sendLocalBroadcast(intent: Intent) {
+    LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+}
+
+fun Context.unregisterLocalReceiver(receiver: BroadcastReceiver?) {
+    if(receiver != null) LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
 }
 
 fun Context.getPreferences(): AppSettingsSharedPreferences {

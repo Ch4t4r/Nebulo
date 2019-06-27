@@ -2,6 +2,7 @@
 <resources>
     <bool name="keep_service_alive">true</bool>
     <bool name="hide_adblocking_servers">true</bool>
+    <bool name="add_default_hostsources">false</bool>
 
     <string-array name="interface_address_prefixes">
         <item>192.168.0/24</item>

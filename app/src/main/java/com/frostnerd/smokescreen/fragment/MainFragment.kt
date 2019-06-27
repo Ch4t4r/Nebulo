@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.fragment
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.net.Uri
@@ -13,11 +14,13 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.activity.DnsRuleActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.getPreferences
@@ -116,8 +119,13 @@ class MainFragment : Fragment() {
                 val i = Intent(Intent.ACTION_VIEW)
                 val url = it.tag as URL
                 i.data = Uri.parse(url.toURI().toString())
-                startActivity(i)
+                try {
+                    startActivity(i)
+                } catch (e: ActivityNotFoundException) { Toast.makeText(context!!, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show() }
             }
+        }
+        dnsRules.setOnClickListener {
+            startActivity(Intent(context!!, DnsRuleActivity::class.java))
         }
         GlobalScope.launch {
             val context = context

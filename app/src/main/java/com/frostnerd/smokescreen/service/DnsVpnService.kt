@@ -40,10 +40,13 @@ import kotlinx.coroutines.*
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.dnsname.DnsName
+import org.minidns.record.A
+import org.minidns.record.AAAA
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
+import java.lang.IllegalStateException
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
@@ -213,7 +216,8 @@ class DnsVpnService : VpnService(), Runnable {
             "allow_ipv4_traffic",
             "dns_server_config",
             "notification_allow_stop",
-            "notification_allow_pause"
+            "notification_allow_pause",
+            "dns_rules_enabled"
         )
         settingsSubscription = getPreferences().listenForChanges(relevantSettings, getPreferences().preferenceChangeListener {
                 changes ->
@@ -600,9 +604,9 @@ class DnsVpnService : VpnService(), Runnable {
             dhcpDnsServer.forEach {
                 if (it is Inet4Address) {
                     builder.addRoute(it, 32)
-                    }
                 }
-            } else if (deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
+            }
+        } else if (deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
 
         if (useIpv6) {
             builder.addDnsServer(dummyServerIpv6)
@@ -685,7 +689,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun getDhcpDnsServers():List<InetAddress> {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
-            if(network != null) continue
+            if(network == null) continue
             val info = mgr.getNetworkInfo(network) ?: continue
             val capabilities = mgr.getNetworkCapabilities(network) ?: continue
             if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
@@ -752,7 +756,7 @@ class DnsVpnService : VpnService(), Runnable {
         handle.ipv4Enabled =
             !handle.ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
-        dnsProxy = SmokeProxy(handle, createProxyBypassHandlers(), createDnsCache(), createQueryLogger())
+        dnsProxy = SmokeProxy(handle, createProxyBypassHandlers(), createDnsCache(), createQueryLogger(), createLocalResolver())
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(1, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger {
@@ -797,7 +801,7 @@ class DnsVpnService : VpnService(), Runnable {
             log("Creating bypass handlers for search domains of connected networks.")
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             for (network in mgr.allNetworks) {
-                if(network != null) continue
+                if(network == null) continue
                 val networkInfo = mgr.getNetworkInfo(network) ?: continue
                 if (networkInfo.isConnected && !mgr.isVpnNetwork(network)) {
                     val linkProperties = mgr.getLinkProperties(network) ?: continue
@@ -910,6 +914,47 @@ class DnsVpnService : VpnService(), Runnable {
             log("Persisted cache deleted.")
         }
         return dnsCache
+    }
+
+    private fun createLocalResolver():LocalResolver? {
+        if(getPreferences().dnsRulesEnabled) {
+            return object:LocalResolver(false) {
+                private val dao = getDatabase().dnsRuleDao()
+                private val resolveResults = mutableMapOf<Question, String>()
+                private val wwwRegex = Regex("^www\\.")
+                private val useUserRules = getPreferences().customHostsEnabled
+
+                override suspend fun canResolve(question: Question): Boolean {
+                    return if(question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA) {
+                        false
+                    } else {
+                        val uniformQuestion = question.name.toString().replace(wwwRegex, "")
+                        val resolveResult = dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
+                        if (resolveResult != null) {
+                            resolveResults[question] = resolveResult
+                            true
+                        } else false
+                    }
+                }
+
+                override suspend fun resolve(question: Question): List<Record<*>> {
+                    val result = resolveResults.remove(question)
+                    return result?.let {
+                        val data = if(question.type == Record.TYPE.A) {
+                            A(it)
+                        } else {
+                            AAAA(it)
+                        }
+                        listOf(Record(question.name.toString(), question.type, question.clazz.value, 9999, data))
+                    } ?: throw IllegalStateException()
+                }
+
+                override fun cleanup() {}
+
+            }
+        } else {
+            return null
+        }
     }
 
     private fun createPersistedCacheEntry(

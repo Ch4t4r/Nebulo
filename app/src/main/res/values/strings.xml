@@ -4,6 +4,7 @@
     <string name="activity_label_import_queries">Import queries</string>
     <string name="activity_label_import_servers">Import server(s)</string>
     <string name="activity_label_speed_test">Server speed comparison</string>
+    <string name="activity_label_dns_rules">Dns rules</string>
 
     <string name="activity_label_enable_logging">Export logs/Enable logging</string>
 
@@ -13,6 +14,7 @@
     <string name="all_resume">Resume</string>
     <string name="all_no">No</string>
     <string name="all_yes">Yes</string>
+    <string name="all_abort">Abort</string>
     <string name="information">Information</string>
     <string name="open_app">Open app</string>
     <string name="all_close">Close</string>
@@ -60,4 +62,10 @@
     <string name="window_speedtest_runtest">Start the test</string>
     <string name="window_speedtest_useserver">Use this server</string>
 
+    <string name="error_no_webbrowser_installed">You don\'t have any app installed to view this link.</string>
+
+    <string name="button_main_dnsrules">DNS rules</string>
+
+    <string name="window_dnsrules_customhosts">Custom hosts</string>
+    <string name="window_dnsrules_customhosts_message">Define all your custom hosts here.</string>
 </resources>
