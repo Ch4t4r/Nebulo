@@ -126,4 +126,22 @@
         <item>@string/changelog_build_32_5</item>
         <item>@string/changelog_build_32_6</item>
     </string-array>
+
+    <string name="changelog_build_33_1">Added Turkish, Indonesian, Russian and Dutch translations</string>
+    <string name="changelog_build_33_2">The button shown when the app crashes when automatic crash reporting is disabled now has a button to send the log files</string>
+    <string name="changelog_build_33_3">Replaced some of the icons</string>
+    <string name="changelog_build_33_4">Fixed a few crashes</string>
+    <string name="changelog_build_33_5">Added a view to test dns server speeds</string>
+    <string name="changelog_build_33_6">You can now specify custom IP addresses for hosts. Hosts can be imported from URLs and added by hand.</string>
+    <string name="changelog_build_33_7">A few design tweaks</string>
+    <string-array name="changelog_build_33">
+        <item>1.0 Beta (Build 33)</item>
+        <item>@string/changelog_build_33_1</item>
+        <item>@string/changelog_build_33_2</item>
+        <item>@string/changelog_build_33_3</item>
+        <item>@string/changelog_build_33_4</item>
+        <item>@string/changelog_build_33_5</item>
+        <item>@string/changelog_build_33_6</item>
+        <item>@string/changelog_build_33_7</item>
+    </string-array>
 </resources>
