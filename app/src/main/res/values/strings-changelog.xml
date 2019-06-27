@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="changelog_build_23_1">Non-default ports are now shown for DoT servers</string>
     <string name="changelog_build_23_2">Added this dialog to highlight changes</string>
@@ -128,7 +128,7 @@
     </string-array>
 
     <string name="changelog_build_33_1">Added Turkish, Indonesian, Russian and Dutch translations</string>
-    <string name="changelog_build_33_2">The button shown when the app crashes when automatic crash reporting is disabled now has a button to send the log files</string>
+    <string name="changelog_build_33_2">The notification shown when the app crashes when automatic crash reporting is disabled now has a button to send the log files</string>
     <string name="changelog_build_33_3">Replaced some of the icons</string>
     <string name="changelog_build_33_4">Fixed a few crashes</string>
     <string name="changelog_build_33_5">Added a view to test dns server speeds</string>
