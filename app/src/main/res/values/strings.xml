@@ -60,4 +60,6 @@
     <string name="window_speedtest_runtest">Start the test</string>
     <string name="window_speedtest_useserver">Use this server</string>
 
+    <string name="error_no_webbrowser_installed">You don\'t have any app installed to view this link.</string>
+
 </resources>
