@@ -25,4 +25,11 @@
 
     <string name="notification_appcrash_title">Nebulo has crashed</string>
     <string name="notification_appcrash_message">Nebulo has crashed. Click here to go to the main menu and to restart the app, if necessary.</string>
+
+    <string name="notification_ruleimport_title">DNS rule import</string>
+    <string name="notification_ruleimport_message">Importing DNS rules from %1s (%2s)</string>
+    <string name="notification_ruleimport_secondarymessage">Preparing import…</string>
+
+    <string name="notification_ruleimportfinished_title">DNS rule import finished</string>
+    <string name="notification_ruleimportfinished_message">%1d rules have been imported.</string>
 </resources>

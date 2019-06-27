@@ -110,4 +110,24 @@
 
     <string name="dialog_speedtest_useserver_title">Select server</string>
     <string name="dialog_speedtest_useserver_message">Do you want to use the server %1s? It ranked %2d out of %3d with a response time of %4d ms.</string>
+
+    <string name="dialog_deletehostsource_title">Delete %1s?</string>
+    <string name="dialog_deletehostsource_message">Are you sure you want to delete the host source %1s? This cannot be undone, the hosts from this source will be removed.</string>
+
+    <string name="dialog_clearuserrules_title">Clear all dns rules?</string>
+    <string name="dialog_clearuserrules_message">Are you want to clear all dns rules? This cannot be undone.</string>
+
+    <string name="dialog_newhostsource_title">New rule source</string>
+    <string name="dialog_newhostsource_name">Name</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newhostsource_error_name_empty">Please provide a name.</string>
+    <string name="dialog_newhostsource_url_invalid">Please provide a valid url.</string>
+
+    <string name="dialog_newdnsrule_title">New Dns rule</string>
+    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">IPv4 address</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">Ipv6 address</string>
+    <string name="dialog_newdnsrule_host_invalid">Please provide a valid host</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Please provide a valid IPv4 address</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Please provide a valid IPv6 address</string>
 </resources>

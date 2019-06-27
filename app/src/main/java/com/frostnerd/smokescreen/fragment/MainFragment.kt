@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.activity.DnsRuleActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.getPreferences
@@ -122,6 +123,9 @@ class MainFragment : Fragment() {
                     startActivity(i)
                 } catch (e: ActivityNotFoundException) { Toast.makeText(context!!, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show() }
             }
+        }
+        dnsRules.setOnClickListener {
+            startActivity(Intent(context!!, DnsRuleActivity::class.java))
         }
         GlobalScope.launch {
             val context = context

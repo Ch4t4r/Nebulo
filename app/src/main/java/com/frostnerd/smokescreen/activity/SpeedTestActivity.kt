@@ -1,13 +1,11 @@
 package com.frostnerd.smokescreen.activity
 
 import android.graphics.Color
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.AdapterBuilder
-import com.frostnerd.design.DesignUtil
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
@@ -18,6 +16,7 @@ import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.showInfoTextDialog
+import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.activity_speedtest.*
 import kotlinx.android.synthetic.main.item_dns_speed.view.*
@@ -55,6 +54,7 @@ class SpeedTestActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_speedtest)
         setSupportActionBar(toolBar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         startTest.setOnClickListener {
             startTest()
             startTest.isEnabled = false
@@ -99,7 +99,7 @@ class SpeedTestActivity : BaseActivity() {
             }
         }
         serverList.layoutManager = LinearLayoutManager(this)
-        serverList.addItemDecoration(SpaceItemDecorator())
+        serverList.addItemDecoration(SpaceItemDecorator(this))
         prepareList()
     }
 
@@ -130,7 +130,7 @@ class SpeedTestActivity : BaseActivity() {
                         dialog.dismiss()
                     }, null)
             }
-            listAdapter = AdapterBuilder.withViewHolder({ SpeedViewHolder(it, showUseServerDialog) }) {
+            listAdapter = AdapterBuilder.withViewHolder({ view, _ -> SpeedViewHolder(view, showUseServerDialog) }) {
                 viewBuilder = { parent, _ ->
                     layoutInflater.inflate(R.layout.item_dns_speed, parent, false)
                 }
@@ -253,19 +253,6 @@ class SpeedTestActivity : BaseActivity() {
         var started:Boolean = false
     }
 
-    private inner class SpaceItemDecorator() : RecyclerView.ItemDecoration() {
-        private val decorationHeight: Int = DesignUtil.dpToPixels(12f, this@SpeedTestActivity).toInt()
 
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-            super.getItemOffsets(outRect, view, parent, state)
-
-            val itemPosition = parent.getChildAdapterPosition(view)
-            val totalCount = parent.adapter!!.itemCount
-
-            if (itemPosition >= 0 && itemPosition < totalCount - 1) {
-                outRect.bottom = decorationHeight
-            }
-        }
-    }
 
 }

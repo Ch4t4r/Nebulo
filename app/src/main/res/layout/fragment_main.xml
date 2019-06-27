@@ -51,7 +51,6 @@
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
                 android:layout_height="wrap_content">
 
             <ImageButton
@@ -84,6 +83,16 @@
                     android:layout_toStartOf="@id/speedTest"
                     android:layout_marginEnd="8dp"
                     style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    android:layout_width="match_parent"
+                    android:id="@+id/dnsRules"
+                    android:layout_marginTop="12dp"
+                    android:layout_below="@id/startButton"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:text="@string/button_main_dnsrules"
+                    android:background="@drawable/main_roundbuttons"
                     android:layout_height="wrap_content"/>
         </RelativeLayout>
     </LinearLayout>
