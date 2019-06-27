@@ -249,7 +249,9 @@ class Logger private constructor(context: Context) {
                     newString
                 })
                 textBuilder.append("\n")
-                if (printToConsole) println(textBuilder)
+                if (printToConsole) {
+                    oldSystemOut.println(textBuilder)
+                }
                 fileWriter.write(textBuilder.toString())
                 fileWriter.flush()
             }
