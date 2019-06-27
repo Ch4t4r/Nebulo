@@ -36,4 +36,10 @@
 
     <string name="notification_appcrash_title">Nebulo ist abgestürzt</string>
     <string name="notification_appcrash_message">Nebulo ist abgestürzt. Klicke hier, um in das Hauptmenü zu gelangen und, falls nötig, die App neuzustarten.</string>
+<string name="notification_ruleimport_title">DNS Regel Import</string>
+    <string name="notification_ruleimport_message">Importiere Regeln von %1s (%2s)</string>
+    <string name="notification_ruleimport_secondarymessage">Bereite Import vor…</string>
+
+    <string name="notification_ruleimportfinished_title">DNS Regel Import fertig</string>
+    <string name="notification_ruleimportfinished_message">%1d Regeln wurden importiert.</string>
 </resources>
