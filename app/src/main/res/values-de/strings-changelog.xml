@@ -42,4 +42,11 @@
     <string name="changelog_build_32_4">Es wurde eine Ansicht zum Seitenmenü hinzugefügt, welche den aktuell genutzten Server und deren IP-Adressen anzeigt</string>
     <string name="changelog_build_32_5">Die App nutzt intern nun andere Adressen</string>
     <string name="changelog_build_32_6">Es wurden einige Abstürze und Einfrierer behoben</string>
+    <string name="changelog_build_33_1">Die App ist nun auf Türkisch, Indonesisch, Russisch und Niederländisch übersetzt</string>
+    <string name="changelog_build_33_2">Die Benachrichtigung welche angezeigt wird, wenn die App abstürzt und die automatische Absturzmeldung nicht aktiv ist, enthält nun einen Knopf zum Versenden der Logs</string>
+    <string name="changelog_build_33_3">Einige Icons ersetzt</string>
+    <string name="changelog_build_33_4">Einige Abstürze behoben</string>
+    <string name="changelog_build_33_5">Es existiert nun eine Ansicht, um die Geschwindigkeiten verschiedener Dns Server zu vergleichen</string>
+    <string name="changelog_build_33_6">Es können nun für Hosts selbst IP Adressen angegeben werden. Hosts können von URLs importiert oder von Hand eingegeben werden.</string>
+    <string name="changelog_build_33_7">Einige Design-Anpassungen</string>
     </resources>
