@@ -1,2 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_23_1">DoT sunucuları için varsayılan olmayan bağlantı noktaları gösteriliyor</string>
+    <string name="changelog_build_23_2">Değişiklikleri vurgulamak için bu iletişim kutusu eklendi</string>
+    <string name="changelog_build_23_3">Sorgu dışa aktarma ayarı şimdi yüklenip yüklenmediğini gösteren bir iletişim kutusu gösteriyor</string>
+    <string name="changelog_build_23_4">Sunucu içe aktarmasının Android 7\'nin altındaki işletim sistemi sürümlerinde çalışmaması düzeltildi.</string>
+    <string name="changelog_build_23_5">Sorgu günlüğü şimdi sorguyu göndermek için kullanılan protokolü gösterir.</string>
+    <string name="changelog_build_23_6">Artık uygulama ayarlarından PIN korumayı kullanabilirsiniz</string>
+    <string name="changelog_build_24_1">Parmak izi sensörüne sahip olmayan cihazlarda, uygulamanın çökmesine sebep olan hata düzeltildi</string>
+    <string name="changelog_build_25_1">IPv6/IPv6\'nın geliştirilmiş kullanımı - Uygulama yalnızca ikisini de destekleyen ağlarda güvenilir bir şekilde çalışıyor</string>
+    <string name="changelog_build_25_2">Yeni DNS sunucuları eklendi</string>
+    </resources>

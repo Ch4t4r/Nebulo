@@ -103,4 +103,34 @@
 \nWusstest du schon, dass diese App eine Telegramgruppe hat\? Die Gruppe enthält reguläre Updates und ist der perfekte Platz, um Fragen zu stellen und Diskussionen anzuregen.
 \nWir sind eine großartige Gemeinde von über 120 Personen, möchtest du ein Teil davon werden\?</string>
     <string name="dialog_join_group_positive">Gerne!</string>
+<string name="dialog_speedresult_title">Ergebnisse des Geschwindigkeitstests</string>
+    <string name="dialog_speedresult_message">%1d Server getestet
+\n%2d DoT Server erreichbar, %3d nicht erreichbar
+\n%4d DoH Server erreichbar, %5d nicht erreichbar
+\nDurchschnittliche Antwortzeit: %6d ms.
+\n
+\nSchnellster Server: %7s
+\nLangsamster Server: %8s</string>
+
+    <string name="dialog_speedtest_useserver_title">Server auswählen</string>
+    <string name="dialog_speedtest_useserver_message">Möchtest du den Server %1s nutzen\? Er erreichte Platz %2d von %3d mit einer durchschnittlichen Antwortzeit von %4d ms.</string>
+<string name="dialog_deletehostsource_title">%1s löschen\?</string>
+    <string name="dialog_deletehostsource_message">Bist du dir sicher, dass du die Quelle %1s löschen willst\? Dies kann nicht rückgängig gemacht werden, Hosts aus dieser Quelle werden gelöscht.</string>
+
+    <string name="dialog_clearuserrules_title">Alle Dns Regeln leeren\?</string>
+    <string name="dialog_clearuserrules_message">Bist du dir sicher, dass du alle von dir definierten hosts löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
+
+    <string name="dialog_newhostsource_title">Neue Regel Quelle</string>
+    <string name="dialog_newhostsource_name">Name</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newhostsource_error_name_empty">Bitte gebe einen Namen an.</string>
+    <string name="dialog_newhostsource_url_invalid">Bitte gebe eine valide URL an.</string>
+
+    <string name="dialog_newdnsrule_title">Neue Dns Regel</string>
+    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">IPv4 Adresse</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">IPv6 Adresse</string>
+    <string name="dialog_newdnsrule_host_invalid">Bitte gebe einen validen Host an</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Bitte gebe eine valide IPv4 Adresse an</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Bitte gebe eine valide IPv6 Adresse an</string>
 </resources>

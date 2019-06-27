@@ -53,4 +53,18 @@
 
 <string name="about_help_translating">Hilf beim Übersetzen</string>
 
+<string name="activity_label_speed_test">Geschwindigkeitsvergleich</string>
+
+    <string name="window_speedtest_runtest">Den Test starten</string>
+    <string name="window_speedtest_useserver">Diesen Server nutzen</string>
+
+<string name="activity_label_dns_rules">Dns Regeln</string>
+
+    <string name="all_abort">Abbrechen</string>
+    <string name="error_no_webbrowser_installed">Du hast keine App zum ansehen dieses Links installiert.</string>
+
+    <string name="button_main_dnsrules">Dns Regeln</string>
+
+    <string name="window_dnsrules_customhosts">Eigene Hosts</string>
+    <string name="window_dnsrules_customhosts_message">Gebe hier Hosts von Hand ein.</string>
 </resources>
