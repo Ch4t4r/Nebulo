@@ -113,8 +113,8 @@ class Logger private constructor(context: Context) {
     private val logFile: File
     private val fileWriter: BufferedWriter
     private val printToConsole = BuildConfig.DEBUG
-    private var oldPrintStream: PrintStream
-    private var oldSystemOut: PrintStream
+    private var oldPrintStream: PrintStream?
+    private var oldSystemOut: PrintStream?
     private val lock = ReentrantLock()
     var enabled: Boolean = true
     private val id:Int
@@ -135,13 +135,13 @@ class Logger private constructor(context: Context) {
         log("------------------------------", tag = null)
         oldPrintStream = System.err
         oldSystemOut = System.out
-        System.setErr(object : PrintStream(oldPrintStream) {
+        System.setErr(object : PrintStream(oldPrintStream!!) {
             override fun println(x: String?) {
                 super.println(x)
                 log(x ?: "", "System.Err")
             }
         })
-        System.setOut(object : PrintStream(oldSystemOut) {
+        System.setOut(object : PrintStream(oldSystemOut!!) {
             override fun println(x: String?) {
                 super.println(x)
                 log(x ?: "", "System.Out")
@@ -225,8 +225,8 @@ class Logger private constructor(context: Context) {
         enabled = false
         instance = null
         fileWriter.close()
-        System.setErr(oldPrintStream)
-        System.setOut(oldSystemOut)
+        System.setErr(oldPrintStream!!)
+        System.setOut(oldSystemOut!!)
     }
 
     fun log(text: String, tag: String? = "Info", vararg formatArgs: Any) {
@@ -250,7 +250,7 @@ class Logger private constructor(context: Context) {
                 })
                 textBuilder.append("\n")
                 if (printToConsole) {
-                    oldSystemOut.println(textBuilder)
+                    (oldSystemOut ?: System.out).println(textBuilder)
                 }
                 fileWriter.write(textBuilder.toString())
                 fileWriter.flush()
