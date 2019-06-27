@@ -144,4 +144,10 @@
         <item>@string/changelog_build_33_6</item>
         <item>@string/changelog_build_33_7</item>
     </string-array>
+
+    <string name="changelog_build_34_1">Fixed a crash related to the database</string>
+    <string-array name="changelog_build_34">
+        <item>1.0 Beta (Build 34)</item>
+        <item>@string/changelog_build_34_1</item>
+    </string-array>
 </resources>
