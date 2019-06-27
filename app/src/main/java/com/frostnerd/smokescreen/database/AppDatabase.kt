@@ -4,10 +4,16 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.frostnerd.smokescreen.database.dao.CachedResponseDao
 import com.frostnerd.smokescreen.database.dao.DnsQueryDao
+import com.frostnerd.smokescreen.database.dao.DnsRuleDao
+import com.frostnerd.smokescreen.database.dao.HostSourceDao
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.entities.DnsQuery
+import com.frostnerd.smokescreen.database.entities.DnsRule
+import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.repository.CachedResponseRepository
 import com.frostnerd.smokescreen.database.repository.DnsQueryRepository
+import com.frostnerd.smokescreen.database.repository.DnsRuleRepository
+import com.frostnerd.smokescreen.database.repository.HostSourceRepository
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -28,15 +34,19 @@ import com.frostnerd.smokescreen.database.repository.DnsQueryRepository
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-@Database(entities = [CachedResponse::class, DnsQuery::class], version = AppDatabase.currentVersion)
+@Database(entities = [CachedResponse::class, DnsQuery::class, DnsRule::class, HostSource::class], version = AppDatabase.currentVersion)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
-        const val currentVersion:Int = 5
+        const val currentVersion:Int = 6
     }
 
     abstract fun cachedResponseDao(): CachedResponseDao
     abstract fun dnsQueryDao():DnsQueryDao
+    abstract fun dnsRuleDao():DnsRuleDao
+    abstract fun hostSourceDao():HostSourceDao
 
     fun cachedResponseRepository() = CachedResponseRepository(cachedResponseDao())
     fun dnsQueryRepository() = DnsQueryRepository(dnsQueryDao())
+    fun dnsRuleRepository() = DnsRuleRepository(dnsRuleDao())
+    fun hostSourceRepository() = HostSourceRepository(hostSourceDao())
 }

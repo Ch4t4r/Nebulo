@@ -1,9 +1,7 @@
 package com.frostnerd.smokescreen.util.proxy
 
-import com.frostnerd.dnstunnelproxy.DnsHandle
-import com.frostnerd.dnstunnelproxy.DnsPacketProxy
+import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.dnstunnelproxy.QueryListener
-import com.frostnerd.dnstunnelproxy.SimpleDnsCache
 import com.frostnerd.smokescreen.service.DnsVpnService
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.record.A
@@ -36,7 +34,8 @@ class SmokeProxy(
     dnsHandle: DnsHandle,
     proxyBypassHandles: List<DnsHandle>,
     val cache: SimpleDnsCache?,
-    queryListener: QueryListener?
+    queryListener: QueryListener?,
+    localResolver: LocalResolver?
 ) :
     DnsPacketProxy(
         proxyBypassHandles.toMutableList().let {
@@ -45,7 +44,8 @@ class SmokeProxy(
         }.toList(),
         null,
         cache,
-        queryListener = queryListener
+        queryListener = queryListener,
+        localResolver = localResolver
     )
 
 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/dialog_horizontal_margin"
+              android:paddingRight="@dimen/dialog_horizontal_margin"
+              android:paddingTop="@dimen/dialog_vertical_margin"
+              android:paddingBottom="@dimen/dialog_vertical_margin"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/hostTil"
+            app:errorEnabled="true"
+            android:textColorHint="?android:attr/textColorSecondary"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:hint="@string/dialog_newdnsrule_hint_host"
+                android:id="@+id/host"
+                android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ipv4Til"
+            app:errorEnabled="true"
+            android:textColorHint="?android:attr/textColorSecondary"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:hint="@string/dialog_newdnsrule_hint_ipv4address"
+                android:id="@+id/ipv4Address"
+                android:text="0.0.0.0"
+                android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ipv6Til"
+            app:errorEnabled="true"
+            android:textColorHint="?android:attr/textColorSecondary"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:hint="@string/dialog_newdnsrule_hint_ipv6address"
+                android:id="@+id/ipv6Address"
+                android:text="::1"
+                android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

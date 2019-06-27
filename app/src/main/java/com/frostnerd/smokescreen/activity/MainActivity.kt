@@ -18,6 +18,7 @@ import com.frostnerd.navigationdraweractivity.items.createMenu
 import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
@@ -109,6 +110,10 @@ class MainActivity : NavigationDrawerActivity() {
                 }, getString(R.string.dialog_crashreporting_negative) to { dialog, _ ->
                     dialog.dismiss()
                 }, null)
+        }
+        if(resources.getBoolean(R.bool.add_default_hostsources) && !getPreferences().hostSourcesPopulated) {
+            getDatabase().hostSourceRepository().insertAllAsync(DnsRuleActivity.defaultHostSources)
+            getPreferences().hostSourcesPopulated = true
         }
     }
 

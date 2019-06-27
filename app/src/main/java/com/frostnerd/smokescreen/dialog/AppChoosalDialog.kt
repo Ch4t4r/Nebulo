@@ -105,7 +105,7 @@ class AppChoosalDialog(
                     this.viewBuilder = { parent, _ ->
                         layoutInflater.inflate(R.layout.item__dialog_app_choosal, parent, false)
                     }
-                    this.viewHolderBuilder = { view ->
+                    this.viewHolderBuilder = { view, _ ->
                         AppViewHolder(view)
                     }
                     this.bindNonModelView = { _, _ -> throw IllegalStateException() }
