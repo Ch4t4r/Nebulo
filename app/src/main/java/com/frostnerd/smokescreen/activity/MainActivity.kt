@@ -1,10 +1,12 @@
 package com.frostnerd.smokescreen.activity
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
@@ -194,12 +196,16 @@ class MainActivity : NavigationDrawerActivity() {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
             } catch (e: android.content.ActivityNotFoundException) {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                try {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                        )
                     )
-                )
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(this, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show()
+                }
             }
             getPreferences().hasRatedApp = true
         }
