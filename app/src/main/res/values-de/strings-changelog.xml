@@ -49,4 +49,9 @@
     <string name="changelog_build_33_5">Es existiert nun eine Ansicht, um die Geschwindigkeiten verschiedener Dns Server zu vergleichen</string>
     <string name="changelog_build_33_6">Es können nun für Hosts selbst IP Adressen angegeben werden. Hosts können von URLs importiert oder von Hand eingegeben werden.</string>
     <string name="changelog_build_33_7">Einige Design-Anpassungen</string>
+    <string name="changelog_build_34_1">Es wurde ein Fehler mit der Datenbank behoben</string>
+    <string name="changelog_build_35_1">Es wurden einige Abstürze bei den Dns Regeln behoben</string>
+    <string name="changelog_build_35_2">Abbrechen des Dns Regeln Imports friert die Oberfläche nicht mehr ein</string>
+    <string name="changelog_build_35_3">Kleinere Leistungsverbesserungen für dns-over-https</string>
+    <string name="changelog_build_35_4">Die Hostquellen der Dns Regeln zeigen nun, wieviele Regeln aus diesen importiert wurden</string>
     </resources>
