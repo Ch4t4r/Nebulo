@@ -139,6 +139,18 @@ class RuleImportService : Service() {
         }
     }
 
+    private fun updateNotificationFinishing() {
+        if(notification != null) {
+            val notificationText = getString(R.string.notification_ruleimport_tertiarymessage)
+            notification?.setContentText(
+                notificationText
+            )
+            notification?.setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
+            notification?.setProgress(1, 1, true)
+            startForeground(3, notification!!.build())
+        }
+    }
+
     private fun startWork() {
         importJob = GlobalScope.launch {
             val dnsRuleDao = getDatabase().dnsRuleDao()
@@ -183,6 +195,7 @@ class RuleImportService : Service() {
                 } else return@forEach
             }
             if (importJob != null && importJob?.isCancelled == false) {
+                updateNotificationFinishing()
                 dnsRuleDao.deleteMarkedRules()
                 dnsRuleDao.commitStaging()
                 showSuccessNotification()
