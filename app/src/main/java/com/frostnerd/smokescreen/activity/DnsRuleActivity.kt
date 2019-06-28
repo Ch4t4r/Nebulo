@@ -383,7 +383,7 @@ class DnsRuleActivity : BaseActivity() {
                 HostSource("AdAway", "https://adaway.org/hosts.txt"),
                 HostSource("StevenBlack unified", "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"),
                 HostSource("CoinBlockerList", "https://zerodot1.gitlab.io/CoinBlockerLists/hosts"),
-                HostSource("Malewaredomainlist.com", "http://www.malwaredomainlist.com/hostslist/hosts.txt"),
+                HostSource("Malewaredomainlist.com", "https://www.malwaredomainlist.com/hostslist/hosts.txt"),
                 HostSource("PiHoleBlocklist Android tracking", "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/android-tracking.txt"),
                 HostSource("Quidsup NoTrack Tracker Blocklist", "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt"),
                 HostSource("someonewhocares.org", "https://someonewhocares.org/hosts/zero/hosts")
