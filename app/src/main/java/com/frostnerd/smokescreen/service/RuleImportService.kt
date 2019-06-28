@@ -46,7 +46,8 @@ import java.util.regex.Pattern
  */
 class RuleImportService : Service() {
     private var importJob: Job? = null
-    private val DNSMASQ_MATCHER = Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:$|\\s+.*)").matcher("")
+    private val DNSMASQ_MATCHER =
+        Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:$|\\s+.*)").matcher("")
     private val HOSTS_MATCHER =
         Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([a-zA-Z0-9._\\-]+).*")
             .matcher("")
@@ -93,6 +94,7 @@ class RuleImportService : Service() {
             notification!!.setUsesChronometer(true)
             notification!!.setContentTitle(getString(R.string.notification_ruleimport_title))
             notification!!.setContentText(getString(R.string.notification_ruleimport_secondarymessage))
+            notification!!.setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_ruleimport_secondarymessage)))
             notification!!.setProgress(100, 0, true)
             val abortPendingAction = PendingIntent.getService(
                 this,
@@ -118,13 +120,15 @@ class RuleImportService : Service() {
 
     private fun updateNotification(source: HostSource, count: Int, maxCount: Int) {
         if (notification != null) {
-            notification?.setContentText(
-                getString(
-                    R.string.notification_ruleimport_message,
-                    source.name,
-                    source.source
-                )
+            val notificationText = getString(
+                R.string.notification_ruleimport_message,
+                source.name,
+                source.source
             )
+            notification?.setContentText(
+                notificationText
+            )
+            notification?.setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
             notification?.setProgress(maxCount, count, false)
             startForeground(3, notification!!.build())
         }
@@ -142,7 +146,7 @@ class RuleImportService : Service() {
                     updateNotification(it, count, maxCount.toInt())
                     count++
                     if (it.isFileSource) {
-                        var stream:FileInputStream? = null
+                        var stream: FileInputStream? = null
                         try {
                             val file = File(it.source)
                             if (file.canRead()) {
@@ -155,7 +159,7 @@ class RuleImportService : Service() {
                             stream?.close()
                         }
                     } else {
-                        var response:Response? = null
+                        var response: Response? = null
                         try {
                             val request = Request.Builder().url(it.source)
                             response = httpClient.newCall(request.build()).execute()
@@ -164,7 +168,7 @@ class RuleImportService : Service() {
                             } else {
                                 log("Downloading resource of $it failed.")
                             }
-                        } catch (ex:java.lang.Exception) {
+                        } catch (ex: java.lang.Exception) {
                             log("Downloading resource of $it failed ($ex)")
                         } finally {
                             response?.body()?.close()
@@ -206,7 +210,7 @@ class RuleImportService : Service() {
                                     log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
                                     iterator.remove()
                                 } else parsers[matcher] = hosts.copy(hosts.first + 1)
-                                if(parsers.isEmpty()) {
+                                if (parsers.isEmpty()) {
                                     log("No parsers left. Aborting.")
                                 }
                             }
