@@ -42,4 +42,6 @@
 
     <string name="notification_ruleimportfinished_title">DNS Regel Import fertig</string>
     <string name="notification_ruleimportfinished_message">%1d Regeln wurden importiert.</string>
-</resources>
+<string name="notification_ruleimport_tertiarymessage">Beende Import…</string>
+
+    </resources>
