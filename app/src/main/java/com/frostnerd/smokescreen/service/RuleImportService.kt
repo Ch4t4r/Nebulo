@@ -19,6 +19,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import org.minidns.record.Record
 import java.io.*
 import java.lang.IllegalStateException
@@ -154,13 +155,19 @@ class RuleImportService : Service() {
                             stream?.close()
                         }
                     } else {
-                        val request = Request.Builder().url(it.source)
-                        val response = httpClient.newCall(request.build()).execute()
-                        if (response.isSuccessful) {
-                            processLines(it, response.body()!!.byteStream())
-                            response.close()
-                        } else {
-                            log("Downloading resource of $it failed.")
+                        var response:Response? = null
+                        try {
+                            val request = Request.Builder().url(it.source)
+                            response = httpClient.newCall(request.build()).execute()
+                            if (response.isSuccessful) {
+                                processLines(it, response.body()!!.byteStream())
+                            } else {
+                                log("Downloading resource of $it failed.")
+                            }
+                        } catch (ex:java.lang.Exception) {
+                            log("Downloading resource of $it failed ($ex)")
+                        } finally {
+                            response?.body()?.close()
                         }
                     }
                 }
