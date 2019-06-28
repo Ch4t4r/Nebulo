@@ -57,6 +57,7 @@ class DnsRuleActivity : BaseActivity() {
     private lateinit var adapterDataSource: ListDataSource<HostSource>
     private var importDoneReceiver:BroadcastReceiver? = null
     private lateinit var userDnsRules:MutableList<DnsRule>
+    private var refreshProgressShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +91,7 @@ class DnsRuleActivity : BaseActivity() {
             } else {
                 startService(Intent(this, RuleImportService::class.java))
                 refreshProgress.show()
+                refreshProgressShown = true
             }
         }
         sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
@@ -232,9 +234,9 @@ class DnsRuleActivity : BaseActivity() {
         list.addItemDecoration(SpaceItemDecorator(this))
         list.adapter = sourceAdapter
         if(isServiceRunning(RuleImportService::class.java)) {
-            refresh.isEnabled = false
             refreshProgress.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
                 refreshProgress.show()
+                refreshProgressShown = true
             }
         }
     }
@@ -242,12 +244,12 @@ class DnsRuleActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         importDoneReceiver = registerLocalReceiver(IntentFilter(RuleImportService.BROADCAST_IMPORT_DONE)) {
-            refresh.isEnabled = true
             refreshProgress.hide()
+            refreshProgressShown = false
         }
-        if(!isServiceRunning(RuleImportService::class.java) && !refresh.isEnabled) {
-            refresh.isEnabled = true
+        if(!isServiceRunning(RuleImportService::class.java) && refreshProgressShown) {
             refreshProgress.hide()
+            refreshProgressShown = false
         }
     }
 

@@ -77,10 +77,13 @@ class RuleImportService : Service() {
         importJob?.let {
             importJob = null
             it.cancel()
-            val dnsRuleDao = getDatabase().dnsRuleDao()
-            dnsRuleDao.deleteStagedRules()
-            dnsRuleDao.commitStaging()
+            GlobalScope.launch {
+                val dnsRuleDao = getDatabase().dnsRuleDao()
+                dnsRuleDao.deleteStagedRules()
+                dnsRuleDao.commitStaging()
+            }
             stopForeground(true)
+            sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
             stopSelf()
         }
     }
@@ -187,6 +190,7 @@ class RuleImportService : Service() {
             log("All imports finished.")
             importJob = null
             stopForeground(true)
+            sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
             stopSelf()
         }
     }
@@ -267,7 +271,6 @@ class RuleImportService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         abortImport()
-        sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
     }
 
     override fun onBind(intent: Intent?): IBinder? {
