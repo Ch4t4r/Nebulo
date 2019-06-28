@@ -60,4 +60,6 @@
 
     <string name="window_dnsrules_customhosts">Aangepaste hosts</string>
     <string name="window_dnsrules_customhosts_message">Definieer hier al uw aangepaste hosts.</string>
+<string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regels van deze bron: -</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regels van deze bron: %1d</string>
 </resources>
