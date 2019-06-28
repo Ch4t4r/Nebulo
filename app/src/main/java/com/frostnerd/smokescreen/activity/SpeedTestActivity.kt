@@ -156,7 +156,9 @@ class SpeedTestActivity : BaseActivity() {
             wasStartedBefore = true
             val testsLeft = testResults!!.shuffled()
             var cnt = 0
-            startTest.text = "0/${testsLeft.size}"
+            runOnUiThread {
+                startTest.text = "0/${testsLeft.size}"
+            }
             testsLeft.forEach {
                 if(testJob?.isCancelled == false) {
                     it.started = true
