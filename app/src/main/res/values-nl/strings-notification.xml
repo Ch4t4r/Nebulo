@@ -24,4 +24,10 @@
 
     <string name="notification_appcrash_title">Nebulo is gecrasht</string>
     <string name="notification_appcrash_message">Nebulo is gecrasht. Klik hier om naar het hoofdmenu te gaan en de app indien nodig opnieuw te starten.</string>
+<string name="notification_ruleimport_title">DNS-regel importeren</string>
+    <string name="notification_ruleimport_message">Importeren van DNS-regels uit %1s (%2s)</string>
+    <string name="notification_ruleimport_secondarymessage">Importeren voorbereiden …</string>
+
+    <string name="notification_ruleimportfinished_title">DNS-regel importeren voltooid</string>
+    <string name="notification_ruleimportfinished_message">%1d regels zijn geïmporteerd.</string>
 </resources>
