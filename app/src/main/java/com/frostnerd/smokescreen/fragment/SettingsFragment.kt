@@ -413,20 +413,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun showBatteryOptimizationDialog(enablePreference: () -> Unit) {
-        AlertDialog.Builder(requireContext(), requireContext().getPreferences().theme.dialogStyle)
-            .setTitle(R.string.dialog_batteryoptimization_title)
-            .setMessage(R.string.dialog_batteryoptimization_message)
-            .setNegativeButton(android.R.string.cancel) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .setPositiveButton(R.string.dialog_batteryoptimization_whitelist) { dialog, _ ->
-                startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS))
-                dialog.dismiss()
-            }
-            .setNeutralButton(R.string.dialog_batteryoptimization_ignore) { dialog, _ ->
-                enablePreference()
-                dialog.dismiss()
-            }.show()
+        val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+        if(intent.resolveActivity(context!!.packageManager) == null) {
+            enablePreference()
+        } else {
+            AlertDialog.Builder(requireContext(), requireContext().getPreferences().theme.dialogStyle)
+                .setTitle(R.string.dialog_batteryoptimization_title)
+                .setMessage(R.string.dialog_batteryoptimization_message)
+                .setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(R.string.dialog_batteryoptimization_whitelist) { dialog, _ ->
+                    startActivity(intent)
+                    dialog.dismiss()
+                }
+                .setNeutralButton(R.string.dialog_batteryoptimization_ignore) { dialog, _ ->
+                    enablePreference()
+                    dialog.dismiss()
+                }.show()
+        }
     }
 
     private fun showExcludedAppsDialog() {
