@@ -67,4 +67,6 @@
 
     <string name="window_dnsrules_customhosts">Eigene Hosts</string>
     <string name="window_dnsrules_customhosts_message">Gebe hier Hosts von Hand ein.</string>
+<string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regeln aus dieser Quelle: -</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regeln aus dieser Quelle: %1d</string>
 </resources>
