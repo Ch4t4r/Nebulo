@@ -49,4 +49,9 @@
     <string name="changelog_build_33_5">Een weergave toegevoegd om dns-server snelheden te testen</string>
     <string name="changelog_build_33_6">U kunt nu aangepaste IP-adressen voor hosts opgeven. Hosts kunnen worden geïmporteerd uit URL\'s en handmatig worden toegevoegd.</string>
     <string name="changelog_build_33_7">Enkele aanpassingen in het ontwerp</string>
+    <string name="changelog_build_34_1">Crash gerelateerd aan de database gerepareerd</string>
+    <string name="changelog_build_35_1">Enkele crashes verholpen gerelateerd aan het importeren van DNS regels</string>
+    <string name="changelog_build_35_2">Het afbreken van de import van de dns regel bevriest nu de UI niet meer</string>
+    <string name="changelog_build_35_3">Kleine prestatieverbeteringen voor dns-over-https</string>
+    <string name="changelog_build_35_4">De host bronnen van de dns-regels laten nu zien hoeveel regels er van hen zijn geïmporteerd</string>
     </resources>
