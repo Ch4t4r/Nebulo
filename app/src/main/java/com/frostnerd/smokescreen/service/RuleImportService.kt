@@ -75,12 +75,14 @@ class RuleImportService : Service() {
 
     private fun abortImport() {
         importJob?.let {
+            importJob = null
             it.cancel()
             val dnsRuleDao = getDatabase().dnsRuleDao()
             dnsRuleDao.deleteStagedRules()
             dnsRuleDao.commitStaging()
+            stopForeground(true)
+            stopSelf()
         }
-        importJob = null
     }
 
     private fun createNotification() {
@@ -174,16 +176,16 @@ class RuleImportService : Service() {
                             response?.body?.close()
                         }
                     }
-                }
-                log("Import of $it finished")
+                    log("Import of $it finished")
+                } else return@forEach
             }
             if (importJob != null && importJob?.isCancelled == false) {
                 dnsRuleDao.deleteMarkedRules()
                 dnsRuleDao.commitStaging()
+                showSuccessNotification()
             }
             log("All imports finished.")
             importJob = null
-            showSuccessNotification()
             stopForeground(true)
             stopSelf()
         }
