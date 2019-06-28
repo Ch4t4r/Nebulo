@@ -30,4 +30,6 @@
 
     <string name="notification_ruleimportfinished_title">DNS-regel importeren voltooid</string>
     <string name="notification_ruleimportfinished_message">%1d regels zijn geïmporteerd.</string>
-</resources>
+<string name="notification_ruleimport_tertiarymessage">Importeren voltooien…</string>
+
+    </resources>
