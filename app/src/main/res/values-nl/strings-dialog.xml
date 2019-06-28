@@ -103,4 +103,35 @@
 \nWij zijn een geweldige community van meer dan 120 mensen, wilt u er deel van uitmaken\?</string>
     <string name="dialog_join_group_positive">Ja!</string>
 
-    </resources>
+    <string name="dialog_speedresult_title">Snelheid testresultaten</string>
+    <string name="dialog_speedresult_message">%1d servers getest
+\n %2d DoT servers bereikbaar, %3d niet bereikbaar
+\n %4d DoH servers bereikbaar, %5d niet bereikbaar
+\n Gemiddelde responstijd: %6d ms.
+\n
+\n Snelste server: %7s
+\n Langzaamste server: %8s</string>
+
+    <string name="dialog_speedtest_useserver_title">Selecteer server</string>
+    <string name="dialog_speedtest_useserver_message">Wilt u de server %1s gebruiken\? Het staat op plaats %2d van %3d met een responstijd van %4d ms.</string>
+
+    <string name="dialog_deletehostsource_title">Verwijderen %1s\?</string>
+    <string name="dialog_deletehostsource_message">Weet u zeker dat u de host bron %1s wilt verwijderen\? Dit kan niet ongedaan worden gemaakt, de hosts van deze bron zullen worden verwijderd.</string>
+
+    <string name="dialog_clearuserrules_title">Alle dns regels wissen\?</string>
+    <string name="dialog_clearuserrules_message">Wilt u alle dns regels wissen\? Dit kan niet ongedaan gemaakt worden.</string>
+
+    <string name="dialog_newhostsource_title">Nieuwe regel bron</string>
+    <string name="dialog_newhostsource_name">Naam</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newhostsource_error_name_empty">Geef a.u.b een naam op.</string>
+    <string name="dialog_newhostsource_url_invalid">Geef a.u.b een geldige URL op.</string>
+
+    <string name="dialog_newdnsrule_title">Nieuwe Dns regel</string>
+    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">IPv4 adres</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">IPv6 adres</string>
+    <string name="dialog_newdnsrule_host_invalid">Geef a.u.b een geldige host op</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Geef a.u.b een geldig IPv4 adres op</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Geef a.u.b een geldig IPv6 adres op</string>
+</resources>
