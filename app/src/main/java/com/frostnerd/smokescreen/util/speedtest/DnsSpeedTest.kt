@@ -97,7 +97,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
             val start = System.currentTimeMillis()
             response = httpClient.newCall(requestBuilder.build()).execute()
             if(!response.isSuccessful) return null
-            val body = response.body() ?: return null
+            val body = response.body ?: return null
             val bytes = body.bytes()
             val time = (System.currentTimeMillis() - start).toInt()
 
@@ -110,7 +110,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
         } catch (ex: Exception) {
             return null
         } finally {
-            if(response?.body() != null) response.close()
+            if(response?.body != null) response.close()
         }
     }
 

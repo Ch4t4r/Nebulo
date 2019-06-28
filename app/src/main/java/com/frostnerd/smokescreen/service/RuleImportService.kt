@@ -164,14 +164,14 @@ class RuleImportService : Service() {
                             val request = Request.Builder().url(it.source)
                             response = httpClient.newCall(request.build()).execute()
                             if (response.isSuccessful) {
-                                processLines(it, response.body()!!.byteStream())
+                                processLines(it, response.body!!.byteStream())
                             } else {
                                 log("Downloading resource of $it failed.")
                             }
                         } catch (ex: java.lang.Exception) {
                             log("Downloading resource of $it failed ($ex)")
                         } finally {
-                            response?.body()?.close()
+                            response?.body?.close()
                         }
                     }
                 }
