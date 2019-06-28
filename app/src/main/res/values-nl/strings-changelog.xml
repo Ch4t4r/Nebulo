@@ -42,4 +42,11 @@
     <string name="changelog_build_32_4">Er is een weergave toegevoegd aan het menu met de momenteel gebruikte server en hun IP-adressen</string>
     <string name="changelog_build_32_5">De app maakt nu gebruik van verschillende interne adressen</string>
     <string name="changelog_build_32_6">Enkele crashes verholpen en app vastlopers verholpen</string>
+    <string name="changelog_build_33_1">Turkse, Indonesische, Russische en Nederlandse vertalingen toegevoegd</string>
+    <string name="changelog_build_33_2">De melding die wordt weergegeven wanneer de app crasht wanneer automatische crash rapportage is uitgeschakeld, heeft nu een knop om de logbestanden te verzenden</string>
+    <string name="changelog_build_33_3">Een aantal iconen vervangen</string>
+    <string name="changelog_build_33_4">Enkele crashes opgelost</string>
+    <string name="changelog_build_33_5">Een weergave toegevoegd om dns-server snelheden te testen</string>
+    <string name="changelog_build_33_6">U kunt nu aangepaste IP-adressen voor hosts opgeven. Hosts kunnen worden geïmporteerd uit URL\'s en handmatig worden toegevoegd.</string>
+    <string name="changelog_build_33_7">Enkele aanpassingen in het ontwerp</string>
     </resources>
