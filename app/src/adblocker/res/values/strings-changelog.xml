@@ -59,4 +59,12 @@
         <item>1.0 Beta-Adblock (Build 35)</item>
         <item>@string/changelog_build_34_1</item>
     </string-array>
+
+    <string-array name="changelog_build_36">
+        <item>1.0 Beta-Adblock (Build 36)</item>
+        <item>@string/changelog_build_35_1</item>
+        <item>@string/changelog_build_35_2</item>
+        <item>@string/changelog_build_35_3</item>
+        <item>@string/changelog_build_35_4</item>
+    </string-array>
 </resources>

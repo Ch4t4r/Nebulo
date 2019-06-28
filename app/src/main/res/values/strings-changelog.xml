@@ -150,4 +150,16 @@
         <item>1.0 Beta (Build 34)</item>
         <item>@string/changelog_build_34_1</item>
     </string-array>
+
+    <string name="changelog_build_35_1">Fixed some crashes related to the dns rule import</string>
+    <string name="changelog_build_35_2">Aborting the dns rule import now doesn\'t freeze the UI anymore</string>
+    <string name="changelog_build_35_3">Small performance improvement for dns-over-https</string>
+    <string name="changelog_build_35_4">The host sources for the dns rules now show how many rules were imported from them</string>
+    <string-array name="changelog_build_35">
+        <item>1.0 Beta (Build 35)</item>
+        <item>@string/changelog_build_35_1</item>
+        <item>@string/changelog_build_35_2</item>
+        <item>@string/changelog_build_35_3</item>
+        <item>@string/changelog_build_35_4</item>
+    </string-array>
 </resources>
