@@ -15,6 +15,7 @@ import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
+import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
@@ -32,6 +33,7 @@ import kotlinx.android.synthetic.main.item_datasource.view.enable
 import kotlinx.android.synthetic.main.item_datasource.view.text
 import kotlinx.android.synthetic.main.item_datasource_rules.view.*
 import kotlinx.android.synthetic.main.item_dnsrule_host.view.*
+import kotlin.system.measureTimeMillis
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -55,8 +57,9 @@ class DnsRuleActivity : BaseActivity() {
     private lateinit var sourceAdapter: RecyclerView.Adapter<*>
     private lateinit var sourceAdapterList: MutableList<HostSource>
     private lateinit var adapterDataSource: ListDataSource<HostSource>
-    private var importDoneReceiver:BroadcastReceiver? = null
     private lateinit var userDnsRules:MutableList<DnsRule>
+    private lateinit var sourceRuleCount:MutableMap<HostSource, Int?>
+    private var importDoneReceiver:BroadcastReceiver? = null
     private var refreshProgressShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,6 +98,9 @@ class DnsRuleActivity : BaseActivity() {
             }
         }
         sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
+        sourceRuleCount = sourceAdapterList.map {
+            it to (null as Int?)
+        }.toMap().toMutableMap()
         adapterDataSource = ListDataSource(sourceAdapterList)
         var showUserRules = false
         var userRuleCount = 0
@@ -203,8 +209,18 @@ class DnsRuleActivity : BaseActivity() {
             getItemCount = {
                 sourceAdapterList.size + 1 + userRuleCount
             }
-            bindModelView = { viewHolder, _, data ->
+            bindModelView = { viewHolder, position, data ->
                 (viewHolder as SourceViewHolder).display(data)
+                when {
+                    sourceRuleCount[data] != null -> viewHolder.ruleCount.text = getString(R.string.window_dnsrules_customhosts_hostsource_rulecount, sourceRuleCount[data])
+                    data.enabled -> launchWithLifecylce(false) {
+                        sourceRuleCount[data] = getDatabase().dnsRuleDao().getCountForHostSource(data.id)
+                        runOnUiThread {
+                            sourceAdapter.notifyItemChanged(position)
+                        }
+                    }
+                    else -> viewHolder.ruleCount.text = getString(R.string.window_dnsrules_customhosts_hostsource_rulecount_pending)
+                }
             }
             bindNonModelView = { viewHolder, position ->
                 if(viewHolder is CustomRulesViewHolder) {
@@ -245,6 +261,12 @@ class DnsRuleActivity : BaseActivity() {
         super.onResume()
         importDoneReceiver = registerLocalReceiver(IntentFilter(RuleImportService.BROADCAST_IMPORT_DONE)) {
             refreshProgress.hide()
+            sourceRuleCount.keys.forEach {
+                sourceRuleCount[it] = null
+            }
+            sourceAdapterList.forEachIndexed { index, hostSource ->
+                if(hostSource.enabled) sourceAdapter.notifyItemChanged(index)
+            }
             refreshProgressShown = false
         }
         if(!isServiceRunning(RuleImportService::class.java) && refreshProgressShown) {
@@ -283,6 +305,7 @@ class DnsRuleActivity : BaseActivity() {
         val subText = view.subText
         val enabled = view.enable
         val delete = view.delete
+        val ruleCount = view.ruleCount
         lateinit var source: HostSource
 
         init {
