@@ -22,7 +22,9 @@ import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
+import com.frostnerd.smokescreen.dialog.ExportDnsRulesDialog
 import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
+import com.frostnerd.smokescreen.service.RuleExportService
 import com.frostnerd.smokescreen.service.RuleImportService
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import kotlinx.android.synthetic.main.activity_dns_rules.*
@@ -63,7 +65,9 @@ class DnsRuleActivity : BaseActivity() {
     private lateinit var userDnsRules:MutableList<DnsRule>
     private lateinit var sourceRuleCount:MutableMap<HostSource, Int?>
     private var importDoneReceiver:BroadcastReceiver? = null
+    private var exportDoneReceiver:BroadcastReceiver? = null
     private var refreshProgressShown = false
+    private var exportProgressShown = false
     private var fileChosenRequestCode = 5
     private var fileChosenCallback: ((Uri) -> Unit)? = null
 
@@ -106,6 +110,30 @@ class DnsRuleActivity : BaseActivity() {
                 startService(Intent(this, RuleImportService::class.java))
                 refreshProgress.show()
                 refreshProgressShown = true
+            }
+        }
+        export.setOnClickListener {
+            if (isServiceRunning(RuleExportService::class.java)) {
+                startService(Intent(this, RuleExportService::class.java).putExtra("abort", true))
+            } else {
+                ExportDnsRulesDialog(this) { exportFromSources, exportUserRules ->
+                    fileChosenCallback = {
+                        val intent = Intent(this, RuleExportService::class.java).apply {
+                            putExtra(
+                                "params",
+                                RuleExportService.Params(exportFromSources, exportUserRules, it.toString())
+                            )
+                        }
+                        startService(intent)
+                        exportProgress.show()
+                        exportProgressShown = true
+                    }
+                    startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                        addCategory(Intent.CATEGORY_OPENABLE)
+                        putExtra(Intent.EXTRA_TITLE, "dnsRuleExport.txt")
+                        type = "text/*"
+                    }, fileChosenRequestCode)
+                }.show()
             }
         }
         sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
@@ -268,6 +296,12 @@ class DnsRuleActivity : BaseActivity() {
                 refreshProgressShown = true
             }
         }
+        if(isServiceRunning(RuleExportService::class.java)) {
+            exportProgress.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+                exportProgressShown = true
+                exportProgress.show()
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -290,15 +324,24 @@ class DnsRuleActivity : BaseActivity() {
             }
             refreshProgressShown = false
         }
+        exportDoneReceiver = registerLocalReceiver(IntentFilter(RuleExportService.BROADCAST_EXPORT_DONE)) {
+            exportProgress.hide()
+            exportProgressShown = false
+        }
         if(!isServiceRunning(RuleImportService::class.java) && refreshProgressShown) {
             refreshProgress.hide()
             refreshProgressShown = false
+        }
+        if(!isServiceRunning(RuleExportService::class.java) && exportProgressShown) {
+            exportProgress.show()
+            exportProgressShown = false
         }
     }
 
     override fun onPause() {
         super.onPause()
         unregisterLocalReceiver(importDoneReceiver)
+        unregisterLocalReceiver(exportDoneReceiver)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
