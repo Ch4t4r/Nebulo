@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:paddingLeft="@dimen/dialog_horizontal_margin"
+              android:paddingRight="@dimen/dialog_horizontal_margin"
+              android:paddingTop="@dimen/dialog_vertical_margin"
+              android:paddingBottom="@dimen/dialog_vertical_margin"
+              android:layout_height="match_parent">
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:id="@+id/exportSources"
+            android:text="@string/dialog_exportdnsrules_export_sources"
+            android:textColor="?android:attr/textColor"
+            android:checked="true"
+            android:layout_height="wrap_content"/>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:id="@+id/exportUserRules"
+            android:text="@string/dialog_exportdnsrules_export_user_rules"
+            android:checked="true"
+            android:textColor="?android:attr/textColor"
+            android:layout_height="wrap_content"/>
+</LinearLayout>
