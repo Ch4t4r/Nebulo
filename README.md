@@ -1,4 +1,4 @@
-![Icon](app/src/main/res/mipmap-mdpi/ic_launcher_round.png)  
+![Icon](app/src/main/res/mipmap-mdpi/ic_launcher.png)  
 
 # Nebulo
 Nebulo is a free, open-source, non-root and small sized DNS changer utilizing dns-over-https and dns-over-tls to bring privacy and security to your phone.
