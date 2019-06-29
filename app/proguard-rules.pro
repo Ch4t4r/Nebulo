@@ -27,6 +27,12 @@
      public static *** v(...);
 }
 
+-assumenosideeffects class com.frostnerd.vpntunnelproxy.Logger {
+        ** fine(...);
+        ** finer(...);
+        ** finest(...);
+}
+
 -keepclassmembernames class kotlinx.** {
     volatile <fields>;
 }
