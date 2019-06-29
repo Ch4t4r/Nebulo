@@ -19,6 +19,7 @@ Go to the [play store](https://play.google.com/store/apps/details?id=com.frostne
 1. Add the repository on your F-Droid app by clicking [this link](https://fdroid.frostnerd.com/fdroid/repo?fingerprint=74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26).
     - Or add it yourself, fdroid.frostnerd.com/fdroid with fingerprint 74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26
     - You can use the [QR-Code as well](material/fdroid_qr.jpg) .
+    - I recommend using [Aurora Droid](https://gitlab.com/AuroraOSS/auroradroid) , it contains the repository by default
 2. Update your repositories (by pulling down to refresh)
 3. Search for Nebulo
 4. Download the app.
