@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.frostnerd.smokescreen.R
@@ -163,19 +164,20 @@ class RuleImportService : Service() {
                     updateNotification(it, count, maxCount.toInt())
                     count++
                     if (it.isFileSource) {
-                        var stream: FileInputStream? = null
+                        log("Importing from file")
+                        var stream: InputStream? = null
                         try {
-                            val file = File(it.source)
-                            if (file.canRead()) {
-                                stream = FileInputStream(file)
-                                processLines(it, stream)
-                            }
+                            val uri = Uri.parse(it.source)
+                            stream = contentResolver.openInputStream(uri)
+                            processLines(it, stream)
                         } catch (ex: Exception) {
+                            log("Import failed: $ex")
                             ex.printStackTrace()
                         } finally {
                             stream?.close()
                         }
                     } else {
+                        log("Importing from URL")
                         var response: Response? = null
                         try {
                             val request = Request.Builder().url(it.source)
@@ -192,7 +194,10 @@ class RuleImportService : Service() {
                         }
                     }
                     log("Import of $it finished")
-                } else return@forEach
+                } else {
+                    log("Aborting import.")
+                    return@forEach
+                }
             }
             if (importJob != null && importJob?.isCancelled == false) {
                 updateNotificationFinishing()
