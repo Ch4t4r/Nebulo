@@ -766,7 +766,7 @@ class DnsVpnService : VpnService(), Runnable {
             }
 
             override fun logMessage(message: String, level: Level) {
-                if(level >= Level.INFO) {
+                if(level >= Level.INFO || (BuildConfig.DEBUG && level >= Level.FINE)) {
                     log(message, "VPN-LIBRARY, $level")
                 }
             }
