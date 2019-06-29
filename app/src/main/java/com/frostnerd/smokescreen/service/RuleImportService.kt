@@ -253,15 +253,15 @@ class RuleImportService : Service() {
         parsers: Map<Matcher, Pair<Int, MutableList<Host>>>,
         forceCommit: Boolean = false
     ) {
-        if (parsers.size == 1) {
-            val hosts = parsers[parsers.keys.first()]!!.second
-            if (hosts.size > 5000 || forceCommit) {
-                getDatabase().dnsRuleDao().insertAll(hosts.map {
-                    DnsRule(it.type, it.host, it.target, null, source.id)
-                })
-                ruleCount += hosts.size
-                hosts.clear()
-            }
+        val hosts = parsers[parsers.keys.minBy {
+            parsers[it]!!.first
+        } ?: parsers.keys.first()]!!.second
+        if (hosts.size > 5000 || forceCommit) {
+            getDatabase().dnsRuleDao().insertAll(hosts.map {
+                DnsRule(it.type, it.host, it.target, null, source.id)
+            })
+            ruleCount += hosts.size
+            hosts.clear()
         }
     }
 
