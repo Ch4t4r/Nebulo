@@ -109,7 +109,7 @@ class RuleExportService : Service() {
         exportJob = GlobalScope.launch {
             var stream:BufferedWriter? = null
             try {
-                stream = BufferedWriter(OutputStreamWriter(contentResolver.openOutputStream(params.targetUri)!!))
+                stream = BufferedWriter(OutputStreamWriter(contentResolver.openOutputStream(Uri.parse(params.targetUri))!!))
                 var ruleCount = 0
                 var writtenCount = 0
                 var nonUserRuleCount: Int? = null
@@ -214,6 +214,6 @@ class RuleExportService : Service() {
     data class Params(
         val exportFromSources: Boolean,
         val exportUserRules: Boolean,
-        val targetUri: Uri
+        val targetUri: String
     ) : Serializable
 }
