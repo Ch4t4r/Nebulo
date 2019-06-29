@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.activity
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -63,6 +64,8 @@ class DnsRuleActivity : BaseActivity() {
     private lateinit var sourceRuleCount:MutableMap<HostSource, Int?>
     private var importDoneReceiver:BroadcastReceiver? = null
     private var refreshProgressShown = false
+    private var fileChosenRequestCode = 5
+    private var fileChosenCallback: ((Uri) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +76,7 @@ class DnsRuleActivity : BaseActivity() {
             userDnsRules = it.toMutableList()
         }, coroutineScope = LifecycleCoroutineScope(this, ui = false))
         addSource.setOnClickListener {
-            NewHostSourceDialog(this) { newSource ->
+            NewHostSourceDialog(this, onSourceCreated = { newSource ->
                 if (!sourceAdapterList.contains(newSource)) {
                     val insertPos = sourceAdapterList.indexOfFirst {
                         it.name > newSource.name
@@ -88,7 +91,13 @@ class DnsRuleActivity : BaseActivity() {
                     sourceAdapter.notifyItemInserted(insertPos)
                     getDatabase().hostSourceDao().insert(newSource)
                 }
-            }.show()
+            }, showFileChooser = { callback ->
+                fileChosenCallback = callback
+                startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = "text/*"
+                }, fileChosenRequestCode)
+            }).show()
         }
         refresh.setOnClickListener {
             if(isServiceRunning(RuleImportService::class.java)) {
@@ -258,6 +267,14 @@ class DnsRuleActivity : BaseActivity() {
                 refreshProgress.show()
                 refreshProgressShown = true
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == fileChosenRequestCode && resultCode == RESULT_OK){
+            if(data?.data != null) fileChosenCallback?.invoke(data.data!!)
+            fileChosenCallback = null
         }
     }
 
