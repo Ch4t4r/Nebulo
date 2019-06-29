@@ -35,7 +35,7 @@ The file is distributed as .apk file in two places:
 Want to be always up-to-date on the development of this app? Looking for a way to contact the developer?
 
 Join our [Telegram group](https://t.me/joinchat/I54nRleveRGP8IPmcIdySg)!
-
+(Alternativly [the channel](https://t.me/NebuloUpdates) , which contains only updates and nothing else)
 
 # Issues, feature requests and questions
 Have an idea, question or encountered a bug? Feel free to create an issue [right here in GitLab](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues).
