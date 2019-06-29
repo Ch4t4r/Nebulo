@@ -145,10 +145,8 @@ class RuleExportService : Service() {
                         if (!cancelled) {
                             writtenCount++
                             writeRule(stream, it)
-                            if (writtenCount % 2000 == 0) {
-                                stream.flush()
-                            }
                             if(writtenCount % progressIncrements == 0) {
+                                stream.flush()
                                 updateNotification(writtenCount, ruleCount)
                             }
                         } else return@forEach
@@ -163,10 +161,8 @@ class RuleExportService : Service() {
                             if (!cancelled) {
                                 writtenCount++
                                 writeRule(stream, it)
-                                if (writtenCount % 2000 == 0) {
-                                    stream.flush()
-                                }
                                 if(writtenCount % progressIncrements == 0) {
+                                    stream.flush()
                                     updateNotification(writtenCount, ruleCount)
                                 }
                             } else return@forEach
