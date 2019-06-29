@@ -93,6 +93,7 @@ class RuleExportService : Service() {
         val text = getString(R.string.notification_ruleexport_message, ruleCount, totalRuleCount)
         notification!!.setContentText(text)
         notification!!.setStyle(NotificationCompat.BigTextStyle().bigText(text))
+        startForeground(5, notification!!.build())
     }
 
     private fun showSuccessNotification(ruleCount: Int) {
@@ -120,8 +121,11 @@ class RuleExportService : Service() {
                     ruleCount += nonUserRuleCount
                 }
                 val progressIncrements = (ruleCount * 0.01).toInt().let {
-                    if(it < 10) 50
-                    else it
+                    when {
+                        it == 0 -> 1
+                        it < 20 -> it*10
+                        else -> it
+                    }
                 }
                 stream.write(buildString {
                     append("# Dns rules exported from Nebulo")
@@ -150,6 +154,7 @@ class RuleExportService : Service() {
                         } else return@forEach
                     }
                 }
+                updateNotification(writtenCount, ruleCount)
                 if (params.exportFromSources && !cancelled) {
                     val limit = 2000
                     var offset = 0
