@@ -133,4 +133,8 @@
     <string name="dialog_newdnsrule_host_invalid">Bitte gebe einen validen Host an</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Bitte gebe eine valide IPv4 Adresse an</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Bitte gebe eine valide IPv6 Adresse an</string>
+<string name="dialog_newhostsource_choose_file">Datei wählen</string>
+    <string name="dialog_exportdnsrules_title">Dns Regeln exportieren</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Exportiere eigene Dns Regeln</string>
+    <string name="dialog_exportdnsrules_export_sources">Exportiere Dns Regeln aus angegebenen Quellen</string>
 </resources>
