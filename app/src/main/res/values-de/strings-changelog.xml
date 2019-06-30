@@ -54,4 +54,10 @@
     <string name="changelog_build_35_2">Abbrechen des Dns Regeln Imports friert die Oberfläche nicht mehr ein</string>
     <string name="changelog_build_35_3">Kleinere Leistungsverbesserungen für dns-over-https</string>
     <string name="changelog_build_35_4">Die Hostquellen der Dns Regeln zeigen nun, wieviele Regeln aus diesen importiert wurden</string>
+    <string name="changelog_build_36_1">Die Dns Regeln können nun exportiert werden</string>
+    <string name="changelog_build_36_2">Dns Regeln können nun von Dateien importiert werden</string>
+    <string name="changelog_build_36_3">Es wurde ein Fehler behoben, welcher dafür gesorgt hat, dass Dns Regeln aus kleinen Quellen nicht importiert wurden</string>
+    <string name="changelog_build_36_4">Der Dns Regel Import funktioniert nun mit nicht-Standard Buchstaben (z.B. Umlauten)</string>
+    <string name="changelog_build_36_5">Die Dns Regeln befinden sich nun im Seitenmenü</string>
+    <string name="changelog_build_36_6">Es wurde ein Fehler behoben, welcher auf manchen Geräten zum Absturz der App führte</string>
     </resources>
