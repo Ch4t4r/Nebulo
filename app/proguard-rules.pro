@@ -28,9 +28,9 @@
 }
 
 -assumenosideeffects class com.frostnerd.vpntunnelproxy.Logger {
-        ** fine(...);
-        ** finer(...);
-        ** finest(...);
+        public final void fine(...);
+        public final void finer(...);
+        public final void finest(...);
 }
 
 -keepclassmembernames class kotlinx.** {
