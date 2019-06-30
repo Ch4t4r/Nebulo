@@ -50,9 +50,9 @@ class RuleImportService : Service() {
     private val DNSMASQ_MATCHER =
         Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:$|\\s+.*)").matcher("")
     private val HOSTS_MATCHER =
-        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([a-zA-ZÀ-ÖØ-öø-ÿ0-9._\\-]+).*")
+        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([\\w._\\-]+).*")
             .matcher("")
-    private val DOMAINS_MATCHER = Pattern.compile("^([A-Za-z0-9À-ÖØ-öø-ÿ_][A-Za-zÀ-ÖØ-öø-ÿ_0-9\\-.]+)(?:\$|\\s+.*)").matcher("")
+    private val DOMAINS_MATCHER = Pattern.compile("^([_\\w][\\w_\\-.]+)(?:\$|\\s+.*)").matcher("")
     private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("")
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
