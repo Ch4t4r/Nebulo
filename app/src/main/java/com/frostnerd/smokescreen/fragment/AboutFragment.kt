@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.LicensesDialog
+import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
 import kotlinx.android.synthetic.main.fragment_about.view.*
 import java.util.*
 
@@ -34,6 +35,7 @@ import java.util.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class AboutFragment : Fragment() {
+    var queryGenStepOne = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_about, container, false)
@@ -101,6 +103,14 @@ class AboutFragment : Fragment() {
             showInfoTextDialog(context!!, getString(R.string.about_help_translating),
                 getString(R.string.dialog_help_translating_message),
                 neutralButton = getString(R.string.all_close) to null)
+        }
+        view.privacyPolicy.setOnLongClickListener {
+            queryGenStepOne = true
+            true
+        }
+        view.about.setOnLongClickListener {
+            if(queryGenStepOne) QueryGeneratorDialog(requireContext())
+            true
         }
     }
 }

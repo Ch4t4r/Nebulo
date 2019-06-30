@@ -56,6 +56,19 @@
                         android:elevation="0dp"
                         android:layout_height="wrap_content"/>
             </com.github.jorgecastilloprz.FABProgressCircle>
+
+            <com.github.jorgecastilloprz.FABProgressCircle
+                    android:layout_width="wrap_content"
+                    android:id="@+id/exportProgress"
+                    android:layout_marginStart="8dp"
+                    android:layout_height="wrap_content">
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:layout_width="wrap_content"
+                        android:id="@+id/export"
+                        android:src="@drawable/ic_file_upload"
+                        android:elevation="0dp"
+                        android:layout_height="wrap_content"/>
+            </com.github.jorgecastilloprz.FABProgressCircle>
         </LinearLayout>
     </RelativeLayout>
     <View

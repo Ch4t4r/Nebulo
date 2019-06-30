@@ -1,4 +1,4 @@
-![Icon](app/src/main/res/mipmap-mdpi/ic_launcher_round.png)  
+![Icon](app/src/main/res/mipmap-mdpi/ic_launcher.png)  
 
 # Nebulo
 Nebulo is a free, open-source, non-root and small sized DNS changer utilizing dns-over-https and dns-over-tls to bring privacy and security to your phone.
@@ -19,6 +19,7 @@ Go to the [play store](https://play.google.com/store/apps/details?id=com.frostne
 1. Add the repository on your F-Droid app by clicking [this link](https://fdroid.frostnerd.com/fdroid/repo?fingerprint=74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26).
     - Or add it yourself, fdroid.frostnerd.com/fdroid with fingerprint 74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26
     - You can use the [QR-Code as well](material/fdroid_qr.jpg) .
+    - I recommend using [Aurora Droid](https://gitlab.com/AuroraOSS/auroradroid) , it contains the repository by default
 2. Update your repositories (by pulling down to refresh)
 3. Search for Nebulo
 4. Download the app.
@@ -35,7 +36,7 @@ The file is distributed as .apk file in two places:
 Want to be always up-to-date on the development of this app? Looking for a way to contact the developer?
 
 Join our [Telegram group](https://t.me/joinchat/I54nRleveRGP8IPmcIdySg)!
-
+(Alternativly [the channel](https://t.me/NebuloUpdates) , which contains only updates and nothing else)
 
 # Issues, feature requests and questions
 Have an idea, question or encountered a bug? Feel free to create an issue [right here in GitLab](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues).

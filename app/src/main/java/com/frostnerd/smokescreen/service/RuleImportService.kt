@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.frostnerd.smokescreen.R
@@ -49,9 +50,9 @@ class RuleImportService : Service() {
     private val DNSMASQ_MATCHER =
         Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:$|\\s+.*)").matcher("")
     private val HOSTS_MATCHER =
-        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([a-zA-ZÀ-ÖØ-öø-ÿ0-9._\\-]+).*")
+        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([\\w._\\-]+).*")
             .matcher("")
-    private val DOMAINS_MATCHER = Pattern.compile("^([A-Za-z0-9À-ÖØ-öø-ÿ_][A-Za-zÀ-ÖØ-öø-ÿ_0-9\\-.]+)(?:\$|\\s+.*)").matcher("")
+    private val DOMAINS_MATCHER = Pattern.compile("^([_\\w][\\w_\\-.]+)(?:\$|\\s+.*)").matcher("")
     private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("")
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
@@ -163,19 +164,20 @@ class RuleImportService : Service() {
                     updateNotification(it, count, maxCount.toInt())
                     count++
                     if (it.isFileSource) {
-                        var stream: FileInputStream? = null
+                        log("Importing from file")
+                        var stream: InputStream? = null
                         try {
-                            val file = File(it.source)
-                            if (file.canRead()) {
-                                stream = FileInputStream(file)
-                                processLines(it, stream)
-                            }
+                            val uri = Uri.parse(it.source)
+                            stream = contentResolver.openInputStream(uri)
+                            processLines(it, stream)
                         } catch (ex: Exception) {
+                            log("Import failed: $ex")
                             ex.printStackTrace()
                         } finally {
                             stream?.close()
                         }
                     } else {
+                        log("Importing from URL")
                         var response: Response? = null
                         try {
                             val request = Request.Builder().url(it.source)
@@ -192,7 +194,10 @@ class RuleImportService : Service() {
                         }
                     }
                     log("Import of $it finished")
-                } else return@forEach
+                } else {
+                    log("Aborting import.")
+                    return@forEach
+                }
             }
             if (importJob != null && importJob?.isCancelled == false) {
                 updateNotificationFinishing()
@@ -248,15 +253,15 @@ class RuleImportService : Service() {
         parsers: Map<Matcher, Pair<Int, MutableList<Host>>>,
         forceCommit: Boolean = false
     ) {
-        if (parsers.size == 1) {
-            val hosts = parsers[parsers.keys.first()]!!.second
-            if (hosts.size > 5000 || forceCommit) {
-                getDatabase().dnsRuleDao().insertAll(hosts.map {
-                    DnsRule(it.type, it.host, it.target, null, source.id)
-                })
-                ruleCount += hosts.size
-                hosts.clear()
-            }
+        val hosts = parsers[parsers.keys.minBy {
+            parsers[it]!!.first
+        } ?: parsers.keys.first()]!!.second
+        if (hosts.size > 5000 || forceCommit) {
+            getDatabase().dnsRuleDao().insertAll(hosts.map {
+                DnsRule(it.type, it.host, it.target, null, source.id)
+            })
+            ruleCount += hosts.size
+            hosts.clear()
         }
     }
 

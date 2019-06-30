@@ -57,6 +57,9 @@ interface DnsRuleDao {
     @Query("SELECT COUNT(*) FROM DnsRule WHERE importedFrom IS NULL")
     fun getUserCount():Long
 
+    @Query("SELECT COUNT(*) FROM DnsRule WHERE importedFrom IS NOT NULL")
+    fun getNonUserCount(): Long
+
     @Query("SELECT CASE WHEN :type=28 THEN IFNULL(ipv6Target, target) ELSE target END FROM DnsRule WHERE host=:host AND (type = :type OR type=255) AND (importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0) = 1) AND (importedFrom IS NOT NULL OR :useUserRules=1) LIMIT 1")
     fun findRuleTarget(host: String, type: Record.TYPE, useUserRules:Boolean): String?
 
@@ -68,6 +71,9 @@ interface DnsRuleDao {
 
     @Query("SELECT * FROM DnsRule WHERE importedFrom IS NULL ORDER BY host")
     fun getAllUserRules():List<DnsRule>
+
+    @Query("SELECT * FROM DnsRule WHERE importedFrom IS NOT NULL ORDER BY host LIMIT :limit OFFSET :offset")
+    fun getAllNonUserRules(offset:Int, limit:Int):List<DnsRule>
 
     @Delete
     fun remove(rule:DnsRule)

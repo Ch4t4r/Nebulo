@@ -31,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/urlTil"
                 app:errorEnabled="true"
+                android:layout_toStartOf="@id/chooseFile"
                 android:textColorHint="?android:attr/textColorSecondary"
                 android:layout_height="wrap_content">
 
@@ -40,5 +41,16 @@
                     android:id="@+id/url"
                     android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/main_roundbuttons"
+                android:id="@+id/chooseFile"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/dialog_newhostsource_choose_file"
+                android:layout_height="wrap_content"/>
     </RelativeLayout>
 </LinearLayout>

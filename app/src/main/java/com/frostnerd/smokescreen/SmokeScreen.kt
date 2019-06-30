@@ -99,7 +99,7 @@ class SmokeScreen : Application() {
     }
 
     fun initSentry(forceEnabled: Boolean = false) {
-        if (forceEnabled || getPreferences().crashReportingEnabled) {
+        if (!BuildConfig.DEBUG && (forceEnabled || getPreferences().crashReportingEnabled)) {
             Sentry.init(
                 "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
                 AndroidSentryClientFactory(this)

@@ -206,6 +206,7 @@
             </intent-filter>
         </service>
         <service android:name=".service.RuleImportService"/>
+        <service android:name=".service.RuleExportService"/>
 
         <receiver
                 android:name=".receiver.AutostartReceiver"

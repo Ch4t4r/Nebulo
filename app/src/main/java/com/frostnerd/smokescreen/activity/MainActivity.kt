@@ -149,6 +149,13 @@ class MainActivity : NavigationDrawerActivity() {
                     ).show()
                     false
                 })
+            clickableItem(getString(R.string.button_main_dnsrules),
+                iconLeft = getDrawable(R.drawable.ic_view_list),
+                onLongClick = null,
+                onSimpleClick = { _ ,_, _ ->
+                    startActivity(Intent(this@MainActivity, DnsRuleActivity::class.java))
+                    false
+                })
             divider()
             if (isPackageInstalled(this@MainActivity, "com.android.vending")) {
                 clickableItem(getString(R.string.menu_rate),

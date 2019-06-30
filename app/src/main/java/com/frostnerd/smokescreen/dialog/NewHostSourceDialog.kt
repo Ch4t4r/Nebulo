@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.dialog
 
 import android.content.Context
 import android.content.DialogInterface
+import android.net.Uri
 import android.webkit.URLUtil
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.smokescreen.R
@@ -28,7 +29,9 @@ import kotlinx.android.synthetic.main.dialog_new_hostsource.view.*
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class NewHostSourceDialog (context: Context, onSourceCreated:(HostSource) -> Unit):AlertDialog(context, context.getPreferences().theme.dialogStyle) {
+class NewHostSourceDialog (context: Context,
+                           onSourceCreated:(HostSource) -> Unit,
+                           showFileChooser:(fileChosen:(uri: Uri) -> Unit) -> Unit):AlertDialog(context, context.getPreferences().theme.dialogStyle) {
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_hostsource, null, false)
@@ -45,6 +48,11 @@ class NewHostSourceDialog (context: Context, onSourceCreated:(HostSource) -> Uni
         }
         view.url.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus) urlTil.error = null
+        }
+        view.chooseFile.setOnClickListener {
+            showFileChooser {
+                view.url.setText(it.toString())
+            }
         }
         setOnShowListener {
             getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
