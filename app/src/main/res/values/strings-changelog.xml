@@ -162,4 +162,20 @@
         <item>@string/changelog_build_35_3</item>
         <item>@string/changelog_build_35_4</item>
     </string-array>
+
+    <string name="changelog_build_36_1">You can now export the dns rules</string>
+    <string name="changelog_build_36_2">Dns rules can now be imported from files</string>
+    <string name="changelog_build_36_3">Fixed dns rules not being imported from very small sources</string>
+    <string name="changelog_build_36_4">The rule import can now recognize non-default letters (such as umlauts)</string>
+    <string name="changelog_build_36_5">Moved the dns rules to the sidebar menu</string>
+    <string name="changelog_build_36_6">Fixed a crash which occurred on some device</string>
+    <string-array name="changelog_build_36">
+        <item>1.0 Beta (Build 36)</item>
+        <item>@string/changelog_build_36_1</item>
+        <item>@string/changelog_build_36_2</item>
+        <item>@string/changelog_build_36_3</item>
+        <item>@string/changelog_build_36_4</item>
+        <item>@string/changelog_build_36_5</item>
+        <item>@string/changelog_build_36_6</item>
+    </string-array>
 </resources>
