@@ -124,9 +124,6 @@ class MainFragment : Fragment() {
                 } catch (e: ActivityNotFoundException) { Toast.makeText(context!!, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show() }
             }
         }
-        dnsRules.setOnClickListener {
-            startActivity(Intent(context!!, DnsRuleActivity::class.java))
-        }
         GlobalScope.launch {
             val context = context
             if (isAdded && !isDetached && context != null) {
