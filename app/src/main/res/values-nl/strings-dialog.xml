@@ -134,4 +134,8 @@
     <string name="dialog_newdnsrule_host_invalid">Geef a.u.b een geldige host op</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Geef a.u.b een geldig IPv4 adres op</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Geef a.u.b een geldig IPv6 adres op</string>
+<string name="dialog_newhostsource_choose_file">Kies bestand</string>
+    <string name="dialog_exportdnsrules_title">Exporteer dns regels</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Exporteer uw eigen dns-regels</string>
+    <string name="dialog_exportdnsrules_export_sources">Exporteer dns-regels van ingeschakelde host bronnen</string>
 </resources>
