@@ -54,4 +54,10 @@
     <string name="changelog_build_35_2">Het afbreken van de import van de dns regel bevriest nu de UI niet meer</string>
     <string name="changelog_build_35_3">Kleine prestatieverbeteringen voor dns-over-https</string>
     <string name="changelog_build_35_4">De host bronnen van de dns-regels laten nu zien hoeveel regels er van hen zijn geïmporteerd</string>
+    <string name="changelog_build_36_1">U kunt de dns-regels nu exporteren</string>
+    <string name="changelog_build_36_2">Dns-regels kunnen nu uit bestanden worden geïmporteerd</string>
+    <string name="changelog_build_36_3">Probleem opgelost waarbij dns-regels uit zeer kleine bronnen niet werden geïmporteerd</string>
+    <string name="changelog_build_36_4">De regel import kan nu niet-standaard letters (zoals umlauts) herkennen</string>
+    <string name="changelog_build_36_5">De dns-regels staan nu in het paginamenu</string>
+    <string name="changelog_build_36_6">Een crash opgelost die zich op sommige apparaten voordeed</string>
     </resources>
