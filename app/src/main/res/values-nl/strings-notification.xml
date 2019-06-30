@@ -32,4 +32,10 @@
     <string name="notification_ruleimportfinished_message">%1d regels zijn geïmporteerd.</string>
 <string name="notification_ruleimport_tertiarymessage">Importeren voltooien…</string>
 
-    </resources>
+    <string name="notification_ruleexport_title">Dns regel exporteren</string>
+    <string name="notification_ruleexport_message">Exporteer regels (%1d/%2d)</string>
+    <string name="notification_ruleexport_secondarymessage">Exporteren voorbereiden…</string>
+
+    <string name="notification_ruleexportfinished_title">DNS-regel exporteren is voltooid</string>
+    <string name="notification_ruleexportfinished_message">%1d regels zijn geëxporteerd.</string>
+</resources>
