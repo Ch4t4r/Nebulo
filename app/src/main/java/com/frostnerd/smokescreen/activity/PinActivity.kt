@@ -16,13 +16,11 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import com.frostnerd.lifecyclemanagement.BaseActivity
-import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.canUseFingerprintAuthentication
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
-import kotlinx.android.synthetic.main.dialog_pin.*
 import kotlinx.android.synthetic.main.dialog_pin.view.*
 import java.math.BigInteger
 import java.security.MessageDigest

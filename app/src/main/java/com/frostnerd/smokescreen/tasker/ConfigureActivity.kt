@@ -13,7 +13,6 @@ import android.widget.EditText
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.lifecyclemanagement.BaseActivity
-import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.dialog.NewServerDialog
@@ -23,7 +22,6 @@ import com.frostnerd.smokescreen.tlsServerFromHosts
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_tasker_configure.*
-import kotlinx.android.synthetic.main.dialog_new_server.view.*
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
