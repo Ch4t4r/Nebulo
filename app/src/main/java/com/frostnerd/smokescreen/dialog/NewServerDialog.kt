@@ -17,7 +17,6 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseDialog
-import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
