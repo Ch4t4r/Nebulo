@@ -16,6 +16,8 @@
     <string name="open_app">App öffnen</string>
     <string name="all_close">Schließen</string>
 
+    <string name="error_invalid_url">Bitte gebe eine valide URL an.</string>
+
     <string name="main_dnssurveillance_infotext">Bitte behalte im Hinterkopf, dass der DNS Server, mit welchem du verbunden bist, sehen kann, welche Webseiten zu besuchst. Überprüfe die Datenschutzerklärung des Servers für mehr Informationen.</string>
     <string name="main_dnssurveillance_privacystatement">Datenschutzerklärung von %1s</string>
 

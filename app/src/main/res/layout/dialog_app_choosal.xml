@@ -32,30 +32,23 @@
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_height="24dp"/>
 
-        <com.frostnerd.materialedittext.MaterialEditText
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                app:image="@drawable/ic_search"
-                app:iconTint="?attr/foregroundElementColor"
-                app:allowCollapse="false"
-                app:animationDuration="0"
-                app:indicatorState="undefined"
-                app:indicatorVisibilityWhenUnused="hidden"
-                app:revealType="revealInstant"
+                android:id="@+id/nameTil"
+                app:errorEnabled="true"
+                android:hint="@string/search"
+                android:textColorHint="?attr/foregroundElementColor"
                 android:layout_toStartOf="@id/clearSearch"
                 android:layout_alignParentStart="true"
-                app:revealDelay="0"
-                app:labelText="@string/search"
                 android:layout_height="wrap_content">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:textColor="?attr/foregroundElementColor"
-                    android:layout_height="wrap_content"
-                    android:importantForAutofill="no"
                     android:hint="@string/hint_searchterm"
                     android:id="@+id/search"
-                    android:inputType="text"/>
-        </com.frostnerd.materialedittext.MaterialEditText>
+                    android:inputType="text"
+                    android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </RelativeLayout>
 

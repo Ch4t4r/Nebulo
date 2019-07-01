@@ -11,34 +11,21 @@
               android:paddingBottom="@dimen/dialog_vertical_margin"
               android:layout_height="match_parent">
 
-    <com.frostnerd.materialedittext.MaterialEditText
-            android:id="@+id/pinInputMet"
+    <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/pinInputTil"
+            app:errorEnabled="true"
             android:layout_marginTop="10dp"
-            app:allowCollapse="false"
-            app:animationDuration="0"
-            app:hint="@string/dialog_pin_hint"
-            app:indicatorState="undefined"
-            app:indicatorVisibilityWhenUnused="hidden"
-            app:labelColorPrimary="?attr/foregroundElementColor"
-            app:labelColorSecondary="?attr/foregroundElementColor"
-            app:iconTint="?attr/foregroundElementColor"
-            app:labelText="@string/dialog_pin_inputlabel"
-            app:revealDelay="0"
-            app:revealType="revealInstant">
+            android:textColorHint="?attr/foregroundElementColor"
+            android:hint="@string/dialog_pin_hint"
+            android:layout_height="wrap_content">
 
-        <EditText
-                android:importantForAutofill="no"
-                android:id="@+id/pinInput"
+        <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/inputElementColor"
-                android:cursorVisible="true"
+                android:id="@+id/pinInput"
                 android:inputType="numberPassword"
-                android:textColor="?attr/foregroundElementColor"/>
-    </com.frostnerd.materialedittext.MaterialEditText>
-
+                android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/fingerprintImage"

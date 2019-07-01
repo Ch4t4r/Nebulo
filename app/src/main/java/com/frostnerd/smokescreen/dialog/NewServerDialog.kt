@@ -17,10 +17,11 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseDialog
-import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_new_server.*
 import kotlinx.android.synthetic.main.dialog_new_server.view.*
 
@@ -75,7 +76,19 @@ class NewServerDialog(
         setOnShowListener {
             addUrlTextWatcher(primaryServerWrap, primaryServer, false)
             addUrlTextWatcher(secondaryServerWrap, secondaryServer, true)
+            serverName.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    serverNameWrap.error = if (s.isNullOrBlank()) context.getString(R.string.error_invalid_servername)
+                    else null
+                }
 
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+            })
+            serverNameWrap.error = context.getString(R.string.error_invalid_servername)
             getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                 if (inputsValid()) {
                     val name = serverName.text.toString()
@@ -120,11 +133,15 @@ class NewServerDialog(
         if (dnsOverHttps) {
             if(titleOverride == null) setTitle(R.string.dialog_newserver_title_https)
             view.primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint)
-            view.secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint)
+            view.secondaryServer.apply {
+                if(isFocused || error != null) setHint(R.string.dialog_newserver_secondaryserver_hint)
+            }
         }else {
             if(titleOverride == null) setTitle(R.string.dialog_newserver_title_tls)
             view.primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
-            view.secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
+            view.secondaryServer.apply {
+                if(isFocused || error != null) setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
+            }
         }
         if(titleOverride != null) setTitle(titleOverride)
     }
@@ -250,7 +267,7 @@ class NewServerDialog(
         else TLSUpstreamAddress(parsedHost)
     }
 
-    fun addUrlTextWatcher(materialEditText: MaterialEditText, editText: EditText, emptyAllowed: Boolean) {
+    fun addUrlTextWatcher(input: TextInputLayout, editText: TextInputEditText, emptyAllowed: Boolean) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 val valid =
@@ -258,10 +275,9 @@ class NewServerDialog(
                         s.toString()
                     ))
 
-                materialEditText.indicatorState = if (valid) {
-                    if (s.isBlank()) MaterialEditText.IndicatorState.UNDEFINED
-                    else MaterialEditText.IndicatorState.CORRECT
-                } else MaterialEditText.IndicatorState.INCORRECT
+                input.error = if (valid) {
+                    null
+                } else context.getString(R.string.error_invalid_url)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -273,10 +289,9 @@ class NewServerDialog(
         })
     }
 
-    fun inputsValid(): Boolean = serverNameWrap.indicatorState != MaterialEditText.IndicatorState.INCORRECT &&
-            primaryServerWrap.indicatorState != MaterialEditText.IndicatorState.INCORRECT &&
-            secondaryServerWrap.indicatorState != MaterialEditText.IndicatorState.INCORRECT
-
+    fun inputsValid(): Boolean = serverNameWrap.error == null &&
+            primaryServerWrap.error == null &&
+            secondaryServerWrap.error == null
 
     override fun destroy() {}
 }

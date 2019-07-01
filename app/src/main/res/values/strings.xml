@@ -19,6 +19,10 @@
     <string name="open_app">Open app</string>
     <string name="all_close">Close</string>
 
+    <string name="error_invalid_url">Please provide a valid url.</string>
+    <string name="error_invalid_pin">Please provide your PIN.</string>
+    <string name="error_invalid_servername">Please provide a name.</string>
+
     <string name="main_dnssurveillance_infotext">Be aware that the DNS server you are connected to is able to record which sites you are visiting. Check the respective privacy statements for more information.</string>
     <string name="main_dnssurveillance_privacystatement">Privacy statement of %1s</string>
 
