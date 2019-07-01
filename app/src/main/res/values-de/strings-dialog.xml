@@ -124,7 +124,6 @@
     <string name="dialog_newhostsource_name">Name</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_error_name_empty">Bitte gebe einen Namen an.</string>
-    <string name="dialog_newhostsource_url_invalid">Bitte gebe eine valide URL an.</string>
 
     <string name="dialog_newdnsrule_title">Neue Dns Regel</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>

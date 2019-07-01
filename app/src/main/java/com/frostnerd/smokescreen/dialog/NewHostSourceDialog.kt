@@ -64,7 +64,7 @@ class NewHostSourceDialog (context: Context,
                     nameTil.error = null
                 }
                 if(url.text.isNullOrBlank() || !URLUtil.isValidUrl(url.text.toString())) {
-                    urlTil.error = context.getString(R.string.dialog_newhostsource_url_invalid)
+                    urlTil.error = context.getString(R.string.error_invalid_url)
                     valid = false
                 } else {
                     urlTil.error = null

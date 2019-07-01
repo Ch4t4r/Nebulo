@@ -13,6 +13,8 @@
     <string name="open_app">Open app</string>
     <string name="all_close">Sluit</string>
 
+    <string name="error_invalid_url">Geef a.u.b een geldige URL op.</string>
+
     <string name="main_dnssurveillance_privacystatement">Privacyverklaring van %1s</string>
 
     <string name="quicksettings_stop_text">Stop Nebulo</string>
