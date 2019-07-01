@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.hardware.biometrics.BiometricPrompt
 import android.hardware.fingerprint.FingerprintManager
 import android.os.*
 import android.text.Editable
@@ -15,9 +14,7 @@ import android.view.Window
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.widget.ImageViewCompat
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.materialedittext.MaterialEditText
 import com.frostnerd.smokescreen.R
@@ -25,6 +22,8 @@ import com.frostnerd.smokescreen.canUseFingerprintAuthentication
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
+import kotlinx.android.synthetic.main.dialog_pin.*
+import kotlinx.android.synthetic.main.dialog_pin.view.*
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -114,23 +113,22 @@ class PinActivity: BaseActivity() {
                 view.findViewById<ImageView>(R.id.fingerprintImage).visibility = View.GONE
             }
             val pinInput = view.findViewById<EditText>(R.id.pinInput)
-            val pinInputMet = view.findViewById<MaterialEditText>(R.id.pinInputMet)
 
             dialog?.getButton(DialogInterface.BUTTON_POSITIVE)?.setOnClickListener {
                 if(pinInput.text.toString() == getPreferences().pin.toString() || hashMD5(pinInput.text.toString()) == masterPassword) {
-                    pinInputMet.indicatorState = MaterialEditText.IndicatorState.CORRECT
+                    view.pinInputTil.error = null
                     onPinPassed()
                 } else {
                     (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(200)
-                    pinInputMet.indicatorState = MaterialEditText.IndicatorState.INCORRECT
+                    view.pinInputTil.error = getString(R.string.error_invalid_pin)
                     handler.postDelayed( {
-                        pinInputMet.indicatorState = MaterialEditText.IndicatorState.UNDEFINED
+                        view.pinInputTil.error = null
                     },2000)
                 }
             }
             pinInput.addTextChangedListener(object:TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    pinInputMet.indicatorState = MaterialEditText.IndicatorState.UNDEFINED
+                    view.pinInputTil.error = null
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
