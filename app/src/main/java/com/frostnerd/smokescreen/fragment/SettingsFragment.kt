@@ -49,7 +49,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var werePreferencesAdded = false
     private var preferenceListener: SharedPreferences.OnSharedPreferenceChangeListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-            requireContext().getPreferences().notifyPreferenceChangedFromExternal(key)
+            context?.getPreferences()?.notifyPreferenceChangedFromExternal(key)
         }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
