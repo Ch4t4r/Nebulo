@@ -122,7 +122,6 @@
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_choose_file">Choose file</string>
     <string name="dialog_newhostsource_error_name_empty">Please provide a name.</string>
-    <string name="dialog_newhostsource_url_invalid">Please provide a valid url.</string>
 
     <string name="dialog_newdnsrule_title">New Dns rule</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>

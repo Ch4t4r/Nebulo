@@ -20,6 +20,8 @@ import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fromServerUrls
 import com.frostnerd.smokescreen.hasHttpsServer
 import com.frostnerd.smokescreen.tlsServerFromHosts
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_tasker_configure.*
 import kotlinx.android.synthetic.main.dialog_new_server.view.*
 
@@ -104,6 +106,7 @@ class ConfigureActivity : BaseActivity() {
                                 }
                             }
                         }
+                        setHints()
                     }
                 }
             }
@@ -155,28 +158,35 @@ class ConfigureActivity : BaseActivity() {
                 validationRegex = if (position == 0) NewServerDialog.SERVER_URL_REGEX else NewServerDialog.TLS_REGEX
                 primaryServer.text = primaryServer.text
                 secondaryServer.text = secondaryServer.text
-                if(position == 1) {
-                    primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint)
-                    secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint)
-                } else {
-                    primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
-                    secondaryServer.setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
-                }
+                setHints()
             }
         }
         addUrlTextWatcher(primaryServerWrap, primaryServer, false)
         addUrlTextWatcher(secondaryServerWrap, secondaryServer, true)
+        setHints()
     }
 
-    private fun addUrlTextWatcher(materialEditText: MaterialEditText, editText: EditText, emptyAllowed: Boolean) {
+    private fun setHints() {
+        val doh = serverType.selectedItemPosition == 0
+        println("DOH: $doh")
+        primaryServer.hint = if(primaryServer.hasFocus() || primaryServerWrap.error != null) {
+            if(doh) getString(R.string.dialog_newserver_primaryserver_hint)
+            else getString(R.string.dialog_newserver_primaryserver_hint_dot)
+        } else null
+        secondaryServer.hint = if(secondaryServer.hasFocus()) {
+            if(doh) getString(R.string.dialog_newserver_secondaryserver_hint)
+            else getString(R.string.dialog_newserver_secondaryserver_hint_dot)
+        } else null
+    }
+
+    private fun addUrlTextWatcher(input: TextInputLayout, editText: TextInputEditText, emptyAllowed: Boolean) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 val valid = (emptyAllowed && s.isBlank()) || validationRegex.matches(s.toString())
 
-                materialEditText.indicatorState = if (valid) {
-                    if (s.isBlank()) MaterialEditText.IndicatorState.UNDEFINED
-                    else MaterialEditText.IndicatorState.CORRECT
-                } else MaterialEditText.IndicatorState.INCORRECT
+                input.error = if (valid) {
+                    null
+                } else getString(R.string.error_invalid_url)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -186,6 +196,9 @@ class ConfigureActivity : BaseActivity() {
             }
 
         })
+        editText.setOnFocusChangeListener { _, hasFocus ->
+            setHints()
+        }
     }
 
     override fun onBackPressed() {
@@ -206,8 +219,8 @@ class ConfigureActivity : BaseActivity() {
         if (action == "start") {
             settings.putBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, startIfRunning.isChecked)
             if (!useServersFromConfig.isChecked) {
-                if (primaryServerWrap.indicatorState != MaterialEditText.IndicatorState.INCORRECT &&
-                    secondaryServerWrap.indicatorState != MaterialEditText.IndicatorState.INCORRECT
+                if (primaryServerWrap.error == null &&
+                    secondaryServerWrap.error == null
                 ) {
                     var primary = primaryServer.text.toString()
                     var secondary = if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString()
