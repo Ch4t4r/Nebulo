@@ -203,6 +203,7 @@ class RuleImportService : Service() {
                 updateNotificationFinishing()
                 dnsRuleDao.deleteMarkedRules()
                 dnsRuleDao.commitStaging()
+                getDatabase().recreateDnsRuleIndizes()
                 showSuccessNotification()
             }
             log("All imports finished.")
