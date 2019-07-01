@@ -54,9 +54,14 @@ private val MIGRATION_5_6 = migration(5, 6) {
     it.execSQL("CREATE TABLE IF NOT EXISTS `DnsRule` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stagingType` INTEGER, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `target` TEXT NOT NULL, `ipv6Target` TEXT, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
     it.execSQL("CREATE TABLE IF NOT EXISTS `HostSource` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL)")
     it.execSQL("CREATE  INDEX `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
-    it.execSQL("CREATE  INDEX `index_DnsRule_host` ON `DnsRule` (`host`)")
     it.execSQL("CREATE  INDEX `index_DnsRule_host_type` ON `DnsRule` (`host`, `type`)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 5 to 6 completed")
+}
+
+private val MIGRATION_6_7 = migration(6,7) {
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 6 to 7")
+    it.execSQL("DROP INDEX `index_DnsRule_host`")
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 6 to 7 completed")
 }
 
 
@@ -64,7 +69,7 @@ fun Context.getDatabase(): AppDatabase {
     if (INSTANCE == null) {
         INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
             .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
             .build()
     }
     return INSTANCE!!
