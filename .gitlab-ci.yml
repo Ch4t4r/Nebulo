@@ -5,6 +5,7 @@ variables:
   ANDROID_SDK_TOOLS: "26.1.1"
 
 stages:
+ - test
  - build
 
 before_script:
@@ -55,4 +56,15 @@ build_fdroid:
       - app/build/outputs/apk/adblocker/fdroid/*.apk
       - app/build/outputs/mapping/adblocker/fdroid/mapping.txt
   only:
+    - master
+
+test_build_release:
+  stage: test
+  script:
+    - ./gradlew clean check assembleNormalRelease --stacktrace -x test
+  except:
+    - /^no_ci.*$/
+    - /^no_build.*$/
+    - /^no_build_no_tests.*$/
+    - /^no_build_no_deploy.*$/
     - master

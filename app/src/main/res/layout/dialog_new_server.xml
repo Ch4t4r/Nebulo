@@ -9,15 +9,14 @@
         android:paddingBottom="@dimen/dialog_vertical_margin"
         android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:paddingLeft="@dimen/dialog_horizontal_margin"
-                  android:paddingRight="@dimen/dialog_horizontal_margin"
-                  android:paddingTop="@dimen/dialog_vertical_margin"
-                  android:paddingBottom="@dimen/dialog_vertical_margin"
-                  android:layout_height="wrap_content">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/dialog_horizontal_margin"
+            android:paddingRight="@dimen/dialog_horizontal_margin"
+            android:paddingTop="@dimen/dialog_vertical_margin"
+            android:paddingBottom="@dimen/dialog_vertical_margin"
+            android:layout_height="wrap_content">
 
         <Spinner
                 android:layout_width="match_parent"
@@ -25,98 +24,66 @@
                 android:layout_marginBottom="12dp"
                 android:layout_height="wrap_content"/>
 
-        <com.frostnerd.materialedittext.MaterialEditText
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                app:labelColorPrimary="?attr/foregroundElementColor"
-                app:labelColorSecondary="?attr/foregroundElementColor"
-                android:layout_marginTop="8dp"
-                app:revealDelay="0"
-                app:revealType="revealInstant"
-                app:labelText="@string/dialog_newserver_name"
-                app:hint="@string/dialog_newserver_name_hint"
-                app:allowCollapse="false"
-                app:minCharLength="1"
-                app:maxCharLength="50"
-                app:indicatorState="incorrect"
-                app:animationDuration="0"
                 android:id="@+id/serverNameWrap"
+                app:errorEnabled="true"
+                android:hint="@string/dialog_newserver_name"
+                android:textColorHint="?attr/foregroundElementColor"
+                android:layout_marginTop="8dp"
                 app:openKeyboardOnFocus="true"
                 android:layout_height="wrap_content">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:hint="@string/dialog_newserver_name_hint"
                     android:id="@+id/serverName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionNext"
                     android:inputType="text"
+                    android:imeOptions="actionNext"
                     android:maxLines="1"
-                    android:text=""
                     android:nextFocusDown="@id/secondaryServer"
-                    android:importantForAutofill="no"
-                    android:textColor="?attr/foregroundElementColor">
+                    android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <requestFocus/>
-            </EditText>
-        </com.frostnerd.materialedittext.MaterialEditText>
-
-        <com.frostnerd.materialedittext.MaterialEditText
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                app:labelColorPrimary="?attr/foregroundElementColor"
-                app:labelColorSecondary="?attr/foregroundElementColor"
-                android:layout_marginTop="8dp"
-                app:revealDelay="0"
-                app:revealType="revealInstant"
-                app:minCharLength="1"
-                app:labelText="@string/dialog_newserver_primaryserver"
-                app:hint="@string/dialog_newserver_primaryserver_hint"
-                app:allowCollapse="false"
-                app:animationDuration="0"
-                app:indicatorState="incorrect"
                 android:id="@+id/primaryServerWrap"
+                app:errorEnabled="true"
+                android:hint="@string/dialog_newserver_primaryserver"
+                android:textColorHint="?attr/foregroundElementColor"
+                android:layout_marginTop="8dp"
                 app:openKeyboardOnFocus="true"
                 android:layout_height="wrap_content">
 
-            <EditText
-                    android:id="@+id/primaryServer"
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionNext"
+                    android:hint="@string/dialog_newserver_name_hint"
+                    android:id="@+id/primaryServer"
                     android:inputType="text"
+                    android:imeOptions="actionNext"
                     android:maxLines="1"
-                    android:text=""
                     android:nextFocusDown="@id/secondaryServer"
-                    android:importantForAutofill="no"
-                    android:textColor="?attr/foregroundElementColor">
-            </EditText>
-        </com.frostnerd.materialedittext.MaterialEditText>
+                    android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.frostnerd.materialedittext.MaterialEditText
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                app:labelColorPrimary="?attr/foregroundElementColor"
-                app:labelColorSecondary="?attr/foregroundElementColor"
-                app:revealDelay="0"
-                android:layout_marginTop="8dp"
-                app:revealType="revealInstant"
-                app:labelText="@string/dialog_newserver_secondaryserver"
-                app:hint="@string/dialog_newserver_secondaryserver_hint"
                 android:id="@+id/secondaryServerWrap"
-                app:allowCollapse="false"
-                app:animationDuration="0"
+                app:errorEnabled="true"
+                android:hint="@string/dialog_newserver_secondaryserver"
+                android:textColorHint="?attr/foregroundElementColor"
+                android:layout_marginTop="8dp"
+                app:openKeyboardOnFocus="true"
                 android:layout_height="wrap_content">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionNext"
-                    android:nextFocusUp="@id/primaryServer"
-                    android:inputType="text"
-                    android:maxLines="1"
                     android:id="@+id/secondaryServer"
-                    android:text=""
-                    android:importantForAutofill="no"
-                    android:textColor="?attr/foregroundElementColor">
-            </EditText>
-        </com.frostnerd.materialedittext.MaterialEditText>
-
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/primaryServer"
+                    android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 </ScrollView>

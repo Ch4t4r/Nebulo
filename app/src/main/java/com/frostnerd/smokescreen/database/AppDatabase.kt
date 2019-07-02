@@ -37,7 +37,7 @@ import com.frostnerd.smokescreen.database.repository.HostSourceRepository
 @Database(entities = [CachedResponse::class, DnsQuery::class, DnsRule::class, HostSource::class], version = AppDatabase.currentVersion)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
-        const val currentVersion:Int = 6
+        const val currentVersion:Int = 7
     }
 
     abstract fun cachedResponseDao(): CachedResponseDao
@@ -49,4 +49,16 @@ abstract class AppDatabase : RoomDatabase() {
     fun dnsQueryRepository() = DnsQueryRepository(dnsQueryDao())
     fun dnsRuleRepository() = DnsRuleRepository(dnsRuleDao())
     fun hostSourceRepository() = HostSourceRepository(hostSourceDao())
+
+    fun recreateDnsRuleIndizes() {
+        this.openHelper.writableDatabase.apply {
+            runInTransaction {
+                execSQL("DROP INDEX `index_DnsRule_importedFrom`")
+                execSQL("DROP INDEX `index_DnsRule_host_type`")
+
+                execSQL("CREATE  INDEX `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
+                execSQL("CREATE  INDEX `index_DnsRule_host_type` ON `DnsRule` (`host`, `type`)")
+            }
+        }
+    }
 }
