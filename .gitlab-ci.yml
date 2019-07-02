@@ -61,7 +61,7 @@ build_fdroid:
 test_build_release:
   stage: test
   script:
-    - ./gradlew clean check assembleNormalRelease --stacktrace -x test
+    - ./gradlew clean check assembleNormalUnsignedRelease --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
