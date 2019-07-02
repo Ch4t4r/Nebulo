@@ -36,4 +36,18 @@
 
     <string name="notification_appcrash_title">Nebulo çöktü</string>
     <string name="notification_appcrash_message">Nebulo çöktü. Ana menüye gitmek ve gerekirse uygulamayı yeniden başlatmak için burayı tıklayın.</string>
+<string name="notification_ruleimport_title">DNS kuralı ithâlatı</string>
+    <string name="notification_ruleimport_message">%1s(%2s)\'den DNS kuralları ithal ediliyor</string>
+    <string name="notification_ruleimport_secondarymessage">İthâlata hazırlanıyor…</string>
+    <string name="notification_ruleimport_tertiarymessage">İthâlat bitiyor…</string>
+
+    <string name="notification_ruleimportfinished_title">DNS kuralı ithâlatı tamamlandı</string>
+    <string name="notification_ruleimportfinished_message">%1d kural(lar)ı ithâl edildi.</string>
+
+    <string name="notification_ruleexport_title">DNS kural ihracatı</string>
+    <string name="notification_ruleexport_message">İhrâcat kuralları (%1d/%2d)</string>
+    <string name="notification_ruleexport_secondarymessage">İhrâcat hazırlanıyor…</string>
+
+    <string name="notification_ruleexportfinished_title">DNS kural ihrâcatı tamamlandı</string>
+    <string name="notification_ruleexportfinished_message">%1d kural(lar)ı ihrâc edildi.</string>
 </resources>

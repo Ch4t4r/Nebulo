@@ -43,9 +43,9 @@
     <string name="dialog_error_text">Uygulama çöktü gibi görünüyor. Hata günlüğünü geliştiriciye göndermek ister misiniz\?</string>
 
     <string name="dialog_batteryoptimization_title">Pil iyileştirmesi</string>
-    <string name="dialog_batteryoptimization_message">Bazı cihazlarda, pil iyileştirmeleri devre dışı bırakılmadığı sürece, uygulamanın önyükleme işlemini tamamladığı bildirilmez.
-\nUygulama şu anda pil iyileştirmesinden beyaz listeye alınmadı, bunu yapmak ister misiniz\?
-\n
+    <string name="dialog_batteryoptimization_message">Bazı cihazlarda, pil iyileştirmeleri devre dışı bırakılmadığı sürece, cihazın önyükleme işlemini tamamladığı bildirilmez. 
+\nUygulama şu anda pil iyileştirmesinden beyaz listeye alınmadı, bunu yapmak ister misiniz\? 
+\n 
 \nDevre dışı bırakmadan önce, iyileştirme etkinken çalışıp çalışmadığını denemelisiniz.</string>
     <string name="dialog_batteryoptimization_whitelist">Devre dışı</string>
     <string name="dialog_batteryoptimization_ignore">Yoksay</string>
@@ -103,4 +103,16 @@
 \nBu uygulamanın bir Telegram grubu olduğunu biliyor muydunuz\? Düzenli güncellemeler içerir ve tartışmalar ve sorular için mükemmel bir yerdir.
 \n120 kişiden büyük bir topluluğuz, bunun bir parçası olmak ister misiniz\?</string>
     <string name="dialog_join_group_positive">Evet!</string>
-</resources>
+<string name="dialog_speedresult_title">Hız testi sonuçları</string>
+    <string name="dialog_speedresult_message">%1d sunucu test edildi
+\n  %2d DoT sunucularına erişilebiliyor, %3d erişilemiyor
+\n  %4d DoH sunucularına erişilebiliyor, %5d erişilemiyor
+\n  Ortalama tepki süresi: %6d ms.
+\n
+\n  En hızlı sunucu: %7s
+\n  En yavaş sunucu: %8s</string>
+
+    <string name="dialog_speedtest_useserver_title">Sunucu seç</string>
+    <string name="dialog_speedtest_useserver_message">%1s sunucusunu kullanmak istiyor musunuz\? Bu %4d ms bir tepki süresi ile %3d dışında %2d sırada yer aldı.</string>
+
+    </resources>
