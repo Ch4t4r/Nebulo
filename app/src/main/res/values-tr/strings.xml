@@ -52,4 +52,19 @@
 
 <string name="about_help_translating">Çeviriye yardımcı olun</string>
 
+<string name="activity_label_speed_test">Sunucu hızı karşılaştırması</string>
+    <string name="activity_label_dns_rules">DNS kuralları</string>
+
+    <string name="all_abort">İptal et</string>
+    <string name="window_speedtest_runtest">Testi başlat</string>
+    <string name="window_speedtest_useserver">Bu sunucuyu kullan</string>
+
+    <string name="error_no_webbrowser_installed">Bu bağlantıyı görüntülemek için yüklü herhangi bir uygulama yok.</string>
+
+    <string name="button_main_dnsrules">DNS kuralları</string>
+
+    <string name="window_dnsrules_customhosts">Özel Hosts</string>
+    <string name="window_dnsrules_customhosts_message">Tüm özel Hostları burada tanımlayın.</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Bu kaynaktan gelen kurallar: -</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Bu kaynaktan gelen kurallar: %1d</string>
 </resources>
