@@ -60,4 +60,8 @@
     <string name="changelog_build_36_4">Der Dns Regel Import funktioniert nun mit nicht-Standard Buchstaben (z.B. Umlauten)</string>
     <string name="changelog_build_36_5">Die Dns Regeln befinden sich nun im Seitenmenü</string>
     <string name="changelog_build_36_6">Es wurde ein Fehler behoben, welcher auf manchen Geräten zum Absturz der App führte</string>
+    <string name="changelog_build_37_1">Einige Abstürze behoben</string>
+    <string name="changelog_build_37_2">Ein paar Designverbesserungen</string>
+    <string name="changelog_build_37_3">Der Import von Dns Regeln ist nun schneller</string>
+    <string name="changelog_build_37_4">Importierte Dns Regeln benötigen nun weniger Speicher auf dem Gerät</string>
     </resources>
