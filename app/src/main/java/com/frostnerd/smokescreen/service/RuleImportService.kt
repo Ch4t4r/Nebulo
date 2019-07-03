@@ -54,6 +54,7 @@ class RuleImportService : Service() {
             .matcher("")
     private val DOMAINS_MATCHER = Pattern.compile("^([_\\w][\\w_\\-.]+)(?:\$|\\s+.*)").matcher("")
     private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("")
+    private val ruleCommitSize = 10000
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
 
@@ -221,15 +222,17 @@ class RuleImportService : Service() {
             DOMAINS_MATCHER to (0 to mutableListOf()),
             ADBLOCK_MATCHER to (0 to mutableListOf())
         )
+        var lineCount = 0
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
             lines.forEach { line ->
                 if (importJob != null && importJob?.isCancelled == false) {
                     if (parsers.isNotEmpty() && !line.trim().startsWith("#") && !line.trim().startsWith("!") && !line.isBlank()) {
+                        lineCount++
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
                                 hosts.second.addAll(processLine(matcher))
-                                commitLines(source, parsers)
+                                if(lineCount > ruleCommitSize) commitLines(source, parsers)
                             } else {
                                 if (hosts.first > 5) {
                                     log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
@@ -257,7 +260,7 @@ class RuleImportService : Service() {
         val hosts = parsers[parsers.keys.minBy {
             parsers[it]!!.first
         } ?: parsers.keys.first()]!!.second
-        if (hosts.size > 5000 || forceCommit) {
+        if (hosts.size > ruleCommitSize || forceCommit) {
             getDatabase().dnsRuleDao().insertAll(hosts.map {
                 DnsRule(it.type, it.host, it.target, null, source.id)
             })
