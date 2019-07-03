@@ -945,8 +945,9 @@ class DnsVpnService : VpnService(), Runnable {
                         false
                     } else {
                         val uniformQuestion = question.name.toString().replace(wwwRegex, "")
-                        val resolveResult = dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
+                        var resolveResult = dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
                         if (resolveResult != null) {
+                            if(resolveResult == "0") resolveResult = "0.0.0.0"
                             resolveResults[question] = resolveResult
                             true
                         } else false
