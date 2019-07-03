@@ -238,7 +238,9 @@ class RuleImportService : Service() {
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
                                 val rule = processLine(matcher, sourceId)
-                                if(rule != null) hosts.second.add(rule)
+                                if(rule != null) hosts.second.add(rule.apply {
+                                    stagingType = 2
+                                })
                                 if(lineCount > ruleCommitSize) {
                                     commitLines(parsers)
                                     lineCount = 0
