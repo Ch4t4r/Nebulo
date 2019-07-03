@@ -52,7 +52,6 @@
 <string name="activity_label_speed_test">Server snelheidsvergelijking</string>
     <string name="activity_label_dns_rules">Dns regels</string>
 
-    <string name="all_abort">Afbreken</string>
     <string name="window_speedtest_runtest">Start de test</string>
     <string name="window_speedtest_useserver">Gebruik deze server</string>
 

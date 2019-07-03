@@ -109,7 +109,7 @@ class RuleImportService : Service() {
                 PendingIntent.FLAG_CANCEL_CURRENT
             )
             val abortAction =
-                NotificationCompat.Action(R.drawable.ic_times, getString(R.string.all_abort), abortPendingAction)
+                NotificationCompat.Action(R.drawable.ic_times, getString(android.R.string.cancel), abortPendingAction)
             notification!!.addAction(abortAction)
         }
         startForeground(3, notification!!.build())

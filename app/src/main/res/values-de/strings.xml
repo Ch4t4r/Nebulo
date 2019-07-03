@@ -62,7 +62,6 @@
 
 <string name="activity_label_dns_rules">Dns Regeln</string>
 
-    <string name="all_abort">Abbrechen</string>
     <string name="error_no_webbrowser_installed">Du hast keine App zum ansehen dieses Links installiert.</string>
 
     <string name="button_main_dnsrules">Dns Regeln</string>
