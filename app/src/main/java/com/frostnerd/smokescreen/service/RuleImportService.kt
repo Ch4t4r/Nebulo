@@ -266,7 +266,7 @@ class RuleImportService : Service() {
             parsers[it]!!.first
         } ?: parsers.keys.first()]!!.second
         if (hosts.size > ruleCommitSize || forceCommit) {
-            getDatabase().dnsRuleDao().insertAll(hosts)
+            getDatabase().dnsRuleDao().insertAllIgnoreConflict(hosts)
             ruleCount += hosts.size
             hosts.clear()
         }

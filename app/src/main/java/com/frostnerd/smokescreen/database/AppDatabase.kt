@@ -57,7 +57,7 @@ abstract class AppDatabase : RoomDatabase() {
                 execSQL("DROP INDEX `index_DnsRule_host_type`")
 
                 execSQL("CREATE  INDEX `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
-                execSQL("CREATE  INDEX `index_DnsRule_host_type` ON `DnsRule` (`host`, `type`)")
+                execSQL("CREATE UNIQUE INDEX `index_DnsRule_host_type` ON `DnsRule` (`host`, `type`)")
             }
         }
     }

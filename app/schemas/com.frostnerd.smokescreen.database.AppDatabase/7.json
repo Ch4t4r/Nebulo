@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 7,
-    "identityHash": "4aa62cae2ae68bc4d2a314f44806a334",
+    "identityHash": "7446a9cf3961a8a8d4beb8cde8f5c79c",
     "entities": [
       {
         "tableName": "CachedResponse",
@@ -163,12 +163,12 @@
           },
           {
             "name": "index_DnsRule_host_type",
-            "unique": false,
+            "unique": true,
             "columnNames": [
               "host",
               "type"
             ],
-            "createSql": "CREATE  INDEX `index_DnsRule_host_type` ON `${TABLE_NAME}` (`host`, `type`)"
+            "createSql": "CREATE UNIQUE INDEX `index_DnsRule_host_type` ON `${TABLE_NAME}` (`host`, `type`)"
           }
         ],
         "foreignKeys": [
@@ -227,7 +227,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4aa62cae2ae68bc4d2a314f44806a334')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7446a9cf3961a8a8d4beb8cde8f5c79c')"
     ]
   }
 }

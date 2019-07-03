@@ -51,6 +51,9 @@ interface DnsRuleDao {
     @Insert
     fun insertAll(rules: Collection<DnsRule>)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertAllIgnoreConflict(rules: Collection<DnsRule>)
+
     @Query("SELECT COUNT(*) FROM DnsRule")
     fun getCount(): Long
 
