@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:hint="@string/dialog_newdnsrule_hint_host"
                 android:id="@+id/host"
+                android:inputType="textUri"
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 

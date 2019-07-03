@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:hint="@string/dialog_newserver_name_hint"
                     android:id="@+id/primaryServer"
-                    android:inputType="text"
+                    android:inputType="textUri"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:nextFocusDown="@id/secondaryServer"
@@ -76,7 +76,7 @@
             <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/secondaryServer"
-                    android:inputType="text"
+                    android:inputType="textUri"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:nextFocusDown="@id/primaryServer"
