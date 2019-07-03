@@ -217,12 +217,13 @@ class RuleImportService : Service() {
 
     private fun processLines(source: HostSource, stream: InputStream) {
         val parsers = mutableMapOf(
-            DNSMASQ_MATCHER to (0 to mutableListOf<Host>()),
+            DNSMASQ_MATCHER to (0 to mutableListOf<DnsRule>()),
             HOSTS_MATCHER to (0 to mutableListOf()),
             DOMAINS_MATCHER to (0 to mutableListOf()),
             ADBLOCK_MATCHER to (0 to mutableListOf())
         )
         var lineCount = 0
+        val sourceId = source.id
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
             lines.forEach { line ->
                 if (importJob != null && importJob?.isCancelled == false) {
@@ -231,8 +232,8 @@ class RuleImportService : Service() {
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
-                                hosts.second.addAll(processLine(matcher))
-                                if(lineCount > ruleCommitSize) commitLines(source, parsers)
+                                hosts.second.add(processLine(matcher, sourceId))
+                                if(lineCount > ruleCommitSize) commitLines(parsers)
                             } else {
                                 if (hosts.first > 5) {
                                     log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
@@ -249,42 +250,39 @@ class RuleImportService : Service() {
                 }
             }
         }
-        commitLines(source, parsers, true)
+        commitLines(parsers, true)
     }
 
     private fun commitLines(
-        source: HostSource,
-        parsers: Map<Matcher, Pair<Int, MutableList<Host>>>,
+        parsers: Map<Matcher, Pair<Int, MutableList<DnsRule>>>,
         forceCommit: Boolean = false
     ) {
         val hosts = parsers[parsers.keys.minBy {
             parsers[it]!!.first
         } ?: parsers.keys.first()]!!.second
         if (hosts.size > ruleCommitSize || forceCommit) {
-            getDatabase().dnsRuleDao().insertAll(hosts.map {
-                DnsRule(it.type, it.host, it.target, null, source.id)
-            })
+            getDatabase().dnsRuleDao().insertAll(hosts)
             ruleCount += hosts.size
             hosts.clear()
         }
     }
 
     private val wwwRegex = Regex("^www\\.")
-    private fun processLine(matcher: Matcher): Collection<Host> {
+    private fun processLine(matcher: Matcher, sourceId:Long): DnsRule {
         when {
             matcher.groupCount() == 1 -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
-                return listOf(Host(host, "0.0.0.0", Record.TYPE.A), Host(host, "::1", Record.TYPE.AAAA))
+                return DnsRule(Record.TYPE.ANY, host, "0.0.0.0", "::1", importedFrom = sourceId)
             }
             matcher == DNSMASQ_MATCHER -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
                 val target = matcher.group(2)
-                return listOf(Host(host, target, if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A))
+                return DnsRule(if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A, host, target, importedFrom = sourceId)
             }
             matcher == HOSTS_MATCHER -> {
                 val target = matcher.group(1)
                 val host = matcher.group(2).replace(wwwRegex, "")
-                return listOf(Host(host, target, if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A))
+                return DnsRule(if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A, host, target, importedFrom = sourceId)
             }
         }
         throw IllegalStateException()
@@ -298,6 +296,4 @@ class RuleImportService : Service() {
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
-
-    private data class Host(val host: String, val target: String, val type: Record.TYPE)
 }
