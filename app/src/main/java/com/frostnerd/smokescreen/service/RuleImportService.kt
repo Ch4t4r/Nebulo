@@ -279,25 +279,29 @@ class RuleImportService : Service() {
             }
             matcher == DNSMASQ_MATCHER -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
-                val target = matcher.group(2).let {
+                var target = matcher.group(2)
+                val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
+                target = target.let {
                     when (it) {
                         "0.0.0.0" -> "0"
                         "127.0.0.1", "::1" -> "1"
                         else -> it
                     }
                 }
-                return DnsRule(if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A, host, target, importedFrom = sourceId)
+                return DnsRule(type, host, target, importedFrom = sourceId)
             }
             matcher == HOSTS_MATCHER -> {
-                val target = matcher.group(1)
-                val host = matcher.group(2).replace(wwwRegex, "").let {
+                var target = matcher.group(1)
+                val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
+                target = target.let {
                     when (it) {
                         "0.0.0.0" -> "0"
                         "127.0.0.1", "::1" -> "1"
                         else -> it
                     }
                 }
-                return DnsRule(if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A, host, target, importedFrom = sourceId)
+                val host = matcher.group(2).replace(wwwRegex, "")
+                return DnsRule(type, host, target, importedFrom = sourceId)
             }
         }
         throw IllegalStateException()
