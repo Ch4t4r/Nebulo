@@ -9,4 +9,5 @@
     <string name="contentdescription_stop_app">Die App stoppen</string>
     
     <string name="hint_searchterm">Suchbegriff</string>
+<string name="hint_search">Suche</string>
 </resources>
