@@ -27,6 +27,7 @@ import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
 import com.frostnerd.smokescreen.service.RuleExportService
 import com.frostnerd.smokescreen.service.RuleImportService
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.activity_dns_rules.toolBar
 import kotlinx.android.synthetic.main.item_datasource.view.*
@@ -204,19 +205,23 @@ class DnsRuleActivity : BaseActivity() {
                                 else -> it
                             }
                         }
-                        getDatabase().dnsRuleRepository().insertAsync(newRule)
-                        userDnsRules.add(insertPos, newRule)
-                        val wereRulesShown = showUserRules
-                        showUserRules = true
-                        if(wereRulesShown) {
-                            userRuleCount += 1
-                            sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
-                        } else {
-                            userRuleCount = userDnsRules.size
-                            runOnUiThread {
-                                sourceAdapter.notifyItemChanged(sourceAdapterList.size)
-                                sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                        val id = getDatabase().dnsRuleDao().insertIgnore(newRule)
+                        if(id != -1L) {
+                            userDnsRules.add(insertPos, newRule)
+                            val wereRulesShown = showUserRules
+                            showUserRules = true
+                            if(wereRulesShown) {
+                                userRuleCount += 1
+                                sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                            } else {
+                                userRuleCount = userDnsRules.size
+                                runOnUiThread {
+                                    sourceAdapter.notifyItemChanged(sourceAdapterList.size)
+                                    sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                                }
                             }
+                        } else {
+                            Snackbar.make(findViewById(android.R.id.content), R.string.window_dnsrules_hostalreadyexists, Snackbar.LENGTH_LONG).show()
                         }
                     }).show()
                 })

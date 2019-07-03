@@ -33,6 +33,9 @@ interface DnsRuleDao {
     @Insert
     fun insert(dnsRule: DnsRule)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertIgnore(dnsRule: DnsRule):Long
+
     @Query("DELETE FROM DnsRule WHERE importedFrom IS NULL")
     fun deleteAllUserRules()
 
