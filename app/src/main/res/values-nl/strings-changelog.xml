@@ -60,4 +60,8 @@
     <string name="changelog_build_36_4">De regel import kan nu niet-standaard letters (zoals umlauts) herkennen</string>
     <string name="changelog_build_36_5">De dns-regels staan nu in het paginamenu</string>
     <string name="changelog_build_36_6">Een crash opgelost die zich op sommige apparaten voordeed</string>
+    <string name="changelog_build_37_1">Enkele crashes verholpen</string>
+    <string name="changelog_build_37_2">Enkele verbeteringen in het ontwerp</string>
+    <string name="changelog_build_37_3">Het importeren van de dns-regels gaat nu sneller</string>
+    <string name="changelog_build_37_4">Geïmporteerde dns-regels nemen nu minder ruimte in beslag op het apparaat</string>
     </resources>
