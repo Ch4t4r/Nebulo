@@ -948,7 +948,10 @@ class DnsVpnService : VpnService(), Runnable {
                         val resolveResult = dao.findRuleTarget(uniformQuestion, question.type, useUserRules)?.let {
                             when (it) {
                                 "0" -> "0.0.0.0"
-                                "1" -> "127.0.0.1"
+                                "1" -> {
+                                    if (question.type == Record.TYPE.AAAA) "::1"
+                                    else "127.0.0.1"
+                                }
                                 else -> it
                             }
                         }

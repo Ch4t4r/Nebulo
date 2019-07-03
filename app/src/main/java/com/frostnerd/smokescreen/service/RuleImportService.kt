@@ -272,14 +272,14 @@ class RuleImportService : Service() {
         when {
             matcher.groupCount() == 1 -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
-                return DnsRule(Record.TYPE.ANY, host, "0", "::1", importedFrom = sourceId)
+                return DnsRule(Record.TYPE.ANY, host, "0", "1", importedFrom = sourceId)
             }
             matcher == DNSMASQ_MATCHER -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
                 val target = matcher.group(2).let {
                     when (it) {
                         "0.0.0.0" -> "0"
-                        "127.0.0.1" -> "1"
+                        "127.0.0.1", "::1" -> "1"
                         else -> it
                     }
                 }
@@ -290,7 +290,7 @@ class RuleImportService : Service() {
                 val host = matcher.group(2).replace(wwwRegex, "").let {
                     when (it) {
                         "0.0.0.0" -> "0"
-                        "127.0.0.1" -> "1"
+                        "127.0.0.1", "::1" -> "1"
                         else -> it
                     }
                 }
