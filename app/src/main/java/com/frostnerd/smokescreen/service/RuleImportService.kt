@@ -72,7 +72,7 @@ class RuleImportService : Service() {
             abortImport()
         }
         createNotification()
-        startWork()
+        if(importJob != null) startWork()
         return START_STICKY
     }
 
@@ -162,7 +162,7 @@ class RuleImportService : Service() {
             val maxCount = getDatabase().hostSourceDao().getEnabledCount()
             getDatabase().hostSourceDao().getAllEnabled().forEach {
                 log("Importing HostSource $it")
-                if (importJob != null && importJob?.isCancelled == false) {
+                if (importJob?.isCancelled == false) {
                     updateNotification(it, count, maxCount.toInt())
                     count++
                     if (it.isFileSource) {
@@ -203,9 +203,13 @@ class RuleImportService : Service() {
             }
             if (importJob != null && importJob?.isCancelled == false) {
                 updateNotificationFinishing()
+                log("Delete rules staged for deletion")
                 dnsRuleDao.deleteMarkedRules()
+                log("Commiting staging")
                 dnsRuleDao.commitStaging()
+                log("Recreating database indices")
                 getDatabase().recreateDnsRuleIndizes()
+                log("Done.")
                 showSuccessNotification()
             }
             log("All imports finished.")
