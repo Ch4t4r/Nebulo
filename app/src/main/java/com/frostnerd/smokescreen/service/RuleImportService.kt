@@ -233,7 +233,10 @@ class RuleImportService : Service() {
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
                                 hosts.second.add(processLine(matcher, sourceId))
-                                if(lineCount > ruleCommitSize) commitLines(parsers)
+                                if(lineCount > ruleCommitSize) {
+                                    commitLines(parsers)
+                                    lineCount = 0
+                                }
                             } else {
                                 if (hosts.first > 5) {
                                     log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
