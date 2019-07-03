@@ -25,7 +25,7 @@ android {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 36
+        versionCode 37
         versionName "1.0-Beta"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -70,7 +70,7 @@ android {
         adblocker {
             dimension "version"
             versionNameSuffix "-adblock"
-            versionCode 37
+            versionCode 38
         }
         normal {
             dimension "version"
