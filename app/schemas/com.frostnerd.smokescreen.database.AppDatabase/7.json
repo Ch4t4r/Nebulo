@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 7,
-    "identityHash": "7446a9cf3961a8a8d4beb8cde8f5c79c",
+    "identityHash": "3523d380c8f8a65d08ada5165f30a90f",
     "entities": [
       {
         "tableName": "CachedResponse",
@@ -162,13 +162,14 @@
             "createSql": "CREATE  INDEX `index_DnsRule_importedFrom` ON `${TABLE_NAME}` (`importedFrom`)"
           },
           {
-            "name": "index_DnsRule_host_type",
+            "name": "index_DnsRule_host_type_stagingType",
             "unique": true,
             "columnNames": [
               "host",
-              "type"
+              "type",
+              "stagingType"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_DnsRule_host_type` ON `${TABLE_NAME}` (`host`, `type`)"
+            "createSql": "CREATE UNIQUE INDEX `index_DnsRule_host_type_stagingType` ON `${TABLE_NAME}` (`host`, `type`, `stagingType`)"
           }
         ],
         "foreignKeys": [
@@ -227,7 +228,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7446a9cf3961a8a8d4beb8cde8f5c79c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3523d380c8f8a65d08ada5165f30a90f')"
     ]
   }
 }

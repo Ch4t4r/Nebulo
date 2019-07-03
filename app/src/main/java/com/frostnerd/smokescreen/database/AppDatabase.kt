@@ -54,10 +54,10 @@ abstract class AppDatabase : RoomDatabase() {
         this.openHelper.writableDatabase.apply {
             runInTransaction {
                 execSQL("DROP INDEX `index_DnsRule_importedFrom`")
-                execSQL("DROP INDEX `index_DnsRule_host_type`")
+                execSQL("DROP INDEX `index_DnsRule_host_type_stagingType`")
 
                 execSQL("CREATE  INDEX `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
-                execSQL("CREATE UNIQUE INDEX `index_DnsRule_host_type` ON `DnsRule` (`host`, `type`)")
+                execSQL("CREATE UNIQUE INDEX `index_DnsRule_host_type_stagingType` ON `DnsRule` (`host`, `type`, `stagingType`)")
             }
         }
     }

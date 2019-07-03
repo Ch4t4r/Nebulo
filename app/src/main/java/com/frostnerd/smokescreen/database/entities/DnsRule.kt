@@ -30,7 +30,7 @@ import org.minidns.record.Record
         childColumns = arrayOf("importedFrom"),
         onDelete = ForeignKey.NO_ACTION
     )],
-    indices = [Index("importedFrom"), Index("host", "type", unique = true)]
+    indices = [Index("importedFrom"), Index("host", "type", "stagingType", unique = true)]
     )
 @TypeConverters(DnsTypeConverter::class)
 data class DnsRule(
