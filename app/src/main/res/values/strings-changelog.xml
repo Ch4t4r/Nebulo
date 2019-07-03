@@ -178,4 +178,16 @@
         <item>@string/changelog_build_36_5</item>
         <item>@string/changelog_build_36_6</item>
     </string-array>
+
+    <string name="changelog_build_37_1">Fixed some crashes</string>
+    <string name="changelog_build_37_2">A few design improvements</string>
+    <string name="changelog_build_37_3">The dns rule import is now a bit faster</string>
+    <string name="changelog_build_37_4">Imported dns rules now take less space on the device</string>
+    <string-array name="changelog_build_37">
+        <item>1.0 Beta (Build 37)</item>
+        <item>@string/changelog_build_37_1</item>
+        <item>@string/changelog_build_37_2</item>
+        <item>@string/changelog_build_37_3</item>
+        <item>@string/changelog_build_37_4</item>
+    </string-array>
 </resources>

@@ -77,4 +77,12 @@
         <item>@string/changelog_build_36_5</item>
         <item>@string/changelog_build_36_6</item>
     </string-array>
+
+    <string-array name="changelog_build_38">
+        <item>1.0 Beta-Adblock (Build 38)</item>
+        <item>@string/changelog_build_37_1</item>
+        <item>@string/changelog_build_37_2</item>
+        <item>@string/changelog_build_37_3</item>
+        <item>@string/changelog_build_37_4</item>
+    </string-array>
 </resources>
