@@ -80,4 +80,8 @@ interface DnsRuleDao {
 
     @Query("SELECT COUNT(*) FROM DnsRule WHERE importedFrom=:hostSourceId")
     fun getCountForHostSource(hostSourceId:Long):Int
+
+    @Query("SELECT * FROM DnsRule WHERE importedFrom IS NOT NULL AND host=:host AND type=:type AND stagingType=2 LIMIT 1")
+    fun getNonUserRule(host:String, type:Record.TYPE):DnsRule?
+
 }

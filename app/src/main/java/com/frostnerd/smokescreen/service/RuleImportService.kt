@@ -57,6 +57,7 @@ class RuleImportService : Service() {
     private val ruleCommitSize = 10000
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
+    private var checkDuplicates:Boolean = false
 
     companion object {
         const val BROADCAST_IMPORT_DONE = "com.frostnerd.nebulo.RULE_IMPORT_DONE"
@@ -232,7 +233,8 @@ class RuleImportService : Service() {
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
-                                hosts.second.add(processLine(matcher, sourceId))
+                                val rule = processLine(matcher, sourceId)
+                                if(rule != null) hosts.second.add(rule)
                                 if(lineCount > ruleCommitSize) {
                                     commitLines(parsers)
                                     lineCount = 0
@@ -271,11 +273,18 @@ class RuleImportService : Service() {
     }
 
     private val wwwRegex = Regex("^www\\.")
-    private fun processLine(matcher: Matcher, sourceId:Long): DnsRule {
+    private fun processLine(matcher: Matcher, sourceId:Long): DnsRule? {
         when {
             matcher.groupCount() == 1 -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
-                return DnsRule(Record.TYPE.ANY, host, "0", "1", importedFrom = sourceId)
+                return if(checkDuplicates) {
+                    val existingIpv4 = getDatabase().dnsRuleDao().getNonUserRule(host, Record.TYPE.A)
+                    val existingIpv6 = getDatabase().dnsRuleDao().getNonUserRule(host, Record.TYPE.AAAA)
+                    if(existingIpv4 == null && existingIpv6 == null) DnsRule(Record.TYPE.ANY, host, "0", "1", importedFrom = sourceId)
+                    else if(existingIpv4 == null) DnsRule(Record.TYPE.A, host, "0", importedFrom = sourceId)
+                    else if(existingIpv6 == null) DnsRule(Record.TYPE.AAAA, host, "1", importedFrom = sourceId)
+                    else null
+                } else DnsRule(Record.TYPE.ANY, host, "0", "1", importedFrom = sourceId)
             }
             matcher == DNSMASQ_MATCHER -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
@@ -288,7 +297,7 @@ class RuleImportService : Service() {
                         else -> it
                     }
                 }
-                return DnsRule(type, host, target, importedFrom = sourceId)
+                return createRuleIfNotExists(host, target, type, sourceId)
             }
             matcher == HOSTS_MATCHER -> {
                 var target = matcher.group(1)
@@ -301,11 +310,20 @@ class RuleImportService : Service() {
                     }
                 }
                 val host = matcher.group(2).replace(wwwRegex, "")
-                return DnsRule(type, host, target, importedFrom = sourceId)
+                return createRuleIfNotExists(host, target, type, sourceId)
             }
         }
         throw IllegalStateException()
     }
+
+    private fun createRuleIfNotExists(host:String, target:String, type:Record.TYPE, sourceId:Long):DnsRule? {
+        return if(checkDuplicates) {
+            val existingRule = getDatabase().dnsRuleDao().getNonUserRule(host, type)
+            if(existingRule == null) DnsRule(type, host, target, importedFrom = sourceId)
+            else null
+        } else DnsRule(type, host, target, importedFrom = sourceId)
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
