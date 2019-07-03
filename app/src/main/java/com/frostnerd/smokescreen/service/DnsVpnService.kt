@@ -19,7 +19,6 @@ import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.general.CombinedIterator
 import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.networking.NetworkUtil
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.BuildConfig
@@ -512,6 +511,23 @@ class DnsVpnService : VpnService(), Runnable {
         }
     }
 
+    private fun randomLocalIPv6Address(): String {
+        val prefix = StringBuilder(randomIPv6LocalPrefix())
+        for (i in 0..4) prefix.append(":").append(randomIPv6Block(16, false))
+        return prefix.toString()
+    }
+
+    private fun randomIPv6LocalPrefix(): String {
+        return "fd" + randomIPv6Block(8, true) + ":" + randomIPv6Block(16, false) + ":" + randomIPv6Block(16, false)
+    }
+
+    private fun randomIPv6Block(bits: Int, leading_zeros: Boolean): String {
+        var hex = java.lang.Long.toHexString(Math.floor(Math.random() * Math.pow(2.0, bits.toDouble())).toLong())
+        if (!leading_zeros || hex.length == bits / 4);
+        hex = "0000".substring(0, bits / 4 - hex.length) + hex
+        return hex
+    }
+
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -564,7 +580,7 @@ class DnsVpnService : VpnService(), Runnable {
         var tries = 0
         if (useIpv6) {
             do {
-                val addr = NetworkUtil.randomLocalIPv6Address()
+                val addr = randomLocalIPv6Address()
                 try {
                     builder.addAddress(addr, 48)
                     couldSetAddress = true
