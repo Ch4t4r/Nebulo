@@ -10,4 +10,5 @@
     <string name="contentdescription_stop_app">Stop the app</string>
     
     <string name="hint_searchterm">Term to be searched</string>
+    <string name="hint_search">Search</string>
 </resources>

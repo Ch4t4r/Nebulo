@@ -31,7 +31,6 @@
                 android:hint="@string/dialog_newserver_name"
                 android:textColorHint="?attr/foregroundElementColor"
                 android:layout_marginTop="8dp"
-                app:openKeyboardOnFocus="true"
                 android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -52,7 +51,6 @@
                 android:hint="@string/dialog_newserver_primaryserver"
                 android:textColorHint="?attr/foregroundElementColor"
                 android:layout_marginTop="8dp"
-                app:openKeyboardOnFocus="true"
                 android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -73,7 +71,6 @@
                 android:hint="@string/dialog_newserver_secondaryserver"
                 android:textColorHint="?attr/foregroundElementColor"
                 android:layout_marginTop="8dp"
-                app:openKeyboardOnFocus="true"
                 android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText

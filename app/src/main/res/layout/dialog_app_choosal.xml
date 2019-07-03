@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/nameTil"
                 app:errorEnabled="true"
-                android:hint="@string/search"
+                android:hint="@string/hint_search"
                 android:textColorHint="?attr/foregroundElementColor"
                 android:layout_toStartOf="@id/clearSearch"
                 android:layout_alignParentStart="true"

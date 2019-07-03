@@ -14,8 +14,6 @@
         <item name="android:textColorSecondary">#EEEEEE</item>
         <item name="android:textColorHighlight">#EEEEEE</item>
         <item name="android:editTextColor">#EEEEEE</item>
-        <item name="cardColor">#42A5F5</item>
-        <item name="cardStrokeColor">#42A5F5</item>
         <item name="inputElementColor">#42A5F5</item>
         <item name="foregroundElementColor">#FFF</item>
 
@@ -44,8 +42,6 @@
         <item name="android:textColorSecondary">#E0E0E0</item>
         <item name="android:textColorHighlight">#E0E0E0</item>
         <item name="android:editTextColor">#BDBDBD</item>
-        <item name="cardColor">#757575</item>
-        <item name="cardStrokeColor">#757575</item>
         <item name="inputElementColor">#757575</item>
         <item name="foregroundElementColor">#EEEEEE</item>
 
@@ -74,8 +70,6 @@
         <item name="android:textColorSecondary">#BDBDBD</item>
         <item name="android:textColorHighlight">#B0BEC5</item>
         <item name="android:editTextColor">#E0E0E0</item>
-        <item name="cardColor">#90A4AE</item>
-        <item name="cardStrokeColor">#90A4AE</item>
         <item name="inputElementColor">#90A4AE</item>
         <item name="foregroundElementColor">#FFF</item>
 
@@ -109,8 +103,6 @@
         <item name="android:textColorSecondary">#9E9E9E</item>
         <item name="android:textColorHighlight">#9E9E9E</item>
         <item name="android:editTextColor">#9E9E9E</item>
-        <item name="cardColor">#37474F</item>
-        <item name="cardStrokeColor">#37474F</item>
         <item name="inputElementColor">#37474F</item>
         <item name="foregroundElementColor">#9E9E9E</item>
 
@@ -143,9 +135,6 @@
         <item name="foregroundElementColor">#FFF</item>
 
         <item name="color">#EEEEEE</item>
-
-        <item name="cardColor">#42A5F5</item>
-        <item name="cardStrokeColor">#42A5F5</item>
         <item name="inputElementColor">#42A5F5</item>
 
         <item name="android:windowNoTitle">true</item>
@@ -171,9 +160,6 @@
         <item name="foregroundElementColor">#FFF</item>
 
         <item name="color">#E0E0E0</item>
-
-        <item name="cardColor">#90A4AE</item>
-        <item name="cardStrokeColor">#90A4AE</item>
         <item name="inputElementColor">#90A4AE</item>
 
         <item name="android:windowNoTitle">true</item>
@@ -199,9 +185,6 @@
         <item name="foregroundElementColor">#EEEEEE</item>
 
         <item name="color">#BDBDBD</item>
-
-        <item name="cardColor">#757575</item>
-        <item name="cardStrokeColor">#757575</item>
         <item name="inputElementColor">#757575</item>
 
         <item name="android:windowNoTitle">true</item>
@@ -227,9 +210,6 @@
         <item name="foregroundElementColor">#9E9E9E</item>
 
         <item name="color">#424242</item>
-
-        <item name="cardColor">#37474F</item>
-        <item name="cardStrokeColor">#37474F</item>
         <item name="inputElementColor">#37474F</item>
 
         <item name="android:windowNoTitle">true</item>
@@ -250,9 +230,6 @@
         <item name="android:textColorHighlight">@color/preference_primary_color</item>
         <item name="android:editTextColor">@color/preference_primary_color</item>
         <item name="foregroundElementColor">#FFF</item>
-
-        <item name="cardColor">#42A5F5</item>
-        <item name="cardStrokeColor">#42A5F5</item>
         <item name="inputElementColor">#42A5F5</item>
 
         <item name="android:dialogTheme">@style/DialogTheme_Blue</item>
@@ -272,9 +249,6 @@
         <item name="android:textColorHighlight">@color/preference_primary_color_dark</item>
         <item name="android:editTextColor">@color/preference_primary_color_dark</item>
         <item name="foregroundElementColor">#FFF</item>
-
-        <item name="cardColor">#757575</item>
-        <item name="cardStrokeColor">#757575</item>
         <item name="inputElementColor">#757575</item>
 
         <item name="dialogTheme">@style/DialogTheme_Dark</item>
@@ -297,8 +271,6 @@
         <item name="android:editTextColor">@color/preference_primary_color_mono</item>
         <item name="foregroundElementColor">#FFF</item>
 
-        <item name="cardColor">#90A4AE</item>
-        <item name="cardStrokeColor">#90A4AE</item>
         <item name="inputElementColor">#90A4AE</item>
 
         <item name="dialogTheme">@style/DialogTheme_Mono</item>
@@ -320,8 +292,6 @@
         <item name="android:textColorHighlight">@color/preference_primary_color_true_black</item>
         <item name="android:editTextColor">@color/preference_primary_color_true_black</item>
 
-        <item name="cardColor">#37474F</item>
-        <item name="cardStrokeColor">#37474F</item>
         <item name="inputElementColor">#37474F</item>
         <item name="foregroundElementColor">#9E9E9E</item>
 
