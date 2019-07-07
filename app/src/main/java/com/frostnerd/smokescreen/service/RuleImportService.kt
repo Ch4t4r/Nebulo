@@ -72,7 +72,7 @@ class RuleImportService : Service() {
             abortImport()
         }
         createNotification()
-        if(importJob != null) startWork()
+        if(importJob == null) startWork()
         return START_STICKY
     }
 
