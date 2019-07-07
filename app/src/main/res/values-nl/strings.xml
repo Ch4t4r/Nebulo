@@ -66,4 +66,5 @@
 <string name="error_invalid_pin">Geef uw PIN-code op.</string>
     <string name="error_invalid_servername">Geef een naam op.</string>
 
+    <string name="window_dnsrules_hostalreadyexists">Er is al een regel voor deze host.</string>
     </resources>

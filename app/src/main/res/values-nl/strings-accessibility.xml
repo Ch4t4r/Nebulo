@@ -9,4 +9,5 @@
     <string name="contentdescription_stop_app">Stop de app</string>
     
     <string name="hint_searchterm">Te zoeken term</string>
+<string name="hint_search">Zoeken</string>
 </resources>
