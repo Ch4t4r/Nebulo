@@ -60,8 +60,8 @@ private val MIGRATION_5_6 = migration(5, 6) {
 
 private val MIGRATION_6_7 = migration(6,7) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 6 to 7")
-    it.execSQL("DROP INDEX `index_DnsRule_host`")
-    it.execSQL("DROP INDEX `index_DnsRule_host_type`")
+    it.execSQL("DROP INDEX IF EXISTS `index_DnsRule_host`")
+    it.execSQL("DROP INDEX IF EXISTS `index_DnsRule_host_type`")
     it.execSQL("CREATE UNIQUE INDEX `index_DnsRule_host_type_stagingType` ON `DnsRule` (`host`, `type`, `stagingType`)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 6 to 7 completed")
 }
