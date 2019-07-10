@@ -161,6 +161,8 @@ class DnsVpnService : VpnService(), Runnable {
     private fun addNetworkChangeListener() {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         networkCallback = object : ConnectivityManager.NetworkCallback() {
+            private var waitingForNetwork = false
+
             override fun onLost(network: Network?) {
                 super.onLost(network)
                 val activeNetwork = mgr.activeNetworkInfo
@@ -178,11 +180,19 @@ class DnsVpnService : VpnService(), Runnable {
             }
 
             private fun handleChange() {
-                if(this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
-                    upstreamAddress.addressCreator.reset()
-                    upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
+                if(mgr.activeNetworkInfo == null) {
+                    if(fileDescriptor != null) {
+                        destroy(false)
+                        destroyed = false
+                        waitingForNetwork = true
+                    }
+                } else {
+                    if(this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
+                        upstreamAddress.addressCreator.reset()
+                        upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
+                    }
+                    if (fileDescriptor != null || waitingForNetwork) recreateVpn(false, null)
                 }
-                if (fileDescriptor != null) recreateVpn(false, null)
             }
         }
         val builder = NetworkRequest.Builder()
@@ -425,6 +435,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun establishVpn() {
         log("Establishing VPN")
         if (fileDescriptor == null) {
+            destroyed = false
             fileDescriptor = createBuilder().establish()
             run()
             setNotificationText()
