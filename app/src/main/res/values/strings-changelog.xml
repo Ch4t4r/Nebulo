@@ -190,4 +190,12 @@
         <item>@string/changelog_build_37_3</item>
         <item>@string/changelog_build_37_4</item>
     </string-array>
+
+    <string name="changelog_build_38_1">This is a performance focused update which should make dns queries faster, use less memory and be less battery consuming.</string>
+    <string name="changelog_build_38_2">Fixed a crash on some devices regarding the internal database</string>
+    <string-array name="changelog_build_38">
+        <item>1.0 Beta (Build 38)</item>
+        <item>@string/changelog_build_38_1</item>
+        <item>@string/changelog_build_38_2</item>
+    </string-array>
 </resources>
