@@ -24,18 +24,18 @@
 
     <string name="notification_appcrash_title">Nebulo is gecrasht</string>
     <string name="notification_appcrash_message">Nebulo is gecrasht. Klik hier om naar het hoofdmenu te gaan en de app indien nodig opnieuw te starten.</string>
-<string name="notification_ruleimport_title">DNS-regel importeren</string>
+<string name="notification_ruleimport_title">DNS-regels importeren</string>
     <string name="notification_ruleimport_message">Importeren van DNS-regels uit %1s (%2s)</string>
     <string name="notification_ruleimport_secondarymessage">Importeren voorbereiden …</string>
 
-    <string name="notification_ruleimportfinished_title">DNS-regel importeren voltooid</string>
+    <string name="notification_ruleimportfinished_title">DNS-regels importeren voltooid</string>
     <string name="notification_ruleimportfinished_message">%1d regels zijn geïmporteerd.</string>
 <string name="notification_ruleimport_tertiarymessage">Importeren voltooien…</string>
 
-    <string name="notification_ruleexport_title">Dns regel exporteren</string>
+    <string name="notification_ruleexport_title">Dns-regels exporteren</string>
     <string name="notification_ruleexport_message">Exporteer regels (%1d/%2d)</string>
     <string name="notification_ruleexport_secondarymessage">Exporteren voorbereiden…</string>
 
-    <string name="notification_ruleexportfinished_title">DNS-regel exporteren is voltooid</string>
+    <string name="notification_ruleexportfinished_title">DNS-regels exporteren is voltooid</string>
     <string name="notification_ruleexportfinished_message">%1d regels zijn geëxporteerd.</string>
 </resources>
