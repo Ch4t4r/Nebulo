@@ -46,7 +46,6 @@ import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
-import java.lang.IllegalStateException
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress

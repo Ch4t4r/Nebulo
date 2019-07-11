@@ -20,7 +20,6 @@ import leakcanary.LeakSentry
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.io.Serializable
-import java.lang.Exception
 import java.text.DateFormat
 import java.util.*
 

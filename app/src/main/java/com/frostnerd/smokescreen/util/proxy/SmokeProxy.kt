@@ -2,7 +2,6 @@ package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.dnstunnelproxy.QueryListener
-import com.frostnerd.smokescreen.service.DnsVpnService
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.record.A
 import org.minidns.record.AAAA

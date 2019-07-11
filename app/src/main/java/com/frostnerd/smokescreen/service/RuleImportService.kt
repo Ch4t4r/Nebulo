@@ -23,8 +23,9 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import org.minidns.record.Record
-import java.io.*
-import java.lang.IllegalStateException
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 

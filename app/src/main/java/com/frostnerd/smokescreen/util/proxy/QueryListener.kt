@@ -8,11 +8,8 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.getSentryIfEnabled
 import com.frostnerd.smokescreen.hasTlsServer
 import com.frostnerd.smokescreen.log
-import io.sentry.event.Event
-import io.sentry.event.EventBuilder
 import org.minidns.dnsmessage.DnsMessage
 
 /*

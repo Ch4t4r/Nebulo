@@ -7,9 +7,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.getPreferences
 import kotlinx.android.synthetic.main.dialog_create_dnsrule.view.*
-import kotlinx.android.synthetic.main.dialog_create_dnsrule.view.ipv4Address
 import org.minidns.record.Record
-import java.lang.Exception
 import java.net.Inet4Address
 import java.net.Inet6Address
 

@@ -6,7 +6,6 @@ import android.graphics.Typeface
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import android.widget.SimpleExpandableListAdapter
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences

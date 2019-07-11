@@ -15,7 +15,6 @@ import com.github.anrwatchdog.ANRWatchDog
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
 import io.sentry.event.User
-import leakcanary.LeakCanary
 import leakcanary.LeakSentry
 import java.util.*
 import kotlin.system.exitProcess

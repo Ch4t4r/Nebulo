@@ -8,8 +8,6 @@ import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
 import com.frostnerd.vpntunnelproxy.TunnelHandle
 import org.minidns.dnsmessage.DnsMessage
-import org.pcap4j.packet.IpPacket
-import java.lang.IllegalStateException
 import java.net.DatagramPacket
 import java.net.Inet4Address
 import java.net.Inet6Address

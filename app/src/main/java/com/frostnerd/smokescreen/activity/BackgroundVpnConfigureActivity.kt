@@ -17,7 +17,6 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.toJson
-import java.lang.IllegalArgumentException
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
