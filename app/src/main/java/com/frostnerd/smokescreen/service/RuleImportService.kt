@@ -18,6 +18,7 @@ import com.frostnerd.smokescreen.util.Notifications
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import leakcanary.LeakSentry
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -65,6 +66,11 @@ class RuleImportService : Service() {
 
     private val httpClient by lazy {
         OkHttpClient()
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        LeakSentry.refWatcher.watch(this, "RuleImportService")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

@@ -16,6 +16,7 @@ import com.frostnerd.smokescreen.util.Notifications
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import leakcanary.LeakSentry
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.io.Serializable
@@ -48,6 +49,11 @@ class RuleExportService : Service() {
 
     companion object {
         const val BROADCAST_EXPORT_DONE = "com.frostnerd.nebulo.RULE_EXPORT_DONE"
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        LeakSentry.refWatcher.watch(this, "RuleExportService")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

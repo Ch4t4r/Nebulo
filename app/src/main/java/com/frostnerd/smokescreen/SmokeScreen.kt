@@ -15,6 +15,8 @@ import com.github.anrwatchdog.ANRWatchDog
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
 import io.sentry.event.User
+import leakcanary.LeakCanary
+import leakcanary.LeakSentry
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -96,6 +98,7 @@ class SmokeScreen : Application() {
         ANRWatchDog().setANRListener {
             log(RuntimeException(it))
         }
+        LeakSentry.refWatcher.watch(this)
     }
 
     fun initSentry(forceEnabled: Boolean = false) {
