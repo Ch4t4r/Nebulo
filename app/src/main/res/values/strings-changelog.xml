@@ -198,4 +198,10 @@
         <item>@string/changelog_build_38_1</item>
         <item>@string/changelog_build_38_2</item>
     </string-array>
+
+    <string name="changelog_build_39_1">Fixed a crash which affected most dns servers</string>
+    <string-array name="changelog_build_39">
+        <item>1.0 Beta (Build 39)</item>
+        <item>@string/changelog_build_39_1</item>
+    </string-array>
 </resources>
