@@ -36,6 +36,7 @@ import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import kotlinx.coroutines.*
+import leakcanary.LeakSentry
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.dnsname.DnsName
@@ -45,7 +46,6 @@ import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
-import java.lang.IllegalStateException
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
@@ -143,6 +143,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
+        LeakSentry.refWatcher.watch(this, "DnsVpnService")
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             log("Encountered an uncaught exception.")
             destroy()

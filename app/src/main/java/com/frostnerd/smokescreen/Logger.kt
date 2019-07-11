@@ -6,6 +6,10 @@ import android.os.Build
 import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.database.AppDatabase
 import io.sentry.Sentry
+import io.sentry.event.Event
+import io.sentry.event.EventBuilder
+import io.sentry.event.interfaces.ExceptionInterface
+import leakcanary.LeakSentry
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,7 +44,18 @@ private fun Context.logErrorSentry(e: Throwable) {
                 e.stackTrace.contains(elem)
             }
         } || publishedExceptions.put(e, e.stackTrace.toHashSet()) != null) return
-    else if (getPreferences().crashReportingEnabled) Sentry.capture(e)
+    else if (getPreferences().crashReportingEnabled) {
+        if(e is OutOfMemoryError) {
+            EventBuilder().withMessage(e.message)
+                .withLevel(Event.Level.ERROR)
+                .withExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
+                .withSentryInterface(ExceptionInterface(e)).build().apply {
+                    Sentry.capture(this)
+                }
+        } else {
+            Sentry.capture(e)
+        }
+    }
 }
 
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {

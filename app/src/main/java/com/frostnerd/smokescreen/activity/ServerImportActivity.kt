@@ -22,7 +22,6 @@ import java.io.InputStreamReader
 import java.io.StringReader
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.stream.Collectors
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

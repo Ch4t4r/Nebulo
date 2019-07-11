@@ -6,12 +6,6 @@ import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
 import org.minidns.dnsmessage.DnsMessage
-import org.minidns.record.A
-import org.minidns.record.AAAA
-import org.minidns.record.Data
-import org.minidns.record.Record
-import java.net.Inet4Address
-import java.net.Inet6Address
 import java.net.InetAddress
 
 /*

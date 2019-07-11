@@ -1,10 +1,8 @@
 package com.frostnerd.smokescreen.dialog
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.getPreferences
 import kotlinx.android.synthetic.main.dialog_export_dnsrules.view.*
 

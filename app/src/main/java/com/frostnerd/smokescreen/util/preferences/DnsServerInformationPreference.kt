@@ -3,7 +3,6 @@ package com.frostnerd.smokescreen.util.preferences
 import android.content.SharedPreferences
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
-import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
@@ -11,10 +10,7 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
 import com.frostnerd.smokescreen.hasTlsServer
-import java.lang.IllegalStateException
 import kotlin.reflect.KProperty
-import kotlin.reflect.full.declaredMemberProperties
-import kotlin.reflect.jvm.isAccessible
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

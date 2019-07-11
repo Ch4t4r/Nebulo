@@ -11,6 +11,7 @@ import android.service.quicksettings.TileService
 import androidx.annotation.RequiresApi
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
+import leakcanary.LeakSentry
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -39,6 +40,11 @@ fun Context.updateServiceTile() {
 
 @RequiresApi(Build.VERSION_CODES.N)
 class StartStopTileService:TileService() {
+    override fun onCreate() {
+        super.onCreate()
+        LeakSentry.refWatcher.watch(this, "StartStopTileService")
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         updateTileState()
         return Service.START_STICKY

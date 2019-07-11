@@ -7,13 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import com.frostnerd.dnstunnelproxy.Decision
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
-import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.general.StringUtil
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.fromServerUrls
-import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.service.DnsVpnService
 
 /*

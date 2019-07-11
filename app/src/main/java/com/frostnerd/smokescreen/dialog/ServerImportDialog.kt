@@ -12,7 +12,6 @@ import com.frostnerd.cacheadapter.AdapterBuilder
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
-import com.frostnerd.encrypteddnstunnelproxy.RequestType
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences

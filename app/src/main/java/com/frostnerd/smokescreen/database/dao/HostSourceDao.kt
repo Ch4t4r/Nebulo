@@ -1,7 +1,6 @@
 package com.frostnerd.smokescreen.database.dao
 
 import androidx.room.*
-import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.entities.HostSource
 
 /*

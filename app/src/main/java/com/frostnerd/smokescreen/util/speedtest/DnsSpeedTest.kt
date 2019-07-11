@@ -3,7 +3,8 @@ package com.frostnerd.smokescreen.util.speedtest
 import androidx.annotation.IntRange
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
-import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import okhttp3.*
 import org.minidns.dnsmessage.DnsMessage
@@ -11,10 +12,7 @@ import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
 import java.io.DataInputStream
 import java.io.DataOutputStream
-import java.lang.Exception
 import java.net.*
-import java.time.Duration
-import java.time.temporal.TemporalUnit
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLSocketFactory
 import kotlin.random.Random

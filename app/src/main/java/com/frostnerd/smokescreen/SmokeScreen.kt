@@ -15,6 +15,7 @@ import com.github.anrwatchdog.ANRWatchDog
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
 import io.sentry.event.User
+import leakcanary.LeakSentry
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -96,6 +97,7 @@ class SmokeScreen : Application() {
         ANRWatchDog().setANRListener {
             log(RuntimeException(it))
         }
+        LeakSentry.refWatcher.watch(this)
     }
 
     fun initSentry(forceEnabled: Boolean = false) {
@@ -105,18 +107,18 @@ class SmokeScreen : Application() {
                 AndroidSentryClientFactory(this)
             )
             Sentry.getContext().user = User(getPreferences().crashReportingUUID, null, null, null)
-            Sentry.getStoredClient().addTag("user.language", Locale.getDefault().displayLanguage)
-            Sentry.getStoredClient().addTag("app.database_version", AppDatabase.currentVersion.toString())
-            Sentry.getStoredClient().addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
-            Sentry.getStoredClient()
-                .addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
-            Sentry.getStoredClient().addTag(
-                "app.dns_server_secondary",
-                getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
-            )
-            Sentry.getStoredClient().addTag("app.debug", BuildConfig.DEBUG.toString())
-            Sentry.getStoredClient()
-                .addTag("app.installer_package", packageManager.getInstallerPackageName(packageName))
+            Sentry.getStoredClient().apply {
+                addTag("user.language", Locale.getDefault().displayLanguage)
+                addTag("app.database_version", AppDatabase.currentVersion.toString())
+                addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
+                addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
+                addTag(
+                    "app.dns_server_secondary",
+                    getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
+                )
+                addTag("app.debug", BuildConfig.DEBUG.toString())
+                addTag("app.installer_package", packageManager.getInstallerPackageName(packageName))
+            }
         } else {
             Sentry.close()
         }
