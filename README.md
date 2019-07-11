@@ -85,6 +85,9 @@ This work contains third-party content, namely:
    - License: [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 - [LeakCanary](https://github.com/square/leakcanary) for finding memory leaks
    - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+- [LeakSentry](https://github.com/square/leakcanary/tree/master/leakcanary-leaksentry) for finding memory leaks
+   - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
 
 # Cloning
 Feel free to clone this software. However, there are a few things to notice:
