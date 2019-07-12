@@ -53,7 +53,7 @@ class ProxyTlsHandler(
             sendPacketToUpstreamDNSServer(deviceWriteToken, DatagramPacket(data, 0, data.size, destination, realDestination.port), originalEnvelope)
         } else {
             val response = dnsMessage.asBuilder().setQrFlag(true).setResponseCode(DnsMessage.RESPONSE_CODE.SERVER_FAIL)
-            dnsPacketProxy?.writeUDPDnsPacketToDevice(deviceWriteToken, response.build().toArray(), originalEnvelope)
+            dnsPacketProxy?.writeUDPDnsPacketToDevice(response.build().toArray(), originalEnvelope)
         }
     }
 
