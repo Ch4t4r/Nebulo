@@ -54,6 +54,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+        leakCanary {
+            initWith buildTypes.debug
+        }
         fdroid {
             initWith release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -115,9 +118,9 @@ dependencies {
     implementation 'com.github.anrwatchdog:anrwatchdog:1.4.0'
 
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
-
     implementation 'com.squareup.leakcanary:leaksentry:2.0-alpha-3'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-3'
+
+    leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-3'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
