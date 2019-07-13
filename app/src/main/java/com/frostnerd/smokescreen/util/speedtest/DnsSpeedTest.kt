@@ -100,7 +100,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             val start = System.currentTimeMillis()
             response = httpClient.newCall(requestBuilder.build()).execute()
             if(!response.isSuccessful) {
-                log("DoH test failed once for ${server.name}: Request not successful (${response.code}")
+                log("DoH test failed once for ${server.name}: Request not successful (${response.code})")
                 return null
             }
             val body = response.body ?: run{
