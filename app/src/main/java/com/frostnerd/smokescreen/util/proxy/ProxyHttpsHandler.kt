@@ -28,7 +28,7 @@ import java.net.InetAddress
  */
 class ProxyHttpsHandler(
     serverConfigurations: List<ServerConfiguration>,
-    connectTimeout: Int,
+    connectTimeout: Long,
     val queryCountCallback: ((queryCount: Int) -> Unit)? = null
 ) :
     AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
@@ -45,7 +45,7 @@ class ProxyHttpsHandler(
 
     constructor(
         serverConfiguration: ServerConfiguration,
-        connectTimeout: Int
+        connectTimeout: Long
     ) : this(listOf(serverConfiguration), connectTimeout)
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {

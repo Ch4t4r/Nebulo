@@ -82,6 +82,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
     private fun testHttps(config: ServerConfiguration): Int? {
         val msg = createTestDnsPacket()
         val url: URL = config.urlCreator.createUrl(msg, config.urlCreator.address)
+        log("Using URL: $url")
         val requestBuilder = Request.Builder().url(url)
         if (config.requestHasBody) {
             val body = config.bodyCreator!!.createBody(msg, config.urlCreator.address)
@@ -98,7 +99,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             val start = System.currentTimeMillis()
             response = httpClient.newCall(requestBuilder.build()).execute()
             if(!response.isSuccessful) {
-                log("DoH test failed once for ${server.name}: Request not successful")
+                log("DoH test failed once for ${server.name}: Request not successful (${response.code}")
                 return null
             }
             val body = response.body ?: run{
@@ -117,7 +118,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             }
             return time
         } catch (ex: Exception) {
-            log("DoH test failed with exception once for ${server.name}: $ex")
+            log("DoH test failed with exception once for ${server.name}: ${ex.message}")
             return null
         } finally {
             if(response?.body != null) response.close()
