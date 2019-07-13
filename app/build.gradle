@@ -98,7 +98,7 @@ dependencies {
 
     implementation 'com.frostnerd.utilskt:preferences:1.5.12' // https://git.frostnerd.com/AndroidUtils/preferenceskt (Accessible after logging in [free of charge])
     implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.3.18' // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity (Accessible after logging in [free of charge])
-    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.5.119' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.5.120' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
     implementation 'com.frostnerd.utilskt:general:1.0.16' // https://git.frostnerd.com/AndroidUtils/generalkt (Accessible after logging in [free of charge])
     implementation 'com.frostnerd.utilskt:adapters:1.1.1' // https://git.frostnerd.com/AndroidUtils/Adapters (Accessible after logging in [free of charge])
 
