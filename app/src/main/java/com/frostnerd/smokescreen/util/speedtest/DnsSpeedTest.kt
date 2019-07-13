@@ -7,6 +7,7 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import okhttp3.*
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
@@ -88,7 +89,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             val body = config.bodyCreator!!.createBody(msg, config.urlCreator.address)
             if (body != null) {
                 requestBuilder.header("Content-Type", config.contentType)
-                requestBuilder.post(RequestBody.create(body.mediaType, body.rawBody))
+                requestBuilder.post(body.rawBody.toRequestBody(body.mediaType, 0, body.rawBody.size))
             } else {
                 log("DoH test failed once for ${server.name}: BodyCreator didn't create a body")
                 return null
