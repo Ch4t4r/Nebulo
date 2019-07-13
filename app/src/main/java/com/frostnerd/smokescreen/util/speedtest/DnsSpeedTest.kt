@@ -62,7 +62,6 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
      * @return The average response time (in ms)
      */
     fun runTest(@IntRange(from = 1) passes: Int): Int? {
-        println("Running test for ${server.name}")
         var ttl = 0
         for (i in 0 until passes) {
             if (server is HttpsDnsServerInformation) {
