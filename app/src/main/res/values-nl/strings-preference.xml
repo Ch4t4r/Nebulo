@@ -118,9 +118,6 @@
     <string name="summary_bypass_searchdomains">Stuur zoekdomeinen (bijvoorbeeld MyPC.local of MyPc.fritz.box) naar de Dns-server van uw netwerk in plaats van de DoH-server.
 \nDit wordt sterk aanbevolen. Die verzoeken verlaten uw netwerk niet.</string>
 
-    <string name="title_nullterminate_keweon">Keweon Null-terminate</string>
-    <string name="summary_nullterminate_keweon">Null-terminate domeinen van Keweon verwerpen reclame aanvragen volledig in plaats van ze naar Keweon te sturen</string>
-
     <string name="title_pause_on_captiveportal">Pauzeer bij inlogpagina</string>
     <string name="summary_pause_on_captiveportal">Stuur geen DNS-aanvragen naar de geconfigureerde server als u zich moet aanmelden op een inlogpagina. Het zal automatisch worden hervat kort na het inloggen.
 \nAls u deze optie uitschakelt, is het u misschien niet toegestaan de inlogpagina te openen.</string>

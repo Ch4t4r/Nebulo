@@ -119,9 +119,6 @@
     <string name="summary_bypass_searchdomains">Kirim domain pencarian (misal. MyPC.local atau MyPc.fritz.box) ke server Dns jaringan Anda, bukan server DoH.
 \nIni sangat dianjurkan. Pertanyaan itu tidak meninggalkan jaringan Anda.</string>
 
-    <string name="title_nullterminate_keweon">Null-mengakhiri keweon</string>
-    <string name="summary_nullterminate_keweon">Null-terminates domain yang diblokir oleh keweon, yang membatalkan lalu lintas iklan sepenuhnya dikirim ke keweon</string>
-
     <string name="title_pause_on_captiveportal">Jeda di portal kaptif</string>
     <string name="summary_pause_on_captiveportal">Jangan gunakan DoH jika portal kaptif terdeteksi. Ini akan secara otomatis dilanjutkan segera setelah masuk.
 \nMenonaktifkannya mungkin mencegah Anda membuka situs portal kaptif untuk masuk.</string>

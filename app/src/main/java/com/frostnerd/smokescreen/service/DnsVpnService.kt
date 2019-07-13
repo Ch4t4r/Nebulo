@@ -221,7 +221,6 @@ class DnsVpnService : VpnService(), Runnable {
             "show_notification_on_lockscreen",
             "hide_notification_icon",
             "pause_on_captive_portal",
-            "null_terminate_keweon",
             "allow_ipv6_traffic",
             "allow_ipv4_traffic",
             "dns_server_config",
@@ -767,8 +766,7 @@ class DnsVpnService : VpnService(), Runnable {
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)
-                },
-                nullRouteKeweon = getPreferences().isUsingKeweon() && getPreferences().nullTerminateKeweon
+                }
             )
         } else {
             handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
@@ -776,8 +774,7 @@ class DnsVpnService : VpnService(), Runnable {
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)
-                },
-                nullRouteKeweon = getPreferences().isUsingKeweon() && getPreferences().nullTerminateKeweon)
+                })
         }
         log("Handle created, creating DNS proxy")
         handle.ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())

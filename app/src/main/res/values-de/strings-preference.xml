@@ -116,9 +116,6 @@
     <string name="summary_bypass_searchdomains">Sende Suchdomains (z.B. MyPC.local oder MyPc.fritz.box) zu dem DNS server deines aktuellen Netzwerkes, anstatt zum konfigurierten DNS server.
 \nDies wird ausdrücklich empfohlen. Diese Anfragen verlassen dein Netzwerk nicht.</string>
 
-    <string name="title_nullterminate_keweon">Keweon Null-terminieren</string>
-    <string name="summary_nullterminate_keweon">Null-terminiere von Keweon blockierte Domains, was Werbeanfragen komplett verwirft, anstatt, dass diese zu Keweon gesendet werden</string>
-
     <string name="title_pause_on_captiveportal">Bei Anmeldeportal pausieren</string>
     <string name="summary_pause_on_captiveportal">Leite DNS Anfragen nicht an den konfigurierten Server weiter, wenn eine Anmeldung im Netzerk benötigt wird. Die Weiterleitung wird kurz nach der Anmeldung automatisch vorgesetzt.
 \nDas Deaktivieren dieser Option macht es möglicherweise nicht möglich, die Anmeldeseite zu öffnen.</string>

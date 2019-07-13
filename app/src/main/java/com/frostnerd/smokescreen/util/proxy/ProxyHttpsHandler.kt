@@ -29,8 +29,7 @@ import java.net.InetAddress
 class ProxyHttpsHandler(
     serverConfigurations: List<ServerConfiguration>,
     connectTimeout: Int,
-    val queryCountCallback: ((queryCount: Int) -> Unit)? = null,
-    val nullRouteKeweon: Boolean = false
+    val queryCountCallback: ((queryCount: Int) -> Unit)? = null
 ) :
     AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
     override val handlesSpecificRequests: Boolean = false
@@ -50,8 +49,7 @@ class ProxyHttpsHandler(
     ) : this(listOf(serverConfiguration), connectTimeout)
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
-        if (!nullRouteKeweon) return dnsMessage
-        return com.frostnerd.smokescreen.util.proxy.nullRouteKeweon(dnsMessage)
+        return dnsMessage
     }
 
     override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
@@ -62,5 +60,5 @@ class ProxyHttpsHandler(
     override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = true
 
     override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean =
-        nullRouteKeweon
+        false
 }

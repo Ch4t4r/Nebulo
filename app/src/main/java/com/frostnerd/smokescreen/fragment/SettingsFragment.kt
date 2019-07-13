@@ -132,11 +132,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             hideIconPreference.isEnabled = false
             hideIconPreference.isVisible = false
         }
-        if (!requireContext().getPreferences().isUsingKeweon()) {
-            val terminateKeweonPreference = findPreference("null_terminate_keweon")
-            terminateKeweonPreference.isVisible = false
-            terminateKeweonPreference.isEnabled = false
-        }
         processGeneralCategory()
         processCacheCategory()
         processLoggingCategory()

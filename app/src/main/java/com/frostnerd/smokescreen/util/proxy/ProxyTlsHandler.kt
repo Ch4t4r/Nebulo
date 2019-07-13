@@ -36,8 +36,7 @@ import javax.net.ssl.SSLSession
 class ProxyTlsHandler(
     val upstreamAddresses: List<TLSUpstreamAddress>,
     connectTimeout: Int,
-    val queryCountCallback: ((queryCount: Int) -> Unit)? = null,
-    val nullRouteKeweon: Boolean = false
+    val queryCountCallback: ((queryCount: Int) -> Unit)? = null
 ):AbstractTLSDnsHandle(connectTimeout) {
     override val handlesSpecificRequests: Boolean = false
 
@@ -68,8 +67,7 @@ class ProxyTlsHandler(
     }
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
-        if(!nullRouteKeweon) return dnsMessage
-        return com.frostnerd.smokescreen.util.proxy.nullRouteKeweon(dnsMessage)
+        return dnsMessage
     }
 
     override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): TLSUpstreamAddress {
@@ -86,7 +84,7 @@ class ProxyTlsHandler(
     }
 
     override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean {
-        return nullRouteKeweon
+        return false
     }
 
     override fun verifyConnection(sslSession: SSLSession, outgoingPacket: DatagramPacket) {

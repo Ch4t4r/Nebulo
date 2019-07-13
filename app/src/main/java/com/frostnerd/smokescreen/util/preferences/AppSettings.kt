@@ -93,7 +93,6 @@ interface AppSettings {
     var disallowOtherVpns: Boolean
 
     var bypassSearchdomains: Boolean
-    var nullTerminateKeweon: Boolean
     var pauseOnCaptivePortal:Boolean
     var showNoConnectionNotification:Boolean
 
@@ -108,13 +107,6 @@ interface AppSettings {
     var exportedQueryCount:Int
     var totalAppLaunches:Int
     var askedForGroupJoin:Boolean
-
-    fun isUsingKeweon(): Boolean {
-        return dnsServerConfig.servers.any {
-            val host = it.address.host ?: ""
-            host.contains("keweon") || host.contains("asecdns.com") || host.contains("asecdns.ch")
-        }
-    }
 
     fun addUserServerConfiguration(info:DnsServerInformation<*>):UserServerConfiguration {
         var max = 0
@@ -212,7 +204,6 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
-    override var nullTerminateKeweon: Boolean by booleanPref("null_terminate_keweon", false)
     override var pauseOnCaptivePortal: Boolean by booleanPref("pause_on_captive_portal", true)
     override var showNoConnectionNotification:Boolean by booleanPref("show_no_connection_notification", false)
 

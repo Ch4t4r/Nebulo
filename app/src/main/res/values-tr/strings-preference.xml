@@ -119,9 +119,6 @@
     <string name="summary_bypass_searchdomains">Arama alanadlarını (örneğin, MyPC.local veya MyPc.fritz.box), DoH sunucusu yerine ağınızın DNS sunucusuna gönderin.
 \nBu şiddetle tavsiye edilir. Bu sorgular ağınızı terk etmez.</string>
 
-    <string name="title_nullterminate_keweon">Keweon boş sonlandırma</string>
-    <string name="summary_nullterminate_keweon">Engellenen alanları keweon tarafından boş sonlandırır, bu da reklam trafiğini tamamen keweon\'a gönderilmek yerine hurdaya çıkarır</string>
-
     <string name="title_pause_on_captiveportal">Giriş portalında duraklat</string>
     <string name="summary_pause_on_captiveportal">Giriş portalı tespit edilirse DoH kullanmayın. Giriş yaptıktan kısa bir süre sonra otomatik olarak devam edilecektir.
 \nDevre dışı bırakmak, oturum açmak için giriş portalını açmanızı engelleyebilir.</string>
