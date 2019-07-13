@@ -15,6 +15,7 @@ import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.showInfoTextDialog
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
@@ -162,7 +163,10 @@ class SpeedTestActivity : BaseActivity() {
             testsLeft.forEach {
                 if(testJob?.isCancelled == false) {
                     it.started = true
-                    val res = DnsSpeedTest(it.server, 500, 750).runTest(3)
+                    log("Running SpeedTest for ${it.server.name}")
+                    val res = DnsSpeedTest(it.server, 500, 750) { line ->
+                        log(line)
+                    }.runTest(3)
 
                     if (res != null) it.latency = res
                     else it.error = true

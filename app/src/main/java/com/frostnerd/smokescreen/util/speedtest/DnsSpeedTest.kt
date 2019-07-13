@@ -36,7 +36,10 @@ import kotlin.random.Random
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int = 2500, val readTimeout:Int = 1500) {
+class DnsSpeedTest(val server: DnsServerInformation<*>,
+                   val connectTimeout: Int = 2500,
+                   val readTimeout:Int = 1500,
+                   val log:(line:String) -> Unit) {
     private val httpClient by lazy {
         OkHttpClient.Builder()
             .dns(httpsDnsClient)
@@ -87,6 +90,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
                 requestBuilder.header("Content-Type", config.contentType)
                 requestBuilder.post(RequestBody.create(body.mediaType, body.rawBody))
             } else {
+                log("DoH test failed once for ${server.name}: BodyCreator didn't create a body")
                 return null
             }
         }
@@ -94,18 +98,27 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
         try {
             val start = System.currentTimeMillis()
             response = httpClient.newCall(requestBuilder.build()).execute()
-            if(!response.isSuccessful) return null
-            val body = response.body ?: return null
+            if(!response.isSuccessful) {
+                log("DoH test failed once for ${server.name}: Request not successful")
+                return null
+            }
+            val body = response.body ?: run{
+                log("DoH test failed once for ${server.name}: No response body")
+                return null
+            }
             val bytes = body.bytes()
             val time = (System.currentTimeMillis() - start).toInt()
 
             if (bytes.size < 17) {
+                log("DoH test failed once for ${server.name}: Returned less than 17 bytes")
                 return null
             } else if(!testResponse(DnsMessage(bytes))) {
+                log("DoH test failed once for ${server.name}: Testing the response for valid dns message failed")
                 return null
             }
             return time
         } catch (ex: Exception) {
+            log("DoH test failed with exception once for ${server.name}: $ex")
             return null
         } finally {
             if(response?.body != null) response.close()
@@ -114,7 +127,10 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
 
     private fun testTls(address: TLSUpstreamAddress): Int? {
         val addr =
-            address.addressCreator.resolveOrGetResultOrNull(retryIfError = true, runResolveNow = true) ?: return null
+            address.addressCreator.resolveOrGetResultOrNull(retryIfError = true, runResolveNow = true) ?: kotlin.run {
+                log("DoT test failed once for ${server.name}: Address failed to resolve ($address)")
+                return null
+            }
         var socket: Socket? = null
         try {
             socket = SSLSocketFactory.getDefault().createSocket()
@@ -137,9 +153,13 @@ class DnsSpeedTest(val server: DnsServerInformation<*>, val connectTimeout: Int 
 
             socket.close()
             socket = null
-            if(!testResponse(DnsMessage(readData))) return null
+            if(!testResponse(DnsMessage(readData))) {
+                log("DoT test failed once for ${server.name}: Testing the response for valid dns message failed")
+                return null
+            }
             return time
         } catch (ex: Exception) {
+            log("DoT test failed with exception once for ${server.name}: $ex")
             return null
         } finally {
             socket?.close()
