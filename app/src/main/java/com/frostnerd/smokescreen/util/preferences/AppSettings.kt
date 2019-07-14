@@ -171,7 +171,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
-    override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf())
+    override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf("com.android.vending"))
     override var isBypassBlacklist: Boolean by booleanPref("user_bypass_blacklist", true)
 
     override var showNotificationOnLockscreen: Boolean by booleanPref("show_notification_on_lockscreen", true)
@@ -219,11 +219,10 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override val defaultBypassPackages: Set<String> by cache(restrictedCollection(
         stringSetPref(
             "default_bypass_packages",
-            hashSetOf(BuildConfig.APPLICATION_ID, "com.android.vending")
+            hashSetOf(BuildConfig.APPLICATION_ID)
         )
     ) {
         shouldContain(BuildConfig.APPLICATION_ID)
-        shouldContain("com.android.vending")
     }, cacheControl)
     override var dnsServerConfig: DnsServerInformation<*> by cache(DnsServerInformationPreference("dns_server_config") {
         AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
