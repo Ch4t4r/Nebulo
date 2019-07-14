@@ -54,7 +54,6 @@ class MainActivity : NavigationDrawerActivity() {
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
     private var startedActivity = false
-    private var settingsSubscription:TypedPreferences<*>.OnPreferenceChangeListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
@@ -79,11 +78,11 @@ class MainActivity : NavigationDrawerActivity() {
                 }
             }
             update()
-            settingsSubscription = getPreferences().listenForChanges("dns_server_config", getPreferences().preferenceChangeListener {
+             getPreferences().listenForChanges("dns_server_config", getPreferences().preferenceChangeListener {
                 runOnUiThread {
                     update()
                 }
-            })
+            }.pauseOn(lifecycle).resumeOn(lifecycle).unregisterOn(lifecycle))
             view
         }
         supportActionBar?.elevation = 0f
@@ -184,8 +183,6 @@ class MainActivity : NavigationDrawerActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        settingsSubscription?.unregister()
-        settingsSubscription = null
     }
 
     override fun onBackPressed() {
