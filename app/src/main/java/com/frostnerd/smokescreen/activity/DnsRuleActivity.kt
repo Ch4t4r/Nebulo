@@ -203,8 +203,14 @@ class DnsRuleActivity : BaseActivity() {
                                 else -> it
                             }
                         }
-                        val id = if(newRule.isWhitelistRule()) getDatabase().dnsRuleDao().insertWhitelist(newRule)
-                        else getDatabase().dnsRuleDao().insertIgnore(newRule)
+                        val id = if(newRule.isWhitelistRule()) {
+                            getDatabase().dnsRuleDao().insertWhitelist(newRule)
+                            if(userDnsRules.any {
+                                    println("$it vs $newRule")
+                                    it.host == newRule.host && it.type == newRule.type
+                                }) -1L
+                            else 0L
+                        } else getDatabase().dnsRuleDao().insertIgnore(newRule)
                         if(id != -1L) {
                             userDnsRules.add(insertPos, newRule)
                             val wereRulesShown = showUserRules
