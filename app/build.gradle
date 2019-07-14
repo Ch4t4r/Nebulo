@@ -92,7 +92,7 @@ android {
 }
 
 dependencies {
-    def room_version = "2.1.0"
+    def room_version = "2.2.0-alpha01"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
