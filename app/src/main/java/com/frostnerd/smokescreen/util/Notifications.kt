@@ -75,5 +75,21 @@ class Notifications {
             }
             return "defaultchannel"
         }
+
+        fun getPinNotificationChannelId(context: Context):String {
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    "pinchannel",
+                    context.getString(R.string.notification_channel_pin),
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+                channel.enableLights(false)
+                channel.enableVibration(false)
+                channel.description = context.getString(R.string.notification_channel_pin_description)
+                channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+                (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
+            }
+            return "pinchannel"
+        }
     }
 }
