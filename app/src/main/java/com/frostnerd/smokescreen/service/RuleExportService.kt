@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.sendLocalBroadcast
+import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -80,6 +81,7 @@ class RuleExportService : Service() {
             notification!!.setContentText(getString(R.string.notification_ruleexport_secondarymessage))
             notification!!.setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_ruleexport_secondarymessage)))
             notification!!.setProgress(100, 0, true)
+            notification!!.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
             val abortPendingAction = PendingIntent.getService(
                 this,
                 1,
@@ -107,6 +109,7 @@ class RuleExportService : Service() {
         successNotification.setAutoCancel(true)
         successNotification.setContentTitle(getString(R.string.notification_ruleexportfinished_title))
         successNotification.setContentText(getString(R.string.notification_ruleexportfinished_message, ruleCount))
+        successNotification.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(6, successNotification.build())
     }
 
