@@ -113,9 +113,6 @@
     <string name="title_bypass_searchdomains">Searchdomains bypass</string>
     <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network.</string>
 
-    <string name="title_nullterminate_keweon">Null-terminate keweon</string>
-    <string name="summary_nullterminate_keweon">Null-terminates domains blocked by keweon, which scraps ad-traffic entirely instead of it being sent to keweon</string>
-
     <string name="title_pause_on_captiveportal">Pause on captive portal</string>
     <string name="summary_pause_on_captiveportal">Don\'t use DoH if a captive portal is detected. It will automatically be resumed shortly after logging in.\nDisabling it might prevent you from opening the captive portal site to log in.</string>
 

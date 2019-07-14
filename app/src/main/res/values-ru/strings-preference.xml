@@ -137,7 +137,4 @@
 
     <string name="title_delete_queries">Очистить лог запросов</string>
     <string name="summary_delete_queries">Нажмите здесь для удаления всех запросов из лога.</string>
-<string name="title_nullterminate_keweon">Терминация ответов от keweon</string>
-    <string name="summary_nullterminate_keweon">Прекращать обработку ответов, которые сервер keweon считает рекламными (отправлять в 0.0.0.0)</string>
-
     </resources>

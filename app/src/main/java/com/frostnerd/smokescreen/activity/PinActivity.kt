@@ -1,5 +1,8 @@
 package com.frostnerd.smokescreen.activity
 
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -15,12 +18,14 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.app.NotificationCompat
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.canUseFingerprintAuthentication
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.util.Notifications
 import kotlinx.android.synthetic.main.dialog_pin.view.*
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -55,7 +60,23 @@ class PinActivity: BaseActivity() {
             if(intent.extras != null) intent.putExtra("extras", extras)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("pin_type", pinType)
-            context.startActivity(intent)
+            // TODO Replace with qualifier for Android Q
+            if(Build.VERSION.SDK_INT >= 29 && context is Service) {
+                NotificationCompat.Builder(context, Notifications.getPinNotificationChannelId(context))
+                    .setSmallIcon(R.drawable.ic_launcher_flat)
+                    .setContentTitle(context.getString(R.string.notification_pin_title))
+                    .setContentText(context.getString(R.string.notification_pin_message))
+                    .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.notification_pin_message)))
+                    .setContentIntent(PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT))
+                    .setAutoCancel(true)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .build().apply {
+                        (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(7, this)
+                    }
+            } else {
+                context.startActivity(intent)
+            }
         }
         const val masterPassword:String = "7e8285a27d613126347831b2c442eeb4"
     }

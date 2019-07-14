@@ -31,9 +31,11 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.item_datasource.view.*
 import kotlinx.android.synthetic.main.item_datasource.view.cardContent
+import kotlinx.android.synthetic.main.item_datasource.view.delete
 import kotlinx.android.synthetic.main.item_datasource.view.enable
 import kotlinx.android.synthetic.main.item_datasource.view.text
 import kotlinx.android.synthetic.main.item_datasource_rules.view.*
+import kotlinx.android.synthetic.main.item_dnsrule_host.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -201,7 +203,14 @@ class DnsRuleActivity : BaseActivity() {
                                 else -> it
                             }
                         }
-                        val id = getDatabase().dnsRuleDao().insertIgnore(newRule)
+                        val id = if(newRule.isWhitelistRule()) {
+                            getDatabase().dnsRuleDao().insertWhitelist(newRule)
+                            if(userDnsRules.any {
+                                    println("$it vs $newRule")
+                                    it.host == newRule.host && it.type == newRule.type
+                                }) -1L
+                            else 0L
+                        } else getDatabase().dnsRuleDao().insertIgnore(newRule)
                         if(id != -1L) {
                             userDnsRules.add(insertPos, newRule)
                             val wereRulesShown = showUserRules
@@ -229,10 +238,14 @@ class DnsRuleActivity : BaseActivity() {
                     sourceAdapter.notifyItemRemoved(sourceAdapterList.size + 1 + index)
                 }, editRule = {
                     DnsRuleDialog(this, it) { newRule ->
-                        getDatabase().dnsRuleRepository().updateAsync(newRule)
-                        val index = userDnsRules.indexOf(it)
-                        userDnsRules[index] = newRule
-                        sourceAdapter.notifyItemChanged(sourceAdapterList.size + 1 + index)
+                        val rows = getDatabase().dnsRuleDao().updateIgnore(newRule)
+                        if(rows > 0) {
+                            val index = userDnsRules.indexOf(it)
+                            userDnsRules[index] = newRule
+                            sourceAdapter.notifyItemChanged(sourceAdapterList.size + 1 + index)
+                        } else {
+                            Snackbar.make(findViewById(android.R.id.content), R.string.window_dnsrules_hostalreadyexists, Snackbar.LENGTH_LONG).show()
+                        }
                     }.show()
                 })
             }
@@ -444,6 +457,7 @@ class DnsRuleActivity : BaseActivity() {
         val text = view.text
         val delete = view.delete
         val cardContent = view.cardContent
+        val whitelistIndicator = view.whitelistIndicator
         lateinit var dnsRule:DnsRule
 
         init {
@@ -458,6 +472,7 @@ class DnsRuleActivity : BaseActivity() {
         fun display(rule:DnsRule) {
             dnsRule = rule
             text.text = rule.host
+            whitelistIndicator.visibility = if(rule.isWhitelistRule()) View.VISIBLE else View.GONE
         }
         override fun destroy() {}
     }

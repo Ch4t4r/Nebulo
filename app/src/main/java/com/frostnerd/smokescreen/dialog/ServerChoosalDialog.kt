@@ -114,15 +114,21 @@ class ServerChoosalDialog(
 
     private fun loadServerData(tls: Boolean) {
         if (tls) {
+            val hiddenServers = context.getPreferences().removedDefaultDoTServers
             defaultConfig = AbstractTLSDnsHandle.waitUntilKnownServersArePopulated {
-                it.values.toList()
+                it.filter {
+                    it.key !in hiddenServers
+                }.values.toList()
             }
             userConfig = context.getPreferences().userServers.filter {
                 !it.isHttpsServer()
             }.toList()
         } else {
+            val hiddenServers = context.getPreferences().removedDefaultDoHServers
             defaultConfig = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
-                it.values.toList()
+                it.filter {
+                    it.key !in hiddenServers
+                }.values.toList()
             }
             userConfig = context.getPreferences().userServers.filter {
                 it.isHttpsServer()
@@ -213,6 +219,10 @@ class ServerChoosalDialog(
         else button.text = "$name ($primaryServer, $secondaryServer)"
 
         button.tag = info
+        button.setOnLongClickListener {
+            showDefaultConfigDeleteDialog(info, button)
+            true
+        }
         return button
     }
 
@@ -266,7 +276,39 @@ class ServerChoosalDialog(
 
                 if (button.isChecked) {
                     currentSelectedServer =
-                        if (userConfiguration.isHttpsServer()) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[0]!! else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS[0]!!
+                        if (userConfiguration.isHttpsServer()) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
+                    markCurrentSelectedServer()
+                    context.getPreferences().dnsServerConfig = currentSelectedServer
+                }
+                knownServersGroup.removeView(button)
+            }.show()
+    }
+
+    private fun showDefaultConfigDeleteDialog(config:DnsServerInformation<*>, button: RadioButton) {
+        AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+            .setTitle(R.string.dialog_deleteconfig_title)
+            .setMessage(
+                context.getString(
+                    R.string.dialog_deleteconfig_text,
+                    config.name
+                )
+            )
+            .setNegativeButton(R.string.all_no) { _, _ -> }
+            .setPositiveButton(R.string.all_yes) { _, _ ->
+                val isHttps = spinner.selectedItemPosition == 0
+                if(isHttps) {
+                    context.getPreferences().removedDefaultDoHServers = context.getPreferences().removedDefaultDoHServers + AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.keys.find {
+                        AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[it] == config
+                    }!!
+                } else {
+                    context.getPreferences().removedDefaultDoTServers = context.getPreferences().removedDefaultDoTServers + AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.keys.find {
+                        AbstractTLSDnsHandle.KNOWN_DNS_SERVERS[it] == config
+                    }!!
+                }
+
+                if (button.isChecked) {
+                    currentSelectedServer =
+                        if (isHttps) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
                     markCurrentSelectedServer()
                     context.getPreferences().dnsServerConfig = currentSelectedServer
                 }

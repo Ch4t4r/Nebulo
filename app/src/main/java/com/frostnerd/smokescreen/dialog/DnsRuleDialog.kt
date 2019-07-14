@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.dialog
 
 import android.content.Context
 import android.content.DialogInterface
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
@@ -31,6 +32,8 @@ import java.net.Inet6Address
  */
 class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (DnsRule) -> Unit) :
     AlertDialog(context, context.getPreferences().theme.dialogStyle) {
+    private var isWhitelist = false
+
     init {
         val view = layoutInflater.inflate(R.layout.dialog_create_dnsrule, null, false)
         setView(view)
@@ -39,6 +42,9 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
             dialog.dismiss()
         }
         setButton(DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok)) { _, _ ->
+
+        }
+        setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.dialog_newdnsrule_whitelist)) { _, _ ->
 
         }
         setOnShowListener {
@@ -66,17 +72,22 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                 if (valid) {
                     dismiss()
                     val type = when {
+                        isWhitelist -> Record.TYPE.ANY
                         !view.ipv4Address.text.isNullOrBlank() && !view.ipv6Address.text.isNullOrBlank() -> {
                             Record.TYPE.ANY
                         }
                         !view.ipv4Address.text.isNullOrBlank() -> Record.TYPE.A
                         else -> Record.TYPE.AAAA
                     }
-                    val primaryTarget = when (type) {
+                    val primaryTarget = if (isWhitelist) {
+                        ""
+                    } else when (type) {
                         Record.TYPE.A, Record.TYPE.ANY -> view.ipv4Address.text.toString()
                         else -> view.ipv6Address.text.toString()
                     }
-                    val secondaryTarget = when (type) {
+                    val secondaryTarget = if (isWhitelist) {
+                        null
+                    } else when (type) {
                         Record.TYPE.AAAA, Record.TYPE.ANY -> view.ipv6Address.text.toString()
                         else -> null
                     }
@@ -85,27 +96,45 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                         host = view.host.text.toString(),
                         target = primaryTarget,
                         ipv6Target = secondaryTarget
-                    ) ?: DnsRule(Record.TYPE.A, view.host.text.toString(), view.ipv4Address.text.toString())
+                    ) ?: DnsRule(type, view.host.text.toString(), primaryTarget, secondaryTarget)
                     onRuleCreated(
                         newRule
                     )
                 }
             }
-        }
-        if (dnsRule != null) {
-            view.host.setText(dnsRule.host)
-            when {
-                dnsRule.type == Record.TYPE.A -> {
-                    view.ipv4Address.setText(dnsRule.target)
-                    view.ipv6Address.text = null
-                }
-                dnsRule.type == Record.TYPE.AAAA -> {
-                    view.ipv4Address.text = null
-                    view.ipv6Address.setText(dnsRule.target)
-                }
-                dnsRule.type == Record.TYPE.ANY -> {
-                    view.ipv4Address.setText(dnsRule.target)
-                    view.ipv6Address.setText(dnsRule.ipv6Target)
+            getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener {
+                isWhitelist = !isWhitelist
+                getButton(DialogInterface.BUTTON_NEUTRAL).text =
+                    if (isWhitelist) context.getString(R.string.dialog_newdnsrule_specify_address)
+                    else context.getString(R.string.dialog_newdnsrule_whitelist)
+
+                val visibility = if (isWhitelist) View.GONE else View.VISIBLE
+                view.ipv4Til.visibility = visibility
+                view.ipv6Til.visibility = visibility
+            }
+            if (dnsRule != null) {
+                if (dnsRule.isWhitelistRule()) {
+                    isWhitelist = true
+                    getButton(DialogInterface.BUTTON_NEUTRAL).text =
+                        context.getString(R.string.dialog_newdnsrule_specify_address)
+                    view.ipv4Til.visibility = View.GONE
+                    view.ipv6Til.visibility = View.GONE
+                } else {
+                    view.host.setText(dnsRule.host)
+                    when {
+                        dnsRule.type == Record.TYPE.A -> {
+                            view.ipv4Address.setText(dnsRule.target)
+                            view.ipv6Address.text = null
+                        }
+                        dnsRule.type == Record.TYPE.AAAA -> {
+                            view.ipv4Address.text = null
+                            view.ipv6Address.setText(dnsRule.target)
+                        }
+                        dnsRule.type == Record.TYPE.ANY -> {
+                            view.ipv4Address.setText(dnsRule.target)
+                            view.ipv6Address.setText(dnsRule.ipv6Target)
+                        }
+                    }
                 }
             }
         }

@@ -204,4 +204,20 @@
         <item>1.0 Beta (Build 39)</item>
         <item>@string/changelog_build_39_1</item>
     </string-array>
+
+    <string name="changelog_build_40_1">Performance and memory improvements</string>
+    <string name="changelog_build_40_2">All servers in the server dialog can now be deleted by long-clicking them</string>
+    <string name="changelog_build_40_3">Google Play can now be removed from the list of bypass apps</string>
+    <string name="changelog_build_40_4">The PIN feature now works on Android Q</string>
+    <string name="changelog_build_40_5">You can now whitelist domains in the dns rules. If whitelisted they will be sent to the dns server, regardless of whether they are present in a file you provide</string>
+    <string name="changelog_build_40_6">The rule import/export notifications can now be clicked</string>
+    <string-array name="changelog_build_40">
+        <item>1.0 Beta (Build 40)</item>
+        <item>@string/changelog_build_40_1</item>
+        <item>@string/changelog_build_40_2</item>
+        <item>@string/changelog_build_40_3</item>
+        <item>@string/changelog_build_40_4</item>
+        <item>@string/changelog_build_40_5</item>
+        <item>@string/changelog_build_40_6</item>
+    </string-array>
 </resources>

@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.util.preferences
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
@@ -93,7 +94,6 @@ interface AppSettings {
     var disallowOtherVpns: Boolean
 
     var bypassSearchdomains: Boolean
-    var nullTerminateKeweon: Boolean
     var pauseOnCaptivePortal:Boolean
     var showNoConnectionNotification:Boolean
 
@@ -108,13 +108,6 @@ interface AppSettings {
     var exportedQueryCount:Int
     var totalAppLaunches:Int
     var askedForGroupJoin:Boolean
-
-    fun isUsingKeweon(): Boolean {
-        return dnsServerConfig.servers.any {
-            val host = it.address.host ?: ""
-            host.contains("keweon") || host.contains("asecdns.com") || host.contains("asecdns.ch")
-        }
-    }
 
     fun addUserServerConfiguration(info:DnsServerInformation<*>):UserServerConfiguration {
         var max = 0
@@ -178,7 +171,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
-    override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf())
+    override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf("com.android.vending"))
     override var isBypassBlacklist: Boolean by booleanPref("user_bypass_blacklist", true)
 
     override var showNotificationOnLockscreen: Boolean by booleanPref("show_notification_on_lockscreen", true)
@@ -212,7 +205,6 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
-    override var nullTerminateKeweon: Boolean by booleanPref("null_terminate_keweon", false)
     override var pauseOnCaptivePortal: Boolean by booleanPref("pause_on_captive_portal", true)
     override var showNoConnectionNotification:Boolean by booleanPref("show_no_connection_notification", false)
 
@@ -227,11 +219,10 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override val defaultBypassPackages: Set<String> by cache(restrictedCollection(
         stringSetPref(
             "default_bypass_packages",
-            hashSetOf(BuildConfig.APPLICATION_ID, "com.android.vending")
+            hashSetOf(BuildConfig.APPLICATION_ID)
         )
     ) {
         shouldContain(BuildConfig.APPLICATION_ID)
-        shouldContain("com.android.vending")
     }, cacheControl)
     override var dnsServerConfig: DnsServerInformation<*> by cache(DnsServerInformationPreference("dns_server_config") {
         AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
@@ -242,6 +233,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     var customHostsEnabled:Boolean by booleanPref("custom_hosts", true)
     var dnsRulesEnabled:Boolean by booleanPref("dns_rules_enabled", false)
     var hostSourcesPopulated:Boolean by booleanPref("dns_rules_sources_populated", false)
+
+    var removedDefaultDoTServers:Set<Int> by intPref<SharedPreferences>("removed_dohserver_id").toSetPreference(emptySet())
+    var removedDefaultDoHServers:Set<Int> by intPref<SharedPreferences>("removed_dotserver_id").toSetPreference(emptySet())
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

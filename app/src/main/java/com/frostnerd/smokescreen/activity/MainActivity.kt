@@ -12,10 +12,7 @@ import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
-import com.frostnerd.navigationdraweractivity.items.BasicDrawerItem
-import com.frostnerd.navigationdraweractivity.items.DrawerItem
-import com.frostnerd.navigationdraweractivity.items.createMenu
-import com.frostnerd.navigationdraweractivity.items.singleInstanceFragment
+import com.frostnerd.navigationdraweractivity.items.*
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.getDatabase
@@ -26,6 +23,7 @@ import com.frostnerd.smokescreen.fragment.AboutFragment
 import com.frostnerd.smokescreen.fragment.MainFragment
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.fragment.SettingsFragment
+import com.frostnerd.smokescreen.util.DeepActionState
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.menu_cardview.view.*
 import kotlin.random.Random
@@ -54,7 +52,6 @@ class MainActivity : NavigationDrawerActivity() {
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
     private var startedActivity = false
-    private var settingsSubscription:TypedPreferences<*>.OnPreferenceChangeListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
@@ -79,11 +76,11 @@ class MainActivity : NavigationDrawerActivity() {
                 }
             }
             update()
-            settingsSubscription = getPreferences().listenForChanges("dns_server_config", getPreferences().preferenceChangeListener {
+             getPreferences().listenForChanges("dns_server_config", getPreferences().preferenceChangeListener {
                 runOnUiThread {
                     update()
                 }
-            })
+            }.pauseOn(lifecycle).resumeOn(lifecycle).unregisterOn(lifecycle))
             view
         }
         supportActionBar?.elevation = 0f
@@ -114,6 +111,21 @@ class MainActivity : NavigationDrawerActivity() {
         if(resources.getBoolean(R.bool.add_default_hostsources) && !getPreferences().hostSourcesPopulated) {
             getDatabase().hostSourceRepository().insertAllAsync(DnsRuleActivity.defaultHostSources)
             getPreferences().hostSourcesPopulated = true
+        }
+        handleDeepAction()
+    }
+
+    private fun handleDeepAction() {
+        if(intent?.hasExtra("deep_action") == true) {
+            whenDrawerIsReady {
+                when(intent.getSerializableExtra("deep_action")) {
+                    DeepActionState.DNS_RULES -> {
+                        clickItem(drawerItems.find {
+                            it is ClickableDrawerItem && it.title == getString(R.string.button_main_dnsrules)
+                        }!!)
+                    }
+                }
+            }
         }
     }
 
@@ -184,8 +196,6 @@ class MainActivity : NavigationDrawerActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        settingsSubscription?.unregister()
-        settingsSubscription = null
     }
 
     override fun onBackPressed() {

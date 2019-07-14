@@ -96,4 +96,14 @@
         <item>1.0 Beta-Adblock (Build 40)</item>
         <item>@string/changelog_build_39_1</item>
     </string-array>
+
+    <string-array name="changelog_build_41">
+        <item>1.0 Beta (Build 41)</item>
+        <item>@string/changelog_build_40_1</item>
+        <item>@string/changelog_build_40_2</item>
+        <item>@string/changelog_build_40_3</item>
+        <item>@string/changelog_build_40_4</item>
+        <item>@string/changelog_build_40_5</item>
+        <item>@string/changelog_build_40_6</item>
+    </string-array>
 </resources>

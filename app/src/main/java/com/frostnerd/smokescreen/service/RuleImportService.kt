@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.service
 
+import android.app.IntentService
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
@@ -14,6 +15,7 @@ import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.sendLocalBroadcast
+import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -47,8 +49,7 @@ import java.util.regex.Pattern
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class RuleImportService : Service() {
-    private var importJob: Job? = null
+class RuleImportService : IntentService("RuleImportService") {
     private val DNSMASQ_MATCHER =
         Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:$|\\s+.*)").matcher("")
     private val HOSTS_MATCHER =
@@ -59,7 +60,8 @@ class RuleImportService : Service() {
     private val ruleCommitSize = 10000
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
-    private var checkDuplicates:Boolean = false
+    private var checkDuplicates: Boolean = false
+    private var isAborted = false
 
     companion object {
         const val BROADCAST_IMPORT_DONE = "com.frostnerd.nebulo.RULE_IMPORT_DONE"
@@ -75,27 +77,19 @@ class RuleImportService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (intent != null && intent.hasExtra("abort")) {
+        return if (intent != null && intent.hasExtra("abort")) {
             abortImport()
-        }
+            START_NOT_STICKY
+        } else super.onStartCommand(intent, flags, startId)
+    }
+
+    override fun onHandleIntent(intent: Intent) {
         createNotification()
-        if(importJob == null) startWork()
-        return START_STICKY
+        startWork()
     }
 
     private fun abortImport() {
-        importJob?.let {
-            importJob = null
-            it.cancel()
-            GlobalScope.launch {
-                val dnsRuleDao = getDatabase().dnsRuleDao()
-                dnsRuleDao.deleteStagedRules()
-                dnsRuleDao.commitStaging()
-            }
-            stopForeground(true)
-            sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
-            stopSelf()
-        }
+        isAborted = true
     }
 
     private fun createNotification() {
@@ -111,6 +105,7 @@ class RuleImportService : Service() {
             notification!!.setContentText(getString(R.string.notification_ruleimport_secondarymessage))
             notification!!.setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_ruleimport_secondarymessage)))
             notification!!.setProgress(100, 0, true)
+            notification!!.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
             val abortPendingAction = PendingIntent.getService(
                 this,
                 1,
@@ -130,6 +125,7 @@ class RuleImportService : Service() {
         successNotification.setAutoCancel(true)
         successNotification.setContentTitle(getString(R.string.notification_ruleimportfinished_title))
         successNotification.setContentText(getString(R.string.notification_ruleimportfinished_message, ruleCount))
+        successNotification.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(4, successNotification.build())
     }
 
@@ -150,7 +146,7 @@ class RuleImportService : Service() {
     }
 
     private fun updateNotificationFinishing() {
-        if(notification != null) {
+        if (notification != null) {
             val notificationText = getString(R.string.notification_ruleimport_tertiarymessage)
             notification?.setContentText(
                 notificationText
@@ -162,69 +158,72 @@ class RuleImportService : Service() {
     }
 
     private fun startWork() {
-        importJob = GlobalScope.launch {
-            val dnsRuleDao = getDatabase().dnsRuleDao()
-            dnsRuleDao.markNonUserRulesForDeletion()
-            var count = 0
-            val maxCount = getDatabase().hostSourceDao().getEnabledCount()
-            getDatabase().hostSourceDao().getAllEnabled().forEach {
-                log("Importing HostSource $it")
-                if (importJob?.isCancelled == false) {
-                    updateNotification(it, count, maxCount.toInt())
-                    count++
-                    if (it.isFileSource) {
-                        log("Importing from file")
-                        var stream: InputStream? = null
-                        try {
-                            val uri = Uri.parse(it.source)
-                            stream = contentResolver.openInputStream(uri)
-                            processLines(it, stream)
-                        } catch (ex: Exception) {
-                            log("Import failed: $ex")
-                            ex.printStackTrace()
-                        } finally {
-                            stream?.close()
-                        }
-                    } else {
-                        log("Importing from URL")
-                        var response: Response? = null
-                        try {
-                            val request = Request.Builder().url(it.source)
-                            response = httpClient.newCall(request.build()).execute()
-                            if (response.isSuccessful) {
-                                processLines(it, response.body!!.byteStream())
-                            } else {
-                                log("Downloading resource of $it failed.")
-                            }
-                        } catch (ex: java.lang.Exception) {
-                            log("Downloading resource of $it failed ($ex)")
-                        } finally {
-                            response?.body?.close()
-                        }
+        val dnsRuleDao = getDatabase().dnsRuleDao()
+        dnsRuleDao.markNonUserRulesForDeletion()
+        var count = 0
+        val maxCount = getDatabase().hostSourceDao().getEnabledCount()
+        getDatabase().hostSourceDao().getAllEnabled().forEach {
+            log("Importing HostSource $it")
+            if (!isAborted) {
+                updateNotification(it, count, maxCount.toInt())
+                count++
+                if (it.isFileSource) {
+                    log("Importing from file")
+                    var stream: InputStream? = null
+                    try {
+                        val uri = Uri.parse(it.source)
+                        stream = contentResolver.openInputStream(uri)
+                        processLines(it, stream)
+                    } catch (ex: Exception) {
+                        log("Import failed: $ex")
+                        ex.printStackTrace()
+                    } finally {
+                        stream?.close()
                     }
-                    log("Import of $it finished")
                 } else {
-                    log("Aborting import.")
-                    return@forEach
+                    log("Importing from URL")
+                    var response: Response? = null
+                    try {
+                        val request = Request.Builder().url(it.source)
+                        response = httpClient.newCall(request.build()).execute()
+                        if (response.isSuccessful) {
+                            processLines(it, response.body!!.byteStream())
+                        } else {
+                            log("Downloading resource of $it failed.")
+                        }
+                    } catch (ex: java.lang.Exception) {
+                        log("Downloading resource of $it failed ($ex)")
+                    } finally {
+                        response?.body?.close()
+                    }
                 }
+                log("Import of $it finished")
+            } else {
+                log("Aborting import.")
+                return@forEach
             }
-            if (importJob != null && importJob?.isCancelled == false) {
-                updateNotificationFinishing()
-                log("Delete rules staged for deletion")
-                dnsRuleDao.deleteMarkedRules()
-                log("Commiting staging")
-                dnsRuleDao.commitStaging()
-                log("Recreating database indices")
-                getDatabase().recreateDnsRuleIndizes()
-                log("Done.")
-                showSuccessNotification()
-            }
-            log("All imports finished.")
-            importJob = null
-            stopForeground(true)
-            sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
-            stopSelf()
         }
+        if (!isAborted) {
+            updateNotificationFinishing()
+            log("Delete rules staged for deletion")
+            dnsRuleDao.deleteMarkedRules()
+            log("Commiting staging")
+            dnsRuleDao.commitStaging()
+            log("Recreating database indices")
+            getDatabase().recreateDnsRuleIndizes()
+            log("Done.")
+            showSuccessNotification()
+        } else {
+            GlobalScope.launch {
+                dnsRuleDao.deleteStagedRules()
+                dnsRuleDao.commitStaging()
+                sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
+            }
+            stopForeground(true)
+        }
+        log("All imports finished.")
+        stopForeground(true)
+        sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
     }
 
     private fun processLines(source: HostSource, stream: InputStream) {
@@ -238,17 +237,17 @@ class RuleImportService : Service() {
         val sourceId = source.id
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
             lines.forEach { line ->
-                if (importJob != null && importJob?.isCancelled == false) {
+                if (!isAborted) {
                     if (parsers.isNotEmpty() && !line.trim().startsWith("#") && !line.trim().startsWith("!") && !line.isBlank()) {
                         lineCount++
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
                                 val rule = processLine(matcher, sourceId)
-                                if(rule != null) hosts.second.add(rule.apply {
+                                if (rule != null) hosts.second.add(rule.apply {
                                     stagingType = 2
                                 })
-                                if(lineCount > ruleCommitSize) {
+                                if (lineCount > ruleCommitSize) {
                                     commitLines(parsers)
                                     lineCount = 0
                                 }
@@ -286,16 +285,22 @@ class RuleImportService : Service() {
     }
 
     private val wwwRegex = Regex("^www\\.")
-    private fun processLine(matcher: Matcher, sourceId:Long): DnsRule? {
+    private fun processLine(matcher: Matcher, sourceId: Long): DnsRule? {
         when {
             matcher.groupCount() == 1 -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
-                return if(checkDuplicates) {
+                return if (checkDuplicates) {
                     val existingIpv4 = getDatabase().dnsRuleDao().getNonUserRule(host, Record.TYPE.A)
                     val existingIpv6 = getDatabase().dnsRuleDao().getNonUserRule(host, Record.TYPE.AAAA)
-                    if(existingIpv4 == null && existingIpv6 == null) DnsRule(Record.TYPE.ANY, host, "0", "1", importedFrom = sourceId)
-                    else if(existingIpv4 == null) DnsRule(Record.TYPE.A, host, "0", importedFrom = sourceId)
-                    else if(existingIpv6 == null) DnsRule(Record.TYPE.AAAA, host, "1", importedFrom = sourceId)
+                    if (existingIpv4 == null && existingIpv6 == null) DnsRule(
+                        Record.TYPE.ANY,
+                        host,
+                        "0",
+                        "1",
+                        importedFrom = sourceId
+                    )
+                    else if (existingIpv4 == null) DnsRule(Record.TYPE.A, host, "0", importedFrom = sourceId)
+                    else if (existingIpv6 == null) DnsRule(Record.TYPE.AAAA, host, "1", importedFrom = sourceId)
                     else null
                 } else DnsRule(Record.TYPE.ANY, host, "0", "1", importedFrom = sourceId)
             }
@@ -329,10 +334,10 @@ class RuleImportService : Service() {
         throw IllegalStateException()
     }
 
-    private fun createRuleIfNotExists(host:String, target:String, type:Record.TYPE, sourceId:Long):DnsRule? {
-        return if(checkDuplicates) {
+    private fun createRuleIfNotExists(host: String, target: String, type: Record.TYPE, sourceId: Long): DnsRule? {
+        return if (checkDuplicates) {
             val existingRule = getDatabase().dnsRuleDao().getNonUserRule(host, type)
-            if(existingRule == null) DnsRule(type, host, target, importedFrom = sourceId)
+            if (existingRule == null) DnsRule(type, host, target, importedFrom = sourceId)
             else null
         } else DnsRule(type, host, target, importedFrom = sourceId)
     }

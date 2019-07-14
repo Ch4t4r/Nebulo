@@ -9,6 +9,9 @@
     <string name="notification_channel_noconnection">Connection warning channel</string>
     <string name="notification_channel_noconnection_description">Channel used for showing notifications when no connection seems to be available</string>
 
+    <string name="notification_channel_pin">Pin-related channel</string>
+    <string name="notification_channel_pin_description">Channel used for notifications related to the pin, i.e. when it has to be provided</string>
+
     <string name="notification_main_text">Queries are sent to %1$s\n\n%2$d Apps are excluded from DoH/DoT\n%3$d entries in the cache</string>
     <string name="notification_main_text_with_secondary">Queries are sent to %1$s and %2$s\n\n%3$d Apps are excluded from DoH/DoT\n%4$d entries in the cache</string>
     <string name="notification_main_text_whitelist">Queries are sent to %1$s\n\n%2$d Apps are using DoH/DoT\n%3$d entries in the cache</string>
@@ -40,4 +43,7 @@
 
     <string name="notification_ruleexportfinished_title">DNS rule export finished</string>
     <string name="notification_ruleexportfinished_message">%1d rules have been exported.</string>
+
+    <string name="notification_pin_title">PIN required</string>
+    <string name="notification_pin_message">Your PIN is required to perform that action. Click here to confirm it.</string>
 </resources>

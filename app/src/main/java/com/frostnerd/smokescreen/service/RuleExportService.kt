@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.service
 
+import android.app.IntentService
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
@@ -12,6 +13,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.sendLocalBroadcast
+import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -41,9 +43,8 @@ import java.util.*
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class RuleExportService : Service() {
-    private var exportJob: Job? = null
-    private var cancelled = false
+class RuleExportService : IntentService("RuleExportService") {
+    private var isAborted = false
     private var notification: NotificationCompat.Builder? = null
 
     companion object {
@@ -56,15 +57,19 @@ class RuleExportService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return if (intent != null && intent.hasExtra("abort")) {
+            abortImport()
+            START_NOT_STICKY
+        } else super.onStartCommand(intent, flags, startId)
+    }
+
+    override fun onHandleIntent(intent: Intent) {
         createNotification()
-        if (intent?.hasExtra("params") == true) {
-            val params = intent.getSerializableExtra("params") as Params
-            startWork(params)
-        } else if (intent?.hasExtra("abort") == true) {
-            cancelled = true
-            exportJob?.cancel()
-        }
-        return START_STICKY
+        startWork(intent.getSerializableExtra("params") as Params)
+    }
+
+    private fun abortImport() {
+        isAborted = true
     }
 
     private fun createNotification() {
@@ -80,6 +85,7 @@ class RuleExportService : Service() {
             notification!!.setContentText(getString(R.string.notification_ruleexport_secondarymessage))
             notification!!.setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_ruleexport_secondarymessage)))
             notification!!.setProgress(100, 0, true)
+            notification!!.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
             val abortPendingAction = PendingIntent.getService(
                 this,
                 1,
@@ -107,88 +113,85 @@ class RuleExportService : Service() {
         successNotification.setAutoCancel(true)
         successNotification.setContentTitle(getString(R.string.notification_ruleexportfinished_title))
         successNotification.setContentText(getString(R.string.notification_ruleexportfinished_message, ruleCount))
+        successNotification.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(6, successNotification.build())
     }
 
-
     private fun startWork(params: Params) {
-        exportJob = GlobalScope.launch {
-            var stream:BufferedWriter? = null
-            try {
-                stream = BufferedWriter(OutputStreamWriter(contentResolver.openOutputStream(Uri.parse(params.targetUri))!!))
-                var ruleCount = 0
-                var writtenCount = 0
-                var nonUserRuleCount: Int? = null
+        var stream: BufferedWriter? = null
+        try {
+            stream = BufferedWriter(OutputStreamWriter(contentResolver.openOutputStream(Uri.parse(params.targetUri))!!))
+            var ruleCount = 0
+            var writtenCount = 0
+            var nonUserRuleCount: Int? = null
 
-                if (params.exportUserRules) ruleCount += getDatabase().dnsRuleDao().getUserCount().toInt()
-                if (params.exportFromSources) {
-                    nonUserRuleCount = getDatabase().dnsRuleDao().getNonUserCount().toInt()
-                    ruleCount += nonUserRuleCount
+            if (params.exportUserRules) ruleCount += getDatabase().dnsRuleDao().getUserCount().toInt()
+            if (params.exportFromSources) {
+                nonUserRuleCount = getDatabase().dnsRuleDao().getNonUserCount().toInt()
+                ruleCount += nonUserRuleCount
+            }
+            val progressIncrements = (ruleCount * 0.01).toInt().let {
+                when {
+                    it == 0 -> 1
+                    it < 20 -> it * 10
+                    else -> it
                 }
-                val progressIncrements = (ruleCount * 0.01).toInt().let {
-                    when {
-                        it == 0 -> 1
-                        it < 20 -> it*10
-                        else -> it
-                    }
+            }
+            stream.write(buildString {
+                append("# Dns rules exported from Nebulo")
+                append(System.lineSeparator())
+                append("# Exported at: ")
+                append(DateFormat.getDateTimeInstance().format(Date()))
+                append(System.lineSeparator())
+                append("# Rule count: ")
+                append(ruleCount)
+                append(System.lineSeparator())
+                append("# Format: HOSTS")
+                append(System.lineSeparator())
+            })
+            updateNotification(0, ruleCount)
+            if (params.exportUserRules && !isAborted) {
+                getDatabase().dnsRuleDao().getAllUserRules().forEach {
+                    if (!isAborted) {
+                        writtenCount++
+                        writeRule(stream, it)
+                        if (writtenCount % progressIncrements == 0) {
+                            stream.flush()
+                            updateNotification(writtenCount, ruleCount)
+                        }
+                    } else return@forEach
                 }
-                stream.write(buildString {
-                    append("# Dns rules exported from Nebulo")
-                    append(System.lineSeparator())
-                    append("# Exported at: ")
-                    append(DateFormat.getDateTimeInstance().format(Date()))
-                    append(System.lineSeparator())
-                    append("# Rule count: ")
-                    append(ruleCount)
-                    append(System.lineSeparator())
-                    append("# Format: HOSTS")
-                    append(System.lineSeparator())
-                })
-                updateNotification(0, ruleCount)
-                if (params.exportUserRules && !cancelled) {
-                    getDatabase().dnsRuleDao().getAllUserRules().forEach {
-                        if (!cancelled) {
+            }
+            updateNotification(writtenCount, ruleCount)
+            if (params.exportFromSources && !isAborted) {
+                val limit = 2000
+                var offset = 0
+                while (!isAborted && offset < nonUserRuleCount!!) {
+                    getDatabase().dnsRuleDao().getAllNonUserRules(offset, limit).forEach {
+                        if (!isAborted) {
                             writtenCount++
                             writeRule(stream, it)
-                            if(writtenCount % progressIncrements == 0) {
+                            if (writtenCount % progressIncrements == 0) {
                                 stream.flush()
                                 updateNotification(writtenCount, ruleCount)
                             }
                         } else return@forEach
                     }
+                    offset += limit
                 }
-                updateNotification(writtenCount, ruleCount)
-                if (params.exportFromSources && !cancelled) {
-                    val limit = 2000
-                    var offset = 0
-                    while (!cancelled && offset < nonUserRuleCount!!) {
-                        getDatabase().dnsRuleDao().getAllNonUserRules(offset, limit).forEach {
-                            if (!cancelled) {
-                                writtenCount++
-                                writeRule(stream, it)
-                                if(writtenCount % progressIncrements == 0) {
-                                    stream.flush()
-                                    updateNotification(writtenCount, ruleCount)
-                                }
-                            } else return@forEach
-                        }
-                        offset += limit
-                    }
-                }
-                if (!cancelled) {
-                    stream.flush()
-                    showSuccessNotification(writtenCount)
-                }
-            } catch (ex:Exception) {
-                ex.printStackTrace()
-            } finally {
-                stream?.close()
             }
-            exportJob = null
-            stopForeground(true)
-            sendLocalBroadcast(Intent(BROADCAST_EXPORT_DONE))
-            stopSelf()
+            if (!isAborted) {
+                stream.flush()
+                showSuccessNotification(writtenCount)
+            }
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        } finally {
+            stream?.close()
         }
+        stopForeground(true)
+        sendLocalBroadcast(Intent(BROADCAST_EXPORT_DONE))
+        stopSelf()
     }
 
     private fun writeRule(stream: BufferedWriter, rule: DnsRule) {
@@ -208,8 +211,7 @@ class RuleExportService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        cancelled = true
-        exportJob?.cancel()
+        isAborted = true
     }
 
 

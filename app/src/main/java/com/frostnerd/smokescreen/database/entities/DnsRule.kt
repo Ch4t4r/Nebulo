@@ -42,8 +42,10 @@ data class DnsRule(
 ) {
     @PrimaryKey(autoGenerate = true) var id: Long = 0
 
-    // Null = none
+    // 0 = none
     // 1 = marked delete
     // 2 = marked insert
-    var stagingType:Int? = null
+    var stagingType:Short = 0
+
+    fun isWhitelistRule() = target == ""
 }
