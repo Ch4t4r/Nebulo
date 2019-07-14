@@ -106,8 +106,10 @@ class SpeedTestActivity : BaseActivity() {
 
     private fun prepareList() {
         prepareListJob = launchWithLifecylce(true) {
-            val dnsServers = AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.values +
-                    AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.values +
+            val hiddenDotServers = getPreferences().removedDefaultDoTServers
+            val hiddenDohServers = getPreferences().removedDefaultDoHServers
+            val dnsServers = AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.filter { it.key !in hiddenDotServers }.values +
+                    AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.filter { it.key !in hiddenDohServers }.values +
                     getPreferences().userServers.map {
                         it.serverInformation
                     }

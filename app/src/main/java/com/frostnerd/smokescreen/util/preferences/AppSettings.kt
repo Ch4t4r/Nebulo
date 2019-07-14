@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.util.preferences
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
@@ -233,6 +234,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     var customHostsEnabled:Boolean by booleanPref("custom_hosts", true)
     var dnsRulesEnabled:Boolean by booleanPref("dns_rules_enabled", false)
     var hostSourcesPopulated:Boolean by booleanPref("dns_rules_sources_populated", false)
+
+    var removedDefaultDoTServers:Set<Int> by intPref<SharedPreferences>("removed_dohserver_id").toSetPreference(emptySet())
+    var removedDefaultDoHServers:Set<Int> by intPref<SharedPreferences>("removed_dotserver_id").toSetPreference(emptySet())
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
