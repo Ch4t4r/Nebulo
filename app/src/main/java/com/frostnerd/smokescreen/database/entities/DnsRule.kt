@@ -46,4 +46,6 @@ data class DnsRule(
     // 1 = marked delete
     // 2 = marked insert
     var stagingType:Int? = null
+
+    fun isWhitelistRule() = target == ""
 }
