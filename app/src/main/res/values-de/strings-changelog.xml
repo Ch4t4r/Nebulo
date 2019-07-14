@@ -64,4 +64,13 @@
     <string name="changelog_build_37_2">Ein paar Designverbesserungen</string>
     <string name="changelog_build_37_3">Der Import von Dns Regeln ist nun schneller</string>
     <string name="changelog_build_37_4">Importierte Dns Regeln benötigen nun weniger Speicher auf dem Gerät</string>
+    <string name="changelog_build_38_1">Dies ist ein auf die Leistung ausgerichtetes Update, welche DNS-Anfragen schneller machen sollte, sowie weniger Speicher und weniger Batterie verbrauchen sollte.</string>
+    <string name="changelog_build_38_2">Einen Absturz behoben, welcher auf manchen Geräten aufgrund der internen Datenbank auftrat</string>
+    <string name="changelog_build_39_1">Ein Fehler behoben, welcher fast alle DNS-Server betraf</string>
+    <string name="changelog_build_40_1">Leistungs- und Speicherverbesserungen</string>
+    <string name="changelog_build_40_2">Alle Server im Serverauswahldialog können nun durch langes Klicken auf diese gelöscht werden</string>
+    <string name="changelog_build_40_3">Google Play kann nun aus der Liste von ausgeschlossenen Apps abgewählt werden</string>
+    <string name="changelog_build_40_4">Die PIN funktioniert nun auf Android Q</string>
+    <string name="changelog_build_40_5">Es können nun Domains in den DNS-Regeln gewhitelistet werden. Werden diese als whitelist Eintrag erstellt, so werden diese immer zu dem aktuellen DNS Server geschickt, unabhängig davon, ob diese in einer der angegebenen Regelquellen vorkommen</string>
+    <string name="changelog_build_40_6">Die DNS Regel Import/Export Benachrichtigung kann nun angeklickt werden</string>
     </resources>
