@@ -54,7 +54,7 @@ interface DnsRuleDao {
     @Query("DELETE FROM DnsRule WHERE stagingType=2")
     fun deleteStagedRules()
 
-    @Query("UPDATE DnsRule SET stagingType=0")
+    @Query("UPDATE OR IGNORE DnsRule SET stagingType=0")
     fun commitStaging()
 
     @Insert

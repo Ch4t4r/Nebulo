@@ -210,16 +210,15 @@ class RuleImportService : IntentService("RuleImportService") {
             dnsRuleDao.deleteMarkedRules()
             log("Commiting staging")
             dnsRuleDao.commitStaging()
+            dnsRuleDao.deleteStagedRules()
             log("Recreating database indices")
             getDatabase().recreateDnsRuleIndizes()
             log("Done.")
             showSuccessNotification()
         } else {
-            GlobalScope.launch {
-                dnsRuleDao.deleteStagedRules()
-                dnsRuleDao.commitStaging()
-                sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
-            }
+            dnsRuleDao.deleteStagedRules()
+            dnsRuleDao.commitStaging()
+            sendLocalBroadcast(Intent(BROADCAST_IMPORT_DONE))
             stopForeground(true)
         }
         log("All imports finished.")
