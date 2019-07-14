@@ -160,6 +160,7 @@ class RuleImportService : IntentService("RuleImportService") {
     private fun startWork() {
         val dnsRuleDao = getDatabase().dnsRuleDao()
         dnsRuleDao.markNonUserRulesForDeletion()
+        dnsRuleDao.deleteStagedRules()
         var count = 0
         val maxCount = getDatabase().hostSourceDao().getEnabledCount()
         getDatabase().hostSourceDao().getAllEnabled().forEach {
