@@ -67,4 +67,10 @@
     <string name="changelog_build_38_1">Dit is een prestatiegerichte update die dns-query\'s sneller moet uitvoeren, minder geheugen moet gebruiken en minder batterijverbruik vereist.</string>
     <string name="changelog_build_38_2">Een crash op sommige apparaten verholpen met betrekking tot de interne database</string>
     <string name="changelog_build_39_1">Crash verholpen die van invloed was op de meeste dns-servers</string>
+    <string name="changelog_build_40_1">Prestatie en geheugenverbeteringen</string>
+    <string name="changelog_build_40_2">Alle servers in het dialoogvenster voor serverselectie kunnen nu worden verwijderd door er lang op te drukken</string>
+    <string name="changelog_build_40_3">Google Play kan nu worden gedeselecteerd in de lijst met uitgesloten apps</string>
+    <string name="changelog_build_40_4">De PIN-functie werkt nu op Android Q</string>
+    <string name="changelog_build_40_5">U kunt domeinen nu whitelisten in de dns-regels. Als ze op de whitelist staan, worden ze naar de dns-server verzonden, ongeacht of ze aanwezig zijn in de ingeschakelde dns-regel bronnen</string>
+    <string name="changelog_build_40_6">De dns-regel import / export-notificatie kan nu worden aangeklikt</string>
     </resources>
