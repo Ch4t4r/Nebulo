@@ -38,4 +38,9 @@
 
     <string name="notification_ruleexportfinished_title">DNS-regels exporteren is voltooid</string>
     <string name="notification_ruleexportfinished_message">%1d regels zijn geëxporteerd.</string>
+<string name="notification_channel_pin">PIN-code gerelateerd kanaal</string>
+    <string name="notification_channel_pin_description">Kanaal dat wordt gebruikt voor meldingen met betrekking tot de pincode, d.w.z. wanneer deze moet worden verstrekt</string>
+
+    <string name="notification_pin_title">PIN-code vereist</string>
+    <string name="notification_pin_message">Uw pincode is nodig om die actie uit te voeren. Klik hier om te bevestigen.</string>
 </resources>

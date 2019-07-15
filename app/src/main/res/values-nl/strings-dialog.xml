@@ -137,4 +137,6 @@
     <string name="dialog_exportdnsrules_title">Exporteer dns regels</string>
     <string name="dialog_exportdnsrules_export_user_rules">Exporteer uw eigen dns-regels</string>
     <string name="dialog_exportdnsrules_export_sources">Exporteer dns-regels van ingeschakelde host bronnen</string>
-</resources>
+<string name="dialog_newdnsrule_whitelist">Whitelist</string>
+    <string name="dialog_newdnsrule_specify_address">Adres</string>
+    </resources>
