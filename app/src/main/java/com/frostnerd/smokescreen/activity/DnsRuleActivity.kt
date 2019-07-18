@@ -497,6 +497,10 @@ class DnsRuleActivity : BaseActivity() {
                 ).apply {
                     forEach { it.enabled = false }
                 })
+                put(2, mutableListOf(
+                    HostSource("Energized unblock", "https://raw.githubusercontent.com/EnergizedProtection/unblock/master/basic/formats/domains.txt", true),
+                    HostSource("hblock", "https://hblock.molinero.dev/hosts")
+                ))
             }
         }
 
