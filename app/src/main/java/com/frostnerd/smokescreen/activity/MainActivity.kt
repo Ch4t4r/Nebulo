@@ -108,9 +108,13 @@ class MainActivity : NavigationDrawerActivity() {
                     dialog.dismiss()
                 }, null)
         }
-        if(resources.getBoolean(R.bool.add_default_hostsources) && !getPreferences().hostSourcesPopulated) {
-            getDatabase().hostSourceRepository().insertAllAsync(DnsRuleActivity.defaultHostSources)
-            getPreferences().hostSourcesPopulated = true
+        if(resources.getBoolean(R.bool.add_default_hostsources)) {
+            DnsRuleActivity.getDefaultHostSources(getPreferences().hostSourcesVersion + 1).apply {
+                if(isNotEmpty()) {
+                    getDatabase().hostSourceRepository().insertAllAsync(this)
+                    getPreferences().hostSourcesVersion += 1
+                }
+            }
         }
         handleDeepAction()
     }
