@@ -24,7 +24,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "HostSource")
 data class HostSource(
     var name: String,
-    var source: String
+    var source: String,
+    var whitelistSource:Boolean = false
 ) {
     val isFileSource: Boolean
         get() {

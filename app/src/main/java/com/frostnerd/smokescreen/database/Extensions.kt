@@ -52,7 +52,7 @@ private val MIGRATION_4_5 = migration(4, 5) {
 private val MIGRATION_5_6 = migration(5, 6) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 5 to 6")
     it.execSQL("CREATE TABLE IF NOT EXISTS `DnsRule` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stagingType` INTEGER NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `target` TEXT NOT NULL, `ipv6Target` TEXT, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
-    it.execSQL("CREATE TABLE IF NOT EXISTS `HostSource` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL)")
+    it.execSQL("CREATE TABLE IF NOT EXISTS `HostSource` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL, `whitelistSource` INTEGER NOT NULL)")
     it.execSQL("CREATE  INDEX `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
     it.execSQL("CREATE UNIQUE INDEX `index_DnsRule_host_type_stagingType` ON `DnsRule` (`host`, `type`, `stagingType`)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 5 to 6 completed")
@@ -75,12 +75,18 @@ private val MIGRATION_7_8 = migration(7,8) {
     it.execSQL("CREATE INDEX IF NOT EXISTS `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 7 to 8 completed")
 }
+private val MIGRATION_8_9 = migration(8, 9) {
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 8 to 9")
+    it.execSQL("ALTER TABLE `HostSource` ADD COLUMN `whitelistSource` INTEGER NOT NULL DEFAULT 0")
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 8 to 9 completed")
+}
+
 
 fun Context.getDatabase(): AppDatabase {
     if (INSTANCE == null) {
         INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
             .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
             .build()
     }
     return INSTANCE!!
