@@ -243,7 +243,7 @@ class RuleImportService : IntentService("RuleImportService") {
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
-                                val rule = processLine(matcher, sourceId)
+                                val rule = processLine(matcher, sourceId, source.whitelistSource)
                                 if (rule != null) hosts.second.add(rule.apply {
                                     stagingType = 2
                                 })
@@ -285,7 +285,9 @@ class RuleImportService : IntentService("RuleImportService") {
     }
 
     private val wwwRegex = Regex("^www\\.")
-    private fun processLine(matcher: Matcher, sourceId: Long): DnsRule? {
+    private fun processLine(matcher: Matcher, sourceId: Long, isWhitelist:Boolean): DnsRule? {
+        val defaultTargetV4 = if(isWhitelist) "" else "0"
+        val defaultTargetV6 = if(isWhitelist) "" else "1"
         when {
             matcher.groupCount() == 1 -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
@@ -295,14 +297,14 @@ class RuleImportService : IntentService("RuleImportService") {
                     if (existingIpv4 == null && existingIpv6 == null) DnsRule(
                         Record.TYPE.ANY,
                         host,
-                        "0",
-                        "1",
+                        defaultTargetV4,
+                        defaultTargetV6,
                         importedFrom = sourceId
                     )
-                    else if (existingIpv4 == null) DnsRule(Record.TYPE.A, host, "0", importedFrom = sourceId)
-                    else if (existingIpv6 == null) DnsRule(Record.TYPE.AAAA, host, "1", importedFrom = sourceId)
+                    else if (existingIpv4 == null) DnsRule(Record.TYPE.A, host, defaultTargetV4, importedFrom = sourceId)
+                    else if (existingIpv6 == null) DnsRule(Record.TYPE.AAAA, host, defaultTargetV6, importedFrom = sourceId)
                     else null
-                } else DnsRule(Record.TYPE.ANY, host, "0", "1", importedFrom = sourceId)
+                } else DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = sourceId)
             }
             matcher == DNSMASQ_MATCHER -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
