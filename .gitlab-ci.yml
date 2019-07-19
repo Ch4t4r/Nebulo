@@ -28,7 +28,7 @@ build_debug:
 build_release:
   stage: build
   script:
-   - ./gradlew clean check assembleNormalRelease --stacktrace -x test
+   - ./gradlew clean checkNormalRelease assembleNormalRelease --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
@@ -44,7 +44,7 @@ build_release:
 build_fdroid:
   stage: build
   script:
-    - ./gradlew clean check assembleAdblockerFdroid --stacktrace -x test
+    - ./gradlew clean checkAdblockerFdroid assembleAdblockerFdroid --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
@@ -60,7 +60,7 @@ build_fdroid:
 test_build_release:
   stage: test
   script:
-    - ./gradlew clean check assembleNormalUnsignedRelease --stacktrace -x test
+    - ./gradlew clean checkNormalUnsignedRelease assembleNormalUnsignedRelease --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
