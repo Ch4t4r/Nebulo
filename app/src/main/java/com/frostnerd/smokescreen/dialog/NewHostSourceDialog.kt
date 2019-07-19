@@ -70,7 +70,7 @@ class NewHostSourceDialog (context: Context,
                     urlTil.error = null
                 }
                 if(valid) {
-                    onSourceCreated(HostSource(name.text.toString(), url.text.toString()))
+                    onSourceCreated(HostSource(name.text.toString(), url.text.toString(), whitelist.isChecked))
                     dismiss()
                 }
             }
