@@ -55,4 +55,12 @@
             android:id="@+id/useChrome"
             android:layout_height="wrap_content"/>
 
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:textColor="?android:attr/textColor"
+            android:text="Restart vpn inbetween sites"
+            android:id="@+id/restartVpn"
+            android:checked="true"
+            android:layout_height="wrap_content"/>
+
 </LinearLayout>

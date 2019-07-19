@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.service.DnsVpnService
 import kotlinx.android.synthetic.main.dialog_query_generator.*
+import kotlinx.android.synthetic.main.dialog_query_generator.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -366,6 +367,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
             if(callDeepurls.isChecked) {
                 urlsToUse.addAll(websiteUrls)
             }
+            val restartVpn = view.restartVpn.isChecked
             val runCount = iterations.text.toString().toIntOrNull() ?: 1
             job = GlobalScope.launch {
                 context.log("Generating queries for ${urlsToUse.size} urls $runCount times", "[QueryGenerator]")
@@ -383,8 +385,10 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
                         if(++domainCount % 20 == 0 && callWithChrome) {
                             killChrome()
                         }
-                        DnsVpnService.restartVpn(context, false)
-                        delay(1500)
+                        if(restartVpn) {
+                            DnsVpnService.restartVpn(context, false)
+                            delay(1500)
+                        }
                     }
                 }
                 job = null
