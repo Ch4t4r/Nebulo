@@ -116,9 +116,7 @@ class MainActivity : NavigationDrawerActivity() {
                     else -> it +1
                 }
             }
-            println("START AT $versionToStartFrom")
             DnsRuleActivity.getDefaultHostSources(versionToStartFrom).apply {
-                println("FOUND: $this")
                 if(isNotEmpty()) {
                     getDatabase().hostSourceRepository().insertAllAsync(this)
                     getPreferences().hostSourcesVersion = DnsRuleActivity.latestSourcesVersion
