@@ -86,7 +86,6 @@
                 android:layout_width="wrap_content"
                 android:layout_below="@id/contentWrap"
                 android:layout_centerHorizontal="true"
-                android:layout_toEndOf="@id/sourceWhitelistIndicator"
                 android:id="@+id/ruleCount"
                 android:paddingStart="12dp"
                 android:paddingBottom="12dp"
