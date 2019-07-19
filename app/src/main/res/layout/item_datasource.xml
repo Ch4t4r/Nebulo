@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_below="@id/contentWrap"
                 android:layout_centerHorizontal="true"
-                android:layout_toEndOf="@id/whitelistIndicator"
+                android:layout_toEndOf="@id/sourceWhitelistIndicator"
                 android:id="@+id/ruleCount"
                 android:paddingBottom="12dp"
                 android:text="@string/window_dnsrules_customhosts_hostsource_rulecount_pending"
