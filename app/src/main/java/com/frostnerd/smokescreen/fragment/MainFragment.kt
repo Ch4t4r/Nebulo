@@ -139,7 +139,9 @@ class MainFragment : Fragment() {
     }
 
     fun startVpn() {
-        val prepare = VpnService.prepare(requireContext())
+        val prepare = VpnService.prepare(requireContext()).apply {
+            this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+        }
 
         if (prepare == null) {
             requireContext().startService(Intent(requireContext(), DnsVpnService::class.java))

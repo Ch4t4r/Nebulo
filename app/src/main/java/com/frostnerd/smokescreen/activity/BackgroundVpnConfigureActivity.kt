@@ -48,7 +48,9 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
         private const val VPN_REQUEST_CODE = 1
 
         fun prepareVpn(context: Context, serverInfo:DnsServerInformation<*>? = null) {
-            val vpnIntent = VpnService.prepare(context)
+            val vpnIntent = VpnService.prepare(context).apply {
+                this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            }
             if (vpnIntent == null) {
                 DnsVpnService.startVpn(context, serverInfo)
             } else {
@@ -121,7 +123,9 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
         supportActionBar?.hide()
         actionBar?.hide()
 
-        val vpnIntent = VpnService.prepare(this)
+        val vpnIntent = VpnService.prepare(this).apply {
+            this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+        }
         if (vpnIntent == null) {
             startService()
             finish()
