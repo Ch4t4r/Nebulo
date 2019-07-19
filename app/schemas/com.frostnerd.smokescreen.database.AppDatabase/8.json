@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 8,
-    "identityHash": "4d5a6eb715cb9b8b137068cd1844203b",
+    "identityHash": "7975e2fde0d819a21ec75fd1e079f3b8",
     "entities": [
       {
         "tableName": "CachedResponse",
@@ -188,7 +188,7 @@
       },
       {
         "tableName": "HostSource",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `lineCount` INTEGER, `name` TEXT NOT NULL, `source` TEXT NOT NULL, `whitelistSource` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `ruleCount` INTEGER, `name` TEXT NOT NULL, `source` TEXT NOT NULL, `whitelistSource` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -203,8 +203,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "lineCount",
-            "columnName": "lineCount",
+            "fieldPath": "ruleCount",
+            "columnName": "ruleCount",
             "affinity": "INTEGER",
             "notNull": false
           },
@@ -240,7 +240,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4d5a6eb715cb9b8b137068cd1844203b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7975e2fde0d819a21ec75fd1e079f3b8')"
     ]
   }
 }

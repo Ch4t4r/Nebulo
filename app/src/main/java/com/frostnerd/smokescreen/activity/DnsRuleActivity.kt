@@ -92,6 +92,7 @@ class DnsRuleActivity : BaseActivity() {
                     }
                     sourceAdapterList.add(insertPos, newSource)
                     sourceAdapter.notifyItemInserted(insertPos)
+                    list.scrollToPosition(insertPos)
                     getDatabase().hostSourceDao().insert(newSource)
                 }
             }, showFileChooser = { callback ->
@@ -187,6 +188,7 @@ class DnsRuleActivity : BaseActivity() {
                         userRuleCount = userDnsRules.size
                         runOnUiThread {
                             sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                            list.smoothScrollToPosition(sourceAdapterList.size + 1)
                         }
                     } else {
                         sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
@@ -223,6 +225,7 @@ class DnsRuleActivity : BaseActivity() {
                                 runOnUiThread {
                                     sourceAdapter.notifyItemChanged(sourceAdapterList.size)
                                     sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                                    list.smoothScrollToPosition(insertPos)
                                 }
                             }
                         } else {
