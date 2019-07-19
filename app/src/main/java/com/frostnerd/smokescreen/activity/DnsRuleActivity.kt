@@ -279,8 +279,9 @@ class DnsRuleActivity : BaseActivity() {
                             })
                     }
                     data.enabled -> launchWithLifecylce(false) {
+                        val prev = sourceRuleCount[data]
                         sourceRuleCount[data] = getDatabase().dnsRuleDao().getCountForHostSource(data.id)
-                        runOnUiThread {
+                        if(prev != sourceRuleCount[data]) runOnUiThread {
                             sourceAdapter.notifyItemChanged(position)
                         }
                     }

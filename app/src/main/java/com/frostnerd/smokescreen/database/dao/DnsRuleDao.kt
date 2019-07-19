@@ -90,7 +90,7 @@ interface DnsRuleDao {
     @Delete
     fun remove(rule:DnsRule)
 
-    @Query("SELECT COUNT(*) FROM DnsRule WHERE importedFrom=:hostSourceId")
+    @Query("SELECT COUNT(*) FROM DnsRule WHERE importedFrom=:hostSourceId AND stagingType=0")
     fun getCountForHostSource(hostSourceId:Long):Int
 
     @Query("SELECT * FROM DnsRule WHERE importedFrom IS NOT NULL AND host=:host AND type=:type AND stagingType=2 LIMIT 1")
