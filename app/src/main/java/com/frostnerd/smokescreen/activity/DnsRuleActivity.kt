@@ -511,7 +511,7 @@ class DnsRuleActivity : BaseActivity() {
         }
 
         fun getDefaultHostSources(versionRange:IntRange): List<HostSource> {
-            if(versionRange.first < latestSourcesVersion) return emptyList()
+            if(versionRange.first > latestSourcesVersion) return emptyList()
             return defaultHostSources.filter {
                 it.key in versionRange
             }.values.flatten()
