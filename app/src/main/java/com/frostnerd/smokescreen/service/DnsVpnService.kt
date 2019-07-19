@@ -762,7 +762,7 @@ class DnsVpnService : VpnService(), Runnable {
         if(serverConfig.httpsConfiguration != null) {
             handle = ProxyHttpsHandler(
                 serverConfig.httpsConfiguration!!,
-                connectTimeout = 5000,
+                connectTimeout = 20000,
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)
