@@ -28,7 +28,7 @@
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/contentWrap"
-                android:layout_toEndOf="@id/whitelistIndicator"
+                android:layout_toEndOf="@id/sourceWhitelistIndicator"
                 android:layout_height="wrap_content">
 
             <LinearLayout
