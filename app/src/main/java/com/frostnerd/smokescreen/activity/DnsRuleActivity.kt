@@ -384,6 +384,7 @@ class DnsRuleActivity : BaseActivity() {
         val enabled = view.enable
         val delete = view.delete
         val ruleCount = view.ruleCount
+        val whitelistIndicator = view.sourceWhitelistIndicator
         lateinit var source: HostSource
 
         init {
@@ -403,6 +404,7 @@ class DnsRuleActivity : BaseActivity() {
             text.text = source.name
             enabled.isChecked = source.enabled
             subText.text = source.source
+            whitelistIndicator.visibility = if(source.whitelistSource) View.VISIBLE else View.GONE
         }
 
         override fun destroy() {}

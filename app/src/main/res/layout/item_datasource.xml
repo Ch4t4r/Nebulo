@@ -15,9 +15,20 @@
             android:orientation="vertical"
             android:layout_height="wrap_content">
 
+        <ImageView
+                android:layout_width="32dp"
+                android:src="@drawable/ic_shield"
+                android:paddingStart="12dp"
+                android:id="@+id/sourceWhitelistIndicator"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:tint="?android:attr/textColor"
+                android:layout_height="32dp"/>
+
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/contentWrap"
+                android:layout_toEndOf="@id/whitelistIndicator"
                 android:layout_height="wrap_content">
 
             <LinearLayout
@@ -70,6 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_below="@id/contentWrap"
                 android:layout_centerHorizontal="true"
+                android:layout_toEndOf="@id/whitelistIndicator"
                 android:id="@+id/ruleCount"
                 android:paddingBottom="12dp"
                 android:text="@string/window_dnsrules_customhosts_hostsource_rulecount_pending"
