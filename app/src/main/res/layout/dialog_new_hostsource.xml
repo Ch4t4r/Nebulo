@@ -53,4 +53,11 @@
                 android:text="@string/dialog_newhostsource_choose_file"
                 android:layout_height="wrap_content"/>
     </RelativeLayout>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:textColor="?android:attr/textColor"
+            android:id="@+id/whitelist"
+            android:text="@string/dialog_newhostsource_use_as_whitelist"
+            android:layout_height="wrap_content"/>
 </LinearLayout>

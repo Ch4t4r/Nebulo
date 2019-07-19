@@ -108,9 +108,22 @@ class MainActivity : NavigationDrawerActivity() {
                     dialog.dismiss()
                 }, null)
         }
-        if(resources.getBoolean(R.bool.add_default_hostsources) && !getPreferences().hostSourcesPopulated) {
-            getDatabase().hostSourceRepository().insertAllAsync(DnsRuleActivity.defaultHostSources)
-            getPreferences().hostSourcesPopulated = true
+        if(resources.getBoolean(R.bool.add_default_hostsources)) {
+            val versionToStartFrom = getPreferences().hostSourcesVersion.let {
+                when {
+                    it != 0 -> it + 1
+                    getDatabase().hostSourceDao().getCount() == 0L -> 1
+                    else -> it +1
+                }
+            }
+            println("START AT $versionToStartFrom")
+            DnsRuleActivity.getDefaultHostSources(versionToStartFrom).apply {
+                println("FOUND: $this")
+                if(isNotEmpty()) {
+                    getDatabase().hostSourceRepository().insertAllAsync(this)
+                    getPreferences().hostSourcesVersion = DnsRuleActivity.latestSourcesVersion
+                }
+            }
         }
         handleDeepAction()
     }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 8,
-    "identityHash": "eefd1e309b2389e1e629ab2f0cbd21fa",
+    "identityHash": "ac968e2144f7f4a5af55b87a4ccc8e38",
     "entities": [
       {
         "tableName": "CachedResponse",
@@ -159,7 +159,7 @@
             "columnNames": [
               "importedFrom"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_DnsRule_importedFrom` ON `${TABLE_NAME}` (`importedFrom`)"
+            "createSql": "CREATE  INDEX `index_DnsRule_importedFrom` ON `${TABLE_NAME}` (`importedFrom`)"
           },
           {
             "name": "index_DnsRule_host_type_stagingType",
@@ -169,7 +169,7 @@
               "type",
               "stagingType"
             ],
-            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_DnsRule_host_type_stagingType` ON `${TABLE_NAME}` (`host`, `type`, `stagingType`)"
+            "createSql": "CREATE UNIQUE INDEX `index_DnsRule_host_type_stagingType` ON `${TABLE_NAME}` (`host`, `type`, `stagingType`)"
           }
         ],
         "foreignKeys": [
@@ -188,7 +188,7 @@
       },
       {
         "tableName": "HostSource",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL, `whitelistSource` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -213,6 +213,12 @@
             "columnName": "source",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "whitelistSource",
+            "columnName": "whitelistSource",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -228,7 +234,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'eefd1e309b2389e1e629ab2f0cbd21fa')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ac968e2144f7f4a5af55b87a4ccc8e38')"
     ]
   }
 }
