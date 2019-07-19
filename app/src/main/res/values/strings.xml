@@ -73,5 +73,5 @@
     <string name="window_dnsrules_hostalreadyexists">There already is a rule for this host.</string>
     <string name="window_dnsrules_customhosts_message">Define all your custom hosts here.</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Rules from this source: %1d</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Rules from this source: %1d (%2d duplicates not in use)</string>
 </resources>

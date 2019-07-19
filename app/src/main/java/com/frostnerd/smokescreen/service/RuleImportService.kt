@@ -234,6 +234,7 @@ class RuleImportService : IntentService("RuleImportService") {
             ADBLOCK_MATCHER to (0 to mutableListOf())
         )
         var lineCount = 0
+        var ruleCount = 0
         val sourceId = source.id
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
             lines.forEach { line ->
@@ -249,6 +250,7 @@ class RuleImportService : IntentService("RuleImportService") {
                                 })
                                 if (lineCount > ruleCommitSize) {
                                     commitLines(parsers)
+                                    ruleCount += lineCount
                                     lineCount = 0
                                 }
                             } else {
@@ -267,7 +269,12 @@ class RuleImportService : IntentService("RuleImportService") {
                 }
             }
         }
-        commitLines(parsers, true)
+        if(!isAborted) {
+            ruleCount += lineCount
+            source.ruleCount = ruleCount
+            getDatabase().hostSourceDao().update(source)
+            commitLines(parsers, true)
+        }
     }
 
     private fun commitLines(

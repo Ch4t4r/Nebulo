@@ -267,7 +267,17 @@ class DnsRuleActivity : BaseActivity() {
             bindModelView = { viewHolder, position, data ->
                 (viewHolder as SourceViewHolder).display(data)
                 when {
-                    sourceRuleCount[data] != null -> viewHolder.ruleCount.text = getString(R.string.window_dnsrules_customhosts_hostsource_rulecount, sourceRuleCount[data])
+                    sourceRuleCount[data] != null -> {
+                        viewHolder.ruleCount.text = getString(R.string.window_dnsrules_customhosts_hostsource_rulecount,
+                            sourceRuleCount[data],
+                            data.ruleCount.let {
+                                when (it) {
+                                    null -> 0
+                                    0 -> 0
+                                    else -> it - sourceRuleCount[data]!!
+                                }
+                            })
+                    }
                     data.enabled -> launchWithLifecylce(false) {
                         sourceRuleCount[data] = getDatabase().dnsRuleDao().getCountForHostSource(data.id)
                         runOnUiThread {

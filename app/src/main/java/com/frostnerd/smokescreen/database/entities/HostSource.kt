@@ -33,4 +33,6 @@ data class HostSource(
         }
     @PrimaryKey(autoGenerate = true) var id: Long = 0
     var enabled: Boolean = true
+    var ruleCount:Int? = null
+
 }
