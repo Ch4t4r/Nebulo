@@ -26,6 +26,8 @@ import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
 import io.sentry.Sentry
 import io.sentry.SentryClient
+import java.net.Inet4Address
+import java.net.Inet6Address
 import java.util.logging.Level
 
 /*
@@ -183,6 +185,48 @@ fun ConnectivityManager.isWifiNetwork(network: Network): Boolean {
 fun ConnectivityManager.isVpnNetwork(network: Network): Boolean {
     val capabilities = getNetworkCapabilities(network)
     return capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+}
+
+fun Context.hasDeviceIpv4Address(): Boolean {
+    val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    for (network in mgr.allNetworks) {
+        if(network == null) continue
+        val info = mgr.getNetworkInfo(network) ?: continue
+        val capabilities = mgr.getNetworkCapabilities(network) ?: continue
+        if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
+            val linkProperties = mgr.getLinkProperties(network) ?: continue
+            log("Checking for IPv4 address in connected non-VPN network ${info.typeName}")
+            for (linkAddress in linkProperties.linkAddresses) {
+                if (linkAddress.address is Inet4Address && !linkAddress.address.isLoopbackAddress) {
+                    log("IPv4 address found.")
+                    return true
+                }
+            }
+        }
+    }
+    log("No IPv4 addresses found.")
+    return false
+}
+
+fun Context.hasDeviceIpv6Address(): Boolean {
+    val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    for (network in mgr.allNetworks) {
+        if(network == null) continue
+        val info = mgr.getNetworkInfo(network) ?: continue
+        val capabilities = mgr.getNetworkCapabilities(network) ?: continue
+        if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
+            val linkProperties = mgr.getLinkProperties(network) ?: continue
+            log("Checking for IPv6 address in connected non-VPN network ${info.typeName}")
+            for (linkAddress in linkProperties.linkAddresses) {
+                if (linkAddress.address is Inet6Address && !linkAddress.address.isLoopbackAddress) {
+                    log("IPv6 address found.")
+                    return true
+                }
+            }
+        }
+    }
+    log("No IPv6 addresses found.")
+    return false
 }
 
 operator fun Level.compareTo(otherLevel:Level):Int {
