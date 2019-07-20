@@ -37,7 +37,7 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
     init {
         val view = layoutInflater.inflate(R.layout.dialog_create_dnsrule, null, false)
         setView(view)
-        setTitle(R.string.dialog_newdnsrule_title)
+        setTitle(if(dnsRule == null) R.string.dialog_newdnsrule_title else R.string.dialog_newdnsrule_edit)
         setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel)) { dialog, _ ->
             dialog.dismiss()
         }

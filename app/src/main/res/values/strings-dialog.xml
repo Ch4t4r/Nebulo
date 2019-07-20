@@ -125,6 +125,7 @@
     <string name="dialog_newhostsource_error_name_empty">Please provide a name.</string>
 
     <string name="dialog_newdnsrule_title">New Dns rule</string>
+    <string name="dialog_newdnsrule_edit">Edit Dns rule</string>
     <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Address</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
