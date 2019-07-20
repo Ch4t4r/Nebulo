@@ -118,6 +118,7 @@
     <string name="dialog_clearuserrules_message">Are you want to clear all dns rules? This cannot be undone.</string>
 
     <string name="dialog_newhostsource_title">New rule source</string>
+    <string name="dialog_newhostsource_edit_title">New rule source</string>
     <string name="dialog_newhostsource_name">Name</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_choose_file">Choose file</string>

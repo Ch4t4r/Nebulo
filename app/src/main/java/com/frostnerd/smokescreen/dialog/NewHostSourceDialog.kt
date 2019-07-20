@@ -39,7 +39,7 @@ class NewHostSourceDialog(
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_hostsource, null, false)
         setView(view)
-        setTitle(R.string.dialog_newhostsource_title)
+        setTitle(if(hostSource != null) R.string.dialog_newhostsource_edit_title else R.string.dialog_newhostsource_title)
         setButton(DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok)) { dialog, _ ->
             dialog.dismiss()
         }
