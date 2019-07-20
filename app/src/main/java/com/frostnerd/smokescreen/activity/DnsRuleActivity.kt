@@ -164,6 +164,19 @@ class DnsRuleActivity : BaseActivity() {
                 }, changeSourceStatus = { hostSource, enabled ->
                     hostSource.enabled = enabled
                     getDatabase().hostSourceDao().update(hostSource)
+                }, editSource = { hostSource ->
+                    NewHostSourceDialog(this, onSourceCreated = { newSource ->
+                        getDatabase().hostSourceDao().update(newSource)
+                        val index = sourceAdapterList.indexOf(hostSource)
+                        sourceAdapter.notifyItemChanged(index)
+                        sourceAdapterList[index] = newSource
+                    }, showFileChooser = { callback ->
+                        fileChosenCallback = callback
+                        startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                            addCategory(Intent.CATEGORY_OPENABLE)
+                            this.type = "text/*"
+                        }, fileChosenRequestCode)
+                    }, hostSource = hostSource).show()
                 })
                 1 -> CustomRulesViewHolder(view, changeSourceStatus = {
                     getPreferences().customHostsEnabled = it
@@ -391,7 +404,8 @@ class DnsRuleActivity : BaseActivity() {
     private class SourceViewHolder(
         view: View,
         deleteSource: (HostSource) -> Unit,
-        changeSourceStatus: (HostSource, enabled: Boolean) -> Unit
+        changeSourceStatus: (HostSource, enabled: Boolean) -> Unit,
+        editSource: (HostSource) -> Unit
     ) : BaseViewHolder(view) {
         val text = view.text
         val subText = view.subText
@@ -409,7 +423,7 @@ class DnsRuleActivity : BaseActivity() {
                 changeSourceStatus(source, isChecked)
             }
             view.cardContent.setOnClickListener {
-                enabled.isChecked = !enabled.isChecked
+                editSource(source)
             }
         }
 

@@ -29,9 +29,12 @@ import kotlinx.android.synthetic.main.dialog_new_hostsource.view.*
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class NewHostSourceDialog (context: Context,
-                           onSourceCreated:(HostSource) -> Unit,
-                           showFileChooser:(fileChosen:(uri: Uri) -> Unit) -> Unit):AlertDialog(context, context.getPreferences().theme.dialogStyle) {
+class NewHostSourceDialog(
+    context: Context,
+    onSourceCreated: (HostSource) -> Unit,
+    showFileChooser: (fileChosen: (uri: Uri) -> Unit) -> Unit,
+    hostSource: HostSource? = null
+) : AlertDialog(context, context.getPreferences().theme.dialogStyle) {
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_hostsource, null, false)
@@ -44,10 +47,10 @@ class NewHostSourceDialog (context: Context,
             dialog.dismiss()
         }
         view.name.setOnFocusChangeListener { _, hasFocus ->
-            if(hasFocus) nameTil.error = null
+            if (hasFocus) nameTil.error = null
         }
         view.url.setOnFocusChangeListener { _, hasFocus ->
-            if(hasFocus) urlTil.error = null
+            if (hasFocus) urlTil.error = null
         }
         view.chooseFile.setOnClickListener {
             showFileChooser {
@@ -55,22 +58,32 @@ class NewHostSourceDialog (context: Context,
             }
         }
         setOnShowListener {
+            if (hostSource != null) {
+                view.url.setText(hostSource.source)
+                view.name.setText(hostSource.name)
+                view.whitelist.isChecked = hostSource.whitelistSource
+            }
             getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                 var valid = true
-                if(name.text.isNullOrBlank()) {
+                if (name.text.isNullOrBlank()) {
                     nameTil.error = context.getString(R.string.dialog_newhostsource_error_name_empty)
                     valid = false
                 } else {
                     nameTil.error = null
                 }
-                if(url.text.isNullOrBlank() || !URLUtil.isValidUrl(url.text.toString())) {
+                if (url.text.isNullOrBlank() || !URLUtil.isValidUrl(url.text.toString())) {
                     urlTil.error = context.getString(R.string.error_invalid_url)
                     valid = false
                 } else {
                     urlTil.error = null
                 }
-                if(valid) {
-                    onSourceCreated(HostSource(name.text.toString(), url.text.toString(), whitelist.isChecked))
+                if (valid) {
+                    val newSource = hostSource?.copy(
+                        name = name.text.toString(),
+                        source = url.text.toString(),
+                        whitelistSource = whitelist.isChecked
+                    ) ?: HostSource(name.text.toString(), url.text.toString(), whitelist.isChecked)
+                    onSourceCreated(newSource)
                     dismiss()
                 }
             }
