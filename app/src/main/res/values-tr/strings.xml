@@ -65,5 +65,5 @@
     <string name="window_dnsrules_customhosts">Özel Hosts</string>
     <string name="window_dnsrules_customhosts_message">Tüm özel Hostları burada tanımlayın.</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Bu kaynaktan gelen kurallar: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Bu kaynaktan gelen kurallar: %1d</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Bu kaynaktan gelen kurallar: %1d (%2$d kopyaları kullanımda değil)</string>
 </resources>

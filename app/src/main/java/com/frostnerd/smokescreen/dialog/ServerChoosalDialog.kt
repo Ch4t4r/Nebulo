@@ -7,14 +7,14 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.dnstunnelproxy.TransportProtocol
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseDialog
-import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.hasTlsServer
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.dialog_server_configuration.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -98,7 +98,7 @@ class ServerChoosalDialog(
             markCurrentSelectedServer()
         }
         view.findViewById<Button>(R.id.addServer).setOnClickListener {
-            NewServerDialog(context, title = null, dnsOverHttps = spinner.selectedItemPosition == 0) { info ->
+            NewServerDialog(context, title = null, dnsOverHttps = spinner.selectedItemPosition == 0, server = null, onServerAdded = { info ->
                 val config = createButtonForUserConfiguration(
                     context.getPreferences().addUserServerConfiguration(
                         info
@@ -107,7 +107,7 @@ class ServerChoosalDialog(
                 if (info.hasTlsServer() == defaultConfig.any { it.hasTlsServer() }) knownServersGroup.addView(
                     config
                 )
-            }.show()
+            }).show()
         }
         addKnownServers()
     }
@@ -138,6 +138,8 @@ class ServerChoosalDialog(
 
     private fun addKnownServers() {
         populationJob = GlobalScope.launch {
+            val hasIpv4 = context.hasDeviceIpv4Address()
+            val hasIpv6 = context.hasDeviceIpv6Address()
             val buttons = mutableListOf<RadioButton>()
             defaultConfig.sortedByDescending {
                 it.name
@@ -145,6 +147,11 @@ class ServerChoosalDialog(
                 !it.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !context.resources.getBoolean(
                     R.bool.hide_adblocking_servers
                 )
+            }.filter {
+                it.servers.all { server ->
+                    hasIpv4 == (TransportProtocol.IPV4 in server.supportedTransportProtocols)
+                            || hasIpv6 == (TransportProtocol.IPV6 in server.supportedTransportProtocols)
+                }
             }.forEach {
                 buttons.add(0, createButtonForKnownConfiguration(it))
             }
@@ -226,13 +233,14 @@ class ServerChoosalDialog(
         return button
     }
 
-    private fun createButtonForUserConfiguration(userConfiguration: UserServerConfiguration): RadioButton {
-        val button = RadioButton(context)
-        button.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        button.setTextColor(context.getPreferences().theme.getTextColor(context))
+    private fun createButtonForUserConfiguration(userConfiguration: UserServerConfiguration, reuseButton:RadioButton? = null): RadioButton {
+        val button = reuseButton ?: RadioButton(context).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            setTextColor(context.getPreferences().theme.getTextColor(context))
+        }
 
         val info = userConfiguration.serverInformation
         val primaryServer: String
@@ -255,7 +263,16 @@ class ServerChoosalDialog(
 
         button.tag = userConfiguration
         button.setOnLongClickListener {
-            showUserConfigDeleteDialog(userConfiguration, button)
+            AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+                .setTitle(R.string.dialog_editdelete_title)
+                .setPositiveButton(R.string.dialog_editdelete_edit) { dialog, _ ->
+                    showUserConfigEditDialog(userConfiguration, button)
+                    dialog.dismiss()
+                }
+                .setNegativeButton(R.string.dialog_editdelete_delete) { dialog, _ ->
+                    showUserConfigDeleteDialog(userConfiguration, button)
+                    dialog.dismiss()
+                }.show()
             true
         }
         return button
@@ -282,6 +299,23 @@ class ServerChoosalDialog(
                 }
                 knownServersGroup.removeView(button)
             }.show()
+    }
+
+    private fun showUserConfigEditDialog(userConfiguration: UserServerConfiguration, button: RadioButton) {
+        NewServerDialog(context, null, userConfiguration.isHttpsServer(), server = userConfiguration, onServerAdded = {
+            context.getPreferences().userServers.toMutableSet().apply {
+                remove(userConfiguration)
+                context.getPreferences().userServers = this
+            }
+            val newConfig = context.getPreferences().addUserServerConfiguration(it)
+            if(button.isChecked) {
+                currentSelectedServer = newConfig.serverInformation
+                context.getPreferences().dnsServerConfig = newConfig.serverInformation
+            }
+            loadServerData(spinner.selectedItemPosition == 1)
+            knownServersGroup.removeAllViews()
+            addKnownServers()
+        }).show()
     }
 
     private fun showDefaultConfigDeleteDialog(config:DnsServerInformation<*>, button: RadioButton) {

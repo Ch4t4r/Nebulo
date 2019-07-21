@@ -1,19 +1,19 @@
-package com.frostnerd.smokescreen.activity
+package com.frostnerd.smokescreen.fragment
 
+import android.app.Activity.RESULT_OK
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.View
+import android.view.*
 import android.widget.Switch
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.ListDataSource
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.lifecyclemanagement.launchWithLifecylce
@@ -57,7 +57,7 @@ import kotlinx.coroutines.launch
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class DnsRuleActivity : BaseActivity() {
+class DnsRuleFragment : Fragment() {
     private lateinit var sourceAdapter: RecyclerView.Adapter<*>
     private lateinit var sourceAdapterList: MutableList<HostSource>
     private lateinit var adapterDataSource: ListDataSource<HostSource>
@@ -72,14 +72,20 @@ class DnsRuleActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dns_rules)
-        setSupportActionBar(toolBar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.activity_dns_rules, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         getDatabase().dnsRuleRepository().getUserRulesAsnc(block = {
             userDnsRules = it.toMutableList()
         }, coroutineScope = LifecycleCoroutineScope(this, ui = false))
         addSource.setOnClickListener {
-            NewHostSourceDialog(this, onSourceCreated = { newSource ->
+            NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
                 if (!sourceAdapterList.contains(newSource)) {
                     val insertPos = sourceAdapterList.indexOfFirst {
                         it.name > newSource.name
@@ -104,27 +110,27 @@ class DnsRuleActivity : BaseActivity() {
             }).show()
         }
         refresh.setOnClickListener {
-            if(isServiceRunning(RuleImportService::class.java)) {
-                startService(Intent(this, RuleImportService::class.java).putExtra("abort", true))
+            if(context!!.isServiceRunning(RuleImportService::class.java)) {
+                context!!.startService(Intent(context!!, RuleImportService::class.java).putExtra("abort", true))
             } else {
-                startService(Intent(this, RuleImportService::class.java))
+                context!!.startService(Intent(context!!, RuleImportService::class.java))
                 refreshProgress.show()
                 refreshProgressShown = true
             }
         }
         export.setOnClickListener {
-            if (isServiceRunning(RuleExportService::class.java)) {
-                startService(Intent(this, RuleExportService::class.java).putExtra("abort", true))
+            if (context!!.isServiceRunning(RuleExportService::class.java)) {
+                context!!.startService(Intent(context!!, RuleExportService::class.java).putExtra("abort", true))
             } else {
-                ExportDnsRulesDialog(this) { exportFromSources, exportUserRules ->
+                ExportDnsRulesDialog(context!!) { exportFromSources, exportUserRules ->
                     fileChosenCallback = {
-                        val intent = Intent(this, RuleExportService::class.java).apply {
+                        val intent = Intent(context!!, RuleExportService::class.java).apply {
                             putExtra(
                                 "params",
                                 RuleExportService.Params(exportFromSources, exportUserRules, it.toString())
                             )
                         }
-                        startService(intent)
+                        context!!.startService(intent)
                         exportProgress.show()
                         exportProgressShown = true
                     }
@@ -146,7 +152,7 @@ class DnsRuleActivity : BaseActivity() {
         sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder({ view, type ->
             when (type) {
                 0 -> SourceViewHolder(view, deleteSource = {
-                    showInfoTextDialog(this,
+                    showInfoTextDialog(context!!,
                         getString(R.string.dialog_deletehostsource_title, it.name),
                         getString(R.string.dialog_deletehostsource_message, it.name),
                         getString(R.string.all_yes) to { dialog, _ ->
@@ -160,94 +166,122 @@ class DnsRuleActivity : BaseActivity() {
                             dialog.dismiss()
                         }, getString(R.string.all_no) to { dialog, _ ->
                             dialog.dismiss()
-                        }, null)
+                        }, null
+                    )
                 }, changeSourceStatus = { hostSource, enabled ->
                     hostSource.enabled = enabled
                     getDatabase().hostSourceDao().update(hostSource)
+                }, editSource = { hostSource ->
+                    NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
+                        getDatabase().hostSourceDao().update(newSource)
+                        val index = sourceAdapterList.indexOf(hostSource)
+                        sourceAdapter.notifyItemChanged(index)
+                        sourceAdapterList[index] = newSource
+                    }, showFileChooser = { callback ->
+                        fileChosenCallback = callback
+                        startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                            addCategory(Intent.CATEGORY_OPENABLE)
+                            this.type = "text/*"
+                        }, fileChosenRequestCode)
+                    }, hostSource = hostSource).show()
                 })
-                1 -> CustomRulesViewHolder(view, changeSourceStatus = {
-                    getPreferences().customHostsEnabled = it
-                }, clearRules = {
-                    showInfoTextDialog(this,
-                        getString(R.string.dialog_clearuserrules_title),
-                        getString(R.string.dialog_clearuserrules_message),
-                        getString(R.string.all_yes) to { dialog, _ ->
-                            getDatabase().dnsRuleRepository().deleteAllUserRulesAsync()
-                            userDnsRules = mutableListOf()
-                            if(showUserRules) {
-                                sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
-                            }
-                            userRuleCount = 0
-                            dialog.dismiss()
-                        }, getString(R.string.all_no) to { dialog, _ ->
-                            dialog.dismiss()
-                        }, null)
-                }, changeRuleVisibility = {
-                    showUserRules = !showUserRules
-                    if(showUserRules) {
-                        userRuleCount = userDnsRules.size
-                        runOnUiThread {
-                            sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
-                            list.smoothScrollToPosition(sourceAdapterList.size + 1)
-                        }
-                    } else {
-                        sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
-                        userRuleCount = 0
-                    }
-                }, createRule = {
-                    DnsRuleDialog(this, onRuleCreated = { newRule ->
-                        val insertPos = userDnsRules.indexOfFirst {
-                            it.host > newRule.host
-                        }.let {
-                            when (it) {
-                                0 -> 0
-                                -1 -> userDnsRules.size
-                                else -> it
-                            }
-                        }
-                        val id = if(newRule.isWhitelistRule()) {
-                            getDatabase().dnsRuleDao().insertWhitelist(newRule)
-                            if(userDnsRules.any {
-                                    println("$it vs $newRule")
-                                    it.host == newRule.host && it.type == newRule.type
-                                }) -1L
-                            else 0L
-                        } else getDatabase().dnsRuleDao().insertIgnore(newRule)
-                        if(id != -1L) {
-                            userDnsRules.add(insertPos, newRule)
-                            val wereRulesShown = showUserRules
-                            showUserRules = true
-                            if(wereRulesShown) {
-                                userRuleCount += 1
-                                sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
-                            } else {
-                                userRuleCount = userDnsRules.size
-                                runOnUiThread {
-                                    sourceAdapter.notifyItemChanged(sourceAdapterList.size)
-                                    sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
-                                    list.smoothScrollToPosition(insertPos)
+                1 -> CustomRulesViewHolder(
+                    view,
+                    changeSourceStatus = {
+                        getPreferences().customHostsEnabled = it
+                    },
+                    clearRules = {
+                        showInfoTextDialog(context!!,
+                            getString(R.string.dialog_clearuserrules_title),
+                            getString(R.string.dialog_clearuserrules_message),
+                            getString(R.string.all_yes) to { dialog, _ ->
+                                getDatabase().dnsRuleRepository().deleteAllUserRulesAsync()
+                                userDnsRules = mutableListOf()
+                                if (showUserRules) {
+                                    sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
                                 }
+                                userRuleCount = 0
+                                dialog.dismiss()
+                            }, getString(R.string.all_no) to { dialog, _ ->
+                                dialog.dismiss()
+                            }, null
+                        )
+                    },
+                    changeRuleVisibility = {
+                        showUserRules = !showUserRules
+                        if (showUserRules) {
+                            userRuleCount = userDnsRules.size
+                            activity!!.runOnUiThread {
+                                sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                                list.smoothScrollToPosition(sourceAdapterList.size + 1)
                             }
                         } else {
-                            Snackbar.make(findViewById(android.R.id.content), R.string.window_dnsrules_hostalreadyexists, Snackbar.LENGTH_LONG).show()
+                            sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
+                            userRuleCount = 0
                         }
-                    }).show()
-                })
-                else -> CustomRuleHostViewHolder(view, deleteRule =  {
+                    },
+                    createRule = {
+                        DnsRuleDialog(context!!, onRuleCreated = { newRule ->
+                            val insertPos = userDnsRules.indexOfFirst {
+                                it.host > newRule.host
+                            }.let {
+                                when (it) {
+                                    0 -> 0
+                                    -1 -> userDnsRules.size
+                                    else -> it
+                                }
+                            }
+                            val id = if (newRule.isWhitelistRule()) {
+                                getDatabase().dnsRuleDao().insertWhitelist(newRule)
+                                if (userDnsRules.any {
+                                        println("$it vs $newRule")
+                                        it.host == newRule.host && it.type == newRule.type
+                                    }) -1L
+                                else 0L
+                            } else getDatabase().dnsRuleDao().insertIgnore(newRule)
+                            if (id != -1L) {
+                                userDnsRules.add(insertPos, newRule)
+                                val wereRulesShown = showUserRules
+                                showUserRules = true
+                                if (wereRulesShown) {
+                                    userRuleCount += 1
+                                    sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                                } else {
+                                    userRuleCount = userDnsRules.size
+                                    activity!!.runOnUiThread {
+                                        sourceAdapter.notifyItemChanged(sourceAdapterList.size)
+                                        sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                                        list.smoothScrollToPosition(insertPos)
+                                    }
+                                }
+                            } else {
+                                Snackbar.make(
+                                    activity!!.findViewById(android.R.id.content),
+                                    R.string.window_dnsrules_hostalreadyexists,
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                        }).show()
+                    })
+                else -> CustomRuleHostViewHolder(view, deleteRule = {
                     val index = userDnsRules.indexOf(it)
                     userDnsRules.remove(it)
                     getDatabase().dnsRuleRepository().removeAsync(it)
                     userRuleCount -= 1
                     sourceAdapter.notifyItemRemoved(sourceAdapterList.size + 1 + index)
                 }, editRule = {
-                    DnsRuleDialog(this, it) { newRule ->
+                    DnsRuleDialog(context!!, it) { newRule ->
                         val rows = getDatabase().dnsRuleDao().updateIgnore(newRule)
-                        if(rows > 0) {
+                        if (rows > 0) {
                             val index = userDnsRules.indexOf(it)
                             userDnsRules[index] = newRule
                             sourceAdapter.notifyItemChanged(sourceAdapterList.size + 1 + index)
                         } else {
-                            Snackbar.make(findViewById(android.R.id.content), R.string.window_dnsrules_hostalreadyexists, Snackbar.LENGTH_LONG).show()
+                            Snackbar.make(
+                                activity!!.findViewById(android.R.id.content),
+                                R.string.window_dnsrules_hostalreadyexists,
+                                Snackbar.LENGTH_LONG
+                            ).show()
                         }
                     }.show()
                 })
@@ -310,21 +344,21 @@ class DnsRuleActivity : BaseActivity() {
                 }
             }
             runOnUiThread = {
-                this@DnsRuleActivity.runOnUiThread(it)
+                activity!!.runOnUiThread(it)
             }
 
         }.build()
-        list.layoutManager = LinearLayoutManager(this)
+        list.layoutManager = LinearLayoutManager(context!!)
         list.recycledViewPool.setMaxRecycledViews(1, 1)
-        list.addItemDecoration(SpaceItemDecorator(this))
+        list.addItemDecoration(SpaceItemDecorator(context!!))
         list.adapter = sourceAdapter
-        if(isServiceRunning(RuleImportService::class.java)) {
+        if(context!!.isServiceRunning(RuleImportService::class.java)) {
             refreshProgress.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
                 refreshProgress.show()
                 refreshProgressShown = true
             }
         }
-        if(isServiceRunning(RuleExportService::class.java)) {
+        if(context!!.isServiceRunning(RuleExportService::class.java)) {
             exportProgress.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
                 exportProgressShown = true
                 exportProgress.show()
@@ -342,7 +376,7 @@ class DnsRuleActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        importDoneReceiver = registerLocalReceiver(IntentFilter(RuleImportService.BROADCAST_IMPORT_DONE)) {
+        importDoneReceiver = context!!.registerLocalReceiver(IntentFilter(RuleImportService.BROADCAST_IMPORT_DONE)) {
             refreshProgress.hide()
             sourceRuleCount.keys.forEach {
                 sourceRuleCount[it] = null
@@ -352,15 +386,15 @@ class DnsRuleActivity : BaseActivity() {
             }
             refreshProgressShown = false
         }
-        exportDoneReceiver = registerLocalReceiver(IntentFilter(RuleExportService.BROADCAST_EXPORT_DONE)) {
+        exportDoneReceiver = context!!.registerLocalReceiver(IntentFilter(RuleExportService.BROADCAST_EXPORT_DONE)) {
             exportProgress.hide()
             exportProgressShown = false
         }
-        if(!isServiceRunning(RuleImportService::class.java) && refreshProgressShown) {
+        if(!context!!.isServiceRunning(RuleImportService::class.java) && refreshProgressShown) {
             refreshProgress.hide()
             refreshProgressShown = false
         }
-        if(!isServiceRunning(RuleExportService::class.java) && exportProgressShown) {
+        if(!context!!.isServiceRunning(RuleExportService::class.java) && exportProgressShown) {
             exportProgress.show()
             exportProgressShown = false
         }
@@ -368,30 +402,25 @@ class DnsRuleActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-        unregisterLocalReceiver(importDoneReceiver)
-        unregisterLocalReceiver(exportDoneReceiver)
+        context!!.unregisterLocalReceiver(importDoneReceiver)
+        context!!.unregisterLocalReceiver(exportDoneReceiver)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_dnsrule, menu)
-        val switch =  menu?.getItem(0)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_dnsrule, menu)
+        val switch =  menu.getItem(0)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)
         switch?.setOnCheckedChangeListener { _, isChecked ->
             getPreferences().dnsRulesEnabled = isChecked
             overlay.visibility = if(isChecked) View.GONE else View.VISIBLE
         }
         switch?.isChecked = getPreferences().dnsRulesEnabled
-        return true
     }
-
-    override fun getConfiguration(): Configuration {
-        return Configuration.withDefaults()
-    }
-
 
     private class SourceViewHolder(
         view: View,
         deleteSource: (HostSource) -> Unit,
-        changeSourceStatus: (HostSource, enabled: Boolean) -> Unit
+        changeSourceStatus: (HostSource, enabled: Boolean) -> Unit,
+        editSource: (HostSource) -> Unit
     ) : BaseViewHolder(view) {
         val text = view.text
         val subText = view.subText
@@ -409,7 +438,7 @@ class DnsRuleActivity : BaseActivity() {
                 changeSourceStatus(source, isChecked)
             }
             view.cardContent.setOnClickListener {
-                enabled.isChecked = !enabled.isChecked
+                editSource(source)
             }
         }
 

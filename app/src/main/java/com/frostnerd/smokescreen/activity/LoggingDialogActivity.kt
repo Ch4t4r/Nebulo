@@ -1,9 +1,12 @@
 package com.frostnerd.smokescreen.activity
 
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.SmokeScreen.Companion.NOTIFICATION_ID_APP_CRASH
 import com.frostnerd.smokescreen.fragment.showLogExportDialog
 import com.frostnerd.smokescreen.getPreferences
 
@@ -30,6 +33,7 @@ class LoggingDialogActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(NOTIFICATION_ID_APP_CRASH)
         if (getPreferences().loggingEnabled) {
             showLogExportDialog {
                 finish()

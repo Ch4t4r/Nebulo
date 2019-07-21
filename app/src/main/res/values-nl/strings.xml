@@ -62,7 +62,7 @@
     <string name="window_dnsrules_customhosts">Aangepaste hosts</string>
     <string name="window_dnsrules_customhosts_message">Definieer hier al uw aangepaste hosts.</string>
 <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regels van deze bron: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regels van deze bron: %1d (%2d duplicaten niet gebruikt)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regels van deze bron: %1d (%2$d duplicaten niet in gebruik)</string>
 <string name="error_invalid_pin">Geef uw PIN-code op.</string>
     <string name="error_invalid_servername">Geef een naam op.</string>
 
