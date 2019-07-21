@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="changelog_build_29_1">Server, welche Werbung blockieren werden nun in nicht-Playstore Versionen angezeigt (inklusiver dieser!)</string>
     <string name="changelog_build_29_2">AdGuard DNS wurde hinzugefügt</string>
+    <string name="changelog_build_41_adblocker_1"></string>
     </resources>
