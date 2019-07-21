@@ -73,4 +73,6 @@
     <string name="changelog_build_40_4">Die PIN funktioniert nun auf Android Q</string>
     <string name="changelog_build_40_5">Es können nun Domains in den DNS-Regeln gewhitelistet werden. Werden diese als whitelist Eintrag erstellt, so werden diese immer zu dem aktuellen DNS Server geschickt, unabhängig davon, ob diese in einer der angegebenen Regelquellen vorkommen</string>
     <string name="changelog_build_40_6">Die DNS Regel Import/Export Benachrichtigung kann nun angeklickt werden</string>
+    <string name="changelog_build_41_1"></string>
+    <string name="changelog_build_41_2"></string>
     </resources>
