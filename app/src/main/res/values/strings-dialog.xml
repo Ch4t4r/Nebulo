@@ -139,4 +139,8 @@
     <string name="dialog_exportdnsrules_title">Export dns rules</string>
     <string name="dialog_exportdnsrules_export_user_rules">Export custom host dns rules</string>
     <string name="dialog_exportdnsrules_export_sources">Export dns rules from enabled host sources</string>
+
+    <string name="dialog_editdelete_title">What do you want to do?</string>
+    <string name="dialog_editdelete_edit">Edit</string>
+    <string name="dialog_editdelete_delete">Delete</string>
 </resources>

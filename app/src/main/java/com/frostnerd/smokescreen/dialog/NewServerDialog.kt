@@ -19,6 +19,7 @@ import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
+import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_new_server.*
@@ -46,7 +47,8 @@ class NewServerDialog(
     context: Context,
     title: String? = null,
     var dnsOverHttps: Boolean,
-    onServerAdded: (serverInfo: DnsServerInformation<*>) -> Unit
+    onServerAdded: (serverInfo: DnsServerInformation<*>) -> Unit,
+    server: UserServerConfiguration? = null
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
     private var validationRegex = NewServerDialog.SERVER_URL_REGEX
 
@@ -123,6 +125,13 @@ class NewServerDialog(
                     setHintAndTitle(view, dnsOverHttps, title)
                     primaryServer.text = primaryServer.text
                     secondaryServer.text = secondaryServer.text
+                }
+            }
+            if(server != null) {
+                serverName.setText(server.serverInformation.name)
+                primaryServer.setText(server.serverInformation.servers[0].address.formatToString())
+                if(server.serverInformation.servers.size > 1) {
+                    secondaryServer.setText(server.serverInformation.servers[1].address.formatToString())
                 }
             }
         }
