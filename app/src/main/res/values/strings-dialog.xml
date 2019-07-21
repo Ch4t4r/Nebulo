@@ -118,6 +118,7 @@
     <string name="dialog_clearuserrules_message">Are you want to clear all dns rules? This cannot be undone.</string>
 
     <string name="dialog_newhostsource_title">New rule source</string>
+    <string name="dialog_newhostsource_edit_title">New rule source</string>
     <string name="dialog_newhostsource_name">Name</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_choose_file">Choose file</string>
@@ -125,6 +126,7 @@
     <string name="dialog_newhostsource_error_name_empty">Please provide a name.</string>
 
     <string name="dialog_newdnsrule_title">New Dns rule</string>
+    <string name="dialog_newdnsrule_edit">Edit Dns rule</string>
     <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Address</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
@@ -137,4 +139,8 @@
     <string name="dialog_exportdnsrules_title">Export dns rules</string>
     <string name="dialog_exportdnsrules_export_user_rules">Export custom host dns rules</string>
     <string name="dialog_exportdnsrules_export_sources">Export dns rules from enabled host sources</string>
+
+    <string name="dialog_editdelete_title">What do you want to do?</string>
+    <string name="dialog_editdelete_edit">Edit</string>
+    <string name="dialog_editdelete_delete">Delete</string>
 </resources>

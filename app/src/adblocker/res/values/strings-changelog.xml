@@ -106,4 +106,18 @@
         <item>@string/changelog_build_40_5</item>
         <item>@string/changelog_build_40_6</item>
     </string-array>
+
+    <string name="changelog_build_41_adblocker_1">Added two new dns rule sources</string>
+    <string-array name="changelog_build_42">
+        <item>@string/changelog_build_41_1</item>
+        <item>@string/changelog_build_41_2</item>
+        <item>@string/changelog_build_41_3</item>
+        <item>@string/changelog_build_41_4</item>
+        <item>@string/changelog_build_41_5</item>
+        <item>@string/changelog_build_41_6</item>
+        <item>@string/changelog_build_41_7</item>
+        <item>@string/changelog_build_41_8</item>
+        <item>@string/changelog_build_41_adblocker_1</item>
+        <item>@string/changelog_build_41_9</item>
+    </string-array>
 </resources>

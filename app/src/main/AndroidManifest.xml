@@ -176,11 +176,6 @@
                 android:label="@string/activity_label_speed_test"
                 android:parentActivityName=".activity.MainActivity"
                 />
-        <activity
-                android:name=".activity.DnsRuleActivity"
-                android:label="@string/activity_label_dns_rules"
-                android:parentActivityName=".activity.MainActivity"
-                />
 
         <service
                 android:name=".service.DnsVpnService"
