@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.database
 
 import android.content.Context
 import android.util.Base64
+import androidx.fragment.app.Fragment
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -91,6 +92,10 @@ fun Context.getDatabase(): AppDatabase {
             .build()
     }
     return INSTANCE!!
+}
+
+fun Fragment.getDatabase():AppDatabase {
+    return context!!.getDatabase()
 }
 
 private fun migration(

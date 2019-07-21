@@ -13,16 +13,12 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.*
-import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
-import com.frostnerd.smokescreen.fragment.AboutFragment
-import com.frostnerd.smokescreen.fragment.MainFragment
-import com.frostnerd.smokescreen.fragment.QueryLogFragment
-import com.frostnerd.smokescreen.fragment.SettingsFragment
+import com.frostnerd.smokescreen.fragment.*
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.menu_cardview.view.*
@@ -116,10 +112,10 @@ class MainActivity : NavigationDrawerActivity() {
                     else -> it +1
                 }
             }
-            DnsRuleActivity.getDefaultHostSources(versionToStartFrom).apply {
+            DnsRuleFragment.getDefaultHostSources(versionToStartFrom).apply {
                 if(isNotEmpty()) {
                     getDatabase().hostSourceRepository().insertAllAsync(this)
-                    getPreferences().hostSourcesVersion = DnsRuleActivity.latestSourcesVersion
+                    getPreferences().hostSourcesVersion = DnsRuleFragment.latestSourcesVersion
                 }
             }
         }
@@ -172,12 +168,10 @@ class MainActivity : NavigationDrawerActivity() {
                     ).show()
                     false
                 })
-            clickableItem(getString(R.string.button_main_dnsrules),
+            fragmentItem(getString(R.string.button_main_dnsrules),
                 iconLeft = getDrawable(R.drawable.ic_view_list),
-                onLongClick = null,
-                onSimpleClick = { _ ,_, _ ->
-                    startActivity(Intent(this@MainActivity, DnsRuleActivity::class.java))
-                    false
+                fragmentCreator = {
+                    DnsRuleFragment()
                 })
             divider()
             if (isPackageInstalled(this@MainActivity, "com.android.vending")) {

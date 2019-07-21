@@ -13,6 +13,7 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
+import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.Decision
 import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
@@ -128,6 +129,10 @@ fun Context.unregisterLocalReceiver(receiver: BroadcastReceiver?) {
 
 fun Context.getPreferences(): AppSettingsSharedPreferences {
     return AppSettings.fromSharedPreferences(this)
+}
+
+fun Fragment.getPreferences(): AppSettingsSharedPreferences {
+    return AppSettings.fromSharedPreferences(context!!)
 }
 
 fun Context.getSentryIfEnabled(): SentryClient? {
