@@ -140,4 +140,5 @@
 <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Adres</string>
     <string name="dialog_newhostsource_use_as_whitelist">Gebruik als whitelist</string>
+    <string name="dialog_newhostsource_edit_title">Nieuwe dns-regel bron</string>
     </resources>
