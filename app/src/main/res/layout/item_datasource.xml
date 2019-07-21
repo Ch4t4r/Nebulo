@@ -34,6 +34,7 @@
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
+
                     <ImageView
                             android:layout_width="24dp"
                             android:src="@drawable/ic_shield"
@@ -88,6 +89,7 @@
                 android:layout_centerHorizontal="true"
                 android:id="@+id/ruleCount"
                 android:paddingStart="12dp"
+                android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
                 android:text="@string/window_dnsrules_customhosts_hostsource_rulecount_pending"
                 android:layout_height="wrap_content"/>
