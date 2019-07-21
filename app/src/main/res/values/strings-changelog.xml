@@ -223,13 +223,12 @@
 
     <string name="changelog_build_41_1">Dns rule sources can now be used as whitelists</string>
     <string name="changelog_build_41_2">The host sources now indicate how many rules were duplicate in a file</string>
-    <string name="changelog_build_41_3">Google Play can now be removed from the list of bypass apps</string>
-    <string name="changelog_build_41_4">Added new servers</string>
-    <string name="changelog_build_41_5">User-defined servers can now be edited</string>
-    <string name="changelog_build_41_6">The server list now only shows server which support the current network (IPv4 or IPv6)</string>
-    <string name="changelog_build_41_7">Host sources can now be edited by clicking on them</string>
-    <string name="changelog_build_41_8">The dns rules now don\'t open a separate window anymore</string>
-    <string name="changelog_build_41_9">Fixed a few crashes</string>
+    <string name="changelog_build_41_3">Added new servers</string>
+    <string name="changelog_build_41_4">User-defined servers can now be edited</string>
+    <string name="changelog_build_41_5">The server list now only shows server which support the current network (IPv4 or IPv6)</string>
+    <string name="changelog_build_41_6">Host sources can now be edited by clicking on them</string>
+    <string name="changelog_build_41_7">The dns rules now don\'t open a separate window anymore</string>
+    <string name="changelog_build_41_8">Fixed a few crashes</string>
     <string-array name="changelog_build_41">
         <item>1.0 Beta (Build 41)</item>
         <item>@string/changelog_build_41_1</item>
@@ -240,6 +239,5 @@
         <item>@string/changelog_build_41_6</item>
         <item>@string/changelog_build_41_7</item>
         <item>@string/changelog_build_41_8</item>
-        <item>@string/changelog_build_41_9</item>
     </string-array>
 </resources>

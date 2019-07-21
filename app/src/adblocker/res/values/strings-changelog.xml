@@ -118,6 +118,5 @@
         <item>@string/changelog_build_41_7</item>
         <item>@string/changelog_build_41_8</item>
         <item>@string/changelog_build_41_adblocker_1</item>
-        <item>@string/changelog_build_41_9</item>
     </string-array>
 </resources>
