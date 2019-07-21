@@ -139,4 +139,5 @@
     <string name="dialog_exportdnsrules_export_sources">Exporteer dns-regels van ingeschakelde host bronnen</string>
 <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Adres</string>
+    <string name="dialog_newhostsource_use_as_whitelist">Gebruik als whitelist</string>
     </resources>
