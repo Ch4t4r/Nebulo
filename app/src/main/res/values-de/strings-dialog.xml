@@ -139,4 +139,9 @@
 <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Adressangabe</string>
     <string name="dialog_newhostsource_use_as_whitelist">Als Whitelist benutzen</string>
-    </resources>
+    <string name="dialog_newhostsource_edit_title">Neue Regelquelle</string>
+    <string name="dialog_newdnsrule_edit">Dns Regel bearbeiten</string>
+    <string name="dialog_editdelete_title">Was möchtest du tun\?</string>
+    <string name="dialog_editdelete_edit">Editieren</string>
+    <string name="dialog_editdelete_delete">Löschen</string>
+</resources>

@@ -73,4 +73,12 @@
     <string name="changelog_build_40_4">De PIN-functie werkt nu op Android Q</string>
     <string name="changelog_build_40_5">U kunt domeinen nu whitelisten in de dns-regels. Als ze op de whitelist staan, worden ze naar de dns-server verzonden, ongeacht of ze aanwezig zijn in de ingeschakelde dns-regel bronnen</string>
     <string name="changelog_build_40_6">De dns-regel import / export-notificatie kan nu worden aangeklikt</string>
+    <string name="changelog_build_41_1">Dns-regel bronnen kunnen nu worden gebruikt als whitelist</string>
+    <string name="changelog_build_41_2">De host bronnen geven nu aan hoeveel regels in een bestand duplicaat waren</string>
+    <string name="changelog_build_41_3">Nieuwe servers toegevoegd</string>
+    <string name="changelog_build_41_4">Door de gebruiker gedefinieerde servers kunnen nu worden bewerkt</string>
+    <string name="changelog_build_41_5">De serverlijst toont nu alleen de servers die het huidige netwerk ondersteunt (IPv4 of IPv6)</string>
+    <string name="changelog_build_41_6">Host bronnen kunnen nu worden bewerkt door erop te klikken</string>
+    <string name="changelog_build_41_7">De dns-regels openen nu niet meer in een apart venster</string>
+    <string name="changelog_build_41_8">Enkele crashes opgelost</string>
     </resources>
