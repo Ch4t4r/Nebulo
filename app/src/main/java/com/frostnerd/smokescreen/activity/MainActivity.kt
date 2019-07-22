@@ -107,9 +107,9 @@ class MainActivity : NavigationDrawerActivity() {
         if(resources.getBoolean(R.bool.add_default_hostsources)) {
             val versionToStartFrom = getPreferences().hostSourcesVersion.let {
                 when {
-                    it != 0 -> it + 1
-                    getDatabase().hostSourceDao().getCount() == 0L -> 1
-                    else -> it +1
+                    it != 0 -> it + 1 // Previous app version already had source versioning
+                    getDatabase().hostSourceDao().getCount() == 0L -> 1 // Previous app version didn't have versioning and no sources
+                    else -> 2 // Previous app version didn't have versioning, but had sources
                 }
             }
             DnsRuleFragment.getDefaultHostSources(versionToStartFrom).apply {
