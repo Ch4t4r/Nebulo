@@ -327,17 +327,22 @@ class RuleImportService : IntentService("RuleImportService") {
                 return createRuleIfNotExists(host, target, type, sourceId)
             }
             matcher == HOSTS_MATCHER -> {
-                var target = matcher.group(1)
-                val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
-                target = target.let {
-                    when (it) {
-                        "0.0.0.0" -> "0"
-                        "127.0.0.1", "::1" -> "1"
-                        else -> it
+                return if(isWhitelist) {
+                    val host = matcher.group(2).replace(wwwRegex, "")
+                    DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = sourceId)
+                } else {
+                    var target = matcher.group(1)
+                    val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
+                    target = target.let {
+                        when (it) {
+                            "0.0.0.0" -> "0"
+                            "127.0.0.1", "::1" -> "1"
+                            else -> it
+                        }
                     }
+                    val host = matcher.group(2).replace(wwwRegex, "")
+                    createRuleIfNotExists(host, target, type, sourceId)
                 }
-                val host = matcher.group(2).replace(wwwRegex, "")
-                return createRuleIfNotExists(host, target, type, sourceId)
             }
         }
         throw IllegalStateException()
