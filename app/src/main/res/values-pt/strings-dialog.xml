@@ -1,2 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_serverconfiguration_title">Configuração do servidor</string>
+    <string name="dialog_serverconfiguration_addserver">Adicionar um servidor</string>
+
+    <string name="dialog_newserver_title_https">Adicionar um servidor (DoH)</string>
+    <string name="dialog_newserver_title_tls">Adicionar um servidor (DoT)</string>
+    <string name="dialog_newserver_name">Nome do servidor</string>
+    <string name="dialog_newserver_name_hint">Exemplo</string>
+    <string name="dialog_newserver_primaryserver">Servidor principal</string>
+    <string name="dialog_newserver_secondaryserver">Servidor secundário (opcional)</string>
+    <string name="dialog_deleteconfig_title">Excluir configuração\?</string>
+    <string name="dialog_deleteconfig_text">Você deseja excluir a configuração %1$s\?</string>
+
+    <string name="dialog_appchoosal_showsystemapps">Mostrar aplicativos do sistema</string>
+    <string name="dialog_appchoosal_whitelist">Apenas use DoH/DoT em aplicativos selecionados</string>
+
+    <string name="dialog_excludedapps_infotext">%1d aplicativos são excluídos por padrão e não podem ser desmarcados</string>
+
+    <string name="dialog_serverimport_title">Importação de %1d servidor(es)</string>
+    <string name="dialog_serverimport_done">Feito</string>
+    <string name="dialog_serverimport_priority">Prioridade %1d</string>
+    <string name="dialog_serverimport_experimental">Experimental</string>
+    <string name="dialog_serverimport_servertype_doh">Tipo: DNS-via-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Tipo: Dns-via-TLS (DoT)</string>
+    <string name="dialog_serverimport_text">Por favor, selecione o(s) servidor(es) que você deseja importar.
+\n
+\nServidores que já foram importados serão duplicados se você os selecionar.</string>
+
+    <string name="dialog_serverimportfailed_title">Importação falhou</string>
+    <string name="dialog_serverimportfailed_text">Não foi possível importar o(s) servidor(es).</string>
+    <string name="dialog_serverimportfailed_text_exception">Não foi possível importar o(s) servidor(es).
+\n(%1s)</string>
+
+    <string name="dialog_logexport_text">Como você deseja compartilhar os registros\?</string>
+    <string name="dialog_logexport_general">Exportação geral</string>
+    <string name="dialog_logexport_email">E-Mail</string>
+
+    <string name="dialog_deletelogs_text">Tem certeza de que deseja excluir todos os registros\?</string>
+
+    <string name="dialog_error_title">Relatório de falhas</string>
+    <string name="dialog_error_text">Parece que o aplicativo travou. Você deseja enviar os arquivos de registro de erros para o desenvolvedor\?</string>
+
+    <string name="dialog_batteryoptimization_title">Otimização da bateria</string>
+    <string name="dialog_batteryoptimization_message">Em alguns dispositivos, o aplicativo não será notificado de que o dispositivo concluiu a inicialização, a menos que as otimizações de bateria estejam desativadas para ele.
+\nNo momento, o aplicativo não está na lista de aplicativos não otimizados, deseja alterar isso\?
+\n
+\nVocê deve testar se ele funciona com a otimização ativada antes de desativá-lo.</string>
+    <string name="dialog_batteryoptimization_whitelist">Desabilitar</string>
+    <string name="dialog_batteryoptimization_ignore">Ignorar</string>
+
+    <string name="dialog_rate_confirmation">Você deseja abrir a Play Store para classificar o aplicativo\?</string>
+
+    <string name="dialog_changelog_title">Histórico de mudanças</string>
+    <string name="dialog_changelog_infotext">O aplicativo foi atualizado desde a última vez que você o abriu. Na lista a seguir você pode ver o histórico de mudanças. Marque a caixa abaixo e você não verá esta mensagem no futuro.</string>
+    <string name="dialog_changelog_dont_show_again">Não mostrar de novo</string>
+
+    <string name="dialog_about_changelog">Histórico de mudanças</string>
+    <string name="dialog_about_licenses">Licenças</string>
+
+    <string name="dialog_query_export_title">Exportando consultas…</string>
+    <string name="dialog_query_export_message">Por favor, aguarde enquanto as consultas estão sendo exportadas</string>
+
+    <string name="dialog_pin_message">Por favor, forneça seu PIN.</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_pin_inputlabel">PIN</string>
+
+    <string name="dialog_enable_logging">Você quer habilitar o registro\? Os registros contêm informações estatísticas, informações de depuração e ações no aplicativo. Os registros gerados não são compartilhados, a menos que você mesmo faça isso.</string>
+
+    <string name="dialog_crashreporting_title">Relatório de travamento automático</string>
+    <string name="dialog_crashreportingusages_title">Dados transmitidos</string>
+    <string name="dialog_crashreportingusages_message">Clique em um dos grupos para ver quais dados são transmitidos em falhas.</string>
+    <string name="dialog_crashreporting_positive">Habilitar relatórios de travamento</string>
+    </resources>
