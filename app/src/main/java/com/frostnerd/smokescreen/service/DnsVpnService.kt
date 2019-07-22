@@ -181,19 +181,11 @@ class DnsVpnService : VpnService(), Runnable {
             }
 
             private fun handleChange() {
-                if(mgr.activeNetworkInfo == null) {
-                    if(fileDescriptor != null) {
-                        destroy(false)
-                        destroyed = false
-                        waitingForNetwork = true
-                    }
-                } else {
-                    if(this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
-                        upstreamAddress.addressCreator.reset()
-                        upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
-                    }
-                    if (fileDescriptor != null || waitingForNetwork) recreateVpn(false, null)
+                if(this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
+                    upstreamAddress.addressCreator.reset()
+                    upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
                 }
+                if (fileDescriptor != null) recreateVpn(false, null)
             }
         }
         val builder = NetworkRequest.Builder()
