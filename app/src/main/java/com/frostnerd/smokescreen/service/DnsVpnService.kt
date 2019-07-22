@@ -49,8 +49,10 @@ import java.io.Serializable
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
+import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 import java.util.logging.Level
+import kotlin.math.pow
 
 
 /*
@@ -375,19 +377,32 @@ class DnsVpnService : VpnService(), Runnable {
         log("Updating server configuration..")
         userServerConfig = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
         serverConfig = getServerConfig()
+        val initialBackoffTime = 200
+        var tries = 0.toDouble()
+        var totalTries = 0
         serverConfig.forEachAddress { _, address ->
             if(!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(true)
             address.addressCreator.whenResolveFailed {
                 showNoConnectionNotification()
-                if(it is TimeoutException) {
-                    address.addressCreator.resolveOrGetResultOrNull(true)
-                    address.addressCreator.whenResolveFinishedSuccessfully {
-                        hideNoConnectionNotification()
-                    }
-                }
+                if(it is TimeoutException || it is UnknownHostException) {
+                    if(totalTries <= 70) {
+                        GlobalScope.launch {
+                            delay((initialBackoffTime * 2.toDouble().pow(tries++)).toLong())
+                            totalTries++
+                            if(tries >= 9) tries = 0.toDouble()
+                            address.addressCreator.resolveOrGetResultOrNull(true)
+                            address.addressCreator.whenResolveFinishedSuccessfully {
+                                hideNoConnectionNotification()
+                                false
+                            }
+                        }
+                        true
+                    } else false
+                } else false
             }
             address.addressCreator.whenResolveFinishedSuccessfully {
                 hideNoConnectionNotification()
+                false
             }
         }
         log("Server configuration updated to $serverConfig")
@@ -611,6 +626,7 @@ class DnsVpnService : VpnService(), Runnable {
                                 builder.addRoute(address, 32)
                             }
                         }
+                        false
                     }
                     if(!it.address.addressCreator.startedResolve && !it.address.addressCreator.isCurrentlyResolving()) it.address.addressCreator.resolveOrGetResultOrNull(true, true)
                 }
