@@ -39,6 +39,8 @@ class LicensesDialog(context: Context):BaseDialog(context, context.getPreference
         libraries["FABProgressCircle (Apache License Version 2.0)"] = context.getString(R.string.license_apache2)
         libraries["LeakCanary (Apache License Version 2.0)"] = context.getString(R.string.license_apache2)
         libraries["LeakSentry (Apache License Version 2.0)"] = context.getString(R.string.license_apache2)
+        libraries["OkHttp (Apache License Version 2.0)"] = context.getString(R.string.license_apache2)
+        libraries["Gson (Apache License Version 2.0)"] = context.getString(R.string.license_apache2)
 
         setTitle(R.string.dialog_about_licenses)
         val view = layoutInflater.inflate(R.layout.dialog_licenses, null, false)
