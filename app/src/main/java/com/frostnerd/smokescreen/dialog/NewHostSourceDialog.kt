@@ -3,6 +3,9 @@ package com.frostnerd.smokescreen.dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.net.Uri
+import android.provider.OpenableColumns
+import android.text.Editable
+import android.text.TextWatcher
 import android.webkit.URLUtil
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.smokescreen.R
@@ -35,6 +38,10 @@ class NewHostSourceDialog(
     showFileChooser: (fileChosen: (uri: Uri) -> Unit) -> Unit,
     hostSource: HostSource? = null
 ) : AlertDialog(context, context.getPreferences().theme.dialogStyle) {
+    private val githubNameRegex = Regex("^https://raw.githubusercontent.com/([^/]+).*$", RegexOption.IGNORE_CASE)
+    private val domainNameRegex = Regex("^https://([^/]{2,}).*$", RegexOption.IGNORE_CASE)
+    private var userModifiedName = false
+
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_hostsource, null, false)
@@ -62,6 +69,48 @@ class NewHostSourceDialog(
                 view.url.setText(hostSource.source)
                 view.name.setText(hostSource.name)
                 view.whitelist.isChecked = hostSource.whitelistSource
+            }
+            view.url.addTextChangedListener(object: TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    if(URLUtil.isValidUrl(s.toString())) {
+                        if(view.name.text.isNullOrBlank() || !userModifiedName) {
+                            val githubMatcher = githubNameRegex.matchEntire(s.toString())
+                            val domainMatcher = domainNameRegex.matchEntire(s.toString())
+                            if(githubMatcher != null) {
+                                view.name.setText(githubMatcher.groupValues[1])
+                            } else if(domainMatcher != null) {
+                                val fqdn = domainMatcher.groupValues[1]
+                                val domain = fqdn.split(".").let {
+                                    if(it.size >= 2) {
+                                        if(it.size >= 3 && it[it.size - 2].length <= 2){
+                                            it[it.size - 3] + "." + it[it.size - 2] + "." + it[it.size - 1] //E.g. mycoolsize.co.nz
+                                        } else it[it.size - 2] + "." + it[it.size - 1] // E.g. mycoolsite.com
+                                    } else it[0] //eg localhost
+                                }
+                                view.name.setText(domain)
+                            } else if(URLUtil.isContentUrl(s.toString())) {
+                                 val text = context.contentResolver.query(Uri.parse(s.toString()), null, null, null, null).let {
+                                     if(it?.moveToFirst() == false) null to it
+                                     else it?.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME)) to it
+                                }.let {
+                                    it.second?.close()
+                                    it.first
+                                }
+                                if(text != null) view.name.setText(text)
+                            }
+                        }
+                    }
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+            })
+            view.name.setOnFocusChangeListener { _, _ ->
+                userModifiedName = true
             }
             getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                 var valid = true
