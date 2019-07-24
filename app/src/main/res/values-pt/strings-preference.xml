@@ -84,4 +84,56 @@
     <string name="summary_enable_sentry">Enviar automaticamente relatórios de falha para o desenvolvedor. Os dados só são enviados se o aplicativo tiver um problema ou falhar.</string>
 
 
-    </resources>
+    <string name="preference_category_ip">Configurações de IP</string>
+
+    <string name="title_enable_ipv6">Ativar IPv6</string>
+    <string name="summary_enable_ipv6">Use ipv6, se o dispositivo tiver um endereço IPv6 atribuído</string>
+
+    <string name="title_enable_ipv4">Ativar IPv4</string>
+    <string name="summary_enable_ipv4">Use ipv4, se o dispositivo tiver um endereço IPv4 atribuído</string>
+
+    <string name="title_force_ipv6">Forçar IPv6</string>
+    <string name="summary_force_ipv6">Forçar o aplicativo a aceitar consultas IPv6, mesmo que o dispositivo não use IPv6.</string>
+
+    <string name="title_force_ipv4">Forçar IPv4</string>
+    <string name="summary_force_ipv4">Forçar o aplicativo a aceitar consultas IPv4, mesmo que o dispositivo não use IPv4.</string>
+
+    <string name="title_allow_ipv4_traffic">Permitir tráfego IPv4</string>
+    <string name="summary_allow_ipv4_traffic">Permitir que o IPv4 seja usado, mesmo que o IPv4 esteja desabilitado aqui.
+\nSe não for permitido, nenhuma conexão IPv4 será possível enquanto o aplicativo estiver em execução.</string>
+
+    <string name="title_allow_ipv6_traffic">Permitir tráfego IPv6</string>
+    <string name="summary_allow_ipv6_traffic">Permitir que o IPv6 seja usado, mesmo que o IPv6 esteja desabilitado aqui.
+\nSe não for permitido, nenhuma conexão IPv6 será possível enquanto o aplicativo estiver em execução.</string>
+
+
+    <string name="preference_category_network">Configurações de rede</string>
+
+    <string name="title_disallow_other_vpns">Não permitir outras VPNs</string>
+    <string name="summary_disallow_other_vpns">Não permitir que outras VPNs sejam iniciadas, a menos que o aplicativo tenha sido explicitamente interrompido</string>
+
+    <string name="title_catch_other_dns_servers">Interceptar outro tráfego de DNS</string>
+    <string name="summary_catch_other_dns_servers">Interceptar o tráfego de servidores DNS conhecidos e encaminhá-lo com segurança para o servidor configurado usando o nebulo</string>
+
+    <string name="title_bypass_searchdomains">Ignorar domínios de pesquisa</string>
+    <string name="summary_bypass_searchdomains">Encaminhar tais domínios (por exemplo, MeuPC.local ou MeuPC.fritz.box) para o servidor DNS da sua rede local em vez do servidor de DNS configurado. Isso é expressamente recomendado. Essas consultas não saem da sua rede.</string>
+
+    <string name="title_pause_on_captiveportal">Pausar na página de login da rede</string>
+    <string name="summary_pause_on_captiveportal">Não encaminhe DNS para o servidor configurado quando for detectado que você precisar efetuar login com credenciais de acesso (por exemplo, em redes públicas de Wi-Fi). Nebulo continuará automaticamente após a autenticação bem-sucedida.
+\nDesativar esta opção pode impedir que você abra a página de login.</string>
+
+    <string name="title_show_noconnection_notification">Notificar quando sem conexão</string>
+    <string name="summary_show_noconnection_notification">Mostrar uma notificação se o aplicativo não tiver uma conexão ou ela for ruim</string>
+
+
+    <string name="preference_category_querylogging">Registro de consultas</string>
+
+    <string name="title_log_queries">Registro de consultas de DNS</string>
+    <string name="summary_log_queries">Registrar todas as consultas de DNS feitas pelo dispositivo e as respostas do servidor</string>
+
+    <string name="title_export_queries">Exportar consultas de DNS</string>
+    <string name="summary_export_queries">Exportar consultas de DNS como CSV (%1d consultas)</string>
+
+    <string name="title_delete_queries">Limpar consultas de DNS</string>
+    <string name="summary_delete_queries">Clique aqui para excluir todas as consultas de DNS do registro.</string>
+</resources>
