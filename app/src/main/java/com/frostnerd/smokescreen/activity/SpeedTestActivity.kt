@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.AdapterBuilder
+import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.TransportProtocol
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
@@ -117,6 +118,10 @@ class SpeedTestActivity : BaseActivity() {
                     hasIpv4 == (TransportProtocol.IPV4 in server.supportedTransportProtocols)
                             || hasIpv6 == (TransportProtocol.IPV6 in server.supportedTransportProtocols)
                 }
+            }.filter {
+                !it.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !resources.getBoolean(
+                    R.bool.hide_adblocking_servers
+                )
             }
             val testResults = dnsServers.map {
                 SpeedTest(it, null)
