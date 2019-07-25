@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
+import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.*
@@ -20,6 +21,7 @@ import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.*
 import com.frostnerd.smokescreen.util.DeepActionState
+import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.menu_cardview.view.*
 import kotlin.random.Random
@@ -69,6 +71,14 @@ class MainActivity : NavigationDrawerActivity() {
                     runResolveNow = true
                 )?.lastOrNull()?.hostAddress ?: "-").let {
                     if(it == view.dns1.text.toString()) "-" else it
+                }
+                launchWithLifecylce(false) {
+                    val latency = DnsSpeedTest(server, log= {}).runTest(1)
+                    runOnUiThread {
+                        view.latency.text = if(latency != null && latency > 0) {
+                           "$latency ms"
+                        } else "- ms"
+                    }
                 }
             }
             update()

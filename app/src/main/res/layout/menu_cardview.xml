@@ -26,6 +26,12 @@
 
         <TextView
                 android:layout_width="wrap_content"
+                android:id="@+id/latency"
+                android:text="- ms"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:layout_width="wrap_content"
                 android:id="@+id/dns1"
                 android:layout_height="wrap_content"/>
 
