@@ -29,6 +29,7 @@ import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.proxy.ProxyBypassHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyHttpsHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyTlsHandler
@@ -145,6 +146,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
+        getPreferences().vpnServiceState = VpnServiceState.STARTED
         LeakSentry.refWatcher.watch(this, "DnsVpnService")
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             log("Encountered an uncaught exception.")
@@ -513,6 +515,7 @@ class DnsVpnService : VpnService(), Runnable {
             LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
         }
         updateServiceTile()
+        getPreferences().vpnServiceState = VpnServiceState.STOPPED
         log("onDestroy() done.")
     }
 

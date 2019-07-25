@@ -236,6 +236,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     var removedDefaultDoTServers:Set<Int> by intPref<SharedPreferences>("removed_dohserver_id").toSetPreference(emptySet())
     var removedDefaultDoHServers:Set<Int> by intPref<SharedPreferences>("removed_dotserver_id").toSetPreference(emptySet())
+
+    var vpnServiceState:VpnServiceState by enumPref("vpn_service_state", VpnServiceState.STOPPED)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
