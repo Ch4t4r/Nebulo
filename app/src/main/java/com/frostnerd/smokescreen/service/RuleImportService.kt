@@ -52,6 +52,7 @@ import java.util.regex.Pattern
 class RuleImportService : IntentService("RuleImportService") {
     private val DNSMASQ_MATCHER =
         Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:/?\$|\\s+.*)").matcher("")
+    private val DNSMASQ_BLOCK_MATCHER = Pattern.compile("^address=/([^/]+)/$").matcher("")
     private val HOSTS_MATCHER =
         Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([\\w._\\-]+).*")
             .matcher("")
@@ -231,7 +232,8 @@ class RuleImportService : IntentService("RuleImportService") {
             DNSMASQ_MATCHER to (0 to mutableListOf<DnsRule>()),
             HOSTS_MATCHER to (0 to mutableListOf()),
             DOMAINS_MATCHER to (0 to mutableListOf()),
-            ADBLOCK_MATCHER to (0 to mutableListOf())
+            ADBLOCK_MATCHER to (0 to mutableListOf()),
+            DNSMASQ_BLOCK_MATCHER to (0 to mutableListOf())
         )
         var lineCount = 0
         var ruleCount = 0
