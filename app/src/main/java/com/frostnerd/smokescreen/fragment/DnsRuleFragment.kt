@@ -37,6 +37,7 @@ import kotlinx.android.synthetic.main.item_datasource.view.text
 import kotlinx.android.synthetic.main.item_datasource_rules.view.*
 import kotlinx.android.synthetic.main.item_dnsrule_host.view.*
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /*
@@ -69,6 +70,7 @@ class DnsRuleFragment : Fragment() {
     private var exportProgressShown = false
     private var fileChosenRequestCode = 5
     private var fileChosenCallback: ((Uri) -> Unit)? = null
+    private var userRulesJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,9 +83,10 @@ class DnsRuleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getDatabase().dnsRuleRepository().getUserRulesAsnc(block = {
-            userDnsRules = it.toMutableList()
-        }, coroutineScope = LifecycleCoroutineScope(this, ui = false))
+        userRulesJob = launchWithLifecylce(false) {
+            userDnsRules = getDatabase().dnsRuleDao().getAllUserRules().toMutableList()
+            userRulesJob = null
+        }
         addSource.setOnClickListener {
             NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
                 if (!sourceAdapterList.contains(newSource)) {
@@ -208,58 +211,72 @@ class DnsRuleFragment : Fragment() {
                         )
                     },
                     changeRuleVisibility = {
-                        showUserRules = !showUserRules
-                        if (showUserRules) {
-                            userRuleCount = userDnsRules.size
-                            activity!!.runOnUiThread {
-                                sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
-                                list.smoothScrollToPosition(sourceAdapterList.size + 1)
+                        val changeVisibility = {
+                            showUserRules = !showUserRules
+                            if (showUserRules) {
+                                userRuleCount = userDnsRules.size
+                                activity!!.runOnUiThread {
+                                    sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                                    list.smoothScrollToPosition(sourceAdapterList.size + 1)
+                                }
+                            } else {
+                                sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
+                                userRuleCount = 0
                             }
-                        } else {
-                            sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
-                            userRuleCount = 0
+                        }
+                        if(userRulesJob == null) changeVisibility()
+                        else launchWithLifecylce(false) {
+                            userRulesJob?.join()
+                            changeVisibility()
                         }
                     },
                     createRule = {
                         DnsRuleDialog(context!!, onRuleCreated = { newRule ->
-                            val insertPos = userDnsRules.indexOfFirst {
-                                it.host > newRule.host
-                            }.let {
-                                when (it) {
-                                    0 -> 0
-                                    -1 -> userDnsRules.size
-                                    else -> it
-                                }
-                            }
-                            val id = if (newRule.isWhitelistRule()) {
-                                getDatabase().dnsRuleDao().insertWhitelist(newRule)
-                                if (userDnsRules.any {
-                                        println("$it vs $newRule")
-                                        it.host == newRule.host && it.type == newRule.type
-                                    }) -1L
-                                else 0L
-                            } else getDatabase().dnsRuleDao().insertIgnore(newRule)
-                            if (id != -1L) {
-                                userDnsRules.add(insertPos, newRule)
-                                val wereRulesShown = showUserRules
-                                showUserRules = true
-                                if (wereRulesShown) {
-                                    userRuleCount += 1
-                                    sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
-                                } else {
-                                    userRuleCount = userDnsRules.size
-                                    activity!!.runOnUiThread {
-                                        sourceAdapter.notifyItemChanged(sourceAdapterList.size)
-                                        sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
-                                        list.smoothScrollToPosition(insertPos)
+                            val insert = {
+                                val insertPos = userDnsRules.indexOfFirst {
+                                    it.host > newRule.host
+                                }.let {
+                                    when (it) {
+                                        0 -> 0
+                                        -1 -> userDnsRules.size
+                                        else -> it
                                     }
                                 }
-                            } else {
-                                Snackbar.make(
-                                    activity!!.findViewById(android.R.id.content),
-                                    R.string.window_dnsrules_hostalreadyexists,
-                                    Snackbar.LENGTH_LONG
-                                ).show()
+                                val id = if (newRule.isWhitelistRule()) {
+                                    getDatabase().dnsRuleDao().insertWhitelist(newRule)
+                                    if (userDnsRules.any {
+                                            println("$it vs $newRule")
+                                            it.host == newRule.host && it.type == newRule.type
+                                        }) -1L
+                                    else 0L
+                                } else getDatabase().dnsRuleDao().insertIgnore(newRule)
+                                if (id != -1L) {
+                                    userDnsRules.add(insertPos, newRule)
+                                    val wereRulesShown = showUserRules
+                                    showUserRules = true
+                                    if (wereRulesShown) {
+                                        userRuleCount += 1
+                                        sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                                    } else {
+                                        userRuleCount = userDnsRules.size
+                                        activity!!.runOnUiThread {
+                                            sourceAdapter.notifyItemChanged(sourceAdapterList.size)
+                                            sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                                            list.smoothScrollToPosition(insertPos)
+                                        }
+                                    }
+                                } else {
+                                    Snackbar.make(
+                                        activity!!.findViewById(android.R.id.content),
+                                        R.string.window_dnsrules_hostalreadyexists,
+                                        Snackbar.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                            if(userRulesJob == null) insert()
+                            else GlobalScope.launch {
+                                userRulesJob?.join()
+                                insert()
                             }
                         }).show()
                     })
