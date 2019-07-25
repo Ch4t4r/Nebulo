@@ -52,6 +52,7 @@ class ProxyTlsHandler(
             sendPacketToUpstreamDNSServer(deviceWriteToken, DatagramPacket(data, 0, data.size, destination, realDestination.port), originalEnvelope)
         } else {
             val response = dnsMessage.asBuilder().setQrFlag(true).setResponseCode(DnsMessage.RESPONSE_CODE.SERVER_FAIL)
+            dnsPacketProxy?.tunnelHandle?.proxy?.logger?.warning("Cannot forward packet because the address isn't resolved yet.")
             dnsPacketProxy?.writeUDPDnsPacketToDevice(response.build().toArray(), originalEnvelope)
         }
     }
