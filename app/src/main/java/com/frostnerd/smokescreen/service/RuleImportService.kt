@@ -251,8 +251,7 @@ class RuleImportService : IntentService("RuleImportService") {
                                     stagingType = 2
                                 })
                                 if (lineCount > ruleCommitSize) {
-                                    commitLines(parsers)
-                                    ruleCount += lineCount
+                                    ruleCount += commitLines(parsers)
                                     lineCount = 0
                                 }
                             } else {
@@ -272,25 +271,26 @@ class RuleImportService : IntentService("RuleImportService") {
             }
         }
         if(!isAborted) {
-            ruleCount += lineCount
+            ruleCount += commitLines(parsers, true)
             source.ruleCount = ruleCount
             getDatabase().hostSourceDao().update(source)
-            commitLines(parsers, true)
         }
     }
 
     private fun commitLines(
         parsers: Map<Matcher, Pair<Int, MutableList<DnsRule>>>,
         forceCommit: Boolean = false
-    ) {
+    ):Int {
         val hosts = parsers[parsers.keys.minBy {
             parsers[it]!!.first
         } ?: parsers.keys.first()]!!.second
-        if (hosts.size > ruleCommitSize || forceCommit) {
+        return if (hosts.size > ruleCommitSize || forceCommit) {
             getDatabase().dnsRuleDao().insertAllIgnoreConflict(hosts)
             ruleCount += hosts.size
+            val added = hosts.size
             hosts.clear()
-        }
+            added
+        } else 0
     }
 
     private val wwwRegex = Regex("^www\\.")
