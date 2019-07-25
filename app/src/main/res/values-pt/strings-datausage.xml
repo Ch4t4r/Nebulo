@@ -20,4 +20,8 @@
     <string name="dialog_crashreportingusages_data_app_4">Nome do servidor DNS</string>
     <string name="dialog_crashreportingusages_data_app_5">Servidor DNS principal</string>
     <string name="dialog_crashreportingusages_data_app_6">Servidor DNS secundário</string>
+    <string name="dialog_crashreportingusages_data_os_1">Nome (p. ex., android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Versão (p. ex., 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Versão do kernel</string>
+    <string name="dialog_crashreportingusages_data_os_4">Presença de root (sim/não)</string>
     </resources>
