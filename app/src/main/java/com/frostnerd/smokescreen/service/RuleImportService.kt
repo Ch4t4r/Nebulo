@@ -51,7 +51,7 @@ import java.util.regex.Pattern
  */
 class RuleImportService : IntentService("RuleImportService") {
     private val DNSMASQ_MATCHER =
-        Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:$|\\s+.*)").matcher("")
+        Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:/?\$|\\s+.*)").matcher("")
     private val HOSTS_MATCHER =
         Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([\\w._\\-]+).*")
             .matcher("")
