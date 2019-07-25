@@ -72,10 +72,11 @@ class NewHostSourceDialog(
             }
             view.url.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    if(URLUtil.isValidUrl(s.toString())) {
+                    val alteredString = if(s.isNullOrBlank()) "" else if(s.contains("://")) s.toString() else "https://$s"
+                    if(URLUtil.isValidUrl(alteredString)) {
                         if(view.name.text.isNullOrBlank() || !userModifiedName) {
-                            val githubMatcher = githubNameRegex.matchEntire(s.toString())
-                            val domainMatcher = domainNameRegex.matchEntire(s.toString())
+                            val githubMatcher = githubNameRegex.matchEntire(alteredString)
+                            val domainMatcher = domainNameRegex.matchEntire(alteredString)
                             if(githubMatcher != null) {
                                 view.name.setText(githubMatcher.groupValues[1])
                             } else if(domainMatcher != null) {
@@ -88,8 +89,8 @@ class NewHostSourceDialog(
                                     } else it[0] //eg localhost
                                 }
                                 view.name.setText(domain)
-                            } else if(URLUtil.isContentUrl(s.toString())) {
-                                 val text = context.contentResolver.query(Uri.parse(s.toString()), null, null, null, null).let {
+                            } else if(URLUtil.isContentUrl(alteredString)) {
+                                 val text = context.contentResolver.query(Uri.parse(alteredString), null, null, null, null).let {
                                      if(it?.moveToFirst() == false) null to it
                                      else it?.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME)) to it
                                 }.let {
@@ -120,7 +121,15 @@ class NewHostSourceDialog(
                 } else {
                     nameTil.error = null
                 }
-                if (url.text.isNullOrBlank() || !URLUtil.isValidUrl(url.text.toString())) {
+
+                val alteredUrl = url.text.let {
+                    when {
+                        it.isNullOrBlank() -> ""
+                        it.contains("://") -> it.toString()
+                        else -> "https://$it"
+                    }
+                }
+                if (alteredUrl.isBlank() || !URLUtil.isValidUrl(alteredUrl)) {
                     urlTil.error = context.getString(R.string.error_invalid_url)
                     valid = false
                 } else {
@@ -129,9 +138,9 @@ class NewHostSourceDialog(
                 if (valid) {
                     val newSource = hostSource?.copy(
                         name = name.text.toString(),
-                        source = url.text.toString(),
+                        source = alteredUrl,
                         whitelistSource = whitelist.isChecked
-                    ) ?: HostSource(name.text.toString(), url.text.toString(), whitelist.isChecked)
+                    ) ?: HostSource(name.text.toString(), alteredUrl, whitelist.isChecked)
                     onSourceCreated(newSource)
                     dismiss()
                 }
