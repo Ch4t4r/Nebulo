@@ -1,7 +1,13 @@
 package com.frostnerd.smokescreen.dialog
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 
 /*
@@ -22,4 +28,26 @@ import com.frostnerd.smokescreen.getPreferences
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class BatteryOptimizationInfoDialog(context:Context) :AlertDialog(context, context.getPreferences().theme.dialogStyle)
+class BatteryOptimizationInfoDialog(context:Context) :AlertDialog(context, context.getPreferences().theme.dialogStyle) {
+    private val moreInfoLink = "https://dontkillmyapp.com?app=Nebulo"
+
+    init {
+        setTitle(R.string.dialog_batteryoptimization_title)
+        setMessage(context.getString(R.string.dialog_servicekilled_message))
+        setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(android.R.string.ok)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.dialog_servicekilled_more_info)) { dialog, _ ->
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(moreInfoLink)
+            try {
+                context.startActivity(i)
+            } catch (e: ActivityNotFoundException) { Toast.makeText(context, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show() }
+            dialog.dismiss()
+        }
+        setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.dialog_batteryoptimization_ignore)) { dialog, _ ->
+            context.getPreferences().ignoreServiceKilled = true
+            dialog.dismiss()
+        }
+    }
+}
