@@ -143,4 +143,7 @@
     <string name="dialog_editdelete_title">What do you want to do?</string>
     <string name="dialog_editdelete_edit">Edit</string>
     <string name="dialog_editdelete_delete">Delete</string>
+
+    <string name="dialog_servicekilled_message">The app detected that it wasn\'t stopped properly the last time it was active. This strongly indicates that your system chose to force stop the app without any possibility for the app to restart itself.\n\nOn most devices you have a few options to prevent or at least delay the system from stopping the app.\nYou can for example disable battery optimizations for the app in the system settings or avoid clearing the app from the list of recents.\n\nIf you chose to ignore this you won\'t see this dialog again. You can read more and receive tips for solving this with the button below (opens an external website in your browser).</string>
+    <string name="dialog_servicekilled_more_info">More information</string>
 </resources>

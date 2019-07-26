@@ -28,7 +28,9 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.proxy.ProxyBypassHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyHttpsHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyTlsHandler
@@ -99,6 +101,8 @@ class DnsVpnService : VpnService(), Runnable {
     companion object {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
         const val BROADCAST_VPN_INACTIVE = BuildConfig.APPLICATION_ID + ".VPN_INACTIVE"
+        private const val REQUEST_CODE_IGNORE_SERVICE_KILLED = 10
+
         var currentTrafficStats: TrafficStats? = null
             private set
 
@@ -145,6 +149,26 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
+        if(getPreferences().vpnServiceState == VpnServiceState.STARTED && !getPreferences().ignoreServiceKilled) { // The app didn't stop properly
+            val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra("command", Command.IGNORE_SERVICE_KILLED)
+            val ignorePendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                PendingIntent.getForegroundService(this@DnsVpnService, REQUEST_CODE_IGNORE_SERVICE_KILLED, ignoreIntent, PendingIntent.FLAG_ONE_SHOT)
+            } else {
+                PendingIntent.getService(this@DnsVpnService, REQUEST_CODE_IGNORE_SERVICE_KILLED, ignoreIntent, PendingIntent.FLAG_ONE_SHOT)
+            }
+            NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this)).apply {
+                setContentTitle(getString(R.string.notification_service_killed_title))
+                setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_service_killed_message)))
+                setSmallIcon(R.drawable.ic_cloud_warn)
+                setAutoCancel(true)
+                setOngoing(false)
+                setContentIntent(DeepActionState.BATTERY_OPTIMIZATION_DIALOG.pendingIntentTo(this@DnsVpnService))
+                addAction(R.drawable.ic_eye, getString(R.string.notification_service_killed_ignore), ignorePendingIntent)
+            }.build().also {
+                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(7, it)
+            }
+        }
+        getPreferences().vpnServiceState = VpnServiceState.STARTED
         LeakSentry.refWatcher.watch(this, "DnsVpnService")
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             log("Encountered an uncaught exception.")
@@ -310,9 +334,7 @@ class DnsVpnService : VpnService(), Runnable {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("Service onStartCommand", intent = intent)
         if (intent != null && intent.hasExtra("command")) {
-            val command = intent.getSerializableExtra("command") as Command
-
-            when (command) {
+            when (intent.getSerializableExtra("command") as Command) {
                 Command.STOP -> {
                     log("Received STOP command.")
                     if(PinActivity.shouldValidatePin(this, intent)) {
@@ -342,6 +364,10 @@ class DnsVpnService : VpnService(), Runnable {
                         pauseNotificationAction?.icon = R.drawable.ic_stat_pause
                         notificationBuilder.setSmallIcon(R.drawable.ic_mainnotification)
                     }
+                    updateNotification()
+                }
+                Command.IGNORE_SERVICE_KILLED -> {
+                    getPreferences().ignoreServiceKilled = true
                     updateNotification()
                 }
             }
@@ -513,6 +539,7 @@ class DnsVpnService : VpnService(), Runnable {
             LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
         }
         updateServiceTile()
+        getPreferences().vpnServiceState = VpnServiceState.STOPPED
         log("onDestroy() done.")
     }
 
@@ -983,7 +1010,7 @@ class DnsVpnService : VpnService(), Runnable {
 }
 
 enum class Command : Serializable {
-    STOP, RESTART, PAUSE_RESUME
+    STOP, RESTART, PAUSE_RESUME, IGNORE_SERVICE_KILLED
 }
 
 data class DnsServerConfiguration(val httpsConfiguration:List<ServerConfiguration>?, val tlsConfiguration:List<TLSUpstreamAddress>?) {
