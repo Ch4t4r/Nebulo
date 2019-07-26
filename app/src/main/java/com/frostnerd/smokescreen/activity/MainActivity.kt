@@ -16,6 +16,7 @@ import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.*
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.BatteryOptimizationInfoDialog
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
@@ -140,6 +141,9 @@ class MainActivity : NavigationDrawerActivity() {
                         clickItem(drawerItems.find {
                             it is ClickableDrawerItem && it.title == getString(R.string.button_main_dnsrules)
                         }!!)
+                    }
+                    DeepActionState.BATTERY_OPTIMIZATION_DIALOG -> {
+                        BatteryOptimizationInfoDialog(this).show()
                     }
                 }
             }
