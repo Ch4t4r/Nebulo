@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="activity_label_import_queries">Importar consultas</string>
     <string name="activity_label_import_servers">Importar servidor(es)</string>
-    <string name="activity_label_speed_test">Comparação de velocidade dos servidores</string>
+    <string name="activity_label_speed_test">Comparar velocidade</string>
     <string name="activity_label_dns_rules">Regras de DNS</string>
 
     <string name="activity_label_enable_logging">Exportar registros/Ativar registro</string>

@@ -70,4 +70,82 @@
     <string name="dialog_crashreportingusages_title">Dados transmitidos</string>
     <string name="dialog_crashreportingusages_message">Clique em um dos grupos para ver quais dados são transmitidos em falhas.</string>
     <string name="dialog_crashreporting_positive">Habilitar relatórios de travamento</string>
-    </resources>
+    <string name="dialog_crashreporting_negative">Não, obrigado.</string>
+    <string name="dialog_crashreporting_neutral">Ver dados</string>
+    <string name="dialog_crashreporting_message">Obrigado por ser um testador do aplicativo!
+\n
+\nEste aplicativo está usando software de terceiros de código aberto e auto-hospedado para facilitar o rastreio de falhas de aplicativo assim que elas ocorrem. Se e somente se habilitado, o aplicativo transmitirá relatórios de travamento quando encontrar uma falha. Estes relatórios contêm dados adicionais sobre o aplicativo e seu dispositivo. Isso inclui um ID que é usado para rastrear falhas provenientes do mesmo usuário, mas não pode ser usado para rastrear qualquer outra coisa. Ativar o relatório de travamento é opcional, mas me ajudaria muito.
+\nOs relatórios são enviados com segurança por HTTPS. 
+\n
+\nClique em \"ver dados\" abaixo para ver que tipo de dados são transmitidos e para um link para a política de privacidade.</string>
+    <string name="dialog_crashreporting_message_notester">Obrigado por usar Nebulo!
+\n
+\nEste aplicativo está usando software de terceiros de código aberto e auto-hospedado para facilitar o rastreio de falhas de aplicativo assim que elas ocorrem. Se e somente se habilitado, o aplicativo transmitirá relatórios de travamento quando encontrar uma falha. Estes relatórios contêm dados adicionais sobre o aplicativo e seu dispositivo. Isso inclui um ID que é usado para rastrear falhas provenientes do mesmo usuário, mas não pode ser usado para rastrear qualquer outra coisa. Ativar o relatório de travamento é opcional, mas tornaria as correções de bugs mais fáceis e rápidas.
+\n
+\nOs relatórios são enviados com segurança por HTTPS. 
+\n
+\nClique em \"ver dados\" abaixo para ver que tipo de dados são transmitidos e para um link para a política de privacidade.</string>
+
+    <string name="dialog_clearqueries_title">Limpar todas as consultas</string>
+    <string name="dialog_clearqueries_message">Tem certeza de que deseja limpar as consultas registradas\? Isto não pode ser revertido.</string>
+
+    <string name="dialog_credits_title">Créditos</string>
+    <string name="dialog_credits_message" formatted="true">- Ícone do aplicativo por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
+\n - Tradução turca por Kemal Oktay Aktoğan
+\n - Tradução russa por bruleto
+\n - Tradução holandesa por Bas Koedijk 
+\n 
+\n Quer ver seu nome aqui\? Sinta-se à vontade para &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuir&lt;/a&gt;.</string>
+
+    <string name="dialog_join_group_title">Junte-se à comunidade</string>
+    <string name="dialog_join_group_message">Olá!
+\n
+\nVocê sabia que este aplicativo tem um grupo do Telegram\? Ele contém atualizações regulares e é o lugar perfeito para dúvidas e discussões.
+\nSomos uma grande comunidade com mais de 120 pessoas, gostaria de fazer parte dela\?</string>
+    <string name="dialog_join_group_positive">Sim!</string>
+
+    <string name="dialog_speedresult_title">Resultados do teste de velocidade</string>
+    <string name="dialog_speedresult_message">%1d servidores testados
+\n %2d servidores DoT alcançáveis, %3d inacessíveis
+\n %4d servidores DoH alcançáveis, %5d inacessíveis
+\n Tempo médio de resposta: %6d ms.
+\n
+\n Servidor mais rápido: %7s
+\n Servidor mais lento: %8s</string>
+
+    <string name="dialog_speedtest_useserver_title">Selecionar servidor</string>
+    <string name="dialog_speedtest_useserver_message">Você quer usar o servidor %1s\? Ele se classificou como %2d de %3d, com um tempo de resposta de %4d ms.</string>
+
+    <string name="dialog_deletehostsource_title">Excluir %1s\?</string>
+    <string name="dialog_deletehostsource_message">Tem certeza de que deseja excluir a fonte de host %1s\? Isso não pode ser revertido, os hosts dessa fonte serão removidos.</string>
+
+    <string name="dialog_clearuserrules_title">Limpar todas as regras de DNS\?</string>
+    <string name="dialog_clearuserrules_message">Você quer limpar todas as regras de DNS\? Isto não pode ser desfeito.</string>
+
+    <string name="dialog_newhostsource_title">Nova fonte de regras</string>
+    <string name="dialog_newhostsource_edit_title">Nova fonte de regras</string>
+    <string name="dialog_newhostsource_name">Nome</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newhostsource_choose_file">Escolher arquivo</string>
+    <string name="dialog_newhostsource_use_as_whitelist">Usar como lista branca</string>
+    <string name="dialog_newhostsource_error_name_empty">Por favor, forneça um nome.</string>
+
+    <string name="dialog_newdnsrule_title">Nova regra de DNS</string>
+    <string name="dialog_newdnsrule_edit">Editar regra de DNS</string>
+    <string name="dialog_newdnsrule_whitelist">Lista branca</string>
+    <string name="dialog_newdnsrule_specify_address">Endereço</string>
+    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">Endereço IPv4</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">Endereço IPv6</string>
+    <string name="dialog_newdnsrule_host_invalid">Por favor, forneça um host válido</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Por favor, forneça um endereço IPv4 válido</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Por favor, forneça um endereço IPv6 válido</string>
+
+    <string name="dialog_exportdnsrules_title">Exportar regras de DNS</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Exportar suas próprias regras de DNS</string>
+    <string name="dialog_exportdnsrules_export_sources">Exportar regras de DNS de fontes de host habilitadas</string>
+
+    <string name="dialog_editdelete_title">O que você quer fazer\?</string>
+    <string name="dialog_editdelete_edit">Editar</string>
+    <string name="dialog_editdelete_delete">Excluir</string>
+</resources>

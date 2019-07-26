@@ -1,2 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="notification_channel_default">Canal padrão</string>
+    <string name="notification_channel_default_description">Canal padrão para exibir notificações.</string>
+
+    <string name="notification_channel_foreground_service">Canal de notificação permanente</string>
+    <string name="notification_channel_foreground_service_description">Canal que é usado para exibir notificações permanentes</string>
+
+    <string name="notification_channel_noconnection">Canal para avisos de conexão</string>
+    <string name="notification_channel_noconnection_description">Canal usado para exibir notificações quando nenhuma conexão está disponível</string>
+
+    <string name="notification_channel_pin">Canal relacionado ao código PIN</string>
+    <string name="notification_channel_pin_description">Canal que é usado para notificações relacionadas ao código PIN como, por exemplo, quando ele não foi fornecido</string>
+
+    <string name="notification_main_text">Consultas enviadas para %1$s
+\n 
+\n%2$d aplicativos excluídos do DoH/DoT
+\n%3$d entradas no cache</string>
+    <string name="notification_main_text_with_secondary">Consultas enviadas para %1$s e %2$s
+\n 
+\n%3$d aplicativos excluídos do DoH/DoT
+\n%4$d entradas no cache</string>
+    <string name="notification_main_text_whitelist">Consultas enviadas para %1$s
+\n 
+\n%2$d aplicativos usando DoH/DoT
+\n%3$d entradas no cache</string>
+    <string name="notification_main_text_with_secondary_whitelist">Consultas enviadas para %1$s e %2$s
+\n 
+\n%3$d aplicativos usando DoH/DoT
+\n%4$d entradas no cache</string>
+    <string name="notification_main_title_tls">Nebulo (DoT)</string>
+    <string name="notification_main_title_https">Nebulo (DoH)</string>
+    <string name="notification_main_subtext">%1$d consultas até agora</string>
+
+    <string name="notification_noconnection_title">Sem conexão</string>
+    <string name="notification_noconnection_text">O aplicativo não está encaminhando as consultas DNS, porque não há conexão ou ela é instável.</string>
+
+    <string name="notification_vpnrestart_title">Reiniciando VPN</string>
+    <string name="notification_vpnrestart_text">O serviço de VPN será reiniciado em breve.</string>
+
+    <string name="notification_appcrash_title">Nebulo parou inesperadamente</string>
+    <string name="notification_appcrash_message">O Nebulo parou inesperadamente. Clique aqui para ir ao menu principal e, se necessário, reiniciar o aplicativo.</string>
+
+    <string name="notification_ruleimport_title">Importação de regras de DNS</string>
+    <string name="notification_ruleimport_message">Importando regras de DNS de %1s (%2s)</string>
+    <string name="notification_ruleimport_secondarymessage">Preparando a importação…</string>
+    <string name="notification_ruleimport_tertiarymessage">Finalizando a importação…</string>
+
+    <string name="notification_ruleimportfinished_title">Importação de regras de DNS concluída</string>
+    <string name="notification_ruleimportfinished_message">%1d regras foram importadas.</string>
+
+    <string name="notification_ruleexport_title">Exportação de regras de DNS</string>
+    <string name="notification_ruleexport_message">Exportando regras (%1d/%2d)</string>
+    <string name="notification_ruleexport_secondarymessage">Preparando a exportação…</string>
+
+    <string name="notification_ruleexportfinished_title">Exportação de regras de DNS concluída</string>
+    <string name="notification_ruleexportfinished_message">%1d regras foram exportadas.</string>
+
+    <string name="notification_pin_title">Código PIN requerido</string>
+    <string name="notification_pin_message">Seu código PIN é necessário para realizar essa ação. Clique aqui para confirmá-la.</string>
+</resources>
