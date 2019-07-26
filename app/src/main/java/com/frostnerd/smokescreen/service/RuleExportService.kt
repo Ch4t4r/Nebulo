@@ -54,6 +54,7 @@ class RuleExportService : IntentService("RuleExportService") {
     override fun onCreate() {
         super.onCreate()
         LeakSentry.refWatcher.watch(this, "RuleExportService")
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_DNSRULE_EXPORT_FINISHED)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
