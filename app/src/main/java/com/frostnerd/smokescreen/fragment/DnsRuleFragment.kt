@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Switch
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,6 @@ import com.frostnerd.cacheadapter.ListDataSource
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
-import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.entities.DnsRule
@@ -71,6 +71,7 @@ class DnsRuleFragment : Fragment() {
     private var fileChosenRequestCode = 5
     private var fileChosenCallback: ((Uri) -> Unit)? = null
     private var userRulesJob: Job? = null
+    private var totalRuleCount:Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +87,10 @@ class DnsRuleFragment : Fragment() {
         userRulesJob = launchWithLifecylce(false) {
             userDnsRules = getDatabase().dnsRuleDao().getAllUserRules().toMutableList()
             userRulesJob = null
+            launch {
+                totalRuleCount = getDatabase().dnsRuleDao().getNonStagedCount()
+                updateRuleCountTitle()
+            }
         }
         addSource.setOnClickListener {
             NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
@@ -286,6 +291,10 @@ class DnsRuleFragment : Fragment() {
                     getDatabase().dnsRuleRepository().removeAsync(it)
                     userRuleCount -= 1
                     sourceAdapter.notifyItemRemoved(sourceAdapterList.size + 1 + index)
+                    if(totalRuleCount != null) {
+                        totalRuleCount = totalRuleCount!! - 1
+                        updateRuleCountTitle()
+                    }
                 }, editRule = {
                     DnsRuleDialog(context!!, it) { newRule ->
                         val rows = getDatabase().dnsRuleDao().updateIgnore(newRule)
@@ -402,6 +411,10 @@ class DnsRuleFragment : Fragment() {
                 if(hostSource.enabled) sourceAdapter.notifyItemChanged(index)
             }
             refreshProgressShown = false
+            launchWithLifecylce(false) {
+                totalRuleCount = getDatabase().dnsRuleDao().getNonStagedCount()
+                updateRuleCountTitle()
+            }
         }
         exportDoneReceiver = context!!.registerLocalReceiver(IntentFilter(RuleExportService.BROADCAST_EXPORT_DONE)) {
             exportProgress.hide()
@@ -414,6 +427,12 @@ class DnsRuleFragment : Fragment() {
         if(!context!!.isServiceRunning(RuleExportService::class.java) && exportProgressShown) {
             exportProgress.show()
             exportProgressShown = false
+        }
+    }
+
+    private fun updateRuleCountTitle() {
+        activity?.runOnUiThread {
+            (activity as AppCompatActivity?)?.supportActionBar?.subtitle = getString(R.string.window_dnsrules_subtitle, totalRuleCount)
         }
     }
 

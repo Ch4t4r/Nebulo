@@ -70,6 +70,7 @@
     <string name="button_main_dnsrules">DNS rules</string>
 
     <string name="window_dnsrules_customhosts">Custom hosts</string>
+    <string name="window_dnsrules_subtitle">%1d rules</string>
     <string name="window_dnsrules_hostalreadyexists">There already is a rule for this host.</string>
     <string name="window_dnsrules_customhosts_message">Define all your custom hosts here.</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>

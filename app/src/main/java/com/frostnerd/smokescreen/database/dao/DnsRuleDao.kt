@@ -66,6 +66,9 @@ interface DnsRuleDao {
     @Query("SELECT COUNT(*) FROM DnsRule")
     fun getCount(): Long
 
+    @Query("SELECT COUNT(*) FROM DnsRule WHERE stagingType=0")
+    fun getNonStagedCount(): Long
+
     @Query("SELECT COUNT(*) FROM DnsRule WHERE importedFrom IS NULL")
     fun getUserCount():Long
 
