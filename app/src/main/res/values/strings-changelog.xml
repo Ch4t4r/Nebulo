@@ -240,4 +240,20 @@
         <item>@string/changelog_build_41_7</item>
         <item>@string/changelog_build_41_8</item>
     </string-array>
+
+    <string name="changelog_build_43_1">The server info in the side bar menu now shows the current latency</string>
+    <string name="changelog_build_43_2">The speed test now only shows servers which support the current network</string>
+    <string name="changelog_build_43_3">Fixed dnsmasq host sources not being imported</string>
+    <string name="changelog_build_43_4">The dns rules view now shows the total amount of rules</string>
+    <string name="changelog_build_43_5">A dialog is now shown when the system kills the app, informing about possible solutions</string>
+    <string name="changelog_build_43_6">Fixed a few crashes</string>
+    <string-array name="changelog_build_43">
+        <item>1.0 Beta (Build 43)</item>
+        <item>@string/changelog_build_43_1</item>
+        <item>@string/changelog_build_43_2</item>
+        <item>@string/changelog_build_43_3</item>
+        <item>@string/changelog_build_43_4</item>
+        <item>@string/changelog_build_43_5</item>
+        <item>@string/changelog_build_43_6</item>
+    </string-array>
 </resources>
