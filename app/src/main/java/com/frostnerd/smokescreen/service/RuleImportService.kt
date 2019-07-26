@@ -117,7 +117,7 @@ class RuleImportService : IntentService("RuleImportService") {
                 NotificationCompat.Action(R.drawable.ic_times, getString(android.R.string.cancel), abortPendingAction)
             notification!!.addAction(abortAction)
         }
-        startForeground(3, notification!!.build())
+        startForeground(Notifications.ID_DNSRULE_IMPORT, notification!!.build())
     }
 
     private fun showSuccessNotification() {
@@ -133,7 +133,7 @@ class RuleImportService : IntentService("RuleImportService") {
             successNotification.setStyle(NotificationCompat.BigTextStyle().bigText(this))
         }
         successNotification.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
-        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(4, successNotification.build())
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_DNSRULE_IMPORT_FINISHED, successNotification.build())
     }
 
     private fun updateNotification(source: HostSource, count: Int, maxCount: Int) {
@@ -148,7 +148,7 @@ class RuleImportService : IntentService("RuleImportService") {
             )
             notification?.setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
             notification?.setProgress(maxCount, count, false)
-            startForeground(3, notification!!.build())
+            startForeground(Notifications.ID_DNSRULE_IMPORT, notification!!.build())
         }
     }
 
@@ -160,7 +160,7 @@ class RuleImportService : IntentService("RuleImportService") {
             )
             notification?.setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
             notification?.setProgress(1, 1, true)
-            startForeground(3, notification!!.build())
+            startForeground(Notifications.ID_DNSRULE_IMPORT, notification!!.build())
         }
     }
 

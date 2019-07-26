@@ -31,10 +31,6 @@ import leakcanary.LeakSentry
 
 class VpnRestartService : Service() {
 
-    companion object {
-        const val NOTIFICATION_ID: Int = 999
-    }
-
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
@@ -52,7 +48,7 @@ class VpnRestartService : Service() {
         builder.setContentTitle(getString(R.string.notification_vpnrestart_title))
         builder.setContentText(getString(R.string.notification_vpnrestart_text))
 
-        startForeground(NOTIFICATION_ID, builder.build())
+        startForeground(Notifications.ID_VPN_RESTART, builder.build())
 
         log("Starting the background configure")
         BackgroundVpnConfigureActivity.prepareVpn(this,

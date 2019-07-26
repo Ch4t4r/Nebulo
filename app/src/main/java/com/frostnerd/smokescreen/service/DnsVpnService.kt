@@ -284,7 +284,7 @@ class DnsVpnService : VpnService(), Runnable {
                 queryCount + queryCountOffset
             )
         )
-        startForeground(1, notificationBuilder.build())
+        startForeground(Notifications.ID_VPN_SERVICE, notificationBuilder.build())
     }
 
     private fun showNoConnectionNotification() {
@@ -298,7 +298,7 @@ class DnsVpnService : VpnService(), Runnable {
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
             noConnectionNotificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(getString(R.string.notification_noconnection_text)))
         }
-        if(!noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(2, noConnectionNotificationBuilder.build())
+        if(!noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_NO_CONNECTION, noConnectionNotificationBuilder.build())
         noConnectionNotificationShown = true
     }
 
