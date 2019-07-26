@@ -125,7 +125,13 @@ class RuleImportService : IntentService("RuleImportService") {
         successNotification.setSmallIcon(R.drawable.ic_mainnotification)
         successNotification.setAutoCancel(true)
         successNotification.setContentTitle(getString(R.string.notification_ruleimportfinished_title))
-        successNotification.setContentText(getString(R.string.notification_ruleimportfinished_message, ruleCount))
+        val actualRuleCount = getDatabase().dnsRuleDao().getNonUserCount()
+        getString(R.string.notification_ruleimportfinished_message,
+            actualRuleCount,
+            ruleCount - actualRuleCount).apply {
+            successNotification.setContentText(this)
+            successNotification.setStyle(NotificationCompat.BigTextStyle().bigText(this))
+        }
         successNotification.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(4, successNotification.build())
     }
