@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
+import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
@@ -21,7 +22,9 @@ import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.*
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.DeepActionState
+import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.menu_cardview.view.*
@@ -131,6 +134,9 @@ class MainActivity : NavigationDrawerActivity() {
             }
         }
         handleDeepAction()
+        if(!isServiceRunning(DnsVpnService::class.java) && getPreferences().vpnServiceState == VpnServiceState.STARTED) {
+            BatteryOptimizationInfoDialog(this).show()
+        }
     }
 
     private fun handleDeepAction() {
