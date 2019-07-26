@@ -135,6 +135,7 @@ class MainActivity : NavigationDrawerActivity() {
         }
         handleDeepAction()
         if(!isServiceRunning(DnsVpnService::class.java) && getPreferences().vpnServiceState == VpnServiceState.STARTED) {
+            getPreferences().vpnServiceState = VpnServiceState.STOPPED
             BatteryOptimizationInfoDialog(this).show()
         }
     }
