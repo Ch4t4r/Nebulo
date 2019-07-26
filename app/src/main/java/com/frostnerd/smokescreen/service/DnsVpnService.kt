@@ -165,7 +165,7 @@ class DnsVpnService : VpnService(), Runnable {
                 setContentIntent(DeepActionState.BATTERY_OPTIMIZATION_DIALOG.pendingIntentTo(this@DnsVpnService))
                 addAction(R.drawable.ic_eye, getString(R.string.notification_service_killed_ignore), ignorePendingIntent)
             }.build().also {
-                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(7, it)
+                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_SERVICE_KILLED, it)
             }
         }
         getPreferences().vpnServiceState = VpnServiceState.STARTED
