@@ -144,4 +144,11 @@
     <string name="dialog_editdelete_title">Was möchtest du tun\?</string>
     <string name="dialog_editdelete_edit">Editieren</string>
     <string name="dialog_editdelete_delete">Löschen</string>
+<string name="dialog_servicekilled_message">Die App hat erkannt, dass sie nach der letzten Ausführung nicht ordnungsgemäß beendet wurde. Dies deutet sehr stark darauf hin, dass das System die App zwangsweise geschlossen hat, ohne dieser die Möglichkeit zu geben, sich selbst neu zu starten.
+\n
+\nAuf den meisten Geräten existieren einige Optionen, welche dieses Verhalten seitens des System verhindern, mindestens aber verzögern können.
+\nSo kannst du zum Beispiel in den Systemeinstellungen die Batterieoptimierungen für Nebulo deaktivieren, oder die App nicht aus der Liste der zuletzt verwendeten Apps entfernen.
+\n
+\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser).</string>
+    <string name="dialog_servicekilled_more_info">Mehr Informationen</string>
 </resources>
