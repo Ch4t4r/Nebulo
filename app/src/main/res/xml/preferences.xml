@@ -131,6 +131,12 @@
                 android:summary="@string/summary_enable_logging"
                 android:key="logging_enabled"/>
 
+        <CheckBoxPreference
+                android:title="@string/title_advanced_logging"
+                android:summary="@string/summary_advanced_logging"
+                android:dependency="logging_enabled"
+                android:key="advanced_logging"/>
+
         <Preference
                 android:key="send_logs"
                 android:title="@string/title_send_logs"

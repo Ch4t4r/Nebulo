@@ -193,6 +193,10 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         "logging_enabled",
         BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
     )
+    var advancedLogging:Boolean by booleanPref(
+        "advanced_logging",
+        false
+    )
     override var crashReportingEnabled: Boolean by booleanPref("enable_sentry", false)
 
     override var enableIpv6: Boolean by booleanPref("ipv6_enabled", true)
