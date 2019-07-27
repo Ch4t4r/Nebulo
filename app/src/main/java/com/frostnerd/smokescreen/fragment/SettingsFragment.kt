@@ -94,7 +94,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         )
     }
 
-    fun findPreference(key:String): Preference {
+    private fun findPreference(key:String): Preference {
         return super.findPreference<Preference>(key)!!
     }
 

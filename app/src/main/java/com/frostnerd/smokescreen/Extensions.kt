@@ -51,7 +51,7 @@ import java.util.logging.Level
  */
 
 fun Context.canUseFingerprintAuthentication(): Boolean {
-    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) return false
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false
     val mgr = getSystemService(Context.FINGERPRINT_SERVICE) as? FingerprintManager
     if(mgr == null || !mgr.isHardwareDetected) return false
     else if(!mgr.hasEnrolledFingerprints()) return false

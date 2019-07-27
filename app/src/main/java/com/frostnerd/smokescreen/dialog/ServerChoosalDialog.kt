@@ -14,7 +14,6 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.dialog_server_configuration.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -46,8 +45,8 @@ class ServerChoosalDialog(
     BaseDialog(context, context.getPreferences().theme.dialogStyle) {
     private var populationJob: Job? = null
     private var currentSelectedServer: DnsServerInformation<*>
-    lateinit var defaultConfig: List<DnsServerInformation<*>>
-    lateinit var userConfig: List<UserServerConfiguration>
+    private lateinit var defaultConfig: List<DnsServerInformation<*>>
+    private lateinit var userConfig: List<UserServerConfiguration>
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_server_configuration, null, false)
@@ -115,8 +114,8 @@ class ServerChoosalDialog(
     private fun loadServerData(tls: Boolean) {
         if (tls) {
             val hiddenServers = context.getPreferences().removedDefaultDoTServers
-            defaultConfig = AbstractTLSDnsHandle.waitUntilKnownServersArePopulated {
-                it.filter {
+            defaultConfig = AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { servers ->
+                servers.filter {
                     it.key !in hiddenServers
                 }.values.toList()
             }
@@ -125,8 +124,8 @@ class ServerChoosalDialog(
             }.toList()
         } else {
             val hiddenServers = context.getPreferences().removedDefaultDoHServers
-            defaultConfig = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
-                it.filter {
+            defaultConfig = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {servers ->
+                servers.filter {
                     it.key !in hiddenServers
                 }.values.toList()
             }
@@ -169,7 +168,7 @@ class ServerChoosalDialog(
         }
     }
 
-    fun markCurrentSelectedServer() {
+    private fun markCurrentSelectedServer() {
         for (id in 0 until knownServersGroup.childCount) {
             val child = knownServersGroup.getChildAt(id) as RadioButton
             val payload = child.tag

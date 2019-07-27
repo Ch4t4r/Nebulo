@@ -54,6 +54,7 @@ import java.net.InetAddress
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 import java.util.logging.Level
+import kotlin.math.floor
 import kotlin.math.pow
 
 
@@ -374,7 +375,7 @@ class DnsVpnService : VpnService(), Runnable {
         } else {
             log("No command passed, fetching servers and establishing connection if needed")
             log("Checking whether The VPN is prepared")
-            if (VpnService.prepare(this) != null) {
+            if (prepare(this) != null) {
                 log("The VPN isn't prepared, stopping self and starting Background configure")
                 updateNotification(0)
                 stopForeground(true)
@@ -479,7 +480,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun recreateVpn(reloadServerConfiguration: Boolean, intent: Intent?) {
         log("Recreating the VPN (destroying & establishing)")
         destroy(false)
-        if (VpnService.prepare(this) == null) {
+        if (prepare(this) == null) {
             log("VpnService is still prepared, establishing VPN.")
             destroyed = false
             if (reloadServerConfiguration || !this::serverConfig.isInitialized) {
@@ -567,7 +568,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun randomIPv6Block(bits: Int, leading_zeros: Boolean): String {
-        var hex = java.lang.Long.toHexString(Math.floor(Math.random() * Math.pow(2.0, bits.toDouble())).toLong())
+        var hex = java.lang.Long.toHexString(floor(Math.random() * 2.0.pow(bits.toDouble())).toLong())
         if (!leading_zeros || hex.length == bits / 4);
         hex = "0000".substring(0, bits / 4 - hex.length) + hex
         return hex
@@ -655,7 +656,10 @@ class DnsVpnService : VpnService(), Runnable {
                         }
                         false
                     }
-                    if(!it.address.addressCreator.startedResolve && !it.address.addressCreator.isCurrentlyResolving()) it.address.addressCreator.resolveOrGetResultOrNull(true, true)
+                    if(!it.address.addressCreator.startedResolve && !it.address.addressCreator.isCurrentlyResolving()) it.address.addressCreator.resolveOrGetResultOrNull(
+                        retryIfError = true,
+                        runResolveNow = true
+                    )
                 }
             }
         } else log("Not intercepting traffic towards known DNS servers.")
@@ -793,7 +797,7 @@ class DnsVpnService : VpnService(), Runnable {
         log("VPN proxy creating, trying to run...")
         fileDescriptor?.let {
             vpnProxy?.run(it)
-        } ?: kotlin.run {
+        } ?: run {
             recreateVpn(false, null)
             return
         }
@@ -839,7 +843,7 @@ class DnsVpnService : VpnService(), Runnable {
         } else log("Not creating bypass handlers for search domains, bypass is disabled.")
         if(getPreferences().pauseOnCaptivePortal) {
             val dhcpServers = getDhcpDnsServers()
-            if(!dhcpServers.isEmpty()) bypassHandlers.add(CaptivePortalUdpDnsHandle(targetDnsServer = { dhcpServers.first() }))
+            if(dhcpServers.isNotEmpty()) bypassHandlers.add(CaptivePortalUdpDnsHandle(targetDnsServer = { dhcpServers.first() }))
         }
         bypassHandlers.add(NoConnectionDnsHandle(getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager, NoConnectionDnsHandle.Behavior.DROP_PACKETS) {
             log("Connection changed to connected=$it", "NoConnectionDnsHandle-Listener")
@@ -889,7 +893,7 @@ class DnsVpnService : VpnService(), Runnable {
                                 }
                             }
 
-                            if(!recordsToPersist.isEmpty()) {
+                            if(recordsToPersist.isNotEmpty()) {
                                 entries.add(createPersistedCacheEntry(entry.key, cachedType.key, recordsToPersist))
                             }
                         }

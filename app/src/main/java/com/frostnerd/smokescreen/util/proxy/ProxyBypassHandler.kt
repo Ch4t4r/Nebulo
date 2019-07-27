@@ -28,7 +28,7 @@ import java.net.InetAddress
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class ProxyBypassHandler(val searchDomains:List<String>, val destinationDnsServer:InetAddress):AbstractUDPDnsHandle() {
+class ProxyBypassHandler(private val searchDomains:List<String>, private val destinationDnsServer:InetAddress):AbstractUDPDnsHandle() {
     override val handlesSpecificRequests: Boolean = true
     private val upstreamAddress = UpstreamAddress(destinationDnsServer, 53)
 

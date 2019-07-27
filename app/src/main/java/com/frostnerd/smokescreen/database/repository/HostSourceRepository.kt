@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
  *
  * development@frostnerd.com
  */
-class HostSourceRepository(val hostSourceDao: HostSourceDao) {
+class HostSourceRepository(private val hostSourceDao: HostSourceDao) {
 
     @Delete
     fun deleteAsync(hostSource: HostSource, coroutineScope: CoroutineScope = GlobalScope) {

@@ -46,13 +46,13 @@ fun showPrivacyPolicyDialog(context: Context) {
 fun showInfoTextDialog(context:Context, title:String, text:String,
                        positiveButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
                        negativeButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
-                       neutralButton:Pair<String, ((DialogInterface, Int) -> Unit)?>? = context.getString(android.R.string.ok) to null): androidx.appcompat.app.AlertDialog {
-    var stringWithLinks = SpannableString(text)
+                       neutralButton:Pair<String, ((DialogInterface, Int) -> Unit)?>? = context.getString(android.R.string.ok) to null): AlertDialog {
+    val stringWithLinks = SpannableString(text)
     Linkify.addLinks(stringWithLinks, Linkify.ALL)
 
     val span = Html.fromHtml(stringWithLinks.toString().replace("\n", "<br>"))
 
-    val dialogBuilder = androidx.appcompat.app.AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+    val dialogBuilder = AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
         .setTitle(title)
         .setMessage(span)
     if(neutralButton != null) dialogBuilder.setNeutralButton(neutralButton.first, neutralButton.second)

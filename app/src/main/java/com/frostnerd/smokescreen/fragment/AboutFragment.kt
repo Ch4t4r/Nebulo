@@ -35,7 +35,7 @@ import java.util.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class AboutFragment : Fragment() {
-    var queryGenStepOne = false
+    private var queryGenStepOne = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_about, container, false)

@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class DnsRuleRepository(val dnsRuleDao: DnsRuleDao) {
+class DnsRuleRepository(private val dnsRuleDao: DnsRuleDao) {
 
     fun updateAsync(dnsRule: DnsRule, coroutineScope: CoroutineScope = GlobalScope) {
         coroutineScope.launch {

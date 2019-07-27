@@ -6,12 +6,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import androidx.test.platform.app.InstrumentationRegistry
 import com.frostnerd.smokescreen.database.*
-import org.junit.Assert.assertEquals
 import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import java.io.IOException
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -20,7 +17,7 @@ import java.io.IOException
  */
 @RunWith(RobolectricTestRunner::class)
 class ExampleUnitTest {
-    private val TEST_DB = "direct-migration-test"
+    private val testDbName = "direct-migration-test"
     private val migrations = mutableMapOf<Migration,(SupportSQLiteDatabase) -> Unit>().apply {
         put(MIGRATION_3_4) {
 
@@ -53,10 +50,10 @@ class ExampleUnitTest {
     /*@Test
     @Throws(IOException::class)
     fun testIncrementalMigrations_withoutData() {
-        var db = helper.createDatabase(TEST_DB, 3)
+        var db = helper.createDatabase(testDbName, 3)
         db.close()
         for(migration in migrations) {
-            db = helper.runMigrationsAndValidate(TEST_DB, migration.key.endVersion, true, migration.key)
+            db = helper.runMigrationsAndValidate(testDbName, migration.key.endVersion, true, migration.key)
             db.close()
         }
     }*/

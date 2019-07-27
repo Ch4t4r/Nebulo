@@ -3,7 +3,6 @@ package com.frostnerd.smokescreen.service
 import android.app.IntentService
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -17,9 +16,6 @@ import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import leakcanary.LeakSentry
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -50,14 +46,14 @@ import java.util.regex.Pattern
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class RuleImportService : IntentService("RuleImportService") {
-    private val DNSMASQ_MATCHER =
+    private val dnsmasqMatcher =
         Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:/?\$|\\s+.*)").matcher("")
-    private val DNSMASQ_BLOCK_MATCHER = Pattern.compile("^address=/([^/]+)/$").matcher("")
-    private val HOSTS_MATCHER =
+    private val dnsmasqBlockMatcher = Pattern.compile("^address=/([^/]+)/$").matcher("")
+    private val hostsMatcher =
         Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([\\w._\\-]+).*")
             .matcher("")
-    private val DOMAINS_MATCHER = Pattern.compile("^([_\\w][\\w_\\-.]+)(?:\$|\\s+.*)").matcher("")
-    private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("")
+    private val domainsMatcher = Pattern.compile("^([_\\w][\\w_\\-.]+)(?:\$|\\s+.*)").matcher("")
+    private val adblockMatcher = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("")
     private val ruleCommitSize = 10000
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
@@ -236,11 +232,11 @@ class RuleImportService : IntentService("RuleImportService") {
 
     private fun processLines(source: HostSource, stream: InputStream) {
         val parsers = mutableMapOf(
-            DNSMASQ_MATCHER to (0 to mutableListOf<DnsRule>()),
-            HOSTS_MATCHER to (0 to mutableListOf()),
-            DOMAINS_MATCHER to (0 to mutableListOf()),
-            ADBLOCK_MATCHER to (0 to mutableListOf()),
-            DNSMASQ_BLOCK_MATCHER to (0 to mutableListOf())
+            dnsmasqMatcher to (0 to mutableListOf<DnsRule>()),
+            hostsMatcher to (0 to mutableListOf()),
+            domainsMatcher to (0 to mutableListOf()),
+            adblockMatcher to (0 to mutableListOf()),
+            dnsmasqBlockMatcher to (0 to mutableListOf())
         )
         var lineCount = 0
         var ruleCount = 0
@@ -322,7 +318,7 @@ class RuleImportService : IntentService("RuleImportService") {
                     else null
                 } else DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = sourceId)
             }
-            matcher == DNSMASQ_MATCHER -> {
+            matcher == dnsmasqMatcher -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
                 var target = matcher.group(2)
                 val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
@@ -335,7 +331,7 @@ class RuleImportService : IntentService("RuleImportService") {
                 }
                 return createRuleIfNotExists(host, target, type, sourceId)
             }
-            matcher == HOSTS_MATCHER -> {
+            matcher == hostsMatcher -> {
                 return if(isWhitelist) {
                     val host = matcher.group(2).replace(wwwRegex, "")
                     DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = sourceId)

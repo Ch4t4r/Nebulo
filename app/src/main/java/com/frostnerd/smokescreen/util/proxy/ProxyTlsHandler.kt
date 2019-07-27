@@ -34,7 +34,7 @@ import javax.net.ssl.SSLSession
  */
 
 class ProxyTlsHandler(
-    val upstreamAddresses: List<TLSUpstreamAddress>,
+    private val upstreamAddresses: List<TLSUpstreamAddress>,
     connectTimeout: Int,
     val queryCountCallback: ((queryCount: Int) -> Unit)? = null
 ):AbstractTLSDnsHandle(connectTimeout) {
