@@ -29,7 +29,7 @@ import java.io.FileWriter
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-class DnsQueryRepository(val dnsQueryDao: DnsQueryDao) {
+class DnsQueryRepository(private val dnsQueryDao: DnsQueryDao) {
 
     fun updateAsync(dnsQuery: DnsQuery): Job {
         return GlobalScope.launch {

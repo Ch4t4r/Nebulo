@@ -67,8 +67,7 @@ class ConfigureActivity : BaseActivity() {
         if (intent != null && intent.extras != null) {
             val settings = intent.extras!!.getBundle(TaskerHelper.EXTRAS_BUNDLE_KEY)
             if (settings != null) {
-                val action = settings.getString(TaskerHelper.DATA_KEY_ACTION, "start")
-                when (action) {
+                when (settings.getString(TaskerHelper.DATA_KEY_ACTION, "start")) {
                     "stop" -> {
                         actionType.setSelection(1)
                     }

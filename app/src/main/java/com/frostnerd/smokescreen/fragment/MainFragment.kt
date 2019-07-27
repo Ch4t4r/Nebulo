@@ -138,7 +138,7 @@ class MainFragment : Fragment() {
         if (vpnStateReceiver != null) requireContext().unregisterLocalReceiver(vpnStateReceiver!!)
     }
 
-    fun startVpn() {
+    private fun startVpn() {
         val prepare = VpnService.prepare(requireContext()).apply {
             this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         }

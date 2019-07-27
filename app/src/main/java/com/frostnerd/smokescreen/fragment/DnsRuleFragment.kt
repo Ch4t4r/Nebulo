@@ -591,7 +591,7 @@ class DnsRuleFragment : Fragment() {
             return getDefaultHostSources(versionStart..Integer.MAX_VALUE)
         }
 
-        fun getDefaultHostSources(versionRange:IntRange): List<HostSource> {
+        private fun getDefaultHostSources(versionRange:IntRange): List<HostSource> {
             if(versionRange.first > latestSourcesVersion) return emptyList()
             return defaultHostSources.filter {
                 it.key in versionRange

@@ -56,7 +56,6 @@
     <string name="dialog_changelog_infotext">En son açtığınızdan beri uygulama güncellendi. Aşağıdaki listede değişiklikleri görebilirsiniz. Aşağıdaki kutuyu işaretleyin, gelecekte bu mesajı görmeyeceksiniz.</string>
     <string name="dialog_changelog_dont_show_again">Tekrar gösterme</string>
 
-    <string name="dialog_about_changelog">Değişiklikler</string>
     <string name="dialog_about_licenses">Lisanslar</string>
 
     <string name="dialog_query_export_title">Sorgular dışa aktarılıyor…</string>
@@ -64,7 +63,6 @@
 
     <string name="dialog_pin_message">Lütfen PIN’inizi girin.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Günlüğe kaydetmeyi etkinleştirmek ister misiniz\? Kayıtlar istatistik bilgileri, hata ayıklama bilgilerini ve uygulamadaki eylemleri içerir. Oluşturduğunuz günlükler siz yapmazsanız paylaşılmaz.</string>
 

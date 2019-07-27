@@ -45,6 +45,7 @@ android {
     }
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        debug.assets.srcDirs += files("$projectDir/schemas".toString())
     }
     buildTypes {
         release {
@@ -81,6 +82,11 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/library_release.kotlin_module'
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -123,6 +129,7 @@ dependencies {
     leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-3'
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.robolectric:robolectric:4.3"
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
@@ -98,7 +97,7 @@ class MainActivity : NavigationDrawerActivity() {
         getPreferences().totalAppLaunches += 1
         if(getPreferences().totalAppLaunches >= 3 && getPreferences().shouldShowCrashReportingConsentDialog()) {
             CrashReportingEnableDialog(this, onConsentGiven = {
-                val bar = Snackbar.make(findViewById<View>(android.R.id.content), R.string.crashreporting_thankyou, Snackbar.LENGTH_INDEFINITE)
+                val bar = Snackbar.make(findViewById(android.R.id.content), R.string.crashreporting_thankyou, Snackbar.LENGTH_INDEFINITE)
                     bar.setAction(R.string.crashreporting_thankyou_gotit) {
                         bar.dismiss()
                     }.show()
@@ -220,10 +219,6 @@ class MainActivity : NavigationDrawerActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     override fun onBackPressed() {
         val fragment = currentFragment
         if (fragment != null && fragment is BackpressFragment) {
@@ -238,7 +233,7 @@ class MainActivity : NavigationDrawerActivity() {
         val openStore = {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
-            } catch (e: android.content.ActivityNotFoundException) {
+            } catch (e: ActivityNotFoundException) {
                 try {
                     startActivity(
                         Intent(

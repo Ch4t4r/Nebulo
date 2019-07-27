@@ -3,7 +3,6 @@ package com.frostnerd.smokescreen.service
 import android.app.IntentService
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -15,9 +14,6 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import leakcanary.LeakSentry
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter

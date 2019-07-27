@@ -55,7 +55,6 @@
     <string name="dialog_changelog_infotext">Обнаружена новая версия приложения. Список изменений вы можете увидеть ниже.</string>
     <string name="dialog_changelog_dont_show_again">Не показывать это уведомление в дальнейшем</string>
 
-    <string name="dialog_about_changelog">Список изменений</string>
     <string name="dialog_about_licenses">Список лицензий</string>
 
     <string name="dialog_query_export_title">Экспорт DNS запросов…</string>
@@ -63,7 +62,6 @@
 
     <string name="dialog_pin_message">Введите новый PIN.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Включить логирование\? Лог будет включать в себя статистическую информацию, данные для отладки и действия в приложении. Сформированные логи хранятся локально.</string>
 

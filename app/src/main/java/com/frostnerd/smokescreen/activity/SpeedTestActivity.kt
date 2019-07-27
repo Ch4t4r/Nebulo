@@ -172,16 +172,16 @@ class SpeedTestActivity : BaseActivity() {
             runOnUiThread {
                 startTest.text = "0/${testsLeft.size}"
             }
-            testsLeft.forEach {
+            testsLeft.forEach { pendingTest ->
                 if(testJob?.isCancelled == false) {
-                    it.started = true
-                    log("Running SpeedTest for ${it.server.name}")
-                    val res = DnsSpeedTest(it.server, 500, 750) { line ->
+                    pendingTest.started = true
+                    log("Running SpeedTest for ${pendingTest.server.name}")
+                    val res = DnsSpeedTest(pendingTest.server, 500, 750) { line ->
                         log(line)
                     }.runTest(3)
 
-                    if (res != null) it.latency = res
-                    else it.error = true
+                    if (res != null) pendingTest.latency = res
+                    else pendingTest.error = true
 
                     testResults!!.sortBy {
                         it.latency ?: Integer.MAX_VALUE

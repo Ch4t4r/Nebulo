@@ -25,10 +25,10 @@ import com.frostnerd.cacheadapter.DataSource
  */
 
 class LiveDataSource<T>(
-    val lifecycleOwner: LifecycleOwner,
-    val liveData: LiveData<List<T>>,
-    val reverse: Boolean = false,
-    val onInsertAtFront:(() -> Unit)? = null
+    private val lifecycleOwner: LifecycleOwner,
+    private val liveData: LiveData<List<T>>,
+    private val reverse: Boolean = false,
+    private val onInsertAtFront:(() -> Unit)? = null
 ) : DataSource<T>() {
     private var data = emptyList<T>()
     fun currentSize() = data.size

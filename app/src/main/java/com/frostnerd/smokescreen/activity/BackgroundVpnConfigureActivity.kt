@@ -44,7 +44,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
 
     companion object {
         const val extraKeyServerConfig = "server_config"
-        const val extraKeyServerType = "config_type"
+        private const val extraKeyServerType = "config_type"
         private const val VPN_REQUEST_CODE = 1
 
         fun prepareVpn(context: Context, serverInfo:DnsServerInformation<*>? = null) {
@@ -93,7 +93,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
             return null
         }
 
-        fun getServerInfoType(serverInfo: DnsServerInformation<*>): String {
+        private fun getServerInfoType(serverInfo: DnsServerInformation<*>): String {
             return when {
                 serverInfo is HttpsDnsServerInformation -> "https"
                 serverInfo.servers.any {
@@ -103,7 +103,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
             }
         }
 
-        fun serverInfoFromJson(json:String, type:String):DnsServerInformation<*> {
+        private fun serverInfoFromJson(json:String, type:String):DnsServerInformation<*> {
             TLSUpstreamAddress
             HttpsUpstreamAddress
             return when(type) {
@@ -114,7 +114,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
     }
 }
 
-    var requestTime: Long = -1
+    private var requestTime: Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.dialogStyle)

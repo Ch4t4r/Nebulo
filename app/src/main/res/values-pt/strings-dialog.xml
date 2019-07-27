@@ -54,7 +54,6 @@
     <string name="dialog_changelog_infotext">O aplicativo foi atualizado desde a última vez que você o abriu. Na lista a seguir você pode ver o histórico de mudanças. Marque a caixa abaixo e você não verá esta mensagem no futuro.</string>
     <string name="dialog_changelog_dont_show_again">Não mostrar de novo</string>
 
-    <string name="dialog_about_changelog">Histórico de mudanças</string>
     <string name="dialog_about_licenses">Licenças</string>
 
     <string name="dialog_query_export_title">Exportando consultas…</string>
@@ -62,7 +61,6 @@
 
     <string name="dialog_pin_message">Por favor, forneça seu PIN.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Você quer habilitar o registro\? Os registros contêm informações estatísticas, informações de depuração e ações no aplicativo. Os registros gerados não são compartilhados, a menos que você mesmo faça isso.</string>
 

@@ -94,7 +94,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         )
     }
 
-    fun findPreference(key:String): Preference {
+    private fun findPreference(key:String): Preference {
         return super.findPreference<Preference>(key)!!
     }
 
@@ -434,10 +434,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
             requireActivity(),
             requireContext().getPreferences().userBypassPackages,
             defaultChosenUnselectablePackages = requireContext().getPreferences().defaultBypassPackages,
-            infoText = getString(
-                R.string.dialog_excludedapps_infotext,
-                requireContext().getPreferences().defaultBypassPackages.size
-            ),
+            infoText =  requireContext().getPreferences().defaultBypassPackages.size.let {
+                resources.getQuantityString(
+                    R.plurals.dialog_excludedapps_infotext,
+                    it,
+                    it
+                )
+            },
             blackList = requireContext().getPreferences().isBypassBlacklist
         ) { selected, isBlacklist ->
             requireContext().getPreferences().isBypassBlacklist = isBlacklist

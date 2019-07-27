@@ -6,9 +6,6 @@
     <string name="menu_create_shortcut">Erstelle eine Server Verknüpfung</string>
     <string name="menu_rate">Bewerten</string>
     <string name="menu_about">Über diese App</string>
-    
-    <string name="menu_cardview_title">Echtzeit Statistik</string>
-
 <string name="menu_show_on_fdroid">Auf F-Droid anzeigen</string>
     
     </resources>

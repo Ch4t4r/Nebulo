@@ -38,8 +38,8 @@ import kotlin.random.Random
  */
 
 class DnsSpeedTest(val server: DnsServerInformation<*>,
-                   val connectTimeout: Int = 2500,
-                   val readTimeout:Int = 1500,
+                   private val connectTimeout: Int = 2500,
+                   private val readTimeout:Int = 1500,
                    val log:(line:String) -> Unit) {
     private val httpClient by lazy {
         OkHttpClient.Builder()
@@ -128,7 +128,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
 
     private fun testTls(address: TLSUpstreamAddress): Int? {
         val addr =
-            address.addressCreator.resolveOrGetResultOrNull(retryIfError = true, runResolveNow = true) ?: kotlin.run {
+            address.addressCreator.resolveOrGetResultOrNull(retryIfError = true, runResolveNow = true) ?: run {
                 log("DoT test failed once for ${server.name}: Address failed to resolve ($address)")
                 return null
             }

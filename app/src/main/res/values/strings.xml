@@ -4,7 +4,6 @@
     <string name="activity_label_import_queries">Import queries</string>
     <string name="activity_label_import_servers">Import server(s)</string>
     <string name="activity_label_speed_test">Server speed comparison</string>
-    <string name="activity_label_dns_rules">Dns rules</string>
 
     <string name="activity_label_enable_logging">Export logs/Enable logging</string>
 
@@ -63,7 +62,6 @@
     <string name="about_help_translating">Help translating</string>
 
     <string name="window_speedtest_runtest">Start the test</string>
-    <string name="window_speedtest_useserver">Use this server</string>
 
     <string name="error_no_webbrowser_installed">You don\'t have any app installed to view this link.</string>
 
