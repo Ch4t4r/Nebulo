@@ -21,8 +21,11 @@
 
     <string name="dialog_appchoosal_showsystemapps">Show system apps</string>
     <string name="dialog_appchoosal_whitelist">Only use DoH/DoT in selected apps</string>
-
-    <string name="dialog_excludedapps_infotext">%1d apps are excluded by default and cannot be de-selected</string>
+    
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">%1d app is excluded by default and cannot be de-selected</item>
+        <item quantity="other">%1d apps are excluded by default and cannot be de-selected</item>
+    </plurals>
 
     <string name="dialog_serverimport_title">Import of %1d server(s)</string>
     <string name="dialog_serverimport_done">Done</string>
