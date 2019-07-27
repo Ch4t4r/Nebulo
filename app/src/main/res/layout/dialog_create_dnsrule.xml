@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:paddingLeft="@dimen/dialog_horizontal_margin"
               android:paddingRight="@dimen/dialog_horizontal_margin"
@@ -36,6 +37,7 @@
                 android:hint="@string/dialog_newdnsrule_hint_ipv4address"
                 android:id="@+id/ipv4Address"
                 android:text="0.0.0.0"
+                tools:ignore="HardcodedText"
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,6 +53,7 @@
                 android:hint="@string/dialog_newdnsrule_hint_ipv6address"
                 android:id="@+id/ipv6Address"
                 android:text="::1"
+                tools:ignore="HardcodedText"
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 

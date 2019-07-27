@@ -115,7 +115,7 @@
                         android:pathPattern=".*\\.nebuloserver"
                         tools:ignore="AppLinkUrlError"/>
             </intent-filter>
-            <intent-filter android:autoVerify="true">
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -226,7 +226,8 @@
         <receiver
                 android:name=".tasker.FireReceiver"
                 android:exported="true"
-                android:process=":background">
+                android:process=":background"
+                tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING"/>
             </intent-filter>
