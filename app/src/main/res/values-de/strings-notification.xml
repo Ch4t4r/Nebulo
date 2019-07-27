@@ -41,7 +41,7 @@
     <string name="notification_ruleimport_secondarymessage">Bereite Import vor…</string>
 
     <string name="notification_ruleimportfinished_title">DNS Regel Import fertig</string>
-    <string name="notification_ruleimportfinished_message">%1d Regeln wurden importiert.</string>
+    <string name="notification_ruleimportfinished_message">%1d Regeln wurden importiert (%2$d Duplikate ausgelassen)</string>
 <string name="notification_ruleimport_tertiarymessage">Beende Import…</string>
 
     <string name="notification_ruleexport_title">Dns Regel Export</string>
@@ -55,4 +55,7 @@
 
     <string name="notification_pin_title">PIN Eingabe erforderlich</string>
     <string name="notification_pin_message">Die PIN wird benötigt, um diese Aktion durchzuführen. Klicke hier um die Aktion zu bestätigen.</string>
+<string name="notification_service_killed_title">Informationen über Batterieoptimierungen</string>
+    <string name="notification_service_killed_message">Es scheint, dass die App vor kurzem vom System gestoppt wurde. Klicke hier, um mehr zu erfahren.</string>
+    <string name="notification_service_killed_ignore">Ignorieren</string>
 </resources>

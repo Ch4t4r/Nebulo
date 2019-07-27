@@ -70,4 +70,5 @@
     <string name="error_invalid_servername">Bitte gebe einen Namen an.</string>
 
     <string name="window_dnsrules_hostalreadyexists">Es existiert bereits eine Regel für diesen Host.</string>
+    <string name="window_dnsrules_subtitle">%1d Regeln</string>
     </resources>

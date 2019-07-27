@@ -146,4 +146,11 @@
     <string name="dialog_editdelete_title">O que você quer fazer\?</string>
     <string name="dialog_editdelete_edit">Editar</string>
     <string name="dialog_editdelete_delete">Excluir</string>
+<string name="dialog_servicekilled_message">O aplicativo detectou que não foi finalizado corretamente na última vez em que estava ativo. Isso fortemente indica que seu sistema optou por forçar a parada sem que o aplicativo pudesse se reiniciar.
+\n
+\nNa maioria dos dispositivos, você tem algumas opções para impedir ou ao menos atrasar o sistema de parar o aplicativo.
+\nPor exemplo, você pode desativar a otimização de bateria para o aplicativo nas configurações do sistema ou evitar excluí-lo da lista de aplicativos recentes.
+\n
+\nSe você optar por ignorar isso, você não verá esta caixa de diálogo novamente. Você pode ler mais e obter dicas para resolver isso com o botão abaixo (abre um site externo em seu navegador).</string>
+    <string name="dialog_servicekilled_more_info">Mais informações</string>
 </resources>

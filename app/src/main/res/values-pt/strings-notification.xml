@@ -46,7 +46,7 @@
     <string name="notification_ruleimport_tertiarymessage">Finalizando a importação…</string>
 
     <string name="notification_ruleimportfinished_title">Importação de regras de DNS concluída</string>
-    <string name="notification_ruleimportfinished_message">%1d regras foram importadas.</string>
+    <string name="notification_ruleimportfinished_message">%1d regras foram importadas (%2$d duplicatas omitidas)</string>
 
     <string name="notification_ruleexport_title">Exportação de regras de DNS</string>
     <string name="notification_ruleexport_message">Exportando regras (%1d/%2d)</string>
@@ -57,4 +57,7 @@
 
     <string name="notification_pin_title">Código PIN requerido</string>
     <string name="notification_pin_message">Seu código PIN é necessário para realizar essa ação. Clique aqui para confirmá-la.</string>
+<string name="notification_service_killed_title">Informações sobre otimização de bateria</string>
+    <string name="notification_service_killed_message">Parece que o aplicativo foi recentemente interrompido pelo sistema. Clique aqui para mais informações.</string>
+    <string name="notification_service_killed_ignore">Ignorar</string>
 </resources>
