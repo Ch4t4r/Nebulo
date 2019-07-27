@@ -29,7 +29,7 @@
     <string name="notification_ruleimport_secondarymessage">Importeren voorbereiden …</string>
 
     <string name="notification_ruleimportfinished_title">DNS-regels importeren voltooid</string>
-    <string name="notification_ruleimportfinished_message">%1d regels zijn geïmporteerd.</string>
+    <string name="notification_ruleimportfinished_message">%1d regels zijn geïmporteerd (%2$d duplicaten weggelaten)</string>
 <string name="notification_ruleimport_tertiarymessage">Importeren voltooien…</string>
 
     <string name="notification_ruleexport_title">Dns-regels exporteren</string>
@@ -43,4 +43,7 @@
 
     <string name="notification_pin_title">PIN-code vereist</string>
     <string name="notification_pin_message">Uw pincode is nodig om die actie uit te voeren. Klik hier om te bevestigen.</string>
+<string name="notification_service_killed_title">Informatie over batterij optimalisatie</string>
+    <string name="notification_service_killed_message">Het lijkt erop dat de app onlangs is gestopt door het systeem. Klik hier voor meer informatie.</string>
+    <string name="notification_service_killed_ignore">Negeren</string>
 </resources>

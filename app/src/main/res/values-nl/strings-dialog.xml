@@ -145,4 +145,11 @@
     <string name="dialog_editdelete_title">Wat wil je doen\?</string>
     <string name="dialog_editdelete_edit">Bewerken</string>
     <string name="dialog_editdelete_delete">Verwijderen</string>
+<string name="dialog_servicekilled_message">De app ontdekte dat hij de laatste keer dat hij actief was niet juist afgesloten was. Dit geeft sterk aan dat uw systeem ervoor heeft gekozen om de app geforceerd te stoppen zonder dat de app zichzelf kan herstarten.
+\n
+\nOp de meeste apparaten heb je een aantal opties om te voorkomen dat het systeem de app stopt.
+\nJe kunt bijvoorbeeld de batterijoptimalisatie voor de app uitschakelen in de systeeminstellingen of voorkomen dat de app uit de lijst met recente apps wordt gewist.
+\n
+\nAls je ervoor kiest om dit te negeren dan zie je dit dialoogvenster niet meer terug. U kunt meer lezen en tips krijgen om dit op te lossen met de onderstaande knop (opent een externe website in uw browser).</string>
+    <string name="dialog_servicekilled_more_info">Meer informatie</string>
 </resources>
