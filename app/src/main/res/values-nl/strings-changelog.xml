@@ -81,4 +81,10 @@
     <string name="changelog_build_41_6">Host bronnen kunnen nu worden bewerkt door erop te klikken</string>
     <string name="changelog_build_41_7">De dns-regels openen nu niet meer in een apart venster</string>
     <string name="changelog_build_41_8">Enkele crashes opgelost</string>
+    <string name="changelog_build_43_1">De serverinformatie in het zijbalk menu toont nu de huidige latentie</string>
+    <string name="changelog_build_43_2">De snelheidstest toont nu alleen servers die het huidige netwerk ondersteunen</string>
+    <string name="changelog_build_43_3">Probleem opgelost waarbij dnsmasq host bronnen niet geïmporteerd werden</string>
+    <string name="changelog_build_43_4">De dns-regels weergave toont nu het totale aantal regels</string>
+    <string name="changelog_build_43_5">Er wordt nu een dialoogvenster weergegeven wanneer het systeem de app afsluit, met informatie over mogelijke oplossingen</string>
+    <string name="changelog_build_43_6">Een paar kleine foutjes opgelost</string>
     </resources>
