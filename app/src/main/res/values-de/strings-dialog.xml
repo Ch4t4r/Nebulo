@@ -56,7 +56,6 @@
     <string name="dialog_changelog_infotext">Die App wurde seitdem du sie zuletzt geöffnet hast geupdated. In the folgenden Liste siehst du die Änderungen. Klicke die Box unten an, um diesen Dialog in Zukunft nicht mehr zu sehen.</string>
     <string name="dialog_changelog_dont_show_again">Nicht mehr zeigen</string>
 
-    <string name="dialog_about_changelog">Änderungsprotokoll</string>
     <string name="dialog_about_licenses">Lizenzen</string>
 
     <string name="dialog_query_export_title">Exportiere Anfragen…</string>
@@ -64,7 +63,6 @@
 
     <string name="dialog_pin_message">Bitte gebe deine PIN an.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Möchtest du die Protokollierung aktivieren\? Die Protokolle enthalten statistische, sowie Testinformationen und ausgeführte Aktionen in der App. Die Protokolle werden niemals automatisch verschickt.</string>
 

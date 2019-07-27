@@ -6,7 +6,4 @@
     <string name="menu_rate">Avaliar</string>
     <string name="menu_about">Sobre este aplicativo</string>
     <string name="menu_show_on_fdroid">Mostrar no F-Droid</string>
-    
-    <string name="menu_cardview_title">Estatísticas em tempo real</string>
-
 </resources>

@@ -54,7 +54,6 @@
     <string name="dialog_changelog_infotext">Apl ini telah diperbarui sejak Anda terakhir kali membukanya. Dalam daftar berikut, Anda dapat melihat log perubahan. Centang kotak di bawah dan Anda tidak akan melihat pesan ini di masa mendatang.</string>
     <string name="dialog_changelog_dont_show_again">Jangan perlihatkan lagi</string>
 
-    <string name="dialog_about_changelog">Log perubahan</string>
     <string name="dialog_about_licenses">Lisensi</string>
 
     <string name="dialog_query_export_title">Mengekspor kueri…</string>
@@ -62,7 +61,6 @@
 
     <string name="dialog_pin_message">Harap berikan PIN Anda.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Apakah Anda ingin mengaktifkan pencatatan\? Log berisi informasi statistik, informasi debug, dan tindakan di apl. Log yang dibuat tidak akan dibagikan kecuali Anda melakukannya sendiri.</string>
 

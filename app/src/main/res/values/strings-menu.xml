@@ -8,7 +8,4 @@
     <string name="menu_rate">Rate</string>
     <string name="menu_about">About this app</string>
     <string name="menu_show_on_fdroid">Show on F-Droid</string>
-    
-    <string name="menu_cardview_title">Realtime stats</string>
-
 </resources>

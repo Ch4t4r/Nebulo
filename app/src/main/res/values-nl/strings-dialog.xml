@@ -54,7 +54,6 @@
     <string name="dialog_changelog_infotext">De app is bijgewerkt sinds je hem voor het laatst hebt geopend. In de volgende lijst ziet u de changelog. Vink het vak hieronder aan en je ziet dit bericht in de toekomst niet meer.</string>
     <string name="dialog_changelog_dont_show_again">Niet meer laten zien</string>
 
-    <string name="dialog_about_changelog">Changelog</string>
     <string name="dialog_about_licenses">licenties</string>
 
     <string name="dialog_query_export_title">Zoekopdrachten exporteren…</string>
@@ -62,7 +61,6 @@
 
     <string name="dialog_pin_message">Geef uw pincode op.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Wilt u loggen inschakelen\? Logbestanden bevatten statistische informatie, foutopsporingsinformatie en acties in de app. Gegenereerde logbestanden worden niet gedeeld tenzij u dit zelf doet.</string>
 

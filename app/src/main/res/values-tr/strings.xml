@@ -53,11 +53,7 @@
 <string name="about_help_translating">Çeviriye yardımcı olun</string>
 
 <string name="activity_label_speed_test">Sunucu hızı karşılaştırması</string>
-    <string name="activity_label_dns_rules">DNS kuralları</string>
-
     <string name="window_speedtest_runtest">Testi başlat</string>
-    <string name="window_speedtest_useserver">Bu sunucuyu kullan</string>
-
     <string name="error_no_webbrowser_installed">Bu bağlantıyı görüntülemek için yüklü herhangi bir uygulama yok.</string>
 
     <string name="button_main_dnsrules">DNS kuralları</string>

@@ -56,7 +56,6 @@
     <string name="dialog_changelog_infotext">The app has been updated since you last opened it. In the following list you can see the changelog. Check the box below and you won\'t see this message in the future.</string>
     <string name="dialog_changelog_dont_show_again">Don\'t show again</string>
 
-    <string name="dialog_about_changelog">Changelog</string>
     <string name="dialog_about_licenses">Licenses</string>
 
     <string name="dialog_query_export_title">Exporting queries…</string>
@@ -64,7 +63,6 @@
 
     <string name="dialog_pin_message">Please provide your PIN.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Do you want to enable logging? Logs contain statistic information, debug information and actions in the app. Generated logs aren\'t shared unless you do so yourself.</string>
 

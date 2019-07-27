@@ -6,7 +6,4 @@
     <string name="menu_rate">Beoordeel</string>
     <string name="menu_about">Over deze app</string>
     <string name="menu_show_on_fdroid">Toon in F-Droid</string>
-    
-    <string name="menu_cardview_title">Realtime statistieken</string>
-
 </resources>

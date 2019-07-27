@@ -2,8 +2,6 @@
 <resources><string name="activity_label_import_queries">Importar consultas</string>
     <string name="activity_label_import_servers">Importar servidor(es)</string>
     <string name="activity_label_speed_test">Comparar velocidade</string>
-    <string name="activity_label_dns_rules">Regras de DNS</string>
-
     <string name="activity_label_enable_logging">Exportar registros/Ativar registro</string>
 
     <string name="all_stop">Parar</string>
@@ -53,8 +51,6 @@
     <string name="about_help_translating">Ajudar a traduzir</string>
 
     <string name="window_speedtest_runtest">Iniciar o teste</string>
-    <string name="window_speedtest_useserver">Usar este servidor</string>
-
     <string name="error_no_webbrowser_installed">Você não tem nenhum aplicativo instalado para visualizar este link.</string>
 
     <string name="button_main_dnsrules">Regras de DNS</string>
