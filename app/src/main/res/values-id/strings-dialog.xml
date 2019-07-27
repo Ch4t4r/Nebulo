@@ -14,9 +14,14 @@
     <string name="dialog_appchoosal_showsystemapps">Tampilkan apl sistem</string>
     <string name="dialog_appchoosal_whitelist">Hanya gunakan DoH/DoT di apl yang dipilih</string>
 
-    <string name="dialog_excludedapps_infotext">%1d apl dikecualikan secara default dan tidak dapat dipilih</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="other">%1d apl dikecualikan secara default dan tidak dapat dipilih</item>
+    </plurals>
 
-    <string name="dialog_serverimport_title">Impor server %1d</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Impor server %1d</item>
+        <item quantity="other">Impor server %1d</item>
+    </plurals>
     <string name="dialog_serverimport_done">Selesai</string>
     <string name="dialog_serverimport_priority">Prioritas %1d</string>
     <string name="dialog_serverimport_experimental">Eksperimental</string>

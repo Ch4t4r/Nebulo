@@ -14,9 +14,13 @@
     <string name="dialog_appchoosal_showsystemapps">システムアプリを表示する</string>
     <string name="dialog_appchoosal_whitelist">選択したアプリでのみDoH / DoTを使用する</string>
 
-    <string name="dialog_excludedapps_infotext">%1dのアプリはデフォルトで除外されており、選択を解除できません</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="other">%1dのアプリはデフォルトで除外されており、選択を解除できません</item>
+    </plurals>
 
-    <string name="dialog_serverimport_title">%1dサーバーのインポート</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="other">Import of %1d servers</item>
+    </plurals>
     <string name="dialog_serverimport_done">完了</string>
     <string name="dialog_serverimport_priority">優先度%1d</string>
     <string name="dialog_serverimport_experimental">実験的</string>

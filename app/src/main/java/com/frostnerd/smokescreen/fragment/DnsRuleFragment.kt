@@ -432,7 +432,7 @@ class DnsRuleFragment : Fragment() {
 
     private fun updateRuleCountTitle() {
         activity?.runOnUiThread {
-            (activity as AppCompatActivity?)?.supportActionBar?.subtitle = getString(R.string.window_dnsrules_subtitle, totalRuleCount)
+            (activity as AppCompatActivity?)?.supportActionBar?.subtitle = resources.getQuantityString(R.plurals.window_dnsrules_subtitle, totalRuleCount!!.toInt(), totalRuleCount)
         }
     }
 

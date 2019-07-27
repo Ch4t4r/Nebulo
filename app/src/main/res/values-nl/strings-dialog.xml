@@ -14,9 +14,15 @@
     <string name="dialog_appchoosal_showsystemapps">Systeem-apps weergeven</string>
     <string name="dialog_appchoosal_whitelist">Gebruik alleen DoH / DoT in geselecteerde apps</string>
 
-    <string name="dialog_excludedapps_infotext">%1d apps zijn standaard uitgesloten en kunnen niet worden gedeselecteerd</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">%%1d app is standaard uitgesloten en kunnen niet worden gedeselecteerd</item>
+        <item quantity="other">%1d apps zijn standaard uitgesloten en kunnen niet worden gedeselecteerd</item>
+    </plurals>
 
-    <string name="dialog_serverimport_title">Import van %1d server (s)</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Import van %1d server</item>
+        <item quantity="other">Import van %1d servers</item>
+    </plurals>
     <string name="dialog_serverimport_done">Klaar</string>
     <string name="dialog_serverimport_priority">Prioriteit %1d</string>
     <string name="dialog_serverimport_experimental">Experimenteel</string>

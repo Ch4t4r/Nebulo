@@ -68,9 +68,12 @@
     <string name="button_main_dnsrules">DNS rules</string>
 
     <string name="window_dnsrules_customhosts">Custom hosts</string>
-    <string name="window_dnsrules_subtitle">%1d rules</string>
+    <plurals name="window_dnsrules_subtitle">
+        <item quantity="one">%1d rule</item>
+        <item quantity="other">%1d rules</item>
+    </plurals>
     <string name="window_dnsrules_hostalreadyexists">There already is a rule for this host.</string>
     <string name="window_dnsrules_customhosts_message">Define all your custom hosts here.</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Rules from this source: %1d (%2$d duplicates not in use)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">Rules from this source: %1d (%2$d duplicates not in use)</string>
 </resources>

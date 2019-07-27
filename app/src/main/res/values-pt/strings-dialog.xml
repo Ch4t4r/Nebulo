@@ -14,9 +14,15 @@
     <string name="dialog_appchoosal_showsystemapps">Mostrar aplicativos do sistema</string>
     <string name="dialog_appchoosal_whitelist">Apenas use DoH/DoT em aplicativos selecionados</string>
 
-    <string name="dialog_excludedapps_infotext">%1d aplicativos são excluídos por padrão e não podem ser desmarcados</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">%1d aplicação é excluídos por padrão e não podem ser desmarcados</item>
+        <item quantity="other">%1d aplicativos são excluídos por padrão e não podem ser desmarcados</item>
+    </plurals>
 
-    <string name="dialog_serverimport_title">Importação de %1d servidor(es)</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Importação de %1d servidor</item>
+        <item quantity="other">Importação de %1d servidores</item>
+    </plurals>
     <string name="dialog_serverimport_done">Feito</string>
     <string name="dialog_serverimport_priority">Prioridade %1d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
