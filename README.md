@@ -56,6 +56,8 @@ A list of some extraordinary people who contributed to this project:
  - Turkish translation by Kemal Oktay Aktoğan
  - Russian translation by [bruleto](https://t.me/bruleto)
  - Dutch translation by Bas Koedijk
+ - Portuguese translation by Rafael W. Bohnenberger
+ - Indonesian translation by Gloeyisk
 <br/>
 <br/>
 
