@@ -151,4 +151,9 @@
 \n
 \nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser).</string>
     <string name="dialog_servicekilled_more_info">Mehr Informationen</string>
-</resources>
+<plurals name="dialog_excludedapps_infotext">
+	<item quantity="one">%1d App ist standardmäßig ausgewählt und kann nicht abgewählt werden</item>
+	<item quantity="other">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</item>
+</plurals>
+
+    </resources>
