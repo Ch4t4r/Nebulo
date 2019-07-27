@@ -16,8 +16,6 @@
     <string name="dialog_appchoosal_showsystemapps">Zeige Systemapps</string>
     <string name="dialog_appchoosal_whitelist">Nutze DoH/DoT nur in ausgewählten Apps</string>
 
-    <string name="dialog_excludedapps_infotext">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</string>
-
     <string name="dialog_serverimport_title">Import von %1d Servern</string>
     <string name="dialog_serverimport_done">Fertig</string>
     <string name="dialog_serverimport_priority">Priorität %1d</string>
