@@ -15,9 +15,9 @@
     <string name="dialog_appchoosal_whitelist">Gebruik alleen DoH / DoT in geselecteerde apps</string>
 
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%%1d app is standaard uitgesloten en kunnen niet worden gedeselecteerd</item>
-        <item quantity="other">%1d apps zijn standaard uitgesloten en kunnen niet worden gedeselecteerd</item>
-    </plurals>
+	<item quantity="one">%1d app is standaard uitgesloten en kan niet worden gedeselecteerd</item>
+	<item quantity="other">%1d apps zijn standaard uitgesloten en kunnen niet worden geselecteerd</item>
+</plurals>
 
     <plurals name="dialog_serverimport_title">
         <item quantity="one">Import van %1d server</item>
