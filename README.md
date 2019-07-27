@@ -70,6 +70,10 @@ This work is licensed under the GNU GPLv3 License. Different license-agreements 
 
 Copyright (C) 2019   Daniel Wolf
 
+<br>
+<br>
+Please be aware that I'm not going to tolerate exact copies of this app on the Play Store. This project took a lot of work, not only from me, but many alpha/beta testers and translators. Copying is - per the license - generally allowed, but uploading a nearly identical version to the Play Store would be impersonation which I'd go after.
+
 # Third-party content
 This work contains third-party content, namely:
 - [sentry-java](https://github.com/getsentry/sentry-java) for crash-reporting
