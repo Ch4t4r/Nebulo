@@ -139,6 +139,7 @@
     <string name="dialog_newdnsrule_host_invalid">Please provide a valid host</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Please provide a valid IPv4 address</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Please provide a valid IPv6 address</string>
+    <string name="dialog_newdnsrule_wildcard_info">The host supports wildcards. Use star (*) for any amount of characters, numbers and allowed special characters except period (.). Use two stars (**) to include the period (.).</string>
 
     <string name="dialog_exportdnsrules_title">Export dns rules</string>
     <string name="dialog_exportdnsrules_export_user_rules">Export custom host dns rules</string>

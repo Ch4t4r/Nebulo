@@ -91,12 +91,21 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                         Record.TYPE.AAAA, Record.TYPE.ANY -> view.ipv6Address.text.toString()
                         else -> null
                     }
+                    var isWildcard = false
+                    val host = view.host.text.toString().let {
+                        if(it.contains("*")) {
+                            isWildcard = true
+                            it.replace("**", ".*").replace("*", "[^.]*")
+                        } else it
+                    }
+
                     val newRule = dnsRule?.copy(
                         type = type,
-                        host = view.host.text.toString(),
+                        host = host,
                         target = primaryTarget,
-                        ipv6Target = secondaryTarget
-                    ) ?: DnsRule(type, view.host.text.toString(), primaryTarget, secondaryTarget)
+                        ipv6Target = secondaryTarget,
+                        isWildcard = isWildcard
+                    ) ?: DnsRule(type, host, primaryTarget, secondaryTarget, isWildcard = isWildcard)
                     onRuleCreated(
                         newRule
                     )
