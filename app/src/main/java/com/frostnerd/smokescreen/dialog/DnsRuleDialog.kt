@@ -110,7 +110,7 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                         if(it.contains("*")) {
                             isWildcard = true
                             it.replace("**", "%%").replace("*", "%")
-                        } else it
+                        } else it.replace(Regex("^www\\."), "")
                     }
 
                     val newRule = dnsRule?.copy(
