@@ -8,6 +8,7 @@ import android.net.Uri
 import android.net.VpnService
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -19,14 +20,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
-import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.registerLocalReceiver
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
-import com.frostnerd.smokescreen.unregisterLocalReceiver
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -79,6 +77,30 @@ class MainFragment : Fragment() {
                 proxyStarting = true
             }
             updateVpnIndicators()
+        }
+        startButton.setOnTouchListener { _, event ->
+            if(proxyRunning || proxyStarting) {
+                false
+            } else {
+                if(event.flags and MotionEvent.FLAG_WINDOW_IS_OBSCURED != 0) {
+                    if(event.action == MotionEvent.ACTION_UP) {
+                        if(VpnService.prepare(context!!) != null) {
+                            showInfoTextDialog(context!!,
+                                getString(R.string.dialog_overlaydetected_title),
+                                getString(R.string.dialog_overlaydetected_message),
+                                positiveButton = null,
+                                negativeButton = null,
+                                neutralButton = getString(android.R.string.ok) to { dialog, _ ->
+                                    dialog.dismiss()
+                                    startVpn()
+                                    proxyStarting = true
+                                }
+                            )
+                            true
+                        } else false
+                    } else false
+                }else false
+            }
         }
         speedTest.setOnClickListener {
             startActivity(Intent(context!!, SpeedTestActivity::class.java))
