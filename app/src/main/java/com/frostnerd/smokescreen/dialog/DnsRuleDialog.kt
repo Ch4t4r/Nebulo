@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.dialog_create_dnsrule.view.*
 import org.minidns.record.Record
 import java.net.Inet4Address
 import java.net.Inet6Address
+import java.util.regex.Matcher
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -33,6 +34,19 @@ import java.net.Inet6Address
 class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (DnsRule) -> Unit) :
     AlertDialog(context, context.getPreferences().theme.dialogStyle) {
     private var isWhitelist = false
+    companion object {
+        private val matchers = mutableMapOf<String, Matcher>()
+
+        fun printableHost(host:String): String {
+            return host.replace("%%", "**").replace("%", "*")
+        }
+
+        fun databaseHostToMatcher(host:String):Matcher {
+            return matchers.getOrPut(host, {
+                host.replace("%%", ".*").replace("%", "[^.]*").toPattern().matcher("")
+            })
+        }
+    }
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_create_dnsrule, null, false)
@@ -95,7 +109,7 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                     val host = view.host.text.toString().let {
                         if(it.contains("*")) {
                             isWildcard = true
-                            it.replace("**", ".*").replace("*", "[^.]*")
+                            it.replace("**", "%%").replace("*", "%")
                         } else it
                     }
 
@@ -124,12 +138,13 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
             if (dnsRule != null) {
                 if (dnsRule.isWhitelistRule()) {
                     isWhitelist = true
+                    view.host.setText(printableHost(dnsRule.host))
                     getButton(DialogInterface.BUTTON_NEUTRAL).text =
                         context.getString(R.string.dialog_newdnsrule_specify_address)
                     view.ipv4Til.visibility = View.GONE
                     view.ipv6Til.visibility = View.GONE
                 } else {
-                    view.host.setText(dnsRule.host)
+                    view.host.setText(printableHost(dnsRule.host))
                     when {
                         dnsRule.type == Record.TYPE.A -> {
                             view.ipv4Address.setText(dnsRule.target)
