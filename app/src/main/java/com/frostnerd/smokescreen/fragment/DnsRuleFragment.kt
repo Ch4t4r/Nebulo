@@ -552,7 +552,7 @@ class DnsRuleFragment : Fragment() {
 
         fun display(rule:DnsRule) {
             dnsRule = rule
-            text.text = rule.host
+            text.text = DnsRuleDialog.printableHost(rule.host)
             whitelistIndicator.visibility = if(rule.isWhitelistRule()) View.VISIBLE else View.GONE
         }
         override fun destroy() {}

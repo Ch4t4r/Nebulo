@@ -57,4 +57,10 @@
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:alpha="0.8"
+            android:text="@string/dialog_newdnsrule_wildcard_info"
+            android:layout_height="wrap_content"/>
+
 </LinearLayout>
