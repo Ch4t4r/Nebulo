@@ -89,6 +89,12 @@ val MIGRATION_8_9 = migration(8, 9) {
     it.execSQL("ALTER TABLE `HostSource` ADD COLUMN `ruleCount` INTEGER")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 8 to 9 completed")
 }
+@VisibleForTesting
+val MIGRATION_9_10 = migration(9, 10) {
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 9 to 10")
+    it.execSQL("ALTER TABLE `DnsRule` ADD COLUMN `isWildcard` INTEGER NOT NULL DEFAULT 0")
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 9 to 10 completed")
+}
 
 
 fun Context.getDatabase(): AppDatabase {
