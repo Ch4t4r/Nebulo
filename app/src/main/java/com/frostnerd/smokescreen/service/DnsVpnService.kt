@@ -36,6 +36,7 @@ import com.frostnerd.smokescreen.util.proxy.ProxyBypassHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyHttpsHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyTlsHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
+import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import kotlinx.coroutines.*
@@ -783,6 +784,10 @@ class DnsVpnService : VpnService(), Runnable {
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(2, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger() {
+            override fun failedRequest(question: FutureAnswer, reason: Throwable?) {
+                if(reason != null) log("A request failed: " + Logger.stacktraceToString(reason), "VPN-LIBRARY")
+            }
+
             val advancedLogging = getPreferences().advancedLogging
             override fun logException(ex: Exception, terminal: Boolean, level: Level) {
                 if(terminal) log(ex)
