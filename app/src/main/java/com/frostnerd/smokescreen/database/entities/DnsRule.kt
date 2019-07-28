@@ -38,7 +38,8 @@ data class DnsRule(
     val host: String,
     val target: String,
     val ipv6Target:String? = null,
-    val importedFrom: Long? = null
+    val importedFrom: Long? = null,
+    var isWildcard:Boolean = false
 ) {
     @PrimaryKey(autoGenerate = true) var id: Long = 0
 

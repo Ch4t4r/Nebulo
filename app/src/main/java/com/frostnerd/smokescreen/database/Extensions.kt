@@ -89,13 +89,19 @@ val MIGRATION_8_9 = migration(8, 9) {
     it.execSQL("ALTER TABLE `HostSource` ADD COLUMN `ruleCount` INTEGER")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 8 to 9 completed")
 }
+@VisibleForTesting
+val MIGRATION_9_10 = migration(9, 10) {
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 9 to 10")
+    it.execSQL("ALTER TABLE `DnsRule` ADD COLUMN `isWildcard` INTEGER NOT NULL DEFAULT 0")
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 9 to 10 completed")
+}
 
 
 fun Context.getDatabase(): AppDatabase {
     if (INSTANCE == null) {
         INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
             .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
+            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10)
             .build()
     }
     return INSTANCE!!
