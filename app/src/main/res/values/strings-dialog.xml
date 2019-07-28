@@ -126,6 +126,7 @@
     <string name="dialog_newhostsource_title">New rule source</string>
     <string name="dialog_newhostsource_edit_title">New rule source</string>
     <string name="dialog_newhostsource_name">Name</string>
+    <string name="dialog_newhostsource_wildcard_info">You can use host lists which make use of wildcard domains.</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_choose_file">Choose file</string>
     <string name="dialog_newhostsource_use_as_whitelist">Use as whitelist</string>

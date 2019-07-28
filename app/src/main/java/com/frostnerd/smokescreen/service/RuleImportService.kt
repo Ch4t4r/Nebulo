@@ -47,17 +47,16 @@ import java.util.regex.Pattern
  */
 class RuleImportService : IntentService("RuleImportService") {
     private val dnsmasqMatcher =
-        Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:/?\$|\\s+.*)").matcher("")
-    private val dnsmasqBlockMatcher = Pattern.compile("^address=/([^/]+)/$").matcher("")
+        Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:/?\$|\\s+.*)").matcher("") // address=/xyz.com/0.0.0.0
+    private val dnsmasqBlockMatcher = Pattern.compile("^address=/([^/]+)/$").matcher("") // address=/xyz.com/
     private val hostsMatcher =
-        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([\\w._\\-]+).*")
-            .matcher("")
-    private val domainsMatcher = Pattern.compile("^([_\\w][\\w_\\-.]+)(?:\$|\\s+.*)").matcher("")
-    private val adblockMatcher = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("")
+        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([*\\w._\\-]+).*")
+            .matcher("") // 0.0.0.0 xyz.com
+    private val domainsMatcher = Pattern.compile("^([_\\w*][*\\w_\\-.]+)(?:\$|\\s+.*)").matcher("") // xyz.com
+    private val adblockMatcher = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("") // ||xyz.com^
     private val ruleCommitSize = 10000
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
-    private var checkDuplicates: Boolean = false
     private var isAborted = false
 
     companion object {
@@ -197,6 +196,7 @@ class RuleImportService : IntentService("RuleImportService") {
                             log("Downloading resource of $it failed.")
                         }
                     } catch (ex: java.lang.Exception) {
+                        ex.printStackTrace()
                         log("Downloading resource of $it failed ($ex)")
                     } finally {
                         response?.body?.close()
@@ -303,20 +303,7 @@ class RuleImportService : IntentService("RuleImportService") {
         when {
             matcher.groupCount() == 1 -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
-                return if (checkDuplicates) {
-                    val existingIpv4 = getDatabase().dnsRuleDao().getNonUserRule(host, Record.TYPE.A)
-                    val existingIpv6 = getDatabase().dnsRuleDao().getNonUserRule(host, Record.TYPE.AAAA)
-                    if (existingIpv4 == null && existingIpv6 == null) DnsRule(
-                        Record.TYPE.ANY,
-                        host,
-                        defaultTargetV4,
-                        defaultTargetV6,
-                        importedFrom = sourceId
-                    )
-                    else if (existingIpv4 == null) DnsRule(Record.TYPE.A, host, defaultTargetV4, importedFrom = sourceId)
-                    else if (existingIpv6 == null) DnsRule(Record.TYPE.AAAA, host, defaultTargetV6, importedFrom = sourceId)
-                    else null
-                } else DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = sourceId)
+                return createRule(host, defaultTargetV4, defaultTargetV6, Record.TYPE.ANY, sourceId)
             }
             matcher == dnsmasqMatcher -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
@@ -329,7 +316,7 @@ class RuleImportService : IntentService("RuleImportService") {
                         else -> it
                     }
                 }
-                return createRuleIfNotExists(host, target, type, sourceId)
+                return createRule(host, target, null, type, sourceId)
             }
             matcher == hostsMatcher -> {
                 return if(isWhitelist) {
@@ -346,21 +333,23 @@ class RuleImportService : IntentService("RuleImportService") {
                         }
                     }
                     val host = matcher.group(2).replace(wwwRegex, "")
-                    createRuleIfNotExists(host, target, type, sourceId)
+                    return createRule(host, target, null, type, sourceId)
                 }
             }
         }
         throw IllegalStateException()
     }
 
-    private fun createRuleIfNotExists(host: String, target: String, type: Record.TYPE, sourceId: Long): DnsRule? {
-        return if (checkDuplicates) {
-            val existingRule = getDatabase().dnsRuleDao().getNonUserRule(host, type)
-            if (existingRule == null) DnsRule(type, host, target, importedFrom = sourceId)
-            else null
-        } else DnsRule(type, host, target, importedFrom = sourceId)
+    private fun createRule(host: String, target: String, targetV6:String? = null, type: Record.TYPE, sourceId: Long): DnsRule? {
+        var isWildcard = false
+        val alteredHost = host.let {
+            if(it.contains("*")) {
+                isWildcard = true
+                it.replace("**", "%%").replace("*", "%")
+            } else it
+        }
+        return DnsRule(type, alteredHost, target, targetV6, sourceId, isWildcard)
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
