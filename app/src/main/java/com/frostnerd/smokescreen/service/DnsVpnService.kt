@@ -28,6 +28,7 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
@@ -962,9 +963,37 @@ class DnsVpnService : VpnService(), Runnable {
                             }
                         }
                         if (resolveResult != null) {
-                            resolveResults[question] = resolveResult
-                            true
-                        } else false
+                            val isWildcardWhitelisted = dao.findPossibleWildcardRuleTarget(uniformQuestion, question.type, useUserRules, true, false).any {
+                                DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion).matches()
+                            }
+                            if(!isWildcardWhitelisted) {
+                                resolveResults[question] = resolveResult
+                                true
+                            } else false
+                        } else {
+                            val wildcardResolveResults = dao.findPossibleWildcardRuleTarget(uniformQuestion, question.type, useUserRules, true, true).filter {
+                                DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion).matches()
+                            }
+                            if(wildcardResolveResults.isEmpty() || wildcardResolveResults.any {
+                                    it.isWhitelistRule()
+                                }) false
+                            else {
+                                resolveResults[question] = wildcardResolveResults.first().let {
+                                    if(question.type == Record.TYPE.AAAA) it.ipv6Target ?: it.target
+                                    else it.target
+                                }.let {
+                                    when (it) {
+                                        "0" -> "0.0.0.0"
+                                        "1" -> {
+                                            if (question.type == Record.TYPE.AAAA) "::1"
+                                            else "127.0.0.1"
+                                        }
+                                        else -> it
+                                    }
+                                }
+                                true
+                            }
+                        }
                     }
                 }
 
