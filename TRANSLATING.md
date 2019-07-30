@@ -5,12 +5,12 @@ This is where you come in: I speak German and English but can't deliver any othe
 
 # How it's done
 I use an web-based translations editor called [Weblate](weblate.org) (open-source software, available under the GPLv3) to make managing translations easy.
-I host my [own instance of Weblate](https://weblate.frostnerd.com) -- [creating an account](https://weblate.frostnerd.com/accounts/register/) is free and neither does the site contain ads, nor does it use any tracking.
+I host my [own instance of Weblate](https://weblate.frostnerd.com) -- [creating an account](https://weblate.frostnerd.com/accounts/register/) is free and neither does the site contain ads, nor does it use any tracking (look at the privacy policy below though!).
 
 See below for a quick tutorial on how to use Weblate.
 
 # The current state
-Right now the app only contains German and English translations. Your help is needed.
+Right now the app contains German, English, Dutch, Portuguese, Russian, Indonesian and Turkish translations. This is already a good number of translations, but your help is needed to push it even further.
 
 <a href="https://weblate.frostnerd.com/engage/nebulo/?utm_source=widget">
 <img src="https://weblate.frostnerd.com/widgets/nebulo/-/multi-green.svg" alt="Translation state" />
@@ -30,7 +30,7 @@ It is analyzed and [publicly displayed](https://weblate.frostnerd.com/stats/) wh
 No collected data is shared with any third party.
 No collected data is analyzed automatically except for the usages described above.
 
-You can remove your account at any time. Simply do this by opening [this page](https://weblate.frostnerd.com/accounts/remove/) whilst logged in. You'll receive an e-mail with a link you have to click to delete your account. Deleting your account deletes your profile, completely removing your e-mail address from the database. Your IP addresses used in the past won't be deleted and stay in the audit log.
+You can remove your account at any time. Simply do this by opening [this page](https://weblate.frostnerd.com/accounts/remove/) whilst logged in. You'll receive an e-mail with a link you have to click to delete your account. Deleting your account deletes your profile, completely removing your e-mail address from the database. Your IP addresses used in the past won't be deleted and stay in the audit log. Translations contributed by you won't be deleted as well.
 
 Feel free to contact me at daniel.wolf@frostnerd.com if you wish to know what data is saved about you, or if you wish it to be deleted.
 

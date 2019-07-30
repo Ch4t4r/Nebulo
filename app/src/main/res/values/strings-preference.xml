@@ -71,6 +71,9 @@
     <string name="title_enable_logging">Enable logging</string>
     <string name="summary_enable_logging">Enables logging of debug information (contains statistic data). These logs aren\'t send automatically.</string>
 
+    <string name="title_advanced_logging">Advanced logging</string>
+    <string name="summary_advanced_logging">Adds more logging, which could help with more persistent problems.</string>
+
     <string name="title_send_logs">Send logs</string>
     <string name="summary_send_logs">Click here to send the logs to the developer.</string>
 

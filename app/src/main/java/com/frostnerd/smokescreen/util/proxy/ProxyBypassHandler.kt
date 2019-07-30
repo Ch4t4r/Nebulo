@@ -59,7 +59,7 @@ class ProxyBypassHandler(private val searchDomains:List<String>, private val des
         return true
     }
 
-    override fun informFailedRequest(request: FutureAnswer) {
+    override fun informFailedRequest(request: FutureAnswer, failureReason:Throwable?) {
     }
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {

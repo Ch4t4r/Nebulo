@@ -60,4 +60,10 @@
             android:id="@+id/whitelist"
             android:text="@string/dialog_newhostsource_use_as_whitelist"
             android:layout_height="wrap_content"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/dialog_newhostsource_wildcard_info"
+            android:alpha="0.8"
+            android:layout_height="wrap_content"/>
 </LinearLayout>

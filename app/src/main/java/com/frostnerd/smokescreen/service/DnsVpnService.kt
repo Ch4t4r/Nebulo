@@ -28,6 +28,7 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
@@ -35,6 +36,7 @@ import com.frostnerd.smokescreen.util.proxy.ProxyBypassHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyHttpsHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyTlsHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
+import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import kotlinx.coroutines.*
@@ -782,13 +784,18 @@ class DnsVpnService : VpnService(), Runnable {
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(2, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger() {
+            override fun failedRequest(question: FutureAnswer, reason: Throwable?) {
+                if(reason != null) log("A request failed: " + Logger.stacktraceToString(reason), "VPN-LIBRARY")
+            }
+
+            val advancedLogging = getPreferences().advancedLogging
             override fun logException(ex: Exception, terminal: Boolean, level: Level) {
                 if(terminal) log(ex)
                 else log(Logger.stacktraceToString(ex), "VPN-LIBRARY, $level")
             }
 
             override fun logMessage(message: String, level: Level) {
-                if(level >= Level.INFO || (BuildConfig.DEBUG && level >= Level.FINE)) {
+                if(level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
                     log(message, "VPN-LIBRARY, $level")
                 }
             }
@@ -962,9 +969,37 @@ class DnsVpnService : VpnService(), Runnable {
                             }
                         }
                         if (resolveResult != null) {
-                            resolveResults[question] = resolveResult
-                            true
-                        } else false
+                            val isWildcardWhitelisted = dao.findPossibleWildcardRuleTarget(uniformQuestion, question.type, useUserRules, true, false).any {
+                                DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion).matches()
+                            }
+                            if(!isWildcardWhitelisted) {
+                                resolveResults[question] = resolveResult
+                                true
+                            } else false
+                        } else {
+                            val wildcardResolveResults = dao.findPossibleWildcardRuleTarget(uniformQuestion, question.type, useUserRules, true, true).filter {
+                                DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion).matches()
+                            }
+                            if(wildcardResolveResults.isEmpty() || wildcardResolveResults.any {
+                                    it.isWhitelistRule()
+                                }) false
+                            else {
+                                resolveResults[question] = wildcardResolveResults.first().let {
+                                    if(question.type == Record.TYPE.AAAA) it.ipv6Target ?: it.target
+                                    else it.target
+                                }.let {
+                                    when (it) {
+                                        "0" -> "0.0.0.0"
+                                        "1" -> {
+                                            if (question.type == Record.TYPE.AAAA) "::1"
+                                            else "127.0.0.1"
+                                        }
+                                        else -> it
+                                    }
+                                }
+                                true
+                            }
+                        }
                     }
                 }
 

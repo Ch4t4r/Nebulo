@@ -64,7 +64,7 @@ class ProxyTlsHandler(
         } ?: (resolveResult.firstOrNull() ?: throw IllegalStateException("The given UpstreamAddress doesn't have an address for the requested IP version (IPv4: $ipv4Enabled, IPv6: $ipv6Enabled)"))
     }
 
-    override fun informFailedRequest(request: FutureAnswer) {
+    override fun informFailedRequest(request: FutureAnswer, failureReason:Throwable?) {
     }
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
