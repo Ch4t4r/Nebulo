@@ -136,4 +136,7 @@
 
     <string name="title_delete_queries">Wis DNS-verzoeken</string>
     <string name="summary_delete_queries">Klik hier om alle geregistreerde DNS-verzoeken te verwijderen.</string>
-</resources>
+<string name="title_advanced_logging">Geavanceerd loggen</string>
+    <string name="summary_advanced_logging">Voegt uitgebreid Loggen toe, wat kan helpen bij aanhoudende problemen.</string>
+
+    </resources>
