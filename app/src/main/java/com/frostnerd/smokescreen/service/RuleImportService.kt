@@ -302,11 +302,12 @@ class RuleImportService : IntentService("RuleImportService") {
         val defaultTargetV6 = if(isWhitelist) "" else "1"
         when {
             matcher.groupCount() == 1 -> {
-                val host = matcher.group(1).replace(wwwRegex, "")
+                val host = if(matcher == dnsmasqBlockMatcher) "%%" + matcher.group(1)
+                else matcher.group(1).replace(wwwRegex, "")
                 return createRule(host, defaultTargetV4, defaultTargetV6, Record.TYPE.ANY, sourceId)
             }
             matcher == dnsmasqMatcher -> {
-                val host = matcher.group(1).replace(wwwRegex, "")
+                val host = "%%" + matcher.group(1)
                 var target = matcher.group(2)
                 val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
                 target = target.let {
