@@ -90,12 +90,13 @@
     <string name="dialog_clearqueries_message">Bist du dir sicher, dass du alle gespeicherten Anfragen löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
 
     <string name="dialog_credits_title">Danksagungen</string>
-    <string name="dialog_credits_message" formatted="true">- App icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;
-\n- Türkische Übersetzung von Kemal Oktay Aktoğan
-\n- Russische Übersetzung von bruleto\n
-        - Niederländische Übersetzung von Bas Koedijk
-\n 
-\n Möchtest du deinen Namen hier sehen\? Trage noch heute &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;etwas bei&lt;/a&gt;.</string>
+    <string name="dialog_credits_message" formatted="true">- App icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 
+\n- Türkische Übersetzung von Kemal Oktay Aktoğan 
+\n- Russische Übersetzung von bruleto
+\n- Niederländische Übersetzung von Bas Koedijk
+\n- Portugiesische Übersetzung von Rafael W. Bohnenberger 
+\n- Indonesische Übersetzung von Gloeyisk
+\nMöchtest du deinen Namen hier sehen\? Trage noch heute &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;etwas bei&lt;/a&gt;.</string>
 
     <string name="dialog_join_group_title">Der Gemeinde beitreten</string>
     <string name="dialog_join_group_message">Hallo!
@@ -156,4 +157,11 @@
 	<item quantity="other">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</item>
 </plurals>
 
-    </resources>
+    <string name="dialog_newhostsource_wildcard_info">Es können Regelquellen genutzt werden, welche Wildcard Domains benutzen.</string>
+    <string name="dialog_newdnsrule_wildcard_info">Der Host der Regel unterstützt Wildcards. Benutze einen Stern (*), um eine Beliebige Anzahl an Buchstaben, Nummern und Sonderzeichen, außer einem Punkt(.) abzudecken. Nutze zwei Sterne (**), um den Punkt (.) mit einzuschließen.</string>
+
+    <string name="dialog_overlaydetected_title">Systemweites Overlay festgestellt</string>
+    <string name="dialog_overlaydetected_message">Es scheint ein systemweites Overlay (z.B. eine Chatblase, oder ein Farb-/Nachtfilter) aktiv zu sein. Auf den meisten Geräten ist es nicht möglich, der App den benötigten Zugang zum VPN zu gewähren, wenn ein Overlay sichtbar ist.
+\n
+\nBitte deaktivere dein Overlay, solltest du im nächsten Dialog nicht auf OK klicken können.</string>
+</resources>
