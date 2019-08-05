@@ -1,2 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_crashreportingusages_data_1">Thông tin người dùng</string>
+    <string name="dialog_crashreportingusages_data_2">Thông tin thiết bị</string>
+    <string name="dialog_crashreportingusages_data_3">Thông tin ứng dụng</string>
+    <string name="dialog_crashreportingusages_data_4">Thông tin hệ điều hành</string>
+    <string name="dialog_crashreportingusages_data_user_1">ID ngẫu nhiên được sử dụng để theo dõi sự cố</string>
+    <string name="dialog_crashreportingusages_data_device_1">Kiến trúc (x86, arm, ...)</string>
+    <string name="dialog_crashreportingusages_data_device_4">Trạng thái sạc (có/không)</string>
+    <string name="dialog_crashreportingusages_data_device_6">Độ phân giải màn hình</string>
+    <string name="dialog_crashreportingusages_data_device_7">Nhà sản xuất</string>
+    <string name="dialog_crashreportingusages_data_device_10">Ngôn ngữ</string>
+    <string name="dialog_crashreportingusages_data_app_2">Phiên bản ứng dụng</string>
+    <string name="dialog_crashreportingusages_data_app_4">Tên máy chủ DNS</string>
+    </resources>
