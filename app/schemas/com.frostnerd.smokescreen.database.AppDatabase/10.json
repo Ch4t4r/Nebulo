@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 10,
-    "identityHash": "daac9efbbf9d89b9aa10f7ad54ac736a",
+    "identityHash": "5d29ef2a948e6e550e83fcef5932253d",
     "entities": [
       {
         "tableName": "CachedResponse",
@@ -194,7 +194,7 @@
       },
       {
         "tableName": "HostSource",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `ruleCount` INTEGER, `name` TEXT NOT NULL, `source` TEXT NOT NULL, `whitelistSource` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `ruleCount` INTEGER, `checksum` TEXT, `name` TEXT NOT NULL, `source` TEXT NOT NULL, `whitelistSource` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -212,6 +212,12 @@
             "fieldPath": "ruleCount",
             "columnName": "ruleCount",
             "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "checksum",
+            "columnName": "checksum",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
@@ -246,7 +252,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'daac9efbbf9d89b9aa10f7ad54ac736a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5d29ef2a948e6e550e83fcef5932253d')"
     ]
   }
 }

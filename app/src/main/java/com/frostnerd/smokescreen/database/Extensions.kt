@@ -93,6 +93,7 @@ val MIGRATION_8_9 = migration(8, 9) {
 val MIGRATION_9_10 = migration(9, 10) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 9 to 10")
     it.execSQL("ALTER TABLE `DnsRule` ADD COLUMN `isWildcard` INTEGER NOT NULL DEFAULT 0")
+    it.execSQL("ALTER TABLE `HostSource` ADD COLUMN `checksum` TEXT DEFAULT NULL")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 9 to 10 completed")
 }
 

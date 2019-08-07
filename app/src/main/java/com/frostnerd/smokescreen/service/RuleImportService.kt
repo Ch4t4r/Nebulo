@@ -166,6 +166,7 @@ class RuleImportService : IntentService("RuleImportService") {
         dnsRuleDao.deleteStagedRules()
         var count = 0
         val maxCount = getDatabase().hostSourceDao().getEnabledCount()
+        val newChecksums = mutableMapOf<HostSource, String>()
         getDatabase().hostSourceDao().getAllEnabled().forEach {
             log("Importing HostSource $it")
             if (!isAborted) {
@@ -189,15 +190,31 @@ class RuleImportService : IntentService("RuleImportService") {
                     var response: Response? = null
                     try {
                         val request = Request.Builder().url(it.source)
+                        if(it.checksum != null) request.header("If-None-Match", it.checksum!!)
                         response = httpClient.newCall(request.build()).execute()
-                        if (response.isSuccessful) {
-                            processLines(it, response.body!!.byteStream())
-                        } else {
-                            log("Downloading resource of $it failed.")
+                        val localDataIsRecent = response.code == 304 || it.checksum!= null && response.headers.find {
+                            it.first.equals("etag", true)
+                        }?.second == it.checksum
+                        when {
+                            response.isSuccessful && !localDataIsRecent -> {
+                                response.headers.find {
+                                    it.first.equals("etag", true)
+                                }?.second?.apply {
+                                    newChecksums[it] = this
+                                }
+                                processLines(it, response.body!!.byteStream())
+                            }
+                            response.code == 304 || localDataIsRecent -> {
+                                log("Host source ${it.name} hasn't changed, not updating.")
+                                ruleCount += it.ruleCount ?: 0
+                                dnsRuleDao.unstageRulesOfSource(it.id)
+                                log("Unstaged rules for ${it.name}")
+                            }
+                            else -> log("Downloading resource of ${it.name} failed.")
                         }
                     } catch (ex: java.lang.Exception) {
                         ex.printStackTrace()
-                        log("Downloading resource of $it failed ($ex)")
+                        log("Downloading resource of ${it.name} failed ($ex)")
                     } finally {
                         response?.body?.close()
                     }
@@ -217,6 +234,12 @@ class RuleImportService : IntentService("RuleImportService") {
             dnsRuleDao.deleteStagedRules()
             log("Recreating database indices")
             getDatabase().recreateDnsRuleIndizes()
+            log("Updating Etag values for sources")
+            newChecksums.forEach { (source, etag) ->
+                source.checksum = etag
+                getDatabase().hostSourceDao().update(source)
+            }
+            getDatabase().hostSourceDao().removeChecksumForDisabled()
             log("Done.")
             showSuccessNotification()
         } else {

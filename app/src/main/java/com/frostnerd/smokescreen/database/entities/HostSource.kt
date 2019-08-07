@@ -35,4 +35,7 @@ data class HostSource(
     var enabled: Boolean = true
     var ruleCount:Int? = null
 
+    // Content of the ETag header for supported rule sources
+    // Null if file-based or unknown (e.g. not requested yet)
+    var checksum:String? = null
 }
