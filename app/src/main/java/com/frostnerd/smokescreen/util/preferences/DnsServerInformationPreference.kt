@@ -54,7 +54,9 @@ class DnsServerInformationPreference(key: String, defaultValue: (String) -> DnsS
             }
 
         } else {
-            defaultValue(key)
+            defaultValue(key).also {
+                setValue(thisRef, property, it)
+            }
         }
     }
 
