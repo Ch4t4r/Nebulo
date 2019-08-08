@@ -243,6 +243,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     var vpnServiceState:VpnServiceState by enumPref("vpn_service_state", VpnServiceState.STOPPED)
     var ignoreServiceKilled:Boolean by booleanPref("ignore_service_killed", false)
+
+    var automaticHostRefresh:Boolean by booleanPref("automatic_host_refresh", false)
+    var automaticHostRefreshWifiOnly:Boolean by booleanPref("automatic_host_refresh_wifi_only", true)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

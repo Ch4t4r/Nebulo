@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:paddingLeft="@dimen/dialog_horizontal_margin"
+              android:paddingRight="@dimen/dialog_horizontal_margin"
+              android:paddingTop="@dimen/dialog_vertical_margin"
+              android:paddingBottom="@dimen/dialog_vertical_margin"
+              android:layout_height="match_parent">
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:text="@string/dialog_hostsourcerefresh_automatic_refresh"
+            android:textColor="?android:attr/textColor"
+            android:id="@+id/automaticRefresh"
+            android:layout_height="wrap_content"/>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:text="@string/dialog_hostsourcerefresh_wifi_only"
+            android:textColor="?android:attr/textColor"
+            android:id="@+id/refreshWifiOnly"
+            android:layout_height="wrap_content"/>
+
+    <Button
+            android:layout_width="match_parent"
+            android:background="@drawable/main_roundbuttons"
+            android:id="@+id/refreshNow"
+            android:text="@string/dialog_hostsourcerefresh_refresh_now"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
