@@ -16,9 +16,11 @@
     <string name="dialog_appchoosal_showsystemapps">Zeige Systemapps</string>
     <string name="dialog_appchoosal_whitelist">Nutze DoH/DoT nur in ausgewählten Apps</string>
 
-    <string name="dialog_excludedapps_infotext">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Import von %1d Server</item>
+        <item quantity="other">Import von %1d Servern</item>
+    </plurals>
 
-    <string name="dialog_serverimport_title">Import von %1d Servern</string>
     <string name="dialog_serverimport_done">Fertig</string>
     <string name="dialog_serverimport_priority">Priorität %1d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
@@ -56,7 +58,6 @@
     <string name="dialog_changelog_infotext">Die App wurde seitdem du sie zuletzt geöffnet hast geupdated. In the folgenden Liste siehst du die Änderungen. Klicke die Box unten an, um diesen Dialog in Zukunft nicht mehr zu sehen.</string>
     <string name="dialog_changelog_dont_show_again">Nicht mehr zeigen</string>
 
-    <string name="dialog_about_changelog">Änderungsprotokoll</string>
     <string name="dialog_about_licenses">Lizenzen</string>
 
     <string name="dialog_query_export_title">Exportiere Anfragen…</string>
@@ -64,7 +65,6 @@
 
     <string name="dialog_pin_message">Bitte gebe deine PIN an.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Möchtest du die Protokollierung aktivieren\? Die Protokolle enthalten statistische, sowie Testinformationen und ausgeführte Aktionen in der App. Die Protokolle werden niemals automatisch verschickt.</string>
 
@@ -90,12 +90,13 @@
     <string name="dialog_clearqueries_message">Bist du dir sicher, dass du alle gespeicherten Anfragen löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
 
     <string name="dialog_credits_title">Danksagungen</string>
-    <string name="dialog_credits_message" formatted="true">- App icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;
-\n- Türkische Übersetzung von Kemal Oktay Aktoğan
-\n- Russische Übersetzung von bruleto\n
-        - Niederländische Übersetzung von Bas Koedijk
-\n 
-\n Möchtest du deinen Namen hier sehen\? Trage noch heute &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;etwas bei&lt;/a&gt;.</string>
+    <string name="dialog_credits_message" formatted="true">- App icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 
+\n- Türkische Übersetzung von Kemal Oktay Aktoğan 
+\n- Russische Übersetzung von bruleto
+\n- Niederländische Übersetzung von Bas Koedijk
+\n- Portugiesische Übersetzung von Rafael W. Bohnenberger 
+\n- Indonesische Übersetzung von Gloeyisk
+\nMöchtest du deinen Namen hier sehen\? Trage noch heute &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;etwas bei&lt;/a&gt;.</string>
 
     <string name="dialog_join_group_title">Der Gemeinde beitreten</string>
     <string name="dialog_join_group_message">Hallo!
@@ -144,4 +145,23 @@
     <string name="dialog_editdelete_title">Was möchtest du tun\?</string>
     <string name="dialog_editdelete_edit">Editieren</string>
     <string name="dialog_editdelete_delete">Löschen</string>
+<string name="dialog_servicekilled_message">Die App hat erkannt, dass sie nach der letzten Ausführung nicht ordnungsgemäß beendet wurde. Dies deutet sehr stark darauf hin, dass das System die App zwangsweise geschlossen hat, ohne dieser die Möglichkeit zu geben, sich selbst neu zu starten.
+\n
+\nAuf den meisten Geräten existieren einige Optionen, welche dieses Verhalten seitens des System verhindern, mindestens aber verzögern können.
+\nSo kannst du zum Beispiel in den Systemeinstellungen die Batterieoptimierungen für Nebulo deaktivieren, oder die App nicht aus der Liste der zuletzt verwendeten Apps entfernen.
+\n
+\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser).</string>
+    <string name="dialog_servicekilled_more_info">Mehr Informationen</string>
+<plurals name="dialog_excludedapps_infotext">
+	<item quantity="one">%1d App ist standardmäßig ausgewählt und kann nicht abgewählt werden</item>
+	<item quantity="other">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</item>
+</plurals>
+
+    <string name="dialog_newhostsource_wildcard_info">Es können Regelquellen genutzt werden, welche Wildcard Domains benutzen.</string>
+    <string name="dialog_newdnsrule_wildcard_info">Der Host der Regel unterstützt Wildcards. Benutze einen Stern (*), um eine Beliebige Anzahl an Buchstaben, Nummern und Sonderzeichen, außer einem Punkt(.) abzudecken. Nutze zwei Sterne (**), um den Punkt (.) mit einzuschließen.</string>
+
+    <string name="dialog_overlaydetected_title">Systemweites Overlay festgestellt</string>
+    <string name="dialog_overlaydetected_message">Es scheint ein systemweites Overlay (z.B. eine Chatblase, oder ein Farb-/Nachtfilter) aktiv zu sein. Auf den meisten Geräten ist es nicht möglich, der App den benötigten Zugang zum VPN zu gewähren, wenn ein Overlay sichtbar ist.
+\n
+\nBitte deaktivere dein Overlay, solltest du im nächsten Dialog nicht auf OK klicken können.</string>
 </resources>

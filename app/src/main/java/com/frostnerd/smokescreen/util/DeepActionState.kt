@@ -25,7 +25,7 @@ import com.frostnerd.smokescreen.activity.MainActivity
  */
 
 enum class DeepActionState {
-    DNS_RULES;
+    DNS_RULES, BATTERY_OPTIMIZATION_DIALOG;
 
 
     fun intentTo(context:Context): Intent {

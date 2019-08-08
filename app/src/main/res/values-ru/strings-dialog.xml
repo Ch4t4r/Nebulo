@@ -16,9 +16,17 @@
     <string name="dialog_appchoosal_showsystemapps">Показать системные приложения</string>
     <string name="dialog_appchoosal_whitelist">Использовать DoH/DoT только в отмеченных приложениях</string>
 
-    <string name="dialog_excludedapps_infotext">Исключенные приложения по умолчанию (%1d)</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">Исключенные приложения по умолчанию (%1d)</item>
+        <item quantity="other">Исключенные приложения по умолчанию (%1d)</item>
+        <item quantity="many">Исключенные приложения по умолчанию (%1d)</item>
+        <item quantity="few">Исключенные приложения по умолчанию (%1d)</item>
+    </plurals>
 
-    <string name="dialog_serverimport_title">Импортировать %1d сервер(а)</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Импортировать %1d сервер</item>
+        <item quantity="other">Импортировать %1d сервер(а)</item>
+    </plurals>
     <string name="dialog_serverimport_done">Готово</string>
     <string name="dialog_serverimport_priority">Приоритет %1d</string>
     <string name="dialog_serverimport_experimental">Экспериментальный</string>
@@ -55,7 +63,6 @@
     <string name="dialog_changelog_infotext">Обнаружена новая версия приложения. Список изменений вы можете увидеть ниже.</string>
     <string name="dialog_changelog_dont_show_again">Не показывать это уведомление в дальнейшем</string>
 
-    <string name="dialog_about_changelog">Список изменений</string>
     <string name="dialog_about_licenses">Список лицензий</string>
 
     <string name="dialog_query_export_title">Экспорт DNS запросов…</string>
@@ -63,7 +70,6 @@
 
     <string name="dialog_pin_message">Введите новый PIN.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Включить логирование\? Лог будет включать в себя статистическую информацию, данные для отладки и действия в приложении. Сформированные логи хранятся локально.</string>
 

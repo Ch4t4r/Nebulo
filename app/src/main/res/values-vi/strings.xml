@@ -1,2 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="all_stop">Dừng</string>
+    <string name="all_start">Khởi động</string>
+    <string name="all_pause">Tạm dừng</string>
+    <string name="all_resume">Tiếp tục</string>
+    <string name="all_no">Không</string>
+    <string name="all_yes">Có</string>
+    <string name="information">Thông tin</string>
+    <string name="all_close">Đóng</string>
+
+    </resources>

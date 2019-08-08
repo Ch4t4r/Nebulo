@@ -27,6 +27,19 @@ import com.frostnerd.smokescreen.R
 class Notifications {
 
     companion object {
+        const val ID_VPN_SERVICE = 1
+        const val ID_NO_CONNECTION = 2
+        const val ID_APP_CRASH = 3
+        const val ID_DNSRULE_IMPORT = 4
+        const val ID_DNSRULE_IMPORT_FINISHED = 5
+        const val ID_DNSRULE_EXPORT = 6
+        const val ID_DNSRULE_EXPORT_FINISHED = 7
+        const val ID_PIN = 8
+        const val ID_SERVICE_KILLED = 9
+        const val ID_VPN_RESTART = 999
+
+
+
         fun servicePersistentNotificationChannel(context: Context):String {
             if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(

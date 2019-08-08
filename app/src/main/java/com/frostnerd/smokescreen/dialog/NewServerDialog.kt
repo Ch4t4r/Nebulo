@@ -50,7 +50,7 @@ class NewServerDialog(
     onServerAdded: (serverInfo: DnsServerInformation<*>) -> Unit,
     server: UserServerConfiguration? = null
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
-    private var validationRegex = NewServerDialog.SERVER_URL_REGEX
+    private var validationRegex = SERVER_URL_REGEX
 
     companion object {
         val SERVER_URL_REGEX =
@@ -120,7 +120,7 @@ class NewServerDialog(
             serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
                 override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
-                    validationRegex = if (position == 0) NewServerDialog.SERVER_URL_REGEX else NewServerDialog.TLS_REGEX
+                    validationRegex = if (position == 0) SERVER_URL_REGEX else TLS_REGEX
                     dnsOverHttps = position == 0
                     setHintAndTitle(view, dnsOverHttps, title)
                     primaryServer.text = primaryServer.text
@@ -275,7 +275,7 @@ class NewServerDialog(
         else TLSUpstreamAddress(parsedHost)
     }
 
-    fun addUrlTextWatcher(input: TextInputLayout, editText: TextInputEditText, emptyAllowed: Boolean) {
+    private fun addUrlTextWatcher(input: TextInputLayout, editText: TextInputEditText, emptyAllowed: Boolean) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 val valid =
@@ -297,7 +297,7 @@ class NewServerDialog(
         })
     }
 
-    fun inputsValid(): Boolean = serverNameWrap.error == null &&
+    private fun inputsValid(): Boolean = serverNameWrap.error == null &&
             primaryServerWrap.error == null &&
             secondaryServerWrap.error == null
 

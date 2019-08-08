@@ -6,17 +6,16 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.AdapterBuilder
+import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.dnstunnelproxy.TransportProtocol
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.lifecyclemanagement.launchWithLifecylce
-import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.log
-import com.frostnerd.smokescreen.showInfoTextDialog
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.activity_speedtest.*
@@ -108,11 +107,22 @@ class SpeedTestActivity : BaseActivity() {
         prepareListJob = launchWithLifecylce(true) {
             val hiddenDotServers = getPreferences().removedDefaultDoTServers
             val hiddenDohServers = getPreferences().removedDefaultDoHServers
-            val dnsServers = AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.filter { it.key !in hiddenDotServers }.values +
+            val hasIpv4 = hasDeviceIpv4Address()
+            val hasIpv6 = hasDeviceIpv6Address()
+            val dnsServers = (AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.filter { it.key !in hiddenDotServers }.values +
                     AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.filter { it.key !in hiddenDohServers }.values +
                     getPreferences().userServers.map {
                         it.serverInformation
-                    }
+                    }).filter {
+                it.servers.all { server ->
+                    hasIpv4 == (TransportProtocol.IPV4 in server.supportedTransportProtocols)
+                            || hasIpv6 == (TransportProtocol.IPV6 in server.supportedTransportProtocols)
+                }
+            }.filter {
+                !it.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !resources.getBoolean(
+                    R.bool.hide_adblocking_servers
+                )
+            }
             val testResults = dnsServers.map {
                 SpeedTest(it, null)
             }.toMutableList()
@@ -162,16 +172,16 @@ class SpeedTestActivity : BaseActivity() {
             runOnUiThread {
                 startTest.text = "0/${testsLeft.size}"
             }
-            testsLeft.forEach {
+            testsLeft.forEach { pendingTest ->
                 if(testJob?.isCancelled == false) {
-                    it.started = true
-                    log("Running SpeedTest for ${it.server.name}")
-                    val res = DnsSpeedTest(it.server, 500, 750) { line ->
+                    pendingTest.started = true
+                    log("Running SpeedTest for ${pendingTest.server.name}")
+                    val res = DnsSpeedTest(pendingTest.server, 500, 750) { line ->
                         log(line)
                     }.runTest(3)
 
-                    if (res != null) it.latency = res
-                    else it.error = true
+                    if (res != null) pendingTest.latency = res
+                    else pendingTest.error = true
 
                     testResults!!.sortBy {
                         it.latency ?: Integer.MAX_VALUE

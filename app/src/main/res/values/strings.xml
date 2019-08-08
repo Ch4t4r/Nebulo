@@ -4,7 +4,6 @@
     <string name="activity_label_import_queries">Import queries</string>
     <string name="activity_label_import_servers">Import server(s)</string>
     <string name="activity_label_speed_test">Server speed comparison</string>
-    <string name="activity_label_dns_rules">Dns rules</string>
 
     <string name="activity_label_enable_logging">Export logs/Enable logging</string>
 
@@ -63,15 +62,18 @@
     <string name="about_help_translating">Help translating</string>
 
     <string name="window_speedtest_runtest">Start the test</string>
-    <string name="window_speedtest_useserver">Use this server</string>
 
     <string name="error_no_webbrowser_installed">You don\'t have any app installed to view this link.</string>
 
     <string name="button_main_dnsrules">DNS rules</string>
 
     <string name="window_dnsrules_customhosts">Custom hosts</string>
+    <plurals name="window_dnsrules_subtitle">
+        <item quantity="one">%1d rule</item>
+        <item quantity="other">%1d rules</item>
+    </plurals>
     <string name="window_dnsrules_hostalreadyexists">There already is a rule for this host.</string>
     <string name="window_dnsrules_customhosts_message">Define all your custom hosts here.</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Rules from this source: %1d (%2$d duplicates not in use)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">Rules from this source: %1d (%2$d duplicates not in use)</string>
 </resources>

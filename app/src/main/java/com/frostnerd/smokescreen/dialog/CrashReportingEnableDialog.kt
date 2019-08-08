@@ -91,7 +91,7 @@ class CrashReportingEnableDialog(
     override fun destroy() {
     }
 
-    private inner class UsedDataListAdapter() : BaseExpandableListAdapter() {
+    private inner class UsedDataListAdapter : BaseExpandableListAdapter() {
         private val titles = context.resources.getStringArray(R.array.dialog_crashreportingusages_data)
         private val children = listOf(
             context.resources.getStringArray(R.array.dialog_crashreportingusages_data_user),

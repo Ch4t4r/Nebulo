@@ -1,2 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_41_1">As fontes de regras de DNS agora podem ser usadas como listas brancas</string>
+    <string name="changelog_build_41_2">As fontes de host agora indicam quantas regras foram duplicadas em um arquivo</string>
+    <string name="changelog_build_41_3">Novos servidores adicionados</string>
+    <string name="changelog_build_41_4">Servidores definidos pelo usuário agora podem ser editados</string>
+    <string name="changelog_build_41_5">A lista de servidores agora mostra apenas servidores que oferecem suporte à rede atual (IPv4 ou IPv6)</string>
+    <string name="changelog_build_41_6">As fontes de regra de DNS agora podem ser editadas clicando nelas</string>
+    <string name="changelog_build_41_7">As regras de DNS agora não são mais abertas em uma janela separada</string>
+    <string name="changelog_build_41_8">Algumas falhas corrigidas</string>
+    <string name="changelog_build_43_1">As informações do servidor no menu da barra lateral agora mostram a latência atual</string>
+    <string name="changelog_build_43_2">O teste de velocidade agora só mostra os servidores que suportam a rede atual</string>
+    <string name="changelog_build_43_3">Corrigido um problema em que as fontes de host dnsmasq não estavam sendo importadas</string>
+    <string name="changelog_build_43_4">O modo de exibição regras de DNS agora mostra o número total de regras</string>
+    <string name="changelog_build_43_5">Uma caixa de diálogo agora aparecerá quando o sistema fecha o aplicativo, com informações sobre possíveis soluções</string>
+    <string name="changelog_build_43_6">Corrigidas algumas falhas</string>
+    </resources>

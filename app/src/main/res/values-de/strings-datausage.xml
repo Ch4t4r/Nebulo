@@ -4,7 +4,7 @@
     <string name="dialog_crashreportingusages_data_3">Appdaten</string>
     <string name="dialog_crashreportingusages_data_4">Betriebssystemdaten</string>
     <string name="dialog_crashreportingusages_data_user_1">Zufällige ID zum Nachverfolgen von Abstürzen</string>
-    <string name="dialog_crashreportingusages_data_device_1">Architektur (x86, arm, ...)</string>
+    <string name="dialog_crashreportingusages_data_device_1">Architektur (x86, arm, …)</string>
     <string name="dialog_crashreportingusages_data_device_2">Ausrichtung (Portrait, Landscape)</string>
     <string name="dialog_crashreportingusages_data_device_3">Freier/benutzter Arbeitsspeicher (RAM)</string>
     <string name="dialog_crashreportingusages_data_device_4">Aufladestatus (ja/nein)</string>

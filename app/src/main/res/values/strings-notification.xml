@@ -35,7 +35,7 @@
     <string name="notification_ruleimport_tertiarymessage">Finishing import…</string>
 
     <string name="notification_ruleimportfinished_title">DNS rule import finished</string>
-    <string name="notification_ruleimportfinished_message">%1d rules have been imported.</string>
+    <string name="notification_ruleimportfinished_message">%1d rules have been imported (%2$d duplicates omitted)</string>
 
     <string name="notification_ruleexport_title">Dns rule export</string>
     <string name="notification_ruleexport_message">Exporting rules (%1d/%2d)</string>
@@ -46,4 +46,8 @@
 
     <string name="notification_pin_title">PIN required</string>
     <string name="notification_pin_message">Your PIN is required to perform that action. Click here to confirm it.</string>
+
+    <string name="notification_service_killed_title">Information about battery optimization</string>
+    <string name="notification_service_killed_message">It seems like the app was previously stopped by the system. Click here to learn more.</string>
+    <string name="notification_service_killed_ignore">Ignore</string>
 </resources>

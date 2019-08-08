@@ -34,7 +34,7 @@ import javax.net.ssl.SSLSession
  */
 
 class ProxyTlsHandler(
-    val upstreamAddresses: List<TLSUpstreamAddress>,
+    private val upstreamAddresses: List<TLSUpstreamAddress>,
     connectTimeout: Int,
     val queryCountCallback: ((queryCount: Int) -> Unit)? = null
 ):AbstractTLSDnsHandle(connectTimeout) {
@@ -52,6 +52,7 @@ class ProxyTlsHandler(
             sendPacketToUpstreamDNSServer(deviceWriteToken, DatagramPacket(data, 0, data.size, destination, realDestination.port), originalEnvelope)
         } else {
             val response = dnsMessage.asBuilder().setQrFlag(true).setResponseCode(DnsMessage.RESPONSE_CODE.SERVER_FAIL)
+            dnsPacketProxy?.tunnelHandle?.proxy?.logger?.warning("Cannot forward packet because the address isn't resolved yet.")
             dnsPacketProxy?.writeUDPDnsPacketToDevice(response.build().toArray(), originalEnvelope)
         }
     }
@@ -63,7 +64,7 @@ class ProxyTlsHandler(
         } ?: (resolveResult.firstOrNull() ?: throw IllegalStateException("The given UpstreamAddress doesn't have an address for the requested IP version (IPv4: $ipv4Enabled, IPv6: $ipv6Enabled)"))
     }
 
-    override fun informFailedRequest(request: FutureAnswer) {
+    override fun informFailedRequest(request: FutureAnswer, failureReason:Throwable?) {
     }
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {

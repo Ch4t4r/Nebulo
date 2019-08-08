@@ -41,7 +41,7 @@ class ServerConfigurationPreference(key: String, defaultValue: (String) -> Serve
                 ServerConfiguration.createSimpleServerConfig(split[0], requestType, responseType)
             } else {
                 return AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
-                    it[encoded.toInt()]!!.serverConfigurations.entries.first().value
+                    (it[encoded.toInt()] ?: error("Server with ID ${encoded.toInt()} not found")).serverConfigurations.entries.first().value
                 }
             }
         } else return defaultValue(key)

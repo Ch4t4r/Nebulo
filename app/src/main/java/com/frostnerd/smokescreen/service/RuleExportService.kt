@@ -3,7 +3,6 @@ package com.frostnerd.smokescreen.service
 import android.app.IntentService
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -15,9 +14,6 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import leakcanary.LeakSentry
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
@@ -54,6 +50,7 @@ class RuleExportService : IntentService("RuleExportService") {
     override fun onCreate() {
         super.onCreate()
         LeakSentry.refWatcher.watch(this, "RuleExportService")
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_DNSRULE_EXPORT_FINISHED)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -96,7 +93,7 @@ class RuleExportService : IntentService("RuleExportService") {
                 NotificationCompat.Action(R.drawable.ic_times, getString(android.R.string.cancel), abortPendingAction)
             notification!!.addAction(abortAction)
         }
-        startForeground(5, notification!!.build())
+        startForeground(Notifications.ID_DNSRULE_EXPORT, notification!!.build())
     }
 
     private fun updateNotification(ruleCount: Int, totalRuleCount: Int) {
@@ -104,7 +101,7 @@ class RuleExportService : IntentService("RuleExportService") {
         val text = getString(R.string.notification_ruleexport_message, ruleCount, totalRuleCount)
         notification!!.setContentText(text)
         notification!!.setStyle(NotificationCompat.BigTextStyle().bigText(text))
-        startForeground(5, notification!!.build())
+        startForeground(Notifications.ID_DNSRULE_EXPORT, notification!!.build())
     }
 
     private fun showSuccessNotification(ruleCount: Int) {
@@ -114,7 +111,7 @@ class RuleExportService : IntentService("RuleExportService") {
         successNotification.setContentTitle(getString(R.string.notification_ruleexportfinished_title))
         successNotification.setContentText(getString(R.string.notification_ruleexportfinished_message, ruleCount))
         successNotification.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
-        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(6, successNotification.build())
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_DNSRULE_EXPORT_FINISHED, successNotification.build())
     }
 
     private fun startWork(params: Params) {

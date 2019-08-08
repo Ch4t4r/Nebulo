@@ -72,7 +72,7 @@ class PinActivity: BaseActivity() {
                     .setDefaults(NotificationCompat.DEFAULT_ALL)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .build().apply {
-                        (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(7, this)
+                        (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_PIN, this)
                     }
             } else {
                 context.startActivity(intent)

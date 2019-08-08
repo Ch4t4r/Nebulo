@@ -37,7 +37,7 @@ import com.frostnerd.smokescreen.database.repository.HostSourceRepository
 @Database(entities = [CachedResponse::class, DnsQuery::class, DnsRule::class, HostSource::class], version = AppDatabase.currentVersion)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
-        const val currentVersion:Int = 8
+        const val currentVersion:Int = 10
     }
 
     abstract fun cachedResponseDao(): CachedResponseDao

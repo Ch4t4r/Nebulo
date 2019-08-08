@@ -38,9 +38,6 @@ import kotlin.system.exitProcess
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class SmokeScreen : Application() {
-    companion object {
-        const val NOTIFICATION_ID_APP_CRASH = 3
-    }
 
     private var defaultUncaughtExceptionHandler: Thread.UncaughtExceptionHandler? = null
     val customUncaughtExceptionHandler: Thread.UncaughtExceptionHandler =
@@ -83,7 +80,7 @@ class SmokeScreen : Application() {
 
         notification.setStyle(NotificationCompat.BigTextStyle(notification).bigText(getString(R.string.notification_appcrash_message)))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
-            NOTIFICATION_ID_APP_CRASH,
+            Notifications.ID_APP_CRASH,
             notification.build()
         )
     }

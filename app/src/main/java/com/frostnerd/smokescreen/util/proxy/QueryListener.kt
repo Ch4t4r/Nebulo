@@ -30,7 +30,7 @@ import org.minidns.dnsmessage.DnsMessage
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy.QueryListener {
+class QueryListener(private val context: Context) : QueryListener {
     private val writeQueriesToLog = context.getPreferences().loggingEnabled
     private val logQueriesToDb = context.getPreferences().queryLoggingEnabled
     private val waitingQueryLogs: MutableMap<Int, DnsQuery> = mutableMapOf()
@@ -73,7 +73,9 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
             val dao = context.getDatabase().dnsQueryDao()
             dao.insert(query)
             query.id = dao.getLastInsertedId()
-            waitingQueryLogs[questionMessage.id] = query
+            synchronized(waitingQueryLogs) {
+                waitingQueryLogs[questionMessage.id] = query
+            }
         }
     }
 
@@ -91,7 +93,9 @@ class QueryListener(private val context: Context) : com.frostnerd.dnstunnelproxy
                 }
                 query.fromCache = (source == QueryListener.Source.CACHE || source == QueryListener.Source.CACHE_AND_LOCALRESOLVER)
                 context.getDatabase().dnsQueryRepository().updateAsync(query)
-                waitingQueryLogs.remove(responseMessage.id)
+                synchronized(waitingQueryLogs) {
+                    waitingQueryLogs.remove(responseMessage.id)
+                }
             }
         }
     }

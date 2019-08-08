@@ -3,7 +3,6 @@ package com.frostnerd.smokescreen.service
 import android.app.IntentService
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -17,9 +16,6 @@ import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import leakcanary.LeakSentry
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -50,17 +46,17 @@ import java.util.regex.Pattern
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class RuleImportService : IntentService("RuleImportService") {
-    private val DNSMASQ_MATCHER =
-        Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:$|\\s+.*)").matcher("")
-    private val HOSTS_MATCHER =
-        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([\\w._\\-]+).*")
-            .matcher("")
-    private val DOMAINS_MATCHER = Pattern.compile("^([_\\w][\\w_\\-.]+)(?:\$|\\s+.*)").matcher("")
-    private val ADBLOCK_MATCHER = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("")
+    private val dnsmasqMatcher =
+        Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:/?\$|\\s+.*)").matcher("") // address=/xyz.com/0.0.0.0
+    private val dnsmasqBlockMatcher = Pattern.compile("^address=/([^/]+)/$").matcher("") // address=/xyz.com/
+    private val hostsMatcher =
+        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([*\\w._\\-]+).*")
+            .matcher("") // 0.0.0.0 xyz.com
+    private val domainsMatcher = Pattern.compile("^([_\\w*][*\\w_\\-.]+)(?:\$|\\s+.*)").matcher("") // xyz.com
+    private val adblockMatcher = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("") // ||xyz.com^
     private val ruleCommitSize = 10000
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
-    private var checkDuplicates: Boolean = false
     private var isAborted = false
 
     companion object {
@@ -74,6 +70,7 @@ class RuleImportService : IntentService("RuleImportService") {
     override fun onCreate() {
         super.onCreate()
         LeakSentry.refWatcher.watch(this, "RuleImportService")
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_DNSRULE_IMPORT_FINISHED)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -116,7 +113,7 @@ class RuleImportService : IntentService("RuleImportService") {
                 NotificationCompat.Action(R.drawable.ic_times, getString(android.R.string.cancel), abortPendingAction)
             notification!!.addAction(abortAction)
         }
-        startForeground(3, notification!!.build())
+        startForeground(Notifications.ID_DNSRULE_IMPORT, notification!!.build())
     }
 
     private fun showSuccessNotification() {
@@ -124,9 +121,15 @@ class RuleImportService : IntentService("RuleImportService") {
         successNotification.setSmallIcon(R.drawable.ic_mainnotification)
         successNotification.setAutoCancel(true)
         successNotification.setContentTitle(getString(R.string.notification_ruleimportfinished_title))
-        successNotification.setContentText(getString(R.string.notification_ruleimportfinished_message, ruleCount))
+        val actualRuleCount = getDatabase().dnsRuleDao().getNonUserCount()
+        getString(R.string.notification_ruleimportfinished_message,
+            actualRuleCount,
+            ruleCount - actualRuleCount).apply {
+            successNotification.setContentText(this)
+            successNotification.setStyle(NotificationCompat.BigTextStyle().bigText(this))
+        }
         successNotification.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
-        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(4, successNotification.build())
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_DNSRULE_IMPORT_FINISHED, successNotification.build())
     }
 
     private fun updateNotification(source: HostSource, count: Int, maxCount: Int) {
@@ -141,7 +144,7 @@ class RuleImportService : IntentService("RuleImportService") {
             )
             notification?.setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
             notification?.setProgress(maxCount, count, false)
-            startForeground(3, notification!!.build())
+            startForeground(Notifications.ID_DNSRULE_IMPORT, notification!!.build())
         }
     }
 
@@ -153,7 +156,7 @@ class RuleImportService : IntentService("RuleImportService") {
             )
             notification?.setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
             notification?.setProgress(1, 1, true)
-            startForeground(3, notification!!.build())
+            startForeground(Notifications.ID_DNSRULE_IMPORT, notification!!.build())
         }
     }
 
@@ -193,6 +196,7 @@ class RuleImportService : IntentService("RuleImportService") {
                             log("Downloading resource of $it failed.")
                         }
                     } catch (ex: java.lang.Exception) {
+                        ex.printStackTrace()
                         log("Downloading resource of $it failed ($ex)")
                     } finally {
                         response?.body?.close()
@@ -228,10 +232,11 @@ class RuleImportService : IntentService("RuleImportService") {
 
     private fun processLines(source: HostSource, stream: InputStream) {
         val parsers = mutableMapOf(
-            DNSMASQ_MATCHER to (0 to mutableListOf<DnsRule>()),
-            HOSTS_MATCHER to (0 to mutableListOf()),
-            DOMAINS_MATCHER to (0 to mutableListOf()),
-            ADBLOCK_MATCHER to (0 to mutableListOf())
+            dnsmasqMatcher to (0 to mutableListOf<DnsRule>()),
+            hostsMatcher to (0 to mutableListOf()),
+            domainsMatcher to (0 to mutableListOf()),
+            adblockMatcher to (0 to mutableListOf()),
+            dnsmasqBlockMatcher to (0 to mutableListOf())
         )
         var lineCount = 0
         var ruleCount = 0
@@ -249,8 +254,7 @@ class RuleImportService : IntentService("RuleImportService") {
                                     stagingType = 2
                                 })
                                 if (lineCount > ruleCommitSize) {
-                                    commitLines(parsers)
-                                    ruleCount += lineCount
+                                    ruleCount += commitLines(parsers)
                                     lineCount = 0
                                 }
                             } else {
@@ -270,25 +274,26 @@ class RuleImportService : IntentService("RuleImportService") {
             }
         }
         if(!isAborted) {
-            ruleCount += lineCount
+            ruleCount += commitLines(parsers, true)
             source.ruleCount = ruleCount
             getDatabase().hostSourceDao().update(source)
-            commitLines(parsers, true)
         }
     }
 
     private fun commitLines(
         parsers: Map<Matcher, Pair<Int, MutableList<DnsRule>>>,
         forceCommit: Boolean = false
-    ) {
+    ):Int {
         val hosts = parsers[parsers.keys.minBy {
             parsers[it]!!.first
         } ?: parsers.keys.first()]!!.second
-        if (hosts.size > ruleCommitSize || forceCommit) {
+        return if (hosts.size > ruleCommitSize || forceCommit) {
             getDatabase().dnsRuleDao().insertAllIgnoreConflict(hosts)
             ruleCount += hosts.size
+            val added = hosts.size
             hosts.clear()
-        }
+            added
+        } else 0
     }
 
     private val wwwRegex = Regex("^www\\.")
@@ -298,22 +303,9 @@ class RuleImportService : IntentService("RuleImportService") {
         when {
             matcher.groupCount() == 1 -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
-                return if (checkDuplicates) {
-                    val existingIpv4 = getDatabase().dnsRuleDao().getNonUserRule(host, Record.TYPE.A)
-                    val existingIpv6 = getDatabase().dnsRuleDao().getNonUserRule(host, Record.TYPE.AAAA)
-                    if (existingIpv4 == null && existingIpv6 == null) DnsRule(
-                        Record.TYPE.ANY,
-                        host,
-                        defaultTargetV4,
-                        defaultTargetV6,
-                        importedFrom = sourceId
-                    )
-                    else if (existingIpv4 == null) DnsRule(Record.TYPE.A, host, defaultTargetV4, importedFrom = sourceId)
-                    else if (existingIpv6 == null) DnsRule(Record.TYPE.AAAA, host, defaultTargetV6, importedFrom = sourceId)
-                    else null
-                } else DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = sourceId)
+                return createRule(host, defaultTargetV4, defaultTargetV6, Record.TYPE.ANY, sourceId)
             }
-            matcher == DNSMASQ_MATCHER -> {
+            matcher == dnsmasqMatcher -> {
                 val host = matcher.group(1).replace(wwwRegex, "")
                 var target = matcher.group(2)
                 val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
@@ -324,33 +316,40 @@ class RuleImportService : IntentService("RuleImportService") {
                         else -> it
                     }
                 }
-                return createRuleIfNotExists(host, target, type, sourceId)
+                return createRule(host, target, null, type, sourceId)
             }
-            matcher == HOSTS_MATCHER -> {
-                var target = matcher.group(1)
-                val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
-                target = target.let {
-                    when (it) {
-                        "0.0.0.0" -> "0"
-                        "127.0.0.1", "::1" -> "1"
-                        else -> it
+            matcher == hostsMatcher -> {
+                return if(isWhitelist) {
+                    val host = matcher.group(2).replace(wwwRegex, "")
+                    DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = sourceId)
+                } else {
+                    var target = matcher.group(1)
+                    val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
+                    target = target.let {
+                        when (it) {
+                            "0.0.0.0" -> "0"
+                            "127.0.0.1", "::1" -> "1"
+                            else -> it
+                        }
                     }
+                    val host = matcher.group(2).replace(wwwRegex, "")
+                    return createRule(host, target, null, type, sourceId)
                 }
-                val host = matcher.group(2).replace(wwwRegex, "")
-                return createRuleIfNotExists(host, target, type, sourceId)
             }
         }
         throw IllegalStateException()
     }
 
-    private fun createRuleIfNotExists(host: String, target: String, type: Record.TYPE, sourceId: Long): DnsRule? {
-        return if (checkDuplicates) {
-            val existingRule = getDatabase().dnsRuleDao().getNonUserRule(host, type)
-            if (existingRule == null) DnsRule(type, host, target, importedFrom = sourceId)
-            else null
-        } else DnsRule(type, host, target, importedFrom = sourceId)
+    private fun createRule(host: String, target: String, targetV6:String? = null, type: Record.TYPE, sourceId: Long): DnsRule? {
+        var isWildcard = false
+        val alteredHost = host.let {
+            if(it.contains("*")) {
+                isWildcard = true
+                it.replace("**", "%%").replace("*", "%")
+            } else it
+        }
+        return DnsRule(type, alteredHost, target, targetV6, sourceId, isWildcard)
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

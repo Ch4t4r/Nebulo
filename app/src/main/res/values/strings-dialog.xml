@@ -21,20 +21,26 @@
 
     <string name="dialog_appchoosal_showsystemapps">Show system apps</string>
     <string name="dialog_appchoosal_whitelist">Only use DoH/DoT in selected apps</string>
+    
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">%1d app is excluded by default and cannot be de-selected</item>
+        <item quantity="other">%1d apps are excluded by default and cannot be de-selected</item>
+    </plurals>
 
-    <string name="dialog_excludedapps_infotext">%1d apps are excluded by default and cannot be de-selected</string>
-
-    <string name="dialog_serverimport_title">Import of %1d server(s)</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Import of %1d server</item>
+        <item quantity="other">Import of %1d servers</item>
+    </plurals>
     <string name="dialog_serverimport_done">Done</string>
     <string name="dialog_serverimport_priority">Priority %1d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Type: Dns-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Type: Dns-over-TLS (DoT)</string>
-    <string name="dialog_serverimport_text">Please select the server(s) you wish to import.\n\nServers which are already imported will be duplicate if you select them.</string>
+    <string name="dialog_serverimport_text" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">Please select the servers you wish to import.\n\nServers which are already imported will be duplicate if you select them.</string>
 
     <string name="dialog_serverimportfailed_title">Import failed</string>
     <string name="dialog_serverimportfailed_text">The server(s) could not be imported.</string>
-    <string name="dialog_serverimportfailed_text_exception">The server(s) could not be imported.\n(%1s)</string>
+    <string name="dialog_serverimportfailed_text_exception" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">The servers could not be imported.\n(%1s)</string>
 
     <string name="dialog_logexport_text">How do you want to share the logs?</string>
     <string name="dialog_logexport_general">General export</string>
@@ -56,7 +62,6 @@
     <string name="dialog_changelog_infotext">The app has been updated since you last opened it. In the following list you can see the changelog. Check the box below and you won\'t see this message in the future.</string>
     <string name="dialog_changelog_dont_show_again">Don\'t show again</string>
 
-    <string name="dialog_about_changelog">Changelog</string>
     <string name="dialog_about_licenses">Licenses</string>
 
     <string name="dialog_query_export_title">Exporting queries…</string>
@@ -64,7 +69,6 @@
 
     <string name="dialog_pin_message">Please provide your PIN.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Do you want to enable logging? Logs contain statistic information, debug information and actions in the app. Generated logs aren\'t shared unless you do so yourself.</string>
 
@@ -85,7 +89,9 @@
         - App icon by <![CDATA[<a href="https://dribbble.com/rkbdi">RKBDI</a>]]> .\n
         - Turkish translation by Kemal Oktay Aktoğan\n
         - Russian translation by bruleto\n
-        - Dutch translation by Bas Koedijk
+        - Dutch translation by Bas Koedijk\n
+        - Portuguese translation by Rafael W. Bohnenberger\n
+        - Indonesian translation by Gloeyisk
         \n
         \n
         Want to see your name here? Feel free to <![CDATA[<a href="https://git.frostnerd.com/PublicAndroidApps/smokescreen">contribute</a>]]>.
@@ -99,7 +105,7 @@
         \n\nThat\'s why I\'m kindly asking for your help translating this app to reach as broad of an audience as possible. If you are willing to help translating this app into your language feel free to either contact me or <![CDATA[<a href="https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/TRANSLATING.md">read here on how to help.</a>]]></string>
 
     <string name="dialog_speedresult_title">Speed test results</string>
-    <string name="dialog_speedresult_message">
+    <string name="dialog_speedresult_message" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">
         %1d servers tested\n
         %2d DoT servers reachable, %3d not reachable\n
         %4d DoH servers reachable, %5d not reachable\n
@@ -120,6 +126,7 @@
     <string name="dialog_newhostsource_title">New rule source</string>
     <string name="dialog_newhostsource_edit_title">New rule source</string>
     <string name="dialog_newhostsource_name">Name</string>
+    <string name="dialog_newhostsource_wildcard_info">You can use host lists which make use of wildcard domains.</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_choose_file">Choose file</string>
     <string name="dialog_newhostsource_use_as_whitelist">Use as whitelist</string>
@@ -135,6 +142,7 @@
     <string name="dialog_newdnsrule_host_invalid">Please provide a valid host</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Please provide a valid IPv4 address</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Please provide a valid IPv6 address</string>
+    <string name="dialog_newdnsrule_wildcard_info">The host supports wildcards. Use star (*) for any amount of characters, numbers and allowed special characters except period (.). Use two stars (**) to include the period (.).</string>
 
     <string name="dialog_exportdnsrules_title">Export dns rules</string>
     <string name="dialog_exportdnsrules_export_user_rules">Export custom host dns rules</string>
@@ -143,4 +151,10 @@
     <string name="dialog_editdelete_title">What do you want to do?</string>
     <string name="dialog_editdelete_edit">Edit</string>
     <string name="dialog_editdelete_delete">Delete</string>
+
+    <string name="dialog_servicekilled_message">The app detected that it wasn\'t stopped properly the last time it was active. This strongly indicates that your system chose to force stop the app without any possibility for the app to restart itself.\n\nOn most devices you have a few options to prevent or at least delay the system from stopping the app.\nYou can for example disable battery optimizations for the app in the system settings or avoid clearing the app from the list of recents.\n\nIf you chose to ignore this you won\'t see this dialog again. You can read more and receive tips for solving this with the button below (opens an external website in your browser).</string>
+    <string name="dialog_servicekilled_more_info">More information</string>
+
+    <string name="dialog_overlaydetected_title">System-wide overlay detected</string>
+    <string name="dialog_overlaydetected_message">There seems to be a system-wide overlay (e.g. a chat bubble, color- or nightfilter) active. Most device don\'t allow you to enable a VPN in this case.\n\nIf you can\'t click OK in the next dialog please disable the overlay.</string>
 </resources>

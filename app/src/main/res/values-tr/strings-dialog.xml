@@ -16,9 +16,15 @@
     <string name="dialog_appchoosal_showsystemapps">Sistem uygulamalarını göster</string>
     <string name="dialog_appchoosal_whitelist">Yalnızca seçili uygulamalarda DoH/DoT kullanın</string>
 
-    <string name="dialog_excludedapps_infotext">%1d uygulama varsayılan olarak hariç tutulur ve seçilemez</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">%1d uygulaması varsayılan olarak hariç tutuldu ve seçilemiyor</item>
+        <item quantity="other">%1d uygulama varsayılan olarak hariç tutulur ve seçilemez</item>
+    </plurals>
 
-    <string name="dialog_serverimport_title">%1d sunucunun içe aktarılması</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">%1d sunucunun içe aktarılması</item>
+        <item quantity="other">%1d sunucunun içe aktarılması</item>
+    </plurals>
     <string name="dialog_serverimport_done">Tamamlandı</string>
     <string name="dialog_serverimport_priority">Öncelik %1d</string>
     <string name="dialog_serverimport_experimental">Deneysel</string>
@@ -56,7 +62,6 @@
     <string name="dialog_changelog_infotext">En son açtığınızdan beri uygulama güncellendi. Aşağıdaki listede değişiklikleri görebilirsiniz. Aşağıdaki kutuyu işaretleyin, gelecekte bu mesajı görmeyeceksiniz.</string>
     <string name="dialog_changelog_dont_show_again">Tekrar gösterme</string>
 
-    <string name="dialog_about_changelog">Değişiklikler</string>
     <string name="dialog_about_licenses">Lisanslar</string>
 
     <string name="dialog_query_export_title">Sorgular dışa aktarılıyor…</string>
@@ -64,7 +69,6 @@
 
     <string name="dialog_pin_message">Lütfen PIN’inizi girin.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Günlüğe kaydetmeyi etkinleştirmek ister misiniz\? Kayıtlar istatistik bilgileri, hata ayıklama bilgilerini ve uygulamadaki eylemleri içerir. Oluşturduğunuz günlükler siz yapmazsanız paylaşılmaz.</string>
 

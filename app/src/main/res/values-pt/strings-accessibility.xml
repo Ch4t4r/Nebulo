@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="contentdescription_main_infoimage">Ícone de informação</string>
+    <string name="contentdescription_main_servericon">Ícone do servidor</string>
+    <string name="contentdescription_main_statusimage">Imagem que indica se o aplicativo está ativo</string>
+    <string name="contentdescription_shared_app_icon">Ícone do aplicativo</string>
+    <string name="contentdescription_clear_search">Limpar o histórico de pesquisa</string>
+
+    <string name="contentdescription_start_app">Iniciar o aplicativo</string>
+    <string name="contentdescription_stop_app">Parar o aplicativo</string>
+    
+    <string name="hint_searchterm">Palavra-chave a ser pesquisada</string>
+    <string name="hint_search">Pesquisar</string>
+</resources>

@@ -2,13 +2,6 @@ package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.dnstunnelproxy.QueryListener
-import org.minidns.dnsmessage.DnsMessage
-import org.minidns.record.A
-import org.minidns.record.AAAA
-import org.minidns.record.Data
-import org.minidns.record.Record
-import java.net.Inet4Address
-import java.net.Inet6Address
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

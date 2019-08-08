@@ -50,11 +50,7 @@
     <string name="about_help_translating">Help met vertalen</string>
 
 <string name="activity_label_speed_test">Server snelheidsvergelijking</string>
-    <string name="activity_label_dns_rules">Dns regels</string>
-
     <string name="window_speedtest_runtest">Start de test</string>
-    <string name="window_speedtest_useserver">Gebruik deze server</string>
-
     <string name="error_no_webbrowser_installed">U hebt geen enkele app geïnstalleerd om deze link te bekijken.</string>
 
     <string name="button_main_dnsrules">DNS regels</string>
@@ -67,4 +63,8 @@
     <string name="error_invalid_servername">Geef een naam op.</string>
 
     <string name="window_dnsrules_hostalreadyexists">Er is al een regel voor deze host.</string>
+    <plurals name="window_dnsrules_subtitle">
+        <item quantity="one">%1d regel</item>
+        <item quantity="other">%1d regels</item>
+    </plurals>
     </resources>

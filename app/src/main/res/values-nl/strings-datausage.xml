@@ -4,7 +4,7 @@
     <string name="dialog_crashreportingusages_data_3">App gegevens</string>
     <string name="dialog_crashreportingusages_data_4">Besturingssysteemgegevens</string>
     <string name="dialog_crashreportingusages_data_user_1">Willekeurige ID gebruikt om crashes op te sporen</string>
-    <string name="dialog_crashreportingusages_data_device_1">Architectuur (x86, arm, ...)</string>
+    <string name="dialog_crashreportingusages_data_device_1">Architectuur (x86, arm, …)</string>
     <string name="dialog_crashreportingusages_data_device_2">Oriëntatie (landschap, portret)</string>
     <string name="dialog_crashreportingusages_data_device_3">Vrij / gebruikt geheugen (RAM)</string>
     <string name="dialog_crashreportingusages_data_device_4">Oplaadstatus (ja / nee)</string>

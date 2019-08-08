@@ -45,7 +45,9 @@ class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformat
     }
 
     init {
-        setTitle(context.getString(R.string.dialog_serverimport_title, servers.size))
+        setTitle(servers.size.let {
+            context.resources.getQuantityString(R.plurals.dialog_serverimport_title, it, it)
+        })
         setCancelable(false)
         setCanceledOnTouchOutside(false)
         setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel)) { dialog, _ ->
@@ -78,7 +80,7 @@ class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformat
                 checkbox.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) selectedServerPositions.add(itemView.tag as Int)
                     else selectedServerPositions.remove(itemView.tag as Int)
-                    getButton(DialogInterface.BUTTON_POSITIVE).isEnabled = !selectedServerPositions.isEmpty()
+                    getButton(DialogInterface.BUTTON_POSITIVE).isEnabled = selectedServerPositions.isNotEmpty()
                 }
                 itemView
             }
@@ -104,10 +106,10 @@ class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformat
 
     class ServerViewHolder(itemView: View) : BaseViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.name)
-        val urls = itemView.findViewById<TextView>(R.id.urls)
-        val capabilities = itemView.findViewById<TextView>(R.id.capabilities)
+        private val urls = itemView.findViewById<TextView>(R.id.urls)
+        private val capabilities = itemView.findViewById<TextView>(R.id.capabilities)
         val selected = itemView.findViewById<CheckBox>(R.id.checkbox)
-        val serverType = itemView.findViewById<TextView>(R.id.serverType)
+        private val serverType = itemView.findViewById<TextView>(R.id.serverType)
 
         override fun destroy() {
         }

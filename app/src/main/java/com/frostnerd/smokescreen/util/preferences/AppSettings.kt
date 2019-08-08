@@ -193,6 +193,10 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         "logging_enabled",
         BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
     )
+    var advancedLogging:Boolean by booleanPref(
+        "advanced_logging",
+        false
+    )
     override var crashReportingEnabled: Boolean by booleanPref("enable_sentry", false)
 
     override var enableIpv6: Boolean by booleanPref("ipv6_enabled", true)
@@ -236,6 +240,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     var removedDefaultDoTServers:Set<Int> by intPref<SharedPreferences>("removed_dohserver_id").toSetPreference(emptySet())
     var removedDefaultDoHServers:Set<Int> by intPref<SharedPreferences>("removed_dotserver_id").toSetPreference(emptySet())
+
+    var vpnServiceState:VpnServiceState by enumPref("vpn_service_state", VpnServiceState.STOPPED)
+    var ignoreServiceKilled:Boolean by booleanPref("ignore_service_killed", false)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

@@ -46,7 +46,7 @@ class ChangelogDialog(context: Context, versionToStartFrom:Int, val showOptOut:B
             }
         }
     }
-    val changes = TreeMap<Int, List<String>>()
+    private val changes = TreeMap<Int, List<String>>()
 
     init {
         val resources = context.resources

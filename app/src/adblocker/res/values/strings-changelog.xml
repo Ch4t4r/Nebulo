@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="InconsistentArrays">
 
     <string name="changelog_build_29_1">Servers which block ads are now shown in non-playstore builds (including this one!)</string>
     <string name="changelog_build_29_2">Added AdGuard DNS</string>
@@ -98,7 +98,7 @@
     </string-array>
 
     <string-array name="changelog_build_41">
-        <item>1.0 Beta (Build 41)</item>
+        <item>1.0 Beta-Adblock (Build 41)</item>
         <item>@string/changelog_build_40_1</item>
         <item>@string/changelog_build_40_2</item>
         <item>@string/changelog_build_40_3</item>
@@ -109,6 +109,7 @@
 
     <string name="changelog_build_41_adblocker_1">Added two new dns rule sources</string>
     <string-array name="changelog_build_42">
+        <item>1.0 Beta-Adblock (Build 42)</item>
         <item>@string/changelog_build_41_1</item>
         <item>@string/changelog_build_41_2</item>
         <item>@string/changelog_build_41_3</item>

@@ -41,7 +41,7 @@ import kotlin.random.Random
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPreferences().theme.dialogStyle){
-    val websiteDomains = setOf("bild.de", "washingtonpost.com", "cnn.com", "bbc.com", "nytimes.com", "huffingtonpost.com",
+    private val websiteDomains = setOf("bild.de", "washingtonpost.com", "cnn.com", "bbc.com", "nytimes.com", "huffingtonpost.com",
         "reuters.com", "abcnews.go.com", "timesofindia.indiatimes.com", "theguardian.com", "bloomberg.com",
         "Oneindia.com", "News18.com", "Hindustantimes.com", "Firstpost.com", "Indianexpress.com",
         "Manoramaonline.com",
@@ -220,7 +220,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
         "chubbiesshorts.com", "ritual.com", "sugarbearhair.com", "thirdlove.com", "welleco.com", "mpgsport.com",
         "viator.com", "lonelyplanet.com", "homeaway.com", "hotwire.com", "orbitz.com", "travelocity.com"
     )
-    val websiteUrls = setOf("https://www.heise.de/newsticker/meldung/10-Jahre-Bitcoin-Am-Anfang-war-die-Blockchain-4262899.html",
+    private val websiteUrls = setOf("https://www.heise.de/newsticker/meldung/10-Jahre-Bitcoin-Am-Anfang-war-die-Blockchain-4262899.html",
         "https://www.heise.de/newsticker/meldung/Gehackte-Daten-Politiker-beklagen-schweren-Angriff-auf-die-Demokratie-4265847.html",
         "https://www.golem.de/news/xbox-microsoft-arbeitet-an-force-feedback-tasten-1901-138510.html",
         "http://www.spiegel.de/plus/platz-da-jungs-a-00000000-0002-0001-0000-000161665893",

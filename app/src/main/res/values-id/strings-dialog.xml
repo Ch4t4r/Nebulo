@@ -14,9 +14,14 @@
     <string name="dialog_appchoosal_showsystemapps">Tampilkan apl sistem</string>
     <string name="dialog_appchoosal_whitelist">Hanya gunakan DoH/DoT di apl yang dipilih</string>
 
-    <string name="dialog_excludedapps_infotext">%1d apl dikecualikan secara default dan tidak dapat dipilih</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="other">%1d apl dikecualikan secara default dan tidak dapat dipilih</item>
+    </plurals>
 
-    <string name="dialog_serverimport_title">Impor server %1d</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Impor server %1d</item>
+        <item quantity="other">Impor server %1d</item>
+    </plurals>
     <string name="dialog_serverimport_done">Selesai</string>
     <string name="dialog_serverimport_priority">Prioritas %1d</string>
     <string name="dialog_serverimport_experimental">Eksperimental</string>
@@ -54,7 +59,6 @@
     <string name="dialog_changelog_infotext">Apl ini telah diperbarui sejak Anda terakhir kali membukanya. Dalam daftar berikut, Anda dapat melihat log perubahan. Centang kotak di bawah dan Anda tidak akan melihat pesan ini di masa mendatang.</string>
     <string name="dialog_changelog_dont_show_again">Jangan perlihatkan lagi</string>
 
-    <string name="dialog_about_changelog">Log perubahan</string>
     <string name="dialog_about_licenses">Lisensi</string>
 
     <string name="dialog_query_export_title">Mengekspor kueri…</string>
@@ -62,7 +66,6 @@
 
     <string name="dialog_pin_message">Harap berikan PIN Anda.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_pin_inputlabel">PIN</string>
 
     <string name="dialog_enable_logging">Apakah Anda ingin mengaktifkan pencatatan\? Log berisi informasi statistik, informasi debug, dan tindakan di apl. Log yang dibuat tidak akan dibagikan kecuali Anda melakukannya sendiri.</string>
 

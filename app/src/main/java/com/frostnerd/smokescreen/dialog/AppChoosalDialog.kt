@@ -198,7 +198,7 @@ class AppChoosalDialog(
     inner class AppViewHolder(itemView: View) : BaseViewHolder(itemView) {
         val icon = itemView.findViewById<ImageView>(R.id.icon)
         val title = itemView.findViewById<TextView>(R.id.app_name)
-        val checkBox = itemView.findViewById<CheckBox>(R.id.checkbox)
+        private val checkBox = itemView.findViewById<CheckBox>(R.id.checkbox)
 
         init {
             checkBox.setOnCheckedChangeListener { _, isChecked ->

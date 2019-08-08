@@ -5,21 +5,26 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
+import com.frostnerd.general.service.isServiceRunning
+import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.*
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.BatteryOptimizationInfoDialog
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.*
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.DeepActionState
+import com.frostnerd.smokescreen.util.preferences.VpnServiceState
+import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.menu_cardview.view.*
 import kotlin.random.Random
@@ -70,6 +75,14 @@ class MainActivity : NavigationDrawerActivity() {
                 )?.lastOrNull()?.hostAddress ?: "-").let {
                     if(it == view.dns1.text.toString()) "-" else it
                 }
+                launchWithLifecylce(false) {
+                    val latency = DnsSpeedTest(server, log= {}).runTest(1)
+                    runOnUiThread {
+                        view.latency.text = if(latency != null && latency > 0) {
+                           "$latency ms"
+                        } else "- ms"
+                    }
+                }
             }
             update()
              getPreferences().listenForChanges("dns_server_config", getPreferences().preferenceChangeListener {
@@ -84,7 +97,7 @@ class MainActivity : NavigationDrawerActivity() {
         getPreferences().totalAppLaunches += 1
         if(getPreferences().totalAppLaunches >= 3 && getPreferences().shouldShowCrashReportingConsentDialog()) {
             CrashReportingEnableDialog(this, onConsentGiven = {
-                val bar = Snackbar.make(findViewById<View>(android.R.id.content), R.string.crashreporting_thankyou, Snackbar.LENGTH_INDEFINITE)
+                val bar = Snackbar.make(findViewById(android.R.id.content), R.string.crashreporting_thankyou, Snackbar.LENGTH_INDEFINITE)
                     bar.setAction(R.string.crashreporting_thankyou_gotit) {
                         bar.dismiss()
                     }.show()
@@ -107,9 +120,9 @@ class MainActivity : NavigationDrawerActivity() {
         if(resources.getBoolean(R.bool.add_default_hostsources)) {
             val versionToStartFrom = getPreferences().hostSourcesVersion.let {
                 when {
-                    it != 0 -> it + 1
-                    getDatabase().hostSourceDao().getCount() == 0L -> 1
-                    else -> it +1
+                    it != 0 -> it + 1 // Previous app version already had source versioning
+                    getDatabase().hostSourceDao().getCount() == 0L -> 1 // Previous app version didn't have versioning and no sources
+                    else -> 2 // Previous app version didn't have versioning, but had sources
                 }
             }
             DnsRuleFragment.getDefaultHostSources(versionToStartFrom).apply {
@@ -120,6 +133,10 @@ class MainActivity : NavigationDrawerActivity() {
             }
         }
         handleDeepAction()
+        if(!isServiceRunning(DnsVpnService::class.java) && getPreferences().vpnServiceState == VpnServiceState.STARTED && !getPreferences().ignoreServiceKilled) {
+            getPreferences().vpnServiceState = VpnServiceState.STOPPED
+            BatteryOptimizationInfoDialog(this).show()
+        }
     }
 
     private fun handleDeepAction() {
@@ -130,6 +147,9 @@ class MainActivity : NavigationDrawerActivity() {
                         clickItem(drawerItems.find {
                             it is ClickableDrawerItem && it.title == getString(R.string.button_main_dnsrules)
                         }!!)
+                    }
+                    DeepActionState.BATTERY_OPTIMIZATION_DIALOG -> {
+                        BatteryOptimizationInfoDialog(this).show()
                     }
                 }
             }
@@ -199,10 +219,6 @@ class MainActivity : NavigationDrawerActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     override fun onBackPressed() {
         val fragment = currentFragment
         if (fragment != null && fragment is BackpressFragment) {
@@ -217,7 +233,7 @@ class MainActivity : NavigationDrawerActivity() {
         val openStore = {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
-            } catch (e: android.content.ActivityNotFoundException) {
+            } catch (e: ActivityNotFoundException) {
                 try {
                     startActivity(
                         Intent(

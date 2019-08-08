@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.database
 
 import android.content.Context
 import android.util.Base64
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 import androidx.room.migration.Migration
@@ -10,6 +11,7 @@ import com.frostnerd.smokescreen.Logger
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
+import java.lang.IllegalStateException
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -31,7 +33,8 @@ import java.io.DataInputStream
  */
 
 private var INSTANCE: AppDatabase? = null
-private val MIGRATION_2_X = migration(2) {
+@VisibleForTesting
+val MIGRATION_2_X = migration(2) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 2 to the current version (${AppDatabase.currentVersion}")
     it.execSQL("DROP TABLE CachedResponse")
     it.execSQL("CREATE TABLE CachedResponse(type INTEGER NOT NULL, dnsName TEXT NOT NULL, records TEXT NOT NULL, PRIMARY KEY(dnsName, type))")
@@ -40,26 +43,29 @@ private val MIGRATION_2_X = migration(2) {
     MIGRATION_5_6.migrate(it)
     Logger.logIfOpen("DB_MIGRATION", "Migration from 2 to current version completed")
 }
-private val MIGRATION_3_4 = migration(3, 4) {
+@VisibleForTesting
+val MIGRATION_3_4 = migration(3, 4) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 3 to 4")
     it.execSQL("CREATE TABLE IF NOT EXISTS `DnsQuery` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `fromCache` INTEGER NOT NULL, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 3 to 4 completed")
 }
-private val MIGRATION_4_5 = migration(4, 5) {
+@VisibleForTesting
+val MIGRATION_4_5 = migration(4, 5) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 4 to 5")
     it.execSQL("DROP TABLE IF EXISTS UserServerConfiguration")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 4 to 5 completed")
 }
-private val MIGRATION_5_6 = migration(5, 6) {
+@VisibleForTesting
+val MIGRATION_5_6 = migration(5, 6) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 5 to 6")
     it.execSQL("CREATE TABLE IF NOT EXISTS `DnsRule` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stagingType` INTEGER NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `target` TEXT NOT NULL, `ipv6Target` TEXT, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
-    it.execSQL("CREATE TABLE IF NOT EXISTS `HostSource` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL, `whitelistSource` INTEGER NOT NULL, `ruleCount` INTEGER)")
-    it.execSQL("CREATE  INDEX `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
+    it.execSQL("CREATE TABLE IF NOT EXISTS `HostSource` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL)")
+    it.execSQL("CREATE INDEX IF NOT EXISTS `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
     it.execSQL("CREATE UNIQUE INDEX `index_DnsRule_host_type_stagingType` ON `DnsRule` (`host`, `type`, `stagingType`)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 5 to 6 completed")
 }
-
-private val MIGRATION_6_7 = migration(6,7) {
+@VisibleForTesting
+val MIGRATION_6_7 = migration(6,7) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 6 to 7")
     it.execSQL("DROP INDEX IF EXISTS `index_DnsRule_host`")
     it.execSQL("DROP INDEX IF EXISTS `index_DnsRule_host_type`")
@@ -67,8 +73,8 @@ private val MIGRATION_6_7 = migration(6,7) {
     it.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_DnsRule_host_type_stagingType` ON `DnsRule` (`host`, `type`, `stagingType`)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 6 to 7 completed")
 }
-
-private val MIGRATION_7_8 = migration(7,8) {
+@VisibleForTesting
+val MIGRATION_7_8 = migration(7,8) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 7 to 8")
     it.execSQL("DROP TABLE `DnsRule`")
     it.execSQL("CREATE TABLE IF NOT EXISTS `DnsRule` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stagingType` INTEGER NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `target` TEXT NOT NULL, `ipv6Target` TEXT, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
@@ -76,11 +82,18 @@ private val MIGRATION_7_8 = migration(7,8) {
     it.execSQL("CREATE INDEX IF NOT EXISTS `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 7 to 8 completed")
 }
-private val MIGRATION_8_9 = migration(8, 9) {
+@VisibleForTesting
+val MIGRATION_8_9 = migration(8, 9) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 8 to 9")
     it.execSQL("ALTER TABLE `HostSource` ADD COLUMN `whitelistSource` INTEGER NOT NULL DEFAULT 0")
     it.execSQL("ALTER TABLE `HostSource` ADD COLUMN `ruleCount` INTEGER")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 8 to 9 completed")
+}
+@VisibleForTesting
+val MIGRATION_9_10 = migration(9, 10) {
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 9 to 10")
+    it.execSQL("ALTER TABLE `DnsRule` ADD COLUMN `isWildcard` INTEGER NOT NULL DEFAULT 0")
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 9 to 10 completed")
 }
 
 
@@ -88,7 +101,7 @@ fun Context.getDatabase(): AppDatabase {
     if (INSTANCE == null) {
         INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
             .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
+            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10)
             .build()
     }
     return INSTANCE!!
@@ -103,6 +116,7 @@ private fun migration(
     to: Int = AppDatabase.currentVersion,
     migrate: (database: SupportSQLiteDatabase) -> Unit
 ): Migration {
+    if(from < 0 || to >AppDatabase.currentVersion || from > to) throw IllegalStateException("Version out of bounds $from->$to with bounds 0 -- ${AppDatabase.currentVersion}")
     return object : Migration(from, to) {
         override fun migrate(database: SupportSQLiteDatabase) {
             migrate.invoke(database)

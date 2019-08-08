@@ -56,6 +56,8 @@ A list of some extraordinary people who contributed to this project:
  - Turkish translation by Kemal Oktay Aktoğan
  - Russian translation by [bruleto](https://t.me/bruleto)
  - Dutch translation by Bas Koedijk
+ - Portuguese translation by Rafael W. Bohnenberger
+ - Indonesian translation by Gloeyisk
 <br/>
 <br/>
 
@@ -67,6 +69,10 @@ This work is licensed under the GNU GPLv3 License. Different license-agreements 
 
 
 Copyright (C) 2019   Daniel Wolf
+
+<br>
+<br>
+Please be aware that I'm not going to tolerate exact copies of this app on the Play Store. This project took a lot of work, not only from me, but many alpha/beta testers and translators. Copying is - per the license - generally allowed, but uploading a nearly identical version to the Play Store would be impersonation which I'd go after.
 
 # Third-party content
 This work contains third-party content, namely:
@@ -87,6 +93,12 @@ This work contains third-party content, namely:
    - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 - [LeakSentry](https://github.com/square/leakcanary/tree/master/leakcanary-leaksentry) for finding memory leaks
    - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+- [Gson](https://github.com/google/gson)
+   - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+- [OkHttp](https://github.com/square/okhttp)
+   - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+- [Pcap4j](https://github.com/kaitoy/pcap4j)
+   - License:[MIT](https://opensource.org/licenses/MIT)
 
 
 # Cloning

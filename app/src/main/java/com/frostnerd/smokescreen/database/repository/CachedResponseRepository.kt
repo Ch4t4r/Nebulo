@@ -23,9 +23,9 @@ import kotlinx.coroutines.*
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class CachedResponseRepository(val cachedResponseDao: CachedResponseDao) {
+class CachedResponseRepository(private val cachedResponseDao: CachedResponseDao) {
     @Insert
-    suspend fun insertAll(cachedResponses:List<CachedResponse>): Job {
+    fun insertAll(cachedResponses:List<CachedResponse>): Job {
         return GlobalScope.launch {
             cachedResponseDao.insertAll(cachedResponses)
         }

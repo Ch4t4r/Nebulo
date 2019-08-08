@@ -81,4 +81,10 @@
     <string name="changelog_build_41_6">Dns Regelquellen können nun durch Klicken auf diese bearbeitet werden</string>
     <string name="changelog_build_41_7">Die Dns Regeln öffnen sich nun nicht mehr in einem eigenen Fenster</string>
     <string name="changelog_build_41_8">Einige Abstürze behoben</string>
+    <string name="changelog_build_43_1">Die Serverinformation im Seitenmenü zeigt nun die Latenz des Servers</string>
+    <string name="changelog_build_43_2">Der Geschwindigkeitstest zeigt nun nur Server, welche das aktuelle Netzwerk unterstützen</string>
+    <string name="changelog_build_43_3">Das dnsmasq Format funktioniert nun für Regelquellen</string>
+    <string name="changelog_build_43_4">Die Ansicht der Dns Regeln und Quellen zeigt nun die absolute Anzahl an Regeln</string>
+    <string name="changelog_build_43_5">Es wird nun ein Dialog gezeigt, wenn das Gerät die App beendet, welcher Informationen über Mögliche Lösungen liefert</string>
+    <string name="changelog_build_43_6">Einige Abstürze behoben</string>
     </resources>
