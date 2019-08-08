@@ -159,7 +159,7 @@
     <string name="dialog_overlaydetected_message">There seems to be a system-wide overlay (e.g. a chat bubble, color- or nightfilter) active. Most device don\'t allow you to enable a VPN in this case.\n\nIf you can\'t click OK in the next dialog please disable the overlay.</string>
 
     <string name="dialog_hostsourcerefresh_title">Refresh host sources</string>
-    <string name="dialog_hostsourcerefresh_automatic_refresh">Refresh host sources</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Automatically refresh host sources</string>
     <string name="dialog_hostsourcerefresh_wifi_only">Refresh on WIFI only</string>
     <string name="dialog_hostsourcerefresh_refresh_every">Refresh every</string>
     <string name="dialog_hostsourcerefresh_refresh_now">Refresh now</string>
