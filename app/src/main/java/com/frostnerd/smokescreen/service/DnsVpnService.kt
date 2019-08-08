@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.service
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -94,6 +95,8 @@ class DnsVpnService : VpnService(), Runnable {
     private var queryCountOffset: Long = 0
     private var packageBypassAmount = 0
     private var connectedToANetwork:Boolean? = null
+    private var lastScreenOff:Long? = null
+    private lateinit var screenStateReceiver:BroadcastReceiver
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -185,6 +188,15 @@ class DnsVpnService : VpnService(), Runnable {
         updateServiceTile()
         subscribeToSettings()
         addNetworkChangeListener()
+        screenStateReceiver = registerReceiver(listOf(Intent.ACTION_SCREEN_OFF, Intent.ACTION_SCREEN_ON)) {
+            if(it?.action == Intent.ACTION_SCREEN_OFF) {
+                lastScreenOff = System.currentTimeMillis()
+            } else {
+                if(lastScreenOff != null && System.currentTimeMillis() - lastScreenOff!! >= 60000) {
+                    if(fileDescriptor != null) recreateVpn(false, null)
+                }
+            }
+        }
         log("Service created.")
     }
 
@@ -513,9 +525,14 @@ class DnsVpnService : VpnService(), Runnable {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
-            if(isStoppingCompletely && networkCallback != null) {
-                (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).unregisterNetworkCallback(networkCallback)
-                networkCallback = null
+            if (isStoppingCompletely) {
+                if (networkCallback != null) {
+                    (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).unregisterNetworkCallback(
+                        networkCallback
+                    )
+                    networkCallback = null
+                }
+                unregisterReceiver(screenStateReceiver)
             }
             vpnProxy = null
             fileDescriptor = null
