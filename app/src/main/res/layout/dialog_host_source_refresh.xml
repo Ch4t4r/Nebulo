@@ -44,6 +44,7 @@
                     android:layout_width="wrap_content"
                     android:id="@+id/timeAmountTil"
                     android:layout_alignParentTop="true"
+                    android:minWidth="48dp"
                     android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
