@@ -229,7 +229,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         shouldContain(BuildConfig.APPLICATION_ID)
     }, cacheControl)
     override var dnsServerConfig: DnsServerInformation<*> by cache(DnsServerInformationPreference("dns_server_config") {
-        AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
+        AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(-1) { knownServers ->
             knownServers.getValue(9)
         }
     }, cacheControl)
