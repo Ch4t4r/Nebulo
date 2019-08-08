@@ -26,6 +26,7 @@
 
     <TextView
             android:layout_width="wrap_content"
+            android:layout_marginTop="12dp"
             android:text="@string/dialog_hostsourcerefresh_refresh_every"
             android:layout_height="wrap_content"/>
 
@@ -55,8 +56,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_toEndOf="@id/timeAmountTil"
                 android:id="@+id/timeUnit"
+                android:layout_marginStart="8dp"
                 android:layout_alignBaseline="@id/timeAmountTil"
-                android:entries="@array/dialog_hostsourcerefresh_timeunits"
                 android:layout_height="wrap_content"/>
 
         <Button

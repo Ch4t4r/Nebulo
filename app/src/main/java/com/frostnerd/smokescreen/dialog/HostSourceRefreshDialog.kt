@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.dialog
 
 import android.content.Context
 import android.content.DialogInterface
+import android.widget.ArrayAdapter
 import androidx.annotation.Keep
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.smokescreen.R
@@ -46,7 +47,14 @@ class HostSourceRefreshDialog(context:Context,
         view.refreshWifiOnly.isChecked = context.getPreferences().automaticHostRefreshWifiOnly
         view.timeAmount.setText(context.getPreferences().automaticHostRefreshTimeAmount.toString())
         view.timeUnit.setSelection(context.getPreferences().automaticHostRefreshTimeUnit.ordinal)
-        setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.all_close)) { dialog, _ ->
+        val adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
+            context,
+            R.array.dialog_hostsourcerefresh_timeunits,
+            R.layout.item_tasker_action_spinner_item
+        )
+        adapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
+        view.timeUnit.adapter = adapter
+        setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(android.R.string.cancel)) { dialog, _ ->
             dialog.dismiss()
         }
         setButton(DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok)) { dialog, _ ->
