@@ -87,4 +87,8 @@
     <string name="changelog_build_43_4">De dns-regels weergave toont nu het totale aantal regels</string>
     <string name="changelog_build_43_5">Er wordt nu een dialoogvenster weergegeven wanneer het systeem de app afsluit, met informatie over mogelijke oplossingen</string>
     <string name="changelog_build_43_6">Een paar kleine foutjes opgelost</string>
+    <string name="changelog_build_44_1">De app zou nu in staat moeten zijn zichzelf te herstellen wanneer het scherm enige tijd uitgeschakeld is geweest</string>
+    <string name="changelog_build_44_2">DNS-regels kunnen nu worden geconfigureerd om periodiek te worden bijgewerkt</string>
+    <string name="changelog_build_44_3">Host bronnen worden nu alleen gedownload/verwerkt wanneer hun inhoud is gewijzigd</string>
+    <string name="changelog_build_44_4">De dns-regels ondersteunen nu wildcards</string>
     </resources>
