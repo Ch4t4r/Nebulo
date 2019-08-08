@@ -67,7 +67,7 @@ class HostSourceRefreshDialog(context:Context,
             dialog.dismiss()
             context.getPreferences().automaticHostRefresh = view.automaticRefresh.isChecked
             context.getPreferences().automaticHostRefreshWifiOnly = view.refreshWifiOnly.isChecked
-            context.getPreferences().automaticHostRefreshTimeAmount = view.timeAmount.text.toString().toInt()
+            context.getPreferences().automaticHostRefreshTimeAmount = view.timeAmount.text.toString().toIntOrNull() ?: 1
             context.getPreferences().automaticHostRefreshTimeUnit = TimeUnit.values().find { it.ordinal == view.timeUnit.selectedItemPosition }!!
             refreshConfigChanged()
         }
