@@ -111,6 +111,7 @@ dependencies {
     implementation 'com.frostnerd.utilskt:general:1.0.16' // https://git.frostnerd.com/AndroidUtils/generalkt (Accessible after logging in [free of charge])
     implementation 'com.frostnerd.utilskt:adapters:1.1.1' // https://git.frostnerd.com/AndroidUtils/Adapters (Accessible after logging in [free of charge])
 
+    implementation 'androidx.work:work-runtime:2.2.0-rc01'
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation "androidx.preference:preference:1.1.0-rc01"
     implementation "com.google.android.material:material:1.1.0-alpha09"

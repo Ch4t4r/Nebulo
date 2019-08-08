@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.frostnerd.cacheadapter.ListDataSource
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.general.service.isServiceRunning
@@ -23,12 +27,15 @@ import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.dialog.ExportDnsRulesDialog
+import com.frostnerd.smokescreen.dialog.HostSourceRefreshDialog
 import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
 import com.frostnerd.smokescreen.service.RuleExportService
 import com.frostnerd.smokescreen.service.RuleImportService
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
+import com.frostnerd.smokescreen.util.worker.RuleImportStartWorker
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_dns_rules.*
+import kotlinx.android.synthetic.main.dialog_host_source_refresh.*
 import kotlinx.android.synthetic.main.item_datasource.view.*
 import kotlinx.android.synthetic.main.item_datasource.view.cardContent
 import kotlinx.android.synthetic.main.item_datasource.view.delete
@@ -39,6 +46,8 @@ import kotlinx.android.synthetic.main.item_dnsrule_host.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.time.Duration
+import java.util.concurrent.TimeUnit
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -118,13 +127,46 @@ class DnsRuleFragment : Fragment() {
             }).show()
         }
         refresh.setOnClickListener {
-            if(context!!.isServiceRunning(RuleImportService::class.java)) {
-                context!!.startService(Intent(context!!, RuleImportService::class.java).putExtra("abort", true))
-            } else {
-                context!!.startService(Intent(context!!, RuleImportService::class.java))
-                refreshProgress.show()
-                refreshProgressShown = true
-            }
+            HostSourceRefreshDialog(context!!,runRefresh =  {
+                if(context!!.isServiceRunning(RuleImportService::class.java)) {
+                    context!!.startService(Intent(context!!, RuleImportService::class.java).putExtra("abort", true))
+                } else {
+                    context!!.startService(Intent(context!!, RuleImportService::class.java))
+                    refreshProgress.show()
+                    refreshProgressShown = true
+                }
+            }, refreshConfigChanged = {
+                getPreferences().apply {
+                    val constraints = Constraints.Builder()
+                        .setRequiresStorageNotLow(true)
+                        .setRequiresBatteryNotLow(true)
+                        .setRequiredNetworkType(if (this.automaticHostRefreshWifiOnly) NetworkType.UNMETERED else NetworkType.CONNECTED)
+                        .build()
+                    val mappedTimeAmount = automaticHostRefreshTimeAmount.let {
+                        if (automaticHostRefreshTimeUnit == HostSourceRefreshDialog.TimeUnit.WEEKS) it * 7
+                        else it
+                    }.toLong()
+                    val mappedTimeUnit = automaticHostRefreshTimeUnit.let {
+                        when (it) {
+                            HostSourceRefreshDialog.TimeUnit.WEEKS -> TimeUnit.DAYS
+                            HostSourceRefreshDialog.TimeUnit.DAYS -> TimeUnit.DAYS
+                            HostSourceRefreshDialog.TimeUnit.HOURS -> TimeUnit.HOURS
+                            HostSourceRefreshDialog.TimeUnit.MINUTES -> TimeUnit.MINUTES
+                        }
+                    }
+                    val workRequest = PeriodicWorkRequest.Builder(RuleImportStartWorker::class.java,
+                        mappedTimeAmount,
+                        mappedTimeUnit)
+                        .setConstraints(constraints)
+                        .setInitialDelay(mappedTimeAmount, mappedTimeUnit)
+                        .addTag("hostSourceRefresh")
+                    WorkManager.getInstance(context!!).apply {
+                        cancelAllWorkByTag("hostSourceRefresh")
+                        enqueue(workRequest.build())
+                    }
+
+                }
+            }).show()
         }
         export.setOnClickListener {
             if (context!!.isServiceRunning(RuleExportService::class.java)) {
