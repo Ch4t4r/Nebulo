@@ -11,6 +11,7 @@ import com.frostnerd.preferenceskt.typedpreferences.cache.ExpirationCacheControl
 import com.frostnerd.preferenceskt.typedpreferences.cache.buildCacheStrategy
 import com.frostnerd.preferenceskt.typedpreferences.types.*
 import com.frostnerd.smokescreen.BuildConfig
+import com.frostnerd.smokescreen.dialog.HostSourceRefreshDialog
 import java.util.*
 
 /*
@@ -229,7 +230,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         shouldContain(BuildConfig.APPLICATION_ID)
     }, cacheControl)
     override var dnsServerConfig: DnsServerInformation<*> by cache(DnsServerInformationPreference("dns_server_config") {
-        AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(500) { knownServers ->
+        AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(-1) { knownServers ->
             knownServers.getValue(9)
         }
     }, cacheControl)
@@ -243,6 +244,11 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     var vpnServiceState:VpnServiceState by enumPref("vpn_service_state", VpnServiceState.STOPPED)
     var ignoreServiceKilled:Boolean by booleanPref("ignore_service_killed", false)
+
+    var automaticHostRefresh:Boolean by booleanPref("automatic_host_refresh", false)
+    var automaticHostRefreshWifiOnly:Boolean by booleanPref("automatic_host_refresh_wifi_only", true)
+    var automaticHostRefreshTimeUnit:HostSourceRefreshDialog.TimeUnit by enumPref("automatic_host_refresh_timeunit", HostSourceRefreshDialog.TimeUnit.HOURS)
+    var automaticHostRefreshTimeAmount:Int by intPref("automatic_host_refresh_timeamount", 12)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

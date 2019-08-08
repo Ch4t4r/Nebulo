@@ -47,4 +47,7 @@ interface HostSourceDao {
 
     @Query("SELECT COUNT(*) FROM HostSource WHERE enabled > 0")
     fun getEnabledCount(): Long
+
+    @Query("UPDATE HostSource SET checksum=NULL WHERE checksum IS NOT NULL AND enabled<1")
+    fun removeChecksumForDisabled()
 }

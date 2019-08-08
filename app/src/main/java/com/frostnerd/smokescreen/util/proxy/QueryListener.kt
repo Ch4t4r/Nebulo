@@ -61,7 +61,7 @@ class QueryListener(private val context: Context) : QueryListener {
         if (writeQueriesToLog) {
             context.log("Query from device: $questionMessage")
         }
-        if (logQueriesToDb) {
+        if (logQueriesToDb && questionMessage.questions.size != 0) {
             val query = DnsQuery(
                 type = questionMessage.question.type,
                 name = questionMessage.question.name.toString(),
