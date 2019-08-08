@@ -37,9 +37,13 @@ class HostSourceRefreshDialog(context:Context,
         }
         view.automaticRefresh.setOnCheckedChangeListener { _, isChecked ->
             view.refreshWifiOnly.isEnabled = isChecked
+            view.timeAmountTil.isEnabled = isChecked
+            view.timeUnit.isEnabled = isChecked
         }
         view.automaticRefresh.isChecked = context.getPreferences().automaticHostRefresh
         view.refreshWifiOnly.isChecked = context.getPreferences().automaticHostRefreshWifiOnly
+        view.timeAmount.setText(context.getPreferences().automaticHostRefreshTimeAmount.toString())
+        view.timeUnit.setSelection(context.getPreferences().automaticHostRefreshTimeUnit.ordinal)
         setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.all_close)) { dialog, _ ->
             dialog.dismiss()
         }
@@ -47,7 +51,13 @@ class HostSourceRefreshDialog(context:Context,
             dialog.dismiss()
             context.getPreferences().automaticHostRefresh = view.automaticRefresh.isChecked
             context.getPreferences().automaticHostRefreshWifiOnly = view.refreshWifiOnly.isChecked
+            context.getPreferences().automaticHostRefreshTimeAmount = view.timeAmount.text.toString().toInt()
+            context.getPreferences().automaticHostRefreshTimeUnit = TimeUnit.values().find { it.ordinal == view.timeUnit.selectedItemPosition }!!
+
         }
     }
 
+    enum class TimeUnit {
+        HOURS, DAYS, WEEKS
+    }
 }

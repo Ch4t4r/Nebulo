@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:paddingLeft="@dimen/dialog_horizontal_margin"
@@ -22,12 +24,48 @@
             android:id="@+id/refreshWifiOnly"
             android:layout_height="wrap_content"/>
 
-    <Button
-            android:layout_width="match_parent"
-            android:background="@drawable/main_roundbuttons"
-            android:id="@+id/refreshNow"
-            android:text="@string/dialog_hostsourcerefresh_refresh_now"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+    <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/dialog_hostsourcerefresh_refresh_every"
             android:layout_height="wrap_content"/>
 
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/timeAmountTil"
+                android:layout_above="@id/refreshNow"
+                android:layout_alignParentTop="true"
+                android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/timeAmount"
+                    android:inputType="numberSigned"
+                    android:imeOptions="actionNext"
+                    android:text="12"
+                    android:maxLines="1"
+                    android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/timeAmountTil"
+                android:id="@+id/timeUnit"
+                android:layout_alignBaseline="@id/timeAmountTil"
+                android:entries="@array/dialog_hostsourcerefresh_timeunits"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:layout_width="match_parent"
+                android:background="@drawable/main_roundbuttons"
+                android:id="@+id/refreshNow"
+                android:layout_alignParentBottom="true"
+                android:text="@string/dialog_hostsourcerefresh_refresh_now"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_height="wrap_content"/>
+    </RelativeLayout>
 </LinearLayout>

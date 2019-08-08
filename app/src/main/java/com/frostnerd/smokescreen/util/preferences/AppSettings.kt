@@ -11,6 +11,7 @@ import com.frostnerd.preferenceskt.typedpreferences.cache.ExpirationCacheControl
 import com.frostnerd.preferenceskt.typedpreferences.cache.buildCacheStrategy
 import com.frostnerd.preferenceskt.typedpreferences.types.*
 import com.frostnerd.smokescreen.BuildConfig
+import com.frostnerd.smokescreen.dialog.HostSourceRefreshDialog
 import java.util.*
 
 /*
@@ -246,6 +247,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     var automaticHostRefresh:Boolean by booleanPref("automatic_host_refresh", false)
     var automaticHostRefreshWifiOnly:Boolean by booleanPref("automatic_host_refresh_wifi_only", true)
+    var automaticHostRefreshTimeUnit:HostSourceRefreshDialog.TimeUnit by enumPref("automatic_host_refresh_timeunit", HostSourceRefreshDialog.TimeUnit.HOURS)
+    var automaticHostRefreshTimeAmount:Int by intPref("automatic_host_refresh_timeamount", 12)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
