@@ -42,7 +42,6 @@
             <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:id="@+id/timeAmountTil"
-                    android:layout_above="@id/refreshNow"
                     android:layout_alignParentTop="true"
                     android:layout_height="wrap_content">
 
@@ -69,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:background="@drawable/main_roundbuttons"
                     android:id="@+id/refreshNow"
-                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/timeAmountTil"
+                    android:layout_marginTop="16dp"
                     android:text="@string/dialog_hostsourcerefresh_refresh_now"
                     style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_height="wrap_content"/>
