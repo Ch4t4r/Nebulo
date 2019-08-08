@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.dialog
 
 import android.content.Context
 import android.content.DialogInterface
+import androidx.annotation.Keep
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
@@ -57,6 +58,7 @@ class HostSourceRefreshDialog(context:Context,
         }
     }
 
+    @Keep
     enum class TimeUnit {
         HOURS, DAYS, WEEKS
     }

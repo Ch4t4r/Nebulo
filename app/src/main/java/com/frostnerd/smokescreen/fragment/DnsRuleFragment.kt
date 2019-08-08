@@ -23,6 +23,7 @@ import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.dialog.ExportDnsRulesDialog
+import com.frostnerd.smokescreen.dialog.HostSourceRefreshDialog
 import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
 import com.frostnerd.smokescreen.service.RuleExportService
 import com.frostnerd.smokescreen.service.RuleImportService
@@ -118,13 +119,15 @@ class DnsRuleFragment : Fragment() {
             }).show()
         }
         refresh.setOnClickListener {
-            if(context!!.isServiceRunning(RuleImportService::class.java)) {
-                context!!.startService(Intent(context!!, RuleImportService::class.java).putExtra("abort", true))
-            } else {
-                context!!.startService(Intent(context!!, RuleImportService::class.java))
-                refreshProgress.show()
-                refreshProgressShown = true
-            }
+            HostSourceRefreshDialog(context!!) {
+                if(context!!.isServiceRunning(RuleImportService::class.java)) {
+                    context!!.startService(Intent(context!!, RuleImportService::class.java).putExtra("abort", true))
+                } else {
+                    context!!.startService(Intent(context!!, RuleImportService::class.java))
+                    refreshProgress.show()
+                    refreshProgressShown = true
+                }
+            }.show()
         }
         export.setOnClickListener {
             if (context!!.isServiceRunning(RuleExportService::class.java)) {
