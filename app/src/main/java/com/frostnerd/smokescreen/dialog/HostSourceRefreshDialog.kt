@@ -48,10 +48,6 @@ class HostSourceRefreshDialog(context:Context,
         view.automaticRefresh.setOnCheckedChangeListener { _, isChecked ->
             changeAutomaticRefreshStatus(isChecked)
         }
-        view.automaticRefresh.isChecked = context.getPreferences().automaticHostRefresh
-        view.refreshWifiOnly.isChecked = context.getPreferences().automaticHostRefreshWifiOnly
-        view.timeAmount.setText(context.getPreferences().automaticHostRefreshTimeAmount.toString())
-        view.timeUnit.setSelection(context.getPreferences().automaticHostRefreshTimeUnit.ordinal)
         changeAutomaticRefreshStatus(view.automaticRefresh.isChecked)
         val adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
             context,
@@ -60,6 +56,10 @@ class HostSourceRefreshDialog(context:Context,
         )
         adapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
         view.timeUnit.adapter = adapter
+        view.automaticRefresh.isChecked = context.getPreferences().automaticHostRefresh
+        view.refreshWifiOnly.isChecked = context.getPreferences().automaticHostRefreshWifiOnly
+        view.timeAmount.setText(context.getPreferences().automaticHostRefreshTimeAmount.toString())
+        view.timeUnit.setSelection(context.getPreferences().automaticHostRefreshTimeUnit.ordinal)
         setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(android.R.string.cancel)) { dialog, _ ->
             dialog.dismiss()
         }
@@ -75,6 +75,6 @@ class HostSourceRefreshDialog(context:Context,
 
     @Keep
     enum class TimeUnit {
-        HOURS, DAYS, WEEKS
+        MINUTES, HOURS, DAYS, WEEKS
     }
 }

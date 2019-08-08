@@ -151,6 +151,7 @@ class DnsRuleFragment : Fragment() {
                             HostSourceRefreshDialog.TimeUnit.WEEKS -> TimeUnit.DAYS
                             HostSourceRefreshDialog.TimeUnit.DAYS -> TimeUnit.DAYS
                             HostSourceRefreshDialog.TimeUnit.HOURS -> TimeUnit.HOURS
+                            HostSourceRefreshDialog.TimeUnit.MINUTES -> TimeUnit.MINUTES
                         }
                     }
                     val workRequest = PeriodicWorkRequest.Builder(RuleImportStartWorker::class.java,

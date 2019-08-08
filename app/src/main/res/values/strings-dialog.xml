@@ -163,10 +163,12 @@
     <string name="dialog_hostsourcerefresh_wifi_only">Refresh on WIFI only</string>
     <string name="dialog_hostsourcerefresh_refresh_every">Refresh every</string>
     <string name="dialog_hostsourcerefresh_refresh_now">Refresh now</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutes</string>
     <string name="dialog_hostsourcerefresh_timeunit_hours">Hours</string>
     <string name="dialog_hostsourcerefresh_timeunit_days">Days</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Weeks</string>
     <string-array name="dialog_hostsourcerefresh_timeunits">
+        <item>@string/dialog_hostsourcerefresh_timeunit_minutes</item>
         <item>@string/dialog_hostsourcerefresh_timeunit_hours</item>
         <item>@string/dialog_hostsourcerefresh_timeunit_days</item>
         <item>@string/dialog_hostsourcerefresh_timeunit_weeks</item>
