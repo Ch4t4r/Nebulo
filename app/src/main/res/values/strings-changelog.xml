@@ -256,4 +256,17 @@
         <item>@string/changelog_build_43_5</item>
         <item>@string/changelog_build_43_6</item>
     </string-array>
+
+    <string name="changelog_build_44_1">The app should now be able to recover itself when the screen has been off for some time</string>
+    <string name="changelog_build_44_2">Dns rules can now be configured to updated periodically</string>
+    <string name="changelog_build_44_3">Host sources are now only downloaded/parsed when their content changed</string>
+    <string name="changelog_build_44_4">The dns rules now support wildcards</string>
+    <string-array name="changelog_build_44">
+        <item>1.0 Beta (Build 44)</item>
+        <item>@string/changelog_build_44_1</item>
+        <item>@string/changelog_build_44_2</item>
+        <item>@string/changelog_build_44_3</item>
+        <item>@string/changelog_build_44_4</item>
+        <item>@string/changelog_build_43_6</item>
+    </string-array>
 </resources>
