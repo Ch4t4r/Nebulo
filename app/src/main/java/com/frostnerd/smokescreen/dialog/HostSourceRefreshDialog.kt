@@ -27,7 +27,8 @@ import kotlinx.android.synthetic.main.dialog_host_source_refresh.view.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class HostSourceRefreshDialog(context:Context,
-                              runRefresh:() -> Unit):AlertDialog(context, context.getPreferences().theme.dialogStyle) {
+                              runRefresh:() -> Unit,
+                              refreshConfigChanged:() -> Unit):AlertDialog(context, context.getPreferences().theme.dialogStyle) {
 
     init {
         setTitle(R.string.dialog_hostsourcerefresh_title)
@@ -54,7 +55,7 @@ class HostSourceRefreshDialog(context:Context,
             context.getPreferences().automaticHostRefreshWifiOnly = view.refreshWifiOnly.isChecked
             context.getPreferences().automaticHostRefreshTimeAmount = view.timeAmount.text.toString().toInt()
             context.getPreferences().automaticHostRefreshTimeUnit = TimeUnit.values().find { it.ordinal == view.timeUnit.selectedItemPosition }!!
-
+            refreshConfigChanged()
         }
     }
 
