@@ -190,21 +190,23 @@ class RuleImportService : IntentService("RuleImportService") {
                     var response: Response? = null
                     try {
                         val request = Request.Builder().url(it.source)
-                        if(it.checksum != null) request.header("If-None-Match", it.checksum!!)
+                        val realChecksum = it.checksum?.replace("<qt>", "\"")
+                        if(realChecksum != null) request.header("If-None-Match", realChecksum)
                         response = httpClient.newCall(request.build()).execute()
-                        val localDataIsRecent = response.code == 304 || it.checksum!= null && response.headers.find {
+                        val receivedChecksum = response?.headers.find {
                             it.first.equals("etag", true)
-                        }?.second == it.checksum
+                        }?.second
+                        val localDataIsRecent = response.code == 304 || (realChecksum != null && receivedChecksum == realChecksum)
                         when {
                             response.isSuccessful && !localDataIsRecent -> {
                                 response.headers.find {
                                     it.first.equals("etag", true)
                                 }?.second?.apply {
-                                    newChecksums[it] = this
+                                    newChecksums[it] = this.replace("\"", "<qt>")
                                 }
                                 processLines(it, response.body!!.byteStream())
                             }
-                            response.code == 304 || localDataIsRecent -> {
+                            localDataIsRecent -> {
                                 log("Host source ${it.name} hasn't changed, not updating.")
                                 ruleCount += it.ruleCount ?: 0
                                 dnsRuleDao.unstageRulesOfSource(it.id)
