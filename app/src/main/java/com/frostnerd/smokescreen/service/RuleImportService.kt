@@ -193,10 +193,10 @@ class RuleImportService : IntentService("RuleImportService") {
                         val realChecksum = it.checksum?.replace("<qt>", "\"")
                         if(realChecksum != null) request.header("If-None-Match", realChecksum)
                         response = httpClient.newCall(request.build()).execute()
-                        val receivedChecksum = response?.headers.find {
+                        val receivedChecksum = response.headers.find {
                             it.first.equals("etag", true)
                         }?.second
-                        val localDataIsRecent = response.code == 304 || (realChecksum != null && receivedChecksum == realChecksum)
+                        val localDataIsRecent = response.code == 304 || (realChecksum != null && (receivedChecksum == realChecksum || receivedChecksum == "W/$realChecksum"))
                         when {
                             response.isSuccessful && !localDataIsRecent -> {
                                 response.headers.find {
