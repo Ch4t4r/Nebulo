@@ -38,6 +38,7 @@ class HostSourceRefreshDialog(context:Context,
         setView(view)
         view.refreshNow.setOnClickListener {
             runRefresh()
+            dismiss()
         }
         val changeAutomaticRefreshStatus:(Boolean) -> Unit = { isChecked ->
             view.refreshWifiOnly.isEnabled = isChecked
