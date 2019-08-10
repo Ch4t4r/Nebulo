@@ -136,4 +136,7 @@
 
     <string name="title_delete_queries">Limpar consultas de DNS</string>
     <string name="summary_delete_queries">Clique aqui para excluir todas as consultas de DNS do registro.</string>
-</resources>
+<string name="title_advanced_logging">Registro avançado</string>
+    <string name="summary_advanced_logging">Adiciona mais registros, o que pode ajudar com problemas mais persistentes.</string>
+
+    </resources>

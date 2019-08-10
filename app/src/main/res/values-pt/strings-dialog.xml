@@ -15,9 +15,9 @@
     <string name="dialog_appchoosal_whitelist">Apenas use DoH/DoT em aplicativos selecionados</string>
 
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d aplicação é excluídos por padrão e não podem ser desmarcados</item>
-        <item quantity="other">%1d aplicativos são excluídos por padrão e não podem ser desmarcados</item>
-    </plurals>
+	<item quantity="one">%1d aplicativo é excluído por padrão e não pode ser desmarcado</item>
+	<item quantity="other">%1d aplicativos são excluídos por padrão e não podem ser desmarcados</item>
+</plurals>
 
     <plurals name="dialog_serverimport_title">
         <item quantity="one">Importação de %1d servidor</item>
@@ -28,13 +28,13 @@
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Tipo: DNS-via-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Tipo: Dns-via-TLS (DoT)</string>
-    <string name="dialog_serverimport_text">Por favor, selecione o(s) servidor(es) que você deseja importar.
-\n
+    <string name="dialog_serverimport_text">Por favor, selecione os servidores que você deseja importar. 
+\n 
 \nServidores que já foram importados serão duplicados se você os selecionar.</string>
 
     <string name="dialog_serverimportfailed_title">Importação falhou</string>
     <string name="dialog_serverimportfailed_text">Não foi possível importar o(s) servidor(es).</string>
-    <string name="dialog_serverimportfailed_text_exception">Não foi possível importar o(s) servidor(es).
+    <string name="dialog_serverimportfailed_text_exception">Não foi possível importar os servidores. 
 \n(%1s)</string>
 
     <string name="dialog_logexport_text">Como você deseja compartilhar os registros\?</string>
@@ -94,11 +94,13 @@
     <string name="dialog_clearqueries_message">Tem certeza de que deseja limpar as consultas registradas\? Isto não pode ser revertido.</string>
 
     <string name="dialog_credits_title">Créditos</string>
-    <string name="dialog_credits_message" formatted="true">- Ícone do aplicativo por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
-\n - Tradução turca por Kemal Oktay Aktoğan
-\n - Tradução russa por bruleto
+    <string name="dialog_credits_message" formatted="true">- Ícone do aplicativo por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; . 
+\n - Tradução turca por Kemal Oktay Aktoğan 
+\n - Tradução russa por bruleto 
 \n - Tradução holandesa por Bas Koedijk 
-\n 
+\n - Tradução portuguesa por Rafael W. Bohnenberger
+\n - Tradução indonésia por Gloeyisk 
+\n
 \n Quer ver seu nome aqui\? Sinta-se à vontade para &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuir&lt;/a&gt;.</string>
 
     <string name="dialog_join_group_title">Junte-se à comunidade</string>
@@ -159,4 +161,11 @@
 \n
 \nSe você optar por ignorar isso, você não verá esta caixa de diálogo novamente. Você pode ler mais e obter dicas para resolver isso com o botão abaixo (abre um site externo em seu navegador).</string>
     <string name="dialog_servicekilled_more_info">Mais informações</string>
+<string name="dialog_newhostsource_wildcard_info">Você pode usar listas de hosts que fazem uso de domínios curinga.</string>
+    <string name="dialog_newdnsrule_wildcard_info">O host oferece suporte a caracteres-curinga. Use asterisco (*) para qualquer quantidade de caracteres, números e caracteres especiais permitidos, exceto o ponto (.). Use dois asteriscos (**) para incluir o ponto (.).</string>
+
+    <string name="dialog_overlaydetected_title">Sobreposição em todo o sistema detectada</string>
+    <string name="dialog_overlaydetected_message">Uma sobreposição em todo o sistema (por exemplo, um balão de chat, filtro colorido ou noturno) parece estar ativa. Com a maioria dos dispositivos, você não pode habilitar a VPN nesse caso. 
+\n
+\nSe você não puder clicar em OK na próxima caixa de diálogo, desative a sobreposição.</string>
 </resources>

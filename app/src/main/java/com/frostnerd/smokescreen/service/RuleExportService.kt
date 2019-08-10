@@ -148,7 +148,7 @@ class RuleExportService : IntentService("RuleExportService") {
             })
             updateNotification(0, ruleCount)
             if (params.exportUserRules && !isAborted) {
-                getDatabase().dnsRuleDao().getAllUserRules().forEach {
+                getDatabase().dnsRuleDao().getAllUserRulesWithoutWhitelist().forEach {
                     if (!isAborted) {
                         writtenCount++
                         writeRule(stream, it)
@@ -164,7 +164,7 @@ class RuleExportService : IntentService("RuleExportService") {
                 val limit = 2000
                 var offset = 0
                 while (!isAborted && offset < nonUserRuleCount!!) {
-                    getDatabase().dnsRuleDao().getAllNonUserRules(offset, limit).forEach {
+                    getDatabase().dnsRuleDao().getAllNonUserRulesWithoutWhitelist(offset, limit).forEach {
                         if (!isAborted) {
                             writtenCount++
                             writeRule(stream, it)

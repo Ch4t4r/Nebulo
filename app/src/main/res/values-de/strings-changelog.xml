@@ -87,4 +87,8 @@
     <string name="changelog_build_43_4">Die Ansicht der Dns Regeln und Quellen zeigt nun die absolute Anzahl an Regeln</string>
     <string name="changelog_build_43_5">Es wird nun ein Dialog gezeigt, wenn das Gerät die App beendet, welcher Informationen über Mögliche Lösungen liefert</string>
     <string name="changelog_build_43_6">Einige Abstürze behoben</string>
+    <string name="changelog_build_44_1">Die App sollte nun richtig funktionieren, wenn das WLAN sich automatisch ausschaltet</string>
+    <string name="changelog_build_44_2">Hostquellen können nun regelmäßig geupdated werden</string>
+    <string name="changelog_build_44_3">Hostquellen werden nur noch gedownloaded, wenn sich deren Inhalt geändert hat</string>
+    <string name="changelog_build_44_4">Die DNS Regeln unterstützen nun Wildcards</string>
     </resources>
