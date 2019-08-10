@@ -133,7 +133,10 @@ class MainActivity : NavigationDrawerActivity() {
             }
         }
         handleDeepAction()
-        if(!isServiceRunning(DnsVpnService::class.java) && getPreferences().vpnServiceState == VpnServiceState.STARTED && !getPreferences().ignoreServiceKilled) {
+        if(!isServiceRunning(DnsVpnService::class.java) &&
+            getPreferences().vpnServiceState == VpnServiceState.STARTED &&
+            !getPreferences().ignoreServiceKilled &&
+                getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE) {
             getPreferences().vpnServiceState = VpnServiceState.STOPPED
             BatteryOptimizationInfoDialog(this).show()
         }
