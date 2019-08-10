@@ -164,4 +164,13 @@
     <string name="dialog_overlaydetected_message">Es scheint ein systemweites Overlay (z.B. eine Chatblase, oder ein Farb-/Nachtfilter) aktiv zu sein. Auf den meisten Geräten ist es nicht möglich, der App den benötigten Zugang zum VPN zu gewähren, wenn ein Overlay sichtbar ist.
 \n
 \nBitte deaktivere dein Overlay, solltest du im nächsten Dialog nicht auf OK klicken können.</string>
-</resources>
+<string name="dialog_hostsourcerefresh_title">Hostquellen aktualisieren</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Hostquellen automatisch aktualisieren</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">Nur bei WLAN-Verbindung</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">Aktualisiere alle</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">Jetzt aktualisieren</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Minuten</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">Stunden</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">Tage</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">Wochen</string>
+    </resources>
