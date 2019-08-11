@@ -263,7 +263,7 @@ class DnsRuleFragment : Fragment() {
                             showUserRules = !showUserRules
                             if (showUserRules) {
                                 userRuleCount = userDnsRules.size
-                                activity!!.runOnUiThread {
+                                activity?.runOnUiThread {
                                     sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
                                     list.smoothScrollToPosition(sourceAdapterList.size + 1)
                                 }
@@ -304,10 +304,12 @@ class DnsRuleFragment : Fragment() {
                                     showUserRules = true
                                     if (wereRulesShown) {
                                         userRuleCount += 1
-                                        sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                                        activity?.runOnUiThread {
+                                            sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                                        }
                                     } else {
                                         userRuleCount = userDnsRules.size
-                                        activity!!.runOnUiThread {
+                                        activity?.runOnUiThread {
                                             sourceAdapter.notifyItemChanged(sourceAdapterList.size)
                                             sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
                                             list.smoothScrollToPosition(insertPos)
@@ -413,7 +415,7 @@ class DnsRuleFragment : Fragment() {
                 }
             }
             runOnUiThread = {
-                activity!!.runOnUiThread(it)
+                activity?.runOnUiThread(it)
             }
 
         }.build()
