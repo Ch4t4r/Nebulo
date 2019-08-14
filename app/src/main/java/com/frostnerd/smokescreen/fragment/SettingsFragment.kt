@@ -163,6 +163,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         queryLogging.setOnPreferenceChangeListener { _, newValue ->
             requireContext().getPreferences().queryLoggingEnabled = newValue as Boolean
+            context?.sendLocalBroadcast(Intent(MainActivity.BROADCAST_RELOAD_MENU))
             true
         }
         exportQueries.summary =
