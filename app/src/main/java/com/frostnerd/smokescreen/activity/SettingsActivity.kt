@@ -28,9 +28,11 @@ import com.frostnerd.smokescreen.getPreferences
 
 class SettingsActivity : BaseActivity() {
     companion object {
-        fun showCategory(context: Context, category:Category) {
+        fun showCategory(context: Context, category: Category) {
             Intent(context, SettingsActivity::class.java).apply {
                 putExtra("category", category)
+            }.also {
+                context.startActivity(it)
             }
         }
     }
