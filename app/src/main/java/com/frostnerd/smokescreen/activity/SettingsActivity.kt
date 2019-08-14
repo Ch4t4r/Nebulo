@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.fragment.SettingsFragment
 import com.frostnerd.smokescreen.getPreferences
@@ -49,6 +50,13 @@ class SettingsActivity : BaseActivity() {
                 putSerializable("category", intent.getSerializableExtra("category"))
             }
         }).commit()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if(item.itemId == android.R.id.home) {
+            finish()
+            true
+        } else super.onOptionsItemSelected(item)
     }
 
     enum class Category {
