@@ -162,8 +162,8 @@ fun IntArray.toStringArray(): Array<String> {
     return stringArray as Array<String>
 }
 
-fun Activity.restart() {
-    val intent = intent
+fun <T:Activity>Activity.restart(activityClass:Class<T>? = null) {
+    val intent = (if(activityClass != null) Intent(this, activityClass) else intent)
         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
     finish()
     startActivity(intent)

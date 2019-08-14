@@ -163,7 +163,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         queryLogging.setOnPreferenceChangeListener { _, newValue ->
             requireContext().getPreferences().queryLoggingEnabled = newValue as Boolean
-            (requireActivity() as MainActivity).reloadMenuItems()
             true
         }
         exportQueries.summary =
@@ -252,7 +251,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (newTheme != null) {
                 removePreferenceListener()
                 requireContext().getPreferences().theme = newTheme
-                requireActivity().restart()
+                requireActivity().restart(MainActivity::class.java)
                 true
             } else {
                 false
