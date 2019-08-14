@@ -67,9 +67,7 @@ class QueryLogListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val live = requireContext().getDatabase().dnsQueryDao().getAllLive()
-        val source = LiveDataSource(this, live, true) {
-            list.smoothScrollToPosition(0)
-        }
+        val source = LiveDataSource(this, live, true)
         val adapter = ModelAdapterBuilder.newBuilder(source) {
             viewBuilder = { parent, viewType ->
                 val createdView = layoutInflater.inflate(R.layout.item_logged_query, parent, false)
