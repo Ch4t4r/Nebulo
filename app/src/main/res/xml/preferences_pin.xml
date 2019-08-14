@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/preference_category_pin">
+        <CheckBoxPreference
+                android:key="enable_pin"
+                android:title="@string/title_preference_enable_pin"
+                android:defaultValue="false"
+                android:summary="@string/summary_preference_enable_pin"/>
+        <CheckBoxPreference
+                android:key="pin_allow_fingerprint"
+                android:dependency="enable_pin"
+                android:title="@string/title_preference_pin_use_fingerprint"
+                android:defaultValue="true"
+                android:summary="@string/summary_preference_pin_use_fingerprint"/>
+        <EditTextPreference
+                android:title="@string/title_preference_change_pin"
+                android:key="pin"
+                android:dependency="enable_pin"
+                android:inputType="number"
+                android:digits="012345789"
+                android:defaultValue="1234"
+                android:summary="@string/summary_preference_change_pin"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

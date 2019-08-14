@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/preference_category_ip">
+        <CheckBoxPreference
+                android:key="ipv4_enabled"
+                android:title="@string/title_enable_ipv4"
+                android:defaultValue="true"
+                android:summary="@string/summary_enable_ipv4"/>
+        <CheckBoxPreference
+                android:key="allow_ipv4_traffic"
+                android:title="@string/title_allow_ipv4_traffic"
+                android:summary="@string/summary_allow_ipv4_traffic"
+                />
+        <CheckBoxPreference
+                android:key="force_ipv4"
+                android:defaultValue="false"
+                android:title="@string/title_force_ipv4"
+                android:summary="@string/summary_force_ipv4"/>
+        <CheckBoxPreference
+                android:key="ipv6_enabled"
+                android:title="@string/title_enable_ipv6"
+                android:defaultValue="true"
+                android:summary="@string/summary_enable_ipv6"/>
+        <CheckBoxPreference
+                android:key="allow_ipv6_traffic"
+                android:title="@string/title_allow_ipv6_traffic"
+                android:summary="@string/summary_allow_ipv6_traffic"
+                />
+        <CheckBoxPreference
+                android:key="force_ipv6"
+                android:defaultValue="false"
+                android:title="@string/title_force_ipv6"
+                android:summary="@string/summary_force_ipv6"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

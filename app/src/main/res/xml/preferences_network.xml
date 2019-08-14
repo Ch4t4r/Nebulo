@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/preference_category_network">
+        <CheckBoxPreference
+                android:key="disallow_other_vpns"
+                android:title="@string/title_disallow_other_vpns"
+                android:summary="@string/summary_disallow_other_vpns"
+                android:defaultValue="false"/>
+
+        <CheckBoxPreference
+                android:key="catch_known_servers"
+                android:title="@string/title_catch_other_dns_servers"
+                android:summary="@string/summary_catch_other_dns_servers"
+                android:defaultValue="true"/>
+
+        <CheckBoxPreference
+                android:key="bypass_searchdomains"
+                android:title="@string/title_bypass_searchdomains"
+                android:defaultValue="true"
+                android:summary="@string/summary_bypass_searchdomains"/>
+
+        <CheckBoxPreference
+                android:key="pause_on_captive_portal"
+                android:defaultValue="true"
+                android:title="@string/title_pause_on_captiveportal"
+                android:summary="@string/summary_pause_on_captiveportal"/>
+
+        <CheckBoxPreference
+                android:key="show_no_connection_notification"
+                android:title="@string/title_show_noconnection_notification"
+                android:summary="@string/summary_show_noconnection_notification"
+                android:defaultValue="false"/>
+    </PreferenceCategory>
+</PreferenceScreen>
