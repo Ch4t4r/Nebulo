@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.fragment.SettingsFragment
+import com.frostnerd.smokescreen.getPreferences
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -39,6 +40,7 @@ class SettingsActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(getPreferences().theme.layoutStyleWithActionbar)
         super.onCreate(savedInstanceState)
         supportFragmentManager.beginTransaction().replace(android.R.id.content, SettingsFragment().apply {
             arguments = Bundle().apply {
