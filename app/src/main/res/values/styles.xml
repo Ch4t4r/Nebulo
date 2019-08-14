@@ -29,6 +29,11 @@
         <item name="android:navigationBarColor">?android:attr/statusBarColor</item>
     </style>
 
+    <style name="AppTheme_Blue_ActionBar" parent="AppTheme_Blue">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+    </style>
+
     <style name="AppTheme_Dark" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">#424242</item>
         <item name="colorPrimaryDark">#212121</item>
@@ -57,6 +62,11 @@
         <item name="android:navigationBarColor">?android:attr/statusBarColor</item>
     </style>
 
+    <style name="AppTheme_Dark_ActionBar" parent="AppTheme_Dark">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+    </style>
+
     <style name="AppTheme_Mono" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">#607D8B</item>
         <item name="colorPrimaryDark">#37474F</item>
@@ -83,6 +93,11 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?android:attr/statusBarColor</item>
+    </style>
+
+    <style name="AppTheme_Mono_ActionBar" parent="AppTheme_Mono">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
@@ -116,6 +131,10 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?android:attr/statusBarColor</item>
+    </style>
+    <style name="AppTheme_True_Black_ActionBar" parent="AppTheme_True_Black">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
     </style>
 
     <style name="DialogTheme_Blue" parent="Theme.AppCompat.Light.Dialog.Alert">

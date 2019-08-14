@@ -19,6 +19,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.isInt
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.MainActivity
+import com.frostnerd.smokescreen.activity.SettingsActivity
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
@@ -51,10 +52,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
         SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             context?.getPreferences()?.notifyPreferenceChangedFromExternal(key)
         }
+    private val category:SettingsActivity.Category by lazy {
+        arguments!!.getSerializable("category") as SettingsActivity.Category
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         log("Adding preferences from resources...")
-        setPreferencesFromResource(R.xml.preferences, rootKey)
+        val resource = when(category) {
+            SettingsActivity.Category.GENERAL -> R.xml.preferences_general
+            SettingsActivity.Category.NOTIFICATION -> R.xml.preferences_notification
+            SettingsActivity.Category.PIN -> R.xml.preferences_pin
+            SettingsActivity.Category.CACHE -> R.xml.preferences_cache
+            SettingsActivity.Category.LOGGING -> R.xml.preferences_logging
+            SettingsActivity.Category.IP -> R.xml.preferences_ip
+            SettingsActivity.Category.NETWORK -> R.xml.preferences_network
+            SettingsActivity.Category.QUERIES -> R.xml.preferences_queries
+        }
+        setPreferencesFromResource(resource, rootKey)
         log("Preferences added.")
         werePreferencesAdded = true
         createPreferenceListener()
@@ -101,44 +115,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         log("Fragment created")
-        findPreference("theme").setOnPreferenceChangeListener { _, newValue ->
-            val id = (newValue as? String)?.toInt() ?: newValue as Int
-            val newTheme = Theme.findById(id)
+        when(category) {
+            SettingsActivity.Category.GENERAL -> processGeneralCategory()
+            SettingsActivity.Category.NOTIFICATION -> processNotificationCategory()
+            SettingsActivity.Category.PIN -> processPinCategory()
+            SettingsActivity.Category.CACHE -> processCacheCategory()
+            SettingsActivity.Category.LOGGING -> processLoggingCategory()
+            SettingsActivity.Category.IP -> processIPCategory()
+            SettingsActivity.Category.NETWORK -> processNetworkCategory()
+            SettingsActivity.Category.QUERIES -> processQueryCategory()
+        }
+    }
 
-            log("Updated theme to $newValue")
-            if (newTheme != null) {
-                removePreferenceListener()
-                requireContext().getPreferences().theme = newTheme
-                requireActivity().restart()
-                true
-            } else {
-                false
-            }
-        }
-        findPreference("app_exclusion_list").setOnPreferenceClickListener {
-            showExcludedAppsDialog()
-            true
-        }
-        findPreference("send_logs").setOnPreferenceClickListener {
-            requireContext().showLogExportDialog()
-            true
-        }
-        findPreference("delete_logs").setOnPreferenceClickListener {
-            showLogDeletionDialog()
-            true
-        }
+    private fun processNotificationCategory() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val hideIconPreference = findPreference("hide_notification_icon")
             hideIconPreference.isEnabled = false
             hideIconPreference.isVisible = false
         }
-        processGeneralCategory()
-        processCacheCategory()
-        processLoggingCategory()
-        processIPCategory()
-        processNetworkCategory()
-        processQueryCategory()
-        processPinCategory()
     }
 
     private fun processPinCategory() {
@@ -249,6 +243,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     false
                 } else true
             }
+        }
+        findPreference("theme").setOnPreferenceChangeListener { _, newValue ->
+            val id = (newValue as? String)?.toInt() ?: newValue as Int
+            val newTheme = Theme.findById(id)
+
+            log("Updated theme to $newValue")
+            if (newTheme != null) {
+                removePreferenceListener()
+                requireContext().getPreferences().theme = newTheme
+                requireActivity().restart()
+                true
+            } else {
+                false
+            }
+        }
+        findPreference("app_exclusion_list").setOnPreferenceClickListener {
+            showExcludedAppsDialog()
+            true
         }
     }
 
@@ -389,6 +401,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else {
                 (requireContext().applicationContext as SmokeScreen).initSentry(true)
             }
+            true
+        }
+        findPreference("send_logs").setOnPreferenceClickListener {
+            requireContext().showLogExportDialog()
+            true
+        }
+        findPreference("delete_logs").setOnPreferenceClickListener {
+            showLogDeletionDialog()
             true
         }
     }

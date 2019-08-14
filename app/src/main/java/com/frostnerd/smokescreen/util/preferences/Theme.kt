@@ -33,11 +33,15 @@ import kotlin.reflect.KProperty
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-enum class Theme(val id: Int, @StyleRes val layoutStyle: Int, @StyleRes val dialogStyle: Int, @StyleRes val preferenceStyle: Int) {
-    MONO(1, R.style.AppTheme_Mono, R.style.DialogTheme_Mono, R.style.PreferenceTheme_Mono),
-    DARK(2, R.style.AppTheme_Dark, R.style.DialogTheme_Dark, R.style.PreferenceTheme_Dark),
-    TRUE_BLACK(3, R.style.AppTheme_True_Black, R.style.DialogTheme_True_Black, R.style.PreferenceTheme_True_Black),
-    BLUE(4, R.style.AppTheme_Blue, R.style.DialogTheme_Blue, R.style.PreferenceTheme_Blue);
+enum class Theme(val id: Int,
+                 @StyleRes val layoutStyle: Int,
+                 @StyleRes val dialogStyle: Int,
+                 @StyleRes val preferenceStyle: Int,
+                 @StyleRes val layoutStyleWithActionbar:Int) {
+    MONO(1, R.style.AppTheme_Mono, R.style.DialogTheme_Mono, R.style.PreferenceTheme_Mono, R.style.AppTheme_Mono_ActionBar),
+    DARK(2, R.style.AppTheme_Dark, R.style.DialogTheme_Dark, R.style.PreferenceTheme_Dark, R.style.AppTheme_Dark_ActionBar),
+    TRUE_BLACK(3, R.style.AppTheme_True_Black, R.style.DialogTheme_True_Black, R.style.PreferenceTheme_True_Black, R.style.AppTheme_True_Black_ActionBar),
+    BLUE(4, R.style.AppTheme_Blue, R.style.DialogTheme_Blue, R.style.PreferenceTheme_Blue, R.style.AppTheme_Blue_ActionBar);
 
     @ColorInt
     fun getColor(context: Context, @AttrRes attribute: Int, @ColorInt defaultValue: Int = Color.BLACK): Int {

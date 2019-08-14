@@ -167,7 +167,7 @@ class MainActivity : NavigationDrawerActivity() {
             )
             fragmentItem(getString(R.string.menu_settings),
                 iconLeft = getDrawable(R.drawable.ic_menu_settings),
-                fragmentCreator = singleInstanceFragment { SettingsFragment() })
+                fragmentCreator = singleInstanceFragment { SettingsOverviewFragment() })
             if (getPreferences().queryLoggingEnabled) {
                 divider()
                 fragmentItem(getString(R.string.menu_querylogging),
