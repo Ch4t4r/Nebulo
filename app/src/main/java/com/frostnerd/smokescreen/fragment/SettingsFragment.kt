@@ -19,6 +19,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.isInt
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.MainActivity
+import com.frostnerd.smokescreen.activity.SettingsActivity
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
@@ -101,37 +102,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         log("Fragment created")
-        findPreference("theme").setOnPreferenceChangeListener { _, newValue ->
-            val id = (newValue as? String)?.toInt() ?: newValue as Int
-            val newTheme = Theme.findById(id)
-
-            log("Updated theme to $newValue")
-            if (newTheme != null) {
-                removePreferenceListener()
-                requireContext().getPreferences().theme = newTheme
-                requireActivity().restart()
-                true
-            } else {
-                false
-            }
-        }
-        findPreference("app_exclusion_list").setOnPreferenceClickListener {
-            showExcludedAppsDialog()
-            true
-        }
-        findPreference("send_logs").setOnPreferenceClickListener {
-            requireContext().showLogExportDialog()
-            true
-        }
-        findPreference("delete_logs").setOnPreferenceClickListener {
-            showLogDeletionDialog()
-            true
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val hideIconPreference = findPreference("hide_notification_icon")
-            hideIconPreference.isEnabled = false
-            hideIconPreference.isVisible = false
-        }
         processGeneralCategory()
         processCacheCategory()
         processLoggingCategory()
@@ -139,6 +109,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
         processNetworkCategory()
         processQueryCategory()
         processPinCategory()
+        processNotificationCategory()
+    }
+
+    private fun processNotificationCategory() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val hideIconPreference = findPreference("hide_notification_icon")
+            hideIconPreference.isEnabled = false
+            hideIconPreference.isVisible = false
+        }
     }
 
     private fun processPinCategory() {
@@ -249,6 +228,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     false
                 } else true
             }
+        }
+        findPreference("theme").setOnPreferenceChangeListener { _, newValue ->
+            val id = (newValue as? String)?.toInt() ?: newValue as Int
+            val newTheme = Theme.findById(id)
+
+            log("Updated theme to $newValue")
+            if (newTheme != null) {
+                removePreferenceListener()
+                requireContext().getPreferences().theme = newTheme
+                requireActivity().restart()
+                true
+            } else {
+                false
+            }
+        }
+        findPreference("app_exclusion_list").setOnPreferenceClickListener {
+            showExcludedAppsDialog()
+            true
         }
     }
 
@@ -389,6 +386,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else {
                 (requireContext().applicationContext as SmokeScreen).initSentry(true)
             }
+            true
+        }
+        findPreference("send_logs").setOnPreferenceClickListener {
+            requireContext().showLogExportDialog()
+            true
+        }
+        findPreference("delete_logs").setOnPreferenceClickListener {
+            showLogDeletionDialog()
             true
         }
     }
