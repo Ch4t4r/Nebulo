@@ -1,2 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preference_category_general">General</string>
+
+    <string name="title_theme">Tema</string>
+    <string name="summary_theme">Establece el tema para esta aplicación</string>
+
+    <string name="title_start_on_boot">Iniciar en el arranque</string>
+    <string name="summary_start_on_boot">Iniciar la aplicación cuando se prenda el teléfono</string>
+
+    <string name="title_start_after_update">Iniciar después de una actualización</string>
+    <string name="summary_start_after_update">Iniciar la aplicación después de que haya sido actualizada</string>
+
+    <string name="title_excluded_apps">Aplicaciónes excluidas</string>
+    <string name="summary_excluded_apps">Excluya aplicaciones de la aplicación aquí, por ejemplo si ya no vuelven a conectarse al internet - aplicaciones seleccionadas ya no usarán dns-over-https.</string>
+
+
+
+    <string name="preference_category_notification">Notificación</string>
+
+    <string name="title_show_notification_on_lockscreen">Mostrar en pantalla de bloqueo</string>
+    <string name="summary_show_notification_on_lockscreen">Establece si se muestra la notificación en la pantalla de bloqueo</string>
+
+    <string name="title_notification_hide_icon">Esconder ícono</string>
+    <string name="summary_notification_hide_icon">Esconder el ícono de la barra de navegación de arriba</string>
+
+    <string name="title_notification_allow_stop">Permitir detener</string>
+    <string name="summary_notification_allow_stop">Permite que la aplicación sea detenida desde la notificación</string>
+
+    <string name="title_notification_allow_pause">Permitir pausar</string>
+    <string name="summary_notification_allow_pause">Permite que la aplicación sea pausada desde la notificación</string>
+
+
+    <string name="preference_category_pin">Protección por PIN</string>
+
+    <string name="title_preference_enable_pin">Pin</string>
+    <string name="summary_preference_enable_pin">Pide un PIN al abrir o detener la aplicación</string>
+
+    <string name="title_preference_pin_use_fingerprint">Permitir huella</string>
+    <string name="summary_preference_pin_use_fingerprint">Permitir que su huella sea usada en vez del pin</string>
+
+    <string name="title_preference_change_pin">Cambiar pin</string>
+    <string name="summary_preference_change_pin">Cambie el pin. Solo se permiten valores numéricos.
+\nPin actual: %1s</string>
+
+    <string name="preference_category_cache">Control de caché</string>
+
+    <string name="title_dnscache_enabled">Usar caché DNS</string>
+    <string name="summary_dnscache_enabled">Habilita el cache DNS de la aplicación. El caché memoriza solicitudes viejas para responder a futuras preguntas más rapido</string>
+
+    <string name="title_dnscache_keepacrosslaunches">Mantener caché DNS</string>
+    <string name="title_dnscache_maxsize">Tamaño máximo de cache</string>
+    </resources>
