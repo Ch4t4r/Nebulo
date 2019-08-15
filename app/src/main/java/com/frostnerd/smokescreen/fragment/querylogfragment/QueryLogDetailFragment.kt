@@ -136,14 +136,16 @@ class QueryLogDetailFragment : Fragment() {
             longName.text = query.name
             type.text = query.type.name
             protocol.text = when {
-                query.askedServer == null -> ""
+                query.responseSource == QueryListener.Source.CACHE -> getString(R.string.windows_querylogging_usedserver_cache)
+                query.responseSource == QueryListener.Source.LOCALRESOLVER -> getString(R.string.windows_querylogging_usedserver_dnsrules)
+                query.askedServer == null -> "-"
                 query.askedServer!!.startsWith("https") -> getString(R.string.fragment_querydetail_mode_doh)
                 else -> getString(R.string.fragment_querydetail_mode_dot)
             }
-            if(query.responseSource == QueryListener.Source.CACHE) {
-                resolvedBy.text = "Cache"
-            } else {
-                resolvedBy.text = query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
+            resolvedBy.text = when {
+                query.responseSource == QueryListener.Source.CACHE -> getString(R.string.windows_querylogging_usedserver_cache)
+                query.responseSource == QueryListener.Source.LOCALRESOLVER -> getString(R.string.windows_querylogging_usedserver_dnsrules)
+                else -> query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
             }
             responses.text = query.getParsedResponses().filter {
                 it.type == query.type
