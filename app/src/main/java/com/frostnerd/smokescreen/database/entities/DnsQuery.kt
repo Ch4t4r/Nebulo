@@ -37,7 +37,7 @@ data class DnsQuery(
     val type: Record.TYPE,
     val name: String,
     var askedServer: String?,
-    var responseSource:QueryListener.Source? = null,
+    var responseSource:QueryListener.Source,
     val questionTime: Long,
     var responseTime: Long = 0,
     var responses: MutableList<String>

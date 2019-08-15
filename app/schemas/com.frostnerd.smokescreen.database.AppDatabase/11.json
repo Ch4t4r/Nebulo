@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 11,
-    "identityHash": "fb5d5231e14e3e9fbd2d47ee90178b0f",
+    "identityHash": "6593a50157ce88fb018043b5c151353a",
     "entities": [
       {
         "tableName": "CachedResponse",
@@ -39,7 +39,7 @@
       },
       {
         "tableName": "DnsQuery",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `responseSource` TEXT, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `responseSource` TEXT NOT NULL, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -69,7 +69,7 @@
             "fieldPath": "responseSource",
             "columnName": "responseSource",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "questionTime",
@@ -252,7 +252,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fb5d5231e14e3e9fbd2d47ee90178b0f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6593a50157ce88fb018043b5c151353a')"
     ]
   }
 }
