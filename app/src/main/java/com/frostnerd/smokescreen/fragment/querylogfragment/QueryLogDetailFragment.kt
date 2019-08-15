@@ -36,7 +36,7 @@ class QueryLogDetailFragment : Fragment() {
         private set
     private lateinit var timeFormatSameDay: DateFormat
     private lateinit var timeFormatDifferentDay: DateFormat
-    internal fun formatTimeStamp(timestamp:Long): String {
+    private fun formatTimeStamp(timestamp:Long): String {
         return if(isTimeStampToday(timestamp)) timeFormatSameDay.format(timestamp)
         else timeFormatDifferentDay.format(timestamp)
     }
@@ -71,6 +71,7 @@ class QueryLogDetailFragment : Fragment() {
     private var viewCreated = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setupTimeFormat()
         return inflater.inflate(R.layout.fragment_querylog_detail, container, false)
     }
 

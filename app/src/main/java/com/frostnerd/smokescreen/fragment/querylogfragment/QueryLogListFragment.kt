@@ -38,7 +38,6 @@ import java.util.*
  */
 class QueryLogListFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setupTimeFormat()
         return layoutInflater.inflate(R.layout.fragment_querylog_list, container, false)
     }
 
