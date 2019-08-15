@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:background="?selectableItemBackground"
-              android:paddingTop="4dp"
-              android:paddingBottom="4dp"
-              android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:background="?selectableItemBackground"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:layout_height="wrap_content">
+
+    <ImageView
+            android:layout_width="28dp"
+            android:id="@+id/typeImage"
+            android:layout_centerVertical="true"
+            android:tint="?android:attr/textColor"
+            android:layout_height="28dp"/>
 
     <TextView
             android:layout_width="wrap_content"
             android:id="@+id/text"
-            android:layout_marginStart="12dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/typeImage"
+            android:paddingStart="12sp"
+            android:paddingEnd="12sp"
+            android:layout_toStartOf="@id/arrow"
             android:layout_height="wrap_content"/>
 
-</LinearLayout>
+    <ImageView
+            android:layout_width="32dp"
+            android:src="@drawable/ic_chevron_right"
+            android:tint="?android:attr/textColor"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/arrow"
+            android:layout_centerVertical="true"
+            android:layout_height="32dp"/>
+
+</RelativeLayout>

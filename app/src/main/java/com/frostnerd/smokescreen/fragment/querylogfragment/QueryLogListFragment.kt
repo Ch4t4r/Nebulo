@@ -9,12 +9,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
+import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.util.LiveDataSource
 import kotlinx.android.synthetic.main.fragment_querylog_list.*
+import kotlinx.android.synthetic.main.item_logged_query.view.*
 import java.text.DateFormat
 import java.util.*
 
@@ -58,6 +60,12 @@ class QueryLogListFragment: Fragment() {
             bindModelView = { viewHolder, position, data ->
                 viewHolder.itemView.findViewById<TextView>(R.id.text).text = data.shortName
                 viewHolder.itemView.tag = data
+                viewHolder.itemView.typeImage.setImageResource(when(data.responseSource) {
+                    QueryListener.Source.UPSTREAM -> R.drawable.ic_share_arrow
+                    QueryListener.Source.CACHE, QueryListener.Source.CACHE_AND_LOCALRESOLVER -> R.drawable.ic_database
+                    QueryListener.Source.LOCALRESOLVER -> R.drawable.ic_flag
+                    else -> R.drawable.ic_query_question
+                })
                 if(isDisplayingQuery(data)) displayQuery(data, false)
             }
             bindNonModelView = { viewHolder, position ->
