@@ -50,38 +50,6 @@
 
             <ImageView
                     android:layout_width="24dp"
-                    android:id="@+id/typeImage"
-                    android:src="@drawable/ic_query_type"
-                    android:tint="?android:attr/textColor"
-                    android:layout_height="24dp"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="18sp"
-                    android:layout_toEndOf="@id/typeImage"
-                    android:text="@string/windows_querylogging_type"
-                    android:textStyle="italic"
-                    android:layout_marginStart="8dp"
-                    android:id="@+id/queryTypeText"
-                    android:layout_height="wrap_content"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="18sp"
-                    android:id="@+id/type"
-                    android:layout_alignStart="@id/queryTypeText"
-                    android:layout_below="@id/queryTypeText"
-                    android:layout_marginTop="8dp"
-                    android:layout_height="wrap_content"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="24dp"
-                android:layout_height="wrap_content">
-
-            <ImageView
-                    android:layout_width="24dp"
                     android:id="@+id/questionImage"
                     android:src="@drawable/ic_query_question"
                     android:tint="?android:attr/textColor"
@@ -103,6 +71,38 @@
                     android:id="@+id/longName"
                     android:layout_alignStart="@id/queryQuestionText"
                     android:layout_below="@id/queryQuestionText"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="24dp"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:id="@+id/typeImage"
+                    android:src="@drawable/ic_query_type"
+                    android:tint="?android:attr/textColor"
+                    android:layout_height="24dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@id/typeImage"
+                    android:text="@string/windows_querylogging_type"
+                    android:textStyle="italic"
+                    android:layout_marginStart="8dp"
+                    android:id="@+id/queryTypeText"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/type"
+                    android:layout_alignStart="@id/queryTypeText"
+                    android:layout_below="@id/queryTypeText"
                     android:layout_marginTop="8dp"
                     android:layout_height="wrap_content"/>
         </RelativeLayout>
