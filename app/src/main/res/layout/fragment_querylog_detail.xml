@@ -1,176 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
-              android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <LinearLayout
-            android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_height="wrap_content">
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
                 android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:id="@+id/timeImage"
+                    android:src="@drawable/ic_query_time"
+                    android:tint="?android:attr/textColor"
+                    android:layout_height="24dp"/>
 
             <TextView
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@id/timeImage"
                     android:text="Time"
+                    android:textStyle="italic"
+                    android:layout_marginStart="8dp"
+                    android:id="@+id/queryTimeText"
                     android:layout_height="wrap_content"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:textSize="18sp"
                     android:id="@+id/queryTime"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/ic_query_time"
+                    android:layout_alignStart="@id/queryTimeText"
+                    android:layout_below="@id/queryTimeText"
+                    android:layout_marginTop="8dp"
                     android:layout_height="wrap_content"/>
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="18dp"
                 android:layout_height="wrap_content">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:textStyle="italic"
-                    android:text="Resolved by"
-                    android:layout_height="wrap_content"/>
+            <ImageView
+                    android:layout_width="24dp"
+                    android:id="@+id/typeImage"
+                    android:src="@drawable/ic_query_type"
+                    android:tint="?android:attr/textColor"
+                    android:layout_height="24dp"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:textSize="18sp"
-                    android:id="@+id/resolvedBy"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/ic_query_askedserver"
-                    android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="24dp"
-                android:layout_height="wrap_content">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_toEndOf="@id/typeImage"
+                    android:text="Time"
                     android:textStyle="italic"
-                    android:text="Protocol"
-                    android:layout_height="wrap_content"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="18sp"
-                    android:id="@+id/protocol"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/ic_lock_white"
-                    android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="24dp"
-                android:layout_height="wrap_content">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:textStyle="italic"
-                    android:text="Latency"
-                    android:layout_height="wrap_content"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="18sp"
-                    android:id="@+id/latency"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/ic_query_latency"
-                    android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="24dp"
-                android:layout_height="wrap_content">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:textStyle="italic"
-                    android:text="Query"
-                    android:layout_height="wrap_content"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="18sp"
-                    android:id="@+id/longName"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/ic_query_question"
-                    android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="24dp"
-                android:layout_height="wrap_content">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:textStyle="italic"
-                    android:text="Type"
+                    android:layout_marginStart="8dp"
+                    android:id="@+id/queryTypeText"
                     android:layout_height="wrap_content"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:textSize="18sp"
                     android:id="@+id/type"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/ic_query_type"
+                    android:layout_alignStart="@id/queryTypeText"
+                    android:layout_below="@id/queryTypeText"
+                    android:layout_marginTop="8dp"
                     android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </LinearLayout>
+        </RelativeLayout>
 
-    <LinearLayout
-            android:layout_marginTop="12dp"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:layout_height="wrap_content">
-
-        <View
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="12dp"
-                android:background="?attr/inputElementColor"
-                android:layout_height="1dp"/>
+                android:layout_marginTop="18dp"
+                android:layout_height="wrap_content">
 
-        <View
+            <ImageView
+                    android:layout_width="24dp"
+                    android:id="@+id/questionImage"
+                    android:src="@drawable/ic_query_question"
+                    android:tint="?android:attr/textColor"
+                    android:layout_height="24dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@id/questionImage"
+                    android:text="Time"
+                    android:textStyle="italic"
+                    android:layout_marginStart="8dp"
+                    android:id="@+id/queryQuestionText"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/longName"
+                    android:layout_alignStart="@id/queryQuestionText"
+                    android:layout_below="@id/queryQuestionText"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="4dp"
-                android:background="?attr/inputElementColor"
-                android:layout_height="1dp"/>
+                android:layout_marginTop="18dp"
+                android:layout_height="wrap_content">
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:text="Answers"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:layout_height="wrap_content"/>
+            <ImageView
+                    android:layout_width="24dp"
+                    android:id="@+id/serverImage"
+                    android:src="@drawable/ic_query_askedserver"
+                    android:tint="?android:attr/textColor"
+                    android:layout_height="24dp"/>
 
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@id/serverImage"
+                    android:text="Time"
+                    android:textStyle="italic"
+                    android:layout_marginStart="8dp"
+                    android:id="@+id/queryServerText"
+                    android:layout_height="wrap_content"/>
 
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/resolvedBy"
+                    android:layout_alignStart="@id/queryServerText"
+                    android:layout_below="@id/queryServerText"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="18dp"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:id="@+id/protocolImage"
+                    android:src="@drawable/ic_lock_white"
+                    android:tint="?android:attr/textColor"
+                    android:layout_height="24dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@id/protocolImage"
+                    android:text="Time"
+                    android:textStyle="italic"
+                    android:layout_marginStart="8dp"
+                    android:id="@+id/queryProtocolText"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/protocol"
+                    android:layout_alignStart="@id/queryProtocolText"
+                    android:layout_below="@id/queryProtocolText"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="18dp"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:id="@+id/latencyImage"
+                    android:src="@drawable/ic_query_latency"
+                    android:tint="?android:attr/textColor"
+                    android:layout_height="24dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@id/latencyImage"
+                    android:text="Time"
+                    android:textStyle="italic"
+                    android:layout_marginStart="8dp"
+                    android:id="@+id/queryLatencyText"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/latency"
+                    android:layout_alignStart="@id/queryLatencyText"
+                    android:layout_below="@id/queryLatencyText"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
