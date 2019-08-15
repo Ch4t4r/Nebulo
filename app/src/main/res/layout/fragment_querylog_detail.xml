@@ -9,8 +9,8 @@
 
     <LinearLayout
             android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <RelativeLayout
                 android:layout_width="match_parent"
@@ -202,5 +202,14 @@
                     android:layout_marginTop="8dp"
                     android:layout_height="wrap_content"/>
         </RelativeLayout>
+
+        <Button
+                android:layout_width="match_parent"
+                android:id="@+id/createDnsRule"
+                android:background="@drawable/main_roundbuttons"
+                android:text="@string/windows_querylogging_create_dnsrule"
+                android:layout_marginTop="24dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_height="wrap_content"/>
     </LinearLayout>
 </ScrollView>

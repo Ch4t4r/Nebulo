@@ -9,7 +9,13 @@ import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
+import com.frostnerd.smokescreen.database.entities.DnsRule
+import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.DnsRuleDialog
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.fragment_querylog_detail.*
+import org.minidns.record.Record
 import java.text.DateFormat
 import java.util.*
 
@@ -79,6 +85,29 @@ class QueryLogDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewCreated = true
         updateUi()
+        createDnsRule.setOnClickListener {
+            val query = currentQuery
+            if(query != null) {
+                DnsRuleDialog(context!!, DnsRule(query.type, query.name, if(query.type == Record.TYPE.A) "0.0.0.0" else "::1"), onRuleCreated = { newRule ->
+                    val id = if (newRule.isWhitelistRule()) {
+                        getDatabase().dnsRuleDao().insertWhitelist(newRule)
+                    } else getDatabase().dnsRuleDao().insertIgnore(newRule)
+                    if (id != -1L) {
+                        Snackbar.make(
+                            activity!!.findViewById(android.R.id.content),
+                            R.string.windows_querylogging_dnsrule_created,
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Snackbar.make(
+                            activity!!.findViewById(android.R.id.content),
+                            R.string.window_dnsrules_hostalreadyexists,
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                }).show()
+            }
+        }
     }
 
     fun isShowingQuery(): Boolean {
