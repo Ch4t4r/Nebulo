@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.fragment.querylogfragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import kotlinx.android.synthetic.main.fragment_querylog_detail.*
+import java.text.DateFormat
+import java.util.*
 
 
 /*
@@ -31,8 +34,40 @@ import kotlinx.android.synthetic.main.fragment_querylog_detail.*
 class QueryLogDetailFragment : Fragment() {
     var currentQuery: DnsQuery? = null
         private set
+    private lateinit var timeFormatSameDay: DateFormat
+    private lateinit var timeFormatDifferentDay: DateFormat
+    internal fun formatTimeStamp(timestamp:Long): String {
+        return if(isTimeStampToday(timestamp)) timeFormatSameDay.format(timestamp)
+        else timeFormatDifferentDay.format(timestamp)
+    }
 
+    private fun isTimeStampToday(timestamp:Long):Boolean {
+        return timestamp >= getStartOfDay()
+    }
 
+    private fun getStartOfDay():Long {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        return calendar.timeInMillis
+    }
+
+    private fun getLocale(): Locale {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            resources.configuration.locales.get(0)!!
+        } else{
+            @Suppress("DEPRECATION")
+            resources.configuration.locale!!
+        }
+    }
+
+    private fun setupTimeFormat() {
+        val locale = getLocale()
+        timeFormatSameDay = DateFormat.getTimeInstance(DateFormat.MEDIUM, locale)
+        timeFormatDifferentDay = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, locale)
+    }
     private var viewCreated = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,7 +95,7 @@ class QueryLogDetailFragment : Fragment() {
     private fun updateUi() {
         val query = currentQuery
         if(query != null && viewCreated) {
-            queryTime.text = QueryLogListFragment.formatTimeStamp(query.questionTime)
+            queryTime.text = formatTimeStamp(query.questionTime)
             if(query.responseTime >= query.questionTime) {
                 latency.text = (query.responseTime - query.questionTime).toString() + " ms"
             } else {
