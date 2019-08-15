@@ -53,6 +53,7 @@ class QueryListener(private val context: Context) : QueryListener {
         if (logQueriesToDb) {
             val query = waitingQueryLogs[questionMessage.id] ?: return
             query.askedServer = askedServer
+            query.responseSource = QueryListener.Source.UPSTREAM
             context.getDatabase().dnsQueryDao().update(query)
         }
     }
