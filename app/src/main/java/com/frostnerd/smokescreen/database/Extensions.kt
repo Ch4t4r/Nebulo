@@ -97,12 +97,21 @@ val MIGRATION_9_10 = migration(9, 10) {
     Logger.logIfOpen("DB_MIGRATION", "Migration from 9 to 10 completed")
 }
 
+val MIGRATION_10_11 = migration(10, 11) {
+    Logger.logIfOpen("DB_MIGRATION", "Migrating from 10 to 11")
+    it.execSQL("CREATE TABLE `DnsQuery_tmp` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `responseSource` TEXT, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)")
+    it.execSQL("INSERT INTO `DnsQuery_tmp`(id, type, name, askedServer, questionTime, responseTime, responses, responseSource) SELECT id, type, name, askedServer, questionTime, responseTime, responses, CASE WHEN fromCache=1 THEN 'CACHE' else 'UPSTREAM' END as `responseSource` FROM DnsQuery")
+    it.execSQL("DROP TABLE `DnsQuery`")
+    it.execSQL("ALTER TABLE `DnsQuery_tmp` RENAME TO `DnsQuery`")
+    Logger.logIfOpen("DB_MIGRATION", "Migration from 10 to 11 completed")
+}
+
 
 fun Context.getDatabase(): AppDatabase {
     if (INSTANCE == null) {
         INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
             .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10)
+            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11)
             .build()
     }
     return INSTANCE!!

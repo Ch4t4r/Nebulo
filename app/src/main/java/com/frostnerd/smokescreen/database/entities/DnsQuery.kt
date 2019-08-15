@@ -5,7 +5,9 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.smokescreen.database.converters.DnsTypeConverter
+import com.frostnerd.smokescreen.database.converters.QuerySourceConverter
 import com.frostnerd.smokescreen.database.converters.StringListConverter
 import com.frostnerd.smokescreen.database.recordFromBase64
 import org.minidns.record.Record
@@ -29,13 +31,13 @@ import org.minidns.record.Record
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 @Entity(tableName = "DnsQuery")
-@TypeConverters(DnsTypeConverter::class, StringListConverter::class)
+@TypeConverters(DnsTypeConverter::class, StringListConverter::class, QuerySourceConverter::class)
 data class DnsQuery(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val type: Record.TYPE,
     val name: String,
     var askedServer: String?,
-    var fromCache:Boolean,
+    var responseSource:QueryListener.Source? = null,
     val questionTime: Long,
     var responseTime: Long = 0,
     var responses: MutableList<String>

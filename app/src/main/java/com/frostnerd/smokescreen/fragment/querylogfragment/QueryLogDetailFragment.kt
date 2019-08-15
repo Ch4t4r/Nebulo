@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import kotlinx.android.synthetic.main.fragment_querylog_detail.*
@@ -109,7 +110,7 @@ class QueryLogDetailFragment : Fragment() {
                 query.askedServer!!.startsWith("https") -> getString(R.string.fragment_querydetail_mode_doh)
                 else -> getString(R.string.fragment_querydetail_mode_dot)
             }
-            if(query.fromCache) {
+            if(query.responseSource == QueryListener.Source.CACHE) {
                 resolvedBy.text = "Cache"
             } else {
                 resolvedBy.text = query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
