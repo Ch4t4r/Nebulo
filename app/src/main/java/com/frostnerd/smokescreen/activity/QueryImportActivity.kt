@@ -61,7 +61,7 @@ class QueryImportActivity: AppCompatActivity() {
                                     else QueryListener.Source.UPSTREAM
                                 } else QueryListener.Source.values().find {
                                     it.name.equals(split[5], true)
-                                }
+                                } ?: QueryListener.Source.UPSTREAM
                                 queries.add(DnsQuery(
                                     name=split[0],
                                     type =  Record.TYPE.getType(split[3].toInt()),
