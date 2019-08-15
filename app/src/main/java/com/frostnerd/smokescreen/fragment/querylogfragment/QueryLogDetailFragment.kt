@@ -15,6 +15,7 @@ import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.fragment_querylog_detail.*
+import org.minidns.record.A
 import org.minidns.record.Record
 import java.text.DateFormat
 import java.util.*
@@ -143,6 +144,15 @@ class QueryLogDetailFragment : Fragment() {
                 resolvedBy.text = "Cache"
             } else {
                 resolvedBy.text = query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
+            }
+            responses.text = query.getParsedResponses().filter {
+                it.type == query.type
+            }.joinToString {
+                val payload = it.payload
+                payload.toString()
+            }.let {
+                if(it.isBlank()) "-"
+                else it
             }
         }
     }

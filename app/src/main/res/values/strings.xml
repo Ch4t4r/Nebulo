@@ -83,6 +83,7 @@
     <string name="windows_querylogging_used_server">Used server</string>
     <string name="windows_querylogging_protocol">Protocol</string>
     <string name="windows_querylogging_latency">Latency</string>
+    <string name="windows_querylogging_responses">Responses</string>
     <string name="windows_querylogging_create_dnsrule">Create dns rule for this host</string>
     <string name="windows_querylogging_dnsrule_created">Dns rule has been created.</string>
 </resources>
