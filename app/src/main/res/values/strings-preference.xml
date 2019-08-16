@@ -86,16 +86,16 @@
 
     <string name="preference_category_ip">IP settings</string>
 
-    <string name="title_enable_ipv6">Enable Ipv6</string>
+    <string name="title_enable_ipv6">Enable IPv6</string>
     <string name="summary_enable_ipv6">Use IPv6, if the device has an IPv6 address assigned</string>
 
-    <string name="title_enable_ipv4">Enable Ipv4</string>
+    <string name="title_enable_ipv4">Enable IPv4</string>
     <string name="summary_enable_ipv4">Use IPv4, if the device has an IPv4 address assigned</string>
 
-    <string name="title_force_ipv6">Force Ipv6</string>
+    <string name="title_force_ipv6">Force IPv6</string>
     <string name="summary_force_ipv6">Force the app to accept IPv6 requests, even when the device doesn\'t use IPv6.</string>
 
-    <string name="title_force_ipv4">Force Ipv4</string>
+    <string name="title_force_ipv4">Force IPv4</string>
     <string name="summary_force_ipv4">Force the app to accept IPv4 requests, even when the device doesn\'t use IPv4.</string>
 
     <string name="title_allow_ipv4_traffic">Allow IPv4 traffic</string>

@@ -44,8 +44,8 @@
     <string name="dialog_crashreportingusages_data_app_2">App version</string>
     <string name="dialog_crashreportingusages_data_app_3">Database version</string>
     <string name="dialog_crashreportingusages_data_app_4">Dns server name</string>
-    <string name="dialog_crashreportingusages_data_app_5">Primary dns server</string>
-    <string name="dialog_crashreportingusages_data_app_6">Secondary dns server</string>
+    <string name="dialog_crashreportingusages_data_app_5">Primary DNS server</string>
+    <string name="dialog_crashreportingusages_data_app_6">Secondary DNS server</string>
     <string-array name="dialog_crashreportingusages_data_app">
         <item>@string/dialog_crashreportingusages_data_app_1</item>
         <item>@string/dialog_crashreportingusages_data_app_2</item>

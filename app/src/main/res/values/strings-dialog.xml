@@ -120,8 +120,8 @@
     <string name="dialog_deletehostsource_title">Delete %1s?</string>
     <string name="dialog_deletehostsource_message">Are you sure you want to delete the host source %1s? This cannot be undone, the hosts from this source will be removed.</string>
 
-    <string name="dialog_clearuserrules_title">Clear all dns rules?</string>
-    <string name="dialog_clearuserrules_message">Are you want to clear all dns rules? This cannot be undone.</string>
+    <string name="dialog_clearuserrules_title">Clear all DNS rules?</string>
+    <string name="dialog_clearuserrules_message">Are you want to clear all DNS rules? This cannot be undone.</string>
 
     <string name="dialog_newhostsource_title">New rule source</string>
     <string name="dialog_newhostsource_edit_title">New rule source</string>
@@ -132,21 +132,21 @@
     <string name="dialog_newhostsource_use_as_whitelist">Use as whitelist</string>
     <string name="dialog_newhostsource_error_name_empty">Please provide a name.</string>
 
-    <string name="dialog_newdnsrule_title">New Dns rule</string>
-    <string name="dialog_newdnsrule_edit">Edit Dns rule</string>
+    <string name="dialog_newdnsrule_title">New DNS rule</string>
+    <string name="dialog_newdnsrule_edit">Edit DNS rule</string>
     <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Address</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
     <string name="dialog_newdnsrule_hint_ipv4address">IPv4 address</string>
-    <string name="dialog_newdnsrule_hint_ipv6address">Ipv6 address</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">IPv6 address</string>
     <string name="dialog_newdnsrule_host_invalid">Please provide a valid host</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Please provide a valid IPv4 address</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Please provide a valid IPv6 address</string>
     <string name="dialog_newdnsrule_wildcard_info">The host supports wildcards. Use star (*) for any amount of characters, numbers and allowed special characters except period (.). Use two stars (**) to include the period (.).</string>
 
-    <string name="dialog_exportdnsrules_title">Export dns rules</string>
-    <string name="dialog_exportdnsrules_export_user_rules">Export custom host dns rules</string>
-    <string name="dialog_exportdnsrules_export_sources">Export dns rules from enabled host sources</string>
+    <string name="dialog_exportdnsrules_title">Export DNS rules</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Export custom host DNS rules</string>
+    <string name="dialog_exportdnsrules_export_sources">Export DNS rules from enabled host sources</string>
 
     <string name="dialog_editdelete_title">What do you want to do?</string>
     <string name="dialog_editdelete_edit">Edit</string>
