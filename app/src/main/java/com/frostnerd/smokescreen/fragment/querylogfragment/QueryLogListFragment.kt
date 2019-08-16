@@ -61,7 +61,7 @@ class QueryLogListFragment: Fragment() {
                 viewHolder.itemView.findViewById<TextView>(R.id.text).text = data.shortName
                 viewHolder.itemView.tag = data
                 viewHolder.itemView.typeImage.setImageResource(when(data.responseSource) {
-                    QueryListener.Source.UPSTREAM -> R.drawable.ic_share_arrow
+                    QueryListener.Source.UPSTREAM -> R.drawable.ic_reply
                     QueryListener.Source.CACHE, QueryListener.Source.CACHE_AND_LOCALRESOLVER -> R.drawable.ic_database
                     QueryListener.Source.LOCALRESOLVER -> R.drawable.ic_flag
                     else -> R.drawable.ic_query_question

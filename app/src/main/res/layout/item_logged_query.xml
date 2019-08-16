@@ -8,11 +8,11 @@
                 android:layout_height="wrap_content">
 
     <ImageView
-            android:layout_width="28dp"
+            android:layout_width="24dp"
             android:id="@+id/typeImage"
             android:layout_centerVertical="true"
             android:tint="?android:attr/textColor"
-            android:layout_height="28dp"/>
+            android:layout_height="24dp"/>
 
     <TextView
             android:layout_width="wrap_content"
