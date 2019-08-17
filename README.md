@@ -1,6 +1,20 @@
-![Icon](app/src/main/res/mipmap-mdpi/ic_launcher.png)  
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=200px height=200px src="app/src/main/res/mipmap-xxhdpi/ic_launcher.png" alt="Project logo"></a>
+</p>
 
-# Nebulo
+<h3 align="center">Nebulo</h3>
+
+<div align="center">
+
+  [![Apk size](https://img.shields.io/badge/Apk%20file%20size-4.7%20MB-blue)]() 
+  [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](/LICENSE)
+
+</div>
+
+---
+
+# About
 Nebulo is a free, open-source, non-root and small sized DNS changer utilizing dns-over-https and dns-over-tls to bring privacy and security to your phone.
 It is fast, contains no ads or tracking and offers a lot of flexibility.
 
@@ -87,7 +101,7 @@ Copyright (C) 2019   Daniel Wolf
 
 <br>
 <br>
-Please be aware that I'm not going to tolerate exact copies of this app on the Play Store. This project took a lot of work, not only from me, but many alpha/beta testers and translators. Copying is - per the license - generally allowed, but uploading a nearly identical version to the Play Store would be impersonation which I'd go after.
+Please be aware that I'm not going to tolerate exact copies of this app on the Play Store. This project took a lot of work, not only from me, but many alpha/beta testers and translators. Copying is - per the license - generally allowed, but uploading a nearly identical version to the Play Store would be impersonation as per Google policy.
 
 # Third-party content
 This work contains third-party content, namely:
