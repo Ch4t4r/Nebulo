@@ -1,10 +1,11 @@
-<p align="center">
+<div align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="app/src/main/res/mipmap-xxhdpi/ic_launcher.png" alt="Project logo"></a>
-</p>
+  <img width=200px height=200px src="app/src/main/res/mipmap-xxhdpi/ic_launcher.png" alt="Project logo"></a>
+</div>
 
-<h3 align="center">Nebulo</h3>
-
+<div align=center>
+    <h3 align="center">Nebulo</h3>
+</div>
 <div align="center">
 
   [![Apk size](https://img.shields.io/badge/Apk%20file%20size-4.7%20MB-blue)]() 
