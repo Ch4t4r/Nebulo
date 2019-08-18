@@ -269,4 +269,14 @@
         <item>@string/changelog_build_44_4</item>
         <item>@string/changelog_build_43_6</item>
     </string-array>
+
+    <string name="changelog_build_45_1">Split the settings into multiple layouts to increase readability</string>
+    <string name="changelog_build_45_2">Overhauled the query log</string>
+    <string-array name="changelog_build_45">
+        <item>1.0 Beta (Build 45)</item>
+        <item>@string/changelog_build_45_1</item>
+        <item>@string/changelog_build_45_2</item>
+        <item>@string/changelog_build_43_6</item>
+    </string-array>
+    
 </resources>
