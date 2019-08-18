@@ -124,15 +124,15 @@
     <string name="dialog_deletehostsource_title">Verwijderen %1s\?</string>
     <string name="dialog_deletehostsource_message">Weet u zeker dat u de host bron %1s wilt verwijderen\? Dit kan niet ongedaan worden gemaakt, de hosts van deze bron zullen worden verwijderd.</string>
 
-    <string name="dialog_clearuserrules_title">Alle dns regels wissen\?</string>
-    <string name="dialog_clearuserrules_message">Wilt u alle dns regels wissen\? Dit kan niet ongedaan gemaakt worden.</string>
+    <string name="dialog_clearuserrules_title">Alle DNS regels wissen\?</string>
+    <string name="dialog_clearuserrules_message">Wilt u alle DNS regels wissen\? Dit kan niet ongedaan gemaakt worden.</string>
 
     <string name="dialog_newhostsource_title">Nieuwe regel bron</string>
     <string name="dialog_newhostsource_name">Naam</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_error_name_empty">Geef a.u.b een naam op.</string>
 
-    <string name="dialog_newdnsrule_title">Nieuwe Dns regel</string>
+    <string name="dialog_newdnsrule_title">Nieuwe DNS regel</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
     <string name="dialog_newdnsrule_hint_ipv4address">IPv4 adres</string>
     <string name="dialog_newdnsrule_hint_ipv6address">IPv6 adres</string>
@@ -140,14 +140,14 @@
     <string name="dialog_newdnsrule_ipv4_invalid">Geef a.u.b een geldig IPv4 adres op</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Geef a.u.b een geldig IPv6 adres op</string>
 <string name="dialog_newhostsource_choose_file">Kies bestand</string>
-    <string name="dialog_exportdnsrules_title">Exporteer dns regels</string>
-    <string name="dialog_exportdnsrules_export_user_rules">Exporteer uw eigen dns-regels</string>
-    <string name="dialog_exportdnsrules_export_sources">Exporteer dns-regels van ingeschakelde host bronnen</string>
+    <string name="dialog_exportdnsrules_title">Exporteer DNS regels</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Exporteer uw eigen DNS-regels</string>
+    <string name="dialog_exportdnsrules_export_sources">Exporteer DNS-regels van ingeschakelde host bronnen</string>
 <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Adres</string>
     <string name="dialog_newhostsource_use_as_whitelist">Gebruik als whitelist</string>
     <string name="dialog_newhostsource_edit_title">Nieuwe dns-regel bron</string>
-    <string name="dialog_newdnsrule_edit">Dns-regel bewerken</string>
+    <string name="dialog_newdnsrule_edit">DNS-regel bewerken</string>
     <string name="dialog_editdelete_title">Wat wil je doen\?</string>
     <string name="dialog_editdelete_edit">Bewerken</string>
     <string name="dialog_editdelete_delete">Verwijderen</string>
@@ -159,7 +159,7 @@
 \nAls je ervoor kiest om dit te negeren dan zie je dit dialoogvenster niet meer terug. U kunt meer lezen en tips krijgen om dit op te lossen met de onderstaande knop (opent een externe website in uw browser).</string>
     <string name="dialog_servicekilled_more_info">Meer informatie</string>
 <string name="dialog_newhostsource_wildcard_info">U kunt host bronnen gebruiken met wildcard domeinen.</string>
-    <string name="dialog_newdnsrule_wildcard_info">De host ondersteunt wildcards. Gebruik ster (*) voor een willekeurig aantal tekens, cijfers en toegestane speciale tekens behalve punt (.). Gebruik twee sterren (**) om de punt (.) Op te nemen.</string>
+    <string name="dialog_newdnsrule_wildcard_info">De host ondersteunt wildcards. Gebruik een asterisk (*) voor een willekeurig aantal tekens, cijfers en toegestane speciale tekens behalve punt (.). Gebruik twee asteriksen (**) om de punt (.) Op te nemen.</string>
 
     <string name="dialog_overlaydetected_title">Systeem-brede overlay gedetecteerd</string>
     <string name="dialog_overlaydetected_message">Er lijkt een systeem-brede overlay (bijv. Een chatballon, kleuren- of nachtfilter) actief te zijn. Met de meeste apparaten kunt u in dit geval geen VPN inschakelen. Als u in het volgende dialoogvenster niet op OK kunt klikken, schakelt u de overlay uit.</string>
