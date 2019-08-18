@@ -117,7 +117,6 @@ class SmokeScreen : Application() {
                         "app.dns_server_secondary",
                         getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
                     )
-                    addTag("app.debug", BuildConfig.DEBUG.toString())
                     addTag("app.installer_package", packageManager.getInstallerPackageName(packageName))
                 }
             }
