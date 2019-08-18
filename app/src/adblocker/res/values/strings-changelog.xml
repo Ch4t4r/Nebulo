@@ -107,7 +107,7 @@
         <item>@string/changelog_build_40_6</item>
     </string-array>
 
-    <string name="changelog_build_41_adblocker_1">Added two new dns rule sources</string>
+    <string name="changelog_build_41_adblocker_1">Added two new DNS rule sources</string>
     <string-array name="changelog_build_42">
         <item>1.0 Beta-Adblock (Build 42)</item>
         <item>@string/changelog_build_41_1</item>
