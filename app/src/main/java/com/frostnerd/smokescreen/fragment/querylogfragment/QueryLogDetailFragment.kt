@@ -89,7 +89,10 @@ class QueryLogDetailFragment : Fragment() {
         createDnsRule.setOnClickListener {
             val query = currentQuery
             if(query != null) {
-                DnsRuleDialog(context!!, DnsRule(query.type, query.name, if(query.type == Record.TYPE.A) "0.0.0.0" else "::1"), onRuleCreated = { newRule ->
+                val answerIP = query.getParsedResponses().firstOrNull {
+                    it.type == query.type
+                }?.payload?.toString() ?: if(query.type == Record.TYPE.A) "0.0.0.0" else "::1"
+                DnsRuleDialog(context!!, DnsRule(query.type, query.name, target = answerIP), onRuleCreated = { newRule ->
                     val id = if (newRule.isWhitelistRule()) {
                         getDatabase().dnsRuleDao().insertWhitelist(newRule)
                     } else getDatabase().dnsRuleDao().insertIgnore(newRule)
