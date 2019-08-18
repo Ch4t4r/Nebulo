@@ -12,7 +12,7 @@
 \n
 \n%2$d исключенных приложений
 \n%3$d записей в кэше</string>
-    <string name="notification_main_text_with_secondary">Запросы идут к %1$s и %2$d
+    <string name="notification_main_text_with_secondary">Запросы идут к %1$s и %2$s
 \n
 \n%3$d исключенных приложений
 \n%4$d записей в кэше</string>
