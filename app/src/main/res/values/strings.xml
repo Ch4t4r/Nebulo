@@ -76,4 +76,16 @@
     <string name="window_dnsrules_customhosts_message">Define all your custom hosts here.</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">Rules from this source: %1d (%2$d duplicates not in use)</string>
+
+    <string name="windows_querylogging_time">Time</string>
+    <string name="windows_querylogging_type">Type</string>
+    <string name="windows_querylogging_question">Question</string>
+    <string name="windows_querylogging_used_server">Used server</string>
+    <string name="windows_querylogging_protocol">Protocol</string>
+    <string name="windows_querylogging_latency">Latency</string>
+    <string name="windows_querylogging_responses">Responses</string>
+    <string name="windows_querylogging_create_dnsrule">Create dns rule for this host</string>
+    <string name="windows_querylogging_dnsrule_created">Dns rule has been created.</string>
+    <string name="windows_querylogging_usedserver_dnsrules">Resolved with Dns Rules</string>
+    <string name="windows_querylogging_usedserver_cache">Resolved with cache</string>
 </resources>

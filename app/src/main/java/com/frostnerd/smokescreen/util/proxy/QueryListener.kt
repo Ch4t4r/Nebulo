@@ -66,9 +66,9 @@ class QueryListener(private val context: Context) : QueryListener {
                 type = questionMessage.question.type,
                 name = questionMessage.question.name.toString(),
                 askedServer = null,
+                responseSource = QueryListener.Source.UPSTREAM,
                 questionTime = System.currentTimeMillis(),
-                responses = mutableListOf(),
-                fromCache = false
+                responses = mutableListOf()
             )
             val dao = context.getDatabase().dnsQueryDao()
             dao.insert(query)
@@ -91,7 +91,7 @@ class QueryListener(private val context: Context) : QueryListener {
                 for (answer in responseMessage.answerSection) {
                     query.addResponse(answer)
                 }
-                query.fromCache = (source == QueryListener.Source.CACHE || source == QueryListener.Source.CACHE_AND_LOCALRESOLVER)
+                query.responseSource = source
                 context.getDatabase().dnsQueryRepository().updateAsync(query)
                 synchronized(waitingQueryLogs) {
                     waitingQueryLogs.remove(responseMessage.id)

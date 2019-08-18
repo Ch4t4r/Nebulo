@@ -1,13 +1,24 @@
 package com.frostnerd.smokescreen.fragment.querylogfragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
+import com.frostnerd.smokescreen.database.entities.DnsRule
+import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.DnsRuleDialog
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.fragment_querylog_detail.*
+import org.minidns.record.A
+import org.minidns.record.Record
+import java.text.DateFormat
+import java.util.*
 
 
 /*
@@ -31,17 +42,76 @@ import kotlinx.android.synthetic.main.fragment_querylog_detail.*
 class QueryLogDetailFragment : Fragment() {
     var currentQuery: DnsQuery? = null
         private set
+    private lateinit var timeFormatSameDay: DateFormat
+    private lateinit var timeFormatDifferentDay: DateFormat
+    private fun formatTimeStamp(timestamp:Long): String {
+        return if(isTimeStampToday(timestamp)) timeFormatSameDay.format(timestamp)
+        else timeFormatDifferentDay.format(timestamp)
+    }
 
+    private fun isTimeStampToday(timestamp:Long):Boolean {
+        return timestamp >= getStartOfDay()
+    }
 
+    private fun getStartOfDay():Long {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        return calendar.timeInMillis
+    }
+
+    private fun getLocale(): Locale {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            resources.configuration.locales.get(0)!!
+        } else{
+            @Suppress("DEPRECATION")
+            resources.configuration.locale!!
+        }
+    }
+
+    private fun setupTimeFormat() {
+        val locale = getLocale()
+        timeFormatSameDay = DateFormat.getTimeInstance(DateFormat.MEDIUM, locale)
+        timeFormatDifferentDay = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, locale)
+    }
     private var viewCreated = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setupTimeFormat()
         return inflater.inflate(R.layout.fragment_querylog_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewCreated = true
         updateUi()
+        createDnsRule.setOnClickListener {
+            val query = currentQuery
+            if(query != null) {
+                val answerIP = query.getParsedResponses().firstOrNull {
+                    it.type == query.type
+                }?.payload?.toString() ?: if(query.type == Record.TYPE.A) "0.0.0.0" else "::1"
+                DnsRuleDialog(context!!, DnsRule(query.type, query.name, target = answerIP), onRuleCreated = { newRule ->
+                    val id = if (newRule.isWhitelistRule()) {
+                        getDatabase().dnsRuleDao().insertWhitelist(newRule)
+                    } else getDatabase().dnsRuleDao().insertIgnore(newRule)
+                    if (id != -1L) {
+                        Snackbar.make(
+                            activity!!.findViewById(android.R.id.content),
+                            R.string.windows_querylogging_dnsrule_created,
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Snackbar.make(
+                            activity!!.findViewById(android.R.id.content),
+                            R.string.window_dnsrules_hostalreadyexists,
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                }).show()
+            }
+        }
     }
 
     fun isShowingQuery(): Boolean {
@@ -60,7 +130,7 @@ class QueryLogDetailFragment : Fragment() {
     private fun updateUi() {
         val query = currentQuery
         if(query != null && viewCreated) {
-            queryTime.text = QueryLogListFragment.formatTimeStamp(query.questionTime)
+            queryTime.text = formatTimeStamp(query.questionTime)
             if(query.responseTime >= query.questionTime) {
                 latency.text = (query.responseTime - query.questionTime).toString() + " ms"
             } else {
@@ -69,14 +139,25 @@ class QueryLogDetailFragment : Fragment() {
             longName.text = query.name
             type.text = query.type.name
             protocol.text = when {
-                query.askedServer == null -> ""
+                query.responseSource == QueryListener.Source.CACHE -> getString(R.string.windows_querylogging_usedserver_cache)
+                query.responseSource == QueryListener.Source.LOCALRESOLVER -> getString(R.string.windows_querylogging_usedserver_dnsrules)
+                query.askedServer == null -> "-"
                 query.askedServer!!.startsWith("https") -> getString(R.string.fragment_querydetail_mode_doh)
                 else -> getString(R.string.fragment_querydetail_mode_dot)
             }
-            if(query.fromCache) {
-                resolvedBy.text = "Cache"
-            } else {
-                resolvedBy.text = query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
+            resolvedBy.text = when {
+                query.responseSource == QueryListener.Source.CACHE -> getString(R.string.windows_querylogging_usedserver_cache)
+                query.responseSource == QueryListener.Source.LOCALRESOLVER -> getString(R.string.windows_querylogging_usedserver_dnsrules)
+                else -> query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
+            }
+            responses.text = query.getParsedResponses().filter {
+                it.type == query.type
+            }.joinToString {
+                val payload = it.payload
+                payload.toString()
+            }.let {
+                if(it.isBlank()) "-"
+                else it
             }
         }
     }
