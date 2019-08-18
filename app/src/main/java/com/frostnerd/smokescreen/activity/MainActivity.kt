@@ -48,11 +48,13 @@ import kotlin.random.Random
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class MainActivity : NavigationDrawerActivity() {
+    companion object {
+        const val BROADCAST_RELOAD_MENU = "main.reloadMenu"
+    }
     override val drawerOverActionBar: Boolean = true
     private var textColor: Int = 0
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
-    private var startedActivity = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
@@ -140,6 +142,9 @@ class MainActivity : NavigationDrawerActivity() {
             getPreferences().vpnServiceState = VpnServiceState.STOPPED
             BatteryOptimizationInfoDialog(this).show()
         }
+        registerLocalReceiver(listOf(BROADCAST_RELOAD_MENU), true) {
+            reloadMenuItems()
+        }
     }
 
     private fun handleDeepAction() {
@@ -175,6 +180,7 @@ class MainActivity : NavigationDrawerActivity() {
                     fragmentCreator = {
                         QueryLogFragment()
                     })
+
             }
             divider()
             clickableItem(getString(R.string.menu_create_shortcut),

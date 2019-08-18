@@ -131,7 +131,7 @@
     <string name="changelog_build_33_2">The notification shown when the app crashes when automatic crash reporting is disabled now has a button to send the log files</string>
     <string name="changelog_build_33_3">Replaced some of the icons</string>
     <string name="changelog_build_33_4">Fixed a few crashes</string>
-    <string name="changelog_build_33_5">Added a view to test dns server speeds</string>
+    <string name="changelog_build_33_5">Added a view to test DNS server speeds</string>
     <string name="changelog_build_33_6">You can now specify custom IP addresses for hosts. Hosts can be imported from URLs and added by hand.</string>
     <string name="changelog_build_33_7">A few design tweaks</string>
     <string-array name="changelog_build_33">
@@ -151,10 +151,10 @@
         <item>@string/changelog_build_34_1</item>
     </string-array>
 
-    <string name="changelog_build_35_1">Fixed some crashes related to the dns rule import</string>
-    <string name="changelog_build_35_2">Aborting the dns rule import now doesn\'t freeze the UI anymore</string>
+    <string name="changelog_build_35_1">Fixed some crashes related to the DNS rule import</string>
+    <string name="changelog_build_35_2">Aborting the DNS rule import now doesn\'t freeze the UI anymore</string>
     <string name="changelog_build_35_3">Small performance improvement for dns-over-https</string>
-    <string name="changelog_build_35_4">The host sources for the dns rules now show how many rules were imported from them</string>
+    <string name="changelog_build_35_4">The host sources for the DNS rules now show how many rules were imported from them</string>
     <string-array name="changelog_build_35">
         <item>1.0 Beta (Build 35)</item>
         <item>@string/changelog_build_35_1</item>
@@ -163,11 +163,11 @@
         <item>@string/changelog_build_35_4</item>
     </string-array>
 
-    <string name="changelog_build_36_1">You can now export the dns rules</string>
+    <string name="changelog_build_36_1">You can now export the DNS rules</string>
     <string name="changelog_build_36_2">Dns rules can now be imported from files</string>
-    <string name="changelog_build_36_3">Fixed dns rules not being imported from very small sources</string>
+    <string name="changelog_build_36_3">Fixed DNS rules not being imported from very small sources</string>
     <string name="changelog_build_36_4">The rule import can now recognize non-default letters (such as umlauts)</string>
-    <string name="changelog_build_36_5">Moved the dns rules to the sidebar menu</string>
+    <string name="changelog_build_36_5">Moved the DNS rules to the sidebar menu</string>
     <string name="changelog_build_36_6">Fixed a crash which occurred on some device</string>
     <string-array name="changelog_build_36">
         <item>1.0 Beta (Build 36)</item>
@@ -181,8 +181,8 @@
 
     <string name="changelog_build_37_1">Fixed some crashes</string>
     <string name="changelog_build_37_2">A few design improvements</string>
-    <string name="changelog_build_37_3">The dns rule import is now a bit faster</string>
-    <string name="changelog_build_37_4">Imported dns rules now take less space on the device</string>
+    <string name="changelog_build_37_3">The DNS rule import is now a bit faster</string>
+    <string name="changelog_build_37_4">Imported DNS rules now take less space on the device</string>
     <string-array name="changelog_build_37">
         <item>1.0 Beta (Build 37)</item>
         <item>@string/changelog_build_37_1</item>
@@ -191,7 +191,7 @@
         <item>@string/changelog_build_37_4</item>
     </string-array>
 
-    <string name="changelog_build_38_1">This is a performance focused update which should make dns queries faster, use less memory and be less battery consuming.</string>
+    <string name="changelog_build_38_1">This is a performance focused update which should make DNS queries faster, use less memory and be less battery consuming.</string>
     <string name="changelog_build_38_2">Fixed a crash on some devices regarding the internal database</string>
     <string-array name="changelog_build_38">
         <item>1.0 Beta (Build 38)</item>
@@ -199,7 +199,7 @@
         <item>@string/changelog_build_38_2</item>
     </string-array>
 
-    <string name="changelog_build_39_1">Fixed a crash which affected most dns servers</string>
+    <string name="changelog_build_39_1">Fixed a crash which affected most DNS servers</string>
     <string-array name="changelog_build_39">
         <item>1.0 Beta (Build 39)</item>
         <item>@string/changelog_build_39_1</item>
@@ -227,7 +227,7 @@
     <string name="changelog_build_41_4">User-defined servers can now be edited</string>
     <string name="changelog_build_41_5">The server list now only shows server which support the current network (IPv4 or IPv6)</string>
     <string name="changelog_build_41_6">Host sources can now be edited by clicking on them</string>
-    <string name="changelog_build_41_7">The dns rules now don\'t open a separate window anymore</string>
+    <string name="changelog_build_41_7">The DNS rules now don\'t open a separate window anymore</string>
     <string name="changelog_build_41_8">Fixed a few crashes</string>
     <string-array name="changelog_build_41">
         <item>1.0 Beta (Build 41)</item>
@@ -244,7 +244,7 @@
     <string name="changelog_build_43_1">The server info in the side bar menu now shows the current latency</string>
     <string name="changelog_build_43_2">The speed test now only shows servers which support the current network</string>
     <string name="changelog_build_43_3">Fixed dnsmasq host sources not being imported</string>
-    <string name="changelog_build_43_4">The dns rules view now shows the total amount of rules</string>
+    <string name="changelog_build_43_4">The DNS rules view now shows the total amount of rules</string>
     <string name="changelog_build_43_5">A dialog is now shown when the system kills the app, informing about possible solutions</string>
     <string name="changelog_build_43_6">Fixed a few crashes</string>
     <string-array name="changelog_build_43">
@@ -260,7 +260,7 @@
     <string name="changelog_build_44_1">The app should now be able to recover itself when the screen has been off for some time</string>
     <string name="changelog_build_44_2">Dns rules can now be configured to updated periodically</string>
     <string name="changelog_build_44_3">Host sources are now only downloaded/parsed when their content changed</string>
-    <string name="changelog_build_44_4">The dns rules now support wildcards</string>
+    <string name="changelog_build_44_4">The DNS rules now support wildcards</string>
     <string-array name="changelog_build_44">
         <item>1.0 Beta (Build 44)</item>
         <item>@string/changelog_build_44_1</item>

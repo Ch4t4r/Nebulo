@@ -13,7 +13,11 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.Decision
 import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
@@ -116,6 +120,32 @@ fun Context.registerLocalReceiver(
         }
     }
     LocalBroadcastManager.getInstance(this).registerReceiver(actualReceiver, filter)
+    return actualReceiver
+}
+
+fun AppCompatActivity.registerLocalReceiver(
+    filteredActions: List<String>,
+    unregisterOnDestroy:Boolean,
+    receiver: (intent: Intent?) -> Unit
+): BroadcastReceiver {
+    val filter = IntentFilter()
+    for (filteredAction in filteredActions) {
+        filter.addAction(filteredAction)
+    }
+
+    val actualReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            receiver(intent)
+        }
+    }
+    val mgr = LocalBroadcastManager.getInstance(this)
+    mgr.registerReceiver(actualReceiver, filter)
+    if(unregisterOnDestroy) lifecycle.addObserver(object:LifecycleObserver {
+        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        fun onDestroy() {
+            mgr.unregisterReceiver(actualReceiver)
+        }
+    })
     return actualReceiver
 }
 
