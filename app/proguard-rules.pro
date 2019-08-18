@@ -28,7 +28,6 @@
 }
 
 -assumenosideeffects class com.frostnerd.vpntunnelproxy.Logger {
-        public final void fine(...);
         public final void finer(...);
         public final void finest(...);
 }

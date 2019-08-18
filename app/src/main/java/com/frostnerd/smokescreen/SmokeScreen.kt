@@ -15,6 +15,9 @@ import com.github.anrwatchdog.ANRWatchDog
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
 import io.sentry.event.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import leakcanary.LeakSentry
 import java.util.*
 import kotlin.system.exitProcess
@@ -99,22 +102,23 @@ class SmokeScreen : Application() {
 
     fun initSentry(forceEnabled: Boolean = false) {
         if (!BuildConfig.DEBUG && (forceEnabled || getPreferences().crashReportingEnabled)) {
-            Sentry.init(
-                "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
-                AndroidSentryClientFactory(this)
-            )
-            Sentry.getContext().user = User(getPreferences().crashReportingUUID, null, null, null)
-            Sentry.getStoredClient().apply {
-                addTag("user.language", Locale.getDefault().displayLanguage)
-                addTag("app.database_version", AppDatabase.currentVersion.toString())
-                addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
-                addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
-                addTag(
-                    "app.dns_server_secondary",
-                    getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
+            GlobalScope.launch(Dispatchers.IO) {
+                Sentry.init(
+                    "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
+                    AndroidSentryClientFactory(this@SmokeScreen)
                 )
-                addTag("app.debug", BuildConfig.DEBUG.toString())
-                addTag("app.installer_package", packageManager.getInstallerPackageName(packageName))
+                Sentry.getContext().user = User(getPreferences().crashReportingUUID, null, null, null)
+                Sentry.getStoredClient().apply {
+                    addTag("user.language", Locale.getDefault().displayLanguage)
+                    addTag("app.database_version", AppDatabase.currentVersion.toString())
+                    addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
+                    addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
+                    addTag(
+                        "app.dns_server_secondary",
+                        getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
+                    )
+                    addTag("app.installer_package", packageManager.getInstallerPackageName(packageName))
+                }
             }
         } else {
             Sentry.close()

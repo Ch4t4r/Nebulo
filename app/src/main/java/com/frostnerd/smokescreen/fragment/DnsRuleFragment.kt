@@ -137,34 +137,35 @@ class DnsRuleFragment : Fragment() {
                 }
             }, refreshConfigChanged = {
                 getPreferences().apply {
-                    val constraints = Constraints.Builder()
-                        .setRequiresStorageNotLow(true)
-                        .setRequiresBatteryNotLow(true)
-                        .setRequiredNetworkType(if (this.automaticHostRefreshWifiOnly) NetworkType.UNMETERED else NetworkType.CONNECTED)
-                        .build()
-                    val mappedTimeAmount = automaticHostRefreshTimeAmount.let {
-                        if (automaticHostRefreshTimeUnit == HostSourceRefreshDialog.TimeUnit.WEEKS) it * 7
-                        else it
-                    }.toLong()
-                    val mappedTimeUnit = automaticHostRefreshTimeUnit.let {
-                        when (it) {
-                            HostSourceRefreshDialog.TimeUnit.WEEKS -> TimeUnit.DAYS
-                            HostSourceRefreshDialog.TimeUnit.DAYS -> TimeUnit.DAYS
-                            HostSourceRefreshDialog.TimeUnit.HOURS -> TimeUnit.HOURS
-                            HostSourceRefreshDialog.TimeUnit.MINUTES -> TimeUnit.MINUTES
+                    val workManager = WorkManager.getInstance(context!!)
+                    workManager.cancelAllWorkByTag("hostSourceRefresh")
+                    if(automaticHostRefresh) {
+                        val constraints = Constraints.Builder()
+                            .setRequiresStorageNotLow(true)
+                            .setRequiresBatteryNotLow(true)
+                            .setRequiredNetworkType(if (this.automaticHostRefreshWifiOnly) NetworkType.UNMETERED else NetworkType.CONNECTED)
+                            .build()
+                        val mappedTimeAmount = automaticHostRefreshTimeAmount.let {
+                            if (automaticHostRefreshTimeUnit == HostSourceRefreshDialog.TimeUnit.WEEKS) it * 7
+                            else it
+                        }.toLong()
+                        val mappedTimeUnit = automaticHostRefreshTimeUnit.let {
+                            when (it) {
+                                HostSourceRefreshDialog.TimeUnit.WEEKS -> TimeUnit.DAYS
+                                HostSourceRefreshDialog.TimeUnit.DAYS -> TimeUnit.DAYS
+                                HostSourceRefreshDialog.TimeUnit.HOURS -> TimeUnit.HOURS
+                                HostSourceRefreshDialog.TimeUnit.MINUTES -> TimeUnit.MINUTES
+                            }
                         }
-                    }
-                    val workRequest = PeriodicWorkRequest.Builder(RuleImportStartWorker::class.java,
-                        mappedTimeAmount,
-                        mappedTimeUnit)
-                        .setConstraints(constraints)
-                        .setInitialDelay(mappedTimeAmount, mappedTimeUnit)
-                        .addTag("hostSourceRefresh")
-                    WorkManager.getInstance(context!!).apply {
-                        cancelAllWorkByTag("hostSourceRefresh")
-                        enqueue(workRequest.build())
-                    }
+                        val workRequest = PeriodicWorkRequest.Builder(RuleImportStartWorker::class.java,
+                            mappedTimeAmount,
+                            mappedTimeUnit)
+                            .setConstraints(constraints)
+                            .setInitialDelay(mappedTimeAmount, mappedTimeUnit)
+                            .addTag("hostSourceRefresh")
 
+                        workManager.enqueue(workRequest.build())
+                    }
                 }
             }).show()
         }
@@ -262,7 +263,7 @@ class DnsRuleFragment : Fragment() {
                             showUserRules = !showUserRules
                             if (showUserRules) {
                                 userRuleCount = userDnsRules.size
-                                activity!!.runOnUiThread {
+                                activity?.runOnUiThread {
                                     sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
                                     list.smoothScrollToPosition(sourceAdapterList.size + 1)
                                 }
@@ -303,10 +304,12 @@ class DnsRuleFragment : Fragment() {
                                     showUserRules = true
                                     if (wereRulesShown) {
                                         userRuleCount += 1
-                                        sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                                        activity?.runOnUiThread {
+                                            sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                                        }
                                     } else {
                                         userRuleCount = userDnsRules.size
-                                        activity!!.runOnUiThread {
+                                        activity?.runOnUiThread {
                                             sourceAdapter.notifyItemChanged(sourceAdapterList.size)
                                             sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
                                             list.smoothScrollToPosition(insertPos)
@@ -412,7 +415,7 @@ class DnsRuleFragment : Fragment() {
                 }
             }
             runOnUiThread = {
-                activity!!.runOnUiThread(it)
+                activity?.runOnUiThread(it)
             }
 
         }.build()

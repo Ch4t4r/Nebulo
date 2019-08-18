@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/preference_category_general">
+        <ListPreference
+                android:defaultValue="1"
+                android:entries="@array/theme"
+                android:entryValues="@array/themeValues"
+                android:key="theme"
+                android:summary="@string/summary_theme"
+                android:title="@string/title_theme"/>
+
+        <CheckBoxPreference
+                android:defaultValue="true"
+                android:summary="@string/summary_start_on_boot"
+                android:title="@string/title_start_on_boot"
+                android:key="start_on_boot"/>
+
+        <CheckBoxPreference
+                android:key="start_after_update"
+                android:title="@string/title_start_after_update"
+                android:summary="@string/summary_start_after_update"
+                android:defaultValue="true"/>
+
+        <Preference
+                android:key="app_exclusion_list"
+                android:title="@string/title_excluded_apps"
+                android:summary="@string/summary_excluded_apps"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

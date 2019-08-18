@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/preference_category_logging">
+        <CheckBoxPreference
+                android:title="@string/title_enable_logging"
+                android:summary="@string/summary_enable_logging"
+                android:key="logging_enabled"/>
+
+        <CheckBoxPreference
+                android:title="@string/title_advanced_logging"
+                android:summary="@string/summary_advanced_logging"
+                android:dependency="logging_enabled"
+                android:key="advanced_logging"/>
+
+        <Preference
+                android:key="send_logs"
+                android:title="@string/title_send_logs"
+                android:summary="@string/summary_send_logs"/>
+
+        <Preference
+                android:key="delete_logs"
+                android:title="@string/title_delete_all_logs"
+                android:summary="@string/summary_delete_all_logs"/>
+
+        <CheckBoxPreference
+                android:key="enable_sentry"
+                android:title="@string/title_enable_sentry"
+                android:defaultValue="false"
+                android:summary="@string/summary_enable_sentry"/>
+    </PreferenceCategory>
+</PreferenceScreen>

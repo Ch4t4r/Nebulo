@@ -155,7 +155,9 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
-        if(getPreferences().vpnServiceState == VpnServiceState.STARTED && !getPreferences().ignoreServiceKilled) { // The app didn't stop properly
+        if(getPreferences().vpnServiceState == VpnServiceState.STARTED &&
+            !getPreferences().ignoreServiceKilled &&
+                getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE) { // The app didn't stop properly
             val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra("command", Command.IGNORE_SERVICE_KILLED)
             val ignorePendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 PendingIntent.getForegroundService(this@DnsVpnService, REQUEST_CODE_IGNORE_SERVICE_KILLED, ignoreIntent, PendingIntent.FLAG_ONE_SHOT)
@@ -175,6 +177,7 @@ class DnsVpnService : VpnService(), Runnable {
             }
         }
         getPreferences().vpnServiceState = VpnServiceState.STARTED
+        getPreferences().vpnLaunchLastVersion = BuildConfig.VERSION_CODE
         LeakSentry.refWatcher.watch(this, "DnsVpnService")
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             log("Encountered an uncaught exception.")

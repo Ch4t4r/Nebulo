@@ -48,11 +48,13 @@ import kotlin.random.Random
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class MainActivity : NavigationDrawerActivity() {
+    companion object {
+        const val BROADCAST_RELOAD_MENU = "main.reloadMenu"
+    }
     override val drawerOverActionBar: Boolean = true
     private var textColor: Int = 0
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
-    private var startedActivity = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
@@ -133,9 +135,15 @@ class MainActivity : NavigationDrawerActivity() {
             }
         }
         handleDeepAction()
-        if(!isServiceRunning(DnsVpnService::class.java) && getPreferences().vpnServiceState == VpnServiceState.STARTED && !getPreferences().ignoreServiceKilled) {
+        if(!isServiceRunning(DnsVpnService::class.java) &&
+            getPreferences().vpnServiceState == VpnServiceState.STARTED &&
+            !getPreferences().ignoreServiceKilled &&
+                getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE) {
             getPreferences().vpnServiceState = VpnServiceState.STOPPED
             BatteryOptimizationInfoDialog(this).show()
+        }
+        registerLocalReceiver(listOf(BROADCAST_RELOAD_MENU), true) {
+            reloadMenuItems()
         }
     }
 
@@ -164,7 +172,7 @@ class MainActivity : NavigationDrawerActivity() {
             )
             fragmentItem(getString(R.string.menu_settings),
                 iconLeft = getDrawable(R.drawable.ic_menu_settings),
-                fragmentCreator = singleInstanceFragment { SettingsFragment() })
+                fragmentCreator = singleInstanceFragment { SettingsOverviewFragment() })
             if (getPreferences().queryLoggingEnabled) {
                 divider()
                 fragmentItem(getString(R.string.menu_querylogging),
@@ -172,6 +180,7 @@ class MainActivity : NavigationDrawerActivity() {
                     fragmentCreator = {
                         QueryLogFragment()
                     })
+
             }
             divider()
             clickableItem(getString(R.string.menu_create_shortcut),

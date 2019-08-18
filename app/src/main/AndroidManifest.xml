@@ -38,6 +38,13 @@
 
         </activity>
         <activity
+                android:name=".activity.SettingsActivity"
+                android:label="@string/menu_settings"
+                android:theme="@style/AppTheme_Mono_ActionBar"
+                android:parentActivityName=".activity.MainActivity">
+
+        </activity>
+        <activity
                 android:name=".activity.ShortcutActivity"
                 android:exported="true"
                 android:launchMode="singleTop"

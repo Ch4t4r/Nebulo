@@ -86,7 +86,7 @@ class DnsQueryRepository(private val dnsQueryDao: DnsQueryDao) {
                     builder.append(query.type.name).append(",")
                     builder.append(query.type.value).append(",")
                     builder.append(query.askedServer).append(",")
-                    builder.append(query.fromCache).append(",")
+                    builder.append(query.responseSource?.name ?: "").append(",")
                     builder.append(query.questionTime).append(",")
                     builder.append(query.responseTime).append(",")
                     builder.append("\"").append(responseConverter.someObjectListToString(query.responses).replace(",", ";").replace("\"", "'")).append("\"")

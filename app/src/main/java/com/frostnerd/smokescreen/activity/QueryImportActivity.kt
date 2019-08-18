@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.converters.StringListConverter
 import com.frostnerd.smokescreen.database.entities.DnsQuery
@@ -55,11 +56,17 @@ class QueryImportActivity: AppCompatActivity() {
                             val converter = StringListConverter()
                             for(line in iterator) {
                                 val split = line.split(",")
+                                val source = if(split[5].equals("false", true) || split[5].equals("true", true)) {
+                                    if (split[5].toBoolean()) QueryListener.Source.CACHE
+                                    else QueryListener.Source.UPSTREAM
+                                } else QueryListener.Source.values().find {
+                                    it.name.equals(split[5], true)
+                                } ?: QueryListener.Source.UPSTREAM
                                 queries.add(DnsQuery(
                                     name=split[0],
                                     type =  Record.TYPE.getType(split[3].toInt()),
                                     askedServer = split[4],
-                                    fromCache = split[5].toBoolean(),
+                                    responseSource = source,
                                     questionTime = split[6].toLong(),
                                     responseTime = split[7].toLong(),
                                     responses = converter.stringToList(split[8].replaceFirst("\"", "").replace(Regex("\"$"), ""))
