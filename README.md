@@ -10,7 +10,10 @@
 
   [![Apk size](https://img.shields.io/badge/Apk%20file%20size-4.7%20MB-blue)]() 
   [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](/LICENSE)
-
+  <a href="https://weblate.frostnerd.com/engage/nebulo/?utm_source=widget">
+    <img src="https://weblate.frostnerd.com/widgets/nebulo/-/svg-badge.svg" alt="Übersetzungsstatus" />
+  </a> 
+[![pipeline status](https://git.frostnerd.com/PublicAndroidApps/smokescreen/badges/master/pipeline.svg)](https://git.frostnerd.com/PublicAndroidApps/smokescreen/commits/master)
 </div>
 
 ---
@@ -143,9 +146,3 @@ Feel free to clone this software. However, there are a few things to notice:
 </br>
 
 </br>
-
-<a href="https://weblate.frostnerd.com/engage/nebulo/?utm_source=widget">
-<img src="https://weblate.frostnerd.com/widgets/nebulo/-/svg-badge.svg" alt="Übersetzungsstatus" />
-</a> 
-
-[![pipeline status](https://git.frostnerd.com/PublicAndroidApps/smokescreen/badges/master/pipeline.svg)](https://git.frostnerd.com/PublicAndroidApps/smokescreen/commits/master)
