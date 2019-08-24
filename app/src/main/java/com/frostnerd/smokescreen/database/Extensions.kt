@@ -99,10 +99,23 @@ val MIGRATION_9_10 = migration(9, 10) {
 
 val MIGRATION_10_11 = migration(10, 11) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 10 to 11")
-    it.execSQL("CREATE TABLE `DnsQuery_tmp` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `responseSource` TEXT NOT NULL, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)")
-    it.execSQL("INSERT INTO `DnsQuery_tmp`(id, type, name, askedServer, questionTime, responseTime, responses, responseSource) SELECT id, type, name, askedServer, questionTime, responseTime, responses, CASE WHEN fromCache=1 THEN 'CACHE' else 'UPSTREAM' END as `responseSource` FROM DnsQuery")
-    it.execSQL("DROP TABLE `DnsQuery`")
-    it.execSQL("ALTER TABLE `DnsQuery_tmp` RENAME TO `DnsQuery`")
+    val count = it.query("SELECT COUNT(*) FROM 'DnsQuery'").let { cursor ->
+        cursor.moveToFirst()
+        val cnt = cursor.getInt(0)
+        cursor.close()
+        cnt
+    }
+
+    if(count > 0) {
+        it.execSQL("CREATE TABLE `DnsQuery_tmp` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `responseSource` TEXT NOT NULL, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)")
+        it.execSQL("INSERT INTO `DnsQuery_tmp`(id, type, name, askedServer, questionTime, responseTime, responses, responseSource) SELECT id, type, name, askedServer, questionTime, responseTime, responses, CASE WHEN fromCache=1 THEN 'CACHE' else 'UPSTREAM' END as `responseSource` FROM DnsQuery")
+        it.execSQL("DROP TABLE `DnsQuery`")
+        it.execSQL("ALTER TABLE `DnsQuery_tmp` RENAME TO `DnsQuery`")
+    } else {
+        it.execSQL("DROP TABLE `DnsQuery`")
+        it.execSQL("CREATE TABLE `DnsQuery` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `name` TEXT NOT NULL, `askedServer` TEXT, `responseSource` TEXT NOT NULL, `questionTime` INTEGER NOT NULL, `responseTime` INTEGER NOT NULL, `responses` TEXT NOT NULL)")
+    }
+
     Logger.logIfOpen("DB_MIGRATION", "Migration from 10 to 11 completed")
 }
 
