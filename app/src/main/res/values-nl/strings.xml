@@ -67,4 +67,15 @@
         <item quantity="one">%1d regel</item>
         <item quantity="other">%1d regels</item>
     </plurals>
-    </resources>
+    <string name="windows_querylogging_time">Tijd</string>
+    <string name="windows_querylogging_type">Type</string>
+    <string name="windows_querylogging_question">Vraag</string>
+    <string name="windows_querylogging_used_server">Gebruikte server</string>
+    <string name="windows_querylogging_protocol">Protocol</string>
+    <string name="windows_querylogging_latency">Latentie</string>
+    <string name="windows_querylogging_responses">Antwoorden</string>
+    <string name="windows_querylogging_create_dnsrule">Maak DNS-regel aan voor deze host</string>
+    <string name="windows_querylogging_dnsrule_created">DNS-regel is aangemaakt.</string>
+    <string name="windows_querylogging_usedserver_dnsrules">Afgehandeld met DNS-regels</string>
+    <string name="windows_querylogging_usedserver_cache">Afgehandeld met cache</string>
+</resources>

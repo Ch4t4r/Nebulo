@@ -118,15 +118,15 @@
 <string name="dialog_deletehostsource_title">%1s löschen\?</string>
     <string name="dialog_deletehostsource_message">Bist du dir sicher, dass du die Quelle %1s löschen willst\? Dies kann nicht rückgängig gemacht werden, Hosts aus dieser Quelle werden gelöscht.</string>
 
-    <string name="dialog_clearuserrules_title">Alle Dns Regeln leeren\?</string>
-    <string name="dialog_clearuserrules_message">Bist du dir sicher, dass du alle von dir definierten hosts löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
+    <string name="dialog_clearuserrules_title">Alle DNS Regeln leeren\?</string>
+    <string name="dialog_clearuserrules_message">Bist du dir sicher, dass du alle von dir definierten DNS Regeln löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
 
     <string name="dialog_newhostsource_title">Neue Regel Quelle</string>
     <string name="dialog_newhostsource_name">Name</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_error_name_empty">Bitte gebe einen Namen an.</string>
 
-    <string name="dialog_newdnsrule_title">Neue Dns Regel</string>
+    <string name="dialog_newdnsrule_title">Neue DNS Regel</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
     <string name="dialog_newdnsrule_hint_ipv4address">IPv4 Adresse</string>
     <string name="dialog_newdnsrule_hint_ipv6address">IPv6 Adresse</string>
@@ -134,14 +134,14 @@
     <string name="dialog_newdnsrule_ipv4_invalid">Bitte gebe eine valide IPv4 Adresse an</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Bitte gebe eine valide IPv6 Adresse an</string>
 <string name="dialog_newhostsource_choose_file">Datei wählen</string>
-    <string name="dialog_exportdnsrules_title">Dns Regeln exportieren</string>
-    <string name="dialog_exportdnsrules_export_user_rules">Exportiere eigene Dns Regeln</string>
-    <string name="dialog_exportdnsrules_export_sources">Exportiere Dns Regeln aus angegebenen Quellen</string>
+    <string name="dialog_exportdnsrules_title">DNS Regeln exportieren</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Exportiere eigene DNS Regeln</string>
+    <string name="dialog_exportdnsrules_export_sources">Exportiere DNS Regeln aus angegebenen Quellen</string>
 <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Adressangabe</string>
     <string name="dialog_newhostsource_use_as_whitelist">Als Whitelist benutzen</string>
     <string name="dialog_newhostsource_edit_title">Neue Regelquelle</string>
-    <string name="dialog_newdnsrule_edit">Dns Regel bearbeiten</string>
+    <string name="dialog_newdnsrule_edit">DNS Regel bearbeiten</string>
     <string name="dialog_editdelete_title">Was möchtest du tun\?</string>
     <string name="dialog_editdelete_edit">Editieren</string>
     <string name="dialog_editdelete_delete">Löschen</string>
