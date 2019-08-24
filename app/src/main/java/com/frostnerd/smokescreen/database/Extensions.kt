@@ -61,7 +61,7 @@ val MIGRATION_5_6 = migration(5, 6) {
     it.execSQL("CREATE TABLE IF NOT EXISTS `DnsRule` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stagingType` INTEGER NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `target` TEXT NOT NULL, `ipv6Target` TEXT, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
     it.execSQL("CREATE TABLE IF NOT EXISTS `HostSource` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `enabled` INTEGER NOT NULL, `name` TEXT NOT NULL, `source` TEXT NOT NULL)")
     it.execSQL("CREATE INDEX IF NOT EXISTS `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
-    it.execSQL("CREATE UNIQUE INDEX `index_DnsRule_host_type_stagingType` ON `DnsRule` (`host`, `type`, `stagingType`)")
+    it.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_DnsRule_host_type_stagingType` ON `DnsRule` (`host`, `type`, `stagingType`)")
     Logger.logIfOpen("DB_MIGRATION", "Migration from 5 to 6 completed")
 }
 @VisibleForTesting
@@ -76,7 +76,7 @@ val MIGRATION_6_7 = migration(6,7) {
 @VisibleForTesting
 val MIGRATION_7_8 = migration(7,8) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 7 to 8")
-    it.execSQL("DROP TABLE `DnsRule`")
+    it.execSQL("DROP TABLE IF EXISTS `DnsRule`")
     it.execSQL("CREATE TABLE IF NOT EXISTS `DnsRule` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stagingType` INTEGER NOT NULL, `type` INTEGER NOT NULL, `host` TEXT NOT NULL, `target` TEXT NOT NULL, `ipv6Target` TEXT, `importedFrom` INTEGER, FOREIGN KEY(`importedFrom`) REFERENCES `HostSource`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
     it.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_DnsRule_host_type_stagingType` ON `DnsRule` (`host`, `type`, `stagingType`)")
     it.execSQL("CREATE INDEX IF NOT EXISTS `index_DnsRule_importedFrom` ON `DnsRule` (`importedFrom`)")
