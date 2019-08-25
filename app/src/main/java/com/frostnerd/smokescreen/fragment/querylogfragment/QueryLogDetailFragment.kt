@@ -152,9 +152,9 @@ class QueryLogDetailFragment : Fragment() {
             }
             responses.text = query.getParsedResponses().filter {
                 it.type == query.type
-            }.joinToString {
+            }.joinToString(separator = "\n") {
                 val payload = it.payload
-                payload.toString()
+                "$payload (TTL: ${it.ttl})"
             }.let {
                 if(it.isBlank()) "-"
                 else it
