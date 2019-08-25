@@ -3,29 +3,36 @@
 
     <PreferenceCategory android:title="@string/preference_category_general">
         <ListPreference
+                android:entries="@array/languages"
+                android:entryValues="@array/language_values"
+                android:key="language"
+                android:summary="@string/summary_language"
+                android:title="@string/title_language" />
+
+        <ListPreference
                 android:defaultValue="1"
                 android:entries="@array/theme"
                 android:entryValues="@array/themeValues"
                 android:key="theme"
                 android:summary="@string/summary_theme"
-                android:title="@string/title_theme"/>
+                android:title="@string/title_theme" />
 
         <CheckBoxPreference
                 android:defaultValue="true"
+                android:key="start_on_boot"
                 android:summary="@string/summary_start_on_boot"
-                android:title="@string/title_start_on_boot"
-                android:key="start_on_boot"/>
+                android:title="@string/title_start_on_boot" />
 
         <CheckBoxPreference
+                android:defaultValue="true"
                 android:key="start_after_update"
-                android:title="@string/title_start_after_update"
                 android:summary="@string/summary_start_after_update"
-                android:defaultValue="true"/>
+                android:title="@string/title_start_after_update" />
 
         <Preference
                 android:key="app_exclusion_list"
-                android:title="@string/title_excluded_apps"
-                android:summary="@string/summary_excluded_apps"/>
+                android:summary="@string/summary_excluded_apps"
+                android:title="@string/title_excluded_apps" />
     </PreferenceCategory>
 
 </PreferenceScreen>

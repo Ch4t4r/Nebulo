@@ -169,6 +169,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var askedForGroupJoin: Boolean by booleanPref("asked_group_join", false)
     override var lastLogId: Int by intPref("last_log_id", 0)
 
+    var language:String by stringPref("language", "auto")
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
