@@ -150,11 +150,9 @@ class QueryLogDetailFragment : Fragment() {
                 query.responseSource == QueryListener.Source.LOCALRESOLVER -> getString(R.string.windows_querylogging_usedserver_dnsrules)
                 else -> query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
             }
-            responses.text = query.getParsedResponses().filter {
-                it.type == query.type
-            }.joinToString(separator = "\n") {
+            responses.text = query.getParsedResponses().joinToString(separator = "\n") {
                 val payload = it.payload
-                "$payload (TTL: ${it.ttl})"
+                "$payload (${it.type.name}, TTL: ${it.ttl})"
             }.let {
                 if(it.isBlank()) "-"
                 else it
