@@ -54,16 +54,16 @@
     <string name="summary_dnscache_maxsize">Sets the maximum of entries the cache can hold at any time</string>
 
     <string name="title_dnscache_usedefaulttimes">Default cache time</string>
-    <string name="summary_dnscache_usedefaulttimes">Cache requests for the default time communicated by the server</string>
+    <string name="summary_dnscache_usedefaulttimes">Keep requests in the cache for as long as the DNS server communicates using the TTL</string>
 
     <string name="title_dnscache_minimum_cache_time">Minimum cache time</string>
-    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached.\nCurrent: %1d Seconds.</string>
+    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached, no matter whether the default caching time for it would be shorter. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds.</string>
 
     <string name="title_dnscache_customcachetime">Custom cache time (Seconds)</string>
-    <string name="summary_dnscache_customcachetime">Changes the amount of time old requests are cached.\nCurrent: %1d Seconds.</string>
+    <string name="summary_dnscache_customcachetime">Changes how long all requests are cached, no matter whether the default caching time for it would be longer. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds.</string>
 
     <string name="title_dnscache_nxdomaincachetime">Cache time for NXDomain (Seconds)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time old NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds.</string>
+    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds.</string>
 
 
     <string name="preference_category_logging">Logging</string>
