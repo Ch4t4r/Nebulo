@@ -268,7 +268,9 @@ class DnsRuleFragment : Fragment() {
                                     list.smoothScrollToPosition(sourceAdapterList.size + 1)
                                 }
                             } else {
-                                sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
+                                activity?.runOnUiThread {
+                                    sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
+                                }
                                 userRuleCount = 0
                             }
                         }
