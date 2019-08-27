@@ -36,6 +36,24 @@ Nebulo is a completely original piece of software. It doesn't use any other depe
 - As mentioned no other VPN can be active when Nebulo is running.
 - Nebulo works fine with non-VPN firewalls in place (such as AFWall+), but changes in firewall profiles [could break the VPN](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues/84), requiring a restart of Nebulo.
 - Other means of ad-blocking, like modifying the `/etc/hosts` file or the `AdAway` app go hand in hand with Nebulo as well. 
+    - The AdGuard app might cause Nebulo not to receive DNS queries
+
+## Core features
+The app consists of a few core features:
+ * Dns forwarding using dns-over-https and dns-over-tls
+ * A customizable in-memory DNS cache
+    * You can configure minimum caching time and default caching times
+ * A list of servers with a lot of default entries
+    * You can add your own servers as well
+ * A DNS speed test
+ * Query logging
+ * DNS rules, where you can specify your own IP addresses for hosts
+    * Rules can be imported from files and URLs (supports 4 different formats)
+ * Highly customizable settings
+    * Disable IPv4/IPv6
+    * Allow captive portals
+    * Allow search domains on the current network
+    * ... And more
 
 # Help wanted
 Requesting your support: the app is getting closer to a proper release but it's still missing an important aspect: translations.
