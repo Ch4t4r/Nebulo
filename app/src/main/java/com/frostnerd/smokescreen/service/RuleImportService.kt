@@ -63,7 +63,7 @@ class RuleImportService : IntentService("RuleImportService") {
         const val BROADCAST_IMPORT_DONE = "com.frostnerd.nebulo.RULE_IMPORT_DONE"
     }
 
-    private val httpClient by lazy {
+    private val httpClient by lazy(LazyThreadSafetyMode.NONE) {
         OkHttpClient()
     }
 

@@ -49,12 +49,12 @@ class AppChoosalDialog(
     val infoText: String?,
     val dataCallback: (selectedApps: MutableSet<String>, blackList:Boolean) -> Unit
 ) {
-    private val dialogBuilder by lazy { AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle) }
-    private val layoutInflater by lazy { LayoutInflater.from(context) }
-    private val view by lazy { layoutInflater.inflate(R.layout.dialog_app_choosal, null, false) }
-    private val progressBar by lazy { view.findViewById<ProgressBar>(R.id.progress) }
-    private val packageManager by lazy { context.packageManager }
-    private val installedPackages: MutableList<ApplicationInfo> by lazy {
+    private val dialogBuilder by lazy(LazyThreadSafetyMode.NONE) { AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle) }
+    private val layoutInflater by lazy(LazyThreadSafetyMode.NONE) { LayoutInflater.from(context) }
+    private val view by lazy(LazyThreadSafetyMode.NONE){ layoutInflater.inflate(R.layout.dialog_app_choosal, null, false) }
+    private val progressBar by lazy(LazyThreadSafetyMode.NONE) { view.findViewById<ProgressBar>(R.id.progress) }
+    private val packageManager by lazy(LazyThreadSafetyMode.NONE) { context.packageManager }
+    private val installedPackages: MutableList<ApplicationInfo> by lazy(LazyThreadSafetyMode.NONE) {
         packageManager.getInstalledApplications(PackageManager.GET_META_DATA).filter {
             !hiddenAppPackages.contains(it.packageName)
         }.sortedBy {

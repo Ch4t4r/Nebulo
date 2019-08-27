@@ -52,7 +52,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             context?.getPreferences()?.notifyPreferenceChangedFromExternal(key)
         }
-    private val category:SettingsActivity.Category by lazy {
+    private val category:SettingsActivity.Category by lazy(LazyThreadSafetyMode.NONE) {
         arguments!!.getSerializable("category") as SettingsActivity.Category
     }
 

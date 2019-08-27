@@ -607,7 +607,7 @@ class DnsRuleFragment : Fragment() {
 
     companion object {
         const val latestSourcesVersion = 2
-        private val defaultHostSources:Map<Int, List<HostSource>> by lazy {
+        private val defaultHostSources:Map<Int, List<HostSource>> by lazy(LazyThreadSafetyMode.NONE) {
             mutableMapOf<Int, List<HostSource>>().apply {
                 put(1, mutableListOf(
                     HostSource("Energized Basic", "https://raw.githubusercontent.com/EnergizedProtection/block/master/basic/formats/domains.txt"),
