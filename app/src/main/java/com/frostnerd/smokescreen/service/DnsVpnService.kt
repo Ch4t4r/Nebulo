@@ -804,6 +804,12 @@ class DnsVpnService : VpnService(), Runnable {
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(2, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger() {
+            override fun logMessage(message: () -> String, level: Level) {
+                if(level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
+                    log(message(), "VPN-LIBRARY, $level")
+                }
+            }
+
             override fun failedRequest(question: FutureAnswer, reason: Throwable?) {
                 if(reason != null) log("A request failed: " + Logger.stacktraceToString(reason), "VPN-LIBRARY")
             }
