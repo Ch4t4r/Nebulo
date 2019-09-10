@@ -591,8 +591,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun randomIPv6Block(bits: Int, leading_zeros: Boolean): String {
         var hex = java.lang.Long.toHexString(floor(Math.random() * 2.0.pow(bits.toDouble())).toLong())
-        if (!leading_zeros || hex.length == bits / 4);
-        hex = "0000".substring(0, bits / 4 - hex.length) + hex
+        if (!leading_zeros || hex.length == bits / 4) hex = "0000".substring(0, bits / 4 - hex.length) + hex
         return hex
     }
 
