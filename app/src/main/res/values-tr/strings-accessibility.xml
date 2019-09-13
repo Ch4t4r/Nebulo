@@ -9,4 +9,5 @@
     <string name="contentdescription_stop_app">Uygulamayı durdur</string>
     
     <string name="hint_searchterm">Aranacak terim</string>
+<string name="hint_search">Arama</string>
 </resources>
