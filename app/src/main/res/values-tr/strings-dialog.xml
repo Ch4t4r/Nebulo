@@ -17,9 +17,9 @@
     <string name="dialog_appchoosal_whitelist">Yalnızca seçili uygulamalarda DoH/DoT kullanın</string>
 
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d uygulaması varsayılan olarak hariç tutuldu ve seçilemiyor</item>
-        <item quantity="other">%1d uygulama varsayılan olarak hariç tutulur ve seçilemez</item>
-    </plurals>
+	<item quantity="one">%1d uygulaması varsayılan olarak hariç tutuldu ve seçilemez</item>
+	<item quantity="other">%1d uygulama varsayılan olarak hariç tutulur ve seçilemez</item>
+</plurals>
 
     <plurals name="dialog_serverimport_title">
         <item quantity="one">%1d sunucunun içe aktarılması</item>
@@ -36,7 +36,7 @@
 
     <string name="dialog_serverimportfailed_title">İçe aktarma başarısız oldu</string>
     <string name="dialog_serverimportfailed_text">Sunucu(lar) alınamadı.</string>
-    <string name="dialog_serverimportfailed_text_exception">Sunucu(lar) alınamadı.
+    <string name="dialog_serverimportfailed_text_exception">Sunucular alınamadı. 
 \n(%1s)</string>
 
     <string name="dialog_logexport_text">Günlükleri nasıl paylaşmak istersiniz\?</string>
@@ -95,10 +95,12 @@
 
     <string name="dialog_credits_title">Katkıcılar</string>
     <string name="dialog_credits_message" formatted="true">- &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; tarafından uygulama simgesi. 
-\n- Türkçe çevirisi Kemal Oktay Aktoğan 
-\n- Rusça çeviri tarafından bruleto 
-\n- Almanca çevirisi Bas Koedjik
-\n 
+\n- Türkçe çeviri: Kemal Oktay Aktoğan
+\n- Rusça çeviri: bruleto
+\n- Almanca çeviri: Bas Koedjik
+\n- Portekizce çeviri: Rafael W. Bohnenberger
+\n- Endonezce çeviri: Gloeyisk
+\n
 \nİsmini burada görmek ister misin\? &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;Katkı&lt;/a&gt;da bulunmaktan çekinmeyin.</string>
 
     <string name="dialog_join_group_title">Topluluğa katıl</string>
@@ -119,4 +121,61 @@
     <string name="dialog_speedtest_useserver_title">Sunucu seç</string>
     <string name="dialog_speedtest_useserver_message">%1s sunucusunu kullanmak istiyor musunuz\? Bu %4d ms bir tepki süresi ile %3d dışında %2d sırada yer aldı.</string>
 
+    <string name="dialog_deletehostsource_title">%1s silinsin mi\?</string>
+    <string name="dialog_deletehostsource_message">%1s ana bilgisayar kaynağını silmek istediğinize emin misiniz\? Bu işlem geri alınamaz, bu kaynaktan gelen ana bilgisayarlar kaldırılır.</string>
+
+    <string name="dialog_clearuserrules_title">Tüm DNS kuralları temizlensin mi\?</string>
+    <string name="dialog_clearuserrules_message">Tüm DNS kurallarını silmek istiyor musunuz\? Bu geri alınamaz.</string>
+
+    <string name="dialog_newhostsource_title">Yeni kural kaynağı</string>
+    <string name="dialog_newhostsource_edit_title">Yeni kural kaynağı</string>
+    <string name="dialog_newhostsource_name">İsim</string>
+    <string name="dialog_newhostsource_wildcard_info">Joker karakter etki alanlarını kullanan ana bilgisayar listelerini kullanabilirsiniz.</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newhostsource_choose_file">Dosya seçin</string>
+    <string name="dialog_newhostsource_use_as_whitelist">Beyaz liste olarak kullan</string>
+    <string name="dialog_newhostsource_error_name_empty">Lütfen bir isim girin.</string>
+
+    <string name="dialog_newdnsrule_title">Yeni DNS kuralı</string>
+    <string name="dialog_newdnsrule_edit">DNS kuralını düzenle</string>
+    <string name="dialog_newdnsrule_whitelist">Beyaz liste</string>
+    <string name="dialog_newdnsrule_specify_address">Adres</string>
+    <string name="dialog_newdnsrule_hint_host">Ana bilgisayar</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">IPv4 adres</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">IPv6 adres</string>
+    <string name="dialog_newdnsrule_host_invalid">Lütfen geçerli bir ana bilgisayar sağlayın</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Lütfen geçerli bir IPv4 adresi girin</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Lütfen geçerli bir IPv6 adresi girin</string>
+    <string name="dialog_newdnsrule_wildcard_info">Ana bilgisayar joker karakterleri destekler. Nokta(.) dışında herhangi bir karakter, sayı ve izin verilen özel karakterler için yıldız(*) kullanın. Süreyi(.) eklemek için iki yıldız(**) kullanın.</string>
+
+    <string name="dialog_exportdnsrules_title">DNS kurallarını dışa aktar</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Özel ana bilgisayar DNS kurallarını dışa aktar</string>
+    <string name="dialog_exportdnsrules_export_sources">DNS kurallarını etkin ana bilgisayar kaynaklarından dışa aktar</string>
+
+    <string name="dialog_editdelete_title">Ne yapmak istiyorsun\?</string>
+    <string name="dialog_editdelete_edit">Düzenle</string>
+    <string name="dialog_editdelete_delete">Sil</string>
+
+    <string name="dialog_servicekilled_message">Uygulama, en son etkin olduğunda düzgün bir şekilde durmadığını tespit etti. Bu, uygulamanızın kendisini yeniden başlatması için herhangi bir olasılık olmadan sistemi durdurmaya zorlamayı seçtiğini gösterir.
+\n
+\nÇoğu cihazda sistemin uygulamayı durdurmasını önlemek veya en azından geciktirmek için birkaç seçeneğiniz vardır.
+\nÖrneğin, sistem ayarlarında uygulama için pil optimizasyonlarını devre dışı bırakabilir veya uygulamayı son listesinden silmeyi önleyebilirsiniz.
+\n
+\nBunu görmezden gelmeyi seçerseniz, bu diyalogu tekrar göremezsiniz. Daha fazla okuyabilir ve bunu çözmek için ipuçlarını aşağıdaki düğme ile alabilirsiniz (tarayıcınızda harici bir web sitesi açar).</string>
+    <string name="dialog_servicekilled_more_info">Daha fazla bilgi</string>
+
+    <string name="dialog_overlaydetected_title">Sistem genelinde yer paylaşımı algılandı</string>
+    <string name="dialog_overlaydetected_message">Sistem genelinde bir kaplama (örneğin, bir sohbet balonu, renk veya gece filtresi) etkin görünüyor. Çoğu cihaz bu durumda bir VPN\'yi etkinleştirmenize izin vermez.
+\n
+\nBir sonraki iletişim kutusunda Tamam\'ı tıklayamıyorsanız lütfen kaplamayı devre dışı bırakın.</string>
+
+    <string name="dialog_hostsourcerefresh_title">Ana bilgisayar kaynaklarını yenile</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Ana bilgisayar kaynaklarını otomatik olarak yenile</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">Yalnızca WIFI’de yenile</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">Her birini yenile</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">Şimdi yenile</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutes</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">Saat</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">Gün</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">Hafta</string>
     </resources>
