@@ -61,5 +61,25 @@
     <string name="window_dnsrules_customhosts">Özel Hosts</string>
     <string name="window_dnsrules_customhosts_message">Tüm özel Hostları burada tanımlayın.</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Bu kaynaktan gelen kurallar: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Bu kaynaktan gelen kurallar: %1d (%2$d kopyaları kullanımda değil)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Bu kaynaktan gelen kurallar: %1d (%2$d kopya kullanılmıyor)</string>
+<string name="error_invalid_url">Lütfen geçerli bir URL girin.</string>
+    <string name="error_invalid_pin">Lütfen PIN’inizi girin.</string>
+    <string name="error_invalid_servername">Lütfen bir isim girin.</string>
+
+    <plurals name="window_dnsrules_subtitle">
+	<item quantity="one">% 1d kuralı</item>
+	<item quantity="other">% 1d kuralları</item>
+</plurals>
+    <string name="window_dnsrules_hostalreadyexists">Bu ana bilgisayar için zaten bir kural var.</string>
+    <string name="windows_querylogging_time">Zaman</string>
+    <string name="windows_querylogging_type">Tür</string>
+    <string name="windows_querylogging_question">Soru</string>
+    <string name="windows_querylogging_used_server">Kullanılan sunucu</string>
+    <string name="windows_querylogging_protocol">Protokol</string>
+    <string name="windows_querylogging_latency">Gecikme</string>
+    <string name="windows_querylogging_responses">Yanıtlar</string>
+    <string name="windows_querylogging_create_dnsrule">Bu ana bilgisayar için DNS kuralı oluşturun</string>
+    <string name="windows_querylogging_dnsrule_created">DNS kuralı oluşturuldu.</string>
+    <string name="windows_querylogging_usedserver_dnsrules">DNS Kuralları ile çözüldü</string>
+    <string name="windows_querylogging_usedserver_cache">Önbellekle çözüldü</string>
 </resources>
