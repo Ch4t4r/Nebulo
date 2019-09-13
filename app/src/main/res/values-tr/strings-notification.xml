@@ -42,7 +42,7 @@
     <string name="notification_ruleimport_tertiarymessage">İthâlat bitiyor…</string>
 
     <string name="notification_ruleimportfinished_title">DNS kuralı ithâlatı tamamlandı</string>
-    <string name="notification_ruleimportfinished_message">%1d kural(lar)ı ithâl edildi (%2$d kopya çıkarıldı)</string>
+    <string name="notification_ruleimportfinished_message">%1d kural(lar)ı içe aktarıldı (%2$d kopya çıkarıldı)</string>
 
     <string name="notification_ruleexport_title">DNS kural ihracatı</string>
     <string name="notification_ruleexport_message">İhrâcat kuralları (%1d/%2d)</string>
@@ -50,4 +50,13 @@
 
     <string name="notification_ruleexportfinished_title">DNS kural ihrâcatı tamamlandı</string>
     <string name="notification_ruleexportfinished_message">%1d kural(lar)ı ihrâc edildi.</string>
+<string name="notification_channel_pin">Pin ile ilgili kanal</string>
+    <string name="notification_channel_pin_description">Pin ile ilgili bildirimler için kullanılan kanal, yani ne zaman verilmesi gerektiği</string>
+
+    <string name="notification_pin_title">PIN gerekli</string>
+    <string name="notification_pin_message">Bu işlemi gerçekleştirmek için PIN\'iniz gerekir. Onaylamak için buraya tıklayın.</string>
+
+    <string name="notification_service_killed_title">Pil iyileştirmesi hakkında bilgi</string>
+    <string name="notification_service_killed_message">Uygulama daha önce sistem tarafından durdurulmuş gibi görünüyor. Daha fazlasını öğrenmek için buraya tıklayın.</string>
+    <string name="notification_service_killed_ignore">Yoksay</string>
 </resources>
