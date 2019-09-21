@@ -105,7 +105,7 @@
     <string name="dialog_join_group_message">Selamün Aleyküm
 \n
 \nBu uygulamanın bir Telegram grubu olduğunu biliyor muydunuz\? Düzenli güncellemeler içerir ve tartışmalar ve sorular için mükemmel bir yerdir.
-\n120 kişiden büyük bir topluluğuz, bunun bir parçası olmak ister misiniz\?</string>
+\n200 kişiden büyük bir topluluğuz, bunun bir parçası olmak ister misiniz\?</string>
     <string name="dialog_join_group_positive">Evet!</string>
 <string name="dialog_speedresult_title">Hız testi sonuçları</string>
     <string name="dialog_speedresult_message">%1d sunucu test edildi
