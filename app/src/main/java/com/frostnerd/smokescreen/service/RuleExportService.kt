@@ -60,9 +60,11 @@ class RuleExportService : IntentService("RuleExportService") {
         } else super.onStartCommand(intent, flags, startId)
     }
 
-    override fun onHandleIntent(intent: Intent) {
-        createNotification()
-        startWork(intent.getSerializableExtra("params") as Params)
+    override fun onHandleIntent(intent: Intent?) {
+        if(intent != null) {
+            createNotification()
+            startWork(intent.getSerializableExtra("params") as Params)
+        }
     }
 
     private fun abortImport() {

@@ -80,7 +80,7 @@ class RuleImportService : IntentService("RuleImportService") {
         } else super.onStartCommand(intent, flags, startId)
     }
 
-    override fun onHandleIntent(intent: Intent) {
+    override fun onHandleIntent(intent: Intent?) {
         createNotification()
         startWork()
     }
@@ -178,7 +178,7 @@ class RuleImportService : IntentService("RuleImportService") {
                     try {
                         val uri = Uri.parse(it.source)
                         stream = contentResolver.openInputStream(uri)
-                        processLines(it, stream)
+                        processLines(it, stream!!)
                     } catch (ex: Exception) {
                         log("Import failed: $ex")
                         ex.printStackTrace()

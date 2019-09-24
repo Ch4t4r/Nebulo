@@ -31,9 +31,9 @@ class LanguageContextWrapper(context:Context): ContextWrapper(context) {
             return context.resources.configuration.let {
                 it.setLocale(newLocale)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    it.locales = LocaleList(newLocale).apply {
+                    it.setLocales(LocaleList(newLocale).apply {
                         LocaleList.setDefault(this)
-                    }
+                    })
                 }
                 LanguageContextWrapper(context.createConfigurationContext(it))
             }
