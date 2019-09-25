@@ -1,2 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="contentdescription_main_infoimage">Icône d\'information</string>
+    <string name="contentdescription_main_servericon">Icône du serveur</string>
+    <string name="contentdescription_shared_app_icon">Icône de l\'application</string>
+    </resources>
