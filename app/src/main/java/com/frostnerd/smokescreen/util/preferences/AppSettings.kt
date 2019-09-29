@@ -147,7 +147,7 @@ interface AppSettings {
     fun shouldShowCrashReportingConsentDialog(): Boolean {
         return BuildConfig.VERSION_NAME.let {
             it.contains("alpha", true) || it.contains("beta", true)
-        } && !crashReportingConsent && !crashReportingConsentAsked
+        } && !crashReportingConsent && !crashReportingConsentAsked && !BuildConfig.DEBUG
     }
 }
 
