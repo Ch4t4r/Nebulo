@@ -58,6 +58,7 @@ import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 import java.util.logging.Level
 import kotlin.math.floor
+import kotlin.math.min
 import kotlin.math.pow
 
 
@@ -340,12 +341,13 @@ class DnsVpnService : VpnService(), Runnable {
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
             noConnectionNotificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(getString(R.string.notification_noconnection_text)))
         }
+        noConnectionNotificationBuilder.setWhen(System.currentTimeMillis())
         if(!noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_NO_CONNECTION, noConnectionNotificationBuilder.build())
         noConnectionNotificationShown = true
     }
 
     private fun hideNoConnectionNotification() {
-        if(noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(2)
+        if(noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_NO_CONNECTION)
         noConnectionNotificationShown = false
     }
 
@@ -429,20 +431,26 @@ class DnsVpnService : VpnService(), Runnable {
             address.addressCreator.whenResolveFailed {
                 showNoConnectionNotification()
                 if(it is TimeoutException || it is UnknownHostException) {
+                    log("Address resolve failed: $it. Total tries $totalTries/70")
                     if(totalTries <= 70) {
                         GlobalScope.launch {
-                            delay((initialBackoffTime * 2.toDouble().pow(tries++)).toLong())
+                            val exponentialBackoff = (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
+                            delay(min(45000L, exponentialBackoff))
                             totalTries++
                             if(tries >= 9) tries = 0.toDouble()
                             address.addressCreator.resolveOrGetResultOrNull(true)
                             address.addressCreator.whenResolveFinishedSuccessfully {
+                                log("Address resolve succeeded after failing, hiding notification")
                                 hideNoConnectionNotification()
                                 false
                             }
                         }
                         true
                     } else false
-                } else false
+                } else {
+                    log("Address resolve failed: $it. Not retrying.")
+                    false
+                }
             }
             address.addressCreator.whenResolveFinishedSuccessfully {
                 hideNoConnectionNotification()
