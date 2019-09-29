@@ -58,6 +58,7 @@ import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 import java.util.logging.Level
 import kotlin.math.floor
+import kotlin.math.min
 import kotlin.math.pow
 
 
@@ -432,7 +433,8 @@ class DnsVpnService : VpnService(), Runnable {
                 if(it is TimeoutException || it is UnknownHostException) {
                     if(totalTries <= 70) {
                         GlobalScope.launch {
-                            delay((initialBackoffTime * 2.toDouble().pow(tries++)).toLong())
+                            val exponentialBackoff = (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
+                            delay(min(45000L, exponentialBackoff))
                             totalTries++
                             if(tries >= 9) tries = 0.toDouble()
                             address.addressCreator.resolveOrGetResultOrNull(true)
