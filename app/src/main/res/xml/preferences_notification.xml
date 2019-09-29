@@ -25,5 +25,11 @@
                 android:title="@string/title_notification_allow_pause"
                 android:summary="@string/summary_notification_allow_pause"
                 android:defaultValue="true"/>
+
+        <CheckBoxPreference
+                android:key="show_no_connection_notification"
+                android:title="@string/title_show_noconnection_notification"
+                android:summary="@string/summary_show_noconnection_notification"
+                android:defaultValue="false"/>
     </PreferenceCategory>
 </PreferenceScreen>
