@@ -431,6 +431,7 @@ class DnsVpnService : VpnService(), Runnable {
             address.addressCreator.whenResolveFailed {
                 showNoConnectionNotification()
                 if(it is TimeoutException || it is UnknownHostException) {
+                    log("Address resolve failed: $it. Total tries $totalTries/70")
                     if(totalTries <= 70) {
                         GlobalScope.launch {
                             val exponentialBackoff = (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
@@ -439,13 +440,17 @@ class DnsVpnService : VpnService(), Runnable {
                             if(tries >= 9) tries = 0.toDouble()
                             address.addressCreator.resolveOrGetResultOrNull(true)
                             address.addressCreator.whenResolveFinishedSuccessfully {
+                                log("Address resolve succeeded after failing, hiding notification")
                                 hideNoConnectionNotification()
                                 false
                             }
                         }
                         true
                     } else false
-                } else false
+                } else {
+                    log("Address resolve failed: $it. Not retrying.")
+                    false
+                }
             }
             address.addressCreator.whenResolveFinishedSuccessfully {
                 hideNoConnectionNotification()
