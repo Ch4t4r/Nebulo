@@ -340,6 +340,7 @@ class DnsVpnService : VpnService(), Runnable {
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
             noConnectionNotificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(getString(R.string.notification_noconnection_text)))
         }
+        noConnectionNotificationBuilder.setWhen(System.currentTimeMillis())
         if(!noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_NO_CONNECTION, noConnectionNotificationBuilder.build())
         noConnectionNotificationShown = true
     }
