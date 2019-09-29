@@ -185,7 +185,17 @@ class DnsVpnService : VpnService(), Runnable {
             destroy()
             stopForeground(true)
             stopSelf()
-            (application as SmokeScreen).customUncaughtExceptionHandler.uncaughtException(t, e)
+
+            (application as SmokeScreen).apply {
+                (dnsProxy?.queryListener as com.frostnerd.smokescreen.util.proxy.QueryListener?)?.apply {
+                    if(lastDnsResponse != null) {
+                        customUncaughtExceptionHandler.addExtra("dns_packet", lastDnsResponse.toString())
+                        customUncaughtExceptionHandler.addExtra("dns_packet_bytes", lastDnsResponse!!.toArray().joinToString(separator = "") {
+                            it.toInt().toUByte().toString(16)
+                        })
+                    }
+                }
+            }.customUncaughtExceptionHandler.uncaughtException(t, e)
         }
         log("Service onCreate()")
         createNotification()

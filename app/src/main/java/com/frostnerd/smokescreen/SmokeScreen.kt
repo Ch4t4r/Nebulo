@@ -43,22 +43,7 @@ import kotlin.system.exitProcess
 class SmokeScreen : Application() {
 
     private var defaultUncaughtExceptionHandler: Thread.UncaughtExceptionHandler? = null
-    val customUncaughtExceptionHandler: Thread.UncaughtExceptionHandler =
-        Thread.UncaughtExceptionHandler { t, e ->
-            e.printStackTrace()
-            log(e)
-            val isPrerelease =
-                BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
-            if (isPrerelease && getPreferences().loggingEnabled && !getPreferences().crashReportingEnabled) {
-                startActivity(Intent(this, ErrorDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-            } else if (isPrerelease && getPreferences().crashReportingEnabled) {
-                showCrashNotification()
-            }
-            closeLogger()
-            defaultUncaughtExceptionHandler?.uncaughtException(t, e)
-            exitProcess(0)
-        }
-
+    val customUncaughtExceptionHandler = EnrichableUncaughtExceptionHandler()
     private fun showCrashNotification() {
         val notification = NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
             .setSmallIcon(R.drawable.ic_cloud_warn)
@@ -133,5 +118,30 @@ class SmokeScreen : Application() {
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
         log("Memory has been trimmed with level $level")
+    }
+
+    inner class EnrichableUncaughtExceptionHandler:Thread.UncaughtExceptionHandler{
+        private val extras = mutableMapOf<String, String>()
+
+        override fun uncaughtException(t: Thread, e: Throwable) {
+            e.printStackTrace()
+            log(e, extras)
+            extras.clear()
+            val isPrerelease =
+                BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
+            if (isPrerelease && getPreferences().loggingEnabled && !getPreferences().crashReportingEnabled) {
+                startActivity(Intent(this@SmokeScreen, ErrorDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            } else if (isPrerelease && getPreferences().crashReportingEnabled) {
+                showCrashNotification()
+            }
+            closeLogger()
+            defaultUncaughtExceptionHandler?.uncaughtException(t, e)
+            exitProcess(0)
+        }
+
+        fun addExtra(key:String, value:String) {
+            extras[key] = value
+        }
+
     }
 }

@@ -35,6 +35,7 @@ class QueryListener(private val context: Context) : QueryListener {
     private val logQueriesToDb = context.getPreferences().queryLoggingEnabled
     private val waitingQueryLogs: MutableMap<Int, DnsQuery> = mutableMapOf()
     private val askedServer:String
+    var lastDnsResponse:DnsMessage? = null
 
     init {
         val config = context.getPreferences().dnsServerConfig
@@ -83,6 +84,7 @@ class QueryListener(private val context: Context) : QueryListener {
         if (writeQueriesToLog) {
             context.log("Returned from $source: $responseMessage")
         }
+        lastDnsResponse = responseMessage
 
         if (logQueriesToDb) {
             val query = waitingQueryLogs[responseMessage.id]
