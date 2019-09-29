@@ -347,7 +347,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun hideNoConnectionNotification() {
-        if(noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(2)
+        if(noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_NO_CONNECTION)
         noConnectionNotificationShown = false
     }
 
