@@ -17,7 +17,7 @@
         <CheckBoxPreference
             android:key="map_query_refused"
             android:title="@string/title_map_query_refused"
-            android:summary="@string/title_map_query_refused"
+            android:summary="@string/summary_map_query_refused"
             android:defaultValue="true" />
 
         <CheckBoxPreference
