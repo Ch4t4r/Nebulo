@@ -57,7 +57,6 @@ buildscript {
 allprojects {
     repositories {
         google()
-        maven { url 'https://jitpack.io' }
         jcenter()
         maven {
             url 'https://artifactory.frostnerd.com/artifactory/libs-release-local'
@@ -74,6 +73,7 @@ allprojects {
             }
         }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        maven { url 'https://jitpack.io' }
     }
 }
 
