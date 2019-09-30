@@ -890,7 +890,8 @@ class DnsVpnService : VpnService(), Runnable {
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)
-                }
+                },
+                mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
             )
         } else {
             handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
@@ -898,7 +899,7 @@ class DnsVpnService : VpnService(), Runnable {
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)
-                })
+                }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock)
         }
         log("Handle created, creating DNS proxy")
         handle.ipv6Enabled =

@@ -116,6 +116,9 @@
     <string name="title_catch_other_dns_servers">Intercept other DNS traffic</string>
     <string name="summary_catch_other_dns_servers">Intercept traffic of known DNS servers and transmit it using Nebulo</string>
 
+    <string name="title_map_query_refused">Interpret refused queries as disallowed hosts</string>
+    <string name="summary_map_query_refused">Some DNS servers might refuse to answer a query if the host isn\'t allowed or is blocked. This setting blocks the host instead of refusing the query, otherwise the system might get confused.</string>
+
     <string name="title_bypass_searchdomains">Searchdomains bypass</string>
     <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network.</string>
 

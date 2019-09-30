@@ -15,6 +15,12 @@
                 android:defaultValue="true"/>
 
         <CheckBoxPreference
+            android:key="map_query_refused"
+            android:title="@string/title_map_query_refused"
+            android:summary="@string/title_map_query_refused"
+            android:defaultValue="true" />
+
+        <CheckBoxPreference
                 android:key="bypass_searchdomains"
                 android:title="@string/title_bypass_searchdomains"
                 android:defaultValue="true"

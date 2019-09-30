@@ -29,7 +29,8 @@ import java.net.InetAddress
 class ProxyHttpsHandler(
     serverConfigurations: List<ServerConfiguration>,
     connectTimeout: Long,
-    val queryCountCallback: ((queryCount: Int) -> Unit)? = null
+    val queryCountCallback: ((queryCount: Int) -> Unit)? = null,
+    val mapQueryRefusedToHostBlock:Boolean
 ) :
     AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
     override val handlesSpecificRequests: Boolean = false
@@ -45,11 +46,27 @@ class ProxyHttpsHandler(
 
     constructor(
         serverConfiguration: ServerConfiguration,
-        connectTimeout: Long
-    ) : this(listOf(serverConfiguration), connectTimeout)
+        connectTimeout: Long,
+        mapQueryRefusedToHostBlock:Boolean
+    ) : this(listOf(serverConfiguration), connectTimeout, mapQueryRefusedToHostBlock = mapQueryRefusedToHostBlock)
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
-        return dnsMessage
+        return if(dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED) {
+            if(dnsMessage.questions.isNotEmpty()) {
+                val answer = if(dnsMessage.question.type == org.minidns.record.Record.TYPE.A) {
+                    org.minidns.record.A("0.0.0.0")
+                } else org.minidns.record.AAAA("::1")
+                dnsMessage.asBuilder().setResponseCode(DnsMessage.RESPONSE_CODE.NO_ERROR).addAnswer(
+                    org.minidns.record.Record(
+                        dnsMessage.question.name,
+                        dnsMessage.question.type,
+                        org.minidns.record.Record.CLASS.IN.value,
+                        50L,
+                        answer
+                    )
+                ).build()
+            } else dnsMessage
+        } else dnsMessage
     }
 
     override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
@@ -60,5 +77,5 @@ class ProxyHttpsHandler(
     override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = true
 
     override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean =
-        false
+        mapQueryRefusedToHostBlock
 }
