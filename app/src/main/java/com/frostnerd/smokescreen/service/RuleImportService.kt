@@ -366,13 +366,14 @@ class RuleImportService : IntentService("RuleImportService") {
         throw IllegalStateException()
     }
 
+    private val wildcardNormalisationRegex = Regex("(?:^\\*\\*\\.)|(\\.\\*\\*$)")
     private fun createRule(host: String, target: String, targetV6:String? = null, type: Record.TYPE, sourceId: Long): DnsRule? {
         var isWildcard = false
         val alteredHost = host.let {
             if(it.contains("*")) {
                 isWildcard = true
-                it.replace("**", "%%").replace("*", "%")
-            } else it
+                it.replace("**", "%%").replace("*", "%").replace(wildcardNormalisationRegex, "**")
+        } else it
         }
         return DnsRule(type, alteredHost, target, targetV6, sourceId, isWildcard)
     }
