@@ -89,21 +89,21 @@ class DnsVpnService : VpnService(), Runnable {
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var noConnectionNotificationBuilder: NotificationCompat.Builder
     private var noConnectionNotificationShown = false
-    private lateinit var serverConfig:DnsServerConfiguration
+    private lateinit var serverConfig: DnsServerConfiguration
     private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
-    private var networkCallback:ConnectivityManager.NetworkCallback? = null
-    private var pauseNotificationAction:NotificationCompat.Action? = null
+    private var networkCallback: ConnectivityManager.NetworkCallback? = null
+    private var pauseNotificationAction: NotificationCompat.Action? = null
     private var queryCountOffset: Long = 0
     private var packageBypassAmount = 0
-    private var connectedToANetwork:Boolean? = null
-    private var lastScreenOff:Long? = null
-    private lateinit var screenStateReceiver:BroadcastReceiver
+    private var connectedToANetwork: Boolean? = null
+    private var lastScreenOff: Long? = null
+    private lateinit var screenStateReceiver: BroadcastReceiver
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
         Null if the current servers are from the settings
      */
-    private var userServerConfig:DnsServerInformation<*>? = null
+    private var userServerConfig: DnsServerInformation<*>? = null
 
     companion object {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
@@ -113,7 +113,7 @@ class DnsVpnService : VpnService(), Runnable {
         var currentTrafficStats: TrafficStats? = null
             private set
 
-        fun startVpn(context: Context, serverInfo:DnsServerInformation<*>? = null) {
+        fun startVpn(context: Context, serverInfo: DnsServerInformation<*>? = null) {
             val intent = Intent(context, DnsVpnService::class.java)
             if (serverInfo != null) {
                 BackgroundVpnConfigureActivity.writeServerInfoToIntent(serverInfo, intent)
@@ -122,17 +122,17 @@ class DnsVpnService : VpnService(), Runnable {
         }
 
         fun restartVpn(context: Context, fetchServersFromSettings: Boolean) {
-            if(context.isServiceRunning(DnsVpnService::class.java)) {
+            if (context.isServiceRunning(DnsVpnService::class.java)) {
                 val bundle = Bundle()
                 bundle.putBoolean("fetch_servers", fetchServersFromSettings)
                 sendCommand(context, Command.RESTART, bundle)
             } else startVpn(context)
         }
 
-        fun restartVpn(context: Context, serverInfo:DnsServerInformation<*>?) {
-            if(context.isServiceRunning(DnsVpnService::class.java)) {
+        fun restartVpn(context: Context, serverInfo: DnsServerInformation<*>?) {
+            if (context.isServiceRunning(DnsVpnService::class.java)) {
                 val bundle = Bundle()
-                if(serverInfo != null) {
+                if (serverInfo != null) {
                     BackgroundVpnConfigureActivity.writeServerInfoToIntent(serverInfo, bundle)
                     bundle.putBoolean("fetch_servers", true)
                 }
@@ -156,26 +156,52 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
-        if(getPreferences().vpnServiceState == VpnServiceState.STARTED &&
+        if (getPreferences().vpnServiceState == VpnServiceState.STARTED &&
             !getPreferences().ignoreServiceKilled &&
-                getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE) { // The app didn't stop properly
-            val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra("command", Command.IGNORE_SERVICE_KILLED)
+            getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE
+        ) { // The app didn't stop properly
+            val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra(
+                "command",
+                Command.IGNORE_SERVICE_KILLED
+            )
             val ignorePendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                PendingIntent.getForegroundService(this@DnsVpnService, REQUEST_CODE_IGNORE_SERVICE_KILLED, ignoreIntent, PendingIntent.FLAG_ONE_SHOT)
+                PendingIntent.getForegroundService(
+                    this@DnsVpnService,
+                    REQUEST_CODE_IGNORE_SERVICE_KILLED,
+                    ignoreIntent,
+                    PendingIntent.FLAG_ONE_SHOT
+                )
             } else {
-                PendingIntent.getService(this@DnsVpnService, REQUEST_CODE_IGNORE_SERVICE_KILLED, ignoreIntent, PendingIntent.FLAG_ONE_SHOT)
+                PendingIntent.getService(
+                    this@DnsVpnService,
+                    REQUEST_CODE_IGNORE_SERVICE_KILLED,
+                    ignoreIntent,
+                    PendingIntent.FLAG_ONE_SHOT
+                )
             }
-            NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this)).apply {
-                setContentTitle(getString(R.string.notification_service_killed_title))
-                setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_service_killed_message)))
-                setSmallIcon(R.drawable.ic_cloud_warn)
-                setAutoCancel(true)
-                setOngoing(false)
-                setContentIntent(DeepActionState.BATTERY_OPTIMIZATION_DIALOG.pendingIntentTo(this@DnsVpnService))
-                addAction(R.drawable.ic_eye, getString(R.string.notification_service_killed_ignore), ignorePendingIntent)
-            }.build().also {
-                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_SERVICE_KILLED, it)
-            }
+            NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
+                .apply {
+                    setContentTitle(getString(R.string.notification_service_killed_title))
+                    setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_service_killed_message)))
+                    setSmallIcon(R.drawable.ic_cloud_warn)
+                    setAutoCancel(true)
+                    setOngoing(false)
+                    setContentIntent(
+                        DeepActionState.BATTERY_OPTIMIZATION_DIALOG.pendingIntentTo(
+                            this@DnsVpnService
+                        )
+                    )
+                    addAction(
+                        R.drawable.ic_eye,
+                        getString(R.string.notification_service_killed_ignore),
+                        ignorePendingIntent
+                    )
+                }.build().also {
+                    (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
+                        Notifications.ID_SERVICE_KILLED,
+                        it
+                    )
+                }
         }
         getPreferences().vpnServiceState = VpnServiceState.STARTED
         getPreferences().vpnLaunchLastVersion = BuildConfig.VERSION_CODE
@@ -185,22 +211,38 @@ class DnsVpnService : VpnService(), Runnable {
             destroy()
             stopForeground(true)
             stopSelf()
-            (application as SmokeScreen).customUncaughtExceptionHandler.uncaughtException(t, e)
+
+            (application as SmokeScreen).apply {
+                (dnsProxy?.queryListener as com.frostnerd.smokescreen.util.proxy.QueryListener?)?.apply {
+                    if (lastDnsResponse != null) {
+                        customUncaughtExceptionHandler.addExtra(
+                            "dns_packet",
+                            lastDnsResponse.toString()
+                        )
+                        customUncaughtExceptionHandler.addExtra(
+                            "dns_packet_bytes",
+                            lastDnsResponse!!.toArray().joinToString(separator = "") {
+                                it.toInt().toUByte().toString(16)
+                            })
+                    }
+                }
+            }.customUncaughtExceptionHandler.uncaughtException(t, e)
         }
         log("Service onCreate()")
         createNotification()
         updateServiceTile()
         subscribeToSettings()
         addNetworkChangeListener()
-        screenStateReceiver = registerReceiver(listOf(Intent.ACTION_SCREEN_OFF, Intent.ACTION_SCREEN_ON)) {
-            if(it?.action == Intent.ACTION_SCREEN_OFF) {
-                lastScreenOff = System.currentTimeMillis()
-            } else {
-                if(lastScreenOff != null && System.currentTimeMillis() - lastScreenOff!! >= 60000) {
-                    if(fileDescriptor != null) recreateVpn(false, null)
+        screenStateReceiver =
+            registerReceiver(listOf(Intent.ACTION_SCREEN_OFF, Intent.ACTION_SCREEN_ON)) {
+                if (it?.action == Intent.ACTION_SCREEN_OFF) {
+                    lastScreenOff = System.currentTimeMillis()
+                } else {
+                    if (lastScreenOff != null && System.currentTimeMillis() - lastScreenOff!! >= 60000) {
+                        if (fileDescriptor != null) recreateVpn(false, null)
+                    }
                 }
             }
-        }
         log("Service created.")
     }
 
@@ -226,7 +268,7 @@ class DnsVpnService : VpnService(), Runnable {
             }
 
             private fun handleChange() {
-                if(this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
+                if (this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
                     upstreamAddress.addressCreator.reset()
                     upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
                 }
@@ -265,31 +307,35 @@ class DnsVpnService : VpnService(), Runnable {
             "notification_allow_pause",
             "dns_rules_enabled"
         )
-        settingsSubscription = getPreferences().listenForChanges(relevantSettings, getPreferences().preferenceChangeListener {
-                changes ->
-            log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
-            log("Detailed changes: $changes")
-            if("hide_notification_icon" in changes || "hide_notification_icon" in changes) {
-                log("Recreating the notification because of the change in preferences")
-                createNotification()
-                setNotificationText()
-            } else if("notification_allow_pause" in changes || "notification_allow_stop" in changes) {
-                log("Recreating the notification because of the change in preferences")
-                createNotification()
-                setNotificationText()
-            }
-            val reload = "dns_server_config" in changes
-            recreateVpn(reload, null)
-        })
+        settingsSubscription = getPreferences().listenForChanges(
+            relevantSettings,
+            getPreferences().preferenceChangeListener { changes ->
+                log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
+                log("Detailed changes: $changes")
+                if ("hide_notification_icon" in changes || "hide_notification_icon" in changes) {
+                    log("Recreating the notification because of the change in preferences")
+                    createNotification()
+                    setNotificationText()
+                } else if ("notification_allow_pause" in changes || "notification_allow_stop" in changes) {
+                    log("Recreating the notification because of the change in preferences")
+                    createNotification()
+                    setNotificationText()
+                }
+                val reload = "dns_server_config" in changes
+                recreateVpn(reload, null)
+            })
         log("Subscribed.")
     }
 
     private fun createNotification() {
         log("Creating notification")
-        notificationBuilder = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
-        if(getPreferences().hideNotificationIcon)
+        notificationBuilder = NotificationCompat.Builder(
+            this,
+            Notifications.servicePersistentNotificationChannel(this)
+        )
+        if (getPreferences().hideNotificationIcon)
             notificationBuilder.priority = NotificationCompat.PRIORITY_MIN
-        if(!getPreferences().showNotificationOnLockscreen)
+        if (!getPreferences().showNotificationOnLockscreen)
             notificationBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET)
         notificationBuilder.setContentTitle(getString(R.string.app_name))
         notificationBuilder.setSmallIcon(R.drawable.ic_mainnotification)
@@ -304,16 +350,34 @@ class DnsVpnService : VpnService(), Runnable {
                 Intent(this, PinActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
             )
         )
-        if(getPreferences().allowStopInNotification) {
+        if (getPreferences().allowStopInNotification) {
             val stopPendingIntent =
-                PendingIntent.getService(this, 1, commandIntent(this, Command.STOP), PendingIntent.FLAG_CANCEL_CURRENT)
-            val stopAction = NotificationCompat.Action(R.drawable.ic_stop, getString(R.string.all_stop), stopPendingIntent)
+                PendingIntent.getService(
+                    this,
+                    1,
+                    commandIntent(this, Command.STOP),
+                    PendingIntent.FLAG_CANCEL_CURRENT
+                )
+            val stopAction = NotificationCompat.Action(
+                R.drawable.ic_stop,
+                getString(R.string.all_stop),
+                stopPendingIntent
+            )
             notificationBuilder.addAction(stopAction)
         }
-        if(getPreferences().allowPauseInNotification) {
+        if (getPreferences().allowPauseInNotification) {
             val pausePendingIntent =
-                PendingIntent.getService(this, 2, commandIntent(this, Command.PAUSE_RESUME), PendingIntent.FLAG_CANCEL_CURRENT)
-            pauseNotificationAction = NotificationCompat.Action(R.drawable.ic_stat_pause, getString(R.string.all_pause), pausePendingIntent)
+                PendingIntent.getService(
+                    this,
+                    2,
+                    commandIntent(this, Command.PAUSE_RESUME),
+                    PendingIntent.FLAG_CANCEL_CURRENT
+                )
+            pauseNotificationAction = NotificationCompat.Action(
+                R.drawable.ic_stat_pause,
+                getString(R.string.all_pause),
+                pausePendingIntent
+            )
             notificationBuilder.addAction(pauseNotificationAction)
         }
         updateNotification(0)
@@ -331,23 +395,35 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun showNoConnectionNotification() {
-        if(!getPreferences().showNoConnectionNotification) return
-        if(!this::noConnectionNotificationBuilder.isInitialized) {
-            noConnectionNotificationBuilder = NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
+        if (!getPreferences().showNoConnectionNotification) return
+        if (!this::noConnectionNotificationBuilder.isInitialized) {
+            noConnectionNotificationBuilder = NotificationCompat.Builder(
+                this,
+                Notifications.noConnectionNotificationChannelId(this)
+            )
             noConnectionNotificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
             noConnectionNotificationBuilder.setOngoing(false)
             noConnectionNotificationBuilder.setSmallIcon(R.drawable.ic_cloud_strikethrough)
             noConnectionNotificationBuilder.setContentTitle(getString(R.string.notification_noconnection_title))
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
-            noConnectionNotificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(getString(R.string.notification_noconnection_text)))
+            noConnectionNotificationBuilder.setStyle(
+                NotificationCompat.BigTextStyle(
+                    notificationBuilder
+                ).bigText(getString(R.string.notification_noconnection_text))
+            )
         }
         noConnectionNotificationBuilder.setWhen(System.currentTimeMillis())
-        if(!noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_NO_CONNECTION, noConnectionNotificationBuilder.build())
+        if (!noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
+            Notifications.ID_NO_CONNECTION,
+            noConnectionNotificationBuilder.build()
+        )
         noConnectionNotificationShown = true
     }
 
     private fun hideNoConnectionNotification() {
-        if(noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_NO_CONNECTION)
+        if (noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(
+            Notifications.ID_NO_CONNECTION
+        )
         noConnectionNotificationShown = false
     }
 
@@ -357,7 +433,7 @@ class DnsVpnService : VpnService(), Runnable {
             when (intent.getSerializableExtra("command") as Command) {
                 Command.STOP -> {
                     log("Received STOP command.")
-                    if(PinActivity.shouldValidatePin(this, intent)) {
+                    if (PinActivity.shouldValidatePin(this, intent)) {
                         log("The pin has to be validated before actually stopping.")
                         PinActivity.askForPin(this, PinType.STOP_SERVICE)
                     } else {
@@ -373,7 +449,7 @@ class DnsVpnService : VpnService(), Runnable {
                     setNotificationText()
                 }
                 Command.PAUSE_RESUME -> {
-                    if(vpnProxy != null) {
+                    if (vpnProxy != null) {
                         destroy(false)
                         pauseNotificationAction?.title = getString(R.string.all_resume)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_resume
@@ -427,17 +503,20 @@ class DnsVpnService : VpnService(), Runnable {
         var tries = 0.toDouble()
         var totalTries = 0
         serverConfig.forEachAddress { _, address ->
-            if(!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(true)
+            if (!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(
+                true
+            )
             address.addressCreator.whenResolveFailed {
                 showNoConnectionNotification()
-                if(it is TimeoutException || it is UnknownHostException) {
+                if (it is TimeoutException || it is UnknownHostException) {
                     log("Address resolve failed: $it. Total tries $totalTries/70")
-                    if(totalTries <= 70) {
+                    if (totalTries <= 70) {
                         GlobalScope.launch {
-                            val exponentialBackoff = (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
+                            val exponentialBackoff =
+                                (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
                             delay(min(45000L, exponentialBackoff))
                             totalTries++
-                            if(tries >= 9) tries = 0.toDouble()
+                            if (tries >= 9) tries = 0.toDouble()
                             address.addressCreator.resolveOrGetResultOrNull(true)
                             address.addressCreator.whenResolveFinishedSuccessfully {
                                 log("Address resolve succeeded after failing, hiding notification")
@@ -461,12 +540,13 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun setNotificationText() {
-        val primaryServer:String
-        val secondaryServer:String?
-        if(serverConfig.httpsConfiguration != null) {
+        val primaryServer: String
+        val secondaryServer: String?
+        if (serverConfig.httpsConfiguration != null) {
             notificationBuilder.setContentTitle(getString(R.string.notification_main_title_https))
             primaryServer = serverConfig.httpsConfiguration!![0].urlCreator.address.getUrl(true)
-            secondaryServer = serverConfig.httpsConfiguration!!.getOrNull(1)?.urlCreator?.address?.getUrl(true)
+            secondaryServer =
+                serverConfig.httpsConfiguration!!.getOrNull(1)?.urlCreator?.address?.getUrl(true)
         } else {
             notificationBuilder.setContentTitle(getString(R.string.notification_main_title_tls))
             primaryServer = serverConfig.tlsConfiguration!![0].formatToString()
@@ -474,7 +554,7 @@ class DnsVpnService : VpnService(), Runnable {
         }
         val text = if (secondaryServer != null) {
             getString(
-                if(getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
+                if (getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
                 primaryServer,
                 secondaryServer,
                 packageBypassAmount,
@@ -482,13 +562,17 @@ class DnsVpnService : VpnService(), Runnable {
             )
         } else {
             getString(
-                if(getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
+                if (getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
                 primaryServer,
                 packageBypassAmount,
                 dnsProxy?.cache?.livingCachedEntries() ?: 0
             )
         }
-        notificationBuilder.setStyle(NotificationCompat.BigTextStyle(notificationBuilder).bigText(text))
+        notificationBuilder.setStyle(
+            NotificationCompat.BigTextStyle(notificationBuilder).bigText(
+                text
+            )
+        )
     }
 
     private fun establishVpn() {
@@ -529,9 +613,9 @@ class DnsVpnService : VpnService(), Runnable {
         }
     }
 
-    private fun destroy(isStoppingCompletely:Boolean = true) {
+    private fun destroy(isStoppingCompletely: Boolean = true) {
         log("Destroying the VPN")
-        if(isStoppingCompletely || connectedToANetwork == true) hideNoConnectionNotification()
+        if (isStoppingCompletely || connectedToANetwork == true) hideNoConnectionNotification()
         if (!destroyed) {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
@@ -563,7 +647,10 @@ class DnsVpnService : VpnService(), Runnable {
         if (!destroyed && resources.getBoolean(R.bool.keep_service_alive)) {
             log("The service wasn't destroyed from within and keep_service_alive is true, restarting VPN.")
             val restartIntent = Intent(this, VpnRestartService::class.java)
-            if(userServerConfig != null) BackgroundVpnConfigureActivity.writeServerInfoToIntent(userServerConfig!!, restartIntent)
+            if (userServerConfig != null) BackgroundVpnConfigureActivity.writeServerInfoToIntent(
+                userServerConfig!!,
+                restartIntent
+            )
             startForegroundServiceCompat(restartIntent)
         } else {
             destroy()
@@ -594,19 +681,25 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun randomIPv6LocalPrefix(): String {
-        return "fd" + randomIPv6Block(8, true) + ":" + randomIPv6Block(16, false) + ":" + randomIPv6Block(16, false)
+        return "fd" + randomIPv6Block(8, true) + ":" + randomIPv6Block(
+            16,
+            false
+        ) + ":" + randomIPv6Block(16, false)
     }
 
     private fun randomIPv6Block(bits: Int, leading_zeros: Boolean): String {
-        var hex = java.lang.Long.toHexString(floor(Math.random() * 2.0.pow(bits.toDouble())).toLong())
-        if (!leading_zeros || hex.length == bits / 4) hex = "0000".substring(0, bits / 4 - hex.length) + hex
+        var hex =
+            java.lang.Long.toHexString(floor(Math.random() * 2.0.pow(bits.toDouble())).toLong())
+        if (!leading_zeros || hex.length == bits / 4) hex =
+            "0000".substring(0, bits / 4 - hex.length) + hex
         return hex
     }
 
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val activeNetwork = (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetwork
+            val activeNetwork =
+                (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetwork
             log("Current active network: $activeNetwork")
         }
         val builder = Builder()
@@ -685,7 +778,7 @@ class DnsVpnService : VpnService(), Runnable {
                         }
                         false
                     }
-                    if(!it.address.addressCreator.startedResolve && !it.address.addressCreator.isCurrentlyResolving()) it.address.addressCreator.resolveOrGetResultOrNull(
+                    if (!it.address.addressCreator.startedResolve && !it.address.addressCreator.isCurrentlyResolving()) it.address.addressCreator.resolveOrGetResultOrNull(
                         retryIfError = true,
                         runResolveNow = true
                     )
@@ -707,19 +800,22 @@ class DnsVpnService : VpnService(), Runnable {
             builder.addDnsServer(dummyServerIpv6)
             builder.addRoute(dummyServerIpv6, 128)
             dhcpDnsServer.forEach {
-                if(it is Inet6Address) {
+                if (it is Inet6Address) {
                     builder.addRoute(it, 128)
                 }
             }
-        } else if(deviceHasIpv6 && allowIpv6Traffic) builder.allowFamily(OsConstants.AF_INET6)
+        } else if (deviceHasIpv6 && allowIpv6Traffic) builder.allowFamily(OsConstants.AF_INET6)
         builder.setBlocking(true)
 
         log("Applying disallowed packages.")
         val userBypass = getPreferences().userBypassPackages
         val defaultBypass = getPreferences().defaultBypassPackages
-        if(getPreferences().isBypassBlacklist || userBypass.size == 0) {
+        if (getPreferences().isBypassBlacklist || userBypass.size == 0) {
             log("Mode is set to blacklist, bypassing ${userBypass.size + defaultBypass.size} packages.")
-            for (defaultBypassPackage in CombinedIterator(userBypass.iterator(), defaultBypass.iterator())) {
+            for (defaultBypassPackage in CombinedIterator(
+                userBypass.iterator(),
+                defaultBypass.iterator()
+            )) {
                 if (isPackageInstalled(defaultBypassPackage)) { //TODO Check what is faster: catching the exception, or checking ourselves
                     builder.addDisallowedApplication(defaultBypassPackage)
                 } else log("Package $defaultBypassPackage not installed, thus not bypassing")
@@ -728,7 +824,7 @@ class DnsVpnService : VpnService(), Runnable {
         } else {
             log("Mode is set to whitelist, whitelisting ${userBypass.size} packages.")
             for (pkg in userBypass) {
-                if(!defaultBypass.contains(pkg)) {
+                if (!defaultBypass.contains(pkg)) {
                     if (isPackageInstalled(pkg)) { //TODO Check what is faster: catching the exception, or checking ourselves
                         builder.addAllowedApplication(pkg)
                         packageBypassAmount++
@@ -739,10 +835,10 @@ class DnsVpnService : VpnService(), Runnable {
         return builder
     }
 
-    private fun getDhcpDnsServers():List<InetAddress> {
+    private fun getDhcpDnsServers(): List<InetAddress> {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
-            if(network == null) continue
+            if (network == null) continue
             val info = mgr.getNetworkInfo(network) ?: continue
             val capabilities = mgr.getNetworkCapabilities(network) ?: continue
             if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
@@ -755,19 +851,21 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun getServerConfig(): DnsServerConfiguration {
         TLSUpstreamAddress
-        return if(userServerConfig != null) {
-            userServerConfig!!.let {config ->
-                return if(config is HttpsDnsServerInformation) DnsServerConfiguration(config.serverConfigurations.values.toList(), null)
+        return if (userServerConfig != null) {
+            userServerConfig!!.let { config ->
+                return if (config is HttpsDnsServerInformation) DnsServerConfiguration(
+                    config.serverConfigurations.values.toList(),
+                    null
+                )
                 else {
                     DnsServerConfiguration(null, config.servers.map {
                         it.address as TLSUpstreamAddress
                     })
                 }
             }
-        }
-        else {
+        } else {
             val config = getPreferences().dnsServerConfig
-            if(config.hasTlsServer()) {
+            if (config.hasTlsServer()) {
                 DnsServerConfiguration(null, config.servers.map {
                     it.address as TLSUpstreamAddress
                 })
@@ -784,15 +882,16 @@ class DnsVpnService : VpnService(), Runnable {
         log("Starting with config: $serverConfig")
 
         log("Creating handle.")
-        val handle:DnsHandle
-        if(serverConfig.httpsConfiguration != null) {
+        val handle: DnsHandle
+        if (serverConfig.httpsConfiguration != null) {
             handle = ProxyHttpsHandler(
                 serverConfig.httpsConfiguration!!,
                 connectTimeout = 20000,
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)
-                }
+                },
+                mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
             )
         } else {
             handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
@@ -800,35 +899,46 @@ class DnsVpnService : VpnService(), Runnable {
                 queryCountCallback = {
                     setNotificationText()
                     updateNotification(it)
-                })
+                }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock)
         }
         log("Handle created, creating DNS proxy")
-        handle.ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
+        handle.ipv6Enabled =
+            getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
         handle.ipv4Enabled =
             !handle.ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
-        dnsProxy = SmokeProxy(handle, createProxyBypassHandlers(), createDnsCache(), createQueryLogger(), createLocalResolver())
+        dnsProxy = SmokeProxy(
+            handle,
+            createProxyBypassHandlers(),
+            createDnsCache(),
+            createQueryLogger(),
+            createLocalResolver()
+        )
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
-            newFixedThreadPoolContext(2, "proxy-pool")), logger = object:com.frostnerd.vpntunnelproxy.Logger() {
+            newFixedThreadPoolContext(2, "proxy-pool")
+        ), logger = object : com.frostnerd.vpntunnelproxy.Logger() {
             override fun logMessage(message: () -> String, level: Level) {
-                if(level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
+                if (level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
                     log(message(), "VPN-LIBRARY, $level")
                 }
             }
 
             override fun failedRequest(question: FutureAnswer, reason: Throwable?) {
-                if(reason != null) log("A request failed: " + Logger.stacktraceToString(reason), "VPN-LIBRARY")
+                if (reason != null) log(
+                    "A request failed: " + Logger.stacktraceToString(reason),
+                    "VPN-LIBRARY"
+                )
             }
 
             val advancedLogging = getPreferences().advancedLogging
             override fun logException(ex: Exception, terminal: Boolean, level: Level) {
-                if(terminal) log(ex)
+                if (terminal) log(ex)
                 else log(Logger.stacktraceToString(ex), "VPN-LIBRARY, $level")
             }
 
             override fun logMessage(message: String, level: Level) {
-                if(level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
+                if (level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
                     log(message, "VPN-LIBRARY, $level")
                 }
             }
@@ -847,7 +957,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun createQueryLogger(): QueryListener? {
-        return if(getPreferences().loggingEnabled || getPreferences().queryLoggingEnabled) {
+        return if (getPreferences().loggingEnabled || getPreferences().queryLoggingEnabled) {
             com.frostnerd.smokescreen.util.proxy.QueryListener(this)
         } else null
     }
@@ -859,11 +969,11 @@ class DnsVpnService : VpnService(), Runnable {
      */
     private fun createProxyBypassHandlers(): MutableList<DnsHandle> {
         val bypassHandlers = mutableListOf<DnsHandle>()
-        if(getPreferences().bypassSearchdomains) {
+        if (getPreferences().bypassSearchdomains) {
             log("Creating bypass handlers for search domains of connected networks.")
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             for (network in mgr.allNetworks) {
-                if(network == null) continue
+                if (network == null) continue
                 val networkInfo = mgr.getNetworkInfo(network) ?: continue
                 if (networkInfo.isConnected && !mgr.isVpnNetwork(network)) {
                     val linkProperties = mgr.getLinkProperties(network) ?: continue
@@ -881,20 +991,27 @@ class DnsVpnService : VpnService(), Runnable {
             }
             log("${bypassHandlers.size} bypass handlers created.")
         } else log("Not creating bypass handlers for search domains, bypass is disabled.")
-        if(getPreferences().pauseOnCaptivePortal) {
+        if (getPreferences().pauseOnCaptivePortal) {
             val dhcpServers = getDhcpDnsServers()
-            if(dhcpServers.isNotEmpty()) bypassHandlers.add(CaptivePortalUdpDnsHandle(targetDnsServer = { dhcpServers.first() }))
+            if (dhcpServers.isNotEmpty()) bypassHandlers.add(
+                CaptivePortalUdpDnsHandle(
+                    targetDnsServer = { dhcpServers.first() })
+            )
         }
-        bypassHandlers.add(NoConnectionDnsHandle(getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager, NoConnectionDnsHandle.Behavior.DROP_PACKETS) {
-            log("Connection changed to connected=$it", "NoConnectionDnsHandle-Listener")
-            connectedToANetwork = it
-            if(!it) showNoConnectionNotification()
-            else hideNoConnectionNotification()
-        })
+        bypassHandlers.add(
+            NoConnectionDnsHandle(
+                getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager,
+                NoConnectionDnsHandle.Behavior.DROP_PACKETS
+            ) {
+                log("Connection changed to connected=$it", "NoConnectionDnsHandle-Listener")
+                connectedToANetwork = it
+                if (!it) showNoConnectionNotification()
+                else hideNoConnectionNotification()
+            })
         return bypassHandlers
     }
 
-    private fun createDnsCache():SimpleDnsCache? {
+    private fun createDnsCache(): SimpleDnsCache? {
         val dnsCache: SimpleDnsCache?
         dnsCache = if (getPreferences().useDnsCache) {
             log("Creating DNS Cache.")
@@ -908,67 +1025,85 @@ class DnsVpnService : VpnService(), Runnable {
                         type: Record.TYPE,
                         record: Record<*>
                     ): Long {
-                        return if(answerMessage.responseCode == DnsMessage.RESPONSE_CODE.NX_DOMAIN) nxDomainCacheTime else cacheTime
+                        return if (answerMessage.responseCode == DnsMessage.RESPONSE_CODE.NX_DOMAIN) nxDomainCacheTime else cacheTime
                     }
 
-                    override suspend fun getTtl(question: Question, record: Record<*>): Long = cacheTime
+                    override suspend fun getTtl(question: Question, record: Record<*>): Long =
+                        cacheTime
 
 
                     override fun shouldCache(question: Question): Boolean = true
                 }
             } else DefaultCacheControl(getPreferences().minimumCacheTime.toLong())
-            val onClearCache:((currentCache:Map<String, Map<Record.TYPE, Map<Record<*>, Long>>>) -> Unit)? = if(getPreferences().keepDnsCacheAcrossLaunches) {
-                { cache ->
-                    log("Persisting current cache to Database.")
-                    getDatabase().cachedResponseDao().deleteAll()
-                    var persisted = 0
-                    val entries = mutableListOf<CachedResponse>()
-                    for(entry in cache) {
-                        for(cachedType in entry.value) {
-                            val recordsToPersist:MutableMap<Record<*>, Long> = mutableMapOf()
-                            for(cachedRecord in cachedType.value) {
-                                if(cachedRecord.value > System.currentTimeMillis()) {
-                                    recordsToPersist[cachedRecord.key] = cachedRecord.value
-                                    persisted++
+            val onClearCache: ((currentCache: Map<String, Map<Record.TYPE, Map<Record<*>, Long>>>) -> Unit)? =
+                if (getPreferences().keepDnsCacheAcrossLaunches) {
+                    { cache ->
+                        log("Persisting current cache to Database.")
+                        getDatabase().cachedResponseDao().deleteAll()
+                        var persisted = 0
+                        val entries = mutableListOf<CachedResponse>()
+                        for (entry in cache) {
+                            for (cachedType in entry.value) {
+                                val recordsToPersist: MutableMap<Record<*>, Long> = mutableMapOf()
+                                for (cachedRecord in cachedType.value) {
+                                    if (cachedRecord.value > System.currentTimeMillis()) {
+                                        recordsToPersist[cachedRecord.key] = cachedRecord.value
+                                        persisted++
+                                    }
+                                }
+
+                                if (recordsToPersist.isNotEmpty()) {
+                                    entries.add(
+                                        createPersistedCacheEntry(
+                                            entry.key,
+                                            cachedType.key,
+                                            recordsToPersist
+                                        )
+                                    )
                                 }
                             }
-
-                            if(recordsToPersist.isNotEmpty()) {
-                                entries.add(createPersistedCacheEntry(entry.key, cachedType.key, recordsToPersist))
-                            }
                         }
+                        GlobalScope.launch {
+                            val dao = getDatabase().cachedResponseDao()
+                            dao.insertAll(entries)
+                        }
+                        log("Cache persisted [$persisted records]")
                     }
-                    GlobalScope.launch {
-                        val dao = getDatabase().cachedResponseDao()
-                        dao.insertAll(entries)
-                    }
-                    log("Cache persisted [$persisted records]")
-                }
-            } else null
-            SimpleDnsCache(cacheControl, CacheStrategy(getPreferences().maxCacheSize), onClearCache = onClearCache)
+                } else null
+            SimpleDnsCache(
+                cacheControl,
+                CacheStrategy(getPreferences().maxCacheSize),
+                onClearCache = onClearCache
+            )
         } else {
             log("Not creating DNS cache, is disabled.")
             null
         }
-        if(dnsCache != null) log("Cache created.")
+        if (dnsCache != null) log("Cache created.")
 
         // Restores persisted cache
-        if(dnsCache != null && getPreferences().keepDnsCacheAcrossLaunches) {
+        if (dnsCache != null && getPreferences().keepDnsCacheAcrossLaunches) {
             log("Restoring old cache")
             var restored = 0
             var tooOld = 0
             GlobalScope.launch {
-                for (cachedResponse in getDatabase().cachedResponseRepository().getAllAsync(GlobalScope)) {
+                for (cachedResponse in getDatabase().cachedResponseRepository().getAllAsync(
+                    GlobalScope
+                )) {
                     val records = mutableMapOf<Record<*>, Long>()
                     for (record in cachedResponse.records) {
-                        if(record.value > System.currentTimeMillis()) {
+                        if (record.value > System.currentTimeMillis()) {
                             val bytes = Base64.decode(record.key, Base64.NO_WRAP)
                             val stream = DataInputStream(ByteArrayInputStream(bytes))
                             records[Record.parse(stream, bytes)] = record.value
                             restored++
                         } else tooOld++
                     }
-                    dnsCache.addToCache(DnsName.from(cachedResponse.dnsName), cachedResponse.type, records)
+                    dnsCache.addToCache(
+                        DnsName.from(cachedResponse.dnsName),
+                        cachedResponse.type,
+                        records
+                    )
                 }
                 getDatabase().cachedResponseDao().deleteAll()
             }
@@ -978,59 +1113,79 @@ class DnsVpnService : VpnService(), Runnable {
         return dnsCache
     }
 
-    private fun createLocalResolver():LocalResolver? {
-        if(getPreferences().dnsRulesEnabled) {
-            return object:LocalResolver(false) {
+    private fun createLocalResolver(): LocalResolver? {
+        if (getPreferences().dnsRulesEnabled) {
+            return object : LocalResolver(false) {
                 private val dao = getDatabase().dnsRuleDao()
                 private val resolveResults = mutableMapOf<Question, String>()
                 private val wwwRegex = Regex("^www\\.")
                 private val useUserRules = getPreferences().customHostsEnabled
 
                 override suspend fun canResolve(question: Question): Boolean {
-                    return if(question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA) {
+                    return if (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA) {
                         false
                     } else {
                         val uniformQuestion = question.name.toString().replace(wwwRegex, "")
-                        val resolveResult = dao.findRuleTarget(uniformQuestion, question.type, useUserRules)?.let {
-                            when (it) {
-                                "0" -> "0.0.0.0"
-                                "1" -> {
-                                    if (question.type == Record.TYPE.AAAA) "::1"
-                                    else "127.0.0.1"
-                                }
-                                else -> it
-                            }
-                        }
-                        if (resolveResult != null) {
-                            val isWildcardWhitelisted = dao.findPossibleWildcardRuleTarget(uniformQuestion, question.type, useUserRules, true, false).any {
-                                DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion).matches()
-                            }
-                            if(!isWildcardWhitelisted) {
+                        val isWhitelisted = dao.findPossibleWildcardRuleTarget(
+                            uniformQuestion,
+                            question.type,
+                            useUserRules,
+                            true,
+                            false
+                        ).any {
+                            DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
+                                .matches()
+                        } || dao.findNonWildcardWhitelistEntry(
+                            uniformQuestion,
+                            useUserRules
+                        ).isNotEmpty()
+                        if (isWhitelisted) false
+                        else {
+                            val resolveResult =
+                                dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
+                                    ?.let {
+                                        when (it) {
+                                            "0" -> "0.0.0.0"
+                                            "1" -> {
+                                                if (question.type == Record.TYPE.AAAA) "::1"
+                                                else "127.0.0.1"
+                                            }
+                                            else -> it
+                                        }
+                                    }
+                            if (resolveResult != null) {
                                 resolveResults[question] = resolveResult
                                 true
-                            } else false
-                        } else {
-                            val wildcardResolveResults = dao.findPossibleWildcardRuleTarget(uniformQuestion, question.type, useUserRules, true, true).filter {
-                                DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion).matches()
-                            }
-                            if(wildcardResolveResults.isEmpty() || wildcardResolveResults.any {
-                                    it.isWhitelistRule()
-                                }) false
-                            else {
-                                resolveResults[question] = wildcardResolveResults.first().let {
-                                    if(question.type == Record.TYPE.AAAA) it.ipv6Target ?: it.target
-                                    else it.target
-                                }.let {
-                                    when (it) {
-                                        "0" -> "0.0.0.0"
-                                        "1" -> {
-                                            if (question.type == Record.TYPE.AAAA) "::1"
-                                            else "127.0.0.1"
-                                        }
-                                        else -> it
-                                    }
+                            } else {
+                                val wildcardResolveResults = dao.findPossibleWildcardRuleTarget(
+                                    uniformQuestion,
+                                    question.type,
+                                    useUserRules,
+                                    false,
+                                    true
+                                ).filter {
+                                    DnsRuleDialog.databaseHostToMatcher(it.host)
+                                        .reset(uniformQuestion).matches()
                                 }
-                                true
+                                if(wildcardResolveResults.isNotEmpty()) {
+                                    resolveResults[question] = wildcardResolveResults.first().let {
+                                        if (question.type == Record.TYPE.AAAA) it.ipv6Target
+                                            ?: it.target
+                                        else it.target
+                                    }.let {
+                                        when (it) {
+                                            "0" -> "0.0.0.0"
+                                            "1" -> {
+                                                if (question.type == Record.TYPE.AAAA) "::1"
+                                                else "127.0.0.1"
+                                            }
+                                            else -> it
+                                        }
+                                    }
+                                    true
+                                } else {
+                                    false
+                                }
                             }
                         }
                     }
@@ -1039,12 +1194,20 @@ class DnsVpnService : VpnService(), Runnable {
                 override suspend fun resolve(question: Question): List<Record<*>> {
                     val result = resolveResults.remove(question)
                     return result?.let {
-                        val data = if(question.type == Record.TYPE.A) {
+                        val data = if (question.type == Record.TYPE.A) {
                             A(it)
                         } else {
                             AAAA(it)
                         }
-                        listOf(Record(question.name.toString(), question.type, question.clazz.value, 9999, data))
+                        listOf(
+                            Record(
+                                question.name.toString(),
+                                question.type,
+                                question.clazz.value,
+                                9999,
+                                data
+                            )
+                        )
                     } ?: throw IllegalStateException()
                 }
 
@@ -1067,7 +1230,8 @@ class DnsVpnService : VpnService(), Runnable {
             mutableMapOf()
         )
         for (record in recordsToPersist) {
-            entity.records[Base64.encodeToString(record.key.toByteArray(), Base64.NO_WRAP)] = record.value
+            entity.records[Base64.encodeToString(record.key.toByteArray(), Base64.NO_WRAP)] =
+                record.value
         }
         return entity
     }
@@ -1085,9 +1249,12 @@ enum class Command : Serializable {
     STOP, RESTART, PAUSE_RESUME, IGNORE_SERVICE_KILLED
 }
 
-data class DnsServerConfiguration(val httpsConfiguration:List<ServerConfiguration>?, val tlsConfiguration:List<TLSUpstreamAddress>?) {
+data class DnsServerConfiguration(
+    val httpsConfiguration: List<ServerConfiguration>?,
+    val tlsConfiguration: List<TLSUpstreamAddress>?
+) {
 
-    fun forEachAddress(block:(isHttps:Boolean, UpstreamAddress) -> Unit) {
+    fun forEachAddress(block: (isHttps: Boolean, UpstreamAddress) -> Unit) {
         httpsConfiguration?.forEach {
             block(true, it.urlCreator.address)
         }
