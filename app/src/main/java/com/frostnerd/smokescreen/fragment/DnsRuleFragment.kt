@@ -451,11 +451,14 @@ class DnsRuleFragment : Fragment() {
         super.onResume()
         importDoneReceiver = context!!.registerLocalReceiver(IntentFilter(RuleImportService.BROADCAST_IMPORT_DONE)) {
             refreshProgress.hide()
+
             sourceRuleCount.keys.forEach {
-                sourceRuleCount[it] = null
-            }
-            sourceAdapterList.forEachIndexed { index, hostSource ->
-                if(hostSource.enabled) sourceAdapter.notifyItemChanged(index)
+
+                val index = sourceAdapterList.indexOf(it)
+                if(index >= 0 && (sourceAdapterList[index].enabled || sourceRuleCount[it] != null)) {
+                    sourceRuleCount[it] = null
+                    sourceAdapter.notifyItemChanged(index)
+                } else sourceRuleCount[it] = null
             }
             refreshProgressShown = false
             launchWithLifecylce(false) {
