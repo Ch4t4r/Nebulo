@@ -224,7 +224,13 @@ class DnsRuleFragment : Fragment() {
                     getDatabase().hostSourceDao().setSourceEnabled(hostSource.id, enabled)
                 }, editSource = { hostSource ->
                     NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
-                        getDatabase().hostSourceDao().update(newSource)
+                        getDatabase().hostSourceDao().findById(newSource.id)?.apply {
+                            getDatabase().hostSourceDao().update(this.copy(
+                                name = newSource.name,
+                                source = newSource.source,
+                                whitelistSource = newSource.whitelistSource
+                            ))
+                        }
                         val index = sourceAdapterList.indexOf(hostSource)
                         sourceAdapter.notifyItemChanged(index)
                         sourceAdapterList[index] = newSource

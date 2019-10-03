@@ -24,6 +24,9 @@ import com.frostnerd.smokescreen.database.entities.HostSource
 @Dao
 interface HostSourceDao {
 
+    @Query("SELECT * FROM HostSource WHERE id=:sourceId")
+    fun findById(sourceId: Long):HostSource?
+
     @Insert
     fun insert(hostSource: HostSource)
 
