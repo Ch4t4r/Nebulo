@@ -221,7 +221,7 @@ class DnsRuleFragment : Fragment() {
                     )
                 }, changeSourceStatus = { hostSource, enabled ->
                     hostSource.enabled = enabled
-                    getDatabase().hostSourceDao().update(hostSource)
+                    getDatabase().hostSourceDao().setSourceEnabled(hostSource.id, enabled)
                 }, editSource = { hostSource ->
                     NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
                         getDatabase().hostSourceDao().update(newSource)

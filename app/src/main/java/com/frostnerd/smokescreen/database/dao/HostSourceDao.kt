@@ -33,6 +33,9 @@ interface HostSourceDao {
     @Update
     fun update(hostSource: HostSource)
 
+    @Query("UPDATE HostSource SET enabled=:enabled WHERE id=:sourceId")
+    fun setSourceEnabled(sourceId:Long, enabled:Boolean)
+
     @Delete
     fun delete(hostSource: HostSource)
 
