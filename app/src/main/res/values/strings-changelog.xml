@@ -278,5 +278,22 @@
         <item>@string/changelog_build_45_2</item>
         <item>@string/changelog_build_43_6</item>
     </string-array>
+
+    <string name="changelog_build_46_1">The query log now shows the TTL and IP responses</string>
+    <string name="changelog_build_46_2">The language can now be changed from within the app</string>
+    <string name="changelog_build_46_3">The main screen now displays whether private DNS is active (Android 9+)</string>
+    <string name="changelog_build_46_4">Added news servers</string>
+    <string name="changelog_build_46_5">Design changes</string>
+    <string name="changelog_build_46_6">Improved handling of dns rules</string>
+    <string-array name="changelog_build_46">
+        <item>1.0 Beta (Build 45)</item>
+        <item>@string/changelog_build_46_1</item>
+        <item>@string/changelog_build_46_2</item>
+        <item>@string/changelog_build_46_3</item>
+        <item>@string/changelog_build_46_4</item>
+        <item>@string/changelog_build_46_5</item>
+        <item>@string/changelog_build_46_6</item>
+        <item>@string/changelog_build_43_6</item>
+    </string-array>
     
 </resources>
