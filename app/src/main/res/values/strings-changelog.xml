@@ -287,7 +287,7 @@
     <string name="changelog_build_46_6">Design changes</string>
     <string name="changelog_build_46_7">Improved handling of dns rules</string>
     <string-array name="changelog_build_46">
-        <item>1.0 Beta (Build 45)</item>
+        <item>1.0 Beta (Build 46)</item>
         <item>@string/changelog_build_46_1</item>
         <item>@string/changelog_build_46_2</item>
         <item>@string/changelog_build_46_3</item>
