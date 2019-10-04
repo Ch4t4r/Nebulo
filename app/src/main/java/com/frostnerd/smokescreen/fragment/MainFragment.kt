@@ -72,7 +72,7 @@ class MainFragment : Fragment() {
         startButton.setOnClickListener {
             if (proxyRunning) {
                 DnsVpnService.sendCommand(requireContext(), Command.STOP)
-                proxyStarting = true
+                proxyStarting = false
                 proxyRunning = false
             } else {
                 startVpn()
