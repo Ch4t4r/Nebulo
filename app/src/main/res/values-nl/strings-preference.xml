@@ -54,18 +54,18 @@
     <string name="summary_dnscache_maxsize">Stelt het maximale aantal vermeldingen in het cachegeheugen in</string>
 
     <string name="title_dnscache_usedefaulttimes">Standaard cache tijd</string>
-    <string name="summary_dnscache_usedefaulttimes">DNS-verzoeken opslaan zolang de DNS-server dit aanbeveelt</string>
+    <string name="summary_dnscache_usedefaulttimes">Houd DNS-aanvragen in de cache zoals aanbevolen door de DNS-server (met behulp van de TTL)</string>
 
     <string name="title_dnscache_minimum_cache_time">Minimale cache tijd</string>
-    <string name="summary_dnscache_minimum_cache_time">De minimale opslagtijd in cachegeheugen. 
+    <string name="summary_dnscache_minimum_cache_time">De minimale opslag tijd in het cachegeheugen, ongeacht of de standaard cache tijd daarvoor korter zou zijn. Lange cache tijden kunnen ertoe leiden dat de gegevens in het cachegeheugen niet synchroon lopen met de werkelijke gegevens.
 \nHuidig: %1d seconden.</string>
 
     <string name="title_dnscache_customcachetime">Aangepaste cache tijd (seconden)</string>
-    <string name="summary_dnscache_customcachetime">Verander de hoeveelheid tijd die oude verzoeken in het cachegeheugen worden opgeslagen.
+    <string name="summary_dnscache_customcachetime">Wijzigt hoe lang alle aanvragen in de cache worden opgeslagen, ongeacht of de standaard cache tijd langer is. Lange cache tijden kunnen ertoe leiden dat de gegevens in het cachegeheugen niet synchroon lopen met de werkelijke gegevens.
 \nHuidig: %1d Seconden.</string>
 
     <string name="title_dnscache_nxdomaincachetime">Cache tijd voor NXDomain (seconden)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die oude NXDOMAIN-verzoeken in het cachegeheugen hebben. Dit verbetert de prestaties voor niet bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)Huidig: %1d seconden.</string>
+    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die NXDOMAIN verzoeken in het cachegeheugen hebben. Dit verbetert de prestaties voor niet bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)Huidig: %1d seconden.</string>
 
 
     <string name="preference_category_logging">Loggen</string>
@@ -138,5 +138,11 @@
     <string name="summary_delete_queries">Klik hier om alle geregistreerde DNS-verzoeken te verwijderen.</string>
 <string name="title_advanced_logging">Geavanceerd loggen</string>
     <string name="summary_advanced_logging">Voegt uitgebreid Loggen toe, wat kan helpen bij aanhoudende problemen.</string>
+
+    <string name="title_language">Taal</string>
+    <string name="summary_language">Wijzig de taal van de app</string>
+
+    <string name="title_map_query_refused">Geweigerde zoekopdrachten interpreteren als niet toegestane hosts</string>
+    <string name="summary_map_query_refused">Sommige DNS servers kunnen een zoekopdracht weigeren te beantwoorden als de host niet is toegestaan of wordt geblokkeerd. Deze instelling blokkeert de host in plaats van de zoekopdracht te weigeren, anders kan het systeem in de war raken.</string>
 
     </resources>
