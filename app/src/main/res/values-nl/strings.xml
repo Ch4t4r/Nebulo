@@ -78,4 +78,7 @@
     <string name="windows_querylogging_dnsrule_created">DNS-regel is aangemaakt.</string>
     <string name="windows_querylogging_usedserver_dnsrules">Afgehandeld met DNS-regels</string>
     <string name="windows_querylogging_usedserver_cache">Afgehandeld met cache</string>
+<string name="windows_querylogging_search_hint">Zoek naar een host in het DNS verzoek-logboek</string>
+    <string name="windows_querylogging_search">Host zoeken</string>
+    <string name="window_main_privatedns_info">Privé-DNS is actief, uw aanvragen zijn al beveiligd. Schakel Nebulo in als u DNS-over-HTTPS of andere handige functies wilt gebruiken.</string>
 </resources>
