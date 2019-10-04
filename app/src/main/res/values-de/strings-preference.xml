@@ -54,14 +54,14 @@
     <string name="summary_dnscache_maxsize">Setzt die maximal erlaubte Anzahl an Einträgen im Zwischenspeicher</string>
 
     <string name="title_dnscache_usedefaulttimes">Standard-Aufbewahrungszeit</string>
-    <string name="summary_dnscache_usedefaulttimes">Speichere DNS Anfragen solange, wie es der DNS server empfiehlt</string>
+    <string name="summary_dnscache_usedefaulttimes">Speichere DNS Anfragen solange im Cache, wie es der DNS Server (anhand der TTL) empfiehlt</string>
 
     <string name="title_dnscache_minimum_cache_time">Minimale Aufbewahrungszeit</string>
-    <string name="summary_dnscache_minimum_cache_time">Die minimale Aufbewahrungszeit im Zwischenspeicher.
+    <string name="summary_dnscache_minimum_cache_time">Die minimale Aufbewahrungszeit im Zwischenspeicher, egal, ob die Standardaufbewahrungszeit kürzer wäre. Lange Aufbewahrungszeiten könnten dazu führen, dass die Daten im Zwischenspeicher veraltet sind.
 \nAktuell: %1d Sekunden.</string>
 
     <string name="title_dnscache_customcachetime">Eigene Aufbewahrungszeit</string>
-    <string name="summary_dnscache_customcachetime">Ändert für jede Anfrage wie lange diese zwischengespeichert wird.
+    <string name="summary_dnscache_customcachetime">Ändert für jede Anfrage wie lange diese zwischengespeichert wird, egal, ob die Standardaufbewahrungszeit kürzer wäre. Lange Aufbewahrungszeiten könnten dazu führen, dass die Daten im Zwischenspeicher veraltet sind
 \nAktuell: %1d Sekunden.</string>
 
     <string name="title_dnscache_nxdomaincachetime">Aufbewahrungszeit für nicht-existente Domains</string>
@@ -139,5 +139,11 @@
 
     <string name="title_advanced_logging">Erweiterte Protokollierung</string>
     <string name="summary_advanced_logging">Fügt mehr Protokollierung hinzu, was bei persistenteren Problemen unterstützen kann.</string>
+
+    <string name="title_language">Sprache</string>
+    <string name="summary_language">Ändere die Sprache der App</string>
+
+    <string name="title_map_query_refused">Abgelehnte Anfragen als geblockte Hosts in­ter­pre­tie­ren</string>
+    <string name="summary_map_query_refused">Einige DNS Server lehnen möglicherweise die Bearbeitung einer Anfrage ab, wenn der Host blockiert ist. Diese Einstellung blockiert den Host, wenn die Anfrage abgelehnt wird, da das System sonst eventuell verwirrt wird.</string>
 
     </resources>
