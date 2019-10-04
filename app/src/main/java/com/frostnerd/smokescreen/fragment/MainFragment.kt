@@ -3,9 +3,12 @@ package com.frostnerd.smokescreen.fragment
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.net.VpnService
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -51,7 +54,6 @@ import java.net.URL
  */
 class MainFragment : Fragment() {
     private val vpnRequestCode: Int = 1
-    private var loadingAnimation: RotateAnimation? = null
     private var proxyRunning: Boolean = false
     private var proxyStarting = false
     private var vpnStateReceiver: BroadcastReceiver? = null
@@ -70,7 +72,7 @@ class MainFragment : Fragment() {
         startButton.setOnClickListener {
             if (proxyRunning) {
                 DnsVpnService.sendCommand(requireContext(), Command.STOP)
-                proxyStarting = true
+                proxyStarting = false
                 proxyRunning = false
             } else {
                 startVpn()
@@ -182,36 +184,37 @@ class MainFragment : Fragment() {
     }
 
     private fun updateVpnIndicators() {
+        val privateDnsActive = if(Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            false
+        } else {
+            (context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).let {
+                if(it.activeNetwork == null) false
+                else it.getLinkProperties(it.activeNetwork)?.isPrivateDnsActive ?: false
+            }
+        }
         when {
             proxyRunning -> {
+                privateDnsInfo.visibility = View.INVISIBLE
                 statusImage.setImageResource(R.drawable.ic_lock)
                 statusImage.clearAnimation()
                 startButton.setText(R.string.all_stop)
             }
             proxyStarting -> {
+                privateDnsInfo.visibility = View.INVISIBLE
                 startButton.setText(R.string.all_stop)
-                if (loadingAnimation == null) {
-                    loadingAnimation = RotateAnimation(
-                        0f,
-                        360f,
-                        Animation.RELATIVE_TO_SELF,
-                        0.5f,
-                        Animation.RELATIVE_TO_SELF,
-                        0.5f
-                    )
-                    loadingAnimation?.repeatCount = Animation.INFINITE
-                    loadingAnimation?.duration = 2300
-                    loadingAnimation?.interpolator = LinearInterpolator()
-                    statusImage.startAnimation(loadingAnimation)
-                } else if (!loadingAnimation!!.hasStarted() || loadingAnimation!!.hasEnded()) {
-                    statusImage.startAnimation(loadingAnimation)
-                }
-                statusImage.setImageResource(R.drawable.ic_spinner)
+                statusImage.setImageResource(R.drawable.ic_lock_half_open)
             }
             else -> {
                 startButton.setText(R.string.all_start)
-                statusImage.setImageResource(R.drawable.ic_lock_open)
-                statusImage.clearAnimation()
+                if(privateDnsActive) {
+                    statusImage.setImageResource(R.drawable.ic_lock)
+                    statusImage.clearAnimation()
+                    privateDnsInfo.visibility = View.VISIBLE
+                } else {
+                    statusImage.setImageResource(R.drawable.ic_lock_open)
+                    statusImage.clearAnimation()
+                    privateDnsInfo.visibility = View.INVISIBLE
+                }
             }
         }
     }

@@ -2,6 +2,9 @@
 <resources>
     <string name="preference_category_general">General</string>
 
+    <string name="title_language">Language</string>
+    <string name="summary_language">Change the language of the app</string>
+
     <string name="title_theme">Theme</string>
     <string name="summary_theme">Sets the theme of this app</string>
 
@@ -54,16 +57,16 @@
     <string name="summary_dnscache_maxsize">Sets the maximum of entries the cache can hold at any time</string>
 
     <string name="title_dnscache_usedefaulttimes">Default cache time</string>
-    <string name="summary_dnscache_usedefaulttimes">Cache requests for the default time communicated by the server</string>
+    <string name="summary_dnscache_usedefaulttimes">Keep requests in the cache for as long as the DNS server communicates using the TTL</string>
 
     <string name="title_dnscache_minimum_cache_time">Minimum cache time</string>
-    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached.\nCurrent: %1d Seconds.</string>
+    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached, no matter whether the default caching time for it would be shorter. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds.</string>
 
     <string name="title_dnscache_customcachetime">Custom cache time (Seconds)</string>
-    <string name="summary_dnscache_customcachetime">Changes the amount of time old requests are cached.\nCurrent: %1d Seconds.</string>
+    <string name="summary_dnscache_customcachetime">Changes how long all requests are cached, no matter whether the default caching time for it would be longer. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds.</string>
 
     <string name="title_dnscache_nxdomaincachetime">Cache time for NXDomain (Seconds)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time old NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds.</string>
+    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds.</string>
 
 
     <string name="preference_category_logging">Logging</string>
@@ -113,6 +116,9 @@
     <string name="title_catch_other_dns_servers">Intercept other DNS traffic</string>
     <string name="summary_catch_other_dns_servers">Intercept traffic of known DNS servers and transmit it using Nebulo</string>
 
+    <string name="title_map_query_refused">Interpret refused queries as disallowed hosts</string>
+    <string name="summary_map_query_refused">Some DNS servers might refuse to answer a query if the host isn\'t allowed or is blocked. This setting blocks the host instead of refusing the query, otherwise the system might get confused.</string>
+
     <string name="title_bypass_searchdomains">Searchdomains bypass</string>
     <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network.</string>
 
@@ -133,4 +139,25 @@
 
     <string name="title_delete_queries">Clear queries</string>
     <string name="summary_delete_queries">Click here to delete all logged queries.</string>
+
+    <string-array name="languages">
+        <item>System language</item>
+        <item>English</item>
+        <item>Dutch</item>
+        <item>German</item>
+        <item>Indonesian</item>
+        <item>Portuguese</item>
+        <item>Russian</item>
+        <item>Turkish</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>auto</item>
+        <item>en</item>
+        <item>nl</item>
+        <item>de</item>
+        <item>in</item>
+        <item>pt</item>
+        <item>ru</item>
+        <item>tr</item>
+    </string-array>
 </resources>

@@ -52,7 +52,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             context?.getPreferences()?.notifyPreferenceChangedFromExternal(key)
         }
-    private val category:SettingsActivity.Category by lazy {
+    private val category:SettingsActivity.Category by lazy(LazyThreadSafetyMode.NONE) {
         arguments!!.getSerializable("category") as SettingsActivity.Category
     }
 
@@ -233,6 +233,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     @SuppressLint("NewApi")
     private fun processGeneralCategory() {
         val startOnBoot = findPreference("start_on_boot") as CheckBoxPreference
+        val language = findPreference("language")
         startOnBoot.setOnPreferenceChangeListener { preference, newValue ->
             if (newValue == false) true
             else {
@@ -257,6 +258,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else {
                 false
             }
+        }
+        language.setOnPreferenceChangeListener { _, _ ->
+            requireActivity().restart(MainActivity::class.java)
+            true
         }
         findPreference("app_exclusion_list").setOnPreferenceClickListener {
             showExcludedAppsDialog()

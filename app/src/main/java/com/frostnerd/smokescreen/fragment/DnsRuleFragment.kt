@@ -221,13 +221,21 @@ class DnsRuleFragment : Fragment() {
                     )
                 }, changeSourceStatus = { hostSource, enabled ->
                     hostSource.enabled = enabled
-                    getDatabase().hostSourceDao().update(hostSource)
+                    getDatabase().hostSourceDao().setSourceEnabled(hostSource.id, enabled)
                 }, editSource = { hostSource ->
                     NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
-                        getDatabase().hostSourceDao().update(newSource)
+                        val currentSource = getDatabase().hostSourceDao().findById(hostSource.id)!!.apply {
+                            this.name = newSource.name
+                            this.source = newSource.source
+                            this.whitelistSource = newSource.whitelistSource
+                        }
+                        getDatabase().hostSourceDao().update(currentSource)
+
                         val index = sourceAdapterList.indexOf(hostSource)
+                        sourceAdapterList[index] = currentSource
+                        sourceRuleCount[currentSource] = sourceRuleCount[hostSource]
+                        sourceRuleCount.remove(hostSource)
                         sourceAdapter.notifyItemChanged(index)
-                        sourceAdapterList[index] = newSource
                     }, showFileChooser = { callback ->
                         fileChosenCallback = callback
                         startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -268,7 +276,9 @@ class DnsRuleFragment : Fragment() {
                                     list.smoothScrollToPosition(sourceAdapterList.size + 1)
                                 }
                             } else {
-                                sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
+                                activity?.runOnUiThread {
+                                    sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
+                                }
                                 userRuleCount = 0
                             }
                         }
@@ -449,14 +459,19 @@ class DnsRuleFragment : Fragment() {
         super.onResume()
         importDoneReceiver = context!!.registerLocalReceiver(IntentFilter(RuleImportService.BROADCAST_IMPORT_DONE)) {
             refreshProgress.hide()
-            sourceRuleCount.keys.forEach {
-                sourceRuleCount[it] = null
-            }
-            sourceAdapterList.forEachIndexed { index, hostSource ->
-                if(hostSource.enabled) sourceAdapter.notifyItemChanged(index)
-            }
             refreshProgressShown = false
+
             launchWithLifecylce(false) {
+                sourceRuleCount.keys.forEach {
+                    val index = sourceAdapterList.indexOf(it)
+                    if(index >= 0 && (sourceAdapterList[index].enabled || sourceRuleCount[it] != null)) {
+                        sourceRuleCount[it] = null
+                        launchWithLifecylce(true) {
+                            sourceAdapter.notifyItemChanged(index)
+                        }
+                    } else sourceRuleCount[it] = null
+                }
+                sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
                 totalRuleCount = getDatabase().dnsRuleDao().getNonStagedCount()
                 updateRuleCountTitle()
             }
@@ -490,11 +505,13 @@ class DnsRuleFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_dnsrule, menu)
         val switch =  menu.getItem(0)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)
+        switch?.isChecked = getPreferences().dnsRulesEnabled.also {
+            overlay.visibility = if(it) View.GONE else View.VISIBLE
+        }
         switch?.setOnCheckedChangeListener { _, isChecked ->
             getPreferences().dnsRulesEnabled = isChecked
             overlay.visibility = if(isChecked) View.GONE else View.VISIBLE
         }
-        switch?.isChecked = getPreferences().dnsRulesEnabled
     }
 
     private class SourceViewHolder(
@@ -605,7 +622,7 @@ class DnsRuleFragment : Fragment() {
 
     companion object {
         const val latestSourcesVersion = 2
-        private val defaultHostSources:Map<Int, List<HostSource>> by lazy {
+        private val defaultHostSources:Map<Int, List<HostSource>> by lazy(LazyThreadSafetyMode.NONE) {
             mutableMapOf<Int, List<HostSource>>().apply {
                 put(1, mutableListOf(
                     HostSource("Energized Basic", "https://raw.githubusercontent.com/EnergizedProtection/block/master/basic/formats/domains.txt"),

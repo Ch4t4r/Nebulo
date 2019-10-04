@@ -40,7 +40,7 @@ class QueryLogFragment : Fragment(), BackpressFragment {
     }
 
     override fun onBackPressed(): Boolean {
-        return if(viewpager.currentItem == 1) {
+        return if(viewpager != null && viewpager.currentItem == 1) {
             viewpager.currentItem = 0
             true
         } else false

@@ -15,6 +15,12 @@
                 android:defaultValue="true"/>
 
         <CheckBoxPreference
+            android:key="map_query_refused"
+            android:title="@string/title_map_query_refused"
+            android:summary="@string/summary_map_query_refused"
+            android:defaultValue="true" />
+
+        <CheckBoxPreference
                 android:key="bypass_searchdomains"
                 android:title="@string/title_bypass_searchdomains"
                 android:defaultValue="true"
@@ -25,11 +31,5 @@
                 android:defaultValue="true"
                 android:title="@string/title_pause_on_captiveportal"
                 android:summary="@string/summary_pause_on_captiveportal"/>
-
-        <CheckBoxPreference
-                android:key="show_no_connection_notification"
-                android:title="@string/title_show_noconnection_notification"
-                android:summary="@string/summary_show_noconnection_notification"
-                android:defaultValue="false"/>
     </PreferenceCategory>
 </PreferenceScreen>

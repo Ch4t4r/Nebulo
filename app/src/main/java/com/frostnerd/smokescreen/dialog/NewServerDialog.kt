@@ -53,12 +53,13 @@ class NewServerDialog(
     private var validationRegex = SERVER_URL_REGEX
 
     companion object {
+        private val dohAddressPart = "[a-z0-9][a-z0-9-.]*[a-z0-9]"
         val SERVER_URL_REGEX =
             Regex(
-                "^\\s*(?:https://)?([a-z0-9][a-z0-9-.]*[a-z0-9])(?::[1-9][0-9]{0,4})?(/[a-z0-9-.]+)*(/)?\\s*$",
+                "^\\s*(?:https://)?((?:$dohAddressPart)|(?:\\[[a-z0-9:]+]))(?::[1-9][0-9]{0,4})?(/[a-z0-9-.]+)*(/)?\\s*$",
                 RegexOption.IGNORE_CASE
             )
-        val TLS_REGEX = Regex("^\\s*([a-z0-9][a-z0-9-.]*[a-z0-9])(?::[1-9][0-9]{0,4})?\\s*$", RegexOption.IGNORE_CASE)
+        val TLS_REGEX = Regex("^\\s*($dohAddressPart)(?::[1-9][0-9]{0,4})?\\s*$", RegexOption.IGNORE_CASE)
     }
 
     init {

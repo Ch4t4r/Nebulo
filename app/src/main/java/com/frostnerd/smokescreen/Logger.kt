@@ -38,17 +38,28 @@ import kotlin.concurrent.withLock
  */
 
 private val publishedExceptions = mutableMapOf<Throwable, Set<StackTraceElement>>()
-private fun Context.logErrorSentry(e: Throwable) {
+private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = null) {
     if (publishedExceptions.any {
             it.value.all { elem ->
                 e.stackTrace.contains(elem)
             }
         } || publishedExceptions.put(e, e.stackTrace.toHashSet()) != null) return
     else if (getPreferences().crashReportingEnabled) {
-        if(e is OutOfMemoryError) {
+        if (e is OutOfMemoryError) {
             EventBuilder().withMessage(e.message)
                 .withLevel(Event.Level.ERROR)
                 .withExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
+                .withSentryInterface(ExceptionInterface(e)).build().apply {
+                    Sentry.capture(this)
+                }
+        } else if (extras != null && extras.isNotEmpty()) {
+            EventBuilder().withMessage(e.message)
+                .withLevel(Event.Level.ERROR)
+                .apply {
+                    extras.forEach { (key, value) ->
+                        withExtra(key, value)
+                    }
+                }
                 .withSentryInterface(ExceptionInterface(e)).build().apply {
                     Sentry.capture(this)
                 }
@@ -64,14 +75,19 @@ fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg
     }
 }
 
-fun Context.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs: Any) {
+fun Context.log(
+    text: String,
+    tag: String? = this::class.java.simpleName,
+    intent: Intent?,
+    vararg formatArgs: Any
+) {
     if (Logger.isEnabled(this)) {
         Logger.getInstance(this).log(text, tag, intent, formatArgs)
     }
 }
 
-fun Context.log(e: Throwable) {
-    logErrorSentry(e)
+fun Context.log(e: Throwable, extras: Map<String, String>? = null) {
+    logErrorSentry(e, extras)
     if (Logger.isEnabled(this)) {
         Logger.getInstance(this).log(e)
     } else {
@@ -111,7 +127,12 @@ fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, varar
     if (context != null) requireContext().log(text, tag, formatArgs)
 }
 
-fun Fragment.log(text: String, tag: String? = this::class.java.simpleName, intent: Intent?, vararg formatArgs: Any) {
+fun Fragment.log(
+    text: String,
+    tag: String? = this::class.java.simpleName,
+    intent: Intent?,
+    vararg formatArgs: Any
+) {
     if (context != null) requireContext().log(text, tag, intent, formatArgs)
 }
 
@@ -132,12 +153,15 @@ class Logger private constructor(context: Context) {
     private var oldSystemOut: PrintStream?
     private val lock = ReentrantLock()
     var enabled: Boolean = true
-    private val id:Int
+    private val id: Int
 
     init {
         val logDir = getLogDir(context)
         id = ++context.getPreferences().lastLogId
-        logFile = File(logDir, "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log")
+        logFile = File(
+            logDir,
+            "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log"
+        )
         logDir.mkdirs()
         logFile.createNewFile()
         fileWriter = BufferedWriter(FileWriter(logFile, false))
@@ -168,7 +192,7 @@ class Logger private constructor(context: Context) {
         private var instance: Logger? = null
         var timeStampFormatter = SimpleDateFormat("EEE MMM dd.yy kk:mm:ss", Locale.US)
         var logFileNameTimeStampFormatter = SimpleDateFormat("dd_MM_yyyy___kk_mm_ss", Locale.US)
-        private var enabled:Boolean? = null
+        private var enabled: Boolean? = null
 
         internal fun getInstance(context: Context): Logger {
             if (instance == null) {
@@ -177,14 +201,14 @@ class Logger private constructor(context: Context) {
             return instance!!
         }
 
-        internal fun isEnabled(context: Context):Boolean {
+        internal fun isEnabled(context: Context): Boolean {
             return enabled ?: run {
                 enabled = context.getPreferences().loggingEnabled
                 enabled!!
             }
         }
 
-        internal fun setEnabled(enabled:Boolean) {
+        internal fun setEnabled(enabled: Boolean) {
             this.enabled = enabled
         }
 
@@ -278,7 +302,10 @@ class Logger private constructor(context: Context) {
             val stackTrace = stacktraceToString(e)
             log(stackTrace)
             val errorFile =
-                File(logFile.parentFile, "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err")
+                File(
+                    logFile.parentFile,
+                    "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err"
+                )
 
             if (errorFile.createNewFile()) {
                 val writer = BufferedWriter(FileWriter(errorFile, false))

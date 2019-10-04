@@ -147,7 +147,7 @@ interface AppSettings {
     fun shouldShowCrashReportingConsentDialog(): Boolean {
         return BuildConfig.VERSION_NAME.let {
             it.contains("alpha", true) || it.contains("beta", true)
-        } && !crashReportingConsent && !crashReportingConsentAsked
+        } && !crashReportingConsent && !crashReportingConsentAsked && !BuildConfig.DEBUG
     }
 }
 
@@ -169,6 +169,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var askedForGroupJoin: Boolean by booleanPref("asked_group_join", false)
     override var lastLogId: Int by intPref("last_log_id", 0)
 
+    var language:String by stringPref("language", "auto")
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
@@ -212,6 +213,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
     override var pauseOnCaptivePortal: Boolean by booleanPref("pause_on_captive_portal", true)
     override var showNoConnectionNotification:Boolean by booleanPref("show_no_connection_notification", false)
+    var mapQueryRefusedToHostBlock:Boolean by booleanPref("map_query_refused", true)
 
     override var queryLoggingEnabled: Boolean by booleanPref("log_dns_queries", false)
 

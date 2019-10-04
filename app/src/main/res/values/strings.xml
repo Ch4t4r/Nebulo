@@ -77,6 +77,8 @@
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">Rules from this source: %1d (%2$d duplicates not in use)</string>
 
+    <string name="windows_querylogging_search_hint">Search for a host in the query log</string>
+    <string name="windows_querylogging_search">Host-search</string>
     <string name="windows_querylogging_time">Time</string>
     <string name="windows_querylogging_type">Type</string>
     <string name="windows_querylogging_question">Question</string>
@@ -88,4 +90,6 @@
     <string name="windows_querylogging_dnsrule_created">DNS rule has been created.</string>
     <string name="windows_querylogging_usedserver_dnsrules">Resolved with DNS Rules</string>
     <string name="windows_querylogging_usedserver_cache">Resolved with cache</string>
+
+    <string name="window_main_privatedns_info">Private DNS is active, your queries are already protected. Enable Nebulo if you wish to use dns-over-https or other useful features.</string>
 </resources>

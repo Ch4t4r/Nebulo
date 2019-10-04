@@ -98,7 +98,7 @@
     </string>
 
     <string name="dialog_join_group_title">Join the community</string>
-    <string name="dialog_join_group_message">Hey there!\n\nDid you know that this app has a Telegram group? It contains regular updates and is the perfect place for discussions and questions.\nWe are a great community of over 120 people, would you like to be a part of it?</string>
+    <string name="dialog_join_group_message">Hey there!\n\nDid you know that this app has a Telegram group? It contains regular updates and is the perfect place for discussions and questions.\nWe are a great community of over 200 people, would you like to be a part of it?</string>
     <string name="dialog_join_group_positive">Yeah!</string>
 
     <string name="dialog_help_translating_message" translatable="false">This app is translated to a few languages, but even more are missing or incomplete - including yours.

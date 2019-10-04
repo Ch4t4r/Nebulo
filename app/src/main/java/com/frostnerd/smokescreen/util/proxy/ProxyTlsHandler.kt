@@ -8,6 +8,9 @@ import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
 import com.frostnerd.vpntunnelproxy.TunnelHandle
 import org.minidns.dnsmessage.DnsMessage
+import org.minidns.record.A
+import org.minidns.record.AAAA
+import org.minidns.record.Record
 import java.net.DatagramPacket
 import java.net.Inet4Address
 import java.net.Inet6Address
@@ -36,7 +39,8 @@ import javax.net.ssl.SSLSession
 class ProxyTlsHandler(
     private val upstreamAddresses: List<TLSUpstreamAddress>,
     connectTimeout: Int,
-    val queryCountCallback: ((queryCount: Int) -> Unit)? = null
+    val queryCountCallback: ((queryCount: Int) -> Unit)? = null,
+    val mapQueryRefusedToHostBlock:Boolean
 ):AbstractTLSDnsHandle(connectTimeout) {
     override val handlesSpecificRequests: Boolean = false
 
@@ -70,7 +74,14 @@ class ProxyTlsHandler(
     }
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
-        return dnsMessage
+        return if(dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED) {
+            if(dnsMessage.questions.isNotEmpty()) {
+                val answer = if(dnsMessage.question.type == Record.TYPE.A) {
+                    A("0.0.0.0")
+                } else AAAA("::1")
+                dnsMessage.asBuilder().setResponseCode(DnsMessage.RESPONSE_CODE.NO_ERROR).addAnswer(Record(dnsMessage.question.name, dnsMessage.question.type, Record.CLASS.IN.value, 50L, answer)).build()
+            } else dnsMessage
+        } else dnsMessage
     }
 
     override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): TLSUpstreamAddress {
@@ -87,7 +98,7 @@ class ProxyTlsHandler(
     }
 
     override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean {
-        return false
+        return mapQueryRefusedToHostBlock
     }
 
     override fun verifyConnection(sslSession: SSLSession, outgoingPacket: DatagramPacket) {

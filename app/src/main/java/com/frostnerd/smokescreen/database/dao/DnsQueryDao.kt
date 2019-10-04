@@ -33,6 +33,9 @@ interface DnsQueryDao {
     @Query("SELECT * FROM DnsQuery")
     fun getAllLive(): LiveData<List<DnsQuery>>
 
+    @Query("SELECT * FROM DnsQuery WHERE name LIKE '%' ||:hostPart || '%'")
+    fun getAllWithHostLive(hostPart:String): LiveData<List<DnsQuery>>
+
     @Query("SELECT MAX(id) FROM DnsQuery")
     fun getLastInsertedId():Long
 

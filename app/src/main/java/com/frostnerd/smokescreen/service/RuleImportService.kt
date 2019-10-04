@@ -63,7 +63,7 @@ class RuleImportService : IntentService("RuleImportService") {
         const val BROADCAST_IMPORT_DONE = "com.frostnerd.nebulo.RULE_IMPORT_DONE"
     }
 
-    private val httpClient by lazy {
+    private val httpClient by lazy(LazyThreadSafetyMode.NONE) {
         OkHttpClient()
     }
 
@@ -80,7 +80,7 @@ class RuleImportService : IntentService("RuleImportService") {
         } else super.onStartCommand(intent, flags, startId)
     }
 
-    override fun onHandleIntent(intent: Intent) {
+    override fun onHandleIntent(intent: Intent?) {
         createNotification()
         startWork()
     }
@@ -178,7 +178,7 @@ class RuleImportService : IntentService("RuleImportService") {
                     try {
                         val uri = Uri.parse(it.source)
                         stream = contentResolver.openInputStream(uri)
-                        processLines(it, stream)
+                        processLines(it, stream!!)
                     } catch (ex: Exception) {
                         log("Import failed: $ex")
                         ex.printStackTrace()
@@ -366,13 +366,14 @@ class RuleImportService : IntentService("RuleImportService") {
         throw IllegalStateException()
     }
 
+    private val wildcardNormalisationRegex = Regex("(?:^\\*\\*\\.)|(\\.\\*\\*$)")
     private fun createRule(host: String, target: String, targetV6:String? = null, type: Record.TYPE, sourceId: Long): DnsRule? {
         var isWildcard = false
         val alteredHost = host.let {
             if(it.contains("*")) {
                 isWildcard = true
-                it.replace("**", "%%").replace("*", "%")
-            } else it
+                it.replace("**", "%%").replace("*", "%").replace(wildcardNormalisationRegex, "**")
+        } else it
         }
         return DnsRule(type, alteredHost, target, targetV6, sourceId, isWildcard)
     }

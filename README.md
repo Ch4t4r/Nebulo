@@ -1,8 +1,59 @@
-![Icon](app/src/main/res/mipmap-mdpi/ic_launcher.png)  
+<div align="center">
+  <a href="" rel="noopener">
+  <img width=200px height=200px src="app/src/main/res/mipmap-xxhdpi/ic_launcher.png" alt="Project logo"></a>
+</div>
 
-# Nebulo
+<div align=center>
+    <h3 align="center">Nebulo</h3>
+</div>
+<div align="center">
+
+  [![Apk size](https://img.shields.io/badge/Apk%20file%20size-4.7%20MB-blue)]() 
+  [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](/LICENSE)
+  <a href="https://weblate.frostnerd.com/engage/nebulo/?utm_source=widget">
+    <img src="https://weblate.frostnerd.com/widgets/nebulo/-/svg-badge.svg" alt="Übersetzungsstatus" />
+  </a> 
+[![pipeline status](https://git.frostnerd.com/PublicAndroidApps/smokescreen/badges/master/pipeline.svg)](https://git.frostnerd.com/PublicAndroidApps/smokescreen/commits/master)
+</div>
+
+---
+
+# About
 Nebulo is a free, open-source, non-root and small sized DNS changer utilizing dns-over-https and dns-over-tls to bring privacy and security to your phone.
 It is fast, contains no ads or tracking and offers a lot of flexibility.
+
+# Our mission
+Our mission is to provide access to dns-over-tls and dns-over-https as a tool against censorship and tracking. Many countries block controversial or government-critical websites using DNS which can possibly be circumvented using either of those protocols.
+The second topic, tracking, is nearly as important as the topic of censorship. Many ISPs use their own DNS servers as a way of tracking their users. Using DoH/DoT puts an end to this by encrypting your dns queries.
+
+# How it works
+Nebulo uses the VPN API of the Android system to create a dummy VPN which intercepts all packets for the dns servers of your device. This dummy VPN is __not__ a real VPN and does not tunnel your packets - it only handles dns packets. As only one VPN can be activate at any given time you have to decice between using Nebulo or a real VPN.
+
+## What this is based on
+Nebulo is a completely original piece of software. It doesn't use any other dependency under the hood for the dns capabilities. Check the [dependencies](https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/app/build.gradle#L100) to see what is used for everything build around DoH/DoT.
+
+## Incompatibilities, compatibilities and possible problems 
+- As mentioned no other VPN can be active when Nebulo is running.
+- Nebulo works fine with non-VPN firewalls in place (such as AFWall+), but changes in firewall profiles [could break the VPN](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues/84), requiring a restart of Nebulo.
+- Other means of ad-blocking, like modifying the `/etc/hosts` file or the `AdAway` app go hand in hand with Nebulo as well. 
+    - The AdGuard app might cause Nebulo not to receive DNS queries
+
+## Core features
+The app consists of a few core features:
+ * Dns forwarding using dns-over-https and dns-over-tls
+ * A customizable in-memory DNS cache
+    * You can configure minimum caching time and default caching times
+ * A list of servers with a lot of default entries
+    * You can add your own servers as well
+ * A DNS speed test
+ * Query logging
+ * DNS rules, where you can specify your own IP addresses for hosts
+    * Rules can be imported from files and URLs (supports 4 different formats)
+ * Highly customizable settings
+    * Disable IPv4/IPv6
+    * Allow captive portals
+    * Allow search domains on the current network
+    * ... And more
 
 # Help wanted
 Requesting your support: the app is getting closer to a proper release but it's still missing an important aspect: translations.
@@ -72,7 +123,7 @@ Copyright (C) 2019   Daniel Wolf
 
 <br>
 <br>
-Please be aware that I'm not going to tolerate exact copies of this app on the Play Store. This project took a lot of work, not only from me, but many alpha/beta testers and translators. Copying is - per the license - generally allowed, but uploading a nearly identical version to the Play Store would be impersonation which I'd go after.
+Please be aware that I'm not going to tolerate exact copies of this app on the Play Store. This project took a lot of work, not only from me, but many alpha/beta testers and translators. Copying is - per the license - generally allowed, but uploading a nearly identical version to the Play Store would be impersonation as per Google policy.
 
 # Third-party content
 This work contains third-party content, namely:
@@ -113,9 +164,3 @@ Feel free to clone this software. However, there are a few things to notice:
 </br>
 
 </br>
-
-<a href="https://weblate.frostnerd.com/engage/nebulo/?utm_source=widget">
-<img src="https://weblate.frostnerd.com/widgets/nebulo/-/svg-badge.svg" alt="Übersetzungsstatus" />
-</a> 
-
-[![pipeline status](https://git.frostnerd.com/PublicAndroidApps/smokescreen/badges/master/pipeline.svg)](https://git.frostnerd.com/PublicAndroidApps/smokescreen/commits/master)

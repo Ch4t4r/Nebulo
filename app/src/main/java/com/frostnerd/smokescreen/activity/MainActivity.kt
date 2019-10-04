@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.activity
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -23,10 +24,12 @@ import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.*
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.DeepActionState
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.menu_cardview.view.*
+import java.util.*
 import kotlin.random.Random
 
 /*
@@ -55,6 +58,17 @@ class MainActivity : NavigationDrawerActivity() {
     private var textColor: Int = 0
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
+
+    override fun attachBaseContext(newBase: Context) {
+        val language = getPreferences().language
+        if(language == "auto") {
+            super.attachBaseContext(newBase)
+        } else {
+            val country = language.split("_").getOrNull(1)
+            val locale = if(country != null) Locale(language.split("_")[0], country) else Locale(language)
+            super.attachBaseContext(LanguageContextWrapper.wrap(newBase, locale))
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.layoutStyle)
@@ -268,7 +282,7 @@ class MainActivity : NavigationDrawerActivity() {
     }
 
     override fun createStyleOptions(): StyleOptions {
-        backgroundColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.colorBackground)
+        backgroundColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.colorPrimary)
         textColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.textColor)
         inputElementColor = getPreferences().theme.getColor(this, R.attr.inputElementColor, Color.WHITE)
 
