@@ -282,7 +282,7 @@ class MainActivity : NavigationDrawerActivity() {
     }
 
     override fun createStyleOptions(): StyleOptions {
-        backgroundColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.colorBackground)
+        backgroundColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.colorPrimary)
         textColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.textColor)
         inputElementColor = getPreferences().theme.getColor(this, R.attr.inputElementColor, Color.WHITE)
 

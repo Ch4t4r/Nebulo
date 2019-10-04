@@ -141,7 +141,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#B2EBF2</item>
-        <item name="android:windowBackground">@drawable/background_default</item>
+        <item name="android:windowBackground">@drawable/dialogbackground_default</item>
 
         <item name="android:textColor">#EEEEEE</item>
         <item name="android:textColorPrimary">#EEEEEE</item>
@@ -164,9 +164,10 @@
 
     <style name="DialogTheme_Mono" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorPrimary">#607D8B</item>
+
         <item name="colorPrimaryDark">#37474F</item>
         <item name="colorAccent">#E0E0E0</item>
-        <item name="android:windowBackground">@drawable/background_mono</item>
+        <item name="android:windowBackground">@drawable/dialogbackground_mono</item>
 
         <item name="android:textColor">#E0E0E0</item>
         <item name="android:textColorPrimary">#E0E0E0</item>
@@ -191,7 +192,7 @@
         <item name="colorPrimary">#424242</item>
         <item name="colorPrimaryDark">#212121</item>
         <item name="colorAccent">#607D8B</item>
-        <item name="android:windowBackground">@drawable/background_dark</item>
+        <item name="android:windowBackground">@drawable/dialogbackground_dark</item>
 
         <item name="android:textColor">#BDBDBD</item>
         <item name="android:textColorPrimary">#BDBDBD</item>
@@ -216,7 +217,7 @@
         <item name="colorPrimary">#263238</item>
         <item name="colorPrimaryDark">#263238</item>
         <item name="colorAccent">#424242</item>
-        <item name="android:windowBackground">@drawable/background_true_black</item>
+        <item name="android:windowBackground">@drawable/dialogbackground_trueblack</item>
 
         <item name="android:textColor">#BDBDBD</item>
         <item name="android:textColorPrimary">#BDBDBD</item>
