@@ -93,4 +93,11 @@
     <string name="changelog_build_44_4">Die DNS Regeln unterstützen nun Wildcards</string>
     <string name="changelog_build_45_1">Die Einstellungen wurden in mehrere Ansichten aufgeteilt, um die Lesbarkeit zu verbessern</string>
     <string name="changelog_build_45_2">Die Anfragenprotokollierung wurde überarbeitet</string>
+    <string name="changelog_build_46_1">Das Anfrageprotokoll zeigt nun die TTL und die IP Antworten</string>
+    <string name="changelog_build_46_2">Das Anfragenprotokoll kann nun nach Hosts durchsucht werden</string>
+    <string name="changelog_build_46_3">Die Sprache kann nun in der App geändert werden</string>
+    <string name="changelog_build_46_4">Der Hauptbildschirm zeigt nun an, ob Private DNS aktiv ist (Android 9+)</string>
+    <string name="changelog_build_46_5">Neue Server hinzugefügt</string>
+    <string name="changelog_build_46_6">Designänderungen</string>
+    <string name="changelog_build_46_7">Verhalten der DNS Regeln verbessert</string>
     </resources>

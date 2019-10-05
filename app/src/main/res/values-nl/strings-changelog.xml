@@ -93,4 +93,11 @@
     <string name="changelog_build_44_4">De DNS-regels ondersteunen nu wildcards</string>
     <string name="changelog_build_45_1">Splits de instellingen in meerdere lay-outs om de leesbaarheid te vergroten</string>
     <string name="changelog_build_45_2">Het DNS aanvraag log is herzien</string>
+    <string name="changelog_build_46_1">Het DNS-verzoek logboek toont nu de TTL- en IP-antwoorden</string>
+    <string name="changelog_build_46_2">Het DNS-verzoek logboek kan nu worden doorzocht op specifieke hosts</string>
+    <string name="changelog_build_46_3">De taal kan nu vanuit de app worden gewijzigd</string>
+    <string name="changelog_build_46_4">Het hoofdscherm toont nu of Privé-DNS actief is (Android 9+)</string>
+    <string name="changelog_build_46_5">Nieuwe servers toegevoegd</string>
+    <string name="changelog_build_46_6">Ontwerp wijzigingen</string>
+    <string name="changelog_build_46_7">Verbeterde verwerking van DNS-regels</string>
     </resources>

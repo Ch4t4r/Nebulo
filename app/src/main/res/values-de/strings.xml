@@ -85,4 +85,7 @@
     <string name="windows_querylogging_dnsrule_created">DNS Regel wurde erstellt.</string>
     <string name="windows_querylogging_usedserver_dnsrules">Mit DNS Regeln aufgelöst</string>
     <string name="windows_querylogging_usedserver_cache">Mit dem Cache aufgelöst</string>
+<string name="windows_querylogging_search_hint">Suche nach einem Host in dem Anfrageprotokoll</string>
+    <string name="windows_querylogging_search">Hostsuche</string>
+    <string name="window_main_privatedns_info">Privater DNS ist aktiv, deine Anfragen sind bereits durch das System geschützt. Aktiviere Nebulo falls du dns-over-https oder andere sinnvolle Features nutzen willst.</string>
 </resources>

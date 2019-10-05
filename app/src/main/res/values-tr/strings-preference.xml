@@ -137,4 +137,7 @@
 
     <string name="title_delete_queries">Sorguları temizle</string>
     <string name="summary_delete_queries">Günlüğe kaydedilen tüm sorguları silmek için buraya tıklayın.</string>
-</resources>
+<string name="title_advanced_logging">Gelişmiş günlükleme</string>
+    <string name="summary_advanced_logging">Daha kalıcı sorunlara yardımcı olabilecek daha fazla günlük kaydı ekler.</string>
+
+    </resources>
