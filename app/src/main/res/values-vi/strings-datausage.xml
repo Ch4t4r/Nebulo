@@ -1,14 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="dialog_crashreportingusages_data_1">Thông tin người dùng</string>
-    <string name="dialog_crashreportingusages_data_2">Thông tin thiết bị</string>
-    <string name="dialog_crashreportingusages_data_3">Thông tin ứng dụng</string>
-    <string name="dialog_crashreportingusages_data_4">Thông tin hệ điều hành</string>
+<resources><string name="dialog_crashreportingusages_data_1">Dữ liệu người dùng</string>
+    <string name="dialog_crashreportingusages_data_2">Dữ liệu thiết bị</string>
+    <string name="dialog_crashreportingusages_data_3">Dữ liệu ứng dụng</string>
+    <string name="dialog_crashreportingusages_data_4">Dữ liệu thông tin hệ điều hành</string>
     <string name="dialog_crashreportingusages_data_user_1">ID ngẫu nhiên được sử dụng để theo dõi sự cố</string>
-    <string name="dialog_crashreportingusages_data_device_1">Kiến trúc (x86, arm, ...)</string>
+    <string name="dialog_crashreportingusages_data_device_1">Cấu trúc (x86, arm, ...)</string>
     <string name="dialog_crashreportingusages_data_device_4">Trạng thái sạc (có/không)</string>
     <string name="dialog_crashreportingusages_data_device_6">Độ phân giải màn hình</string>
     <string name="dialog_crashreportingusages_data_device_7">Nhà sản xuất</string>
     <string name="dialog_crashreportingusages_data_device_10">Ngôn ngữ</string>
     <string name="dialog_crashreportingusages_data_app_2">Phiên bản ứng dụng</string>
     <string name="dialog_crashreportingusages_data_app_4">Tên máy chủ DNS</string>
+    <string name="dialog_crashreportingusages_data_device_2">Hướng màn hình (chiều ngang, chiều dọc)</string>
+    <string name="dialog_crashreportingusages_data_device_3">Bộ nhớ trống/đã sử dụng (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_5">Có kết nối mạng lúc gặp sự cố (có/không)</string>
+    <string name="dialog_crashreportingusages_data_device_8">Hãng</string>
+    <string name="dialog_crashreportingusages_data_device_9">Mẫu thiết bị</string>
+    <string name="dialog_crashreportingusages_data_app_1">Thời gian khởi động ứng dụng</string>
+    <string name="dialog_crashreportingusages_data_app_3">Phiên bản cơ sở dữ liệu</string>
+    <string name="dialog_crashreportingusages_data_app_5">Máy chủ DNS chính</string>
+    <string name="dialog_crashreportingusages_data_app_6">Máy chủ DNS phụ</string>
+    <string name="dialog_crashreportingusages_data_os_1">Tên (ví dụ: Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Phiên bản (ví dụ: 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Phiên bản Kernel</string>
+    <string name="dialog_crashreportingusages_data_os_4">Máy đã root (có/không)</string>
     </resources>
