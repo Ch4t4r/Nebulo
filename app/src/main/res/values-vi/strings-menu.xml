@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="menu_main">Trạng thái ứng dụng</string>
     <string name="menu_settings">Cài đặt</string>
-    <string name="menu_querylogging">Truy vấn đã lưu</string>
+    <string name="menu_querylogging">Truy vấn đã ghi</string>
     <string name="menu_create_shortcut">Tạo lối tắt máy chủ</string>
     <string name="menu_rate">Đánh giá</string>
     <string name="menu_about">Về ứng dụng này</string>
-    <string name="menu_show_on_fdroid">Mở trong F-Droid</string>
+    <string name="menu_show_on_fdroid">Hiển thị trên F-Droid</string>
 </resources>
