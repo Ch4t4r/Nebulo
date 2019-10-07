@@ -1,2 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_crashreportingusages_data_1">Dati utente</string>
+    <string name="dialog_crashreportingusages_data_2">Dati dispositivo</string>
+    <string name="dialog_crashreportingusages_data_3">Dati app</string>
+    <string name="dialog_crashreportingusages_data_4">Dati sistema operativo</string>
+    <string name="dialog_crashreportingusages_data_user_1">ID casuale usato per tracciare i crash</string>
+    <string name="dialog_crashreportingusages_data_device_1">Architettura (x86, arm, …)</string>
+    <string name="dialog_crashreportingusages_data_device_2">Orientamento (orizzontale, verticale)</string>
+    <string name="dialog_crashreportingusages_data_device_3">Memoria libera/usata (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_4">Stato di ricarica (sì/no)</string>
+    <string name="dialog_crashreportingusages_data_device_5">Online nel momento del crash (sì/no)</string>
+    <string name="dialog_crashreportingusages_data_device_6">Risoluzione schermo</string>
+    <string name="dialog_crashreportingusages_data_device_7">Produttore</string>
+    <string name="dialog_crashreportingusages_data_device_8">Marca</string>
+    <string name="dialog_crashreportingusages_data_device_9">Modello</string>
+    <string name="dialog_crashreportingusages_data_device_10">Lingua</string>
+    <string name="dialog_crashreportingusages_data_app_1">Ora di avvio dell\'app</string>
+    <string name="dialog_crashreportingusages_data_app_2">Versione app</string>
+    <string name="dialog_crashreportingusages_data_app_3">Versione database</string>
+    <string name="dialog_crashreportingusages_data_app_4">Nome server dns</string>
+    <string name="dialog_crashreportingusages_data_app_5">Server DNS principale</string>
+    <string name="dialog_crashreportingusages_data_app_6">Server DNS secondario</string>
+    <string name="dialog_crashreportingusages_data_os_1">Nome (es. Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Versione (es. 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Versione kernel</string>
+    <string name="dialog_crashreportingusages_data_os_4">Root (sì/no)</string>
+    </resources>
