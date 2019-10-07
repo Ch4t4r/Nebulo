@@ -1,2 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preference_category_general">Cài đặt chung</string>
+
+    <string name="title_language">Ngôn ngữ</string>
+    <string name="summary_language">Thay đổi ngôn ngữ của ứng dụng</string>
+
+    <string name="title_theme">Chủ đề</string>
+    <string name="summary_theme">Đặt chủ đề cho ứng dụng</string>
+
+    <string name="title_start_on_boot">Chạy khi khởi động</string>
+    <string name="summary_start_on_boot">Khởi động ứng dụng khi điện thoại mở nguồn</string>
+
+    <string name="title_start_after_update">Khởi động sau khi cập nhật</string>
+    <string name="summary_start_after_update">Khởi động ứng dụng khi ứng dụng đã cập nhật</string>
+
+    <string name="title_excluded_apps">Loại trừ ứng dụng</string>
+    </resources>
