@@ -279,22 +279,22 @@
         <item>@string/changelog_build_43_6</item>
     </string-array>
 
-    <string name="changelog_build_46_1">The query log now shows the TTL and IP responses</string>
-    <string name="changelog_build_46_2">The query log can now be searched for specific hosts</string>
-    <string name="changelog_build_46_3">The language can now be changed from within the app</string>
-    <string name="changelog_build_46_4">The main screen now displays whether private DNS is active (Android 9+)</string>
-    <string name="changelog_build_46_5">Added news servers</string>
-    <string name="changelog_build_46_6">Design changes</string>
-    <string name="changelog_build_46_7">Improved handling of dns rules</string>
-    <string-array name="changelog_build_46">
-        <item>1.0 Beta (Build 46)</item>
-        <item>@string/changelog_build_46_1</item>
-        <item>@string/changelog_build_46_2</item>
-        <item>@string/changelog_build_46_3</item>
-        <item>@string/changelog_build_46_4</item>
-        <item>@string/changelog_build_46_5</item>
-        <item>@string/changelog_build_46_6</item>
-        <item>@string/changelog_build_46_7</item>
+    <string name="changelog_build_47_1">The query log now shows the TTL and IP responses</string>
+    <string name="changelog_build_47_2">The query log can now be searched for specific hosts</string>
+    <string name="changelog_build_47_3">The language can now be changed from within the app</string>
+    <string name="changelog_build_47_4">The main screen now displays whether private DNS is active (Android 9+)</string>
+    <string name="changelog_build_47_5">Added news servers</string>
+    <string name="changelog_build_47_6">Design changes</string>
+    <string name="changelog_build_47_7">Improved handling of dns rules</string>
+    <string-array name="changelog_build_47">
+        <item>1.0 Beta (Build 47)</item>
+        <item>@string/changelog_build_47_1</item>
+        <item>@string/changelog_build_47_2</item>
+        <item>@string/changelog_build_47_3</item>
+        <item>@string/changelog_build_47_4</item>
+        <item>@string/changelog_build_47_5</item>
+        <item>@string/changelog_build_47_6</item>
+        <item>@string/changelog_build_47_7</item>
         <item>@string/changelog_build_43_6</item>
     </string-array>
     
