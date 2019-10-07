@@ -1,2 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools"><string name="activity_label_import_queries">Importa richieste</string>
+    <string name="activity_label_import_servers">Importa server</string>
+    <string name="activity_label_speed_test">Confronto velocità server</string>
+
+    <string name="activity_label_enable_logging">Esporta registri/Attiva registro</string>
+
+    <string name="all_stop">Ferma</string>
+    <string name="all_start">Avvia</string>
+    <string name="all_pause">Pausa</string>
+    <string name="all_resume">Riprendi</string>
+    <string name="all_no">No</string>
+    <string name="all_yes">Sì</string>
+    <string name="information">Informazioni</string>
+    <string name="open_app">Apri app</string>
+    <string name="all_close">Chiudi</string>
+
+    <string name="error_invalid_url">Inserisci un URL valido.</string>
+    <string name="error_invalid_pin">Inserisci il tuo PIN.</string>
+    <string name="error_invalid_servername">Inserisci un nome.</string>
+
+    <string name="main_dnssurveillance_infotext">Ricorda che il server DNS a cui sei connesso è in grado di registrare i siti che stai visitando. Consulta le rispettive dichiarazioni sulla privacy per maggiori informazioni.</string>
+    <string name="main_dnssurveillance_privacystatement">Dichiarazione sulla privacy di %1s</string>
+
+    <string name="about_app">Questa app è open source. Il codice sorgente è accessibile su &lt;a href=https://smokescreen.app/source&gt;smokescreen.app/source&lt;/a&gt;.
+\nInoltre l\'app non contiene pubblicità e non tiene traccia né raccoglie dati su di te.
+\n
+\nVersione %1s
+\nBuild %2d
+\nVersione database %3d
+\nID segnalazione errori: %4s
+\n
+\n© Daniel Wolf 2019
+\nConcesso in licenza GPLv3.
+\n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
+    <string name="app_share_text">Ehi, ho trovato quest\'app che cripta le tue richieste DNS per darti maggiore privacy e sicurezza. Dacci un\'occhiata: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
+
+    <string name="quicksettings_stop_text">Ferma Nebulo</string>
+    <string name="quicksettings_start_text">Avvia Nebulo</string>
+
+    <string name="crashreporting_thankyou">Grazie! Se cambi idea, vai nelle impostazioni.</string>
+    <string name="crashreporting_thankyou_gotit">Capito!</string>
+
+    <string name="about_share">Condividi</string>
+    <string name="about_licenses">Licenze open source</string>
+    <string name="about_changelog">Cronologia</string>
+    <string name="about_contact_developer">Contatta lo sviluppatore</string>
+    <string name="about_telegram_group">Gruppo Telegram</string>
+    <string name="about_privacypolicy">Informativa sulla privacy</string>
+    <string name="about_credits">Crediti</string>
+    <string name="about_info">Informazioni generali</string>
+    <string name="about_help_translating">Aiuta nella traduzione</string>
+
+    <string name="window_speedtest_runtest">Avvia il test</string>
+
+    <string name="error_no_webbrowser_installed">Non hai alcuna app installata per visualizzare questo link.</string>
+
+    <string name="button_main_dnsrules">Regole DNS</string>
+
+    <string name="window_dnsrules_customhosts">Hosts personalizzati</string>
+    <plurals name="window_dnsrules_subtitle">
+	<item quantity="one">%1d regola</item>
+	<item quantity="other">%1d regole</item>
+</plurals>
+    <string name="window_dnsrules_hostalreadyexists">C\'è già una regola per questo host.</string>
+    <string name="window_dnsrules_customhosts_message">Definisci qui tutti i tuoi host personalizzati.</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regole da questa fonte: -</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regole da questa fonte: %1d (%2$d doppi non usati)</string>
+
+    <string name="windows_querylogging_search_hint">Cerca un host nel registro delle richieste</string>
+    <string name="windows_querylogging_search">Ricerca host</string>
+    <string name="windows_querylogging_time">Orario</string>
+    <string name="windows_querylogging_type">Tipo</string>
+    <string name="windows_querylogging_question">Domanda</string>
+    <string name="windows_querylogging_used_server">Server usato</string>
+    <string name="windows_querylogging_protocol">Protocollo</string>
+    <string name="windows_querylogging_latency">Latenza</string>
+    <string name="windows_querylogging_responses">Risposte</string>
+    <string name="windows_querylogging_create_dnsrule">Crea regola DNS per questo host</string>
+    <string name="windows_querylogging_dnsrule_created">La regola DNS è stata creata.</string>
+    <string name="windows_querylogging_usedserver_dnsrules">Risolto con regole DNS</string>
+    <string name="windows_querylogging_usedserver_cache">Risolto con la cache</string>
+
+    <string name="window_main_privatedns_info">Private DNS è attivo, le tue richieste sono già protette. Attiva Nebulo se vuoi usare dns-over-https o altre funzioni utili.</string>
+</resources>
