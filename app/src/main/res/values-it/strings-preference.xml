@@ -1,2 +1,150 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preference_category_general">Generali</string>
+
+    <string name="title_language">Lingua</string>
+    <string name="summary_language">Cambia la lingua dell\'app</string>
+
+    <string name="title_theme">Tema</string>
+    <string name="summary_theme">Imposta il tema dell\'app</string>
+
+    <string name="title_start_on_boot">Esegui all\'avvio</string>
+    <string name="summary_start_on_boot">Esegui l\'app quando viene acceso il telefono</string>
+
+    <string name="title_start_after_update">Esegui dopo l\'aggiornamento</string>
+    <string name="summary_start_after_update">Esegui l\'app dopo essere stata aggiornata</string>
+
+    <string name="title_excluded_apps">App escluse</string>
+    <string name="summary_excluded_apps">Escludi qui le app, ad esempio se non riescono più a connettersi ad internet - le app selezionate non usaranno più dns-over-https.</string>
+
+
+
+    <string name="preference_category_notification">Notifiche</string>
+
+    <string name="title_show_notification_on_lockscreen">Mostra a schermo bloccato</string>
+    <string name="summary_show_notification_on_lockscreen">Imposta se mostrare la notifica a schermo bloccato</string>
+
+    <string name="title_notification_hide_icon">Nascondi l\'icona</string>
+    <string name="summary_notification_hide_icon">Nascondi l\'icona dalla barra di navigazione in alto</string>
+
+    <string name="title_notification_allow_stop">Permetti di fermare</string>
+    <string name="summary_notification_allow_stop">Permetti di fermare l\'app dalla notifica</string>
+
+    <string name="title_notification_allow_pause">Permetti la pausa</string>
+    <string name="summary_notification_allow_pause">Permetti di mettere in pausa l\'app dalla notifica</string>
+
+
+    <string name="preference_category_pin">Protezione con PIN</string>
+
+    <string name="title_preference_enable_pin">Pin</string>
+    <string name="summary_preference_enable_pin">Chiedi un PIN quando apri o fermi l\'app</string>
+
+    <string name="title_preference_pin_use_fingerprint">Permetti l\'impronta</string>
+    <string name="summary_preference_pin_use_fingerprint">Permetti l\'uso della mia impronta al posto del pin.</string>
+
+    <string name="title_preference_change_pin">Cambia pin</string>
+    <string name="summary_preference_change_pin">Cambia il pin. Sono ammessi solo numeri.
+\nPin attuale: %1s</string>
+
+    <string name="preference_category_cache">Controllo della cache</string>
+
+    <string name="title_dnscache_enabled">Usa la cache DNS</string>
+    <string name="summary_dnscache_enabled">Attiva la cache DNS dell\'app. La cache memorizza le vecchie richieste per rispondere alle domande future più velocemente</string>
+
+    <string name="title_dnscache_keepacrosslaunches">Mantieni la cache DNS</string>
+    <string name="summary_dnscache_keepacrosslaunches">Mantieni la cache DNS tra avvii diversi dell\'app</string>
+
+    <string name="title_dnscache_maxsize">Dimensione cache massima</string>
+    <string name="summary_dnscache_maxsize">Imposta il numero massimo di elementi che la cache può tenere</string>
+
+    <string name="title_dnscache_usedefaulttimes">Tempo di cache predefinito</string>
+    <string name="summary_dnscache_usedefaulttimes">Mantieni le richieste in cache per tutto il tempo in cui il server DNS comunica usando il TTL</string>
+
+    <string name="title_dnscache_minimum_cache_time">Tempo di cache minimo</string>
+    <string name="summary_dnscache_minimum_cache_time">Il minimo di tempo in cui gli elementi devono restare in cache, indipendentemente da un tempo di cache predefinito più breve. Tempi di cache lunghi possono causare la perdita di sincronizzazione dei dati in cache con i dati effettivi.
+\nAttuale: %1d secondi.</string>
+
+    <string name="title_dnscache_customcachetime">Tempo di cache personalizzato (secondi)</string>
+    <string name="summary_dnscache_customcachetime">Cambia la durata della cache di tutte le richieste, indipendentemente da un tempo di cache predefinito più breve. Tempi di cache lunghi possono causare la perdita di sincronizzazione dei dati in cache con i dati effettivi.
+\nAttuale: %1d secondi.</string>
+
+    <string name="title_dnscache_nxdomaincachetime">Tempo di cache per NXDomain (secondi)</string>
+    <string name="summary_dnscache_nxdomaincachetime">Cambia il tempo in cui le richieste di NXDOMAIN restano in cache. Questo migliora le prestazioni per i domini inesistenti (es. se sono bloccati)
+\nAttuale: %1d secondi.</string>
+
+
+    <string name="preference_category_logging">Registro</string>
+
+    <string name="title_enable_logging">Attiva il registro</string>
+    <string name="summary_enable_logging">Attiva la registrazione di informazioni di debug (contiene dati statistici). Queste informazioni non vengono inviate automaticamente.</string>
+
+    <string name="title_advanced_logging">Registro avanzato</string>
+    <string name="summary_advanced_logging">Aggiunge più informazioni, che potrebbero aiutare con problemi più persistenti.</string>
+
+    <string name="title_send_logs">Invia registri</string>
+    <string name="summary_send_logs">Clicca qui per inviare i registri allo sviluppatore.</string>
+
+    <string name="title_delete_all_logs">Elimina tutti i registri</string>
+    <string name="summary_delete_all_logs">Elimina tutti i registri salvati nel dispositivo.</string>
+
+    <string name="title_enable_sentry">Attiva segnalazione errori</string>
+    <string name="summary_enable_sentry">Invia automaticamente segnalazioni di errore allo sviluppatore. I dati vengono trasmessi solo sui crash.</string>
+
+
+    <string name="preference_category_ip">Impostazioni IP</string>
+
+    <string name="title_enable_ipv6">Attiva IPv6</string>
+    <string name="summary_enable_ipv6">Usa IPv6, se il dispositivo ha un indirizzo IPv6 assegnato</string>
+
+    <string name="title_enable_ipv4">Attiva IPv4</string>
+    <string name="summary_enable_ipv4">Usa IPv4, se il dispositivo ha un indirizzo IPv4 assegnato</string>
+
+    <string name="title_force_ipv6">Obbliga IPv6</string>
+    <string name="summary_force_ipv6">Obbliga l\'app ad accettare richieste IPv6, anche quando il dispositivo non usa IPv6.</string>
+
+    <string name="title_force_ipv4">Obbliga IPv4</string>
+    <string name="summary_force_ipv4">Obbliga l\'app ad accettare richieste IPv4, anche quando il dispositivo non usa IPv4.</string>
+
+    <string name="title_allow_ipv4_traffic">Permetti traffico IPv4</string>
+    <string name="summary_allow_ipv4_traffic">Permetti l\'uso di traffico IPv4, anche se IPv4 è disattivato.
+\nSe disattivata, non è permessa alcuna connessione IPv4 mentre l\'app è attiva.</string>
+
+    <string name="title_allow_ipv6_traffic">Permetti traffico IPv6</string>
+    <string name="summary_allow_ipv6_traffic">Permetti l\'uso di traffico IPv6, anche se IPv6 è disattivato.
+\nSe disattivata, non è permessa alcuna connessione IPv6 mentre l\'app è attiva.</string>
+
+
+    <string name="preference_category_network">Rete</string>
+
+    <string name="title_disallow_other_vpns">Proibisci altre VPN</string>
+    <string name="summary_disallow_other_vpns">Non permettere l\'avvio di altre VPN se l\'app non viene esplicitamente fermata</string>
+
+    <string name="title_catch_other_dns_servers">Intercetta altro traffico DNS</string>
+    <string name="summary_catch_other_dns_servers">Intercetta il traffico di server DNS noti e trasmettilo usando Nebulo</string>
+
+    <string name="title_map_query_refused">Interpreta le richieste rifiutate come host proibiti</string>
+    <string name="summary_map_query_refused">Alcuni server DNS potrebbero rifiutare di rispondere ad una richiesta se l\'host non è permesso o è bloccato. Questa impostazione blocca l\'host invece di rifiutare la richiesta, altrimenti il sistema potrebbe confondersi.</string>
+
+    <string name="title_bypass_searchdomains">Escludi \"search domains\"</string>
+    <string name="summary_bypass_searchdomains">Invia \"search domains\" (es. MioPC.local o MioPc.fritz.box) al server Dns della tua rete al posto del server DoH.
+\nAltamente consigliato. Quelle richieste non vanno al di fuori della tua rete.</string>
+
+    <string name="title_pause_on_captiveportal">Pausa sui \"captive portal\"</string>
+    <string name="summary_pause_on_captiveportal">Non usare DoH se viene rilevato un \"captive portal\". Verrà riattivato subito dopo l\'accesso.
+\nDisabilitarlo potrebbe impedirti di aprire il sito del \"captive portal\" per accedere.</string>
+
+    <string name="title_show_noconnection_notification">Notifica per nessuna connessione</string>
+    <string name="summary_show_noconnection_notification">Mostra una notifica quando l\'app non trova una connessione</string>
+
+
+    <string name="preference_category_querylogging">Registro richieste</string>
+
+    <string name="title_log_queries">Registro richieste</string>
+    <string name="summary_log_queries">Registra tutte le richieste e le loro risposte</string>
+
+    <string name="title_export_queries">Esporta richieste</string>
+    <string name="summary_export_queries">Esporta le richieste come CSV (%1d richieste)</string>
+
+    <string name="title_delete_queries">Svuota richieste</string>
+    <string name="summary_delete_queries">Clicca qui per eliminare tutte le richieste registrate.</string>
+
+    </resources>
