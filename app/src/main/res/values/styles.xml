@@ -76,10 +76,10 @@
         <item name="navDrawableColor">#E0E0E0</item>
 
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-        <item name="android:textColor">#E0E0E0</item>
-        <item name="android:textColorSecondary">#BDBDBD</item>
-        <item name="android:textColorHighlight">#B0BEC5</item>
-        <item name="android:editTextColor">#E0E0E0</item>
+        <item name="android:textColor">#F5F5F5</item>
+        <item name="android:textColorSecondary">#EEEEEE</item>
+        <item name="android:textColorHighlight">#CFD8DC</item>
+        <item name="android:editTextColor">#F5F5F5</item>
         <item name="inputElementColor">#90A4AE</item>
         <item name="foregroundElementColor">#FFF</item>
 

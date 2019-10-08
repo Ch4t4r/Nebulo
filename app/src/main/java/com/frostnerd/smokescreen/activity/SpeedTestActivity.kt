@@ -240,7 +240,7 @@ class SpeedTestActivity : BaseActivity() {
                 when {
                     speedTest.error -> {
                         latency.text = "- ms"
-                        latency.setTextColor(Color.RED)
+                        latency.setTextColor(Color.parseColor("#80CBC4"))
                         progress.visibility = View.INVISIBLE
                         latency.visibility = View.VISIBLE
                     }
