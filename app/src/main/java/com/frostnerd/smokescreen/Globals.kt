@@ -12,6 +12,12 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
+import androidx.annotation.ColorInt
+import okhttp3.internal.toHexString
+
+
+
+
 
 
 /*
@@ -73,6 +79,17 @@ fun isPackageInstalled(context: Context, packageName: String): Boolean {
     val list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
     return list.size > 0
 }
+
+fun colorToHexString(@ColorInt color:Int):String {
+    return String.format("#%06X", 0xFFFFFF and color)
+}
+
+@ColorInt
+fun opaqueColor(@ColorInt color: Int, opactiy: Int): Int {
+    val alpha = opactiy - opactiy % 5
+    return Color.parseColor("#" + alpha.toHexString() + colorToHexString(color).replace("#", ""))
+}
+
 
 interface BackpressFragment {
     fun onBackPressed():Boolean
