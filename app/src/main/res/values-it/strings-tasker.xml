@@ -1,2 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="tasker_start_if_running">Avvia anche se già in esecuzione (potrebbe sovrascrivere la configurazione)</string>
+    <string name="tasker_use_default_configuration">Usa i server selezionati nel menu</string>
+    <string name="tasker_action">Azione</string>
+    <string name="tasker_start_app_custom_url">Avvia l\'app con %1s (Modalità: %2s)</string>
+    <string name="tasker_start_app_custom_urls">Avvia l\'app con %1s e %2s (Modalità: %3s)</string>
+    </resources>

@@ -1,2 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="menu_main">Stato dell\'app</string>
+    <string name="menu_settings">Impostazioni</string>
+    <string name="menu_querylogging">Richieste registrate</string>
+    <string name="menu_create_shortcut">Crea una scorciatoia server</string>
+    <string name="menu_rate">Valuta</string>
+    <string name="menu_about">Riguardo questa app</string>
+    <string name="menu_show_on_fdroid">Vedi su F-Droid</string>
+</resources>

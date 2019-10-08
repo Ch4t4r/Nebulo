@@ -1,4 +1,4 @@
 {
-  "main": "",
-  "shortText": ""
+    "main": "Quando si naviga su un sito web conosciuto con il suo nome, diciamo esempio.it, il tuo dispositivo chiede a specifici server - server DNS - come indirizzare il sito web. Il DNS è un vecchio protocollo che, a parte piccole modifiche, non è stato toccato dalla sua creazione nel 1987. Naturalmente Internet è cambiato molto in questo periodo, rendendo il protocollo obsoleto in alcuni dei suoi aspetti fondamentali.\n\nQuesta app affronta uno dei problemi più grandi del DNS: crittografia.\nMentre quasi tutto il traffico su Internet è ora cifrato, le richieste DNS (cioè le domande per l'indirizzo di un nome) e la risposta non lo sono. Ciò permette agli aggressori di intercettare, leggere e modificare le tue richieste.\n\nNebulo è un modificatore di DNS che implementa DNS-over-HTTPs e DNS-over-TLS per inviare in sicurezza le richieste DNS al server di destinazione. In questo modo solo tu e il server DNS siete in grado di leggere le richieste che stai inviando.\n\nCaratteristiche principali:\n - Configura l'app una volta e poi dimenticatene. Dopo la configurazione iniziale funziona in modo completamente autonomo\n - Nessuna pubblicità e tracciamento di dati\n - Possono essere usati server personalizzati\n - Basso consumo della batteria",
+    "shortText": "Un'alternativa sicura a vecchi standard."
 }

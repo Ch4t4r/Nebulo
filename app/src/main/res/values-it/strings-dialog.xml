@@ -1,2 +1,182 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools"><string name="dialog_serverconfiguration_title">Configurazione server</string>
+    <string name="dialog_serverconfiguration_addserver">Aggiungi un server</string>
+
+    <string name="dialog_newserver_title_https">Aggiungi un server (DoH)</string>
+    <string name="dialog_newserver_title_tls">Aggiungi un server (DoT)</string>
+    <string name="dialog_newserver_name">Nome server</string>
+    <string name="dialog_newserver_name_hint">Esempio</string>
+    <string name="dialog_newserver_primaryserver">Server principale</string>
+    <string name="dialog_newserver_secondaryserver">Server secondario (facoltativo)</string>
+    <string name="dialog_deleteconfig_title">Eliminare la configurazione\?</string>
+    <string name="dialog_deleteconfig_text">Vuoi eliminare la configurazione %1$s\?</string>
+
+    <string name="dialog_appchoosal_showsystemapps">Mostra app di sistema</string>
+    <string name="dialog_appchoosal_whitelist">Usa DoH/DoT solo in app selezionate</string>
+    
+    <plurals name="dialog_excludedapps_infotext">
+	<item quantity="one">%1d app esclusa in modo predefinito e non può essere deselezionata</item>
+	<item quantity="other">%1d app escluse in modo predefinito e non possono essere deselezionate</item>
+</plurals>
+
+    <plurals name="dialog_serverimport_title">
+	<item quantity="one">Importazione di %1d server</item>
+	<item quantity="other">Importazione di %1d server</item>
+</plurals>
+    <string name="dialog_serverimport_done">Fatto</string>
+    <string name="dialog_serverimport_priority">Priorità %1d</string>
+    <string name="dialog_serverimport_experimental">Sperimentale</string>
+    <string name="dialog_serverimport_servertype_doh">Tipo: Dns-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Tipo: Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Seleziona i server che vuoi importare.
+\n
+\nI server già importati saranno doppi se li selezioni.</string>
+
+    <string name="dialog_serverimportfailed_title">Importazione fallita</string>
+    <string name="dialog_serverimportfailed_text">Impossibile importare il/i server.</string>
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Impossibile importare i server.
+\n(%1s)</string>
+
+    <string name="dialog_logexport_text">Come vuoi condividere i registri\?</string>
+    <string name="dialog_logexport_general">Esportazione generale</string>
+    <string name="dialog_logexport_email">Email</string>
+
+    <string name="dialog_deletelogs_text">Sei sicuro di volere eliminare tutti i registri\?</string>
+
+    <string name="dialog_error_title">Segnalazione errore</string>
+    <string name="dialog_error_text">Sembra che l\'app sia crashata. Vuoi inviare i registri di errore allo sviluppatore\?</string>
+
+    <string name="dialog_batteryoptimization_title">Ottimizzazione batteria</string>
+    <string name="dialog_batteryoptimization_message">Su alcuni dispositivi l\'app non verrà avvisata che il dispositivo ha terminato l\'avvio a meno che non siano state disattivate le ottimizzazioni della batteria.
+\nAttualmente l\'app viene ottimizzata per la batteria, vuoi disattivarlo\?
+\n
+\nVerifica se funziona con l\'ottimizzazione attivata prima di disattivarla.</string>
+    <string name="dialog_batteryoptimization_whitelist">Disattiva</string>
+    <string name="dialog_batteryoptimization_ignore">Ignora</string>
+
+    <string name="dialog_rate_confirmation">Vuoi aprire il Play Store per valutare l\'app\?</string>
+
+    <string name="dialog_changelog_title">Cronologia</string>
+    <string name="dialog_changelog_infotext">L\'app è stata aggiornata dall\'ultima volta che l\'hai aperta. Nella lista seguente puoi vedere la cronologia. Seleziona la casella sotto e non vedrai più questo messaggio.</string>
+    <string name="dialog_changelog_dont_show_again">Non mostrare più</string>
+
+    <string name="dialog_about_licenses">Licenze</string>
+
+    <string name="dialog_query_export_title">Esportazione richieste…</string>
+    <string name="dialog_query_export_message">Attendi finchè le richieste vengono esportate</string>
+
+    <string name="dialog_pin_message">Inserisci il tuo PIN.</string>
+    <string name="dialog_pin_hint">PIN</string>
+
+    <string name="dialog_enable_logging">Vuoi attivare il registro\? I registri contengono statistiche, informazioni di debug ed azioni nell\'app. I registri generati non vegono condivisi a meno che non lo fai spontaneamente.</string>
+
+    <string name="dialog_crashreporting_title">Segnalazione automatica errori</string>
+    <string name="dialog_crashreportingusages_title">Dati trasmessi</string>
+    <string name="dialog_crashreportingusages_message">Clicca uno dei gruppi per vedere quali dati vengono trasmessi nei crash.</string>
+    <string name="dialog_crashreporting_positive">Attiva segnalazione errori</string>
+    <string name="dialog_crashreporting_negative">No, grazie.</string>
+    <string name="dialog_crashreporting_neutral">Vedi i dati</string>
+    <string name="dialog_crashreporting_message">Grazie di essere un tester dell\'app!
+\n
+\nQuesta app usa software di terze parti open source e autogestiti per rendere più facile tenere traccia dei crash dell\'app non appena si verificano. Se e solo se attivato, l\'applicazione trasmetterà i registri quando si verificano crash. Questi registri contengono dati aggiuntivi sull\'app e sul dispositivo. Ciò include un ID che viene usato per tenere traccia dei crash provenienti dallo stesso utente, ma non può essere usato per tenere traccia di qualsiasi altra cosa. L\'attivazione della segnalazione dei crash è opzionale, ma mi sarebbe di grande aiuto.
+\nI registri vengono inviati in modo sicuro tramite HTTPS.
+\n
+\nClicca \"Vedi i dati\" sotto per leggere quale tipo di dati viene trasmesso e per un link all\'informativa sulla privacy.</string>
+    <string name="dialog_crashreporting_message_notester">Grazie di usare Nebulo!
+\n
+\nQuesta app usa software di terze parti open source e autogestiti per rendere più facile tenere traccia dei crash dell\'app non appena si verificano. Se e solo se attivato, l\'applicazione trasmetterà i registri quando si verificano crash. Questi registri contengono dati aggiuntivi sull\'app e sul dispositivo. Ciò include un ID che viene usato per tenere traccia dei crash provenienti dallo stesso utente, ma non può essere usato per tenere traccia di qualsiasi altra cosa. L\'attivazione della segnalazione dei crash è opzionale, ma mi sarebbe di grande aiuto.
+\nI registri vengono inviati in modo sicuro tramite HTTPS.
+\n
+\nClicca \"Vedi i dati\" sotto per leggere quale tipo di dati viene trasmesso e per un link all\'informativa sulla privacy.</string>
+
+    <string name="dialog_clearqueries_title">Svuota tutte le richieste</string>
+    <string name="dialog_clearqueries_message">Sei sicuro di volere eliminare le richieste registrate\? Non può essere annullato.</string>
+
+    <string name="dialog_credits_title">Crediti</string>
+    <string name="dialog_credits_message" formatted="true">- Icona app di &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
+\n - Traduzione turca di Kemal Oktay Aktoğan
+\n - Traduzione russa di bruleto
+\n - Traduzione danese di Bas Koedijk
+\n - Traduzione portoghese di Rafael W. Bohnenberger
+\n - Traduzione indonesiana di Gloeyisk
+\n - Traduzione italiana di Random 
+\n 
+\n Vuoi vedere qui il tuo nome\? Sentiti libero di &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuire&lt;/a&gt;.</string>
+
+    <string name="dialog_join_group_title">Unisciti alla comunità</string>
+    <string name="dialog_join_group_message">Ehilà!
+\n
+\nSapevi che quest\'app ha un gruppo Telegram\? Contiene aggiornamenti regolari ed è il luogo perfetto per discussioni e domande.
+\nSiamo una grande comunità di oltre 200 persone, vorresti farne parte\?</string>
+    <string name="dialog_join_group_positive">Certo!</string>
+
+    <string name="dialog_speedresult_title">Risultati test velocità</string>
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d server testati
+\n %2d server DoT raggiungibili, %3d non raggiungibili
+\n %4d server DoH raggiungibili, %5d non raggiungibili
+\n Tempo di risposta medio: %6d ms.
+\n
+\n Server più veloce: %7s
+\n Server più lento: %8s</string>
+
+    <string name="dialog_speedtest_useserver_title">Seleziona server</string>
+    <string name="dialog_speedtest_useserver_message">Vuoi usare il server %1s\? Si è classificato %2d su %3d con un tempo di risposta di %4d ms.</string>
+
+    <string name="dialog_deletehostsource_title">Eliminare %1s\?</string>
+    <string name="dialog_deletehostsource_message">Sei sicuro di volere eliminare la fonte host %1s\? Non può essere annullato, gli host da questa fonte verranno rimossi.</string>
+
+    <string name="dialog_clearuserrules_title">Eliminare tutte le regole DNS\?</string>
+    <string name="dialog_clearuserrules_message">Sei sicuro di volere eliminare tutte le regole DNS\? Non può essere annullato.</string>
+
+    <string name="dialog_newhostsource_title">Nuova fonte regole</string>
+    <string name="dialog_newhostsource_edit_title">Nuova fonte regole</string>
+    <string name="dialog_newhostsource_name">Nome</string>
+    <string name="dialog_newhostsource_wildcard_info">Puoi usare liste di host che fanno uso di domini jolly.</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newhostsource_choose_file">Scegli file</string>
+    <string name="dialog_newhostsource_use_as_whitelist">Usa come lista bianca</string>
+    <string name="dialog_newhostsource_error_name_empty">Inserisci un nome.</string>
+
+    <string name="dialog_newdnsrule_title">Nuova regola DNS</string>
+    <string name="dialog_newdnsrule_edit">Modifica regola DNS</string>
+    <string name="dialog_newdnsrule_whitelist">Lista bianca</string>
+    <string name="dialog_newdnsrule_specify_address">Indirizzo</string>
+    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">Indirizzo IPv4</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">Indirizzo IPv6</string>
+    <string name="dialog_newdnsrule_host_invalid">Inserisci un host valido</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Inserisci un indirizzo IPv4 valido</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Inserisci un indirizzo IPv6 valido</string>
+    <string name="dialog_newdnsrule_wildcard_info">L\'host supporta i caratteri jolly. Usa un asterisco (*) per qualsiasi quantità di caratteri, numeri e caratteri speciali consentiti ad eccezione del punto (.). Usa due asterischi (**) per includere il punto (.).</string>
+
+    <string name="dialog_exportdnsrules_title">Esporta regole DNS</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Esporta regole DNS host personalizzate</string>
+    <string name="dialog_exportdnsrules_export_sources">Esporta regole DNS da fonti host attivate</string>
+
+    <string name="dialog_editdelete_title">Cosa vuoi fare\?</string>
+    <string name="dialog_editdelete_edit">Modifica</string>
+    <string name="dialog_editdelete_delete">Elimina</string>
+
+    <string name="dialog_servicekilled_message">L\'app ha rilevato che non si è fermata correttamente l\'ultima volta che è stata attiva. Ciò suggerisce decisamente che il sistema abbia scelto di forzare l\'arresto dell\'app senza che essa potesse riavviarsi da sola.
+\n
+\nNella maggior parte dei dispositivi sono disponibili alcune opzioni per impedire o almeno ritardare l\'arresto dell\'app.
+\nPuoi, ad esempio, disattivare le ottimizzazioni della batteria per l\'app nelle impostazioni di sistema o evitare di togliere l\'app dall\'elenco dei recenti.
+\n
+\nSe scegli di ignorare, non vedrai più questo messaggio. Puoi leggere altro e ricevere suggerimenti per risolvere il problema con il pulsante sottostante (apre un sito web esterno nel tuo browser).</string>
+    <string name="dialog_servicekilled_more_info">Maggiori informazioni</string>
+
+    <string name="dialog_overlaydetected_title">Overlay di sistema rilevato</string>
+    <string name="dialog_overlaydetected_message">Sembra esserci un overlay a livello di sistema (es. una chat, colore o filtro notturno) attivo. Molti dispositivi non ti permettono di attivare una VPN in questo caso.
+\n
+\nSe non puoi cliccare OK nella prossima finestra, disattiva l\'overlay.</string>
+
+    <string name="dialog_hostsourcerefresh_title">Aggiorna fonti host</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Aggiorna automaticamente le fonti host</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">Aggiorna solo su WIFI</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">Aggiorna ogni</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">Aggiorna ora</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Minuti</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">Ore</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">Giorni</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">Settimane</string>
+    </resources>
