@@ -24,7 +24,7 @@
     <string name="main_dnssurveillance_infotext">Be aware that the DNS server you are connected to is able to record which sites you are visiting. Check the respective privacy statements for more information.</string>
     <string name="main_dnssurveillance_privacystatement">Privacy statement of %1s</string>
 
-    <string name="about_app">This app is open source. The source code can be accessed at <![CDATA[<a href="https://smokescreen.app/source">smokescreen.app/source</a>]]>.\nFurthermore the app doesn\'t contain ads and does not track or collect any data about you.\n\nVersion %1s\nBuild %2d\nDatabase version %3d\nCrashreport ID: %4s\n\n&#169; Daniel Wolf 2019\nLicensed under GPLv3.\n<![CDATA[<a href="mailto:support@frostnerd.com">support@frostnerd.com</a>]]></string>
+    <string name="about_app">This app is open source. The source code can be accessed at <![CDATA[<a href="https://nebulo.app/source">nebulo.app/source</a>]]>.\nFurthermore the app doesn\'t contain ads and does not track or collect any data about you.\n\nVersion %1s\nBuild %2d\nDatabase version %3d\nCrashreport ID: %4s\n\n&#169; Daniel Wolf 2019\nLicensed under GPLv3.\n<![CDATA[<a href="mailto:support@frostnerd.com">support@frostnerd.com</a>]]></string>
     <string name="support_contact_mail" translatable="false">support@frostnerd.com</string>
 
     <string name="app_share_text">Hey, I found this app which encrypts your DNS queries to give you more privacy and security. Check it out here: https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen</string>

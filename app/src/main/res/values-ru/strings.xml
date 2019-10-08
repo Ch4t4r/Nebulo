@@ -19,7 +19,7 @@
     <string name="main_dnssurveillance_infotext">Имейте в виду, используемый DNS-сервер может вести логирование посещаемых вами доменов, а также запрашиваемых вашей системой. Сервер также может собирать метаданные. Проверьте соответствующее заявление о конфиденциальности.</string>
     <string name="main_dnssurveillance_privacystatement">Заявление о конфиденциальности %1s</string>
 
-    <string name="about_app">Это приложение с открытым исходным кодом. Исходный код опубликован на сайте &lt;a href=https://smokescreen.app/source&gt;smokescreen.app/source&lt;/a&gt;. 
+    <string name="about_app">Это приложение с открытым исходным кодом. Исходный код опубликован на сайте &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
 \n 
 \nКроме того, приложение не содержит рекламу, не отслеживает и не собирает данные. 
 \n 

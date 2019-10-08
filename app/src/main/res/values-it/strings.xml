@@ -22,7 +22,7 @@
     <string name="main_dnssurveillance_infotext">Ricorda che il server DNS a cui sei connesso è in grado di registrare i siti che stai visitando. Consulta le rispettive dichiarazioni sulla privacy per maggiori informazioni.</string>
     <string name="main_dnssurveillance_privacystatement">Dichiarazione sulla privacy di %1s</string>
 
-    <string name="about_app">Questa app è open source. Il codice sorgente è accessibile su &lt;a href=https://smokescreen.app/source&gt;smokescreen.app/source&lt;/a&gt;.
+    <string name="about_app">Questa app è open source. Il codice sorgente è accessibile su &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
 \nInoltre l\'app non contiene pubblicità e non tiene traccia né raccoglie dati su di te.
 \n
 \nVersione %1s

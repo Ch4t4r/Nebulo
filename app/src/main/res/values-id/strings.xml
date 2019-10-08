@@ -17,7 +17,7 @@
     <string name="main_dnssurveillance_infotext">Perlu diketahui bahwa server DNS yang terhubung dengan Anda dapat merekam situs mana yang Anda kunjungi. Periksa pernyataan privasi untuk informasi lebih lanjut.</string>
     <string name="main_dnssurveillance_privacystatement">Pernyataan privasi %1s</string>
 
-    <string name="about_app">Apl ini adalah open source. Kode sumber dapat diakses di &lt;a href=https://smokescreen.app/source&gt; smokescreen.app/source &lt;/a&gt;.
+    <string name="about_app">Apl ini adalah open source. Kode sumber dapat diakses di &lt;a href=https://nebulo.app/source&gt; nebulo.app/source &lt;/a&gt;.
 \nSelain itu apl ini tidak mengandung iklan dan tidak melacak atau mengumpulkan data tentang Anda.
 \n
 \nVersi %1s

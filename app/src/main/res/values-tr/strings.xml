@@ -19,7 +19,7 @@
     <string name="main_dnssurveillance_infotext">Bağlandığınız DNS sunucusunun hangi siteleri ziyaret ettiğinizi kaydedebildiğini unutmayın. Daha fazla bilgi için ilgili gizlilik bildirimlerini kontrol edin.</string>
     <string name="main_dnssurveillance_privacystatement">%1s’in gizlilik beyanı</string>
 
-    <string name="about_app">Bu uygulama açık kaynak. Kaynak koduna &lt;a href=https://smokescreen.app/source&gt;smokescreen.app/source&lt;/a&gt; adresinden erişilebilir.
+    <string name="about_app">Bu uygulama açık kaynak. Kaynak koduna &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt; adresinden erişilebilir.
 \nAyrıca, uygulama reklam içermez ve sizinle ilgili hiçbir veri izlemez veya toplamaz.
 \n
 \nSürüm: %1s

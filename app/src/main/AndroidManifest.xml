@@ -134,6 +134,18 @@
                 <data android:host="www.smokescreen.app"/>
                 <data android:host="smokescreen.app"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="https"/>
+                <data android:scheme="http"/>
+                <data android:pathPattern="/servers/.*"/>
+                <data android:host="www.nebulo.app"/>
+                <data android:host="nebulo.app"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name=".activity.QueryImportActivity"
