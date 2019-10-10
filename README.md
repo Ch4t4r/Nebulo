@@ -132,8 +132,6 @@ This work contains third-party content, namely:
 - [Material Design Icons](https://material.io/tools/icons/)
    - License: [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
    - The notification and launcher icons are remixes of the cloud icon
-- [ANR-WatchDog](https://github.com/SalomonBrys/ANR-WatchDog)
-   - License: [MIT](https://opensource.org/licenses/MIT)
 - [Font Awesome icons](https://fontawesome.com/)
    - License: Font Awesome Pro License, held by Daniel Wolf
 - [Weblate](https://weblate.org) for managing translations

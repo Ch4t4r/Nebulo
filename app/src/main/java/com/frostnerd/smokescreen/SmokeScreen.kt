@@ -12,7 +12,6 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.util.DatasavingSentryEventHelper
 import com.frostnerd.smokescreen.util.Notifications
-import com.github.anrwatchdog.ANRWatchDog
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
 import io.sentry.event.User
@@ -88,9 +87,6 @@ class SmokeScreen : Application() {
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
         log("Application created.")
-        ANRWatchDog().setANRListener {
-            log(RuntimeException(it))
-        }
         LeakSentry.refWatcher.watch(this)
     }
 
