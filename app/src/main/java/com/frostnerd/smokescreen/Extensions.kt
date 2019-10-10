@@ -165,11 +165,6 @@ fun Fragment.getPreferences(): AppSettingsSharedPreferences {
     return AppSettings.fromSharedPreferences(context!!)
 }
 
-fun Context.getSentryIfEnabled(): SentryClient? {
-    return if(getPreferences().crashReportingEnabled) Sentry.getStoredClient()
-    else null
-}
-
 fun Context.isAppBatteryOptimized(): Boolean {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false
     val pwrm = getSystemService(Context.POWER_SERVICE) as PowerManager

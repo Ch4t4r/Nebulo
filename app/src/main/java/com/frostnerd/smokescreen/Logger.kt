@@ -44,7 +44,7 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                 e.stackTrace.contains(elem)
             }
         } || publishedExceptions.put(e, e.stackTrace.toHashSet()) != null) return
-    else if (getPreferences().crashReportingEnabled) {
+    else {
         if (e is OutOfMemoryError) {
             EventBuilder().withMessage(e.message)
                 .withLevel(Event.Level.ERROR)
@@ -52,7 +52,8 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                 .withSentryInterface(ExceptionInterface(e)).build().apply {
                     Sentry.capture(this)
                 }
-        } else if (extras != null && extras.isNotEmpty()) {
+        } else if (getPreferences().crashReportingEnabled && extras != null && extras.isNotEmpty()) {
+            // Extra data is only passed when not in data-saving mode.
             EventBuilder().withMessage(e.message)
                 .withLevel(Event.Level.ERROR)
                 .apply {

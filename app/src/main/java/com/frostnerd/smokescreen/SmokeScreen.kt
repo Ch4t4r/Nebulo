@@ -10,6 +10,7 @@ import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.activity.LoggingDialogActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
+import com.frostnerd.smokescreen.util.DatasavingSentryEventHelper
 import com.frostnerd.smokescreen.util.Notifications
 import com.github.anrwatchdog.ANRWatchDog
 import io.sentry.Sentry
@@ -45,25 +46,33 @@ class SmokeScreen : Application() {
     private var defaultUncaughtExceptionHandler: Thread.UncaughtExceptionHandler? = null
     val customUncaughtExceptionHandler = EnrichableUncaughtExceptionHandler()
     private fun showCrashNotification() {
-        val notification = NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
-            .setSmallIcon(R.drawable.ic_cloud_warn)
-            .setOngoing(false)
-            .setAutoCancel(true)
-            .setContentIntent(
-                PendingIntent.getActivity(
-                    this, 1,
-                    Intent(this, PinActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
+        val notification =
+            NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
+                .setSmallIcon(R.drawable.ic_cloud_warn)
+                .setOngoing(false)
+                .setAutoCancel(true)
+                .setContentIntent(
+                    PendingIntent.getActivity(
+                        this, 1,
+                        Intent(this, PinActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
+                    )
                 )
-            )
-            .setContentTitle(getString(R.string.notification_appcrash_title))
+                .setContentTitle(getString(R.string.notification_appcrash_title))
         if (getPreferences().loggingEnabled) {
             val pendingIntent = PendingIntent.getActivity(
                 this,
                 1,
-                Intent(this, LoggingDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                Intent(
+                    this,
+                    LoggingDialogActivity::class.java
+                ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
                 PendingIntent.FLAG_CANCEL_CURRENT
             )
-            notification.addAction(R.drawable.ic_share, getString(R.string.title_send_logs), pendingIntent)
+            notification.addAction(
+                R.drawable.ic_share,
+                getString(R.string.title_send_logs),
+                pendingIntent
+            )
         }
 
         notification.setStyle(NotificationCompat.BigTextStyle(notification).bigText(getString(R.string.notification_appcrash_message)))
@@ -85,28 +94,59 @@ class SmokeScreen : Application() {
         LeakSentry.refWatcher.watch(this)
     }
 
-    fun initSentry(forceEnabled: Boolean = false) {
-        if (!BuildConfig.DEBUG && (forceEnabled || getPreferences().crashReportingEnabled)) {
-            GlobalScope.launch(Dispatchers.IO) {
-                Sentry.init(
-                    "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
-                    AndroidSentryClientFactory(this@SmokeScreen)
-                )
-                Sentry.getContext().user = User(getPreferences().crashReportingUUID, null, null, null)
-                Sentry.getStoredClient().apply {
-                    addTag("user.language", Locale.getDefault().displayLanguage)
-                    addTag("app.database_version", AppDatabase.currentVersion.toString())
-                    addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
-                    addTag("app.dns_server_primary", getPreferences().dnsServerConfig.servers[0].address.formatToString())
-                    addTag(
-                        "app.dns_server_secondary",
-                        getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
+    fun initSentry(forceStatus: Status = Status.NONE) {
+        if (!BuildConfig.DEBUG) {
+            val reportingEnabled = getPreferences().crashReportingEnabled
+            if (forceStatus != Status.DATASAVING && (reportingEnabled || forceStatus == Status.ENABLED)) {
+                // Enable Sentry in full mode
+                // This passes some device-related data, but nothing which allows user actions to be tracked across the app
+                // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
+                GlobalScope.launch(Dispatchers.IO) {
+                    Sentry.init(
+                        "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
+                        AndroidSentryClientFactory(this@SmokeScreen)
                     )
-                    addTag("app.installer_package", packageManager.getInstallerPackageName(packageName))
+                    Sentry.getContext().user =
+                        User(getPreferences().crashReportingUUID, null, null, null)
+                    Sentry.getStoredClient().apply {
+                        addTag("user.language", Locale.getDefault().displayLanguage)
+                        addTag("app.database_version", AppDatabase.currentVersion.toString())
+                        addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
+                        addTag(
+                            "app.dns_server_primary",
+                            getPreferences().dnsServerConfig.servers[0].address.formatToString()
+                        )
+                        addTag(
+                            "app.dns_server_secondary",
+                            getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
+                        )
+                        addTag(
+                            "app.installer_package",
+                            packageManager.getInstallerPackageName(packageName)
+                        )
+                        addTag("richdata", "true")
+                    }
+                }
+            } else if(!reportingEnabled || forceStatus == Status.DATASAVING){
+                // Inits Sentry in datasaving mode
+                // Only data absolutely necessary is transmitted (Android version, app version).
+                // Only crashes will be reported, no regular events.
+                GlobalScope.launch(Dispatchers.IO) {
+                    Sentry.init(
+                        "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
+                        AndroidSentryClientFactory(this@SmokeScreen)
+                    )
+                    Sentry.getStoredClient().apply {
+                        addTag("richdata", "false")
+                        addTag("dist", BuildConfig.VERSION_CODE.toString())
+                        this.builderHelpers.forEach {
+                            this.removeBuilderHelper(it)
+                        }
+                        this.addBuilderHelper(DatasavingSentryEventHelper())
+                    }
+                    Sentry.capture(IllegalArgumentException("Warnign!"))
                 }
             }
-        } else {
-            Sentry.close()
         }
     }
 
@@ -120,7 +160,7 @@ class SmokeScreen : Application() {
         log("Memory has been trimmed with level $level")
     }
 
-    inner class EnrichableUncaughtExceptionHandler:Thread.UncaughtExceptionHandler{
+    inner class EnrichableUncaughtExceptionHandler : Thread.UncaughtExceptionHandler {
         private val extras = mutableMapOf<String, String>()
 
         override fun uncaughtException(t: Thread, e: Throwable) {
@@ -128,9 +168,17 @@ class SmokeScreen : Application() {
             log(e, extras)
             extras.clear()
             val isPrerelease =
-                BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
+                BuildConfig.VERSION_NAME.contains(
+                    "alpha",
+                    true
+                ) || BuildConfig.VERSION_NAME.contains("beta", true)
             if (isPrerelease && getPreferences().loggingEnabled && !getPreferences().crashReportingEnabled) {
-                startActivity(Intent(this@SmokeScreen, ErrorDialogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                startActivity(
+                    Intent(
+                        this@SmokeScreen,
+                        ErrorDialogActivity::class.java
+                    ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                )
             } else if (isPrerelease && getPreferences().crashReportingEnabled) {
                 showCrashNotification()
             }
@@ -139,9 +187,13 @@ class SmokeScreen : Application() {
             exitProcess(0)
         }
 
-        fun addExtra(key:String, value:String) {
+        fun addExtra(key: String, value: String) {
             extras[key] = value
         }
 
     }
+}
+
+enum class Status {
+    ENABLED, DATASAVING, NONE
 }

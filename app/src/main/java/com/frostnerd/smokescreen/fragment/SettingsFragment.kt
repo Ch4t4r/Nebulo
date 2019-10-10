@@ -403,8 +403,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         crashReporting.setOnPreferenceChangeListener { _, newValue ->
             if (!(newValue as Boolean)) {
                 Sentry.close()
+                (requireContext().applicationContext as SmokeScreen).initSentry(Status.DATASAVING)
             } else {
-                (requireContext().applicationContext as SmokeScreen).initSentry(true)
+                (requireContext().applicationContext as SmokeScreen).initSentry(Status.ENABLED)
             }
             true
         }
