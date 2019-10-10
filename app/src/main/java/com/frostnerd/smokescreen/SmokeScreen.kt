@@ -141,7 +141,6 @@ class SmokeScreen : Application() {
                         }
                         this.addBuilderHelper(DatasavingSentryEventHelper())
                     }
-                    Sentry.capture(IllegalArgumentException("Warnign!"))
                 }
             }
         }
