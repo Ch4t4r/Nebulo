@@ -11,6 +11,7 @@ import android.service.quicksettings.TileService
 import androidx.annotation.RequiresApi
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.watchIfEnabled
 import leakcanary.LeakSentry
 
 /*
@@ -42,7 +43,7 @@ fun Context.updateServiceTile() {
 class StartStopTileService:TileService() {
     override fun onCreate() {
         super.onCreate()
-        LeakSentry.refWatcher.watch(this, "StartStopTileService")
+        LeakSentry.watchIfEnabled(this, "StartStopTileService")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

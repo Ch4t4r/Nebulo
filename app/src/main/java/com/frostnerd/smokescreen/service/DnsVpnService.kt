@@ -205,7 +205,7 @@ class DnsVpnService : VpnService(), Runnable {
         }
         getPreferences().vpnServiceState = VpnServiceState.STARTED
         getPreferences().vpnLaunchLastVersion = BuildConfig.VERSION_CODE
-        LeakSentry.refWatcher.watch(this, "DnsVpnService")
+        LeakSentry.watchIfEnabled(this, "DnsVpnService")
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             log("Encountered an uncaught exception.")
             destroy()

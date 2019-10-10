@@ -90,7 +90,6 @@ fun opaqueColor(@ColorInt color: Int, opactiy: Int): Int {
     return Color.parseColor("#" + alpha.toHexString() + colorToHexString(color).replace("#", ""))
 }
 
-
 interface BackpressFragment {
     fun onBackPressed():Boolean
 }

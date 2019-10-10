@@ -54,9 +54,15 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            buildConfigField("Boolean", "LEAK_DETECTION", "false")
+        }
+        debug {
+            initWith buildTypes.debug
+            buildConfigField("Boolean", "LEAK_DETECTION", "false")
         }
         leakCanary {
             initWith buildTypes.debug
+            buildConfigField("Boolean", "LEAK_DETECTION", "true")
         }
         fdroid {
             initWith release
@@ -67,6 +73,7 @@ android {
             debuggable false
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("Boolean", "LEAK_DETECTION", "false")
         }
     }
     flavorDimensions "version"

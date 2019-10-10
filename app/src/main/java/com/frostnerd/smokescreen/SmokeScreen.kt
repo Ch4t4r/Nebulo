@@ -87,7 +87,7 @@ class SmokeScreen : Application() {
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
         log("Application created.")
-        LeakSentry.refWatcher.watch(this)
+        LeakSentry.watchIfEnabled(this)
     }
 
     fun initSentry(forceStatus: Status = Status.NONE) {

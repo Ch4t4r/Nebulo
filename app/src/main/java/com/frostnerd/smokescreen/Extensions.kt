@@ -31,6 +31,7 @@ import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
 import io.sentry.Sentry
 import io.sentry.SentryClient
+import leakcanary.LeakSentry
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.util.logging.Level
@@ -362,4 +363,16 @@ private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
     } else parsedHost = host
     return if (port != null) TLSUpstreamAddress(parsedHost, port)
     else TLSUpstreamAddress(parsedHost)
+}
+
+fun LeakSentry.watchIfEnabled(watchedInstance: Any) {
+    if(BuildConfig.LEAK_DETECTION) {
+        refWatcher.watch(watchedInstance)
+    }
+}
+
+fun LeakSentry.watchIfEnabled(watchedInstance: Any, name:String) {
+    if(BuildConfig.LEAK_DETECTION) {
+        refWatcher.watch(watchedInstance, name)
+    }
 }
