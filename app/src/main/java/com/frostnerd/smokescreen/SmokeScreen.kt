@@ -82,6 +82,7 @@ class SmokeScreen : Application() {
     }
 
     override fun onCreate() {
+        if(!BuildConfig.LEAK_DETECTION) LeakSentry.config = LeakSentry.config.copy(enabled = false)
         initSentry()
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
