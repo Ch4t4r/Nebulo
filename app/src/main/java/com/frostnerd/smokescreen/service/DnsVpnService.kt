@@ -38,8 +38,8 @@ import com.frostnerd.smokescreen.util.proxy.ProxyHttpsHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyTlsHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.FutureAnswer
+import com.frostnerd.vpntunnelproxy.RetryingVPNTunnelProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
-import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import kotlinx.coroutines.*
 import leakcanary.LeakSentry
 import org.minidns.dnsmessage.DnsMessage
@@ -84,7 +84,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var fileDescriptor: ParcelFileDescriptor? = null
     private var handle: ProxyHttpsHandler? = null
     private var dnsProxy: SmokeProxy? = null
-    private var vpnProxy: VPNTunnelProxy? = null
+    private var vpnProxy: RetryingVPNTunnelProxy? = null
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var noConnectionNotificationBuilder: NotificationCompat.Builder
@@ -915,7 +915,7 @@ class DnsVpnService : VpnService(), Runnable {
             createLocalResolver()
         )
         log("DnsProxy created, creating VPN proxy")
-        vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
+        vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(2, "proxy-pool")
         ), logger = object : com.frostnerd.vpntunnelproxy.Logger() {
             override fun logMessage(message: () -> String, level: Level) {
@@ -943,10 +943,11 @@ class DnsVpnService : VpnService(), Runnable {
                 }
             }
         })
+        vpnProxy?.maxRetries = 15
 
         log("VPN proxy creating, trying to run...")
         fileDescriptor?.let {
-            vpnProxy?.run(it)
+            vpnProxy?.runProxyWithRetry(it, it)
         } ?: run {
             recreateVpn(false, null)
             return
