@@ -10,14 +10,10 @@ import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
-import androidx.annotation.ColorInt
 import okhttp3.internal.toHexString
-
-
-
-
 
 
 /*

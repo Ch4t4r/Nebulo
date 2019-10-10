@@ -35,7 +35,6 @@ import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import com.frostnerd.smokescreen.util.worker.RuleImportStartWorker
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_dns_rules.*
-import kotlinx.android.synthetic.main.dialog_host_source_refresh.*
 import kotlinx.android.synthetic.main.item_datasource.view.*
 import kotlinx.android.synthetic.main.item_datasource.view.cardContent
 import kotlinx.android.synthetic.main.item_datasource.view.delete
@@ -46,7 +45,6 @@ import kotlinx.android.synthetic.main.item_dnsrule_host.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 /*

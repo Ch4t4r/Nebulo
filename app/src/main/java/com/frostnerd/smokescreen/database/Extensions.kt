@@ -11,7 +11,6 @@ import com.frostnerd.smokescreen.Logger
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
-import java.lang.IllegalStateException
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

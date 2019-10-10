@@ -29,8 +29,6 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
-import io.sentry.Sentry
-import io.sentry.SentryClient
 import leakcanary.LeakSentry
 import java.net.Inet4Address
 import java.net.Inet6Address
