@@ -8,6 +8,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.watchIfEnabled
 import leakcanary.LeakSentry
 
 /*
@@ -37,7 +38,7 @@ class VpnRestartService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        LeakSentry.refWatcher.watch(this, "VpnRestartService")
+        LeakSentry.watchIfEnabled(this, "VpnRestartService")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

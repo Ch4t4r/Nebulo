@@ -48,7 +48,7 @@ class CrashReportingEnableDialog(
         ) { dialog, _ ->
             context.getPreferences().crashReportingEnabled = true
             context.getPreferences().crashReportingConsent = true
-            (context.applicationContext as SmokeScreen).initSentry(true)
+            (context.applicationContext as SmokeScreen).initSentry(Status.ENABLED)
             onConsentGiven?.invoke()
             dialog.dismiss()
         }
@@ -59,6 +59,7 @@ class CrashReportingEnableDialog(
             context.getPreferences().crashReportingEnabled = false
             context.getPreferences().crashReportingConsent = false
             Sentry.close()
+            (context.applicationContext as SmokeScreen).initSentry(Status.DATASAVING)
             dialog.dismiss()
         }
         setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.dialog_crashreporting_neutral)) { _, _ ->

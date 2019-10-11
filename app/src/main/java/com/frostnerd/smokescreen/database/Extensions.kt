@@ -8,10 +8,10 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.frostnerd.smokescreen.Logger
+import okhttp3.internal.toImmutableList
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
-import java.lang.IllegalStateException
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -33,6 +33,9 @@ import java.lang.IllegalStateException
  */
 
 private var INSTANCE: AppDatabase? = null
+var EXECUTED_MIGRATIONS = listOf<Pair<Int, Int>>()
+    get() = _EXECUTED_MIGRATIONS.toImmutableList()
+private var _EXECUTED_MIGRATIONS = mutableListOf<Pair<Int, Int>>()
 @VisibleForTesting
 val MIGRATION_2_X = migration(2) {
     Logger.logIfOpen("DB_MIGRATION", "Migrating from 2 to the current version (${AppDatabase.currentVersion}")
@@ -142,6 +145,7 @@ private fun migration(
     if(from < 0 || to >AppDatabase.currentVersion || from > to) throw IllegalStateException("Version out of bounds $from->$to with bounds 0 -- ${AppDatabase.currentVersion}")
     return object : Migration(from, to) {
         override fun migrate(database: SupportSQLiteDatabase) {
+            _EXECUTED_MIGRATIONS.add(from to to)
             migrate.invoke(database)
         }
     }

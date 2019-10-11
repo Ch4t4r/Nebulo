@@ -29,8 +29,8 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
-import io.sentry.Sentry
-import io.sentry.SentryClient
+import leakcanary.LeakSentry
+import java.lang.NullPointerException
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.util.logging.Level
@@ -165,11 +165,6 @@ fun Fragment.getPreferences(): AppSettingsSharedPreferences {
     return AppSettings.fromSharedPreferences(context!!)
 }
 
-fun Context.getSentryIfEnabled(): SentryClient? {
-    return if(getPreferences().crashReportingEnabled) Sentry.getStoredClient()
-    else null
-}
-
 fun Context.isAppBatteryOptimized(): Boolean {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false
     val pwrm = getSystemService(Context.POWER_SERVICE) as PowerManager
@@ -227,7 +222,13 @@ fun Context.hasDeviceIpv4Address(): Boolean {
     var hasNetwork = false
     for (network in mgr.allNetworks) {
         if(network == null) continue
-        val info = mgr.getNetworkInfo(network) ?: continue
+        val info = try {
+            mgr.getNetworkInfo(network)
+        } catch (ex:NullPointerException) {
+            // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
+            log("Exception when trying to determine IPv4 capability: $ex")
+            null
+        } ?: continue
         val capabilities = mgr.getNetworkCapabilities(network) ?: continue
         if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
             val linkProperties = mgr.getLinkProperties(network) ?: continue
@@ -250,7 +251,13 @@ fun Context.hasDeviceIpv6Address(): Boolean {
     var hasNetwork = false
     for (network in mgr.allNetworks) {
         if(network == null) continue
-        val info = mgr.getNetworkInfo(network) ?: continue
+        val info =  try {
+            mgr.getNetworkInfo(network)
+        } catch (ex:NullPointerException) {
+            // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
+            log("Exception when trying to determine IPv6 capability: $ex")
+            null
+        } ?: continue
         val capabilities = mgr.getNetworkCapabilities(network) ?: continue
         if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
             val linkProperties = mgr.getLinkProperties(network) ?: continue
@@ -367,4 +374,16 @@ private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
     } else parsedHost = host
     return if (port != null) TLSUpstreamAddress(parsedHost, port)
     else TLSUpstreamAddress(parsedHost)
+}
+
+fun LeakSentry.watchIfEnabled(watchedInstance: Any) {
+    if(BuildConfig.LEAK_DETECTION) {
+        refWatcher.watch(watchedInstance)
+    }
+}
+
+fun LeakSentry.watchIfEnabled(watchedInstance: Any, name:String) {
+    if(BuildConfig.LEAK_DETECTION) {
+        refWatcher.watch(watchedInstance, name)
+    }
 }

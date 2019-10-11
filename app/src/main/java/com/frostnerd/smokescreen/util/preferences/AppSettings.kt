@@ -177,6 +177,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var isBypassBlacklist: Boolean by booleanPref("user_bypass_blacklist", true)
 
     override var showNotificationOnLockscreen: Boolean by booleanPref("show_notification_on_lockscreen", true)
+    var simpleNotification:Boolean by booleanPref("simple_notification", false)
     override var hideNotificationIcon: Boolean by booleanPref("hide_notification_icon", false)
     override var allowPauseInNotification: Boolean by booleanPref("notification_allow_pause", true)
     override var allowStopInNotification: Boolean by booleanPref("notification_allow_stop", true)

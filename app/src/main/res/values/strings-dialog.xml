@@ -43,7 +43,7 @@
     <string name="dialog_serverimportfailed_text_exception" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">The servers could not be imported.\n(%1s)</string>
 
     <string name="dialog_logexport_text">How do you want to share the logs?</string>
-    <string name="dialog_logexport_general">General export</string>
+    <string name="dialog_logexport_general">Choose app</string>
     <string name="dialog_logexport_email">E-Mail</string>
 
     <string name="dialog_deletelogs_text">Are you sure that you want to delete all logs?</string>

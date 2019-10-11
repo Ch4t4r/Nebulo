@@ -24,6 +24,9 @@
     <string name="title_show_notification_on_lockscreen">Show on lockscreen</string>
     <string name="summary_show_notification_on_lockscreen">Sets whether to show the notification on the lockscreen</string>
 
+    <string name="title_simple_notification">Simple notification</string>
+    <string name="summary_simple_notification">Use a simple text in the notification</string>
+
     <string name="title_notification_hide_icon">Hide icon</string>
     <string name="summary_notification_hide_icon">Hide the icon from the navigation bar on the top</string>
 

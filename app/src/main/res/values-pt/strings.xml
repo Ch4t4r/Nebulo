@@ -21,7 +21,7 @@
     <string name="main_dnssurveillance_infotext">Esteja ciente de que o servidor de DNS ao qual você está conectado é capaz de registrar quais sites você está visitando. Verifique as respectivas declarações de privacidade para obter mais informações.</string>
     <string name="main_dnssurveillance_privacystatement">Declaração de privacidade de %1s</string>
 
-    <string name="about_app">Este aplicativo é de código aberto. O código-fonte pode ser acessado em &lt;a href=https://smokescreen.app/source&gt;smokescreen.app/source&lt;/a&gt;.
+    <string name="about_app">Este aplicativo é de código aberto. O código-fonte pode ser acessado em &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
 \nAlém disso, o aplicativo não contém anúncios e não rastreia ou coleta dados sobre você.
 \n
 \nVersão %1s

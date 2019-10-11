@@ -13,9 +13,7 @@ import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_dns_rules.*
 import kotlinx.android.synthetic.main.fragment_querylog_detail.*
-import org.minidns.record.A
 import org.minidns.record.Record
 import java.text.DateFormat
 import java.util.*

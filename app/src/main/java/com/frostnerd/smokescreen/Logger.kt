@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.database.AppDatabase
+import com.frostnerd.smokescreen.database.EXECUTED_MIGRATIONS
 import io.sentry.Sentry
 import io.sentry.event.Event
 import io.sentry.event.EventBuilder
@@ -44,7 +45,10 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                 e.stackTrace.contains(elem)
             }
         } || publishedExceptions.put(e, e.stackTrace.toHashSet()) != null) return
-    else if (getPreferences().crashReportingEnabled) {
+    else {
+        Sentry.getContext().addExtra("database_migrations",  EXECUTED_MIGRATIONS.sortedBy { it.first }.joinToString {
+            "${it.first} -> ${it.second}"
+        })
         if (e is OutOfMemoryError) {
             EventBuilder().withMessage(e.message)
                 .withLevel(Event.Level.ERROR)
@@ -52,7 +56,8 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                 .withSentryInterface(ExceptionInterface(e)).build().apply {
                     Sentry.capture(this)
                 }
-        } else if (extras != null && extras.isNotEmpty()) {
+        } else if (getPreferences().crashReportingEnabled && extras != null && extras.isNotEmpty()) {
+            // Extra data is only passed when not in data-saving mode.
             EventBuilder().withMessage(e.message)
                 .withLevel(Event.Level.ERROR)
                 .apply {

@@ -38,8 +38,8 @@ import com.frostnerd.smokescreen.util.proxy.ProxyHttpsHandler
 import com.frostnerd.smokescreen.util.proxy.ProxyTlsHandler
 import com.frostnerd.smokescreen.util.proxy.SmokeProxy
 import com.frostnerd.vpntunnelproxy.FutureAnswer
+import com.frostnerd.vpntunnelproxy.RetryingVPNTunnelProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
-import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import kotlinx.coroutines.*
 import leakcanary.LeakSentry
 import org.minidns.dnsmessage.DnsMessage
@@ -51,6 +51,7 @@ import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
+import java.lang.NullPointerException
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
@@ -84,7 +85,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var fileDescriptor: ParcelFileDescriptor? = null
     private var handle: ProxyHttpsHandler? = null
     private var dnsProxy: SmokeProxy? = null
-    private var vpnProxy: VPNTunnelProxy? = null
+    private var vpnProxy: RetryingVPNTunnelProxy? = null
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var noConnectionNotificationBuilder: NotificationCompat.Builder
@@ -98,6 +99,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var connectedToANetwork: Boolean? = null
     private var lastScreenOff: Long? = null
     private lateinit var screenStateReceiver: BroadcastReceiver
+    private var simpleNotification = getPreferences().simpleNotification
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -205,7 +207,7 @@ class DnsVpnService : VpnService(), Runnable {
         }
         getPreferences().vpnServiceState = VpnServiceState.STARTED
         getPreferences().vpnLaunchLastVersion = BuildConfig.VERSION_CODE
-        LeakSentry.refWatcher.watch(this, "DnsVpnService")
+        LeakSentry.watchIfEnabled(this, "DnsVpnService")
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             log("Encountered an uncaught exception.")
             destroy()
@@ -305,14 +307,16 @@ class DnsVpnService : VpnService(), Runnable {
             "dns_server_config",
             "notification_allow_stop",
             "notification_allow_pause",
-            "dns_rules_enabled"
+            "dns_rules_enabled",
+            "simple_notification"
         )
         settingsSubscription = getPreferences().listenForChanges(
             relevantSettings,
             getPreferences().preferenceChangeListener { changes ->
                 log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
                 log("Detailed changes: $changes")
-                if ("hide_notification_icon" in changes || "hide_notification_icon" in changes) {
+                if ("hide_notification_icon" in changes || "hide_notification_icon" in changes || "simple_notification" in changes) {
+                    simpleNotification = getPreferences().simpleNotification
                     log("Recreating the notification because of the change in preferences")
                     createNotification()
                     setNotificationText()
@@ -343,7 +347,7 @@ class DnsVpnService : VpnService(), Runnable {
         notificationBuilder.setAutoCancel(false)
         notificationBuilder.setSound(null)
         notificationBuilder.setOnlyAlertOnce(true)
-        notificationBuilder.setUsesChronometer(true)
+        notificationBuilder.setUsesChronometer(!getPreferences().simpleNotification)
         notificationBuilder.setContentIntent(
             PendingIntent.getActivity(
                 this, 1,
@@ -385,12 +389,14 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun updateNotification(queryCount: Int? = null) {
-        if (queryCount != null) notificationBuilder.setSubText(
-            getString(
-                R.string.notification_main_subtext,
-                queryCount + queryCountOffset
+        if(!simpleNotification) {
+            if (queryCount != null) notificationBuilder.setSubText(
+                getString(
+                    R.string.notification_main_subtext,
+                    queryCount + queryCountOffset
+                )
             )
-        )
+        }
         startForeground(Notifications.ID_VPN_SERVICE, notificationBuilder.build())
     }
 
@@ -450,11 +456,13 @@ class DnsVpnService : VpnService(), Runnable {
                 }
                 Command.PAUSE_RESUME -> {
                     if (vpnProxy != null) {
+                        log("Received RESUME command while app running, destroying vpn.")
                         destroy(false)
                         pauseNotificationAction?.title = getString(R.string.all_resume)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_resume
                         notificationBuilder.setSmallIcon(R.drawable.ic_notification_paused)
                     } else {
+                        log("Received RESUME command while app paused, restarting vpn.")
                         recreateVpn(false, null)
                         pauseNotificationAction?.title = getString(R.string.all_pause)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_pause
@@ -552,27 +560,33 @@ class DnsVpnService : VpnService(), Runnable {
             primaryServer = serverConfig.tlsConfiguration!![0].formatToString()
             secondaryServer = serverConfig.tlsConfiguration!!.getOrNull(1)?.formatToString()
         }
-        val text = if (secondaryServer != null) {
-            getString(
-                if (getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
-                primaryServer,
-                secondaryServer,
-                packageBypassAmount,
-                dnsProxy?.cache?.livingCachedEntries() ?: 0
-            )
+        val text =
+            when {
+                getPreferences().simpleNotification -> getString(R.string.notification_simple_text, serverConfig.name)
+                secondaryServer != null -> getString(
+                    if (getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
+                    primaryServer,
+                    secondaryServer,
+                    packageBypassAmount,
+                    dnsProxy?.cache?.livingCachedEntries() ?: 0
+                )
+                else -> getString(
+                    if (getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
+                    primaryServer,
+                    packageBypassAmount,
+                    dnsProxy?.cache?.livingCachedEntries() ?: 0
+                )
+            }
+        if(simpleNotification) {
+            notificationBuilder.setStyle(null)
+            notificationBuilder.setContentText(text)
         } else {
-            getString(
-                if (getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
-                primaryServer,
-                packageBypassAmount,
-                dnsProxy?.cache?.livingCachedEntries() ?: 0
+            notificationBuilder.setStyle(
+                NotificationCompat.BigTextStyle(notificationBuilder).bigText(
+                    text
+                )
             )
         }
-        notificationBuilder.setStyle(
-            NotificationCompat.BigTextStyle(notificationBuilder).bigText(
-                text
-            )
-        )
     }
 
     private fun establishVpn() {
@@ -839,7 +853,13 @@ class DnsVpnService : VpnService(), Runnable {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
             if (network == null) continue
-            val info = mgr.getNetworkInfo(network) ?: continue
+            val info = try {
+                mgr.getNetworkInfo(network)
+            } catch (ex:NullPointerException) {
+                // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
+                log("Exception when trying to determine DHCP DNS servers: $ex")
+                null
+            } ?: continue
             val capabilities = mgr.getNetworkCapabilities(network) ?: continue
             if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
@@ -854,11 +874,12 @@ class DnsVpnService : VpnService(), Runnable {
         return if (userServerConfig != null) {
             userServerConfig!!.let { config ->
                 return if (config is HttpsDnsServerInformation) DnsServerConfiguration(
+                    config.name,
                     config.serverConfigurations.values.toList(),
                     null
                 )
                 else {
-                    DnsServerConfiguration(null, config.servers.map {
+                    DnsServerConfiguration(config.name, null, config.servers.map {
                         it.address as TLSUpstreamAddress
                     })
                 }
@@ -866,11 +887,11 @@ class DnsVpnService : VpnService(), Runnable {
         } else {
             val config = getPreferences().dnsServerConfig
             if (config.hasTlsServer()) {
-                DnsServerConfiguration(null, config.servers.map {
+                DnsServerConfiguration(config.name, null, config.servers.map {
                     it.address as TLSUpstreamAddress
                 })
             } else {
-                DnsServerConfiguration((config as HttpsDnsServerInformation).serverConfigurations.map {
+                DnsServerConfiguration(config.name, (config as HttpsDnsServerInformation).serverConfigurations.map {
                     it.value
                 }, null)
             }
@@ -888,8 +909,10 @@ class DnsVpnService : VpnService(), Runnable {
                 serverConfig.httpsConfiguration!!,
                 connectTimeout = 20000,
                 queryCountCallback = {
-                    setNotificationText()
-                    updateNotification(it)
+                    if(!simpleNotification) {
+                        setNotificationText()
+                        updateNotification(it)
+                    }
                 },
                 mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
             )
@@ -897,8 +920,10 @@ class DnsVpnService : VpnService(), Runnable {
             handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
                 connectTimeout = 2000,
                 queryCountCallback = {
-                    setNotificationText()
-                    updateNotification(it)
+                    if(!simpleNotification) {
+                        setNotificationText()
+                        updateNotification(it)
+                    }
                 }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock)
         }
         log("Handle created, creating DNS proxy")
@@ -915,7 +940,7 @@ class DnsVpnService : VpnService(), Runnable {
             createLocalResolver()
         )
         log("DnsProxy created, creating VPN proxy")
-        vpnProxy = VPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
+        vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(2, "proxy-pool")
         ), logger = object : com.frostnerd.vpntunnelproxy.Logger() {
             override fun logMessage(message: () -> String, level: Level) {
@@ -943,10 +968,11 @@ class DnsVpnService : VpnService(), Runnable {
                 }
             }
         })
+        vpnProxy?.maxRetries = 15
 
         log("VPN proxy creating, trying to run...")
         fileDescriptor?.let {
-            vpnProxy?.run(it)
+            vpnProxy?.runProxyWithRetry(it, it)
         } ?: run {
             recreateVpn(false, null)
             return
@@ -974,7 +1000,13 @@ class DnsVpnService : VpnService(), Runnable {
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             for (network in mgr.allNetworks) {
                 if (network == null) continue
-                val networkInfo = mgr.getNetworkInfo(network) ?: continue
+                val networkInfo = try {
+                    mgr.getNetworkInfo(network)
+                } catch (ex:NullPointerException) {
+                    // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
+                    log("Exception when trying to create proxy bypass handlers: $ex")
+                    null
+                } ?: continue
                 if (networkInfo.isConnected && !mgr.isVpnNetwork(network)) {
                     val linkProperties = mgr.getLinkProperties(network) ?: continue
                     if (!linkProperties.domains.isNullOrBlank() && linkProperties.dnsServers.isNotEmpty()) {
@@ -1250,6 +1282,7 @@ enum class Command : Serializable {
 }
 
 data class DnsServerConfiguration(
+    val name:String,
     val httpsConfiguration: List<ServerConfiguration>?,
     val tlsConfiguration: List<TLSUpstreamAddress>?
 ) {
