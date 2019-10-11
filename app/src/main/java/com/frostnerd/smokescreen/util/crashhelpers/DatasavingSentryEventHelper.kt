@@ -1,4 +1,4 @@
-package com.frostnerd.smokescreen.util
+package com.frostnerd.smokescreen.util.crashhelpers
 
 import android.os.Build
 import com.frostnerd.smokescreen.BuildConfig

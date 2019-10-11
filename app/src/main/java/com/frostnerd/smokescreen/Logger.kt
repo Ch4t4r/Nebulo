@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.database.AppDatabase
+import com.frostnerd.smokescreen.database.EXECUTED_MIGRATIONS
 import io.sentry.Sentry
 import io.sentry.event.Event
 import io.sentry.event.EventBuilder
@@ -45,6 +46,9 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
             }
         } || publishedExceptions.put(e, e.stackTrace.toHashSet()) != null) return
     else {
+        Sentry.getContext().addExtra("database_migrations",  EXECUTED_MIGRATIONS.sortedBy { it.first }.joinToString {
+            "${it.first} -> ${it.second}"
+        })
         if (e is OutOfMemoryError) {
             EventBuilder().withMessage(e.message)
                 .withLevel(Event.Level.ERROR)

@@ -10,7 +10,7 @@ import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.activity.LoggingDialogActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
-import com.frostnerd.smokescreen.util.DatasavingSentryEventHelper
+import com.frostnerd.smokescreen.util.crashhelpers.DatasavingSentryEventHelper
 import com.frostnerd.smokescreen.util.Notifications
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
