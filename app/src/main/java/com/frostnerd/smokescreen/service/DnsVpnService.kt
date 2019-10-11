@@ -98,6 +98,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var connectedToANetwork: Boolean? = null
     private var lastScreenOff: Long? = null
     private lateinit var screenStateReceiver: BroadcastReceiver
+    private var simpleNotification = getPreferences().simpleNotification
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -305,14 +306,16 @@ class DnsVpnService : VpnService(), Runnable {
             "dns_server_config",
             "notification_allow_stop",
             "notification_allow_pause",
-            "dns_rules_enabled"
+            "dns_rules_enabled",
+            "simple_notification"
         )
         settingsSubscription = getPreferences().listenForChanges(
             relevantSettings,
             getPreferences().preferenceChangeListener { changes ->
                 log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
                 log("Detailed changes: $changes")
-                if ("hide_notification_icon" in changes || "hide_notification_icon" in changes) {
+                if ("hide_notification_icon" in changes || "hide_notification_icon" in changes || "simple_notification" in changes) {
+                    simpleNotification = getPreferences().simpleNotification
                     log("Recreating the notification because of the change in preferences")
                     createNotification()
                     setNotificationText()
@@ -343,7 +346,7 @@ class DnsVpnService : VpnService(), Runnable {
         notificationBuilder.setAutoCancel(false)
         notificationBuilder.setSound(null)
         notificationBuilder.setOnlyAlertOnce(true)
-        notificationBuilder.setUsesChronometer(true)
+        notificationBuilder.setUsesChronometer(!getPreferences().simpleNotification)
         notificationBuilder.setContentIntent(
             PendingIntent.getActivity(
                 this, 1,
@@ -385,12 +388,14 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun updateNotification(queryCount: Int? = null) {
-        if (queryCount != null) notificationBuilder.setSubText(
-            getString(
-                R.string.notification_main_subtext,
-                queryCount + queryCountOffset
+        if(!simpleNotification) {
+            if (queryCount != null) notificationBuilder.setSubText(
+                getString(
+                    R.string.notification_main_subtext,
+                    queryCount + queryCountOffset
+                )
             )
-        )
+        }
         startForeground(Notifications.ID_VPN_SERVICE, notificationBuilder.build())
     }
 
@@ -554,27 +559,33 @@ class DnsVpnService : VpnService(), Runnable {
             primaryServer = serverConfig.tlsConfiguration!![0].formatToString()
             secondaryServer = serverConfig.tlsConfiguration!!.getOrNull(1)?.formatToString()
         }
-        val text = if (secondaryServer != null) {
-            getString(
-                if (getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
-                primaryServer,
-                secondaryServer,
-                packageBypassAmount,
-                dnsProxy?.cache?.livingCachedEntries() ?: 0
-            )
+        val text =
+            when {
+                getPreferences().simpleNotification -> getString(R.string.notification_simple_text, serverConfig.name)
+                secondaryServer != null -> getString(
+                    if (getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
+                    primaryServer,
+                    secondaryServer,
+                    packageBypassAmount,
+                    dnsProxy?.cache?.livingCachedEntries() ?: 0
+                )
+                else -> getString(
+                    if (getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
+                    primaryServer,
+                    packageBypassAmount,
+                    dnsProxy?.cache?.livingCachedEntries() ?: 0
+                )
+            }
+        if(simpleNotification) {
+            notificationBuilder.setStyle(null)
+            notificationBuilder.setContentText(text)
         } else {
-            getString(
-                if (getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
-                primaryServer,
-                packageBypassAmount,
-                dnsProxy?.cache?.livingCachedEntries() ?: 0
+            notificationBuilder.setStyle(
+                NotificationCompat.BigTextStyle(notificationBuilder).bigText(
+                    text
+                )
             )
         }
-        notificationBuilder.setStyle(
-            NotificationCompat.BigTextStyle(notificationBuilder).bigText(
-                text
-            )
-        )
     }
 
     private fun establishVpn() {
@@ -856,11 +867,12 @@ class DnsVpnService : VpnService(), Runnable {
         return if (userServerConfig != null) {
             userServerConfig!!.let { config ->
                 return if (config is HttpsDnsServerInformation) DnsServerConfiguration(
+                    config.name,
                     config.serverConfigurations.values.toList(),
                     null
                 )
                 else {
-                    DnsServerConfiguration(null, config.servers.map {
+                    DnsServerConfiguration(config.name, null, config.servers.map {
                         it.address as TLSUpstreamAddress
                     })
                 }
@@ -868,11 +880,11 @@ class DnsVpnService : VpnService(), Runnable {
         } else {
             val config = getPreferences().dnsServerConfig
             if (config.hasTlsServer()) {
-                DnsServerConfiguration(null, config.servers.map {
+                DnsServerConfiguration(config.name, null, config.servers.map {
                     it.address as TLSUpstreamAddress
                 })
             } else {
-                DnsServerConfiguration((config as HttpsDnsServerInformation).serverConfigurations.map {
+                DnsServerConfiguration(config.name, (config as HttpsDnsServerInformation).serverConfigurations.map {
                     it.value
                 }, null)
             }
@@ -890,8 +902,10 @@ class DnsVpnService : VpnService(), Runnable {
                 serverConfig.httpsConfiguration!!,
                 connectTimeout = 20000,
                 queryCountCallback = {
-                    setNotificationText()
-                    updateNotification(it)
+                    if(!simpleNotification) {
+                        setNotificationText()
+                        updateNotification(it)
+                    }
                 },
                 mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
             )
@@ -899,8 +913,10 @@ class DnsVpnService : VpnService(), Runnable {
             handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
                 connectTimeout = 2000,
                 queryCountCallback = {
-                    setNotificationText()
-                    updateNotification(it)
+                    if(!simpleNotification) {
+                        setNotificationText()
+                        updateNotification(it)
+                    }
                 }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock)
         }
         log("Handle created, creating DNS proxy")
@@ -1253,6 +1269,7 @@ enum class Command : Serializable {
 }
 
 data class DnsServerConfiguration(
+    val name:String,
     val httpsConfiguration: List<ServerConfiguration>?,
     val tlsConfiguration: List<TLSUpstreamAddress>?
 ) {
