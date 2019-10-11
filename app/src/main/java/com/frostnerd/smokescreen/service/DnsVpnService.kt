@@ -450,11 +450,13 @@ class DnsVpnService : VpnService(), Runnable {
                 }
                 Command.PAUSE_RESUME -> {
                     if (vpnProxy != null) {
+                        log("Received RESUME command while app running, destroying vpn.")
                         destroy(false)
                         pauseNotificationAction?.title = getString(R.string.all_resume)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_resume
                         notificationBuilder.setSmallIcon(R.drawable.ic_notification_paused)
                     } else {
+                        log("Received RESUME command while app paused, restarting vpn.")
                         recreateVpn(false, null)
                         pauseNotificationAction?.title = getString(R.string.all_pause)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_pause
