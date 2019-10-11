@@ -165,7 +165,7 @@
             "columnNames": [
               "importedFrom"
             ],
-            "createSql": "CREATE  INDEX `index_DnsRule_importedFrom` ON `${TABLE_NAME}` (`importedFrom`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_DnsRule_importedFrom` ON `${TABLE_NAME}` (`importedFrom`)"
           },
           {
             "name": "index_DnsRule_host_type_stagingType",
@@ -175,7 +175,7 @@
               "type",
               "stagingType"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_DnsRule_host_type_stagingType` ON `${TABLE_NAME}` (`host`, `type`, `stagingType`)"
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_DnsRule_host_type_stagingType` ON `${TABLE_NAME}` (`host`, `type`, `stagingType`)"
           }
         ],
         "foreignKeys": [
