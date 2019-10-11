@@ -51,6 +51,7 @@ import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
+import java.lang.NullPointerException
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
@@ -852,7 +853,13 @@ class DnsVpnService : VpnService(), Runnable {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         for (network in mgr.allNetworks) {
             if (network == null) continue
-            val info = mgr.getNetworkInfo(network) ?: continue
+            val info = try {
+                mgr.getNetworkInfo(network)
+            } catch (ex:NullPointerException) {
+                // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
+                log("Exception when trying to determine DHCP DNS servers: $ex")
+                null
+            } ?: continue
             val capabilities = mgr.getNetworkCapabilities(network) ?: continue
             if (info.isConnected && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
                 val linkProperties = mgr.getLinkProperties(network) ?: continue
@@ -993,7 +1000,13 @@ class DnsVpnService : VpnService(), Runnable {
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             for (network in mgr.allNetworks) {
                 if (network == null) continue
-                val networkInfo = mgr.getNetworkInfo(network) ?: continue
+                val networkInfo = try {
+                    mgr.getNetworkInfo(network)
+                } catch (ex:NullPointerException) {
+                    // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
+                    log("Exception when trying to create proxy bypass handlers: $ex")
+                    null
+                } ?: continue
                 if (networkInfo.isConnected && !mgr.isVpnNetwork(network)) {
                     val linkProperties = mgr.getLinkProperties(network) ?: continue
                     if (!linkProperties.domains.isNullOrBlank() && linkProperties.dnsServers.isNotEmpty()) {
