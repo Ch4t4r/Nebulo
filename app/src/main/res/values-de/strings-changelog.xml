@@ -100,4 +100,7 @@
     <string name="changelog_build_47_5">Neue Server hinzugefügt</string>
     <string name="changelog_build_47_6">Designänderungen</string>
     <string name="changelog_build_47_7">Verhalten der DNS Regeln verbessert</string>
+    <string name="changelog_build_48_1">Einstellung zum vereinfachen der Benachrichtigung hinzugefügt</string>
+    <string name="changelog_build_48_2">Das Anfragenprotokoll zeigt nun die Quelle einer DNS Regel, wurde de Anfrage von einer DNS Regel beantwortet</string>
+    <string name="changelog_build_48_3">Die Sprache wird nun korrekt in allen Fenstern gewechselt, wenn sie in den Einstellungen der Ap geändert wird</string>
     </resources>
