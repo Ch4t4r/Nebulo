@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.activity
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -13,6 +14,7 @@ import com.frostnerd.smokescreen.Logger
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.dialog.ServerImportDialog
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import kotlinx.coroutines.*
@@ -47,6 +49,10 @@ class ServerImportActivity : BaseActivity() {
     }
 
     private var importJob: Job? = null
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.dialogStyle)

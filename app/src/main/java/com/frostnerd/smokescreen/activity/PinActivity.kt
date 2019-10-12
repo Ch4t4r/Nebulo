@@ -25,6 +25,7 @@ import com.frostnerd.smokescreen.canUseFingerprintAuthentication
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import kotlinx.android.synthetic.main.dialog_pin.view.*
 import java.math.BigInteger
@@ -82,6 +83,10 @@ class PinActivity: BaseActivity() {
     }
     private var dialog:AlertDialog? = null
     private var cancellationSignal:CancellationSignal? = null
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)

@@ -6,15 +6,14 @@
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:paddingLeft="@dimen/dialog_horizontal_margin"
-            android:paddingRight="@dimen/dialog_horizontal_margin"
-            android:paddingTop="@dimen/dialog_vertical_margin"
-            android:paddingBottom="@dimen/dialog_vertical_margin"
             android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:id="@+id/list"
+                android:paddingLeft="@dimen/dialog_horizontal_margin"
+                android:paddingRight="@dimen/dialog_horizontal_margin"
+                android:paddingTop="@dimen/dialog_vertical_margin"
                 android:layout_above="@id/fabWrap"
                 android:layout_height="match_parent"/>
 
@@ -24,7 +23,12 @@
                 android:gravity="center_horizontal"
                 android:layout_marginTop="12dp"
                 android:layout_alignParentBottom="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
+                android:paddingLeft="@dimen/dialog_horizontal_margin"
+                android:paddingRight="@dimen/dialog_horizontal_margin"
+                android:paddingBottom="@dimen/dialog_vertical_margin"
                 android:layout_height="wrap_content">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton

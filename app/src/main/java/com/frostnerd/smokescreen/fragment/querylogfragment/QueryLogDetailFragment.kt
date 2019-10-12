@@ -14,6 +14,10 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_querylog_detail.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.minidns.record.Record
 import java.text.DateFormat
 import java.util.*
@@ -46,6 +50,7 @@ class QueryLogDetailFragment : Fragment() {
         return if(isTimeStampToday(timestamp)) timeFormatSameDay.format(timestamp)
         else timeFormatDifferentDay.format(timestamp)
     }
+    private var hostSourceFetchJob: Job? = null
 
     private fun isTimeStampToday(timestamp:Long):Boolean {
         return timestamp >= getStartOfDay()
@@ -128,6 +133,7 @@ class QueryLogDetailFragment : Fragment() {
     private fun updateUi() {
         val query = currentQuery
         if(query != null && viewCreated) {
+            hostSourceFetchJob?.cancel()
             queryTime.text = formatTimeStamp(query.questionTime)
             if(query.responseTime >= query.questionTime) {
                 latency.text = (query.responseTime - query.questionTime).toString() + " ms"
@@ -155,6 +161,28 @@ class QueryLogDetailFragment : Fragment() {
                 if(it.isBlank()) "-"
                 else it
             }
+
+            if(query.responseSource == QueryListener.Source.LOCALRESOLVER) {
+                hostSourceWrap.visibility = View.VISIBLE
+                hostSourceFetchJob = GlobalScope.launch {
+                    val sourceRule = getDatabase().dnsRuleDao().findRuleTargetEntity(query.name, query.type, true)
+                        ?: getDatabase().dnsRuleDao().findPossibleWildcardRuleTarget(query.name, query. type, true, false, true).firstOrNull {
+                            DnsRuleDialog.databaseHostToMatcher(it.host).reset(query.name).matches()
+                        }
+                    val text = if (sourceRule != null) {
+                        if(sourceRule.importedFrom == null) {
+                            getString(R.string.windows_querylogging_hostsource__user)
+                        } else {
+                            getDatabase().hostSourceDao().findById(sourceRule.importedFrom)?.name ?: getString(R.string.windows_querylogging_hostsource__unknown)
+                        }
+                    } else {
+                        getString(R.string.windows_querylogging_hostsource__unknown)
+                    }
+                    if(hostSourceFetchJob?.isCancelled == false) launch(Dispatchers.Main) {
+                        hostSource.text = text
+                    }
+                }
+            } else hostSourceWrap.visibility = View.GONE
         }
     }
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
 import android.os.LocaleList
+import com.frostnerd.smokescreen.getPreferences
 import java.util.*
 
 /*
@@ -27,6 +28,17 @@ import java.util.*
 class LanguageContextWrapper(context:Context): ContextWrapper(context) {
 
     companion object {
+        fun attachFromSettings(context: Context, newBase:Context):Context {
+            val language = context.getPreferences().language
+            return if(language == "auto") {
+                newBase
+            } else {
+                val country = language.split("_").getOrNull(1)
+                val locale = if(country != null) Locale(language.split("_")[0], country) else Locale(language)
+                wrap(newBase, locale)
+            }
+        }
+
         fun wrap(context: Context, newLocale:Locale):Context {
             return context.resources.configuration.let {
                 it.setLocale(newLocale)

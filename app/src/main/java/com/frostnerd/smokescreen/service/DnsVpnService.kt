@@ -1033,13 +1033,15 @@ class DnsVpnService : VpnService(), Runnable {
         bypassHandlers.add(
             NoConnectionDnsHandle(
                 getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager,
-                NoConnectionDnsHandle.Behavior.DROP_PACKETS
-            ) {
-                log("Connection changed to connected=$it", "NoConnectionDnsHandle-Listener")
-                connectedToANetwork = it
-                if (!it) showNoConnectionNotification()
-                else hideNoConnectionNotification()
-            })
+                NoConnectionDnsHandle.Behavior.DROP_PACKETS,
+                regularConnectionCheckIntervalMs = 60000,
+                connectionListener = {
+                    log("Connection changed to connected=$it", "NoConnectionDnsHandle-Listener")
+                    connectedToANetwork = it
+                    if (!it) showNoConnectionNotification()
+                    else hideNoConnectionNotification()
+                })
+        )
         return bypassHandlers
     }
 

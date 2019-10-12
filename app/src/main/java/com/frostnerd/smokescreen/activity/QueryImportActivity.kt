@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.activity
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.frostnerd.dnstunnelproxy.QueryListener
@@ -9,6 +10,7 @@ import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.showInfoTextDialog
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import org.minidns.record.Record
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -33,6 +35,10 @@ import java.io.InputStreamReader
  */
 
 class QueryImportActivity: AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.dialogStyle)

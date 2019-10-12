@@ -60,14 +60,7 @@ class MainActivity : NavigationDrawerActivity() {
     private var inputElementColor: Int = 0
 
     override fun attachBaseContext(newBase: Context) {
-        val language = getPreferences().language
-        if(language == "auto") {
-            super.attachBaseContext(newBase)
-        } else {
-            val country = language.split("_").getOrNull(1)
-            val locale = if(country != null) Locale(language.split("_")[0], country) else Locale(language)
-            super.attachBaseContext(LanguageContextWrapper.wrap(newBase, locale))
-        }
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

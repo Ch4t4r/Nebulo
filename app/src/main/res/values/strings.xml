@@ -83,6 +83,9 @@
     <string name="windows_querylogging_type">Type</string>
     <string name="windows_querylogging_question">Question</string>
     <string name="windows_querylogging_used_server">Used server</string>
+    <string name="windows_querylogging_hostsource">Source of DNS rule</string>
+    <string name="windows_querylogging_hostsource__user">User rules</string>
+    <string name="windows_querylogging_hostsource__unknown">Unknown</string>
     <string name="windows_querylogging_protocol">Protocol</string>
     <string name="windows_querylogging_latency">Latency</string>
     <string name="windows_querylogging_responses">Responses</string>

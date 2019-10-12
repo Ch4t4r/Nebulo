@@ -87,6 +87,9 @@ interface DnsRuleDao {
     @Query("SELECT * FROM DnsRule d1 WHERE ((:includeWhitelistEntries=1 AND d1.target == '') OR (:includeNonWhitelistEntries=1 AND d1.target!='')) AND (d1.type = :type OR d1.type=255) AND (d1.importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=d1.importedFrom),0) = 1) AND (d1.importedFrom IS NOT NULL OR :useUserRules=1) AND :host LIKE host AND isWildcard=1")
     fun findPossibleWildcardRuleTarget(host: String, type: Record.TYPE, useUserRules:Boolean, includeWhitelistEntries:Boolean, includeNonWhitelistEntries:Boolean):List<DnsRule>
 
+    @Query("SELECT * FROM DnsRule d1 WHERE d1.host=:host AND d1.target != '' AND (d1.type = :type OR d1.type=255) AND (d1.importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=d1.importedFrom),0) = 1) AND (d1.importedFrom IS NOT NULL OR :useUserRules=1) AND (SELECT COUNT(*) FROM DnsRule d2 WHERE d2.target='' AND d2.host=:host AND (d2.type = :type OR d2.type=255) AND (d2.importedFrom IS NOT NULL OR :useUserRules=1) AND (importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0)))=0 AND isWildcard=0 LIMIT 1")
+    fun findRuleTargetEntity(host: String, type: Record.TYPE, useUserRules:Boolean):DnsRule?
+
     @Query("DELETE FROM DnsRule WHERE importedFrom=:sourceId")
     fun deleteAllFromSource(sourceId: Long)
 
