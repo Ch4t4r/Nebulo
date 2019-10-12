@@ -52,7 +52,7 @@ class SettingsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         supportFragmentManager.beginTransaction().replace(android.R.id.content, SettingsFragment().apply {
             arguments = Bundle().apply {
-                putSerializable("category", intent.getSerializableExtra("category"))
+                putSerializable("category", intent.getSerializableExtra("category")!!)
             }
         }).commit()
     }
