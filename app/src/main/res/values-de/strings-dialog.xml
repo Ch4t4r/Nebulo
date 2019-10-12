@@ -36,7 +36,7 @@
 \n(%1s)</string>
 
     <string name="dialog_logexport_text">Wie möchtest du die Logs teilen\?</string>
-    <string name="dialog_logexport_general">Generell</string>
+    <string name="dialog_logexport_general">App auswählen</string>
     <string name="dialog_logexport_email">E-Mail</string>
 
     <string name="dialog_deletelogs_text">Bist du dir sicher, dass du alle Logs löschen willst\?</string>
