@@ -110,7 +110,7 @@
     <string name="preference_category_network">Netzwerk</string>
 
     <string name="title_disallow_other_vpns">Verbiete andere VPNs</string>
-    <string name="summary_disallow_other_vpns">Erlaube es nicht, andere VPNs zu staretn, solange die App nicht explizit gestoppt wurde</string>
+    <string name="summary_disallow_other_vpns">Erlaube es nicht, andere VPNs zu starten, solange die App nicht explizit gestoppt wurde</string>
 
     <string name="title_bypass_searchdomains">Suchdomain-Umgehung</string>
     <string name="summary_bypass_searchdomains">Sende Suchdomains (z.B. MyPC.local oder MyPc.fritz.box) zu dem DNS server deines aktuellen Netzwerkes, anstatt zum konfigurierten DNS server.
