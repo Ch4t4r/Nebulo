@@ -297,5 +297,18 @@
         <item>@string/changelog_build_47_7</item>
         <item>@string/changelog_build_43_6</item>
     </string-array>
+
+    <string name="changelog_build_48_1">Added a setting to simplify the notification</string>
+    <string name="changelog_build_48_2">The query log now shows the host source of the DNS rule, if the question was answered from the DNS rules</string>
+    <string name="changelog_build_48_3">The language now properly switches in all windows when changing it in the app settings</string>
+    <string-array name="changelog_build_48">
+        <item>1.0 Beta (Build 48)</item>
+        <item>@string/changelog_build_48_1</item>
+        <item>@string/changelog_build_48_2</item>
+        <item>@string/changelog_build_48_3</item>
+        <item>@string/changelog_build_28_5</item>
+        <item>@string/changelog_build_47_6</item>
+        <item>@string/changelog_build_27_1</item>
+    </string-array>
     
 </resources>
