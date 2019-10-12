@@ -146,4 +146,7 @@
     <string name="title_map_query_refused">Abgelehnte Anfragen als geblockte Hosts in­ter­pre­tie­ren</string>
     <string name="summary_map_query_refused">Einige DNS Server lehnen möglicherweise die Bearbeitung einer Anfrage ab, wenn der Host blockiert ist. Diese Einstellung blockiert den Host, wenn die Anfrage abgelehnt wird, da das System sonst eventuell verwirrt wird.</string>
 
+    <string name="title_simple_notification">Simple Benachrichtigung</string>
+    <string name="summary_simple_notification">Zeige eine simplifizierte Benachrichtigung</string>
+
     </resources>
