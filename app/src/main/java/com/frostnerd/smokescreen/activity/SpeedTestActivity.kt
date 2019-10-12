@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.activity
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,7 @@ import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.activity_speedtest.*
@@ -49,6 +51,10 @@ class SpeedTestActivity : BaseActivity() {
     private var testResults:MutableList<SpeedTest>? = null
     private var listAdapter:RecyclerView.Adapter<*>? = null
     private var prepareListJob:Job? = null
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

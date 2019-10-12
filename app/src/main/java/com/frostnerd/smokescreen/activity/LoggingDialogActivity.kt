@@ -8,6 +8,7 @@ import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.fragment.showLogExportDialog
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 
 /*
@@ -30,6 +31,10 @@ import com.frostnerd.smokescreen.util.Notifications
  */
 
 class LoggingDialogActivity : BaseActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

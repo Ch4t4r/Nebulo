@@ -17,6 +17,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.toJson
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -115,6 +116,10 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
 }
 
     private var requestTime: Long = -1
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.dialogStyle)

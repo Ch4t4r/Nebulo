@@ -1,10 +1,12 @@
 package com.frostnerd.smokescreen.activity
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.fragment.showLogExportDialog
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -25,6 +27,11 @@ import com.frostnerd.smokescreen.fragment.showLogExportDialog
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ErrorDialogActivity : BaseActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val dialog = AlertDialog.Builder(this)

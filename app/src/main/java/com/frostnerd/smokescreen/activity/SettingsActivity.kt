@@ -7,6 +7,7 @@ import android.view.MenuItem
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.fragment.SettingsFragment
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -40,6 +41,10 @@ class SettingsActivity : BaseActivity() {
 
     override fun getConfiguration(): Configuration {
         return Configuration.withDefaults()
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
