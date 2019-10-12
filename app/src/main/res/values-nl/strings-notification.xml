@@ -46,4 +46,5 @@
 <string name="notification_service_killed_title">Informatie over batterij optimalisatie</string>
     <string name="notification_service_killed_message">Het lijkt erop dat de app onlangs is gestopt door het systeem. Klik hier voor meer informatie.</string>
     <string name="notification_service_killed_ignore">Negeren</string>
-</resources>
+<string name="notification_simple_text">Huidige server: %1$s</string>
+    </resources>
