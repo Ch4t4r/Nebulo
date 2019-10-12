@@ -100,4 +100,7 @@
     <string name="changelog_build_47_5">Nieuwe servers toegevoegd</string>
     <string name="changelog_build_47_6">Ontwerp wijzigingen</string>
     <string name="changelog_build_47_7">Verbeterde verwerking van DNS-regels</string>
+    <string name="changelog_build_48_1">Een instelling toegevoegd om de melding te vereenvoudigen</string>
+    <string name="changelog_build_48_2">Het DNS-logboek toont nu de hostbron van de DNS-regel, als de vraag werd beantwoord vanuit de DNS-regels</string>
+    <string name="changelog_build_48_3">"De taal veranderd nu correct in alle vensters wanneer deze wordt gewijzigd in de instellingen  van de app"</string>
     </resources>
