@@ -88,4 +88,7 @@
 <string name="windows_querylogging_search_hint">Suche nach einem Host in dem Anfrageprotokoll</string>
     <string name="windows_querylogging_search">Hostsuche</string>
     <string name="window_main_privatedns_info">Privater DNS ist aktiv, deine Anfragen sind bereits durch das System geschützt. Aktiviere Nebulo falls du dns-over-https oder andere sinnvolle Features nutzen willst.</string>
-</resources>
+<string name="windows_querylogging_hostsource">Quelle der DNS Regel</string>
+    <string name="windows_querylogging_hostsource__user">Nutzerregeln</string>
+    <string name="windows_querylogging_hostsource__unknown">Unbekannt</string>
+    </resources>

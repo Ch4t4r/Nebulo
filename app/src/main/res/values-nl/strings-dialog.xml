@@ -38,7 +38,7 @@
 \n(%1s)</string>
 
     <string name="dialog_logexport_text">Hoe wil je de logs delen\?</string>
-    <string name="dialog_logexport_general">Algemeen</string>
+    <string name="dialog_logexport_general">Kies app</string>
     <string name="dialog_logexport_email">E-Mail</string>
 
     <string name="dialog_deletelogs_text">Weet je zeker dat je alle logs wilt verwijderen\?</string>

@@ -81,4 +81,7 @@
 <string name="windows_querylogging_search_hint">Zoek naar een host in het DNS verzoek-logboek</string>
     <string name="windows_querylogging_search">Host zoeken</string>
     <string name="window_main_privatedns_info">Privé-DNS is actief, uw aanvragen zijn al beveiligd. Schakel Nebulo in als u DNS-over-HTTPS of andere handige functies wilt gebruiken.</string>
-</resources>
+<string name="windows_querylogging_hostsource">Bron van DNS-regel</string>
+    <string name="windows_querylogging_hostsource__user">Gebruikers regels</string>
+    <string name="windows_querylogging_hostsource__unknown">Onbekend</string>
+    </resources>

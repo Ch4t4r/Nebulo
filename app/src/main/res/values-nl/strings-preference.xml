@@ -145,4 +145,7 @@
     <string name="title_map_query_refused">Geweigerde zoekopdrachten interpreteren als niet toegestane hosts</string>
     <string name="summary_map_query_refused">Sommige DNS servers kunnen een zoekopdracht weigeren te beantwoorden als de host niet is toegestaan of wordt geblokkeerd. Deze instelling blokkeert de host in plaats van de zoekopdracht te weigeren, anders kan het systeem in de war raken.</string>
 
+    <string name="title_simple_notification">Eenvoudige melding</string>
+    <string name="summary_simple_notification">Gebruik een eenvoudige tekst in de melding</string>
+
     </resources>
