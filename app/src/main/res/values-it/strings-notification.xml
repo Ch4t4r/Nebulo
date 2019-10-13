@@ -61,4 +61,5 @@
     <string name="notification_service_killed_title">Informazioni sull\'ottimizzazione della batteria</string>
     <string name="notification_service_killed_message">Sembra che l\'app sia stata precedentemente fermata dal sistema. Clicca qui per informazioni.</string>
     <string name="notification_service_killed_ignore">Ignora</string>
-</resources>
+<string name="notification_simple_text">Server attuale: %1$s</string>
+    </resources>
