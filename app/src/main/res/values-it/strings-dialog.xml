@@ -38,7 +38,7 @@
 \n(%1s)</string>
 
     <string name="dialog_logexport_text">Come vuoi condividere i registri\?</string>
-    <string name="dialog_logexport_general">Esportazione generale</string>
+    <string name="dialog_logexport_general">Scegli app</string>
     <string name="dialog_logexport_email">Email</string>
 
     <string name="dialog_deletelogs_text">Sei sicuro di volere eliminare tutti i registri\?</string>
