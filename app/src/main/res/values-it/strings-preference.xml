@@ -147,4 +147,7 @@
     <string name="title_delete_queries">Svuota richieste</string>
     <string name="summary_delete_queries">Clicca qui per eliminare tutte le richieste registrate.</string>
 
+    <string name="title_simple_notification">Notifica semplice</string>
+    <string name="summary_simple_notification">Usa un testo semplice nella notifica</string>
+
     </resources>
