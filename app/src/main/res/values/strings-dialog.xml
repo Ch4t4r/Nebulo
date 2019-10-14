@@ -42,6 +42,7 @@
     <string name="dialog_serverimportfailed_text">The server(s) could not be imported.</string>
     <string name="dialog_serverimportfailed_text_exception" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">The servers could not be imported.\n(%1s)</string>
 
+    <string name="dialog_logexport_loading_title">Preparing logs</string>
     <string name="dialog_logexport_text">How do you want to share the logs?</string>
     <string name="dialog_logexport_general">Choose app</string>
     <string name="dialog_logexport_email">E-Mail</string>
