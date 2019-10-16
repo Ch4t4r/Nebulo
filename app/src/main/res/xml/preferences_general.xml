@@ -6,6 +6,7 @@
                 android:entries="@array/languages"
                 android:entryValues="@array/language_values"
                 android:key="language"
+                android:defaultValue="auto"
                 android:summary="@string/summary_language"
                 android:title="@string/title_language" />
 
