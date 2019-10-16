@@ -27,6 +27,7 @@ class DatasavingSentryEventHelper :EventBuilderHelper {
 
     override fun helpBuildingEvent(eventBuilder: EventBuilder) {
         eventBuilder.withDist(BuildConfig.VERSION_CODE.toString())
+        eventBuilder.withRelease("com.frostnerd.smokescreen-" + BuildConfig.VERSION_NAME)
         eventBuilder.withContexts(contexts)
     }
 

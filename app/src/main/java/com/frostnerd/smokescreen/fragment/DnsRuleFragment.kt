@@ -114,7 +114,7 @@ class DnsRuleFragment : Fragment() {
                     sourceAdapterList.add(insertPos, newSource)
                     sourceAdapter.notifyItemInserted(insertPos)
                     list.scrollToPosition(insertPos)
-                    getDatabase().hostSourceDao().insert(newSource)
+                    newSource.id = getDatabase().hostSourceDao().insert(newSource)
                 }
             }, showFileChooser = { callback ->
                 fileChosenCallback = callback
@@ -524,17 +524,23 @@ class DnsRuleFragment : Fragment() {
         val delete = view.delete
         val ruleCount = view.ruleCount
         val whitelistIndicator = view.sourceWhitelistIndicator
-        lateinit var source: HostSource
+        private var source: HostSource? = null
 
         init {
             delete.setOnClickListener {
-                deleteSource(source)
+                source?.also {
+                    deleteSource(it)
+                }
             }
             enabled.setOnCheckedChangeListener { _, isChecked ->
-                changeSourceStatus(source, isChecked)
+                source?.also {
+                    changeSourceStatus(it, isChecked)
+                }
             }
             view.cardContent.setOnClickListener {
-                editSource(source)
+                source?.also {
+                    editSource(it)
+                }
             }
         }
 

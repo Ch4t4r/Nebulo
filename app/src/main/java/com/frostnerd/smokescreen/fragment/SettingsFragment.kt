@@ -12,11 +12,13 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
+import androidx.lifecycle.LifecycleOwner
 import androidx.preference.CheckBoxPreference
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.frostnerd.general.isInt
+import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.activity.SettingsActivity
@@ -25,8 +27,13 @@ import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.LoadingDialog
 import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Theme
 import io.sentry.Sentry
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -310,6 +317,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val minCacheTime = findPreference("dnscache_minimum_time") as EditTextPreference
         val cacheTime = findPreference("dnscache_custom_time") as EditTextPreference
         val nxDomainCacheTime = findPreference("dnscache_nxdomain_cachetime") as EditTextPreference
+        val clearCache = findPreference("clear_dns_cache")
 
         val updateState = { isCacheEnabled: Boolean, isUsingDefaultTime: Boolean ->
             cacheMaxSize.isEnabled = isCacheEnabled
@@ -369,6 +377,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else {
                 false
             }
+        }
+        clearCache.setOnPreferenceClickListener {
+            showInfoTextDialog(context!!,
+                getString(R.string.title_clear_dnscache),
+                getString(R.string.dialog_cleardnscache_message),
+                getString(R.string.all_yes) to { dialog, _ ->
+                    GlobalScope.launch {
+                        getDatabase().cachedResponseDao().deleteAll()
+                        DnsVpnService.invalidateDNSCache(context!!)
+                    }
+                    dialog.dismiss()
+                }).show()
+            true
         }
     }
 
@@ -482,12 +503,27 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
 fun Context.showLogExportDialog(onDismiss: (() -> Unit)? = null) {
     log("Trying to send logs..")
-    val zipFile = this.zipAllLogFiles()
-    if (zipFile != null) {
-        val zipUri =
-            FileProvider.getUriForFile(this, "com.frostnerd.smokescreen.LogZipProvider", zipFile)
-        showLogExportDialog(zipUri, onDismiss)
-    } else log("Cannot send, zip file is null.")
+    val scope = if (this is LifecycleOwner) LifecycleCoroutineScope(this, ui = false)
+    else GlobalScope
+
+    val loadingDialog = LoadingDialog(this, R.string.dialog_logexport_loading_title).also {
+        it.show()
+    }
+    scope.launch {
+        val zipFile = this@showLogExportDialog.zipAllLogFiles()
+        if (zipFile != null) {
+            val zipUri =
+                FileProvider.getUriForFile(
+                    this@showLogExportDialog,
+                    "com.frostnerd.smokescreen.LogZipProvider",
+                    zipFile
+                )
+            withContext(Dispatchers.Main) {
+                loadingDialog.dismiss()
+                showLogExportDialog(zipUri, onDismiss)
+            }
+        } else log("Cannot send, zip file is null.")
+    }
 }
 
 private fun Context.showLogExportDialog(zipUri: Uri, onDismiss: (() -> Unit)? = null) {
