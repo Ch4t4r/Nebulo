@@ -103,4 +103,9 @@
     <string name="changelog_build_48_1">Einstellung zum vereinfachen der Benachrichtigung hinzugefügt</string>
     <string name="changelog_build_48_2">Das Anfragenprotokoll zeigt nun die Quelle einer DNS Regel, wurde de Anfrage von einer DNS Regel beantwortet</string>
     <string name="changelog_build_48_3">Die Sprache wird nun korrekt in allen Fenstern gewechselt, wenn sie in den Einstellungen der Ap geändert wird</string>
+    <string name="changelog_build_49_1">Dies ist das Update, in welchem Nebulo den Betastatus verlässt!</string>
+    <string name="changelog_build_49_2">Es wurde eine Einstellung hinzugefügt, um den DNS Cache zu leeren</string>
+    <string name="changelog_build_49_3">Die automatischen Absturzmeldungen können nun auf komplett, minimal und aus gesetzt werden (vorher war nur an/aus möglich)</string>
+    <string name="changelog_build_49_4">Das Anfragenprotokoll zeigt nun einen Indikator, wenn der DNS Server den Host möglicherweise blockiert hat</string>
+    <string name="changelog_build_49_5">Das Exportieren der Logdateien zeigt nun einen Ladedialog</string>
     </resources>
