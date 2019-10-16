@@ -19,6 +19,9 @@ import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.util.LiveDataSource
 import kotlinx.android.synthetic.main.fragment_querylog_list.*
 import kotlinx.android.synthetic.main.item_logged_query.view.*
+import org.minidns.record.A
+import org.minidns.record.AAAA
+import org.minidns.record.Record
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -75,13 +78,21 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
             bindModelView = { viewHolder, position, data ->
                 viewHolder.itemView.findViewById<TextView>(R.id.text).text = data.shortName
                 viewHolder.itemView.tag = data
-                viewHolder.itemView.typeImage.setImageResource(when(data.responseSource) {
-                    QueryListener.Source.UPSTREAM -> R.drawable.ic_reply
-                    QueryListener.Source.CACHE, QueryListener.Source.CACHE_AND_LOCALRESOLVER -> R.drawable.ic_database
-                    QueryListener.Source.LOCALRESOLVER -> R.drawable.ic_flag
-                    else -> R.drawable.ic_query_question
-                })
-                if(isDisplayingQuery(data)) displayQuery(data, false)
+                viewHolder.itemView.typeImage.setImageResource(
+                    when (data.responseSource) {
+                        QueryListener.Source.UPSTREAM -> R.drawable.ic_reply
+                        QueryListener.Source.CACHE, QueryListener.Source.CACHE_AND_LOCALRESOLVER -> R.drawable.ic_database
+                        QueryListener.Source.LOCALRESOLVER -> R.drawable.ic_flag
+                        else -> {
+                            if (data.getParsedResponses().any {
+                                    (it.type == Record.TYPE.A && (it.payload as A).toString() == "0.0.0.0"
+                                            || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString() == "::1"))
+                                }) R.drawable.ic_flag
+                            else R.drawable.ic_query_question
+                        }
+                    }
+                )
+                if (isDisplayingQuery(data)) displayQuery(data, false)
             }
             bindNonModelView = { viewHolder, position ->
 
