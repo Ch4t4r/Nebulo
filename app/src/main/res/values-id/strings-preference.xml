@@ -80,9 +80,6 @@
     <string name="title_delete_all_logs">Hapus semua log</string>
     <string name="summary_delete_all_logs">Menghapus semua log yang tersimpan di perangkat Anda.</string>
 
-    <string name="title_enable_sentry">Aktifkan pelaporan kerusakan</string>
-    <string name="summary_enable_sentry">Secara otomatis mengirim laporan kerusakan ke pengembang. Data hanya dikirim saat rusak.</string>
-
 
     <string name="preference_category_ip">Setelan IP</string>
 

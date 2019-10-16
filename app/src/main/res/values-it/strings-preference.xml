@@ -86,9 +86,6 @@
     <string name="title_delete_all_logs">Elimina tutti i registri</string>
     <string name="summary_delete_all_logs">Elimina tutti i registri salvati nel dispositivo.</string>
 
-    <string name="title_enable_sentry">Attiva segnalazione errori</string>
-    <string name="summary_enable_sentry">Invia automaticamente segnalazioni di errore allo sviluppatore. I dati vengono trasmessi solo sui crash.</string>
-
 
     <string name="preference_category_ip">Impostazioni IP</string>
 

@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.database.EXECUTED_MIGRATIONS
+import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import io.sentry.Sentry
 import io.sentry.event.Event
 import io.sentry.event.EventBuilder
@@ -56,7 +57,7 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                 .withSentryInterface(ExceptionInterface(e)).build().apply {
                     Sentry.capture(this)
                 }
-        } else if (getPreferences().crashReportingEnabled && extras != null && extras.isNotEmpty()) {
+        } else if (getPreferences().crashreportingType == Crashreporting.FULL && extras != null && extras.isNotEmpty()) {
             // Extra data is only passed when not in data-saving mode.
             EventBuilder().withMessage(e.message)
                 .withLevel(Event.Level.ERROR)

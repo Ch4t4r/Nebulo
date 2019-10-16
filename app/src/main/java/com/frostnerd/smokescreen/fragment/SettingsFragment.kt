@@ -13,13 +13,11 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.lifecycle.LifecycleOwner
-import androidx.preference.CheckBoxPreference
-import androidx.preference.EditTextPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.*
 import com.frostnerd.general.isInt
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.activity.SettingsActivity
 import com.frostnerd.smokescreen.database.getDatabase
@@ -28,6 +26,7 @@ import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.LoadingDialog
 import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import com.frostnerd.smokescreen.util.preferences.Theme
 import io.sentry.Sentry
 import kotlinx.coroutines.Dispatchers
@@ -397,7 +396,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val loggingEnabled = findPreference("logging_enabled") as CheckBoxPreference
         val sendLogs = findPreference("send_logs")
         val deleteLogs = findPreference("delete_logs")
-        val crashReporting = findPreference("enable_sentry") as CheckBoxPreference
+        val crashReportingType = findPreference("crashreporting_type") as ListPreference
         loggingEnabled.isChecked = requireContext().getPreferences().loggingEnabled
         sendLogs.isEnabled = loggingEnabled.isChecked
         deleteLogs.isEnabled = loggingEnabled.isChecked
@@ -411,24 +410,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
             deleteLogs.isEnabled = enabled
             true
         }
-        crashReporting.setOnPreferenceClickListener {
-            if(requireContext().getPreferences().crashReportingConsent) {
-                true
-            } else {
+        crashReportingType.setOnPreferenceChangeListener { preference, newValue ->
+            newValue as String
+            if(newValue == Crashreporting.FULL.value && !getPreferences().crashReportingConsent) {
                 CrashReportingEnableDialog(requireContext(), onConsentGiven = {
-                    crashReporting.isChecked = true
+                    crashReportingType.value = Crashreporting.FULL.value
                 }).show()
                 false
-            }
-        }
-        crashReporting.setOnPreferenceChangeListener { _, newValue ->
-            if (!(newValue as Boolean)) {
-                Sentry.close()
-                (requireContext().applicationContext as SmokeScreen).initSentry(Status.DATASAVING)
             } else {
-                (requireContext().applicationContext as SmokeScreen).initSentry(Status.ENABLED)
+                if(newValue == Crashreporting.MINIMAL.value) {
+                    Sentry.close()
+                    (requireContext().applicationContext as SmokeScreen).initSentry(Status.DATASAVING)
+                } else if(newValue == Crashreporting.OFF.value) {
+                    Sentry.close()
+                }
+                true
             }
-            true
         }
         findPreference("send_logs").setOnPreferenceClickListener {
             requireContext().showLogExportDialog()

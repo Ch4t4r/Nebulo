@@ -80,9 +80,6 @@
     <string name="title_delete_all_logs">Excluir todos os relatórios</string>
     <string name="summary_delete_all_logs">Excluir todos os relatórios armazenados no seu dispositivo.</string>
 
-    <string name="title_enable_sentry">Habilitar relatórios de travamento</string>
-    <string name="summary_enable_sentry">Enviar automaticamente relatórios de falha para o desenvolvedor. Os dados só são enviados se o aplicativo tiver um problema ou falhar.</string>
-
 
     <string name="preference_category_ip">Configurações de IP</string>
 

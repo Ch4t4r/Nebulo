@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import io.sentry.Sentry
 import kotlinx.android.synthetic.main.dialog_crashreportingusages.view.*
 import kotlinx.android.synthetic.main.dialog_crashreportingusages_listgroup.view.*
@@ -46,7 +47,7 @@ class CrashReportingEnableDialog(
             DialogInterface.BUTTON_POSITIVE,
             context.getString(R.string.dialog_crashreporting_positive)
         ) { dialog, _ ->
-            context.getPreferences().crashReportingEnabled = true
+            context.getPreferences().crashreportingType = Crashreporting.FULL
             context.getPreferences().crashReportingConsent = true
             (context.applicationContext as SmokeScreen).initSentry(Status.ENABLED)
             onConsentGiven?.invoke()
@@ -56,10 +57,9 @@ class CrashReportingEnableDialog(
             DialogInterface.BUTTON_NEGATIVE,
             context.getString(R.string.dialog_crashreporting_negative)
         ) { dialog, _ ->
-            context.getPreferences().crashReportingEnabled = false
+            context.getPreferences().crashreportingType = Crashreporting.OFF
             context.getPreferences().crashReportingConsent = false
             Sentry.close()
-            (context.applicationContext as SmokeScreen).initSentry(Status.DATASAVING)
             dialog.dismiss()
         }
         setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.dialog_crashreporting_neutral)) { _, _ ->

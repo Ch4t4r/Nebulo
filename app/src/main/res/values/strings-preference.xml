@@ -88,8 +88,8 @@
     <string name="title_delete_all_logs">Delete all logs</string>
     <string name="summary_delete_all_logs">Deletes all logs stored on your device.</string>
 
-    <string name="title_enable_sentry">Enable crash reporting</string>
-    <string name="summary_enable_sentry">Automatically send crash reports to the developer. Data is only transmitted on crashes.</string>
+    <string name="title_crashreporting_type">Automatic crash reporting</string>
+    <string name="summary_crashreporting_type">Configure what data should be transmitted to the developer when the app crashes. Crash data never contains personal data and helps fixing problems faster.</string>
 
 
     <string name="preference_category_ip">IP settings</string>
@@ -164,5 +164,20 @@
         <item>pt</item>
         <item>ru</item>
         <item>tr</item>
+    </string-array>
+
+    <string name="crashreporting_type_full">Full (Report statistic and debug data)</string>
+    <string name="crashreporting_type_minimal">Minimal (Only report Android &amp; App version)</string>
+    <string name="crashreporting_type_off">Off (Don\'t send crashreports)</string>
+    <string-array name="crashreporting_types">
+        <item>@string/crashreporting_type_full</item>
+        <item>@string/crashreporting_type_minimal</item>
+        <item>@string/crashreporting_type_off</item>
+    </string-array>
+
+    <string-array name="crashreporting_types_values">
+        <item>full</item>
+        <item>minimal</item>
+        <item>off</item>
     </string-array>
 </resources>

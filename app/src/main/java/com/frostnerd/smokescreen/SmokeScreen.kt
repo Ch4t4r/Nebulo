@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.util.crashhelpers.DatasavingSentryEventHelper
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
 import io.sentry.event.User
@@ -93,8 +94,8 @@ class SmokeScreen : Application() {
 
     fun initSentry(forceStatus: Status = Status.NONE) {
         if (!BuildConfig.DEBUG) {
-            val reportingEnabled = getPreferences().crashReportingEnabled
-            if (forceStatus != Status.DATASAVING && (reportingEnabled || forceStatus == Status.ENABLED)) {
+            val enabledType = getPreferences().crashreportingType
+            if (forceStatus != Status.DATASAVING && (enabledType == Crashreporting.FULL || forceStatus == Status.ENABLED)) {
                 // Enable Sentry in full mode
                 // This passes some device-related data, but nothing which allows user actions to be tracked across the app
                 // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
@@ -124,7 +125,7 @@ class SmokeScreen : Application() {
                         addTag("richdata", "true")
                     }
                 }
-            } else if(!reportingEnabled || forceStatus == Status.DATASAVING){
+            } else if(enabledType == Crashreporting.MINIMAL || forceStatus == Status.DATASAVING){
                 // Inits Sentry in datasaving mode
                 // Only data absolutely necessary is transmitted (Android version, app version).
                 // Only crashes will be reported, no regular events.
@@ -170,14 +171,14 @@ class SmokeScreen : Application() {
                     "alpha",
                     true
                 ) || BuildConfig.VERSION_NAME.contains("beta", true)
-            if (isPrerelease && getPreferences().loggingEnabled && !getPreferences().crashReportingEnabled) {
+            if (isPrerelease && getPreferences().loggingEnabled && getPreferences().crashreportingType == Crashreporting.OFF) {
                 startActivity(
                     Intent(
                         this@SmokeScreen,
                         ErrorDialogActivity::class.java
                     ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 )
-            } else if (isPrerelease && getPreferences().crashReportingEnabled) {
+            } else if (isPrerelease && getPreferences().crashreportingType != Crashreporting.OFF) {
                 showCrashNotification()
             }
             closeLogger()

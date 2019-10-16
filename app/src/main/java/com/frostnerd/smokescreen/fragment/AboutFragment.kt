@@ -13,6 +13,7 @@ import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
 import com.frostnerd.smokescreen.dialog.LicensesDialog
 import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
+import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import kotlinx.android.synthetic.main.fragment_about.view.*
 import java.util.*
 
@@ -91,7 +92,7 @@ class AboutFragment : Fragment() {
                     BuildConfig.VERSION_NAME + if (BuildConfig.DEBUG) " DEBUG" else "",
                     BuildConfig.VERSION_CODE,
                     AppDatabase.currentVersion,
-                    if (context!!.getPreferences().crashReportingEnabled) context!!.getPreferences().crashReportingUUID else "---"
+                    if (context!!.getPreferences().crashreportingType == Crashreporting.FULL) context!!.getPreferences().crashReportingUUID else "---"
                 )
             )
         }

@@ -80,9 +80,6 @@
     <string name="title_delete_all_logs">Tüm günlükleri sil</string>
     <string name="summary_delete_all_logs">Cihazınızda depolanan tüm günlükleri siler.</string>
 
-    <string name="title_enable_sentry">Çökme raporlamasını etkinleştir</string>
-    <string name="summary_enable_sentry">Çökme raporlarını geliştiriciye otomatik olarak gönderin. Veri yalnızca çökmelerde iletilir.</string>
-
 
     <string name="preference_category_ip">IP ayarları</string>
 

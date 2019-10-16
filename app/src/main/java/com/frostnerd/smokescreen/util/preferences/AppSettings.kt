@@ -80,7 +80,6 @@ interface AppSettings {
 
     // Logging category
     var loggingEnabled: Boolean
-    var crashReportingEnabled:Boolean
 
 
     // IP category
@@ -200,7 +199,10 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         "advanced_logging",
         false
     )
-    override var crashReportingEnabled: Boolean by booleanPref("enable_sentry", false)
+    private var oldCrashreportSetting: Boolean by booleanPref("enable_sentry", false)
+    var crashreportingType: Crashreporting by CrashReportingPreferenceWithDefault("crashreporting_type") {
+        if (oldCrashreportSetting) Crashreporting.FULL else Crashreporting.MINIMAL
+    }
 
     override var enableIpv6: Boolean by booleanPref("ipv6_enabled", true)
     override var enableIpv4: Boolean by booleanPref("ipv4_enabled", true)
@@ -269,4 +271,8 @@ private val migration = buildMigration {
     initialMigration { _, _, _ ->
 
     }
+}
+
+enum class Crashreporting(val value:String) {
+    FULL("full"), MINIMAL("minimal"), OFF("off")
 }

@@ -79,9 +79,6 @@
     <string name="title_delete_all_logs">Verwijder alle logs</string>
     <string name="summary_delete_all_logs">Verwijdert alle logs die op uw apparaat zijn opgeslagen.</string>
 
-    <string name="title_enable_sentry">Schakel crash rapportage in</string>
-    <string name="summary_enable_sentry">Stuur automatisch crashmeldingen naar de ontwikkelaar. Gegevens worden alleen bij crashes overgedragen.</string>
-
 
     <string name="preference_category_ip">IP instellingen</string>
 

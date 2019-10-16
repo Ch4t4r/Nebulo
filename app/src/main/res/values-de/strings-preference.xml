@@ -80,10 +80,6 @@
     <string name="title_delete_all_logs">Alle Protokolle löschen</string>
     <string name="summary_delete_all_logs">Lösche alle auf deinem Gerät gespeicherten Protokolle.</string>
 
-    <string name="title_enable_sentry">Absturzmeldungen aktivieren</string>
-    <string name="summary_enable_sentry">Sende automatische Absturzmeldungen an den Entwickler. Daten werden nur verschickt, wenn die App ein Problem hat oder abstürzt.</string>
-
-
     <string name="preference_category_ip">IP Einstellungen</string>
 
     <string name="title_enable_ipv6">IPv6 aktivieren</string>
