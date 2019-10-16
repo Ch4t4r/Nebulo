@@ -311,4 +311,18 @@
         <item>@string/changelog_build_27_1</item>
     </string-array>
     
+    <string name="changelog_build_49_1">This is the update where Nebulo is finally leaving Beta status!</string>
+    <string name="changelog_build_49_2">A setting has been added which clears the DNS cache</string>
+    <string name="changelog_build_49_3">The automatic crash reporting can now be set to full, minimal and off (previously only on/off was possible)</string>
+    <string name="changelog_build_49_4">The query log now shows an indication when the DNS server might have blocked the host</string>
+    <string name="changelog_build_49_5">Exporting the log files now shows a loading dialog</string>
+    <string-array name="changelog_build_49">
+        <item>@string/changelog_build_49_1</item>
+        <item>@string/changelog_build_49_2</item>
+        <item>@string/changelog_build_49_3</item>
+        <item>@string/changelog_build_49_4</item>
+        <item>@string/changelog_build_49_5</item>
+        <item>@string/changelog_build_43_6</item>
+    </string-array>
+    
 </resources>
