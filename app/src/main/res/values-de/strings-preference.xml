@@ -145,4 +145,12 @@
     <string name="title_simple_notification">Simple Benachrichtigung</string>
     <string name="summary_simple_notification">Zeige eine simplifizierte Benachrichtigung</string>
 
+    <string name="title_clear_dnscache"></string>
+    <string name="title_crashreporting_type"></string>
+    <string name="summary_crashreporting_type"></string>
+
+
+    <string name="crashreporting_type_full"></string>
+    <string name="crashreporting_type_minimal"></string>
+    <string name="crashreporting_type_off"></string>
     </resources>
