@@ -320,6 +320,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val updateState = { isCacheEnabled: Boolean, isUsingDefaultTime: Boolean ->
             cacheMaxSize.isEnabled = isCacheEnabled
+            clearCache.isEnabled = isCacheEnabled
             useDefaultTime.isEnabled = isCacheEnabled
             cacheTime.isEnabled = isCacheEnabled && !isUsingDefaultTime
             nxDomainCacheTime.isEnabled = cacheTime.isEnabled
