@@ -114,7 +114,7 @@ class DnsRuleFragment : Fragment() {
                     sourceAdapterList.add(insertPos, newSource)
                     sourceAdapter.notifyItemInserted(insertPos)
                     list.scrollToPosition(insertPos)
-                    getDatabase().hostSourceDao().insert(newSource)
+                    newSource.id = getDatabase().hostSourceDao().insert(newSource)
                 }
             }, showFileChooser = { callback ->
                 fileChosenCallback = callback

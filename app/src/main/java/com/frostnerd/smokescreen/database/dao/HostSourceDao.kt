@@ -28,7 +28,7 @@ interface HostSourceDao {
     fun findById(sourceId: Long):HostSource?
 
     @Insert
-    fun insert(hostSource: HostSource)
+    fun insert(hostSource: HostSource):Long
 
     @Insert
     fun insertAll(hostSources: Collection<HostSource>)
