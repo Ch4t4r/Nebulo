@@ -57,6 +57,7 @@
     <string name="summary_dnscache_keepacrosslaunches">Keep the DNS cache across multiple launches</string>
 
     <string name="title_clear_dnscache">Clear DNS cache</string>
+    <string name="summary_clear_dnscache">Click here to clear the DNS cache, for example when websites start misbehaving because they are cached.</string>
 
     <string name="title_dnscache_maxsize">Maximum Cache size</string>
     <string name="summary_dnscache_maxsize">Sets the maximum of entries the cache can hold at any time</string>

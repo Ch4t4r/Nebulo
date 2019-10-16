@@ -15,6 +15,7 @@
 
         <Preference
                 android:key="clear_dns_cache"
+                android:summary="@string/summary_clear_dnscache"
                 android:title="@string/title_clear_dnscache" />
 
         <EditTextPreference
