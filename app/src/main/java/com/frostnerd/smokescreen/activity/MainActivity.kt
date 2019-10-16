@@ -104,7 +104,7 @@ class MainActivity : NavigationDrawerActivity() {
         supportActionBar?.elevation = 0f
         ChangelogDialog.showNewVersionChangelog(this)
         getPreferences().totalAppLaunches += 1
-        if(getPreferences().totalAppLaunches >= 5 &&
+        if(getPreferences().totalAppLaunches >= 7 &&
             !getPreferences().askedForGroupJoin &&
             Random.nextInt(0,100) < 15 &&
                 isPackageInstalled(this, "org.telegram.messenger")) {
