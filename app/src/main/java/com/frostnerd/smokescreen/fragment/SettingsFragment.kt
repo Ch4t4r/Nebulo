@@ -27,6 +27,7 @@ import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.LoadingDialog
 import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Theme
 import io.sentry.Sentry
 import kotlinx.coroutines.Dispatchers
@@ -316,6 +317,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val minCacheTime = findPreference("dnscache_minimum_time") as EditTextPreference
         val cacheTime = findPreference("dnscache_custom_time") as EditTextPreference
         val nxDomainCacheTime = findPreference("dnscache_nxdomain_cachetime") as EditTextPreference
+        val clearCache = findPreference("clear_dns_cache")
 
         val updateState = { isCacheEnabled: Boolean, isUsingDefaultTime: Boolean ->
             cacheMaxSize.isEnabled = isCacheEnabled
@@ -375,6 +377,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else {
                 false
             }
+        }
+        clearCache.setOnPreferenceClickListener {
+            showInfoTextDialog(context!!,
+                getString(R.string.title_clear_dnscache),
+                getString(R.string.dialog_cleardnscache_message),
+                getString(R.string.all_yes) to { dialog, _ ->
+                    GlobalScope.launch {
+                        getDatabase().cachedResponseDao().deleteAll()
+                        DnsVpnService.invalidateDNSCache(context!!)
+                    }
+                    dialog.dismiss()
+                }).show()
+            true
         }
     }
 

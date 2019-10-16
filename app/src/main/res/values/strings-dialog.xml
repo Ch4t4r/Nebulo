@@ -174,5 +174,7 @@
         <item>@string/dialog_hostsourcerefresh_timeunit_days</item>
         <item>@string/dialog_hostsourcerefresh_timeunit_weeks</item>
     </string-array>
+    
+    <string name="dialog_cleardnscache_message">Are you sure you want to clear the DNS cache?</string>
 
 </resources>

@@ -131,6 +131,12 @@ class DnsVpnService : VpnService(), Runnable {
             } else startVpn(context)
         }
 
+        fun invalidateDNSCache(context: Context) {
+            if(context.isServiceRunning(DnsVpnService::class.java)) {
+                sendCommand(context, Command.INVALIDATE_DNS_CACHE)
+            }
+        }
+
         fun restartVpn(context: Context, serverInfo: DnsServerInformation<*>?) {
             if (context.isServiceRunning(DnsVpnService::class.java)) {
                 val bundle = Bundle()
@@ -473,6 +479,10 @@ class DnsVpnService : VpnService(), Runnable {
                 Command.IGNORE_SERVICE_KILLED -> {
                     getPreferences().ignoreServiceKilled = true
                     updateNotification()
+                }
+                Command.INVALIDATE_DNS_CACHE -> {
+                    dnsProxy?.cache?.clear()
+                    restartVpn(this, false)
                 }
             }
         } else {
@@ -1280,7 +1290,7 @@ class DnsVpnService : VpnService(), Runnable {
 }
 
 enum class Command : Serializable {
-    STOP, RESTART, PAUSE_RESUME, IGNORE_SERVICE_KILLED
+    STOP, RESTART, PAUSE_RESUME, IGNORE_SERVICE_KILLED, INVALIDATE_DNS_CACHE
 }
 
 data class DnsServerConfiguration(
