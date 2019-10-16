@@ -136,6 +136,7 @@ class SmokeScreen : Application() {
                     Sentry.getStoredClient().apply {
                         addTag("richdata", "false")
                         addTag("dist", BuildConfig.VERSION_CODE.toString())
+                        addExtra("dist", BuildConfig.VERSION_CODE)
                         this.builderHelpers.forEach {
                             this.removeBuilderHelper(it)
                         }
