@@ -6,7 +6,7 @@
                 android:key="dnscache_enabled"
                 android:title="@string/title_dnscache_enabled"
                 android:summary="@string/summary_dnscache_enabled"
-                android:defaultValue="true"/>
+                android:defaultValue="false"/>
         <CheckBoxPreference
                 android:key="dnscache_keepacrosslaunches"
                 android:title="@string/title_dnscache_keepacrosslaunches"
