@@ -133,6 +133,7 @@ class SmokeScreen : Application() {
                         "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
                         AndroidSentryClientFactory(this@SmokeScreen)
                     )
+                    Sentry.getContext().user = User("anon-" + BuildConfig.VERSION_CODE, null, null, null)
                     Sentry.getStoredClient().apply {
                         addTag("richdata", "false")
                         addTag("dist", BuildConfig.VERSION_CODE.toString())
