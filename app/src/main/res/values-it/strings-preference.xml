@@ -48,7 +48,9 @@
     <string name="preference_category_cache">Controllo della cache</string>
 
     <string name="title_dnscache_enabled">Usa la cache DNS</string>
-    <string name="summary_dnscache_enabled">Attiva la cache DNS dell\'app. La cache memorizza le vecchie richieste per rispondere alle domande future più velocemente</string>
+    <string name="summary_dnscache_enabled">Attiva la cache DNS dell\'app. La cache memorizza le vecchie richieste per rispondere alle domande future più velocemente.
+\n
+\nIl sistema ha già una cache, attiva questa se vuoi personalizzare il comportamento.</string>
 
     <string name="title_dnscache_keepacrosslaunches">Mantieni la cache DNS</string>
     <string name="summary_dnscache_keepacrosslaunches">Mantieni la cache DNS tra avvii diversi dell\'app</string>
@@ -147,4 +149,14 @@
     <string name="title_simple_notification">Notifica semplice</string>
     <string name="summary_simple_notification">Usa un testo semplice nella notifica</string>
 
+    <string name="title_clear_dnscache">Svuota cache DNS</string>
+    <string name="summary_clear_dnscache">Clicca qui per svuotare la cache DNS, ad esempio quando i siti si comportano in modo strano perchè sono in cache.</string>
+
+    <string name="title_crashreporting_type">Segnalazione automatica crash</string>
+    <string name="summary_crashreporting_type">Configura quali dati vengono trasmessi allo sviluppatore quando l\'app va in errore. I dati non contengono mai info personali ed aiutano a risolvere i problemi velocemente.</string>
+
+
+    <string name="crashreporting_type_full">Completa (Segnala statistiche e dati di debug)</string>
+    <string name="crashreporting_type_minimal">Minimale (Segnala solo versione di Android e app)</string>
+    <string name="crashreporting_type_off">Spenta (Non inviare segnalazioni)</string>
     </resources>
