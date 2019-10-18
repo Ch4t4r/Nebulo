@@ -206,8 +206,10 @@ class DnsRuleFragment : Fragment() {
                         getString(R.string.dialog_deletehostsource_message, it.name),
                         getString(R.string.all_yes) to { dialog, _ ->
                             val pos = sourceAdapterList.indexOf(it)
-                            sourceAdapterList.removeAt(pos)
-                            sourceAdapter.notifyItemRemoved(pos)
+                            if(pos >= 0) {
+                                sourceAdapterList.removeAt(pos)
+                                sourceAdapter.notifyItemRemoved(pos)
+                            }
                             GlobalScope.launch {
                                 getDatabase().dnsRuleDao().deleteAllFromSource(it.id)
                                 getDatabase().hostSourceDao().delete(it)
