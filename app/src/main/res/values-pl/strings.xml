@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="all_stop">Stop</string>
+<resources xmlns:tools="http://schemas.android.com/tools"><string name="all_stop">Stop</string>
     <string name="all_start">Start</string>
     <string name="all_pause">Pauza</string>
     <string name="all_resume">Wznów</string>
@@ -18,4 +18,54 @@
     <string name="quicksettings_start_text">Uruchom Nebulo</string>
 
     <string name="about_share">Udostępnij</string>
-    </resources>
+    <string name="activity_label_import_queries">Importuj kwerendy</string>
+    <string name="activity_label_import_servers">Importuj serwer(y)</string>
+    <string name="activity_label_speed_test">Porównanie prędkości serwerów</string>
+
+    <string name="activity_label_enable_logging">Eksportuj logi/Włącz tworzenie logów</string>
+
+    <string name="error_invalid_url">Podaj prawidłowy adres URL.</string>
+    <string name="error_invalid_pin">Podaj swój PIN.</string>
+    <string name="error_invalid_servername">Podaj nazwę.</string>
+
+    <string name="crashreporting_thankyou">Dziękuję! Jeśli chcesz zmienić zdanie, zrób to w ustawieniach.</string>
+    <string name="about_licenses">Licencje Open-source</string>
+    <string name="about_changelog">Changelog</string>
+    <string name="about_telegram_group">Grupa Telegram</string>
+    <string name="about_privacypolicy">Polityka prywatności</string>
+    <string name="about_info">Informacje ogólne</string>
+    <string name="about_help_translating">Pomoc w tłumaczeniu</string>
+
+    <string name="window_speedtest_runtest">Rozpocznij test</string>
+
+    <string name="error_no_webbrowser_installed">Nie posiadasz aplikacji, która mogłaby otworzyć ten link.</string>
+
+    <string name="button_main_dnsrules">Zasady DNS</string>
+
+    <string name="window_dnsrules_customhosts">Własne hosty</string>
+    <plurals name="window_dnsrules_subtitle">
+	<item quantity="one">%1d zasada</item>
+	<item quantity="few">%1d zasady</item>
+	<item quantity="many"></item>
+</plurals>
+    <string name="window_dnsrules_hostalreadyexists">Zasada dla tego hosta już istnieje.</string>
+    <string name="window_dnsrules_customhosts_message">Zdefiniuj własnych hostów tutaj.</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Zasady z tego źródła: -</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Zasady z tego źródła: %1d (%2$d nieużywanych duplikatów)</string>
+
+    <string name="windows_querylogging_search_hint">Szukaj hosta w logu żądań</string>
+    <string name="windows_querylogging_search">Wyszukiwanie hostów</string>
+    <string name="windows_querylogging_time">Czas</string>
+    <string name="windows_querylogging_type">Typ</string>
+    <string name="windows_querylogging_question">Zapytanie</string>
+    <string name="windows_querylogging_used_server">Użyty serwer</string>
+    <string name="windows_querylogging_hostsource">Źródło zasady DNS</string>
+    <string name="windows_querylogging_hostsource__user">Zasady użytkownika</string>
+    <string name="windows_querylogging_hostsource__unknown">Nieznane</string>
+    <string name="windows_querylogging_protocol">Protokół</string>
+    <string name="windows_querylogging_latency">Opóźnienie</string>
+    <string name="windows_querylogging_responses">Odpowiedzi</string>
+    <string name="windows_querylogging_create_dnsrule">Stwórz zasadę DNS dla tego hosta</string>
+    <string name="windows_querylogging_dnsrule_created">Zasada DNS została utworzona.</string>
+    <string name="window_main_privatedns_info">Prywatny DNS jest aktywny, twoje zapytania DNS są już chronione. Włącz Nebulo jeśli chcesz używać DNS-Over-HTTP albo innych użytecznych funkcji.</string>
+</resources>
