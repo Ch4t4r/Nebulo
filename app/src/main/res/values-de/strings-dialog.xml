@@ -74,11 +74,11 @@
     <string name="dialog_crashreporting_positive">Absturzmeldungen aktivieren</string>
     <string name="dialog_crashreporting_negative">Nein, Danke.</string>
     <string name="dialog_crashreporting_neutral">Daten ansehen</string>
-    <string name="dialog_crashreporting_message">Danke, dass du ein Tester in dieser App bist!
-\n
-\nDiese App nutzt open-source und selbst gehostete Software aus dritter Hand, um die Verfolgung von Abstürzen leichter zu machen. Wenn (und auch nur wenn) aktiviert, wird die App bei einem Absturz automatisch Daten über den Absturz übermitteln. Diese Meldungen enthalten zusatzlich zur Absturzmeldung weitere statistische Daten über dein Gerät. Dies umfasst eine zufällig erstellte Zeichekette, welche zum Identifizieren von Abstürzen auf dem gleichen Gerät genutzt wird. Diese kann nicht dafür genutzt werden, anderweitige Aktionen zu verfolgen. Das Aktivieren der Absturzmeldungen ist optional, würde mir aber sehr helfen.
-\nMeldungen werden sicher über HTTPS übertragen.
-\n
+    <string name="dialog_crashreporting_message">Danke, dass du Nebulo benutzt!
+\n 
+\nDiese App nutzt open-source und selbst gehostete Software aus dritter Hand, um die Verfolgung von Abstürzen leichter zu machen. Wenn (und auch nur wenn) aktiviert, wird die App bei einem Absturz automatisch Daten über den Absturz übermitteln. Diese Meldungen enthalten zusatzlich zur Absturzmeldung weitere statistische Daten über dein Gerät. Dies umfasst eine zufällig erstellte Zeichekette, welche zum Identifizieren von Abstürzen auf dem gleichen Gerät genutzt wird. Diese kann nicht dafür genutzt werden, anderweitige Aktionen zu verfolgen. Das Aktivieren der Absturzmeldungen ist optional, würde mir aber sehr helfen. 
+\nMeldungen werden sicher über HTTPS übertragen. 
+\n 
 \nKlicke auf \"Daten ansehen\" um einzusehen, welche Arten von Daten übermittelt werden. Dort befindet sich ebenfalls ein Link zur Datenschutzerklärung.</string>
     <string name="dialog_crashreporting_message_notester">Danke, dass du Nebulo benutzt!
 \n
@@ -173,4 +173,7 @@
     <string name="dialog_hostsourcerefresh_timeunit_hours">Stunden</string>
     <string name="dialog_hostsourcerefresh_timeunit_days">Tage</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Wochen</string>
-    </resources>
+    <string name="dialog_logexport_loading_title">Bereite Logdateien vor</string>
+    <string name="dialog_cleardnscache_message">Bist du dir sicher, dass du den DNS Cache leeren möchtest\?</string>
+
+</resources>

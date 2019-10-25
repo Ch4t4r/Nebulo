@@ -145,4 +145,14 @@
     <string name="title_simple_notification">Simple Benachrichtigung</string>
     <string name="summary_simple_notification">Zeige eine simplifizierte Benachrichtigung</string>
 
+    <string name="title_clear_dnscache">DNS Cache leeren</string>
+    <string name="title_crashreporting_type">Automatische Absturzmeldungen</string>
+    <string name="summary_crashreporting_type">Stelle ein, was für Daten bei einem Absturz automatisch an den Entwickler geschickt werden sollen. Absturzdaten enthalten niemals persönliche Daten und helfen dabei, Probleme schneller zu beheben.</string>
+
+
+    <string name="crashreporting_type_full">Komplett (Sende statistische &amp; debug Daten)</string>
+    <string name="crashreporting_type_minimal">Minimal (Sende nur Android &amp; App Version)</string>
+    <string name="crashreporting_type_off">Aus (Sende keine Abstürze)</string>
+    <string name="summary_clear_dnscache">Klicke hier um den DNS Cache zu leeren, zum Beispiel wenn Webseiten nicht mehr richtig funktionieren, da sie gecached sind.</string>
+
     </resources>

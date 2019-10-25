@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_serverconfiguration_title">Konfiguracja serwera</string>
+    <string name="dialog_serverconfiguration_addserver">Dodaj serwer</string>
+
+    <string name="dialog_newserver_title_https">Dodaj serwer (DoH)</string>
+    <string name="dialog_newserver_title_tls">Dodaj serwer (DoT)</string>
+    <string name="dialog_newserver_name">Nazwa serwera</string>
+    <string name="dialog_newserver_name_hint">Przykład</string>
+    <string name="dialog_newserver_primaryserver">Serwer podstawowy</string>
+    <string name="dialog_newserver_secondaryserver">Serwer zapasowy (opcjonalny)</string>
+    <string name="dialog_deleteconfig_title">Skasować ustawienia\?</string>
+    </resources>

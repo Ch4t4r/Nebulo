@@ -1,4 +1,4 @@
 {
-  "main": "",
-  "shortText": ""
+    "main": "Podczas nawigacji do strony internetowej, np. example.com, urządzenie wysyła zayptanie do określonelych serwerów - serwerów DNS - jak adresować stronę internetową. DNS jest starym protokołem, który, z wyjątkiem mniejszych zmian, nie był dotykany od czasu jego utworzenia w 1987 roku. W tym czasie Internet znacznie się zmienił, powodując dezaktualizację protokołu w niektórych jego podstawowych aspektach.\n\nTa aplikacja rozwiązuje jeden z większych problemów z DNS: Szyfrowanie.\nPodczas gdy prawie cały ruch w Internecie jest teraz zaszyfrowany, żądania DNS (tj. pytania o adres nazw) i odpowiedź nie są. Dzięki temu atakujący mogą przechwycić, odczytać i zmodyfikować Twoje żądania.\n\nNebulo jest zmieniaczem DNS, który implementuje DNS-over-HTTPs i DNS-over-TLS, aby bezpiecznie wysyłać żądania DNS do serwera docelowego. W ten sposób tylko Ty i serwer DNS są w stanie odczytywać wysyłane żądania.\n\nPodstawowe funkcje:\n - Skonfiguruj aplikację raz i zapomnij o niej. Po wstępnej konfiguracji działa w pełni autonomicznie.\n - Żadnych reklam i żadnego śledzenia.\n - Możliwość użycia niestandardowych serwerów.\n - Niskie zużycie baterii",
+    "shortText": "Bezpieczna alternatywa dla starych standardów."
 }

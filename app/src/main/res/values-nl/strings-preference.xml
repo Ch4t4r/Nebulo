@@ -45,7 +45,9 @@
     <string name="preference_category_cache">Cache controle</string>
 
     <string name="title_dnscache_enabled">Gebruik DNS-cache</string>
-    <string name="summary_dnscache_enabled">Schakelt DNS-cache in. Het cachegeheugen onthoudt oude verzoeken om toekomstige vragen sneller te beantwoorden</string>
+    <string name="summary_dnscache_enabled">Schakelt DNS-cache in. Het cachegeheugen onthoudt oude verzoeken om toekomstige vragen sneller te beantwoorden
+\n
+\nHet systeem heeft al een cache, schakel deze in als u het gedrag wilt aanpassen.</string>
 
     <string name="title_dnscache_keepacrosslaunches">DNS-cache behouden</string>
     <string name="summary_dnscache_keepacrosslaunches">Sla de DNS-cache op bij het sluiten van de App</string>
@@ -145,4 +147,14 @@
     <string name="title_simple_notification">Eenvoudige melding</string>
     <string name="summary_simple_notification">Gebruik een eenvoudige tekst in de melding</string>
 
+    <string name="title_clear_dnscache">DNS cache wissen</string>
+    <string name="summary_clear_dnscache">Klik hier om de DNS-cache te wissen, bijvoorbeeld wanneer websites niet meer goed werken omdat ze in de cache zijn opgeslagen.</string>
+
+    <string name="title_crashreporting_type">Automatische crashrapportage</string>
+    <string name="summary_crashreporting_type">Configureer welke gegevens naar de ontwikkelaar moeten worden verzonden wanneer de app crasht. Crashgegevens bevatten nooit persoonlijke gegevens en helpen problemen sneller op te lossen.</string>
+
+
+    <string name="crashreporting_type_full">Volledig (rapporteer statistische en debug gegevens)</string>
+    <string name="crashreporting_type_minimal">Minimaal (alleen Android &amp; App-versie melden)</string>
+    <string name="crashreporting_type_off">Uit (Stuur geen crashrapporten)</string>
     </resources>

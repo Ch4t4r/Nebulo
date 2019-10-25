@@ -103,4 +103,9 @@
     <string name="changelog_build_48_1">Een instelling toegevoegd om de melding te vereenvoudigen</string>
     <string name="changelog_build_48_2">Het DNS-logboek toont nu de hostbron van de DNS-regel, als de vraag werd beantwoord vanuit de DNS-regels</string>
     <string name="changelog_build_48_3">"De taal veranderd nu correct in alle vensters wanneer deze wordt gewijzigd in de instellingen  van de app"</string>
+    <string name="changelog_build_49_1">Dit is de update waarin Nebulo eindelijk de Beta status verlaat!</string>
+    <string name="changelog_build_49_2">Er is een instelling toegevoegd die de DNS-cache wist</string>
+    <string name="changelog_build_49_3">De automatische crashrapportage kan nu worden ingesteld op volledig, minimaal en uit (voorheen was alleen aan/uit mogelijk)</string>
+    <string name="changelog_build_49_4">Het DNS-logboek toont nu een indicatie wanneer de DNS-server de host mogelijk heeft geblokkeerd</string>
+    <string name="changelog_build_49_5">Het exporteren van de logbestanden toont nu een laaddialoog</string>
     </resources>

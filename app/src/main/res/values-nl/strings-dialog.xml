@@ -76,11 +76,11 @@
     <string name="dialog_crashreporting_positive">Schakel crashrapportage in</string>
     <string name="dialog_crashreporting_negative">Nee bedankt.</string>
     <string name="dialog_crashreporting_neutral">Zie gegevens</string>
-    <string name="dialog_crashreporting_message">Bedankt dat je een tester bent voor de app!
-\n
-\nDeze app maakt gebruik van open source en zelf gehoste software van derden om app-crashes gemakkelijker te volgen zodra ze zich voordoen. Als en alleen als ingeschakeld, verzendt de app crashmeldingen wanneer de app een crash tegenkomt. Deze rapporten bevatten aanvullende gegevens over de app en uw apparaat. Dit bevat een ID die wordt gebruikt om crashes van dezelfde gebruiker bij te houden, maar kan niet worden gebruikt om iets anders te volgen. Het inschakelen van de crashrapportage is optioneel maar zou mij enorm helpen.
-\nRapporten worden veilig verzonden via HTTPS.
-\n
+    <string name="dialog_crashreporting_message">Bedankt dat u Nebulo gebruikt!
+\n 
+\nDeze app maakt gebruik van open source en zelf gehoste software van derden om app-crashes gemakkelijker te volgen zodra ze zich voordoen. Als en alleen als ingeschakeld, verzendt de app crashmeldingen wanneer de app een crash tegenkomt. Deze rapporten bevatten aanvullende gegevens over de app en uw apparaat. Dit bevat een ID die wordt gebruikt om crashes van dezelfde gebruiker bij te houden, maar kan niet worden gebruikt om iets anders te volgen. Het inschakelen van de crashrapportage is optioneel maar zou mij enorm helpen. 
+\nRapporten worden veilig verzonden via HTTPS. 
+\n 
 \nKlik hieronder op \'Zie gegevens\' om te zien wat voor soort gegevens worden verzonden en voor een link naar het privacybeleid.</string>
     <string name="dialog_crashreporting_message_notester">Bedankt voor het gebruik van Nebulo!
 \n
@@ -172,4 +172,7 @@
     <string name="dialog_hostsourcerefresh_timeunit_hours">Uren</string>
     <string name="dialog_hostsourcerefresh_timeunit_days">Dagen</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Weken</string>
-    </resources>
+    <string name="dialog_logexport_loading_title">Logboeken voorbereiden</string>
+    <string name="dialog_cleardnscache_message">Weet u zeker dat u de DNS-cache wilt wissen\?</string>
+
+</resources>
