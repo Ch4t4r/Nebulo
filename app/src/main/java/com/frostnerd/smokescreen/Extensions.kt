@@ -387,3 +387,9 @@ fun LeakSentry.watchIfEnabled(watchedInstance: Any, name:String) {
         refWatcher.watch(watchedInstance, name)
     }
 }
+
+fun String.equalsAny(vararg options:String, ignoreCase:Boolean = false):Boolean {
+    return options.any {
+        it.equals(this, ignoreCase)
+    }
+}

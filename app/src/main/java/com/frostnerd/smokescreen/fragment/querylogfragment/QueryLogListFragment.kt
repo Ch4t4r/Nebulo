@@ -15,6 +15,7 @@ import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.equalsAny
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.util.LiveDataSource
 import kotlinx.android.synthetic.main.fragment_querylog_list.*
@@ -84,7 +85,7 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
                             if (data.getParsedResponses().any {
                                     if (it.type == Record.TYPE.A) println((it.payload as A).toString())
                                     (it.type == Record.TYPE.A && (it.payload as A).toString() == "0.0.0.0"
-                                            || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString() == "::1"))
+                                            || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString().equalsAny("::1", "::0", "0:0:0:0:0:0:0:0")))
                                 }) R.drawable.ic_flag
                             else R.drawable.ic_reply
                         QueryListener.Source.CACHE, QueryListener.Source.CACHE_AND_LOCALRESOLVER -> R.drawable.ic_database
