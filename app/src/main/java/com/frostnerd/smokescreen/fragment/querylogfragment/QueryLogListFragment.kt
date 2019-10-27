@@ -80,16 +80,16 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
                 viewHolder.itemView.tag = data
                 viewHolder.itemView.typeImage.setImageResource(
                     when (data.responseSource) {
-                        QueryListener.Source.UPSTREAM -> R.drawable.ic_reply
-                        QueryListener.Source.CACHE, QueryListener.Source.CACHE_AND_LOCALRESOLVER -> R.drawable.ic_database
-                        QueryListener.Source.LOCALRESOLVER -> R.drawable.ic_flag
-                        else -> {
+                        QueryListener.Source.UPSTREAM ->
                             if (data.getParsedResponses().any {
+                                    if (it.type == Record.TYPE.A) println((it.payload as A).toString())
                                     (it.type == Record.TYPE.A && (it.payload as A).toString() == "0.0.0.0"
                                             || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString() == "::1"))
                                 }) R.drawable.ic_flag
-                            else R.drawable.ic_query_question
-                        }
+                            else R.drawable.ic_reply
+                        QueryListener.Source.CACHE, QueryListener.Source.CACHE_AND_LOCALRESOLVER -> R.drawable.ic_database
+                        QueryListener.Source.LOCALRESOLVER -> R.drawable.ic_flag
+                        else -> R.drawable.ic_query_question
                     }
                 )
                 if (isDisplayingQuery(data)) displayQuery(data, false)
