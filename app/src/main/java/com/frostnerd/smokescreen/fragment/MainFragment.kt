@@ -55,7 +55,11 @@ class MainFragment : Fragment() {
     private var proxyStarting = false
     private var vpnStateReceiver: BroadcastReceiver? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -78,12 +82,12 @@ class MainFragment : Fragment() {
             updateVpnIndicators()
         }
         startButton.setOnTouchListener { _, event ->
-            if(proxyRunning || proxyStarting) {
+            if (proxyRunning || proxyStarting) {
                 false
             } else {
-                if(event.flags and MotionEvent.FLAG_WINDOW_IS_OBSCURED != 0) {
-                    if(event.action == MotionEvent.ACTION_UP) {
-                        if(VpnService.prepare(context!!) != null) {
+                if (event.flags and MotionEvent.FLAG_WINDOW_IS_OBSCURED != 0) {
+                    if (event.action == MotionEvent.ACTION_UP) {
+                        if (VpnService.prepare(context!!) != null) {
                             showInfoTextDialog(context!!,
                                 getString(R.string.dialog_overlaydetected_title),
                                 getString(R.string.dialog_overlaydetected_message),
@@ -98,7 +102,7 @@ class MainFragment : Fragment() {
                             true
                         } else false
                     } else false
-                }else false
+                } else false
             }
         }
         speedTest.setOnClickListener {
@@ -141,7 +145,13 @@ class MainFragment : Fragment() {
                 i.data = Uri.parse(url.toURI().toString())
                 try {
                     startActivity(i)
-                } catch (e: ActivityNotFoundException) { Toast.makeText(context!!, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show() }
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(
+                        context!!,
+                        R.string.error_no_webbrowser_installed,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
         GlobalScope.launch {
@@ -166,8 +176,22 @@ class MainFragment : Fragment() {
 
         if (prepare == null) {
             requireContext().startService(Intent(requireContext(), DnsVpnService::class.java))
+            getPreferences().vpnInformationShown = true
         } else {
-            startActivityForResult(prepare, vpnRequestCode)
+            if (getPreferences().vpnInformationShown) {
+                requireContext().startService(Intent(requireContext(), DnsVpnService::class.java))
+            } else {
+                showInfoTextDialog(requireContext(),
+                    getString(R.string.dialog_vpninformation_title),
+                    getString(R.string.dialog_vpninformation_message),
+                    neutralButton = getString(android.R.string.ok) to { dialog, _ ->
+                        startActivityForResult(prepare, vpnRequestCode)
+                        dialog.dismiss()
+                    }).apply {
+                    setCancelable(false)
+                }
+                getPreferences().vpnInformationShown = true
+            }
         }
     }
 
@@ -181,11 +205,11 @@ class MainFragment : Fragment() {
     }
 
     private fun updateVpnIndicators() {
-        val privateDnsActive = if(Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+        val privateDnsActive = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             false
         } else {
             (context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).let {
-                if(it.activeNetwork == null) false
+                if (it.activeNetwork == null) false
                 else it.getLinkProperties(it.activeNetwork)?.isPrivateDnsActive ?: false
             }
         }
@@ -203,7 +227,7 @@ class MainFragment : Fragment() {
             }
             else -> {
                 startButton.setText(R.string.all_start)
-                if(privateDnsActive) {
+                if (privateDnsActive) {
                     statusImage.setImageResource(R.drawable.ic_lock)
                     statusImage.clearAnimation()
                     privateDnsInfo.visibility = View.VISIBLE
@@ -221,10 +245,11 @@ class MainFragment : Fragment() {
             val url = serverInfo.specification.privacyPolicyURL
             val text = view?.findViewById<TextView>(R.id.privacyStatementText)
             if (url != null && text != null) {
-                text.text = getString(R.string.main_dnssurveillance_privacystatement, serverInfo.name)
+                text.text =
+                    getString(R.string.main_dnssurveillance_privacystatement, serverInfo.name)
                 text.tag = url
                 text.visibility = View.VISIBLE
-            } else if(text != null){
+            } else if (text != null) {
                 text.visibility = View.GONE
             }
         }

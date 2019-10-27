@@ -255,6 +255,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     var automaticHostRefreshWifiOnly:Boolean by booleanPref("automatic_host_refresh_wifi_only", true)
     var automaticHostRefreshTimeUnit:HostSourceRefreshDialog.TimeUnit by enumPref("automatic_host_refresh_timeunit", HostSourceRefreshDialog.TimeUnit.HOURS)
     var automaticHostRefreshTimeAmount:Int by intPref("automatic_host_refresh_timeamount", 12)
+
+    var vpnInformationShown:Boolean by booleanPref("vpn_information_shown", false)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

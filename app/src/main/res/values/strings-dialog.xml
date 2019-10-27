@@ -177,4 +177,6 @@
     
     <string name="dialog_cleardnscache_message">Are you sure you want to clear the DNS cache?</string>
 
+    <string name="dialog_vpninformation_title">How this app works</string>
+    <string name="dialog_vpninformation_message">Nebulo works by using a dummy VPN to capture all your DNS requests, which are then forwarded to a secure server of your choice.\nThis dummy VPN is not a real VPN and neither does it hide your identity, nor does it change your IP address.\n\nNo actual data, except for DNS requests, is transmitted using this app.</string>
 </resources>
