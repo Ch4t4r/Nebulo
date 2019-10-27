@@ -317,6 +317,7 @@
     <string name="changelog_build_49_4">The query log now shows an indication when the DNS server might have blocked the host</string>
     <string name="changelog_build_49_5">Exporting the log files now shows a loading dialog</string>
     <string-array name="changelog_build_49">
+        <item>Version 1.0 (Build 49)</item>
         <item>@string/changelog_build_49_1</item>
         <item>@string/changelog_build_49_2</item>
         <item>@string/changelog_build_49_3</item>
