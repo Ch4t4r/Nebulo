@@ -111,7 +111,7 @@ configurations.all {
 }
 
 dependencies {
-    def room_version = "2.2.0"
+    def room_version = "2.2.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -127,7 +127,7 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "androidx.preference:preference:1.1.0"
-    implementation "com.google.android.material:material:1.1.0-beta01"
+    implementation "com.google.android.material:material:1.2.0-alpha01"
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-alpha01'
 
     implementation "androidx.room:room-runtime:$room_version"
@@ -135,7 +135,7 @@ dependencies {
     implementation "androidx.room:room-coroutines:2.1.0-alpha04"
     testImplementation "androidx.room:room-testing:$room_version"
 
-    implementation 'io.sentry:sentry-android:1.7.27'
+    implementation 'io.sentry:sentry-android:1.7.28'
 
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
     implementation 'com.squareup.leakcanary:leaksentry:2.0-alpha-3'
@@ -143,7 +143,7 @@ dependencies {
     leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.robolectric:robolectric:4.3"
+    testImplementation "org.robolectric:robolectric:4.3.1"
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
