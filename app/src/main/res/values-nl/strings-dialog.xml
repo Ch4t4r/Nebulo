@@ -175,4 +175,9 @@
     <string name="dialog_logexport_loading_title">Logboeken voorbereiden</string>
     <string name="dialog_cleardnscache_message">Weet u zeker dat u de DNS-cache wilt wissen\?</string>
 
+<string name="dialog_vpninformation_title">Hoe deze app werkt</string>
+    <string name="dialog_vpninformation_message">Nebulo werkt met behulp van een dummy VPN om al uw DNS-aanvragen vast te leggen, die vervolgens worden doorgestuurd naar een beveiligde server naar keuze.
+\nDeze dummy VPN is geen echte VPN en verbergt noch uw identiteit, noch verandert het uw IP-adres.
+\n
+\nEr worden geen actuele gegevens, behalve DNS-verzoeken, verzonden met behulp van deze app.</string>
 </resources>
