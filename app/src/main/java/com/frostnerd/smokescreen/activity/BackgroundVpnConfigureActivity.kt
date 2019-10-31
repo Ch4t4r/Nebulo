@@ -18,6 +18,7 @@ import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.toJson
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
+import java.lang.NullPointerException
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -49,9 +50,14 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
         private const val VPN_REQUEST_CODE = 1
 
         fun prepareVpn(context: Context, serverInfo:DnsServerInformation<*>? = null) {
-            val vpnIntent = VpnService.prepare(context).apply {
-                this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            val vpnIntent = try {
+                VpnService.prepare(context).apply {
+                    this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                }
+            } catch (ex:NullPointerException) { // Caused by VpnService.prepare(), maybe Android Bug?
+                Intent()
             }
+
             if (vpnIntent == null) {
                 DnsVpnService.startVpn(context, serverInfo)
             } else {
