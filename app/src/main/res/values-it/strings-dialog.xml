@@ -184,7 +184,7 @@
 
 <string name="dialog_vpninformation_title">Come funziona l\'app</string>
     <string name="dialog_vpninformation_message">Nebulo funziona usando una finta VPN per catturare tutte le tue richieste DNS, che vengono poi inoltrate ad un server sicuro di tua scelta.
-\nQuesta finta VPN non è reale e non nasconde la tua identità, nè cambia il tuo indirizzo IP.
+\nQuesta VPN non è reale e non nasconde la tua identità, nè cambia il tuo indirizzo IP.
 \n
 \nNessun dato, eccetto le richieste DNS, viene trasmesso usando questa app.</string>
 </resources>
