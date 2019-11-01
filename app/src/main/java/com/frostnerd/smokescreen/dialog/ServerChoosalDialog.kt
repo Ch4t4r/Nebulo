@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.dialog
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -203,7 +204,7 @@ class ServerChoosalDialog(
     }
 
     private fun createButtonForKnownConfiguration(info: DnsServerInformation<*>): RadioButton {
-        val button = RadioButton(context)
+        val button = LayoutInflater.from(context).inflate(R.layout.radiobutton, null, false) as RadioButton
 
         val name = info.name
         val primaryServer: String
@@ -233,7 +234,7 @@ class ServerChoosalDialog(
     }
 
     private fun createButtonForUserConfiguration(userConfiguration: UserServerConfiguration, reuseButton:RadioButton? = null): RadioButton {
-        val button = reuseButton ?: RadioButton(context).apply {
+        val button = reuseButton ?: (LayoutInflater.from(context).inflate(R.layout.radiobutton, null, false) as RadioButton).apply {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
