@@ -77,13 +77,7 @@ class ServerChoosalDialog(
         spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
         val spinner = view.findViewById<Spinner>(R.id.spinner)
         spinner.adapter = spinnerAdapter
-        spinner.setSelection(if (isCurrentServerTls) 1 else 0)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                loadServerData(position == 1)
-            }
-        }
+        if(isCurrentServerTls) spinner.setSelection(1)
         view.findViewById<RadioGroup>(R.id.knownServersGroup).setOnCheckedChangeListener { group, _ ->
             val button = view.findViewById(group.checkedRadioButtonId) as RadioButton
             val payload = button.tag
@@ -106,7 +100,16 @@ class ServerChoosalDialog(
                 )
             }).show()
         }
-        addKnownServers()
+        addKnownServers {
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    loadServerData(position == 1)
+                    knownServersGroup.removeAllViews()
+                    addKnownServers()
+                }
+            }
+        }
     }
 
     private fun loadServerData(tls: Boolean) {
@@ -133,8 +136,11 @@ class ServerChoosalDialog(
         }
     }
 
-    private fun addKnownServers() {
+    private fun addKnownServers(then:(() -> Unit)? = null) {
+        val previousJob = populationJob
         populationJob = GlobalScope.launch {
+            previousJob?.cancel()
+            previousJob?.join()
             val hasIpv4 = context.hasDeviceIpv4Address()
             val hasIpv6 = context.hasDeviceIpv6Address()
             val buttons = mutableListOf<RadioButton>()
@@ -162,6 +168,7 @@ class ServerChoosalDialog(
                 }
                 markCurrentSelectedServer()
                 populationJob = null
+                then?.invoke()
             }
         }
     }
