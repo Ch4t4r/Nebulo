@@ -1,9 +1,10 @@
 package com.frostnerd.smokescreen.fragment
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import com.frostnerd.smokescreen.BackpressFragment
@@ -35,6 +36,11 @@ class QueryLogFragment : Fragment(), BackpressFragment {
     lateinit var listFragment: QueryLogListFragment
     lateinit var detailFragment: QueryLogDetailFragment
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_querylog_main, container, false)
     }
@@ -52,6 +58,15 @@ class QueryLogFragment : Fragment(), BackpressFragment {
 
         viewpager.adapter = createViewAdapter()
         tabLayout.setupWithViewPager(viewpager)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_queryloglist, menu)
+        val searchManager = context!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView: SearchView = menu.findItem(R.id.search)!!.actionView as SearchView
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
+        searchView.setOnQueryTextListener(listFragment)
     }
 
     fun displayQueryDetailed(query:DnsQuery, switchToDetailView:Boolean = true) {

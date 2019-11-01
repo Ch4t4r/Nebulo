@@ -1,9 +1,10 @@
 package com.frostnerd.smokescreen.util.proxy
 
-import com.frostnerd.dnstunnelproxy.ParsedPacket
+import com.frostnerd.dnstunnelproxy.IPPacket
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
+import com.frostnerd.vpntunnelproxy.DeviceWriteToken
 import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
 import com.frostnerd.vpntunnelproxy.TunnelHandle
@@ -45,9 +46,9 @@ class ProxyTlsHandler(
     override val handlesSpecificRequests: Boolean = false
 
     override suspend fun forwardDnsQuestion(
-        deviceWriteToken: TunnelHandle.DeviceWriteToken,
+        deviceWriteToken: DeviceWriteToken,
         dnsMessage: DnsMessage,
-        originalEnvelope: ParsedPacket,
+        originalEnvelope: IPPacket,
         realDestination: UpstreamAddress
     ) {
         val destination = selectAddressOrNull(realDestination)

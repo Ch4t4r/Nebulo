@@ -48,7 +48,6 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -85,7 +84,7 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
                             if (data.getParsedResponses().any {
                                     if (it.type == Record.TYPE.A) println((it.payload as A).toString())
                                     (it.type == Record.TYPE.A && (it.payload as A).toString() == "0.0.0.0"
-                                            || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString().equalsAny("::1", "::0", "0:0:0:0:0:0:0:0")))
+                                            || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString().equalsAny("::1", "::0", "0:0:0:0:0:0:0:0", "0:0:0:0:0:0:0:1")))
                                 }) R.drawable.ic_flag
                             else R.drawable.ic_reply
                         QueryListener.Source.CACHE, QueryListener.Source.CACHE_AND_LOCALRESOLVER -> R.drawable.ic_database
@@ -112,15 +111,6 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
         val parent = parentFragment as QueryLogFragment
         if(!parent.detailFragment.isShowingQuery()) return false
         return parent.detailFragment.currentQuery?.id == dnsQuery.id
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_queryloglist, menu)
-        val searchManager = context!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView:SearchView = menu.findItem(R.id.search)!!.actionView as SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
-        searchView.setOnQueryTextListener(this)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
