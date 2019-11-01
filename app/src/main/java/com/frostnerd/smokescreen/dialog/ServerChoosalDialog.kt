@@ -82,8 +82,6 @@ class ServerChoosalDialog(
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 loadServerData(position == 1)
-                knownServersGroup.removeAllViews()
-                addKnownServers()
             }
         }
         view.findViewById<RadioGroup>(R.id.knownServersGroup).setOnCheckedChangeListener { group, _ ->
@@ -95,7 +93,6 @@ class ServerChoosalDialog(
             } else {
                 payload as DnsServerInformation<*>
             }
-            markCurrentSelectedServer()
         }
         view.findViewById<Button>(R.id.addServer).setOnClickListener {
             NewServerDialog(context, title = null, dnsOverHttps = spinner.selectedItemPosition == 0, server = null, onServerAdded = { info ->
