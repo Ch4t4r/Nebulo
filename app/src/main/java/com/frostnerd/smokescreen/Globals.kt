@@ -10,6 +10,7 @@ import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
@@ -48,25 +49,31 @@ fun showPrivacyPolicyDialog(context: Context) {
 fun showInfoTextDialog(context:Context, title:String, text:String,
                        positiveButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
                        negativeButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
-                       neutralButton:Pair<String, ((DialogInterface, Int) -> Unit)?>? = context.getString(android.R.string.ok) to null): AlertDialog {
-    val stringWithLinks = SpannableString(text)
-    Linkify.addLinks(stringWithLinks, Linkify.ALL)
+                       neutralButton:Pair<String, ((DialogInterface, Int) -> Unit)?>? = context.getString(android.R.string.ok) to null,
+                       withDialog: (AlertDialog.() -> Unit)? = null) {
+    try {
+        val stringWithLinks = SpannableString(text)
+        Linkify.addLinks(stringWithLinks, Linkify.ALL)
 
-    val span = Html.fromHtml(stringWithLinks.toString().replace("\n", "<br>"))
+        val span = Html.fromHtml(stringWithLinks.toString().replace("\n", "<br>"))
 
-    val dialogBuilder = AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
-        .setTitle(title)
-        .setMessage(span)
-    if(neutralButton != null) dialogBuilder.setNeutralButton(neutralButton.first, neutralButton.second)
-    if(positiveButton != null) dialogBuilder.setPositiveButton(positiveButton.first, positiveButton.second)
-    if(negativeButton != null) dialogBuilder.setNegativeButton(negativeButton.first, negativeButton.second)
+        val dialogBuilder = AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+            .setTitle(title)
+            .setMessage(span)
+        if(neutralButton != null) dialogBuilder.setNeutralButton(neutralButton.first, neutralButton.second)
+        if(positiveButton != null) dialogBuilder.setPositiveButton(positiveButton.first, positiveButton.second)
+        if(negativeButton != null) dialogBuilder.setNegativeButton(negativeButton.first, negativeButton.second)
 
-    val dialog = dialogBuilder.show()
-    val textView = dialog.findViewById<TextView>(android.R.id.message)
-    textView?.movementMethod = LinkMovementMethod.getInstance()
-    textView?.linksClickable = true
-    textView?.setLinkTextColor(Color.parseColor("#64B5F6"))
-    return dialog
+        val dialog = dialogBuilder.show()
+        val textView = dialog.findViewById<TextView>(android.R.id.message)
+        textView?.movementMethod = LinkMovementMethod.getInstance()
+        textView?.linksClickable = true
+        textView?.setLinkTextColor(Color.parseColor("#64B5F6"))
+        withDialog?.invoke(dialog)
+    } catch (ex: Exception) {
+        if(ex.message?.contains("webview") == false) throw ex
+        else Toast.makeText(context, R.string.error_webview_missing, Toast.LENGTH_LONG).show()
+    }
 }
 
 fun isPackageInstalled(context: Context, packageName: String): Boolean {

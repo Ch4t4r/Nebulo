@@ -392,7 +392,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 neutralButton = null,
                 negativeButton = getString(android.R.string.no) to { dialog, _ ->
                     dialog.dismiss()
-                }).show()
+                }, withDialog = {
+                    show()
+                })
             true
         }
     }

@@ -187,9 +187,9 @@ class MainFragment : Fragment() {
                     neutralButton = getString(android.R.string.ok) to { dialog, _ ->
                         startActivityForResult(prepare, vpnRequestCode)
                         dialog.dismiss()
-                    }).apply {
-                    setCancelable(false)
-                }
+                    }, withDialog = {
+                        setCancelable(false)
+                    })
                 getPreferences().vpnInformationShown = true
             }
         }
