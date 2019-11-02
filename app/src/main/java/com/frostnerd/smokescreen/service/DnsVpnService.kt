@@ -61,6 +61,7 @@ import java.util.logging.Level
 import kotlin.math.floor
 import kotlin.math.min
 import kotlin.math.pow
+import kotlin.random.Random
 
 
 /*
@@ -953,28 +954,30 @@ class DnsVpnService : VpnService(), Runnable {
         vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(2, "proxy-pool")
         ), logger = object : com.frostnerd.vpntunnelproxy.Logger() {
+            private val tag = (0..5).map { Random.nextInt('a'.toInt(), 'z'.toInt()).toChar() }.joinToString(separator = "")
+
             override fun logMessage(message: () -> String, level: Level) {
                 if (level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
-                    log(message(), "VPN-LIBRARY, $level")
+                    log(message(), "$tag, VPN-LIBRARY, $level")
                 }
             }
 
             override fun failedRequest(question: FutureAnswer, reason: Throwable?) {
                 if (reason != null) log(
                     "A request failed: " + Logger.stacktraceToString(reason),
-                    "VPN-LIBRARY"
+                    "$tag, VPN-LIBRARY"
                 )
             }
 
             val advancedLogging = getPreferences().advancedLogging
             override fun logException(ex: Exception, terminal: Boolean, level: Level) {
                 if (terminal) log(ex)
-                else log(Logger.stacktraceToString(ex), "VPN-LIBRARY, $level")
+                else log(Logger.stacktraceToString(ex), "$tag, VPN-LIBRARY, $level")
             }
 
             override fun logMessage(message: String, level: Level) {
                 if (level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
-                    log(message, "VPN-LIBRARY, $level")
+                    log(message, "$tag, VPN-LIBRARY, $level")
                 }
             }
         })
