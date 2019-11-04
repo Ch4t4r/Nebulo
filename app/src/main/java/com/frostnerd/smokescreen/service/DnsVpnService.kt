@@ -728,7 +728,7 @@ class DnsVpnService : VpnService(), Runnable {
             log("Current active network: $activeNetwork")
         }
         val builder = Builder()
-
+        builder.setMetered(false)
         val deviceHasIpv6 = hasDeviceIpv6Address()
         val deviceHasIpv4 = hasDeviceIpv4Address()
 
