@@ -59,6 +59,7 @@ import java.net.InetAddress
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 import java.util.logging.Level
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.floor
 import kotlin.math.min
 import kotlin.math.pow
@@ -102,6 +103,8 @@ class DnsVpnService : VpnService(), Runnable {
     private var lastScreenOff: Long? = null
     private lateinit var screenStateReceiver: BroadcastReceiver
     private var simpleNotification = getPreferences().simpleNotification
+    private var lastVPNStopTime:Long? = null
+    private val coroutineScope:CoroutineContext = SupervisorJob()
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -605,10 +608,22 @@ class DnsVpnService : VpnService(), Runnable {
         log("Establishing VPN")
         if (fileDescriptor == null) {
             destroyed = false
-            fileDescriptor = createBuilder().establish()
-            run()
-            setNotificationText()
-            updateNotification()
+            val runVpn = {
+                fileDescriptor = createBuilder().establish()
+                run()
+                setNotificationText()
+                updateNotification()
+            }
+            val timeDiff = lastVPNStopTime?.let { System.currentTimeMillis() - it }
+            if(timeDiff != null && timeDiff < 750) {
+                GlobalScope.launch(coroutineScope) {
+                    delay(750-timeDiff)
+                    if(isActive) runVpn()
+                }
+            } else {
+                runVpn()
+            }
+
         } else log("Connection already running, no need to establish.")
     }
 
@@ -646,6 +661,7 @@ class DnsVpnService : VpnService(), Runnable {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
+            lastVPNStopTime = System.currentTimeMillis()
             if (isStoppingCompletely) {
                 if (networkCallback != null) {
                     (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).unregisterNetworkCallback(
