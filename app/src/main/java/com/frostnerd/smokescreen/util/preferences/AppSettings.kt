@@ -213,6 +213,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
 
     override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
+    var restartVpnOnNetworkChange:Boolean by booleanPref("restart_vpn_networkchange", false)
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
     override var pauseOnCaptivePortal: Boolean by booleanPref("pause_on_captive_portal", true)
     override var showNoConnectionNotification:Boolean by booleanPref("show_no_connection_notification", false)

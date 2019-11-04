@@ -3,33 +3,39 @@
 
     <PreferenceCategory android:title="@string/preference_category_network">
         <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="restart_vpn_networkchange"
+                android:summary="@string/summary_restart_vpn_on_networkchange"
+                android:title="@string/title_restart_vpn_on_networkchange" />
+
+        <CheckBoxPreference
+                android:defaultValue="false"
                 android:key="disallow_other_vpns"
-                android:title="@string/title_disallow_other_vpns"
                 android:summary="@string/summary_disallow_other_vpns"
-                android:defaultValue="false"/>
+                android:title="@string/title_disallow_other_vpns" />
 
         <CheckBoxPreference
+                android:defaultValue="true"
                 android:key="catch_known_servers"
-                android:title="@string/title_catch_other_dns_servers"
                 android:summary="@string/summary_catch_other_dns_servers"
-                android:defaultValue="true"/>
+                android:title="@string/title_catch_other_dns_servers" />
 
         <CheckBoxPreference
-            android:key="map_query_refused"
-            android:title="@string/title_map_query_refused"
-            android:summary="@string/summary_map_query_refused"
-            android:defaultValue="true" />
+                android:defaultValue="true"
+                android:key="map_query_refused"
+                android:summary="@string/summary_map_query_refused"
+                android:title="@string/title_map_query_refused" />
 
         <CheckBoxPreference
+                android:defaultValue="true"
                 android:key="bypass_searchdomains"
-                android:title="@string/title_bypass_searchdomains"
-                android:defaultValue="true"
-                android:summary="@string/summary_bypass_searchdomains"/>
+                android:summary="@string/summary_bypass_searchdomains"
+                android:title="@string/title_bypass_searchdomains" />
 
         <CheckBoxPreference
-                android:key="pause_on_captive_portal"
                 android:defaultValue="true"
-                android:title="@string/title_pause_on_captiveportal"
-                android:summary="@string/summary_pause_on_captiveportal"/>
+                android:key="pause_on_captive_portal"
+                android:summary="@string/summary_pause_on_captiveportal"
+                android:title="@string/title_pause_on_captiveportal" />
     </PreferenceCategory>
 </PreferenceScreen>

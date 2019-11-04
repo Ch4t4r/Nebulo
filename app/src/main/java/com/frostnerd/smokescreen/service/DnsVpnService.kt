@@ -248,7 +248,7 @@ class DnsVpnService : VpnService(), Runnable {
                     lastScreenOff = System.currentTimeMillis()
                 } else {
                     if (lastScreenOff != null && System.currentTimeMillis() - lastScreenOff!! >= 60000) {
-                        if (fileDescriptor != null) recreateVpn(false, null)
+                        if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
                     }
                 }
             }
@@ -281,7 +281,7 @@ class DnsVpnService : VpnService(), Runnable {
                     upstreamAddress.addressCreator.reset()
                     upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
                 }
-                if (fileDescriptor != null) recreateVpn(false, null)
+                if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
             }
         }
         val builder = NetworkRequest.Builder()
