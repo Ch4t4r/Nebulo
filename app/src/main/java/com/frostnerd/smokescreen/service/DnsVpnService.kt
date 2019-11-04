@@ -25,6 +25,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
+import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
@@ -728,7 +729,10 @@ class DnsVpnService : VpnService(), Runnable {
             log("Current active network: $activeNetwork")
         }
         val builder = Builder()
-        builder.setMetered(false)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            builder.setMetered(false)
+        }
+        builder.setConfigureIntent(PendingIntent.getActivity(this, 1, Intent(this, MainActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
         val deviceHasIpv6 = hasDeviceIpv6Address()
         val deviceHasIpv4 = hasDeviceIpv4Address()
 
