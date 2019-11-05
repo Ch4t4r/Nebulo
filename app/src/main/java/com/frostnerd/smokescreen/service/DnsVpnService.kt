@@ -283,7 +283,7 @@ class DnsVpnService : VpnService(), Runnable {
             private fun handleChange() {
                 if (this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
                     upstreamAddress.addressCreator.reset()
-                    upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
+                    resolveAllServerAddresses()
                 }
                 if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
             }
@@ -522,44 +522,46 @@ class DnsVpnService : VpnService(), Runnable {
         log("Updating server configuration..")
         userServerConfig = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
         serverConfig = getServerConfig()
+        resolveAllServerAddresses()
+        log("Server configuration updated to $serverConfig")
+    }
+
+    private fun resolveAllServerAddresses() {
         val initialBackoffTime = 200
         var tries = 0.toDouble()
         var totalTries = 0
         serverConfig.forEachAddress { _, address ->
-            if (!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(
-                true
-            )
-            address.addressCreator.whenResolveFailed {
-                showNoConnectionNotification()
-                if (it is TimeoutException || it is UnknownHostException) {
-                    log("Address resolve failed: $it. Total tries $totalTries/70")
-                    if (totalTries <= 70) {
-                        GlobalScope.launch {
-                            val exponentialBackoff =
-                                (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
-                            delay(min(45000L, exponentialBackoff))
-                            totalTries++
-                            if (tries >= 9) tries = 0.toDouble()
-                            address.addressCreator.resolveOrGetResultOrNull(true)
-                            address.addressCreator.whenResolveFinishedSuccessfully {
-                                log("Address resolve succeeded after failing, hiding notification")
-                                hideNoConnectionNotification()
-                                false
+            address.addressCreator.whenResolveFinished { resolveException, resolveResult ->
+                if(resolveException != null) {
+                    showNoConnectionNotification()
+                    if (resolveException is TimeoutException || resolveException is UnknownHostException) {
+                        log("Address resolve failed: $resolveException. Total tries $totalTries/70")
+                        if (totalTries <= 70) {
+                            GlobalScope.launch {
+                                val exponentialBackoff =
+                                    (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
+                                delay(min(45000L, exponentialBackoff))
+                                totalTries++
+                                if (tries >= 9) tries = 0.toDouble()
+                                address.addressCreator.resolveOrGetResultOrNull(true)
                             }
-                        }
-                        true
-                    } else false
+                            true
+                        } else false
+                    } else {
+                        log("Address resolve failed: $resolveException. Not retrying.")
+                        false
+                    }
+                } else if(resolveResult != null){
+                    hideNoConnectionNotification()
+                    false
                 } else {
-                    log("Address resolve failed: $it. Not retrying.")
                     false
                 }
             }
-            address.addressCreator.whenResolveFinishedSuccessfully {
-                hideNoConnectionNotification()
-                false
-            }
+            if (!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(
+                true
+            )
         }
-        log("Server configuration updated to $serverConfig")
     }
 
     private fun setNotificationText() {
