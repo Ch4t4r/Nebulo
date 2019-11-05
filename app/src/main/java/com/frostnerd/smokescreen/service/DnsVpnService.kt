@@ -977,28 +977,31 @@ class DnsVpnService : VpnService(), Runnable {
             newFixedThreadPoolContext(2, "proxy-pool")
         ), logger = object : com.frostnerd.vpntunnelproxy.Logger() {
             private val tag = (0..5).map { Random.nextInt('a'.toInt(), 'z'.toInt()).toChar() }.joinToString(separator = "")
+            private val minLogLevel =
+                if (BuildConfig.DEBUG || getPreferences().advancedLogging) Level.FINE
+                else if (getPreferences().loggingEnabled) Level.INFO
+                else Level.OFF
 
             override fun logMessage(message: () -> String, level: Level) {
-                if (level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
+                if (level >= minLogLevel) {
                     log(message(), "$tag, VPN-LIBRARY, $level")
                 }
             }
 
             override fun failedRequest(question: FutureAnswer, reason: Throwable?) {
-                if (reason != null) log(
+                if (reason != null && Level.INFO >= minLogLevel) log(
                     "A request failed: " + Logger.stacktraceToString(reason),
                     "$tag, VPN-LIBRARY"
                 )
             }
 
-            val advancedLogging = getPreferences().advancedLogging
             override fun logException(ex: Exception, terminal: Boolean, level: Level) {
                 if (terminal) log(ex)
-                else log(Logger.stacktraceToString(ex), "$tag, VPN-LIBRARY, $level")
+                else if(Level.INFO >= minLogLevel) log(Logger.stacktraceToString(ex), "$tag, VPN-LIBRARY, $level")
             }
 
             override fun logMessage(message: String, level: Level) {
-                if (level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
+                if (level >= minLogLevel) {
                     log(message, "$tag, VPN-LIBRARY, $level")
                 }
             }
