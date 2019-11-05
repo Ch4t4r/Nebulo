@@ -4,7 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
+import android.net.*
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -58,6 +58,8 @@ class MainActivity : NavigationDrawerActivity() {
     private var textColor: Int = 0
     private var backgroundColor: Int = 0
     private var inputElementColor: Int = 0
+    private var cardNetworkCallback:ConnectivityManager.NetworkCallback? = null
+    private val networkManager by lazy { getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager }
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
@@ -94,11 +96,25 @@ class MainActivity : NavigationDrawerActivity() {
                 }
             }
             update()
-             getPreferences().listenForChanges("dns_server_config", getPreferences().preferenceChangeListener {
-                runOnUiThread {
-                    update()
+            getPreferences().listenForChanges(
+                "dns_server_config",
+                getPreferences().preferenceChangeListener {
+                    runOnUiThread {
+                        update()
+                    }
+                }.unregisterOn(lifecycle)
+            )
+            cardNetworkCallback = object: ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    super.onAvailable(network)
+                    runOnUiThread {
+                        update()
+                    }
                 }
-            }.pauseOn(lifecycle).resumeOn(lifecycle).unregisterOn(lifecycle))
+            }
+            networkManager.registerNetworkCallback(NetworkRequest.Builder().apply {
+                addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
+            }.build(), cardNetworkCallback!!)
             view
         }
         supportActionBar?.elevation = 0f
@@ -144,6 +160,12 @@ class MainActivity : NavigationDrawerActivity() {
         registerLocalReceiver(listOf(BROADCAST_RELOAD_MENU), true) {
             reloadMenuItems()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cardNetworkCallback?.let { networkManager.unregisterNetworkCallback(it) }
+        cardNetworkCallback = null
     }
 
     private fun handleDeepAction() {
