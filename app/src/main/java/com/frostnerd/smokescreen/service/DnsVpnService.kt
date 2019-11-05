@@ -1021,7 +1021,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun createQueryLogger(): QueryListener? {
-        return if (getPreferences().loggingEnabled || getPreferences().queryLoggingEnabled) {
+        return if (getPreferences().shouldLogDnsQueriesToConsole() || getPreferences().queryLoggingEnabled) {
             com.frostnerd.smokescreen.util.proxy.QueryListener(this)
         } else null
     }
