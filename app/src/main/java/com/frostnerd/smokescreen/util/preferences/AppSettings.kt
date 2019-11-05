@@ -35,6 +35,9 @@ import java.util.*
 interface AppSettings {
     companion object {
         internal var instance: AppSettingsSharedPreferences? = null
+        val isReleaseVersion = BuildConfig.VERSION_NAME.let {
+            !it.contains("alpha", true) && !it.contains("beta", true)
+        }
     }
     val cacheControl:ExpirationCacheControl
 
