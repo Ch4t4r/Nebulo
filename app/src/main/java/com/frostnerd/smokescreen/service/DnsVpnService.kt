@@ -86,7 +86,6 @@ import kotlin.random.Random
  */
 class DnsVpnService : VpnService(), Runnable {
     private var fileDescriptor: ParcelFileDescriptor? = null
-    private var handle: ProxyHttpsHandler? = null
     private var dnsProxy: SmokeProxy? = null
     private var vpnProxy: RetryingVPNTunnelProxy? = null
     private var destroyed = false
