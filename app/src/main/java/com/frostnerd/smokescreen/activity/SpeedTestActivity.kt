@@ -178,17 +178,19 @@ class SpeedTestActivity : BaseActivity() {
             runOnUiThread {
                 startTest.text = "0/${testsLeft.size}"
             }
+            var highestLatency = 500
             testsLeft.forEach { pendingTest ->
                 if(testJob?.isCancelled == false) {
                     pendingTest.started = true
                     log("Running SpeedTest for ${pendingTest.server.name}")
-                    val res = DnsSpeedTest(pendingTest.server, 500, 750) { line ->
+                    val res = DnsSpeedTest(pendingTest.server, highestLatency, highestLatency+250) { line ->
                         log(line)
                     }.runTest(3)
 
                     if (res != null) pendingTest.latency = res
                     else pendingTest.error = true
 
+                    highestLatency = kotlin.math.max(highestLatency, ((pendingTest.latency ?: 0)*1.25).toInt())
                     testResults!!.sortBy {
                         it.latency ?: Integer.MAX_VALUE
                     }
