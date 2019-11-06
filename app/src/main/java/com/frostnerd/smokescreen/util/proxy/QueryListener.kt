@@ -10,6 +10,7 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.hasTlsServer
 import com.frostnerd.smokescreen.log
+import com.frostnerd.smokescreen.util.preferences.AppSettings
 import org.minidns.dnsmessage.DnsMessage
 
 /*
@@ -31,7 +32,7 @@ import org.minidns.dnsmessage.DnsMessage
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class QueryListener(private val context: Context) : QueryListener {
-    private val writeQueriesToLog = context.getPreferences().loggingEnabled
+    private val writeQueriesToLog = context.getPreferences().shouldLogDnsQueriesToConsole()
     private val logQueriesToDb = context.getPreferences().queryLoggingEnabled
     private val waitingQueryLogs: MutableMap<Int, DnsQuery> = mutableMapOf()
     private val askedServer:String

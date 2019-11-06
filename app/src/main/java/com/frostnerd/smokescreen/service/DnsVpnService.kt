@@ -25,6 +25,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
+import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
@@ -58,9 +59,11 @@ import java.net.InetAddress
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 import java.util.logging.Level
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.floor
 import kotlin.math.min
 import kotlin.math.pow
+import kotlin.random.Random
 
 
 /*
@@ -100,6 +103,8 @@ class DnsVpnService : VpnService(), Runnable {
     private var lastScreenOff: Long? = null
     private lateinit var screenStateReceiver: BroadcastReceiver
     private var simpleNotification = getPreferences().simpleNotification
+    private var lastVPNStopTime:Long? = null
+    private val coroutineScope:CoroutineContext = SupervisorJob()
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -247,7 +252,7 @@ class DnsVpnService : VpnService(), Runnable {
                     lastScreenOff = System.currentTimeMillis()
                 } else {
                     if (lastScreenOff != null && System.currentTimeMillis() - lastScreenOff!! >= 60000) {
-                        if (fileDescriptor != null) recreateVpn(false, null)
+                        if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
                     }
                 }
             }
@@ -278,9 +283,9 @@ class DnsVpnService : VpnService(), Runnable {
             private fun handleChange() {
                 if (this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
                     upstreamAddress.addressCreator.reset()
-                    upstreamAddress.addressCreator.resolve(force = true, runResolveNow = true)
+                    resolveAllServerAddresses()
                 }
-                if (fileDescriptor != null) recreateVpn(false, null)
+                if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
             }
         }
         val builder = NetworkRequest.Builder()
@@ -517,44 +522,46 @@ class DnsVpnService : VpnService(), Runnable {
         log("Updating server configuration..")
         userServerConfig = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
         serverConfig = getServerConfig()
+        resolveAllServerAddresses()
+        log("Server configuration updated to $serverConfig")
+    }
+
+    private fun resolveAllServerAddresses() {
         val initialBackoffTime = 200
         var tries = 0.toDouble()
         var totalTries = 0
         serverConfig.forEachAddress { _, address ->
-            if (!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(
-                true
-            )
-            address.addressCreator.whenResolveFailed {
-                showNoConnectionNotification()
-                if (it is TimeoutException || it is UnknownHostException) {
-                    log("Address resolve failed: $it. Total tries $totalTries/70")
-                    if (totalTries <= 70) {
-                        GlobalScope.launch {
-                            val exponentialBackoff =
-                                (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
-                            delay(min(45000L, exponentialBackoff))
-                            totalTries++
-                            if (tries >= 9) tries = 0.toDouble()
-                            address.addressCreator.resolveOrGetResultOrNull(true)
-                            address.addressCreator.whenResolveFinishedSuccessfully {
-                                log("Address resolve succeeded after failing, hiding notification")
-                                hideNoConnectionNotification()
-                                false
+            address.addressCreator.whenResolveFinished { resolveException, resolveResult ->
+                if(resolveException != null) {
+                    showNoConnectionNotification()
+                    if (resolveException is TimeoutException || resolveException is UnknownHostException) {
+                        log("Address resolve failed: $resolveException. Total tries $totalTries/70")
+                        if (totalTries <= 70) {
+                            GlobalScope.launch {
+                                val exponentialBackoff =
+                                    (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
+                                delay(min(45000L, exponentialBackoff))
+                                totalTries++
+                                if (tries >= 9) tries = 0.toDouble()
+                                address.addressCreator.resolveOrGetResultOrNull(true)
                             }
-                        }
-                        true
-                    } else false
+                            true
+                        } else false
+                    } else {
+                        log("Address resolve failed: $resolveException. Not retrying.")
+                        false
+                    }
+                } else if(resolveResult != null){
+                    hideNoConnectionNotification()
+                    false
                 } else {
-                    log("Address resolve failed: $it. Not retrying.")
                     false
                 }
             }
-            address.addressCreator.whenResolveFinishedSuccessfully {
-                hideNoConnectionNotification()
-                false
-            }
+            if (!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(
+                true
+            )
         }
-        log("Server configuration updated to $serverConfig")
     }
 
     private fun setNotificationText() {
@@ -603,10 +610,22 @@ class DnsVpnService : VpnService(), Runnable {
         log("Establishing VPN")
         if (fileDescriptor == null) {
             destroyed = false
-            fileDescriptor = createBuilder().establish()
-            run()
-            setNotificationText()
-            updateNotification()
+            val runVpn = {
+                fileDescriptor = createBuilder().establish()
+                run()
+                setNotificationText()
+                updateNotification()
+            }
+            val timeDiff = lastVPNStopTime?.let { System.currentTimeMillis() - it }
+            if(timeDiff != null && timeDiff < 750) {
+                GlobalScope.launch(coroutineScope) {
+                    delay(750-timeDiff)
+                    if(isActive) runVpn()
+                }
+            } else {
+                runVpn()
+            }
+
         } else log("Connection already running, no need to establish.")
     }
 
@@ -644,6 +663,7 @@ class DnsVpnService : VpnService(), Runnable {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
+            lastVPNStopTime = System.currentTimeMillis()
             if (isStoppingCompletely) {
                 if (networkCallback != null) {
                     (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).unregisterNetworkCallback(
@@ -727,7 +747,10 @@ class DnsVpnService : VpnService(), Runnable {
             log("Current active network: $activeNetwork")
         }
         val builder = Builder()
-
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            builder.setMetered(false)
+        }
+        builder.setConfigureIntent(PendingIntent.getActivity(this, 1, Intent(this, MainActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
         val deviceHasIpv6 = hasDeviceIpv6Address()
         val deviceHasIpv4 = hasDeviceIpv4Address()
 
@@ -953,28 +976,33 @@ class DnsVpnService : VpnService(), Runnable {
         vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(2, "proxy-pool")
         ), logger = object : com.frostnerd.vpntunnelproxy.Logger() {
+            private val tag = (0..5).map { Random.nextInt('a'.toInt(), 'z'.toInt()).toChar() }.joinToString(separator = "")
+            private val minLogLevel =
+                if (BuildConfig.DEBUG || getPreferences().advancedLogging) Level.FINE
+                else if (getPreferences().loggingEnabled) Level.INFO
+                else Level.OFF
+
             override fun logMessage(message: () -> String, level: Level) {
-                if (level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
-                    log(message(), "VPN-LIBRARY, $level")
+                if (level >= minLogLevel) {
+                    log(message(), "$tag, VPN-LIBRARY, $level")
                 }
             }
 
             override fun failedRequest(question: FutureAnswer, reason: Throwable?) {
-                if (reason != null) log(
+                if (reason != null && Level.INFO >= minLogLevel) log(
                     "A request failed: " + Logger.stacktraceToString(reason),
-                    "VPN-LIBRARY"
+                    "$tag, VPN-LIBRARY"
                 )
             }
 
-            val advancedLogging = getPreferences().advancedLogging
             override fun logException(ex: Exception, terminal: Boolean, level: Level) {
                 if (terminal) log(ex)
-                else log(Logger.stacktraceToString(ex), "VPN-LIBRARY, $level")
+                else if(Level.INFO >= minLogLevel) log(Logger.stacktraceToString(ex), "$tag, VPN-LIBRARY, $level")
             }
 
             override fun logMessage(message: String, level: Level) {
-                if (level >= Level.INFO || ((BuildConfig.DEBUG || advancedLogging) && level >= Level.FINE)) {
-                    log(message, "VPN-LIBRARY, $level")
+                if (level >= minLogLevel) {
+                    log(message, "$tag, VPN-LIBRARY, $level")
                 }
             }
         })
@@ -993,7 +1021,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun createQueryLogger(): QueryListener? {
-        return if (getPreferences().loggingEnabled || getPreferences().queryLoggingEnabled) {
+        return if (getPreferences().shouldLogDnsQueriesToConsole() || getPreferences().queryLoggingEnabled) {
             com.frostnerd.smokescreen.util.proxy.QueryListener(this)
         } else null
     }

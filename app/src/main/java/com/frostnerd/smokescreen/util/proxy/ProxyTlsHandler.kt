@@ -7,7 +7,6 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.vpntunnelproxy.DeviceWriteToken
 import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
-import com.frostnerd.vpntunnelproxy.TunnelHandle
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.record.A
 import org.minidns.record.AAAA
@@ -16,6 +15,8 @@ import java.net.DatagramPacket
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLHandshakeException
 import javax.net.ssl.SSLSession
 
 /*
@@ -44,6 +45,7 @@ class ProxyTlsHandler(
     val mapQueryRefusedToHostBlock:Boolean
 ):AbstractTLSDnsHandle(connectTimeout) {
     override val handlesSpecificRequests: Boolean = false
+    private val hostnameVerifier = HttpsURLConnection.getDefaultHostnameVerifier()
 
     override suspend fun forwardDnsQuestion(
         deviceWriteToken: DeviceWriteToken,
@@ -103,7 +105,9 @@ class ProxyTlsHandler(
     }
 
     override fun verifyConnection(sslSession: SSLSession, outgoingPacket: DatagramPacket) {
-        // Java handles certificate validation for us.
+        if (!upstreamAddresses.any { hostnameVerifier.verify(it.host, sslSession) }) {
+            throw SSLHandshakeException("Certificate mismatch, got ${sslSession.peerPrincipal}, but expected any of ${upstreamAddresses.joinToString { it.host }}")
+        }
     }
 
     override fun name(): String {

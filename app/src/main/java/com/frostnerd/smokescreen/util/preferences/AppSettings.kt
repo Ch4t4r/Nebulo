@@ -35,6 +35,9 @@ import java.util.*
 interface AppSettings {
     companion object {
         internal var instance: AppSettingsSharedPreferences? = null
+        val isReleaseVersion = BuildConfig.VERSION_NAME.let {
+            !it.contains("alpha", true) && !it.contains("beta", true)
+        }
     }
     val cacheControl:ExpirationCacheControl
 
@@ -195,6 +198,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         "logging_enabled",
         BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
     )
+    fun shouldLogDnsQueriesToConsole():Boolean = loggingEnabled && (!AppSettings.isReleaseVersion || advancedLogging)
     var advancedLogging:Boolean by booleanPref(
         "advanced_logging",
         false
@@ -213,6 +217,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
 
     override var disallowOtherVpns: Boolean by booleanPref("disallow_other_vpns", false)
+    var restartVpnOnNetworkChange:Boolean by booleanPref("restart_vpn_networkchange", false)
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
     override var pauseOnCaptivePortal: Boolean by booleanPref("pause_on_captive_portal", true)
     override var showNoConnectionNotification:Boolean by booleanPref("show_no_connection_notification", false)

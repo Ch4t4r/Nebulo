@@ -116,6 +116,9 @@
 
     <string name="preference_category_network">Network</string>
 
+    <string name="title_restart_vpn_on_networkchange">Restart on network change</string>
+    <string name="summary_restart_vpn_on_networkchange">Silently restart the app when the network changes. Enable this when facing problems when switching between networks.\n No effect when the app isn\'t active.</string>
+
     <string name="title_disallow_other_vpns">Disallow other VPNs</string>
     <string name="summary_disallow_other_vpns">Don\'t allow other VPNs to start if the app isn\'t explicitly stopped</string>
 
