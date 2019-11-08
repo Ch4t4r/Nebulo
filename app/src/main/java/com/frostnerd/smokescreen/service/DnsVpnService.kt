@@ -778,7 +778,7 @@ class DnsVpnService : VpnService(), Runnable {
                 try {
                     builder.addAddress("$prefix.134", mask)
                     couldSetAddress = true
-                    log("Ipv4-Address set to $prefix.134./$mask")
+                    log("Ipv4-Address set to $prefix.134/$mask")
                     break
                 } catch (ignored: IllegalArgumentException) {
                     log("Couldn't set Ipv4-Address $prefix.134/$mask")
