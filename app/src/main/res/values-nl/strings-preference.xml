@@ -157,4 +157,8 @@
     <string name="crashreporting_type_full">Volledig (rapporteer statistische en debug gegevens)</string>
     <string name="crashreporting_type_minimal">Minimaal (alleen Android &amp; App-versie melden)</string>
     <string name="crashreporting_type_off">Uit (Stuur geen crashrapporten)</string>
+    <string name="title_restart_vpn_on_networkchange">Herstart bij netwerkwijziging</string>
+    <string name="summary_restart_vpn_on_networkchange">Start de app opnieuw als het netwerk verandert. Schakel dit in wanneer u problemen ondervindt bij het schakelen tussen netwerken.
+\n Geen effect wanneer de app niet actief is.</string>
+
     </resources>
