@@ -5,6 +5,7 @@ import com.frostnerd.dnstunnelproxy.LocalResolver
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.MaxSizeMap
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.minidns.dnsmessage.Question
@@ -17,6 +18,7 @@ import kotlin.math.abs
 
 class DnsRuleResolver(context: Context) : LocalResolver(true) {
     private val maxWhitelistCacheSize = 250
+    private val maxResolvedCacheSize = 500
 
     private val dao = context.getDatabase().dnsRuleDao()
     private val resolveResults = mutableMapOf<Question, String>()
@@ -28,7 +30,9 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
     private var nonWildcardCount:Int? = null
 
     // These sets contain hashes of the hosts, the most significant bit of the hash it 1 for IPv6 and 0 for IPv4
-    private var cachedWhitelisted = HashSet<Int>(15) //
+    // Hashes are stored because they are shorter than strings (Int=4 Bytes, String=2-3 per char)
+    private var cachedWhitelisted = HashSet<Int>(15)
+    private var cachedResolved = MaxSizeMap<Int, String>(maxResolvedCacheSize, 40)
 
     init {
         refreshRuleCount()
@@ -82,17 +86,23 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                 false
             }
             else {
-                val resolveResult = if(nonWildcardCount != 0) dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
-                        ?.let {
-                            when (it) {
-                                "0" -> "0.0.0.0"
-                                "1" -> {
-                                    if (question.type == Record.TYPE.AAAA) "::1"
-                                    else "127.0.0.1"
+                val resolveResult = if(nonWildcardCount != 0) {
+                    if(nonWildcardCount == cachedResolved.size) {
+                        cachedResolved[hashHost(uniformQuestion, question.type)]
+                    } else {
+                        cachedResolved[hashHost(uniformQuestion, question.type)] ?: dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
+                            ?.let {
+                                when (it) {
+                                    "0" -> "0.0.0.0"
+                                    "1" -> {
+                                        if (question.type == Record.TYPE.AAAA) "::1"
+                                        else "127.0.0.1"
+                                    }
+                                    else -> it
                                 }
-                                else -> it
                             }
-                        } else null
+                    }
+                } else null
                 if (resolveResult != null) {
                     resolveResults[question] = resolveResult
                     true
