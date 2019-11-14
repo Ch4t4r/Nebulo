@@ -7,6 +7,7 @@ import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.util.MaxSizeMap
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.minidns.dnsmessage.Question
 import org.minidns.record.A
@@ -36,12 +37,15 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
     private var cachedResolved = MaxSizeMap<Int, String>(maxResolvedCacheSize, 40)
     private var cachedWildcardResolved = MaxSizeMap<Int, String>(maxWildcardResolvedCacheSize, 30)
 
+    private var previousRefreshJob:Job? = null
+
     init {
         refreshRuleCount()
     }
 
     fun refreshRuleCount() {
-        GlobalScope.launch {
+        previousRefreshJob?.cancel()
+        previousRefreshJob = GlobalScope.launch {
             val previousRuleCount = ruleCount
             ruleCount = dao.getCount().toInt()
             wildcardCount = dao.getWildcardCount().toInt()
