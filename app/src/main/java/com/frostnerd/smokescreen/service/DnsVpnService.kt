@@ -972,37 +972,7 @@ class DnsVpnService : VpnService(), Runnable {
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(2, "proxy-pool")
-        ), logger = object : com.frostnerd.vpntunnelproxy.Logger() {
-            private val tag = (0..5).map { Random.nextInt('a'.toInt(), 'z'.toInt()).toChar() }.joinToString(separator = "")
-            private val minLogLevel =
-                if (BuildConfig.DEBUG || getPreferences().advancedLogging) Level.FINE
-                else if (getPreferences().loggingEnabled) Level.INFO
-                else Level.OFF
-
-            override fun logMessage(message: () -> String, level: Level) {
-                if (level >= minLogLevel) {
-                    log(message(), "$tag, VPN-LIBRARY, $level")
-                }
-            }
-
-            override fun failedRequest(question: FutureAnswer, reason: Throwable?) {
-                if (reason != null && Level.INFO >= minLogLevel) log(
-                    "A request failed: " + Logger.stacktraceToString(reason),
-                    "$tag, VPN-LIBRARY"
-                )
-            }
-
-            override fun logException(ex: Exception, terminal: Boolean, level: Level) {
-                if (terminal) log(ex)
-                else if(Level.INFO >= minLogLevel) log(Logger.stacktraceToString(ex), "$tag, VPN-LIBRARY, $level")
-            }
-
-            override fun logMessage(message: String, level: Level) {
-                if (level >= minLogLevel) {
-                    log(message, "$tag, VPN-LIBRARY, $level")
-                }
-            }
-        })
+        ), logger = VpnLogger(applicationContext))
         vpnProxy?.maxRetries = 15
 
         log("VPN proxy creating, trying to run...")
