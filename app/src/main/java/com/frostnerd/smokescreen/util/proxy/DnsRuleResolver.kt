@@ -79,12 +79,12 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
                         useUserRules,
                         false,
                         true
-                    ).filter {
+                    ).firstOrNull {
                         DnsRuleDialog.databaseHostToMatcher(it.host)
                             .reset(uniformQuestion).matches()
                     }
-                    if(wildcardResolveResults.isNotEmpty()) {
-                        resolveResults[question] = wildcardResolveResults.first().let {
+                    if(wildcardResolveResults != null) {
+                        resolveResults[question] = wildcardResolveResults.let {
                             if (question.type == Record.TYPE.AAAA) it.ipv6Target
                                 ?: it.target
                             else it.target
