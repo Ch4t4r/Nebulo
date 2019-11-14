@@ -30,10 +30,10 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
     private var cachedWhitelisted = HashSet<Int>(15) //
 
     init {
-        refreshRuleCount(context)
+        refreshRuleCount()
     }
 
-    fun refreshRuleCount(context: Context) {
+    fun refreshRuleCount() {
         GlobalScope.launch {
             ruleCount = dao.getCount().toInt()
             wildcardCount = dao.getWildcardCount().toInt()
