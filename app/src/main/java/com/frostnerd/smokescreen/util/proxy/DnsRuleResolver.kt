@@ -20,6 +20,7 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
     private val useUserRules = context.getPreferences().customHostsEnabled
     private var ruleCount:Int? = null
     private var wildcardCount:Int? = null
+    private var whitelistCount:Int? = null
 
     init {
         refreshRuleCount(context)
@@ -29,6 +30,7 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
         GlobalScope.launch {
             ruleCount = dao.getCount().toInt()
             wildcardCount = dao.getWildcardCount().toInt()
+            whitelistCount = dao.getWhitelistCount().toInt()
         }
     }
 
@@ -37,7 +39,7 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
             false
         } else {
             val uniformQuestion = question.name.toString().replace(wwwRegex, "")
-            val isWhitelisted = dao.findPossibleWildcardRuleTarget(
+            val isWhitelisted = if(whitelistCount != 0) dao.findPossibleWildcardRuleTarget(
                 uniformQuestion,
                 question.type,
                 useUserRules,
@@ -49,7 +51,7 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
             } || dao.findNonWildcardWhitelistEntry(
                 uniformQuestion,
                 useUserRules
-            ).isNotEmpty()
+            ).isNotEmpty() else false
 
             if (isWhitelisted) false
             else {
