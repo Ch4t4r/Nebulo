@@ -989,7 +989,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun createQueryLogger(): QueryListener? {
         return if (getPreferences().shouldLogDnsQueriesToConsole() || getPreferences().queryLoggingEnabled) {
-            com.frostnerd.smokescreen.util.proxy.QueryListener(this)
+            com.frostnerd.smokescreen.util.proxy.QueryListener(applicationContext)
         } else null
     }
 
@@ -1055,24 +1055,7 @@ class DnsVpnService : VpnService(), Runnable {
         dnsCache = if (getPreferences().useDnsCache) {
             log("Creating DNS Cache.")
             val cacheControl: CacheControl = if (!getPreferences().useDefaultDnsCacheTime) {
-                val cacheTime = getPreferences().customDnsCacheTime.toLong()
-                val nxDomainCacheTime = getPreferences().nxDomainCacheTime.toLong()
-                object : CacheControl {
-                    override suspend fun getTtl(
-                        answerMessage: DnsMessage,
-                        dnsName: DnsName,
-                        type: Record.TYPE,
-                        record: Record<*>
-                    ): Long {
-                        return if (answerMessage.responseCode == DnsMessage.RESPONSE_CODE.NX_DOMAIN) nxDomainCacheTime else cacheTime
-                    }
-
-                    override suspend fun getTtl(question: Question, record: Record<*>): Long =
-                        cacheTime
-
-
-                    override fun shouldCache(question: Question): Boolean = true
-                }
+                NxDomainCacheControl(this)
             } else DefaultCacheControl(getPreferences().minimumCacheTime.toLong())
             val onClearCache: ((currentCache: Map<String, Map<Record.TYPE, Map<Record<*>, Long>>>) -> Unit)? =
                 if (getPreferences().keepDnsCacheAcrossLaunches) {
