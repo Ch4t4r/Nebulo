@@ -19,6 +19,7 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
     private val wwwRegex = Regex("^www\\.")
     private val useUserRules = context.getPreferences().customHostsEnabled
     private var ruleCount:Int? = null
+    private var wildcardCount:Int? = null
 
     init {
         refreshRuleCount(context)
@@ -27,6 +28,7 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
     fun refreshRuleCount(context: Context) {
         GlobalScope.launch {
             ruleCount = dao.getCount().toInt()
+            wildcardCount = dao.getWildcardCount().toInt()
         }
     }
 
@@ -48,6 +50,7 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
                 uniformQuestion,
                 useUserRules
             ).isNotEmpty()
+
             if (isWhitelisted) false
             else {
                 val resolveResult =
@@ -65,7 +68,7 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
                 if (resolveResult != null) {
                     resolveResults[question] = resolveResult
                     true
-                } else {
+                } else if(wildcardCount != 0){
                     val wildcardResolveResults = dao.findPossibleWildcardRuleTarget(
                         uniformQuestion,
                         question.type,
@@ -95,6 +98,8 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
                     } else {
                         false
                     }
+                } else {
+                    false
                 }
             }
         }
