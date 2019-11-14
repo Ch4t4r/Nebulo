@@ -39,19 +39,21 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
             false
         } else {
             val uniformQuestion = question.name.toString().replace(wwwRegex, "")
-            val isWhitelisted = if(whitelistCount != 0) dao.findPossibleWildcardRuleTarget(
-                uniformQuestion,
-                question.type,
-                useUserRules,
-                true,
-                false
-            ).any {
-                DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
-                    .matches()
-            } || dao.findNonWildcardWhitelistEntry(
-                uniformQuestion,
-                useUserRules
-            ).isNotEmpty() else false
+            val isWhitelisted = if(whitelistCount != 0) {
+                (wildcardCount != 0 && dao.findPossibleWildcardRuleTarget(
+                    uniformQuestion,
+                    question.type,
+                    useUserRules,
+                    true,
+                    false
+                ).any {
+                    DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
+                        .matches()
+                }) || dao.findNonWildcardWhitelistEntry(
+                    uniformQuestion,
+                    useUserRules
+                ).isNotEmpty()
+            } else false
 
             if (isWhitelisted) false
             else {
