@@ -5,6 +5,9 @@ import com.frostnerd.dnstunnelproxy.LocalResolver
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.getPreferences
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.minidns.dnsmessage.Question
 import org.minidns.record.A
 import org.minidns.record.AAAA
@@ -15,9 +18,20 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
     private val resolveResults = mutableMapOf<Question, String>()
     private val wwwRegex = Regex("^www\\.")
     private val useUserRules = context.getPreferences().customHostsEnabled
+    private var ruleCount:Int? = null
+
+    init {
+        refreshRuleCount(context)
+    }
+
+    fun refreshRuleCount(context: Context) {
+        GlobalScope.launch {
+            ruleCount = dao.getCount().toInt()
+        }
+    }
 
     override suspend fun canResolve(question: Question): Boolean {
-        return if (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA) {
+        return if (ruleCount ==  0 || (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA)) {
             false
         } else {
             val uniformQuestion = question.name.toString().replace(wwwRegex, "")
