@@ -21,7 +21,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
     private val maxResolvedCacheSize = 500
 
     private val dao = context.getDatabase().dnsRuleDao()
-    private val resolveResults = mutableMapOf<Question, String>()
+    private val resolveResults = mutableMapOf<Int, String>()
     private val wwwRegex = Regex("^www\\.")
     private val useUserRules = context.getPreferences().customHostsEnabled
     private var ruleCount: Int? = null
@@ -104,7 +104,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                     }
                 } else null
                 if (resolveResult != null) {
-                    resolveResults[question] = resolveResult
+                    resolveResults[question.hashCode()] = resolveResult
                     true
                 } else if (wildcardCount != 0) {
                     val wildcardResolveResults = dao.findPossibleWildcardRuleTarget(
@@ -118,7 +118,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                             .reset(uniformQuestion).matches()
                     }
                     if (wildcardResolveResults != null) {
-                        resolveResults[question] = wildcardResolveResults.let {
+                        resolveResults[question.hashCode()] = wildcardResolveResults.let {
                             if (question.type == Record.TYPE.AAAA) it.ipv6Target
                                 ?: it.target
                             else it.target
@@ -155,7 +155,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
     }
 
     override suspend fun resolve(question: Question): List<Record<*>> {
-        val result = resolveResults.remove(question)
+        val result = resolveResults.remove(question.hashCode())
         return result?.let {
             val data = if (question.type == Record.TYPE.A) {
                 A(it)
