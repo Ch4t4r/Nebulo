@@ -7,6 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.MaxSizeMap
 import kotlinx.android.synthetic.main.dialog_create_dnsrule.view.*
 import org.minidns.record.Record
 import java.net.Inet4Address
@@ -35,7 +36,7 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
     AlertDialog(context, context.getPreferences().theme.dialogStyle) {
     private var isWhitelist = false
     companion object {
-        private val matchers = mutableMapOf<String, Matcher>()
+        private val matchers = MaxSizeMap<String, Matcher>(150, 10)
 
         fun printableHost(host:String): String {
             return host.replace("%%", "**").replace("%", "*")
