@@ -99,6 +99,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var connectedToANetwork: Boolean? = null
     private var lastScreenOff: Long? = null
     private lateinit var screenStateReceiver: BroadcastReceiver
+    private var dnsRuleRefreshReceiver:BroadcastReceiver? = null
     private var simpleNotification = getPreferences().simpleNotification
     private var lastVPNStopTime:Long? = null
     private val coroutineScope:CoroutineContext = SupervisorJob()
@@ -112,6 +113,7 @@ class DnsVpnService : VpnService(), Runnable {
     companion object {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
         const val BROADCAST_VPN_INACTIVE = BuildConfig.APPLICATION_ID + ".VPN_INACTIVE"
+        const val BROADCAST_DNSRULES_REFRESHED = BuildConfig.APPLICATION_ID + ".DNSRULE_REFRESH"
         private const val REQUEST_CODE_IGNORE_SERVICE_KILLED = 10
 
         var currentTrafficStats: TrafficStats? = null
@@ -253,6 +255,13 @@ class DnsVpnService : VpnService(), Runnable {
                     }
                 }
             }
+        dnsRuleRefreshReceiver = registerLocalReceiver(listOf(BROADCAST_DNSRULES_REFRESHED)) {
+            vpnProxy?.apply {
+                ((packetProxy as DnsPacketProxy).localResolver)?.apply {
+                    (this as DnsRuleResolver).refreshRuleCount()
+                }
+            }
+        }
         log("Service created.")
     }
 
