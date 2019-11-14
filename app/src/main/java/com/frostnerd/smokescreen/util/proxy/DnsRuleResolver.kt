@@ -25,6 +25,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
     private var ruleCount: Int? = null
     private var wildcardCount: Int? = null
     private var whitelistCount: Int? = null
+    private var nonWildcardCount:Int? = null
 
     // These sets contain hashes of the hosts, the most significant bit of the hash it 1 for IPv6 and 0 for IPv4
     private var cachedWhitelisted = HashSet<Int>(15) //
@@ -40,6 +41,8 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
             val previousWhitelistCount = whitelistCount
             whitelistCount = dao.getWhitelistCount().toInt()
             if(previousWhitelistCount != whitelistCount) cachedWhitelisted.clear()
+
+            nonWildcardCount = ruleCount!! - wildcardCount!!
         }
     }
 
@@ -79,8 +82,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                 false
             }
             else {
-                val resolveResult =
-                    dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
+                val resolveResult = if(nonWildcardCount != 0) dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
                         ?.let {
                             when (it) {
                                 "0" -> "0.0.0.0"
@@ -90,7 +92,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                                 }
                                 else -> it
                             }
-                        }
+                        } else null
                 if (resolveResult != null) {
                     resolveResults[question] = resolveResult
                     true
