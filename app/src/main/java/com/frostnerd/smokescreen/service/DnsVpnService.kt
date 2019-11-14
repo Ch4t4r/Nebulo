@@ -1055,7 +1055,7 @@ class DnsVpnService : VpnService(), Runnable {
         dnsCache = if (getPreferences().useDnsCache) {
             log("Creating DNS Cache.")
             val cacheControl: CacheControl = if (!getPreferences().useDefaultDnsCacheTime) {
-                NxDomainCacheControl(this)
+                NxDomainCacheControl(applicationContext)
             } else DefaultCacheControl(getPreferences().minimumCacheTime.toLong())
             val onClearCache: ((currentCache: Map<String, Map<Record.TYPE, Map<Record<*>, Long>>>) -> Unit)? =
                 if (getPreferences().keepDnsCacheAcrossLaunches) {
@@ -1137,7 +1137,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun createLocalResolver(): LocalResolver? {
         return if (getPreferences().dnsRulesEnabled) {
-            DnsRuleResolver(this)
+            DnsRuleResolver(applicationContext)
         } else {
             null
         }
