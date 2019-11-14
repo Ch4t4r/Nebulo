@@ -19,6 +19,7 @@ import kotlin.math.abs
 class DnsRuleResolver(context: Context) : LocalResolver(true) {
     private val maxWhitelistCacheSize = 250
     private val maxResolvedCacheSize = 500
+    private val maxWildcardResolvedCacheSize = 250
 
     private val dao = context.getDatabase().dnsRuleDao()
     private val resolveResults = mutableMapOf<Int, String>()
@@ -33,6 +34,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
     // Hashes are stored because they are shorter than strings (Int=4 Bytes, String=2-3 per char)
     private var cachedWhitelisted = HashSet<Int>(15)
     private var cachedResolved = MaxSizeMap<Int, String>(maxResolvedCacheSize, 40)
+    private var cachedWildcardResolved = MaxSizeMap<Int, String>(maxWildcardResolvedCacheSize, 30)
 
     init {
         refreshRuleCount()
@@ -107,7 +109,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                     resolveResults[question.hashCode()] = resolveResult
                     true
                 } else if (wildcardCount != 0) {
-                    val wildcardResolveResults = dao.findPossibleWildcardRuleTarget(
+                    val wildcardResolveResult = cachedWildcardResolved[hashHost(uniformQuestion, question.type)] ?: dao.findPossibleWildcardRuleTarget(
                         uniformQuestion,
                         question.type,
                         useUserRules,
@@ -116,22 +118,23 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                     ).firstOrNull {
                         DnsRuleDialog.databaseHostToMatcher(it.host)
                             .reset(uniformQuestion).matches()
-                    }
-                    if (wildcardResolveResults != null) {
-                        resolveResults[question.hashCode()] = wildcardResolveResults.let {
-                            if (question.type == Record.TYPE.AAAA) it.ipv6Target
-                                ?: it.target
-                            else it.target
-                        }.let {
-                            when (it) {
-                                "0" -> "0.0.0.0"
-                                "1" -> {
-                                    if (question.type == Record.TYPE.AAAA) "::1"
-                                    else "127.0.0.1"
-                                }
-                                else -> it
+                    }?.let {
+                        if (question.type == Record.TYPE.AAAA) it.ipv6Target
+                            ?: it.target
+                        else it.target
+                    }?.let {
+                        when (it) {
+                            "0" -> "0.0.0.0"
+                            "1" -> {
+                                if (question.type == Record.TYPE.AAAA) "::1"
+                                else "127.0.0.1"
                             }
+                            else -> it
                         }
+                    }
+                    if (wildcardResolveResult != null) {
+                        cachedWildcardResolved[hashHost(uniformQuestion, question.type)] = wildcardResolveResult
+                        resolveResults[question.hashCode()] = wildcardResolveResult
                         true
                     } else {
                         false
