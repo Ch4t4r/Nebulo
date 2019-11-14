@@ -42,13 +42,18 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
 
     fun refreshRuleCount() {
         GlobalScope.launch {
+            val previousRuleCount = ruleCount
             ruleCount = dao.getCount().toInt()
             wildcardCount = dao.getWildcardCount().toInt()
             val previousWhitelistCount = whitelistCount
             whitelistCount = dao.getWhitelistCount().toInt()
-            if(previousWhitelistCount != whitelistCount) cachedWhitelisted.clear()
-
             nonWildcardCount = ruleCount!! - wildcardCount!!
+
+            if(previousWhitelistCount != whitelistCount) cachedWhitelisted.clear()
+            if(previousRuleCount != ruleCount){
+                cachedResolved.clear()
+                cachedWildcardResolved.clear()
+            }
         }
     }
 
