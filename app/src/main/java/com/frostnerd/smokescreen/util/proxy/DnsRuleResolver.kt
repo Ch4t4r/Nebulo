@@ -35,7 +35,7 @@ class DnsRuleResolver(context: Context): LocalResolver(true) {
     }
 
     override suspend fun canResolve(question: Question): Boolean {
-        return if (ruleCount ==  0 || (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA)) {
+        return if ((ruleCount ==  0 || (ruleCount != null && ruleCount == whitelistCount)) || (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA)) {
             false
         } else {
             val uniformQuestion = question.name.toString().replace(wwwRegex, "")
