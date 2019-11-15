@@ -69,17 +69,20 @@ interface DnsRuleDao {
     @Query("SELECT COUNT(*) FROM DnsRule")
     fun getCount(): Long
 
+    @Query("SELECT COUNT(*) FROM DnsRule WHERE importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0) = 1")
+    fun getActiveCount(): Long
+
     @Query("SELECT host FROM DnsRule WHERE type=255 AND isWildcard=0 AND target='' AND (importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0) = 1) ORDER BY RANDOM() LIMIT :count")
     fun getRandomNonWildcardWhitelistEntries(count:Int):List<String>
 
-    @Query("SELECT COUNT(*) FROM DnsRule WHERE isWildcard=1")
-    fun getWildcardCount(): Long
+    @Query("SELECT COUNT(*) FROM DnsRule WHERE isWildcard=1 AND (importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0) = 1)")
+    fun getActiveWildcardCount(): Long
 
-    @Query("SELECT COUNT(*) FROM DnsRule WHERE isWildcard=1 AND target=''")
-    fun getWildcardWhitelistCount(): Long
+    @Query("SELECT COUNT(*) FROM DnsRule WHERE isWildcard=1 AND target='' AND (importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0) = 1)")
+    fun getActiveWildcardWhitelistCount(): Long
 
-    @Query("SELECT COUNT(*) FROM DnsRule WHERE target=''")
-    fun getWhitelistCount(): Long
+    @Query("SELECT COUNT(*) FROM DnsRule WHERE target='' AND (importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0) = 1)")
+    fun getActiveWhitelistCount(): Long
 
     @Query("SELECT COUNT(*) FROM DnsRule WHERE stagingType=0")
     fun getNonStagedCount(): Long
