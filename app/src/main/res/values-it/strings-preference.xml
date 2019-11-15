@@ -159,4 +159,8 @@
     <string name="crashreporting_type_full">Completa (Segnala statistiche e dati di debug)</string>
     <string name="crashreporting_type_minimal">Minimale (Segnala solo versione di Android e app)</string>
     <string name="crashreporting_type_off">Spenta (Non inviare segnalazioni)</string>
+    <string name="title_restart_vpn_on_networkchange">Riavvia al cambio di rete</string>
+    <string name="summary_restart_vpn_on_networkchange">Riavvia l\'app silenziosamente quando cambia la rete. Attivala se riscontri problemi quando passi da una rete all\'altra.
+\n Nessun effetto quando l\'app non è attiva.</string>
+
     </resources>
