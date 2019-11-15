@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.util.proxy
 
 import android.content.Context
 import com.frostnerd.dnstunnelproxy.LocalResolver
+import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.getPreferences
@@ -35,7 +36,8 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
 
     // These sets contain hashes of the hosts, the most significant bit of the hash it 1 for IPv6 and 0 for IPv4
     // Hashes are stored because they are shorter than strings (Int=4 Bytes, String=2-3 per char)
-    private var cachedWhitelisted = HashSet<Int>(15)
+    private var cachedWildcardWhitelisted = HashSet<Int>(15)
+    private var cachedNonWildcardWhitelisted = HashSet<Int>(15)
     private var cachedResolved = MaxSizeMap<Int, String>(maxResolvedCacheSize, 40)
     private var cachedWildcardResolved = MaxSizeMap<Int, String>(maxWildcardResolvedCacheSize, 30)
 
@@ -58,7 +60,10 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
             wildcardWhitelistCount = dao.getWildcardWhitelistCount().toInt()
             nonWildcardWhitelistCount = whitelistCount!! - wildcardWhitelistCount!!
 
-            if(previousWhitelistCount != whitelistCount) cachedWhitelisted.clear()
+            if(previousWhitelistCount != whitelistCount) {
+                cachedWildcardWhitelisted.clear()
+                cachedNonWildcardWhitelisted.clear()
+            }
             if(previousRuleCount != ruleCount){
                 cachedResolved.clear()
                 cachedWildcardResolved.clear()
@@ -72,7 +77,10 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
         } else {
             val uniformQuestion = question.name.toString().replace(wwwRegex, "").toLowerCase(Locale.ROOT)
             val hostHash = hashHost(uniformQuestion, question.type)
-            if(whitelistCount != 0 && cachedWhitelisted.size != 0 && cachedWhitelisted.contains(hostHash)) return false
+            if(whitelistCount != 0) {
+                if(cachedNonWildcardWhitelisted.size != 0 && cachedNonWildcardWhitelisted.contains(hostHash)) return false
+                else if(cachedWildcardWhitelisted.size != 0 && cachedWildcardWhitelisted.contains(hostHash)) return false
+            }
             if(nonWildcardCount != 0 && cachedResolved.size != 0) {
                 val res = cachedResolved[hostHash]
                 if(res != null) {
@@ -88,25 +96,31 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                 }
             }
 
-            val isWhitelisted = if (whitelistCount != 0) {
-                (wildcardWhitelistCount != 0 && dao.findPossibleWildcardRuleTarget(
+            val whitelistEntry: DnsRule? = if (whitelistCount != 0) {
+                val wildCard = if(wildcardWhitelistCount != 0) dao.findPossibleWildcardRuleTarget(
                     uniformQuestion,
                     question.type,
                     useUserRules,
                     true,
                     false
-                ).any {
+                ).firstOrNull {
                     DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
                         .matches()
-                }) || (nonWildcardWhitelistCount != 0 && dao.findNonWildcardWhitelistEntry(
+                } else null
+
+                wildCard ?: if(nonWildcardWhitelistCount != 0 && (nonWildcardWhitelistCount == null || nonWildcardWhitelistCount != whitelistCount)) dao.findNonWildcardWhitelistEntry(
                     uniformQuestion,
                     useUserRules
-                ).isNotEmpty())
-            } else false
+                ).firstOrNull() else null
+            } else null
 
-            if (isWhitelisted) {
-                if(cachedWhitelisted.size >= maxWhitelistCacheSize) cachedWhitelisted.clear()
-                cachedWhitelisted.add(hashHost(uniformQuestion, question.type))
+            if (whitelistEntry != null) {
+                if(whitelistEntry.isWildcard) cachedWildcardWhitelisted.add(hostHash)
+                else cachedNonWildcardWhitelisted.add(hostHash)
+
+                if(cachedWildcardWhitelisted.size >= maxWhitelistCacheSize) cachedWildcardWhitelisted.clear()
+                if(cachedNonWildcardWhitelisted.size >= maxWhitelistCacheSize) cachedNonWildcardWhitelisted.clear()
+
                 false
             }
             else {
