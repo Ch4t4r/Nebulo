@@ -105,7 +105,11 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
             }
 
             val whitelistEntry: DnsRule? = if (whitelistCount != 0) {
-                val wildCard = if(wildcardWhitelistCount != 0) dao.findPossibleWildcardRuleTarget(
+                val normal = if(nonWildcardWhitelistCount != 0 && (nonWildcardWhitelistCount == null || nonWildcardWhitelistCount != whitelistCount)) dao.findNonWildcardWhitelistEntry(
+                    uniformQuestion,
+                    useUserRules
+                ).firstOrNull() else null
+                normal ?: if(wildcardWhitelistCount != 0) dao.findPossibleWildcardRuleTarget(
                     uniformQuestion,
                     question.type,
                     useUserRules,
@@ -115,11 +119,6 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                     DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
                         .matches()
                 } else null
-
-                wildCard ?: if(nonWildcardWhitelistCount != 0 && (nonWildcardWhitelistCount == null || nonWildcardWhitelistCount != whitelistCount)) dao.findNonWildcardWhitelistEntry(
-                    uniformQuestion,
-                    useUserRules
-                ).firstOrNull() else null
             } else null
 
             if (whitelistEntry != null) {
