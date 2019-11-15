@@ -90,7 +90,7 @@ interface DnsRuleDao {
     @Query("SELECT CASE WHEN :type=28 THEN IFNULL(ipv6Target, target) ELSE target END FROM DnsRule d1 WHERE d1.host=:host AND d1.target != '' AND (d1.type = :type OR d1.type=255) AND (d1.importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=d1.importedFrom),0) = 1) AND (d1.importedFrom IS NOT NULL OR :useUserRules=1) AND (SELECT COUNT(*) FROM DnsRule d2 WHERE d2.target='' AND d2.host=:host AND (d2.type = :type OR d2.type=255) AND (d2.importedFrom IS NOT NULL OR :useUserRules=1) AND (importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0)))=0 AND isWildcard=0 LIMIT 1")
     fun findRuleTarget(host: String, type: Record.TYPE, useUserRules:Boolean): String?
 
-    @Query("SELECT * FROM DnsRule where host=:host AND type=255 AND isWildcard=0 AND target='' AND (importedFrom IS NOT NULL OR :useUserRules=1) AND (importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0) = 1)")
+    @Query("SELECT * FROM DnsRule where host=:host AND type=255 AND isWildcard=0 AND target='' AND (importedFrom IS NOT NULL OR :useUserRules=1) AND (importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=importedFrom),0) = 1) LIMIT 1")
     fun findNonWildcardWhitelistEntry(host:String, useUserRules:Boolean):List<DnsRule>
 
     @Query("SELECT * FROM DnsRule d1 WHERE ((:includeWhitelistEntries=1 AND d1.target == '') OR (:includeNonWhitelistEntries=1 AND d1.target!='')) AND (d1.type = :type OR d1.type=255) AND (d1.importedFrom is NULL OR IFNULL((SELECT enabled FROM HostSource h WHERE h.id=d1.importedFrom),0) = 1) AND (d1.importedFrom IS NOT NULL OR :useUserRules=1) AND :host LIKE host AND isWildcard=1")
