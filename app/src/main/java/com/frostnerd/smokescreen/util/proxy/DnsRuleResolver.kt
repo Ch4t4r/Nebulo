@@ -71,29 +71,37 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
             false
         } else {
             val uniformQuestion = question.name.toString().replace(wwwRegex, "").toLowerCase(Locale.ROOT)
-            val isWhitelisted = if (whitelistCount != 0) {
-                if (whitelistCount == cachedWhitelisted.size) {
-                    cachedWhitelisted.contains(hashHost(uniformQuestion, question.type))
-                } else {
-                    (cachedWhitelisted.size != 0 && cachedWhitelisted.contains(
-                        hashHost(
-                            uniformQuestion,
-                            question.type
-                        )
-                    )) || (wildcardWhitelistCount != 0 && dao.findPossibleWildcardRuleTarget(
-                        uniformQuestion,
-                        question.type,
-                        useUserRules,
-                        true,
-                        false
-                    ).any {
-                        DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
-                            .matches()
-                    }) || (nonWildcardWhitelistCount != 0 && dao.findNonWildcardWhitelistEntry(
-                        uniformQuestion,
-                        useUserRules
-                    ).isNotEmpty())
+            val hostHash = hashHost(uniformQuestion, question.type)
+            if(whitelistCount != 0 && cachedWhitelisted.size != 0 && cachedWhitelisted.contains(hostHash)) return false
+            if(nonWildcardCount != 0 && cachedResolved.size != 0) {
+                val res = cachedResolved[hostHash]
+                if(res != null) {
+                    resolveResults[question.hashCode()] = res
+                    return true
                 }
+            }
+            if(wildcardCount != 0 && cachedWildcardResolved.size != 0) {
+                val res = cachedWildcardResolved[hostHash]
+                if(res != null) {
+                    resolveResults[question.hashCode()] = res
+                    return true
+                }
+            }
+
+            val isWhitelisted = if (whitelistCount != 0) {
+                (wildcardWhitelistCount != 0 && dao.findPossibleWildcardRuleTarget(
+                    uniformQuestion,
+                    question.type,
+                    useUserRules,
+                    true,
+                    false
+                ).any {
+                    DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
+                        .matches()
+                }) || (nonWildcardWhitelistCount != 0 && dao.findNonWildcardWhitelistEntry(
+                    uniformQuestion,
+                    useUserRules
+                ).isNotEmpty())
             } else false
 
             if (isWhitelisted) {
@@ -104,9 +112,9 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
             else {
                 val resolveResult = if(nonWildcardCount != 0) {
                     if(nonWildcardCount == cachedResolved.size) {
-                        cachedResolved[hashHost(uniformQuestion, question.type)]
+                        null // We would have hit cache otherwise
                     } else {
-                        cachedResolved[hashHost(uniformQuestion, question.type)] ?: dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
+                        dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
                             ?.let {
                                 when (it) {
                                     "0" -> "0.0.0.0"
@@ -120,10 +128,11 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                     }
                 } else null
                 if (resolveResult != null) {
+                    cachedResolved[hostHash] = resolveResult
                     resolveResults[question.hashCode()] = resolveResult
                     true
                 } else if (wildcardCount != 0) {
-                    val wildcardResolveResult = cachedWildcardResolved[hashHost(uniformQuestion, question.type)] ?: dao.findPossibleWildcardRuleTarget(
+                    val wildcardResolveResult = dao.findPossibleWildcardRuleTarget(
                         uniformQuestion,
                         question.type,
                         useUserRules,
