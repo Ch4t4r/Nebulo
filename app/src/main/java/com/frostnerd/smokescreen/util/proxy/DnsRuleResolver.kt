@@ -30,6 +30,8 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
     private var wildcardCount: Int? = null
     private var whitelistCount: Int? = null
     private var nonWildcardCount:Int? = null
+    private var wildcardWhitelistCount:Int? = null
+    private var nonWildcardWhitelistCount:Int? = null
 
     // These sets contain hashes of the hosts, the most significant bit of the hash it 1 for IPv6 and 0 for IPv4
     // Hashes are stored because they are shorter than strings (Int=4 Bytes, String=2-3 per char)
@@ -53,6 +55,9 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
             whitelistCount = dao.getWhitelistCount().toInt()
             nonWildcardCount = ruleCount!! - wildcardCount!!
 
+            wildcardWhitelistCount = dao.getWildcardWhitelistCount().toInt()
+            nonWildcardWhitelistCount = whitelistCount!! - wildcardWhitelistCount!!
+
             if(previousWhitelistCount != whitelistCount) cachedWhitelisted.clear()
             if(previousRuleCount != ruleCount){
                 cachedResolved.clear()
@@ -75,7 +80,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                             uniformQuestion,
                             question.type
                         )
-                    )) || (wildcardCount != 0 && dao.findPossibleWildcardRuleTarget(
+                    )) || (wildcardWhitelistCount != 0 && dao.findPossibleWildcardRuleTarget(
                         uniformQuestion,
                         question.type,
                         useUserRules,
@@ -84,10 +89,10 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                     ).any {
                         DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
                             .matches()
-                    }) || dao.findNonWildcardWhitelistEntry(
+                    }) || (nonWildcardWhitelistCount != 0 && dao.findNonWildcardWhitelistEntry(
                         uniformQuestion,
                         useUserRules
-                    ).isNotEmpty()
+                    ).isNotEmpty())
                 }
             } else false
 

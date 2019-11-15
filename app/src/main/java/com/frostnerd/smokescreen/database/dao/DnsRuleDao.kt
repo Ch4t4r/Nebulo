@@ -72,6 +72,9 @@ interface DnsRuleDao {
     @Query("SELECT COUNT(*) FROM DnsRule WHERE isWildcard=1")
     fun getWildcardCount(): Long
 
+    @Query("SELECT COUNT(*) FROM DnsRule WHERE isWildcard=1 AND target=''")
+    fun getWildcardWhitelistCount(): Long
+
     @Query("SELECT COUNT(*) FROM DnsRule WHERE target=''")
     fun getWhitelistCount(): Long
 
