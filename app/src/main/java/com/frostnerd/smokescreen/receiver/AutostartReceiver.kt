@@ -38,7 +38,10 @@ class AutostartReceiver : BroadcastReceiver() {
                     startService = intent.data?.schemeSpecificPart == context.packageName && context.getPreferences().startAppAfterUpdate
                     context.getPreferences().vpnServiceState = VpnServiceState.STOPPED
                 }
-                context.getPreferences().startAppOnBoot -> startService = true
+                context.getPreferences().startAppOnBoot -> {
+                    context.getPreferences().vpnServiceState = VpnServiceState.STOPPED
+                    startService = true
+                }
             }
             if(startService) BackgroundVpnConfigureActivity.prepareVpn(context)
         }
