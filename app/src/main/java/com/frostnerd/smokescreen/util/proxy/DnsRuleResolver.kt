@@ -68,7 +68,14 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                 cachedResolved.clear()
                 cachedWildcardResolved.clear()
             }
+            preloadWhitelistEntries()
         }
+    }
+
+    private suspend fun preloadWhitelistEntries() {
+        cachedNonWildcardWhitelisted.addAll(dao.getRandomNonWildcardWhitelistEntries(100).map {
+            hashHost(it.toLowerCase(), Record.TYPE.ANY)
+        })
     }
 
     override suspend fun canResolve(question: Question): Boolean {
@@ -77,9 +84,10 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
         } else {
             val uniformQuestion = question.name.toString().replace(wwwRegex, "").toLowerCase(Locale.ROOT)
             val hostHash = hashHost(uniformQuestion, question.type)
+            val wildcardHostHash = hashHost(uniformQuestion, Record.TYPE.ANY)
             if(whitelistCount != 0) {
-                if(cachedNonWildcardWhitelisted.size != 0 && cachedNonWildcardWhitelisted.contains(hostHash)) return false
-                else if(cachedWildcardWhitelisted.size != 0 && cachedWildcardWhitelisted.contains(hostHash)) return false
+                if(cachedNonWildcardWhitelisted.size != 0 && cachedNonWildcardWhitelisted.contains(wildcardHostHash)) return false
+                else if(cachedWildcardWhitelisted.size != 0 && cachedWildcardWhitelisted.contains(wildcardHostHash)) return false
             }
             if(nonWildcardCount != 0 && cachedResolved.size != 0) {
                 val res = cachedResolved[hostHash]
@@ -115,10 +123,10 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
             } else null
 
             if (whitelistEntry != null) {
-                if(whitelistEntry.isWildcard) cachedWildcardWhitelisted.add(hostHash)
-                else cachedNonWildcardWhitelisted.add(hostHash)
+                if(whitelistEntry.isWildcard) cachedWildcardWhitelisted.add(wildcardHostHash)
+                else cachedNonWildcardWhitelisted.add(wildcardHostHash)
 
-                if(cachedWildcardWhitelisted.size >= maxWhitelistCacheSize) cachedWildcardWhitelisted.clear()
+                if(cachedWildcardWhitelisted.size >= maxWhitelistCacheSize*2) cachedWildcardWhitelisted.clear()
                 if(cachedNonWildcardWhitelisted.size >= maxWhitelistCacheSize) cachedNonWildcardWhitelisted.clear()
 
                 false
