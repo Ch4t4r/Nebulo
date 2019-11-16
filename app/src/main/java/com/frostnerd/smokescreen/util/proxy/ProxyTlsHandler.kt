@@ -44,7 +44,8 @@ class ProxyTlsHandler(
     val queryCountCallback: ((queryCount: Int) -> Unit)? = null,
     val mapQueryRefusedToHostBlock:Boolean
 ):AbstractTLSDnsHandle(connectTimeout) {
-    override val handlesSpecificRequests: Boolean = false
+    override val handlesSpecificRequests: Boolean =
+        ProxyBypassHandler.knownSearchDomains.isNotEmpty()
     private val hostnameVerifier = HttpsURLConnection.getDefaultHostnameVerifier()
 
     override suspend fun forwardDnsQuestion(
@@ -97,7 +98,12 @@ class ProxyTlsHandler(
     }
 
     override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
-        return true
+        return if(dnsMessage.questions.size > 0) {
+            val name = dnsMessage.question.name
+            return !ProxyBypassHandler.knownSearchDomains.any {
+                name.endsWith(it)
+            }
+        } else true
     }
 
     override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean {
