@@ -40,6 +40,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
     private var cachedNonWildcardWhitelisted = HashSet<Int>(15)
     private var cachedResolved = MaxSizeMap<Int, String>(maxResolvedCacheSize, 40)
     private var cachedWildcardResolved = MaxSizeMap<Int, String>(maxWildcardResolvedCacheSize, 30)
+    private var cachedNonIncluded = HashSet<Int>(15)
 
     private var previousRefreshJob:Job? = null
 
@@ -68,6 +69,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
             if(previousRuleCount != ruleCount){
                 cachedResolved.clear()
                 cachedWildcardResolved.clear()
+                cachedNonIncluded.clear()
             }
         }
     }
@@ -85,6 +87,8 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
             val uniformQuestion = question.name.toString().replace(wwwRegex, "").toLowerCase(Locale.ROOT)
             val hostHash = hashHost(uniformQuestion, question.type)
             val wildcardHostHash = hashHost(uniformQuestion, Record.TYPE.ANY)
+
+            if(cachedNonIncluded.size != 0 && cachedNonIncluded.contains(hostHash)) return false
             if(whitelistCount != 0) {
                 if(cachedNonWildcardWhitelisted.size != 0 && cachedNonWildcardWhitelisted.contains(wildcardHostHash)) return false
                 else if(cachedWildcardWhitelisted.size != 0 && cachedWildcardWhitelisted.contains(wildcardHostHash)) return false
@@ -181,9 +185,13 @@ class DnsRuleResolver(context: Context) : LocalResolver(true) {
                         resolveResults[question.hashCode()] = wildcardResolveResult
                         true
                     } else {
+                        if(cachedNonIncluded.size >= maxWhitelistCacheSize) cachedNonIncluded.clear()
+                        cachedNonIncluded.add(hostHash)
                         false
                     }
                 } else {
+                    if(cachedNonIncluded.size >= maxWhitelistCacheSize) cachedNonIncluded.clear()
+                    cachedNonIncluded.add(hostHash)
                     false
                 }
             }
