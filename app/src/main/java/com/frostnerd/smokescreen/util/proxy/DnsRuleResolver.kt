@@ -18,7 +18,7 @@ import java.util.*
 import kotlin.collections.HashSet
 import kotlin.math.abs
 
-class DnsRuleResolver(context: Context) : LocalResolver(true) {
+class DnsRuleResolver(context: Context) : LocalResolver(false) {
     private val maxWhitelistCacheSize = 250
     private val maxResolvedCacheSize = 500
     private val maxWildcardResolvedCacheSize = 250
