@@ -14,6 +14,7 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.watchIfEnabled
 import leakcanary.LeakSentry
 import java.io.BufferedWriter
@@ -88,7 +89,7 @@ class RuleExportService : IntentService("RuleExportService") {
             notification!!.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
             val abortPendingAction = PendingIntent.getService(
                 this,
-                1,
+                RequestCodes.RULE_EXPORT_ABORT,
                 Intent(this, RuleExportService::class.java).putExtra("abort", true),
                 PendingIntent.FLAG_CANCEL_CURRENT
             )

@@ -34,6 +34,7 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.proxy.*
 import com.frostnerd.vpntunnelproxy.FutureAnswer
@@ -114,7 +115,6 @@ class DnsVpnService : VpnService(), Runnable {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
         const val BROADCAST_VPN_INACTIVE = BuildConfig.APPLICATION_ID + ".VPN_INACTIVE"
         const val BROADCAST_DNSRULES_REFRESHED = BuildConfig.APPLICATION_ID + ".DNSRULE_REFRESH"
-        private const val REQUEST_CODE_IGNORE_SERVICE_KILLED = 10
 
         var currentTrafficStats: TrafficStats? = null
             private set
@@ -179,16 +179,16 @@ class DnsVpnService : VpnService(), Runnable {
             val ignorePendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 PendingIntent.getForegroundService(
                     this@DnsVpnService,
-                    REQUEST_CODE_IGNORE_SERVICE_KILLED,
+                    RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
                     ignoreIntent,
-                    PendingIntent.FLAG_ONE_SHOT
+                    PendingIntent.FLAG_UPDATE_CURRENT
                 )
             } else {
                 PendingIntent.getService(
                     this@DnsVpnService,
-                    REQUEST_CODE_IGNORE_SERVICE_KILLED,
+                    RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
                     ignoreIntent,
-                    PendingIntent.FLAG_ONE_SHOT
+                    PendingIntent.FLAG_UPDATE_CURRENT
                 )
             }
             NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
@@ -367,7 +367,7 @@ class DnsVpnService : VpnService(), Runnable {
         notificationBuilder.setUsesChronometer(!getPreferences().simpleNotification)
         notificationBuilder.setContentIntent(
             PendingIntent.getActivity(
-                this, 1,
+                this, RequestCodes.MAIN_NOTIFICATION,
                 PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT
             )
         )
@@ -375,7 +375,7 @@ class DnsVpnService : VpnService(), Runnable {
             val stopPendingIntent =
                 PendingIntent.getService(
                     this,
-                    1,
+                    RequestCodes.MAIN_NOTIFICATION_STOP,
                     commandIntent(this, Command.STOP),
                     PendingIntent.FLAG_CANCEL_CURRENT
                 )
@@ -390,7 +390,7 @@ class DnsVpnService : VpnService(), Runnable {
             val pausePendingIntent =
                 PendingIntent.getService(
                     this,
-                    2,
+                    RequestCodes.MAIN_NOTIFICATION_PAUSE,
                     commandIntent(this, Command.PAUSE_RESUME),
                     PendingIntent.FLAG_CANCEL_CURRENT
                 )
@@ -756,7 +756,7 @@ class DnsVpnService : VpnService(), Runnable {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             builder.setMetered(false)
         }
-        builder.setConfigureIntent(PendingIntent.getActivity(this, 1, PinActivity.openAppIntent(this), PendingIntent.FLAG_CANCEL_CURRENT))
+        builder.setConfigureIntent(PendingIntent.getActivity(this, RequestCodes.VPN_CONFIGURE, PinActivity.openAppIntent(this), PendingIntent.FLAG_CANCEL_CURRENT))
         val deviceHasIpv6 = hasDeviceIpv6Address()
         val deviceHasIpv4 = hasDeviceIpv4Address()
 

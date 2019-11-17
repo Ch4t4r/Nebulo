@@ -106,3 +106,18 @@ class Notifications {
         }
     }
 }
+
+object RequestCodes {
+    val max = 20
+
+    val CRASH_NOTIFICATION = 1
+    val CRASH_NOTIFICATION_SEND_LOGS = 2
+    val MAIN_NOTIFICATION = 3
+    val MAIN_NOTIFICATION_STOP = 4
+    val MAIN_NOTIFICATION_PAUSE = 5
+    val VPN_CONFIGURE = 6
+    val RULE_IMPORT_ABORT = 7
+    val RULE_EXPORT_ABORT = 8
+    val PIN_NOTIFICATION = 9
+    val REQUEST_CODE_IGNORE_SERVICE_KILLED = 10
+}

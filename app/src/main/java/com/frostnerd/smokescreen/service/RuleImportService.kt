@@ -17,6 +17,7 @@ import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.watchIfEnabled
 import leakcanary.LeakSentry
 import okhttp3.OkHttpClient
@@ -107,7 +108,7 @@ class RuleImportService : IntentService("RuleImportService") {
             notification!!.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
             val abortPendingAction = PendingIntent.getService(
                 this,
-                1,
+                RequestCodes.RULE_IMPORT_ABORT,
                 Intent(this, RuleImportService::class.java).putExtra("abort", true),
                 PendingIntent.FLAG_CANCEL_CURRENT
             )
