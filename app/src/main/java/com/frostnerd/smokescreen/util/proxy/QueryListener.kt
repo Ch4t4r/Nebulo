@@ -10,7 +10,7 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.hasTlsServer
 import com.frostnerd.smokescreen.log
-import com.frostnerd.smokescreen.util.preferences.AppSettings
+import kotlinx.coroutines.*
 import org.minidns.dnsmessage.DnsMessage
 
 /*
@@ -34,9 +34,15 @@ import org.minidns.dnsmessage.DnsMessage
 class QueryListener(private val context: Context) : QueryListener {
     private val writeQueriesToLog = context.getPreferences().shouldLogDnsQueriesToConsole()
     private val logQueriesToDb = context.getPreferences().queryLoggingEnabled
-    private val waitingQueryLogs: MutableMap<Int, DnsQuery> = mutableMapOf()
+    private val waitingQueryLogs = LinkedHashMap<Int, DnsQuery>()
+    // Question ID -> <Query, Insert> (true if the query has already been inserted)
+    private val queryLogState: MutableMap<Int, Boolean> = mutableMapOf()
+    // Query -> Has already been inserted
+    private val doneQueries = mutableMapOf<DnsQuery, Boolean>()
     private val askedServer:String
+    private var nextQueryId = 0L
     var lastDnsResponse:DnsMessage? = null
+    private val databaseWriteJob:Job
 
     init {
         val config = context.getPreferences().dnsServerConfig
@@ -45,17 +51,12 @@ class QueryListener(private val context: Context) : QueryListener {
         } else {
             "https::" + (config as HttpsDnsServerInformation).serverConfigurations.values.first().urlCreator.address.getUrl(false)
         }
-    }
-
-    override suspend fun onQueryForwarded(questionMessage: DnsMessage, destination: UpstreamAddress, usedHandle:DnsHandle) {
-        if(writeQueriesToLog) {
-            context.log("Query with ID ${questionMessage.id} forwarded by $usedHandle")
-        }
-
-        if (logQueriesToDb) {
-            val query = waitingQueryLogs[questionMessage.id] ?: return
-            query.askedServer = askedServer
-            context.getDatabase().dnsQueryDao().update(query)
+        nextQueryId = context.getDatabase().dnsQueryDao().getLastInsertedId() + 1
+        databaseWriteJob = GlobalScope.launch(newSingleThreadContext("QueryListener-DatabaseWrite")) {
+            while (isActive) {
+                delay(1500)
+                insertQueries()
+            }
         }
     }
 
@@ -72,12 +73,19 @@ class QueryListener(private val context: Context) : QueryListener {
                 questionTime = System.currentTimeMillis(),
                 responses = mutableListOf()
             )
-            val dao = context.getDatabase().dnsQueryDao()
-            dao.insert(query)
-            query.id = dao.getLastInsertedId()
-            synchronized(waitingQueryLogs) {
-                waitingQueryLogs[questionMessage.id] = query
-            }
+            query.id = nextQueryId++
+            waitingQueryLogs[questionMessage.id] = query
+            queryLogState[questionMessage.id] = false
+        }
+    }
+
+    override suspend fun onQueryForwarded(questionMessage: DnsMessage, destination: UpstreamAddress, usedHandle:DnsHandle) {
+        if(writeQueriesToLog) {
+            context.log("Query with ID ${questionMessage.id} forwarded by $usedHandle")
+        }
+
+        if (logQueriesToDb) {
+            waitingQueryLogs[questionMessage.id]!!.askedServer = askedServer
         }
     }
 
@@ -88,17 +96,43 @@ class QueryListener(private val context: Context) : QueryListener {
         lastDnsResponse = responseMessage
 
         if (logQueriesToDb) {
-            val query = waitingQueryLogs[responseMessage.id]
-            if (query != null) {
-                query.responseTime = System.currentTimeMillis()
-                for (answer in responseMessage.answerSection) {
-                    query.addResponse(answer)
+            val query = waitingQueryLogs.remove(responseMessage.id)!!
+            query.responseTime = System.currentTimeMillis()
+            for (answer in responseMessage.answerSection) {
+                query.addResponse(answer)
+            }
+            query.responseSource = source
+            doneQueries[query] =  queryLogState.remove(responseMessage.id)!!
+        }
+    }
+
+    override fun cleanup() {
+        databaseWriteJob.cancel()
+        insertQueries()
+        waitingQueryLogs.clear()
+        queryLogState.clear()
+    }
+
+    private fun insertQueries() {
+        if(waitingQueryLogs.isEmpty() && doneQueries.isEmpty()) return
+        val currentInsertions = waitingQueryLogs.toMap()
+        val currentDoneInsertions = doneQueries.toMap()
+        doneQueries.clear()
+        val database = context.getDatabase()
+        val dao = database.dnsQueryDao()
+
+        database.runInTransaction {
+            currentInsertions.forEach { (key, value) ->
+                if(queryLogState[key]!!) {
+                    dao.insert(value)
+                    queryLogState[key] = true
+                } else {
+                    dao.update(value)
                 }
-                query.responseSource = source
-                context.getDatabase().dnsQueryRepository().updateAsync(query)
-                synchronized(waitingQueryLogs) {
-                    waitingQueryLogs.remove(responseMessage.id)
-                }
+            }
+            currentDoneInsertions.forEach { (key, value) ->
+                if(value) dao.update(key)
+                else dao.insert(key)
             }
         }
     }
