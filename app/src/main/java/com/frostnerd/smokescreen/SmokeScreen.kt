@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.util.crashhelpers.DatasavingSentryEventHelper
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
@@ -166,11 +167,7 @@ class SmokeScreen : Application() {
             e.printStackTrace()
             log(e, extras)
             extras.clear()
-            val isPrerelease =
-                BuildConfig.VERSION_NAME.contains(
-                    "alpha",
-                    true
-                ) || BuildConfig.VERSION_NAME.contains("beta", true)
+            val isPrerelease = !AppSettings.isReleaseVersion
             if (isPrerelease && getPreferences().loggingEnabled && getPreferences().crashreportingType == Crashreporting.OFF) {
                 startActivity(
                     Intent(

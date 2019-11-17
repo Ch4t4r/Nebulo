@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import io.sentry.Sentry
 import kotlinx.android.synthetic.main.dialog_crashreportingusages.view.*
@@ -32,9 +33,7 @@ import kotlinx.android.synthetic.main.dialog_crashreportingusages_listgroup.view
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class CrashReportingEnableDialog(
-    context: Context, showTesterText: Boolean = BuildConfig.VERSION_NAME.let {
-        it.contains("alpha", true) || it.contains("beta", true)
-    },
+    context: Context, showTesterText: Boolean = !AppSettings.isReleaseVersion,
     onConsentGiven: (() -> Unit)? = null
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
 
