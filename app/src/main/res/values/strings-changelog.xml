@@ -316,6 +316,9 @@
     <string name="changelog_build_49_3">The automatic crash reporting can now be set to full, minimal and off (previously only on/off was possible)</string>
     <string name="changelog_build_49_4">The query log now shows an indication when the DNS server might have blocked the host</string>
     <string name="changelog_build_49_5">Exporting the log files now shows a loading dialog</string>
+    <string name="changelog_build_49_6">The DNS rules are now way faster</string>
+    <string name="changelog_build_49_7">The quick settings tile is now simpler</string>
+    <string name="changelog_build_49_8">Fixed a few bugs which could cause the app to not forward DNS queries after some time on some devices</string>
     <string-array name="changelog_build_49">
         <item>Version 1.0 (Build 49)</item>
         <item>@string/changelog_build_49_1</item>

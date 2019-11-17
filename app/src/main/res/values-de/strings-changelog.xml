@@ -108,4 +108,7 @@
     <string name="changelog_build_49_3">Die automatischen Absturzmeldungen können nun auf komplett, minimal und aus gesetzt werden (vorher war nur an/aus möglich)</string>
     <string name="changelog_build_49_4">Das Anfragenprotokoll zeigt nun einen Indikator, wenn der DNS Server den Host möglicherweise blockiert hat</string>
     <string name="changelog_build_49_5">Das Exportieren der Logdateien zeigt nun einen Ladedialog</string>
+    <string name="changelog_build_49_6">Die DNS Regeln sind nun deutlich schneller</string>
+    <string name="changelog_build_49_7">Die Fläche in den Schnelleinstellungen ist nun simpler</string>
+    <string name="changelog_build_49_8">Es wurden einige Fehler behoben, durch welche DNS Anfragen auf manchen Geräten nach einiger Zeit nicht weitergeleitet wurden</string>
     </resources>
