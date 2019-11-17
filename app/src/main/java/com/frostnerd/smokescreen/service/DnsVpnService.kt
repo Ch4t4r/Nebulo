@@ -756,7 +756,7 @@ class DnsVpnService : VpnService(), Runnable {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             builder.setMetered(false)
         }
-        builder.setConfigureIntent(PendingIntent.getActivity(this, 1, Intent(this, MainActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
+        builder.setConfigureIntent(PendingIntent.getActivity(this, 1, Intent(this, PinActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
         val deviceHasIpv6 = hasDeviceIpv6Address()
         val deviceHasIpv4 = hasDeviceIpv4Address()
 
