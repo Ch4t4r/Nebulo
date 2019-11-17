@@ -10,6 +10,7 @@ import android.view.*
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.Constraints
@@ -29,6 +30,7 @@ import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.dialog.ExportDnsRulesDialog
 import com.frostnerd.smokescreen.dialog.HostSourceRefreshDialog
 import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.service.RuleExportService
 import com.frostnerd.smokescreen.service.RuleImportService
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
@@ -213,6 +215,7 @@ class DnsRuleFragment : Fragment() {
                             GlobalScope.launch {
                                 getDatabase().dnsRuleDao().deleteAllFromSource(it.id)
                                 getDatabase().hostSourceDao().delete(it)
+                                notifyRulesChanged()
                             }
                             dialog.dismiss()
                         }, getString(R.string.all_no) to { dialog, _ ->
@@ -222,6 +225,7 @@ class DnsRuleFragment : Fragment() {
                 }, changeSourceStatus = { hostSource, enabled ->
                     hostSource.enabled = enabled
                     getDatabase().hostSourceDao().setSourceEnabled(hostSource.id, enabled)
+                    notifyRulesChanged()
                 }, editSource = { hostSource ->
                     NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
                         val currentSource = getDatabase().hostSourceDao().findById(hostSource.id)!!.apply {
@@ -260,6 +264,7 @@ class DnsRuleFragment : Fragment() {
                                     sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
                                 }
                                 userRuleCount = 0
+                                notifyRulesChanged()
                                 dialog.dismiss()
                             }, getString(R.string.all_no) to { dialog, _ ->
                                 dialog.dismiss()
@@ -325,6 +330,7 @@ class DnsRuleFragment : Fragment() {
                                             list.smoothScrollToPosition(insertPos)
                                         }
                                     }
+                                    notifyRulesChanged()
                                 } else {
                                     Snackbar.make(
                                         activity!!.findViewById(android.R.id.content),
@@ -350,6 +356,7 @@ class DnsRuleFragment : Fragment() {
                         totalRuleCount = totalRuleCount!! - 1
                         updateRuleCountTitle()
                     }
+                    notifyRulesChanged()
                 }, editRule = {
                     DnsRuleDialog(context!!, it) { newRule ->
                         val rows = getDatabase().dnsRuleDao().updateIgnore(newRule)
@@ -445,6 +452,10 @@ class DnsRuleFragment : Fragment() {
                 exportProgress.show()
             }
         }
+    }
+
+    private fun notifyRulesChanged() {
+        LocalBroadcastManager.getInstance(context!!).sendBroadcast(Intent(DnsVpnService.BROADCAST_DNSRULES_REFRESHED))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

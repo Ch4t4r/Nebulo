@@ -80,13 +80,16 @@ class StartStopTileService:TileService() {
         val tile:Tile? = qsTile
         if(tile != null) {
             if(serviceRunning) {
-                tile.label = getString(R.string.quicksettings_stop_text)
-                tile.icon = Icon.createWithResource(this, R.drawable.ic_stop)
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    tile.subtitle = getString(R.string.quicksettings_stop_text)
+                }
+
                 tile.state = Tile.STATE_ACTIVE
                 tile.contentDescription = getString(R.string.contentdescription_stop_app)
             } else {
-                tile.label = getString(R.string.quicksettings_start_text)
-                tile.icon = Icon.createWithResource(this, R.drawable.ic_play)
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    tile.subtitle = getString(R.string.quicksettings_start_text)
+                }
                 tile.state = Tile.STATE_INACTIVE
                 tile.contentDescription = getString(R.string.contentdescription_start_app)
             }

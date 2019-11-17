@@ -33,7 +33,7 @@ class ProxyHttpsHandler(
     val mapQueryRefusedToHostBlock:Boolean
 ) :
     AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
-    override val handlesSpecificRequests: Boolean = false
+    override val handlesSpecificRequests: Boolean = ProxyBypassHandler.knownSearchDomains.isNotEmpty()
     private val dummyUpstreamAddress = UpstreamAddress(AddressCreator.fromHostAddress("0.0.0.0"), 1)
 
     override fun name(): String {
@@ -41,7 +41,12 @@ class ProxyHttpsHandler(
     }
 
     override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
-        throw RuntimeException("Won't ever be called")
+        return if(dnsMessage.questions.size > 0) {
+            val name = dnsMessage.question.name
+            return !ProxyBypassHandler.knownSearchDomains.any {
+                name.endsWith(it)
+            }
+        } else true
     }
 
     constructor(

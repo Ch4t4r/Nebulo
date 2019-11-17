@@ -33,6 +33,10 @@ class ProxyBypassHandler(private val searchDomains:List<String>, private val des
     override val handlesSpecificRequests: Boolean = true
     private val upstreamAddress = UpstreamAddress(destinationDnsServer, 53)
 
+    companion object {
+        val knownSearchDomains = listOf("fritz.box")
+    }
+
     override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
         if(dnsMessage.questions.isEmpty()) return false
         val name = dnsMessage.question.name

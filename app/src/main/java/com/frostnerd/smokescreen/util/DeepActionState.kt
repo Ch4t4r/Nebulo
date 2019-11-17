@@ -3,7 +3,8 @@ package com.frostnerd.smokescreen.util
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import com.frostnerd.smokescreen.activity.MainActivity
+import android.os.Bundle
+import com.frostnerd.smokescreen.activity.PinActivity
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -29,7 +30,7 @@ enum class DeepActionState {
 
 
     fun intentTo(context:Context): Intent {
-        return Intent(context, MainActivity::class.java).putExtra("deep_action", this)
+        return PinActivity.openAppIntent(context, Bundle().apply { putSerializable("deep_action", this@DeepActionState) })
     }
 
     fun pendingIntentTo(context: Context):PendingIntent {

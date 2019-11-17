@@ -8,6 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
@@ -244,6 +245,7 @@ class RuleImportService : IntentService("RuleImportService") {
             }
             getDatabase().hostSourceDao().removeChecksumForDisabled()
             log("Done.")
+            if(isServiceRunning(DnsVpnService::class.java)) DnsVpnService.restartVpn(this, false)
             showSuccessNotification()
         } else {
             dnsRuleDao.deleteStagedRules()

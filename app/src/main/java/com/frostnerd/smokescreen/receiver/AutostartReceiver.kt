@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -29,9 +30,18 @@ class AutostartReceiver : BroadcastReceiver() {
         if (intent.action != null) {
             var startService = false
             when {
-                intent.action == Intent.ACTION_MY_PACKAGE_REPLACED -> startService = context.getPreferences().startAppAfterUpdate
-                intent.action == Intent.ACTION_PACKAGE_REPLACED -> startService = intent.data?.schemeSpecificPart == context.packageName && context.getPreferences().startAppAfterUpdate
-                context.getPreferences().startAppOnBoot -> startService = true
+                intent.action == Intent.ACTION_MY_PACKAGE_REPLACED -> {
+                    startService = context.getPreferences().startAppAfterUpdate
+                    context.getPreferences().vpnServiceState = VpnServiceState.STOPPED
+                }
+                intent.action == Intent.ACTION_PACKAGE_REPLACED -> {
+                    startService = intent.data?.schemeSpecificPart == context.packageName && context.getPreferences().startAppAfterUpdate
+                    context.getPreferences().vpnServiceState = VpnServiceState.STOPPED
+                }
+                context.getPreferences().startAppOnBoot -> {
+                    context.getPreferences().vpnServiceState = VpnServiceState.STOPPED
+                    startService = true
+                }
             }
             if(startService) BackgroundVpnConfigureActivity.prepareVpn(context)
         }

@@ -15,6 +15,7 @@ import android.util.Base64
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.*
+import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
@@ -34,10 +35,7 @@ import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
-import com.frostnerd.smokescreen.util.proxy.ProxyBypassHandler
-import com.frostnerd.smokescreen.util.proxy.ProxyHttpsHandler
-import com.frostnerd.smokescreen.util.proxy.ProxyTlsHandler
-import com.frostnerd.smokescreen.util.proxy.SmokeProxy
+import com.frostnerd.smokescreen.util.proxy.*
 import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.RetryingVPNTunnelProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
@@ -86,7 +84,6 @@ import kotlin.random.Random
  */
 class DnsVpnService : VpnService(), Runnable {
     private var fileDescriptor: ParcelFileDescriptor? = null
-    private var handle: ProxyHttpsHandler? = null
     private var dnsProxy: SmokeProxy? = null
     private var vpnProxy: RetryingVPNTunnelProxy? = null
     private var destroyed = false
@@ -102,6 +99,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var connectedToANetwork: Boolean? = null
     private var lastScreenOff: Long? = null
     private lateinit var screenStateReceiver: BroadcastReceiver
+    private var dnsRuleRefreshReceiver:BroadcastReceiver? = null
     private var simpleNotification = getPreferences().simpleNotification
     private var lastVPNStopTime:Long? = null
     private val coroutineScope:CoroutineContext = SupervisorJob()
@@ -115,6 +113,7 @@ class DnsVpnService : VpnService(), Runnable {
     companion object {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
         const val BROADCAST_VPN_INACTIVE = BuildConfig.APPLICATION_ID + ".VPN_INACTIVE"
+        const val BROADCAST_DNSRULES_REFRESHED = BuildConfig.APPLICATION_ID + ".DNSRULE_REFRESH"
         private const val REQUEST_CODE_IGNORE_SERVICE_KILLED = 10
 
         var currentTrafficStats: TrafficStats? = null
@@ -256,6 +255,13 @@ class DnsVpnService : VpnService(), Runnable {
                     }
                 }
             }
+        dnsRuleRefreshReceiver = registerLocalReceiver(listOf(BROADCAST_DNSRULES_REFRESHED)) {
+            vpnProxy?.apply {
+                ((packetProxy as DnsPacketProxy).localResolver)?.apply {
+                    (this as DnsRuleResolver).refreshRuleCount()
+                }
+            }
+        }
         log("Service created.")
     }
 
@@ -750,7 +756,7 @@ class DnsVpnService : VpnService(), Runnable {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             builder.setMetered(false)
         }
-        builder.setConfigureIntent(PendingIntent.getActivity(this, 1, Intent(this, MainActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
+        builder.setConfigureIntent(PendingIntent.getActivity(this, 1, Intent(this, PinActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
         val deviceHasIpv6 = hasDeviceIpv6Address()
         val deviceHasIpv4 = hasDeviceIpv4Address()
 
@@ -779,7 +785,7 @@ class DnsVpnService : VpnService(), Runnable {
                 try {
                     builder.addAddress("$prefix.134", mask)
                     couldSetAddress = true
-                    log("Ipv4-Address set to $prefix.134./$mask")
+                    log("Ipv4-Address set to $prefix.134/$mask")
                     break
                 } catch (ignored: IllegalArgumentException) {
                     log("Couldn't set Ipv4-Address $prefix.134/$mask")
@@ -975,37 +981,7 @@ class DnsVpnService : VpnService(), Runnable {
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
             newFixedThreadPoolContext(2, "proxy-pool")
-        ), logger = object : com.frostnerd.vpntunnelproxy.Logger() {
-            private val tag = (0..5).map { Random.nextInt('a'.toInt(), 'z'.toInt()).toChar() }.joinToString(separator = "")
-            private val minLogLevel =
-                if (BuildConfig.DEBUG || getPreferences().advancedLogging) Level.FINE
-                else if (getPreferences().loggingEnabled) Level.INFO
-                else Level.OFF
-
-            override fun logMessage(message: () -> String, level: Level) {
-                if (level >= minLogLevel) {
-                    log(message(), "$tag, VPN-LIBRARY, $level")
-                }
-            }
-
-            override fun failedRequest(question: FutureAnswer, reason: Throwable?) {
-                if (reason != null && Level.INFO >= minLogLevel) log(
-                    "A request failed: " + Logger.stacktraceToString(reason),
-                    "$tag, VPN-LIBRARY"
-                )
-            }
-
-            override fun logException(ex: Exception, terminal: Boolean, level: Level) {
-                if (terminal) log(ex)
-                else if(Level.INFO >= minLogLevel) log(Logger.stacktraceToString(ex), "$tag, VPN-LIBRARY, $level")
-            }
-
-            override fun logMessage(message: String, level: Level) {
-                if (level >= minLogLevel) {
-                    log(message, "$tag, VPN-LIBRARY, $level")
-                }
-            }
-        })
+        ), logger = VpnLogger(applicationContext))
         vpnProxy?.maxRetries = 15
 
         log("VPN proxy creating, trying to run...")
@@ -1022,7 +998,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun createQueryLogger(): QueryListener? {
         return if (getPreferences().shouldLogDnsQueriesToConsole() || getPreferences().queryLoggingEnabled) {
-            com.frostnerd.smokescreen.util.proxy.QueryListener(this)
+            com.frostnerd.smokescreen.util.proxy.QueryListener(applicationContext)
         } else null
     }
 
@@ -1088,24 +1064,7 @@ class DnsVpnService : VpnService(), Runnable {
         dnsCache = if (getPreferences().useDnsCache) {
             log("Creating DNS Cache.")
             val cacheControl: CacheControl = if (!getPreferences().useDefaultDnsCacheTime) {
-                val cacheTime = getPreferences().customDnsCacheTime.toLong()
-                val nxDomainCacheTime = getPreferences().nxDomainCacheTime.toLong()
-                object : CacheControl {
-                    override suspend fun getTtl(
-                        answerMessage: DnsMessage,
-                        dnsName: DnsName,
-                        type: Record.TYPE,
-                        record: Record<*>
-                    ): Long {
-                        return if (answerMessage.responseCode == DnsMessage.RESPONSE_CODE.NX_DOMAIN) nxDomainCacheTime else cacheTime
-                    }
-
-                    override suspend fun getTtl(question: Question, record: Record<*>): Long =
-                        cacheTime
-
-
-                    override fun shouldCache(question: Question): Boolean = true
-                }
+                NxDomainCacheControl(applicationContext)
             } else DefaultCacheControl(getPreferences().minimumCacheTime.toLong())
             val onClearCache: ((currentCache: Map<String, Map<Record.TYPE, Map<Record<*>, Long>>>) -> Unit)? =
                 if (getPreferences().keepDnsCacheAcrossLaunches) {
@@ -1186,108 +1145,10 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun createLocalResolver(): LocalResolver? {
-        if (getPreferences().dnsRulesEnabled) {
-            return object : LocalResolver(false) {
-                private val dao = getDatabase().dnsRuleDao()
-                private val resolveResults = mutableMapOf<Question, String>()
-                private val wwwRegex = Regex("^www\\.")
-                private val useUserRules = getPreferences().customHostsEnabled
-
-                override suspend fun canResolve(question: Question): Boolean {
-                    return if (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA) {
-                        false
-                    } else {
-                        val uniformQuestion = question.name.toString().replace(wwwRegex, "")
-                        val isWhitelisted = dao.findPossibleWildcardRuleTarget(
-                            uniformQuestion,
-                            question.type,
-                            useUserRules,
-                            true,
-                            false
-                        ).any {
-                            DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
-                                .matches()
-                        } || dao.findNonWildcardWhitelistEntry(
-                            uniformQuestion,
-                            useUserRules
-                        ).isNotEmpty()
-                        if (isWhitelisted) false
-                        else {
-                            val resolveResult =
-                                dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
-                                    ?.let {
-                                        when (it) {
-                                            "0" -> "0.0.0.0"
-                                            "1" -> {
-                                                if (question.type == Record.TYPE.AAAA) "::1"
-                                                else "127.0.0.1"
-                                            }
-                                            else -> it
-                                        }
-                                    }
-                            if (resolveResult != null) {
-                                resolveResults[question] = resolveResult
-                                true
-                            } else {
-                                val wildcardResolveResults = dao.findPossibleWildcardRuleTarget(
-                                    uniformQuestion,
-                                    question.type,
-                                    useUserRules,
-                                    false,
-                                    true
-                                ).filter {
-                                    DnsRuleDialog.databaseHostToMatcher(it.host)
-                                        .reset(uniformQuestion).matches()
-                                }
-                                if(wildcardResolveResults.isNotEmpty()) {
-                                    resolveResults[question] = wildcardResolveResults.first().let {
-                                        if (question.type == Record.TYPE.AAAA) it.ipv6Target
-                                            ?: it.target
-                                        else it.target
-                                    }.let {
-                                        when (it) {
-                                            "0" -> "0.0.0.0"
-                                            "1" -> {
-                                                if (question.type == Record.TYPE.AAAA) "::1"
-                                                else "127.0.0.1"
-                                            }
-                                            else -> it
-                                        }
-                                    }
-                                    true
-                                } else {
-                                    false
-                                }
-                            }
-                        }
-                    }
-                }
-
-                override suspend fun resolve(question: Question): List<Record<*>> {
-                    val result = resolveResults.remove(question)
-                    return result?.let {
-                        val data = if (question.type == Record.TYPE.A) {
-                            A(it)
-                        } else {
-                            AAAA(it)
-                        }
-                        listOf(
-                            Record(
-                                question.name.toString(),
-                                question.type,
-                                question.clazz.value,
-                                9999,
-                                data
-                            )
-                        )
-                    } ?: throw IllegalStateException()
-                }
-
-                override fun cleanup() {}
-
-            }
+        return if (getPreferences().dnsRulesEnabled) {
+            DnsRuleResolver(applicationContext)
         } else {
-            return null
+            null
         }
     }
 
