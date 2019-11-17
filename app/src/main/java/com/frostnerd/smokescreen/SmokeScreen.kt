@@ -55,7 +55,7 @@ class SmokeScreen : Application() {
                 .setContentIntent(
                     PendingIntent.getActivity(
                         this, 1,
-                        Intent(this, PinActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
+                        PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT
                     )
                 )
                 .setContentTitle(getString(R.string.notification_appcrash_title))
