@@ -145,7 +145,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val pinValue = findPreference("pin") as EditTextPreference
 
         pinValue.setOnPreferenceChangeListener { _, newValue ->
-            println(newValue)
             if (newValue.toString().isNotEmpty() && newValue.toString().isInt()) {
                 pinValue.summary = getString(R.string.summary_preference_change_pin, newValue.toString())
                 true

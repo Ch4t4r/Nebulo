@@ -308,7 +308,6 @@ class DnsRuleFragment : Fragment() {
                                 val id = if (newRule.isWhitelistRule()) {
                                     getDatabase().dnsRuleDao().insertWhitelist(newRule)
                                     if (userDnsRules.any {
-                                            println("$it vs $newRule")
                                             it.host == newRule.host && it.type == newRule.type
                                         }) -1L
                                     else 0L

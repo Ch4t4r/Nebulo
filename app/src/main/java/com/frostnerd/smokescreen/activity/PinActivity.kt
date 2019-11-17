@@ -59,14 +59,12 @@ class PinActivity: BaseActivity() {
 
         fun openAppIntent(context: Context, extras:Bundle? = null):Intent {
             return if(shouldValidatePin(context, null)) {
-                println(">>>>>>>>>>>>>>>>>>>>>> ASK PIN")
                 val intent = Intent(context, PinActivity::class.java)
                 if(intent.extras != null) intent.putExtra("extras", extras)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 intent.putExtra("pin_type", PinType.APP)
                 intent
             } else {
-                println(">>>>>>>>>> TO MAIN")
                 Intent(context, MainActivity::class.java).apply {
                     if(extras != null) putExtras(extras)
                 }
