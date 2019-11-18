@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
@@ -197,7 +198,9 @@ class RuleExportService : IntentService("RuleExportService") {
 
     private fun writeRule(stream: BufferedWriter, rule: DnsRule) {
         stream.write(buildString {
-            append(rule.target)
+            if(rule.isWildcard) {
+                append(rule.target.replace("%%", "**").replace("%", "*"))
+            } else append(rule.target)
             append(" ")
             append(rule.host)
             append(System.lineSeparator())
