@@ -35,6 +35,7 @@ class ProxyHttpsHandler(
     AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
     override val handlesSpecificRequests: Boolean = ProxyBypassHandler.knownSearchDomains.isNotEmpty()
     private val dummyUpstreamAddress = UpstreamAddress(AddressCreator.fromHostAddress("0.0.0.0"), 1)
+    private var queryCount = 0
 
     override fun name(): String {
         return "ProxyHttpsHandler"
@@ -75,7 +76,7 @@ class ProxyHttpsHandler(
     }
 
     override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
-        queryCountCallback?.invoke(dnsPacketProxy?.tunnelHandle?.trafficStats?.packetsReceivedFromDevice?.toInt() ?: 0)
+        queryCountCallback?.invoke(++queryCount)
         return dummyUpstreamAddress
     }
 
