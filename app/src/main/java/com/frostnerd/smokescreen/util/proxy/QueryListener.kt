@@ -141,11 +141,12 @@ class QueryListener(private val context: Context) : QueryListener {
 
         database.runInTransaction {
             currentInsertions.forEach { (key, value) ->
-                if (queryLogState[key]!!) {
-                    dao.insert(value)
-                    queryLogState[key] = true
-                } else {
-                    dao.update(value)
+                when (queryLogState[key]) {
+                    true -> {
+                        dao.insert(value)
+                        queryLogState[key] = true
+                    }
+                    false -> dao.update(value)
                 }
             }
             currentDoneInsertions.forEach { (key, value) ->
