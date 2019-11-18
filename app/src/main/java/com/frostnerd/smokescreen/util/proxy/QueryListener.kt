@@ -134,7 +134,7 @@ class QueryListener(private val context: Context) : QueryListener {
         synchronized(waitingQueryLogs) {
             currentInsertions = waitingQueryLogs.toMap()
             currentDoneInsertions = doneQueries
-            doneQueries.clear()
+            doneQueries = mutableMapOf()
         }
         val database = context.getDatabase()
         val dao = database.dnsQueryDao()
