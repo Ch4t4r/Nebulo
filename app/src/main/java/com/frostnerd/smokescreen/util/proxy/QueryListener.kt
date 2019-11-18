@@ -40,7 +40,6 @@ class QueryListener(private val context: Context) : QueryListener {
     // Query -> Has already been inserted
     private var doneQueries = mutableMapOf<DnsQuery, Boolean>()
     private val askedServer: String
-    private var nextQueryId = 0L
     var lastDnsResponse: DnsMessage? = null
     private val databaseWriteJob: Job
 
@@ -53,7 +52,6 @@ class QueryListener(private val context: Context) : QueryListener {
                 false
             )
         }
-        nextQueryId = context.getDatabase().dnsQueryDao().getLastInsertedId() + 1
         databaseWriteJob =
             GlobalScope.launch(newSingleThreadContext("QueryListener-DatabaseWrite")) {
                 while (isActive) {
@@ -77,7 +75,6 @@ class QueryListener(private val context: Context) : QueryListener {
                 responses = mutableListOf()
             )
             synchronized(waitingQueryLogs) {
-                query.id = nextQueryId++
                 waitingQueryLogs[questionMessage.id] = query
                 queryLogState[questionMessage.id] = false
             }
@@ -138,11 +135,13 @@ class QueryListener(private val context: Context) : QueryListener {
         }
         val database = context.getDatabase()
         val dao = database.dnsQueryDao()
+        var nextQueryId = context.getDatabase().dnsQueryDao().getLastInsertedId() + 1
 
         database.runInTransaction {
             currentInsertions.forEach { (key, value) ->
                 when (queryLogState[key]) {
                     true -> {
+                        value.id = nextQueryId++
                         dao.insert(value)
                         queryLogState[key] = true
                     }
@@ -151,7 +150,10 @@ class QueryListener(private val context: Context) : QueryListener {
             }
             currentDoneInsertions.forEach { (key, value) ->
                 if (value) dao.update(key)
-                else dao.insert(key)
+                else {
+                    key.id = nextQueryId++
+                    dao.insert(key)
+                }
             }
         }
     }
