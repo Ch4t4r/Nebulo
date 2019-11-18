@@ -61,6 +61,7 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
 
         list.layoutManager = LinearLayoutManager(requireContext())
         list.adapter = unfilteredAdapter
+        progress.visibility = View.GONE
     }
 
     private fun createAdapter(source:LiveDataSource<DnsQuery>): RecyclerView.Adapter<DefaultViewHolder> {
