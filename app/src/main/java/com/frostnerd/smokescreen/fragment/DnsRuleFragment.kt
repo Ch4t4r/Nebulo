@@ -235,7 +235,7 @@ class DnsRuleFragment : Fragment() {
                         }
                         getDatabase().hostSourceDao().update(currentSource)
 
-                        val index = sourceAdapterList.indexOf(hostSource)
+                        val index = sourceAdapterList.indexOf(hostSource).takeIf { it >= 0 } ?: sourceAdapterList.indexOfFirst { it.id == hostSource.id }
                         sourceAdapterList[index] = currentSource
                         sourceRuleCount[currentSource] = sourceRuleCount[hostSource]
                         sourceRuleCount.remove(hostSource)
