@@ -205,7 +205,8 @@ class RuleExportService : IntentService("RuleExportService") {
             append(rule.host)
             append(System.lineSeparator())
             if (rule.ipv6Target != null) {
-                append(rule.ipv6Target)
+                if(rule.isWildcard) append(rule.ipv6Target.replace("%%", "**").replace("%", "*"))
+                else append(rule.ipv6Target)
                 append(" ")
                 append(rule.host)
                 append(System.lineSeparator())
