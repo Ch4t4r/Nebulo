@@ -91,7 +91,7 @@ class QueryListener(private val context: Context) : QueryListener {
         }
 
         if (logQueriesToDb) {
-            waitingQueryLogs[questionMessage.id]!!.askedServer = askedServer
+            waitingQueryLogs[questionMessage.id]?.askedServer = askedServer
         }
     }
 
@@ -106,8 +106,8 @@ class QueryListener(private val context: Context) : QueryListener {
 
         if (logQueriesToDb) {
             val query = synchronized(waitingQueryLogs) {
-                waitingQueryLogs.remove(responseMessage.id)!!
-            }
+                waitingQueryLogs.remove(responseMessage.id)
+            } ?: return
             query.responseTime = System.currentTimeMillis()
             for (answer in responseMessage.answerSection) {
                 query.addResponse(answer)
