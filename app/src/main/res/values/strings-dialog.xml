@@ -146,6 +146,8 @@
     <string name="dialog_newdnsrule_wildcard_info">The host supports wildcards. Use an asterisk (*) for any amount of characters, numbers and allowed special characters except period (.). Use two asterisks (**) to include the period (.).</string>
 
     <string name="dialog_exportdnsrules_title">Export DNS rules</string>
+    <string name="dialog_exportdnsrules_whitelist">Export whitelist rules</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">Export normal rules</string>
     <string name="dialog_exportdnsrules_export_user_rules">Export custom host DNS rules</string>
     <string name="dialog_exportdnsrules_export_sources">Export DNS rules from enabled host sources</string>
 

@@ -26,10 +26,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
-import com.frostnerd.smokescreen.dialog.DnsRuleDialog
-import com.frostnerd.smokescreen.dialog.ExportDnsRulesDialog
-import com.frostnerd.smokescreen.dialog.HostSourceRefreshDialog
-import com.frostnerd.smokescreen.dialog.NewHostSourceDialog
+import com.frostnerd.smokescreen.dialog.*
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.service.RuleExportService
 import com.frostnerd.smokescreen.service.RuleImportService
@@ -173,12 +170,12 @@ class DnsRuleFragment : Fragment() {
             if (context!!.isServiceRunning(RuleExportService::class.java)) {
                 context!!.startService(Intent(context!!, RuleExportService::class.java).putExtra("abort", true))
             } else {
-                ExportDnsRulesDialog(context!!) { exportFromSources, exportUserRules ->
+                ExportDnsRulesDialog(context!!) { exportFromSources, exportUserRules, exportType ->
                     fileChosenCallback = {
                         val intent = Intent(context!!, RuleExportService::class.java).apply {
                             putExtra(
                                 "params",
-                                RuleExportService.Params(exportFromSources, exportUserRules, it.toString())
+                                RuleExportService.Params(exportFromSources, exportUserRules, exportType, it.toString())
                             )
                         }
                         context!!.startService(intent)
@@ -187,7 +184,7 @@ class DnsRuleFragment : Fragment() {
                     }
                     startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
                         addCategory(Intent.CATEGORY_OPENABLE)
-                        putExtra(Intent.EXTRA_TITLE, "dnsRuleExport.txt")
+                        putExtra(Intent.EXTRA_TITLE, if(exportType == ExportType.NON_WHITELIST) "dnsRuleExport.txt" else "dnsRuleWhitelistExport.txt")
                         type = "text/*"
                     }, fileChosenRequestCode)
                 }.show()

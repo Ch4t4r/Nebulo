@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.dialog_export_dnsrules.view.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ExportDnsRulesDialog(context: Context,
-                           beginExport: (exportFromSources:Boolean, exportUserRules:Boolean) -> Unit) :
+                           beginExport: (exportFromSources:Boolean, exportUserRules:Boolean, type:ExportType) -> Unit) :
 androidx.appcompat.app.AlertDialog(context, context.getPreferences().theme.dialogStyle) {
 
     init {
@@ -42,11 +42,16 @@ androidx.appcompat.app.AlertDialog(context, context.getPreferences().theme.dialo
             dialog.dismiss()
             beginExport(
                 view.exportSources.isChecked,
-                view.exportUserRules.isChecked
+                view.exportUserRules.isChecked,
+                if(view.nonwhitelist.isChecked) ExportType.NON_WHITELIST else ExportType.WHITELIST
             )
         }
         setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel)) { dialog, _ ->
             dialog.dismiss()
         }
     }
+}
+
+enum class ExportType {
+    WHITELIST, NON_WHITELIST
 }

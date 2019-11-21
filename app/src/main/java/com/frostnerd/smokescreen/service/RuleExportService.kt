@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
+import com.frostnerd.smokescreen.dialog.ExportType
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
@@ -153,7 +154,8 @@ class RuleExportService : IntentService("RuleExportService") {
             })
             updateNotification(0, ruleCount)
             if (params.exportUserRules && !isAborted) {
-                getDatabase().dnsRuleDao().getAllUserRulesWithoutWhitelist().forEach {
+                getDatabase().dnsRuleDao().getAllUserRules(params.exportType == ExportType.WHITELIST,
+                    params.exportType == ExportType.NON_WHITELIST).forEach {
                     if (!isAborted) {
                         writtenCount++
                         writeRule(stream, it)
@@ -169,7 +171,8 @@ class RuleExportService : IntentService("RuleExportService") {
                 val limit = 2000
                 var offset = 0
                 while (!isAborted && offset < nonUserRuleCount!!) {
-                    getDatabase().dnsRuleDao().getAllNonUserRulesWithoutWhitelist(offset, limit).forEach {
+                    getDatabase().dnsRuleDao().getAllNonUserRules(offset, limit, params.exportType == ExportType.WHITELIST,
+                        params.exportType == ExportType.NON_WHITELIST).forEach {
                         if (!isAborted) {
                             writtenCount++
                             writeRule(stream, it)
@@ -228,6 +231,7 @@ class RuleExportService : IntentService("RuleExportService") {
     data class Params(
         val exportFromSources: Boolean,
         val exportUserRules: Boolean,
+        val exportType: ExportType,
         val targetUri: String
     ) : Serializable
 }
