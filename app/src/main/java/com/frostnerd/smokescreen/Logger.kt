@@ -41,6 +41,7 @@ import kotlin.concurrent.withLock
 
 private val publishedExceptions = mutableMapOf<Throwable, Set<StackTraceElement>>()
 private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = null) {
+    if(getPreferences().crashreportingType == Crashreporting.OFF) return
     if (publishedExceptions.any {
             it.value.all { elem ->
                 e.stackTrace.contains(elem)
