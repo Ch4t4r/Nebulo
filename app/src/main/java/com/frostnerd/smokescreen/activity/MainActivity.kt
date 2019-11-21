@@ -134,7 +134,9 @@ class MainActivity : NavigationDrawerActivity() {
                     dialog.dismiss()
                 }, null)
         } else if(getPreferences().totalAppLaunches > 6 && !getPreferences().hasAskedRateApp
-            && Random.nextInt(0, 100) <= 15 && isPackageInstalled(this, "com.android.vending")) {
+            && Random.nextInt(0, 100) <= 15 && isPackageInstalled(this, "com.android.vending")
+            && getPreferences().lastCrashTimeStamp?.let { System.currentTimeMillis() - it >= 12*60*60*1000 } != false
+        ) {
             showInfoTextDialog(this, getString(R.string.dialog_raterequest_title),
                 getString(R.string.dialog_raterequest_message),
                 getString(R.string.dialog_join_group_positive) to { dialog, _ ->

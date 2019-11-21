@@ -158,6 +158,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         }
     })
 
+    var lastCrashTimeStamp:Long? by longPref("last_crash_timestamp")
+
     override var hasRatedApp: Boolean by booleanPref("has_rated_app", false)
     var hasAskedRateApp:Boolean by booleanPref("asked_rate_app", false)
     override var previousInstalledVersion:Int by nonOptionalOf(intPref("previous_version"),true, BuildConfig.VERSION_CODE)
