@@ -271,9 +271,10 @@ class RuleImportService : IntentService("RuleImportService") {
         var ruleCount = 0
         val sourceId = source.id
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
-            lines.forEach { line ->
+            lines.forEach { _line ->
+                val line = _line.trim()
                 if (!isAborted) {
-                    if (parsers.isNotEmpty() && !line.trim().startsWith("#") && !line.trim().startsWith("!") && !line.isBlank()) {
+                    if (parsers.isNotEmpty() && !line.startsWith("#") && !line.startsWith("!") && !line.isBlank()) {
                         lineCount++
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
