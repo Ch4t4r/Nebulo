@@ -133,6 +133,17 @@ class MainActivity : NavigationDrawerActivity() {
                 }, getString(R.string.dialog_crashreporting_negative) to { dialog, _ ->
                     dialog.dismiss()
                 }, null)
+        } else if(getPreferences().totalAppLaunches > 6 && !getPreferences().hasAskedRateApp
+            && Random.nextInt(0, 100) <= 15 && isPackageInstalled(this, "com.android.vending")) {
+            showInfoTextDialog(this, getString(R.string.dialog_raterequest_title),
+                getString(R.string.dialog_raterequest_message),
+                getString(R.string.dialog_join_group_positive) to { dialog, _ ->
+                    dialog.dismiss()
+                    rateApp()
+                }, getString(R.string.dialog_crashreporting_negative) to { dialog, _ ->
+                    dialog.dismiss()
+                }, null)
+            getPreferences().hasAskedRateApp = true
         }
         if(resources.getBoolean(R.bool.add_default_hostsources)) {
             val versionToStartFrom = getPreferences().hostSourcesVersion.let {
@@ -229,7 +240,15 @@ class MainActivity : NavigationDrawerActivity() {
                     iconLeft = getDrawable(R.drawable.ic_star),
                     onLongClick = null,
                     onSimpleClick = { _, _, _ ->
-                        rateApp()
+                        AlertDialog.Builder(this@MainActivity, getPreferences().theme.dialogStyle)
+                            .setMessage(R.string.dialog_rate_confirmation)
+                            .setPositiveButton(R.string.all_yes) { _, _ ->
+                                rateApp()
+                            }
+                            .setNegativeButton(R.string.all_no) { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
                         false
                     })
             }
@@ -258,34 +277,33 @@ class MainActivity : NavigationDrawerActivity() {
         }
     }
 
+    private fun askRateApp() {
+
+    }
+
     private fun rateApp() {
         val appPackageName = this.packageName
-        val openStore = {
+        try {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=$appPackageName")
+                )
+            )
+        } catch (e: ActivityNotFoundException) {
             try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
-            } catch (e: ActivityNotFoundException) {
-                try {
-                    startActivity(
-                        Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
-                        )
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
                     )
-                } catch (e: ActivityNotFoundException) {
-                    Toast.makeText(this, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show()
-                }
+                )
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(this, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG)
+                    .show()
             }
-            getPreferences().hasRatedApp = true
         }
-        AlertDialog.Builder(this, getPreferences().theme.dialogStyle)
-            .setMessage(R.string.dialog_rate_confirmation)
-            .setPositiveButton(R.string.all_yes) { _, _ ->
-                openStore()
-            }
-            .setNegativeButton(R.string.all_no) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
+        getPreferences().hasRatedApp = true
     }
 
     override fun createStyleOptions(): StyleOptions {
