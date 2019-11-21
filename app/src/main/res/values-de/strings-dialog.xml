@@ -180,4 +180,8 @@
     <string name="dialog_vpninformation_message">Nebulo funktioniert, indem ein dummy-VPN aufgesetzt wird, welcher alle deine DNS Anfragen abfängt und zu einem sicheren Server deiner Wahl weiterleitet. Es handelt sich um keinen echten VPN, weder wird deine Identität versteckt, noch ändert es deine IP-Adresse.
 \n
 \nAußer DNS-Paketen werden keine Daten über diese App verschickt.</string>
+<string name="dialog_exportdnsrules_whitelist">Exportiere Whitelist Regeln</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">Exportiere normale Regeln</string>
+    <string name="dialog_raterequest_title">Bist du mit Nebulo zufrieden\?</string>
+    <string name="dialog_raterequest_message">Würdest du dir einen Moment Zeit nehmen die App im Store zu bewerten, wenn du mit ihr zufrieden bist\?</string>
 </resources>
