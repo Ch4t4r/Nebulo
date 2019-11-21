@@ -27,6 +27,7 @@ import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.RequestCodes
 import kotlinx.android.synthetic.main.dialog_pin.view.*
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -82,7 +83,7 @@ class PinActivity: BaseActivity() {
                     .setContentTitle(context.getString(R.string.notification_pin_title))
                     .setContentText(context.getString(R.string.notification_pin_message))
                     .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.notification_pin_message)))
-                    .setContentIntent(PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT))
+                    .setContentIntent(PendingIntent.getActivity(context, RequestCodes.PIN_NOTIFICATION, intent, PendingIntent.FLAG_CANCEL_CURRENT))
                     .setAutoCancel(true)
                     .setDefaults(NotificationCompat.DEFAULT_ALL)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)

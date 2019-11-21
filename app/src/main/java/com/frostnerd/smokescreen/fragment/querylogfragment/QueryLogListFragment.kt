@@ -61,6 +61,7 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
 
         list.layoutManager = LinearLayoutManager(requireContext())
         list.adapter = unfilteredAdapter
+        progress.visibility = View.GONE
     }
 
     private fun createAdapter(source:LiveDataSource<DnsQuery>): RecyclerView.Adapter<DefaultViewHolder> {
@@ -82,7 +83,6 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
                     when (data.responseSource) {
                         QueryListener.Source.UPSTREAM ->
                             if (data.getParsedResponses().any {
-                                    if (it.type == Record.TYPE.A) println((it.payload as A).toString())
                                     (it.type == Record.TYPE.A && (it.payload as A).toString() == "0.0.0.0"
                                             || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString().equalsAny("::1", "::0", "0:0:0:0:0:0:0:0", "0:0:0:0:0:0:0:1")))
                                 }) R.drawable.ic_flag

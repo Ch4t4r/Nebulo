@@ -11,9 +11,12 @@ import androidx.core.app.NotificationCompat
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.dialog.DnsRuleDialog
+import com.frostnerd.smokescreen.dialog.ExportType
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.watchIfEnabled
 import leakcanary.LeakSentry
 import java.io.BufferedWriter
@@ -88,7 +91,7 @@ class RuleExportService : IntentService("RuleExportService") {
             notification!!.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
             val abortPendingAction = PendingIntent.getService(
                 this,
-                1,
+                RequestCodes.RULE_EXPORT_ABORT,
                 Intent(this, RuleExportService::class.java).putExtra("abort", true),
                 PendingIntent.FLAG_CANCEL_CURRENT
             )
@@ -151,7 +154,8 @@ class RuleExportService : IntentService("RuleExportService") {
             })
             updateNotification(0, ruleCount)
             if (params.exportUserRules && !isAborted) {
-                getDatabase().dnsRuleDao().getAllUserRulesWithoutWhitelist().forEach {
+                getDatabase().dnsRuleDao().getAllUserRules(params.exportType == ExportType.WHITELIST,
+                    params.exportType == ExportType.NON_WHITELIST).forEach {
                     if (!isAborted) {
                         writtenCount++
                         writeRule(stream, it)
@@ -167,7 +171,8 @@ class RuleExportService : IntentService("RuleExportService") {
                 val limit = 2000
                 var offset = 0
                 while (!isAborted && offset < nonUserRuleCount!!) {
-                    getDatabase().dnsRuleDao().getAllNonUserRulesWithoutWhitelist(offset, limit).forEach {
+                    getDatabase().dnsRuleDao().getAllNonUserRules(offset, limit, params.exportType == ExportType.WHITELIST,
+                        params.exportType == ExportType.NON_WHITELIST).forEach {
                         if (!isAborted) {
                             writtenCount++
                             writeRule(stream, it)
@@ -198,12 +203,16 @@ class RuleExportService : IntentService("RuleExportService") {
         stream.write(buildString {
             append(rule.target)
             append(" ")
-            append(rule.host)
+            if(rule.isWildcard) {
+                append(rule.host.replace("%%", "**").replace("%", "*"))
+            } else append(rule.host)
             append(System.lineSeparator())
             if (rule.ipv6Target != null) {
                 append(rule.ipv6Target)
                 append(" ")
-                append(rule.host)
+                if(rule.isWildcard) {
+                    append(rule.host.replace("%%", "**").replace("%", "*"))
+                } else append(rule.host)
                 append(System.lineSeparator())
             }
         })
@@ -222,6 +231,7 @@ class RuleExportService : IntentService("RuleExportService") {
     data class Params(
         val exportFromSources: Boolean,
         val exportUserRules: Boolean,
+        val exportType: ExportType,
         val targetUri: String
     ) : Serializable
 }

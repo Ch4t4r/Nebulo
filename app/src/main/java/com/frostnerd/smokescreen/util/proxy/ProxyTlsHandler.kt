@@ -47,6 +47,7 @@ class ProxyTlsHandler(
     override val handlesSpecificRequests: Boolean =
         ProxyBypassHandler.knownSearchDomains.isNotEmpty()
     private val hostnameVerifier = HttpsURLConnection.getDefaultHostnameVerifier()
+    private var queryCount = 0
 
     override suspend fun forwardDnsQuestion(
         deviceWriteToken: DeviceWriteToken,
@@ -89,7 +90,7 @@ class ProxyTlsHandler(
     }
 
     override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): TLSUpstreamAddress {
-        queryCountCallback?.invoke(dnsPacketProxy?.tunnelHandle?.trafficStats?.packetsReceivedFromDevice?.toInt() ?: 0)
+        queryCountCallback?.invoke(++queryCount)
         return upstreamAddresses[0]
     }
 

@@ -12,6 +12,8 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.util.crashhelpers.DatasavingSentryEventHelper
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.RequestCodes
+import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import io.sentry.Sentry
 import io.sentry.android.AndroidSentryClientFactory
@@ -53,15 +55,15 @@ class SmokeScreen : Application() {
                 .setAutoCancel(true)
                 .setContentIntent(
                     PendingIntent.getActivity(
-                        this, 1,
-                        Intent(this, PinActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
+                        this, RequestCodes.CRASH_NOTIFICATION,
+                        PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT
                     )
                 )
                 .setContentTitle(getString(R.string.notification_appcrash_title))
         if (getPreferences().loggingEnabled) {
             val pendingIntent = PendingIntent.getActivity(
                 this,
-                1,
+                RequestCodes.CRASH_NOTIFICATION_SEND_LOGS,
                 Intent(
                     this,
                     LoggingDialogActivity::class.java
@@ -166,11 +168,7 @@ class SmokeScreen : Application() {
             e.printStackTrace()
             log(e, extras)
             extras.clear()
-            val isPrerelease =
-                BuildConfig.VERSION_NAME.contains(
-                    "alpha",
-                    true
-                ) || BuildConfig.VERSION_NAME.contains("beta", true)
+            val isPrerelease = !AppSettings.isReleaseVersion
             if (isPrerelease && getPreferences().loggingEnabled && getPreferences().crashreportingType == Crashreporting.OFF) {
                 startActivity(
                     Intent(

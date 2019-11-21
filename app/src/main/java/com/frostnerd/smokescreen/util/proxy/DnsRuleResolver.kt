@@ -181,7 +181,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
                         }
                     }
                     if (wildcardResolveResult != null) {
-                        cachedWildcardResolved[hashHost(uniformQuestion, question.type)] = wildcardResolveResult
+                        cachedWildcardResolved[hostHash] = wildcardResolveResult
                         resolveResults[question.hashCode()] = wildcardResolveResult
                         true
                     } else {

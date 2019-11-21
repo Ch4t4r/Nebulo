@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:paddingLeft="@dimen/dialog_horizontal_margin"
-              android:paddingRight="@dimen/dialog_horizontal_margin"
-              android:paddingTop="@dimen/dialog_vertical_margin"
-              android:paddingBottom="@dimen/dialog_vertical_margin"
-              android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dialog_horizontal_margin"
+        android:paddingTop="@dimen/dialog_vertical_margin"
+        android:paddingRight="@dimen/dialog_horizontal_margin"
+        android:paddingBottom="@dimen/dialog_vertical_margin">
+
+    <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RadioButton
+                android:id="@+id/nonwhitelist"
+                android:layout_width="wrap_content"
+                android:checked="true"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_exportdnsrules_nonwhitelist"
+                android:textColor="?android:attr/textColor" />
+
+        <RadioButton
+                android:id="@+id/whitelist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_exportdnsrules_whitelist"
+                android:textColor="?android:attr/textColor" />
+    </RadioGroup>
 
     <CheckBox
-            android:layout_width="wrap_content"
             android:id="@+id/exportSources"
-            android:text="@string/dialog_exportdnsrules_export_sources"
-            android:textColor="?android:attr/textColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:checked="true"
-            android:layout_height="wrap_content"/>
+            android:text="@string/dialog_exportdnsrules_export_sources"
+            android:textColor="?android:attr/textColor" />
 
     <CheckBox
-            android:layout_width="wrap_content"
             android:id="@+id/exportUserRules"
-            android:text="@string/dialog_exportdnsrules_export_user_rules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:checked="true"
-            android:textColor="?android:attr/textColor"
-            android:layout_height="wrap_content"/>
+            android:text="@string/dialog_exportdnsrules_export_user_rules"
+            android:textColor="?android:attr/textColor" />
 </LinearLayout>

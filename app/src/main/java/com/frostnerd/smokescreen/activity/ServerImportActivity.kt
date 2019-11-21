@@ -159,9 +159,7 @@ class ServerImportActivity : BaseActivity() {
         }
         val actualReader = JsonReader(StringReader(jsonString))
         val readServer = { https: Boolean ->
-            println("HTTPS: $https")
             val server = if (https) httpsAdapter.read(actualReader) else tlsAdapter.read(actualReader)
-            println("Read: $server")
             if (server != null) {
                 servers.add(server)
                 true

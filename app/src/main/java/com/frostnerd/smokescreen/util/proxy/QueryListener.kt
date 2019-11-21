@@ -34,30 +34,31 @@ import org.minidns.dnsmessage.DnsMessage
 class QueryListener(private val context: Context) : QueryListener {
     private val writeQueriesToLog = context.getPreferences().shouldLogDnsQueriesToConsole()
     private val logQueriesToDb = context.getPreferences().queryLoggingEnabled
-    private val waitingQueryLogs = LinkedHashMap<Int, DnsQuery>()
+    private var waitingQueryLogs = LinkedHashMap<Int, DnsQuery>()
     // Question ID -> <Query, Insert> (true if the query has already been inserted)
     private val queryLogState: MutableMap<Int, Boolean> = mutableMapOf()
     // Query -> Has already been inserted
-    private val doneQueries = mutableMapOf<DnsQuery, Boolean>()
-    private val askedServer:String
-    private var nextQueryId = 0L
-    var lastDnsResponse:DnsMessage? = null
-    private val databaseWriteJob:Job
+    private var doneQueries = mutableMapOf<DnsQuery, Boolean>()
+    private val askedServer: String
+    var lastDnsResponse: DnsMessage? = null
+    private val databaseWriteJob: Job
 
     init {
         val config = context.getPreferences().dnsServerConfig
-        askedServer = if(config.hasTlsServer()) {
+        askedServer = if (config.hasTlsServer()) {
             "tls::" + config.servers.first().address.host!!
         } else {
-            "https::" + (config as HttpsDnsServerInformation).serverConfigurations.values.first().urlCreator.address.getUrl(false)
+            "https::" + (config as HttpsDnsServerInformation).serverConfigurations.values.first().urlCreator.address.getUrl(
+                false
+            )
         }
-        nextQueryId = context.getDatabase().dnsQueryDao().getLastInsertedId() + 1
-        databaseWriteJob = GlobalScope.launch(newSingleThreadContext("QueryListener-DatabaseWrite")) {
-            while (isActive) {
-                delay(1500)
-                insertQueries()
+        databaseWriteJob =
+            GlobalScope.launch(newSingleThreadContext("QueryListener-DatabaseWrite")) {
+                while (isActive) {
+                    delay(1500)
+                    insertQueries()
+                }
             }
-        }
     }
 
     override suspend fun onDeviceQuery(questionMessage: DnsMessage, srcPort: Int) {
@@ -73,36 +74,46 @@ class QueryListener(private val context: Context) : QueryListener {
                 questionTime = System.currentTimeMillis(),
                 responses = mutableListOf()
             )
-            query.id = nextQueryId++
-            waitingQueryLogs[questionMessage.id] = query
-            queryLogState[questionMessage.id] = false
+            synchronized(waitingQueryLogs) {
+                waitingQueryLogs[questionMessage.id] = query
+                queryLogState[questionMessage.id] = false
+            }
         }
     }
 
-    override suspend fun onQueryForwarded(questionMessage: DnsMessage, destination: UpstreamAddress, usedHandle:DnsHandle) {
-        if(writeQueriesToLog) {
+    override suspend fun onQueryForwarded(
+        questionMessage: DnsMessage,
+        destination: UpstreamAddress,
+        usedHandle: DnsHandle
+    ) {
+        if (writeQueriesToLog) {
             context.log("Query with ID ${questionMessage.id} forwarded by $usedHandle")
         }
 
         if (logQueriesToDb) {
-            waitingQueryLogs[questionMessage.id]!!.askedServer = askedServer
+            waitingQueryLogs[questionMessage.id]?.askedServer = askedServer
         }
     }
 
-    override suspend fun onQueryResponse(responseMessage: DnsMessage, source: QueryListener.Source) {
+    override suspend fun onQueryResponse(
+        responseMessage: DnsMessage,
+        source: QueryListener.Source
+    ) {
         if (writeQueriesToLog) {
             context.log("Returned from $source: $responseMessage")
         }
         lastDnsResponse = responseMessage
 
         if (logQueriesToDb) {
-            val query = waitingQueryLogs.remove(responseMessage.id)!!
+            val query = synchronized(waitingQueryLogs) {
+                waitingQueryLogs.remove(responseMessage.id)
+            } ?: return
             query.responseTime = System.currentTimeMillis()
             for (answer in responseMessage.answerSection) {
                 query.addResponse(answer)
             }
             query.responseSource = source
-            doneQueries[query] =  queryLogState.remove(responseMessage.id)!!
+            doneQueries[query] = queryLogState.remove(responseMessage.id)!!
         }
     }
 
@@ -114,27 +125,36 @@ class QueryListener(private val context: Context) : QueryListener {
     }
 
     private fun insertQueries() {
-        if(waitingQueryLogs.isEmpty() && doneQueries.isEmpty()) return
-        val currentInsertions = waitingQueryLogs.toMap()
-        val currentDoneInsertions = doneQueries.toMap()
-        doneQueries.clear()
+        if (waitingQueryLogs.isEmpty() && doneQueries.isEmpty()) return
+        val currentInsertions:Map<Int, DnsQuery>
+        val currentDoneInsertions:Map<DnsQuery, Boolean>
+        synchronized(waitingQueryLogs) {
+            currentInsertions = waitingQueryLogs.toMap()
+            currentDoneInsertions = doneQueries
+            doneQueries = mutableMapOf()
+        }
         val database = context.getDatabase()
         val dao = database.dnsQueryDao()
+        var nextQueryId = context.getDatabase().dnsQueryDao().getLastInsertedId() + 1
 
         database.runInTransaction {
             currentInsertions.forEach { (key, value) ->
-                if(queryLogState[key]!!) {
-                    dao.insert(value)
-                    queryLogState[key] = true
-                } else {
-                    dao.update(value)
+                when (queryLogState[key]) {
+                    true -> {
+                        value.id = nextQueryId++
+                        dao.insert(value)
+                        queryLogState[key] = true
+                    }
+                    false -> dao.update(value)
                 }
             }
             currentDoneInsertions.forEach { (key, value) ->
-                if(value) dao.update(key)
-                else dao.insert(key)
+                if (value) dao.update(key)
+                else {
+                    key.id = nextQueryId++
+                    dao.insert(key)
+                }
             }
         }
     }
-
 }

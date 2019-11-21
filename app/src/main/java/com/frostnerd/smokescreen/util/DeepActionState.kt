@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.frostnerd.smokescreen.activity.PinActivity
+import kotlin.random.Random
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -34,6 +35,6 @@ enum class DeepActionState {
     }
 
     fun pendingIntentTo(context: Context):PendingIntent {
-        return PendingIntent.getActivity(context, 1, intentTo(context), PendingIntent.FLAG_CANCEL_CURRENT)
+        return PendingIntent.getActivity(context, RequestCodes.max + Random.nextInt(1, 9999), intentTo(context), PendingIntent.FLAG_CANCEL_CURRENT)
     }
 }

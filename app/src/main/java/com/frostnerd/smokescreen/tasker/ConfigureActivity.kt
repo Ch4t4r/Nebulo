@@ -164,7 +164,6 @@ class ConfigureActivity : BaseActivity() {
 
     private fun setHints() {
         val doh = serverType.selectedItemPosition == 0
-        println("DOH: $doh")
         primaryServer.hint = if(primaryServer.hasFocus() || primaryServerWrap.error != null) {
             if(doh) getString(R.string.dialog_newserver_primaryserver_hint)
             else getString(R.string.dialog_newserver_primaryserver_hint_dot)

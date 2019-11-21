@@ -17,6 +17,7 @@ import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
+import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.watchIfEnabled
 import leakcanary.LeakSentry
 import okhttp3.OkHttpClient
@@ -107,7 +108,7 @@ class RuleImportService : IntentService("RuleImportService") {
             notification!!.setContentIntent(DeepActionState.DNS_RULES.pendingIntentTo(this))
             val abortPendingAction = PendingIntent.getService(
                 this,
-                1,
+                RequestCodes.RULE_IMPORT_ABORT,
                 Intent(this, RuleImportService::class.java).putExtra("abort", true),
                 PendingIntent.FLAG_CANCEL_CURRENT
             )
@@ -270,9 +271,10 @@ class RuleImportService : IntentService("RuleImportService") {
         var ruleCount = 0
         val sourceId = source.id
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
-            lines.forEach { line ->
+            lines.forEach { _line ->
+                val line = _line.trim()
                 if (!isAborted) {
-                    if (parsers.isNotEmpty() && !line.trim().startsWith("#") && !line.trim().startsWith("!") && !line.isBlank()) {
+                    if (parsers.isNotEmpty() && !line.startsWith("#") && !line.startsWith("!") && !line.isBlank()) {
                         lineCount++
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {

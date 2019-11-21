@@ -135,7 +135,6 @@ class MainFragment : Fragment() {
                 prefs.edit {
                     prefs.dnsServerConfig = config
                 }
-                println("Saved $config")
             }.show()
         }
         privacyStatementText.setOnClickListener {

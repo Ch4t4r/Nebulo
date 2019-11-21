@@ -10,20 +10,21 @@ stages:
 before_script:
   - source /home/public/android-sdk-linux/initAndroid.sh -s ${ANDROID_COMPILE_SDK}
 
-
-build_debug:
+build_fdroid:
   stage: build
   script:
-    - /./home/public/gitrunner/changeAppVersion.sh app/build.gradle " $CI_COMMIT_REF_NAME\_$CI_PIPELINE_ID" --append
-    - ./gradlew assembleNormalDebug --stacktrace
-  artifacts:
-    paths:
-    - app/build/outputs/apk/normal/debug/*.apk
+    - ./gradlew clean checkAdblockerFdroid assembleAdblockerFdroid --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
     - /^no_build_no_tests.*$/
     - /^no_build_no_deploy.*$/
+  artifacts:
+    paths:
+      - app/build/outputs/apk/adblocker/fdroid/*.apk
+      - app/build/outputs/mapping/adblocker/fdroid/mapping.txt
+  only:
+    - master
 
 build_release:
   stage: build
@@ -38,22 +39,6 @@ build_release:
     paths:
     - app/build/outputs/apk/normal/release/*.apk
     - app/build/outputs/mapping/normal/release/mapping.txt
-  only:
-    - master
-
-build_fdroid:
-  stage: build
-  script:
-    - ./gradlew clean checkAdblockerFdroid assembleAdblockerFdroid --stacktrace -x test
-  except:
-    - /^no_ci.*$/
-    - /^no_build.*$/
-    - /^no_build_no_tests.*$/
-    - /^no_build_no_deploy.*$/
-  artifacts:
-    paths:
-      - app/build/outputs/apk/adblocker/fdroid/*.apk
-      - app/build/outputs/mapping/adblocker/fdroid/mapping.txt
   only:
     - master
 

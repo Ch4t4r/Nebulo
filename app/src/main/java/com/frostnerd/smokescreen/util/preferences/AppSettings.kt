@@ -147,9 +147,7 @@ interface AppSettings {
     }
 
     fun shouldShowCrashReportingConsentDialog(): Boolean {
-        return BuildConfig.VERSION_NAME.let {
-            it.contains("alpha", true) || it.contains("beta", true)
-        } && !crashReportingConsent && !crashReportingConsentAsked && !BuildConfig.DEBUG
+        return !isReleaseVersion && !crashReportingConsent && !crashReportingConsentAsked && !BuildConfig.DEBUG
     }
 }
 
@@ -160,7 +158,10 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         }
     })
 
+    var lastCrashTimeStamp:Long? by longPref("last_crash_timestamp")
+
     override var hasRatedApp: Boolean by booleanPref("has_rated_app", false)
+    var hasAskedRateApp:Boolean by booleanPref("asked_rate_app", false)
     override var previousInstalledVersion:Int by nonOptionalOf(intPref("previous_version"),true, BuildConfig.VERSION_CODE)
     override var showChangelog:Boolean by booleanPref("show_changelog", true)
     override var exportedQueryCount:Int by intPref("exported_query_count", 0)
@@ -196,7 +197,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var nxDomainCacheTime: Int by stringBasedIntPref("dnscache_nxdomain_cachetime", 1800)
     override var loggingEnabled: Boolean by booleanPref(
         "logging_enabled",
-        BuildConfig.VERSION_NAME.contains("alpha", true) || BuildConfig.VERSION_NAME.contains("beta", true)
+        !AppSettings.isReleaseVersion
     )
     fun shouldLogDnsQueriesToConsole():Boolean = loggingEnabled && (!AppSettings.isReleaseVersion || advancedLogging)
     var advancedLogging:Boolean by booleanPref(
