@@ -198,17 +198,18 @@ class RuleExportService : IntentService("RuleExportService") {
 
     private fun writeRule(stream: BufferedWriter, rule: DnsRule) {
         stream.write(buildString {
-            if(rule.isWildcard) {
-                append(rule.target.replace("%%", "**").replace("%", "*"))
-            } else append(rule.target)
+            append(rule.target)
             append(" ")
-            append(rule.host)
+            if(rule.isWildcard) {
+                append(rule.host.replace("%%", "**").replace("%", "*"))
+            } else append(rule.host)
             append(System.lineSeparator())
             if (rule.ipv6Target != null) {
-                if(rule.isWildcard) append(rule.ipv6Target.replace("%%", "**").replace("%", "*"))
-                else append(rule.ipv6Target)
+                append(rule.ipv6Target)
                 append(" ")
-                append(rule.host)
+                if(rule.isWildcard) {
+                    append(rule.host.replace("%%", "**").replace("%", "*"))
+                } else append(rule.host)
                 append(System.lineSeparator())
             }
         })
