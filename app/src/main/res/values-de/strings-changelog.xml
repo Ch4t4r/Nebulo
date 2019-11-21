@@ -111,4 +111,7 @@
     <string name="changelog_build_49_6">Die DNS Regeln sind nun deutlich schneller</string>
     <string name="changelog_build_49_7">Die Fläche in den Schnelleinstellungen ist nun simpler</string>
     <string name="changelog_build_49_8">Es wurden einige Fehler behoben, durch welche DNS Anfragen auf manchen Geräten nach einiger Zeit nicht weitergeleitet wurden</string>
+    <string name="changelog_build_51_1">Whitelist DNS Regeln können nun auch exportiert werden</string>
+    <string name="changelog_build_51_2">Fehler behoben, durch welchen Wildcard DNS Regeln nicht richtig exportiert wurden</string>
+    <string name="changelog_build_51_3">Server aktualisiert</string>
     </resources>
