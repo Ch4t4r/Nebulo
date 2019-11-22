@@ -19,7 +19,7 @@
 ---
 
 # About
-Nebulo is a free, open-source, non-root and small sized DNS changer utilizing dns-over-https and dns-over-tls to bring privacy and security to your phone.
+Nebulo is a free, open-source, non-root and small sized DNS changer for Android utilizing dns-over-https and dns-over-tls to bring privacy and security to your phone.
 It is fast, contains no ads or tracking and offers a lot of flexibility.
 
 # Our mission
