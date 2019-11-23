@@ -180,4 +180,8 @@
 \nDeze dummy VPN is geen echte VPN en verbergt noch uw identiteit, noch verandert het uw IP-adres.
 \n
 \nEr worden geen actuele gegevens, behalve DNS-verzoeken, verzonden met behulp van deze app.</string>
+<string name="dialog_exportdnsrules_whitelist">Whitelist regels exporteren</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">Normale regels exporteren</string>
+    <string name="dialog_raterequest_title">Bent u tevreden over Nebulo\?</string>
+    <string name="dialog_raterequest_message">Hallo daar! Als u tevreden bent met Nebulo, wilt u dan even de tijd nemen om het in de Play Store ™ te beoordelen\?</string>
 </resources>
