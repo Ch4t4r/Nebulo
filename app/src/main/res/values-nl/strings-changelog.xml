@@ -109,6 +109,9 @@
     <string name="changelog_build_49_4">Het DNS-logboek toont nu een indicatie wanneer de DNS-server de host mogelijk heeft geblokkeerd</string>
     <string name="changelog_build_49_5">Het exporteren van de logbestanden toont nu een laaddialoog</string>
     <string name="changelog_build_49_6">De DNS-regels zijn nu veel sneller</string>
-    <string name="changelog_build_49_7">De tegel voor snelle instellingen is nu eenvoudiger.</string>
+    <string name="changelog_build_49_7">De tegel voor snelle instellingen is nu eenvoudiger</string>
     <string name="changelog_build_49_8">Een paar bugs opgelost waardoor de app na verloop van tijd geen DNS-zoekopdrachten kon doorsturen</string>
+    <string name="changelog_build_51_1">Witte lijst DNS-regels kunnen nu ook worden geëxporteerd</string>
+    <string name="changelog_build_51_2">wildcard Dns-regels zijn niet correct geëxporteerd</string>
+    <string name="changelog_build_51_3">Bijgewerkte servers</string>
     </resources>
