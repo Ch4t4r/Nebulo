@@ -328,5 +328,14 @@
         <item>@string/changelog_build_49_5</item>
         <item>@string/changelog_build_43_6</item>
     </string-array>
-    
+
+    <string name="changelog_build_51_1">Whitelist Dns Rules can now be exported as well</string>
+    <string name="changelog_build_51_2">Fixed wildcard Dns Rules not being exported correctly</string>
+    <string name="changelog_build_51_3">Updated servers</string>
+    <string-array name="changelog_build_51">
+        <item>Version 1.0.2 (Build 51)</item>
+        <item>@string/changelog_build_51_1</item>
+        <item>@string/changelog_build_51_2</item>
+        <item>@string/changelog_build_51_3</item>
+    </string-array>
 </resources>
