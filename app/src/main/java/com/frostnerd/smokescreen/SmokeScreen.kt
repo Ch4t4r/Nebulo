@@ -10,9 +10,9 @@ import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.activity.LoggingDialogActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
-import com.frostnerd.smokescreen.util.crashhelpers.DatasavingSentryEventHelper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
+import com.frostnerd.smokescreen.util.crashhelpers.DatasavingSentryEventHelper
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import io.sentry.Sentry

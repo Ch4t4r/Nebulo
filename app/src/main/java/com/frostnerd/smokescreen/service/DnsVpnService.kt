@@ -26,43 +26,33 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
-import com.frostnerd.smokescreen.activity.MainActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
-import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.proxy.*
-import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.RetryingVPNTunnelProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import kotlinx.coroutines.*
 import leakcanary.LeakSentry
-import org.minidns.dnsmessage.DnsMessage
-import org.minidns.dnsmessage.Question
 import org.minidns.dnsname.DnsName
-import org.minidns.record.A
-import org.minidns.record.AAAA
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
-import java.lang.NullPointerException
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
-import java.util.logging.Level
 import kotlin.coroutines.CoroutineContext
 import kotlin.math.floor
 import kotlin.math.min
 import kotlin.math.pow
-import kotlin.random.Random
 
 
 /*

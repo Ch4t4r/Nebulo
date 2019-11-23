@@ -18,7 +18,6 @@ import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.toJson
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
-import java.lang.NullPointerException
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
