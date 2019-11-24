@@ -6,7 +6,6 @@ import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.vpntunnelproxy.DeviceWriteToken
 import com.frostnerd.vpntunnelproxy.FutureAnswer
 import com.frostnerd.vpntunnelproxy.ReceivedAnswer
-import com.frostnerd.vpntunnelproxy.TunnelHandle
 import org.minidns.dnsmessage.DnsMessage
 import java.net.DatagramPacket
 import java.net.InetAddress

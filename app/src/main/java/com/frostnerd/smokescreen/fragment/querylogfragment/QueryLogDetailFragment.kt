@@ -133,6 +133,7 @@ class QueryLogDetailFragment : Fragment() {
     private fun updateUi() {
         val query = currentQuery
         if(query != null && viewCreated) {
+            scrollView.scrollTo(0, 0)
             hostSourceFetchJob?.cancel()
             queryTime.text = formatTimeStamp(query.questionTime)
             if(query.responseTime >= query.questionTime) {

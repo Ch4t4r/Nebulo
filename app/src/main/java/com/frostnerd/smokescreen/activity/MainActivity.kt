@@ -19,7 +19,6 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.BatteryOptimizationInfoDialog
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
-import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.fragment.*
 import com.frostnerd.smokescreen.service.DnsVpnService
@@ -27,9 +26,7 @@ import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.menu_cardview.view.*
-import java.util.*
 import kotlin.random.Random
 
 /*

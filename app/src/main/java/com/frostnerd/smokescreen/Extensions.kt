@@ -30,7 +30,6 @@ import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
 import leakcanary.LeakSentry
-import java.lang.NullPointerException
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.util.logging.Level
