@@ -31,10 +31,13 @@ enum class DeepActionState {
 
 
     fun intentTo(context:Context): Intent {
-        return PinActivity.openAppIntent(context, Bundle().apply { putSerializable("deep_action", this@DeepActionState) })
+        return PinActivity.openAppIntent(context, asBundle())
     }
 
     fun pendingIntentTo(context: Context):PendingIntent {
-        return PendingIntent.getActivity(context, RequestCodes.max + Random.nextInt(1, 9999), intentTo(context), PendingIntent.FLAG_CANCEL_CURRENT)
+        val requestCode = RequestCodes.max + Random.nextInt(1, 9999)
+        return PendingIntent.getActivity(context, requestCode , intentTo(context), PendingIntent.FLAG_CANCEL_CURRENT)
     }
+
+    private fun asBundle() = Bundle().apply { putSerializable("deep_action", this@DeepActionState) }
 }

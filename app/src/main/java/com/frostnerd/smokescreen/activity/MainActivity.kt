@@ -178,7 +178,12 @@ class MainActivity : NavigationDrawerActivity() {
         cardNetworkCallback = null
     }
 
-    private fun handleDeepAction() {
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        handleDeepAction(intent ?: this.intent)
+    }
+
+    private fun handleDeepAction(intent:Intent? = null) {
         if(intent?.hasExtra("deep_action") == true) {
             whenDrawerIsReady {
                 when(intent.getSerializableExtra("deep_action")) {

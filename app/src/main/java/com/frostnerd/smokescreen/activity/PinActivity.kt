@@ -57,16 +57,16 @@ class PinActivity: BaseActivity() {
             return context.getPreferences().enablePin && (intent == null || !intent.getBooleanExtra("pin_validated", false))
         }
 
-        fun openAppIntent(context: Context, extras:Bundle? = null):Intent {
+        fun openAppIntent(context: Context, appExtras:Bundle? = null):Intent {
             return if(shouldValidatePin(context, null)) {
                 val intent = Intent(context, PinActivity::class.java)
-                if(intent.extras != null) intent.putExtra("extras", extras)
+                if(appExtras != null) intent.putExtra("extras", appExtras)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 intent.putExtra("pin_type", PinType.APP)
                 intent
             } else {
                 Intent(context, MainActivity::class.java).apply {
-                    if(extras != null) putExtras(extras)
+                    if(appExtras != null) putExtras(appExtras)
                 }
             }
         }
