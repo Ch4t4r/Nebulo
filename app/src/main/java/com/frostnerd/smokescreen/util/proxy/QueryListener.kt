@@ -109,12 +109,13 @@ class QueryListener(private val context: Context) : QueryListener {
             val query = synchronized(waitingQueryLogs) {
                 waitingQueryLogs.remove(responseMessage.id)
             } ?: return
+            val wasInserted = queryLogState.remove(responseMessage.id)!! != 0 // Update if already inserted (0=insert)
             query.responseTime = System.currentTimeMillis()
             for (answer in responseMessage.answerSection) {
                 query.addResponse(answer)
             }
             query.responseSource = source
-            doneQueries[query] = queryLogState.remove(responseMessage.id)!! != 0 // Update if already inserted (0=insert)
+            doneQueries[query] = wasInserted
         }
     }
 
