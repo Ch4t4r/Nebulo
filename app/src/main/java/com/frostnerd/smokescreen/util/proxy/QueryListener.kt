@@ -35,8 +35,8 @@ class QueryListener(private val context: Context) : QueryListener {
     private val writeQueriesToLog = context.getPreferences().shouldLogDnsQueriesToConsole()
     private val logQueriesToDb = context.getPreferences().queryLoggingEnabled
     private var waitingQueryLogs = LinkedHashMap<Int, DnsQuery>()
-    // Question ID -> <Query, Insert> (true if the query has already been inserted)
-    private val queryLogState: MutableMap<Int, Boolean> = mutableMapOf()
+    // Question ID -> <Query, Flag> (0 = insert, 1 = nothing new, 2 = update)
+    private val queryLogState: MutableMap<Int, Int> = mutableMapOf()
     // Query -> Has already been inserted
     private var doneQueries = mutableMapOf<DnsQuery, Boolean>()
     private val askedServer: String
@@ -76,7 +76,7 @@ class QueryListener(private val context: Context) : QueryListener {
             )
             synchronized(waitingQueryLogs) {
                 waitingQueryLogs[questionMessage.id] = query
-                queryLogState[questionMessage.id] = false
+                queryLogState[questionMessage.id] = 0 // Insert
             }
         }
     }
@@ -92,6 +92,7 @@ class QueryListener(private val context: Context) : QueryListener {
 
         if (logQueriesToDb) {
             waitingQueryLogs[questionMessage.id]?.askedServer = askedServer
+            queryLogState[questionMessage.id] = 2
         }
     }
 
@@ -113,7 +114,7 @@ class QueryListener(private val context: Context) : QueryListener {
                 query.addResponse(answer)
             }
             query.responseSource = source
-            doneQueries[query] = queryLogState.remove(responseMessage.id)!!
+            doneQueries[query] = queryLogState.remove(responseMessage.id)!! != 0 // Update if already inserted (0=insert)
         }
     }
 
@@ -139,13 +140,17 @@ class QueryListener(private val context: Context) : QueryListener {
 
         database.runInTransaction {
             currentInsertions.forEach { (key, value) ->
+                // Do nothing for 1 (no update to process)
                 when (queryLogState[key]) {
-                    true -> {
+                    0 -> {
                         value.id = nextQueryId++
                         dao.insert(value)
-                        queryLogState[key] = true
+                        queryLogState[key] = 1
                     }
-                    false -> dao.update(value)
+                    2 -> {
+                        dao.update(value)
+                        queryLogState[key] = 1
+                    }
                 }
             }
             currentDoneInsertions.forEach { (key, value) ->
