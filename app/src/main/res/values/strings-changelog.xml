@@ -338,4 +338,14 @@
         <item>@string/changelog_build_51_2</item>
         <item>@string/changelog_build_51_3</item>
     </string-array>
+
+    <string name="changelog_build_52_1">The DNS Rules now prevent CNAME cloaking</string>
+    <string name="changelog_build_52_2">Fixed a bug which prevented DoH servers with multiple slashes (/) being added properly</string>
+    <string name="changelog_build_52_3">Fixed a crash which rarely happened with query logging active</string>
+    <string-array name="changelog_build_52">
+        <item>Version 1.0.3 (Build 52)</item>
+        <item>@string/changelog_build_52_1</item>
+        <item>@string/changelog_build_52_2</item>
+        <item>@string/changelog_build_52_3</item>
+    </string-array>
 </resources>
