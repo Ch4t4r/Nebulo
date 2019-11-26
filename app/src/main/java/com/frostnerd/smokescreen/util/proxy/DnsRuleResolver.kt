@@ -10,10 +10,9 @@ import com.frostnerd.smokescreen.util.MaxSizeMap
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
-import org.minidns.record.A
-import org.minidns.record.AAAA
-import org.minidns.record.Record
+import org.minidns.record.*
 import java.util.*
 import kotlin.collections.HashSet
 import kotlin.math.abs
@@ -230,5 +229,112 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
     }
 
     override fun cleanup() {}
+
+    // Handle CNAME Cloaking
+    // Does not need to handle whitelist as the query has already been forwarded
+    override suspend fun mapResponse(message: DnsMessage): DnsMessage {
+        if(ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount)) return message // No rules or only whitelist rules present
+        else if(!message.answerSection.any {
+                it.type == Record.TYPE.CNAME
+            }) return message
+        else if(!message.answerSection.any {
+                it.type == Record.TYPE.A
+            } && ! message.answerSection.any {
+                it.type == Record.TYPE.AAAA
+            }) return message // The Dns rules only have IPv6 and IPv4
+
+        val ordered = message.answerSection.sortedByDescending { it.type.value } // CNAME at the front
+
+        val mappedAnswers = mutableListOf<Record<*>>()
+        val mappedTargets = mutableSetOf<String>()
+        for(record in ordered) {
+            if(record.type == Record.TYPE.CNAME) {
+                val target = (record.payloadData as CNAME).target.toString()
+                if(mappedTargets.contains(record.name.toString())) { // Continue skipping the whole CNAME tree
+                    mappedTargets.add(target)
+                    continue
+                }
+                mappedAnswers.add(record)
+                val originalTargetRecord = followCnameChainToFirstRecord(target, ordered)
+                val type = originalTargetRecord?.type ?: message.questions.firstOrNull()?.type ?: Record.TYPE.A
+                val ruleData = resolveForCname(target, type)
+                if(ruleData != null) {
+                    mappedTargets.add(target)
+                    mappedAnswers.add(Record(target, type, Record.CLASS.IN, originalTargetRecord?.ttl ?: message.answerSection.minBy {
+                        it.ttl
+                    }?.ttl ?: record.ttl, ruleData, originalTargetRecord?.unicastQuery ?: false))
+                }
+            } else if(!mappedTargets.contains(record.name.toString())) mappedAnswers.add(record)
+        }
+
+        return if(mappedTargets.size != 0) {
+            message.asBuilder().setAnswers(mappedAnswers).build()
+        } else {
+            message
+        }
+    }
+
+    private fun followCnameChainToFirstRecord(name:String, records:List<Record<*>>):Record<*>? {
+        var target = name
+        var recursionDepth = 0
+        while(recursionDepth++ < 50) {
+            val nextTarget = records.firstOrNull {
+                it.name.toString() == target
+            }
+            if(nextTarget != null && nextTarget.type != Record.TYPE.CNAME) {
+                return nextTarget
+            } else if(nextTarget == null) return null
+            else target = (nextTarget.payloadData as CNAME).target.toString()
+        }
+        return null
+    }
+
+    private fun resolveForCname(host:String, type:Record.TYPE): Data? {
+        val uniformQuestion = host.replace(wwwRegex, "").toLowerCase(Locale.ROOT)
+
+        var entry = if(nonWildcardCount != 0) {
+            dao.findRuleTarget(uniformQuestion, type, useUserRules)
+                ?.let {
+                    when (it) {
+                        "0" -> "0.0.0.0"
+                        "1" -> {
+                            if (type == Record.TYPE.AAAA) "::1"
+                            else "127.0.0.1"
+                        }
+                        else -> it
+                    }
+                }
+        } else null
+        if(entry == null && wildcardCount != 0) {
+            entry = dao.findPossibleWildcardRuleTarget(
+                uniformQuestion,
+                type,
+                useUserRules,
+                false,
+                true
+            ).firstOrNull {
+                DnsRuleDialog.databaseHostToMatcher(it.host)
+                    .reset(uniformQuestion).matches()
+            }?.let {
+                if (type == Record.TYPE.AAAA) it.ipv6Target
+                    ?: it.target
+                else it.target
+            }?.let {
+                when (it) {
+                    "0" -> "0.0.0.0"
+                    "1" -> {
+                        if (type == Record.TYPE.AAAA) "::1"
+                        else "127.0.0.1"
+                    }
+                    else -> it
+                }
+            }
+        }
+
+        return if(entry != null) {
+            if(type == Record.TYPE.A) A(entry)
+            else AAAA(entry)
+        } else null
+    }
 
 }
