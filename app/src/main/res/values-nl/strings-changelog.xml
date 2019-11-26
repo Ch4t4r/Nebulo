@@ -111,4 +111,7 @@
     <string name="changelog_build_49_6">De DNS-regels zijn nu veel sneller</string>
     <string name="changelog_build_49_7">De tegel voor snelle instellingen is nu eenvoudiger</string>
     <string name="changelog_build_49_8">Een paar bugs opgelost waardoor de app na verloop van tijd geen DNS-zoekopdrachten kon doorsturen</string>
+    <string name="changelog_build_51_1">Whitelist DNS-regels kunnen nu ook geëxporteerd worden</string>
+    <string name="changelog_build_51_2">Probleem opgelost waarbij wildcard DNS-regels niet correct werden geëxporteerd</string>
+    <string name="changelog_build_51_3">Bijgewerkte servers</string>
     </resources>

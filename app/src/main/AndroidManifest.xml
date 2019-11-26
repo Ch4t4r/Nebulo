@@ -26,6 +26,7 @@
                 android:name=".activity.PinActivity"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
                 android:noHistory="true"
+                android:launchMode="singleTask"
                 android:autoRemoveFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -34,7 +35,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity" android:launchMode="singleTask">
 
         </activity>
         <activity

@@ -235,7 +235,7 @@ class NewServerDialog(
             if (port > 65535) port = null
         }
         if (url.contains("/")) {
-            path = url.split("/")[1]
+            path = url.split("/").let { it.subList(1, it.size).joinToString(separator = "/") }
             if (host == "") host = url.split("/")[0]
         }
         if (host == "") host = url
