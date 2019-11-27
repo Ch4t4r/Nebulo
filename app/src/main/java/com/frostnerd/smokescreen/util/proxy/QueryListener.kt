@@ -139,26 +139,28 @@ class QueryListener(private val context: Context) : QueryListener {
         val dao = database.dnsQueryDao()
         var nextQueryId = context.getDatabase().dnsQueryDao().getLastInsertedId() + 1
 
+        val joined = (currentInsertions.map {
+            (it.key to it.value) to queryLogState[it.key]
+        } + currentDoneInsertions.map {
+            (null to it.key) to if(it.value) 2 else 0
+        }).sortedBy {
+            it.first.second.questionTime
+        }
+
         database.runInTransaction {
-            currentInsertions.forEach { (key, value) ->
+            joined.forEach {
                 // Do nothing for 1 (no update to process)
-                when (queryLogState[key]) {
+                // Do nothing for null (query was fulfilled in the meantime)
+                when(it.second) {
                     0 -> {
-                        if(value.id == 0L) value.id = nextQueryId++
-                        dao.insert(value)
-                        queryLogState[key] = 1
+                        if(it.first.second.id == 0L) it.first.second.id = nextQueryId++
+                        dao.insert(it.first.second)
+                        if(it.first.first != null && it.first.first in queryLogState) queryLogState[it.first.first!!] = 1
                     }
                     2 -> {
-                        dao.update(value)
-                        queryLogState[key] = 1
+                        dao.update(it.first.second)
+                        if(it.first.first != null && it.first.first in queryLogState) queryLogState[it.first.first!!] = 1
                     }
-                }
-            }
-            currentDoneInsertions.forEach { (key, value) ->
-                if (value) dao.update(key)
-                else {
-                    if(key.id == 0L) key.id = nextQueryId++
-                    dao.insert(key)
                 }
             }
         }
