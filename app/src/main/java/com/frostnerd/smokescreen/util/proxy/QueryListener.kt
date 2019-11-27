@@ -36,9 +36,9 @@ class QueryListener(private val context: Context) : QueryListener {
     private val logQueriesToDb = context.getPreferences().queryLoggingEnabled
     private var waitingQueryLogs = LinkedHashMap<Int, DnsQuery>()
     // Question ID -> <Query, Flag> (0 = insert, 1 = nothing new, 2 = update)
-    private val queryLogState: MutableMap<Int, Int> = mutableMapOf()
+    private val queryLogState: MutableMap<Int, Int> = LinkedHashMap()
     // Query -> Has already been inserted
-    private var doneQueries = mutableMapOf<DnsQuery, Boolean>()
+    private var doneQueries = LinkedHashMap<DnsQuery, Boolean>()
     private val askedServer: String
     var lastDnsResponse: DnsMessage? = null
     private val databaseWriteJob: Job
@@ -133,7 +133,7 @@ class QueryListener(private val context: Context) : QueryListener {
         synchronized(waitingQueryLogs) {
             currentInsertions = waitingQueryLogs.toMap()
             currentDoneInsertions = doneQueries
-            doneQueries = mutableMapOf()
+            doneQueries = LinkedHashMap()
         }
         val database = context.getDatabase()
         val dao = database.dnsQueryDao()
