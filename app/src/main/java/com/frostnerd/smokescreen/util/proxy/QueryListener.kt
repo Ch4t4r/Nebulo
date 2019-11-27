@@ -144,7 +144,7 @@ class QueryListener(private val context: Context) : QueryListener {
                 // Do nothing for 1 (no update to process)
                 when (queryLogState[key]) {
                     0 -> {
-                        value.id = nextQueryId++
+                        if(value.id == 0L) value.id = nextQueryId++
                         dao.insert(value)
                         queryLogState[key] = 1
                     }
@@ -157,7 +157,7 @@ class QueryListener(private val context: Context) : QueryListener {
             currentDoneInsertions.forEach { (key, value) ->
                 if (value) dao.update(key)
                 else {
-                    key.id = nextQueryId++
+                    if(key.id == 0L) key.id = nextQueryId++
                     dao.insert(key)
                 }
             }
