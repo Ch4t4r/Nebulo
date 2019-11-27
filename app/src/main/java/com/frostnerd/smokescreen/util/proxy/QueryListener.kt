@@ -92,7 +92,7 @@ class QueryListener(private val context: Context) : QueryListener {
 
         if (logQueriesToDb) {
             waitingQueryLogs[questionMessage.id]?.askedServer = askedServer
-            queryLogState[questionMessage.id] = 2
+            if(queryLogState[questionMessage.id] != 0) queryLogState[questionMessage.id] = 2
         }
     }
 
