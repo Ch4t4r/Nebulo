@@ -382,9 +382,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 getString(R.string.title_clear_dnscache),
                 getString(R.string.dialog_cleardnscache_message),
                 getString(R.string.all_yes) to { dialog, _ ->
-                    GlobalScope.launch {
-                        getDatabase().cachedResponseDao().deleteAll()
-                        DnsVpnService.invalidateDNSCache(context!!)
+                    GlobalScope.launch(Dispatchers.IO) {
+                        context?.also {
+                            getDatabase().cachedResponseDao().deleteAll()
+                            DnsVpnService.invalidateDNSCache(context!!)
+                        }
                     }
                     dialog.dismiss()
                 },
