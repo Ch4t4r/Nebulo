@@ -170,6 +170,11 @@ class MainActivity : NavigationDrawerActivity() {
         registerLocalReceiver(listOf(BROADCAST_RELOAD_MENU), true) {
             reloadMenuItems()
         }
+
+        @Suppress("ConstantConditionIf")
+        if(!BuildConfig.DEBUG && BuildConfig.SENTRY_DSN == "dummy") {
+            Toast.makeText(this, "Warning, Sentry DSN is not valid", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onDestroy() {
