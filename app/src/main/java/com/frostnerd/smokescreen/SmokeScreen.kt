@@ -125,6 +125,7 @@ class SmokeScreen : Application() {
                             packageManager.getInstallerPackageName(packageName)
                         )
                         addTag("richdata", "true")
+                        addTag("app.commit", BuildConfig.COMMIT_HASH)
                     }
                 }
             } else if(enabledType == Crashreporting.MINIMAL || forceStatus == Status.DATASAVING){
@@ -140,6 +141,7 @@ class SmokeScreen : Application() {
                     Sentry.getStoredClient().apply {
                         addTag("richdata", "false")
                         addTag("dist", BuildConfig.VERSION_CODE.toString())
+                        addTag("app.commit", BuildConfig.COMMIT_HASH)
                         addExtra("dist", BuildConfig.VERSION_CODE)
                         this.builderHelpers.forEach {
                             this.removeBuilderHelper(it)
