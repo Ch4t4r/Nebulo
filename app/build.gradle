@@ -29,6 +29,7 @@ android {
         versionName "1.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        buildConfigField("Boolean", "FROM_CI", String.valueOf(getSystemVariableOrDefault("CI_COMMIT_SHORT_SHA", "") != ""))
         buildConfigField("String", "COMMIT_HASH", '"' + getGitCommitHash() + '"')
 
         kapt {

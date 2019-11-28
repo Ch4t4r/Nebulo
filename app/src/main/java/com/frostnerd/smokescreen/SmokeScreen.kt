@@ -125,6 +125,7 @@ class SmokeScreen : Application() {
                             packageManager.getInstallerPackageName(packageName)
                         )
                         addTag("richdata", "true")
+                        addTag("app.fromCi", BuildConfig.FROM_CI.toString())
                         addTag("app.commit", BuildConfig.COMMIT_HASH)
                     }
                 }
@@ -142,6 +143,7 @@ class SmokeScreen : Application() {
                         addTag("richdata", "false")
                         addTag("dist", BuildConfig.VERSION_CODE.toString())
                         addTag("app.commit", BuildConfig.COMMIT_HASH)
+                        addTag("app.fromCi", BuildConfig.FROM_CI.toString())
                         addExtra("dist", BuildConfig.VERSION_CODE)
                         this.builderHelpers.forEach {
                             this.removeBuilderHelper(it)
