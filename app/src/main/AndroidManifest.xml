@@ -22,6 +22,9 @@
             android:theme="@style/AppTheme_Mono"
             tools:ignore="GoogleAppIndexingWarning"
             android:fullBackupContent="@xml/backup_descriptor">
+
+        <meta-data android:name="io.sentry.auto-init" android:value="false" />
+
         <activity
                 android:name=".activity.PinActivity"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
