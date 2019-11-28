@@ -29,6 +29,8 @@ android {
         versionName "1.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        buildConfigField("String", "COMMIT_HASH", '"' + getGitCommitHash() + '"')
+
         kapt {
             arguments {
                 arg("room.schemaLocation", "$projectDir/schemas".toString())
@@ -147,4 +149,13 @@ dependencies {
     testImplementation "org.robolectric:robolectric:4.3.1"
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+def getGitCommitHash() {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
 }

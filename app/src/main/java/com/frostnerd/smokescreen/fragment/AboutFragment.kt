@@ -66,7 +66,7 @@ class AboutFragment : Fragment() {
                 getString(R.string.about_contact_developer),
                 getString(R.string.app_name),
                 getString(R.string.support_contact_mail),
-                "\n\n\n\n\n\nSystem:\nApp version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n" +
+                "\n\n\n\n\n\nSystem:\nApp version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE};${BuildConfig.COMMIT_HASH})\n" +
                         "Android: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})"
             )
         }
@@ -89,7 +89,7 @@ class AboutFragment : Fragment() {
                 getString(R.string.menu_about),
                 getString(
                     R.string.about_app,
-                    BuildConfig.VERSION_NAME + if (BuildConfig.DEBUG) " DEBUG" else "",
+                    BuildConfig.VERSION_NAME + (if (BuildConfig.DEBUG) " DEBUG" else "") + " (Commit ${BuildConfig.COMMIT_HASH})",
                     BuildConfig.VERSION_CODE,
                     AppDatabase.currentVersion,
                     if (context!!.getPreferences().crashreportingType == Crashreporting.FULL) context!!.getPreferences().crashReportingUUID else "---"
