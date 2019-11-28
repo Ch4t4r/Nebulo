@@ -95,7 +95,7 @@ class SmokeScreen : Application() {
     }
 
     fun initSentry(forceStatus: Status = Status.NONE) {
-        if (!BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG && BuildConfig.SENTRY_DSN != "dummy") {
             val enabledType = getPreferences().crashreportingType
             if (forceStatus != Status.DATASAVING && (enabledType == Crashreporting.FULL || forceStatus == Status.ENABLED)) {
                 // Enable Sentry in full mode
@@ -103,7 +103,7 @@ class SmokeScreen : Application() {
                 // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
                 GlobalScope.launch(Dispatchers.IO) {
                     Sentry.init(
-                        "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
+                        BuildConfig.SENTRY_DSN,
                         AndroidSentryClientFactory(this@SmokeScreen)
                     )
                     Sentry.getContext().user =
@@ -135,7 +135,7 @@ class SmokeScreen : Application() {
                 // Only crashes will be reported, no regular events.
                 GlobalScope.launch(Dispatchers.IO) {
                     Sentry.init(
-                        "https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2",
+                        BuildConfig.SENTRY_DSN,
                         AndroidSentryClientFactory(this@SmokeScreen)
                     )
                     Sentry.getContext().user = User("anon-" + BuildConfig.VERSION_CODE, null, null, null)
