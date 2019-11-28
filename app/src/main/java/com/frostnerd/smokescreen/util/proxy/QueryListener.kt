@@ -137,7 +137,6 @@ class QueryListener(private val context: Context) : QueryListener {
         }
         val database = context.getDatabase()
         val dao = database.dnsQueryDao()
-        var nextQueryId = context.getDatabase().dnsQueryDao().getLastInsertedId() + 1
 
         val joined = (currentInsertions.map {
             (it.key to it.value) to queryLogState[it.key]
@@ -153,7 +152,6 @@ class QueryListener(private val context: Context) : QueryListener {
                 // Do nothing for null (query was fulfilled in the meantime)
                 when(it.second) {
                     0 -> {
-                        if(it.first.second.id == 0L) it.first.second.id = nextQueryId++
                         dao.insert(it.first.second)
                         if(it.first.first != null && it.first.first in queryLogState) queryLogState[it.first.first!!] = 1
                     }
