@@ -59,7 +59,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             context?.getPreferences()?.notifyPreferenceChangedFromExternal(key)
         }
     private val category:SettingsActivity.Category by lazy(LazyThreadSafetyMode.NONE) {
-        arguments!!.getSerializable("category") as SettingsActivity.Category
+        (arguments?.getSerializable("category") as SettingsActivity.Category?) ?: SettingsActivity.Category.GENERAL
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
