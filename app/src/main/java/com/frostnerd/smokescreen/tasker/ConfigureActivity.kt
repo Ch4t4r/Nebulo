@@ -74,11 +74,11 @@ class ConfigureActivity : BaseActivity() {
                     "start" -> {
                         actionType.setSelection(0)
                         startIfRunning.isChecked = settings.getBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, true)
-                        useServersFromConfig.isChecked =
-                            !settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER) && !settings.containsKey(
+                        useCustomServer.isChecked =
+                            settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER) || settings.containsKey(
                                 BackgroundVpnConfigureActivity.extraKeyServerConfig
                             )
-                        if (!useServersFromConfig.isChecked) {
+                        if (useCustomServer.isChecked) {
                             if (settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER)) {
                                 serverType.setSelection(0)
                                 primaryServer.setText(settings.getString(TaskerHelper.DATA_KEY_PRIMARYSERVER))
@@ -110,8 +110,8 @@ class ConfigureActivity : BaseActivity() {
     }
 
     private fun createLayout() {
-        useServersFromConfig.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+        useCustomServer.setOnCheckedChangeListener { _, isChecked ->
+            if (!isChecked) {
                 serverConfigWrap.visibility = View.GONE
                 serverType.visibility = View.GONE
             } else {
@@ -213,7 +213,7 @@ class ConfigureActivity : BaseActivity() {
         )
         if (action == "start") {
             settings.putBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, startIfRunning.isChecked)
-            if (!useServersFromConfig.isChecked) {
+            if (useCustomServer.isChecked) {
                 if (primaryServerWrap.error == null &&
                     secondaryServerWrap.error == null
                 ) {

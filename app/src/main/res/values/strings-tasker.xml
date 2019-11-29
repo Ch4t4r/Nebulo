@@ -2,7 +2,7 @@
 <resources>
 
     <string name="tasker_start_if_running">Start even if already running (may override configuration)</string>
-    <string name="tasker_use_default_configuration">Use the servers selected in the menu</string>
+    <string name="tasker_use_custom_server">Specify custom servers</string>
     <string name="tasker_action">Action</string>
     <string name="tasker_start_app_custom_url">Start the app with %1s (Mode: %2s)</string>
     <string name="tasker_start_app_custom_urls">Start the app with %1s and %2s (Mode: %3s)</string>

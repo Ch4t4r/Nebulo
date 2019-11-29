@@ -49,10 +49,10 @@
 
             <CheckBox
                     android:layout_width="wrap_content"
-                    android:text="@string/tasker_use_default_configuration"
+                    android:text="@string/tasker_use_custom_server"
                     android:textColor="?android:attr/textColor"
-                    android:checked="true"
-                    android:id="@+id/useServersFromConfig"
+                    android:checked="false"
+                    android:id="@+id/useCustomServer"
                     android:layout_height="wrap_content"/>
 
             <Spinner
