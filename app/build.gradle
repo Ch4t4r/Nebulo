@@ -85,7 +85,6 @@ android {
         adblocker {
             dimension "version"
             versionNameSuffix "-adblock"
-            versionCode 52
         }
         normal {
             dimension "version"
