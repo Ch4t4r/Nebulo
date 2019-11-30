@@ -96,12 +96,13 @@ class SmokeScreen : Application() {
 
     fun initSentry(forceStatus: Status = Status.NONE) {
         if (!BuildConfig.DEBUG && BuildConfig.SENTRY_DSN != "dummy") {
-            val enabledType = getPreferences().crashreportingType
-            if (forceStatus != Status.DATASAVING && (enabledType == Crashreporting.FULL || forceStatus == Status.ENABLED)) {
-                // Enable Sentry in full mode
-                // This passes some device-related data, but nothing which allows user actions to be tracked across the app
-                // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
-                GlobalScope.launch(Dispatchers.IO) {
+            GlobalScope.launch(Dispatchers.IO) {
+                val enabledType = getPreferences().crashreportingType
+                if (forceStatus != Status.DATASAVING && (enabledType == Crashreporting.FULL || forceStatus == Status.ENABLED)) {
+                    // Enable Sentry in full mode
+                    // This passes some device-related data, but nothing which allows user actions to be tracked across the app
+                    // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
+
                     Sentry.init(
                         BuildConfig.SENTRY_DSN,
                         AndroidSentryClientFactory(this@SmokeScreen)
@@ -128,17 +129,16 @@ class SmokeScreen : Application() {
                         addTag("app.fromCi", BuildConfig.FROM_CI.toString())
                         addTag("app.commit", BuildConfig.COMMIT_HASH)
                     }
-                }
-            } else if(enabledType == Crashreporting.MINIMAL || forceStatus == Status.DATASAVING){
-                // Inits Sentry in datasaving mode
-                // Only data absolutely necessary is transmitted (Android version, app version).
-                // Only crashes will be reported, no regular events.
-                GlobalScope.launch(Dispatchers.IO) {
+                } else if (enabledType == Crashreporting.MINIMAL || forceStatus == Status.DATASAVING) {
+                    // Inits Sentry in datasaving mode
+                    // Only data absolutely necessary is transmitted (Android version, app version).
+                    // Only crashes will be reported, no regular events.
                     Sentry.init(
                         BuildConfig.SENTRY_DSN,
                         AndroidSentryClientFactory(this@SmokeScreen)
                     )
-                    Sentry.getContext().user = User("anon-" + BuildConfig.VERSION_CODE, null, null, null)
+                    Sentry.getContext().user =
+                        User("anon-" + BuildConfig.VERSION_CODE, null, null, null)
                     Sentry.getStoredClient().apply {
                         addTag("richdata", "false")
                         addTag("dist", BuildConfig.VERSION_CODE.toString())
