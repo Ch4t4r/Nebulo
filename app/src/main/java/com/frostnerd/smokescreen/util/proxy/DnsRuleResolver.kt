@@ -240,7 +240,10 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
     // Handle CNAME Cloaking
     // Does not need to handle whitelist as the query has already been forwarded
     override suspend fun mapResponse(message: DnsMessage): DnsMessage {
-        if(ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount)) return message // No rules or only whitelist rules present
+        if(ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount) || message.questions.size == 0) return message // No rules or only whitelist rules present
+        else if(whitelistCount != 0 && hashHost(message.question.name.toString().replace(wwwRegex, "").toLowerCase(Locale.ROOT), message.question.type).let {
+                cachedWildcardWhitelisted.contains(it) || cachedNonWildcardWhitelisted.contains(it)
+            }) return message
         else if(!message.answerSection.any {
                 it.type == Record.TYPE.CNAME
             }) return message
