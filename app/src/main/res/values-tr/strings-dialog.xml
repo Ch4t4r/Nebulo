@@ -40,7 +40,7 @@
 \n(%1s)</string>
 
     <string name="dialog_logexport_text">Günlükleri nasıl paylaşmak istersiniz\?</string>
-    <string name="dialog_logexport_general">Genel ihracat</string>
+    <string name="dialog_logexport_general">Uygulamayı seçin</string>
     <string name="dialog_logexport_email">E-Posta</string>
 
     <string name="dialog_deletelogs_text">Tüm günlükleri silmek istediğinize emin misiniz\?</string>
@@ -78,11 +78,11 @@
     <string name="dialog_crashreporting_positive">Çökme raporlamasını etkinleştir</string>
     <string name="dialog_crashreporting_negative">Hayır teşekkürler.</string>
     <string name="dialog_crashreporting_neutral">Verilere bakın</string>
-    <string name="dialog_crashreporting_message">Uygulama için bir deneyici olduğunuz için teşekkür ederiz!
-\n
-\nBu uygulama, çökmeleri en kısa sürede izlemelerini kolaylaştırmak için açık kaynaklı ve kendi kendine barındırılan üçüncü taraf yazılımları kullanıyor. Eğer sadece etkinse, uygulama bir çökme ile karşılaştığında çökme raporları iletir. Bu raporlar uygulama ve cihazınız hakkında ek veriler içerir. Bu, aynı kullanıcıdan gelen çökmeleri izlemek için kullanılan, ancak başka hiçbir şeyi izlemek için kullanılamayan bir kimliği içerir. Kilitlenme raporlamasını etkinleştirmek isteğe bağlıdır ancak bana çok yardımcı olur.
-\nRaporlar HTTPS üzerinden güvenli bir şekilde gönderilir.
-\n
+    <string name="dialog_crashreporting_message">Nebulo\'yu kullandığınız için teşekkür ederiz!
+\n 
+\nBu uygulama, çökmeleri en kısa sürede izlemelerini kolaylaştırmak için açık kaynaklı ve kendi kendine barındırılan üçüncü taraf yazılımları kullanıyor. Eğer sadece etkinse, uygulama bir çökme ile karşılaştığında çökme raporları iletir. Bu raporlar uygulama ve cihazınız hakkında ek veriler içerir. Bu, aynı kullanıcıdan gelen çökmeleri izlemek için kullanılan, ancak başka hiçbir şeyi izlemek için kullanılamayan bir kimliği içerir. Kilitlenme raporlamasını etkinleştirmek isteğe bağlıdır ancak bana çok yardımcı olur. 
+\nRaporlar HTTPS üzerinden güvenli bir şekilde gönderilir. 
+\n 
 \nHangi tür verilerin iletildiğini ve gizlilik politikasına bir bağlantı olduğunu görmek için aşağıdaki \'Verilere bakın\' seçeneğini tıklayın.</string>
     <string name="dialog_crashreporting_message_notester">Nebulo\'yu kullandığınız için teşekkür ederiz!
 \n
@@ -178,4 +178,17 @@
     <string name="dialog_hostsourcerefresh_timeunit_hours">Saat</string>
     <string name="dialog_hostsourcerefresh_timeunit_days">Gün</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Hafta</string>
-    </resources>
+    <string name="dialog_logexport_loading_title">Günlükleri hazırlama</string>
+    <string name="dialog_exportdnsrules_whitelist">Beyaz liste kurallarını dışa aktar</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">Normal kuralları dışa aktar</string>
+    <string name="dialog_cleardnscache_message">DNS önbelleğini silmek istediğinize emin misiniz\?</string>
+
+    <string name="dialog_vpninformation_title">Bu uygulama nasıl çalışır</string>
+    <string name="dialog_vpninformation_message">Nebula, daha sonra seçtiğiniz güvenli bir sunucuya iletilen tüm DNS isteklerinizi yakalamak için kukla bir VPN kullanarak çalışır.
+\nBu kukla VPN gerçek bir VPN değildir ve ne kimliğinizi gizler, ne de IP adresinizi değiştirir.
+\n
+\nDNS istekleri dışında hiçbir gerçek veri, bu uygulamayı kullanarak iletilmez.</string>
+
+    <string name="dialog_raterequest_title">Nebulo\'dan hoşlanıyor musunuz\?</string>
+    <string name="dialog_raterequest_message">Selam! Nebulo\'dan keyif alıyorsanız, lütfen mağazada değerlendirmek için bir dakikanızı ayırır mısınız\?</string>
+</resources>
