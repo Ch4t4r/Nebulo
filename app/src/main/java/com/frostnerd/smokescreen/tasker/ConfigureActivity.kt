@@ -12,12 +12,10 @@ import android.widget.ArrayAdapter
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.lifecyclemanagement.BaseActivity
-import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.dialog.NewServerDialog
-import com.frostnerd.smokescreen.fromServerUrls
-import com.frostnerd.smokescreen.hasHttpsServer
-import com.frostnerd.smokescreen.tlsServerFromHosts
+import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_tasker_configure.*
@@ -74,11 +72,11 @@ class ConfigureActivity : BaseActivity() {
                     "start" -> {
                         actionType.setSelection(0)
                         startIfRunning.isChecked = settings.getBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, true)
-                        useServersFromConfig.isChecked =
-                            !settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER) && !settings.containsKey(
+                        useCustomServer.isChecked =
+                            settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER) || settings.containsKey(
                                 BackgroundVpnConfigureActivity.extraKeyServerConfig
                             )
-                        if (!useServersFromConfig.isChecked) {
+                        if (useCustomServer.isChecked) {
                             if (settings.containsKey(TaskerHelper.DATA_KEY_PRIMARYSERVER)) {
                                 serverType.setSelection(0)
                                 primaryServer.setText(settings.getString(TaskerHelper.DATA_KEY_PRIMARYSERVER))
@@ -110,8 +108,8 @@ class ConfigureActivity : BaseActivity() {
     }
 
     private fun createLayout() {
-        useServersFromConfig.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+        useCustomServer.setOnCheckedChangeListener { _, isChecked ->
+            if (!isChecked) {
                 serverConfigWrap.visibility = View.GONE
                 serverType.visibility = View.GONE
             } else {
@@ -156,6 +154,15 @@ class ConfigureActivity : BaseActivity() {
                 secondaryServer.text = secondaryServer.text
                 setHints()
             }
+        }
+        selectServer.setOnClickListener {
+            ServerChoosalDialog(this@ConfigureActivity, null, serverType.selectedItemPosition == 1) {
+                val typePosition = if(it.hasTlsServer()) 1 else 0
+                if(serverType.selectedItemPosition != typePosition) serverType.setSelection(typePosition)
+                primaryServer.setText(it.servers.first().address.formatToString())
+                if(it.servers.size > 1) secondaryServer.setText(it.servers.last().address.formatToString())
+                else secondaryServer.setText("")
+            }.show()
         }
         addUrlTextWatcher(primaryServerWrap, primaryServer, false)
         addUrlTextWatcher(secondaryServerWrap, secondaryServer, true)
@@ -213,7 +220,7 @@ class ConfigureActivity : BaseActivity() {
         )
         if (action == "start") {
             settings.putBoolean(TaskerHelper.DATA_KEY_STARTIFRUNNING, startIfRunning.isChecked)
-            if (!useServersFromConfig.isChecked) {
+            if (useCustomServer.isChecked) {
                 if (primaryServerWrap.error == null &&
                     secondaryServerWrap.error == null
                 ) {

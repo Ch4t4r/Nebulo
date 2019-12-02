@@ -348,4 +348,9 @@
         <item>@string/changelog_build_52_2</item>
         <item>@string/changelog_build_52_3</item>
     </string-array>
+
+    <string-array name="changelog_build_53">
+        <item>Version 1.1.0 (Build 53)</item>
+        <item>@string/changelog_build_31_4</item>
+    </string-array>
 </resources>

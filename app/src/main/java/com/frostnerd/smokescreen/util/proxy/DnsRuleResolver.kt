@@ -79,86 +79,81 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
         })
     }
 
-    override suspend fun canResolve(question: Question): Boolean {
-        return if ((ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount)) || (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA)) {
-            false
-        } else {
-            val uniformQuestion = question.name.toString().replace(wwwRegex, "").toLowerCase(Locale.ROOT)
-            val hostHash = hashHost(uniformQuestion, question.type)
-            val wildcardHostHash = hashHost(uniformQuestion, Record.TYPE.ANY)
+    private fun findRuleTarget(question: String, type:Record.TYPE):String? {
+        val uniformQuestion = question.replace(wwwRegex, "").toLowerCase(Locale.ROOT)
+        val hostHash = hashHost(uniformQuestion, type)
+        val wildcardHostHash = hashHost(uniformQuestion, Record.TYPE.ANY)
 
-            if(cachedNonIncluded.size != 0 && cachedNonIncluded.contains(hostHash)) return false
-            if(whitelistCount != 0) {
-                if(cachedNonWildcardWhitelisted.size != 0 && cachedNonWildcardWhitelisted.contains(wildcardHostHash)) return false
-                else if(cachedWildcardWhitelisted.size != 0 && cachedWildcardWhitelisted.contains(wildcardHostHash)) return false
+        if(cachedNonIncluded.size != 0 && cachedNonIncluded.contains(hostHash)) return null
+        if(whitelistCount != 0) {
+            if(cachedNonWildcardWhitelisted.size != 0 && cachedNonWildcardWhitelisted.contains(wildcardHostHash)) return null
+            else if(cachedWildcardWhitelisted.size != 0 && cachedWildcardWhitelisted.contains(wildcardHostHash)) return null
+        }
+        if(nonWildcardCount != 0 && cachedResolved.size != 0) {
+            val res = cachedResolved[hostHash]
+            if(res != null) {
+                return res
             }
-            if(nonWildcardCount != 0 && cachedResolved.size != 0) {
-                val res = cachedResolved[hostHash]
-                if(res != null) {
-                    resolveResults[question.hashCode()] = res
-                    return true
-                }
+        }
+        if(wildcardCount != 0 && cachedWildcardResolved.size != 0) {
+            val res = cachedWildcardResolved[hostHash]
+            if(res != null) {
+                return res
             }
-            if(wildcardCount != 0 && cachedWildcardResolved.size != 0) {
-                val res = cachedWildcardResolved[hostHash]
-                if(res != null) {
-                    resolveResults[question.hashCode()] = res
-                    return true
-                }
-            }
+        }
 
-            val whitelistEntry: DnsRule? = if (whitelistCount != 0) {
-                val normal = if(nonWildcardWhitelistCount != 0 && (nonWildcardWhitelistCount == null || nonWildcardWhitelistCount != whitelistCount)) dao.findNonWildcardWhitelistEntry(
-                    uniformQuestion,
-                    useUserRules
-                ).firstOrNull() else null
-                normal ?: if(wildcardWhitelistCount != 0) dao.findPossibleWildcardRuleTarget(
-                    uniformQuestion,
-                    question.type,
-                    useUserRules,
-                    true,
-                    false
-                ).firstOrNull {
-                    DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
-                        .matches()
-                } else null
-            } else null
-
-            if (whitelistEntry != null) {
-                if(whitelistEntry.isWildcard) cachedWildcardWhitelisted.add(wildcardHostHash)
-                else cachedNonWildcardWhitelisted.add(wildcardHostHash)
-
-                if(cachedWildcardWhitelisted.size >= maxWhitelistCacheSize*2) cachedWildcardWhitelisted.clear()
-                if(cachedNonWildcardWhitelisted.size >= maxWhitelistCacheSize) cachedNonWildcardWhitelisted.clear()
-
+        val whitelistEntry: DnsRule? = if (whitelistCount != 0) {
+            val normal = if(nonWildcardWhitelistCount != 0 && (nonWildcardWhitelistCount == null || nonWildcardWhitelistCount != whitelistCount)) dao.findNonWildcardWhitelistEntry(
+                uniformQuestion,
+                useUserRules
+            ).firstOrNull() else null
+            normal ?: if(wildcardWhitelistCount != 0) dao.findPossibleWildcardRuleTarget(
+                uniformQuestion,
+                type,
+                useUserRules,
+                true,
                 false
-            }
-            else {
-                val resolveResult = if(nonWildcardCount != 0) {
-                    if(nonWildcardCount == cachedResolved.size) {
-                        null // We would have hit cache otherwise
-                    } else {
-                        dao.findRuleTarget(uniformQuestion, question.type, useUserRules)
-                            ?.let {
-                                when (it) {
-                                    "0" -> "0.0.0.0"
-                                    "1" -> {
-                                        if (question.type == Record.TYPE.AAAA) "::1"
-                                        else "127.0.0.1"
-                                    }
-                                    else -> it
+            ).firstOrNull {
+                DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
+                    .matches()
+            } else null
+        } else null
+
+        if (whitelistEntry != null) {
+            if(whitelistEntry.isWildcard) cachedWildcardWhitelisted.add(wildcardHostHash)
+            else cachedNonWildcardWhitelisted.add(wildcardHostHash)
+
+            if(cachedWildcardWhitelisted.size >= maxWhitelistCacheSize*2) cachedWildcardWhitelisted.clear()
+            if(cachedNonWildcardWhitelisted.size >= maxWhitelistCacheSize) cachedNonWildcardWhitelisted.clear()
+            return null
+        }
+        else {
+            val resolveResult = if(nonWildcardCount != 0) {
+                if(nonWildcardCount == cachedResolved.size) {
+                    null // We would have hit cache otherwise
+                } else {
+                    dao.findRuleTarget(uniformQuestion, type, useUserRules)
+                        ?.let {
+                            when (it) {
+                                "0" -> "0.0.0.0"
+                                "1" -> {
+                                    if (type == Record.TYPE.AAAA) "::1"
+                                    else "127.0.0.1"
                                 }
+                                else -> it
                             }
-                    }
-                } else null
-                if (resolveResult != null) {
+                        }
+                }
+            } else null
+            when {
+                resolveResult != null -> {
                     cachedResolved[hostHash] = resolveResult
-                    resolveResults[question.hashCode()] = resolveResult
-                    true
-                } else if (wildcardCount != 0) {
+                    return resolveResult
+                }
+                wildcardCount != 0 -> {
                     val wildcardResolveResult = dao.findPossibleWildcardRuleTarget(
                         uniformQuestion,
-                        question.type,
+                        type,
                         useUserRules,
                         false,
                         true
@@ -166,34 +161,46 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
                         DnsRuleDialog.databaseHostToMatcher(it.host)
                             .reset(uniformQuestion).matches()
                     }?.let {
-                        if (question.type == Record.TYPE.AAAA) it.ipv6Target
+                        if (type == Record.TYPE.AAAA) it.ipv6Target
                             ?: it.target
                         else it.target
                     }?.let {
                         when (it) {
                             "0" -> "0.0.0.0"
                             "1" -> {
-                                if (question.type == Record.TYPE.AAAA) "::1"
+                                if (type == Record.TYPE.AAAA) "::1"
                                 else "127.0.0.1"
                             }
                             else -> it
                         }
                     }
-                    if (wildcardResolveResult != null) {
+                    return if (wildcardResolveResult != null) {
                         cachedWildcardResolved[hostHash] = wildcardResolveResult
-                        resolveResults[question.hashCode()] = wildcardResolveResult
-                        true
+                        wildcardResolveResult
                     } else {
                         if(cachedNonIncluded.size >= maxWhitelistCacheSize) cachedNonIncluded.clear()
                         cachedNonIncluded.add(hostHash)
-                        false
+                        null
                     }
-                } else {
+                }
+                else -> {
                     if(cachedNonIncluded.size >= maxWhitelistCacheSize) cachedNonIncluded.clear()
                     cachedNonIncluded.add(hostHash)
-                    false
+                    return null
                 }
             }
+        }
+    }
+
+    override suspend fun canResolve(question: Question): Boolean {
+        return if ((ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount)) || (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA)) {
+            false
+        } else {
+            val res = findRuleTarget(question.name.toString(), question.type)
+            return if(res != null) {
+                resolveResults[question.hashCode()] = res
+                true
+            } else false
         }
     }
 
@@ -233,7 +240,10 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
     // Handle CNAME Cloaking
     // Does not need to handle whitelist as the query has already been forwarded
     override suspend fun mapResponse(message: DnsMessage): DnsMessage {
-        if(ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount)) return message // No rules or only whitelist rules present
+        if(ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount) || message.questions.size == 0) return message // No rules or only whitelist rules present
+        else if(whitelistCount != 0 && hashHost(message.question.name.toString().replace(wwwRegex, "").toLowerCase(Locale.ROOT), message.question.type).let {
+                cachedWildcardWhitelisted.contains(it) || cachedNonWildcardWhitelisted.contains(it)
+            }) return message
         else if(!message.answerSection.any {
                 it.type == Record.TYPE.CNAME
             }) return message
@@ -290,46 +300,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
     }
 
     private fun resolveForCname(host:String, type:Record.TYPE): Data? {
-        val uniformQuestion = host.replace(wwwRegex, "").toLowerCase(Locale.ROOT)
-
-        var entry = if(nonWildcardCount != 0) {
-            dao.findRuleTarget(uniformQuestion, type, useUserRules)
-                ?.let {
-                    when (it) {
-                        "0" -> "0.0.0.0"
-                        "1" -> {
-                            if (type == Record.TYPE.AAAA) "::1"
-                            else "127.0.0.1"
-                        }
-                        else -> it
-                    }
-                }
-        } else null
-        if(entry == null && wildcardCount != 0) {
-            entry = dao.findPossibleWildcardRuleTarget(
-                uniformQuestion,
-                type,
-                useUserRules,
-                false,
-                true
-            ).firstOrNull {
-                DnsRuleDialog.databaseHostToMatcher(it.host)
-                    .reset(uniformQuestion).matches()
-            }?.let {
-                if (type == Record.TYPE.AAAA) it.ipv6Target
-                    ?: it.target
-                else it.target
-            }?.let {
-                when (it) {
-                    "0" -> "0.0.0.0"
-                    "1" -> {
-                        if (type == Record.TYPE.AAAA) "::1"
-                        else "127.0.0.1"
-                    }
-                    else -> it
-                }
-            }
-        }
+        val entry = findRuleTarget(host, type)
 
         return if(entry != null) {
             if(type == Record.TYPE.A) A(entry)

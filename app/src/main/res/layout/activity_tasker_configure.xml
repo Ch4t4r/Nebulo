@@ -1,111 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:paddingLeft="@dimen/dialog_horizontal_margin"
-            android:paddingRight="@dimen/dialog_horizontal_margin"
-            android:paddingTop="@dimen/dialog_vertical_margin"
-            android:paddingBottom="@dimen/dialog_vertical_margin"
-            android:layout_height="match_parent">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dialog_horizontal_margin"
+        android:paddingTop="@dimen/dialog_vertical_margin"
+        android:paddingRight="@dimen/dialog_horizontal_margin"
+        android:paddingBottom="@dimen/dialog_vertical_margin">
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <TextView
                     android:layout_width="wrap_content"
-                    android:text="@string/tasker_action"
-                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
-                    android:layout_height="wrap_content"/>
+                    android:text="@string/tasker_action"
+                    android:textStyle="bold" />
 
             <Spinner
-                    android:layout_width="wrap_content"
                     android:id="@+id/actionType"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="match_parent"
                 android:id="@+id/startConfigWrap"
-                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:layout_height="wrap_content">
+                android:orientation="vertical">
 
             <CheckBox
-                    android:layout_width="wrap_content"
-                    android:text="@string/tasker_start_if_running"
-                    android:textColor="?android:attr/textColor"
-                    android:checked="true"
                     android:id="@+id/startIfRunning"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/tasker_start_if_running"
+                    android:textColor="?android:attr/textColor" />
 
             <CheckBox
+                    android:id="@+id/useCustomServer"
                     android:layout_width="wrap_content"
-                    android:text="@string/tasker_use_default_configuration"
-                    android:textColor="?android:attr/textColor"
-                    android:checked="true"
-                    android:id="@+id/useServersFromConfig"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/tasker_use_custom_server"
+                    android:textColor="?android:attr/textColor" />
 
             <Spinner
-                    android:layout_width="match_parent"
                     android:id="@+id/serverType"
-                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:layout_height="wrap_content"/>
+                    android:visibility="gone" />
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
                     android:id="@+id/serverConfigWrap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
                         android:id="@+id/primaryServerWrap"
-                        app:errorEnabled="true"
-                        android:textColorHint="?android:attr/textColorSecondary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/dialog_newserver_primaryserver"
-                        android:layout_height="wrap_content">
+                        android:textColorHint="?android:attr/textColorSecondary"
+                        app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
                             android:id="@+id/primaryServer"
-                            android:maxLines="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:inputType="textUri"
-                            android:nextFocusDown="@id/secondaryServer"
-                            android:layout_height="wrap_content"/>
+                            android:maxLines="1"
+                            android:nextFocusDown="@id/secondaryServer" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
                         android:id="@+id/secondaryServerWrap"
-                        app:errorEnabled="true"
-                        android:textColorHint="?android:attr/textColorSecondary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/dialog_newserver_secondaryserver"
-                        android:layout_height="wrap_content">
+                        android:textColorHint="?android:attr/textColorSecondary"
+                        app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
                             android:id="@+id/secondaryServer"
-                            android:maxLines="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:inputType="textUri"
-                            android:nextFocusUp="@id/primaryServer"
-                            android:layout_height="wrap_content"/>
+                            android:maxLines="1"
+                            android:nextFocusUp="@id/primaryServer" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:id="@+id/selectServer"
+                        android:background="@drawable/main_roundbuttons"
+                        android:contentDescription="@string/contentdescription_main_servericon"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_main_server"
+                        android:tint="?android:attr/textColor" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

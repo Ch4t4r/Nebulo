@@ -41,20 +41,25 @@ import kotlinx.coroutines.launch
  */
 class ServerChoosalDialog(
     context: AppCompatActivity,
+    selectedServer:DnsServerInformation<*>?,
+    showTls:Boolean = selectedServer?.hasTlsServer() ?: true,
     onEntrySelected: (config: DnsServerInformation<*>) -> Unit
 ) :
     BaseDialog(context, context.getPreferences().theme.dialogStyle) {
     private var populationJob: Job? = null
-    private var currentSelectedServer: DnsServerInformation<*>
+    private var currentSelectedServer: DnsServerInformation<*>?
     private lateinit var defaultConfig: List<DnsServerInformation<*>>
     private lateinit var userConfig: List<UserServerConfiguration>
+
+    constructor(context: AppCompatActivity,
+                    onEntrySelected: (config: DnsServerInformation<*>) -> Unit):this(context, context.getPreferences().dnsServerConfig, onEntrySelected=onEntrySelected)
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_server_configuration, null, false)
         setTitle(R.string.dialog_serverconfiguration_title)
         setView(view)
 
-        currentSelectedServer = context.getPreferences().dnsServerConfig
+        currentSelectedServer = selectedServer
 
         setButton(
             DialogInterface.BUTTON_NEUTRAL, context.getString(android.R.string.cancel)
@@ -62,10 +67,9 @@ class ServerChoosalDialog(
         setButton(
             DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok)
         ) { _, _ ->
-            onEntrySelected.invoke(currentSelectedServer)
+            currentSelectedServer?.apply(onEntrySelected)
         }
-        val isCurrentServerTls = currentSelectedServer.hasTlsServer()
-        loadServerData(isCurrentServerTls)
+        loadServerData(showTls)
 
         val spinnerAdapter = ArrayAdapter<String>(
             context, android.R.layout.simple_spinner_item,
@@ -77,7 +81,7 @@ class ServerChoosalDialog(
         spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
         val spinner = view.findViewById<Spinner>(R.id.spinner)
         spinner.adapter = spinnerAdapter
-        if(isCurrentServerTls) spinner.setSelection(1)
+        if(showTls) spinner.setSelection(1)
         view.findViewById<RadioGroup>(R.id.knownServersGroup).setOnCheckedChangeListener { group, _ ->
             val button = view.findViewById(group.checkedRadioButtonId) as RadioButton
             val payload = button.tag
@@ -174,6 +178,7 @@ class ServerChoosalDialog(
     }
 
     private fun markCurrentSelectedServer() {
+        val currentSelectedServer = this.currentSelectedServer ?: return
         for (id in 0 until knownServersGroup.childCount) {
             val child = knownServersGroup.getChildAt(id) as RadioButton
             val payload = child.tag
@@ -299,7 +304,7 @@ class ServerChoosalDialog(
                     currentSelectedServer =
                         if (userConfiguration.isHttpsServer()) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
                     markCurrentSelectedServer()
-                    context.getPreferences().dnsServerConfig = currentSelectedServer
+                    context.getPreferences().dnsServerConfig = currentSelectedServer!!
                 }
                 knownServersGroup.removeView(button)
             }.show()
@@ -348,7 +353,7 @@ class ServerChoosalDialog(
                     currentSelectedServer =
                         if (isHttps) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
                     markCurrentSelectedServer()
-                    context.getPreferences().dnsServerConfig = currentSelectedServer
+                    context.getPreferences().dnsServerConfig = currentSelectedServer!!
                 }
                 knownServersGroup.removeView(button)
             }.show()

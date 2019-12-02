@@ -22,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import leakcanary.LeakSentry
+import java.net.InetAddress
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -96,59 +97,62 @@ class SmokeScreen : Application() {
 
     fun initSentry(forceStatus: Status = Status.NONE) {
         if (!BuildConfig.DEBUG && BuildConfig.SENTRY_DSN != "dummy") {
-            val enabledType = getPreferences().crashreportingType
-            if (forceStatus != Status.DATASAVING && (enabledType == Crashreporting.FULL || forceStatus == Status.ENABLED)) {
-                // Enable Sentry in full mode
-                // This passes some device-related data, but nothing which allows user actions to be tracked across the app
-                // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
-                GlobalScope.launch(Dispatchers.IO) {
-                    Sentry.init(
-                        BuildConfig.SENTRY_DSN,
-                        AndroidSentryClientFactory(this@SmokeScreen)
-                    )
-                    Sentry.getContext().user =
-                        User(getPreferences().crashReportingUUID, null, null, null)
-                    Sentry.getStoredClient().apply {
-                        addTag("user.language", Locale.getDefault().displayLanguage)
-                        addTag("app.database_version", AppDatabase.currentVersion.toString())
-                        addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
-                        addTag(
-                            "app.dns_server_primary",
-                            getPreferences().dnsServerConfig.servers[0].address.formatToString()
+            GlobalScope.launch(Dispatchers.IO) {
+                val hostName = InetAddress.getLocalHost().hostName
+                if(!hostName.startsWith("mars-sandbox", true)) {
+                    val enabledType = getPreferences().crashreportingType
+                    if (forceStatus != Status.DATASAVING && (enabledType == Crashreporting.FULL || forceStatus == Status.ENABLED)) {
+                        // Enable Sentry in full mode
+                        // This passes some device-related data, but nothing which allows user actions to be tracked across the app
+                        // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
+
+                        Sentry.init(
+                            BuildConfig.SENTRY_DSN,
+                            AndroidSentryClientFactory(this@SmokeScreen)
                         )
-                        addTag(
-                            "app.dns_server_secondary",
-                            getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
-                        )
-                        addTag(
-                            "app.installer_package",
-                            packageManager.getInstallerPackageName(packageName)
-                        )
-                        addTag("richdata", "true")
-                        addTag("app.fromCi", BuildConfig.FROM_CI.toString())
-                        addTag("app.commit", BuildConfig.COMMIT_HASH)
-                    }
-                }
-            } else if(enabledType == Crashreporting.MINIMAL || forceStatus == Status.DATASAVING){
-                // Inits Sentry in datasaving mode
-                // Only data absolutely necessary is transmitted (Android version, app version).
-                // Only crashes will be reported, no regular events.
-                GlobalScope.launch(Dispatchers.IO) {
-                    Sentry.init(
-                        BuildConfig.SENTRY_DSN,
-                        AndroidSentryClientFactory(this@SmokeScreen)
-                    )
-                    Sentry.getContext().user = User("anon-" + BuildConfig.VERSION_CODE, null, null, null)
-                    Sentry.getStoredClient().apply {
-                        addTag("richdata", "false")
-                        addTag("dist", BuildConfig.VERSION_CODE.toString())
-                        addTag("app.commit", BuildConfig.COMMIT_HASH)
-                        addTag("app.fromCi", BuildConfig.FROM_CI.toString())
-                        addExtra("dist", BuildConfig.VERSION_CODE)
-                        this.builderHelpers.forEach {
-                            this.removeBuilderHelper(it)
+                        Sentry.getContext().user =
+                            User(getPreferences().crashReportingUUID, null, null, null)
+                        Sentry.getStoredClient().apply {
+                            addTag("user.language", Locale.getDefault().displayLanguage)
+                            addTag("app.database_version", AppDatabase.currentVersion.toString())
+                            addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
+                            addTag(
+                                "app.dns_server_primary",
+                                getPreferences().dnsServerConfig.servers[0].address.formatToString()
+                            )
+                            addTag(
+                                "app.dns_server_secondary",
+                                getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
+                            )
+                            addTag(
+                                "app.installer_package",
+                                packageManager.getInstallerPackageName(packageName)
+                            )
+                            addTag("richdata", "true")
+                            addTag("app.fromCi", BuildConfig.FROM_CI.toString())
+                            addTag("app.commit", BuildConfig.COMMIT_HASH)
                         }
-                        this.addBuilderHelper(DatasavingSentryEventHelper())
+                    } else if (enabledType == Crashreporting.MINIMAL || forceStatus == Status.DATASAVING) {
+                        // Inits Sentry in datasaving mode
+                        // Only data absolutely necessary is transmitted (Android version, app version).
+                        // Only crashes will be reported, no regular events.
+                        Sentry.init(
+                            BuildConfig.SENTRY_DSN,
+                            AndroidSentryClientFactory(this@SmokeScreen)
+                        )
+                        Sentry.getContext().user =
+                            User("anon-" + BuildConfig.VERSION_CODE, null, null, null)
+                        Sentry.getStoredClient().apply {
+                            addTag("richdata", "false")
+                            addTag("dist", BuildConfig.VERSION_CODE.toString())
+                            addTag("app.commit", BuildConfig.COMMIT_HASH)
+                            addTag("app.fromCi", BuildConfig.FROM_CI.toString())
+                            addExtra("dist", BuildConfig.VERSION_CODE)
+                            this.builderHelpers.forEach {
+                                this.removeBuilderHelper(it)
+                            }
+                            this.addBuilderHelper(DatasavingSentryEventHelper())
+                        }
                     }
                 }
             }
