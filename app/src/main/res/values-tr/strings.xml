@@ -82,4 +82,12 @@
     <string name="windows_querylogging_dnsrule_created">DNS kuralı oluşturuldu.</string>
     <string name="windows_querylogging_usedserver_dnsrules">DNS Kuralları ile çözüldü</string>
     <string name="windows_querylogging_usedserver_cache">Önbellekle çözüldü</string>
+<string name="error_webview_missing">WebView paketi bulunamadı, şu anda güncelleniyor veya kaldırılıyor mu\?</string>
+
+    <string name="windows_querylogging_search_hint">Sorgu günlüğünde bir makine için arama</string>
+    <string name="windows_querylogging_search">Makine arama</string>
+    <string name="windows_querylogging_hostsource">DNS kuralının kaynağı</string>
+    <string name="windows_querylogging_hostsource__user">Kullanıcı kuralları</string>
+    <string name="windows_querylogging_hostsource__unknown">Bilinmeyen</string>
+    <string name="window_main_privatedns_info">Özel DNS etkin, sorgularınız zaten korunuyor. Dns-over-https veya diğer kullanışlı özellikleri kullanmak istiyorsanız, Nebulo\'yu etkinleştirin.</string>
 </resources>
