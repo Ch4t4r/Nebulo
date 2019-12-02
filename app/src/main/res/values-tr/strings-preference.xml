@@ -45,7 +45,9 @@
     <string name="preference_category_cache">Önbellek kontrolü</string>
 
     <string name="title_dnscache_enabled">DNS önbelleğini kullan</string>
-    <string name="summary_dnscache_enabled">Uygulamaların DNS önbelleğini etkinleştirir. Önbellek, eski sorguları daha hızlı cevaplamak için eski istekleri ezberler</string>
+    <string name="summary_dnscache_enabled">Uygulamaların DNS önbelleğini etkinleştirir. Önbellek, gelecekteki soruları daha hızlı cevaplamak için eski istekleri ezberler.
+\n
+\nSistemin zaten bir önbelleği var, davranışı özelleştirmek istiyorsanız bunu etkinleştirin.</string>
 
     <string name="title_dnscache_keepacrosslaunches">DNS önbelleğini koru</string>
     <string name="summary_dnscache_keepacrosslaunches">DNS önbelleğini birden çok başlatma boyunca tutun</string>
@@ -141,4 +143,23 @@
     <string name="summary_language">Uygulamanın dilini değiştir</string>
 
     <string name="title_map_query_refused">Reddedilen sorguları izin verilmeyen ana bilgisayarlar olarak yorumlayın</string>
+    <string name="title_simple_notification">Basit bildirim</string>
+    <string name="summary_simple_notification">Bildirimde basit bir metin kullanın</string>
+
+    <string name="title_clear_dnscache">DNS önbelleğini temizle</string>
+    <string name="summary_clear_dnscache">DNS önbelleğini temizlemek için buraya tıklayın, örneğin web siteleri önbelleğe alındığı için yanlış davranmaya başladığında.</string>
+
+    <string name="title_crashreporting_type">Otomatik kilitlenme raporlaması</string>
+    <string name="summary_crashreporting_type">Uygulama çöktüğünde geliştiriciye hangi verilerin iletileceğini yapılandırın. Kilitlenme verileri hiçbir zaman kişisel veriler içermez ve sorunların daha hızlı düzeltilmesine yardımcı olur.</string>
+
+
+    <string name="title_restart_vpn_on_networkchange">Ağ değişikliğinde yeniden başlat</string>
+    <string name="summary_restart_vpn_on_networkchange">"Ağ değiştiğinde sessizce uygulamayı yeniden başlatın. Ağlar arasında geçiş yaparken sorunla karşılaştığınızda bunu etkinleştirin.
+\n  Uygulama aktif olmadığında hiçbir etkisi olmaz."</string>
+
+    <string name="summary_map_query_refused">Bazı DNS sunucuları, ana bilgisayara izin verilmiyorsa veya engelleniyorsa sorguyu cevaplamayı reddedebilir. Bu ayar, sorguyu reddetmek yerine ana bilgisayarı engeller, aksi takdirde sistem karışabilir.</string>
+
+    <string name="crashreporting_type_full">Tam (İstatistiği ve hata ayıklama verilerini bildir)</string>
+    <string name="crashreporting_type_minimal">Minimal (Sadece Android ve uygulama sürümü)</string>
+    <string name="crashreporting_type_off">Kapalı (Kilitlenme raporları göndermeyin)</string>
     </resources>
