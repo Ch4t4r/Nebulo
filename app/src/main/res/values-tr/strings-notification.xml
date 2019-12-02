@@ -59,4 +59,5 @@
     <string name="notification_service_killed_title">Pil iyileştirmesi hakkında bilgi</string>
     <string name="notification_service_killed_message">Uygulama daha önce sistem tarafından durdurulmuş gibi görünüyor. Daha fazlasını öğrenmek için buraya tıklayın.</string>
     <string name="notification_service_killed_ignore">Yoksay</string>
-</resources>
+<string name="notification_simple_text">Geçerli sunucu: %1$s</string>
+    </resources>
