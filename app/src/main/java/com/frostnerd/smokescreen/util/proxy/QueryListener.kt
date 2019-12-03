@@ -111,6 +111,7 @@ class QueryListener(private val context: Context) : QueryListener {
             } ?: return
             val wasInserted = queryLogState.remove(responseMessage.id)!! != 0 // Update if already inserted (0=insert)
             query.responseTime = System.currentTimeMillis()
+            query.responses = mutableListOf()
             for (answer in responseMessage.answerSection) {
                 query.addResponse(answer)
             }
