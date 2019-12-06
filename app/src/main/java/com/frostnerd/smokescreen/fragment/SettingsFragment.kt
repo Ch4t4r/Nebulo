@@ -223,6 +223,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             dialog.setTitle(R.string.dialog_clearqueries_title)
             dialog.setPositiveButton(R.string.all_yes) { d, _ ->
                 requireContext().getDatabase().dnsQueryDao().deleteAll()
+                getPreferences().exportedQueryCount = 0
                 exportQueries.summary =
                     getString(R.string.summary_export_queries, 0)
                 d.dismiss()
