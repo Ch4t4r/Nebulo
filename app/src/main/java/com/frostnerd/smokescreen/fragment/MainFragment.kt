@@ -178,7 +178,7 @@ class MainFragment : Fragment() {
             getPreferences().vpnInformationShown = true
         } else {
             if (getPreferences().vpnInformationShown) {
-                requireContext().startService(Intent(requireContext(), DnsVpnService::class.java))
+                startActivityForResult(prepare, vpnRequestCode)
             } else {
                 showInfoTextDialog(requireContext(),
                     getString(R.string.dialog_vpninformation_title),
