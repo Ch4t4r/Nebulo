@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.*
@@ -234,7 +233,7 @@ class ConfigureActivity : BaseActivity() {
                     if (serverType.selectedItemPosition == 1) {
                         mode = getString(R.string.tasker_mode_dot)
                         BackgroundVpnConfigureActivity.writeServerInfoToIntent(
-                            DnsServerInformation.tlsServerFromHosts(
+                            tlsServerFromHosts(
                                 primary,
                                 secondary
                             ), settings
