@@ -812,7 +812,7 @@ class DnsVpnService : VpnService(), Runnable {
 
         if (getPreferences().catchKnownDnsServers) {
             log("Interception of requests towards known DNS servers is enabled, adding routes.")
-            for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
+            for (server in KnownDnsServers.waitUntilKnownServersArePopulated(-1)!!.values) {
                 log("Adding all routes for ${server.name}")
                 server.servers.forEach {
                     it.address.addressCreator.whenResolveFinishedSuccessfully { addresses ->
