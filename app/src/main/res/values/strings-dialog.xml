@@ -184,4 +184,6 @@
 
     <string name="dialog_raterequest_title">Are you enjoying Nebulo?</string>
     <string name="dialog_raterequest_message">Hey there! If you are enjoying Nebulo, would you please take a moment to rate it on the store?</string>
+
+    <string name="dialog_vpn_permission_denied_message">The system has denied Nebulo to start it\'s VPN. Please open the app to grant the permission there by clicking the start button.</string>
 </resources>
