@@ -151,12 +151,12 @@
     <string name="dialog_editdelete_title">Wat wil je doen\?</string>
     <string name="dialog_editdelete_edit">Bewerken</string>
     <string name="dialog_editdelete_delete">Verwijderen</string>
-<string name="dialog_servicekilled_message">De app ontdekte dat hij de laatste keer dat hij actief was niet juist afgesloten was. Dit geeft sterk aan dat uw systeem ervoor heeft gekozen om de app geforceerd te stoppen zonder dat de app zichzelf kan herstarten.
-\n
-\nOp de meeste apparaten heb je een aantal opties om te voorkomen dat het systeem de app stopt.
-\nJe kunt bijvoorbeeld de batterijoptimalisatie voor de app uitschakelen in de systeeminstellingen of voorkomen dat de app uit de lijst met recente apps wordt gewist.
-\n
-\nAls je ervoor kiest om dit te negeren dan zie je dit dialoogvenster niet meer terug. U kunt meer lezen en tips krijgen om dit op te lossen met de onderstaande knop (opent een externe website in uw browser).</string>
+<string name="dialog_servicekilled_message">De app ontdekte dat hij de laatste keer dat hij actief was niet juist afgesloten was. Dit geeft sterk aan dat uw systeem ervoor heeft gekozen om de app geforceerd te stoppen zonder dat de app zichzelf kan herstarten. 
+\n 
+\nOp de meeste apparaten heb je een aantal opties om te voorkomen dat het systeem de app stopt. 
+\nJe kunt bijvoorbeeld de batterijoptimalisatie voor de app uitschakelen in de systeeminstellingen of voorkomen dat de app uit de lijst met recente apps wordt gewist. 
+\n 
+\nAls je ervoor kiest om dit te negeren dan zie je dit dialoogvenster niet meer terug. U kunt meer lezen en tips krijgen om dit op te lossen met de onderstaande knop (opent een externe website in uw browser). Klik op instellingen om de Android-instellingen te openen waar u de batterijoptimalisaties voor Nebulo kunt uitschakelen.</string>
     <string name="dialog_servicekilled_more_info">Meer informatie</string>
 <string name="dialog_newhostsource_wildcard_info">U kunt host bronnen gebruiken met wildcard domeinen.</string>
     <string name="dialog_newdnsrule_wildcard_info">De host ondersteunt wildcards. Gebruik een asterisk (*) voor een willekeurig aantal tekens, cijfers en toegestane speciale tekens behalve punt (.). Gebruik twee asteriksen (**) om de punt (.) Op te nemen.</string>
@@ -184,4 +184,5 @@
     <string name="dialog_exportdnsrules_nonwhitelist">Normale regels exporteren</string>
     <string name="dialog_raterequest_title">Bent u tevreden over Nebulo\?</string>
     <string name="dialog_raterequest_message">Hallo daar! Als u tevreden bent met Nebulo, wilt u dan even de tijd nemen om het in de Play Store ™ te beoordelen\?</string>
+<string name="dialog_vpn_permission_denied_message">Het systeem heeft Nebulo geweigerd om zijn VPN te starten. Open de app om de toestemming daar te verlenen door op de startknop te klikken.</string>
 </resources>
