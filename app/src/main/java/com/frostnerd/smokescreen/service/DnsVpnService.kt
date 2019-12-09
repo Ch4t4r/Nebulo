@@ -561,44 +561,50 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun setNotificationText() {
-        val primaryServer: String
-        val secondaryServer: String?
-        if (serverConfig.httpsConfiguration != null) {
-            notificationBuilder.setContentTitle(getString(R.string.notification_main_title_https))
-            primaryServer = serverConfig.httpsConfiguration!![0].urlCreator.address.getUrl(true)
-            secondaryServer =
-                serverConfig.httpsConfiguration!!.getOrNull(1)?.urlCreator?.address?.getUrl(true)
-        } else {
-            notificationBuilder.setContentTitle(getString(R.string.notification_main_title_tls))
-            primaryServer = serverConfig.tlsConfiguration!![0].formatToString()
-            secondaryServer = serverConfig.tlsConfiguration!!.getOrNull(1)?.formatToString()
-        }
-        val text =
-            when {
-                getPreferences().simpleNotification -> getString(R.string.notification_simple_text, serverConfig.name)
-                secondaryServer != null -> getString(
-                    if (getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
-                    primaryServer,
-                    secondaryServer,
-                    packageBypassAmount,
-                    dnsProxy?.cache?.livingCachedEntries() ?: 0
-                )
-                else -> getString(
-                    if (getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
-                    primaryServer,
-                    packageBypassAmount,
-                    dnsProxy?.cache?.livingCachedEntries() ?: 0
+        if (this::serverConfig.isInitialized) {
+            val primaryServer: String
+            val secondaryServer: String?
+            if (serverConfig.httpsConfiguration != null) {
+                notificationBuilder.setContentTitle(getString(R.string.notification_main_title_https))
+                primaryServer = serverConfig.httpsConfiguration!![0].urlCreator.address.getUrl(true)
+                secondaryServer =
+                    serverConfig.httpsConfiguration!!.getOrNull(1)
+                        ?.urlCreator?.address?.getUrl(true)
+            } else {
+                notificationBuilder.setContentTitle(getString(R.string.notification_main_title_tls))
+                primaryServer = serverConfig.tlsConfiguration!![0].formatToString()
+                secondaryServer = serverConfig.tlsConfiguration!!.getOrNull(1)?.formatToString()
+            }
+            val text =
+                when {
+                    getPreferences().simpleNotification -> getString(
+                        R.string.notification_simple_text,
+                        serverConfig.name
+                    )
+                    secondaryServer != null -> getString(
+                        if (getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
+                        primaryServer,
+                        secondaryServer,
+                        packageBypassAmount,
+                        dnsProxy?.cache?.livingCachedEntries() ?: 0
+                    )
+                    else -> getString(
+                        if (getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
+                        primaryServer,
+                        packageBypassAmount,
+                        dnsProxy?.cache?.livingCachedEntries() ?: 0
+                    )
+                }
+            if (simpleNotification) {
+                notificationBuilder.setStyle(null)
+                notificationBuilder.setContentText(text)
+            } else {
+                notificationBuilder.setStyle(
+                    NotificationCompat.BigTextStyle(notificationBuilder).bigText(
+                        text
+                    )
                 )
             }
-        if(simpleNotification) {
-            notificationBuilder.setStyle(null)
-            notificationBuilder.setContentText(text)
-        } else {
-            notificationBuilder.setStyle(
-                NotificationCompat.BigTextStyle(notificationBuilder).bigText(
-                    text
-                )
-            )
         }
     }
 
@@ -806,7 +812,7 @@ class DnsVpnService : VpnService(), Runnable {
 
         if (getPreferences().catchKnownDnsServers) {
             log("Interception of requests towards known DNS servers is enabled, adding routes.")
-            for (server in DnsServerInformation.waitUntilKnownServersArePopulated(-1)!!.values) {
+            for (server in KnownDnsServers.waitUntilKnownServersArePopulated(-1)!!.values) {
                 log("Adding all routes for ${server.name}")
                 server.servers.forEach {
                     it.address.addressCreator.whenResolveFinishedSuccessfully { addresses ->

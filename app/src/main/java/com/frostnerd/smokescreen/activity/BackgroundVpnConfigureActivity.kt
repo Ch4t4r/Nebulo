@@ -168,6 +168,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
     private fun showPermissionDenialDialog() {
         androidx.appcompat.app.AlertDialog.Builder(this, getPreferences().theme.dialogStyle)
             .setTitle(getString(R.string.app_name) + " - " + getString(R.string.information))
+            .setMessage(R.string.dialog_vpn_permission_denied_message)
             .setPositiveButton(R.string.open_app) { _, _ ->
                 val intent = PinActivity.openAppIntent(this)
                 startActivity(intent)

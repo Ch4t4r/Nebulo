@@ -321,7 +321,7 @@ fun HttpsDnsServerInformation.Companion.fromServerUrls(primaryUrl:String, second
     )
 }
 
-fun DnsServerInformation.Companion.tlsServerFromHosts(primaryHost:String, secondaryHost:String?): DnsServerInformation<TLSUpstreamAddress> {
+fun tlsServerFromHosts(primaryHost:String, secondaryHost:String?): DnsServerInformation<TLSUpstreamAddress> {
     val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
     serverInfo.add(
         DnsServerConfiguration(address = createTlsUpstreamAddress(primaryHost), experimental = false, preferredProtocol = TLS, supportedProtocols = listOf(TLS))

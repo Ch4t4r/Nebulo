@@ -53,7 +53,14 @@ class NewServerDialog(
     private var validationRegex = SERVER_URL_REGEX
 
     companion object {
-        private val dohAddressPart = "[a-z0-9][a-z0-9-.]*[a-z0-9]"
+        // Hostpart has to begin with a character or number
+        // Then has to either:
+        //  - Consist of numbers, characters and dashes AND ends with a character
+        //  - End with a character or number
+        //  => Host part has to be at least 2 characters long
+        // Host can optionally end with a dot
+        //  - If there is a dot there has to be either a number or a char after it
+        private val dohAddressPart = "(?:[a-z0-9](?:(?:[a-z0-9-]*[a-z]*[a-z0-9-]*[a-z0-9])|[a-z0-9])(?:.(?=[a-z0-9])|))*"
         val SERVER_URL_REGEX =
             Regex(
                 "^\\s*(?:https://)?((?:$dohAddressPart)|(?:\\[[a-z0-9:]+]))(?::[1-9][0-9]{0,4})?(/[a-z0-9-.]+)*(/)?\\s*$",

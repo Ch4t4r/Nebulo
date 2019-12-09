@@ -108,7 +108,7 @@ fun Context.log(e: Throwable, extras: Map<String, String>? = null) {
 
         if (errorFile.createNewFile()) {
             val writer = BufferedWriter(FileWriter(errorFile, false))
-            writer.write("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n")
+            writer.write("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}, Commit: ${BuildConfig.COMMIT_HASH})\n")
             writer.write("Android SDK version: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})\n")
             writer.write("Device: ${Build.MODEL} from ${Build.MANUFACTURER} (Device: ${Build.DEVICE}, Product: ${Build.PRODUCT})\n")
             writer.write("------------------------------\n")

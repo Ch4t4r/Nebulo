@@ -36,9 +36,9 @@ class QueryListener(private val context: Context) : QueryListener {
     private val logQueriesToDb = context.getPreferences().queryLoggingEnabled
     private var waitingQueryLogs = LinkedHashMap<Int, DnsQuery>()
     // Question ID -> <Query, Flag> (0 = insert, 1 = nothing new, 2 = update)
-    private val queryLogState: MutableMap<Int, Int> = mutableMapOf()
+    private val queryLogState: MutableMap<Int, Int> = LinkedHashMap()
     // Query -> Has already been inserted
-    private var doneQueries = mutableMapOf<DnsQuery, Boolean>()
+    private var doneQueries = LinkedHashMap<DnsQuery, Boolean>()
     private val askedServer: String
     var lastDnsResponse: DnsMessage? = null
     private val databaseWriteJob: Job
@@ -92,7 +92,7 @@ class QueryListener(private val context: Context) : QueryListener {
 
         if (logQueriesToDb) {
             waitingQueryLogs[questionMessage.id]?.askedServer = askedServer
-            queryLogState[questionMessage.id] = 2
+            if(queryLogState[questionMessage.id] != 0) queryLogState[questionMessage.id] = 2
         }
     }
 
@@ -111,6 +111,7 @@ class QueryListener(private val context: Context) : QueryListener {
             } ?: return
             val wasInserted = queryLogState.remove(responseMessage.id)!! != 0 // Update if already inserted (0=insert)
             query.responseTime = System.currentTimeMillis()
+            query.responses = mutableListOf()
             for (answer in responseMessage.answerSection) {
                 query.addResponse(answer)
             }
@@ -133,32 +134,32 @@ class QueryListener(private val context: Context) : QueryListener {
         synchronized(waitingQueryLogs) {
             currentInsertions = waitingQueryLogs.toMap()
             currentDoneInsertions = doneQueries
-            doneQueries = mutableMapOf()
+            doneQueries = LinkedHashMap()
         }
         val database = context.getDatabase()
         val dao = database.dnsQueryDao()
-        var nextQueryId = context.getDatabase().dnsQueryDao().getLastInsertedId() + 1
+
+        val joined = (currentInsertions.map {
+            (it.key to it.value) to queryLogState[it.key]
+        } + currentDoneInsertions.map {
+            (null to it.key) to if(it.value) 2 else 0
+        }).sortedBy {
+            it.first.second.questionTime
+        }
 
         database.runInTransaction {
-            currentInsertions.forEach { (key, value) ->
+            joined.forEach {
                 // Do nothing for 1 (no update to process)
-                when (queryLogState[key]) {
+                // Do nothing for null (query was fulfilled in the meantime)
+                when(it.second) {
                     0 -> {
-                        value.id = nextQueryId++
-                        dao.insert(value)
-                        queryLogState[key] = 1
+                        dao.insert(it.first.second)
+                        if(it.first.first != null && it.first.first in queryLogState) queryLogState[it.first.first!!] = 1
                     }
                     2 -> {
-                        dao.update(value)
-                        queryLogState[key] = 1
+                        dao.update(it.first.second)
+                        if(it.first.first != null && it.first.first in queryLogState) queryLogState[it.first.first!!] = 1
                     }
-                }
-            }
-            currentDoneInsertions.forEach { (key, value) ->
-                if (value) dao.update(key)
-                else {
-                    key.id = nextQueryId++
-                    dao.insert(key)
                 }
             }
         }

@@ -59,7 +59,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             context?.getPreferences()?.notifyPreferenceChangedFromExternal(key)
         }
     private val category:SettingsActivity.Category by lazy(LazyThreadSafetyMode.NONE) {
-        arguments!!.getSerializable("category") as SettingsActivity.Category
+        (arguments?.getSerializable("category") as SettingsActivity.Category?) ?: SettingsActivity.Category.GENERAL
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -223,6 +223,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             dialog.setTitle(R.string.dialog_clearqueries_title)
             dialog.setPositiveButton(R.string.all_yes) { d, _ ->
                 requireContext().getDatabase().dnsQueryDao().deleteAll()
+                getPreferences().exportedQueryCount = 0
                 exportQueries.summary =
                     getString(R.string.summary_export_queries, 0)
                 d.dismiss()
@@ -382,9 +383,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 getString(R.string.title_clear_dnscache),
                 getString(R.string.dialog_cleardnscache_message),
                 getString(R.string.all_yes) to { dialog, _ ->
-                    GlobalScope.launch {
-                        getDatabase().cachedResponseDao().deleteAll()
-                        DnsVpnService.invalidateDNSCache(context!!)
+                    GlobalScope.launch(Dispatchers.IO) {
+                        context?.also {
+                            getDatabase().cachedResponseDao().deleteAll()
+                            DnsVpnService.invalidateDNSCache(context!!)
+                        }
                     }
                     dialog.dismiss()
                 },
