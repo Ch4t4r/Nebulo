@@ -94,7 +94,7 @@ fun Context.log(
 }
 
 fun Context.log(e: Throwable, extras: Map<String, String>? = null) {
-    logErrorSentry(e, extras)
+    if(SmokeScreen.sentryReady) logErrorSentry(e, extras)
     getPreferences().lastCrashTimeStamp = System.currentTimeMillis()
     if (Logger.isEnabled(this)) {
         Logger.getInstance(this).log(e)

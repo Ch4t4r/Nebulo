@@ -58,7 +58,7 @@ class CrashReportingEnableDialog(
         ) { dialog, _ ->
             context.getPreferences().crashreportingType = Crashreporting.OFF
             context.getPreferences().crashReportingConsent = false
-            Sentry.close()
+            (context.applicationContext as SmokeScreen).closeSentry()
             dialog.dismiss()
         }
         setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.dialog_crashreporting_neutral)) { _, _ ->

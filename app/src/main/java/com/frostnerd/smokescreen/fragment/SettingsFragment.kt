@@ -428,10 +428,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 false
             } else {
                 if(newValue == Crashreporting.MINIMAL.value) {
-                    Sentry.close()
+                    (requireContext().applicationContext as SmokeScreen).closeSentry()
                     (requireContext().applicationContext as SmokeScreen).initSentry(Status.DATASAVING)
                 } else if(newValue == Crashreporting.OFF.value) {
-                    Sentry.close()
+                    (requireContext().applicationContext as SmokeScreen).closeSentry()
                 }
                 true
             }
