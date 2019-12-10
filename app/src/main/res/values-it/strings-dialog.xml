@@ -157,12 +157,12 @@
     <string name="dialog_editdelete_edit">Modifica</string>
     <string name="dialog_editdelete_delete">Elimina</string>
 
-    <string name="dialog_servicekilled_message">L\'app ha rilevato che non si è fermata correttamente l\'ultima volta che è stata attiva. Ciò suggerisce decisamente che il sistema abbia scelto di forzare l\'arresto dell\'app senza che essa potesse riavviarsi da sola.
-\n
-\nNella maggior parte dei dispositivi sono disponibili alcune opzioni per impedire o almeno ritardare l\'arresto dell\'app.
-\nPuoi, ad esempio, disattivare le ottimizzazioni della batteria per l\'app nelle impostazioni di sistema o evitare di togliere l\'app dall\'elenco dei recenti.
-\n
-\nSe scegli di ignorare, non vedrai più questo messaggio. Puoi leggere altro e ricevere suggerimenti per risolvere il problema con il pulsante sottostante (apre un sito web esterno nel tuo browser).</string>
+    <string name="dialog_servicekilled_message">L\'app ha rilevato che non si è fermata correttamente l\'ultima volta che è stata attiva. Ciò suggerisce decisamente che il sistema abbia scelto di forzare l\'arresto dell\'app senza che essa potesse riavviarsi da sola. 
+\n 
+\nNella maggior parte dei dispositivi sono disponibili alcune opzioni per impedire o almeno ritardare l\'arresto dell\'app. 
+\nPuoi, ad esempio, disattivare le ottimizzazioni della batteria per l\'app nelle impostazioni di sistema o evitare di togliere l\'app dall\'elenco dei recenti. 
+\n 
+\nSe scegli di ignorare, non vedrai più questo messaggio. Puoi leggere altro e ricevere suggerimenti per risolvere il problema con il pulsante sottostante (apre un sito web esterno nel tuo browser). Clicca su Impostazioni per aprire le impostazioni di Android dove potrai disattivare le ottimizzazioni della batteria per Nebulo.</string>
     <string name="dialog_servicekilled_more_info">Maggiori informazioni</string>
 
     <string name="dialog_overlaydetected_title">Overlay di sistema rilevato</string>
@@ -191,4 +191,5 @@
     <string name="dialog_exportdnsrules_nonwhitelist">Esporta regole normali</string>
     <string name="dialog_raterequest_title">Ti sta piacendo Nebulo\?</string>
     <string name="dialog_raterequest_message">Ehilà! Se ti piace Nebulo, potresti prenderti un momento per valutarlo nello store\?</string>
+<string name="dialog_vpn_permission_denied_message">Il sistema ha impedito a Nebulo di avviare la sua VPN. Apri l\'app per concedere l\'autorizzazione cliccando il pulsante Avvia.</string>
 </resources>
