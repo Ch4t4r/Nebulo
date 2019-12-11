@@ -149,8 +149,6 @@ This work contains third-party content, namely:
    - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 - [OkHttp](https://github.com/square/okhttp)
    - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
-- [Pcap4j](https://github.com/kaitoy/pcap4j)
-   - License:[MIT](https://opensource.org/licenses/MIT)
 
 
 # Cloning
