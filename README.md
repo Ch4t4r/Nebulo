@@ -136,6 +136,7 @@ This work contains third-party content, namely:
    - The notification and launcher icons are remixes of the cloud icon
 - [Font Awesome icons](https://fontawesome.com/)
    - License: Font Awesome Pro License, held by Daniel Wolf
+   - All icons used in Nebulo are also available under the [free license](https://fontawesome.com/license/free). Attribution is required if you don't hold a pro license (Nebulo does so in the credits)
 - [Weblate](https://weblate.org) for managing translations
    - License: GPLv3
 - [FABProgressCircle](https://github.com/JorgeCastilloPrz/FABProgressCircle) for showing a loading indicator around floating action buttons
