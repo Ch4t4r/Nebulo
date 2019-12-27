@@ -8,6 +8,7 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.frostnerd.smokescreen.Logger
+import com.frostnerd.smokescreen.util.parameterizedLazy
 import okhttp3.internal.toImmutableList
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
@@ -32,8 +33,7 @@ import java.io.DataInputStream
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-private var INSTANCE: AppDatabase? = null
-var EXECUTED_MIGRATIONS = listOf<Pair<Int, Int>>()
+val EXECUTED_MIGRATIONS
     get() = _EXECUTED_MIGRATIONS.toImmutableList()
 private var _EXECUTED_MIGRATIONS = mutableListOf<Pair<Int, Int>>()
 @VisibleForTesting
@@ -122,15 +122,15 @@ val MIGRATION_10_11 = migration(10, 11) {
     Logger.logIfOpen("DB_MIGRATION", "Migration from 10 to 11 completed")
 }
 
+private val INSTANCE by parameterizedLazy<AppDatabase, Context> {
+    Room.databaseBuilder(it, AppDatabase::class.java, "data")
+        .allowMainThreadQueries()
+        .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11)
+        .build()
+}
 
 fun Context.getDatabase(): AppDatabase {
-    if (INSTANCE == null) {
-        INSTANCE = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "data")
-            .allowMainThreadQueries()
-            .addMigrations(MIGRATION_2_X, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11)
-            .build()
-    }
-    return INSTANCE!!
+    return INSTANCE(applicationContext)
 }
 
 fun Fragment.getDatabase():AppDatabase {
