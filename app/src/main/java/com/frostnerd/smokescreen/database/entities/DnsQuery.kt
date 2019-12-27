@@ -71,9 +71,7 @@ data class DnsQuery(
         return responses
     }
 
-    fun addResponse(record: Record<*>) {
-        responses.add(Base64.encodeToString(record.toByteArray(), Base64.NO_WRAP))
-    }
+    fun encodeResponse(record: Record<*>):String = Base64.encodeToString(record.toByteArray(), Base64.NO_WRAP)
 
     override fun toString(): String {
         return "DnsQuery(id=$id, type=$type, name='$name', askedServer=$askedServer, questionTime=$questionTime, responseTime=$responseTime, responses={${responses.size}})"
