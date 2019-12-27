@@ -644,7 +644,8 @@ class DnsVpnService : VpnService(), Runnable {
                 log("Re-fetching the servers (from intent or settings)")
                 setServerConfiguration(intent)
             } else serverConfig.forEachAddress { _, address ->
-                address.addressCreator.resolveOrGetResultOrNull(true)
+                address.addressCreator.reset()
+                resolveAllServerAddresses()
             }
             establishVpn()
             setNotificationText()
