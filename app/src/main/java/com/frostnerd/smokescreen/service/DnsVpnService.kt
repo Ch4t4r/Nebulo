@@ -528,7 +528,7 @@ class DnsVpnService : VpnService(), Runnable {
         var tries = 0.toDouble()
         var totalTries = 0
         serverConfig.forEachAddress { _, address ->
-            address.addressCreator.whenResolveFinished { resolveException, resolveResult ->
+            val listener = address.addressCreator.whenResolveFinished { resolveException, resolveResult ->
                 if(resolveException != null) {
                     showNoConnectionNotification()
                     if (resolveException is TimeoutException || resolveException is UnknownHostException) {
@@ -555,9 +555,11 @@ class DnsVpnService : VpnService(), Runnable {
                     false
                 }
             }
-            if (!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(
-                true
-            )
+            if (!address.addressCreator.isCurrentlyResolving()) {
+                if(!address.addressCreator.resolveOrGetResultOrNull(
+                    true
+                ).isNullOrEmpty()) address.addressCreator.removeListener(listener)
+            }
         }
     }
 
