@@ -71,6 +71,8 @@ class NewHostSourceDialog(
                 view.whitelist.isChecked = hostSource.whitelistSource
             }
             view.url.addTextChangedListener(object: TextWatcher {
+                private var previousText:String = ""
+
                 override fun afterTextChanged(s: Editable?) {
                     val alteredString = if(s.isNullOrBlank()) "" else if(s.contains("://")) s.toString() else "https://$s"
                     if(URLUtil.isValidUrl(alteredString)) {
@@ -90,12 +92,17 @@ class NewHostSourceDialog(
                                 }
                                 view.name.setText(domain)
                             } else if(URLUtil.isContentUrl(alteredString)) {
-                                 val text = context.contentResolver.query(Uri.parse(alteredString), null, null, null, null).let {
-                                     if(it?.moveToFirst() == false) null to it
-                                     else it?.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME)) to it
-                                }.let {
-                                    it.second?.close()
-                                    it.first
+                                val text = try {
+                                    context.contentResolver.query(Uri.parse(alteredString), null, null, null, null).let {
+                                        if(it?.moveToFirst() == false) null to it
+                                        else it?.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME)) to it
+                                   }.let {
+                                       it.second?.close()
+                                       it.first
+                                   }
+                                } catch (e: Exception) {
+                                    view.url.setText(previousText)
+                                    null
                                 }
                                 if(text != null) view.name.setText(text)
                             }
@@ -104,6 +111,7 @@ class NewHostSourceDialog(
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                    previousText = s.toString()
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
