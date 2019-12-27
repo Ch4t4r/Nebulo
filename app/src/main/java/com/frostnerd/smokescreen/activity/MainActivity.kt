@@ -70,24 +70,29 @@ class MainActivity : NavigationDrawerActivity() {
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             val update = {
-                val server = getPreferences().dnsServerConfig
-                view.serverName.text = server.name
-                view.dns1.text = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
-                    retryIfError = true,
-                    runResolveNow = true
-                )?.firstOrNull()?.hostAddress ?: "-"
-
-                view.dns2.text = (server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
-                    retryIfError = true,
-                    runResolveNow = true
-                )?.lastOrNull()?.hostAddress ?: "-").let {
-                    if(it == view.dns1.text.toString()) "-" else it
-                }
                 launchWithLifecylce(false) {
-                    val latency = DnsSpeedTest(server, log= {}).runTest(1)
+                    val server = getPreferences().dnsServerConfig
+                    val primaryAddress = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
+                        retryIfError = true,
+                        runResolveNow = true
+                    )?.firstOrNull()?.hostAddress ?: "-"
+                    val secondaryAddress = (server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
+                        retryIfError = true,
+                        runResolveNow = true
+                    )?.lastOrNull()?.hostAddress ?: "-").let {
+                        if(it == view.dns1.text.toString()) "-" else it
+                    }
+
+                    launchWithLifecylce(true) {
+                        view.serverName.text = server.name
+                        view.dns1.text = primaryAddress
+                        view.dns2.text = secondaryAddress
+                    }
+
+                    val latency = DnsSpeedTest(server, log = {}).runTest(1)
                     runOnUiThread {
-                        view.latency.text = if(latency != null && latency > 0) {
-                           "$latency ms"
+                        view.latency.text = if (latency != null && latency > 0) {
+                            "$latency ms"
                         } else "- ms"
                     }
                 }
