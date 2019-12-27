@@ -32,25 +32,25 @@ import java.io.FileWriter
 class DnsQueryRepository(private val dnsQueryDao: DnsQueryDao) {
 
     fun updateAsync(dnsQuery: DnsQuery): Job {
-        return GlobalScope.launch {
+        return GlobalScope.launch(Dispatchers.IO) {
             dnsQueryDao.update(dnsQuery)
         }
     }
 
     fun insertAllAsync(dnsQueries:List<DnsQuery>): Job {
-        return GlobalScope.launch {
+        return GlobalScope.launch(Dispatchers.IO) {
             dnsQueryDao.insertAll(dnsQueries)
         }
     }
 
     fun insertAsync(dnsQuery:DnsQuery): Job {
-        return GlobalScope.launch {
+        return GlobalScope.launch(Dispatchers.IO) {
             dnsQueryDao.insert(dnsQuery)
         }
     }
 
     suspend fun getAllAsync(coroutineScope: CoroutineScope): List<DnsQuery> {
-        return coroutineScope.async(start = CoroutineStart.DEFAULT) {
+        return coroutineScope.async(Dispatchers.IO, start = CoroutineStart.DEFAULT) {
             dnsQueryDao.getAll()
         }.await()
     }
@@ -66,7 +66,7 @@ class DnsQueryRepository(private val dnsQueryDao: DnsQueryDao) {
             exportFile.delete()
             false
         } else exportFile.exists()
-        return GlobalScope.launch {
+        return GlobalScope.launch(Dispatchers.IO) {
             val outStream = BufferedWriter(FileWriter(exportFile, true))
             if(!existed) {
                 outStream.write("Name,Short Name,Type Name,Type ID,Asked Server,Answered from Cache,Question time,Response Time,Responses(JSON-Array of Base64)")

@@ -13,10 +13,7 @@ import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.service.DnsVpnService
 import kotlinx.android.synthetic.main.dialog_query_generator.*
 import kotlinx.android.synthetic.main.dialog_query_generator.view.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
@@ -346,6 +343,9 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
         "https://www.bild.de/video/clip/elefant/elefant-haengt-ueber-zaun-viralpress-61819274.bild.html"
         )
     private var job: Job? = null
+    private val generatorScope:CoroutineScope by lazy {
+        CoroutineScope(newSingleThreadContext("query-generator"))
+    }
     private var loadingDialog:AlertDialog? = null
 
     init {
@@ -369,7 +369,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
             }
             val restartVpn = view.restartVpn.isChecked
             val runCount = iterations.text.toString().toIntOrNull() ?: 1
-            job = GlobalScope.launch {
+            job = generatorScope!!.launch {
                 context.log("Generating queries for ${urlsToUse.size} urls $runCount times", "[QueryGenerator]")
                 val logFileWriter = BufferedWriter(FileWriter(File(context.filesDir, "querygenlog.txt"), true))
                 val callWithChrome = useChrome.isChecked
@@ -392,6 +392,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
                     }
                 }
                 job = null
+                generatorScope?.cancel()
                 loadingDialog?.cancel()
             }
             showLoadingDialog()

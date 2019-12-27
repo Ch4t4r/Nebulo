@@ -165,7 +165,7 @@ class QueryLogDetailFragment : Fragment() {
 
             if(query.responseSource == QueryListener.Source.LOCALRESOLVER) {
                 hostSourceWrap.visibility = View.VISIBLE
-                hostSourceFetchJob = GlobalScope.launch {
+                hostSourceFetchJob = GlobalScope.launch(Dispatchers.IO) {
                     val sourceRule = getDatabase().dnsRuleDao().findRuleTargetEntity(query.name, query.type, true)
                         ?: getDatabase().dnsRuleDao().findPossibleWildcardRuleTarget(query.name, query. type, true, false, true).firstOrNull {
                             DnsRuleDialog.databaseHostToMatcher(it.host).reset(query.name).matches()
