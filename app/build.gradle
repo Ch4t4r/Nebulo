@@ -115,7 +115,7 @@ configurations.all {
 }
 
 dependencies {
-    def room_version = "2.2.2"
+    def room_version = "2.2.3"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -131,7 +131,7 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "androidx.preference:preference:1.1.0"
-    implementation "com.google.android.material:material:1.2.0-alpha02"
+    implementation "com.google.android.material:material:1.2.0-alpha03"
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-alpha01'
 
     implementation "androidx.room:room-runtime:$room_version"
