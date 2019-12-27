@@ -100,7 +100,7 @@ class NewHostSourceDialog(
                                        it.second?.close()
                                        it.first
                                    }
-                                } catch (e: Exception) {
+                                } catch (e: SecurityException) {
                                     view.url.setText(previousText)
                                     null
                                 }
