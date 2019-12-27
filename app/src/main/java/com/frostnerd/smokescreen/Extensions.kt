@@ -79,6 +79,13 @@ fun Context.startForegroundServiceCompat(intent: Intent) {
     } else startService(intent)
 }
 
+fun Context.tryUnregisterReceiver(receiver: BroadcastReceiver) {
+    try {
+        unregisterReceiver(receiver)
+    } catch (e: Exception) {
+    }
+}
+
 fun Context.registerReceiver(filteredActions: List<String>, receiver: (intent: Intent?) -> Unit): BroadcastReceiver {
     val filter = IntentFilter()
     for (filteredAction in filteredActions) {

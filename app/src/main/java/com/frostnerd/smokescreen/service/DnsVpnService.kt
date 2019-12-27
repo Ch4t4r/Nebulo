@@ -684,7 +684,7 @@ class DnsVpnService : VpnService(), Runnable {
                     )
                     networkCallback = null
                 }
-                unregisterReceiver(screenStateReceiver)
+                tryUnregisterReceiver(screenStateReceiver)
             }
             vpnProxy = null
             fileDescriptor = null
