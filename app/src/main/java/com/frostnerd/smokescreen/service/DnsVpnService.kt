@@ -544,7 +544,7 @@ class DnsVpnService : VpnService(), Runnable {
                                 delay(min(45000L, exponentialBackoff))
                                 totalTries++
                                 if (tries >= 9) tries = 0.toDouble()
-                                address.addressCreator.resolveOrGetResultOrNull(true)
+                                if(isActive) address.addressCreator.resolveOrGetResultOrNull(true)
                             }
                             true
                         } else false
@@ -560,9 +560,11 @@ class DnsVpnService : VpnService(), Runnable {
                 }
             }
             if (!address.addressCreator.isCurrentlyResolving()) {
-                if(!address.addressCreator.resolveOrGetResultOrNull(
-                    true
-                ).isNullOrEmpty()) address.addressCreator.removeListener(listener)
+                addressResolveScope.launch {
+                    if(!address.addressCreator.isCurrentlyResolving() && !address.addressCreator.resolveOrGetResultOrNull(
+                            true
+                        ).isNullOrEmpty()) address.addressCreator.removeListener(listener)
+                }
             }
         }
     }
