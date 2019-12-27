@@ -94,6 +94,9 @@ class DnsVpnService : VpnService(), Runnable {
     private var simpleNotification = getPreferences().simpleNotification
     private var lastVPNStopTime:Long? = null
     private val coroutineScope:CoroutineContext = SupervisorJob()
+    private val addressResolveScope:CoroutineScope by lazy {
+        CoroutineScope(newSingleThreadContext("service-resolve-retry"))
+    }
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -527,6 +530,7 @@ class DnsVpnService : VpnService(), Runnable {
         val initialBackoffTime = 200
         var tries = 0.toDouble()
         var totalTries = 0
+        addressResolveScope.cancel()
         serverConfig.forEachAddress { _, address ->
             val listener = address.addressCreator.whenResolveFinished { resolveException, resolveResult ->
                 if(resolveException != null) {
@@ -534,7 +538,7 @@ class DnsVpnService : VpnService(), Runnable {
                     if (resolveException is TimeoutException || resolveException is UnknownHostException) {
                         log("Address resolve failed: $resolveException. Total tries $totalTries/70")
                         if (totalTries <= 70) {
-                            GlobalScope.launch {
+                            addressResolveScope.launch {
                                 val exponentialBackoff =
                                     (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
                                 delay(min(45000L, exponentialBackoff))
@@ -669,6 +673,7 @@ class DnsVpnService : VpnService(), Runnable {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
+            addressResolveScope.cancel()
             lastVPNStopTime = System.currentTimeMillis()
             if (isStoppingCompletely) {
                 if (networkCallback != null) {
