@@ -279,6 +279,7 @@ class DnsVpnService : VpnService(), Runnable {
             private fun handleChange() {
                 if (this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
                     upstreamAddress.addressCreator.reset()
+                    upstreamAddress.addressCreator.resetListeners()
                     resolveAllServerAddresses()
                 }
                 if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
