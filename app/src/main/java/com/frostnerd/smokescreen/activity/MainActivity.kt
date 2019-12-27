@@ -101,17 +101,13 @@ class MainActivity : NavigationDrawerActivity() {
             getPreferences().listenForChanges(
                 "dns_server_config",
                 getPreferences().preferenceChangeListener {
-                    runOnUiThread {
-                        update()
-                    }
+                    update()
                 }.unregisterOn(lifecycle)
             )
-            cardNetworkCallback = object: ConnectivityManager.NetworkCallback() {
+            cardNetworkCallback = object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network) {
                     super.onAvailable(network)
-                    runOnUiThread {
-                        update()
-                    }
+                    update()
                 }
             }
             networkManager.registerNetworkCallback(NetworkRequest.Builder().apply {
