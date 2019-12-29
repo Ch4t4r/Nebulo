@@ -83,7 +83,7 @@ class MainActivity : NavigationDrawerActivity() {
                         if(it == primaryAddress) "-" else it
                     }
 
-                    launchWithLifecylce(true) {
+                    runOnUiThread {
                         view.serverName.text = server.name
                         view.dns1.text = primaryAddress
                         view.dns2.text = secondaryAddress
