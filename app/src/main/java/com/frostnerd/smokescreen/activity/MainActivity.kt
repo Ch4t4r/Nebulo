@@ -19,7 +19,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.BatteryOptimizationInfoDialog
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
-import com.frostnerd.smokescreen.dialog.NewServerDialog
+import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.fragment.*
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.DeepActionState
@@ -229,14 +229,9 @@ class MainActivity : NavigationDrawerActivity() {
                 iconLeft = getDrawable(R.drawable.ic_external_link),
                 onLongClick = null,
                 onSimpleClick = { _, _, _ ->
-                    NewServerDialog(
-                        this@MainActivity,
-                        title = getString(R.string.menu_create_shortcut),
-                        onServerAdded = {
-                            ShortcutActivity.createShortcut(this@MainActivity, it)
-                        },
-                        dnsOverHttps = true
-                    ).show()
+                    ServerChoosalDialog(this@MainActivity, onEntrySelected = {
+                        ShortcutActivity.createShortcut(this@MainActivity, it)
+                    }).show()
                     false
                 })
             fragmentItem(getString(R.string.button_main_dnsrules),
