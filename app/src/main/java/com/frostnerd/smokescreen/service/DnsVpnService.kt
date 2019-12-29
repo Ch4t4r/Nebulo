@@ -821,7 +821,8 @@ class DnsVpnService : VpnService(), Runnable {
             } while (!couldSetAddress && ++tries < 5)
         }
 
-        if (getPreferences().catchKnownDnsServers) {
+        val catchKnownDnsServers = getPreferences().catchKnownDnsServers
+        if (catchKnownDnsServers) {
             log("Interception of requests towards known DNS servers is enabled, adding routes.")
             for (server in KnownDnsServers.waitUntilKnownServersArePopulated(-1)!!.values) {
                 log("Adding all routes for ${server.name}")
@@ -849,7 +850,7 @@ class DnsVpnService : VpnService(), Runnable {
         if (useIpv4) {
             builder.addDnsServer(dummyServerIpv4)
             builder.addRoute(dummyServerIpv4, 32)
-            dhcpDnsServer.forEach {
+            if(catchKnownDnsServers) dhcpDnsServer.forEach {
                 if (it is Inet4Address) {
                     builder.addRoute(it, 32)
                 }
@@ -859,7 +860,7 @@ class DnsVpnService : VpnService(), Runnable {
         if (useIpv6) {
             builder.addDnsServer(dummyServerIpv6)
             builder.addRoute(dummyServerIpv6, 128)
-            dhcpDnsServer.forEach {
+            if(catchKnownDnsServers) dhcpDnsServer.forEach {
                 if (it is Inet6Address) {
                     builder.addRoute(it, 128)
                 }
