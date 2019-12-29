@@ -80,7 +80,7 @@ class MainActivity : NavigationDrawerActivity() {
                         retryIfError = true,
                         runResolveNow = true
                     )?.lastOrNull()?.hostAddress ?: "-").let {
-                        if(it == view.dns1.text.toString()) "-" else it
+                        if(it == primaryAddress) "-" else it
                     }
 
                     launchWithLifecylce(true) {
