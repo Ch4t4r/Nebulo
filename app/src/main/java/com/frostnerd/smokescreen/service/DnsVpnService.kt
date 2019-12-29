@@ -832,7 +832,7 @@ class DnsVpnService : VpnService(), Runnable {
                             if (address is Inet6Address && useIpv6) {
                                 log("Adding route for Ipv6 $address")
                                 builder.addRoute(address, 128)
-                            } else if (address is Inet4Address && useIpv4) {
+                            } else if (address is Inet4Address && useIpv4 && !address.hostAddress.equals("1.1.1.1")) {
                                 log("Adding route for Ipv4 $address")
                                 builder.addRoute(address, 32)
                             }
