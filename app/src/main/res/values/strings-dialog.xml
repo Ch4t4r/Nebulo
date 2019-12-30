@@ -36,11 +36,11 @@
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Type: Dns-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Type: Dns-over-TLS (DoT)</string>
-    <string name="dialog_serverimport_text" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">Please select the servers you wish to import.\n\nServers which are already imported will be duplicate if you select them.</string>
+    <string xmlns:tools="http://schemas.android.com/tools" name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Please select the servers you wish to import.\n\nServers which are already imported will be duplicate if you select them.</string>
 
     <string name="dialog_serverimportfailed_title">Import failed</string>
     <string name="dialog_serverimportfailed_text">The server(s) could not be imported.</string>
-    <string name="dialog_serverimportfailed_text_exception" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">The servers could not be imported.\n(%1s)</string>
+    <string xmlns:tools="http://schemas.android.com/tools" name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">The servers could not be imported.\n(%1s)</string>
 
     <string name="dialog_logexport_loading_title">Preparing logs</string>
     <string name="dialog_logexport_text">How do you want to share the logs?</string>
@@ -106,7 +106,7 @@
         \n\nThat\'s why I\'m kindly asking for your help translating this app to reach as broad of an audience as possible. If you are willing to help translating this app into your language feel free to either contact me or <![CDATA[<a href="https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/TRANSLATING.md">read here on how to help.</a>]]></string>
 
     <string name="dialog_speedresult_title">Speed test results</string>
-    <string name="dialog_speedresult_message" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">
+    <string xmlns:tools="http://schemas.android.com/tools" name="dialog_speedresult_message" tools:ignore="PluralsCandidate">
         %1d servers tested\n
         %2d DoT servers reachable, %3d not reachable\n
         %4d DoH servers reachable, %5d not reachable\n
@@ -185,5 +185,5 @@
     <string name="dialog_raterequest_title">Are you enjoying Nebulo?</string>
     <string name="dialog_raterequest_message">Hey there! If you are enjoying Nebulo, would you please take a moment to rate it on the store?</string>
 
-    <string name="dialog_vpn_permission_denied_message">The system has denied Nebulo to start it\'s VPN. Please open the app to grant the permission there by clicking the start button.</string>
+    <string name="dialog_vpn_permission_denied_message">The system has denied Nebulo to start its VPN. Please open the app to grant the permission there by clicking the start button.</string>
 </resources>
