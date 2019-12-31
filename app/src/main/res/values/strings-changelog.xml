@@ -353,4 +353,16 @@
         <item>Version 1.1.0 (Build 53)</item>
         <item>@string/changelog_build_31_4</item>
     </string-array>
+
+    <string name="changelog_build_54_1">Fixed some VoIP apps not connecting when Nebulo is active</string>
+    <string name="changelog_build_54_2">Creating a server shortcut now lets you select one from the list</string>
+    <string name="changelog_build_54_3">Fixed not clearing the export count when deleting logged queries</string>
+    <string name="changelog_build_54_4">The query log now loads the queries in chunks instead of all at once</string>
+    <string-array name="changelog_build_54">
+        <item>Version 1.2.0 (Build 54)</item>
+        <item>@string/changelog_build_54_1</item>
+        <item>@string/changelog_build_54_2</item>
+        <item>@string/changelog_build_54_3</item>
+        <item>@string/changelog_build_31_4</item>
+    </string-array>
 </resources>
