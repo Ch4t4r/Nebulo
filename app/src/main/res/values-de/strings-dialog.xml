@@ -92,10 +92,12 @@
     <string name="dialog_credits_title">Danksagungen</string>
     <string name="dialog_credits_message" formatted="true">- App icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 
 \n- Türkische Übersetzung von Kemal Oktay Aktoğan 
-\n- Russische Übersetzung von bruleto
-\n- Niederländische Übersetzung von Bas Koedijk
+\n- Russische Übersetzung von bruleto 
+\n- Niederländische Übersetzung von Bas Koedijk 
 \n- Portugiesische Übersetzung von Rafael W. Bohnenberger 
 \n- Indonesische Übersetzung von Gloeyisk
+\n- Einige Icons von Font Awesome
+\n
 \nMöchtest du deinen Namen hier sehen\? Trage noch heute &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;etwas bei&lt;/a&gt;.</string>
 
     <string name="dialog_join_group_title">Der Gemeinde beitreten</string>
