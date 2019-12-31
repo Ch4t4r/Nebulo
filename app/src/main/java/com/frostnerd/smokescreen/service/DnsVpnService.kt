@@ -950,38 +950,49 @@ class DnsVpnService : VpnService(), Runnable {
         log("Starting with config: $serverConfig")
 
         log("Creating handle.")
-        val handle: DnsHandle
-        if (serverConfig.httpsConfiguration != null) {
-            handle = ProxyHttpsHandler(
-                serverConfig.httpsConfiguration!!,
+        var defaultHandle: DnsHandle? = null
+        val handles = mutableListOf<DnsHandle>()
+        val ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
+        val ipv4Enabled = !ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
+
+        serverConfig.httpsConfiguration?.forEach {
+            val handle = ProxyHttpsHandler(
+                listOf(it),
                 connectTimeout = 20000,
                 queryCountCallback = {
-                    if(!simpleNotification) {
+                    if (!simpleNotification) {
                         setNotificationText()
                         updateNotification(it)
                     }
                 },
                 mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
             )
-        } else {
-            handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
+            handle.ipv4Enabled = ipv4Enabled
+            handle.ipv6Enabled = ipv6Enabled
+            if (defaultHandle == null) defaultHandle = handle
+            else handles.add(handle)
+        }
+        serverConfig.tlsConfiguration?.forEach {
+            val handle = ProxyTlsHandler(
+                listOf(it),
                 connectTimeout = 2000,
                 queryCountCallback = {
-                    if(!simpleNotification) {
+                    if (!simpleNotification) {
                         setNotificationText()
                         updateNotification(it)
                     }
-                }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock)
+                }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
+            )
+            handle.ipv4Enabled = ipv4Enabled
+            handle.ipv6Enabled = ipv6Enabled
+            if (defaultHandle == null) defaultHandle = handle
+            else handles.add(handle)
         }
         log("Handle created, creating DNS proxy")
-        handle.ipv6Enabled =
-            getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
-        handle.ipv4Enabled =
-            !handle.ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
         dnsProxy = SmokeProxy(
-            handle,
-            createProxyBypassHandlers(),
+            defaultHandle!!,
+            handles + createProxyBypassHandlers(),
             createDnsCache(),
             createQueryLogger(),
             createLocalResolver()
