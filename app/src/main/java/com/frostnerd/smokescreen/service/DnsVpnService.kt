@@ -776,10 +776,6 @@ class DnsVpnService : VpnService(), Runnable {
         val allowIpv4Traffic = useIpv4 || getPreferences().allowIpv4Traffic
         val allowIpv6Traffic = useIpv6 || getPreferences().allowIpv6Traffic
 
-        val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
-        val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
-        log("Dummy address for Ipv4: $dummyServerIpv4")
-        log("Dummy address for Ipv6: $dummyServerIpv6")
         log("Using IPv4: $useIpv4 (device has IPv4: $deviceHasIpv4), Ipv4 Traffic allowed: $allowIpv4Traffic")
         log("Using IPv6: $useIpv6 (device has IPv6: $deviceHasIpv6), Ipv6 Traffic allowed: $allowIpv6Traffic")
         log("DHCP Dns servers: $dhcpDnsServer")
@@ -847,9 +843,13 @@ class DnsVpnService : VpnService(), Runnable {
             }
         } else log("Not intercepting traffic towards known DNS servers.")
         builder.setSession(getString(R.string.app_name))
+
+
         if (useIpv4) {
-            builder.addDnsServer(dummyServerIpv4)
-            builder.addRoute(dummyServerIpv4, 32)
+            serverConfig.getAllDnsIpAddresses(true, false).forEach {
+                builder.addDnsServer(it)
+                builder.addRoute(it, 32)
+            }
             if(catchKnownDnsServers) dhcpDnsServer.forEach {
                 if (it is Inet4Address) {
                     builder.addRoute(it, 32)
@@ -858,8 +858,10 @@ class DnsVpnService : VpnService(), Runnable {
         } else if (deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
 
         if (useIpv6) {
-            builder.addDnsServer(dummyServerIpv6)
-            builder.addRoute(dummyServerIpv6, 128)
+            serverConfig.getAllDnsIpAddresses(false, true).forEach {
+                builder.addDnsServer(it)
+                builder.addRoute(it, 128)
+            }
             if(catchKnownDnsServers) dhcpDnsServer.forEach {
                 if (it is Inet6Address) {
                     builder.addRoute(it, 128)
@@ -957,6 +959,7 @@ class DnsVpnService : VpnService(), Runnable {
 
         serverConfig.httpsConfiguration?.forEach {
             val handle = ProxyHttpsHandler(
+                serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it),
                 listOf(it),
                 connectTimeout = 20000,
                 queryCountCallback = {
@@ -974,6 +977,7 @@ class DnsVpnService : VpnService(), Runnable {
         }
         serverConfig.tlsConfiguration?.forEach {
             val handle = ProxyTlsHandler(
+                serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it),
                 listOf(it),
                 connectTimeout = 2000,
                 queryCountCallback = {
@@ -1206,6 +1210,31 @@ data class DnsServerConfiguration(
     val httpsConfiguration: List<ServerConfiguration>?,
     val tlsConfiguration: List<TLSUpstreamAddress>?
 ) {
+
+    fun getAllDnsIpAddresses(ipv4:Boolean, ipv6:Boolean):List<String> {
+        val ips = mutableListOf<String>()
+        httpsConfiguration?.forEach { ips.addAll(getIpAddressesFor(ipv4, ipv6, it)) }
+        tlsConfiguration?.forEach { ips.addAll(getIpAddressesFor(ipv4, ipv6, it)) }
+        return ips
+    }
+
+    fun getIpAddressesFor(ipv4:Boolean, ipv6:Boolean, config:ServerConfiguration):List<String> {
+        if(httpsConfiguration.isNullOrEmpty() || config !in httpsConfiguration) return emptyList()
+        val index = httpsConfiguration.indexOf(config) + 100
+        val list = mutableListOf<String>()
+        if(ipv4) list.add("203.0.113." + String.format("%03d", index))
+        if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format("%02x", index))
+        return list
+    }
+
+    fun getIpAddressesFor(ipv4:Boolean, ipv6:Boolean, address:TLSUpstreamAddress):List<String> {
+        if(tlsConfiguration.isNullOrEmpty() || address !in tlsConfiguration) return emptyList()
+        val index = tlsConfiguration.indexOf(address)
+        val list = mutableListOf<String>()
+        if(ipv4) list.add("203.0.113." + String.format("%03d", index))
+        if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format("%02x", index))
+        return list
+    }
 
     fun forEachAddress(block: (isHttps: Boolean, UpstreamAddress) -> Unit) {
         httpsConfiguration?.forEach {

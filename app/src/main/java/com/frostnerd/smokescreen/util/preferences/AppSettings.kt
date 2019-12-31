@@ -43,8 +43,6 @@ interface AppSettings {
 
 
     var catchKnownDnsServers: Boolean
-    var dummyDnsAddressIpv4: String
-    var dummyDnsAddressIpv6: String
     val defaultBypassPackages: Set<String>
     var dnsServerConfig: DnsServerInformation<*>
     var userServers: Set<UserServerConfiguration>
@@ -230,8 +228,6 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         "user_servers"
     ) { mutableSetOf() }, cacheControl)
     override var catchKnownDnsServers: Boolean by booleanPref("catch_known_servers", true)
-    override var dummyDnsAddressIpv4: String by stringPref("dummy_dns_ipv4", "203.0.113.244")
-    override var dummyDnsAddressIpv6: String by stringPref("dummy_dns_ipv6", "fd21:c5ea:169d:fff1:3418:d688:36c5:e8c2")
     override val defaultBypassPackages: Set<String> by cache(restrictedCollection(
         stringSetPref(
             "default_bypass_packages",

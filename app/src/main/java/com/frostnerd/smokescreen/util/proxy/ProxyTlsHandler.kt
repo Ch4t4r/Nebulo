@@ -39,6 +39,7 @@ import javax.net.ssl.SSLSession
  */
 
 class ProxyTlsHandler(
+    val ownAddresses:List<String>,
     private val upstreamAddresses: List<TLSUpstreamAddress>,
     connectTimeout: Int,
     val queryCountCallback: ((queryCount: Int) -> Unit)? = null,
@@ -94,9 +95,7 @@ class ProxyTlsHandler(
         return upstreamAddresses[0]
     }
 
-    override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean {
-        return true
-    }
+    override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = ownAddresses.any { it.equals(destinationAddress.hostAddress, true) }
 
     override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
         return if(dnsMessage.questions.size > 0) {

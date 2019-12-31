@@ -27,6 +27,7 @@ import java.net.InetAddress
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ProxyHttpsHandler(
+    val ownAddresses:List<String>,
     serverConfigurations: List<ServerConfiguration>,
     connectTimeout: Long,
     val queryCountCallback: ((queryCount: Int) -> Unit)? = null,
@@ -49,12 +50,6 @@ class ProxyHttpsHandler(
             }
         } else true
     }
-
-    constructor(
-        serverConfiguration: ServerConfiguration,
-        connectTimeout: Long,
-        mapQueryRefusedToHostBlock:Boolean
-    ) : this(listOf(serverConfiguration), connectTimeout, mapQueryRefusedToHostBlock = mapQueryRefusedToHostBlock)
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
         return if(dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED) {
@@ -80,7 +75,7 @@ class ProxyHttpsHandler(
         return dummyUpstreamAddress
     }
 
-    override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = true
+    override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = ownAddresses.any { it.equals(destinationAddress.hostAddress, true) }
 
     override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean =
         mapQueryRefusedToHostBlock
