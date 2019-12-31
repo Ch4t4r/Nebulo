@@ -1236,7 +1236,7 @@ data class DnsServerConfiguration(
 
     fun getIpAddressesFor(ipv4:Boolean, ipv6:Boolean, address:TLSUpstreamAddress):List<String> {
         if(tlsConfiguration.isNullOrEmpty() || address !in tlsConfiguration) return emptyList()
-        val index = tlsConfiguration.indexOf(address)
+        val index = tlsConfiguration.indexOf(address) + 1
         val list = mutableListOf<String>()
         if(ipv4) list.add("203.0.113." + String.format("%03d", index))
         if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format("%02x", index))
