@@ -44,6 +44,7 @@ import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
+import java.lang.Exception
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
@@ -753,12 +754,23 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val activeNetwork =
-                (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetwork
-            log("Current active network: $activeNetwork")
-        }
         val builder = Builder()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val mgr =
+                getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork =
+                mgr.activeNetwork
+            log("Current active network: $activeNetwork")
+            if(activeNetwork != null) try {
+                mgr.getLinkProperties(activeNetwork)?.domains?.takeIf {
+                    it.isNotEmpty()
+                }?.split(",")?.forEach {
+                    builder.addSearchDomain(it)
+                }
+            } catch (ex:Exception) {
+                log("Failure when setting search domains of network: $ex")
+            }
+        }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             builder.setMetered(false)
         }
