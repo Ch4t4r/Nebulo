@@ -846,6 +846,7 @@ class DnsVpnService : VpnService(), Runnable {
 
         if (useIpv4) {
             serverConfig.getAllDnsIpAddresses(true, false).forEach {
+                log("Adding $it as dummy DNS server address")
                 builder.addDnsServer(it)
                 builder.addRoute(it, 32)
             }
@@ -858,6 +859,7 @@ class DnsVpnService : VpnService(), Runnable {
 
         if (useIpv6) {
             serverConfig.getAllDnsIpAddresses(false, true).forEach {
+                log("Adding $it as dummy DNS server address")
                 builder.addDnsServer(it)
                 builder.addRoute(it, 128)
             }
@@ -957,8 +959,10 @@ class DnsVpnService : VpnService(), Runnable {
         val ipv4Enabled = !ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
         serverConfig.httpsConfiguration?.forEach {
+            val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
+            log("Creating handle for DoH $it with IP-Addresses $addresses")
             val handle = ProxyHttpsHandler(
-                serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it),
+                addresses,
                 listOf(it),
                 connectTimeout = 20000,
                 queryCountCallback = {
@@ -976,8 +980,10 @@ class DnsVpnService : VpnService(), Runnable {
             else handles.add(handle)
         }
         serverConfig.tlsConfiguration?.forEach {
+            val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
+            log("Creating handle for DoH $it with IP-Addresses $addresses")
             val handle = ProxyTlsHandler(
-                serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it),
+                addresses,
                 listOf(it),
                 connectTimeout = 2000,
                 queryCountCallback = {
@@ -993,7 +999,7 @@ class DnsVpnService : VpnService(), Runnable {
             if (defaultHandle == null) defaultHandle = handle
             else handles.add(handle)
         }
-        log("Handle created, creating DNS proxy")
+        log("Creating DNS proxy with ${1 + handles.size} handles")
 
         dnsProxy = SmokeProxy(
             defaultHandle!!,
