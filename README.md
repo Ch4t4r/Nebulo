@@ -136,6 +136,7 @@ This work contains third-party content, namely:
    - The notification and launcher icons are remixes of the cloud icon
 - [Font Awesome icons](https://fontawesome.com/)
    - License: Font Awesome Pro License, held by Daniel Wolf
+   - All icons used in Nebulo are also available under the [free license](https://fontawesome.com/license/free). Attribution is required if you don't hold a pro license (Nebulo does so in the credits)
 - [Weblate](https://weblate.org) for managing translations
    - License: GPLv3
 - [FABProgressCircle](https://github.com/JorgeCastilloPrz/FABProgressCircle) for showing a loading indicator around floating action buttons
@@ -148,8 +149,6 @@ This work contains third-party content, namely:
    - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 - [OkHttp](https://github.com/square/okhttp)
    - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
-- [Pcap4j](https://github.com/kaitoy/pcap4j)
-   - License:[MIT](https://opensource.org/licenses/MIT)
 
 
 # Cloning
@@ -157,8 +156,7 @@ Feel free to clone this software. However, there are a few things to notice:
 - This app uses some of my own libraries which are only accessible when logged into this GitLab instance. Signing up is free and no tracking is in place.
    - These libraries are distributed using an Artifactory server. **This server is not public, but I do hand out credentials on request**.
    - Alternatively, replace the dependencies (`implementation 'com.frostnerd.utilskt:....`) with git sub-modules (`implementation project(...)`) after cloning the libraries.
-- I own a Font Awesome Pro license and use a lot of their icons. Most of the icons used in this project are accessible with a Font Awesome Free license, but not all necessarily are. Either you have to own a license yourself, or check whether a particular icon is also usable with the Free license.
-
+- Nebulo uses icons from Font Awesome covered under their free license. Nebulo gives attribution in the Credits section.
 </br>
 
 </br>

@@ -15,7 +15,7 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
-import kotlinx.android.synthetic.main.dialog_server_configuration.*
+import kotlinx.android.synthetic.main.dialog_server_configuration.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -46,6 +46,9 @@ class ServerChoosalDialog(
     onEntrySelected: (config: DnsServerInformation<*>) -> Unit
 ) :
     BaseDialog(context, context.getPreferences().theme.dialogStyle) {
+
+    private var layout:View =
+        layoutInflater.inflate(R.layout.dialog_server_configuration, null, false)
     private var populationJob: Job? = null
     private var currentSelectedServer: DnsServerInformation<*>?
     private lateinit var defaultConfig: List<DnsServerInformation<*>>
@@ -55,9 +58,8 @@ class ServerChoosalDialog(
                     onEntrySelected: (config: DnsServerInformation<*>) -> Unit):this(context, context.getPreferences().dnsServerConfig, onEntrySelected=onEntrySelected)
 
     init {
-        val view = layoutInflater.inflate(R.layout.dialog_server_configuration, null, false)
         setTitle(R.string.dialog_serverconfiguration_title)
-        setView(view)
+        setView(layout)
 
         currentSelectedServer = selectedServer
 
@@ -79,11 +81,11 @@ class ServerChoosalDialog(
             )
         )
         spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
-        val spinner = view.findViewById<Spinner>(R.id.spinner)
+        val spinner = layout.findViewById<Spinner>(R.id.spinner)
         spinner.adapter = spinnerAdapter
         if(showTls) spinner.setSelection(1)
-        view.findViewById<RadioGroup>(R.id.knownServersGroup).setOnCheckedChangeListener { group, _ ->
-            val button = view.findViewById(group.checkedRadioButtonId) as RadioButton
+        layout.findViewById<RadioGroup>(R.id.knownServersGroup).setOnCheckedChangeListener { group, _ ->
+            val button = layout.findViewById(group.checkedRadioButtonId) as RadioButton
             val payload = button.tag
 
             currentSelectedServer = if (payload is UserServerConfiguration) {
@@ -92,14 +94,14 @@ class ServerChoosalDialog(
                 payload as DnsServerInformation<*>
             }
         }
-        view.findViewById<Button>(R.id.addServer).setOnClickListener {
+        layout.findViewById<Button>(R.id.addServer).setOnClickListener {
             NewServerDialog(context, title = null, dnsOverHttps = spinner.selectedItemPosition == 0, server = null, onServerAdded = { info ->
                 val config = createButtonForUserConfiguration(
                     context.getPreferences().addUserServerConfiguration(
                         info
                     )
                 )
-                if (info.hasTlsServer() == defaultConfig.any { it.hasTlsServer() }) knownServersGroup.addView(
+                if (info.hasTlsServer() == defaultConfig.any { it.hasTlsServer() }) layout.knownServersGroup.addView(
                     config
                 )
             }).show()
@@ -109,7 +111,7 @@ class ServerChoosalDialog(
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     loadServerData(position == 1)
-                    knownServersGroup.removeAllViews()
+                    layout.knownServersGroup.removeAllViews()
                     addKnownServers()
                 }
             }
@@ -166,9 +168,9 @@ class ServerChoosalDialog(
                 buttons.add(createButtonForUserConfiguration(it))
             }
             launch(Dispatchers.Main) {
-                progress.visibility = View.GONE
+                layout.progress.visibility = View.GONE
                 for (button in buttons) {
-                    knownServersGroup.addView(button)
+                    layout.knownServersGroup.addView(button)
                 }
                 markCurrentSelectedServer()
                 populationJob = null
@@ -179,8 +181,8 @@ class ServerChoosalDialog(
 
     private fun markCurrentSelectedServer() {
         val currentSelectedServer = this.currentSelectedServer ?: return
-        for (id in 0 until knownServersGroup.childCount) {
-            val child = knownServersGroup.getChildAt(id) as RadioButton
+        for (id in 0 until layout.knownServersGroup.childCount) {
+            val child = layout.knownServersGroup.getChildAt(id) as RadioButton
             val payload = child.tag
             val info =
                 if (payload is UserServerConfiguration) {
@@ -306,7 +308,7 @@ class ServerChoosalDialog(
                     markCurrentSelectedServer()
                     context.getPreferences().dnsServerConfig = currentSelectedServer!!
                 }
-                knownServersGroup.removeView(button)
+                layout.knownServersGroup.removeView(button)
             }.show()
     }
 
@@ -321,8 +323,8 @@ class ServerChoosalDialog(
                 currentSelectedServer = newConfig.serverInformation
                 context.getPreferences().dnsServerConfig = newConfig.serverInformation
             }
-            loadServerData(spinner.selectedItemPosition == 1)
-            knownServersGroup.removeAllViews()
+            loadServerData(layout.spinner.selectedItemPosition == 1)
+            layout.knownServersGroup.removeAllViews()
             addKnownServers()
         }).show()
     }
@@ -338,7 +340,7 @@ class ServerChoosalDialog(
             )
             .setNegativeButton(R.string.all_no) { _, _ -> }
             .setPositiveButton(R.string.all_yes) { _, _ ->
-                val isHttps = spinner.selectedItemPosition == 0
+                val isHttps = layout.spinner.selectedItemPosition == 0
                 if(isHttps) {
                     context.getPreferences().removedDefaultDoHServers = context.getPreferences().removedDefaultDoHServers + AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.keys.find {
                         AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[it] == config
@@ -355,7 +357,7 @@ class ServerChoosalDialog(
                     markCurrentSelectedServer()
                     context.getPreferences().dnsServerConfig = currentSelectedServer!!
                 }
-                knownServersGroup.removeView(button)
+                layout.knownServersGroup.removeView(button)
             }.show()
     }
 

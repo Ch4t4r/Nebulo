@@ -7,6 +7,7 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.DnsRuleDialog
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.util.MaxSizeMap
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -49,7 +50,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
 
     fun refreshRuleCount() {
         previousRefreshJob?.cancel()
-        previousRefreshJob = GlobalScope.launch {
+        previousRefreshJob = GlobalScope.launch(Dispatchers.IO) {
             val previousRuleCount = ruleCount
             ruleCount = dao.getActiveCount().toInt()
             wildcardCount = dao.getActiveWildcardCount().toInt()

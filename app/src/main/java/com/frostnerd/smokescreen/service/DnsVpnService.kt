@@ -94,6 +94,9 @@ class DnsVpnService : VpnService(), Runnable {
     private var simpleNotification = getPreferences().simpleNotification
     private var lastVPNStopTime:Long? = null
     private val coroutineScope:CoroutineContext = SupervisorJob()
+    private val addressResolveScope:CoroutineScope by lazy {
+        CoroutineScope(newSingleThreadContext("service-resolve-retry"))
+    }
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -279,6 +282,7 @@ class DnsVpnService : VpnService(), Runnable {
             private fun handleChange() {
                 if (this@DnsVpnService::serverConfig.isInitialized) serverConfig.forEachAddress { _, upstreamAddress ->
                     upstreamAddress.addressCreator.reset()
+                    upstreamAddress.addressCreator.resetListeners()
                     resolveAllServerAddresses()
                 }
                 if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
@@ -526,20 +530,21 @@ class DnsVpnService : VpnService(), Runnable {
         val initialBackoffTime = 200
         var tries = 0.toDouble()
         var totalTries = 0
+        addressResolveScope.cancel()
         serverConfig.forEachAddress { _, address ->
-            address.addressCreator.whenResolveFinished { resolveException, resolveResult ->
+            val listener = address.addressCreator.whenResolveFinished { resolveException, resolveResult ->
                 if(resolveException != null) {
                     showNoConnectionNotification()
                     if (resolveException is TimeoutException || resolveException is UnknownHostException) {
                         log("Address resolve failed: $resolveException. Total tries $totalTries/70")
                         if (totalTries <= 70) {
-                            GlobalScope.launch {
+                            addressResolveScope.launch {
                                 val exponentialBackoff =
                                     (initialBackoffTime * 2.toDouble().pow(tries++)).toLong()
                                 delay(min(45000L, exponentialBackoff))
                                 totalTries++
                                 if (tries >= 9) tries = 0.toDouble()
-                                address.addressCreator.resolveOrGetResultOrNull(true)
+                                if(isActive) address.addressCreator.resolveOrGetResultOrNull(true)
                             }
                             true
                         } else false
@@ -554,9 +559,13 @@ class DnsVpnService : VpnService(), Runnable {
                     false
                 }
             }
-            if (!address.addressCreator.isCurrentlyResolving()) address.addressCreator.resolveOrGetResultOrNull(
-                true
-            )
+            if (!address.addressCreator.isCurrentlyResolving()) {
+                addressResolveScope.launch {
+                    if(!address.addressCreator.isCurrentlyResolving() && !address.addressCreator.resolveOrGetResultOrNull(
+                            true
+                        ).isNullOrEmpty()) address.addressCreator.removeListener(listener)
+                }
+            }
         }
     }
 
@@ -641,7 +650,8 @@ class DnsVpnService : VpnService(), Runnable {
                 log("Re-fetching the servers (from intent or settings)")
                 setServerConfiguration(intent)
             } else serverConfig.forEachAddress { _, address ->
-                address.addressCreator.resolveOrGetResultOrNull(true)
+                address.addressCreator.reset()
+                resolveAllServerAddresses()
             }
             establishVpn()
             setNotificationText()
@@ -665,6 +675,7 @@ class DnsVpnService : VpnService(), Runnable {
             queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
+            addressResolveScope.cancel()
             lastVPNStopTime = System.currentTimeMillis()
             if (isStoppingCompletely) {
                 if (networkCallback != null) {
@@ -673,7 +684,7 @@ class DnsVpnService : VpnService(), Runnable {
                     )
                     networkCallback = null
                 }
-                unregisterReceiver(screenStateReceiver)
+                tryUnregisterReceiver(screenStateReceiver)
             }
             vpnProxy = null
             fileDescriptor = null
@@ -810,7 +821,8 @@ class DnsVpnService : VpnService(), Runnable {
             } while (!couldSetAddress && ++tries < 5)
         }
 
-        if (getPreferences().catchKnownDnsServers) {
+        val catchKnownDnsServers = getPreferences().catchKnownDnsServers
+        if (catchKnownDnsServers) {
             log("Interception of requests towards known DNS servers is enabled, adding routes.")
             for (server in KnownDnsServers.waitUntilKnownServersArePopulated(-1)!!.values) {
                 log("Adding all routes for ${server.name}")
@@ -820,7 +832,7 @@ class DnsVpnService : VpnService(), Runnable {
                             if (address is Inet6Address && useIpv6) {
                                 log("Adding route for Ipv6 $address")
                                 builder.addRoute(address, 128)
-                            } else if (address is Inet4Address && useIpv4) {
+                            } else if (address is Inet4Address && useIpv4 && !address.hostAddress.equals("1.1.1.1")) {
                                 log("Adding route for Ipv4 $address")
                                 builder.addRoute(address, 32)
                             }
@@ -838,7 +850,7 @@ class DnsVpnService : VpnService(), Runnable {
         if (useIpv4) {
             builder.addDnsServer(dummyServerIpv4)
             builder.addRoute(dummyServerIpv4, 32)
-            dhcpDnsServer.forEach {
+            if(catchKnownDnsServers) dhcpDnsServer.forEach {
                 if (it is Inet4Address) {
                     builder.addRoute(it, 32)
                 }
@@ -848,7 +860,7 @@ class DnsVpnService : VpnService(), Runnable {
         if (useIpv6) {
             builder.addDnsServer(dummyServerIpv6)
             builder.addRoute(dummyServerIpv6, 128)
-            dhcpDnsServer.forEach {
+            if(catchKnownDnsServers) dhcpDnsServer.forEach {
                 if (it is Inet6Address) {
                     builder.addRoute(it, 128)
                 }

@@ -225,6 +225,7 @@ class DnsRuleFragment : Fragment() {
                     notifyRulesChanged()
                 }, editSource = { hostSource ->
                     NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
+
                         val currentSource = getDatabase().hostSourceDao().findById(hostSource.id)!!.apply {
                             this.name = newSource.name
                             this.source = newSource.source

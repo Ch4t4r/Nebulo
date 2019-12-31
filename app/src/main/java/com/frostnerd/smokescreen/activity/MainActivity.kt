@@ -19,7 +19,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.BatteryOptimizationInfoDialog
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
-import com.frostnerd.smokescreen.dialog.NewServerDialog
+import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.fragment.*
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.DeepActionState
@@ -70,24 +70,29 @@ class MainActivity : NavigationDrawerActivity() {
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             val update = {
-                val server = getPreferences().dnsServerConfig
-                view.serverName.text = server.name
-                view.dns1.text = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
-                    retryIfError = true,
-                    runResolveNow = true
-                )?.firstOrNull()?.hostAddress ?: "-"
-
-                view.dns2.text = (server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
-                    retryIfError = true,
-                    runResolveNow = true
-                )?.lastOrNull()?.hostAddress ?: "-").let {
-                    if(it == view.dns1.text.toString()) "-" else it
-                }
                 launchWithLifecylce(false) {
-                    val latency = DnsSpeedTest(server, log= {}).runTest(1)
+                    val server = getPreferences().dnsServerConfig
+                    val primaryAddress = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
+                        retryIfError = true,
+                        runResolveNow = true
+                    )?.firstOrNull()?.hostAddress ?: "-"
+                    val secondaryAddress = (server.servers.lastOrNull()?.address?.addressCreator?.resolveOrGetResultOrNull(
+                        retryIfError = true,
+                        runResolveNow = true
+                    )?.lastOrNull()?.hostAddress ?: "-").let {
+                        if(it == primaryAddress) "-" else it
+                    }
+
                     runOnUiThread {
-                        view.latency.text = if(latency != null && latency > 0) {
-                           "$latency ms"
+                        view.serverName.text = server.name
+                        view.dns1.text = primaryAddress
+                        view.dns2.text = secondaryAddress
+                    }
+
+                    val latency = DnsSpeedTest(server, log = {}).runTest(1)
+                    runOnUiThread {
+                        view.latency.text = if (latency != null && latency > 0) {
+                            "$latency ms"
                         } else "- ms"
                     }
                 }
@@ -96,17 +101,13 @@ class MainActivity : NavigationDrawerActivity() {
             getPreferences().listenForChanges(
                 "dns_server_config",
                 getPreferences().preferenceChangeListener {
-                    runOnUiThread {
-                        update()
-                    }
+                    update()
                 }.unregisterOn(lifecycle)
             )
-            cardNetworkCallback = object: ConnectivityManager.NetworkCallback() {
+            cardNetworkCallback = object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network) {
                     super.onAvailable(network)
-                    runOnUiThread {
-                        update()
-                    }
+                    update()
                 }
             }
             networkManager.registerNetworkCallback(NetworkRequest.Builder().apply {
@@ -228,14 +229,9 @@ class MainActivity : NavigationDrawerActivity() {
                 iconLeft = getDrawable(R.drawable.ic_external_link),
                 onLongClick = null,
                 onSimpleClick = { _, _, _ ->
-                    NewServerDialog(
-                        this@MainActivity,
-                        title = getString(R.string.menu_create_shortcut),
-                        onServerAdded = {
-                            ShortcutActivity.createShortcut(this@MainActivity, it)
-                        },
-                        dnsOverHttps = true
-                    ).show()
+                    ServerChoosalDialog(this@MainActivity, onEntrySelected = {
+                        ShortcutActivity.createShortcut(this@MainActivity, it)
+                    }).show()
                     false
                 })
             fragmentItem(getString(R.string.button_main_dnsrules),
