@@ -42,13 +42,12 @@ class ProxyTlsHandler(
     val ownAddresses:List<String>,
     private val upstreamAddresses: List<TLSUpstreamAddress>,
     connectTimeout: Int,
-    val queryCountCallback: ((queryCount: Int) -> Unit)? = null,
+    val queryCountCallback: (() -> Unit)? = null,
     val mapQueryRefusedToHostBlock:Boolean
 ):AbstractTLSDnsHandle(connectTimeout) {
     override val handlesSpecificRequests: Boolean =
         ProxyBypassHandler.knownSearchDomains.isNotEmpty()
     private val hostnameVerifier = HttpsURLConnection.getDefaultHostnameVerifier()
-    private var queryCount = 0
 
     override suspend fun forwardDnsQuestion(
         deviceWriteToken: DeviceWriteToken,
@@ -91,7 +90,7 @@ class ProxyTlsHandler(
     }
 
     override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): TLSUpstreamAddress {
-        queryCountCallback?.invoke(++queryCount)
+        queryCountCallback?.invoke()
         return upstreamAddresses[0]
     }
 

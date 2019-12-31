@@ -85,7 +85,6 @@ class DnsVpnService : VpnService(), Runnable {
     private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
     private var pauseNotificationAction: NotificationCompat.Action? = null
-    private var queryCountOffset: Long = 0
     private var packageBypassAmount = 0
     private var connectedToANetwork: Boolean? = null
     private var lastScreenOff: Long? = null
@@ -94,6 +93,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var simpleNotification = getPreferences().simpleNotification
     private var lastVPNStopTime:Long? = null
     private val coroutineScope:CoroutineContext = SupervisorJob()
+    private var queryCount = 0
     private val addressResolveScope:CoroutineScope by lazy {
         CoroutineScope(newSingleThreadContext("service-resolve-retry"))
     }
@@ -395,16 +395,16 @@ class DnsVpnService : VpnService(), Runnable {
             )
             notificationBuilder.addAction(pauseNotificationAction)
         }
-        updateNotification(0)
+        updateNotification()
         log("Notification created and posted.")
     }
 
-    private fun updateNotification(queryCount: Int? = null) {
+    private fun updateNotification() {
         if(!simpleNotification) {
-            if (queryCount != null) notificationBuilder.setSubText(
+            notificationBuilder.setSubText(
                 getString(
                     R.string.notification_main_subtext,
-                    queryCount + queryCountOffset
+                    queryCount
                 )
             )
         }
@@ -495,7 +495,7 @@ class DnsVpnService : VpnService(), Runnable {
             log("Checking whether The VPN is prepared")
             if (prepare(this) != null) {
                 log("The VPN isn't prepared, stopping self and starting Background configure")
-                updateNotification(0)
+                updateNotification()
                 stopForeground(true)
                 destroy()
                 stopSelf()
@@ -510,7 +510,7 @@ class DnsVpnService : VpnService(), Runnable {
                         setServerConfiguration(intent)
                         setNotificationText()
                     }
-                    updateNotification(0)
+                    updateNotification()
                     establishVpn()
                 }
             }
@@ -655,7 +655,7 @@ class DnsVpnService : VpnService(), Runnable {
             }
             establishVpn()
             setNotificationText()
-            updateNotification(0)
+            updateNotification()
         } else {
             log("VpnService isn't prepared, launching BackgroundVpnConfigureActivity.")
             BackgroundVpnConfigureActivity.prepareVpn(
@@ -672,7 +672,6 @@ class DnsVpnService : VpnService(), Runnable {
         log("Destroying the VPN")
         if (isStoppingCompletely || connectedToANetwork == true) hideNoConnectionNotification()
         if (!destroyed) {
-            queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
             addressResolveScope.cancel()
@@ -965,7 +964,8 @@ class DnsVpnService : VpnService(), Runnable {
                 queryCountCallback = {
                     if (!simpleNotification) {
                         setNotificationText()
-                        updateNotification(it)
+                        queryCount++
+                        updateNotification()
                     }
                 },
                 mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
@@ -983,7 +983,8 @@ class DnsVpnService : VpnService(), Runnable {
                 queryCountCallback = {
                     if (!simpleNotification) {
                         setNotificationText()
-                        updateNotification(it)
+                        queryCount++
+                        updateNotification()
                     }
                 }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
             )
