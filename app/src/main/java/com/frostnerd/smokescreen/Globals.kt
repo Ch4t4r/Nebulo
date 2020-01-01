@@ -15,6 +15,7 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
 import okhttp3.internal.toHexString
+import java.util.*
 
 
 /*
@@ -84,7 +85,7 @@ fun isPackageInstalled(context: Context, packageName: String): Boolean {
 }
 
 fun colorToHexString(@ColorInt color:Int):String {
-    return String.format("#%06X", 0xFFFFFF and color)
+    return String.format(Locale.ROOT, "#%06X", 0xFFFFFF and color)
 }
 
 @ColorInt

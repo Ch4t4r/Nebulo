@@ -51,6 +51,7 @@ import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
 import java.net.UnknownHostException
+import java.util.*
 import java.util.concurrent.TimeoutException
 import kotlin.coroutines.CoroutineContext
 import kotlin.math.floor
@@ -1247,8 +1248,8 @@ data class DnsServerConfiguration(
         if(httpsConfiguration.isNullOrEmpty() || config !in httpsConfiguration) return emptyList()
         val index = httpsConfiguration.indexOf(config) + 100
         val list = mutableListOf<String>()
-        if(ipv4) list.add("203.0.113." + String.format("%03d", index))
-        if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format("%02x", index))
+        if(ipv4) list.add("203.0.113." + String.format(Locale.ROOT,"%03d", index))
+        if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format(Locale.ROOT, "%02x", index))
         return list
     }
 
@@ -1256,8 +1257,8 @@ data class DnsServerConfiguration(
         if(tlsConfiguration.isNullOrEmpty() || address !in tlsConfiguration) return emptyList()
         val index = tlsConfiguration.indexOf(address) + 1
         val list = mutableListOf<String>()
-        if(ipv4) list.add("203.0.113." + String.format("%03d", index))
-        if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format("%02x", index))
+        if(ipv4) list.add("203.0.113." + String.format(Locale.ROOT, "%03d", index))
+        if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format(Locale.ROOT, "%02x", index))
         return list
     }
 
