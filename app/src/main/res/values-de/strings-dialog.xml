@@ -92,10 +92,12 @@
     <string name="dialog_credits_title">Danksagungen</string>
     <string name="dialog_credits_message" formatted="true">- App icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 
 \n- Türkische Übersetzung von Kemal Oktay Aktoğan 
-\n- Russische Übersetzung von bruleto
-\n- Niederländische Übersetzung von Bas Koedijk
+\n- Russische Übersetzung von bruleto 
+\n- Niederländische Übersetzung von Bas Koedijk 
 \n- Portugiesische Übersetzung von Rafael W. Bohnenberger 
 \n- Indonesische Übersetzung von Gloeyisk
+\n- Einige Icons von Font Awesome
+\n
 \nMöchtest du deinen Namen hier sehen\? Trage noch heute &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;etwas bei&lt;/a&gt;.</string>
 
     <string name="dialog_join_group_title">Der Gemeinde beitreten</string>
@@ -145,12 +147,12 @@
     <string name="dialog_editdelete_title">Was möchtest du tun\?</string>
     <string name="dialog_editdelete_edit">Editieren</string>
     <string name="dialog_editdelete_delete">Löschen</string>
-<string name="dialog_servicekilled_message">Die App hat erkannt, dass sie nach der letzten Ausführung nicht ordnungsgemäß beendet wurde. Dies deutet sehr stark darauf hin, dass das System die App zwangsweise geschlossen hat, ohne dieser die Möglichkeit zu geben, sich selbst neu zu starten.
-\n
-\nAuf den meisten Geräten existieren einige Optionen, welche dieses Verhalten seitens des System verhindern, mindestens aber verzögern können.
-\nSo kannst du zum Beispiel in den Systemeinstellungen die Batterieoptimierungen für Nebulo deaktivieren, oder die App nicht aus der Liste der zuletzt verwendeten Apps entfernen.
-\n
-\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser).</string>
+<string name="dialog_servicekilled_message">Die App hat erkannt, dass sie nach der letzten Ausführung nicht ordnungsgemäß beendet wurde. Dies deutet sehr stark darauf hin, dass das System die App zwangsweise geschlossen hat, ohne dieser die Möglichkeit zu geben, sich selbst neu zu starten. 
+\n 
+\nAuf den meisten Geräten existieren einige Optionen, welche dieses Verhalten seitens des System verhindern, mindestens aber verzögern können. 
+\nSo kannst du zum Beispiel in den Systemeinstellungen die Batterieoptimierungen für Nebulo deaktivieren, oder die App nicht aus der Liste der zuletzt verwendeten Apps entfernen. 
+\n 
+\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser). Klicke auf Einstellungen um in ein Menü zu kommen, wo die die Batterieoptimierungen für Nebulo deaktivieren kannst.</string>
     <string name="dialog_servicekilled_more_info">Mehr Informationen</string>
 <plurals name="dialog_excludedapps_infotext">
 	<item quantity="one">%1d App ist standardmäßig ausgewählt und kann nicht abgewählt werden</item>
@@ -184,4 +186,5 @@
     <string name="dialog_exportdnsrules_nonwhitelist">Exportiere normale Regeln</string>
     <string name="dialog_raterequest_title">Bist du mit Nebulo zufrieden\?</string>
     <string name="dialog_raterequest_message">Würdest du dir einen Moment Zeit nehmen die App im Store zu bewerten, wenn du mit ihr zufrieden bist\?</string>
+<string name="dialog_vpn_permission_denied_message">Das System hat es Nebulo untersagt, den Dummy-VPN zu starten. Bitte öffne die App und gewähre dieses Recht durch Klicken auf den Startknopf.</string>
 </resources>

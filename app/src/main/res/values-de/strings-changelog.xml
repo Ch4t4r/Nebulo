@@ -117,4 +117,8 @@
     <string name="changelog_build_52_1">Die DNS Regeln können nun CNAME-Cloaking verhindern</string>
     <string name="changelog_build_52_2">Fehler behoben, durch welchen DoH Server mit mehreren Schrägstrichen (/) nicht richtig übernommen wurden</string>
     <string name="changelog_build_52_3">Einen Fehler behoben, welcher selten auftrat, wenn das Anfragenlogging aktiv ist</string>
+    <string name="changelog_build_54_1">Fehler behoben, durch den einige VoIP Anwendungen nicht verbunden haben</string>
+    <string name="changelog_build_54_2">Das Erstellen eines Server-Shortcuts erlaubt es nun, einen Eintrag aus der Liste zu wählen</string>
+    <string name="changelog_build_54_3">Fehler behoben, bei welchen nach dem Leeren der Anfragen der Export-Zähler nicht zurückgesetzt wurde</string>
+    <string name="changelog_build_54_4">Das Anfragenprotokoll lädt die Anfragen nun in Blöcken, statt alle auf einmal</string>
     </resources>
