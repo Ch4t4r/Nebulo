@@ -93,14 +93,16 @@
     <string name="dialog_clearqueries_message">Weet u zeker dat u de geregistreerde zoekopdrachten wilt wissen\? Dit kan niet worden teruggedraaid.</string>
 
     <string name="dialog_credits_title">Dankwoord</string>
-    <string name="dialog_credits_message" formatted="true">- App-icoon door &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;. 
+    <string name="dialog_credits_message" formatted="true">"- App-icoon door &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;. 
 \n- Turkse vertaling door Kemal Oktay Aktoğan 
 \n- Russische vertaling door bruleto 
 \n- Nederlandse vertaling door Bas Koedijk 
-\n- Portugese vertaling door Rafael W. Bohnenberger
-\n- Indonesische vertaling door Gloeyisk
-\n
-\nWil je je naam hier zien\? Aarzel niet om &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt; een bijdrage te leveren &lt;/a&gt;.</string>
+\n- Portugese vertaling door Rafael W. 
+\n  Bohnenberger 
+\n- Indonesische vertaling door Gloeyisk - Enkele 
+\n  pictogrammen van Font Awesome
+\n 
+\nWil je je naam hier zien\? Aarzel niet om &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt; een bijdrage te leveren &lt;/a&gt;."</string>
 
     <string name="dialog_join_group_title">Word lid van de community</string>
     <string name="dialog_join_group_message">Hallo daar!
