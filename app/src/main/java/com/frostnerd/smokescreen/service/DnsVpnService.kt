@@ -765,6 +765,7 @@ class DnsVpnService : VpnService(), Runnable {
                 mgr.getLinkProperties(activeNetwork)?.domains?.takeIf {
                     it.isNotEmpty()
                 }?.split(",")?.forEach {
+                    log("Adding search domain '$it' to VPN")
                     builder.addSearchDomain(it)
                 }
             } catch (ex:Exception) {

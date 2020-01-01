@@ -197,7 +197,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
         "logging_enabled",
         !AppSettings.isReleaseVersion
     )
-    fun shouldLogDnsQueriesToConsole():Boolean = loggingEnabled && (!AppSettings.isReleaseVersion || advancedLogging)
+    fun shouldLogDnsQueriesToConsole():Boolean = loggingEnabled && (!AppSettings.isReleaseVersion || advancedLogging || BuildConfig.DEBUG)
     var advancedLogging:Boolean by booleanPref(
         "advanced_logging",
         false
