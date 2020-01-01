@@ -16,8 +16,10 @@ import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.dnstunnelproxy.QueryListener
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.general.CombinedIterator
 import com.frostnerd.general.service.isServiceRunning
@@ -162,6 +164,9 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
+        AbstractHttpsDNSHandle // Loads the known servers.
+        AbstractTLSDnsHandle
+        KnownDnsServers
         if (getPreferences().vpnServiceState == VpnServiceState.STARTED &&
             !getPreferences().ignoreServiceKilled &&
             getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE
