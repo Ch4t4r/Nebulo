@@ -120,5 +120,5 @@
     <string name="changelog_build_54_1">Probleem opgelost waarbij VoIP-apps geen verbinding konden maken wanneer Nebulo actief is</string>
     <string name="changelog_build_54_2">Als u nu een server snelkoppeling maakt, kunt u er een uit de lijst selecteren</string>
     <string name="changelog_build_54_3">Een fout opgelost waarbij de export teller niet werd gereset nadat de aanvragen waren gewist</string>
-    <string name="changelog_build_54_4">Het DNS-verzoek logboek laadt de aanvragen nu in blokken in plaats van allemaal tegelijk</string>
+    <string name="changelog_build_55_4">Het DNS-verzoek logboek laadt de aanvragen nu in blokken in plaats van allemaal tegelijk</string>
     </resources>

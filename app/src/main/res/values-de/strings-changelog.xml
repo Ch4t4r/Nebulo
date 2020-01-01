@@ -120,5 +120,5 @@
     <string name="changelog_build_54_1">Fehler behoben, durch den einige VoIP Anwendungen nicht verbunden haben</string>
     <string name="changelog_build_54_2">Das Erstellen eines Server-Shortcuts erlaubt es nun, einen Eintrag aus der Liste zu wählen</string>
     <string name="changelog_build_54_3">Fehler behoben, bei welchen nach dem Leeren der Anfragen der Export-Zähler nicht zurückgesetzt wurde</string>
-    <string name="changelog_build_54_4">Das Anfragenprotokoll lädt die Anfragen nun in Blöcken, statt alle auf einmal</string>
+    <string name="changelog_build_55_4">Das Anfragenprotokoll lädt die Anfragen nun in Blöcken, statt alle auf einmal</string>
     </resources>
