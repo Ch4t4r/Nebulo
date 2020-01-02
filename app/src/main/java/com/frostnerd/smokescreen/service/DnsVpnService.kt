@@ -16,8 +16,10 @@ import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.dnstunnelproxy.QueryListener
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.general.CombinedIterator
 import com.frostnerd.general.service.isServiceRunning
@@ -44,10 +46,12 @@ import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
+import java.lang.Exception
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
 import java.net.UnknownHostException
+import java.util.*
 import java.util.concurrent.TimeoutException
 import kotlin.coroutines.CoroutineContext
 import kotlin.math.floor
@@ -85,7 +89,6 @@ class DnsVpnService : VpnService(), Runnable {
     private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
     private var pauseNotificationAction: NotificationCompat.Action? = null
-    private var queryCountOffset: Long = 0
     private var packageBypassAmount = 0
     private var connectedToANetwork: Boolean? = null
     private var lastScreenOff: Long? = null
@@ -94,6 +97,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var simpleNotification = getPreferences().simpleNotification
     private var lastVPNStopTime:Long? = null
     private val coroutineScope:CoroutineContext = SupervisorJob()
+    private var queryCount = 0
     private val addressResolveScope:CoroutineScope by lazy {
         CoroutineScope(newSingleThreadContext("service-resolve-retry"))
     }
@@ -161,6 +165,9 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onCreate() {
         super.onCreate()
+        AbstractHttpsDNSHandle // Loads the known servers.
+        AbstractTLSDnsHandle
+        KnownDnsServers
         if (getPreferences().vpnServiceState == VpnServiceState.STARTED &&
             !getPreferences().ignoreServiceKilled &&
             getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE
@@ -395,16 +402,16 @@ class DnsVpnService : VpnService(), Runnable {
             )
             notificationBuilder.addAction(pauseNotificationAction)
         }
-        updateNotification(0)
+        updateNotification()
         log("Notification created and posted.")
     }
 
-    private fun updateNotification(queryCount: Int? = null) {
+    private fun updateNotification() {
         if(!simpleNotification) {
-            if (queryCount != null) notificationBuilder.setSubText(
+            notificationBuilder.setSubText(
                 getString(
                     R.string.notification_main_subtext,
-                    queryCount + queryCountOffset
+                    queryCount
                 )
             )
         }
@@ -495,7 +502,7 @@ class DnsVpnService : VpnService(), Runnable {
             log("Checking whether The VPN is prepared")
             if (prepare(this) != null) {
                 log("The VPN isn't prepared, stopping self and starting Background configure")
-                updateNotification(0)
+                updateNotification()
                 stopForeground(true)
                 destroy()
                 stopSelf()
@@ -510,7 +517,7 @@ class DnsVpnService : VpnService(), Runnable {
                         setServerConfiguration(intent)
                         setNotificationText()
                     }
-                    updateNotification(0)
+                    updateNotification()
                     establishVpn()
                 }
             }
@@ -655,7 +662,7 @@ class DnsVpnService : VpnService(), Runnable {
             }
             establishVpn()
             setNotificationText()
-            updateNotification(0)
+            updateNotification()
         } else {
             log("VpnService isn't prepared, launching BackgroundVpnConfigureActivity.")
             BackgroundVpnConfigureActivity.prepareVpn(
@@ -672,7 +679,6 @@ class DnsVpnService : VpnService(), Runnable {
         log("Destroying the VPN")
         if (isStoppingCompletely || connectedToANetwork == true) hideNoConnectionNotification()
         if (!destroyed) {
-            queryCountOffset += currentTrafficStats?.packetsReceivedFromDevice ?: 0
             vpnProxy?.stop()
             fileDescriptor?.close()
             addressResolveScope.cancel()
@@ -754,12 +760,24 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val activeNetwork =
-                (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetwork
-            log("Current active network: $activeNetwork")
-        }
         val builder = Builder()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val mgr =
+                getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork =
+                mgr.activeNetwork
+            log("Current active network: $activeNetwork")
+            if(activeNetwork != null) try {
+                mgr.getLinkProperties(activeNetwork)?.domains?.takeIf {
+                    it.isNotEmpty()
+                }?.split(",")?.forEach {
+                    log("Adding search domain '$it' to VPN")
+                    builder.addSearchDomain(it)
+                }
+            } catch (ex:Exception) {
+                log("Failure when setting search domains of network: $ex")
+            }
+        }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             builder.setMetered(false)
         }
@@ -776,10 +794,6 @@ class DnsVpnService : VpnService(), Runnable {
         val allowIpv4Traffic = useIpv4 || getPreferences().allowIpv4Traffic
         val allowIpv6Traffic = useIpv6 || getPreferences().allowIpv6Traffic
 
-        val dummyServerIpv4 = getPreferences().dummyDnsAddressIpv4
-        val dummyServerIpv6 = getPreferences().dummyDnsAddressIpv6
-        log("Dummy address for Ipv4: $dummyServerIpv4")
-        log("Dummy address for Ipv6: $dummyServerIpv6")
         log("Using IPv4: $useIpv4 (device has IPv4: $deviceHasIpv4), Ipv4 Traffic allowed: $allowIpv4Traffic")
         log("Using IPv6: $useIpv6 (device has IPv6: $deviceHasIpv6), Ipv6 Traffic allowed: $allowIpv6Traffic")
         log("DHCP Dns servers: $dhcpDnsServer")
@@ -847,9 +861,14 @@ class DnsVpnService : VpnService(), Runnable {
             }
         } else log("Not intercepting traffic towards known DNS servers.")
         builder.setSession(getString(R.string.app_name))
+
+
         if (useIpv4) {
-            builder.addDnsServer(dummyServerIpv4)
-            builder.addRoute(dummyServerIpv4, 32)
+            serverConfig.getAllDnsIpAddresses(true, false).forEach {
+                log("Adding $it as dummy DNS server address")
+                builder.addDnsServer(it)
+                builder.addRoute(it, 32)
+            }
             if(catchKnownDnsServers) dhcpDnsServer.forEach {
                 if (it is Inet4Address) {
                     builder.addRoute(it, 32)
@@ -858,8 +877,11 @@ class DnsVpnService : VpnService(), Runnable {
         } else if (deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
 
         if (useIpv6) {
-            builder.addDnsServer(dummyServerIpv6)
-            builder.addRoute(dummyServerIpv6, 128)
+            serverConfig.getAllDnsIpAddresses(false, true).forEach {
+                log("Adding $it as dummy DNS server address")
+                builder.addDnsServer(it)
+                builder.addRoute(it, 128)
+            }
             if(catchKnownDnsServers) dhcpDnsServer.forEach {
                 if (it is Inet6Address) {
                     builder.addRoute(it, 128)
@@ -950,38 +972,57 @@ class DnsVpnService : VpnService(), Runnable {
         log("Starting with config: $serverConfig")
 
         log("Creating handle.")
-        val handle: DnsHandle
-        if (serverConfig.httpsConfiguration != null) {
-            handle = ProxyHttpsHandler(
-                serverConfig.httpsConfiguration!!,
+        var defaultHandle: DnsHandle? = null
+        val handles = mutableListOf<DnsHandle>()
+        val ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
+        val ipv4Enabled = !ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
+
+        serverConfig.httpsConfiguration?.forEach {
+            val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
+            log("Creating handle for DoH $it with IP-Addresses $addresses")
+            val handle = ProxyHttpsHandler(
+                addresses,
+                listOf(it),
                 connectTimeout = 20000,
                 queryCountCallback = {
-                    if(!simpleNotification) {
+                    if (!simpleNotification) {
                         setNotificationText()
-                        updateNotification(it)
+                        queryCount++
+                        updateNotification()
                     }
                 },
                 mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
             )
-        } else {
-            handle = ProxyTlsHandler(serverConfig.tlsConfiguration!!,
+            handle.ipv4Enabled = ipv4Enabled
+            handle.ipv6Enabled = ipv6Enabled
+            if (defaultHandle == null) defaultHandle = handle
+            else handles.add(handle)
+        }
+        serverConfig.tlsConfiguration?.forEach {
+            val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
+            log("Creating handle for DoH $it with IP-Addresses $addresses")
+            val handle = ProxyTlsHandler(
+                addresses,
+                listOf(it),
                 connectTimeout = 2000,
                 queryCountCallback = {
-                    if(!simpleNotification) {
+                    if (!simpleNotification) {
                         setNotificationText()
-                        updateNotification(it)
+                        queryCount++
+                        updateNotification()
                     }
-                }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock)
+                }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
+            )
+            handle.ipv4Enabled = ipv4Enabled
+            handle.ipv6Enabled = ipv6Enabled
+            if (defaultHandle == null) defaultHandle = handle
+            else handles.add(handle)
         }
-        log("Handle created, creating DNS proxy")
-        handle.ipv6Enabled =
-            getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
-        handle.ipv4Enabled =
-            !handle.ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
+        log("Creating DNS proxy with ${1 + handles.size} handles")
 
         dnsProxy = SmokeProxy(
-            handle,
-            createProxyBypassHandlers(),
+            defaultHandle!!,
+            handles + createProxyBypassHandlers(),
             createDnsCache(),
             createQueryLogger(),
             createLocalResolver()
@@ -1195,6 +1236,31 @@ data class DnsServerConfiguration(
     val httpsConfiguration: List<ServerConfiguration>?,
     val tlsConfiguration: List<TLSUpstreamAddress>?
 ) {
+
+    fun getAllDnsIpAddresses(ipv4:Boolean, ipv6:Boolean):List<String> {
+        val ips = mutableListOf<String>()
+        httpsConfiguration?.forEach { ips.addAll(getIpAddressesFor(ipv4, ipv6, it)) }
+        tlsConfiguration?.forEach { ips.addAll(getIpAddressesFor(ipv4, ipv6, it)) }
+        return ips
+    }
+
+    fun getIpAddressesFor(ipv4:Boolean, ipv6:Boolean, config:ServerConfiguration):List<String> {
+        if(httpsConfiguration.isNullOrEmpty() || config !in httpsConfiguration) return emptyList()
+        val index = httpsConfiguration.indexOf(config) + 100
+        val list = mutableListOf<String>()
+        if(ipv4) list.add("203.0.113." + String.format(Locale.ROOT,"%03d", index))
+        if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format(Locale.ROOT, "%02x", index))
+        return list
+    }
+
+    fun getIpAddressesFor(ipv4:Boolean, ipv6:Boolean, address:TLSUpstreamAddress):List<String> {
+        if(tlsConfiguration.isNullOrEmpty() || address !in tlsConfiguration) return emptyList()
+        val index = tlsConfiguration.indexOf(address) + 1
+        val list = mutableListOf<String>()
+        if(ipv4) list.add("203.0.113." + String.format(Locale.ROOT, "%03d", index))
+        if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format(Locale.ROOT, "%02x", index))
+        return list
+    }
 
     fun forEachAddress(block: (isHttps: Boolean, UpstreamAddress) -> Unit) {
         httpsConfiguration?.forEach {

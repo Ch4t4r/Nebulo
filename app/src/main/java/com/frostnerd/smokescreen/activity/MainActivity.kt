@@ -8,6 +8,7 @@ import android.net.*
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.frostnerd.dnstunnelproxy.KnownDnsServers
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.general.service.isServiceRunning
@@ -67,6 +68,7 @@ class MainActivity : NavigationDrawerActivity() {
         super.onCreate(savedInstanceState)
         AbstractHttpsDNSHandle // Loads the known servers.
         AbstractTLSDnsHandle
+        KnownDnsServers
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             val update = {

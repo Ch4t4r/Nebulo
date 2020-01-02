@@ -27,15 +27,15 @@ import java.net.InetAddress
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ProxyHttpsHandler(
+    val ownAddresses:List<String>,
     serverConfigurations: List<ServerConfiguration>,
     connectTimeout: Long,
-    val queryCountCallback: ((queryCount: Int) -> Unit)? = null,
+    val queryCountCallback: (() -> Unit)? = null,
     val mapQueryRefusedToHostBlock:Boolean
 ) :
     AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
     override val handlesSpecificRequests: Boolean = ProxyBypassHandler.knownSearchDomains.isNotEmpty()
     private val dummyUpstreamAddress = UpstreamAddress(AddressCreator.fromHostAddress("0.0.0.0"), 1)
-    private var queryCount = 0
 
     override fun name(): String {
         return "ProxyHttpsHandler"
@@ -49,12 +49,6 @@ class ProxyHttpsHandler(
             }
         } else true
     }
-
-    constructor(
-        serverConfiguration: ServerConfiguration,
-        connectTimeout: Long,
-        mapQueryRefusedToHostBlock:Boolean
-    ) : this(listOf(serverConfiguration), connectTimeout, mapQueryRefusedToHostBlock = mapQueryRefusedToHostBlock)
 
     override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
         return if(dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED) {
@@ -76,11 +70,11 @@ class ProxyHttpsHandler(
     }
 
     override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
-        queryCountCallback?.invoke(++queryCount)
+        queryCountCallback?.invoke()
         return dummyUpstreamAddress
     }
 
-    override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = true
+    override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = ownAddresses.any { it.equals(destinationAddress.hostAddress, true) }
 
     override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean =
         mapQueryRefusedToHostBlock
