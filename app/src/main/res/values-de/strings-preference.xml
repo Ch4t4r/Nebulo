@@ -77,7 +77,7 @@
     <string name="summary_enable_logging">Aktiviert die Protokollierung von Testdaten (enthält ausgeführte Aktionen in der App und statistische Daten). Diese Protokolle werden niemals automatisch verschickt.</string>
 
     <string name="title_send_logs">Protokolle verschicken</string>
-    <string name="summary_send_logs">Klicke hier, wenn du die Protokolle dem Entwickler schicken willst.</string>
+    <string name="summary_send_logs">Klicke hier, wenn du die Protokolle dem Entwickler schicken willst</string>
 
     <string name="title_delete_all_logs">Alle Protokolle löschen</string>
     <string name="summary_delete_all_logs">Lösche alle auf deinem Gerät gespeicherten Protokolle.</string>
