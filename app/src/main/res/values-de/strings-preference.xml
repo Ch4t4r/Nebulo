@@ -5,13 +5,13 @@
     <string name="summary_theme">Setzt das Aussehen der App</string>
 
     <string name="title_start_on_boot">Nach Gerätestart starten</string>
-    <string name="summary_start_on_boot">Starte die App automatisch wenn das Gerät gestartet wird</string>
+    <string name="summary_start_on_boot">Starte die App automatisch, wenn das Gerät gestartet wird</string>
 
     <string name="title_start_after_update">Nach Update starten</string>
-    <string name="summary_start_after_update">Starte die App automatisch, nachdem diese geupdated wurde</string>
+    <string name="summary_start_after_update">Starte die App automatisch, nachdem diese upgedated wurde</string>
 
     <string name="title_excluded_apps">DoH/DoT Apps</string>
-    <string name="summary_excluded_apps">Wähle hier aus, welche Apps DoH/DoT benutzen sollen und welche nicht. Dies sollte zum Beispiel gemacht werden, wenn diese keine Internetverbindung haben.</string>
+    <string name="summary_excluded_apps">Wähle hier aus, welche Apps DoH/DoT benutzen sollen und welche nicht. Dies sollte zum Beispiel gemacht werden, wenn diese keine Internetverbindung haben</string>
 
 
 
@@ -36,7 +36,7 @@
     <string name="summary_preference_enable_pin">Frage beim Öffnen oder Beenden der App nach der PIN</string>
 
     <string name="title_preference_pin_use_fingerprint">Fingerabdruck erlauben</string>
-    <string name="summary_preference_pin_use_fingerprint">Erlaube es, statt der PIN einen der auf dem Gerät genutzten Fingerabdrücke zu nutzen.</string>
+    <string name="summary_preference_pin_use_fingerprint">Erlaube es, statt der PIN einen der auf dem Gerät genutzten Fingerabdrücke zu nutzen</string>
 
     <string name="title_preference_change_pin">PIN ändern</string>
     <string name="summary_preference_change_pin">Klicke hier um die PIN zu ändern. Es sind nur Zahlen erlaubt.
@@ -45,9 +45,9 @@
     <string name="preference_category_cache">DNS Zwischenspeicher (Cache)</string>
 
     <string name="title_dnscache_enabled">Benutze den DNS Zwischenspeicher</string>
-    <string name="summary_dnscache_enabled">Aktiviert den DNS Zwischenspeicher. Dieser merkt sich alte DNS Anfragen, um diese in der Zukunft schneller zu beantworten.
+    <string name="summary_dnscache_enabled">Aktiviert den DNS Zwischenspeicher. Er merkt sich alte DNS Anfragen, um diese in der Zukunft schneller zu beantworten.
 \n
-\nDas System hat bereits einen Cache, aktiviere diese Einstellung, wenn du das Verhalten anpassen willst.</string>
+\nDas System hat bereits einen Cache. Aktiviere diese Einstellung, wenn du das Verhalten anpassen willst</string>
 
     <string name="title_dnscache_keepacrosslaunches">Zwischenspeicher abspeichern</string>
     <string name="summary_dnscache_keepacrosslaunches">Speichere den DNS Zwischenspeicher mit Beenden der App ab</string>
@@ -59,14 +59,14 @@
     <string name="summary_dnscache_usedefaulttimes">Speichere DNS Anfragen solange im Cache, wie es der DNS Server (anhand der TTL) empfiehlt</string>
 
     <string name="title_dnscache_minimum_cache_time">Minimale Aufbewahrungszeit</string>
-    <string name="summary_dnscache_minimum_cache_time">Die minimale Aufbewahrungszeit im Zwischenspeicher, egal, ob die Standardaufbewahrungszeit kürzer wäre. Lange Aufbewahrungszeiten könnten dazu führen, dass die Daten im Zwischenspeicher veraltet sind.
+    <string name="summary_dnscache_minimum_cache_time">Die minimale Aufbewahrungszeit im Zwischenspeicher. Egal, ob die Standardaufbewahrungszeit kürzer wäre. Lange Aufbewahrungszeiten könnten dazu führen, dass die Daten im Zwischenspeicher veraltet sind. 
 \nAktuell: %1d Sekunden.</string>
 
     <string name="title_dnscache_customcachetime">Eigene Aufbewahrungszeit</string>
-    <string name="summary_dnscache_customcachetime">Ändert für jede Anfrage wie lange diese zwischengespeichert wird, egal, ob die Standardaufbewahrungszeit kürzer wäre. Lange Aufbewahrungszeiten könnten dazu führen, dass die Daten im Zwischenspeicher veraltet sind
+    <string name="summary_dnscache_customcachetime">Ändert für jede Anfrage, wie lange diese zwischengespeichert wird. Egal, ob die Standardaufbewahrungszeit kürzer wäre. Lange Aufbewahrungszeiten könnten dazu führen, dass die Daten im Zwischenspeicher veraltet sind 
 \nAktuell: %1d Sekunden.</string>
 
-    <string name="title_dnscache_nxdomaincachetime">Aufbewahrungszeit für nicht-existente Domains</string>
+    <string name="title_dnscache_nxdomaincachetime">Aufbewahrungszeit für nicht existente Domains</string>
     <string name="summary_dnscache_nxdomaincachetime">Setzt die Zeit, wie lange Anfragen für nicht existente Domains gespeichert werden sollen. Dies erhöht die Performance, zum Beispiel wenn bestimmte Anfragen blockiert werden
 \nAktuell: %1d Sekunden.</string>
 
@@ -74,13 +74,13 @@
     <string name="preference_category_logging">Protokollierung</string>
 
     <string name="title_enable_logging">Protokollierung aktivieren</string>
-    <string name="summary_enable_logging">Aktiviert die Protokollierung von Testdaten (enthält ausgeführte Aktionen in der App und statistische Daten). Diese Protokolle werden niemals automatisch verschickt.</string>
+    <string name="summary_enable_logging">Aktiviert die Protokollierung von Testdaten (enthält ausgeführte Aktionen in der App und statistische Daten). Diese Protokolle werden niemals automatisch verschickt</string>
 
     <string name="title_send_logs">Protokolle verschicken</string>
     <string name="summary_send_logs">Klicke hier, wenn du die Protokolle dem Entwickler schicken willst</string>
 
     <string name="title_delete_all_logs">Alle Protokolle löschen</string>
-    <string name="summary_delete_all_logs">Lösche alle auf deinem Gerät gespeicherten Protokolle.</string>
+    <string name="summary_delete_all_logs">Lösche alle auf deinem Gerät gespeicherten Protokolle</string>
 
     <string name="preference_category_ip">IP Einstellungen</string>
 
@@ -91,18 +91,18 @@
     <string name="summary_enable_ipv4">Benutze IPv4, falls das Gerät eine IPv4-Adresse hat</string>
 
     <string name="title_force_ipv6">IPv6 erzwingen</string>
-    <string name="summary_force_ipv6">Zwinge die App IPv6 Anfragen zu akzeptieren, auch wenn das Gerät IPv6 nicht nutzt.</string>
+    <string name="summary_force_ipv6">Zwinge die App, IPv6 Anfragen zu akzeptieren - auch wenn das Gerät IPv6 nicht nutzt</string>
 
     <string name="title_force_ipv4">IPv4 erzwingen</string>
-    <string name="summary_force_ipv4">Zwinge die App IPv4 Anfragen zu akzeptieren, auch wenn das Gerät IPv4 nicht nutzt.</string>
+    <string name="summary_force_ipv4">Zwinge die App IPv4 Anfragen zu akzeptieren, auch wenn das Gerät IPv4 nicht nutzt</string>
 
     <string name="title_allow_ipv4_traffic">IPv4 Traffic erlauben</string>
-    <string name="summary_allow_ipv4_traffic">Erlaube IPv4 systemweit, auch wenn IPv4 hier deaktiviert ist.
-\nWenn nicht erlaubt, sind keine IPv4 Verbindungen möglich, solange die App läuft.</string>
+    <string name="summary_allow_ipv4_traffic">Erlaube IPv4 systemweit, auch wenn IPv4 hier deaktiviert ist. 
+\nWenn nicht erlaubt, sind keine IPv4 Verbindungen möglich, solange die App läuft</string>
 
     <string name="title_allow_ipv6_traffic">IPv6 Traffic erlauben</string>
-    <string name="summary_allow_ipv6_traffic">Erlaube IPv6 systemweit, auch wenn IPv6 hier deaktiviert ist.
-\nWenn nicht erlaubt, sind keine IPv6 Verbindungen möglich, solange die App läuft.</string>
+    <string name="summary_allow_ipv6_traffic">Erlaube IPv6 systemweit, auch wenn IPv6 hier deaktiviert ist. 
+\nWenn nicht erlaubt, sind keine IPv6 Verbindungen möglich, solange die App läuft</string>
 
 
     <string name="preference_category_network">Netzwerk</string>
@@ -111,15 +111,15 @@
     <string name="summary_disallow_other_vpns">Erlaube es nicht, andere VPNs zu starten, solange die App nicht explizit gestoppt wurde</string>
 
     <string name="title_bypass_searchdomains">Suchdomain-Umgehung</string>
-    <string name="summary_bypass_searchdomains">Sende Suchdomains (z.B. MyPC.local oder MyPc.fritz.box) zu dem DNS server deines aktuellen Netzwerkes, anstatt zum konfigurierten DNS server.
-\nDies wird ausdrücklich empfohlen. Diese Anfragen verlassen dein Netzwerk nicht.</string>
+    <string name="summary_bypass_searchdomains">Sende Suchdomains (z.B. MyPC.local oder MyPc.fritz.box) zu dem DNS Server deines aktuellen Netzwerkes, anstatt zum konfigurierten DNS Server. 
+\nDies wird ausdrücklich empfohlen. Diese Anfragen verlassen dein Netzwerk nicht</string>
 
     <string name="title_pause_on_captiveportal">Bei Anmeldeportal pausieren</string>
-    <string name="summary_pause_on_captiveportal">Leite DNS Anfragen nicht an den konfigurierten Server weiter, wenn eine Anmeldung im Netzerk benötigt wird. Die Weiterleitung wird kurz nach der Anmeldung automatisch vorgesetzt.
-\nDas Deaktivieren dieser Option macht es möglicherweise nicht möglich, die Anmeldeseite zu öffnen.</string>
+    <string name="summary_pause_on_captiveportal">Leite DNS Anfragen nicht an den konfigurierten Server weiter, wenn eine Anmeldung im Netzerk benötigt wird. Die Weiterleitung wird kurz nach der Anmeldung automatisch vorgesetzt. 
+\nDas Deaktivieren dieser Option macht es möglicherweise nicht möglich, die Anmeldeseite zu öffnen</string>
 
     <string name="title_show_noconnection_notification">Benachrichtigung bei keiner Verbindung</string>
-    <string name="summary_show_noconnection_notification">Zeige eine Benachrichtigung, wenn die App keine, oder nur eine schlechte Verbindung hat</string>
+    <string name="summary_show_noconnection_notification">Zeige eine Benachrichtigung, wenn die App keine oder nur eine schlechte Verbindung hat</string>
 
 
     <string name="preference_category_querylogging">Anfragenspeicherung</string>
@@ -131,34 +131,34 @@
     <string name="summary_export_queries">Exportiere Anfragen als CSV (%1d Anfragen)</string>
 
     <string name="title_delete_queries">Anfragen leeren</string>
-    <string name="summary_delete_queries">Klicke hier, um alle gespeicherten Anfragen zu löschen.</string>
+    <string name="summary_delete_queries">Klicke hier, um alle gespeicherten Anfragen zu löschen</string>
 <string name="title_catch_other_dns_servers">Anderen DNS-Traffic abfangen</string>
     <string name="summary_catch_other_dns_servers">Fange den Traffic von bekannten DNS Servern ab und leite ihn durch Nebulo sicher weiter</string>
 
     <string name="title_advanced_logging">Erweiterte Protokollierung</string>
-    <string name="summary_advanced_logging">Fügt mehr Protokollierung hinzu, was bei persistenteren Problemen unterstützen kann.</string>
+    <string name="summary_advanced_logging">Fügt mehr Protokollierung hinzu, was bei persistenteren Problemen unterstützen kann</string>
 
     <string name="title_language">Sprache</string>
     <string name="summary_language">Ändere die Sprache der App</string>
 
     <string name="title_map_query_refused">Abgelehnte Anfragen als geblockte Hosts in­ter­pre­tie­ren</string>
-    <string name="summary_map_query_refused">Einige DNS Server lehnen möglicherweise die Bearbeitung einer Anfrage ab, wenn der Host blockiert ist. Diese Einstellung blockiert den Host, wenn die Anfrage abgelehnt wird, da das System sonst eventuell verwirrt wird.</string>
+    <string name="summary_map_query_refused">Einige DNS Server lehnen möglicherweise die Bearbeitung einer Anfrage ab, wenn der Host blockiert ist. Diese Einstellung blockiert den Host, wenn die Anfrage abgelehnt wird, da das System sonst eventuell verwirrt wird</string>
 
     <string name="title_simple_notification">Simple Benachrichtigung</string>
     <string name="summary_simple_notification">Zeige eine simplifizierte Benachrichtigung</string>
 
     <string name="title_clear_dnscache">DNS Cache leeren</string>
     <string name="title_crashreporting_type">Automatische Absturzmeldungen</string>
-    <string name="summary_crashreporting_type">Stelle ein, was für Daten bei einem Absturz automatisch an den Entwickler geschickt werden sollen. Absturzdaten enthalten niemals persönliche Daten und helfen dabei, Probleme schneller zu beheben.</string>
+    <string name="summary_crashreporting_type">Stelle ein, was für Daten bei einem Absturz automatisch an den Entwickler geschickt werden sollen. Absturzdaten enthalten niemals persönliche Daten und helfen dabei, Probleme schneller zu beheben</string>
 
 
-    <string name="crashreporting_type_full">Komplett (Sende statistische &amp; debug Daten)</string>
-    <string name="crashreporting_type_minimal">Minimal (Sende nur Android &amp; App Version)</string>
-    <string name="crashreporting_type_off">Aus (Sende keine Abstürze)</string>
-    <string name="summary_clear_dnscache">Klicke hier um den DNS Cache zu leeren, zum Beispiel wenn Webseiten nicht mehr richtig funktionieren, da sie gecached sind.</string>
+    <string name="crashreporting_type_full">Komplett (sende statistische &amp; debug Daten)</string>
+    <string name="crashreporting_type_minimal">Minimal (sende nur Android &amp; App Version)</string>
+    <string name="crashreporting_type_off">Aus (sende keine Abstürze)</string>
+    <string name="summary_clear_dnscache">Klicke hier, um den DNS Cache zu leeren. Zum Beispiel, wenn Webseiten nicht mehr richtig funktionieren, da sie gecached sind</string>
 
     <string name="title_restart_vpn_on_networkchange">Bei Netzwechsel neustarten</string>
     <string name="summary_restart_vpn_on_networkchange">Starte die App neu, wenn das Gerät das Netzwerk ändert. Aktiviere dies, wenn du Probleme mit der App hast, wenn du zwischen mehreren Netzwerken wechselst.
-\nDies hat keinen Effekt, wenn die App nicht aktiv ist.</string>
+\nDies hat keinen Effekt, wenn die App nicht aktiv ist</string>
 
     </resources>
