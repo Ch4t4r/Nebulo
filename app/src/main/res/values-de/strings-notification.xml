@@ -44,19 +44,19 @@
     <string name="notification_ruleimportfinished_message">%1d Regeln wurden importiert (%2$d Duplikate ausgelassen)</string>
 <string name="notification_ruleimport_tertiarymessage">Beende Import…</string>
 
-    <string name="notification_ruleexport_title">Dns Regel Export</string>
+    <string name="notification_ruleexport_title">DNS Regel Export</string>
     <string name="notification_ruleexport_message">Exportiere Regeln (%1d/%2d)</string>
     <string name="notification_ruleexport_secondarymessage">Bereite Export vor…</string>
 
-    <string name="notification_ruleexportfinished_title">Dns Regel Export fertiggestellt</string>
-    <string name="notification_ruleexportfinished_message">%1d Regeln wurden exportiert.</string>
+    <string name="notification_ruleexportfinished_title">DNS Regel Export fertiggestellt</string>
+    <string name="notification_ruleexportfinished_message">%1d Regeln wurden exportiert</string>
 <string name="notification_channel_pin">Channel für PIN</string>
     <string name="notification_channel_pin_description">Kanal, welcher für Benachrichtigungen zur PIN benutzt wird, zum Beispiel wenn diese eingegeben werden muss</string>
 
     <string name="notification_pin_title">PIN Eingabe erforderlich</string>
-    <string name="notification_pin_message">Die PIN wird benötigt, um diese Aktion durchzuführen. Klicke hier um die Aktion zu bestätigen.</string>
+    <string name="notification_pin_message">Die PIN wird benötigt, um diese Aktion durchzuführen. Klicke hier, um die Aktion zu bestätigen</string>
 <string name="notification_service_killed_title">Informationen über Batterieoptimierungen</string>
-    <string name="notification_service_killed_message">Es scheint, dass die App vor kurzem vom System gestoppt wurde. Klicke hier, um mehr zu erfahren.</string>
+    <string name="notification_service_killed_message">Es scheint, dass die App vor kurzem vom System gestoppt wurde. Klicke hier, um mehr zu erfahren</string>
     <string name="notification_service_killed_ignore">Ignorieren</string>
 <string name="notification_simple_text">Aktueller Server: %1$s</string>
     </resources>
