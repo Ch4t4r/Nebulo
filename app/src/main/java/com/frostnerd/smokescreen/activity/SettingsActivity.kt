@@ -30,7 +30,10 @@ import com.frostnerd.smokescreen.util.LanguageContextWrapper
 
 class SettingsActivity : BaseActivity() {
     companion object {
+        private var category:Category? = null
+
         fun showCategory(context: Context, category: Category) {
+            this.category = category
             Intent(context, SettingsActivity::class.java).apply {
                 putExtra("category", category)
             }.also {
@@ -52,7 +55,7 @@ class SettingsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         supportFragmentManager.beginTransaction().replace(android.R.id.content, SettingsFragment().apply {
             arguments = Bundle().apply {
-                putSerializable("category", intent.getSerializableExtra("category")!!)
+                putSerializable("category", intent.getSerializableExtra("category") ?: category ?: Category.GENERAL)
             }
         }).commit()
     }
