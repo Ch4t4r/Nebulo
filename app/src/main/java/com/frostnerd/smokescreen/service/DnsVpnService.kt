@@ -3,10 +3,7 @@ package com.frostnerd.smokescreen.service
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
 import android.net.*
 import android.os.*
@@ -98,6 +95,8 @@ class DnsVpnService : VpnService(), Runnable {
     private var lastVPNStopTime:Long? = null
     private val coroutineScope:CoroutineContext = SupervisorJob()
     private var queryCount = 0
+    private var dnsCache:SimpleDnsCache? = null
+    private var localResolver:LocalResolver? = null
     private val addressResolveScope:CoroutineScope by lazy {
         CoroutineScope(newSingleThreadContext("service-resolve-retry"))
     }
@@ -523,6 +522,15 @@ class DnsVpnService : VpnService(), Runnable {
             }
         }
         return if (destroyed) Service.START_NOT_STICKY else Service.START_STICKY
+    }
+
+    override fun onTrimMemory(level: Int) {
+        if(level >= ComponentCallbacks2.TRIM_MEMORY_BACKGROUND ||
+                level == ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL ||
+                level == ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) {
+            dnsCache?.clear()
+            localResolver?.cleanup()
+        }
     }
 
     private fun setServerConfiguration(intent: Intent?) {
@@ -1020,12 +1028,15 @@ class DnsVpnService : VpnService(), Runnable {
         }
         log("Creating DNS proxy with ${1 + handles.size} handles")
 
+        dnsCache = createDnsCache()
+        localResolver = createLocalResolver()
+
         dnsProxy = SmokeProxy(
             defaultHandle!!,
             handles + createProxyBypassHandlers(),
-            createDnsCache(),
+            dnsCache,
             createQueryLogger(),
-            createLocalResolver()
+            localResolver
         )
         log("DnsProxy created, creating VPN proxy")
         vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
