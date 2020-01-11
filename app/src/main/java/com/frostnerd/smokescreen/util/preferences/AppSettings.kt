@@ -182,6 +182,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var hideNotificationIcon: Boolean by booleanPref("hide_notification_icon", false)
     override var allowPauseInNotification: Boolean by booleanPref("notification_allow_pause", true)
     override var allowStopInNotification: Boolean by booleanPref("notification_allow_stop", true)
+    var showNotificationOnRevoked:Boolean by booleanPref("show_vpn_revoked_notification", true)
 
     override var enablePin:Boolean by booleanPref("enable_pin", false)
     override var allowFingerprintForPin:Boolean by booleanPref("pin_allow_fingerprint", true)

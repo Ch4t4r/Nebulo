@@ -742,7 +742,7 @@ class DnsVpnService : VpnService(), Runnable {
             Handler(Looper.getMainLooper()).postDelayed({
                 BackgroundVpnConfigureActivity.prepareVpn(this, userServerConfig)
             }, 250)
-        } else {
+        } else if(getPreferences().showNotificationOnRevoked){
             NotificationCompat.Builder(this, Notifications.getHighPriorityChannelId(this)).apply {
                 setSmallIcon(R.drawable.ic_cloud_warn)
                 setContentTitle(getString(R.string.notification_service_revoked_title))

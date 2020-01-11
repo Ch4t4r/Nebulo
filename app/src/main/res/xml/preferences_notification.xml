@@ -37,5 +37,11 @@
                 android:key="show_no_connection_notification"
                 android:summary="@string/summary_show_noconnection_notification"
                 android:title="@string/title_show_noconnection_notification" />
+
+        <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="show_vpn_revoked_notification"
+                android:summary="@string/summary_show_revoked_notification"
+                android:title="@string/title_show_revoked_notification" />
     </PreferenceCategory>
 </PreferenceScreen>
