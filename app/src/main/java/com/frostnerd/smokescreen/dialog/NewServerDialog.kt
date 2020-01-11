@@ -286,10 +286,9 @@ class NewServerDialog(
     private fun addUrlTextWatcher(input: TextInputLayout, editText: TextInputEditText, emptyAllowed: Boolean) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                val valid =
-                    (emptyAllowed && s.isBlank()) || (dnsOverHttps && SERVER_URL_REGEX.matches(s.toString())) || (!dnsOverHttps && TLS_REGEX.matches(
-                        s.toString()
-                    ))
+                var valid = (emptyAllowed && s.isBlank())
+                valid = valid || (!s.isBlank() && dnsOverHttps && SERVER_URL_REGEX.matches(s.toString()))
+                valid = valid || (!s.isBlank() && !dnsOverHttps && TLS_REGEX.matches(s.toString()))
 
                 input.error = if (valid) {
                     null
