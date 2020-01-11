@@ -55,7 +55,11 @@ class BatteryOptimizationInfoDialog(context: Context) :
                 context.getString(R.string.menu_settings)
             ) { dialog, _ ->
                 dialog.dismiss()
-                context.startActivity(settingsIntent)
+                try {
+                    context.startActivity(settingsIntent)
+                } catch (e: SecurityException) {
+                    Toast.makeText(context, R.string.error_cannot_open_settings, Toast.LENGTH_LONG).show()
+                }
             }
         } else {
             setButton(
