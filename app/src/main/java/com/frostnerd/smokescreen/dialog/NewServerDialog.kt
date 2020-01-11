@@ -292,7 +292,8 @@ class NewServerDialog(
 
                 input.error = if (valid) {
                     null
-                } else context.getString(R.string.error_invalid_url)
+                } else if(dnsOverHttps) context.getString(R.string.error_invalid_url)
+                else context.getString(R.string.error_invalid_host)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
