@@ -93,4 +93,7 @@
     <string name="windows_querylogging_hostsource__unknown">Unbekannt</string>
     <string name="error_webview_missing">Die WebView wurde nicht gefunden, wurde sie entfernt oder updated gerade\?</string>
 
+    <string name="error_invalid_host">Bitte gebe einen validen Host an.</string>
+    <string name="error_cannot_open_settings">Systemeinstellungen können nicht geöffnet werden.</string>
+
     </resources>
