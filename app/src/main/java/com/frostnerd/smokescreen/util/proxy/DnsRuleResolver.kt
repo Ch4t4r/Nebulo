@@ -236,7 +236,13 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
         } ?: throw IllegalStateException()
     }
 
-    override fun cleanup() {}
+    override fun cleanup() {
+        cachedWildcardWhitelisted.clear()
+        cachedNonWildcardWhitelisted.clear()
+        cachedResolved.clear()
+        cachedWildcardResolved.clear()
+        cachedNonIncluded.clear()
+    }
 
     // Handle CNAME Cloaking
     // Does not need to handle whitelist as the query has already been forwarded

@@ -365,5 +365,14 @@
         <item>@string/changelog_build_31_4</item>
     </string-array>
 
+    <string name="changelog_build_58_1">The primary host/url could be empty when adding a server</string>
+    <string name="changelog_build_58_2">A notification is now shown when Nebulo loses permission to the VPN</string>
+    <string-array name="changelog_build_58">
+        <item>Version 1.2.3 (Build 58)</item>
+        <item>@string/changelog_build_58_1</item>
+        <item>@string/changelog_build_58_2</item>
+        <item>@string/changelog_build_31_4</item>
+    </string-array>
+
     <string name="changelog_build_55_4">The query log now loads the queries in chunks instead of all at once</string>
 </resources>

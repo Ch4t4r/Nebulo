@@ -225,19 +225,19 @@ class DnsRuleFragment : Fragment() {
                     notifyRulesChanged()
                 }, editSource = { hostSource ->
                     NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
-
-                        val currentSource = getDatabase().hostSourceDao().findById(hostSource.id)!!.apply {
+                        getDatabase().hostSourceDao().findById(hostSource.id)?.apply {
                             this.name = newSource.name
                             this.source = newSource.source
                             this.whitelistSource = newSource.whitelistSource
-                        }
-                        getDatabase().hostSourceDao().update(currentSource)
+                        }?.also {
+                            getDatabase().hostSourceDao().update(it)
 
-                        val index = sourceAdapterList.indexOf(hostSource).takeIf { it >= 0 } ?: sourceAdapterList.indexOfFirst { it.id == hostSource.id }
-                        sourceAdapterList[index] = currentSource
-                        sourceRuleCount[currentSource] = sourceRuleCount[hostSource]
-                        sourceRuleCount.remove(hostSource)
-                        sourceAdapter.notifyItemChanged(index)
+                            val index = sourceAdapterList.indexOf(hostSource).takeIf { it >= 0 } ?: sourceAdapterList.indexOfFirst { it.id == hostSource.id }
+                            sourceAdapterList[index] = it
+                            sourceRuleCount[it] = sourceRuleCount[hostSource]
+                            sourceRuleCount.remove(hostSource)
+                            sourceAdapter.notifyItemChanged(index)
+                        }
                     }, showFileChooser = { callback ->
                         fileChosenCallback = callback
                         startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {

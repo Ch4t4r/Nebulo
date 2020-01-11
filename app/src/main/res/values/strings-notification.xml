@@ -12,6 +12,9 @@
     <string name="notification_channel_pin">Pin-related channel</string>
     <string name="notification_channel_pin_description">Channel used for notifications related to the pin, i.e. when it has to be provided</string>
 
+    <string name="notification_channel_high_priorty">High priority</string>
+    <string name="notification_channel_high_priorty_description">Channel for high priority notifications for example when the app loses permission to the VPN</string>
+
     <string name="notification_simple_text">Current server: %1$s</string>
     <string name="notification_main_text">Queries are sent to %1$s\n\n%2$d Apps are excluded from DoH/DoT\n%3$d entries in the cache</string>
     <string name="notification_main_text_with_secondary">Queries are sent to %1$s and %2$s\n\n%3$d Apps are excluded from DoH/DoT\n%4$d entries in the cache</string>
@@ -51,4 +54,7 @@
     <string name="notification_service_killed_title">Information about battery optimization</string>
     <string name="notification_service_killed_message">It seems like the app was previously stopped by the system. Click here to learn more.</string>
     <string name="notification_service_killed_ignore">Ignore</string>
+
+    <string name="notification_service_revoked_title">VPN permission revoked by system</string>
+    <string name="notification_service_revoked_message">Click here to restart</string>
 </resources>
