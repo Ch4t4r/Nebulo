@@ -161,4 +161,8 @@
     <string name="summary_restart_vpn_on_networkchange">Starte die App neu, wenn das Gerät das Netzwerk ändert. Aktiviere dies, wenn du Probleme mit der App hast, wenn du zwischen mehreren Netzwerken wechselst.
 \nDies hat keinen Effekt, wenn die App nicht aktiv ist</string>
 
+    <string name="title_show_revoked_notification">Benachrichtigung bei verlorener Berechtigung</string>
+    <string name="summary_show_revoked_notification">Zeige eine Benachrichtigung, wenn Nebulo die Berechtigung für den VPN verliert</string>
+
+
     </resources>
