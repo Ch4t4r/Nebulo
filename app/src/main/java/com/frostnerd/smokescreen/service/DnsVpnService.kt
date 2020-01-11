@@ -742,6 +742,17 @@ class DnsVpnService : VpnService(), Runnable {
             Handler(Looper.getMainLooper()).postDelayed({
                 BackgroundVpnConfigureActivity.prepareVpn(this, userServerConfig)
             }, 250)
+        } else {
+            NotificationCompat.Builder(this, Notifications.getHighPriorityChannelId(this)).apply {
+                setSmallIcon(R.drawable.ic_cloud_warn)
+                setContentTitle(getString(R.string.notification_service_revoked_title))
+                setContentText(getString(R.string.notification_service_revoked_message))
+                setContentIntent(PendingIntent.getActivity(this@DnsVpnService, RequestCodes.RESTART_AFTER_REVOKE, Intent(this@DnsVpnService, BackgroundVpnConfigureActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
+                setAutoCancel(true)
+                priority = NotificationCompat.PRIORITY_HIGH
+            }.build().also {
+                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_SERVICE_REVOKED, it)
+            }
         }
     }
 
@@ -1054,6 +1065,7 @@ class DnsVpnService : VpnService(), Runnable {
         log("VPN proxy started.")
         currentTrafficStats = vpnProxy?.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_SERVICE_REVOKED)
     }
 
     private fun createQueryLogger(): QueryListener? {

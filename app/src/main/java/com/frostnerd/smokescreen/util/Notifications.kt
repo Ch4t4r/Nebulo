@@ -36,6 +36,7 @@ class Notifications {
         const val ID_DNSRULE_EXPORT_FINISHED = 7
         const val ID_PIN = 8
         const val ID_SERVICE_KILLED = 9
+        const val ID_SERVICE_REVOKED = 10
         const val ID_VPN_RESTART = 999
 
 
@@ -104,6 +105,23 @@ class Notifications {
             }
             return "pinchannel"
         }
+
+        fun getHighPriorityChannelId(context: Context):String {
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    "high_priority",
+                    context.getString(R.string.notification_channel_high_priorty),
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+                channel.enableLights(true)
+                channel.enableVibration(true)
+                channel.description = context.getString(R.string.notification_channel_high_priorty)
+                channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+                channel.setBypassDnd(true)
+                (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
+            }
+            return "high_priority"
+        }
     }
 }
 
@@ -120,4 +138,5 @@ object RequestCodes {
     val RULE_EXPORT_ABORT = 8
     val PIN_NOTIFICATION = 9
     val REQUEST_CODE_IGNORE_SERVICE_KILLED = 10
+    val RESTART_AFTER_REVOKE = 11
 }
