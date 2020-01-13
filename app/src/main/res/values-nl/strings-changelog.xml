@@ -121,4 +121,6 @@
     <string name="changelog_build_54_2">Als u nu een server snelkoppeling maakt, kunt u er een uit de lijst selecteren</string>
     <string name="changelog_build_54_3">Een fout opgelost waarbij de export teller niet werd gereset nadat de aanvragen waren gewist</string>
     <string name="changelog_build_55_4">Het DNS-verzoek logboek laadt de aanvragen nu in blokken in plaats van allemaal tegelijk</string>
+    <string name="changelog_build_58_1">De primaire URL kan leeg worden gelaten bij het toevoegen van een server</string>
+    <string name="changelog_build_58_2">Er wordt nu een melding weergegeven wanneer Nebulo de toestemming voor de VPN verliest</string>
     </resources>
