@@ -163,4 +163,8 @@
     <string name="summary_restart_vpn_on_networkchange">Riavvia l\'app silenziosamente quando cambia la rete. Attivala se riscontri problemi quando passi da una rete all\'altra.
 \n Nessun effetto quando l\'app non è attiva.</string>
 
+    <string name="title_show_revoked_notification">Notifica per revoca autorizzazione</string>
+    <string name="summary_show_revoked_notification">Mostra una notifica quando Nebulo perde l\'autorizzazione alla VPN</string>
+
+
     </resources>
