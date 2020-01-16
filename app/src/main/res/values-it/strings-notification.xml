@@ -62,4 +62,9 @@
     <string name="notification_service_killed_message">Sembra che l\'app sia stata precedentemente fermata dal sistema. Clicca qui per informazioni.</string>
     <string name="notification_service_killed_ignore">Ignora</string>
 <string name="notification_simple_text">Server attuale: %1$s</string>
-    </resources>
+    <string name="notification_channel_high_priorty">Alta priorità</string>
+    <string name="notification_channel_high_priorty_description">Canale per notifiche ad alta priorità, ad esempio quando l\'app perde l\'autorizzazione alla VPN</string>
+
+    <string name="notification_service_revoked_title">Autorizzazione VPN revocata dal sistema</string>
+    <string name="notification_service_revoked_message">Clicca qui per riavviare</string>
+</resources>
