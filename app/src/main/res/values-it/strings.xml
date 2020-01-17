@@ -87,4 +87,7 @@
     <string name="windows_querylogging_hostsource__unknown">Sconosciuto</string>
     <string name="error_webview_missing">Pacchetto WebView non trovato, si sta aggiornando o è stato rimosso\?</string>
 
+    <string name="error_invalid_host">Fornisci un host valido.</string>
+    <string name="error_cannot_open_settings">Impossibile aprire le impostazioni di sistema.</string>
+
     </resources>

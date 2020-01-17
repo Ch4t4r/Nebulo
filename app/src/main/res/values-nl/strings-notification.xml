@@ -47,4 +47,9 @@
     <string name="notification_service_killed_message">Het lijkt erop dat de app onlangs is gestopt door het systeem. Klik hier voor meer informatie.</string>
     <string name="notification_service_killed_ignore">Negeren</string>
 <string name="notification_simple_text">Huidige server: %1$s</string>
-    </resources>
+    <string name="notification_channel_high_priorty">Hoge prioriteit</string>
+    <string name="notification_channel_high_priorty_description">Kanaal voor meldingen met hoge prioriteit, bijvoorbeeld wanneer de app de machtiging voor de VPN verliest</string>
+
+    <string name="notification_service_revoked_title">VPN-machtiging ingetrokken door systeem</string>
+    <string name="notification_service_revoked_message">Klik hier om opnieuw te starten</string>
+</resources>

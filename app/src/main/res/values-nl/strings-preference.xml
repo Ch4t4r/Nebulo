@@ -161,4 +161,8 @@
     <string name="summary_restart_vpn_on_networkchange">Start de app opnieuw als het netwerk verandert. Schakel dit in wanneer u problemen ondervindt bij het schakelen tussen netwerken.
 \n Geen effect wanneer de app niet actief is.</string>
 
+    <string name="title_show_revoked_notification">Melding bij verloren autorisatie</string>
+    <string name="summary_show_revoked_notification">Toon een melding wanneer Nebulo de toestemming voor de VPN verliest</string>
+
+
     </resources>

@@ -59,4 +59,9 @@
     <string name="notification_service_killed_message">Es scheint, dass die App vor kurzem vom System gestoppt wurde. Klicke hier, um mehr zu erfahren</string>
     <string name="notification_service_killed_ignore">Ignorieren</string>
 <string name="notification_simple_text">Aktueller Server: %1$s</string>
-    </resources>
+    <string name="notification_channel_high_priorty">Hohe Priorität</string>
+    <string name="notification_channel_high_priorty_description">Kanal für Benachrichtigungen mit hoher Priorität, zum Beispiel wenn die App den Zugriff auf den VPN verliert</string>
+
+    <string name="notification_service_revoked_title">VPN Berechtigung vom System entzogen</string>
+    <string name="notification_service_revoked_message">Klicke hier um Nebulo zu starten</string>
+</resources>

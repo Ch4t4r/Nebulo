@@ -86,4 +86,7 @@
     <string name="windows_querylogging_hostsource__unknown">Onbekend</string>
     <string name="error_webview_missing">WebView niet gevonden, wordt het momenteel bijgewerkt of verwijderd\?</string>
 
+    <string name="error_invalid_host">Geef een geldige host op.</string>
+    <string name="error_cannot_open_settings">Kan systeeminstellingen niet openen.</string>
+
     </resources>
