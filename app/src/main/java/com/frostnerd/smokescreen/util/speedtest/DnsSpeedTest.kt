@@ -68,7 +68,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
         private val sslSocketFactory = SSLSocketFactory.getDefault()
 
         override fun validate(t: Socket): Boolean {
-            return !t.isConnected
+            return t.isClosed || !t.isConnected
         }
 
         override fun destroy(t: Socket) {
