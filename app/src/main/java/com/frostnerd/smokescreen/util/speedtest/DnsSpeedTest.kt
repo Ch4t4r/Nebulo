@@ -63,7 +63,12 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
         })
     }
     private val connectionPool = ConcurrentHashMap<TLSUpstreamAddress, ObjectPool<Socket>>()
-    private lateinit var poolConfig:PoolConfig
+    private var poolConfig:PoolConfig = PoolConfig().apply {
+        this.maxSize = 1
+        this.minSize = 1
+        this.partitionSize = 1
+        this.maxIdleMilliseconds = 60*1000*5
+    }
     private val poolFactory = object: ObjectFactory<Socket> {
         private val sslSocketFactory = SSLSocketFactory.getDefault()
 
@@ -91,12 +96,6 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
      */
     fun runTest(@IntRange(from = 1) passes: Int): Int? {
         var ttl = 0
-        poolConfig = PoolConfig().apply {
-            this.maxSize = 2
-            this.minSize = 1
-            this.partitionSize = 1
-            this.maxIdleMilliseconds = 60*1000*5
-        }
 
         for (i in 0 until passes) {
             if (server is HttpsDnsServerInformation) {
