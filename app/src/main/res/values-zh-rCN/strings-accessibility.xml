@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="contentdescription_main_infoimage">信息图标</string>
+    <string name="contentdescription_main_servericon">服务器图标</string>
+    <string name="contentdescription_main_statusimage">显示操作状态的图标</string>
+    <string name="contentdescription_shared_app_icon">应用图标</string>
+    <string name="contentdescription_clear_search">清除搜索</string>
+
+    <string name="contentdescription_start_app">开启应用</string>
+    <string name="contentdescription_stop_app">停止应用</string>
+    
+    <string name="hint_searchterm">搜索词</string>
+    <string name="hint_search">搜索</string>
+</resources>
