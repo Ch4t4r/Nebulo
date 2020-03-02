@@ -1,2 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="menu_main">ऐप की स्थिति</string>
+    <string name="menu_settings">सेटिंग्स</string>
+    <string name="menu_querylogging">लिखे गए प्रश्न</string>
+    <string name="menu_create_shortcut">सर्वर शॉर्टकट बनाएँ</string>
+    <string name="menu_rate">मूल्यांकन करें</string>
+    <string name="menu_about">ऐप के बारे में जानकारी</string>
+    <string name="menu_show_on_fdroid">F-Droid पर ऐप देखे</string>
+</resources>
