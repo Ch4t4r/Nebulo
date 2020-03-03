@@ -97,4 +97,71 @@
     <string name="summary_send_logs">डेवलपर को लॉग भेजने के लिए यहां क्लिक करें।</string>
 
     <string name="title_delete_all_logs">सभी लॉग हटाएं</string>
+    <string name="summary_delete_all_logs">आपके डिवाइस पर संग्रहीत सभी लॉग हटाता है।</string>
+
+    <string name="title_crashreporting_type">स्वचालित क्रैश रिपोर्टिंग</string>
+    <string name="summary_crashreporting_type">ऐप क्रैश होने पर डेवलपर को कौन सी जानकारी संचारित कि जानी चाहिए, यह सेट करें। क्रैश जानकारी में कभी भी व्यक्तिगत जानकारी नहीं होती है और समस्याओं को तेज़ी से ठीक करने में मदद करता है।</string>
+
+
+    <string name="preference_category_ip">IP सेटिंग्स</string>
+
+    <string name="title_enable_ipv6">IPv6 सक्षम करें</string>
+    <string name="summary_enable_ipv6">IPv6 का उपयोग करें, यदि डिवाइस में IPv6 पता सौंपा गया है</string>
+
+    <string name="title_enable_ipv4">IPv4 सक्षम करें</string>
+    <string name="summary_enable_ipv4">IPv4 का उपयोग करें, यदि डिवाइस में IPv4 पता सौंपा गया है</string>
+
+    <string name="title_force_ipv6">दृढ़तापूर्वक IPv6 सक्षम करें</string>
+    <string name="summary_force_ipv6">IPv6 अनुरोधों को स्वीकार करने के लिए ऐप को बाध्य करें, तब भी जब डिवाइस IPv6 का उपयोग नहीं करता है।</string>
+
+    <string name="title_force_ipv4">दृढ़तापूर्वक IPv4 सक्षम करें</string>
+    <string name="summary_force_ipv4">IPv4 अनुरोधों को स्वीकार करने के लिए ऐप को बाध्य करें, तब भी जब डिवाइस IPv4 का उपयोग नहीं करता है।</string>
+
+    <string name="title_allow_ipv4_traffic">IPv4 यातायात की अनुमति दें</string>
+    <string name="summary_allow_ipv4_traffic">IPv4 यातायात का उपयोग करने की अनुमति दें, भले ही IPv4 अक्षम हो।
+\nयदि अक्षम है, तो ऐप चलाने के दौरान किसी भी IPv4 संचार की अनुमति नहीं है।</string>
+
+    <string name="title_allow_ipv6_traffic">IPv6 यातायात की अनुमति दें</string>
+    <string name="summary_allow_ipv6_traffic">IPv6 यातायात का उपयोग करने की अनुमति दें, भले ही IPv4 अक्षम हो।
+\nयदि अक्षम है, तो ऐप चलाने के दौरान किसी भी IPv6 संचार की अनुमति नहीं है।</string>
+
+
+    <string name="preference_category_network">नेटवर्क</string>
+
+    <string name="title_restart_vpn_on_networkchange">नेटवर्क परिवर्तन पर पुनरारंभ करें</string>
+    <string name="summary_restart_vpn_on_networkchange">नेटवर्क में परिवर्तन होने पर चुपचाप ऐप को पुनरारंभ करें। इसे सक्षम करें, अगर नेटवर्क के बीच बदलाव करते समय समस्याओं का सामना करना पड़ता हो | 
+\n जब ऐप सक्रिय न हो तो कोई प्रभाव नहीं।</string>
+
+    <string name="title_disallow_other_vpns">अन्य VPN को अस्वीकार करें</string>
+    <string name="summary_disallow_other_vpns">यदि ऐप को स्पष्ट रूप से रोका नहीं गया है, तो अन्य VPN शुरू करने की अनुमति न दें</string>
+
+    <string name="title_catch_other_dns_servers">अन्य DNS यातायात में अवरोध करे</string>
+    <string name="summary_catch_other_dns_servers">ज्ञात DNS सर्वर के यातायात में अवरोध करे और इसे Nebulo द्वारा संचारित करें</string>
+
+    <string name="title_map_query_refused">अस्वीकृत प्रश्नों को अस्वीकार होस्ट के रूप में अवरोध करे</string>
+    <string name="summary_map_query_refused">यदि होस्ट को अनुमति नहीं है या अवरुद्ध है, तो कुछ DNS सर्वर प्रश्नों का उत्तर देने से इनकार कर सकते हैं। यह सेटिंग, प्रश्नों को मना करने के बजाय होस्ट को अवरुद्ध कर देती है, अन्यथा सिस्टम भ्रमित हो सकता है।</string>
+
+    <string name="title_bypass_searchdomains">खोज-डोमेन से बचकर निकले</string>
+    <string name="summary_bypass_searchdomains">DoH सर्वर के बजाय अपने नेटवर्क के DNS सर्वर पर खोज-डोमेन (जैसे MyPC.local या MyPc.fritz.box) भेजें।
+\nयह अत्यधिक सिफारिशित है। वे प्रश्न आपके नेटवर्क को नहीं छोड़ते हैं।</string>
+
+    <string name="title_pause_on_captiveportal">क़ैदी प्रवेशमार्ग पर ठहरे</string>
+    <string name="summary_pause_on_captiveportal">यदिक़ैदी प्रवेशमार्ग का पता चला है, तो DoH का उपयोग न करें। लॉग इन करने के तुरंत बाद यह फिर से शुरू हो जाएगा।
+\nइसे अक्षम करने से आप लॉग इन करने के लिए क़ैदी प्रवेशमार्ग को खोलने से रोक सकते हैं।</string>
+
+
+    <string name="preference_category_querylogging">प्रश्न लिखना सक्षम करे</string>
+
+    <string name="title_log_queries">प्रश्न लिखना सक्षम करे</string>
+    <string name="summary_log_queries">सभी प्रश्नों और उनकी प्रतिक्रियाओं को लिखे</string>
+
+    <string name="title_export_queries">प्रश्न निर्यात करे</string>
+    <string name="summary_export_queries">CSV के रूप में निर्यात प्रश्न (%1d प्रश्न)</string>
+
+    <string name="title_delete_queries">प्रश्न हटाएँ</string>
+    <string name="summary_delete_queries">सभी लिखे गए प्रश्नों को हटाने के लिए यहां क्लिक करें।</string>
+
+    <string name="crashreporting_type_full">पूर्ण (सांख्यिकी और डीबग जानकारी रिपोर्ट)</string>
+    <string name="crashreporting_type_minimal">न्यूनतम (केवल Android और ऐप संस्करण रिपोर्ट)</string>
+    <string name="crashreporting_type_off">बंद (क्रैश रिपोर्ट न भेजें)</string>
     </resources>
