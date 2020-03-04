@@ -1,2 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_crashreportingusages_data_1">उपयोगकर्ता की जानकारी</string>
+    <string name="dialog_crashreportingusages_data_2">डिवाइस की जानकारी</string>
+    <string name="dialog_crashreportingusages_data_3">ऐप की जानकारी</string>
+    <string name="dialog_crashreportingusages_data_4">ऑपरेटिंग सिस्टम की जानकारी</string>
+    <string name="dialog_crashreportingusages_data_user_1">क्रैश पर नज़र रखने के लिए यादृच्छिक ID का उपयोग किया जाता है</string>
+    <string name="dialog_crashreportingusages_data_device_1">स्थापत्य (x86, arm, …)</string>
+    <string name="dialog_crashreportingusages_data_device_2">अभिमुखता (परिदृश्य, चित्र)</string>
+    <string name="dialog_crashreportingusages_data_device_3">मुक्त / प्रयुक्त स्मृति (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_4">चार्ज स्थिति (हाँ / नहीं)</string>
+    <string name="dialog_crashreportingusages_data_device_5">क्रैश के समय ऑनलाइन (हाँ / नहीं)</string>
+    <string name="dialog_crashreportingusages_data_device_6">स्क्रीन संकल्प</string>
+    <string name="dialog_crashreportingusages_data_device_7">निर्माता</string>
+    <string name="dialog_crashreportingusages_data_device_8">ब्रांड</string>
+    <string name="dialog_crashreportingusages_data_device_9">नमूना</string>
+    <string name="dialog_crashreportingusages_data_device_10">भाषा</string>
+    <string name="dialog_crashreportingusages_data_app_1">ऐप शुरू होने का समय</string>
+    <string name="dialog_crashreportingusages_data_app_2">ऐप संस्करण</string>
+    <string name="dialog_crashreportingusages_data_app_3">डेटाबेस संस्करण</string>
+    <string name="dialog_crashreportingusages_data_app_4">DNS सर्वर का नाम</string>
+    <string name="dialog_crashreportingusages_data_app_5">प्राथमिक DNS सर्वर</string>
+    <string name="dialog_crashreportingusages_data_app_6">द्वितीय DNS सर्वर</string>
+    <string name="dialog_crashreportingusages_data_os_1">नाम (उदा. Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">संस्करण (उदा. 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Kernel संस्करण</string>
+    <string name="dialog_crashreportingusages_data_os_4">Rooted (हाँ / नहीं)</string>
+    </resources>
