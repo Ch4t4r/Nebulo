@@ -1,2 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="changelog_build_29_1">सर्वर जो अब विज्ञापनों को रोकते हैं उन्हें गैर-प्लेस्टोर संस्करण (इस एक के सहित) में दिखाया गया है</string>
+    <string name="changelog_build_29_2">AdGuard DNS जोड़ा गया</string>
+    <string name="changelog_build_41_adblocker_1">दो नए DNS नियम स्रोत जोड़े गए</string>
+    </resources>
