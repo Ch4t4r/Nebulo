@@ -1,2 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="tasker_start_if_running">शुरू करे भले ही पहले से चल रहा हो (सेटिंग में परिवर्तन कर सकता है)</string>
+    <string name="tasker_use_custom_server">स्वनिर्धारित सर्वर उल्लिखित करे</string>
+    <string name="tasker_action">कार्य</string>
+    <string name="tasker_start_app_custom_url">%1s के साथ ऐप शुरू करें (प्रणाली: %2s)</string>
+    <string name="tasker_start_app_custom_urls">%1s और %2s के साथ ऐप शुरू करें (प्रणाली: %3s)</string>
+    </resources>
