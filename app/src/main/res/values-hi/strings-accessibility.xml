@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="contentdescription_main_infoimage">सूचना आइकन</string>
+    <string name="contentdescription_main_servericon">सर्वर आइकन</string>
+    <string name="contentdescription_main_statusimage">यह दर्शाता है कि ऐप चल रहा है या नहीं</string>
+    <string name="contentdescription_shared_app_icon">ऐप आइकन</string>
+    <string name="contentdescription_clear_search">खोज हटाएँ</string>
+
+    <string name="contentdescription_start_app">ऐप शुरू करें</string>
+    <string name="contentdescription_stop_app">ऐप बंद करे</string>
+    
+    <string name="hint_searchterm">खोजा जाना वाला शब्द</string>
+    <string name="hint_search">खोज</string>
+</resources>
