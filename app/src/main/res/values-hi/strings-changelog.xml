@@ -93,4 +93,34 @@
     <string name="changelog_build_44_4">DNS नियम अब वाइल्डकार्ड का समर्थन करते हैं</string>
     <string name="changelog_build_45_1">पठनीयता बढ़ाने के लिए सेटिंग्स को कई स्थिति में विभाजित करें</string>
     <string name="changelog_build_45_2">प्रश्नों की लिखावट में मरम्मत कि गयी</string>
-    </resources>
+    <string name="changelog_build_47_1">क्वेरी लॉग अब TTL और IP प्रतिक्रियाओं को दिखाता है</string>
+    <string name="changelog_build_47_2">क्वेरी लॉग को अब विशिष्ट होस्ट के लिए खोजा जा सकता है</string>
+    <string name="changelog_build_47_3">ऐप के भीतर अब भाषा को बदला जा सकता है</string>
+    <string name="changelog_build_47_4">मुख्य स्क्रीन अब दिखाती है कि निजी DNS सक्रिय है (Android 9+)</string>
+    <string name="changelog_build_47_5">नए सर्वर जोड़े गए</string>
+    <string name="changelog_build_47_6">रचना में परिवर्तन</string>
+    <string name="changelog_build_47_7">DNS नियमों का बेहतर संचालन</string>
+    <string name="changelog_build_48_1">अधिसूचना को सरल बनाने के लिए एक सेटिंग जोड़ा गया</string>
+    <string name="changelog_build_48_2">क्वेरी लॉग अब DNS नियम के होस्ट स्रोत को दिखाता है, यदि DNS नियमों से प्रश्न का उत्तर दिया गया था</string>
+    <string name="changelog_build_48_3">ऐप सेटिंग्स में भाषा बदलते समय भाषा अब सभी विंडो में ठीक से बदलती है</string>
+    <string name="changelog_build_49_1">यह वह अपडेट है जहां Nebulo आखिरकार बीटा स्थिति छोड़ रहा है!</string>
+    <string name="changelog_build_49_2">एक सेटिंग जोड़ी गई है जो DNS कैश को साफ करती है</string>
+    <string name="changelog_build_49_3">स्वचालित क्रैश रिपोर्टिंग को अब पूर्ण, न्यूनतम और बंद पर सेट किया जा सकता है (पहले केवल चालू / बंद संभव था)</string>
+    <string name="changelog_build_49_4">क्वेरी लॉग अब एक संकेत दिखाता है जब DNS सर्वर ने होस्ट को अवरुद्ध किया हो सकता है</string>
+    <string name="changelog_build_49_5">लॉग फ़ाइलों को निर्यात करना अब एक लोडिंग संवाद दिखाता है</string>
+    <string name="changelog_build_49_6">DNS नियम अब तेजी से आगे बढ़ रहे हैं</string>
+    <string name="changelog_build_49_7">त्वरित सेटिंग्स टाइल अब सरल है</string>
+    <string name="changelog_build_49_8">कुछ उपकरणों पर कुछ समय के बाद एप्लिकेशन को DNS प्रश्नों को संचार नहीं करता, इसे ठीक किया</string>
+    <string name="changelog_build_51_1">श्वेतसूची DNS नियम अब निर्यात किए जा सकते हैं</string>
+    <string name="changelog_build_51_2">वाइल्डकार्ड डीएनएस नियम को सही तरीके से निर्यात नहीं किया जा रहा है, इसे ठीक किया</string>
+    <string name="changelog_build_51_3">सर्वर अपडेट</string>
+    <string name="changelog_build_52_1">DNS नियम अब CNAME क्लोकिंग को रोकते हैं</string>
+    <string name="changelog_build_52_2">एक बग ठीक किया जो कई स्लैश (/) के साथ DoH सर्वर को ठीक से रोका जा रहा है</string>
+    <string name="changelog_build_52_3">एक क्रैश ठीक किया जो शायद ही कभी लॉगिंग सक्रिय के साथ हुई</string>
+    <string name="changelog_build_54_1">Nebulo के सक्रिय होने पर संचार न करने वाले कुछ VoIP ऐप्स को ठीक किया</string>
+    <string name="changelog_build_54_2">सर्वर शॉर्टकट बनाने से अब आप सूची में से एक का चयन कर सकते हैं</string>
+    <string name="changelog_build_54_3">लॉग इन प्रश्नों को हटाते समय निर्यात गणना को साफ़ नहीं करना</string>
+    <string name="changelog_build_58_1">सर्वर जोड़ते समय प्राथमिक होस्ट / URL खाली हो सकता है</string>
+    <string name="changelog_build_58_2">जब Nebulo VPN को अनुमति खो देता है तो एक सूचना दिखाई जाती है</string>
+    <string name="changelog_build_55_4">क्वेरी लॉग अब एक ही बार में प्रश्नों को लोड करता है</string>
+</resources>
