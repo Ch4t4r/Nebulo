@@ -1,3 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="tasker_use_custom_server">指定自定义服务器</string>
+    <string name="tasker_start_if_running">即使已运行也启动（可能会覆盖设置）</string>
+    <string name="tasker_action">操作</string>
+    <string name="tasker_start_app_custom_url">使用 %1s 启动应用（模式：%2s）</string>
+    <string name="tasker_start_app_custom_urls">使用 %1s 和 %2s 启动程序（模式：%3s）</string>
     </resources>
