@@ -57,4 +57,12 @@
     <string name="notification_ruleexportfinished_message">已导出 %1d 条规则。</string>
 
     <string name="notification_pin_title">请输入 PIN</string>
-    </resources>
+    <string name="notification_pin_message">完成此项操作需要输入您的PIN。点击此处以确认。</string>
+
+    <string name="notification_service_killed_title">关于电池优化的信息</string>
+    <string name="notification_service_killed_message">之前似乎应用被系统关闭了。点击此处了解更多。</string>
+    <string name="notification_service_killed_ignore">忽略</string>
+
+    <string name="notification_service_revoked_title">VPN权限被系统撤销</string>
+    <string name="notification_service_revoked_message">点此重启</string>
+</resources>
