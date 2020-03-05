@@ -1,2 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="dialog_crashreportingusages_data_1">用户数据</string>
+    <string name="dialog_crashreportingusages_data_2">设备数据</string>
+    <string name="dialog_crashreportingusages_data_3">应用数据</string>
+    <string name="dialog_crashreportingusages_data_4">操作系统数据</string>
+    <string name="dialog_crashreportingusages_data_user_1">用于追踪崩溃的随机ID</string>
+    <string name="dialog_crashreportingusages_data_device_1">指令集架构</string>
+    <string name="dialog_crashreportingusages_data_device_2">屏幕方向（横向、纵向）</string>
+    <string name="dialog_crashreportingusages_data_device_3">空闲/占用内存 (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_4">充电状态 （是/否）</string>
+    <string name="dialog_crashreportingusages_data_device_5">崩溃时是否在线（是/否）</string>
+    <string name="dialog_crashreportingusages_data_device_6">屏幕分辨率</string>
+    <string name="dialog_crashreportingusages_data_device_7">设备制造商</string>
+    <string name="dialog_crashreportingusages_data_device_8">品牌</string>
+    <string name="dialog_crashreportingusages_data_device_9">型号</string>
+    <string name="dialog_crashreportingusages_data_device_10">语言</string>
+    <string name="dialog_crashreportingusages_data_app_1">应用启动时间</string>
+    <string name="dialog_crashreportingusages_data_app_2">应用版本</string>
+    <string name="dialog_crashreportingusages_data_app_3">数据库版本</string>
+    <string name="dialog_crashreportingusages_data_app_4">DNS服务器名称</string>
+    <string name="dialog_crashreportingusages_data_app_5">首要DNS服务器</string>
+    <string name="dialog_crashreportingusages_data_app_6">次要DNS服务器</string>
+    <string name="dialog_crashreportingusages_data_os_1">操作系统名（例如Android）</string>
+    <string name="dialog_crashreportingusages_data_os_2">版本（例如 8.1.0）</string>
+    <string name="dialog_crashreportingusages_data_os_3">内核版本</string>
+    <string name="dialog_crashreportingusages_data_os_4">有无Root（是/否）</string>
+    </resources>
