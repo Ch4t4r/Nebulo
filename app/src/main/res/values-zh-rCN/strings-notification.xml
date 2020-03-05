@@ -1,2 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="notification_channel_default">默认通道</string>
+    <string name="notification_channel_default_description">推送通知使用的默认通道。</string>
+
+    <string name="notification_channel_foreground_service">常驻通知通道</string>
+    <string name="notification_channel_foreground_service_description">推送常驻通知使用的默认通道。</string>
+
+    <string name="notification_channel_noconnection">连接警告通道</string>
+    <string name="notification_channel_noconnection_description">推送无可用连接时的警告通知时，所使用的默认通道。</string>
+
+    <string name="notification_channel_high_priorty">高优先级通道</string>
+    <string name="notification_channel_high_priorty_description">推送高优先级通知使用的默认通道，比如推送应用失去VPN权限时。</string>
+
+    <string name="notification_simple_text">当前服务器：%1$s</string>
+    <string name="notification_main_text">解析请求被发往 %1$s
+\n
+\n%2$d 个应用不使用 DoH/DoT
+\n%3$d 条解析项被缓存</string>
+    <string name="notification_main_text_with_secondary">解析请求被发往 %1$s 和 %2$s
+\n
+\n%3$d 个应用不使用 DoH/DoT
+\n%4$d 条解析项被缓存</string>
+    <string name="notification_main_text_whitelist">解析请求被发往 %1$s
+\n
+\n%2$d 个应用使用 DoH/DoT
+\n%3$d 条解析项被缓存</string>
+    <string name="notification_main_text_with_secondary_whitelist">解析请求被发往 %1$s 和 %2$s
+\n
+\n%3$d 个应用使用 DoH/DoT
+\n%4$d 条解析项被缓存</string>
+    <string name="notification_main_title_tls">Nebulo (DoT)</string>
+    <string name="notification_main_title_https">Nebulo (DoH)</string>
+    <string name="notification_main_subtext">已有 %1$d 个请求</string>
+
+    <string name="notification_noconnection_title">无连接</string>
+    <string name="notification_noconnection_text">因为无连接或连接太差，目前应用已停止转发您的DNS请求。</string>
+
+    <string name="notification_vpnrestart_title">重启VPN中</string>
+    <string name="notification_vpnrestart_text">VPN服务即将重启。</string>
+
+    <string name="notification_appcrash_title">Nebulo已崩溃</string>
+    <string name="notification_appcrash_message">Nebulo已崩溃。如有必要，请点击此处以进入主菜单或重启应用。</string>
+
+    <string name="notification_ruleimport_title">导入DNS规则</string>
+    <string name="notification_ruleimport_message">正在从 %1s (%2s) 导入DNS规则</string>
+    <string name="notification_ruleimport_secondarymessage">准备导入…</string>
+    <string name="notification_ruleimport_tertiarymessage">正在完成导入…</string>
+
+    <string name="notification_ruleimportfinished_title">DNS规则导入完成</string>
+    <string name="notification_ruleimportfinished_message">已导入 %1d 条规则（省略 %2$d 条重复规则）</string>
+
+    <string name="notification_ruleexport_title">导出DNS规则</string>
+    <string name="notification_ruleexport_message">导出规则中 （%1d/%2d）</string>
+    <string name="notification_ruleexport_secondarymessage">准备导出…</string>
+
+    <string name="notification_ruleexportfinished_title">DNS规则导出完成</string>
+    <string name="notification_ruleexportfinished_message">已导出 %1d 条规则。</string>
+
+    <string name="notification_pin_title">请输入 PIN</string>
+    </resources>
