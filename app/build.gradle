@@ -132,7 +132,7 @@ dependencies {
     implementation "androidx.room:room-coroutines:2.1.0-alpha04"
     testImplementation "androidx.room:room-testing:$room_version"
 
-    implementation 'io.sentry:sentry-android:2.0.2'
+    implementation 'io.sentry:sentry-android:1.7.30'
 
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
     implementation 'com.squareup.leakcanary:leaksentry:2.0-alpha-3'
