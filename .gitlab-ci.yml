@@ -1,19 +1,16 @@
-image: openjdk:8-jdk
-variables:
-  ANDROID_COMPILE_SDK: "28"
-  ANDROID_SDK_TOOLS: "26.1.1"
+image: thyrlian/android-sdk
 
 stages:
  - test
  - build
 
 before_script:
-  - source /home/public/android-sdk-linux/initAndroid.sh -s ${ANDROID_COMPILE_SDK}
-  
+  - chmod +x gradlew
+
 build_debug:
   stage: build
   script:
-    - /./home/public/gitrunner/changeAppVersion.sh app/build.gradle " $CI_COMMIT_REF_NAME\_$CI_PIPELINE_ID" --append
+    - ./changeVersion.sh app/build.gradle " $CI_COMMIT_REF_NAME\_$CI_PIPELINE_ID" --append
     - ./gradlew assembleNormalDebug --stacktrace -x test
   artifacts:
     paths:
