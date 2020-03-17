@@ -22,7 +22,7 @@ build_debug:
 build_fdroid:
   stage: build
   script:
-    - wget -O $KEYSTORE_FILE $KEYSTORE_URL
+    - wget -O $KEYSTORE_FILE $KEYSTORE_URL -q
     - ./gradlew clean assembleAdblockerFdroid --stacktrace -x test
   except:
     - /^no_ci.*$/
@@ -39,7 +39,7 @@ build_fdroid:
 build_release:
   stage: build
   script:
-   - wget -O $KEYSTORE_FILE $KEYSTORE_URL
+   - wget -O $KEYSTORE_FILE $KEYSTORE_URL -q
    - ./gradlew clean assembleNormalRelease --stacktrace -x test
   except:
     - /^no_ci.*$/
