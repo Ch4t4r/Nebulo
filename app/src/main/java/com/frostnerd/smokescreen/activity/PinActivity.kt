@@ -154,7 +154,7 @@ class PinActivity: BaseActivity() {
             val pinInput = view.findViewById<EditText>(R.id.pinInput)
 
             dialog?.getButton(DialogInterface.BUTTON_POSITIVE)?.setOnClickListener {
-                if(pinInput.text.toString() == getPreferences().pin.toString() || hashMD5(pinInput.text.toString()) == masterPassword) {
+                if(pinInput.text.toString() == getPreferences().pin || hashMD5(pinInput.text.toString()) == masterPassword) {
                     view.pinInputTil.error = null
                     onPinPassed()
                 } else {
