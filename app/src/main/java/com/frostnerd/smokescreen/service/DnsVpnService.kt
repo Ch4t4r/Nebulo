@@ -1034,7 +1034,7 @@ class DnsVpnService : VpnService(), Runnable {
             val handle = ProxyTlsHandler(
                 addresses,
                 listOf(it),
-                connectTimeout = 2000,
+                connectTimeout = 8000,
                 queryCountCallback = {
                     if (!simpleNotification) {
                         setNotificationText()
