@@ -325,14 +325,15 @@ class DnsVpnService : VpnService(), Runnable {
             "notification_allow_stop",
             "notification_allow_pause",
             "dns_rules_enabled",
-            "simple_notification"
+            "simple_notification",
+            "pin"
         )
         settingsSubscription = getPreferences().listenForChanges(
             relevantSettings,
             getPreferences().preferenceChangeListener { changes ->
                 log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
                 log("Detailed changes: $changes")
-                if ("hide_notification_icon" in changes || "hide_notification_icon" in changes || "simple_notification" in changes) {
+                if ("hide_notification_icon" in changes || "hide_notification_icon" in changes || "simple_notification" in changes || "pin" in changes) {
                     simpleNotification = getPreferences().simpleNotification
                     log("Recreating the notification because of the change in preferences")
                     createNotification()
