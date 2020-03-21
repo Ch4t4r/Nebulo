@@ -186,12 +186,14 @@ class PinActivity: BaseActivity() {
                 val startIntent = Intent(this, MainActivity::class.java)
                 startIntent.putExtras(intent?.extras?.getBundle("extras") ?: Bundle())
                 startIntent.putExtra("pin_validated", true)
+                startIntent.putExtra("pin_validated_at", System.currentTimeMillis())
                 //if(pinEnabled) startIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                 startActivity(startIntent)
             }
             PinType.STOP_SERVICE -> {
                 val bundle = intent?.extras?.getBundle("extras") ?: Bundle()
                 bundle.putBoolean("pin_validated", true)
+                bundle.putLong("pin_validated_at", System.currentTimeMillis())
                 DnsVpnService.sendCommand(this, Command.STOP, bundle)
             }
         }

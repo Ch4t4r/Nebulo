@@ -51,6 +51,7 @@ import kotlin.random.Random
 class MainActivity : NavigationDrawerActivity() {
     companion object {
         const val BROADCAST_RELOAD_MENU = "main.reloadMenu"
+        private const val PIN_TIMEOUT = 2*60*1000
     }
     override val drawerOverActionBar: Boolean = true
     private var textColor: Int = 0
@@ -58,9 +59,21 @@ class MainActivity : NavigationDrawerActivity() {
     private var inputElementColor: Int = 0
     private var cardNetworkCallback:ConnectivityManager.NetworkCallback? = null
     private val networkManager by lazy { getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager }
+    private var pinLastPassed:Long? = null
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(getPreferences().enablePin) {
+            pinLastPassed = intent?.getLongExtra("pin_validated_at", 0)
+            if(pinLastPassed == null || System.currentTimeMillis() >= pinLastPassed!! + PIN_TIMEOUT) {
+                startActivity(PinActivity.openAppIntent(this, intent?.extras))
+                finish()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
