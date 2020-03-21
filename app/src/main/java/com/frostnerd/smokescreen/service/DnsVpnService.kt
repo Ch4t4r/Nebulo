@@ -110,9 +110,13 @@ class DnsVpnService : VpnService(), Runnable {
     companion object {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
         const val BROADCAST_VPN_INACTIVE = BuildConfig.APPLICATION_ID + ".VPN_INACTIVE"
+        const val BROADCAST_VPN_PAUSED = BuildConfig.APPLICATION_ID + ".VPN_PAUSED"
+        const val BROADCAST_VPN_RESUMED = BuildConfig.APPLICATION_ID + ".VPN_RESUME"
         const val BROADCAST_DNSRULES_REFRESHED = BuildConfig.APPLICATION_ID + ".DNSRULE_REFRESH"
 
         var currentTrafficStats: TrafficStats? = null
+            private set
+        var paused:Boolean = false
             private set
 
         fun startVpn(context: Context, serverInfo: DnsServerInformation<*>? = null) {
@@ -479,12 +483,18 @@ class DnsVpnService : VpnService(), Runnable {
                         pauseNotificationAction?.title = getString(R.string.all_resume)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_resume
                         notificationBuilder.setSmallIcon(R.drawable.ic_notification_paused)
+                        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(
+                            BROADCAST_VPN_PAUSED))
+                        paused = true
                     } else {
                         log("Received RESUME command while app paused, restarting vpn.")
                         recreateVpn(false, null)
                         pauseNotificationAction?.title = getString(R.string.all_pause)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_pause
                         notificationBuilder.setSmallIcon(R.drawable.ic_mainnotification)
+                        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(
+                            BROADCAST_VPN_RESUMED))
+                        paused = false
                     }
                     updateNotification()
                 }
