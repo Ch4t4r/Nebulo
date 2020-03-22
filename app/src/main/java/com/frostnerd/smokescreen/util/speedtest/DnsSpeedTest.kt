@@ -10,17 +10,16 @@ import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
-import okhttp3.Dns
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import okhttp3.*
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Response
 import okhttp3.internal.closeQuietly
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
 import java.io.DataInputStream
 import java.io.DataOutputStream
+import java.lang.IllegalArgumentException
 import java.net.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
@@ -116,7 +115,14 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
     private fun testHttps(config: ServerConfiguration): Int? {
         val msg = createTestDnsPacket()
         val url: URL = config.urlCreator.createUrl(msg, config.urlCreator.address)
-        log("Using URL: $url")
+        try {
+            url.toString().toHttpUrl()
+            log("Using URL: $url")
+        } catch (ignored:IllegalArgumentException) {
+            log("Invalid URL: $url")
+            return null
+        }
+
         val requestBuilder = Request.Builder().url(url)
         if (config.requestHasBody) {
             val body = config.bodyCreator!!.createBody(msg, config.urlCreator.address)
