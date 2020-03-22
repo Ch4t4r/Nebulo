@@ -441,10 +441,17 @@ class DnsVpnService : VpnService(), Runnable {
             )
         }
         noConnectionNotificationBuilder.setWhen(System.currentTimeMillis())
-        if (!noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
-            Notifications.ID_NO_CONNECTION,
-            noConnectionNotificationBuilder.build()
-        )
+        if (!noConnectionNotificationShown) {
+            try {
+                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
+                    Notifications.ID_NO_CONNECTION,
+                    noConnectionNotificationBuilder.build()
+                )
+            } catch (ex:java.lang.NullPointerException) {
+                // AIDL bug causing NPE in  android.app.ApplicationPackageManager.getUserIfProfile(ApplicationPackageManager.java:2813)
+                // Ignore it.
+            }
+        }
         noConnectionNotificationShown = true
     }
 
