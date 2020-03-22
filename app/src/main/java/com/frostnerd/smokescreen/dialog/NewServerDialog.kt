@@ -53,19 +53,36 @@ class NewServerDialog(
     server: UserServerConfiguration? = null
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
     companion object {
-        // Hostpart has to begin with a character or number
-        // Then has to either:
-        //  - Consist of numbers, characters and dashes AND ends with a character
-        //  - End with a character or number
-        //  => Host part has to be at least 2 characters long
-        // Host can optionally end with a dot
-        //  - If there is a dot there has to be either a number or a char after it
-        private val dohAddressPart = "(?:[a-z0-9](?:(?:[a-z0-9-]*[a-z]*[a-z0-9-]*[a-z0-9])|[a-z0-9])(?:.(?=[a-z0-9])|))*"
-        val TLS_REGEX = Regex("^\\s*($dohAddressPart)(?::[1-9][0-9]{0,4})?\\s*$", RegexOption.IGNORE_CASE)
-
         fun isUrl(s:String): Boolean {
             return s.trim().let {
                 it.toHttpUrlOrNull() != null || "https://$it".toHttpUrlOrNull() != null
+            }
+        }
+
+        fun isValidDot(s:String):Boolean {
+            return parseDotAddress(s.trim()) != null
+        }
+
+        fun parseDotAddress(s:String):TLSUpstreamAddress? {
+            return s.takeIf {
+                !it.startsWith("http", ignoreCase = true) && it.isNotBlank() // It isn't http(s)
+            }?.let {
+                "https://$it".toHttpUrlOrNull() // But it has valid format for a URL
+            }?.takeIf {
+                it.pathSegments.size == 1 && it.pathSegments[0] == "" // But isn't an URL (no path in string)
+            }?.let { url ->
+                val port = if(s.contains(":")) url.port else 853 // Default would treat it as https (port 443)
+
+                // Try to find a matching server in the default list as it'd contain more information than the user provides
+                AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { allServer ->
+                    allServer.values.filter {
+                        it.servers.any { server ->
+                            server.address.host ==  url.host && server.address.port == url.port
+                        }
+                    }
+                }.firstOrNull()?.servers?.firstOrNull {
+                    it.address.host == url.host
+                }?.address ?: TLSUpstreamAddress(url.host, port)
             }
         }
     }
@@ -201,7 +218,7 @@ class NewServerDialog(
             val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
             serverInfo.add(
                 DnsServerConfiguration(
-                    address = createTlsUpstreamAddress(primary),
+                    address = parseDotAddress(primary)!!,
                     experimental = false,
                     supportedProtocols = listOf(TLS),
                     preferredProtocol = TLS
@@ -209,9 +226,7 @@ class NewServerDialog(
             )
             if (!secondary.isNullOrBlank()) serverInfo.add(
                 DnsServerConfiguration(
-                    address = createTlsUpstreamAddress(
-                        secondary
-                    ), experimental = false, supportedProtocols = listOf(TLS), preferredProtocol = TLS
+                    address = parseDotAddress(secondary)!!, experimental = false, supportedProtocols = listOf(TLS), preferredProtocol = TLS
                 )
             )
             onServerAdded.invoke(
@@ -253,38 +268,20 @@ class NewServerDialog(
         else HttpsUpstreamAddress(host, port)
     }
 
-    private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
-        context.log("Creating TLSUpstreamAddress for `$host`")
-        val parsedHost:String
-        var port: Int? = null
-        if (host.contains(":")) {
-            parsedHost = host.split(":")[0]
-            port = host.split(":")[1].split("/")[0].toInt()
-            if (port > 65535) port = null
-        } else parsedHost = host
-        return AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { allServer ->
-            allServer.values.filter {
-                it.servers.any { server ->
-                    server.address.host == parsedHost && (port == null || server.address.port == port)
-                }
-            }
-        }.firstOrNull()?.servers?.firstOrNull {
-            it.address.host == parsedHost
-        }?.address ?: if (port != null) TLSUpstreamAddress(parsedHost, port)
-        else TLSUpstreamAddress(parsedHost)
-    }
-
     private fun addUrlTextWatcher(input: TextInputLayout, editText: TextInputEditText, emptyAllowed: Boolean) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 var valid = (emptyAllowed && s.isBlank())
                 valid = valid || (!s.isBlank() && dnsOverHttps && isUrl(s.toString()))
-                valid = valid || (!s.isBlank() && !dnsOverHttps && TLS_REGEX.matches(s.toString()))
+                valid = valid || (!s.isBlank() && !dnsOverHttps && isValidDot(s.toString()))
 
-                input.error = if (valid) {
-                    null
-                } else if(dnsOverHttps) context.getString(R.string.error_invalid_url)
-                else context.getString(R.string.error_invalid_host)
+                input.error = when {
+                    valid -> {
+                        null
+                    }
+                    dnsOverHttps -> context.getString(R.string.error_invalid_url)
+                    else -> context.getString(R.string.error_invalid_host)
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

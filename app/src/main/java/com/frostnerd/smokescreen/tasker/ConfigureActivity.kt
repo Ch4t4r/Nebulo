@@ -183,7 +183,7 @@ class ConfigureActivity : BaseActivity() {
             override fun afterTextChanged(s: Editable) {
                 var valid = (emptyAllowed && s.isBlank())
                 valid = valid || (!s.isBlank() && dnsOverHttps && NewServerDialog.isUrl(s.toString()))
-                valid = valid || (!s.isBlank() && !dnsOverHttps && NewServerDialog.TLS_REGEX.matches(s.toString()))
+                valid = valid || (!s.isBlank() && !dnsOverHttps && NewServerDialog.isValidDot(s.toString()))
 
                 input.error = if (valid) {
                     null
