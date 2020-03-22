@@ -64,7 +64,9 @@ class NewServerDialog(
         val TLS_REGEX = Regex("^\\s*($dohAddressPart)(?::[1-9][0-9]{0,4})?\\s*$", RegexOption.IGNORE_CASE)
 
         fun isUrl(s:String): Boolean {
-            return s.toHttpUrlOrNull() != null || "https://$s".toHttpUrlOrNull() != null
+            return s.trim().let {
+                it.toHttpUrlOrNull() != null || "https://$it".toHttpUrlOrNull() != null
+            }
         }
     }
 
@@ -104,8 +106,8 @@ class NewServerDialog(
                     var secondary =
                         if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString().trim()
 
-                    if (dnsOverHttps && !primary.startsWith("http")) primary = "https://$primary"
-                    if (dnsOverHttps && secondary != null && !secondary.startsWith("http")) secondary = "https://$secondary"
+                    if (dnsOverHttps && !primary.startsWith("http", ignoreCase = true)) primary = "https://$primary"
+                    if (dnsOverHttps && secondary != null && !secondary.startsWith("http", ignoreCase = true)) secondary = "https://$secondary"
                     invokeCallback(name, primary, secondary, onServerAdded)
                     dismiss()
                 } else {
