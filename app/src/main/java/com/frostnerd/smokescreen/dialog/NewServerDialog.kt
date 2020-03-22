@@ -53,7 +53,7 @@ class NewServerDialog(
     server: UserServerConfiguration? = null
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
     companion object {
-        fun isUrl(s:String): Boolean {
+        fun isValidDoH(s:String): Boolean {
             return s.trim().let {
                 it.toHttpUrlOrNull() != null || "https://$it".toHttpUrlOrNull() != null
             }
@@ -272,7 +272,7 @@ class NewServerDialog(
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 var valid = (emptyAllowed && s.isBlank())
-                valid = valid || (!s.isBlank() && dnsOverHttps && isUrl(s.toString()))
+                valid = valid || (!s.isBlank() && dnsOverHttps && isValidDoH(s.toString()))
                 valid = valid || (!s.isBlank() && !dnsOverHttps && isValidDot(s.toString()))
 
                 input.error = when {
