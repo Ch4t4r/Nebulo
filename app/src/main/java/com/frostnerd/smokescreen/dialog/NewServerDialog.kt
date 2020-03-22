@@ -54,9 +54,10 @@ class NewServerDialog(
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
     companion object {
         fun isValidDoH(s:String): Boolean {
+            // It should contain at least one period (or colon for IPv6), either because it's an IP Address or a domain (like test.com). This explicitly prevents local-only domains (like localhost or raspberry)
             return s.trim().let {
-                it.toHttpUrlOrNull() != null || "https://$it".toHttpUrlOrNull() != null
-            }
+                        it.toHttpUrlOrNull() ?: "https://$it".toHttpUrlOrNull()
+                    }?.host?.contains(Regex("[.:]")) ?: false
         }
 
         fun isValidDot(s:String):Boolean {
@@ -70,8 +71,12 @@ class NewServerDialog(
                 "https://$it".toHttpUrlOrNull() // But it has valid format for a URL
             }?.takeIf {
                 it.pathSegments.size == 1 && it.pathSegments[0] == "" // But isn't an URL (no path in string)
+            }?.takeIf {
+              it.host.contains(Regex("[.:]")) // It should contain at least one period (or colon for IPv6), either because it's an IP Address or a domain (like test.com). This explicitly prevents local-only domains (like localhost or raspberry)
             }?.let { url ->
-                val port = if(s.contains(":")) url.port else 853 // Default would treat it as https (port 443)
+                val port = if(s.indexOf(":").let {
+                        it == -1 || s.toCharArray().getOrNull(it + 1)?.isDigit() != true
+                    }) 853 else url.port  // Default would treat it as https (port 443)
 
                 // Try to find a matching server in the default list as it'd contain more information than the user provides
                 AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { allServer ->
