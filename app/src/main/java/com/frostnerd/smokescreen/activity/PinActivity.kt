@@ -52,9 +52,26 @@ import java.security.NoSuchAlgorithmException
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class PinActivity: BaseActivity() {
+
     companion object {
+        const val PIN_TIMEOUTMS = 2*60*1000
+
         fun shouldValidatePin(context: Context, intent: Intent?): Boolean {
-            return context.getPreferences().enablePin && (intent == null || !intent.getBooleanExtra("pin_validated", false))
+            return context.getPreferences().enablePin
+                    && (intent == null
+                    || !intent.getBooleanExtra("pin_validated", false)
+                    || System.currentTimeMillis() - intent.getLongExtra("pin_validated_at", System.currentTimeMillis()) >= PIN_TIMEOUTMS)
+        }
+
+        fun passPinExtras():Bundle {
+            return Bundle().apply {
+                putLong("pin_validated_at", System.currentTimeMillis())
+                putBoolean("pin_validated", true)
+            }
+        }
+
+        fun passPin(`for`:Intent):Intent {
+            return `for`.putExtras(passPinExtras())
         }
 
         fun openAppIntent(context: Context, appExtras:Bundle? = null):Intent {
@@ -184,10 +201,8 @@ class PinActivity: BaseActivity() {
             PinType.APP -> {
                 val startIntent = Intent(this, MainActivity::class.java)
                 startIntent.putExtras(intent?.extras?.getBundle("extras") ?: Bundle())
-                startIntent.putExtra("pin_validated", true)
-                startIntent.putExtra("pin_validated_at", System.currentTimeMillis())
                 //if(pinEnabled) startIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-                startActivity(startIntent)
+                startActivity(passPin(startIntent))
             }
             PinType.STOP_SERVICE -> {
                 val bundle = intent?.extras?.getBundle("extras") ?: Bundle()

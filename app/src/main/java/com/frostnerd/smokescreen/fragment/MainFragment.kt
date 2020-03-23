@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
@@ -75,7 +76,7 @@ class MainFragment : Fragment() {
         startButton.setOnClickListener {
             proxyState = when (proxyState) {
                 ProxyState.RUNNING -> {
-                    DnsVpnService.sendCommand(requireContext(), Command.STOP)
+                    DnsVpnService.sendCommand(requireContext(), Command.STOP, PinActivity.passPinExtras())
                     ProxyState.NOT_RUNNING
                 }
                 ProxyState.PAUSED -> {
