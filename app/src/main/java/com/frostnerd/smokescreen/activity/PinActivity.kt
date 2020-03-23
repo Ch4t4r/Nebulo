@@ -76,8 +76,7 @@ class PinActivity: BaseActivity() {
             if(intent.extras != null) intent.putExtra("extras", extras)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("pin_type", pinType)
-            // TODO Replace with qualifier for Android Q
-            if(Build.VERSION.SDK_INT >= 29 && context is Service) {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && context is Service) {
                 NotificationCompat.Builder(context, Notifications.getPinNotificationChannelId(context))
                     .setSmallIcon(R.drawable.ic_launcher_flat)
                     .setContentTitle(context.getString(R.string.notification_pin_title))
