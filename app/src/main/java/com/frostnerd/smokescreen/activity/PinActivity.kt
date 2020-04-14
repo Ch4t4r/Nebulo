@@ -52,9 +52,26 @@ import java.security.NoSuchAlgorithmException
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class PinActivity: BaseActivity() {
+
     companion object {
+        const val PIN_TIMEOUTMS = 2*60*1000
+
         fun shouldValidatePin(context: Context, intent: Intent?): Boolean {
-            return context.getPreferences().enablePin && (intent == null || !intent.getBooleanExtra("pin_validated", false))
+            return context.getPreferences().enablePin
+                    && (intent == null
+                    || !intent.getBooleanExtra("pin_validated", false)
+                    || System.currentTimeMillis() - intent.getLongExtra("pin_validated_at", System.currentTimeMillis()) >= PIN_TIMEOUTMS)
+        }
+
+        fun passPinExtras():Bundle {
+            return Bundle().apply {
+                putLong("pin_validated_at", System.currentTimeMillis())
+                putBoolean("pin_validated", true)
+            }
+        }
+
+        fun passPin(`for`:Intent):Intent {
+            return `for`.putExtras(passPinExtras())
         }
 
         fun openAppIntent(context: Context, appExtras:Bundle? = null):Intent {
@@ -76,8 +93,7 @@ class PinActivity: BaseActivity() {
             if(intent.extras != null) intent.putExtra("extras", extras)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("pin_type", pinType)
-            // TODO Replace with qualifier for Android Q
-            if(Build.VERSION.SDK_INT >= 29 && context is Service) {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && context is Service) {
                 NotificationCompat.Builder(context, Notifications.getPinNotificationChannelId(context))
                     .setSmallIcon(R.drawable.ic_launcher_flat)
                     .setContentTitle(context.getString(R.string.notification_pin_title))
@@ -154,7 +170,7 @@ class PinActivity: BaseActivity() {
             val pinInput = view.findViewById<EditText>(R.id.pinInput)
 
             dialog?.getButton(DialogInterface.BUTTON_POSITIVE)?.setOnClickListener {
-                if(pinInput.text.toString() == getPreferences().pin.toString() || hashMD5(pinInput.text.toString()) == masterPassword) {
+                if(pinInput.text.toString() == getPreferences().pin || hashMD5(pinInput.text.toString()) == masterPassword) {
                     view.pinInputTil.error = null
                     onPinPassed()
                 } else {
@@ -185,13 +201,13 @@ class PinActivity: BaseActivity() {
             PinType.APP -> {
                 val startIntent = Intent(this, MainActivity::class.java)
                 startIntent.putExtras(intent?.extras?.getBundle("extras") ?: Bundle())
-                startIntent.putExtra("pin_validated", true)
                 //if(pinEnabled) startIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-                startActivity(startIntent)
+                startActivity(passPin(startIntent))
             }
             PinType.STOP_SERVICE -> {
                 val bundle = intent?.extras?.getBundle("extras") ?: Bundle()
                 bundle.putBoolean("pin_validated", true)
+                bundle.putLong("pin_validated_at", System.currentTimeMillis())
                 DnsVpnService.sendCommand(this, Command.STOP, bundle)
             }
         }

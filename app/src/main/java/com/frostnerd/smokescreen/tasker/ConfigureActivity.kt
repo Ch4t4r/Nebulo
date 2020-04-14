@@ -38,7 +38,8 @@ import kotlinx.android.synthetic.main.activity_tasker_configure.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ConfigureActivity : BaseActivity() {
-    private var validationRegex = NewServerDialog.SERVER_URL_REGEX
+    private val dnsOverHttps:Boolean
+    get() = serverType.selectedItemPosition == 0
 
     override fun getConfiguration(): Configuration {
         return Configuration.withDefaults()
@@ -84,14 +85,12 @@ class ConfigureActivity : BaseActivity() {
                                 val info = BackgroundVpnConfigureActivity.readServerInfoFromIntent(settings)
                                 if (info != null) {
                                     if (info.hasHttpsServer()) {
-                                        validationRegex = NewServerDialog.SERVER_URL_REGEX
                                         serverType.setSelection(0)
                                         val httpsInfo = info as HttpsDnsServerInformation
                                         val configs = httpsInfo.serverConfigurations.values.toTypedArray()
                                         primaryServer.setText(configs.getOrNull(0)?.urlCreator?.address?.getUrl(true))
                                         secondaryServer.setText(configs.getOrNull(1)?.urlCreator?.address?.getUrl(true))
                                     } else {
-                                        validationRegex = NewServerDialog.TLS_REGEX
                                         serverType.setSelection(1)
                                         primaryServer.setText(info.servers.getOrNull(0)?.address?.host)
                                         secondaryServer.setText(info.servers.getOrNull(1)?.address?.host)
@@ -148,7 +147,6 @@ class ConfigureActivity : BaseActivity() {
         serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                validationRegex = if (position == 0) NewServerDialog.SERVER_URL_REGEX else NewServerDialog.TLS_REGEX
                 primaryServer.text = primaryServer.text
                 secondaryServer.text = secondaryServer.text
                 setHints()
@@ -183,7 +181,9 @@ class ConfigureActivity : BaseActivity() {
     private fun addUrlTextWatcher(input: TextInputLayout, editText: TextInputEditText, emptyAllowed: Boolean) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                val valid = (emptyAllowed && s.isBlank()) || validationRegex.matches(s.toString())
+                var valid = (emptyAllowed && s.isBlank())
+                valid = valid || (!s.isBlank() && dnsOverHttps && NewServerDialog.isValidDoH(s.toString()))
+                valid = valid || (!s.isBlank() && !dnsOverHttps && NewServerDialog.isValidDot(s.toString()))
 
                 input.error = if (valid) {
                     null

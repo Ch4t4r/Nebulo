@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="8dp"
+                android:visibility="gone"
                 android:drawableStart="@drawable/ic_caret_right"
                 android:drawablePadding="8dp"
                 android:gravity="center"

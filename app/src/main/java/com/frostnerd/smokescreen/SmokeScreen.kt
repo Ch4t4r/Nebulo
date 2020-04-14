@@ -53,10 +53,11 @@ class SmokeScreen : Application() {
     val customUncaughtExceptionHandler = EnrichableUncaughtExceptionHandler()
     private fun showCrashNotification() {
         val notification =
-            NotificationCompat.Builder(this, Notifications.noConnectionNotificationChannelId(this))
+            NotificationCompat.Builder(this, Notifications.getHighPriorityChannelId(this))
                 .setSmallIcon(R.drawable.ic_cloud_warn)
                 .setOngoing(false)
                 .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(
                     PendingIntent.getActivity(
                         this, RequestCodes.CRASH_NOTIFICATION,

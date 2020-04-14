@@ -24,6 +24,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_new_server.*
 import kotlinx.android.synthetic.main.dialog_new_server.view.*
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -50,23 +52,44 @@ class NewServerDialog(
     onServerAdded: (serverInfo: DnsServerInformation<*>) -> Unit,
     server: UserServerConfiguration? = null
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
-    private var validationRegex = SERVER_URL_REGEX
-
     companion object {
-        // Hostpart has to begin with a character or number
-        // Then has to either:
-        //  - Consist of numbers, characters and dashes AND ends with a character
-        //  - End with a character or number
-        //  => Host part has to be at least 2 characters long
-        // Host can optionally end with a dot
-        //  - If there is a dot there has to be either a number or a char after it
-        private val dohAddressPart = "(?:[a-z0-9](?:(?:[a-z0-9-]*[a-z]*[a-z0-9-]*[a-z0-9])|[a-z0-9])(?:.(?=[a-z0-9])|))*"
-        val SERVER_URL_REGEX =
-            Regex(
-                "^\\s*(?:https://)?((?:$dohAddressPart)|(?:\\[[a-z0-9:]+]))(?::[1-9][0-9]{0,4})?(/[a-z0-9-.]+)*(/)?\\s*$",
-                RegexOption.IGNORE_CASE
-            )
-        val TLS_REGEX = Regex("^\\s*($dohAddressPart)(?::[1-9][0-9]{0,4})?\\s*$", RegexOption.IGNORE_CASE)
+        fun isValidDoH(s:String): Boolean {
+            // It should contain at least one period (or colon for IPv6), either because it's an IP Address or a domain (like test.com). This explicitly prevents local-only domains (like localhost or raspberry)
+            return s.trim().let {
+                        it.toHttpUrlOrNull() ?: "https://$it".toHttpUrlOrNull()
+                    }?.host?.contains(Regex("[.:]")) ?: false
+        }
+
+        fun isValidDot(s:String):Boolean {
+            return parseDotAddress(s.trim()) != null
+        }
+
+        fun parseDotAddress(s:String):TLSUpstreamAddress? {
+            return s.takeIf {
+                !it.startsWith("http", ignoreCase = true) && it.isNotBlank() // It isn't http(s)
+            }?.let {
+                "https://$it".toHttpUrlOrNull() // But it has valid format for a URL
+            }?.takeIf {
+                it.pathSegments.size == 1 && it.pathSegments[0] == "" // But isn't an URL (no path in string)
+            }?.takeIf {
+              it.host.contains(Regex("[.:]")) // It should contain at least one period (or colon for IPv6), either because it's an IP Address or a domain (like test.com). This explicitly prevents local-only domains (like localhost or raspberry)
+            }?.let { url ->
+                val port = if(s.indexOf(":").let {
+                        it == -1 || s.toCharArray().getOrNull(it + 1)?.isDigit() != true
+                    }) 853 else url.port  // Default would treat it as https (port 443)
+
+                // Try to find a matching server in the default list as it'd contain more information than the user provides
+                AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { allServer ->
+                    allServer.values.filter {
+                        it.servers.any { server ->
+                            server.address.host ==  url.host && server.address.port == url.port
+                        }
+                    }
+                }.firstOrNull()?.servers?.firstOrNull {
+                    it.address.host == url.host
+                }?.address ?: TLSUpstreamAddress(url.host, port)
+            }
+        }
     }
 
     init {
@@ -105,9 +128,8 @@ class NewServerDialog(
                     var secondary =
                         if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString().trim()
 
-                    if (primary.startsWith("https")) primary = primary.replace("https://", "")
-                    if (secondary != null && secondary.startsWith("https")) secondary =
-                        secondary.replace("https://", "")
+                    if (dnsOverHttps && !primary.startsWith("http", ignoreCase = true)) primary = "https://$primary"
+                    if (dnsOverHttps && secondary != null && !secondary.startsWith("http", ignoreCase = true)) secondary = "https://$secondary"
                     invokeCallback(name, primary, secondary, onServerAdded)
                     dismiss()
                 } else {
@@ -128,7 +150,6 @@ class NewServerDialog(
             serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
                 override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
-                    validationRegex = if (position == 0) SERVER_URL_REGEX else TLS_REGEX
                     dnsOverHttps = position == 0
                     setHintAndTitle(view, dnsOverHttps, title)
                     primaryServer.text = primaryServer.text
@@ -202,7 +223,7 @@ class NewServerDialog(
             val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
             serverInfo.add(
                 DnsServerConfiguration(
-                    address = createTlsUpstreamAddress(primary),
+                    address = parseDotAddress(primary)!!,
                     experimental = false,
                     supportedProtocols = listOf(TLS),
                     preferredProtocol = TLS
@@ -210,9 +231,7 @@ class NewServerDialog(
             )
             if (!secondary.isNullOrBlank()) serverInfo.add(
                 DnsServerConfiguration(
-                    address = createTlsUpstreamAddress(
-                        secondary
-                    ), experimental = false, supportedProtocols = listOf(TLS), preferredProtocol = TLS
+                    address = parseDotAddress(secondary)!!, experimental = false, supportedProtocols = listOf(TLS), preferredProtocol = TLS
                 )
             )
             onServerAdded.invoke(
@@ -233,67 +252,41 @@ class NewServerDialog(
 
     private fun createHttpsUpstreamAddress(url: String): HttpsUpstreamAddress {
         context.log("Creating HttpsUpstreamAddress for `$url`")
-        var host = ""
-        var port: Int? = null
-        var path: String? = null
-        if (url.contains(":")) {
-            host = url.split(":")[0]
-            port = url.split(":")[1].split("/")[0].toInt()
-            if (port > 65535) port = null
-        }
-        if (url.contains("/")) {
-            path = url.split("/").let { it.subList(1, it.size).joinToString(separator = "/") }
-            if (host == "") host = url.split("/")[0]
-        }
-        if (host == "") host = url
+
+        val parsedUrl = url.toHttpUrl()
+        val host = parsedUrl.host
+        val port = parsedUrl.port
+        val path = parsedUrl.pathSegments.takeIf {
+            it.isNotEmpty() && (it.size > 1 || !it.contains("")) // Non-empty AND contains something other than "" (empty string used when there is no path)
+        }?.joinToString(separator = "/")
 
         return AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated { allServer ->
             if(path != null) emptyList()
             else allServer.values.filter {
                 it.servers.any { server ->
-                    server.address.host == host && (port == null || server.address.port == port)
+                    server.address.host == host && (server.address.port == port)
                 }
             }
         }.firstOrNull()?.servers?.firstOrNull {
             it.address.host == host
-        }?.address ?: if (port != null && path != null) HttpsUpstreamAddress(host, port, path)
-        else if (port != null) HttpsUpstreamAddress(host, port)
-        else if (path != null) HttpsUpstreamAddress(host, urlPath = path)
-        else HttpsUpstreamAddress(host)
-    }
-
-    private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
-        context.log("Creating TLSUpstreamAddress for `$host`")
-        val parsedHost:String
-        var port: Int? = null
-        if (host.contains(":")) {
-            parsedHost = host.split(":")[0]
-            port = host.split(":")[1].split("/")[0].toInt()
-            if (port > 65535) port = null
-        } else parsedHost = host
-        return AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { allServer ->
-            allServer.values.filter {
-                it.servers.any { server ->
-                    server.address.host == parsedHost && (port == null || server.address.port == port)
-                }
-            }
-        }.firstOrNull()?.servers?.firstOrNull {
-            it.address.host == parsedHost
-        }?.address ?: if (port != null) TLSUpstreamAddress(parsedHost, port)
-        else TLSUpstreamAddress(parsedHost)
+        }?.address ?: if (path != null) HttpsUpstreamAddress(host, port, path)
+        else HttpsUpstreamAddress(host, port)
     }
 
     private fun addUrlTextWatcher(input: TextInputLayout, editText: TextInputEditText, emptyAllowed: Boolean) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 var valid = (emptyAllowed && s.isBlank())
-                valid = valid || (!s.isBlank() && dnsOverHttps && SERVER_URL_REGEX.matches(s.toString()))
-                valid = valid || (!s.isBlank() && !dnsOverHttps && TLS_REGEX.matches(s.toString()))
+                valid = valid || (!s.isBlank() && dnsOverHttps && isValidDoH(s.toString()))
+                valid = valid || (!s.isBlank() && !dnsOverHttps && isValidDot(s.toString()))
 
-                input.error = if (valid) {
-                    null
-                } else if(dnsOverHttps) context.getString(R.string.error_invalid_url)
-                else context.getString(R.string.error_invalid_host)
+                input.error = when {
+                    valid -> {
+                        null
+                    }
+                    dnsOverHttps -> context.getString(R.string.error_invalid_url)
+                    else -> context.getString(R.string.error_invalid_host)
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

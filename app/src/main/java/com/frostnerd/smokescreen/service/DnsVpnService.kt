@@ -110,9 +110,13 @@ class DnsVpnService : VpnService(), Runnable {
     companion object {
         const val BROADCAST_VPN_ACTIVE = BuildConfig.APPLICATION_ID + ".VPN_ACTIVE"
         const val BROADCAST_VPN_INACTIVE = BuildConfig.APPLICATION_ID + ".VPN_INACTIVE"
+        const val BROADCAST_VPN_PAUSED = BuildConfig.APPLICATION_ID + ".VPN_PAUSED"
+        const val BROADCAST_VPN_RESUMED = BuildConfig.APPLICATION_ID + ".VPN_RESUME"
         const val BROADCAST_DNSRULES_REFRESHED = BuildConfig.APPLICATION_ID + ".DNSRULE_REFRESH"
 
         var currentTrafficStats: TrafficStats? = null
+            private set
+        var paused:Boolean = false
             private set
 
         fun startVpn(context: Context, serverInfo: DnsServerInformation<*>? = null) {
@@ -325,14 +329,15 @@ class DnsVpnService : VpnService(), Runnable {
             "notification_allow_stop",
             "notification_allow_pause",
             "dns_rules_enabled",
-            "simple_notification"
+            "simple_notification",
+            "pin"
         )
         settingsSubscription = getPreferences().listenForChanges(
             relevantSettings,
             getPreferences().preferenceChangeListener { changes ->
                 log("The Preference(s) ${changes.keys} have changed, restarting the VPN.")
                 log("Detailed changes: $changes")
-                if ("hide_notification_icon" in changes || "hide_notification_icon" in changes || "simple_notification" in changes) {
+                if ("hide_notification_icon" in changes || "hide_notification_icon" in changes || "simple_notification" in changes || "pin" in changes) {
                     simpleNotification = getPreferences().simpleNotification
                     log("Recreating the notification because of the change in preferences")
                     createNotification()
@@ -436,10 +441,17 @@ class DnsVpnService : VpnService(), Runnable {
             )
         }
         noConnectionNotificationBuilder.setWhen(System.currentTimeMillis())
-        if (!noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
-            Notifications.ID_NO_CONNECTION,
-            noConnectionNotificationBuilder.build()
-        )
+        if (!noConnectionNotificationShown) {
+            try {
+                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
+                    Notifications.ID_NO_CONNECTION,
+                    noConnectionNotificationBuilder.build()
+                )
+            } catch (ex:java.lang.NullPointerException) {
+                // AIDL bug causing NPE in  android.app.ApplicationPackageManager.getUserIfProfile(ApplicationPackageManager.java:2813)
+                // Ignore it.
+            }
+        }
         noConnectionNotificationShown = true
     }
 
@@ -478,12 +490,18 @@ class DnsVpnService : VpnService(), Runnable {
                         pauseNotificationAction?.title = getString(R.string.all_resume)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_resume
                         notificationBuilder.setSmallIcon(R.drawable.ic_notification_paused)
+                        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(
+                            BROADCAST_VPN_PAUSED))
+                        paused = true
                     } else {
                         log("Received RESUME command while app paused, restarting vpn.")
                         recreateVpn(false, null)
                         pauseNotificationAction?.title = getString(R.string.all_pause)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_pause
                         notificationBuilder.setSmallIcon(R.drawable.ic_mainnotification)
+                        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(
+                            BROADCAST_VPN_RESUMED))
+                        paused = false
                     }
                     updateNotification()
                 }
@@ -1023,7 +1041,7 @@ class DnsVpnService : VpnService(), Runnable {
             val handle = ProxyTlsHandler(
                 addresses,
                 listOf(it),
-                connectTimeout = 2000,
+                connectTimeout = 8000,
                 queryCountCallback = {
                     if (!simpleNotification) {
                         setNotificationText()

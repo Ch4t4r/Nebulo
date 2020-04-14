@@ -153,7 +153,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
         pinValue.summary =
-            getString(R.string.summary_preference_change_pin, requireContext().getPreferences().pin.toString())
+            getString(R.string.summary_preference_change_pin, requireContext().getPreferences().pin)
         if (!requireContext().canUseFingerprintAuthentication()) findPreference("pin_allow_fingerprint").isVisible =
             false
     }
@@ -497,10 +497,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             blackList = requireContext().getPreferences().isBypassBlacklist
         ) { selected, isBlacklist ->
             requireContext().getPreferences().isBypassBlacklist = isBlacklist
-            if (selected.size != requireContext().getPreferences().userBypassPackages.size) {
-                log("Updated the list of user bypass packages to $selected")
-                requireContext().getPreferences().userBypassPackages = selected
-            }
+            log("Updated the list of user bypass packages to $selected")
+            requireContext().getPreferences().userBypassPackages = selected
         }.createDialog()
         dialog.setTitle(R.string.title_excluded_apps)
         dialog.show()

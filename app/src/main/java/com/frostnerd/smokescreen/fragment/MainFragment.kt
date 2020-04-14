@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
@@ -51,8 +52,7 @@ import java.net.URL
  */
 class MainFragment : Fragment() {
     private val vpnRequestCode: Int = 1
-    private var proxyRunning: Boolean = false
-    private var proxyStarting = false
+    private var proxyState:ProxyState = ProxyState.NOT_RUNNING
     private var vpnStateReceiver: BroadcastReceiver? = null
 
     override fun onCreateView(
@@ -65,24 +65,33 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        proxyRunning = requireContext().isServiceRunning(DnsVpnService::class.java)
+        proxyState = if(requireContext().isServiceRunning(DnsVpnService::class.java)) {
+            if(DnsVpnService.paused) ProxyState.PAUSED
+            else ProxyState.RUNNING
+        } else ProxyState.NOT_RUNNING
         updateVpnIndicators()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         startButton.setOnClickListener {
-            if (proxyRunning) {
-                DnsVpnService.sendCommand(requireContext(), Command.STOP)
-                proxyStarting = false
-                proxyRunning = false
-            } else {
-                startVpn()
-                proxyStarting = true
+            proxyState = when (proxyState) {
+                ProxyState.RUNNING -> {
+                    DnsVpnService.sendCommand(requireContext(), Command.STOP, PinActivity.passPinExtras())
+                    ProxyState.NOT_RUNNING
+                }
+                ProxyState.PAUSED -> {
+                    DnsVpnService.sendCommand(it.context, Command.PAUSE_RESUME)
+                    ProxyState.STARTING
+                }
+                else -> {
+                    startVpn()
+                    ProxyState.STARTING
+                }
             }
             updateVpnIndicators()
         }
         startButton.setOnTouchListener { _, event ->
-            if (proxyRunning || proxyStarting) {
+            if (proxyState == ProxyState.RUNNING || proxyState == ProxyState.STARTING) {
                 false
             } else {
                 if (event.flags and MotionEvent.FLAG_WINDOW_IS_OBSCURED != 0) {
@@ -96,7 +105,7 @@ class MainFragment : Fragment() {
                                 neutralButton = getString(android.R.string.ok) to { dialog, _ ->
                                     dialog.dismiss()
                                     startVpn()
-                                    proxyStarting = true
+                                    proxyState = ProxyState.STARTING
                                 }
                             )
                             true
@@ -111,18 +120,21 @@ class MainFragment : Fragment() {
         vpnStateReceiver = requireContext().registerLocalReceiver(
             listOf(
                 DnsVpnService.BROADCAST_VPN_ACTIVE,
-                DnsVpnService.BROADCAST_VPN_INACTIVE
+                DnsVpnService.BROADCAST_VPN_INACTIVE,
+                DnsVpnService.BROADCAST_VPN_PAUSED,
+                DnsVpnService.BROADCAST_VPN_RESUMED
             )
         ) {
             if (it != null && it.action != null) {
                 when (it.action) {
-                    DnsVpnService.BROADCAST_VPN_ACTIVE -> {
-                        proxyStarting = false
-                        proxyRunning = true
+                    DnsVpnService.BROADCAST_VPN_ACTIVE, DnsVpnService.BROADCAST_VPN_RESUMED -> {
+                        proxyState = ProxyState.RUNNING
                     }
                     DnsVpnService.BROADCAST_VPN_INACTIVE -> {
-                        proxyRunning = false
-                        proxyStarting = false
+                        proxyState = ProxyState.NOT_RUNNING
+                    }
+                    DnsVpnService.BROADCAST_VPN_PAUSED -> {
+                        proxyState = ProxyState.PAUSED
                     }
                 }
                 updateVpnIndicators()
@@ -198,7 +210,6 @@ class MainFragment : Fragment() {
         if (requestCode == vpnRequestCode && resultCode == Activity.RESULT_OK) {
             startVpn()
         } else if (requestCode == vpnRequestCode) {
-            proxyStarting = false
             updateVpnIndicators()
         }
     }
@@ -212,16 +223,21 @@ class MainFragment : Fragment() {
                 else it.getLinkProperties(it.activeNetwork)?.isPrivateDnsActive ?: false
             }
         }
-        when {
-            proxyRunning -> {
+        when(proxyState) {
+            ProxyState.RUNNING -> {
                 privateDnsInfo.visibility = View.INVISIBLE
                 statusImage.setImageResource(R.drawable.ic_lock)
                 statusImage.clearAnimation()
                 startButton.setText(R.string.all_stop)
             }
-            proxyStarting -> {
+            ProxyState.STARTING -> {
                 privateDnsInfo.visibility = View.INVISIBLE
                 startButton.setText(R.string.all_stop)
+                statusImage.setImageResource(R.drawable.ic_lock_half_open)
+            }
+            ProxyState.PAUSED -> {
+                privateDnsInfo.visibility = View.INVISIBLE
+                startButton.setText(R.string.all_resume)
                 statusImage.setImageResource(R.drawable.ic_lock_half_open)
             }
             else -> {
@@ -252,5 +268,9 @@ class MainFragment : Fragment() {
                 text.visibility = View.GONE
             }
         }
+    }
+
+    enum class ProxyState {
+        NOT_RUNNING, STARTING, RUNNING, PAUSED
     }
 }

@@ -68,7 +68,7 @@ interface AppSettings {
     // Pin category
     var enablePin:Boolean
     var allowFingerprintForPin:Boolean
-    var pin:Int
+    var pin: String
 
     // Cache category
     var useDnsCache: Boolean
@@ -174,7 +174,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
-    override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf("com.android.vending"))
+    override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf("com.android.vending", "ch.threema.app.work", "ch.threema.app"))
     override var isBypassBlacklist: Boolean by booleanPref("user_bypass_blacklist", true)
 
     override var showNotificationOnLockscreen: Boolean by booleanPref("show_notification_on_lockscreen", true)
@@ -186,7 +186,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     override var enablePin:Boolean by booleanPref("enable_pin", false)
     override var allowFingerprintForPin:Boolean by booleanPref("pin_allow_fingerprint", true)
-    override var pin: Int by stringBasedIntPref("pin", 1234)
+    override var pin: String by stringPref("pin", "1234")
     override var useDnsCache: Boolean by booleanPref("dnscache_enabled", false)
     override var keepDnsCacheAcrossLaunches: Boolean by booleanPref("dnscache_keepacrosslaunches", false)
     override var maxCacheSize: Int by stringBasedIntPref("dnscache_maxsize", 1000)
