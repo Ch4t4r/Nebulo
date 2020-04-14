@@ -10,6 +10,7 @@ before_script:
 build_debug:
   stage: build
   script:
+    - chmod +x changeVersion.sh
     - ./changeVersion.sh app/build.gradle " $CI_COMMIT_REF_NAME\_$CI_PIPELINE_ID" --append
     - ./gradlew assembleNormalDebug --stacktrace -x test
   artifacts:
