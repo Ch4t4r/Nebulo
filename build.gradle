@@ -8,33 +8,53 @@ static def getSystemVariableOrDefault(String variable, String defaultValue) {
     return value
 }
 
-def getArtifactoryUser() {
+ext.public_artifactory_user = "publicaccess"
+def getArtifactoryUser(Boolean useDefault = true){
     def user = System.getenv("ARTIFACTORY_USER")
-    if (user == null) {
-        user = artifactory_username
+    if(user == null && useDefault){
+        println "Using public artifactory user"
+        user = public_artifactory_user
     }
-
-    if (user == null) {
-        throw new Exception("Artifactory user not set!")
-    }
-
     return user
 }
 
-def getArtifactoryPassword() {
+ext.public_artifactory_password = "AKCp5ekwNjBNhRDnT7YK3BRHxdep6v1FyUSptgrAMhQBfq2eDTauVemGLmgyKucJYeEPsNJGP"
+def getArtifactoryPassword(Boolean useDefault = true){
     def pw = System.getenv("ARTIFACTORY_PASSWORD")
-    if (pw == null) {
-        pw = artifactory_password
-    }
-    if (pw == null) {
-        throw new Exception("Artifactory password not set!")
+    if(pw == null && useDefault){
+        println "Using public artifactory Password"
+        pw = public_artifactory_password
     }
 
     return pw
 }
 
+ext.public_nexus_user = "publicaccess"
+def getNexusUser(){
+    def user = System.getenv("NEXUS_USER")
+    if(user == null){
+        println "Using public Nexus user"
+        user = public_nexus_user
+    } else {
+        println "Nexus user: $user"
+    }
+    return user
+}
+
+ext.public_nexus_token = "HWGxGVPtvV4p3ZS9RSXf"
+def getNexusPassword(){
+    def pw = System.getenv("NEXUS_PASSWORD")
+    if(pw == null){
+        println "Using public Nexus password"
+        pw = public_nexus_token
+    }
+    return pw
+}
+
 ext.artifactory_username = getArtifactoryUser()
 ext.artifactory_password = getArtifactoryPassword()
+ext.nexus_user = getNexusUser()
+ext.nexus_password = getNexusPassword()
 
 buildscript {
     ext.kotlin_version = '1.3.71'
@@ -70,6 +90,13 @@ allprojects {
             credentials {
                 username = "$artifactory_username"
                 password = "$artifactory_password"
+            }
+        }
+        maven {
+            url 'https://nexus.frostnerd.com/repository/libs-release/'
+            credentials {
+                username = "$nexus_user"
+                password = "$nexus_password"
             }
         }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
