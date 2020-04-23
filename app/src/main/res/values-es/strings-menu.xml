@@ -5,4 +5,6 @@
     <string name="menu_querylogging">Consultas registradas</string>
     <string name="menu_settings">Ajustes</string>
     <string name="menu_main">Estado de la aplicación</string>
+    <string name="menu_show_on_fdroid">Mostrar en F-Droid</string>
+    <string name="menu_about">Acerca de esta aplicación</string>
 </resources>
