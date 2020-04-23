@@ -58,4 +58,21 @@
     <string name="windows_querylogging_used_server">Servidor em uso</string>
     <string name="windows_querylogging_search">Pesquisa de host</string>
     <string name="error_invalid_host">Por favor, providencie um host válido.</string>
+    <string name="window_main_privatedns_info">O DNS privado está activo, as suas consultas já estão protegidas. Ative o Nebulo se desejar usar dns-over-https ou outras funcionalidades úteis.</string>
+    <string name="windows_querylogging_usedserver_cache">Resolvido com cache</string>
+    <string name="windows_querylogging_usedserver_dnsrules">Resolvido com regras DNS</string>
+    <string name="windows_querylogging_dnsrule_created">A regra DNS foi criada.</string>
+    <string name="windows_querylogging_create_dnsrule">Criar regra DNS para este host</string>
+    <string name="windows_querylogging_responses">Respostas</string>
+    <string name="windows_querylogging_latency">Latência</string>
+    <string name="windows_querylogging_protocol">Protocolo</string>
+    <string name="windows_querylogging_hostsource__unknown">Desconhecido</string>
+    <string name="windows_querylogging_hostsource__user">Regras de utilização</string>
+    <string name="windows_querylogging_hostsource">Fonte da regra do DNS</string>
+    <string name="windows_querylogging_question">Pergunta</string>
+    <string name="windows_querylogging_type">Tipo</string>
+    <string name="windows_querylogging_time">Hora</string>
+    <string name="windows_querylogging_search_hint">Pesquisar por um anfitrião no log de consultas</string>
+    <string name="error_cannot_open_settings">Não é possível abrir as configurações do sistema.</string>
+    <string name="error_webview_missing">O pacote WebView não foi encontrado, ele está sendo atualizado ou removido\?</string>
 </resources>
