@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Nebulo</string>
     <string name="activity_label_import_queries">Importer des requêtes</string>
-    <string name="activity_label_import_servers">importer des serveurs</string>
+    <string name="activity_label_import_servers">Importer des serveurs</string>
     <string name="activity_label_enable_logging">Exporter/Activer la journalisation</string>
     <string name="all_stop">Arrêter</string>
     <string name="all_start">Démarrer</string>
@@ -28,4 +28,26 @@
     <string name="about_credits">Crédits</string>
     <string name="about_info">Information générale</string>
     <string name="about_help_translating">Aidez pour la traduction</string>
+    <plurals name="window_dnsrules_subtitle">
+        <item quantity="one">%1d Règle DNS</item>
+        <item quantity="other">%1d Règles du DNS</item>
+    </plurals>
+    <string name="about_app">Cette application est open source. Le code source peut être consulté à l\'adresse suivante : &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
+\nEn outre, l\'application ne contient pas de publicité et ne permet pas de suivre ou de collecter des données vous concernant.
+\n
+\nVersion %1s
+\nConstruire %2d
+\nVersion de la base de données %3d
+\nID du crashreport : %4s
+\n
+\nDaniel Wolf 2019
+\nSous licence GPLv3.
+\n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
+    <string name="windows_querylogging_create_dnsrule">Créer une règle DNS pour cet host</string>
+    <string name="windows_querylogging_search">Recherche de l\'host</string>
+    <string name="windows_querylogging_search_hint">Rechercher un host dans le journal des requêtes</string>
+    <string name="window_dnsrules_customhosts_message">Définissez ici tous vos hosts personnalisés.</string>
+    <string name="window_dnsrules_hostalreadyexists">Il existe déjà une règle pour cet host.</string>
+    <string name="window_dnsrules_customhosts">Hosts personnalisés</string>
+    <string name="error_invalid_host">Veuillez fournir un host valide.</string>
 </resources>
