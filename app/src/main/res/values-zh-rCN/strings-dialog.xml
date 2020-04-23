@@ -141,7 +141,25 @@
 \n如果您选择忽略，则不会再看到此对话框。您可以点击下面的按钮（在浏览器中打开外部网站）以阅读更多内容，并获得解决这种问题的方法。点击设置以进入Android设置，在这里您可以禁用Nebulo的电池优化。</string>
     <string name="dialog_servicekilled_more_info">更多信息</string>
     <string name="dialog_overlaydetected_title">检测到系统遮罩层</string>
-    <string name="dialog_overlaydetected_message">似乎有一个系统范围内的覆盖层（如聊天气泡、颜色或夜视镜）在活动。大多数设备不允许你在这种情况下启用VPN。
+    <string name="dialog_overlaydetected_message">有一个系统范围内的遮罩层（如聊天气泡、滤色器或夜视过滤器）似乎正处于活跃状态。大多数设备不允许您在这种情况下启用VPN。
 \n
-\n如果你不能在下一个对话框中点击确定，请禁用覆盖层。</string>
+\n如果您不能在即将出现的对话框中点击确定，请禁用覆盖层。</string>
+    <string name="dialog_vpninformation_message">Nebulo通过使用一个傀儡VPN连接来重定向您所有的DNS请求至一个您选择的安全的服务器。
+\n这个傀儡VPN并非真正的VPN，它也无法隐藏您的身份，无法更改您的IP地址。
+\n
+\n除DNS请求以外，使用本应用不会传输实际的数据。</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">分钟</string>
+    <string name="dialog_hostsourcerefresh_title">更新规则源</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">自动更新规则源</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">仅在Wi-Fi下更新</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">更新，每隔</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">立刻更新</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">个小时</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">天</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">周</string>
+    <string name="dialog_cleardnscache_message">您确定您想清空DNS缓存吗？</string>
+    <string name="dialog_vpninformation_title">本应用如何工作</string>
+    <string name="dialog_raterequest_title">您是否喜欢Nebulo？</string>
+    <string name="dialog_raterequest_message">你好！如果你喜欢Nebulo，你愿意花一点时间在应用商店里为它打分吗？</string>
+    <string name="dialog_vpn_permission_denied_message">系统拒绝了Nebulo启动VPN。请启动应用，并在应用内点击启动按钮以给予VPN权限。</string>
 </resources>
