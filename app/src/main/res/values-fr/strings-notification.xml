@@ -53,4 +53,5 @@
     <string name="notification_channel_foreground_service">Canal de notification permanent</string>
     <string name="notification_channel_default_description">Canal par défaut pour l\'affichage des notifications.</string>
     <string name="notification_channel_default">Canal par défaut</string>
+    <string name="notification_ruleexport_title">DNS règle l\'exportation</string>
 </resources>
