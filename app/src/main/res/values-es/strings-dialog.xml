@@ -79,7 +79,7 @@
     <string name="dialog_logexport_general">Elija la aplicación</string>
     <string name="dialog_batteryoptimization_title">Optimización de la batería</string>
     <string name="dialog_batteryoptimization_whitelist">Desactivar</string>
-    <string name="dialog_changelog_dont_show_again">No vuelvas a aparecer.</string>
+    <string name="dialog_changelog_dont_show_again">No vuelvas a aparecer</string>
     <string name="dialog_about_licenses">Licencias</string>
     <string name="dialog_query_export_message">Por favor, espere mientras se exportan las consultas</string>
     <string name="dialog_crashreporting_title">Reporte automático de colisión</string>
