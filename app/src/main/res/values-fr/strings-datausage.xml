@@ -1,2 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dialog_crashreportingusages_data_os_3">Version du noyau</string>
+    <string name="dialog_crashreportingusages_data_os_2">Version (par exemple 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_1">Nom (par exemple, Android)</string>
+    <string name="dialog_crashreportingusages_data_app_6">Serveur DNS secondaire</string>
+    <string name="dialog_crashreportingusages_data_app_5">Serveur DNS primaire</string>
+    <string name="dialog_crashreportingusages_data_app_4">Nom du serveur Dns</string>
+    <string name="dialog_crashreportingusages_data_app_3">Version de la base de données</string>
+    <string name="dialog_crashreportingusages_data_app_2">Version de l\'application</string>
+    <string name="dialog_crashreportingusages_data_app_1">Heure de début de l\'application</string>
+    <string name="dialog_crashreportingusages_data_device_10">Langue</string>
+    <string name="dialog_crashreportingusages_data_device_9">Modèle</string>
+    <string name="dialog_crashreportingusages_data_device_8">Marque</string>
+    <string name="dialog_crashreportingusages_data_device_7">Fabricant</string>
+    <string name="dialog_crashreportingusages_data_device_6">Résolution de l\'écran</string>
+    <string name="dialog_crashreportingusages_data_device_5">En ligne au moment de l\'accident (oui/non)</string>
+    <string name="dialog_crashreportingusages_data_device_4">État d\'imputation (oui/non)</string>
+    <string name="dialog_crashreportingusages_data_device_3">Mémoire libre/utilisée (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_2">Orientation (paysage, portrait)</string>
+    <string name="dialog_crashreportingusages_data_user_1">L\'identification aléatoire utilisée pour suivre les accidents</string>
+    <string name="dialog_crashreportingusages_data_4">Données relatives au système d\'exploitation</string>
+    <string name="dialog_crashreportingusages_data_3">Données de l\'application</string>
+    <string name="dialog_crashreportingusages_data_2">Données sur les appareils</string>
+    <string name="dialog_crashreportingusages_data_1">Données de l\'utilisateur</string>
+</resources>
