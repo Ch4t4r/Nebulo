@@ -129,5 +129,8 @@
     <string name="dialog_exportdnsrules_whitelist">导出白名单规则</string>
     <string name="dialog_exportdnsrules_nonwhitelist">导出普通规则</string>
     <string name="dialog_exportdnsrules_export_user_rules">导出自定义域名DNS规则</string>
-    <string name="dialog_exportdnsrules_export_sources">从启用的主机源导出DNS规则</string>
+    <string name="dialog_exportdnsrules_export_sources">从启用的规则源导出DNS规则</string>
+    <string name="dialog_editdelete_title">您想做什么？</string>
+    <string name="dialog_editdelete_delete">删除</string>
+    <string name="dialog_editdelete_edit">编辑</string>
 </resources>
