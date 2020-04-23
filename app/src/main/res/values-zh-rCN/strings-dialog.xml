@@ -93,4 +93,11 @@
 \n
 \n你知道这款应用有Telegram群组吗？群组包含有定期的更新，同时也是讨论与提问的极佳去处。
 \n我们是一个由超过200人组成的优质社群，你想成为其中的一分子吗？</string>
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">测试的%1d服务器
+\n %2d DoT服务器可以到达，%3d不可以到达。
+\n %4d DoH服务器可以到达，%5d无法到达。
+\n 平均响应时间：%6d ms。
+\n
+\n 最快的服务器。%7s
+\n 最慢的服务器。%8s</string>
 </resources>
