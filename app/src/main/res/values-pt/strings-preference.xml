@@ -28,13 +28,15 @@
 \nCódigo PIN atual: %1s</string>
     <string name="preference_category_cache">Configurações de cache</string>
     <string name="title_dnscache_enabled">Usar cache de DNS</string>
-    <string name="summary_dnscache_enabled">Habilita o cache do DNS. O cache memoriza consultas antigas para responder a estas mais rapidamente no futuro</string>
+    <string name="summary_dnscache_enabled">Habilita o cache do DNS. O cache memoriza consultas antigas para responder a estas mais rapidamente no futuro.
+\n
+\nO sistema já possui um cache, ative-o se você quiser personalizar o comportamento.</string>
     <string name="title_dnscache_keepacrosslaunches">Armazenar cache do DNS</string>
     <string name="summary_dnscache_keepacrosslaunches">Manter o cache do DNS mesmo quando o aplicativo for reiniciado</string>
     <string name="title_dnscache_maxsize">Tamanho máximo do cache</string>
     <string name="summary_dnscache_maxsize">Definir o número máximo de consultas armazenadas, independentemente do tempo</string>
     <string name="title_dnscache_usedefaulttimes">Tempo de cache padrão</string>
-    <string name="summary_dnscache_usedefaulttimes">Manter no cache as consultas pelo tempo padrão determinado pelo servidor DNS</string>
+    <string name="summary_dnscache_usedefaulttimes">Mantenha as requisições no cache enquanto o servidor DNS se comunicar usando o TTL</string>
     <string name="title_dnscache_minimum_cache_time">Tempo mínimo de cache</string>
     <string name="summary_dnscache_minimum_cache_time">O tempo mínimo de retenção de cada consulta no cache.
 \nAtual: %1d segundos.</string>
@@ -104,4 +106,5 @@
 \n Sem efeito quando o aplicativo não estiver ativo.</string>
     <string name="title_language">Idioma</string>
     <string name="summary_show_revoked_notification">Mostrar uma notificação quando o Nebulo perde a permissão para a VPN</string>
+    <string name="summary_simple_notification">Use um texto simples na Notificação</string>
 </resources>
