@@ -18,14 +18,16 @@
     <string name="dialog_newserver_name">服务器名称</string>
     <plurals name="dialog_serverimport_title">
         <item quantity="one">导入%1d个服务器</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="dialog_serverimport_priority">优先级 %1d</string>
     <string name="dialog_serverimport_experimental">实验性功能</string>
     <string name="dialog_serverimport_servertype_doh">类型：Dns-over-HTTPS（DoH）</string>
     <string name="dialog_serverimport_servertype_dot">类型：Dns-over-TLS（DoT）</string>
     <string name="dialog_serverimport_done">完成</string>
-    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">请选择你想导入的服务器。
+    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">请选择您想导入的服务器。
 \n
-\n如果您选择了已经导入的服务器，则会被复制。</string>
+\n如果您选择了已被导入的服务器，那么服务器将会有重复。</string>
+    <string name="dialog_serverimportfailed_title">导入失败</string>
+    <string name="dialog_serverimportfailed_text">无法导入服务器。</string>
 </resources>
