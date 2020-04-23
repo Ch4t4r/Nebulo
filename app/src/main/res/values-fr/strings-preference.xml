@@ -13,4 +13,22 @@
     <string name="title_start_after_update">Démarrer après la mise à jour</string>
     <string name="title_show_notification_on_lockscreen">Afficher sur un écran verrouillé</string>
     <string name="title_language">Langue</string>
+    <string name="summary_show_notification_on_lockscreen">Permet d\'afficher ou non la notification sur l\'écran de verrouillage</string>
+    <string name="summary_notification_hide_icon">Cacher l\'icône de la barre de navigation en haut</string>
+    <string name="title_notification_allow_stop">Permettre l\'arrêt</string>
+    <string name="title_simple_notification">Simple notification</string>
+    <string name="summary_notification_allow_stop">Permettre l\'arrêt de l\'application à partir de la notification</string>
+    <string name="summary_notification_allow_pause">Permettre une pause de l\'application par rapport à la notification</string>
+    <string name="title_show_noconnection_notification">Notification d\'absence de connexion</string>
+    <string name="summary_show_noconnection_notification">Afficher une notification lorsque l\'application n\'a pas de connexion ou a une mauvaise connexion</string>
+    <string name="title_show_revoked_notification">Notification de perte d\'autorisation</string>
+    <string name="title_preference_enable_pin">Pin</string>
+    <string name="summary_preference_pin_use_fingerprint">Permettez que votre empreinte digitale soit utilisée à la place de l\'épingle.</string>
+    <string name="title_notification_hide_icon">Cacher l\'icône</string>
+    <string name="title_notification_allow_pause">Permettre une pause</string>
+    <string name="preference_category_pin">Protection du code PIN</string>
+    <string name="summary_preference_enable_pin">Demander un code PIN lors de l\'ouverture ou de l\'arrêt de l\'application</string>
+    <string name="title_preference_pin_use_fingerprint">Autoriser les empreintes digitales</string>
+    <string name="summary_simple_notification">Utiliser un texte simple dans la notification</string>
+    <string name="summary_show_revoked_notification">Afficher une notification lorsque Nebulo perd la permission d\'accéder au VPN</string>
 </resources>
