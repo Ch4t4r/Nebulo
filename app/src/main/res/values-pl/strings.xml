@@ -57,4 +57,6 @@
     <string name="windows_querylogging_create_dnsrule">Stwórz zasadę DNS dla tego hosta</string>
     <string name="windows_querylogging_dnsrule_created">Zasada DNS została utworzona.</string>
     <string name="window_main_privatedns_info">Prywatny DNS jest aktywny, twoje zapytania DNS są już chronione. Włącz Nebulo jeśli chcesz używać DNS-Over-HTTP albo innych użytecznych funkcji.</string>
+    <string name="about_contact_developer">Kontakt z programistą</string>
+    <string name="crashreporting_thankyou_gotit">Gotowe!</string>
 </resources>
