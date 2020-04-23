@@ -145,4 +145,15 @@
     <string name="dialog_hostsourcerefresh_wifi_only">Atualizar somente com WIFI</string>
     <string name="dialog_hostsourcerefresh_refresh_every">Atualizar a cada</string>
     <string name="dialog_raterequest_title">Você está gostando do Nebulo\?</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">Exportar regras normais</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">Actualizar agora</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Acta</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">Horário</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">Dias</string>
+    <string name="dialog_cleardnscache_message">Tem a certeza que quer limpar o cache DNS\?</string>
+    <string name="dialog_raterequest_message">Olá! Se estás a gostar do Nebulo, podes tirar um momento para o avaliar na loja\?</string>
+    <string name="dialog_vpn_permission_denied_message">O sistema negou a Nebulo a iniciar a sua VPN. Por favor, abra o aplicativo para conceder a permissão lá clicando no botão iniciar.</string>
+    <string name="dialog_vpninformation_title">Como funciona este aplicativo</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">Semanas</string>
+    <string name="dialog_logexport_loading_title">Preparação de logs</string>
 </resources>
