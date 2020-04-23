@@ -140,4 +140,5 @@
 \n
 \n如果您选择忽略，则不会再看到此对话框。您可以点击下面的按钮（在浏览器中打开外部网站）以阅读更多内容，并获得解决这种问题的方法。点击设置以进入Android设置，在这里您可以禁用Nebulo的电池优化。</string>
     <string name="dialog_servicekilled_more_info">更多信息</string>
+    <string name="dialog_overlaydetected_title">检测到全系统覆盖</string>
 </resources>
