@@ -146,4 +146,20 @@
     <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutes</string>
     <string name="dialog_hostsourcerefresh_timeunit_hours">Heures</string>
     <string name="dialog_hostsourcerefresh_timeunit_days">Journées</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">Rafraîchissement sur WIFI uniquement</string>
+    <string name="dialog_cleardnscache_message">Êtes-vous sûr de vouloir vider le cache du DNS \?</string>
+    <string name="dialog_vpninformation_title">Comment fonctionne cette application</string>
+    <string name="dialog_vpninformation_message">Nebulo fonctionne en utilisant un VPN factice pour capturer toutes vos requêtes DNS, qui sont ensuite transmises à un serveur sécurisé de votre choix.
+\nCe VPN fictif n\'est pas un vrai VPN et ne cache pas votre identité, ni ne modifie votre adresse IP.
+\n
+\nAucune donnée réelle, à l\'exception des requêtes DNS, n\'est transmise par cette application.</string>
+    <string name="dialog_raterequest_message">Hé là ! Si vous appréciez Nebulo, pourriez-vous prendre un moment pour l\'évaluer sur le magasin \?</string>
+    <string name="dialog_vpn_permission_denied_message">Le système a refusé à Nebulo de démarrer son VPN. Veuillez ouvrir l\'application pour accorder la permission en cliquant sur le bouton de démarrage.</string>
+    <string name="dialog_exportdnsrules_whitelist">Règles relatives aux listes blanches d\'exportation</string>
+    <string name="dialog_newhostsource_use_as_whitelist">Utiliser comme liste blanche</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">Rafraîchir chaque</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">Semaines</string>
+    <string name="dialog_newdnsrule_whitelist">Liste blanche</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">Rafraîchir maintenant</string>
+    <string name="dialog_raterequest_title">Vous appréciez Nebulo \?</string>
 </resources>
