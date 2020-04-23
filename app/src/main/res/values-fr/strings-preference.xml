@@ -23,7 +23,7 @@
     <string name="summary_show_noconnection_notification">Afficher une notification lorsque l\'application n\'a pas de connexion ou a une mauvaise connexion</string>
     <string name="title_show_revoked_notification">Notification de perte d\'autorisation</string>
     <string name="title_preference_enable_pin">Pin</string>
-    <string name="summary_preference_pin_use_fingerprint">Permettez que votre empreinte digitale soit utilisée à la place de l\'épingle.</string>
+    <string name="summary_preference_pin_use_fingerprint">Permettez que votre empreinte digitale soit utilisée à la place du code PIN.</string>
     <string name="title_notification_hide_icon">Cacher l\'icône</string>
     <string name="title_notification_allow_pause">Permettre une pause</string>
     <string name="preference_category_pin">Protection du code PIN</string>
@@ -31,4 +31,8 @@
     <string name="title_preference_pin_use_fingerprint">Autoriser les empreintes digitales</string>
     <string name="summary_simple_notification">Utiliser un texte simple dans la notification</string>
     <string name="summary_show_revoked_notification">Afficher une notification lorsque Nebulo perd la permission d\'accéder au VPN</string>
+    <string name="title_preference_change_pin">Changer de code PIN</string>
+    <string name="summary_preference_change_pin">Changez le code PIN. Seules les valeurs numériques sont autorisées.
+\nBroche actuelle : %1s</string>
+    <string name="title_dnscache_nxdomaincachetime">Temps de cache pour le NXDomain (secondes)</string>
 </resources>
