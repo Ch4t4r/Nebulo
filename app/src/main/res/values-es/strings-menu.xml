@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="menu_rate">Valore</string>
+    <string name="menu_create_shortcut">Crear un atajo de servidor</string>
+    <string name="menu_querylogging">Consultas registradas</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="menu_main">Estado de la aplicación</string>
+</resources>
