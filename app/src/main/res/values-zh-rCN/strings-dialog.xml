@@ -30,4 +30,6 @@
 \n如果您选择了已被导入的服务器，那么服务器将会有重复。</string>
     <string name="dialog_serverimportfailed_title">导入失败</string>
     <string name="dialog_serverimportfailed_text">无法导入服务器。</string>
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">服务器无法导入。
+\n(%1s)</string>
 </resources>
