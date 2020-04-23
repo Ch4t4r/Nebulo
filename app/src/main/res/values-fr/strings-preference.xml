@@ -71,4 +71,41 @@
     <string name="summary_advanced_logging">Ajout d\'une journalisation de débogage plus importante, ce qui pourrait aider à résoudre des problèmes plus persistants.</string>
     <string name="title_map_query_refused">Interpréter les requêtes refusées comme des hosts non autorisés</string>
     <string name="title_restart_vpn_on_networkchange">Redémarrage en cas de changement de réseau</string>
+    <string name="summary_enable_logging">Permet l\'enregistrement des informations de débogage (contient des données statistiques). Ces journaux ne sont pas envoyés automatiquement.</string>
+    <string name="title_force_ipv6">Force IPv6</string>
+    <string name="summary_force_ipv6">Forcer l\'application à accepter les requêtes IPv6, même lorsque l\'appareil n\'utilise pas IPv6.</string>
+    <string name="title_force_ipv4">Force IPv4</string>
+    <string name="summary_force_ipv4">Forcer l\'application à accepter les requêtes IPv4, même lorsque l\'appareil n\'utilise pas IPv4.</string>
+    <string name="summary_allow_ipv4_traffic">Autoriser l\'utilisation du trafic IPv4, même si IPv4 est désactivé.
+\nSi elle est désactivée, aucune connexion IPv4 n\'est autorisée pendant l\'exécution de l\'application.</string>
+    <string name="title_allow_ipv6_traffic">Autoriser le trafic IPv6</string>
+    <string name="summary_restart_vpn_on_networkchange">Redémarrez silencieusement l\'application lorsque le réseau change. Activez cette fonction lorsque vous rencontrez des problèmes lors du passage d\'un réseau à l\'autre.
+\n Aucun effet lorsque l\'application n\'est pas active.</string>
+    <string name="summary_disallow_other_vpns">N\'autorisez pas d\'autres VPN à démarrer si l\'application n\'est pas explicitement arrêtée</string>
+    <string name="summary_catch_other_dns_servers">Intercepter le trafic des serveurs DNS connus et le transmettre en utilisant Nebulo</string>
+    <string name="crashreporting_type_off">Off (Ne pas envoyer de rapports d\'accident)</string>
+    <string name="summary_send_logs">Cliquez ici pour envoyer les journaux au développeur.</string>
+    <string name="summary_delete_all_logs">Supprime tous les journaux stockés sur votre appareil.</string>
+    <string name="title_crashreporting_type">Signalement automatique des accidents</string>
+    <string name="summary_crashreporting_type">Configurez les données à transmettre au développeur lorsque l\'application se plante. Les données de crash ne contiennent jamais de données personnelles et permettent de résoudre les problèmes plus rapidement.</string>
+    <string name="summary_enable_ipv4">Utiliser IPv4, si une adresse IPv4 a été attribuée à l\'appareil</string>
+    <string name="summary_allow_ipv6_traffic">Permettre l\'utilisation du trafic IPv6, même si IPv4 est désactivé.
+\nSi elle est désactivée, aucune connexion IPv6 n\'est autorisée pendant l\'exécution de l\'application.</string>
+    <string name="summary_delete_queries">Cliquez ici pour supprimer toutes les requêtes enregistrées.</string>
+    <string name="title_send_logs">Envoyer les journaux</string>
+    <string name="title_delete_all_logs">Supprimer tous les journaux</string>
+    <string name="preference_category_ip">Paramètres IP</string>
+    <string name="title_enable_ipv6">Activer IPv6</string>
+    <string name="summary_enable_ipv6">Utiliser IPv6, si une adresse IPv6 a été attribuée à l\'appareil</string>
+    <string name="title_enable_ipv4">Activer IPv4</string>
+    <string name="title_allow_ipv4_traffic">Autoriser le trafic IPv4</string>
+    <string name="preference_category_network">Réseau</string>
+    <string name="title_disallow_other_vpns">Interdire les autres VPN</string>
+    <string name="preference_category_querylogging">Enregistrement des requêtes</string>
+    <string name="title_log_queries">Enregistrement des requêtes</string>
+    <string name="summary_log_queries">Enregistrer toutes les demandes et leurs réponses</string>
+    <string name="summary_export_queries">Requêtes d\'exportation en CSV (%1d requêtes)</string>
+    <string name="title_catch_other_dns_servers">Interception d\'autres trafics DNS</string>
+    <string name="crashreporting_type_full">Complet (Rapport statistique et données de débogage)</string>
+    <string name="crashreporting_type_minimal">Minimale (Ne concerne que la version Android et App)</string>
 </resources>
