@@ -55,4 +55,5 @@
     <string name="dialog_query_export_message">正在导出查询请求项，请稍候</string>
     <string name="dialog_pin_message">请输入您的PIN。</string>
     <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_enable_logging">您是否要启用日志？日志包含统计信息、调试信息和应用程序中的操作。生成的日志不会被共享，除非你自己去做。</string>
 </resources>
