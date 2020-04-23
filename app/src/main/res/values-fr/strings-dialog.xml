@@ -104,7 +104,7 @@
 \nVous pouvez par exemple désactiver les optimisations de la batterie pour l\'application dans les paramètres du système ou éviter de supprimer l\'application de la liste des dernières versions.
 \n
 \nSi vous choisissez de l\'ignorer, vous ne verrez plus ce dialogue. Vous pouvez en savoir plus et recevoir des conseils pour résoudre ce problème avec le bouton ci-dessous (ouvre un site web externe dans votre navigateur). Cliquez sur paramètres pour ouvrir les paramètres Android où vous pouvez désactiver les optimisations de batterie pour Nebulo.</string>
-    <string name="dialog_hostsourcerefresh_title">Rafraîchir les sources des hôtes</string>
+    <string name="dialog_hostsourcerefresh_title">Rafraîchir les sources des hosts</string>
     <string name="dialog_crashreporting_neutral">Voir les données</string>
     <string name="dialog_newhostsource_error_name_empty">Veuillez fournir un nom.</string>
     <string name="dialog_newdnsrule_specify_address">Adresse</string>
@@ -142,4 +142,8 @@
     <string name="dialog_editdelete_delete">Supprimer</string>
     <string name="dialog_servicekilled_more_info">Plus d\'informations</string>
     <string name="dialog_overlaydetected_title">Détection d\'une superposition à l\'échelle du système</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Rafraîchir automatiquement les sources de l\'host</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutes</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">Heures</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">Journées</string>
 </resources>
