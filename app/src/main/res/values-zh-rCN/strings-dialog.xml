@@ -133,4 +133,10 @@
     <string name="dialog_editdelete_title">您想做什么？</string>
     <string name="dialog_editdelete_delete">删除</string>
     <string name="dialog_editdelete_edit">编辑</string>
+    <string name="dialog_servicekilled_message">该应用程序检测到上次活动时没有正常停止。这强烈表明你的系统选择了强行停止应用，而没有任何可能让应用自行重启。
+\n
+\n在大多数设备上，你有几个选项可以防止或至少延迟系统停止应用的时间。
+\n例如，您可以在系统设置中禁用App的电池优化功能，或者避免将App从recents列表中清除。
+\n
+\n如果你选择了忽略，就不会再看到这个对话框。您可以通过下面的按钮（在浏览器中打开一个外部网站）阅读更多的内容，并收到解决这个问题的提示。点击设置，打开安卓设置，在这里你可以禁用Nebulo的电池优化。</string>
 </resources>
