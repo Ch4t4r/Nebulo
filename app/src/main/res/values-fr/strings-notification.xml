@@ -9,12 +9,12 @@
     <string name="notification_pin_title">Code PIN requis</string>
     <string name="notification_ruleexportfinished_message">Les règles %1d ont été exportées.</string>
     <string name="notification_ruleexportfinished_title">Exportation des règles DNS terminée</string>
-    <string name="notification_ruleexport_secondarymessage">Préparer l\'exportation...</string>
+    <string name="notification_ruleexport_secondarymessage">Préparer l\'exportation…</string>
     <string name="notification_ruleexport_message">Règles d\'exportation (%1d/%2d)</string>
     <string name="notification_ruleimportfinished_message">%1d règles ont été importées (%2$d doublons omis)</string>
     <string name="notification_ruleimportfinished_title">L\'importation des règles DNS est terminée</string>
-    <string name="notification_ruleimport_tertiarymessage">Finir l\'importation...</string>
-    <string name="notification_ruleimport_secondarymessage">Préparer l\'importation...</string>
+    <string name="notification_ruleimport_tertiarymessage">Finir l\'importation…</string>
+    <string name="notification_ruleimport_secondarymessage">Préparer l\'importation…</string>
     <string name="notification_ruleimport_message">Importation de règles DNS de %1s (%2s)</string>
     <string name="notification_ruleimport_title">Importation de règles DNS</string>
     <string name="notification_appcrash_message">Nebulo s\'est écrasé. Cliquez ici pour aller au menu principal et pour redémarrer l\'application, si nécessaire.</string>
