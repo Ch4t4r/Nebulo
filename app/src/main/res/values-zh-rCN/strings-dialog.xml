@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">默认有%1d个应用被选中，且不可被取消选择</item>
+        <item quantity="one">默认有%1d个应用被选中，且不可被取消选中</item>
         <item quantity="other"></item>
     </plurals>
     <string name="dialog_appchoosal_showsystemapps">显示系统应用</string>
@@ -14,6 +14,6 @@
     <string name="dialog_newserver_title_https">添加服务器（DoH）</string>
     <string name="dialog_serverconfiguration_addserver">添加服务器</string>
     <string name="dialog_serverconfiguration_title">服务器配置</string>
-    <string name="dialog_appchoosal_whitelist">仅在选定的应用程序中使用DoH/DoT</string>
+    <string name="dialog_appchoosal_whitelist">仅在选定的应用中使用DoH/DoT</string>
     <string name="dialog_newserver_name">服务器名称</string>
 </resources>
