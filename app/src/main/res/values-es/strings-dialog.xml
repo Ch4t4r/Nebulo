@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dialog_serverconfiguration_title">Configuración del servidor</string>
+    <string name="dialog_newserver_title_tls">Añadir un servidor (DoT)</string>
+    <string name="dialog_deleteconfig_text">¿Quieres borra la configuración %1$s\?</string>
+    <string name="dialog_serverconfiguration_addserver">Añadir un servidor</string>
+    <string name="dialog_newserver_title_https">Añadir un servidor (DoH)</string>
+    <string name="dialog_newserver_name">Nombre del servidor</string>
+    <string name="dialog_newserver_name_hint">Ejemplo</string>
+    <string name="dialog_newserver_primaryserver">Servidor principal</string>
+    <string name="dialog_newserver_secondaryserver">Servidor secundario (Opcional)</string>
+    <string name="dialog_deleteconfig_title">¿Borrar configuración\?</string>
+    <string name="dialog_appchoosal_showsystemapps">Mostrar aplicaciones del sistema</string>
+</resources>
