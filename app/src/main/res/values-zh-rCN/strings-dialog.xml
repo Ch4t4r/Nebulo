@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <plurals name="dialog_excludedapps_infotext">
         <item quantity="one">默认有%1d个应用被选中，且不可被取消选中</item>
         <item quantity="other"/>
@@ -25,4 +25,7 @@
     <string name="dialog_serverimport_servertype_doh">类型：Dns-over-HTTPS（DoH）</string>
     <string name="dialog_serverimport_servertype_dot">类型：Dns-over-TLS（DoT）</string>
     <string name="dialog_serverimport_done">完成</string>
+    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">请选择你想导入的服务器。
+\n
+\n如果您选择了已经导入的服务器，则会被复制。</string>
 </resources>
