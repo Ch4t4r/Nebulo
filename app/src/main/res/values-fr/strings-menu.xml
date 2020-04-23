@@ -6,4 +6,5 @@
     <string name="menu_querylogging">Requêtes enregistrées</string>
     <string name="menu_settings">Paramètres</string>
     <string name="menu_main">Statut de l\'application</string>
+    <string name="menu_rate">Évaluer</string>
 </resources>
