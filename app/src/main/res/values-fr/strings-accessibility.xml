@@ -3,4 +3,9 @@
     <string name="contentdescription_main_infoimage">Icône information</string>
     <string name="contentdescription_main_servericon">Icône du serveur</string>
     <string name="contentdescription_shared_app_icon">Icône de l\'application</string>
+    <string name="hint_searchterm">Terme à chercher</string>
+    <string name="contentdescription_stop_app">Arrêter l\'app</string>
+    <string name="contentdescription_start_app">Démarrer l\'application</string>
+    <string name="contentdescription_clear_search">Supprimer recherche</string>
+    <string name="contentdescription_main_statusimage">Image indiquant si l\'application est en service</string>
 </resources>
