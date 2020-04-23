@@ -1,9 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="activity_label_import_queries">Importar consultas</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activity_label_import_queries">Importar consultas</string>
     <string name="activity_label_import_servers">Importar servidor(es)</string>
     <string name="activity_label_speed_test">Comparar velocidade</string>
     <string name="activity_label_enable_logging">Exportar registros/Ativar registro</string>
-
     <string name="all_stop">Parar</string>
     <string name="all_start">Iniciar</string>
     <string name="all_pause">Pausar</string>
@@ -13,14 +13,11 @@
     <string name="information">Informação</string>
     <string name="open_app">Abrir aplicativo</string>
     <string name="all_close">Fechar</string>
-
     <string name="error_invalid_url">Por favor, forneça um url válido.</string>
     <string name="error_invalid_pin">Por favor, forneça seu PIN.</string>
     <string name="error_invalid_servername">Por favor, forneça um nome.</string>
-
     <string name="main_dnssurveillance_infotext">Esteja ciente de que o servidor de DNS ao qual você está conectado é capaz de registrar quais sites você está visitando. Verifique as respectivas declarações de privacidade para obter mais informações.</string>
     <string name="main_dnssurveillance_privacystatement">Declaração de privacidade de %1s</string>
-
     <string name="about_app">Este aplicativo é de código aberto. O código-fonte pode ser acessado em &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
 \nAlém disso, o aplicativo não contém anúncios e não rastreia ou coleta dados sobre você.
 \n
@@ -33,13 +30,10 @@
 \nLicenciado sob GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
     <string name="app_share_text">Ei, eu encontrei este aplicativo que criptografa suas consultas dns para lhe dar mais privacidade e segurança. Confira aqui: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
-
     <string name="quicksettings_stop_text">Parar o Nebulo</string>
     <string name="quicksettings_start_text">Iniciar o Nebulo</string>
-
     <string name="crashreporting_thankyou">Obrigado! Se você mudar de ideia, vá para as configurações.</string>
     <string name="crashreporting_thankyou_gotit">Entendi!</string>
-
     <string name="about_share">Compartilhar</string>
     <string name="about_licenses">Licenças de código aberto</string>
     <string name="about_changelog">Histórico de mudanças</string>
@@ -49,12 +43,9 @@
     <string name="about_credits">Créditos</string>
     <string name="about_info">Informação geral</string>
     <string name="about_help_translating">Ajudar a traduzir</string>
-
     <string name="window_speedtest_runtest">Iniciar o teste</string>
     <string name="error_no_webbrowser_installed">Você não tem nenhum aplicativo instalado para visualizar este link.</string>
-
     <string name="button_main_dnsrules">Regras de DNS</string>
-
     <string name="window_dnsrules_customhosts">Hosts customizados</string>
     <string name="window_dnsrules_hostalreadyexists">Já existe uma regra para este host.</string>
     <string name="window_dnsrules_customhosts_message">Defina todos os seus hosts personalizados aqui.</string>
@@ -64,4 +55,7 @@
         <item quantity="one">%1d regra</item>
         <item quantity="other">%1d regras</item>
     </plurals>
-    </resources>
+    <string name="windows_querylogging_used_server">Servidor em uso</string>
+    <string name="windows_querylogging_search">Pesquisa de host</string>
+    <string name="error_invalid_host">Por favor, providencie um host válido.</string>
+</resources>
