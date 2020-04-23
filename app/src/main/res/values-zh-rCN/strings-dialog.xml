@@ -103,5 +103,25 @@
     <string name="dialog_speedtest_useserver_title">选择服务器</string>
     <string name="dialog_speedtest_useserver_message">您想使用 %1s 服务器吗？它在%3d个服务器中排名第%2d，响应时间为%4d毫秒。</string>
     <string name="dialog_deletehostsource_title">是否删除 %1s？</string>
-    <string name="dialog_deletehostsource_message">你确定要删除主机源%1s吗？这个是不能撤销的，这个源的主机将被删除。</string>
+    <string name="dialog_deletehostsource_message">您确定您要删除规则源 %1s 吗？此操作无法撤销，此规则源下的规则将被删除。</string>
+    <string name="dialog_newhostsource_name">名称</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newdnsrule_title">新建DNS规则</string>
+    <string name="dialog_newhostsource_title">添加规则源</string>
+    <string name="dialog_newhostsource_wildcard_info">您可以使用带有域名通配符的规则列表。</string>
+    <string name="dialog_newdnsrule_hint_host">域名</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">IPv6 地址</string>
+    <string name="dialog_newdnsrule_host_invalid">请提供有效域名</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">请提供有效IPv4地址</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">请提供有效IPv6地址</string>
+    <string name="dialog_clearuserrules_title">是否清除所有DNS规则？</string>
+    <string name="dialog_clearuserrules_message">您确认您要清除所有DNS规则吗？此操作无法撤销。</string>
+    <string name="dialog_newhostsource_error_name_empty">请命名。</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">IPv4 地址</string>
+    <string name="dialog_newhostsource_choose_file">选择文件</string>
+    <string name="dialog_newdnsrule_whitelist">白名单</string>
+    <string name="dialog_newdnsrule_specify_address">地址</string>
+    <string name="dialog_newhostsource_use_as_whitelist">用作白名单</string>
+    <string name="dialog_newhostsource_edit_title">添加规则源</string>
+    <string name="dialog_newdnsrule_wildcard_info">域名支持使用通配符。使用一个星号（*）来匹配除点号（.）以外的任意长度的任意字母、数字及允许使用的特殊符号。使用两个星号（**）以增加对点号（.）的匹配。</string>
 </resources>
