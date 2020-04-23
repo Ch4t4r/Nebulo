@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="menu_rate">Valore</string>
+    <string name="menu_rate">Evaluar</string>
     <string name="menu_create_shortcut">Crear un atajo de servidor</string>
     <string name="menu_querylogging">Consultas registradas</string>
     <string name="menu_settings">Ajustes</string>
