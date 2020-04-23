@@ -141,4 +141,7 @@
 \n如果您选择忽略，则不会再看到此对话框。您可以点击下面的按钮（在浏览器中打开外部网站）以阅读更多内容，并获得解决这种问题的方法。点击设置以进入Android设置，在这里您可以禁用Nebulo的电池优化。</string>
     <string name="dialog_servicekilled_more_info">更多信息</string>
     <string name="dialog_overlaydetected_title">检测到系统遮罩层</string>
+    <string name="dialog_overlaydetected_message">似乎有一个系统范围内的覆盖层（如聊天气泡、颜色或夜视镜）在活动。大多数设备不允许你在这种情况下启用VPN。
+\n
+\n如果你不能在下一个对话框中点击确定，请禁用覆盖层。</string>
 </resources>
