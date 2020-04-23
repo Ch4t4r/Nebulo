@@ -79,4 +79,67 @@
     <string name="dialog_exportdnsrules_export_user_rules">Exporter des règles DNS d\'host personnalisées</string>
     <string name="dialog_exportdnsrules_export_sources">Exporter les règles DNS à partir de sources d\'host activées</string>
     <string name="dialog_newhostsource_wildcard_info">Vous pouvez utiliser des listes d\'hosts qui font appel à des domaines wildcard.</string>
+    <string name="dialog_crashreporting_message">Merci d\'utiliser Nebulo !
+\n
+\nCette application utilise des logiciels tiers à code source ouvert et auto-hébergés pour faciliter le suivi des pannes d\'applications dès qu\'elles surviennent. Si et seulement si elle est activée, l\'application va transmettre des rapports de crash lorsque l\'application rencontre un crash. Ces rapports contiennent des données supplémentaires sur l\'application et votre appareil. Il s\'agit notamment d\'un identifiant qui est utilisé pour suivre les pannes provenant du même utilisateur, mais qui ne peut pas être utilisé pour suivre autre chose. L\'activation du rapport d\'accident est facultative, mais elle m\'aiderait beaucoup.
+\nLes rapports sont envoyés en toute sécurité via HTTPS.
+\n
+\nCliquez sur \"Voir les données\" ci-dessous pour savoir quel type de données est transmis et pour obtenir un lien vers la politique de confidentialité.</string>
+    <string name="dialog_crashreporting_message_notester">Merci d\'utiliser Nebulo !
+\n
+\nCette application utilise des logiciels tiers à code source ouvert et auto-hébergés pour faciliter le suivi des pannes d\'applications dès qu\'elles surviennent. Si et seulement si elle est activée, l\'application va transmettre des rapports de crash lorsque l\'application rencontre un crash. Ces rapports contiennent des données supplémentaires sur l\'application et votre appareil. Il s\'agit notamment d\'un identifiant qui est utilisé pour suivre les pannes provenant du même utilisateur, mais qui ne peut pas être utilisé pour suivre autre chose. L\'activation du rapport de panne est facultative mais rendrait la correction des bogues plus facile et plus rapide.
+\nLes rapports sont envoyés en toute sécurité via HTTPS
+\n
+\nCliquez sur \"Voir les données\" ci-dessous pour savoir quel type de données est transmis et pour obtenir un lien vers la politique de confidentialité.</string>
+    <string name="dialog_clearqueries_message">Êtes-vous sûr de vouloir effacer les requêtes enregistrées \? Il n\'est pas possible de revenir en arrière.</string>
+    <string name="dialog_join_group_positive">Ouais !</string>
+    <string name="dialog_speedtest_useserver_message">Voulez-vous utiliser le serveur %1s \? Il est classé %2d sur %3d avec un temps de réponse de %4d ms.</string>
+    <string name="dialog_clearuserrules_message">Vous voulez clarifier toutes les règles du DNS \? Cela ne peut pas être annulé.</string>
+    <string name="dialog_newhostsource_choose_file">Choisissez un fichier</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Veuillez fournir une adresse IPv4 valide</string>
+    <string name="dialog_editdelete_edit">Edit</string>
+    <string name="dialog_servicekilled_message">L\'application a détecté qu\'elle n\'était pas correctement arrêtée la dernière fois qu\'elle était active. Cela indique fortement que votre système a choisi de forcer l\'arrêt de l\'application sans aucune possibilité pour l\'application de se redémarrer.
+\n
+\nSur la plupart des appareils, vous disposez de quelques options pour empêcher ou au moins retarder l\'arrêt de l\'application par le système.
+\nVous pouvez par exemple désactiver les optimisations de la batterie pour l\'application dans les paramètres du système ou éviter de supprimer l\'application de la liste des dernières versions.
+\n
+\nSi vous choisissez de l\'ignorer, vous ne verrez plus ce dialogue. Vous pouvez en savoir plus et recevoir des conseils pour résoudre ce problème avec le bouton ci-dessous (ouvre un site web externe dans votre navigateur). Cliquez sur paramètres pour ouvrir les paramètres Android où vous pouvez désactiver les optimisations de batterie pour Nebulo.</string>
+    <string name="dialog_hostsourcerefresh_title">Rafraîchir les sources des hôtes</string>
+    <string name="dialog_crashreporting_neutral">Voir les données</string>
+    <string name="dialog_newhostsource_error_name_empty">Veuillez fournir un nom.</string>
+    <string name="dialog_newdnsrule_specify_address">Adresse</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">Adresse IPv4</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">Règles normales d\'exportation</string>
+    <string name="dialog_overlaydetected_message">Il semble qu\'il y ait une superposition à l\'échelle du système (par exemple une bulle de chat, un filtre de couleur ou de nuit) active. La plupart des appareils ne vous permettent pas d\'activer un VPN dans ce cas.
+\n
+\nSi vous ne pouvez pas cliquer sur OK dans la boîte de dialogue suivante, veuillez désactiver la superposition.</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_crashreportingusages_title">Données transmises</string>
+    <string name="dialog_credits_title">Crédits</string>
+    <string name="dialog_enable_logging">Voulez-vous activer l\'enregistrement \? Les journaux contiennent des informations statistiques, des informations de débogage et des actions dans l\'application. Les journaux générés ne sont pas partagés, sauf si vous le faites vous-même.</string>
+    <string name="dialog_crashreportingusages_message">Cliquez sur l\'un des groupes pour voir quelles données sont transmises lors des accidents.</string>
+    <string name="dialog_query_export_message">Veuillez patienter pendant l\'exportation des requêtes</string>
+    <string name="dialog_pin_message">Veuillez fournir votre code PIN.</string>
+    <string name="dialog_crashreporting_title">Signalement automatique des accidents</string>
+    <string name="dialog_crashreporting_positive">Permettre le signalement des accidents</string>
+    <string name="dialog_crashreporting_negative">Non, merci.</string>
+    <string name="dialog_clearqueries_title">Effacer toutes les requêtes</string>
+    <string name="dialog_join_group_title">Rejoindre la communauté</string>
+    <string name="dialog_speedresult_title">Résultats des tests de vitesse</string>
+    <string name="dialog_speedtest_useserver_title">Sélectionner le serveur</string>
+    <string name="dialog_deletehostsource_title">Supprimer les %1s \?</string>
+    <string name="dialog_clearuserrules_title">Effacer toutes les règles du DNS \?</string>
+    <string name="dialog_newhostsource_title">Nouvelle source de règles</string>
+    <string name="dialog_newhostsource_name">Nom</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newdnsrule_title">Nouvelle règle DNS</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">Adresse IPv6</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Veuillez fournir une adresse IPv6 valide</string>
+    <string name="dialog_exportdnsrules_title">Exporter les règles du DNS</string>
+    <string name="dialog_newhostsource_edit_title">Nouvelle source de règles</string>
+    <string name="dialog_newdnsrule_edit">Modifier la règle DNS</string>
+    <string name="dialog_editdelete_title">Que voulez-vous faire \?</string>
+    <string name="dialog_editdelete_delete">Supprimer</string>
+    <string name="dialog_servicekilled_more_info">Plus d\'informations</string>
+    <string name="dialog_overlaydetected_title">Détection d\'une superposition à l\'échelle du système</string>
 </resources>
