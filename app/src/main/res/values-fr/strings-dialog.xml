@@ -42,4 +42,14 @@
     <string name="dialog_changelog_dont_show_again">Ne plus se montrer</string>
     <string name="dialog_about_licenses">Licences</string>
     <string name="dialog_logexport_loading_title">Préparation des journaux</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">%1d application est exclue par défaut et ne peut être désélectionnée</item>
+        <item quantity="other">%1d applications sont exclues par défaut et ne peuvent être désélectionnées</item>
+    </plurals>
+    <string name="dialog_deleteconfig_title">Supprimer la configuration \?</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Importation d %1d serveur</item>
+        <item quantity="other">Importation de %1d serveurs</item>
+    </plurals>
+    <string name="dialog_error_title">Rapport d\'accident</string>
 </resources>
