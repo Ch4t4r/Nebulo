@@ -126,5 +126,6 @@
     <string name="dialog_newdnsrule_wildcard_info">域名支持使用通配符。使用一个星号（*）来匹配除点号（.）以外的任意长度的任意字母、数字及允许使用的特殊符号。使用两个星号（**）以增加对点号（.）的匹配。</string>
     <string name="dialog_newdnsrule_edit">编辑DNS规则</string>
     <string name="dialog_exportdnsrules_title">导出DNS规则</string>
-    <string name="dialog_exportdnsrules_whitelist">出口白名单规则</string>
+    <string name="dialog_exportdnsrules_whitelist">导出白名单规则</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">导出普通规则</string>
 </resources>
