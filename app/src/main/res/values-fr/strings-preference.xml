@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="preference_category_general">Généralités</string>
+    <string name="title_theme">Thème</string>
+    <string name="summary_theme">Définit le thème de cette application</string>
+    <string name="title_start_on_boot">Démarrage au démarrage</string>
+    <string name="summary_start_on_boot">Démarrer l\'application lorsque le téléphone est allumé</string>
+    <string name="summary_start_after_update">Démarrer l\'application après sa mise à jour</string>
+    <string name="title_excluded_apps">Applications exclues</string>
+    <string name="summary_excluded_apps">Exclure les applications de l\'application ici, par exemple si elles ne peuvent plus se connecter à l\'Internet - les applications sélectionnées n\'utiliseront plus dns-over-https.</string>
+    <string name="preference_category_notification">Notification</string>
+    <string name="summary_language">Changer la langue de l\'application</string>
+    <string name="title_start_after_update">Démarrer après la mise à jour</string>
+    <string name="title_show_notification_on_lockscreen">Afficher sur l\'écran</string>
+    <string name="title_language">Langue</string>
+</resources>
