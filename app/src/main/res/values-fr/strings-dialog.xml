@@ -23,7 +23,7 @@
 \nVous devez tester si elle fonctionne avec l\'optimisation activée avant de la désactiver.</string>
     <string name="dialog_rate_confirmation">Vous voulez ouvrir le magasin de jeux pour évaluer l\'application \?</string>
     <string name="dialog_changelog_infotext">L\'application a été mise à jour depuis la dernière fois que vous l\'avez ouverte. Dans la liste suivante, vous pouvez voir le journal des modifications. Cochez la case ci-dessous et vous ne verrez plus ce message à l\'avenir.</string>
-    <string name="dialog_query_export_title">Exportation des requêtes...</string>
+    <string name="dialog_query_export_title">Exportation des requêtes…</string>
     <string name="dialog_serverconfiguration_title">Configuration du serveur</string>
     <string name="dialog_newserver_title_https">Ajouter un serveur (DoH)</string>
     <string name="dialog_newserver_title_tls">Ajouter un serveur (DoT)</string>
@@ -52,4 +52,31 @@
         <item quantity="other">Importation de %1d serveurs</item>
     </plurals>
     <string name="dialog_error_title">Rapport d\'accident</string>
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d serveurs testés
+\n %2d de serveurs DoT accessibles, %3d non accessibles
+\n %4d Serveurs du ministère de la santé accessibles, %5d non accessibles
+\n Temps de réponse moyen : %6d ms.
+\n
+\n Le serveur le plus rapide : %7s
+\n Le serveur le plus lent : %8s</string>
+    <string name="dialog_join_group_message">Hé là !
+\n
+\nSaviez-vous que cette application dispose d\'un groupe Telegram \? Il contient des mises à jour régulières et est l\'endroit idéal pour les discussions et les questions.
+\nNous sommes une grande communauté de plus de 350 personnes, aimeriez-vous en faire partie \?</string>
+    <string name="dialog_deletehostsource_message">Êtes-vous sûr de vouloir supprimer la host source %1s \? Cela ne peut pas être annulé, les hôtes de cette source seront supprimés.</string>
+    <string name="dialog_newdnsrule_wildcard_info">L\'host supporte les wildcards. Utilisez un astérisque (*) pour toute quantité de caractères, de chiffres et de caractères spéciaux autorisés, à l\'exception du point (.). Utilisez deux astérisques (**) pour inclure le point (.).</string>
+    <string name="dialog_credits_message" formatted="true">- Icône de l\'application réalisée par &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;.
+\n- Traduction en turc par Kemal Oktay Aktoğan
+\n- Traduction en russe par bruleto
+\n- Traduction en néerlandais par Bas Koedijk
+\n- Traduction en portugais par Rafael W. Bohnenberger
+\n- Traduction en indonésien par Gloeyisk
+\n- Quelques icônes de Font Awesome
+\n 
+\n Vous voulez voir votre nom ici \? N\'hésitez pas à &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuer&lt;/a&gt;.</string>
+    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_host_invalid">Veuillez fournir un host valide</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Exporter des règles DNS d\'host personnalisées</string>
+    <string name="dialog_exportdnsrules_export_sources">Exporter les règles DNS à partir de sources d\'host activées</string>
+    <string name="dialog_newhostsource_wildcard_info">Vous pouvez utiliser des listes d\'hosts qui font appel à des domaines wildcard.</string>
 </resources>
