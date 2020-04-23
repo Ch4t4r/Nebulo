@@ -8,4 +8,5 @@
     <string name="contentdescription_start_app">Démarrer l\'application</string>
     <string name="contentdescription_clear_search">Supprimer recherche</string>
     <string name="contentdescription_main_statusimage">Image indiquant si l\'application est en service</string>
+    <string name="hint_search">Recherchez</string>
 </resources>
