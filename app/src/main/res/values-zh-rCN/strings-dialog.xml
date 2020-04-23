@@ -14,4 +14,6 @@
     <string name="dialog_newserver_title_https">添加服务器（DoH）</string>
     <string name="dialog_serverconfiguration_addserver">添加服务器</string>
     <string name="dialog_serverconfiguration_title">服务器配置</string>
+    <string name="dialog_appchoosal_whitelist">仅在选定的应用程序中使用DoH/DoT</string>
+    <string name="dialog_newserver_name">服务器名称</string>
 </resources>
