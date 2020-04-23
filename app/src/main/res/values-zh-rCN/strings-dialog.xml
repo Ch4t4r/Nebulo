@@ -30,6 +30,22 @@
 \n如果您选择了已被导入的服务器，那么服务器将会有重复。</string>
     <string name="dialog_serverimportfailed_title">导入失败</string>
     <string name="dialog_serverimportfailed_text">无法导入服务器。</string>
-    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">服务器无法导入。
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">无法导入服务器。
 \n(%1s)</string>
+    <string name="dialog_logexport_text">您想如何分享日志？</string>
+    <string name="dialog_logexport_email">电子邮件</string>
+    <string name="dialog_deletelogs_text">您确定您想删除所有日志吗？</string>
+    <string name="dialog_error_title">崩溃报告</string>
+    <string name="dialog_batteryoptimization_title">电池优化</string>
+    <string name="dialog_batteryoptimization_message">在一些设备上，设备启动完成后，如果应用的电池优化没有被禁用，应用不会收到启动完成通知。
+\n本应用目前并未在电池优化白名单中。您想将应用列入白名单中吗？
+\n
+\n在禁用应用的电池优化之前，请先测试应用能否正常工作。</string>
+    <string name="dialog_batteryoptimization_whitelist">禁用</string>
+    <string name="dialog_batteryoptimization_ignore">忽略</string>
+    <string name="dialog_rate_confirmation">您想打开Play商店来为应用评分吗？</string>
+    <string name="dialog_changelog_title">更新日志</string>
+    <string name="dialog_error_text">应用似乎崩溃了。您想将崩溃日志文件发送给开发者吗？</string>
+    <string name="dialog_logexport_general">选择应用</string>
+    <string name="dialog_logexport_loading_title">正在准备日志</string>
 </resources>
