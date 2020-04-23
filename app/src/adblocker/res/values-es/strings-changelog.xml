@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="changelog_build_41_adblocker_1">Añadió dos nuevas fuentes de reglas del DNS</string>
+    <string name="changelog_build_29_2">Añadido AdGuard DNS</string>
+    <string name="changelog_build_29_1">Los servidores que bloquean los anuncios se muestran ahora en edificios que no son de juguete (¡incluyendo éste!)</string>
+</resources>
