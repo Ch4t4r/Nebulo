@@ -103,4 +103,5 @@
     <string name="dialog_speedtest_useserver_title">选择服务器</string>
     <string name="dialog_speedtest_useserver_message">您想使用 %1s 服务器吗？它在%3d个服务器中排名第%2d，响应时间为%4d毫秒。</string>
     <string name="dialog_deletehostsource_title">是否删除 %1s？</string>
+    <string name="dialog_deletehostsource_message">你确定要删除主机源%1s吗？这个是不能撤销的，这个源的主机将被删除。</string>
 </resources>
