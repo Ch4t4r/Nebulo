@@ -19,16 +19,18 @@
     <string name="title_notification_allow_pause">Permitir pausar</string>
     <string name="summary_notification_allow_pause">Permite que la aplicación sea pausada desde la notificación</string>
     <string name="preference_category_pin">Protección por PIN</string>
-    <string name="title_preference_enable_pin">Pin</string>
+    <string name="title_preference_enable_pin">El código PIN</string>
     <string name="summary_preference_enable_pin">Pide un PIN al abrir o detener la aplicación</string>
     <string name="title_preference_pin_use_fingerprint">Permitir huella</string>
-    <string name="summary_preference_pin_use_fingerprint">Permitir que su huella sea usada en vez del pin</string>
+    <string name="summary_preference_pin_use_fingerprint">Permita que su huella dactilar sea usada en lugar del código pin.</string>
     <string name="title_preference_change_pin">Cambiar pin</string>
     <string name="summary_preference_change_pin">Cambie el pin. Solo se permiten valores numéricos.
 \nPin actual: %1s</string>
     <string name="preference_category_cache">Control de caché</string>
     <string name="title_dnscache_enabled">Usar caché DNS</string>
-    <string name="summary_dnscache_enabled">Habilita el cache DNS de la aplicación. El caché memoriza solicitudes viejas para responder a futuras preguntas más rapido</string>
+    <string name="summary_dnscache_enabled">Activa la caché del DNS de las aplicaciones. El caché memoriza las antiguas solicitudes para responder más rápido a las futuras preguntas.
+\n
+\nEl sistema ya tiene un caché, habilítalo si quieres personalizar el comportamiento.</string>
     <string name="title_dnscache_keepacrosslaunches">Mantener caché DNS</string>
     <string name="title_dnscache_maxsize">Tamaño máximo de cache</string>
     <string name="summary_clear_dnscache">Haga clic aquí para borrar el caché del DNS, por ejemplo cuando los sitios web comienzan a comportarse mal porque están en caché.</string>
@@ -97,4 +99,13 @@
     <string name="summary_show_revoked_notification">Mostrar una notificación cuando Nebulo pierda el permiso para la VPN</string>
     <string name="summary_dnscache_maxsize">Establece el máximo de ingresos que puede mantener el caché en cualquier momento</string>
     <string name="summary_dnscache_keepacrosslaunches">Mantiene el cache DNS en múltiples lanzamientos</string>
+    <string name="summary_advanced_logging">Añade más registro de depuración, lo que podría ayudar con problemas más persistentes.</string>
+    <string name="title_pause_on_captiveportal">Pausa en el captive portal</string>
+    <string name="summary_bypass_searchdomains">Envía los searchdomains (por ejemplo, MyPC.local o MyPc.fritz.box) al servidor Dns de tu red en lugar del servidor DoH.
+\nEsto es muy recomendable. Esas consultas no salen de su red.</string>
+    <string name="preference_category_logging">Registro de depuración</string>
+    <string name="title_enable_logging">Habilitar el registro de depuración</string>
+    <string name="summary_pause_on_captiveportal">No uses el DoH si se detecta un captive portal. Se reanudará automáticamente poco después de iniciar la sesión.
+\nSi lo desactiva, podría impedirle abrir el captive portal para iniciar sesión.</string>
+    <string name="title_advanced_logging">Registro de depuración avanzada</string>
 </resources>
