@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="menu_show_on_fdroid">Émission sur F-Droid</string>
+    <string name="menu_about">À propos de cette application</string>
+    <string name="menu_create_shortcut">Créer un raccourci du serveur</string>
+    <string name="menu_querylogging">Requêtes enregistrées</string>
+    <string name="menu_settings">Paramètres</string>
+    <string name="menu_main">Statut de l\'application</string>
+</resources>
