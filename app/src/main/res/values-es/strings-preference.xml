@@ -95,4 +95,6 @@
     <string name="title_restart_vpn_on_networkchange">Reiniciar en el cambio de red</string>
     <string name="title_show_revoked_notification">Notificación de pérdida de permiso</string>
     <string name="summary_show_revoked_notification">Mostrar una notificación cuando Nebulo pierda el permiso para la VPN</string>
+    <string name="summary_dnscache_maxsize">Establece el máximo de ingresos que puede mantener el caché en cualquier momento</string>
+    <string name="summary_dnscache_keepacrosslaunches">Mantiene el cache DNS en múltiples lanzamientos</string>
 </resources>
