@@ -121,4 +121,45 @@
     <string name="dialog_exportdnsrules_whitelist">Reglas de la lista blanca de exportación</string>
     <string name="dialog_exportdnsrules_nonwhitelist">Exportar las reglas normales</string>
     <string name="dialog_raterequest_title">¿Estás disfrutando de Nebulo\?</string>
+    <string name="dialog_logexport_text">¿Cómo quieres compartir los registros de depuración\?</string>
+    <string name="dialog_rate_confirmation">¿Quieres abrir el play store para calificar la aplicación\?</string>
+    <string name="dialog_deletehostsource_message">¿Estás seguro de que quieres borrar la fuente de host %1s\? Esto no puede deshacerse, los hosts de esta fuente serán eliminados.</string>
+    <string name="dialog_newdnsrule_wildcard_info">El host apoya a los comodines. Utilice un asterisco (*) para cualquier cantidad de caracteres, números y caracteres especiales permitidos excepto el punto (.). Utilice dos asteriscos (**) para incluir el punto (.).</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">%1d aplicación está excluida por defecto y no puede ser deseleccionada</item>
+        <item quantity="other">%1d aplicaciones están excluidas por defecto y no pueden ser deseleccionadas</item>
+    </plurals>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Importación de %1d servidor</item>
+        <item quantity="other">Importación de %1d servidores</item>
+    </plurals>
+    <string name="dialog_serverimport_servertype_doh">Tipo: Dns-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Tipo: Dns-over-TLS (DoT)</string>
+    <string name="dialog_deletelogs_text">¿Estás seguro de que quieres borrar todos los registros de depuración\?</string>
+    <string name="dialog_error_title">Informe de choque</string>
+    <string name="dialog_batteryoptimization_ignore">Ignore</string>
+    <string name="dialog_changelog_title">Lista de cambios</string>
+    <string name="dialog_query_export_title">Exportar consultas del DNS…</string>
+    <string name="dialog_pin_message">Por favor, proporcione su código PIN.</string>
+    <string name="dialog_pin_hint">Código PIN</string>
+    <string name="dialog_enable_logging">¿Quiere habilitar el registro de depuración\? Los registros contienen información estadística, información de depuración y acciones en la aplicación. Los registros generados no se comparten a menos que lo haga usted mismo.</string>
+    <string name="dialog_clearqueries_title">Borrar todas las consultas del DNS</string>
+    <string name="dialog_clearqueries_message">¿Estás seguro de que quieres borrar las consultas del DNS registradas\? Esto no puede ser revertido.</string>
+    <string name="dialog_credits_message" formatted="true">- Icono de la aplicación por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
+\n- Traducción al turco por Kemal Oktay Aktoğan
+\n- Traducción al ruso por bruleto
+\n- Traducción al holandés por Bas Koedijk
+\n- Traducción al portugués de Rafael W. Bohnenberger
+\n- Traducción al indonesio por Gloeyisk
+\n- Algunos iconos de Font Awesome
+\n 
+\n ¿Quieres ver tu nombre aquí\? Siéntase libre de &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuir&lt;/a&gt;.</string>
+    <string name="dialog_speedtest_useserver_title">Seleccione el servidor</string>
+    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_host_invalid">Por favor, proporcione un host válido</string>
+    <string name="dialog_hostsourcerefresh_title">Actualizar las fuentes de hosts</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Refrescar automáticamente las fuentes del hosts</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutas</string>
+    <string name="dialog_logexport_loading_title">Preparando los registros de depuración</string>
+    <string name="dialog_raterequest_message">¡Hola! Si estás disfrutando de Nebulo, ¿podrías tomarte un momento para evaluarlo en la tienda\?</string>
 </resources>
