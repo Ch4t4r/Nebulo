@@ -1,11 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Nebulo</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nebulo</string>
     <string name="activity_label_import_queries">Importer des requêtes</string>
-    <string name="activity_label_import_servers">Importer des serveurs</string>
-
+    <string name="activity_label_import_servers">importer des serveurs</string>
     <string name="activity_label_enable_logging">Exporter/Activer la journalisation</string>
-
     <string name="all_stop">Arrêter</string>
     <string name="all_start">Démarrer</string>
     <string name="all_pause">Pause</string>
@@ -15,16 +13,12 @@
     <string name="information">Information</string>
     <string name="open_app">Ouvrir l\'application</string>
     <string name="all_close">Fermer</string>
-
     <string name="main_dnssurveillance_infotext">Notez que le serveur DNS auquel vous êtes connecté peut enregistrer les sites que vous visitez. Consultez les déclarations de confidentialité respectives pour plus d\'informations.</string>
     <string name="main_dnssurveillance_privacystatement">Déclaration de confidentialité de %1s</string>
-
     <string name="quicksettings_stop_text">Arrêter Nebulo</string>
     <string name="quicksettings_start_text">Démarrer Nebulo</string>
-
     <string name="crashreporting_thankyou">Merci ! Si vous changez d\'avis, ouvrez les réglages.</string>
     <string name="crashreporting_thankyou_gotit">Compris !</string>
-
     <string name="about_share">Partager</string>
     <string name="about_licenses">Licences Open Source</string>
     <string name="about_changelog">Modifs</string>
@@ -34,5 +28,4 @@
     <string name="about_credits">Crédits</string>
     <string name="about_info">Information générale</string>
     <string name="about_help_translating">Aidez pour la traduction</string>
-
 </resources>
