@@ -100,4 +100,6 @@
 \n
 \n 最快的服务器：%7s
 \n 最慢的服务器：%8s</string>
+    <string name="dialog_speedtest_useserver_title">选择服务器</string>
+    <string name="dialog_speedtest_useserver_message">你想使用服务器%1s吗？它在%3d中排名%2d，响应时间为%4d毫秒。</string>
 </resources>
