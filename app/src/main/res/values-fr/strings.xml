@@ -15,7 +15,7 @@
     <string name="all_close">Fermer</string>
     <string name="main_dnssurveillance_infotext">Notez que le serveur DNS auquel vous êtes connecté peut enregistrer les sites que vous visitez. Consultez les déclarations de confidentialité respectives pour plus d\'informations.</string>
     <string name="main_dnssurveillance_privacystatement">Déclaration de confidentialité de %1s</string>
-    <string name="quicksettings_stop_text">Arrêter Nebulo</string>
+    <string name="quicksettings_stop_text">Stopper Nebulo</string>
     <string name="quicksettings_start_text">Démarrer Nebulo</string>
     <string name="crashreporting_thankyou">Merci ! Si vous changez d\'avis, ouvrez les réglages.</string>
     <string name="crashreporting_thankyou_gotit">Compris !</string>
