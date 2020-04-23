@@ -1,2 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="dialog_logexport_general">Choisir une application</string>
+    <string name="dialog_serverconfiguration_addserver">Ajouter un serveur</string>
+    <string name="dialog_newserver_name">Nom du serveur</string>
+    <string name="dialog_newserver_primaryserver">Serveur primaire</string>
+    <string name="dialog_newserver_secondaryserver">Serveur secondaire (facultatif)</string>
+    <string name="dialog_serverimport_done">Fait</string>
+    <string name="dialog_serverimport_priority">Priorité %1d</string>
+    <string name="dialog_logexport_text">Comment voulez-vous partager les journaux \?</string>
+    <string name="dialog_error_text">Il semble que l\'application ait planté. Voulez-vous envoyer les fichiers de journal d\'erreurs au développeur \?</string>
+    <string name="dialog_batteryoptimization_title">Optimisation de la batterie</string>
+    <string name="dialog_changelog_title">Changelog</string>
+    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Veuillez sélectionner les serveurs que vous souhaitez importer.
+\n
+\nLes serveurs qui sont déjà importés seront dupliqués si vous les sélectionnez.</string>
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Les serveurs n\'ont pas pu être importés.
+\n(%1s)</string>
+    <string name="dialog_deletelogs_text">Êtes-vous sûr de vouloir supprimer tous les journaux \?</string>
+    <string name="dialog_batteryoptimization_message">Sur certains appareils, l\'application ne sera pas informée que l\'appareil a fini de démarrer à moins que les optimisations de la batterie ne soient désactivées pour lui.
+\nL\'application n\'est actuellement pas sur la liste blanche de l\'optimisation de la batterie, voulez-vous faire cela \?
+\n
+\nVous devez tester si elle fonctionne avec l\'optimisation activée avant de la désactiver.</string>
+    <string name="dialog_rate_confirmation">Vous voulez ouvrir le magasin de jeux pour évaluer l\'application \?</string>
+    <string name="dialog_changelog_infotext">L\'application a été mise à jour depuis la dernière fois que vous l\'avez ouverte. Dans la liste suivante, vous pouvez voir le journal des modifications. Cochez la case ci-dessous et vous ne verrez plus ce message à l\'avenir.</string>
+    <string name="dialog_query_export_title">Exportation des requêtes...</string>
+    <string name="dialog_serverconfiguration_title">Configuration du serveur</string>
+    <string name="dialog_newserver_title_https">Ajouter un serveur (DoH)</string>
+    <string name="dialog_newserver_title_tls">Ajouter un serveur (DoT)</string>
+    <string name="dialog_newserver_name_hint">Exemple</string>
+    <string name="dialog_deleteconfig_text">Voulez-vous supprimer la configuration %1$s \?</string>
+    <string name="dialog_appchoosal_showsystemapps">Afficher les applications du système</string>
+    <string name="dialog_appchoosal_whitelist">N\'utiliser que DoH/DoT dans les applications sélectionnées</string>
+    <string name="dialog_serverimport_experimental">Expérimental</string>
+    <string name="dialog_serverimport_servertype_doh">Tapez : Dns-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Tapez : Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimportfailed_title">L\'importation a échoué</string>
+    <string name="dialog_serverimportfailed_text">Le(s) serveur(s) n\'a (n\'ont) pas pu être importé(s).</string>
+    <string name="dialog_logexport_email">Courrier électronique</string>
+    <string name="dialog_batteryoptimization_whitelist">Désactiver</string>
+    <string name="dialog_batteryoptimization_ignore">Ignorer</string>
+    <string name="dialog_changelog_dont_show_again">Ne plus se montrer</string>
+    <string name="dialog_about_licenses">Licences</string>
+    <string name="dialog_logexport_loading_title">Préparation des journaux</string>
+</resources>
