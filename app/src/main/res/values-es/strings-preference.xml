@@ -56,7 +56,7 @@
 \nSi está deshabilitado, no se permite ninguna conexión IPv6 mientras se ejecuta la aplicación.</string>
     <string name="summary_restart_vpn_on_networkchange">Reinicie silenciosamente la aplicación cuando la red cambie. Habilite esto cuando tenga problemas al cambiar de red.
 \n No tiene efecto cuando la aplicación no está activa.</string>
-    <string name="summary_disallow_other_vpns">No permitas que otras VPNs se inicien si la aplicación no se detiene explícitamente.</string>
+    <string name="summary_disallow_other_vpns">No permitas que otras VPNs se inicien si la aplicación no se detiene explícitamente</string>
     <string name="summary_catch_other_dns_servers">Interceptar el tráfico de los servidores DNS conocidos y transmitirlo usando Nebulo</string>
     <string name="summary_map_query_refused">Algunos servidores DNS pueden negarse a responder a una consulta si el host no está permitido o está bloqueado. Esta configuración bloquea el host en lugar de rechazar la consulta, de lo contrario el sistema podría confundirse.</string>
     <string name="summary_delete_queries">Haga clic aquí para borrar todas las consultas registradas.</string>
