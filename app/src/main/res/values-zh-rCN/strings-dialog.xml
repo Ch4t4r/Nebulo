@@ -55,5 +55,42 @@
     <string name="dialog_query_export_message">正在导出查询请求项，请稍候</string>
     <string name="dialog_pin_message">请输入您的PIN。</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_enable_logging">您是否要启用日志？日志包含统计信息、调试信息和应用程序中的操作。生成的日志不会被共享，除非你自己去做。</string>
+    <string name="dialog_enable_logging">您是否要启用日志？日志包含统计信息、调试信息和应用所执行的操作。除非您自己想要共享日志，否则生成的日志不会被共享。</string>
+    <string name="dialog_crashreporting_title">自动发送崩溃报告</string>
+    <string name="dialog_crashreportingusages_title">被传送数据</string>
+    <string name="dialog_crashreportingusages_message">请点击任一组别以查看崩溃时应用发送了什么信息。</string>
+    <string name="dialog_crashreporting_positive">启用崩溃报告</string>
+    <string name="dialog_crashreporting_negative">不了，谢谢。</string>
+    <string name="dialog_crashreporting_neutral">查看数据</string>
+    <string name="dialog_crashreporting_message_notester">感谢使用Nebulo！
+\n
+\n本应用使用开源和自托管的第三方软件以便于在崩溃发生时第一时间追踪崩溃。当且仅当启用崩溃报告后，应用才会在崩溃时发送崩溃报告。这些崩溃报告包含关于应用与您的设备的一些附加信息，包括用于追踪同一用户崩溃的一个ID，而这个ID除此用途外无法用于他用。启用崩溃报告是可选的，但是如果您启用了崩溃报告，修复漏洞会更加简便快捷。
+\n崩溃报告一律使用HTTPS安全地传输。
+\n
+\n点击下方的“查看数据”以查看会传送什么数据，以及阅读隐私政策。</string>
+    <string name="dialog_clearqueries_title">清除所有请求项</string>
+    <string name="dialog_clearqueries_message">您确定您要清除所有已记录请求吗？此操作无法撤销。</string>
+    <string name="dialog_credits_title">致谢名单</string>
+    <string name="dialog_join_group_title">加入社区</string>
+    <string name="dialog_join_group_positive">好啊！</string>
+    <string name="dialog_speedresult_title">测速结果</string>
+    <string name="dialog_crashreporting_message">感谢使用Nebulo！
+\n
+\n本应用使用开源和自托管的第三方软件以便于在崩溃发生时第一时间追踪崩溃。当且仅当启用崩溃报告后，应用才会在崩溃时发送崩溃报告。这些崩溃报告包含关于应用与您的设备的一些附加信息，包括用于追踪同一用户崩溃的一个ID，而这个ID除此用途外无法用于他用。启用崩溃报告是可选的，但是如果您启用了崩溃报告，对我将会有很大帮助。
+\n崩溃报告一律使用HTTPS安全地传输。
+\n
+\n点击下方的“查看数据”以查看会传送什么数据，以及阅读隐私政策。</string>
+    <string name="dialog_credits_message" formatted="true">- 应用图标由 &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 绘制。
+\n- 土耳其语翻译由 Kemal Oktay Aktoğan 完成
+\n- 俄语翻译由 bruleto 完成
+\n- 荷兰语翻译由 Bas Koedijk 完成
+\n- 葡萄牙语翻译由 Rafael W. Bohnenberger 完成
+\n- 印度尼西亚语翻译由 Gloeyisk 完成
+\n- 一些图标来自 Font Awesome 
+\n 
+\n想要在这里看到您的名字吗？您可以随意为此应用&lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;做出贡献&lt;/a&gt;。</string>
+    <string name="dialog_join_group_message">嘿，你好！
+\n
+\n你知道这款应用有Telegram群组吗？群组包含有定期的更新，同时也是讨论与提问的极佳去处。
+\n我们是一个由超过200人组成的优质社群，你想成为其中的一分子吗？</string>
 </resources>
