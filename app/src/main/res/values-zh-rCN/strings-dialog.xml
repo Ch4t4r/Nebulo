@@ -48,4 +48,5 @@
     <string name="dialog_error_text">应用似乎崩溃了。您想将崩溃日志文件发送给开发者吗？</string>
     <string name="dialog_logexport_general">选择应用</string>
     <string name="dialog_logexport_loading_title">正在准备日志</string>
+    <string name="dialog_changelog_infotext">自您上次打开该应用后，该应用已经更新了。在下面的列表中，你可以看到更新日志。勾选下面的框，以后就不会再看到这条消息了。</string>
 </resources>
