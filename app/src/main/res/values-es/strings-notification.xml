@@ -1,2 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="notification_main_text_with_secondary">Las consultas se envían a %1$s y %2$s
+\n
+\nLas aplicaciones están excluidas de DoH/DoT
+\n%4$d entradas en el cache</string>
+    <string name="notification_main_text">Las consultas se envían a %1$s
+\n
+\n2$d Las aplicaciones están excluidas de DoH/DoT
+\n%3$d entradas en el cache</string>
+    <string name="notification_simple_text">Servidor actual: %1$s</string>
+    <string name="notification_channel_high_priorty_description">Canal para notificaciones de alta prioridad, por ejemplo cuando la aplicación pierde el permiso para la VPN</string>
+    <string name="notification_channel_high_priorty">Alta prioridad</string>
+    <string name="notification_channel_pin_description">Canal utilizado para las notificaciones relacionadas con el alfiler, es decir, cuando se tiene que proporcionar</string>
+    <string name="notification_channel_pin">Canal relacionado con el pin</string>
+    <string name="notification_channel_noconnection_description">Canal utilizado para mostrar las notificaciones cuando no parece haber conexión.</string>
+    <string name="notification_channel_noconnection">Canal de advertencia de conexión</string>
+    <string name="notification_channel_foreground_service_description">Canal utilizado para las notificaciones que no pueden ser eliminadas por el usuario</string>
+    <string name="notification_channel_foreground_service">Canal de notificación permanente</string>
+    <string name="notification_channel_default_description">Canal por defecto para la publicación de notificaciones.</string>
+    <string name="notification_channel_default">Canal por defecto</string>
+</resources>
