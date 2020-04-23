@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dialog_crashreportingusages_data_device_1">Arquitectura (x86, brazo, ...)</string>
+    <string name="dialog_crashreportingusages_data_user_1">La identificación aleatoria se usa para rastrear los choques</string>
+    <string name="dialog_crashreportingusages_data_4">Datos del sistema operativo</string>
+    <string name="dialog_crashreportingusages_data_3">Datos de la aplicación</string>
+    <string name="dialog_crashreportingusages_data_2">Datos del dispositivo</string>
+    <string name="dialog_crashreportingusages_data_1">Datos de usuario</string>
+</resources>
