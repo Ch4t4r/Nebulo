@@ -11,6 +11,6 @@
     <string name="preference_category_notification">Notification</string>
     <string name="summary_language">Changer la langue de l\'application</string>
     <string name="title_start_after_update">Démarrer après la mise à jour</string>
-    <string name="title_show_notification_on_lockscreen">Afficher sur l\'écran</string>
+    <string name="title_show_notification_on_lockscreen">Afficher sur un écran verrouillé</string>
     <string name="title_language">Langue</string>
 </resources>
