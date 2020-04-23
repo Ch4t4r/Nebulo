@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="windows_querylogging_type">Tipo</string>
     <string name="windows_querylogging_search">Búsqueda de host</string>
     <string name="windows_querylogging_search_hint">Buscar un host en el registro de consultas</string>
@@ -14,4 +14,65 @@
     <string name="error_invalid_host">Por favor, proporcione un host válido.</string>
     <string name="activity_label_enable_logging">Exportar registros de depuración/activar registro de depuración</string>
     <string name="activity_label_import_queries">Importar consultas DNS</string>
+    <string name="window_main_privatedns_info">El DNS privado está activo, sus consultas ya están protegidas. Habilite Nebulo si desea utilizar dns-over-https u otras características útiles.</string>
+    <string name="windows_querylogging_usedserver_cache">Resuelto con el caché</string>
+    <string name="windows_querylogging_usedserver_dnsrules">Resuelto con las reglas del DNS</string>
+    <string name="windows_querylogging_dnsrule_created">Se ha creado la regla del DNS.</string>
+    <string name="windows_querylogging_create_dnsrule">Crear una regla de DNS para este host</string>
+    <string name="windows_querylogging_responses">Respuestas</string>
+    <string name="windows_querylogging_latency">Latencia</string>
+    <string name="windows_querylogging_protocol">Protocolo</string>
+    <string name="windows_querylogging_hostsource__unknown">Desconocido</string>
+    <string name="windows_querylogging_hostsource__user">Reglas de usuario</string>
+    <string name="windows_querylogging_hostsource">Fuente de la regla del DNS</string>
+    <string name="windows_querylogging_used_server">Servidor usado</string>
+    <string name="windows_querylogging_question">Pregunta</string>
+    <string name="windows_querylogging_time">Tiempo</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Reglas de esta fuente: %1d (%2$d duplicados no en uso)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Reglas de esta fuente: -</string>
+    <string name="button_main_dnsrules">Las reglas del DNS</string>
+    <string name="error_no_webbrowser_installed">No tienes ninguna aplicación instalada para ver este enlace.</string>
+    <string name="window_speedtest_runtest">Inicie la prueba</string>
+    <string name="about_help_translating">Ayuda para traducir</string>
+    <string name="about_info">Información general</string>
+    <string name="about_credits">Créditos</string>
+    <string name="about_privacypolicy">Política de privacidad</string>
+    <string name="about_telegram_group">Grupo de telegramas</string>
+    <string name="about_contact_developer">Contacte con el desarrollador</string>
+    <string name="about_licenses">Licencias de código abierto</string>
+    <string name="about_share">Comparte</string>
+    <string name="crashreporting_thankyou_gotit">¡Ya lo tengo!</string>
+    <string name="crashreporting_thankyou">¡Gracias! Si cambias de opinión, ve a los ajustes.</string>
+    <string name="quicksettings_start_text">Iniciar Nebulo</string>
+    <string name="quicksettings_stop_text">Detener a Nebulo</string>
+    <string name="app_share_text">Oye, encontré esta aplicación que encripta tus consultas DNS para darte más privacidad y seguridad. Compruébalo aquí: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
+    <string name="about_app">Esta aplicación es de código abierto. Se puede acceder al código fuente en &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
+\nAdemás, la aplicación no contiene anuncios y no rastrea ni recoge ningún dato sobre usted.
+\n
+\nVersión %1s
+\nConstruir %2d
+\nVersión de la base de datos %3d
+\nIdentificación del informe del accidente: %4s
+\n
+\n© Daniel Wolf 2019
+\nLicenciado bajo GPLv3.
+\n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
+    <string name="main_dnssurveillance_privacystatement">Declaración de privacidad de %1s</string>
+    <string name="main_dnssurveillance_infotext">Tenga en cuenta que el servidor DNS al que está conectado es capaz de registrar qué sitios está visitando. Consulta las respectivas declaraciones de privacidad para obtener más información.</string>
+    <string name="error_cannot_open_settings">No se puede abrir la configuración del sistema.</string>
+    <string name="error_webview_missing">No se encontró el paquete WebView, ¿se está actualizando o eliminando\?</string>
+    <string name="error_invalid_servername">Por favor, proporcione un nombre.</string>
+    <string name="error_invalid_pin">Por favor, proporcione su PIN.</string>
+    <string name="error_invalid_url">Por favor, proporcione una url válida.</string>
+    <string name="all_close">Cerrar</string>
+    <string name="open_app">Abrir la aplicación</string>
+    <string name="information">Información</string>
+    <string name="all_yes">Sí</string>
+    <string name="all_no">No</string>
+    <string name="all_resume">Reanudar</string>
+    <string name="all_pause">Pausa</string>
+    <string name="all_start">Comienza</string>
+    <string name="all_stop">Deténgase</string>
+    <string name="activity_label_speed_test">Comparación de la velocidad del servidor</string>
+    <string name="activity_label_import_servers">Importar servidor(es)</string>
 </resources>
