@@ -10,7 +10,7 @@
         <item quantity="other">%1d reglas</item>
     </plurals>
     <string name="window_dnsrules_customhosts">Hosts personalizados</string>
-    <string name="about_changelog">Registro de cambios</string>
+    <string name="about_changelog">Changelog</string>
     <string name="error_invalid_host">Por favor, proporcione un host válido.</string>
     <string name="activity_label_enable_logging">Exportar registros de depuración/activar registro de depuración</string>
     <string name="activity_label_import_queries">Importar consultas DNS</string>
