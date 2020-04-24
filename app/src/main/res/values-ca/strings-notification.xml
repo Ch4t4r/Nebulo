@@ -53,4 +53,5 @@
     <string name="notification_channel_foreground_service">Canal de Notificació Permanent</string>
     <string name="notification_channel_default_description">Canal predeterminat per publicar notificacions.</string>
     <string name="notification_channel_default">Canal Predeterminat</string>
+    <string name="notification_ruleexport_secondarymessage">Preparant la exportació…</string>
 </resources>
