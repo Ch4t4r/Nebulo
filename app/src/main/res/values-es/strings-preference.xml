@@ -49,7 +49,7 @@
     <string name="summary_enable_logging">Permite el registro de información de depuración (contiene datos estadísticos). Estos registros no se envían automáticamente.</string>
     <string name="summary_send_logs">Haga clic aquí para enviar los registros al desarrollador.</string>
     <string name="summary_delete_all_logs">Borra todos los registros almacenados en su dispositivo.</string>
-    <string name="summary_crashreporting_type">Configurar qué datos deben ser transmitidos al desarrollador cuando la aplicación se bloquea. Los datos de los bloqueos nunca contienen datos personales y ayudan a solucionar los problemas más rápidamente.</string>
+    <string name="summary_crashreporting_type">Configurar qué datos deben ser transmitidos al desarrollador cuando la aplicación falla. Los datos del fallo nunca contienen datos personales y ayudan a solucionar los problemas más rápidamente.</string>
     <string name="summary_allow_ipv4_traffic">Permitir que el tráfico IPv4 sea utilizado, incluso si el IPv4 está deshabilitado.
 \nSi está desactivado, no se permite ninguna conexión IPv4 mientras se ejecuta la aplicación.</string>
     <string name="summary_allow_ipv6_traffic">Permitir el uso de tráfico IPv6, incluso si IPv4 está desactivado.
@@ -84,7 +84,7 @@
     <string name="title_export_queries">Consultas de exportación</string>
     <string name="title_delete_queries">Consultas claras</string>
     <string name="title_catch_other_dns_servers">Interceptar otro tráfico de DNS</string>
-    <string name="title_map_query_refused">Interpretar las preguntas rechazadas como anfitriones rechazados</string>
+    <string name="title_map_query_refused">Interpretar las consultas rechazadas como anfitriones rechazados</string>
     <string name="title_language">Idioma</string>
     <string name="summary_language">Cambiar el idioma de la aplicación</string>
     <string name="title_simple_notification">Notificación simple</string>
@@ -99,13 +99,13 @@
     <string name="summary_show_revoked_notification">Mostrar una notificación cuando Nebulo pierda el permiso para la VPN</string>
     <string name="summary_dnscache_maxsize">Establece el máximo de ingresos que puede mantener el caché en cualquier momento</string>
     <string name="summary_dnscache_keepacrosslaunches">Mantiene el cache DNS en múltiples lanzamientos</string>
-    <string name="summary_advanced_logging">Añade más registro de depuración, lo que podría ayudar con problemas más persistentes.</string>
+    <string name="summary_advanced_logging">Añade más registro, lo que podría ayudar con problemas más persistentes.</string>
     <string name="title_pause_on_captiveportal">Pausa en el captive portal</string>
     <string name="summary_bypass_searchdomains">Envía los searchdomains (por ejemplo, MyPC.local o MyPc.fritz.box) al servidor Dns de tu red en lugar del servidor DoH.
 \nEsto es muy recomendable. Esas consultas no salen de su red.</string>
     <string name="preference_category_logging">Registro de depuración</string>
-    <string name="title_enable_logging">Habilitar el registro de depuración</string>
+    <string name="title_enable_logging">Habilitar el registro</string>
     <string name="summary_pause_on_captiveportal">No uses el DoH si se detecta un captive portal. Se reanudará automáticamente poco después de iniciar la sesión.
 \nSi lo desactiva, podría impedirle abrir el captive portal para iniciar sesión.</string>
-    <string name="title_advanced_logging">Registro de depuración avanzada</string>
+    <string name="title_advanced_logging">Registro avanzado</string>
 </resources>
