@@ -138,7 +138,7 @@
     <string name="dialog_deletelogs_text">¿Estás seguro de que quieres borrar todos los registros de depuración\?</string>
     <string name="dialog_error_title">Informe de choque</string>
     <string name="dialog_batteryoptimization_ignore">Ignore</string>
-    <string name="dialog_changelog_title">Lista de cambios</string>
+    <string name="dialog_changelog_title">Changelog</string>
     <string name="dialog_query_export_title">Exportar consultas del DNS…</string>
     <string name="dialog_pin_message">Por favor, proporcione su código PIN.</string>
     <string name="dialog_pin_hint">Código PIN</string>
