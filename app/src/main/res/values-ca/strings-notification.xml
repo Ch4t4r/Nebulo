@@ -7,7 +7,7 @@
     <string name="notification_service_killed_title">Informació sobre l’optimització de la bateria</string>
     <string name="notification_pin_message">El PIN és obligatori per realitzar aquesta acció. Feu clic aquí per confirmar-ho.</string>
     <string name="notification_pin_title">PIN obligatori</string>
-    <string name="notification_ruleexportfinished_message">S\'han exportat %1d regles</string>
+    <string name="notification_ruleexportfinished_message">S\'han exportat %1d regles.</string>
     <string name="notification_ruleexportfinished_title">S\'ha finalitzat l\'exportació de regles DNS</string>
     <string name="notification_ruleexport_message">Exportant regles (%1d/%2d)</string>
     <string name="notification_ruleexport_title">Exportació de regla DNS</string>
