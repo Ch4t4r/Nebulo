@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="title_dnscache_enabled">Feu servir la memòria cau DNS</string>
+    <string name="preference_category_general">General</string>
+    <string name="preference_category_cache">Control de memòria cau</string>
+    <string name="summary_preference_change_pin">Canvieu el pin. Només s’admeten valors numèrics.
+\nPin actual: %1s</string>
+    <string name="title_preference_change_pin">Canviar pin</string>
+    <string name="summary_preference_pin_use_fingerprint">Permet que s\'utilitzi la seva empremta en lloc del pin.</string>
+    <string name="title_preference_pin_use_fingerprint">Permet empremta</string>
+    <string name="summary_preference_enable_pin">Demana un PIN quan obriu o atureu l\'aplicació</string>
+    <string name="title_preference_enable_pin">Pin</string>
+    <string name="preference_category_pin">Protecció amb PIN</string>
+    <string name="summary_show_revoked_notification">Mostra una notificació quan Nebulo perdi permís a la VPN</string>
+    <string name="title_show_revoked_notification">Notificació de pèrdua de permís</string>
+    <string name="summary_show_noconnection_notification">Mostra una notificació quan l\'aplicació no tingui connexió o sigui dolenta</string>
+    <string name="title_show_noconnection_notification">Notificació de cap connexió</string>
+    <string name="summary_notification_allow_pause">Permet fer una pausa de l’aplicació des de la notificació</string>
+    <string name="title_notification_allow_pause">Permet fer una pausa</string>
+    <string name="summary_notification_allow_stop">Permet que l’aplicació s’aturi des de la notificació</string>
+    <string name="title_notification_allow_stop">Permet aturar</string>
+    <string name="summary_notification_hide_icon">Amagueu la icona de la barra de navegació de la part superior</string>
+    <string name="title_notification_hide_icon">Amagar icona</string>
+    <string name="summary_simple_notification">Utilitzeu un text senzill a la notificació</string>
+    <string name="title_simple_notification">Notificació simple</string>
+    <string name="summary_show_notification_on_lockscreen">Defineix si voleu mostrar la notificació a la pantalla de bloqueig</string>
+    <string name="title_show_notification_on_lockscreen">Mostra a la pantalla de bloqueig</string>
+    <string name="preference_category_notification">Notificació</string>
+    <string name="summary_excluded_apps">Exclou les aplicacions de l\'aplicació aquí, per exemple si ja no es poden connectar a Internet: les aplicacions seleccionades ja no utilitzaran dns-over-https.</string>
+    <string name="title_excluded_apps">Aplicacions excloses</string>
+    <string name="summary_start_after_update">Iniciar l\'aplicació després que s\'hagi actualitzat</string>
+    <string name="title_start_after_update">Iniciar després d\'una actualització</string>
+    <string name="summary_start_on_boot">Iniciar l\'aplicació quan el telèfon estigui encès</string>
+    <string name="title_start_on_boot">Iniciar a l\'arrancada</string>
+    <string name="summary_theme">Configura el tema d\'aquesta aplicació</string>
+    <string name="title_theme">Tema</string>
+    <string name="summary_language">Canviar l\'idioma de l\'aplicació</string>
+    <string name="title_language">Idioma</string>
+</resources>
