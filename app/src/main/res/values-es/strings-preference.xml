@@ -4,7 +4,7 @@
     <string name="title_theme">Tema</string>
     <string name="summary_theme">Establece el tema para esta aplicación</string>
     <string name="title_start_on_boot">Iniciar en el arranque</string>
-    <string name="summary_start_on_boot">Iniciar la aplicación cuando se prenda el teléfono</string>
+    <string name="summary_start_on_boot">Iniciar la aplicación cuando el teléfono esté encendido</string>
     <string name="title_start_after_update">Iniciar después de una actualización</string>
     <string name="summary_start_after_update">Iniciar la aplicación después de que haya sido actualizada</string>
     <string name="title_excluded_apps">Aplicaciónes excluidas</string>
