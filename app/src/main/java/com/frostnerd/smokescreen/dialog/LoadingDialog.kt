@@ -30,7 +30,6 @@ import kotlinx.android.synthetic.main.dialog_loading.view.*
 class LoadingDialog(context:Context, title:String, private var message: String?) :BaseDialog(context, context.getPreferences().theme.dialogStyle) {
     constructor(context: Context, @StringRes title:Int):this(context, context.getString(title), null)
     constructor(context: Context, @StringRes title:Int, @StringRes message:Int):this(context, context.getString(title), context.getString(message))
-    constructor(context: Context, title:String):this(context, title, null)
 
     private val messageView:TextView
 

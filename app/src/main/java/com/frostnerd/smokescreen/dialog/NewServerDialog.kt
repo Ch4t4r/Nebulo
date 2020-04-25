@@ -137,7 +137,7 @@ class NewServerDialog(
                     vibrator.vibrate(250)
                 }
             }
-            val spinnerAdapter = ArrayAdapter<String>(
+            val spinnerAdapter = ArrayAdapter(
                 context, android.R.layout.simple_spinner_item,
                 arrayListOf(
                     context.getString(R.string.dialog_serverconfiguration_https),

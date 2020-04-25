@@ -10,7 +10,6 @@ import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
-import io.sentry.Sentry
 import kotlinx.android.synthetic.main.dialog_crashreportingusages.view.*
 import kotlinx.android.synthetic.main.dialog_crashreportingusages_listgroup.view.*
 

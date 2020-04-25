@@ -411,7 +411,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
     }
 
     private fun showLoadingDialog() {
-        loadingDialog = AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+        loadingDialog = Builder(context, context.getPreferences().theme.dialogStyle)
             .setTitle("Generating queries")
             .setCancelable(false)
             .setNegativeButton("Stop") { dialog, _ ->

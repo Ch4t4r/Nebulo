@@ -73,7 +73,7 @@ class ServerChoosalDialog(
         }
         loadServerData(showTls)
 
-        val spinnerAdapter = ArrayAdapter<String>(
+        val spinnerAdapter = ArrayAdapter(
             context, android.R.layout.simple_spinner_item,
             arrayListOf(
                 context.getString(R.string.dialog_serverconfiguration_https),
@@ -274,7 +274,7 @@ class ServerChoosalDialog(
 
         button.tag = userConfiguration
         button.setOnLongClickListener {
-            AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+            Builder(context, context.getPreferences().theme.dialogStyle)
                 .setTitle(R.string.dialog_editdelete_title)
                 .setPositiveButton(R.string.dialog_editdelete_edit) { dialog, _ ->
                     showUserConfigEditDialog(userConfiguration, button)
@@ -290,7 +290,7 @@ class ServerChoosalDialog(
     }
 
     private fun showUserConfigDeleteDialog(userConfiguration: UserServerConfiguration, button: RadioButton) {
-        AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+        Builder(context, context.getPreferences().theme.dialogStyle)
             .setTitle(R.string.dialog_deleteconfig_title)
             .setMessage(
                 context.getString(
@@ -330,7 +330,7 @@ class ServerChoosalDialog(
     }
 
     private fun showDefaultConfigDeleteDialog(config:DnsServerInformation<*>, button: RadioButton) {
-        AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
+        Builder(context, context.getPreferences().theme.dialogStyle)
             .setTitle(R.string.dialog_deleteconfig_title)
             .setMessage(
                 context.getString(

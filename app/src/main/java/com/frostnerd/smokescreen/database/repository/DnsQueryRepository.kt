@@ -31,28 +31,10 @@ import java.io.FileWriter
 
 class DnsQueryRepository(private val dnsQueryDao: DnsQueryDao) {
 
-    fun updateAsync(dnsQuery: DnsQuery): Job {
-        return GlobalScope.launch(Dispatchers.IO) {
-            dnsQueryDao.update(dnsQuery)
-        }
-    }
-
     fun insertAllAsync(dnsQueries:List<DnsQuery>): Job {
         return GlobalScope.launch(Dispatchers.IO) {
             dnsQueryDao.insertAll(dnsQueries)
         }
-    }
-
-    fun insertAsync(dnsQuery:DnsQuery): Job {
-        return GlobalScope.launch(Dispatchers.IO) {
-            dnsQueryDao.insert(dnsQuery)
-        }
-    }
-
-    suspend fun getAllAsync(coroutineScope: CoroutineScope): List<DnsQuery> {
-        return coroutineScope.async(Dispatchers.IO, start = CoroutineStart.DEFAULT) {
-            dnsQueryDao.getAll()
-        }.await()
     }
 
     fun exportQueriesAsCsvAsync(context: Context,

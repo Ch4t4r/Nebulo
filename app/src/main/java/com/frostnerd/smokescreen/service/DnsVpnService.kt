@@ -271,8 +271,6 @@ class DnsVpnService : VpnService(), Runnable {
     private fun addNetworkChangeListener() {
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         networkCallback = object : ConnectivityManager.NetworkCallback() {
-            private var waitingForNetwork = false
-
             override fun onLost(network: Network?) {
                 super.onLost(network)
                 val activeNetwork = mgr.activeNetworkInfo

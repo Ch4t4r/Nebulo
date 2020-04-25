@@ -297,10 +297,6 @@ class MainActivity : NavigationDrawerActivity() {
         }
     }
 
-    private fun askRateApp() {
-
-    }
-
     private fun rateApp() {
         val appPackageName = this.packageName
         try {

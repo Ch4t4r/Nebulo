@@ -28,7 +28,6 @@ import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import com.frostnerd.smokescreen.util.preferences.Theme
-import io.sentry.Sentry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -115,7 +114,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun findPreference(key:String): Preference {
-        return super.findPreference<Preference>(key)!!
+        return super.findPreference(key)!!
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

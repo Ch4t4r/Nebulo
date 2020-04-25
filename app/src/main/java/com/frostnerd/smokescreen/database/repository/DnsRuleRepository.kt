@@ -27,39 +27,9 @@ import kotlinx.coroutines.launch
  */
 class DnsRuleRepository(private val dnsRuleDao: DnsRuleDao) {
 
-    fun updateAsync(dnsRule: DnsRule, coroutineScope: CoroutineScope = GlobalScope) {
-        coroutineScope.launch {
-            dnsRuleDao.update(dnsRule)
-        }
-    }
-
-    fun insertAsync(dnsRule: DnsRule, coroutineScope: CoroutineScope = GlobalScope) {
-        coroutineScope.launch {
-            dnsRuleDao.insert(dnsRule)
-        }
-    }
-
     fun deleteAllUserRulesAsync(coroutineScope: CoroutineScope = GlobalScope) {
         coroutineScope.launch {
             dnsRuleDao.deleteAllUserRules()
-        }
-    }
-
-    fun deleteAllFromSourceAsync(hostSource: HostSource, coroutineScope: CoroutineScope = GlobalScope) {
-        coroutineScope.launch {
-            dnsRuleDao.deleteAllFromSource(hostSource.id)
-        }
-    }
-
-    fun getUserCountAsync(block:(count:Long) -> Unit,coroutineScope: CoroutineScope = GlobalScope) {
-        coroutineScope.launch {
-            block(dnsRuleDao.getUserCount())
-        }
-    }
-
-    fun getUserRulesAsnc(block:(List<DnsRule>) -> Unit, coroutineScope: CoroutineScope = GlobalScope) {
-        coroutineScope.launch {
-            block(dnsRuleDao.getAllUserRules())
         }
     }
 

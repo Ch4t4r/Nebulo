@@ -18,13 +18,6 @@ import kotlinx.coroutines.launch
  */
 class HostSourceRepository(private val hostSourceDao: HostSourceDao) {
 
-    @Delete
-    fun deleteAsync(hostSource: HostSource, coroutineScope: CoroutineScope = GlobalScope) {
-        coroutineScope.launch {
-            hostSourceDao.delete(hostSource)
-        }
-    }
-
     fun insertAllAsync(sources:Collection<HostSource>, coroutineScope: CoroutineScope = GlobalScope) {
         coroutineScope.launch {
             hostSourceDao.insertAll(sources)

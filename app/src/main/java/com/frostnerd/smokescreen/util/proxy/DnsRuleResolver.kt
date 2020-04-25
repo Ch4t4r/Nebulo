@@ -74,7 +74,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
         }
     }
 
-    private suspend fun preloadWhitelistEntries() {
+    private fun preloadWhitelistEntries() {
         cachedNonWildcardWhitelisted.addAll(dao.getRandomNonWildcardWhitelistEntries(100).map {
             hashHost(it.toLowerCase(), Record.TYPE.ANY)
         })
