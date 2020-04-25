@@ -14,13 +14,13 @@
     <string name="changelog_build_31_2">Aggiunte impostazioni per disabilitare i pulsanti di stop/pausa della notifica</string>
     <string name="changelog_build_32_4">Aggiunta una vista nel cassetto che mostra il server corrente in uso e gli indirizzi IP a cui si risolve</string>
     <string name="changelog_build_33_2">La notifica mostrata quando l\'app si blocca quando la segnalazione automatica del crash è disabilitata ha ora un pulsante per inviare i file di log</string>
-    <string name="changelog_build_33_6">Ora è possibile specificare indirizzi IP personalizzati per gli host. Gli host possono essere importati da URL e aggiunti manualmente.</string>
+    <string name="changelog_build_33_6">Ora è possibile specificare indirizzi IP personalizzati per gli host. Gli host possono essere importati da URL e aggiunti manualmente</string>
     <string name="changelog_build_35_2">L\'interruzione dell\'importazione della regola DNS non blocca più l\'interfaccia utente</string>
     <string name="changelog_build_35_4">Le fonti ospitanti delle regole DNS mostrano ora quante regole sono state importate da esse</string>
     <string name="changelog_build_36_3">Le regole DNS fisse non vengono importate da fonti molto piccole</string>
     <string name="changelog_build_36_5">Spostate le regole DNS nel menu laterale</string>
     <string name="changelog_build_37_2">Alcuni miglioramenti progettuali</string>
-    <string name="changelog_build_38_1">Questo è un aggiornamento focalizzato sulle prestazioni che dovrebbe rendere le query DNS più veloci, usare meno memoria e consumare meno batteria.</string>
+    <string name="changelog_build_38_1">Questo è un aggiornamento focalizzato sulle prestazioni che dovrebbe rendere le query DNS più veloci, usare meno memoria e consumare meno batteria</string>
     <string name="changelog_build_39_1">Risolto un crash che ha colpito la maggior parte dei server DNS</string>
     <string name="changelog_build_40_2">Tutti i server nella finestra di dialogo del server possono ora essere cancellati con un lungo clic</string>
     <string name="changelog_build_40_4">La funzione PIN ora funziona su Android Q</string>
@@ -34,13 +34,13 @@
     <string name="changelog_build_48_2">Il registro delle interrogazioni mostra ora la fonte host della regola DNS, se alla domanda è stata data risposta dalle regole DNS</string>
     <string name="changelog_build_49_3">La segnalazione automatica dei crash può ora essere impostata su full, minimal e off (prima era possibile solo on/off)</string>
     <string name="changelog_build_49_7">Il riquadro delle impostazioni rapide è ora più semplice</string>
-    <string name="changelog_build_51_1">Le regole di Whitelist Dns possono ora essere esportate</string>
+    <string name="changelog_build_51_1">Le regole di Whitelist DNS possono ora essere esportate</string>
     <string name="changelog_build_52_2">Corretto un bug che impediva che i server DoH con più tagli (/) venissero aggiunti correttamente</string>
     <string name="changelog_build_54_3">Corretto il mancato azzeramento del conteggio delle esportazioni quando si cancellano le query registrate</string>
     <string name="changelog_build_23_1">Le porte non difettose sono ora mostrate per i server DoT</string>
     <string name="changelog_build_23_3">L\'impostazione di esportazione della query mostra ora una finestra di dialogo che indica se sta caricando</string>
     <string name="changelog_build_23_4">Corretto l\'importazione del server che non funziona sulle versioni del sistema operativo sotto Android 7</string>
-    <string name="changelog_build_23_6">Ora è possibile proteggere l\'app nelle impostazioni</string>
+    <string name="changelog_build_23_6">Ora è possibile proteggere la app con un PIN nelle impostazioni</string>
     <string name="changelog_build_24_1">Risolto il crash dell\'app su dispositivi che non hanno un sensore di impronte digitali</string>
     <string name="changelog_build_25_1">Miglioramento della gestione di IPv6/IPv6 - l\'applicazione funziona ora in modo affidabile in reti che supportano solo</string>
     <string name="changelog_build_25_2">Aggiunti nuovi server DNS</string>
@@ -63,7 +63,7 @@
     <string name="changelog_build_31_3">Viene ora visualizzata una notifica se l\'app si blocca e viene abilitata la segnalazione automatica dei crash</string>
     <string name="changelog_build_31_4">Corretti alcuni crash</string>
     <string name="changelog_build_32_1">Revisionato un po\' l\'interfaccia utente</string>
-    <string name="changelog_build_32_2">Il Dns-over-TLS ora funziona in modo più affidabile in reti malfunzionanti</string>
+    <string name="changelog_build_32_2">Il DNS-over-TLS ora funziona in modo più affidabile in reti malfunzionanti</string>
     <string name="changelog_build_32_3">Aggiunta un\'impostazione per intercettare il traffico DNS estero (ad esempio a causa di async DNS)</string>
     <string name="changelog_build_32_5">L\'applicazione utilizza ora diversi indirizzi interni</string>
     <string name="changelog_build_32_6">Risolti alcuni crash e l\'app si blocca</string>
@@ -74,7 +74,7 @@
     <string name="changelog_build_33_7">Alcune modifiche al progetto</string>
     <string name="changelog_build_34_1">Risolto un crash relativo al database</string>
     <string name="changelog_build_35_1">Corretti alcuni crash relativi all\'importazione della regola DNS</string>
-    <string name="changelog_build_35_3">Piccolo miglioramento delle prestazioni per dns-over-https</string>
+    <string name="changelog_build_35_3">Piccolo miglioramento delle prestazioni per DNS-over-HTTPS</string>
     <string name="changelog_build_36_1">Ora è possibile esportare le regole DNS</string>
     <string name="changelog_build_36_2">Le regole del DNS possono ora essere importate da file</string>
     <string name="changelog_build_36_4">L\'importazione di regole può ora riconoscere le lettere non difettose (come le dieresi)</string>
@@ -87,7 +87,7 @@
     <string name="changelog_build_40_3">Google Play può ora essere rimosso dall\'elenco delle applicazioni di bypass</string>
     <string name="changelog_build_40_5">Ora è possibile inserire i domini nella whitelist nelle regole del dns. Se sono in whitelist saranno inviati al server dns, indipendentemente dal fatto che siano presenti in un file da voi fornito</string>
     <string name="changelog_build_40_6">Le notifiche di regola import/export possono ora essere cliccati</string>
-    <string name="changelog_build_41_1">Le fonti delle regole del Dns possono ora essere utilizzate come whitelist</string>
+    <string name="changelog_build_41_1">Le fonti delle regole del DNS possono ora essere utilizzate come whitelist</string>
     <string name="changelog_build_41_3">Aggiunti nuovi server</string>
     <string name="changelog_build_41_4">I server definiti dall\'utente possono ora essere modificati</string>
     <string name="changelog_build_41_6">Le fonti ospitanti possono ora essere modificate cliccando su di esse</string>
@@ -106,7 +106,7 @@
     <string name="changelog_build_45_2">Revisione del registro delle richieste</string>
     <string name="changelog_build_47_2">Il registro delle interrogazioni può ora essere ricercato per specifici host</string>
     <string name="changelog_build_47_4">La schermata principale mostra ora se il DNS privato è attivo (Android 9+)</string>
-    <string name="changelog_build_47_7">Miglioramento della gestione delle regole del dns</string>
+    <string name="changelog_build_47_7">Miglioramento della gestione delle regole del DNS</string>
     <string name="changelog_build_48_1">Aggiunta un\'impostazione per semplificare la notifica</string>
     <string name="changelog_build_48_3">La lingua ora passa correttamente in tutte le finestre quando la si cambia nelle impostazioni dell\'app</string>
     <string name="changelog_build_49_1">Questo è l\'aggiornamento in cui Nebulo sta finalmente lasciando lo stato Beta!</string>
@@ -115,7 +115,7 @@
     <string name="changelog_build_49_5">L\'esportazione dei file di log mostra ora una finestra di dialogo di caricamento</string>
     <string name="changelog_build_49_6">Le regole del DNS sono ora molto più veloci</string>
     <string name="changelog_build_49_8">Corretti alcuni bug che potrebbero far sì che l\'applicazione non inoltri le query DNS dopo qualche tempo su alcuni dispositivi</string>
-    <string name="changelog_build_51_2">Dns jolly fisso Dns Regole che non vengono esportate correttamente</string>
+    <string name="changelog_build_51_2">Dns jolly fisso DNS Regole che non vengono esportate correttamente</string>
     <string name="changelog_build_51_3">Server aggiornati</string>
     <string name="changelog_build_52_1">Le regole del DNS ora impediscono l\'occultamento del CNAME</string>
     <string name="changelog_build_52_3">Corretto un crash che raramente accadeva con la registrazione delle query attiva</string>
