@@ -162,9 +162,4 @@
 \nDNS istekleri dışında hiçbir gerçek veri, bu uygulamayı kullanarak iletilmez.</string>
     <string name="dialog_raterequest_title">Nebulo\'dan hoşlanıyor musunuz\?</string>
     <string name="dialog_raterequest_message">Selam! Nebulo\'dan keyif alıyorsanız, lütfen mağazada değerlendirmek için bir dakikanızı ayırır mısınız\?</string>
-    <string name="dialog_help_translating_message" translatable="false"></string>
-    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false"></string>
-    <string name="dialog_newserver_secondaryserver_hint" translatable="false"></string>
-    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false"></string>
-    <string name="dialog_newserver_primaryserver_hint" translatable="false"></string>
 </resources>

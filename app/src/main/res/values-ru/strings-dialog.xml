@@ -23,6 +23,8 @@
     <plurals name="dialog_serverimport_title">
         <item quantity="one">Импортировать %1d сервер</item>
         <item quantity="other">Импортировать %1d сервер(а)</item>
+        <item quantity="few">Импортировать %1d сервер(а)</item>
+        <item quantity="many">Импортировать %1d сервер(а)</item>
     </plurals>
     <string name="dialog_serverimport_done">Готово</string>
     <string name="dialog_serverimport_priority">Приоритет %1d</string>
@@ -96,7 +98,4 @@
     <string name="dialog_join_group_message">Эй, вы знаете, что у этого приложения есть свой чат в Telegram\? В нем выкладываются все последние обновления и также это лучшее место для вопросов и дискуссий о приложении.
 \nУ нас отличное комьюнити из более чем 200 человек, может хотите к нам присоединиться\?</string>
     <string name="dialog_join_group_positive">О да!</string>
-    <string name="dialog_help_translating_message" translatable="false">Это приложение переведено на несколько языков, но многих языков не хватает или они переведены неполностью. 
-\n
-\nПоэтому разработчик любезно просит вашей помощи в переводе этого приложения, чтобы охватить как можно более широкую аудиторию. Если вы готовы помочь с переводом этого приложения, не cтесняйтесь с ним связаться, либо вы можете прочесть &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/TRANSLATING.md&gt;здесь как помочь.&lt;/a&gt;</string>
 </resources>

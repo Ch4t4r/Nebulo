@@ -162,11 +162,4 @@
     <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutas</string>
     <string name="dialog_logexport_loading_title">Preparando los registros de depuración</string>
     <string name="dialog_raterequest_message">¡Hola! Si estás disfrutando de Nebulo, ¿podrías tomarte un momento para evaluarlo en la tienda\?</string>
-    <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
-    <string name="dialog_newserver_primaryserver_hint" translatable="false"></string>
-    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false"></string>
-    <string name="dialog_newserver_secondaryserver_hint" translatable="false"></string>
-    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false"></string>
-    <string name="dialog_help_translating_message" translatable="false"></string>
-    <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
 </resources>
