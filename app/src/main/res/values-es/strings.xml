@@ -3,21 +3,21 @@
     <string name="windows_querylogging_type">Tipo</string>
     <string name="windows_querylogging_search">Búsqueda de host</string>
     <string name="windows_querylogging_search_hint">Buscar un host en el registro de consultas</string>
-    <string name="window_dnsrules_customhosts_message">Define todos tus host personalizados aquí.</string>
-    <string name="window_dnsrules_hostalreadyexists">Ya hay una regla para este host.</string>
+    <string name="window_dnsrules_customhosts_message">Define todos tus host personalizados aquí</string>
+    <string name="window_dnsrules_hostalreadyexists">Ya hay una regla para este host</string>
     <plurals name="window_dnsrules_subtitle">
         <item quantity="one">%1d regla</item>
         <item quantity="other">%1d reglas</item>
     </plurals>
     <string name="window_dnsrules_customhosts">Hosts personalizados</string>
     <string name="about_changelog">Changelog</string>
-    <string name="error_invalid_host">Por favor, proporcione un host válido.</string>
+    <string name="error_invalid_host">Por favor, proporcione un host válido</string>
     <string name="activity_label_enable_logging">Exportar registros de depuración/activar registro de depuración</string>
     <string name="activity_label_import_queries">Importar consultas DNS</string>
-    <string name="window_main_privatedns_info">El DNS privado está activo, sus consultas ya están protegidas. Habilite Nebulo si desea utilizar dns-over-https u otras características útiles.</string>
+    <string name="window_main_privatedns_info">El DNS privado está activo, sus consultas ya están protegidas. Habilite Nebulo si desea utilizar DNS-over-HTTPS u otras características útiles.</string>
     <string name="windows_querylogging_usedserver_cache">Resuelto con el caché</string>
     <string name="windows_querylogging_usedserver_dnsrules">Resuelto con las reglas del DNS</string>
-    <string name="windows_querylogging_dnsrule_created">Se ha creado la regla del DNS.</string>
+    <string name="windows_querylogging_dnsrule_created">Se ha creado la regla del DNS</string>
     <string name="windows_querylogging_create_dnsrule">Crear una regla de DNS para este host</string>
     <string name="windows_querylogging_responses">Respuestas</string>
     <string name="windows_querylogging_latency">Latencia</string>
@@ -31,7 +31,7 @@
     <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Reglas de esta fuente: %1d (%2$d duplicados no en uso)</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Reglas de esta fuente: -</string>
     <string name="button_main_dnsrules">Reglas de DNS</string>
-    <string name="error_no_webbrowser_installed">No tienes ninguna aplicación instalada para ver este enlace.</string>
+    <string name="error_no_webbrowser_installed">No tienes ninguna aplicación instalada para ver este enlace</string>
     <string name="window_speedtest_runtest">Inicie la prueba</string>
     <string name="about_help_translating">Ayuda traduciendo</string>
     <string name="about_info">Información general</string>
@@ -59,11 +59,11 @@
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
     <string name="main_dnssurveillance_privacystatement">Declaración de privacidad de %1s</string>
     <string name="main_dnssurveillance_infotext">Tenga en cuenta que el servidor DNS al que está conectado es capaz de registrar qué sitios está visitando. Consulta las respectivas declaraciones de privacidad para obtener más información.</string>
-    <string name="error_cannot_open_settings">No se puede abrir la configuración del sistema.</string>
+    <string name="error_cannot_open_settings">No se puede abrir la configuración del sistema</string>
     <string name="error_webview_missing">No se encontró el paquete WebView, ¿se está actualizando o eliminando\?</string>
-    <string name="error_invalid_servername">Por favor, proporcione un nombre.</string>
-    <string name="error_invalid_pin">Por favor, proporcione su PIN.</string>
-    <string name="error_invalid_url">Por favor, proporcione una url válida.</string>
+    <string name="error_invalid_servername">Por favor, proporcione un nombre</string>
+    <string name="error_invalid_pin">Por favor, proporcione su PIN</string>
+    <string name="error_invalid_url">Por favor, proporcione una url válida</string>
     <string name="all_close">Cerrar</string>
     <string name="open_app">Abrir la aplicación</string>
     <string name="information">Información</string>
