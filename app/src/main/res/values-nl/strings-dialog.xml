@@ -1,7 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="dialog_serverconfiguration_title">Server configuratie</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_serverconfiguration_title">Server configuratie</string>
     <string name="dialog_serverconfiguration_addserver">Server toevoegen</string>
-
     <string name="dialog_newserver_title_https">Voeg een server toe (DoH)</string>
     <string name="dialog_newserver_title_tls">Voeg een server toe (DoT)</string>
     <string name="dialog_newserver_name">Server naam</string>
@@ -10,15 +10,12 @@
     <string name="dialog_newserver_secondaryserver">Secundaire server (Optioneel)</string>
     <string name="dialog_deleteconfig_title">Verwijder configuratie\?</string>
     <string name="dialog_deleteconfig_text">Wilt u de configuratie %1$s\? verwijderen\?</string>
-
     <string name="dialog_appchoosal_showsystemapps">Systeem-apps weergeven</string>
     <string name="dialog_appchoosal_whitelist">Gebruik alleen DoH / DoT in geselecteerde apps</string>
-
     <plurals name="dialog_excludedapps_infotext">
-	<item quantity="one">%1d app is standaard uitgesloten en kan niet worden gedeselecteerd</item>
-	<item quantity="other">%1d apps zijn standaard uitgesloten en kunnen niet worden geselecteerd</item>
-</plurals>
-
+        <item quantity="one">%1d app is standaard uitgesloten en kan niet worden gedeselecteerd</item>
+        <item quantity="other">%1d apps zijn standaard uitgesloten en kunnen niet worden geselecteerd</item>
+    </plurals>
     <plurals name="dialog_serverimport_title">
         <item quantity="one">Import van %1d server</item>
         <item quantity="other">Import van %1d servers</item>
@@ -26,26 +23,21 @@
     <string name="dialog_serverimport_done">Klaar</string>
     <string name="dialog_serverimport_priority">Prioriteit %1d</string>
     <string name="dialog_serverimport_experimental">Experimenteel</string>
-    <string name="dialog_serverimport_servertype_doh">Type: Dns-over-HTTPS (DoH)</string>
-    <string name="dialog_serverimport_servertype_dot">Type: Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_servertype_doh">Type: DNS-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Type: DNS-over-TLS (DoT)</string>
     <string name="dialog_serverimport_text">Selecteer de servers die u wilt importeren. 
 \n  
 \nAls u servers selecteert die al zijn toegevoegd, worden deze gedupliceerd.</string>
-
     <string name="dialog_serverimportfailed_title">Importeren mislukt</string>
     <string name="dialog_serverimportfailed_text">De server(s) kunnen niet worden geïmporteerd.</string>
     <string name="dialog_serverimportfailed_text_exception">De servers kunnen niet worden geïmporteerd. 
 \n(%1s)</string>
-
     <string name="dialog_logexport_text">Hoe wil je de logs delen\?</string>
     <string name="dialog_logexport_general">Kies app</string>
     <string name="dialog_logexport_email">E-Mail</string>
-
     <string name="dialog_deletelogs_text">Weet je zeker dat je alle logs wilt verwijderen\?</string>
-
     <string name="dialog_error_title">Crash-rapport</string>
     <string name="dialog_error_text">Het lijkt erop dat de app is gecrasht. Wilt u het foutenlogboek verzenden naar de ontwikkelaar\?</string>
-
     <string name="dialog_batteryoptimization_title">Batterij optimalisatie</string>
     <string name="dialog_batteryoptimization_message">Op sommige apparaten wordt de app niet op de hoogte gebracht dat het apparaat is opgestart, tenzij batterij-optimalisaties zijn uitgeschakeld.
 \nDe app staat momenteel niet op de witte lijst van de batterij-optimalisatie, wil je dit doen\?
@@ -53,23 +45,16 @@
 \nU moet testen of het werkt met optimalisatie ingeschakeld voordat u het uitschakelt.</string>
     <string name="dialog_batteryoptimization_whitelist">Uitschakelen</string>
     <string name="dialog_batteryoptimization_ignore">Negeren</string>
-
     <string name="dialog_rate_confirmation">Wilt u de Play Store openen om de app te beoordelen\?</string>
-
     <string name="dialog_changelog_title">Changelog</string>
     <string name="dialog_changelog_infotext">De app is bijgewerkt sinds je hem voor het laatst hebt geopend. In de volgende lijst ziet u de changelog. Vink het vak hieronder aan en je ziet dit bericht in de toekomst niet meer.</string>
     <string name="dialog_changelog_dont_show_again">Niet meer laten zien</string>
-
     <string name="dialog_about_licenses">licenties</string>
-
     <string name="dialog_query_export_title">Zoekopdrachten exporteren…</string>
     <string name="dialog_query_export_message">Even geduld terwijl de DNS-verzoeken worden geëxporteerd</string>
-
     <string name="dialog_pin_message">Geef uw pincode op.</string>
     <string name="dialog_pin_hint">PIN</string>
-
     <string name="dialog_enable_logging">Wilt u loggen inschakelen\? Logbestanden bevatten statistische informatie, foutopsporingsinformatie en acties in de app. Gegenereerde logbestanden worden niet gedeeld tenzij u dit zelf doet.</string>
-
     <string name="dialog_crashreporting_title">Automatische crash rapportage</string>
     <string name="dialog_crashreportingusages_title">Doorgestuurde gegevens</string>
     <string name="dialog_crashreportingusages_message">Klik op een van de groepen om te zien welke gegevens worden verzonden bij een crash.</string>
@@ -88,10 +73,8 @@
 \nRapporten worden veilig verzonden via HTTPS.
 \n
 \nKlik hieronder op \'Zie gegevens\' om te zien wat voor soort gegevens worden verzonden en voor een link naar het privacybeleid.</string>
-
     <string name="dialog_clearqueries_title">Alle aanvragen wissen</string>
     <string name="dialog_clearqueries_message">Weet u zeker dat u de geregistreerde zoekopdrachten wilt wissen\? Dit kan niet worden teruggedraaid.</string>
-
     <string name="dialog_credits_title">Dankwoord</string>
     <string name="dialog_credits_message" formatted="true">"- App-icoon door &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;. 
 \n- Turkse vertaling door Kemal Oktay Aktoğan 
@@ -103,14 +86,12 @@
 \n- Enkele pictogrammen van Font Awesome
 \n 
 \nWil je je naam hier zien\? Aarzel niet om &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt; een bijdrage te leveren &lt;/a&gt;."</string>
-
     <string name="dialog_join_group_title">Word lid van de community</string>
     <string name="dialog_join_group_message">Hallo daar!
 \n
 \nWist je dat deze app een Telegram-groep heeft\? Het bevat regelmatige updates en is de perfecte plaats voor discussies en vragen.
 \nWij zijn een geweldige community van meer dan 200 mensen, wilt u er deel van uitmaken\?</string>
     <string name="dialog_join_group_positive">Ja!</string>
-
     <string name="dialog_speedresult_title">Snelheid testresultaten</string>
     <string name="dialog_speedresult_message">%1d servers getest
 \n %2d DoT servers bereikbaar, %3d niet bereikbaar
@@ -119,21 +100,16 @@
 \n
 \n Snelste server: %7s
 \n Langzaamste server: %8s</string>
-
     <string name="dialog_speedtest_useserver_title">Selecteer server</string>
     <string name="dialog_speedtest_useserver_message">Wilt u de server %1s gebruiken\? Het staat op plaats %2d van %3d met een responstijd van %4d ms.</string>
-
     <string name="dialog_deletehostsource_title">Verwijderen %1s\?</string>
     <string name="dialog_deletehostsource_message">Weet u zeker dat u de host bron %1s wilt verwijderen\? Dit kan niet ongedaan worden gemaakt, de hosts van deze bron zullen worden verwijderd.</string>
-
     <string name="dialog_clearuserrules_title">Alle DNS regels wissen\?</string>
     <string name="dialog_clearuserrules_message">Wilt u alle DNS regels wissen\? Dit kan niet ongedaan gemaakt worden.</string>
-
     <string name="dialog_newhostsource_title">Nieuwe regel bron</string>
     <string name="dialog_newhostsource_name">Naam</string>
     <string name="dialog_newhostsource_url">URL</string>
-    <string name="dialog_newhostsource_error_name_empty">Geef a.u.b een naam op.</string>
-
+    <string name="dialog_newhostsource_error_name_empty">Geef a.u.b een naam op</string>
     <string name="dialog_newdnsrule_title">Nieuwe DNS regel</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
     <string name="dialog_newdnsrule_hint_ipv4address">IPv4 adres</string>
@@ -141,11 +117,11 @@
     <string name="dialog_newdnsrule_host_invalid">Geef a.u.b een geldige host op</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Geef a.u.b een geldig IPv4 adres op</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Geef a.u.b een geldig IPv6 adres op</string>
-<string name="dialog_newhostsource_choose_file">Kies bestand</string>
+    <string name="dialog_newhostsource_choose_file">Kies bestand</string>
     <string name="dialog_exportdnsrules_title">Exporteer DNS regels</string>
     <string name="dialog_exportdnsrules_export_user_rules">Exporteer uw eigen DNS-regels</string>
     <string name="dialog_exportdnsrules_export_sources">Exporteer DNS-regels van ingeschakelde host bronnen</string>
-<string name="dialog_newdnsrule_whitelist">Whitelist</string>
+    <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Adres</string>
     <string name="dialog_newhostsource_use_as_whitelist">Gebruik als whitelist</string>
     <string name="dialog_newhostsource_edit_title">Nieuwe dns-regel bron</string>
@@ -153,19 +129,18 @@
     <string name="dialog_editdelete_title">Wat wil je doen\?</string>
     <string name="dialog_editdelete_edit">Bewerken</string>
     <string name="dialog_editdelete_delete">Verwijderen</string>
-<string name="dialog_servicekilled_message">De app ontdekte dat hij de laatste keer dat hij actief was niet juist afgesloten was. Dit geeft sterk aan dat uw systeem ervoor heeft gekozen om de app geforceerd te stoppen zonder dat de app zichzelf kan herstarten. 
+    <string name="dialog_servicekilled_message">De app ontdekte dat hij de laatste keer dat hij actief was niet juist afgesloten was. Dit geeft sterk aan dat uw systeem ervoor heeft gekozen om de app geforceerd te stoppen zonder dat de app zichzelf kan herstarten. 
 \n 
 \nOp de meeste apparaten heb je een aantal opties om te voorkomen dat het systeem de app stopt. 
 \nJe kunt bijvoorbeeld de batterijoptimalisatie voor de app uitschakelen in de systeeminstellingen of voorkomen dat de app uit de lijst met recente apps wordt gewist. 
 \n 
 \nAls je ervoor kiest om dit te negeren dan zie je dit dialoogvenster niet meer terug. U kunt meer lezen en tips krijgen om dit op te lossen met de onderstaande knop (opent een externe website in uw browser). Klik op instellingen om de Android-instellingen te openen waar u de batterijoptimalisaties voor Nebulo kunt uitschakelen.</string>
     <string name="dialog_servicekilled_more_info">Meer informatie</string>
-<string name="dialog_newhostsource_wildcard_info">U kunt host bronnen gebruiken met wildcard domeinen.</string>
+    <string name="dialog_newhostsource_wildcard_info">U kunt host bronnen gebruiken met wildcard domeinen.</string>
     <string name="dialog_newdnsrule_wildcard_info">De host ondersteunt wildcards. Gebruik een asterisk (*) voor een willekeurig aantal tekens, cijfers en toegestane speciale tekens behalve punt (.). Gebruik twee asteriksen (**) om de punt (.) Op te nemen.</string>
-
     <string name="dialog_overlaydetected_title">Systeem-brede overlay gedetecteerd</string>
     <string name="dialog_overlaydetected_message">Er lijkt een systeem-brede overlay (bijv. Een chatballon, kleuren- of nachtfilter) actief te zijn. Met de meeste apparaten kunt u in dit geval geen VPN inschakelen. Als u in het volgende dialoogvenster niet op OK kunt klikken, schakelt u de overlay uit.</string>
-<string name="dialog_hostsourcerefresh_title">Vernieuw host bronnen</string>
+    <string name="dialog_hostsourcerefresh_title">Vernieuw host bronnen</string>
     <string name="dialog_hostsourcerefresh_automatic_refresh">Host bronnen automatisch vernieuwen</string>
     <string name="dialog_hostsourcerefresh_wifi_only">Vernieuw alleen op WIFI</string>
     <string name="dialog_hostsourcerefresh_refresh_every">Vernieuw elke</string>
@@ -176,15 +151,14 @@
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Weken</string>
     <string name="dialog_logexport_loading_title">Logboeken voorbereiden</string>
     <string name="dialog_cleardnscache_message">Weet u zeker dat u de DNS-cache wilt wissen\?</string>
-
-<string name="dialog_vpninformation_title">Hoe deze app werkt</string>
+    <string name="dialog_vpninformation_title">Hoe deze app werkt</string>
     <string name="dialog_vpninformation_message">Nebulo werkt met behulp van een dummy VPN om al uw DNS-aanvragen vast te leggen, die vervolgens worden doorgestuurd naar een beveiligde server naar keuze.
 \nDeze dummy VPN is geen echte VPN en verbergt noch uw identiteit, noch verandert het uw IP-adres.
 \n
 \nEr worden geen actuele gegevens, behalve DNS-verzoeken, verzonden met behulp van deze app.</string>
-<string name="dialog_exportdnsrules_whitelist">Whitelist regels exporteren</string>
+    <string name="dialog_exportdnsrules_whitelist">Whitelist regels exporteren</string>
     <string name="dialog_exportdnsrules_nonwhitelist">Normale regels exporteren</string>
     <string name="dialog_raterequest_title">Bent u tevreden over Nebulo\?</string>
     <string name="dialog_raterequest_message">Hallo daar! Als u tevreden bent met Nebulo, wilt u dan even de tijd nemen om het in de Play Store ™ te beoordelen\?</string>
-<string name="dialog_vpn_permission_denied_message">Het systeem heeft Nebulo geweigerd om zijn VPN te starten. Open de app om de toestemming daar te verlenen door op de startknop te klikken.</string>
+    <string name="dialog_vpn_permission_denied_message">Het systeem heeft Nebulo geweigerd om zijn VPN te starten. Open de app om de toestemming daar te verlenen door op de startknop te klikken.</string>
 </resources>
