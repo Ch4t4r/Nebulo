@@ -1,13 +1,11 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="notification_channel_default">Стандартный Канал</string>
-    <string name="notification_channel_default_description">Стандартный канал для показа уведомлений.</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_channel_default">Стандартный Канал</string>
+    <string name="notification_channel_default_description">Стандартный канал для показа уведомлений</string>
     <string name="notification_channel_foreground_service">Постоянный Канал Уведомлений</string>
     <string name="notification_channel_foreground_service_description">Используемый канал для уведомлений, которые не могут быть удалены пользователем</string>
-
     <string name="notification_channel_noconnection">Канал для уведомления об отсутствии соединения</string>
     <string name="notification_channel_noconnection_description">Канал, используемый для отображения уведомлений при отсутствии соединения</string>
-
     <string name="notification_main_text">Запросы идут к %1$s
 \n
 \n%2$d исключенных приложений
@@ -27,13 +25,10 @@
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1$d запросов</string>
-
     <string name="notification_noconnection_title">Нет соединения</string>
-    <string name="notification_noconnection_text">Приложение не перенаправляет ваши DNS запросы, так как нет соединения либо оно нестабильно.</string>
-
+    <string name="notification_noconnection_text">Приложение не перенаправляет ваши DNS запросы, так как нет соединения либо оно нестабильно</string>
     <string name="notification_vpnrestart_title">Перезапуск VPN</string>
-    <string name="notification_vpnrestart_text">VPN будет перезапущен.</string>
-
+    <string name="notification_vpnrestart_text">VPN будет перезапущен</string>
     <string name="notification_appcrash_title">Nebulo неожиданно завершилось</string>
-    <string name="notification_appcrash_message">Nebulo неожиданно завершилось. Нажмите здесь, чтобы перейти в Главное меню и перезагрузить приложение, если это необходимо.</string>
+    <string name="notification_appcrash_message">Nebulo неожиданно завершилось. Нажмите здесь, чтобы перейти в Главное меню и перезагрузить приложение, если это необходимо</string>
 </resources>
