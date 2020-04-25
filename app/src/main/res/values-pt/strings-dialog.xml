@@ -24,7 +24,7 @@
     <string name="dialog_serverimport_priority">Prioridade %1d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Tipo: DNS-via-HTTPS (DoH)</string>
-    <string name="dialog_serverimport_servertype_dot">Tipo: Dns-via-TLS (DoT)</string>
+    <string name="dialog_serverimport_servertype_dot">Tipo: DNS-via-TLS (DoT)</string>
     <string name="dialog_serverimport_text">Por favor, selecione os servidores que você deseja importar. 
 \n 
 \nServidores que já foram importados serão duplicados se você os selecionar.</string>
@@ -33,7 +33,7 @@
     <string name="dialog_serverimportfailed_text_exception">Não foi possível importar os servidores. 
 \n(%1s)</string>
     <string name="dialog_logexport_text">Como você deseja compartilhar os registros\?</string>
-    <string name="dialog_logexport_general"></string>
+    <string name="dialog_logexport_general">Escolha o aplicativo</string>
     <string name="dialog_logexport_email">E-Mail</string>
     <string name="dialog_deletelogs_text">Tem certeza de que deseja excluir todos os registros\?</string>
     <string name="dialog_error_title">Relatório de falhas</string>
@@ -112,7 +112,7 @@
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_choose_file">Escolher arquivo</string>
     <string name="dialog_newhostsource_use_as_whitelist">Usar como lista branca</string>
-    <string name="dialog_newhostsource_error_name_empty">Por favor, forneça um nome.</string>
+    <string name="dialog_newhostsource_error_name_empty">Por favor, forneça um nome</string>
     <string name="dialog_newdnsrule_title">Nova regra de DNS</string>
     <string name="dialog_newdnsrule_edit">Editar regra de DNS</string>
     <string name="dialog_newdnsrule_whitelist">Lista branca</string>
