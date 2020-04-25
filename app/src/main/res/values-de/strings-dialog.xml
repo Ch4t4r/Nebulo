@@ -129,7 +129,7 @@
 \nAuf den meisten Geräten existieren einige Optionen, welche dieses Verhalten seitens des System verhindern, mindestens aber verzögern können. 
 \nSo kannst du zum Beispiel in den Systemeinstellungen die Batterieoptimierungen für Nebulo deaktivieren, oder die App nicht aus der Liste der zuletzt verwendeten Apps entfernen. 
 \n 
-\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser). Klicke auf Einstellungen um in ein Menü zu kommen, wo die die Batterieoptimierungen für Nebulo deaktivieren kannst.</string>
+\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser). Klicke auf Einstellungen um in ein Menü zu kommen, wo die Batterieoptimierungen für Nebulo deaktivieren kannst.</string>
     <string name="dialog_servicekilled_more_info">Mehr Informationen</string>
     <plurals name="dialog_excludedapps_infotext">
         <item quantity="one">%1d App ist standardmäßig ausgewählt und kann nicht abgewählt werden</item>

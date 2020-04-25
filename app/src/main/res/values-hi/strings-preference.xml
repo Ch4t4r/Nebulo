@@ -82,7 +82,7 @@
 \nवर्तमान: %1d सेकंड।</string>
 
     <string name="title_dnscache_nxdomaincachetime">NXDomain के लिए कैश समय (सेकंड)</string>
-    <string name="summary_dnscache_nxdomaincachetime">NXDOMAIN अनुरोधों को कैश किये गए समय राशि बदलता है। यह गैर-मौजूदा डोमेन के प्रदर्शन को बढ़ाता है (उदा. जैसे यदि वे बाधित हैं)|</string>
+    <string name="summary_dnscache_nxdomaincachetime">NXDOMAIN अनुरोधों को कैश किये गए समय राशि बदलता है। यह गैर-मौजूदा डोमेन के प्रदर्शन को बढ़ाता है (उदा. जैसे यदि वे बाधित हैं)|\nCurrent: %1d Seconds</string>
 
 
     <string name="preference_category_logging">लॉगिंग</string>

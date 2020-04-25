@@ -28,7 +28,7 @@
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1$d richieste finora</string>
     <string name="notification_noconnection_title">Nessuna connessione</string>
-    <string name="notification_noconnection_text">L\'app attualmente non sta inoltrando le tue richieste DNS perchè non hai una connessione attiva</string>
+    <string name="notification_noconnection_text">L\'app attualmente non sta inoltrando le tue richieste DNS perché non hai una connessione attiva</string>
     <string name="notification_vpnrestart_title">Riavvio della Vpn</string>
     <string name="notification_vpnrestart_text">Il servizio Vpn verrà presto riavviato</string>
     <string name="notification_appcrash_title">Errore di Nebulo</string>

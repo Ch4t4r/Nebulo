@@ -100,8 +100,8 @@
     <string name="dialog_speedtest_useserver_message">サーバ %1s を使用しますか？それは %3d のうち %2d にランク付けされ、応答時間は %4d ms です。</string>
     <string name="dialog_speedtest_useserver_title">サーバーを選択</string>
     <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">テストされた %1d サーバ
-\n 2d DoT サーバには到達可能、%3d には到達できません。
-\n 4d DoH サーバには到達可能、%5d には到達できません。
+\n %2d DoT サーバには到達可能、%3d には到達できません。
+\n %4d DoH サーバには到達可能、%5d には到達できません。
 \n 平均応答時間: %6d ms.
 \n
 \n 最速サーバ。%7s
