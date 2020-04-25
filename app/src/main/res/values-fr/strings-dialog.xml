@@ -32,8 +32,8 @@
     <string name="dialog_appchoosal_showsystemapps">Afficher les applications du système</string>
     <string name="dialog_appchoosal_whitelist">N\'utiliser que DoH/DoT dans les applications sélectionnées</string>
     <string name="dialog_serverimport_experimental">Expérimental</string>
-    <string name="dialog_serverimport_servertype_doh">Tapez : Dns-over-HTTPS (DoH)</string>
-    <string name="dialog_serverimport_servertype_dot">Tapez : Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_servertype_doh">Tapez : DNS-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Tapez : DNS-over-TLS (DoT)</string>
     <string name="dialog_serverimportfailed_title">L\'importation a échoué</string>
     <string name="dialog_serverimportfailed_text">Le(s) serveur(s) n\'a (n\'ont) pas pu être importé(s).</string>
     <string name="dialog_logexport_email">Courrier électronique</string>
@@ -106,7 +106,7 @@
 \nSi vous choisissez de l\'ignorer, vous ne verrez plus ce dialogue. Vous pouvez en savoir plus et recevoir des conseils pour résoudre ce problème avec le bouton ci-dessous (ouvre un site web externe dans votre navigateur). Cliquez sur paramètres pour ouvrir les paramètres Android où vous pouvez désactiver les optimisations de batterie pour Nebulo.</string>
     <string name="dialog_hostsourcerefresh_title">Rafraîchir les sources des hosts</string>
     <string name="dialog_crashreporting_neutral">Voir les données</string>
-    <string name="dialog_newhostsource_error_name_empty">Veuillez fournir un nom.</string>
+    <string name="dialog_newhostsource_error_name_empty">Veuillez fournir un nom</string>
     <string name="dialog_newdnsrule_specify_address">Adresse</string>
     <string name="dialog_newdnsrule_hint_ipv4address">Adresse IPv4</string>
     <string name="dialog_exportdnsrules_nonwhitelist">Règles normales d\'exportation</string>
