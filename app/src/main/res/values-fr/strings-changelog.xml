@@ -5,7 +5,7 @@
     <string name="changelog_build_23_3">Le paramètre d\'exportation de la requête affiche maintenant une boîte de dialogue indiquant si elle est en train de charger</string>
     <string name="changelog_build_23_4">Correction de l\'importation du serveur ne fonctionnant pas sur les versions d\'OS inférieures à Android 7</string>
     <string name="changelog_build_23_5">Le journal des requêtes indique maintenant le protocole utilisé pour envoyer la requête</string>
-    <string name="changelog_build_23_6">Vous pouvez maintenant protéger l\'application dans les paramètres</string>
+    <string name="changelog_build_23_6">Vous pouvez maintenant protéger l\'application avec un code PIN dans les paramètres</string>
     <string name="changelog_build_24_1">Correction d\'un dysfonctionnement de l\'application sur les appareils qui ne disposent pas de capteur d\'empreintes digitales</string>
     <string name="changelog_build_25_1">Amélioration de la gestion d\'IPv6/IPv6 - l\'application fonctionne désormais de manière fiable dans les réseaux qui ne prennent en charge que</string>
     <string name="changelog_build_25_2">Ajout de nouveaux serveurs DNS</string>
@@ -38,7 +38,7 @@
     <string name="changelog_build_31_3">Une notification est maintenant affichée si l\'application se bloque et le signalement automatique des pannes est activé</string>
     <string name="changelog_build_31_4">Correction de quelques accidents</string>
     <string name="changelog_build_32_1">L\'assurance-chômage a été un peu remaniée</string>
-    <string name="changelog_build_32_2">Dns-over-TLS fonctionne désormais de manière plus fiable sur les mauvais réseaux</string>
+    <string name="changelog_build_32_2">DNS-over-TLS fonctionne désormais de manière plus fiable sur les mauvais réseaux</string>
     <string name="changelog_build_32_3">Ajout d\'un paramètre permettant d\'intercepter le trafic DNS étranger (par exemple en raison d\'un DNS asynchrone)</string>
     <string name="changelog_build_32_4">Ajout d\'une vue dans le tiroir qui montre le serveur actuellement utilisé et les adresses IP qu\'il résout</string>
     <string name="changelog_build_32_5">L\'application utilise désormais différentes adresses internes</string>
@@ -48,15 +48,15 @@
     <string name="changelog_build_33_3">Remplacement de certaines des icônes</string>
     <string name="changelog_build_33_4">Correction de quelques accidents</string>
     <string name="changelog_build_33_5">Ajout d\'une vue pour tester la vitesse des serveurs DNS</string>
-    <string name="changelog_build_33_6">Vous pouvez maintenant spécifier des adresses IP personnalisées pour les hôtes. Les hôtes peuvent être importés à partir d\'URL et ajoutés à la main.</string>
+    <string name="changelog_build_33_6">Vous pouvez maintenant spécifier des adresses IP personnalisées pour les hôtes. Les hôtes peuvent être importés à partir d\'URL et ajoutés à la main</string>
     <string name="changelog_build_33_7">Quelques retouches de conception</string>
     <string name="changelog_build_34_1">Correction d\'un crash lié à la base de données</string>
     <string name="changelog_build_35_1">Correction de quelques plantages liés à l\'importation de règles DNS</string>
     <string name="changelog_build_35_2">L\'abandon de l\'importation des règles DNS ne gèle plus l\'interface utilisateur</string>
-    <string name="changelog_build_35_3">Petite amélioration des performances pour les dns-over-https</string>
+    <string name="changelog_build_35_3">Petite amélioration des performances pour les DNS-over-HTTPS</string>
     <string name="changelog_build_35_4">Les sources d\'hébergement des règles DNS indiquent désormais combien de règles ont été importées à partir de celles-ci</string>
     <string name="changelog_build_36_1">Vous pouvez maintenant exporter les règles du DNS</string>
-    <string name="changelog_build_36_2">Les règles Dns peuvent désormais être importées à partir de fichiers</string>
+    <string name="changelog_build_36_2">Les règles DNS peuvent désormais être importées à partir de fichiers</string>
     <string name="changelog_build_36_3">Les règles fixes du DNS ne sont pas importées de très petites sources</string>
     <string name="changelog_build_36_4">L\'importation de la règle peut désormais reconnaître les lettres qui ne sont pas par défaut (comme les trémas)</string>
     <string name="changelog_build_36_5">Déplacement des règles DNS vers le menu latéral</string>
@@ -65,7 +65,7 @@
     <string name="changelog_build_37_2">Quelques améliorations de conception</string>
     <string name="changelog_build_37_3">L\'importation des règles DNS est désormais un peu plus rapide</string>
     <string name="changelog_build_37_4">Les règles DNS importées prennent désormais moins de place sur l\'appareil</string>
-    <string name="changelog_build_38_1">Il s\'agit d\'une mise à jour axée sur les performances qui devrait rendre les requêtes DNS plus rapides, utiliser moins de mémoire et consommer moins de batterie.</string>
+    <string name="changelog_build_38_1">Il s\'agit d\'une mise à jour axée sur les performances qui devrait rendre les requêtes DNS plus rapides, utiliser moins de mémoire et consommer moins de batterie</string>
     <string name="changelog_build_38_2">Correction d\'un crash sur certains appareils concernant la base de données interne</string>
     <string name="changelog_build_39_1">Correction d\'un crash qui a affecté la plupart des serveurs DNS</string>
     <string name="changelog_build_40_1">Amélioration des performances et de la mémoire</string>
@@ -74,7 +74,7 @@
     <string name="changelog_build_40_4">La fonction PIN fonctionne désormais sur Android Q</string>
     <string name="changelog_build_40_5">Vous pouvez désormais mettre des domaines sur liste blanche dans les règles de la dns. S\'ils sont mis sur liste blanche, ils seront envoyés au serveur dns, qu\'ils soient ou non présents dans un fichier que vous fournissez</string>
     <string name="changelog_build_40_6">La règle des notifications d\'importation/exportation peut maintenant être cliquée</string>
-    <string name="changelog_build_41_1">Les sources de la règle Dns peuvent désormais être utilisées comme listes blanches</string>
+    <string name="changelog_build_41_1">Les sources de la règle DNS peuvent désormais être utilisées comme listes blanches</string>
     <string name="changelog_build_41_2">Les sources hôtes indiquent maintenant combien de règles ont été dupliquées dans un fichier</string>
     <string name="changelog_build_41_3">Ajout de nouveaux serveurs</string>
     <string name="changelog_build_41_4">Les serveurs définis par l\'utilisateur peuvent désormais être modifiés</string>
@@ -112,8 +112,8 @@
     <string name="changelog_build_49_6">Les règles du DNS sont désormais beaucoup plus rapides</string>
     <string name="changelog_build_49_7">La tuile de réglage rapide est désormais plus simple</string>
     <string name="changelog_build_49_8">Correction de quelques bogues qui pouvaient empêcher l\'application de transférer des requêtes DNS après un certain temps sur certains appareils</string>
-    <string name="changelog_build_51_1">Les règles de la Whitelist Dns peuvent désormais être exportées également</string>
-    <string name="changelog_build_51_2">Correction du joker Dns Règles n\'étant pas exportées correctement</string>
+    <string name="changelog_build_51_1">Les règles de la Whitelist DNS peuvent désormais être exportées également</string>
+    <string name="changelog_build_51_2">Correction du joker DNS Règles n\'étant pas exportées correctement</string>
     <string name="changelog_build_51_3">Serveurs mis à jour</string>
     <string name="changelog_build_52_1">Les règles du DNS empêchent désormais le camouflage de la CNAME</string>
     <string name="changelog_build_52_2">Correction d\'un bogue qui empêchait l\'ajout correct des serveurs du ministère de la santé avec plusieurs barres obliques (/)</string>
