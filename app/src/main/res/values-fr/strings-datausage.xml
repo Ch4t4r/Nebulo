@@ -5,7 +5,7 @@
     <string name="dialog_crashreportingusages_data_os_1">Nom (par exemple, Android)</string>
     <string name="dialog_crashreportingusages_data_app_6">Serveur DNS secondaire</string>
     <string name="dialog_crashreportingusages_data_app_5">Serveur DNS primaire</string>
-    <string name="dialog_crashreportingusages_data_app_4">Nom du serveur Dns</string>
+    <string name="dialog_crashreportingusages_data_app_4">Nom du serveur DNS</string>
     <string name="dialog_crashreportingusages_data_app_3">Version de la base de données</string>
     <string name="dialog_crashreportingusages_data_app_2">Version de l\'application</string>
     <string name="dialog_crashreportingusages_data_app_1">Heure de début de l\'application</string>
