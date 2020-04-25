@@ -36,28 +36,28 @@ class SettingsOverviewFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         general.setOnClickListener {
-            SettingsActivity.showCategory(context!!, SettingsActivity.Category.GENERAL)
+            SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.GENERAL)
         }
         notification.setOnClickListener {
-            SettingsActivity.showCategory(context!!, SettingsActivity.Category.NOTIFICATION)
+            SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.NOTIFICATION)
         }
         pin.setOnClickListener {
-            SettingsActivity.showCategory(context!!, SettingsActivity.Category.PIN)
+            SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.PIN)
         }
         cache.setOnClickListener {
-            SettingsActivity.showCategory(context!!, SettingsActivity.Category.CACHE)
+            SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.CACHE)
         }
         logging.setOnClickListener {
-            SettingsActivity.showCategory(context!!, SettingsActivity.Category.LOGGING)
+            SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.LOGGING)
         }
         ip.setOnClickListener {
-            SettingsActivity.showCategory(context!!, SettingsActivity.Category.IP)
+            SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.IP)
         }
         network.setOnClickListener {
-            SettingsActivity.showCategory(context!!, SettingsActivity.Category.NETWORK)
+            SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.NETWORK)
         }
         queryLogging.setOnClickListener {
-            SettingsActivity.showCategory(context!!, SettingsActivity.Category.QUERIES)
+            SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.QUERIES)
         }
     }
 }

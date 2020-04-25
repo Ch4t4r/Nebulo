@@ -95,19 +95,19 @@ class QueryLogDetailFragment : Fragment() {
                 val answerIP = query.getParsedResponses().firstOrNull {
                     it.type == query.type
                 }?.payload?.toString() ?: if(query.type == Record.TYPE.A) "0.0.0.0" else "::1"
-                DnsRuleDialog(context!!, DnsRule(query.type, query.name, target = answerIP), onRuleCreated = { newRule ->
+                DnsRuleDialog(requireContext(), DnsRule(query.type, query.name, target = answerIP), onRuleCreated = { newRule ->
                     val id = if (newRule.isWhitelistRule()) {
                         getDatabase().dnsRuleDao().insertWhitelist(newRule)
                     } else getDatabase().dnsRuleDao().insertIgnore(newRule)
                     if (id != -1L) {
                         Snackbar.make(
-                            activity!!.findViewById(android.R.id.content),
+                            requireActivity().findViewById(android.R.id.content),
                             R.string.windows_querylogging_dnsrule_created,
                             Snackbar.LENGTH_LONG
                         ).show()
                     } else {
                         Snackbar.make(
-                            activity!!.findViewById(android.R.id.content),
+                            requireActivity().findViewById(android.R.id.content),
                             R.string.window_dnsrules_hostalreadyexists,
                             Snackbar.LENGTH_LONG
                         ).show()

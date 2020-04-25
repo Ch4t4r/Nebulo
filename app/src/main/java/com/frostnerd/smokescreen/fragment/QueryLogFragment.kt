@@ -63,9 +63,9 @@ class QueryLogFragment : Fragment(), BackpressFragment {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_queryloglist, menu)
-        val searchManager = context!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView: SearchView = menu.findItem(R.id.search)!!.actionView as SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
         searchView.setOnQueryTextListener(listFragment)
     }
 

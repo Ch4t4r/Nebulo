@@ -99,7 +99,7 @@ class DnsRuleFragment : Fragment() {
             }
         }
         addSource.setOnClickListener {
-            NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
+            NewHostSourceDialog(requireContext(), onSourceCreated = { newSource ->
                 if (!sourceAdapterList.contains(newSource)) {
                     val insertPos = sourceAdapterList.indexOfFirst {
                         it.name > newSource.name
@@ -124,17 +124,17 @@ class DnsRuleFragment : Fragment() {
             }).show()
         }
         refresh.setOnClickListener {
-            HostSourceRefreshDialog(context!!,runRefresh =  {
-                if(context!!.isServiceRunning(RuleImportService::class.java)) {
-                    context!!.startService(Intent(context!!, RuleImportService::class.java).putExtra("abort", true))
+            HostSourceRefreshDialog(requireContext(),runRefresh =  {
+                if(requireContext().isServiceRunning(RuleImportService::class.java)) {
+                    requireContext().startService(Intent(requireContext(), RuleImportService::class.java).putExtra("abort", true))
                 } else {
-                    context!!.startService(Intent(context!!, RuleImportService::class.java))
+                    requireContext().startService(Intent(requireContext(), RuleImportService::class.java))
                     refreshProgress.show()
                     refreshProgressShown = true
                 }
             }, refreshConfigChanged = {
                 getPreferences().apply {
-                    val workManager = WorkManager.getInstance(context!!)
+                    val workManager = WorkManager.getInstance(requireContext())
                     workManager.cancelAllWorkByTag("hostSourceRefresh")
                     if(automaticHostRefresh) {
                         val constraints = Constraints.Builder()
@@ -167,18 +167,18 @@ class DnsRuleFragment : Fragment() {
             }).show()
         }
         export.setOnClickListener {
-            if (context!!.isServiceRunning(RuleExportService::class.java)) {
-                context!!.startService(Intent(context!!, RuleExportService::class.java).putExtra("abort", true))
+            if (requireContext().isServiceRunning(RuleExportService::class.java)) {
+                requireContext().startService(Intent(requireContext(), RuleExportService::class.java).putExtra("abort", true))
             } else {
-                ExportDnsRulesDialog(context!!) { exportFromSources, exportUserRules, exportType ->
+                ExportDnsRulesDialog(requireContext()) { exportFromSources, exportUserRules, exportType ->
                     fileChosenCallback = {
-                        val intent = Intent(context!!, RuleExportService::class.java).apply {
+                        val intent = Intent(requireContext(), RuleExportService::class.java).apply {
                             putExtra(
                                 "params",
                                 RuleExportService.Params(exportFromSources, exportUserRules, exportType, it.toString())
                             )
                         }
-                        context!!.startService(intent)
+                        requireContext().startService(intent)
                         exportProgress.show()
                         exportProgressShown = true
                     }
@@ -200,7 +200,7 @@ class DnsRuleFragment : Fragment() {
         sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder({ view, type ->
             when (type) {
                 0 -> SourceViewHolder(view, deleteSource = {
-                    showInfoTextDialog(context!!,
+                    showInfoTextDialog(requireContext(),
                         getString(R.string.dialog_deletehostsource_title, it.name),
                         getString(R.string.dialog_deletehostsource_message, it.name),
                         getString(R.string.all_yes) to { dialog, _ ->
@@ -224,7 +224,7 @@ class DnsRuleFragment : Fragment() {
                     getDatabase().hostSourceDao().setSourceEnabled(hostSource.id, enabled)
                     notifyRulesChanged()
                 }, editSource = { hostSource ->
-                    NewHostSourceDialog(context!!, onSourceCreated = { newSource ->
+                    NewHostSourceDialog(requireContext(), onSourceCreated = { newSource ->
                         getDatabase().hostSourceDao().findById(hostSource.id)?.apply {
                             this.name = newSource.name
                             this.source = newSource.source
@@ -252,7 +252,7 @@ class DnsRuleFragment : Fragment() {
                         getPreferences().customHostsEnabled = it
                     },
                     clearRules = {
-                        showInfoTextDialog(context!!,
+                        showInfoTextDialog(requireContext(),
                             getString(R.string.dialog_clearuserrules_title),
                             getString(R.string.dialog_clearuserrules_message),
                             getString(R.string.all_yes) to { dialog, _ ->
@@ -292,7 +292,7 @@ class DnsRuleFragment : Fragment() {
                         }
                     },
                     createRule = {
-                        DnsRuleDialog(context!!, onRuleCreated = { newRule ->
+                        DnsRuleDialog(requireContext(), onRuleCreated = { newRule ->
                             val insert = {
                                 val insertPos = userDnsRules.indexOfFirst {
                                     it.host > newRule.host
@@ -355,7 +355,7 @@ class DnsRuleFragment : Fragment() {
                     }
                     notifyRulesChanged()
                 }, editRule = {
-                    DnsRuleDialog(context!!, it) { newRule ->
+                    DnsRuleDialog(requireContext(), it) { newRule ->
                         val rows = getDatabase().dnsRuleDao().updateIgnore(newRule)
                         if (rows > 0) {
                             val index = userDnsRules.indexOf(it)
@@ -433,17 +433,17 @@ class DnsRuleFragment : Fragment() {
             }
 
         }.build()
-        list.layoutManager = LinearLayoutManager(context!!)
+        list.layoutManager = LinearLayoutManager(requireContext())
         list.recycledViewPool.setMaxRecycledViews(1, 1)
-        list.addItemDecoration(SpaceItemDecorator(context!!))
+        list.addItemDecoration(SpaceItemDecorator(requireContext()))
         list.adapter = sourceAdapter
-        if(context!!.isServiceRunning(RuleImportService::class.java)) {
+        if(requireContext().isServiceRunning(RuleImportService::class.java)) {
             refreshProgress.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
                 refreshProgress.show()
                 refreshProgressShown = true
             }
         }
-        if(context!!.isServiceRunning(RuleExportService::class.java)) {
+        if(requireContext().isServiceRunning(RuleExportService::class.java)) {
             exportProgress.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
                 exportProgressShown = true
                 exportProgress.show()
@@ -452,7 +452,7 @@ class DnsRuleFragment : Fragment() {
     }
 
     private fun notifyRulesChanged() {
-        LocalBroadcastManager.getInstance(context!!).sendBroadcast(Intent(DnsVpnService.BROADCAST_DNSRULES_REFRESHED))
+        LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(Intent(DnsVpnService.BROADCAST_DNSRULES_REFRESHED))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -465,7 +465,7 @@ class DnsRuleFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        importDoneReceiver = context!!.registerLocalReceiver(IntentFilter(RuleImportService.BROADCAST_IMPORT_DONE)) {
+        importDoneReceiver = requireContext().registerLocalReceiver(IntentFilter(RuleImportService.BROADCAST_IMPORT_DONE)) {
             refreshProgress.hide()
             refreshProgressShown = false
 
@@ -484,15 +484,15 @@ class DnsRuleFragment : Fragment() {
                 updateRuleCountTitle()
             }
         }
-        exportDoneReceiver = context!!.registerLocalReceiver(IntentFilter(RuleExportService.BROADCAST_EXPORT_DONE)) {
+        exportDoneReceiver = requireContext().registerLocalReceiver(IntentFilter(RuleExportService.BROADCAST_EXPORT_DONE)) {
             exportProgress.hide()
             exportProgressShown = false
         }
-        if(!context!!.isServiceRunning(RuleImportService::class.java) && refreshProgressShown) {
+        if(!requireContext().isServiceRunning(RuleImportService::class.java) && refreshProgressShown) {
             refreshProgress.hide()
             refreshProgressShown = false
         }
-        if(!context!!.isServiceRunning(RuleExportService::class.java) && exportProgressShown) {
+        if(!requireContext().isServiceRunning(RuleExportService::class.java) && exportProgressShown) {
             exportProgress.show()
             exportProgressShown = false
         }
@@ -506,8 +506,8 @@ class DnsRuleFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        context!!.unregisterLocalReceiver(importDoneReceiver)
-        context!!.unregisterLocalReceiver(exportDoneReceiver)
+        requireContext().unregisterLocalReceiver(importDoneReceiver)
+        requireContext().unregisterLocalReceiver(exportDoneReceiver)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
