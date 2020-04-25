@@ -7,7 +7,7 @@
     <string name="dialog_newserver_title_https">Añadir un servidor (DoH)</string>
     <string name="dialog_newserver_name">Nombre del servidor</string>
     <string name="dialog_newserver_name_hint">Ejemplo</string>
-    <string name="dialog_newserver_primaryserver">Servidor principal</string>
+    <string name="dialog_newserver_primaryserver">Servidor primario</string>
     <string name="dialog_newserver_secondaryserver">Servidor secundario (Opcional)</string>
     <string name="dialog_deleteconfig_title">¿Borrar configuración\?</string>
     <string name="dialog_appchoosal_showsystemapps">Mostrar aplicaciones del sistema</string>
@@ -70,11 +70,11 @@
     <string name="dialog_serverimport_done">Hecho</string>
     <string name="dialog_serverimport_priority">Prioridad %1d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
-    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Por favor, seleccione los servidores que desea importar.
-\n
-\nLos servidores ya importados serán duplicados si los selecciona.</string>
-    <string name="dialog_serverimportfailed_title">La importación falló</string>
-    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Los servidores no podían ser importados.
+    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Por favor, seleccione los servidores que desea importar. 
+\n 
+\nSi selecciona servidores ya importados, se duplicarán.</string>
+    <string name="dialog_serverimportfailed_title">Importación fallida</string>
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Los servidores no han podido ser importados. 
 \n(%1s)</string>
     <string name="dialog_logexport_general">Elija la aplicación</string>
     <string name="dialog_batteryoptimization_title">Optimización de la batería</string>
@@ -145,13 +145,15 @@
     <string name="dialog_enable_logging">¿Quiere habilitar el registro de depuración\? Los registros contienen información estadística, información de depuración y acciones en la aplicación. Los registros generados no se comparten a menos que lo haga usted mismo.</string>
     <string name="dialog_clearqueries_title">Borrar todas las consultas del DNS</string>
     <string name="dialog_clearqueries_message">¿Estás seguro de que quieres borrar las consultas del DNS registradas\? Esto no puede ser revertido.</string>
-    <string name="dialog_credits_message" formatted="true">- Icono de la aplicación por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
-\n- Traducción al turco por Kemal Oktay Aktoğan
-\n- Traducción al ruso por bruleto
-\n- Traducción al holandés por Bas Koedijk
-\n- Traducción al portugués de Rafael W. Bohnenberger
-\n- Traducción al indonesio por Gloeyisk
-\n- Algunos iconos de Font Awesome
+    <string name="dialog_credits_message" formatted="true">- Icono de la aplicación por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; . 
+\n- Traducción al turco por Kemal Oktay Aktoğan 
+\n- Traducción al ruso por bruleto 
+\n- Traducción al holandés por Bas Koedijk 
+\n- Traducción al portugués de Rafael W. Bohnenberger 
+\n- Traducción al indonesio por Gloeyisk 
+\n- Traducción al catalán de Daniel Alomar
+\n- Traducción al castellano de Daniel Alomar y Víctor Bayas
+\n- Algunos iconos de Font Awesome 
 \n 
 \n ¿Quieres ver tu nombre aquí\? Siéntase libre de &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuir&lt;/a&gt;.</string>
     <string name="dialog_speedtest_useserver_title">Seleccione el servidor</string>
@@ -160,6 +162,6 @@
     <string name="dialog_hostsourcerefresh_title">Actualizar las fuentes de hosts</string>
     <string name="dialog_hostsourcerefresh_automatic_refresh">Refrescar automáticamente las fuentes del hosts</string>
     <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutas</string>
-    <string name="dialog_logexport_loading_title">Preparando los registros de depuración</string>
+    <string name="dialog_logexport_loading_title">Preparando los registros</string>
     <string name="dialog_raterequest_message">¡Hola! Si estás disfrutando de Nebulo, ¿podrías tomarte un momento para evaluarlo en la tienda\?</string>
 </resources>
