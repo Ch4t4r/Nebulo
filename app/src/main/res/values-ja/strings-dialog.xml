@@ -145,7 +145,7 @@
     <string name="dialog_crashreporting_title">自動衝突報告</string>
     <string name="dialog_pin_message">暗証番号をご記入ください。</string>
     <string name="dialog_query_export_message">クエリがエクスポートされるまでお待ちください</string>
-    <string name="dialog_query_export_title">クエリのエクスポート...</string>
+    <string name="dialog_query_export_title">クエリのエクスポート…</string>
     <string name="dialog_about_licenses">ライセンス</string>
     <string name="dialog_changelog_dont_show_again">二度と表示しないでください</string>
     <string name="dialog_changelog_infotext">最後にアプリを開いてから更新されています。以下のリストでは、変更履歴を見ることができます。以下のボックスにチェックを入れると、今後このメッセージが表示されなくなります。</string>

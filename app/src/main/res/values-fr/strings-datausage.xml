@@ -24,5 +24,5 @@
     <string name="dialog_crashreportingusages_data_2">Données sur les appareils</string>
     <string name="dialog_crashreportingusages_data_1">Données de l\'utilisateur</string>
     <string name="dialog_crashreportingusages_data_os_4">Root (oui/non)</string>
-    <string name="dialog_crashreportingusages_data_device_1">Architecture (x86, arm, ...)</string>
+    <string name="dialog_crashreportingusages_data_device_1">Architecture (x86, arm, …)</string>
 </resources>
