@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_serverconfiguration_title">Sunucu yapılandırması</string>
-    <string name="dialog_serverconfiguration_https">HTTPS üzerinden DNS (DoH)</string>
-    <string name="dialog_serverconfiguration_tls">TLS üzerinden DNS (DoT)</string>
     <string name="dialog_serverconfiguration_addserver">Bir sunucu ekle</string>
     <string name="dialog_newserver_title_https">Bir sunucu ekle (DoH)</string>
     <string name="dialog_newserver_title_tls">Bir sunucu ekle (DoT)</string>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Nebulo</string>
     <string name="activity_label_import_queries">Sorguları içe aktar</string>
     <string name="activity_label_import_servers">Sunucuları içe aktar</string>
     <string name="activity_label_enable_logging">Günlükleri dışa aktar/Günlüğü etkinleştir</string>
@@ -29,8 +28,6 @@
     <string name="app_share_text">Selam, size daha fazla gizlilik ve güvenlik sağlamak için DNS sorgularınızı şifreleyen bu uygulamayı buldum. Buradan kontrol edin: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
     <string name="quicksettings_stop_text">Nebulo\'yu Durdur</string>
     <string name="quicksettings_start_text">Nebulo\'yu Başlat</string>
-    <string name="fragment_querydetail_mode_dot">TLS üzerinden DNS</string>
-    <string name="fragment_querydetail_mode_doh">HTTPS üzerinden DNS</string>
     <string name="crashreporting_thankyou">Teşekkür ederim! Fikrinizi değiştirirseniz, ayarlara gidin.</string>
     <string name="crashreporting_thankyou_gotit">Anladım!</string>
     <string name="about_share">Paylaş</string>

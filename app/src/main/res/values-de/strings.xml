@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Nebulo</string>
     <string name="activity_label_import_queries">Anfragen importieren</string>
     <string name="activity_label_import_servers">Server importieren</string>
     <string name="activity_label_enable_logging">Logs exportieren / Logging aktivieren</string>
@@ -31,8 +30,6 @@
     <string name="app_share_text">Hey, ich habe diese App gefunden, welche deine DNS Anfragen verschlüsselt und dir so mehr Sicherheit und Privatsphäre gibt. Schau sie dir mal an: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
     <string name="quicksettings_stop_text">Nebulo stoppen</string>
     <string name="quicksettings_start_text">Nebulo starten</string>
-    <string name="fragment_querydetail_mode_dot">Dns-over-TLS</string>
-    <string name="fragment_querydetail_mode_doh">Dns-over-HTTPS</string>
     <string name="crashreporting_thankyou">Vielen Dank! Geh in die Einstellungen, um dies zu ändern.</string>
     <string name="crashreporting_thankyou_gotit">Verstanden!</string>
     <string name="about_share">Teilen</string>

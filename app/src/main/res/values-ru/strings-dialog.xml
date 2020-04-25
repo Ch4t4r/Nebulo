@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_serverconfiguration_title">Настройки сервера</string>
-    <string name="dialog_serverconfiguration_https">Dns-over-https (DoH)</string>
-    <string name="dialog_serverconfiguration_tls">Dns-over-tls (DoT)</string>
     <string name="dialog_serverconfiguration_addserver">Добавить сервер</string>
     <string name="dialog_newserver_title_https">Добавить сервер (DoH)</string>
     <string name="dialog_newserver_title_tls">Добавить сервер (DoT)</string>

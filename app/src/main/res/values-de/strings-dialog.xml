@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_serverconfiguration_title">Serverkonfiguration</string>
-    <string name="dialog_serverconfiguration_https">DNS-over-HTTPS (DoH)</string>
-    <string name="dialog_serverconfiguration_tls">DNS-over-TLS (DoT)</string>
     <string name="dialog_serverconfiguration_addserver">Neuer Server</string>
     <string name="dialog_newserver_title_https">Neuer Server (DoH)</string>
     <string name="dialog_newserver_title_tls">Neuer Server (DoT)</string>
