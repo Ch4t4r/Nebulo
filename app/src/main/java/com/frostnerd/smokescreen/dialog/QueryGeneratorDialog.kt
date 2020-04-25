@@ -1,3 +1,5 @@
+@file:Suppress("BlockingMethodInNonBlockingContext")
+
 package com.frostnerd.smokescreen.dialog
 
 import android.content.Context
@@ -369,7 +371,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
             }
             val restartVpn = view.restartVpn.isChecked
             val runCount = iterations.text.toString().toIntOrNull() ?: 1
-            job = generatorScope!!.launch {
+            job = generatorScope.launch {
                 context.log("Generating queries for ${urlsToUse.size} urls $runCount times", "[QueryGenerator]")
                 val logFileWriter = BufferedWriter(FileWriter(File(context.filesDir, "querygenlog.txt"), true))
                 val callWithChrome = useChrome.isChecked
@@ -392,7 +394,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
                     }
                 }
                 job = null
-                generatorScope?.cancel()
+                generatorScope.cancel()
                 loadingDialog?.cancel()
             }
             showLoadingDialog()

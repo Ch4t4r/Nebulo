@@ -173,14 +173,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         exportQueries.summary =
             getString(R.string.summary_export_queries, requireContext().getDatabase().dnsQueryDao().getCount())
         exportQueries.setOnPreferenceClickListener {
-            val loadingDialog: LoadingDialog?
-            if (requireContext().getDatabase().dnsQueryDao().getCount() >= 100) {
-                loadingDialog = LoadingDialog(
+            val loadingDialog: LoadingDialog? = if (requireContext().getDatabase().dnsQueryDao().getCount() >= 100) {
+                LoadingDialog(
                     requireContext(),
                     R.string.dialog_query_export_title,
                     R.string.dialog_query_export_message
                 )
-            } else loadingDialog = null
+            } else null
             loadingDialog?.show()
             requireContext().getDatabase().dnsQueryRepository().exportQueriesAsCsvAsync(requireContext(), { file ->
                 if (!isDetached && !isRemoving) {

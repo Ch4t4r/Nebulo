@@ -229,12 +229,12 @@ class DnsRuleFragment : Fragment() {
                             this.name = newSource.name
                             this.source = newSource.source
                             this.whitelistSource = newSource.whitelistSource
-                        }?.also {
-                            getDatabase().hostSourceDao().update(it)
+                        }?.also { source ->
+                            getDatabase().hostSourceDao().update(source)
 
                             val index = sourceAdapterList.indexOf(hostSource).takeIf { it >= 0 } ?: sourceAdapterList.indexOfFirst { it.id == hostSource.id }
-                            sourceAdapterList[index] = it
-                            sourceRuleCount[it] = sourceRuleCount[hostSource]
+                            sourceAdapterList[index] = source
+                            sourceRuleCount[source] = sourceRuleCount[hostSource]
                             sourceRuleCount.remove(hostSource)
                             sourceAdapter.notifyItemChanged(index)
                         }
