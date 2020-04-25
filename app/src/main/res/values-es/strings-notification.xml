@@ -17,7 +17,7 @@
     <string name="notification_channel_noconnection">Canal de advertencia de conexión</string>
     <string name="notification_channel_foreground_service_description">Canal utilizado para las notificaciones que no pueden ser eliminadas por el usuario</string>
     <string name="notification_channel_foreground_service">Canal de notificación permanente</string>
-    <string name="notification_channel_default_description">Canal por defecto para la publicación de notificaciones.</string>
+    <string name="notification_channel_default_description">Canal por defecto para la publicación de notificaciones</string>
     <string name="notification_channel_default">Canal por defecto</string>
     <string name="notification_ruleexportfinished_message">Se han exportado %1d reglas.</string>
     <string name="notification_main_text_with_secondary_whitelist">Las consultas se envían a %1$s y %2$s
