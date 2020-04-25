@@ -3,11 +3,11 @@
     <string name="notification_service_revoked_message">Cliquez ici pour redémarrer</string>
     <string name="notification_service_revoked_title">Autorisation VPN révoquée par le système</string>
     <string name="notification_service_killed_ignore">Ignorer</string>
-    <string name="notification_service_killed_message">Il semble que l\'application ait été arrêtée par le système. Cliquez ici pour en savoir plus.</string>
+    <string name="notification_service_killed_message">Il semble que l\'application ait été arrêtée par le système. Cliquez ici pour en savoir plus</string>
     <string name="notification_service_killed_title">Informations sur l\'optimisation des batteries</string>
-    <string name="notification_pin_message">Votre code PIN est nécessaire pour effectuer cette action. Cliquez ici pour le confirmer.</string>
+    <string name="notification_pin_message">Votre code PIN est nécessaire pour effectuer cette action. Cliquez ici pour le confirmer</string>
     <string name="notification_pin_title">Code PIN requis</string>
-    <string name="notification_ruleexportfinished_message">Les règles %1d ont été exportées.</string>
+    <string name="notification_ruleexportfinished_message">Les règles %1d ont été exportées</string>
     <string name="notification_ruleexportfinished_title">Exportation des règles DNS terminée</string>
     <string name="notification_ruleexport_secondarymessage">Préparer l\'exportation…</string>
     <string name="notification_ruleexport_message">Règles d\'exportation (%1d/%2d)</string>
@@ -17,11 +17,11 @@
     <string name="notification_ruleimport_secondarymessage">Préparer l\'importation…</string>
     <string name="notification_ruleimport_message">Importation de règles DNS de %1s (%2s)</string>
     <string name="notification_ruleimport_title">Importation de règles DNS</string>
-    <string name="notification_appcrash_message">Nebulo s\'est écrasé. Cliquez ici pour aller au menu principal et pour redémarrer l\'application, si nécessaire.</string>
+    <string name="notification_appcrash_message">Nebulo s\'est écrasé. Cliquez ici pour aller au menu principal et pour redémarrer l\'application, si nécessaire</string>
     <string name="notification_appcrash_title">Nebulo s\'est écrasé</string>
-    <string name="notification_vpnrestart_text">Le service Vpn sera bientôt redémarré.</string>
+    <string name="notification_vpnrestart_text">Le service Vpn sera bientôt redémarré</string>
     <string name="notification_vpnrestart_title">Redémarrage du Vpn</string>
-    <string name="notification_noconnection_text">Actuellement, l\'application ne transmet pas vos requêtes DNS parce que vous n\'avez pas de connexion ou que votre connexion est mauvaise.</string>
+    <string name="notification_noconnection_text">Actuellement, l\'application ne transmet pas vos requêtes DNS parce que vous n\'avez pas de connexion ou que votre connexion est mauvaise</string>
     <string name="notification_noconnection_title">Aucun lien</string>
     <string name="notification_main_subtext">%1$d requêtes jusqu\'à présent</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
@@ -51,7 +51,7 @@
     <string name="notification_channel_noconnection">Canal d\'alerte de connexion</string>
     <string name="notification_channel_foreground_service_description">Canal utilisé pour les notifications qui ne peuvent pas être supprimées par l\'utilisateur</string>
     <string name="notification_channel_foreground_service">Canal de notification permanent</string>
-    <string name="notification_channel_default_description">Canal par défaut pour l\'affichage des notifications.</string>
+    <string name="notification_channel_default_description">Canal par défaut pour l\'affichage des notifications</string>
     <string name="notification_channel_default">Canal par défaut</string>
     <string name="notification_ruleexport_title">DNS règle l\'exportation</string>
 </resources>
