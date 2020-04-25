@@ -35,8 +35,8 @@
     <string name="quicksettings_stop_text">Stop Nebulo</string>
     <string name="quicksettings_start_text">Start Nebulo</string>
 
-    <string name="fragment_querydetail_mode_dot" translatable="false">Dns-over-TLS</string>
-    <string name="fragment_querydetail_mode_doh" translatable="false">Dns-over-HTTPS</string>
+    <string name="fragment_querydetail_mode_dot" translatable="false">DNS-over-TLS</string>
+    <string name="fragment_querydetail_mode_doh" translatable="false">DNS-over-HTTPS</string>
 
     <string-array name="theme">
         <item>Mono</item>
@@ -97,5 +97,5 @@
     <string name="windows_querylogging_usedserver_dnsrules">Resolved with DNS Rules</string>
     <string name="windows_querylogging_usedserver_cache">Resolved with cache</string>
 
-    <string name="window_main_privatedns_info">Private DNS is active, your queries are already protected. Enable Nebulo if you wish to use dns-over-https or other useful features.</string>
+    <string name="window_main_privatedns_info">Private DNS is active, your queries are already protected. Enable Nebulo if you wish to use DNS-over-HTTPS or other useful features.</string>
 </resources>
