@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="changelog_build_23_1">Nicht-standard Ports werden nun für DoT Server angezeigt</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_build_23_1">Nicht-standard Ports werden nun für DoT Server angezeigt</string>
     <string name="changelog_build_23_2">Es wurde dieser Dialog zum Hervorheben von Änderungen hinzugefügt</string>
     <string name="changelog_build_23_3">Der Anfragenexport zeigt nun einen Dialog mit Fortschrittsanzeige</string>
     <string name="changelog_build_23_4">Es wurde ein Fehler behoben, wo der durch welchen der Serverimport unter Android 7 nicht funktioniert hat</string>
@@ -37,7 +38,7 @@
     <string name="changelog_build_31_3">Es wird nun eine Benachrichtigung angezeigt, wenn die Abstürzt und die automatische Absturzmeldung aktiv ist</string>
     <string name="changelog_build_31_4">Es wurden einige Abstürze behoben</string>
     <string name="changelog_build_32_1">Die Oberfläche wurde ein wenig überarbeitet</string>
-    <string name="changelog_build_32_2">Dns-over-TLS funktioniert nun besser in schlechten Netzwerken</string>
+    <string name="changelog_build_32_2">DNS-over-TLS funktioniert nun besser in schlechten Netzwerken</string>
     <string name="changelog_build_32_3">Es wurde eine Einstellung zum Abfangen von fremden DNS-Anfragen hinzugefügt (sinnvoll bei asynchronem DNS)</string>
     <string name="changelog_build_32_4">Es wurde eine Ansicht zum Seitenmenü hinzugefügt, welche den aktuell genutzten Server und deren IP-Adressen anzeigt</string>
     <string name="changelog_build_32_5">Die App nutzt intern nun andere Adressen</string>
@@ -47,15 +48,15 @@
     <string name="changelog_build_33_3">Einige Icons ersetzt</string>
     <string name="changelog_build_33_4">Einige Abstürze behoben</string>
     <string name="changelog_build_33_5">Es existiert nun eine Ansicht, um die Geschwindigkeiten verschiedener DNS Server zu vergleichen</string>
-    <string name="changelog_build_33_6">Es können nun für Hosts selbst IP Adressen angegeben werden. Hosts können von URLs importiert oder von Hand eingegeben werden.</string>
+    <string name="changelog_build_33_6">Es können nun für Hosts selbst IP Adressen angegeben werden. Hosts können von URLs importiert oder von Hand eingegeben werden</string>
     <string name="changelog_build_33_7">Einige Design-Anpassungen</string>
     <string name="changelog_build_34_1">Es wurde ein Fehler mit der Datenbank behoben</string>
     <string name="changelog_build_35_1">Es wurden einige Abstürze bei den DNS Regeln behoben</string>
     <string name="changelog_build_35_2">Abbrechen des DNS Regeln Imports friert die Oberfläche nicht mehr ein</string>
-    <string name="changelog_build_35_3">Kleinere Leistungsverbesserungen für dns-over-https</string>
+    <string name="changelog_build_35_3">Kleinere Leistungsverbesserungen für DNS-over-HTTPS</string>
     <string name="changelog_build_35_4">Die Hostquellen der DNS Regeln zeigen nun, wie viele Regeln aus diesen importiert wurden</string>
     <string name="changelog_build_36_1">Die DNS Regeln können nun exportiert werden</string>
-    <string name="changelog_build_36_2">Dns Regeln können nun von Dateien importiert werden</string>
+    <string name="changelog_build_36_2">DNS Regeln können nun von Dateien importiert werden</string>
     <string name="changelog_build_36_3">Es wurde ein Fehler behoben, welcher dafür gesorgt hat, dass DNS Regeln aus kleinen Quellen nicht importiert wurden</string>
     <string name="changelog_build_36_4">Der Dns Regel Import funktioniert nun mit nicht-Standard Buchstaben (z.B. Umlauten)</string>
     <string name="changelog_build_36_5">Die DNS Regeln befinden sich nun im Seitenmenü</string>
@@ -64,7 +65,7 @@
     <string name="changelog_build_37_2">Ein paar Designverbesserungen</string>
     <string name="changelog_build_37_3">Der Import von DNS Regeln ist nun schneller</string>
     <string name="changelog_build_37_4">Importierte DNS Regeln benötigen nun weniger Speicher auf dem Gerät</string>
-    <string name="changelog_build_38_1">Dies ist ein auf die Leistung ausgerichtetes Update, welche DNS-Anfragen schneller machen sollte, sowie weniger Speicher und weniger Batterie verbrauchen sollte.</string>
+    <string name="changelog_build_38_1">Dies ist ein auf die Leistung ausgerichtetes Update, welche DNS-Anfragen schneller machen sollte, sowie weniger Speicher und weniger Batterie verbrauchen sollte</string>
     <string name="changelog_build_38_2">Einen Absturz behoben, welcher auf manchen Geräten aufgrund der internen Datenbank auftrat</string>
     <string name="changelog_build_39_1">Ein Fehler behoben, welcher fast alle DNS-Server betraf</string>
     <string name="changelog_build_40_1">Leistungs- und Speicherverbesserungen</string>
@@ -73,7 +74,7 @@
     <string name="changelog_build_40_4">Die PIN funktioniert nun auf Android Q</string>
     <string name="changelog_build_40_5">Es können nun Domains in den DNS-Regeln gewhitelistet werden. Werden diese als whitelist Eintrag erstellt, so werden diese immer zu dem aktuellen DNS Server geschickt, unabhängig davon, ob diese in einer der angegebenen Regelquellen vorkommen</string>
     <string name="changelog_build_40_6">Die DNS Regel Import/Export Benachrichtigung kann nun angeklickt werden</string>
-    <string name="changelog_build_41_1">Dns Regelquellen können nun als Whitelist verwendet werden</string>
+    <string name="changelog_build_41_1">DNS Regelquellen können nun als Whitelist verwendet werden</string>
     <string name="changelog_build_41_2">Die Dns Regelquellen geben nun an, wie viele Einträge bereits durch andere Quellen abgedeckt wurden</string>
     <string name="changelog_build_41_3">Neue Server hinzugefügt</string>
     <string name="changelog_build_41_4">Vom Nutzer angelegte Server können nun editiert werden</string>
@@ -111,7 +112,7 @@
     <string name="changelog_build_49_6">Die DNS Regeln sind nun deutlich schneller</string>
     <string name="changelog_build_49_7">Die Fläche in den Schnelleinstellungen ist nun simpler</string>
     <string name="changelog_build_49_8">Es wurden einige Fehler behoben, durch welche DNS Anfragen auf manchen Geräten nach einiger Zeit nicht weitergeleitet wurden</string>
-    <string name="changelog_build_51_1">Whitelist DNS Regeln können nun auch exportiert werden</string>
+    <string name="changelog_build_51_1">Whitelist DNS Regeln können nun auch exportiert werde</string>
     <string name="changelog_build_51_2">Fehler behoben, durch welchen Wildcard DNS Regeln nicht richtig exportiert wurden</string>
     <string name="changelog_build_51_3">Server aktualisiert</string>
     <string name="changelog_build_52_1">Die DNS Regeln können nun CNAME-Cloaking verhindern</string>
@@ -123,4 +124,4 @@
     <string name="changelog_build_55_4">Das Anfragenprotokoll lädt die Anfragen nun in Blöcken, statt alle auf einmal</string>
     <string name="changelog_build_58_1">Die primäre URL konnte beim hinzufügen eines Servers leergelassen werden</string>
     <string name="changelog_build_58_2">Es wird nun eine Benachrichtigung angezeigt, wenn Nebulo die Berechtigung für den VPN verliert</string>
-    </resources>
+</resources>
