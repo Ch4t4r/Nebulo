@@ -13,8 +13,8 @@
     <string name="information">Informação</string>
     <string name="open_app">Abrir aplicativo</string>
     <string name="all_close">Fechar</string>
-    <string name="error_invalid_url">Por favor, forneça um url válido.</string>
-    <string name="error_invalid_pin">Por favor, forneça seu PIN.</string>
+    <string name="error_invalid_url">Por favor, forneça um url válido</string>
+    <string name="error_invalid_pin">Por favor, forneça seu PIN</string>
     <string name="error_invalid_servername">Por favor, forneça um nome.</string>
     <string name="main_dnssurveillance_infotext">Esteja ciente de que o servidor de DNS ao qual você está conectado é capaz de registrar quais sites você está visitando. Verifique as respectivas declarações de privacidade para obter mais informações.</string>
     <string name="main_dnssurveillance_privacystatement">Declaração de privacidade de %1s</string>
@@ -44,11 +44,11 @@
     <string name="about_info">Informação geral</string>
     <string name="about_help_translating">Ajudar a traduzir</string>
     <string name="window_speedtest_runtest">Iniciar o teste</string>
-    <string name="error_no_webbrowser_installed">Você não tem nenhum aplicativo instalado para visualizar este link.</string>
+    <string name="error_no_webbrowser_installed">Você não tem nenhum aplicativo instalado para visualizar este link</string>
     <string name="button_main_dnsrules">Regras de DNS</string>
     <string name="window_dnsrules_customhosts">Hosts customizados</string>
-    <string name="window_dnsrules_hostalreadyexists">Já existe uma regra para este host.</string>
-    <string name="window_dnsrules_customhosts_message">Defina todos os seus hosts personalizados aqui.</string>
+    <string name="window_dnsrules_hostalreadyexists">Já existe uma regra para este host</string>
+    <string name="window_dnsrules_customhosts_message">Defina todos os seus hosts personalizados aqui</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regras desta fonte: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount">Regras desta fonte: %1d (%2$d duplicatas não usadas)</string>
     <plurals name="window_dnsrules_subtitle">
@@ -57,11 +57,11 @@
     </plurals>
     <string name="windows_querylogging_used_server">Servidor em uso</string>
     <string name="windows_querylogging_search">Pesquisa de host</string>
-    <string name="error_invalid_host">Por favor, providencie um host válido.</string>
-    <string name="window_main_privatedns_info">O DNS privado está activo, as suas consultas já estão protegidas. Ative o Nebulo se desejar usar dns-over-https ou outras funcionalidades úteis.</string>
+    <string name="error_invalid_host">Por favor, providencie um host válido</string>
+    <string name="window_main_privatedns_info">O DNS privado está ativo, suas consultas já estão protegidas. Habilite o Nebulo se você deseja usar DNS-over-HTTPS ou outros recursos úteis.</string>
     <string name="windows_querylogging_usedserver_cache">Resolvido com cache</string>
     <string name="windows_querylogging_usedserver_dnsrules">Resolvido com regras DNS</string>
-    <string name="windows_querylogging_dnsrule_created">A regra DNS foi criada.</string>
+    <string name="windows_querylogging_dnsrule_created">A regra DNS foi criada</string>
     <string name="windows_querylogging_create_dnsrule">Criar regra DNS para este host</string>
     <string name="windows_querylogging_responses">Respostas</string>
     <string name="windows_querylogging_latency">Latência</string>
@@ -73,6 +73,6 @@
     <string name="windows_querylogging_type">Tipo</string>
     <string name="windows_querylogging_time">Hora</string>
     <string name="windows_querylogging_search_hint">Pesquisar por um anfitrião no log de consultas</string>
-    <string name="error_cannot_open_settings">Não é possível abrir as configurações do sistema.</string>
+    <string name="error_cannot_open_settings">Não é possível abrir as configurações do sistema</string>
     <string name="error_webview_missing">O pacote WebView não foi encontrado, ele está sendo atualizado ou removido\?</string>
 </resources>
