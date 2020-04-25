@@ -5,7 +5,7 @@
     <string name="changelog_build_23_3">The query export setting now shows a dialog indicating whether it is loading</string>
     <string name="changelog_build_23_4">Fixed the server import not working on OS versions below Android 7</string>
     <string name="changelog_build_23_5">The query log now shows the protocol used to send the query</string>
-    <string name="changelog_build_23_6">You can now pin protect the app in the settings</string>
+    <string name="changelog_build_23_6">You can now protect the app with a PIN in the settings</string>
     <string-array name="changelog_build_23">
         <item>1.0 Beta (Build 23)</item>
         <item>@string/changelog_build_23_1</item>
@@ -112,7 +112,7 @@
     </string-array>
 
     <string name="changelog_build_32_1">Overhauled the UI a bit</string>
-    <string name="changelog_build_32_2">Dns-over-TLS now works more reliable in bad networks</string>
+    <string name="changelog_build_32_2">DNS-over-TLS now works more reliable in bad networks</string>
     <string name="changelog_build_32_3">Added a setting to intercept foreign DNS traffic (for example because of async DNS)</string>
     <string name="changelog_build_32_4">Added a view to the drawer which shows the current server in use and the IP-addresses it resolves to</string>
     <string name="changelog_build_32_5">The app now uses different internal addresses</string>
@@ -132,7 +132,7 @@
     <string name="changelog_build_33_3">Replaced some of the icons</string>
     <string name="changelog_build_33_4">Fixed a few crashes</string>
     <string name="changelog_build_33_5">Added a view to test DNS server speeds</string>
-    <string name="changelog_build_33_6">You can now specify custom IP addresses for hosts. Hosts can be imported from URLs and added by hand.</string>
+    <string name="changelog_build_33_6">You can now specify custom IP addresses for hosts. Hosts can be imported from URLs and added by hand</string>
     <string name="changelog_build_33_7">A few design tweaks</string>
     <string-array name="changelog_build_33">
         <item>1.0 Beta (Build 33)</item>
@@ -153,7 +153,7 @@
 
     <string name="changelog_build_35_1">Fixed some crashes related to the DNS rule import</string>
     <string name="changelog_build_35_2">Aborting the DNS rule import now doesn\'t freeze the UI anymore</string>
-    <string name="changelog_build_35_3">Small performance improvement for dns-over-https</string>
+    <string name="changelog_build_35_3">Small performance improvement for DNS-over-HTTPS</string>
     <string name="changelog_build_35_4">The host sources for the DNS rules now show how many rules were imported from them</string>
     <string-array name="changelog_build_35">
         <item>1.0 Beta (Build 35)</item>
@@ -164,7 +164,7 @@
     </string-array>
 
     <string name="changelog_build_36_1">You can now export the DNS rules</string>
-    <string name="changelog_build_36_2">Dns rules can now be imported from files</string>
+    <string name="changelog_build_36_2">DNS rules can now be imported from files</string>
     <string name="changelog_build_36_3">Fixed DNS rules not being imported from very small sources</string>
     <string name="changelog_build_36_4">The rule import can now recognize non-default letters (such as umlauts)</string>
     <string name="changelog_build_36_5">Moved the DNS rules to the sidebar menu</string>
@@ -191,7 +191,7 @@
         <item>@string/changelog_build_37_4</item>
     </string-array>
 
-    <string name="changelog_build_38_1">This is a performance focused update which should make DNS queries faster, use less memory and be less battery consuming.</string>
+    <string name="changelog_build_38_1">This is a performance focused update which should make DNS queries faster, use less memory and be less battery consuming</string>
     <string name="changelog_build_38_2">Fixed a crash on some devices regarding the internal database</string>
     <string-array name="changelog_build_38">
         <item>1.0 Beta (Build 38)</item>
@@ -221,7 +221,7 @@
         <item>@string/changelog_build_40_6</item>
     </string-array>
 
-    <string name="changelog_build_41_1">Dns rule sources can now be used as whitelists</string>
+    <string name="changelog_build_41_1">DNS rule sources can now be used as whitelists</string>
     <string name="changelog_build_41_2">The host sources now indicate how many rules were duplicate in a file</string>
     <string name="changelog_build_41_3">Added new servers</string>
     <string name="changelog_build_41_4">User-defined servers can now be edited</string>
@@ -258,7 +258,7 @@
     </string-array>
 
     <string name="changelog_build_44_1">The app should now be able to recover itself when the screen has been off for some time</string>
-    <string name="changelog_build_44_2">Dns rules can now be configured to updated periodically</string>
+    <string name="changelog_build_44_2">DNS rules can now be configured to updated periodically</string>
     <string name="changelog_build_44_3">Host sources are now only downloaded/parsed when their content changed</string>
     <string name="changelog_build_44_4">The DNS rules now support wildcards</string>
     <string-array name="changelog_build_44">
@@ -285,7 +285,7 @@
     <string name="changelog_build_47_4">The main screen now displays whether private DNS is active (Android 9+)</string>
     <string name="changelog_build_47_5">Added new servers</string>
     <string name="changelog_build_47_6">Design changes</string>
-    <string name="changelog_build_47_7">Improved handling of dns rules</string>
+    <string name="changelog_build_47_7">Improved handling of DNS rules</string>
     <string-array name="changelog_build_47">
         <item>1.0 Beta (Build 47)</item>
         <item>@string/changelog_build_47_1</item>
@@ -329,8 +329,8 @@
         <item>@string/changelog_build_43_6</item>
     </string-array>
 
-    <string name="changelog_build_51_1">Whitelist Dns Rules can now be exported as well</string>
-    <string name="changelog_build_51_2">Fixed wildcard Dns Rules not being exported correctly</string>
+    <string name="changelog_build_51_1">Whitelist DNS Rules can now be exported as well</string>
+    <string name="changelog_build_51_2">Fixed wildcard DNS Rules not being exported correctly</string>
     <string name="changelog_build_51_3">Updated servers</string>
     <string-array name="changelog_build_51">
         <item>Version 1.0.2 (Build 51)</item>

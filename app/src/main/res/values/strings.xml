@@ -17,12 +17,12 @@
     <string name="open_app">Open app</string>
     <string name="all_close">Close</string>
 
-    <string name="error_invalid_url">Please provide a valid url.</string>
-    <string name="error_invalid_host">Please provide a valid host.</string>
-    <string name="error_invalid_pin">Please provide your PIN.</string>
-    <string name="error_invalid_servername">Please provide a name.</string>
+    <string name="error_invalid_url">Please provide a valid url</string>
+    <string name="error_invalid_host">Please provide a valid host</string>
+    <string name="error_invalid_pin">Please provide your PIN</string>
+    <string name="error_invalid_servername">Please provide a name</string>
     <string name="error_webview_missing">WebView package not found, is it currently updating or removed?</string>
-    <string name="error_cannot_open_settings">Cannot open system settings.</string>
+    <string name="error_cannot_open_settings">Cannot open system settings</string>
 
     <string name="main_dnssurveillance_infotext">Be aware that the DNS server you are connected to is able to record which sites you are visiting. Check the respective privacy statements for more information.</string>
     <string name="main_dnssurveillance_privacystatement">Privacy statement of %1s</string>
@@ -35,8 +35,8 @@
     <string name="quicksettings_stop_text">Stop Nebulo</string>
     <string name="quicksettings_start_text">Start Nebulo</string>
 
-    <string name="fragment_querydetail_mode_dot" translatable="false">Dns-over-TLS</string>
-    <string name="fragment_querydetail_mode_doh" translatable="false">Dns-over-HTTPS</string>
+    <string name="fragment_querydetail_mode_dot" translatable="false">DNS-over-TLS</string>
+    <string name="fragment_querydetail_mode_doh" translatable="false">DNS-over-HTTPS</string>
 
     <string-array name="theme">
         <item>Mono</item>
@@ -66,7 +66,7 @@
 
     <string name="window_speedtest_runtest">Start the test</string>
 
-    <string name="error_no_webbrowser_installed">You don\'t have any app installed to view this link.</string>
+    <string name="error_no_webbrowser_installed">You don\'t have any app installed to view this link</string>
 
     <string name="button_main_dnsrules">DNS rules</string>
 
@@ -75,8 +75,8 @@
         <item quantity="one">%1d rule</item>
         <item quantity="other">%1d rules</item>
     </plurals>
-    <string name="window_dnsrules_hostalreadyexists">There already is a rule for this host.</string>
-    <string name="window_dnsrules_customhosts_message">Define all your custom hosts here.</string>
+    <string name="window_dnsrules_hostalreadyexists">There already is a rule for this host</string>
+    <string name="window_dnsrules_customhosts_message">Define all your custom hosts here</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">Rules from this source: %1d (%2$d duplicates not in use)</string>
 
@@ -93,9 +93,9 @@
     <string name="windows_querylogging_latency">Latency</string>
     <string name="windows_querylogging_responses">Responses</string>
     <string name="windows_querylogging_create_dnsrule">Create DNS rule for this host</string>
-    <string name="windows_querylogging_dnsrule_created">DNS rule has been created.</string>
+    <string name="windows_querylogging_dnsrule_created">DNS rule has been created</string>
     <string name="windows_querylogging_usedserver_dnsrules">Resolved with DNS Rules</string>
     <string name="windows_querylogging_usedserver_cache">Resolved with cache</string>
 
-    <string name="window_main_privatedns_info">Private DNS is active, your queries are already protected. Enable Nebulo if you wish to use dns-over-https or other useful features.</string>
+    <string name="window_main_privatedns_info">Private DNS is active, your queries are already protected. Enable Nebulo if you wish to use DNS-over-HTTPS or other useful features.</string>
 </resources>

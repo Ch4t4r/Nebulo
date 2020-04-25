@@ -111,6 +111,8 @@ A list of some extraordinary people who contributed to this project:
  - Dutch translation by Bas Koedijk
  - Portuguese translation by Rafael W. Bohnenberger
  - Indonesian translation by Gloeyisk
+ - Catalan translation by Daniel Alomar
+ - Spanish translation by Victor Bayas
 <br/>
 <br/>
 
@@ -121,7 +123,7 @@ A list of some extraordinary people who contributed to this project:
 This work is licensed under the GNU GPLv3 License. Different license-agreements can be made with the developer, if needed.
 
 
-Copyright (C) 2019   Daniel Wolf
+Copyright (C) 2020   Daniel Wolf
 
 <br>
 <br>
@@ -153,12 +155,7 @@ This work contains third-party content, namely:
 
 # Cloning
 Feel free to clone this software. However, there are a few things to notice:
-- This app uses some of my own libraries which are only accessible when logged into this GitLab instance. Signing up is free and no tracking is in place.
-   - These libraries are distributed using an Artifactory server. **This server is not public, but I do hand out credentials on request**.
+- This app uses some of my own libraries. Those are OSS as well, you can find the URLs in the `build.gradle`.
+   - These libraries are distributed as pre-built binaries using an Nexus3 server. Public credentials are contained in the root `build.gradle`
    - Alternatively, replace the dependencies (`implementation 'com.frostnerd.utilskt:....`) with git sub-modules (`implementation project(...)`) after cloning the libraries.
 - Nebulo uses icons from Font Awesome covered under their free license. Nebulo gives attribution in the Credits section.
-</br>
-
-</br>
-
-</br>

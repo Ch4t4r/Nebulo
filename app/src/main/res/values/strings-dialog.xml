@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="dialog_serverconfiguration_title">Server configuration</string>
-    <string name="dialog_serverconfiguration_https" translatable="false">Dns-over-https (DoH)</string>
-    <string name="dialog_serverconfiguration_tls" translatable="false">Dns-over-tls (DoT)</string>
+    <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
+    <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
     <string name="dialog_serverconfiguration_addserver">Add a server</string>
 
     <string name="dialog_newserver_title_https">Add a server (DoH)</string>
@@ -34,8 +34,8 @@
     <string name="dialog_serverimport_done">Done</string>
     <string name="dialog_serverimport_priority">Priority %1d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
-    <string name="dialog_serverimport_servertype_doh">Type: Dns-over-HTTPS (DoH)</string>
-    <string name="dialog_serverimport_servertype_dot">Type: Dns-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_servertype_doh">Type: DNS-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Type: DNS-over-TLS (DoT)</string>
     <string xmlns:tools="http://schemas.android.com/tools" name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Please select the servers you wish to import.\n\nServers which are already imported will be duplicate if you select them.</string>
 
     <string name="dialog_serverimportfailed_title">Import failed</string>
@@ -129,7 +129,7 @@
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_choose_file">Choose file</string>
     <string name="dialog_newhostsource_use_as_whitelist">Use as whitelist</string>
-    <string name="dialog_newhostsource_error_name_empty">Please provide a name.</string>
+    <string name="dialog_newhostsource_error_name_empty">Please provide a name</string>
 
     <string name="dialog_newdnsrule_title">New DNS rule</string>
     <string name="dialog_newdnsrule_edit">Edit DNS rule</string>
