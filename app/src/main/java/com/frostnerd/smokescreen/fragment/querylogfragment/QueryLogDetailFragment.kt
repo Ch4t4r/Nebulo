@@ -167,7 +167,11 @@ class QueryLogDetailFragment : Fragment() {
                 hostSourceWrap.visibility = View.VISIBLE
                 hostSourceFetchJob = GlobalScope.launch(Dispatchers.IO) {
                     val sourceRule = getDatabase().dnsRuleDao().findRuleTargetEntity(query.name, query.type, true)
-                        ?: getDatabase().dnsRuleDao().findPossibleWildcardRuleTarget(query.name, query. type, true, false, true).firstOrNull {
+                        ?: getDatabase().dnsRuleDao().findPossibleWildcardRuleTarget(query.name, query. type,
+                            useUserRules = true,
+                            includeWhitelistEntries = false,
+                            includeNonWhitelistEntries = true
+                        ).firstOrNull {
                             DnsRuleDialog.databaseHostToMatcher(it.host).reset(query.name).matches()
                         }
                     val text = if (sourceRule != null) {

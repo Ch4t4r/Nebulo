@@ -899,7 +899,7 @@ class DnsVpnService : VpnService(), Runnable {
 
 
         if (useIpv4) {
-            serverConfig.getAllDnsIpAddresses(true, false).forEach {
+            serverConfig.getAllDnsIpAddresses(ipv4 = true, ipv6 = false).forEach {
                 log("Adding $it as dummy DNS server address")
                 builder.addDnsServer(it)
                 builder.addRoute(it, 32)
@@ -912,7 +912,7 @@ class DnsVpnService : VpnService(), Runnable {
         } else if (deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
 
         if (useIpv6) {
-            serverConfig.getAllDnsIpAddresses(false, true).forEach {
+            serverConfig.getAllDnsIpAddresses(ipv4 = false, ipv6 = true).forEach {
                 log("Adding $it as dummy DNS server address")
                 builder.addDnsServer(it)
                 builder.addRoute(it, 128)
