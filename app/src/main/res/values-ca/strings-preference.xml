@@ -89,4 +89,23 @@
     <string name="summary_dnscache_enabled">Activa la memòria cau DNS de les aplicacions. La memòria cau memoritza peticions antigues per respondre més ràpidament a futures preguntes. 
 \n 
 \nEl sistema ja té una memòria cau, activeu-la si voleu personalitzar el comportament</string>
+    <string name="summary_dnscache_minimum_cache_time">S\'hauria d\'emmagatzemar en memòria la quantitat mínima d\'entrades, sense importar si el temps en la memòria cau predeterminat serà menor. Temps llargs poden fer que les dades de la memòria cau no estiguessin sincronitzades amb les dades reals.
+\nActual: %1d segons</string>
+    <string name="crashreporting_type_off">Desactivat (no envia informes de fallades)</string>
+    <string name="crashreporting_type_minimal">Mínim (només informe d\'Android i versió de l\'aplicació)</string>
+    <string name="crashreporting_type_full">Complet (informació estadística i dades de depuració)</string>
+    <string name="summary_delete_queries">Feu clic aquí per suprimir totes les consultes registrades</string>
+    <string name="title_delete_queries">Esborra les consultes</string>
+    <string name="summary_export_queries">Exporta les consultes com a CSV (%1d consultes)</string>
+    <string name="title_export_queries">Exporta les consultes</string>
+    <string name="summary_log_queries">Registreu totes les consultes i les seves respostes</string>
+    <string name="title_log_queries">Registre de consulta</string>
+    <string name="preference_category_querylogging">Registre de consulta</string>
+    <string name="summary_pause_on_captiveportal">No utilitza DoH si es detecta un portal captiu. Es reprendrà automàticament poc després d’iniciar la sessió.
+\nSi es desactiva, es podria evitar que obri el lloc del portal captiu per iniciar la sessió</string>
+    <string name="title_pause_on_captiveportal">Pausa al portal captiu</string>
+    <string name="summary_bypass_searchdomains">Envieu dominis de cerca (per exemple, MyPC.local o MyPc.fritz.box) al servidor Dns de la vostra xarxa en lloc del servidor DoH.
+\nAixò és molt recomanable. Aquestes consultes no surten de la vostra xarxa</string>
+    <string name="title_bypass_searchdomains">Bypass de searchdomains</string>
+    <string name="summary_map_query_refused">Alguns servidors DNS podrien rebutjar respondre una consulta si l\'amfitrió no està permès o està bloquejat. Aquest paràmetre bloqueja l\'amfitrió en lloc de rebutjar la consulta, en cas contrari el sistema podria confondre\'s</string>
 </resources>
