@@ -19,12 +19,12 @@
     <string name="information">Informació</string>
     <string name="open_app">Obriu l\'aplicació</string>
     <string name="all_close">Tancar</string>
-    <string name="error_invalid_url">Proporcioneu una URL vàlida.</string>
-    <string name="error_invalid_host">Proporcioneu un amfitrió vàlid.</string>
-    <string name="error_invalid_pin">Proporcioneu el PIN.</string>
-    <string name="error_invalid_servername">Introduïu un nom.</string>
+    <string name="error_invalid_url">Proporcioneu una URL vàlida</string>
+    <string name="error_invalid_host">Proporcioneu un amfitrió vàlid</string>
+    <string name="error_invalid_pin">Proporcioneu el PIN</string>
+    <string name="error_invalid_servername">Introduïu un nom</string>
     <string name="error_webview_missing">El paquet WebView no s\'ha trobat. Actualment s\'actualitza o està suprimit\?</string>
-    <string name="error_cannot_open_settings">No es poden obrir la configuració del sistema.</string>
+    <string name="error_cannot_open_settings">No es poden obrir la configuració del sistema</string>
     <string name="about_share">Compartir</string>
     <string name="about_licenses">Llicències de codi obert</string>
     <string name="about_changelog">Registre de canvis</string>
@@ -35,15 +35,15 @@
     <string name="about_info">Informació general</string>
     <string name="about_help_translating">Ajuda amb la traducció</string>
     <string name="window_speedtest_runtest">Comença la prova</string>
-    <string name="error_no_webbrowser_installed">No teniu cap aplicació instal·lada per veure aquest enllaç.</string>
+    <string name="error_no_webbrowser_installed">No teniu cap aplicació instal·lada per veure aquest enllaç</string>
     <string name="button_main_dnsrules">Regles DNS</string>
     <string name="window_dnsrules_customhosts">Amfitrions personalitzats</string>
     <plurals name="window_dnsrules_subtitle">
         <item quantity="one">Regla %1d</item>
         <item quantity="other">Regles %1d</item>
     </plurals>
-    <string name="window_dnsrules_hostalreadyexists">Ja hi ha una regla per a aquest amfitrió.</string>
-    <string name="window_dnsrules_customhosts_message">Definiu tots els amfitrions personalitzats aquí.</string>
+    <string name="window_dnsrules_hostalreadyexists">Ja hi ha una regla per a aquest amfitrió</string>
+    <string name="window_dnsrules_customhosts_message">Definiu tots els amfitrions personalitzats aquí</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Normes d’aquesta font: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regles d\'aquest origen: %1d (%2$d duplicats no utilitzats)</string>
     <string name="windows_querylogging_search_hint">Cerqueu un amfitrió al registre de consultes</string>
@@ -59,10 +59,10 @@
     <string name="windows_querylogging_latency">Latència</string>
     <string name="windows_querylogging_responses">Respostes</string>
     <string name="windows_querylogging_create_dnsrule">Creeu una regla DNS per a aquest amfitrió</string>
-    <string name="windows_querylogging_dnsrule_created">S\'ha creat una regla DNS.</string>
+    <string name="windows_querylogging_dnsrule_created">S\'ha creat una regla DNS</string>
     <string name="windows_querylogging_usedserver_dnsrules">S\'ha resolt amb les regles DNS</string>
     <string name="windows_querylogging_usedserver_cache">Resolució amb memòria cau</string>
-    <string name="window_main_privatedns_info">El DNS privat està actiu i les vostres consultes ja estan protegides. Habiliteu Nebulo si voleu utilitzar dns-over-https o altres funcions útils.</string>
+    <string name="window_main_privatedns_info">El DNS privat està actiu i les vostres consultes ja estan protegides. Habiliteu Nebulo si voleu utilitzar DNS-over-HTTPS o altres funcions útils.</string>
     <string name="main_dnssurveillance_infotext">Tingueu en compte que el servidor DNS al qual esteu connectat és capaç de registrar els llocs que aneu visitant. Consulteu les respectives declaracions de privadesa per obtenir més informació.</string>
     <string name="about_app">Aquesta aplicació és de codi obert. Es pot accedir al codi font a &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
 \nA més, l\'aplicació no conté anuncis i no rastreja ni recopila cap dada sobre vostès.
