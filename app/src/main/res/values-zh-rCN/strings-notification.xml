@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="notification_channel_default">默认通道</string>
-    <string name="notification_channel_default_description">推送通知使用的默认通道。</string>
+    <string name="notification_channel_default_description">推送通知使用的默认通道</string>
     <string name="notification_channel_foreground_service">常驻通知通道</string>
     <string name="notification_channel_foreground_service_description">推送常驻通知使用的默认通道</string>
     <string name="notification_channel_noconnection">连接警告通道</string>
@@ -29,11 +29,11 @@
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">已有 %1$d 个请求</string>
     <string name="notification_noconnection_title">无连接</string>
-    <string name="notification_noconnection_text">因为无连接或连接太差，目前应用已停止转发您的DNS请求。</string>
+    <string name="notification_noconnection_text">因为无连接或连接太差，目前应用已停止转发您的DNS请求</string>
     <string name="notification_vpnrestart_title">重启VPN中</string>
-    <string name="notification_vpnrestart_text">VPN服务即将重启。</string>
+    <string name="notification_vpnrestart_text">VPN服务即将重启</string>
     <string name="notification_appcrash_title">Nebulo已崩溃</string>
-    <string name="notification_appcrash_message">Nebulo已崩溃。如有必要，请点击此处以进入主菜单或重启应用。</string>
+    <string name="notification_appcrash_message">Nebulo已崩溃。如有必要，请点击此处以进入主菜单或重启应用</string>
     <string name="notification_ruleimport_title">导入DNS规则</string>
     <string name="notification_ruleimport_message">正在从 %1s (%2s) 导入DNS规则</string>
     <string name="notification_ruleimport_secondarymessage">准备导入…</string>
@@ -44,11 +44,11 @@
     <string name="notification_ruleexport_message">导出规则中 （%1d/%2d）</string>
     <string name="notification_ruleexport_secondarymessage">准备导出…</string>
     <string name="notification_ruleexportfinished_title">DNS规则导出完成</string>
-    <string name="notification_ruleexportfinished_message">已导出 %1d 条规则。</string>
+    <string name="notification_ruleexportfinished_message">已导出 %1d 条规则</string>
     <string name="notification_pin_title">请输入 PIN</string>
-    <string name="notification_pin_message">完成此项操作需要输入您的PIN。点击此处以确认。</string>
+    <string name="notification_pin_message">完成此项操作需要输入您的PIN。点击此处以确认</string>
     <string name="notification_service_killed_title">关于电池优化的信息</string>
-    <string name="notification_service_killed_message">之前似乎应用被系统关闭了。点击此处了解更多。</string>
+    <string name="notification_service_killed_message">之前似乎应用被系统关闭了。点击此处了解更多</string>
     <string name="notification_service_killed_ignore">忽略</string>
     <string name="notification_service_revoked_title">VPN权限被系统撤销</string>
     <string name="notification_service_revoked_message">点此重启</string>
