@@ -4,13 +4,18 @@ Whilst English is the second most spoken language there are a lot of people out 
 This is where you come in: I speak German and English but can't deliver any other translations. This is why I'd like to ask anyone who is willing to help to consider contributing translations or checking existing translations.
 
 # How it's done
-I use an web-based translations editor called [Weblate](weblate.org) (open-source software, available under the GPLv3) to make managing translations easy.
+I use an web-based translations editor called [Weblate](http://weblate.org) (open-source software, available under the GPLv3) to make managing translations easy.
 I host my [own instance of Weblate](https://weblate.frostnerd.com) -- [creating an account](https://weblate.frostnerd.com/accounts/register/) is free and neither does the site contain ads, nor does it use any tracking (look at the privacy policy below though!).
 
 See below for a quick tutorial on how to use Weblate.
 
+# How to view your translations
+Contributed translations are pushed regularly by Weblate. In some cases it takes some times until this happens.
+A new APK file is then automatically created which contains those new translations. You can always download the latest version of [this file here](https://git.frostnerd.com/PublicAndroidApps/smokescreen/-/jobs/artifacts/translations/raw/app/build/outputs/apk/normal/debug/app-normal-debug.apk?job=build_debug).
+Please use it to verify your contribution.
+
 # The current state
-Right now the app contains German, English, Dutch, Portuguese, Russian, Indonesian and Turkish translations. This is already a good number of translations, but your help is needed to push it even further.
+Right now the app contains a good number of translations, but your help is needed to push it even further.
 
 <a href="https://weblate.frostnerd.com/engage/nebulo/?utm_source=widget">
 <img src="https://weblate.frostnerd.com/widgets/nebulo/-/multi-green.svg" alt="Translation state" />
@@ -50,7 +55,7 @@ Here's a quick tutorial on how to contribute a translation.
 8. [Select](material/translating/translation_overview.png) one of "All strings", "Strings needing action", "Not translated strings" or "Strings needing action without suggestions" or "Translated strings".
 9. You'll be taken to the [translation editor](material/translating/translation_editor.png) (I choose "Not translated strings")
 10. You can now select the translation source (English texts) and enter translations or suggestions for the language.
-   - You can also switch to [Zen mode](material/translating/translation_editor_zen.png) using the button in the right corner.
+      - You can also switch to [Zen mode](material/translating/translation_editor_zen.png) using the button in the right corner.
 11. There is much more this tool is able to do, feel free to experiment (or read [the docs](https://docs.weblate.org/en/weblate-3.6.1/index.html))!
 
 # License
