@@ -1,9 +1,8 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="activity_label_import_servers">导入服务器</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activity_label_import_servers">导入服务器</string>
     <string name="activity_label_speed_test">比较服务器速度</string>
-
     <string name="activity_label_enable_logging">导出日志/启用日志记录</string>
-
     <string name="all_stop">停止</string>
     <string name="all_start">开始</string>
     <string name="all_pause">暂停</string>
@@ -13,19 +12,15 @@
     <string name="information">信息</string>
     <string name="open_app">打开应用</string>
     <string name="all_close">关闭</string>
-
-    <string name="error_invalid_url">请提供有效的地址.</string>
-    <string name="error_invalid_host">请提供有效的主机.</string>
-    <string name="error_invalid_pin">请提供您的密码.</string>
-    <string name="error_invalid_servername">请提供名称.</string>
-    <string name="error_cannot_open_settings">无法打开系统设置。</string>
-
+    <string name="error_invalid_url">请提供有效的地址</string>
+    <string name="error_invalid_host">请提供有效的主机</string>
+    <string name="error_invalid_pin">请提供您的密码</string>
+    <string name="error_invalid_servername">请提供名称</string>
+    <string name="error_cannot_open_settings">无法打开系统设置</string>
     <string name="main_dnssurveillance_infotext">请注意，您连接到的DNS服务器能够记录您正在访问的站点。有关详细信息，请查看相应的隐私声明。</string>
     <string name="quicksettings_stop_text">停止 Nebulo</string>
     <string name="quicksettings_start_text">开启 Nebulo</string>
-
     <string name="crashreporting_thankyou_gotit">去设置!</string>
-
     <string name="about_share">分享</string>
     <string name="about_licenses">开源许可证</string>
     <string name="about_changelog">更新日志</string>
@@ -33,11 +28,9 @@
     <string name="about_telegram_group">Telegram 群组</string>
     <string name="about_privacypolicy">隐私政策</string>
     <string name="window_speedtest_runtest">开始测试</string>
-
     <string name="button_main_dnsrules">DNS 规则</string>
-
     <string name="window_dnsrules_customhosts">自定义 hosts</string>
-    <string name="window_dnsrules_hostalreadyexists">规则已存在.</string>
+    <string name="window_dnsrules_hostalreadyexists">规则已存在</string>
     <string name="windows_querylogging_time">请求时间</string>
     <string name="windows_querylogging_type">记录类型</string>
     <string name="windows_querylogging_question">请求域名</string>
@@ -49,8 +42,7 @@
     <string name="windows_querylogging_latency">延迟</string>
     <string name="windows_querylogging_responses">解析结果</string>
     <string name="windows_querylogging_create_dnsrule">为此主机创建DNS规则</string>
-    <string name="windows_querylogging_dnsrule_created">DNS规则已创建.</string>
+    <string name="windows_querylogging_dnsrule_created">DNS规则已创建</string>
     <string name="windows_querylogging_usedserver_dnsrules">DNS规则</string>
     <string name="windows_querylogging_usedserver_cache">缓存记录</string>
-
-    </resources>
+</resources>
