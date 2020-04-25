@@ -22,8 +22,8 @@
     </plurals>
     <string name="dialog_serverimport_priority">优先级 %1d</string>
     <string name="dialog_serverimport_experimental">实验性功能</string>
-    <string name="dialog_serverimport_servertype_doh">类型：Dns-over-HTTPS（DoH）</string>
-    <string name="dialog_serverimport_servertype_dot">类型：Dns-over-TLS（DoT）</string>
+    <string name="dialog_serverimport_servertype_doh">类型：DNS-over-HTTPS（DoH）</string>
+    <string name="dialog_serverimport_servertype_dot">类型：DNS-over-TLS（DoT）</string>
     <string name="dialog_serverimport_done">完成</string>
     <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">请选择您想导入的服务器。
 \n
@@ -116,7 +116,7 @@
     <string name="dialog_newdnsrule_ipv6_invalid">请提供有效IPv6地址</string>
     <string name="dialog_clearuserrules_title">是否清除所有DNS规则？</string>
     <string name="dialog_clearuserrules_message">您确认您要清除所有DNS规则吗？此操作无法撤销。</string>
-    <string name="dialog_newhostsource_error_name_empty">请命名。</string>
+    <string name="dialog_newhostsource_error_name_empty">请命名</string>
     <string name="dialog_newdnsrule_hint_ipv4address">IPv4 地址</string>
     <string name="dialog_newhostsource_choose_file">选择文件</string>
     <string name="dialog_newdnsrule_whitelist">白名单</string>
