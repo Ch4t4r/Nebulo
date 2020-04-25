@@ -7,7 +7,7 @@
     <string name="summary_start_on_boot">Démarrer l\'application lorsque le téléphone est allumé</string>
     <string name="summary_start_after_update">Démarrer l\'application après sa mise à jour</string>
     <string name="title_excluded_apps">Applications exclues</string>
-    <string name="summary_excluded_apps">Exclure les applications de l\'application ici, par exemple si elles ne peuvent plus se connecter à l\'Internet - les applications sélectionnées n\'utiliseront plus dns-over-https.</string>
+    <string name="summary_excluded_apps">Exclure les applications de l\'application ici, par exemple si elles ne peuvent plus se connecter à l\'Internet - les applications sélectionnées n\'utiliseront plus le DNS-sur-HTTPS ou le DNS-sur-TLS</string>
     <string name="preference_category_notification">Notification</string>
     <string name="summary_language">Changer la langue de l\'application</string>
     <string name="title_start_after_update">Démarrer après la mise à jour</string>
@@ -22,8 +22,8 @@
     <string name="title_show_noconnection_notification">Notification d\'absence de connexion</string>
     <string name="summary_show_noconnection_notification">Afficher une notification lorsque l\'application n\'a pas de connexion ou a une mauvaise connexion</string>
     <string name="title_show_revoked_notification">Notification de perte d\'autorisation</string>
-    <string name="title_preference_enable_pin">Pin</string>
-    <string name="summary_preference_pin_use_fingerprint">Permettez que votre empreinte digitale soit utilisée à la place du code PIN.</string>
+    <string name="title_preference_enable_pin">PIN</string>
+    <string name="summary_preference_pin_use_fingerprint">Permettez que votre empreinte digitale soit utilisée à la place du code PIN</string>
     <string name="title_notification_hide_icon">Cacher l\'icône</string>
     <string name="title_notification_allow_pause">Permettre une pause</string>
     <string name="preference_category_pin">Protection du code PIN</string>
@@ -35,17 +35,17 @@
     <string name="summary_preference_change_pin">Changez le code PIN. Seules les valeurs numériques sont autorisées.
 \nBroche actuelle : %1s</string>
     <string name="title_dnscache_nxdomaincachetime">Temps de cache pour le NXDomain (secondes)</string>
-    <string name="summary_clear_dnscache">Cliquez ici pour vider la mémoire cache du DNS, par exemple lorsque des sites web commencent à se comporter mal parce qu\'ils sont mis en cache.</string>
+    <string name="summary_clear_dnscache">Cliquez ici pour vider la mémoire cache du DNS, par exemple lorsque des sites web commencent à se comporter mal parce qu\'ils sont mis en cache</string>
     <string name="summary_dnscache_maxsize">Définit le nombre maximum d\'entrées que le cache peut contenir à tout moment</string>
-    <string name="summary_dnscache_minimum_cache_time">La durée minimale des entrées doit être mise en cache, même si la durée de mise en cache par défaut est plus courte. De longues durées de mise en cache pourraient entraîner une désynchronisation des données mises en cache avec les données réelles.
-\nCourant : %1d Secondes.</string>
-    <string name="summary_dnscache_customcachetime">Modifie la durée de mise en cache de toutes les demandes, que la durée de mise en cache par défaut soit ou non plus longue. De longues durées de mise en cache pourraient entraîner une désynchronisation des données mises en cache avec les données réelles.
-\nActuellement : %1d Secondes.</string>
-    <string name="summary_dnscache_nxdomaincachetime">Modifie la durée de mise en cache des demandes NXDOMAIN. Cela améliore les performances pour les domaines non existants (par exemple, s\'ils sont bloqués)
-\nCourant : %1d Secondes.</string>
-    <string name="summary_dnscache_enabled">Active le cache DNS de l\'application. Le cache mémorise les anciennes requêtes pour répondre plus rapidement aux futures questions.
-\n
-\nLe système dispose déjà d\'un cache, activez-le si vous souhaitez personnaliser le comportement.</string>
+    <string name="summary_dnscache_minimum_cache_time">La durée minimale des entrées doit être mise en cache, même si la durée de mise en cache par défaut est plus courte. De longues durées de mise en cache pourraient entraîner une désynchronisation des données mises en cache avec les données réelles. 
+\nCourant : %1d Secondes</string>
+    <string name="summary_dnscache_customcachetime">Modifie la durée de mise en cache de toutes les demandes, que la durée de mise en cache par défaut soit ou non plus longue. De longues durées de mise en cache pourraient entraîner une désynchronisation des données mises en cache avec les données réelles. 
+\nActuellement : %1d Secondes</string>
+    <string name="summary_dnscache_nxdomaincachetime">Modifie la durée de mise en cache des demandes NXDOMAIN. Cela améliore les performances pour les domaines non existants (par exemple, s\'ils sont bloqués) 
+\nCourant : %1d Secondes</string>
+    <string name="summary_dnscache_enabled">Active le cache DNS de l\'application. Le cache mémorise les anciennes requêtes pour répondre plus rapidement aux futures questions. 
+\n 
+\nLe système dispose déjà d\'un cache, activez-le si vous souhaitez personnaliser le comportement</string>
     <string name="summary_dnscache_keepacrosslaunches">Conserver le cache du DNS pendant plusieurs lancements</string>
     <string name="preference_category_cache">Contrôle des caches</string>
     <string name="title_dnscache_enabled">Utiliser le cache DNS</string>
@@ -58,40 +58,40 @@
     <string name="preference_category_logging">Enregistrement des données</string>
     <string name="title_enable_logging">Permettre l\'enregistrement des données</string>
     <string name="title_clear_dnscache">Effacer le cache DNS</string>
-    <string name="summary_bypass_searchdomains">Envoyez les searchdomain (par exemple, MyPC.local ou MyPc.fritz.box) au serveur DNS de votre réseau au lieu du serveur DoH.
-\nCeci est fortement recommandé. Ces requêtes ne quittent pas votre réseau.</string>
+    <string name="summary_bypass_searchdomains">Envoyez les searchdomain (par exemple, MyPC.local ou MyPc.fritz.box) au serveur DNS de votre réseau au lieu du serveur DoH. 
+\nCeci est fortement recommandé. Ces requêtes ne quittent pas votre réseau</string>
     <string name="title_pause_on_captiveportal">Pause sur le captive portal</string>
-    <string name="summary_pause_on_captiveportal">N\'utilisez pas le ministère de la santé si un captive portal est détecté. Il sera automatiquement repris peu après la connexion.
-\nLe désactiver pourrait vous empêcher d\'ouvrir le site du captive portal pour vous connecter.</string>
-    <string name="summary_map_query_refused">Certains serveurs DNS peuvent refuser de répondre à une requête si l\'host n\'est pas autorisé ou est bloqué. Ce paramètre bloque l\'host au lieu de refuser la requête, sinon le système risque d\'être confus.</string>
+    <string name="summary_pause_on_captiveportal">N\'utilisez pas le ministère de la santé si un captive portal est détecté. Il sera automatiquement repris peu après la connexion. 
+\nLe désactiver pourrait vous empêcher d\'ouvrir le site du captive portal pour vous connecter</string>
+    <string name="summary_map_query_refused">Certains serveurs DNS peuvent refuser de répondre à une requête si l\'host n\'est pas autorisé ou est bloqué. Ce paramètre bloque l\'host au lieu de refuser la requête, sinon le système risque d\'être confus</string>
     <string name="title_bypass_searchdomains">contournement de l\'searchdomain</string>
     <string name="title_export_queries">Exporter des requêtes DNS</string>
     <string name="title_delete_queries">Des requêtes DNS claires</string>
     <string name="title_advanced_logging">Enregistrement avancé des données</string>
-    <string name="summary_advanced_logging">Ajout d\'une journalisation de débogage plus importante, ce qui pourrait aider à résoudre des problèmes plus persistants.</string>
+    <string name="summary_advanced_logging">Ajout d\'une journalisation de débogage plus importante, ce qui pourrait aider à résoudre des problèmes plus persistants</string>
     <string name="title_map_query_refused">Interpréter les requêtes refusées comme des hosts non autorisés</string>
     <string name="title_restart_vpn_on_networkchange">Redémarrage en cas de changement de réseau</string>
-    <string name="summary_enable_logging">Permet l\'enregistrement des informations de débogage (contient des données statistiques). Ces journaux ne sont pas envoyés automatiquement.</string>
+    <string name="summary_enable_logging">Permet l\'enregistrement des informations de débogage (contient des données statistiques). Ces journaux ne sont pas envoyés automatiquement</string>
     <string name="title_force_ipv6">Force IPv6</string>
-    <string name="summary_force_ipv6">Forcer l\'application à accepter les requêtes IPv6, même lorsque l\'appareil n\'utilise pas IPv6.</string>
+    <string name="summary_force_ipv6">Forcer l\'application à accepter les requêtes IPv6, même lorsque l\'appareil n\'utilise pas IPv6</string>
     <string name="title_force_ipv4">Force IPv4</string>
-    <string name="summary_force_ipv4">Forcer l\'application à accepter les requêtes IPv4, même lorsque l\'appareil n\'utilise pas IPv4.</string>
-    <string name="summary_allow_ipv4_traffic">Autoriser l\'utilisation du trafic IPv4, même si IPv4 est désactivé.
-\nSi elle est désactivée, aucune connexion IPv4 n\'est autorisée pendant l\'exécution de l\'application.</string>
+    <string name="summary_force_ipv4">Forcer l\'application à accepter les requêtes IPv4, même lorsque l\'appareil n\'utilise pas IPv4</string>
+    <string name="summary_allow_ipv4_traffic">Autoriser l\'utilisation du trafic IPv4, même si IPv4 est désactivé. 
+\nSi elle est désactivée, aucune connexion IPv4 n\'est autorisée pendant l\'exécution de l\'application</string>
     <string name="title_allow_ipv6_traffic">Autoriser le trafic IPv6</string>
-    <string name="summary_restart_vpn_on_networkchange">Redémarrez silencieusement l\'application lorsque le réseau change. Activez cette fonction lorsque vous rencontrez des problèmes lors du passage d\'un réseau à l\'autre.
-\n Aucun effet lorsque l\'application n\'est pas active.</string>
+    <string name="summary_restart_vpn_on_networkchange">Redémarrez silencieusement l\'application lorsque le réseau change. Activez cette fonction lorsque vous rencontrez des problèmes lors du passage d\'un réseau à l\'autre. 
+\n Aucun effet lorsque l\'application n\'est pas active</string>
     <string name="summary_disallow_other_vpns">N\'autorisez pas d\'autres VPN à démarrer si l\'application n\'est pas explicitement arrêtée</string>
     <string name="summary_catch_other_dns_servers">Intercepter le trafic des serveurs DNS connus et le transmettre en utilisant Nebulo</string>
     <string name="crashreporting_type_off">Off (Ne pas envoyer de rapports d\'accident)</string>
-    <string name="summary_send_logs">Cliquez ici pour envoyer les journaux au développeur.</string>
-    <string name="summary_delete_all_logs">Supprime tous les journaux stockés sur votre appareil.</string>
+    <string name="summary_send_logs">Cliquez ici pour envoyer les journaux au développeur</string>
+    <string name="summary_delete_all_logs">Supprime tous les journaux stockés sur votre appareil</string>
     <string name="title_crashreporting_type">Signalement automatique des accidents</string>
-    <string name="summary_crashreporting_type">Configurez les données à transmettre au développeur lorsque l\'application se plante. Les données de crash ne contiennent jamais de données personnelles et permettent de résoudre les problèmes plus rapidement.</string>
+    <string name="summary_crashreporting_type">Configurez les données à transmettre au développeur lorsque l\'application se plante. Les données de crash ne contiennent jamais de données personnelles et permettent de résoudre les problèmes plus rapidement</string>
     <string name="summary_enable_ipv4">Utiliser IPv4, si une adresse IPv4 a été attribuée à l\'appareil</string>
-    <string name="summary_allow_ipv6_traffic">Permettre l\'utilisation du trafic IPv6, même si IPv4 est désactivé.
-\nSi elle est désactivée, aucune connexion IPv6 n\'est autorisée pendant l\'exécution de l\'application.</string>
-    <string name="summary_delete_queries">Cliquez ici pour supprimer toutes les requêtes enregistrées.</string>
+    <string name="summary_allow_ipv6_traffic">Permettre l\'utilisation du trafic IPv6, même si IPv4 est désactivé. 
+\nSi elle est désactivée, aucune connexion IPv6 n\'est autorisée pendant l\'exécution de l\'application</string>
+    <string name="summary_delete_queries">Cliquez ici pour supprimer toutes les requêtes enregistrées</string>
     <string name="title_send_logs">Envoyer les journaux</string>
     <string name="title_delete_all_logs">Supprimer tous les journaux</string>
     <string name="preference_category_ip">Paramètres IP</string>
