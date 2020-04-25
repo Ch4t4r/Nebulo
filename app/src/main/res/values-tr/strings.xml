@@ -1,11 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Nebulo</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nebulo</string>
     <string name="activity_label_import_queries">Sorguları içe aktar</string>
     <string name="activity_label_import_servers">Sunucuları içe aktar</string>
-
     <string name="activity_label_enable_logging">Günlükleri dışa aktar/Günlüğü etkinleştir</string>
-
     <string name="all_stop">Dur</string>
     <string name="all_start">Başla</string>
     <string name="all_pause">Duraklat</string>
@@ -15,10 +13,8 @@
     <string name="information">Bilgi</string>
     <string name="open_app">Uygulamayı aç</string>
     <string name="all_close">Kapat</string>
-
     <string name="main_dnssurveillance_infotext">Bağlandığınız DNS sunucusunun hangi siteleri ziyaret ettiğinizi kaydedebildiğini unutmayın. Daha fazla bilgi için ilgili gizlilik bildirimlerini kontrol edin.</string>
     <string name="main_dnssurveillance_privacystatement">%1s’in gizlilik beyanı</string>
-
     <string name="about_app">Bu uygulama açık kaynak. Kaynak koduna &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt; adresinden erişilebilir.
 \nAyrıca, uygulama reklam içermez ve sizinle ilgili hiçbir veri izlemez veya toplamaz.
 \n
@@ -31,16 +27,12 @@
 \nGPLv3 kapsamında lisanslanmıştır.
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
     <string name="app_share_text">Selam, size daha fazla gizlilik ve güvenlik sağlamak için DNS sorgularınızı şifreleyen bu uygulamayı buldum. Buradan kontrol edin: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
-
     <string name="quicksettings_stop_text">Nebulo\'yu Durdur</string>
     <string name="quicksettings_start_text">Nebulo\'yu Başlat</string>
-
     <string name="fragment_querydetail_mode_dot">TLS üzerinden DNS</string>
     <string name="fragment_querydetail_mode_doh">HTTPS üzerinden DNS</string>
-
     <string name="crashreporting_thankyou">Teşekkür ederim! Fikrinizi değiştirirseniz, ayarlara gidin.</string>
     <string name="crashreporting_thankyou_gotit">Anladım!</string>
-
     <string name="about_share">Paylaş</string>
     <string name="about_licenses">Açık kaynaklı lisanslar</string>
     <string name="about_changelog">Değişiklikler</string>
@@ -49,28 +41,23 @@
     <string name="about_privacypolicy">Gizlilik politikası</string>
     <string name="about_credits">Katkıcılar</string>
     <string name="about_info">Genel bilgi</string>
-
-<string name="about_help_translating">Çeviriye yardımcı olun</string>
-
-<string name="activity_label_speed_test">Sunucu hızı karşılaştırması</string>
+    <string name="about_help_translating">Çeviriye yardımcı olun</string>
+    <string name="activity_label_speed_test">Sunucu hızı karşılaştırması</string>
     <string name="window_speedtest_runtest">Testi başlat</string>
-    <string name="error_no_webbrowser_installed">Bu bağlantıyı görüntülemek için yüklü herhangi bir uygulama yok.</string>
-
+    <string name="error_no_webbrowser_installed">Bu bağlantıyı görüntülemek için yüklü herhangi bir uygulama yok</string>
     <string name="button_main_dnsrules">DNS kuralları</string>
-
     <string name="window_dnsrules_customhosts">Özel Hosts</string>
-    <string name="window_dnsrules_customhosts_message">Tüm özel Hostları burada tanımlayın.</string>
+    <string name="window_dnsrules_customhosts_message">Tüm özel Hostları burada tanımlayın</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Bu kaynaktan gelen kurallar: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount">Bu kaynaktan gelen kurallar: %1d (%2$d kopya kullanılmıyor)</string>
-<string name="error_invalid_url">Lütfen geçerli bir URL girin.</string>
-    <string name="error_invalid_pin">Lütfen PIN’inizi girin.</string>
-    <string name="error_invalid_servername">Lütfen bir isim girin.</string>
-
+    <string name="error_invalid_url">Lütfen geçerli bir URL girin</string>
+    <string name="error_invalid_pin">Lütfen PIN’inizi girin</string>
+    <string name="error_invalid_servername">Lütfen bir isim girin</string>
     <plurals name="window_dnsrules_subtitle">
-	<item quantity="one">% 1d kuralı</item>
-	<item quantity="other">% 1d kuralları</item>
-</plurals>
-    <string name="window_dnsrules_hostalreadyexists">Bu ana bilgisayar için zaten bir kural var.</string>
+        <item quantity="one">% 1d kuralı</item>
+        <item quantity="other">% 1d kuralları</item>
+    </plurals>
+    <string name="window_dnsrules_hostalreadyexists">Bu ana bilgisayar için zaten bir kural var</string>
     <string name="windows_querylogging_time">Zaman</string>
     <string name="windows_querylogging_type">Tür</string>
     <string name="windows_querylogging_question">Soru</string>
@@ -79,15 +66,14 @@
     <string name="windows_querylogging_latency">Gecikme</string>
     <string name="windows_querylogging_responses">Yanıtlar</string>
     <string name="windows_querylogging_create_dnsrule">Bu ana bilgisayar için DNS kuralı oluşturun</string>
-    <string name="windows_querylogging_dnsrule_created">DNS kuralı oluşturuldu.</string>
+    <string name="windows_querylogging_dnsrule_created">DNS kuralı oluşturuldu</string>
     <string name="windows_querylogging_usedserver_dnsrules">DNS Kuralları ile çözüldü</string>
     <string name="windows_querylogging_usedserver_cache">Önbellekle çözüldü</string>
-<string name="error_webview_missing">WebView paketi bulunamadı, şu anda güncelleniyor veya kaldırılıyor mu\?</string>
-
+    <string name="error_webview_missing">WebView paketi bulunamadı, şu anda güncelleniyor veya kaldırılıyor mu\?</string>
     <string name="windows_querylogging_search_hint">Sorgu günlüğünde bir makine için arama</string>
     <string name="windows_querylogging_search">Makine arama</string>
     <string name="windows_querylogging_hostsource">DNS kuralının kaynağı</string>
     <string name="windows_querylogging_hostsource__user">Kullanıcı kuralları</string>
     <string name="windows_querylogging_hostsource__unknown">Bilinmeyen</string>
-    <string name="window_main_privatedns_info">Özel DNS etkin, sorgularınız zaten korunuyor. Dns-over-https veya diğer kullanışlı özellikleri kullanmak istiyorsanız, Nebulo\'yu etkinleştirin.</string>
+    <string name="window_main_privatedns_info">Özel DNS etkin, sorgularınız zaten korunuyor. DNS-over-HTTPS veya diğer kullanışlı özellikleri kullanmak istiyorsanız, Nebulo\'yu etkinleştirin.</string>
 </resources>
