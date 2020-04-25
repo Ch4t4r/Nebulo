@@ -37,12 +37,12 @@
     <string name="summary_enable_ipv6">Usar IPv6, si el dispositivo tiene una dirección IPv6 asignada</string>
     <string name="title_allow_ipv6_traffic">Permitir el tráfico IPv6</string>
     <string name="preference_category_network">Red</string>
-    <string name="preference_category_querylogging">Registro de consultas</string>
-    <string name="title_log_queries">Registro de consultas</string>
-    <string name="summary_export_queries">Consultas de exportación como CSV (%1d consultas)</string>
+    <string name="preference_category_querylogging">Registro de consulta</string>
+    <string name="title_log_queries">Registro de consulta</string>
+    <string name="summary_export_queries">Exportación de las consultas como CSV (%1d consultas)</string>
     <string name="summary_show_noconnection_notification">Mostrar una notificación cuando la aplicación no tiene o tiene una mala conexión</string>
     <string name="summary_dnscache_usedefaulttimes">Mantener las solicitudes en la caché durante todo el tiempo que el servidor DNS se comunique usando el TTL</string>
-    <string name="summary_dnscache_minimum_cache_time">El tiempo mínimo de almacenamiento en caché de las entradas debe ser menor, independientemente de que el tiempo de almacenamiento en caché por defecto sea más corto. Los tiempos de almacenamiento en caché largos podrían hacer que los datos almacenados en caché no estuvieran sincronizados con los datos reales. 
+    <string name="summary_dnscache_minimum_cache_time">El tiempo mínimo de almacenamiento en caché de las entradas debe ser menor, independientemente de que el tiempo de almacenamiento en caché por defecto sea más corto. Tiempos de almacenamiento en caché largos podrían hacer que los datos almacenados en caché no estuvieran sincronizados con los datos reales. 
 \nActual: %1d Segundos</string>
     <string name="summary_dnscache_customcachetime">Cambia el tiempo de almacenamiento en caché de todas las solicitudes, sin importar si el tiempo de almacenamiento en caché predeterminado para ello sería más largo. Los tiempos de almacenamiento en caché largos podrían causar que los datos almacenados en caché no estén sincronizados con los datos reales. 
 \nActual: %1d Segundos</string>
@@ -81,8 +81,8 @@
     <string name="title_bypass_searchdomains">Bypass de Searchdomains</string>
     <string name="title_show_noconnection_notification">Notificación sin conexión</string>
     <string name="summary_log_queries">Registra todas las consultas y sus respuestas</string>
-    <string name="title_export_queries">Consultas de exportación</string>
-    <string name="title_delete_queries">Consultas claras</string>
+    <string name="title_export_queries">Exportación de las consultas</string>
+    <string name="title_delete_queries">Limpia las consultes</string>
     <string name="title_catch_other_dns_servers">Interceptar otro tráfico de DNS</string>
     <string name="title_map_query_refused">Interpretar las consultas rechazadas como anfitriones rechazados</string>
     <string name="title_language">Idioma</string>
@@ -92,20 +92,20 @@
     <string name="title_clear_dnscache">Limpiar la caché del DNS</string>
     <string name="title_crashreporting_type">Reporte automático de colisión</string>
     <string name="crashreporting_type_full">Completo (Informe de datos estadísticos y de depuración)</string>
-    <string name="crashreporting_type_minimal">Mínimo (Sólo informe de la versión Android y App)</string>
-    <string name="crashreporting_type_off">Off (No enviar informes de accidentes)</string>
+    <string name="crashreporting_type_minimal">Mínimo (Sólo informe de Android y versión de la App)</string>
+    <string name="crashreporting_type_off">Desactivado (No enviar informes de fallos)</string>
     <string name="title_restart_vpn_on_networkchange">Reiniciar en el cambio de red</string>
     <string name="title_show_revoked_notification">Notificación de pérdida de permiso</string>
     <string name="summary_show_revoked_notification">Mostrar una notificación cuando Nebulo pierda el permiso para la VPN</string>
     <string name="summary_dnscache_maxsize">Establece el máximo de ingresos que puede mantener el caché en cualquier momento</string>
     <string name="summary_dnscache_keepacrosslaunches">Mantiene el cache DNS en múltiples lanzamientos</string>
     <string name="summary_advanced_logging">Añade más registro, lo que podría ayudar con problemas más persistentes</string>
-    <string name="title_pause_on_captiveportal">Pausa en el captive portal</string>
+    <string name="title_pause_on_captiveportal">Pausa en el portal cautivo</string>
     <string name="summary_bypass_searchdomains">Envía los searchdomains (por ejemplo, MyPC.local o MyPc.fritz.box) al servidor Dns de tu red en lugar del servidor DoH. 
 \nEsto es muy recomendable. Esas consultas no salen de su red</string>
     <string name="preference_category_logging">Registro de depuración</string>
     <string name="title_enable_logging">Habilitar el registro</string>
-    <string name="summary_pause_on_captiveportal">No uses el DoH si se detecta un captive portal. Se reanudará automáticamente poco después de iniciar la sesión. 
-\nSi lo desactiva, podría impedirle abrir el captive portal para iniciar sesión</string>
+    <string name="summary_pause_on_captiveportal">No usa el DoH si se detecta un portal cautivo. Se reanudará automáticamente poco después de iniciar la sesión. 
+\nSi lo desactiva, podría impedirle abrir el portal cautivo para iniciar sesión</string>
     <string name="title_advanced_logging">Registro avanzado</string>
 </resources>
