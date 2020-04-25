@@ -132,7 +132,7 @@
     <string name="changelog_build_33_3">Replaced some of the icons</string>
     <string name="changelog_build_33_4">Fixed a few crashes</string>
     <string name="changelog_build_33_5">Added a view to test DNS server speeds</string>
-    <string name="changelog_build_33_6">You can now specify custom IP addresses for hosts. Hosts can be imported from URLs and added by hand.</string>
+    <string name="changelog_build_33_6">You can now specify custom IP addresses for hosts. Hosts can be imported from URLs and added by hand</string>
     <string name="changelog_build_33_7">A few design tweaks</string>
     <string-array name="changelog_build_33">
         <item>1.0 Beta (Build 33)</item>
@@ -191,7 +191,7 @@
         <item>@string/changelog_build_37_4</item>
     </string-array>
 
-    <string name="changelog_build_38_1">This is a performance focused update which should make DNS queries faster, use less memory and be less battery consuming.</string>
+    <string name="changelog_build_38_1">This is a performance focused update which should make DNS queries faster, use less memory and be less battery consuming</string>
     <string name="changelog_build_38_2">Fixed a crash on some devices regarding the internal database</string>
     <string-array name="changelog_build_38">
         <item>1.0 Beta (Build 38)</item>

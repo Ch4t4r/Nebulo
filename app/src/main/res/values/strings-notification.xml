@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="notification_channel_default">Default Channel</string>
-    <string name="notification_channel_default_description">Default channel for posting notifications.</string>
+    <string name="notification_channel_default_description">Default channel for posting notifications</string>
 
     <string name="notification_channel_foreground_service">Permanent Notification Channel</string>
     <string name="notification_channel_foreground_service_description">Channel used for notifications which can\'t be removed by the user</string>
@@ -25,13 +25,13 @@
     <string name="notification_main_subtext">%1$d queries so far</string>
 
     <string name="notification_noconnection_title">No connection</string>
-    <string name="notification_noconnection_text">The app currently isn\'t forwarding your DNS queries because you either have no or a bad connection.</string>
+    <string name="notification_noconnection_text">The app currently isn\'t forwarding your DNS queries because you either have no or a bad connection</string>
 
     <string name="notification_vpnrestart_title">Restarting Vpn</string>
-    <string name="notification_vpnrestart_text">The Vpn service will be restarted soon.</string>
+    <string name="notification_vpnrestart_text">The Vpn service will be restarted soon</string>
 
     <string name="notification_appcrash_title">Nebulo has crashed</string>
-    <string name="notification_appcrash_message">Nebulo has crashed. Click here to go to the main menu and to restart the app, if necessary.</string>
+    <string name="notification_appcrash_message">Nebulo has crashed. Click here to go to the main menu and to restart the app, if necessary</string>
 
     <string name="notification_ruleimport_title">DNS rule import</string>
     <string name="notification_ruleimport_message">Importing DNS rules from %1s (%2s)</string>
@@ -46,13 +46,13 @@
     <string name="notification_ruleexport_secondarymessage">Preparing export…</string>
 
     <string name="notification_ruleexportfinished_title">DNS rule export finished</string>
-    <string name="notification_ruleexportfinished_message">%1d rules have been exported.</string>
+    <string name="notification_ruleexportfinished_message">%1d rules have been exported</string>
 
     <string name="notification_pin_title">PIN required</string>
-    <string name="notification_pin_message">Your PIN is required to perform that action. Click here to confirm it.</string>
+    <string name="notification_pin_message">Your PIN is required to perform that action. Click here to confirm it</string>
 
     <string name="notification_service_killed_title">Information about battery optimization</string>
-    <string name="notification_service_killed_message">It seems like the app was previously stopped by the system. Click here to learn more.</string>
+    <string name="notification_service_killed_message">It seems like the app was previously stopped by the system. Click here to learn more</string>
     <string name="notification_service_killed_ignore">Ignore</string>
 
     <string name="notification_service_revoked_title">VPN permission revoked by system</string>

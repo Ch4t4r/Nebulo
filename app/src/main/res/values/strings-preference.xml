@@ -15,7 +15,7 @@
     <string name="summary_start_after_update">Start the app after it has been updated</string>
 
     <string name="title_excluded_apps">Excluded apps</string>
-    <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use dns-over-https anymore.</string>
+    <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use dns-over-https anymore</string>
 
 
 
@@ -49,7 +49,7 @@
     <string name="summary_preference_enable_pin">Ask for a PIN when opening or stopping the app</string>
 
     <string name="title_preference_pin_use_fingerprint">Allow fingerprint</string>
-    <string name="summary_preference_pin_use_fingerprint">Allow your fingerprint to be used instead of the PIN.</string>
+    <string name="summary_preference_pin_use_fingerprint">Allow your fingerprint to be used instead of the PIN</string>
 
     <string name="title_preference_change_pin">Change PIN</string>
     <string name="summary_preference_change_pin">Change the PIN. Only numeric values are allowed.\nCurrent PIN: %1s</string>
@@ -57,13 +57,13 @@
     <string name="preference_category_cache">Cache control</string>
 
     <string name="title_dnscache_enabled">Use DNS cache</string>
-    <string name="summary_dnscache_enabled">Enables the apps DNS cache. The cache memorizes old requests to answer future questions faster.\n\nThe system already has a cache, enable this if you want to customize behavior.</string>
+    <string name="summary_dnscache_enabled">Enables the apps DNS cache. The cache memorizes old requests to answer future questions faster.\n\nThe system already has a cache, enable this if you want to customize behavior</string>
 
     <string name="title_dnscache_keepacrosslaunches">Keep DNS cache</string>
     <string name="summary_dnscache_keepacrosslaunches">Keep the DNS cache across multiple launches</string>
 
     <string name="title_clear_dnscache">Clear DNS cache</string>
-    <string name="summary_clear_dnscache">Click here to clear the DNS cache, for example when websites start misbehaving because they are cached.</string>
+    <string name="summary_clear_dnscache">Click here to clear the DNS cache, for example when websites start misbehaving because they are cached</string>
 
     <string name="title_dnscache_maxsize">Maximum Cache size</string>
     <string name="summary_dnscache_maxsize">Sets the maximum of entries the cache can hold at any time</string>
@@ -72,31 +72,31 @@
     <string name="summary_dnscache_usedefaulttimes">Keep requests in the cache for as long as the DNS server communicates using the TTL</string>
 
     <string name="title_dnscache_minimum_cache_time">Minimum cache time</string>
-    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached, no matter whether the default caching time for it would be shorter. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds.</string>
+    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached, no matter whether the default caching time for it would be shorter. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds</string>
 
     <string name="title_dnscache_customcachetime">Custom cache time (Seconds)</string>
-    <string name="summary_dnscache_customcachetime">Changes how long all requests are cached, no matter whether the default caching time for it would be longer. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds.</string>
+    <string name="summary_dnscache_customcachetime">Changes how long all requests are cached, no matter whether the default caching time for it would be longer. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds</string>
 
     <string name="title_dnscache_nxdomaincachetime">Cache time for NXDomain (Seconds)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds.</string>
+    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds</string>
 
 
     <string name="preference_category_logging">Logging</string>
 
     <string name="title_enable_logging">Enable logging</string>
-    <string name="summary_enable_logging">Enables logging of debug information (contains statistic data). These logs aren\'t send automatically.</string>
+    <string name="summary_enable_logging">Enables logging of debug information (contains statistic data). These logs aren\'t send automatically</string>
 
     <string name="title_advanced_logging">Advanced logging</string>
-    <string name="summary_advanced_logging">Adds more logging, which could help with more persistent problems.</string>
+    <string name="summary_advanced_logging">Adds more logging, which could help with more persistent problems</string>
 
     <string name="title_send_logs">Send logs</string>
-    <string name="summary_send_logs">Click here to send the logs to the developer.</string>
+    <string name="summary_send_logs">Click here to send the logs to the developer</string>
 
     <string name="title_delete_all_logs">Delete all logs</string>
-    <string name="summary_delete_all_logs">Deletes all logs stored on your device.</string>
+    <string name="summary_delete_all_logs">Deletes all logs stored on your device</string>
 
     <string name="title_crashreporting_type">Automatic crash reporting</string>
-    <string name="summary_crashreporting_type">Configure what data should be transmitted to the developer when the app crashes. Crash data never contains personal data and helps fixing problems faster.</string>
+    <string name="summary_crashreporting_type">Configure what data should be transmitted to the developer when the app crashes. Crash data never contains personal data and helps fixing problems faster</string>
 
 
     <string name="preference_category_ip">IP settings</string>
@@ -108,22 +108,22 @@
     <string name="summary_enable_ipv4">Use IPv4, if the device has an IPv4 address assigned</string>
 
     <string name="title_force_ipv6">Force IPv6</string>
-    <string name="summary_force_ipv6">Force the app to accept IPv6 requests, even when the device doesn\'t use IPv6.</string>
+    <string name="summary_force_ipv6">Force the app to accept IPv6 requests, even when the device doesn\'t use IPv6</string>
 
     <string name="title_force_ipv4">Force IPv4</string>
-    <string name="summary_force_ipv4">Force the app to accept IPv4 requests, even when the device doesn\'t use IPv4.</string>
+    <string name="summary_force_ipv4">Force the app to accept IPv4 requests, even when the device doesn\'t use IPv4</string>
 
     <string name="title_allow_ipv4_traffic">Allow IPv4 traffic</string>
-    <string name="summary_allow_ipv4_traffic">Allow IPv4 traffic to be used, even if IPv4 is disabled.\nIf disabled no IPv4 connections are allowed while the app is running.</string>
+    <string name="summary_allow_ipv4_traffic">Allow IPv4 traffic to be used, even if IPv4 is disabled.\nIf disabled no IPv4 connections are allowed while the app is running</string>
 
     <string name="title_allow_ipv6_traffic">Allow IPv6 traffic</string>
-    <string name="summary_allow_ipv6_traffic">Allow IPv6 traffic to be used, even if IPv4 is disabled.\nIf disabled no IPv6 connections are allowed while the app is running.</string>
+    <string name="summary_allow_ipv6_traffic">Allow IPv6 traffic to be used, even if IPv4 is disabled.\nIf disabled no IPv6 connections are allowed while the app is running</string>
 
 
     <string name="preference_category_network">Network</string>
 
     <string name="title_restart_vpn_on_networkchange">Restart on network change</string>
-    <string name="summary_restart_vpn_on_networkchange">Silently restart the app when the network changes. Enable this when facing problems when switching between networks.\n No effect when the app isn\'t active.</string>
+    <string name="summary_restart_vpn_on_networkchange">Silently restart the app when the network changes. Enable this when facing problems when switching between networks.\n No effect when the app isn\'t active</string>
 
     <string name="title_disallow_other_vpns">Disallow other VPNs</string>
     <string name="summary_disallow_other_vpns">Don\'t allow other VPNs to start if the app isn\'t explicitly stopped</string>
@@ -132,13 +132,13 @@
     <string name="summary_catch_other_dns_servers">Intercept traffic of known DNS servers and transmit it using Nebulo</string>
 
     <string name="title_map_query_refused">Interpret refused queries as disallowed hosts</string>
-    <string name="summary_map_query_refused">Some DNS servers might refuse to answer a query if the host isn\'t allowed or is blocked. This setting blocks the host instead of refusing the query, otherwise the system might get confused.</string>
+    <string name="summary_map_query_refused">Some DNS servers might refuse to answer a query if the host isn\'t allowed or is blocked. This setting blocks the host instead of refusing the query, otherwise the system might get confused</string>
 
     <string name="title_bypass_searchdomains">Searchdomains bypass</string>
-    <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network.</string>
+    <string name="summary_bypass_searchdomains">Send search domains (e.g. MyPC.local or MyPc.fritz.box) to the Dns server of your network instead of the DoH server.\nThis is highly recommended. Those queries don\'t leave your network</string>
 
     <string name="title_pause_on_captiveportal">Pause on captive portal</string>
-    <string name="summary_pause_on_captiveportal">Don\'t use DoH if a captive portal is detected. It will automatically be resumed shortly after logging in.\nDisabling it might prevent you from opening the captive portal site to log in.</string>
+    <string name="summary_pause_on_captiveportal">Don\'t use DoH if a captive portal is detected. It will automatically be resumed shortly after logging in.\nDisabling it might prevent you from opening the captive portal site to log in</string>
 
 
     <string name="preference_category_querylogging">Query logging</string>
@@ -150,7 +150,7 @@
     <string name="summary_export_queries">Export queries as CSV (%1d queries)</string>
 
     <string name="title_delete_queries">Clear queries</string>
-    <string name="summary_delete_queries">Click here to delete all logged queries.</string>
+    <string name="summary_delete_queries">Click here to delete all logged queries</string>
 
     <string-array name="languages">
         <item>System language</item>

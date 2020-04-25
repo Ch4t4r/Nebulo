@@ -129,7 +129,7 @@
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_choose_file">Choose file</string>
     <string name="dialog_newhostsource_use_as_whitelist">Use as whitelist</string>
-    <string name="dialog_newhostsource_error_name_empty">Please provide a name.</string>
+    <string name="dialog_newhostsource_error_name_empty">Please provide a name</string>
 
     <string name="dialog_newdnsrule_title">New DNS rule</string>
     <string name="dialog_newdnsrule_edit">Edit DNS rule</string>
