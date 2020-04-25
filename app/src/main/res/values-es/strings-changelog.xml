@@ -16,7 +16,7 @@
     <string name="changelog_build_29_5">Añadió una configuración para borrar las consultas registradas</string>
     <string name="changelog_build_32_6">Arreglar unos cuantos fallos y congelar la aplicación</string>
     <string name="changelog_build_35_1">Se han arreglado algunos fallos relacionados con la importación de la regla del DNS</string>
-    <string name="changelog_build_35_3">Pequeña mejora del rendimiento para dns-over-https</string>
+    <string name="changelog_build_35_3">Pequeña mejora del rendimiento para DNS-over-HTTPS</string>
     <string name="changelog_build_36_4">La importación de reglas ahora puede reconocer letras no predeterminadas (como diéresis)</string>
     <string name="changelog_build_37_2">Algunas mejoras en el diseño</string>
     <string name="changelog_build_37_4">Las reglas del DNS importadas ahora ocupan menos espacio en el dispositivo</string>
@@ -43,7 +43,7 @@
     <string name="changelog_build_23_1">Los puertos no predeterminados se muestran ahora para los servidores DoT</string>
     <string name="changelog_build_23_3">La configuración de la exportación de la consulta ahora muestra un diálogo que indica si se está cargando</string>
     <string name="changelog_build_23_5">El registro de consultas ahora muestra el protocolo utilizado para enviar la consulta</string>
-    <string name="changelog_build_23_6">Ahora puedes proteger la aplicación con un alfiler en la configuración</string>
+    <string name="changelog_build_23_6">Ahora puedes proteger la aplicación con un PIN en la configuración</string>
     <string name="changelog_build_25_1">Mejor manejo de IPv6/IPv6 - la aplicación ahora funciona de forma fiable en redes que sólo admiten</string>
     <string name="changelog_build_25_3">Ahora se muestra una notificación cuando no hay una mala conexión</string>
     <string name="changelog_build_26_2">Arreglada la notificación de no conexión no desapareciendo correctamente</string>
@@ -67,12 +67,12 @@
     <string name="changelog_build_31_3">Ahora se muestra una notificación si la aplicación se bloquea y se activa el informe automático de fallos</string>
     <string name="changelog_build_31_4">Arregló algunos accidentes</string>
     <string name="changelog_build_32_1">Revisé un poco la interfaz de usuario</string>
-    <string name="changelog_build_32_2">El Dns-over-TLS ahora funciona más confiable en las redes malas</string>
+    <string name="changelog_build_32_2">El DNS-over-TLS ahora funciona más confiable en las redes malas</string>
     <string name="changelog_build_32_5">La aplicación ahora utiliza diferentes direcciones internas</string>
     <string name="changelog_build_33_2">La notificación que se muestra cuando la aplicación se bloquea al desactivar el informe automático de fallos tiene ahora un botón para enviar los archivos de registro</string>
     <string name="changelog_build_33_3">Reemplazó algunos de los iconos</string>
     <string name="changelog_build_33_4">Arregló algunos accidentes</string>
-    <string name="changelog_build_33_6">Ahora puede especificar direcciones IP personalizadas para los hosts. Los hosts pueden ser importados desde las URL y añadidos a mano.</string>
+    <string name="changelog_build_33_6">Ahora puede especificar direcciones IP personalizadas para los hosts. Los hosts pueden ser importados desde las URL y añadidos a mano</string>
     <string name="changelog_build_33_7">Unos pocos ajustes de diseño</string>
     <string name="changelog_build_34_1">Arreglado un fallo relacionado con la base de datos</string>
     <string name="changelog_build_35_2">Abortar la importación de la regla del DNS ahora ya no congela la IU</string>
@@ -84,7 +84,7 @@
     <string name="changelog_build_36_6">Arregló un accidente que ocurrió en algún dispositivo</string>
     <string name="changelog_build_37_1">Arreglar algunas caídas</string>
     <string name="changelog_build_37_3">La importación de la regla del DNS es ahora un poco más rápida</string>
-    <string name="changelog_build_38_1">Esta es una actualización centrada en el rendimiento que debería hacer que las consultas al DNS sean más rápidas, utilicen menos memoria y consuman menos batería.</string>
+    <string name="changelog_build_38_1">Esta es una actualización centrada en el rendimiento que debería hacer que las consultas al DNS sean más rápidas, utilicen menos memoria y consuman menos batería</string>
     <string name="changelog_build_38_2">Arreglado un fallo en algunos dispositivos con respecto a la base de datos interna</string>
     <string name="changelog_build_39_1">Corregido un fallo que afectaba a la mayoría de los servidores DNS</string>
     <string name="changelog_build_40_3">Ahora Google Play puede ser eliminado de la lista de aplicaciones de bypass</string>
