@@ -9,6 +9,9 @@ I host my [own instance of Weblate](https://weblate.frostnerd.com) -- [creating 
 
 See below for a quick tutorial on how to use Weblate.
 
+**Important!**<br>
+I have both a DeepL and a Google Translate API key which I can use to automatically translate the texts to add suggestions to Weblate. Those suggestions won't be used as translations util they are approved. Suggestions fasten the process of translating tremendously as the automatic translation in some cases is already very good or just requires manual edits. Let me know if you want to translate into a new language and I can add the automatic suggestions for those languages to make it faster for you!<br>
+
 # How to view your translations
 Contributed translations are pushed regularly by Weblate. In some cases it takes some times until this happens.
 A new APK file is then automatically created which contains those new translations. You can always download the latest version of [this file here](https://git.frostnerd.com/PublicAndroidApps/smokescreen/-/jobs/artifacts/translations/raw/app/build/outputs/apk/normal/debug/app-normal-debug.apk?job=build_debug).
