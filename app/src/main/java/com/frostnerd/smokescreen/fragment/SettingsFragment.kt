@@ -379,14 +379,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
         clearCache.setOnPreferenceClickListener {
-            showInfoTextDialog(context!!,
+            showInfoTextDialog(requireContext(),
                 getString(R.string.title_clear_dnscache),
                 getString(R.string.dialog_cleardnscache_message),
                 getString(R.string.all_yes) to { dialog, _ ->
                     GlobalScope.launch(Dispatchers.IO) {
                         context?.also {
                             getDatabase().cachedResponseDao().deleteAll()
-                            DnsVpnService.invalidateDNSCache(context!!)
+                            DnsVpnService.invalidateDNSCache(requireContext())
                         }
                     }
                     dialog.dismiss()
@@ -462,7 +462,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun showBatteryOptimizationDialog(enablePreference: () -> Unit) {
         val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
-        if(intent.resolveActivity(context!!.packageManager) == null) {
+        if(intent.resolveActivity(requireContext().packageManager) == null) {
             enablePreference()
         } else {
             AlertDialog.Builder(requireContext(), requireContext().getPreferences().theme.dialogStyle)

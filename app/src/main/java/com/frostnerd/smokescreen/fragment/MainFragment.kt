@@ -96,8 +96,8 @@ class MainFragment : Fragment() {
             } else {
                 if (event.flags and MotionEvent.FLAG_WINDOW_IS_OBSCURED != 0) {
                     if (event.action == MotionEvent.ACTION_UP) {
-                        if (VpnService.prepare(context!!) != null) {
-                            showInfoTextDialog(context!!,
+                        if (VpnService.prepare(requireContext()) != null) {
+                            showInfoTextDialog(requireContext(),
                                 getString(R.string.dialog_overlaydetected_title),
                                 getString(R.string.dialog_overlaydetected_message),
                                 positiveButton = null,
@@ -115,7 +115,7 @@ class MainFragment : Fragment() {
             }
         }
         speedTest.setOnClickListener {
-            startActivity(Intent(context!!, SpeedTestActivity::class.java))
+            startActivity(Intent(requireContext(), SpeedTestActivity::class.java))
         }
         vpnStateReceiver = requireContext().registerLocalReceiver(
             listOf(
@@ -158,7 +158,7 @@ class MainFragment : Fragment() {
                     startActivity(i)
                 } catch (e: ActivityNotFoundException) {
                     Toast.makeText(
-                        context!!,
+                        requireContext(),
                         R.string.error_no_webbrowser_installed,
                         Toast.LENGTH_LONG
                     ).show()
@@ -218,7 +218,7 @@ class MainFragment : Fragment() {
         val privateDnsActive = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             false
         } else {
-            (context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).let {
+            (requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).let {
                 if (it.activeNetwork == null) false
                 else it.getLinkProperties(it.activeNetwork)?.isPrivateDnsActive ?: false
             }

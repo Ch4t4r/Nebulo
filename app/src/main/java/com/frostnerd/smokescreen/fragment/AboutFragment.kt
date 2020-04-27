@@ -45,15 +45,15 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.credits.setOnClickListener {
             showInfoTextDialog(
-                context!!,
+                requireContext(),
                 getString(R.string.dialog_credits_title),
                 getString(R.string.dialog_credits_message)
             )
         }
         view.privacyPolicy.setOnClickListener {
-            showPrivacyPolicyDialog(context!!)
+            showPrivacyPolicyDialog(requireContext())
         }
-        if(isPackageInstalled(context!!, "org.telegram.messenger")) {
+        if(isPackageInstalled(requireContext(), "org.telegram.messenger")) {
             view.group.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://join?invite=I54nRleveRGP8IPmcIdySg"))
                 startActivity(intent)
@@ -62,7 +62,7 @@ class AboutFragment : Fragment() {
             view.group.visibility = View.GONE
         }
         view.contact.setOnClickListener {
-            context!!.showEmailChooser(
+            requireContext().showEmailChooser(
                 getString(R.string.about_contact_developer),
                 getString(R.string.app_name),
                 getString(R.string.support_contact_mail),
@@ -78,21 +78,21 @@ class AboutFragment : Fragment() {
             startActivity(Intent.createChooser(intent, getString(R.string.about_share)))
         }
         view.changelog.setOnClickListener {
-            ChangelogDialog(context!!, 22, showOptOut = false, showInfoText = false).show()
+            ChangelogDialog(requireContext(), 22, showOptOut = false, showInfoText = false).show()
         }
         view.licenses.setOnClickListener {
-            LicensesDialog(context!!).show()
+            LicensesDialog(requireContext()).show()
         }
         view.about.setOnClickListener {
             showInfoTextDialog(
-                context!!,
+                requireContext(),
                 getString(R.string.menu_about),
                 getString(
                     R.string.about_app,
                     BuildConfig.VERSION_NAME + (if (BuildConfig.DEBUG) " DEBUG" else "") + " (Commit ${BuildConfig.COMMIT_HASH})",
                     BuildConfig.VERSION_CODE,
                     AppDatabase.currentVersion,
-                    if (context!!.getPreferences().crashreportingType == Crashreporting.FULL) context!!.getPreferences().crashReportingUUID else "---"
+                    if (requireContext().getPreferences().crashreportingType == Crashreporting.FULL) requireContext().getPreferences().crashReportingUUID else "---"
                 )
             )
         }
@@ -101,7 +101,7 @@ class AboutFragment : Fragment() {
                 languageCode.startsWith(it)
             }) view.translating.visibility = View.GONE
         else view.translating.setOnClickListener {
-            showInfoTextDialog(context!!, getString(R.string.about_help_translating),
+            showInfoTextDialog(requireContext(), getString(R.string.about_help_translating),
                 getString(R.string.dialog_help_translating_message),
                 neutralButton = getString(R.string.all_close) to null)
         }
