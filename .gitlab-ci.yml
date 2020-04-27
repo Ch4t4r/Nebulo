@@ -50,6 +50,7 @@ build_fdroid:
     paths:
       - app/build/outputs/apk/adblocker/fdroid/*.apk
       - app/build/outputs/mapping/adblocker/fdroid/mapping.txt
+    expire_in: 30 days
   only:
     - master
     - release
@@ -68,6 +69,7 @@ build_release:
     paths:
     - app/build/outputs/apk/normal/release/*.apk
     - app/build/outputs/mapping/normal/release/mapping.txt
+    expire_in: 30 days
   only:
     - master
     - release
