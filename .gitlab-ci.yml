@@ -7,6 +7,20 @@ stages:
 before_script:
   - chmod +x gradlew
 
+lint:
+  stage: test
+  script:
+    - ./gradlew lintNormalRelease
+    - ./gradlew lintAdblockerFdroid
+  only:
+    - release
+    - translations
+
+#test:
+#  stage: test
+#  script:
+#    - ./gradlew test
+
 build_debug:
   stage: build
   script:
@@ -18,7 +32,8 @@ build_debug:
     - app/build/outputs/apk/normal/debug/*.apk
   only:
     - translations
-
+  except:
+    - release
 
 build_fdroid:
   stage: build
@@ -36,6 +51,7 @@ build_fdroid:
       - app/build/outputs/mapping/adblocker/fdroid/mapping.txt
   only:
     - master
+    - release
 
 build_release:
   stage: build
@@ -53,6 +69,7 @@ build_release:
     - app/build/outputs/mapping/normal/release/mapping.txt
   only:
     - master
+    - release
 
 test_build_release:
   stage: test
@@ -64,3 +81,4 @@ test_build_release:
     - /^no_build_no_tests.*$/
     - /^no_build_no_deploy.*$/
     - master
+    - release
