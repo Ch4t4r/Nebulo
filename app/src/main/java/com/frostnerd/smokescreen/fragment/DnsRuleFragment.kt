@@ -330,7 +330,7 @@ class DnsRuleFragment : Fragment() {
                                     notifyRulesChanged()
                                 } else {
                                     Snackbar.make(
-                                        activity!!.findViewById(android.R.id.content),
+                                        requireActivity().findViewById(android.R.id.content),
                                         R.string.window_dnsrules_hostalreadyexists,
                                         Snackbar.LENGTH_LONG
                                     ).show()
@@ -363,7 +363,7 @@ class DnsRuleFragment : Fragment() {
                             sourceAdapter.notifyItemChanged(sourceAdapterList.size + 1 + index)
                         } else {
                             Snackbar.make(
-                                activity!!.findViewById(android.R.id.content),
+                                requireActivity().findViewById(android.R.id.content),
                                 R.string.window_dnsrules_hostalreadyexists,
                                 Snackbar.LENGTH_LONG
                             ).show()
