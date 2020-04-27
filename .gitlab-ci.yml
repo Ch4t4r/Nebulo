@@ -30,6 +30,7 @@ build_debug:
   artifacts:
     paths:
     - app/build/outputs/apk/normal/debug/*.apk
+    expire_in: 5 days
   only:
     - translations
   except:
