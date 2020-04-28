@@ -11,7 +11,7 @@
     <string name="dialog_newserver_secondaryserver">Servidor secundario (Opcional)</string>
     <string name="dialog_deleteconfig_title">¿Borrar configuración\?</string>
     <string name="dialog_appchoosal_showsystemapps">Mostrar aplicaciones del sistema</string>
-    <string name="dialog_logexport_email">E-Mail</string>
+    <string name="dialog_logexport_email">Correo electrónico</string>
     <string name="dialog_crashreportingusages_message">Haga clic en uno de los grupos para ver qué datos se transmiten en las colisiones.</string>
     <string name="dialog_join_group_message">¡Hola!
 \n
@@ -25,7 +25,7 @@
 \n
 \nNingún dato real, excepto las solicitudes de DNS, se transmite usando esta aplicación.</string>
     <string name="dialog_serverimportfailed_text">El servidor o los servidores no pudieron ser importados.</string>
-    <string name="dialog_error_text">Parece que la aplicación se ha caído. ¿Quieres enviar los archivos de registro de errores al desarrollador\?</string>
+    <string name="dialog_error_text">Parece que la aplicación ha fallado. ¿Quieres enviar los archivos de registro de errores al desarrollador\?</string>
     <string name="dialog_batteryoptimization_message">En algunos dispositivos, la aplicación no será notificada de que el dispositivo ha terminado de arrancar a menos que las optimizaciones de la batería estén desactivadas para ello.
 \nLa aplicación no está actualmente en la lista blanca de la optimización de la batería, ¿quieres hacer esto\?
 \n
@@ -136,13 +136,13 @@
     <string name="dialog_serverimport_servertype_doh">Tipo: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Tipo: DNS-over-TLS (DoT)</string>
     <string name="dialog_deletelogs_text">¿Estás seguro de que quieres borrar todos los registros de depuración\?</string>
-    <string name="dialog_error_title">Informe de choque</string>
+    <string name="dialog_error_title">Informe de fallo</string>
     <string name="dialog_batteryoptimization_ignore">Ignore</string>
-    <string name="dialog_changelog_title">Changelog</string>
-    <string name="dialog_query_export_title">Exportar consultas del DNS…</string>
-    <string name="dialog_pin_message">Por favor, proporcione su código PIN.</string>
-    <string name="dialog_pin_hint">Código PIN</string>
-    <string name="dialog_enable_logging">¿Quiere habilitar el registro de depuración\? Los registros contienen información estadística, información de depuración y acciones en la aplicación. Los registros generados no se comparten a menos que lo haga usted mismo.</string>
+    <string name="dialog_changelog_title">Registro de cambios</string>
+    <string name="dialog_query_export_title">Exportar consultas…</string>
+    <string name="dialog_pin_message">Por favor, proporcione su PIN.</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_enable_logging">¿Quiere habilitar los registros\? Los registros contienen información estadística, información de depuración y acciones en la aplicación. Los registros generados no se comparten a menos que lo haga usted mismo.</string>
     <string name="dialog_clearqueries_title">Borrar todas las consultas del DNS</string>
     <string name="dialog_clearqueries_message">¿Estás seguro de que quieres borrar las consultas del DNS registradas\? Esto no puede ser revertido.</string>
     <string name="dialog_credits_message" formatted="true">- Icono de la aplicación por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; . 

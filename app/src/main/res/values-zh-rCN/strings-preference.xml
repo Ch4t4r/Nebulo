@@ -1,25 +1,19 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="preference_category_general">常规</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_category_general">常规</string>
     <string name="title_language">语言</string>
-    <string name="summary_language">更改界面语言</string>
-
+    <string name="summary_language">更改应用语言</string>
     <string name="title_theme">主题</string>
     <string name="summary_theme">设置应用主题</string>
-
     <string name="title_start_on_boot">开机自启</string>
-    <string name="summary_start_on_boot">当你的手机启动时自动开启应用</string>
-
+    <string name="summary_start_on_boot">在设备启动时自动启动</string>
     <string name="title_excluded_apps">排除应用</string>
-    <string name="summary_excluded_apps">选择需要排除的应用程序，所选应用程序将不再通过dns-over-https方式访问互联网.</string>
-
-
-
+    <string name="summary_excluded_apps">在这里选择需要排除在外的应用，这些应用可能因无法联网而必须被选择。所选应用将不再使用DNS over HTTPS或DNS over TLS。</string>
     <string name="preference_category_notification">通知</string>
-
     <string name="title_show_notification_on_lockscreen">在锁屏上显示</string>
     <string name="title_simple_notification">简版通知</string>
     <string name="summary_simple_notification">在通知中使用简版的信息</string>
-
     <string name="title_notification_hide_icon">隐藏图标</string>
-    </resources>
+    <string name="summary_start_after_update">在应用更新后自动启动</string>
+    <string name="title_start_after_update">更新后自启</string>
+</resources>
