@@ -45,8 +45,8 @@
     <string name="dialog_error_text">Sembla que l\'aplicació ha fallat. Voleu enviar els fitxers de registre d’errors al desenvolupador\?</string>
     <string name="dialog_deletelogs_text">Esteu segur que voleu suprimir tots els registres\?</string>
     <string name="dialog_logexport_email">Correu electrònic</string>
-    <string name="dialog_batteryoptimization_message">En alguns dispositius, no es notificarà a l\'aplicació que el dispositiu hagi acabat d\'arrencar si no estan desactivades les optimitzacions de la bateria.
-\nActualment, l\'aplicació no està en llista blanca des de l\'optimització de la bateria, voleu fer-ho\?
+    <string name="dialog_batteryoptimization_message">En alguns dispositius, no es notificarà a l\'aplicació que el dispositiu ha acabat d\'arrencar si no estan desactivades les optimitzacions de la bateria.
+\nActualment, l\'aplicació no està en llista blanca d\'optimització de la bateria, voleu fer-ho\?
 \n
 \nHeu de comprovar si funciona amb l’optimització activada abans de desactivar-la.</string>
     <string name="dialog_batteryoptimization_title">Optimització de la bateria</string>
