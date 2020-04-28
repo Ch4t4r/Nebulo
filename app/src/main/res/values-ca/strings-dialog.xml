@@ -58,6 +58,6 @@
     <string name="dialog_changelog_dont_show_again">No ho tornis a mostrar</string>
     <string name="dialog_query_export_title">Exportació consultes …</string>
     <string name="dialog_about_licenses">Llicències</string>
-    <string name="dialog_pin_message">Proporcioneu el PIN.</string>
+    <string name="dialog_pin_message">Si us plau, proporcioneu el vostre PIN.</string>
     <string name="dialog_query_export_message">Espereu mentre s’exporten les consultes</string>
 </resources>
