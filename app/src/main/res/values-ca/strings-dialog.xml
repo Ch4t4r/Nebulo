@@ -55,4 +55,5 @@
     <string name="dialog_batteryoptimization_whitelist">Desactivar</string>
     <string name="dialog_changelog_title">Registre de canvis</string>
     <string name="dialog_changelog_infotext">L\'aplicació s\'ha actualitzat des que la vas obrir per última vegada. A la llista següent podeu veure el registre de canvis. Marca la casella següent i no veuràs aquest missatge en el futur.</string>
+    <string name="dialog_changelog_dont_show_again">No es torni a mostrar</string>
 </resources>
