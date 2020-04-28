@@ -50,4 +50,7 @@
 \n
 \nHeu de comprovar si funciona amb l’optimització activada abans de desactivar-la.</string>
     <string name="dialog_batteryoptimization_title">Optimització de la bateria</string>
+    <string name="dialog_rate_confirmation">Voleu obrir la botiga de reproducció per valorar l’app\?</string>
+    <string name="dialog_batteryoptimization_ignore">Ignoreu</string>
+    <string name="dialog_batteryoptimization_whitelist">Desactivar</string>
 </resources>
