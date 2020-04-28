@@ -39,4 +39,7 @@
     <string name="dialog_serverconfiguration_addserver">Afegir un servidor</string>
     <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverconfiguration_title">Configuració del servidor</string>
+    <string name="dialog_error_title">Informe de fallada</string>
+    <string name="dialog_logexport_general">Tria aplicació</string>
+    <string name="dialog_logexport_text">Com voleu compartir els registres\?</string>
 </resources>
