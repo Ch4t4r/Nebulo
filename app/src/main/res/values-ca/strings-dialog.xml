@@ -42,7 +42,7 @@
     <string name="dialog_error_title">Informe de fallada</string>
     <string name="dialog_logexport_general">Tria aplicació</string>
     <string name="dialog_logexport_text">Com voleu compartir els registres\?</string>
-    <string name="dialog_error_text">Sembla que l\'aplicació s\'ha estavellat. Voleu enviar els fitxers de registre d’errors al desenvolupador\?</string>
+    <string name="dialog_error_text">Sembla que l\'aplicació ha fallat. Voleu enviar els fitxers de registre d’errors al desenvolupador\?</string>
     <string name="dialog_deletelogs_text">Esteu segur que voleu suprimir tots els registres\?</string>
     <string name="dialog_logexport_email">Correu electrònic</string>
 </resources>
