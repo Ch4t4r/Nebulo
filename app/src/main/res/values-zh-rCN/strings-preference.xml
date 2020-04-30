@@ -8,7 +8,7 @@
     <string name="title_start_on_boot">开机自启</string>
     <string name="summary_start_on_boot">在设备启动时自动启动</string>
     <string name="title_excluded_apps">排除应用</string>
-    <string name="summary_excluded_apps">在这里选择需要排除在外的应用，这些应用可能因无法联网而必须被选择。所选应用将不再使用DNS over HTTPS或DNS over TLS。</string>
+    <string name="summary_excluded_apps">在这里选择需要排除在外的应用，这些应用可能因无法联网而必须被选择。所选应用将不再使用DNS over HTTPS或DNS over TLS</string>
     <string name="preference_category_notification">通知</string>
     <string name="title_show_notification_on_lockscreen">在锁屏上显示</string>
     <string name="title_simple_notification">简版通知</string>

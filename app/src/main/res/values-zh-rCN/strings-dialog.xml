@@ -80,12 +80,14 @@
 \n崩溃报告一律使用HTTPS安全地传输。
 \n
 \n点击下方的“查看数据”以查看会传送什么数据，以及阅读隐私政策。</string>
-    <string name="dialog_credits_message" formatted="true">- 应用图标由 &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 绘制。
-\n- 土耳其语翻译由 Kemal Oktay Aktoğan 完成
-\n- 俄语翻译由 bruleto 完成
-\n- 荷兰语翻译由 Bas Koedijk 完成
-\n- 葡萄牙语翻译由 Rafael W. Bohnenberger 完成
-\n- 印度尼西亚语翻译由 Gloeyisk 完成
+    <string name="dialog_credits_message" formatted="true">- 应用图标由 &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 绘制。 
+\n- 土耳其语翻译由 Kemal Oktay Aktoğan 完成 
+\n- 俄语翻译由 bruleto 完成 
+\n- 荷兰语翻译由 Bas Koedijk 完成 
+\n- 葡萄牙语翻译由 Rafael W. Bohnenberger 完成 
+\n- 印度尼西亚语翻译由 Gloeyisk 完成 
+\n- 加泰罗尼亚语翻译由 Daniel Alomar 完成
+\n- 西班牙语翻译由 Daniel Alomar 与 Victor Bayas 完成
 \n- 一些图标来自 Font Awesome 
 \n 
 \n想要在这里看到您的名字吗？您可以随意为此应用&lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;做出贡献&lt;/a&gt;。</string>
