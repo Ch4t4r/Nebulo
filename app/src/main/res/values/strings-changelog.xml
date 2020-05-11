@@ -373,6 +373,23 @@
         <item>@string/changelog_build_58_2</item>
         <item>@string/changelog_build_31_4</item>
     </string-array>
+    
+    <string name="changelog_build_59_1">Added new translations</string>
+    <string name="changelog_build_59_2">Added reusing connections, reducing battery usage</string>
+    <string name="changelog_build_59_3">Nebulo now detects the supported mode when adding a DNS-over-HTTPS server</string>
+    <string name="changelog_build_59_4">Nebulo can now be resumed from the main screen</string>
+    <string name="changelog_build_59_5">Fixed input validation of DNS-over-HTTPS not allowing some valid servers</string>
+    <string name="changelog_build_59_6">The PIN now has to be re-entered after some time</string>
+
+    <string-array name="changelog_build_59">
+        <item>Version 1.2.3 (Build 59)</item>
+        <item>@string/changelog_build_59_1</item>
+        <item>@string/changelog_build_59_2</item>
+        <item>@string/changelog_build_59_3</item>
+        <item>@string/changelog_build_59_4</item>
+        <item>@string/changelog_build_59_5</item>
+        <item>@string/changelog_build_59_6</item>
+    </string-array>
 
     <string name="changelog_build_55_4">The query log now loads the queries in chunks instead of all at once</string>
 </resources>
