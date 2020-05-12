@@ -9,6 +9,10 @@ I host my [own instance of Weblate](https://weblate.frostnerd.com) -- [creating 
 
 See below for a quick tutorial on how to use Weblate.
 
+## Credentials
+If for whatever reason you don't want to create an account you can contact me. I'll then provide you with credentials.
+This can for example be useful if you don't want your Name to be assigned with the commit and instead want to remain anonymous.
+
 # How to view your translations
 Contributed translations are pushed regularly by Weblate. In some cases it takes some times until this happens.
 A new APK file is then automatically created which contains those new translations. You can always download the latest version of [this file here](https://git.frostnerd.com/PublicAndroidApps/smokescreen/-/jobs/artifacts/translations/raw/app/build/outputs/apk/normal/debug/app-normal-debug.apk?job=build_debug).
