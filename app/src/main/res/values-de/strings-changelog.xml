@@ -124,4 +124,10 @@
     <string name="changelog_build_55_4">Das Anfragenprotokoll lädt die Anfragen nun in Blöcken, statt alle auf einmal</string>
     <string name="changelog_build_58_1">Die primäre URL konnte beim hinzufügen eines Servers leergelassen werden</string>
     <string name="changelog_build_58_2">Es wird nun eine Benachrichtigung angezeigt, wenn Nebulo die Berechtigung für den VPN verliert</string>
+    <string name="changelog_build_59_6">Die PIN muss nun nach einiger Zeit neu eingegeben werden</string>
+    <string name="changelog_build_59_5">Fehler in der Eingabevalidierung behoben, wodurch manche DNS-over-HTTPS Server nicht verwendet werden konnten</string>
+    <string name="changelog_build_59_4">Nebulo kann nun vom Hauptbildschirm forgesetzt werden</string>
+    <string name="changelog_build_59_3">Nebulo erkennt nun den unterstützten Modi eines DNS-over-HTTPS Servers</string>
+    <string name="changelog_build_59_2">Aufgebaute Verbindungen werden nun wiederverwendet, dies verringert den Batterieverbrauch</string>
+    <string name="changelog_build_59_1">Neue Übersetzungen hinzugefügt</string>
 </resources>
