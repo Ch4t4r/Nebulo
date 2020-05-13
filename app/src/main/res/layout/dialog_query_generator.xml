@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:paddingLeft="@dimen/dialog_horizontal_margin"
-              android:paddingRight="@dimen/dialog_horizontal_margin"
-              android:paddingTop="@dimen/dialog_vertical_margin"
-              android:paddingBottom="@dimen/dialog_vertical_margin"
-              android:layout_width="match_parent"
-              tools:ignore="HardcodedText"
-              android:layout_height="match_parent">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dialog_horizontal_margin"
+        android:paddingTop="@dimen/dialog_vertical_margin"
+        android:paddingRight="@dimen/dialog_horizontal_margin"
+        android:paddingBottom="@dimen/dialog_vertical_margin"
+        tools:ignore="HardcodedText">
 
     <EditText
-            android:layout_width="match_parent"
-            android:hint="Iterations"
-            android:digits="0123456789"
-            android:importantForAutofill="no"
-            android:inputType="number"
             android:id="@+id/iterations"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:hint="Iterations"
+            android:importantForAutofill="no"
+            android:inputType="number" />
 
     <EditText
+            android:id="@+id/delay"
             android:layout_width="match_parent"
-            android:hint="Base delay time"
+            android:layout_height="wrap_content"
             android:digits="0123456789"
+            android:hint="Base delay time"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:id="@+id/delay"
-            android:text="20000"
-            android:layout_height="wrap_content"/>
+            android:text="20000" />
 
     <CheckBox
-            android:layout_width="wrap_content"
-            android:textColor="?android:attr/textColor"
-            android:text="Open base domains"
             android:id="@+id/baseDomains"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open base domains"
+            android:textColor="?android:attr/textColor" />
 
     <CheckBox
-            android:layout_width="wrap_content"
-            android:textColor="?android:attr/textColor"
-            android:text="Open deep urls"
             android:id="@+id/deepurls"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open deep urls"
+            android:textColor="?android:attr/textColor" />
 
     <CheckBox
-            android:layout_width="wrap_content"
             android:id="@+id/randomTimeout"
-            android:textColor="?android:attr/textColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Add random delay"
-            android:layout_height="wrap_content"/>
+            android:textColor="?android:attr/textColor" />
 
     <CheckBox
-            android:layout_width="wrap_content"
-            android:textColor="?android:attr/textColor"
-            android:text="Use chrome"
             android:id="@+id/useChrome"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use chrome"
+            android:textColor="?android:attr/textColor" />
 
     <CheckBox
-            android:layout_width="wrap_content"
-            android:textColor="?android:attr/textColor"
-            android:text="Restart vpn inbetween sites"
             android:id="@+id/restartVpn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:checked="true"
-            android:layout_height="wrap_content"/>
+            android:text="Restart vpn inbetween sites"
+            android:textColor="?android:attr/textColor" />
 
 </LinearLayout>
