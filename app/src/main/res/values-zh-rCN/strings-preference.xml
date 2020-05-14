@@ -91,4 +91,5 @@
     <string name="title_show_revoked_notification">失去权限通知</string>
     <string name="summary_show_noconnection_notification">在应用无连接或者连接状况差时显示一个通知</string>
     <string name="title_show_noconnection_notification">无连接通知</string>
+    <string name="title_dnscache_enabled">使用DNS缓存</string>
 </resources>
