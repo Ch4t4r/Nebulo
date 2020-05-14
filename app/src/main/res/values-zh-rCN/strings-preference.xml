@@ -16,4 +16,5 @@
     <string name="title_notification_hide_icon">隐藏图标</string>
     <string name="summary_start_after_update">在应用更新后自动启动</string>
     <string name="title_start_after_update">更新后自启</string>
+    <string name="summary_show_notification_on_lockscreen">设置是否在锁屏上显示通知。</string>
 </resources>
