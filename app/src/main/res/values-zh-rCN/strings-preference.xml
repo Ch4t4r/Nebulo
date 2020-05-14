@@ -20,4 +20,6 @@
     <string name="summary_notification_hide_icon">在顶部的通知栏中隐藏应用图标</string>
     <string name="summary_notification_allow_stop">允许从通知栏停止应用</string>
     <string name="title_notification_allow_stop">允许停止</string>
+    <string name="summary_notification_allow_pause">允许应用程序从通知中暂停。</string>
+    <string name="title_notification_allow_pause">允许暂停</string>
 </resources>
