@@ -17,5 +17,7 @@
     <string name="summary_start_after_update">在应用更新后自动启动</string>
     <string name="title_start_after_update">更新后自启</string>
     <string name="summary_show_notification_on_lockscreen">设置是否在锁屏界面上显示通知。</string>
-    <string name="summary_notification_hide_icon">从顶部的导航栏中隐藏图标</string>
+    <string name="summary_notification_hide_icon">在顶部的通知栏中隐藏应用图标</string>
+    <string name="summary_notification_allow_stop">允许从通知栏停止应用</string>
+    <string name="title_notification_allow_stop">允许停止</string>
 </resources>
