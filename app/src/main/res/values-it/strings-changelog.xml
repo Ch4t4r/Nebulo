@@ -124,4 +124,10 @@
     <string name="changelog_build_55_4">Il registro delle query ora carica le query in pezzi invece che in una sola volta</string>
     <string name="changelog_build_58_1">L\'host primario/url potrebbe essere vuoto quando si aggiunge un server</string>
     <string name="changelog_build_58_2">Una notifica viene ora mostrata quando Nebulo perde l\'autorizzazione alla VPN</string>
+    <string name="changelog_build_59_6">Il PIN ora deve essere reinserito dopo un po\' di tempo</string>
+    <string name="changelog_build_59_5">Corretta validazione input di DNS-over-HTTPS che non permetteva alcuni server validi</string>
+    <string name="changelog_build_59_4">Nebulo ora può essere riattivato dalla schermata principale</string>
+    <string name="changelog_build_59_3">Nebulo ora rileva la modalità supportata quando si aggiunge un server DNS-over-HTTPS</string>
+    <string name="changelog_build_59_2">Aggiunto riutilizzo connessioni, ridotto consumo batteria</string>
+    <string name="changelog_build_59_1">Aggiunte nuove traduzioni</string>
 </resources>
