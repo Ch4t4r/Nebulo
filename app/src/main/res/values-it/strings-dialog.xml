@@ -81,9 +81,12 @@
 \n - Traduzione russa di bruleto 
 \n - Traduzione danese di Bas Koedijk 
 \n - Traduzione portoghese di Rafael W. Bohnenberger 
-\n - Traduzione indonesiana di Gloeyisk
-\n - Traduzione italiana di Random
-\n - Alcune icone da Font Awesome
+\n - Traduzione indonesiana di Gloeyisk 
+\n - Traduzione italiana di Random 
+\n - Traduzione catalana di Daniel Alomar 
+\n - Traduzione spagnola di Daniel Alomar e Victor Bayas 
+\n - Alcune icone da Font Awesome 
+\n - Traduzione cinese (semplificato) di Ediel Chedlyramber 
 \n 
 \n Vuoi vedere qui il tuo nome\? Sentiti libero di &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuire&lt;/a&gt;.</string>
     <string name="dialog_join_group_title">Unisciti alla comunità</string>
@@ -163,4 +166,13 @@
     <string name="dialog_raterequest_title">Ti sta piacendo Nebulo\?</string>
     <string name="dialog_raterequest_message">Ehilà! Se ti piace Nebulo, potresti prenderti un momento per valutarlo nello store\?</string>
     <string name="dialog_vpn_permission_denied_message">Il sistema ha impedito a Nebulo di avviare la sua VPN. Apri l\'app per concedere l\'autorizzazione cliccando il pulsante Avvia.</string>
+    <string name="dialog_help_translating_message" translatable="false">Questa app è tradotta in alcune lingue, ma molte mancano o sono incomplete - incluse le tue. 
+\n
+\nEcco perchè chiedo gentilmente il vostro aiuto per tradurre l\'app per raggiungere più persone possibili. Se desideri aiutare a tradurre l\'app nella tua lingua, sentiti libero di contattarmi o &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/TRANSLATING.md&gt;leggi qua come aiutare.&lt;/a&gt;</string>
+    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false">esempio-dot.com[:443]</string>
+    <string name="dialog_newserver_secondaryserver_hint" translatable="false">esempio-doh.com[/dns-query]</string>
+    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false">esempio-dot.com[:443]</string>
+    <string name="dialog_newserver_primaryserver_hint" translatable="false">esempio-doh.com[/dns-query]</string>
+    <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
+    <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
 </resources>
