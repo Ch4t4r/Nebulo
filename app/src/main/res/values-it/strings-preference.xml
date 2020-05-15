@@ -24,7 +24,7 @@
     <string name="title_preference_enable_pin">PIN</string>
     <string name="summary_preference_enable_pin">Chiedi un PIN quando apri o fermi l\'app</string>
     <string name="title_preference_pin_use_fingerprint">Permetti l\'impronta</string>
-    <string name="summary_preference_pin_use_fingerprint">Permetti l\'uso della mia impronta al posto del PIN.</string>
+    <string name="summary_preference_pin_use_fingerprint">Permetti l\'uso della mia impronta al posto del PIN</string>
     <string name="title_preference_change_pin">Cambia PIN</string>
     <string name="summary_preference_change_pin">Cambia il PIN. Sono ammessi solo numeri. 
 \nPIN attuale: %1s</string>
