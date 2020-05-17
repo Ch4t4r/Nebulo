@@ -92,4 +92,17 @@
     <string name="summary_show_noconnection_notification">在应用无连接或者连接状况差时显示一个通知</string>
     <string name="title_show_noconnection_notification">无连接通知</string>
     <string name="title_dnscache_enabled">使用DNS缓存</string>
+    <string name="summary_delete_queries">点击此处以清除所有已记录的请求项</string>
+    <string name="title_delete_queries">清除请求项</string>
+    <string name="summary_export_queries">将请求项以CSV格式导出（%1d 条请求）</string>
+    <string name="title_export_queries">导出请求项</string>
+    <string name="summary_log_queries">记录所有的请求项与回应</string>
+    <string name="title_log_queries">记录请求项</string>
+    <string name="preference_category_querylogging">请求记录</string>
+    <string name="summary_pause_on_captiveportal">如果检测到强制主页，则不使用DoH。网络登录成功后将立马自动恢复使用。
+\n若禁用此设置，则可能将让您无法打开强制主页以登录网络</string>
+    <string name="title_pause_on_captiveportal">停止于强制主页</string>
+    <string name="summary_bypass_searchdomains">发送搜索域请求（例如 MyPC.local 或 MyPC.fritz.box）至网络默认的DNS服务器，而不是DoH服务器。
+\n强烈推荐启用此设置。这些请求将不会离开您的网络</string>
+    <string name="title_bypass_searchdomains">绕过搜索域请求</string>
 </resources>
