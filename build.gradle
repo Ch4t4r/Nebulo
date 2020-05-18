@@ -1,34 +1,3 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
-static def getSystemVariableOrDefault(String variable, String defaultValue) {
-    def value = System.getenv(variable)
-    if(value == null) {
-        return defaultValue
-    }
-    return value
-}
-
-//ext.public_artifactory_user = "publicaccess"
-//def getArtifactoryUser(Boolean useDefault = true){
-//    def user = System.getenv("ARTIFACTORY_USER")
-//    if(user == null && useDefault){
-//        println "Using public artifactory user"
-//        user = public_artifactory_user
-//    }
-//    return user
-//}
-//
-//ext.public_artifactory_password = "AKCp5ekwNjBNhRDnT7YK3BRHxdep6v1FyUSptgrAMhQBfq2eDTauVemGLmgyKucJYeEPsNJGP"
-//def getArtifactoryPassword(Boolean useDefault = true){
-//    def pw = System.getenv("ARTIFACTORY_PASSWORD")
-//    if(pw == null && useDefault){
-//        println "Using public artifactory Password"
-//        pw = public_artifactory_password
-//    }
-//
-//    return pw
-//}
-
 ext.public_nexus_user = "publicaccess"
 def getNexusUser(){
     def user = System.getenv("NEXUS_USER")
@@ -51,8 +20,6 @@ def getNexusPassword(){
     return pw
 }
 
-//ext.artifactory_username = getArtifactoryUser()
-//ext.artifactory_password = getArtifactoryPassword()
 ext.nexus_user = getNexusUser()
 ext.nexus_password = getNexusPassword()
 
@@ -78,20 +45,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        //maven {
-        //    url 'https://artifactory.frostnerd.com/artifactory/libs-release-local'
-        //    credentials {
-        //        username = "$artifactory_username"
-        //        password = "$artifactory_password"
-        //    }
-        //}
-        //maven {
-        //    url 'https://artifactory.frostnerd.com/artifactory/libs-snapshot-local'
-        //    credentials {
-        //        username = "$artifactory_username"
-        //        password = "$artifactory_password"
-        //    }
-        //}
         maven {
             url 'https://nexus.frostnerd.com/repository/libs-release/'
             credentials {
