@@ -6,20 +6,6 @@ apply plugin: 'kotlin-kapt'
 def debugKeyPath = new File(System.properties['user.home'], ".android/debug.keystore")
 
 android {
-    signingConfigs {
-        fromVariablesOrDebug {
-            storeFile new File(getSystemVariableOrDefault("KEYSTORE_FILE", debugKeyPath.path))
-            storePassword getSystemVariableOrDefault("KEYSTORE_PASSWORD", "android")
-            keyAlias = getSystemVariableOrDefault("KEYSTORE_KEY_NAME", "androiddebugkey")
-            keyPassword getSystemVariableOrDefault("KEYSTORE_KEY_PASSWORD", "android")
-        }
-        release {
-            storeFile new File(getSystemVariableOrDefault("KEYSTORE_FILE", ""))
-            storePassword getSystemVariableOrDefault("KEYSTORE_PASSWORD", "")
-            keyAlias = getSystemVariableOrDefault("KEYSTORE_KEY_NAME", "")
-            keyPassword getSystemVariableOrDefault("KEYSTORE_KEY_PASSWORD", "")
-        }
-    }
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.frostnerd.smokescreen"
@@ -45,6 +31,21 @@ android {
         }
         vectorDrawables {
             useSupportLibrary = true
+        }
+    }
+    signingConfigs {
+        fromVariablesOrDebug {
+            storeFile new File(getSystemVariableOrDefault("KEYSTORE_FILE", debugKeyPath.path))
+            storePassword getSystemVariableOrDefault("KEYSTORE_PASSWOR" +
+                    "D", "android")
+            keyAlias = getSystemVariableOrDefault("KEYSTORE_KEY_NAME", "androiddebugkey")
+            keyPassword getSystemVariableOrDefault("KEYSTORE_KEY_PASSWORD", "android")
+        }
+        release {
+            storeFile new File(getSystemVariableOrDefault("KEYSTORE_FILE", ""))
+            storePassword getSystemVariableOrDefault("KEYSTORE_PASSWORD", "")
+            keyAlias = getSystemVariableOrDefault("KEYSTORE_KEY_NAME", "")
+            keyPassword getSystemVariableOrDefault("KEYSTORE_KEY_PASSWORD", "")
         }
     }
     sourceSets {
@@ -108,6 +109,10 @@ android {
     }
 }
 
+static def compileBinariesLocally() {
+    return System.getenv("COMPILE_BINARIES") != null
+}
+
 dependencies {
     def room_version = "2.2.5"
 
@@ -116,11 +121,15 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6'
 
-    implementation 'com.frostnerd.utilskt:preferences:1.5.21' // https://git.frostnerd.com/AndroidUtils/preferenceskt
-    implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.3.35' // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
-    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.5.191' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
-    implementation 'com.frostnerd.utilskt:general:1.0.22' // https://git.frostnerd.com/AndroidUtils/generalkt
-    implementation 'com.frostnerd.utilskt:adapters:1.1.13' // https://git.frostnerd.com/AndroidUtils/Adapters
+
+    if(!compileBinariesLocally()) {
+        println "Using compiled binaries"
+        implementation 'com.frostnerd.utilskt:preferences:1.5.22' // https://git.frostnerd.com/AndroidUtils/preferenceskt
+        implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.3.36' // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
+        implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.5.193' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+        implementation 'com.frostnerd.utilskt:general:1.0.24' // https://git.frostnerd.com/AndroidUtils/generalkt
+        implementation 'com.frostnerd.utilskt:adapters:1.1.15' // https://git.frostnerd.com/AndroidUtils/Adapters
+    }
 
     implementation 'androidx.work:work-runtime:2.3.4'
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -144,6 +153,28 @@ dependencies {
     testImplementation "org.robolectric:robolectric:4.3.1"
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+git {
+    def selfCompile = compileBinariesLocally()
+    if(selfCompile) {
+        implementation "https://git.frostnerd.com/AndroidUtils/preferenceskt.git", {
+            projectPath "/library"
+        }
+        implementation "https://git.frostnerd.com/AndroidUtils/navigationdraweractivity.git", {
+            projectPath "/library"
+        }
+        implementation "https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy.git", {
+            projectPath "/library"
+        }
+        implementation "https://git.frostnerd.com/AndroidUtils/generalkt.git", {
+            projectPath "/library"
+        }
+        implementation "https://git.frostnerd.com/AndroidUtils/Adapters.git", {
+            projectPath "/library"
+        }
+        println "Self-compiling libraries"
+    }
 }
 
 def getGitCommitHash() {

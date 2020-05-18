@@ -37,3 +37,7 @@ captures/
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+
+
+libs/
+libs/**
