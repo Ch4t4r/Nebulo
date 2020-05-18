@@ -355,7 +355,6 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
         val callDomains = view.findViewById<CheckBox>(R.id.baseDomains)
         val callDeepurls = view.findViewById<CheckBox>(R.id.deepurls)
         val useChrome = view.findViewById<CheckBox>(R.id.useChrome)
-        val useRandomDelay = view.findViewById<CheckBox>(R.id.randomTimeout)
         val delay = view.findViewById<EditText>(R.id.delay)
 
         setView(view)
@@ -369,7 +368,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
             }
             val restartVpn = view.restartVpn.isChecked
             val runCount = iterations.text.toString().toIntOrNull() ?: 1
-            job = generatorScope!!.launch {
+            job = generatorScope.launch {
                 context.log("Generating queries for ${urlsToUse.size} urls $runCount times", "[QueryGenerator]")
                 val logFileWriter = BufferedWriter(FileWriter(File(context.filesDir, "querygenlog.txt"), true))
                 val callWithChrome = useChrome.isChecked
