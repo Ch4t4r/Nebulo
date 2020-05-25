@@ -42,3 +42,11 @@ captures/
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+
+
+libs/
+libs/**
+
+.idea/markdown-navigator-enh.xml
+.idea/markdown-navigator.xml
+.idea/navEditor.xml

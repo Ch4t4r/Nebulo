@@ -24,8 +24,17 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_new_server.*
 import kotlinx.android.synthetic.main.dialog_new_server.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.OkHttpClient
+import org.minidns.dnsmessage.DnsMessage
+import org.minidns.dnsmessage.Question
+import org.minidns.record.Record
+import java.lang.Exception
+import java.util.concurrent.TimeUnit
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -190,35 +199,7 @@ class NewServerDialog(
         onServerAdded: (DnsServerInformation<*>) -> Unit
     ) {
         if (dnsOverHttps) {
-            val requestType = mapOf(RequestType.WIREFORMAT_POST to ResponseType.WIREFORMAT)
-            val serverInfo = mutableListOf<HttpsDnsServerConfiguration>()
-            serverInfo.add(
-                HttpsDnsServerConfiguration(
-                    address = createHttpsUpstreamAddress(primary),
-                    requestTypes = requestType,
-                    experimental = false
-                )
-            )
-            if (!secondary.isNullOrBlank()) serverInfo.add(
-                HttpsDnsServerConfiguration(
-                    address = createHttpsUpstreamAddress(
-                        secondary
-                    ), requestTypes = requestType, experimental = false
-                )
-            )
-            onServerAdded.invoke(
-                HttpsDnsServerInformation(
-                    name,
-                    HttpsDnsServerSpecification(
-                        Decision.UNKNOWN,
-                        Decision.UNKNOWN,
-                        Decision.UNKNOWN,
-                        Decision.UNKNOWN
-                    ),
-                    serverInfo,
-                    emptyList()
-                )
-            )
+            detectDohServerTypes(name, primary, secondary, onServerAdded)
         } else {
             val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
             serverInfo.add(
@@ -247,6 +228,73 @@ class NewServerDialog(
                     emptyList()
                 )
             )
+        }
+    }
+
+    private fun detectDohServerTypes(
+        name: String,
+        primary: String,
+        secondary: String?,
+        onServerAdded: (DnsServerInformation<*>) -> Unit
+    ) {
+        val defaultRequestType = RequestType.WIREFORMAT_POST to ResponseType.WIREFORMAT
+        val addresses = mutableListOf<HttpsUpstreamAddress>()
+        addresses.add(createHttpsUpstreamAddress(primary))
+        if (!secondary.isNullOrBlank()) addresses.add(createHttpsUpstreamAddress(secondary))
+
+        val dialog = LoadingDialog(
+            context,
+            R.string.dialog_doh_detect_type_title,
+            R.string.dialog_doh_detect_type_message
+        )
+        val httpClient = OkHttpClient.Builder()
+            .connectTimeout(1250, TimeUnit.MILLISECONDS)
+            .readTimeout(1250, TimeUnit.MILLISECONDS)
+            .build()
+        dialog.show()
+        GlobalScope.launch {
+            val availableTypes = mapOf(
+                defaultRequestType,
+                RequestType.WIREFORMAT to ResponseType.WIREFORMAT,
+                RequestType.PARAMETER_REQUEST to ResponseType.JSON
+            )
+            val serverInfo = mutableListOf<HttpsDnsServerConfiguration>()
+            for (address in addresses) {
+                val detectedTypes = mutableListOf<Pair<RequestType, ResponseType>>()
+                for (availableType in availableTypes) {
+                    try {
+                        val response = ServerConfiguration.createSimpleServerConfig(address, availableType.key, availableType.value).query(client = httpClient,
+                            question = Question("example.com", Record.TYPE.A))
+                        if(response != null && response.responseCode == DnsMessage.RESPONSE_CODE.NO_ERROR) {
+                            detectedTypes.add(availableType.toPair())
+                        }
+                    } catch (ignored:Exception) {
+
+                    }
+                }
+                if(detectedTypes.isEmpty()) detectedTypes.add(defaultRequestType)
+                serverInfo.add(HttpsDnsServerConfiguration(
+                    address = address,
+                    experimental = false,
+                    requestTypes = detectedTypes.toMap()
+                ))
+            }
+            GlobalScope.launch(Dispatchers.Main) {
+                dialog.dismiss()
+                onServerAdded.invoke(
+                    HttpsDnsServerInformation(
+                        name,
+                        HttpsDnsServerSpecification(
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN
+                        ),
+                        serverInfo,
+                        emptyList()
+                    )
+                )
+            }
         }
     }
 
