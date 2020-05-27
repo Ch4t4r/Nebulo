@@ -124,4 +124,10 @@
     <string name="changelog_build_58_1">सर्वर जोड़ते समय प्राथमिक होस्ट / URL खाली हो सकता है</string>
     <string name="changelog_build_58_2">जब Nebulo VPN को अनुमति खो देता है तो एक सूचना दिखाई जाती है</string>
     <string name="changelog_build_55_4">क्वेरी लॉग अब एक ही बार में प्रश्नों को लोड करता है</string>
+    <string name="changelog_build_59_6">पिन को अब कुछ समय बाद फिर से दर्ज करना होगा</string>
+    <string name="changelog_build_59_5">डीएनएस-ओवर-एचटीटीपीएस के फिक्स्ड इनपुट सत्यापन कुछ वैध सर्वरों की अनुमति नहीं देते हैं</string>
+    <string name="changelog_build_59_4">नेबुलो को अब मुख्य स्क्रीन से फिर से शुरू किया जा सकता है</string>
+    <string name="changelog_build_59_3">DNS-over-HTTPS सर्वर को जोड़ने पर Nebulo अब समर्थित मोड का पता लगाता है</string>
+    <string name="changelog_build_59_2">जोड़ा पुन: उपयोग कनेक्शन, बैटरी उपयोग को कम करने</string>
+    <string name="changelog_build_59_1">नए अनुवाद जोड़े गए</string>
 </resources>
