@@ -124,4 +124,6 @@
     <string name="changelog_build_55_4">Het DNS-verzoek logboek laadt de aanvragen nu in blokken in plaats van allemaal tegelijk</string>
     <string name="changelog_build_58_1">De primaire URL kan leeg worden gelaten bij het toevoegen van een server</string>
     <string name="changelog_build_58_2">Er wordt nu een melding weergegeven wanneer Nebulo de toestemming voor de VPN verliest</string>
+    <string name="changelog_build_59_5">Vaste ingangsvalidatie van DNS-over-HTTPS die sommige geldige servers niet toestaat</string>
+    <string name="changelog_build_59_1">Nieuwe vertalingen toegevoegd</string>
 </resources>
