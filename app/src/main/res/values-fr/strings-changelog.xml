@@ -124,4 +124,10 @@
     <string name="changelog_build_55_4">Le journal des requêtes charge maintenant les requêtes par morceaux au lieu de les charger toutes en même temps</string>
     <string name="changelog_build_58_1">L\'hôte/url principal peut être vide lors de l\'ajout d\'un serveur</string>
     <string name="changelog_build_58_2">Une notification est maintenant affichée lorsque Nebulo perd la permission de se connecter au VPN</string>
+    <string name="changelog_build_59_6">Le code PIN doit maintenant être saisi à nouveau après un certain temps</string>
+    <string name="changelog_build_59_5">Correction de la validation d\'entrée du DNS-sur-HTTPS n\'autorisant pas certains serveurs valides</string>
+    <string name="changelog_build_59_4">Nebulo peut maintenant être repris à partir de l\'écran principal</string>
+    <string name="changelog_build_59_3">Nebulo détecte désormais le mode supporté lors de l\'ajout d\'un serveur DNS-sur-HTTPS</string>
+    <string name="changelog_build_59_2">Ajout de la réutilisation des connexions, réduction de l\'utilisation des piles</string>
+    <string name="changelog_build_59_1">Ajout de nouvelles traductions</string>
 </resources>
