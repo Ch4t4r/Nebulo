@@ -126,4 +126,8 @@
     <string name="changelog_build_58_2">Er wordt nu een melding weergegeven wanneer Nebulo de toestemming voor de VPN verliest</string>
     <string name="changelog_build_59_5">Vaste ingangsvalidatie van DNS-over-HTTPS die sommige geldige servers niet toestaat</string>
     <string name="changelog_build_59_1">Nieuwe vertalingen toegevoegd</string>
+    <string name="changelog_build_59_6">De pincode moet nu na enige tijd opnieuw worden ingevoerd</string>
+    <string name="changelog_build_59_4">Nebulo kan nu worden hervat vanaf het hoofdscherm</string>
+    <string name="changelog_build_59_3">Nebulo detecteert nu de ondersteunde modus bij het toevoegen van een DNS-over-HTTPS-server</string>
+    <string name="changelog_build_59_2">Nebulo hergebruikt nu de aansluitingen waardoor het batterijverbruik wordt verlaagd</string>
 </resources>
