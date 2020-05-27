@@ -124,4 +124,10 @@
     <string name="changelog_build_54_3">Se ha corregido el hecho de que no se borra el recuento de exportaciones cuando se eliminan las consultas registradas</string>
     <string name="changelog_build_58_1">El host/url primario podría estar vacío al añadir un servidor</string>
     <string name="changelog_build_58_2">Ahora se muestra una notificación cuando Nebulo pierde el permiso para la VPN</string>
+    <string name="changelog_build_59_6">El PIN ahora tiene que ser reingresado después de algún tiempo</string>
+    <string name="changelog_build_59_5">Validación de entrada fija de DNS-over-HTTPS que no permite algunos servidores válidos</string>
+    <string name="changelog_build_59_4">Nebulo puede ahora ser reanudado desde la pantalla principal</string>
+    <string name="changelog_build_59_3">Nebulo ahora detecta el modo soportado al añadir un servidor DNS-over-HTTPS</string>
+    <string name="changelog_build_59_2">Se añadieron conexiones de reutilización, reduciendo el uso de la batería</string>
+    <string name="changelog_build_59_1">Se han añadido nuevas traducciones</string>
 </resources>
