@@ -175,4 +175,6 @@
     <string name="dialog_newserver_primaryserver_hint" translatable="false">esempio-doh.com[/dns-query]</string>
     <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
     <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
+    <string name="dialog_doh_detect_type_message">Attendere prego.</string>
+    <string name="dialog_doh_detect_type_title">Rilevazione tipo di server</string>
 </resources>
