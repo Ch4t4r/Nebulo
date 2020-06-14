@@ -110,6 +110,11 @@ android {
         disable 'MissingTranslation'
         disable 'InvalidPeriodicWorkRequestInterval'
     }
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
 }
 
 static def compileBinariesLocally() {
