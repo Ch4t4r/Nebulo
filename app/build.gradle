@@ -137,7 +137,7 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.3.4'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "androidx.preference:preference:1.1.1"
-    implementation "com.google.android.material:material:1.2.0-alpha06"
+    implementation "com.google.android.material:material:1.2.0-beta01"
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-alpha01'
 
     implementation "androidx.room:room-runtime:$room_version"
@@ -150,7 +150,7 @@ dependencies {
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
     implementation 'com.squareup.leakcanary:leaksentry:2.0-alpha-3'
 
-    leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+    leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
     testImplementation 'junit:junit:4.13'
     testImplementation "org.robolectric:robolectric:4.3.1"
