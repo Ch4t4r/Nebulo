@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.fragment
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
@@ -26,9 +27,11 @@ import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.service.TestService
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.net.InetAddress
 import java.net.URL
 
 
@@ -76,7 +79,11 @@ class MainFragment : Fragment() {
         startButton.setOnClickListener {
             proxyState = when (proxyState) {
                 ProxyState.RUNNING -> {
-                    DnsVpnService.sendCommand(requireContext(), Command.STOP, PinActivity.passPinExtras())
+                    DnsVpnService.sendCommand(
+                        requireContext(),
+                        Command.STOP,
+                        PinActivity.passPinExtras()
+                    )
                     ProxyState.NOT_RUNNING
                 }
                 ProxyState.PAUSED -> {
@@ -90,10 +97,11 @@ class MainFragment : Fragment() {
             }
             updateVpnIndicators()
         }
-        startButton.setOnTouchListener { _, event ->
+        startButton.setOnTouchListener { innerView , event ->
             if (proxyState == ProxyState.RUNNING || proxyState == ProxyState.STARTING) {
                 false
             } else {
+                var handled = false
                 if (event.flags and MotionEvent.FLAG_WINDOW_IS_OBSCURED != 0) {
                     if (event.action == MotionEvent.ACTION_UP) {
                         if (VpnService.prepare(requireContext()) != null) {
@@ -108,10 +116,14 @@ class MainFragment : Fragment() {
                                     proxyState = ProxyState.STARTING
                                 }
                             )
-                            true
-                        } else false
-                    } else false
-                } else false
+                            handled = true
+                        }
+                    }
+                }
+                if(!handled) {
+                    innerView.performClick()
+                }
+                true
             }
         }
         speedTest.setOnClickListener {
