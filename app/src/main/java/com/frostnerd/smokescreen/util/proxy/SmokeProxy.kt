@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.dnstunnelproxy.QueryListener
+import java.net.InetAddress
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -38,4 +39,26 @@ class SmokeProxy(
         cache,
         queryListener = queryListener,
         localResolver = localResolver
+    )
+
+class NonIPSmokeProxy(
+    dnsHandle: DnsHandle,
+    proxyBypassHandles: List<DnsHandle>,
+    val cache: SimpleDnsCache?,
+    queryListener: QueryListener?,
+    localResolver: LocalResolver?,
+    bindAddress:InetAddress,
+    bindPort:Int
+) :
+    NonIPDnsPacketProxy(
+        proxyBypassHandles.toMutableList().let {
+            it.add(dnsHandle)
+            it
+        }.toList(),
+        null,
+        cache,
+        queryListener = queryListener,
+        localResolver = localResolver,
+        localAddress = bindAddress,
+        localPort = bindPort
     )

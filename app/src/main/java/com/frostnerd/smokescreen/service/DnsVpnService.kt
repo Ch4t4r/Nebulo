@@ -1010,6 +1010,7 @@ class DnsVpnService : VpnService(), Runnable {
     override fun run() {
         log("run() called")
         log("Starting with config: $serverConfig")
+        log("Running in non-vpn mode: $runInNonVpnMode")
 
         log("Creating handle.")
         var defaultHandle: DnsHandle? = null
@@ -1063,44 +1064,52 @@ class DnsVpnService : VpnService(), Runnable {
         dnsCache = createDnsCache()
         localResolver = createLocalResolver()
 
-        dnsProxy = SmokeProxy(
-            defaultHandle!!,
-            handles + createProxyBypassHandlers(),
-            dnsCache,
-            createQueryLogger(),
-            localResolver
-        )
         log("DnsProxy created, creating VPN proxy")
-        vpnProxy = if(runInNonVpnMode) {
-            RetryingVPNTunnelProxy(dnsProxy!!, socketProtector = object:Proxy.SocketProtector {
-                override fun protectDatagramSocket(socket: DatagramSocket) {}
-                override fun protectSocket(socket: Socket) {}
-                override fun protectSocket(socket: Int) {}
-            }, coroutineScope = CoroutineScope(
+         if(runInNonVpnMode) {
+             log("Running in non-VPN mode, starting async")
+             GlobalScope.launch {
+                 dnsProxy = NonIPSmokeProxy(
+                     defaultHandle!!,
+                     handles + createProxyBypassHandlers(),
+                     dnsCache,
+                     createQueryLogger(),
+                     localResolver,
+                     InetAddress.getLocalHost(),
+                     getPreferences().dnsServerModePort
+                 )
+                 vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, socketProtector = object:Proxy.SocketProtector {
+                     override fun protectDatagramSocket(socket: DatagramSocket) {}
+                     override fun protectSocket(socket: Socket) {}
+                     override fun protectSocket(socket: Int) {}
+                 }, coroutineScope = CoroutineScope(
+                     newFixedThreadPoolContext(2, "proxy-pool")
+                 ), logger = VpnLogger(applicationContext))
+                 vpnProxy?.maxRetries = 15
+                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, InetAddress.getLocalHost(), getPreferences().dnsServerModePort)
+                 dnsServerProxy!!.startServer()
+                 log("Non-VPN proxy started.")
+             }
+        } else {
+             dnsProxy = SmokeProxy(
+                 defaultHandle!!,
+                 handles + createProxyBypassHandlers(),
+                 dnsCache,
+                 createQueryLogger(),
+                 localResolver
+             )
+            vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
                 newFixedThreadPoolContext(2, "proxy-pool")
             ), logger = VpnLogger(applicationContext))
-        } else {
-            RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
-                newFixedThreadPoolContext(2, "proxy-pool")
-            ), logger = VpnLogger(applicationContext))
+             vpnProxy?.maxRetries = 15
+             log("VPN proxy creating, trying to run...")
+             fileDescriptor?.let {
+                 vpnProxy?.runProxyWithRetry(it, it)
+             } ?: run {
+                 recreateVpn(false, null)
+                 return
+             }
+             log("VPN proxy started.")
         }
-        vpnProxy?.maxRetries = 15
-
-        if(runInNonVpnMode) {
-            GlobalScope.launch {
-                dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, InetAddress.getLocalHost(), getPreferences().dnsServerModePort)
-                dnsServerProxy!!.startServer()
-            }
-        } else {
-            log("VPN proxy creating, trying to run...")
-            fileDescriptor?.let {
-                vpnProxy?.runProxyWithRetry(it, it)
-            } ?: run {
-                recreateVpn(false, null)
-                return
-            }
-        }
-        log("VPN proxy started.")
         currentTrafficStats = vpnProxy?.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_SERVICE_REVOKED)
