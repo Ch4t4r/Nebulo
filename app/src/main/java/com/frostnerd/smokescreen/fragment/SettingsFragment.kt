@@ -258,7 +258,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val value = newValue as Boolean
             val serviceRunning = requireContext().isServiceRunning(DnsVpnService::class.java)
             if(value && serviceRunning) {
-                DnsVpnService.sendCommand(requireContext(), Command.STOP)
+                DnsVpnService.restartVpn(requireContext(), false)
             } else if(!value) {
                 if(serviceRunning && VpnService.prepare(requireContext()) == null)
                     DnsVpnService.restartVpn(requireContext(), false)
