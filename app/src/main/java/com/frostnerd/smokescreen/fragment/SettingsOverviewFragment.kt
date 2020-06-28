@@ -59,5 +59,8 @@ class SettingsOverviewFragment: Fragment() {
         queryLogging.setOnClickListener {
             SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.QUERIES)
         }
+        nonVpnMode.setOnClickListener {
+            SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.SERVER_MODE)
+        }
     }
 }

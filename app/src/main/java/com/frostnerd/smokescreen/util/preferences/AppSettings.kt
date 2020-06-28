@@ -262,7 +262,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     var vpnInformationShown:Boolean by booleanPref("vpn_information_shown", false)
 
     var runWithoutVpn:Boolean by booleanPref("run_without_vpn", false)
-    var dnsServerModePort:Int by intPref("non_vpn_server_port", 11053)
+    var dnsServerModePort:Int by stringBasedIntPref("non_vpn_server_port", 11053)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

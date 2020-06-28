@@ -68,6 +68,6 @@ class SettingsActivity : BaseActivity() {
     }
 
     enum class Category {
-        GENERAL, NOTIFICATION, PIN, CACHE, LOGGING, IP, NETWORK, QUERIES
+        GENERAL, NOTIFICATION, PIN, CACHE, LOGGING, IP, NETWORK, QUERIES, SERVER_MODE
     }
 }

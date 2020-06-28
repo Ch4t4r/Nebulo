@@ -73,6 +73,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             SettingsActivity.Category.IP -> R.xml.preferences_ip
             SettingsActivity.Category.NETWORK -> R.xml.preferences_network
             SettingsActivity.Category.QUERIES -> R.xml.preferences_queries
+            SettingsActivity.Category.SERVER_MODE -> R.xml.preferences_nonvpnmode
         }
         setPreferencesFromResource(resource, rootKey)
         log("Preferences added.")
@@ -130,6 +131,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             SettingsActivity.Category.IP -> processIPCategory()
             SettingsActivity.Category.NETWORK -> processNetworkCategory()
             SettingsActivity.Category.QUERIES -> processQueryCategory()
+            SettingsActivity.Category.SERVER_MODE -> processNonVpnCategory()
         }
     }
 
@@ -234,6 +236,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
             dialog.show()
             true
         }
+    }
+
+    private fun processNonVpnCategory() {
+        val port = findPreference("non_vpn_server_port") as EditTextPreference
+        val connectInfo = findPreference("nonvpn_connect_info")
+        port.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue.toString().isNotEmpty() && newValue.toString().isInt() && newValue.toString().toInt() > 1024) {
+                port.summary = getString(R.string.summary_local_server_port, newValue.toString())
+                connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, newValue.toString())
+                true
+            } else {
+                false
+            }
+        }
+        port.summary = getString(R.string.summary_local_server_port, requireContext().getPreferences().dnsServerModePort.toString())
+        connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, requireContext().getPreferences().dnsServerModePort.toString())
     }
 
     @SuppressLint("NewApi")
