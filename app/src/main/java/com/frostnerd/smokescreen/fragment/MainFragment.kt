@@ -1,6 +1,5 @@
 package com.frostnerd.smokescreen.fragment
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
@@ -27,11 +26,9 @@ import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
-import com.frostnerd.smokescreen.service.TestService
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.net.InetAddress
 import java.net.URL
 
 
@@ -104,7 +101,7 @@ class MainFragment : Fragment() {
                 var handled = false
                 if (event.flags and MotionEvent.FLAG_WINDOW_IS_OBSCURED != 0) {
                     if (event.action == MotionEvent.ACTION_UP) {
-                        if (VpnService.prepare(requireContext()) != null) {
+                        if (!getPreferences().runWithoutVpn && VpnService.prepare(requireContext()) != null) {
                             showInfoTextDialog(requireContext(),
                                 getString(R.string.dialog_overlaydetected_title),
                                 getString(R.string.dialog_overlaydetected_message),
@@ -193,27 +190,31 @@ class MainFragment : Fragment() {
     }
 
     private fun startVpn() {
-        val prepare = VpnService.prepare(requireContext()).apply {
-            this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-        }
-
-        if (prepare == null) {
+        if(getPreferences().runWithoutVpn) {
             requireContext().startService(Intent(requireContext(), DnsVpnService::class.java))
-            getPreferences().vpnInformationShown = true
         } else {
-            if (getPreferences().vpnInformationShown) {
-                startActivityForResult(prepare, vpnRequestCode)
-            } else {
-                showInfoTextDialog(requireContext(),
-                    getString(R.string.dialog_vpninformation_title),
-                    getString(R.string.dialog_vpninformation_message),
-                    neutralButton = getString(android.R.string.ok) to { dialog, _ ->
-                        startActivityForResult(prepare, vpnRequestCode)
-                        dialog.dismiss()
-                    }, withDialog = {
-                        setCancelable(false)
-                    })
+            val prepare = VpnService.prepare(requireContext()).apply {
+                this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            }
+
+            if (prepare == null) {
+                requireContext().startService(Intent(requireContext(), DnsVpnService::class.java))
                 getPreferences().vpnInformationShown = true
+            } else {
+                if (getPreferences().vpnInformationShown) {
+                    startActivityForResult(prepare, vpnRequestCode)
+                } else {
+                    showInfoTextDialog(requireContext(),
+                        getString(R.string.dialog_vpninformation_title),
+                        getString(R.string.dialog_vpninformation_message),
+                        neutralButton = getString(android.R.string.ok) to { dialog, _ ->
+                            startActivityForResult(prepare, vpnRequestCode)
+                            dialog.dismiss()
+                        }, withDialog = {
+                            setCancelable(false)
+                        })
+                    getPreferences().vpnInformationShown = true
+                }
             }
         }
     }

@@ -260,6 +260,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     var automaticHostRefreshTimeAmount:Int by intPref("automatic_host_refresh_timeamount", 12)
 
     var vpnInformationShown:Boolean by booleanPref("vpn_information_shown", false)
+
+    var runWithoutVpn:Boolean by booleanPref("run_without_vpn", false)
+    var dnsServerModePort:Int by intPref("non_vpn_server_port", 11053)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
