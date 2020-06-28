@@ -1,2 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="notification_main_text_with_secondary">Las consultas se envían a %1$s y %2$s
+\n
+\n%3$d Las aplicaciones están excluidas de DoH/DoT
+\n%4$d entradas en el cache</string>
+    <string name="notification_main_text">Las consultas se envían a %1$s
+\n
+\n%2$d Las aplicaciones están excluidas de DoH/DoT
+\n%3$d entradas en el cache</string>
+    <string name="notification_simple_text">Servidor actual: %1$s</string>
+    <string name="notification_channel_high_priorty_description">Canal para notificaciones de alta prioridad, por ejemplo cuando la aplicación pierde el permiso para la VPN</string>
+    <string name="notification_channel_high_priorty">Alta prioridad</string>
+    <string name="notification_channel_pin_description">Canal utilizado para las notificaciones relacionadas con el PIN, es decir, cuando hay que proporcionarlo</string>
+    <string name="notification_channel_pin">Canal relacionado con el pin</string>
+    <string name="notification_channel_noconnection_description">Canal utilizado para mostrar las notificaciones cuando no parece haber conexión</string>
+    <string name="notification_channel_noconnection">Canal de advertencia de conexión</string>
+    <string name="notification_channel_foreground_service_description">Canal utilizado para las notificaciones que no pueden ser eliminadas por el usuario</string>
+    <string name="notification_channel_foreground_service">Canal de notificación permanente</string>
+    <string name="notification_channel_default_description">Canal por defecto para la publicación de notificaciones</string>
+    <string name="notification_channel_default">Canal por defecto</string>
+    <string name="notification_ruleexportfinished_message">Se han exportado %1d reglas</string>
+    <string name="notification_main_text_with_secondary_whitelist">Las consultas se envían a %1$s y %2$s
+\n
+\nLas aplicaciones de %3$d están usando DoH/DoT
+\n%4$d entradas en el cache</string>
+    <string name="notification_main_text_whitelist">Las consultas se envían a %1$s
+\n
+\n%2$d Las aplicaciones están usando DoH/DoT
+\n%3$d entradas en el cache</string>
+    <string name="notification_service_revoked_message">Haga clic aquí para reiniciar</string>
+    <string name="notification_service_revoked_title">El permiso de VPN revocado por el sistema</string>
+    <string name="notification_service_killed_ignore">Ignore</string>
+    <string name="notification_service_killed_message">Parece que la aplicación fue detenida previamente por el sistema. Haga clic aquí para saber más</string>
+    <string name="notification_service_killed_title">Información sobre la optimización de la batería</string>
+    <string name="notification_pin_message">Su PIN es necesario para realizar esa acción. Haga clic aquí para confirmarlo</string>
+    <string name="notification_pin_title">Se requiere un PIN</string>
+    <string name="notification_ruleexportfinished_title">Exportación de la regla del DNS terminada</string>
+    <string name="notification_ruleexport_secondarymessage">Preparando la exportación…</string>
+    <string name="notification_ruleexport_message">Normas de exportación (%1d/%2d)</string>
+    <string name="notification_ruleexport_title">Las DNS rigen la exportación</string>
+    <string name="notification_ruleimportfinished_message">Se han importado las reglas %1d (%2$d duplicados omitidos)</string>
+    <string name="notification_ruleimportfinished_title">La importación de la regla del DNS ha terminado</string>
+    <string name="notification_ruleimport_tertiarymessage">Terminando la importación…</string>
+    <string name="notification_ruleimport_secondarymessage">Preparando la importación…</string>
+    <string name="notification_ruleimport_message">Importar reglas del DNS de %1s (%2s)</string>
+    <string name="notification_ruleimport_title">La importación de la regla del DNS</string>
+    <string name="notification_appcrash_message">Nebulo se ha estrellado. Haga clic aquí para ir al menú principal y para reiniciar la aplicación, si es necesario</string>
+    <string name="notification_appcrash_title">Nebulo se ha estrellado</string>
+    <string name="notification_vpnrestart_text">El servicio Vpn se reiniciará pronto</string>
+    <string name="notification_vpnrestart_title">Reiniciando Vpn</string>
+    <string name="notification_noconnection_text">La aplicación actualmente no está reenviando tus consultas DNS porque no tienes o tienes una mala conexión</string>
+    <string name="notification_noconnection_title">No hay conexión</string>
+    <string name="notification_main_subtext">%1$d consultas hasta ahora</string>
+    <string name="notification_main_title_https">Nebulo (DoH)</string>
+    <string name="notification_main_title_tls">Nebulo (DoT)</string>
+</resources>

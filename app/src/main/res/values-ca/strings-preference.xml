@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_dnscache_enabled">Feu servir la memòria cau DNS</string>
+    <string name="preference_category_general">General</string>
+    <string name="preference_category_cache">Control de memòria cau</string>
+    <string name="summary_preference_change_pin">Canvieu el pin. Només s’admeten valors numèrics.
+\nPin actual: %1s</string>
+    <string name="title_preference_change_pin">Canviar PIN</string>
+    <string name="summary_preference_pin_use_fingerprint">Permet que s\'utilitzi la seva empremta en lloc del PIN.</string>
+    <string name="title_preference_pin_use_fingerprint">Permet empremta</string>
+    <string name="summary_preference_enable_pin">Demana un PIN quan obriu o atureu l\'aplicació</string>
+    <string name="title_preference_enable_pin">PIN</string>
+    <string name="preference_category_pin">Protecció amb PIN</string>
+    <string name="summary_show_revoked_notification">Mostra una notificació quan Nebulo perdi permís a la VPN</string>
+    <string name="title_show_revoked_notification">Notificació de pèrdua de permís</string>
+    <string name="summary_show_noconnection_notification">Mostra una notificació quan l\'aplicació no tingui connexió o sigui dolenta</string>
+    <string name="title_show_noconnection_notification">Notificació de cap connexió</string>
+    <string name="summary_notification_allow_pause">Permet fer una pausa de l’aplicació des de la notificació</string>
+    <string name="title_notification_allow_pause">Permet fer una pausa</string>
+    <string name="summary_notification_allow_stop">Permet que l’aplicació s’aturi des de la notificació</string>
+    <string name="title_notification_allow_stop">Permet aturar</string>
+    <string name="summary_notification_hide_icon">Amagueu la icona de la barra de navegació de la part superior</string>
+    <string name="title_notification_hide_icon">Amagar icona</string>
+    <string name="summary_simple_notification">Utilitzeu un text senzill a la notificació</string>
+    <string name="title_simple_notification">Notificació simple</string>
+    <string name="summary_show_notification_on_lockscreen">Defineix si voleu mostrar la notificació a la pantalla de bloqueig</string>
+    <string name="title_show_notification_on_lockscreen">Mostra a la pantalla de bloqueig</string>
+    <string name="preference_category_notification">Notificació</string>
+    <string name="summary_excluded_apps">Exclou les aplicacions de l\'aplicació aquí, per exemple si ja no es poden connectar a Internet: les aplicacions seleccionades ja no utilitzaran DNS-over-HTTPS</string>
+    <string name="title_excluded_apps">Aplicacions excloses</string>
+    <string name="summary_start_after_update">Iniciar l\'aplicació després que s\'hagi actualitzat</string>
+    <string name="title_start_after_update">Iniciar després d\'una actualització</string>
+    <string name="summary_start_on_boot">Iniciar l\'aplicació quan el telèfon estigui encès</string>
+    <string name="title_start_on_boot">Iniciar a l\'arrancada</string>
+    <string name="summary_theme">Configura el tema d\'aquesta aplicació</string>
+    <string name="title_theme">Tema</string>
+    <string name="summary_language">Canviar l\'idioma de l\'aplicació</string>
+    <string name="title_language">Idioma</string>
+    <string name="title_map_query_refused">Interpreta les consultes rebutjades com a amfitrions no autoritzats</string>
+    <string name="summary_catch_other_dns_servers">Intercepteu el trànsit de servidors DNS coneguts i transmetre-ho fent servir Nebulo</string>
+    <string name="title_catch_other_dns_servers">Intercepta altre trànsit DNS</string>
+    <string name="summary_disallow_other_vpns">No permetis que altres VPNs s’iniciïn si l’aplicació no s’atura explícitament</string>
+    <string name="title_disallow_other_vpns">No permet altres VPNs</string>
+    <string name="summary_restart_vpn_on_networkchange">Reinicieu silenciosament l’aplicació quan la xarxa canviï. Habiliteu-ho quan tingueu problemes quan canvieu entre xarxes. 
+\n No tindrà efecte quan l\'aplicació no estigui activa</string>
+    <string name="title_restart_vpn_on_networkchange">Reinicia al canvi de xarxa</string>
+    <string name="preference_category_network">Xarxa</string>
+    <string name="summary_allow_ipv6_traffic">Permet que s’utilitzi el trànsit IPv6, fins i tot si el IPv4 està desactivat. 
+\nSi està desactivat, no s’admeten connexions IPv6 mentre l’aplicació està en funcionament</string>
+    <string name="title_allow_ipv6_traffic">Permet el tràfic IPv6</string>
+    <string name="summary_allow_ipv4_traffic">Permet que s’utilitzi el trànsit IPv4, fins i tot si el IPv4 està desactivat. 
+\nSi està desactivat, no s’admeten connexions IPv4 mentre l’aplicació està en funcionament</string>
+    <string name="title_allow_ipv4_traffic">Permet el tràfic IPv4</string>
+    <string name="summary_force_ipv4">Obliga l\'aplicació a acceptar peticions IPv4, fins i tot quan el dispositiu no utilitzi IPv4</string>
+    <string name="title_force_ipv4">Força IPv4</string>
+    <string name="summary_force_ipv6">Obliga l\'aplicació a acceptar peticions IPv6, fins i tot quan el dispositiu no utilitzi IPv6</string>
+    <string name="title_force_ipv6">Força IPv6</string>
+    <string name="summary_enable_ipv4">Utilitzeu IPv4, si el dispositiu té assignada una adreça IPv4</string>
+    <string name="title_enable_ipv4">Habilita IPv4</string>
+    <string name="summary_enable_ipv6">Utilitzeu IPv6, si el dispositiu té assignada una adreça IPv6</string>
+    <string name="title_enable_ipv6">Habilitar IPv6</string>
+    <string name="preference_category_ip">Ajustos de IP</string>
+    <string name="summary_crashreporting_type">Configureu quines dades s’han de transmetre al desenvolupador quan l’aplicació falla. Les dades de la fallada no contenen dades personals i ajuden a solucionar els problemes de manera més ràpida</string>
+    <string name="title_crashreporting_type">Informe automàtic de sinistres</string>
+    <string name="summary_delete_all_logs">Esborra tots els registres emmagatzemats al seu dispositiu</string>
+    <string name="title_delete_all_logs">Esborra tots els registres</string>
+    <string name="summary_send_logs">Feu clic aquí per enviar els registres al desenvolupador</string>
+    <string name="title_send_logs">Envia els registres</string>
+    <string name="summary_advanced_logging">Afegeix més registre, que podria ajudar amb problemes més persistents</string>
+    <string name="title_advanced_logging">Registre avançat</string>
+    <string name="summary_enable_logging">Habilita el registre d\'informació de depuració (conté dades estadístiques). Aquests registres no s’envien automàticament</string>
+    <string name="title_enable_logging">Habilitar registre</string>
+    <string name="preference_category_logging">Registre</string>
+    <string name="summary_dnscache_nxdomaincachetime">Canvia la quantitat de temps que les sol·licituds NXDOMAIN estan a la memòria cau. Això millora el rendiment per a dominis que no existeixen (per exemple, si es bloquegen) 
+\nActual: %1d Segons</string>
+    <string name="title_dnscache_nxdomaincachetime">Temps de la memòria cau per NXDomain (Segons)</string>
+    <string name="summary_dnscache_customcachetime">Canvia el temps que es mantenen totes les sol·licituds en la memòria cau, sense importar si el temps de memòria cau predeterminat serà més llarg. Llargs temps de memòria cau poden fer que les dades de la memòria cau no estiguessin sincronitzades amb les dades reals. 
+\nActual: %1d Segons</string>
+    <string name="title_dnscache_customcachetime">Temps personalitzat de la memòria cau (Segons)</string>
+    <string name="title_dnscache_minimum_cache_time">Temps mínim de memòria cau</string>
+    <string name="summary_dnscache_usedefaulttimes">Manteniu les sol·licituds a la memòria cau sempre que el servidor DNS es comuniqui mitjançant el TTL</string>
+    <string name="title_dnscache_usedefaulttimes">Temps predeterminat de la memòria cau</string>
+    <string name="summary_dnscache_maxsize">Estableix el màxim d\'entrades que pot conservar la memòria cau en qualsevol moment</string>
+    <string name="title_dnscache_maxsize">Mida màxima de la memòria Cau</string>
+    <string name="summary_clear_dnscache">Feu clic aquí per esborrar la memòria cau DNS, per exemple quan els llocs web comencen a comportar-se malament perquè estan en memòria cau</string>
+    <string name="title_clear_dnscache">Netejar la memòria cau DNS</string>
+    <string name="summary_dnscache_keepacrosslaunches">Manteniu la memòria cau DNS en diversos llançaments</string>
+    <string name="title_dnscache_keepacrosslaunches">Mantenir memòria cau DNS</string>
+    <string name="summary_dnscache_enabled">Activa la memòria cau DNS de les aplicacions. La memòria cau memoritza peticions antigues per respondre més ràpidament a futures preguntes. 
+\n 
+\nEl sistema ja té una memòria cau, activeu-la si voleu personalitzar el comportament</string>
+    <string name="summary_dnscache_minimum_cache_time">S\'hauria d\'emmagatzemar en memòria la quantitat mínima d\'entrades, sense importar si el temps en la memòria cau predeterminat serà menor. Temps llargs poden fer que les dades de la memòria cau no estiguessin sincronitzades amb les dades reals.
+\nActual: %1d segons</string>
+    <string name="crashreporting_type_off">Desactivat (no envia informes de fallades)</string>
+    <string name="crashreporting_type_minimal">Mínim (només informe d\'Android i versió de l\'aplicació)</string>
+    <string name="crashreporting_type_full">Complet (informació estadística i dades de depuració)</string>
+    <string name="summary_delete_queries">Feu clic aquí per suprimir totes les consultes registrades</string>
+    <string name="title_delete_queries">Esborra les consultes</string>
+    <string name="summary_export_queries">Exporta les consultes com a CSV (%1d consultes)</string>
+    <string name="title_export_queries">Exporta les consultes</string>
+    <string name="summary_log_queries">Registreu totes les consultes i les seves respostes</string>
+    <string name="title_log_queries">Registre de consulta</string>
+    <string name="preference_category_querylogging">Registre de consulta</string>
+    <string name="summary_pause_on_captiveportal">No utilitza DoH si es detecta un portal captiu. Es reprendrà automàticament poc després d’iniciar la sessió.
+\nSi es desactiva, es podria evitar que obri el lloc del portal captiu per iniciar la sessió</string>
+    <string name="title_pause_on_captiveportal">Pausa al portal captiu</string>
+    <string name="summary_bypass_searchdomains">Envieu dominis de cerca (per exemple, MyPC.local o MyPc.fritz.box) al servidor Dns de la vostra xarxa en lloc del servidor DoH.
+\nAixò és molt recomanable. Aquestes consultes no surten de la vostra xarxa</string>
+    <string name="title_bypass_searchdomains">Bypass de searchdomains</string>
+    <string name="summary_map_query_refused">Alguns servidors DNS podrien rebutjar respondre una consulta si l\'amfitrió no està permès o està bloquejat. Aquest paràmetre bloqueja l\'amfitrió en lloc de rebutjar la consulta, en cas contrari el sistema podria confondre\'s</string>
+</resources>

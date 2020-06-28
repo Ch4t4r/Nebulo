@@ -1,13 +1,11 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="notification_channel_default">Standaard kanaal</string>
-    <string name="notification_channel_default_description">Standaard kanaal voor het plaatsen van meldingen.</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_channel_default">Standaard kanaal</string>
+    <string name="notification_channel_default_description">Standaard kanaal voor het plaatsen van meldingen</string>
     <string name="notification_channel_foreground_service">Permanent notificatiekanaal</string>
     <string name="notification_channel_foreground_service_description">Kanaal dat wordt gebruikt voor meldingen die niet door de gebruiker kunnen worden verwijderd</string>
-
     <string name="notification_channel_noconnection">Verbindings waarschuwingskanaal</string>
     <string name="notification_channel_noconnection_description">Kanaal dat wordt gebruikt voor het weergeven van meldingen wanneer er geen verbinding beschikbaar lijkt te zijn</string>
-
     <string name="notification_main_text">Aanvragen worden verzonden naar %1$s %2$d Apps zijn uitgesloten van DoH / DoT %3$d vermeldingen in de cache</string>
     <string name="notification_main_text_with_secondary">Aanvragen worden verzonden naar %1$s en %2$s %3$d Apps zijn uitgesloten van DoH / DoT %4$d vermeldingen in de cache</string>
     <string name="notification_main_text_whitelist">Aanvragen worden verzonden naar %1$s %2$d Apps gebruiken DoH / DoT %3$d vermeldingen in de cache</string>
@@ -15,41 +13,33 @@
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1$d aanvragen tot nu toe</string>
-
     <string name="notification_noconnection_title">Geen verbinding</string>
-    <string name="notification_noconnection_text">De app stuurt momenteel uw DNS-aanvragen niet door omdat u geen of een slechte verbinding heeft.</string>
-
+    <string name="notification_noconnection_text">De app stuurt momenteel uw DNS-aanvragen niet door omdat u geen of een slechte verbinding heeft</string>
     <string name="notification_vpnrestart_title">Vpn herstarten</string>
-    <string name="notification_vpnrestart_text">De VPN-service wordt spoedig opnieuw opgestart.</string>
-
+    <string name="notification_vpnrestart_text">De VPN-service wordt spoedig opnieuw opgestart</string>
     <string name="notification_appcrash_title">Nebulo is gecrasht</string>
-    <string name="notification_appcrash_message">Nebulo is gecrasht. Klik hier om naar het hoofdmenu te gaan en de app indien nodig opnieuw te starten.</string>
-<string name="notification_ruleimport_title">DNS-regels importeren</string>
+    <string name="notification_appcrash_message">Nebulo is gecrasht. Klik hier om naar het hoofdmenu te gaan en de app indien nodig opnieuw te starten</string>
+    <string name="notification_ruleimport_title">DNS-regels importeren</string>
     <string name="notification_ruleimport_message">Importeren van DNS-regels uit %1s (%2s)</string>
     <string name="notification_ruleimport_secondarymessage">Importeren voorbereiden …</string>
-
     <string name="notification_ruleimportfinished_title">DNS-regels importeren voltooid</string>
     <string name="notification_ruleimportfinished_message">%1d regels zijn geïmporteerd (%2$d duplicaten weggelaten)</string>
-<string name="notification_ruleimport_tertiarymessage">Importeren voltooien…</string>
-
-    <string name="notification_ruleexport_title">Dns-regels exporteren</string>
+    <string name="notification_ruleimport_tertiarymessage">Importeren voltooien…</string>
+    <string name="notification_ruleexport_title">DNS-regels exporteren</string>
     <string name="notification_ruleexport_message">Exporteer regels (%1d/%2d)</string>
     <string name="notification_ruleexport_secondarymessage">Exporteren voorbereiden…</string>
-
     <string name="notification_ruleexportfinished_title">DNS-regels exporteren is voltooid</string>
-    <string name="notification_ruleexportfinished_message">%1d regels zijn geëxporteerd.</string>
-<string name="notification_channel_pin">PIN-code gerelateerd kanaal</string>
+    <string name="notification_ruleexportfinished_message">%1d regels zijn geëxporteerd</string>
+    <string name="notification_channel_pin">PIN-code gerelateerd kanaal</string>
     <string name="notification_channel_pin_description">Kanaal dat wordt gebruikt voor meldingen met betrekking tot de pincode, d.w.z. wanneer deze moet worden verstrekt</string>
-
     <string name="notification_pin_title">PIN-code vereist</string>
-    <string name="notification_pin_message">Uw pincode is nodig om die actie uit te voeren. Klik hier om te bevestigen.</string>
-<string name="notification_service_killed_title">Informatie over batterij optimalisatie</string>
-    <string name="notification_service_killed_message">Het lijkt erop dat de app onlangs is gestopt door het systeem. Klik hier voor meer informatie.</string>
+    <string name="notification_pin_message">Uw pincode is nodig om die actie uit te voeren. Klik hier om te bevestigen</string>
+    <string name="notification_service_killed_title">Informatie over batterij optimalisatie</string>
+    <string name="notification_service_killed_message">Het lijkt erop dat de app onlangs is gestopt door het systeem. Klik hier voor meer informatie</string>
     <string name="notification_service_killed_ignore">Negeren</string>
-<string name="notification_simple_text">Huidige server: %1$s</string>
+    <string name="notification_simple_text">Huidige server: %1$s</string>
     <string name="notification_channel_high_priorty">Hoge prioriteit</string>
     <string name="notification_channel_high_priorty_description">Kanaal voor meldingen met hoge prioriteit, bijvoorbeeld wanneer de app de machtiging voor de VPN verliest</string>
-
     <string name="notification_service_revoked_title">VPN-machtiging ingetrokken door systeem</string>
     <string name="notification_service_revoked_message">Klik hier om opnieuw te starten</string>
 </resources>

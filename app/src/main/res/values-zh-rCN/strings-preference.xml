@@ -1,25 +1,111 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="preference_category_general">常规</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_category_general">常规</string>
     <string name="title_language">语言</string>
-    <string name="summary_language">更改界面语言</string>
-
+    <string name="summary_language">更改应用语言</string>
     <string name="title_theme">主题</string>
     <string name="summary_theme">设置应用主题</string>
-
     <string name="title_start_on_boot">开机自启</string>
-    <string name="summary_start_on_boot">当你的手机启动时自动开启应用</string>
-
+    <string name="summary_start_on_boot">在设备启动时自动启动</string>
     <string name="title_excluded_apps">排除应用</string>
-    <string name="summary_excluded_apps">选择需要排除的应用程序，所选应用程序将不再通过dns-over-https方式访问互联网.</string>
-
-
-
+    <string name="summary_excluded_apps">在这里选择需要排除在外的应用，这些应用可能因无法联网而必须被选择。所选应用将不再使用DNS over HTTPS或DNS over TLS</string>
     <string name="preference_category_notification">通知</string>
-
-    <string name="title_show_notification_on_lockscreen">在锁屏上显示</string>
+    <string name="title_show_notification_on_lockscreen">于锁屏界面显示</string>
     <string name="title_simple_notification">简版通知</string>
     <string name="summary_simple_notification">在通知中使用简版的信息</string>
-
     <string name="title_notification_hide_icon">隐藏图标</string>
-    </resources>
+    <string name="summary_start_after_update">在应用更新后自动启动</string>
+    <string name="title_start_after_update">更新后自启</string>
+    <string name="summary_show_notification_on_lockscreen">设置是否在锁屏界面上显示通知</string>
+    <string name="summary_notification_hide_icon">在顶部的通知栏中隐藏应用图标</string>
+    <string name="summary_notification_allow_stop">允许从通知栏停止应用</string>
+    <string name="title_notification_allow_stop">允许停止</string>
+    <string name="summary_notification_allow_pause">允许应用从通知栏暂停</string>
+    <string name="title_notification_allow_pause">允许暂停</string>
+    <string name="summary_map_query_refused">如果禁止或拦截了域名，某些DNS服务器可能拒绝对请求做出应答。此设置将拦截域名，而不是拒绝请求，否则系统可能会感到困惑</string>
+    <string name="title_map_query_refused">将被拒绝的请求解释为被禁止的域名</string>
+    <string name="summary_restart_vpn_on_networkchange">更换网络时以静默方式重启应用。更换网络遇到问题时请启用此功能。
+\n应用未启用时无效果</string>
+    <string name="summary_catch_other_dns_servers">拦截已知DNS服务器的流量，并使用Nebulo传送请求</string>
+    <string name="title_catch_other_dns_servers">拦截其他DNS流量</string>
+    <string name="summary_disallow_other_vpns">如果应用未被明确要求停止，则不允许其他VPN启动</string>
+    <string name="title_disallow_other_vpns">禁止其他VPN</string>
+    <string name="title_restart_vpn_on_networkchange">更换网络后重启</string>
+    <string name="preference_category_network">网络</string>
+    <string name="summary_allow_ipv6_traffic">允许IPv6流量，即使IPv7被禁用。
+\n如果禁用此项，当应用运行时将没有IPv7连接会被放行</string>
+    <string name="title_allow_ipv6_traffic">放行IPv6流量</string>
+    <string name="title_allow_ipv4_traffic">放行IPv4流量</string>
+    <string name="summary_allow_ipv4_traffic">允许IPv4流量，即使IPv4被禁用。
+\n如果禁用此项，当应用运行时将没有IPv4连接会被放行</string>
+    <string name="summary_force_ipv4">强制让应用接受IPv4请求，即使设备不使用IPv4</string>
+    <string name="title_force_ipv4">强制使用IPv4</string>
+    <string name="summary_force_ipv6">强制让应用接受IPv6请求，即使设备不使用IPv6</string>
+    <string name="title_force_ipv6">强制使用IPv6</string>
+    <string name="summary_enable_ipv4">如果设备有分配IPv4地址，则使用IPv4</string>
+    <string name="title_enable_ipv4">启用IPv4</string>
+    <string name="summary_enable_ipv6">如果设备有分配IPv6地址，则使用IPv6</string>
+    <string name="title_enable_ipv6">启用IPv6</string>
+    <string name="preference_category_ip">IP设置</string>
+    <string name="summary_crashreporting_type">设置当应用崩溃时，要向开发者发送什么数据。崩溃数据不包含个人信息，同时有助于更快解决问题</string>
+    <string name="title_crashreporting_type">自动崩溃报告</string>
+    <string name="summary_delete_all_logs">删除此设备上存储的所有日志</string>
+    <string name="title_delete_all_logs">删除所有日志</string>
+    <string name="summary_send_logs">点击此处以向开发者发送日志</string>
+    <string name="title_send_logs">发送日志</string>
+    <string name="summary_advanced_logging">增加更多日志项，可能可以帮助解决更加顽固的问题</string>
+    <string name="title_advanced_logging">高级日志记录</string>
+    <string name="summary_enable_logging">启用调试信息的日志记录。这些日志不会被自动发送</string>
+    <string name="title_enable_logging">启用日志记录</string>
+    <string name="preference_category_logging">日志记录</string>
+    <string name="summary_dnscache_nxdomaincachetime">更改NXDOMAIN请求项的缓存时长。可以提升解析不存在域名（例如是否被拦截）的性能
+\n当前： %1d 秒</string>
+    <string name="title_dnscache_nxdomaincachetime">NXDomain缓存时长（秒）</string>
+    <string name="summary_dnscache_customcachetime">请求项应当被保留的时长，无论其默认缓存时长是否比定义值更长。过长的缓存时长可能导致被缓存的数据与实际数据不同步。
+\n当前： %1d 秒</string>
+    <string name="title_dnscache_customcachetime">自定义缓存时长（秒）</string>
+    <string name="summary_dnscache_minimum_cache_time">请求项应当被保留的最短时长，无论其默认缓存时长是否比定义值更短。过长的缓存时长可能导致被缓存的数据与实际数据不同步。
+\n当前： %1d 秒</string>
+    <string name="title_dnscache_minimum_cache_time">最低缓存时长</string>
+    <string name="summary_dnscache_usedefaulttimes">只要DNS服务器在使用TTL交流，请求项就会保留在缓存中</string>
+    <string name="title_dnscache_usedefaulttimes">默认缓存时长</string>
+    <string name="summary_dnscache_maxsize">设置缓存最多能保留多少请求项</string>
+    <string name="title_dnscache_maxsize">缓存最大大小</string>
+    <string name="summary_clear_dnscache">点击此处以清除缓存。可解决网站因被缓存而出错的问题</string>
+    <string name="title_clear_dnscache">清除DNS缓存</string>
+    <string name="summary_dnscache_keepacrosslaunches">即使应用关闭，也保留DNS缓存</string>
+    <string name="title_dnscache_keepacrosslaunches">保留DNS缓存</string>
+    <string name="summary_dnscache_enabled">使用应用的DNS缓存。缓存会记住之前的DNS请求，以加速回应DNS解析。
+\n
+\n系统已有缓存，如果您想自定义缓存行为，则启用此项</string>
+    <string name="preference_category_cache">缓存控制</string>
+    <string name="summary_preference_change_pin">更改PIN。仅允许数字。
+\n当前使用PIN： %1s</string>
+    <string name="title_preference_change_pin">更改PIN</string>
+    <string name="summary_preference_enable_pin">当启动或停止应用时，要求提供PIN以解锁应用</string>
+    <string name="summary_preference_pin_use_fingerprint">允许使用指纹代替PIN来解锁应用</string>
+    <string name="title_preference_pin_use_fingerprint">允许指纹解锁</string>
+    <string name="title_preference_enable_pin">PIN</string>
+    <string name="preference_category_pin">PIN保护</string>
+    <string name="summary_show_revoked_notification">当Nebulo失去VPN权限时显示一个通知</string>
+    <string name="title_show_revoked_notification">失去权限通知</string>
+    <string name="summary_show_noconnection_notification">在应用无连接或者连接状况差时显示一个通知</string>
+    <string name="title_show_noconnection_notification">无连接通知</string>
+    <string name="title_dnscache_enabled">使用DNS缓存</string>
+    <string name="summary_delete_queries">点击此处以清除所有已记录的请求项</string>
+    <string name="title_delete_queries">清除请求项</string>
+    <string name="summary_export_queries">将请求项以CSV格式导出（%1d 条请求）</string>
+    <string name="title_export_queries">导出请求项</string>
+    <string name="summary_log_queries">记录所有的请求项与回应</string>
+    <string name="title_log_queries">记录请求项</string>
+    <string name="preference_category_querylogging">请求记录</string>
+    <string name="summary_pause_on_captiveportal">如果检测到强制主页，则不使用DoH。网络登录成功后将立马自动恢复使用。
+\n若禁用此设置，则可能将让您无法打开强制主页以登录网络</string>
+    <string name="title_pause_on_captiveportal">停止于强制主页</string>
+    <string name="summary_bypass_searchdomains">发送搜索域请求（例如 MyPC.local 或 MyPC.fritz.box）至网络默认的DNS服务器，而不是DoH服务器。
+\n强烈推荐启用此设置。这些请求将不会离开您的网络</string>
+    <string name="title_bypass_searchdomains">绕过搜索域请求</string>
+    <string name="crashreporting_type_off">关闭（不发送崩溃报告）</string>
+    <string name="crashreporting_type_minimal">最少（仅报告Android版本与应用版本）</string>
+    <string name="crashreporting_type_full">完整（统计与调试数据）</string>
+</resources>

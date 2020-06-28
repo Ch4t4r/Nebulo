@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="hint_search">Busca en</string>
+    <string name="hint_searchterm">Término a buscar</string>
+    <string name="contentdescription_stop_app">Detén la aplicación</string>
+    <string name="contentdescription_start_app">Inicie la aplicación</string>
+    <string name="contentdescription_clear_search">Despejen la búsqueda</string>
+    <string name="contentdescription_shared_app_icon">Icono de la aplicación</string>
+    <string name="contentdescription_main_statusimage">La imagen que indica si la aplicación está funcionando</string>
+    <string name="contentdescription_main_servericon">Icono del servidor</string>
+    <string name="contentdescription_main_infoimage">Icono de información</string>
+</resources>

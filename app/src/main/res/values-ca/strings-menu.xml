@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_show_on_fdroid">Mostrar a F-Droid</string>
+    <string name="menu_about">Sobre aquesta aplicació</string>
+    <string name="menu_rate">Valorar</string>
+    <string name="menu_create_shortcut">Creeu una drecera del servidor</string>
+    <string name="menu_querylogging">Consultes registrades</string>
+    <string name="menu_settings">Ajustos</string>
+    <string name="menu_main">Estat de l\'aplicació</string>
+</resources>

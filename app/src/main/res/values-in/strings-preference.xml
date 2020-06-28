@@ -1,137 +1,89 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="preference_category_general">Umum</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_category_general">Umum</string>
     <string name="title_theme">Tema</string>
     <string name="summary_theme">Mengatur tema untuk apl ini</string>
-
     <string name="title_start_on_boot">Mulai saat boot</string>
     <string name="summary_start_on_boot">Mulai aplikasi saat ponsel dihidupkan</string>
-
     <string name="title_start_after_update">Mulai setelah pembaruan</string>
     <string name="summary_start_after_update">Mulai apl setelah diperbarui</string>
-
     <string name="title_excluded_apps">Pengecualian apl</string>
-    <string name="summary_excluded_apps">Pengecualian apl, misalnya jika mereka tidak dapat terhubung ke Internet lagi - aplikasi yang dipilih tidak akan menggunakan dns-over-https lagi.</string>
-
-
-
+    <string name="summary_excluded_apps">Excluir aplicativos do aplicativo aqui, por exemplo, se eles não conseguirem mais se conectar à Internet - aplicativos selecionados não usarão mais DNS-over-HTTPS ou DNS-over-TLS</string>
     <string name="preference_category_notification">Pemberitahuan</string>
-
     <string name="title_show_notification_on_lockscreen">Tampilkan di layar kunci</string>
     <string name="summary_show_notification_on_lockscreen">Setel apakah akan menampilkan pemberitahuan di layar kunci</string>
-
     <string name="title_notification_hide_icon">Sembunyikan ikon</string>
     <string name="summary_notification_hide_icon">Sembunyikan ikon di atas bilah navigasi</string>
-
     <string name="title_notification_allow_stop">Izinkan berhenti</string>
     <string name="summary_notification_allow_stop">Izinkan aplikasi dihentikan dari notifikasi</string>
-
     <string name="title_notification_allow_pause">Izinkan jeda</string>
     <string name="summary_notification_allow_pause">Izinkan aplikasi dijeda dari notifikasi</string>
-
-
     <string name="preference_category_pin">Perlindungan PIN</string>
-
     <string name="title_preference_enable_pin">PIN</string>
     <string name="summary_preference_enable_pin">Meminta PIN saat membuka atau menghentikan apl</string>
-
     <string name="title_preference_pin_use_fingerprint">Izinkan sidik jari</string>
-    <string name="summary_preference_pin_use_fingerprint">Izinkan sidik jari Anda digunakan sebagai pin.</string>
-
+    <string name="summary_preference_pin_use_fingerprint">Izinkan sidik jari Anda digunakan sebagai PIN</string>
     <string name="title_preference_change_pin">Ubah pin</string>
     <string name="summary_preference_change_pin">Ubah pin. Hanya nilai numerik yang diizinkan.
 \nPin saat ini: %1s</string>
-
     <string name="preference_category_cache">Kontrol cache</string>
-
     <string name="title_dnscache_enabled">Gunakan cache DNS</string>
     <string name="summary_dnscache_enabled">Mengaktifkan cache DNS apl. Cache menghafal permintaan lama untuk menjawab pertanyaan selanjutnya dengan lebih cepat</string>
-
     <string name="title_dnscache_keepacrosslaunches">Simpan cache DNS</string>
     <string name="summary_dnscache_keepacrosslaunches">Simpan cache DNS di beberapa peluncuran</string>
-
     <string name="title_dnscache_maxsize">Ukuran cache maksimum</string>
     <string name="summary_dnscache_maxsize">Setel maksimum entri yang dapat ditampung oleh cache setiap saat</string>
-
     <string name="title_dnscache_usedefaulttimes">Waktu cache default</string>
     <string name="summary_dnscache_usedefaulttimes">Permintaan cache untuk waktu default yang dikomunikasikan oleh server</string>
-
     <string name="title_dnscache_minimum_cache_time">Waktu cache minimal</string>
-    <string name="summary_dnscache_minimum_cache_time">Jumlah minimal entri waktu harus di-cache.
-\nSaat ini: %1d Detik.</string>
-
+    <string name="summary_dnscache_minimum_cache_time">Jumlah minimal entri waktu harus di-cache. 
+\nSaat ini: %1d Detik</string>
     <string name="title_dnscache_customcachetime">Waktu cache khusus (Detik)</string>
-    <string name="summary_dnscache_customcachetime">Mengubah jumlah waktu permintaan lama di-cache.
-\nSaat ini: %1d Detik.</string>
-
+    <string name="summary_dnscache_customcachetime">Mengubah jumlah waktu permintaan lama di-cache. 
+\nSaat ini: %1d Detik</string>
     <string name="title_dnscache_nxdomaincachetime">Waktu cache untuk NXDomain (Detik)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Mengubah jumlah waktu permintaan NXDOMAIN lama di-cache. Meningkatkan kinerja untuk domain yang tidak ada (misal. Jika diblokir)
-\nSaat ini: %1d Detik.</string>
-
-
+    <string name="summary_dnscache_nxdomaincachetime">Mengubah jumlah waktu permintaan NXDOMAIN lama di-cache. Meningkatkan kinerja untuk domain yang tidak ada (misal. Jika diblokir) 
+\nSaat ini: %1d Detik</string>
     <string name="preference_category_logging">Pencatatan</string>
-
     <string name="title_enable_logging">Aktifkan pencatatan</string>
-    <string name="summary_enable_logging">Mengaktifkan pencatatan informasi debug (berisi data statistik). Log ini tidak terkirim secara otomatis.</string>
-
+    <string name="summary_enable_logging">Mengaktifkan pencatatan informasi debug (berisi data statistik). Log ini tidak terkirim secara otomatis</string>
     <string name="title_send_logs">Kirim log</string>
-    <string name="summary_send_logs">Klik di sini untuk mengirim log ke pengembang.</string>
-
+    <string name="summary_send_logs">Klik di sini untuk mengirim log ke pengembang</string>
     <string name="title_delete_all_logs">Hapus semua log</string>
-    <string name="summary_delete_all_logs">Menghapus semua log yang tersimpan di perangkat Anda.</string>
-
-
+    <string name="summary_delete_all_logs">Menghapus semua log yang tersimpan di perangkat Anda</string>
     <string name="preference_category_ip">Setelan IP</string>
-
     <string name="title_enable_ipv6">Aktifkan Ipv6</string>
     <string name="summary_enable_ipv6">Gunakan IPv6, jika perangkat memiliki alamat IPv6 yang ditetapkan</string>
-
     <string name="title_enable_ipv4">Aktifkan Ipv4</string>
     <string name="summary_enable_ipv4">Gunakan IPv4, jika perangkat memiliki alamat IPv4 yang ditetapkan</string>
-
     <string name="title_force_ipv6">Paksa Ipv6</string>
-    <string name="summary_force_ipv6">Memaksa apl untuk menerima permintaan IPv6, bahkan ketika perangkat tidak menggunakan IPv6.</string>
-
+    <string name="summary_force_ipv6">Memaksa apl untuk menerima permintaan IPv6, bahkan ketika perangkat tidak menggunakan IPv6</string>
     <string name="title_force_ipv4">Paksa Ipv6</string>
-    <string name="summary_force_ipv4">Memaksa apl untuk menerima permintaan IPv4, bahkan ketika perangkat tidak menggunakan IPv4.</string>
-
+    <string name="summary_force_ipv4">Memaksa apl untuk menerima permintaan IPv4, bahkan ketika perangkat tidak menggunakan IPv4</string>
     <string name="title_allow_ipv4_traffic">Izinkan lalu lintas IPv4</string>
-    <string name="summary_allow_ipv4_traffic">Izinkan lalu lintas IPv4 digunakan, bahkan jika IPv4 dinonaktifkan.
-\nJika dinonaktifkan, tidak ada koneksi IPv4 yang diizinkan saat aplikasi sedang berjalan.</string>
-
+    <string name="summary_allow_ipv4_traffic">Izinkan lalu lintas IPv4 digunakan, bahkan jika IPv4 dinonaktifkan. 
+\nJika dinonaktifkan, tidak ada koneksi IPv4 yang diizinkan saat aplikasi sedang berjalan</string>
     <string name="title_allow_ipv6_traffic">Izinkan lalu lintas IPv6</string>
-    <string name="summary_allow_ipv6_traffic">Izinkan lalu lintas IPv6 digunakan, bahkan jika IPv4 dinonaktifkan.
-\nJika dinonaktifkan, tidak ada koneksi IPv6 yang diizinkan saat aplikasi sedang berjalan.</string>
-
-
+    <string name="summary_allow_ipv6_traffic">Izinkan lalu lintas IPv6 digunakan, bahkan jika IPv4 dinonaktifkan. 
+\nJika dinonaktifkan, tidak ada koneksi IPv6 yang diizinkan saat aplikasi sedang berjalan</string>
     <string name="preference_category_network">Jaringan</string>
-
     <string name="title_disallow_other_vpns">Larang VPN lain</string>
     <string name="summary_disallow_other_vpns">Jangan izinkan VPN lain memulai jika apl tidak dihentikan secara eksplisit</string>
-
     <string name="title_catch_other_dns_servers">Mencegah lalu lintas DNS lainnya</string>
     <string name="summary_catch_other_dns_servers">Mencegah lalu lintas dari server DNS yang dikenal dan mengirimkannya menggunakan Nebulo</string>
-
     <string name="title_bypass_searchdomains">Melewatkan pencarian domain</string>
-    <string name="summary_bypass_searchdomains">Kirim domain pencarian (misal. MyPC.local atau MyPc.fritz.box) ke server Dns jaringan Anda, bukan server DoH.
-\nIni sangat dianjurkan. Pertanyaan itu tidak meninggalkan jaringan Anda.</string>
-
+    <string name="summary_bypass_searchdomains">Kirim domain pencarian (misal. MyPC.local atau MyPc.fritz.box) ke server Dns jaringan Anda, bukan server DoH. 
+\nIni sangat dianjurkan. Pertanyaan itu tidak meninggalkan jaringan Anda</string>
     <string name="title_pause_on_captiveportal">Jeda di portal kaptif</string>
-    <string name="summary_pause_on_captiveportal">Jangan gunakan DoH jika portal kaptif terdeteksi. Ini akan secara otomatis dilanjutkan segera setelah masuk.
-\nMenonaktifkannya mungkin mencegah Anda membuka situs portal kaptif untuk masuk.</string>
-
+    <string name="summary_pause_on_captiveportal">Jangan gunakan DoH jika portal kaptif terdeteksi. Ini akan secara otomatis dilanjutkan segera setelah masuk. 
+\nMenonaktifkannya mungkin mencegah Anda membuka situs portal kaptif untuk masuk</string>
     <string name="title_show_noconnection_notification">Pemberitahuan disaat tidak ada koneksi</string>
     <string name="summary_show_noconnection_notification">Tampilkan pemberitahuan saat aplikasi sedang dalam koneksi yang buruk</string>
-
-
     <string name="preference_category_querylogging">Catatan kueri</string>
-
     <string name="title_log_queries">Catatan kueri</string>
     <string name="summary_log_queries">Catat semua pertanyaan dan tanggapan</string>
-
     <string name="title_export_queries">Ekspor kueri</string>
     <string name="summary_export_queries">Ekspor kueri sebagai CSV (%1d kueri)</string>
-
     <string name="title_delete_queries">Hapus kueri</string>
-    <string name="summary_delete_queries">Klik di sini untuk menghapus semua kueri yang dicatat.</string>
+    <string name="summary_delete_queries">Klik di sini untuk menghapus semua kueri yang dicatat</string>
 </resources>

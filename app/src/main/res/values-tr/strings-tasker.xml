@@ -3,6 +3,4 @@
     <string name="tasker_action">Eylem</string>
     <string name="tasker_start_app_custom_url">%1s ile uygulamayı başlat (Kip: %2s)</string>
     <string name="tasker_start_app_custom_urls">%1s ve %2s ile uygulamayı başlat (Kip: %3s)</string>
-    <string name="tasker_mode_doh">DoH</string>
-    <string name="tasker_mode_dot">DoT</string>
     </resources>

@@ -148,12 +148,12 @@ class ServerImportActivity : BaseActivity() {
             else reader.skipValue()
 
         }
-        if (reader.readJsonArray {
+        if (!reader.readJsonArray {
                 val previousSize = serverTypes.size
                 if (reader.readJsonObject(block = readServerType) && serverTypes.size == previousSize) serverTypes.add(
                     true
                 )
-            }) else {
+            }){
             val previousSize = serverTypes.size
             if (reader.readJsonObject(block = readServerType) && serverTypes.size == previousSize) serverTypes.add(true)
         }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="dialog_logexport_loading_title">Preparant els registres</string>
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Els servidors no han pogut ser importats.
+\n(%1s)</string>
+    <string name="dialog_serverimportfailed_text">El servidor(s) no ha(n) pogut ser importat(s).</string>
+    <string name="dialog_serverimportfailed_title">Importació fallida</string>
+    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Si us plau, seleccioneu els servidors que voleu importar.
+\n
+\nSi seleccioneu servidors que ja estiguin importats, es duplicaran.</string>
+    <string name="dialog_serverimport_servertype_dot">Tipus: DNS-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_servertype_doh">Tipus: DNS-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_experimental">Experimental</string>
+    <string name="dialog_serverimport_priority">Prioritat %1d</string>
+    <string name="dialog_serverimport_done">Fet</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Importació de %1d servidor</item>
+        <item quantity="other">Importació de %1d servidors</item>
+    </plurals>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">L\'aplicació %1d està exclosa de manera predeterminada i no es pot seleccionar</item>
+        <item quantity="other">Les aplicacions %1d estan excloses de manera predeterminada i no es poden seleccionar</item>
+    </plurals>
+    <string name="dialog_appchoosal_whitelist">Només fes servir DoH/DoT en les aplicacions seleccionades</string>
+    <string name="dialog_appchoosal_showsystemapps">Mostrar aplicacions del sistema</string>
+    <string name="dialog_deleteconfig_text">Vols esborrar la configuració %1$s\?</string>
+    <string name="dialog_deleteconfig_title">Esborrar configuració\?</string>
+    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false">exemple-dot.com[:443]</string>
+    <string name="dialog_newserver_secondaryserver_hint" translatable="false">exemple-doh.com[/dns-query]</string>
+    <string name="dialog_newserver_secondaryserver">Servidor secundari (opcional)</string>
+    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false">exemple-dot.com[:443]</string>
+    <string name="dialog_newserver_primaryserver_hint" translatable="false">exemple-doh.com[/dns-query]</string>
+    <string name="dialog_newserver_primaryserver">Servidor primari</string>
+    <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
+    <string name="dialog_newserver_name_hint">Exemple</string>
+    <string name="dialog_newserver_name">Nom del servidor</string>
+    <string name="dialog_newserver_title_tls">Afegir un servidor (DoT)</string>
+    <string name="dialog_newserver_title_https">Afegir un servidor (DoH)</string>
+    <string name="dialog_serverconfiguration_addserver">Afegir un servidor</string>
+    <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
+    <string name="dialog_serverconfiguration_title">Configuració del servidor</string>
+    <string name="dialog_error_title">Informe de fallada</string>
+    <string name="dialog_logexport_general">Tria aplicació</string>
+    <string name="dialog_logexport_text">Com voleu compartir els registres\?</string>
+    <string name="dialog_error_text">Sembla que l\'aplicació ha fallat. Voleu enviar els fitxers de registre d’errors al desenvolupador\?</string>
+    <string name="dialog_deletelogs_text">Esteu segur que voleu suprimir tots els registres\?</string>
+    <string name="dialog_logexport_email">Correu electrònic</string>
+    <string name="dialog_batteryoptimization_message">En alguns dispositius, no es notificarà a l\'aplicació que el dispositiu ha acabat d\'arrencar si no estan desactivades les optimitzacions de la bateria.
+\nActualment, l\'aplicació no està en llista blanca d\'optimització de la bateria, voleu fer-ho\?
+\n
+\nHeu de comprovar si funciona amb l’optimització activada abans de desactivar-la.</string>
+    <string name="dialog_batteryoptimization_title">Optimització de la bateria</string>
+    <string name="dialog_rate_confirmation">Voleu obrir la botiga d\'aplicacions per valorar l’aplicació\?</string>
+    <string name="dialog_batteryoptimization_ignore">Ignoreu</string>
+    <string name="dialog_batteryoptimization_whitelist">Desactivar</string>
+    <string name="dialog_changelog_title">Registre de canvis</string>
+    <string name="dialog_changelog_infotext">L\'aplicació s\'ha actualitzat des que la vas obrir per última vegada. A la llista següent podeu veure el registre de canvis. Marca la casella següent i no veuràs aquest missatge en el futur.</string>
+    <string name="dialog_changelog_dont_show_again">No ho tornis a mostrar</string>
+    <string name="dialog_query_export_title">Exportació consultes …</string>
+    <string name="dialog_about_licenses">Llicències</string>
+    <string name="dialog_pin_message">Si us plau, proporcioneu el vostre PIN.</string>
+    <string name="dialog_query_export_message">Espereu mentre s’exporten les consultes</string>
+    <string name="dialog_enable_logging">Voleu activar el registre\? Els registres contenen informació estadística, informació de depuració i accions a l\'aplicació. Els registres generats no es comparteixen tret que ho facis tu mateix.</string>
+    <string name="dialog_pin_hint">PIN</string>
+</resources>

@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="all_stop">Stop</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="all_stop">Stop</string>
     <string name="all_start">Start</string>
     <string name="all_pause">Pauza</string>
     <string name="all_resume">Wznów</string>
@@ -8,26 +9,19 @@
     <string name="information">Informacje</string>
     <string name="open_app">Uruchom aplikację</string>
     <string name="all_close">Zamknij</string>
-
     <string name="main_dnssurveillance_infotext">Pamiętaj, że serwer DNS, z którym jesteś połączony, może rejestrować odwiedzane witryny. Sprawdź jego oświadczenie o ochronie prywatności, aby uzyskać więcej informacji.</string>
     <string name="main_dnssurveillance_privacystatement">Oświadczenie o ochronie prywatności %1s</string>
-
     <string name="app_share_text">Cześć, znalazłem aplikację, która szyfruje zapytania DNS, aby zapewnić więcej prywatności i bezpieczeństwa. Zobacz więcej: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
-
     <string name="quicksettings_stop_text">Zatrzymaj Nebulo</string>
     <string name="quicksettings_start_text">Uruchom Nebulo</string>
-
     <string name="about_share">Udostępnij</string>
-    <string name="activity_label_import_queries">Importuj kwerendy</string>
-    <string name="activity_label_import_servers">Importuj serwer(y)</string>
+    <string name="activity_label_import_queries">Import zapytań</string>
+    <string name="activity_label_import_servers">Import serwer(ów)</string>
     <string name="activity_label_speed_test">Porównanie prędkości serwerów</string>
-
-    <string name="activity_label_enable_logging">Eksportuj logi/Włącz tworzenie logów</string>
-
+    <string name="activity_label_enable_logging">Eksport logów/Włączenie logowania</string>
     <string name="error_invalid_url">Podaj prawidłowy adres URL.</string>
     <string name="error_invalid_pin">Podaj swój PIN.</string>
     <string name="error_invalid_servername">Podaj nazwę.</string>
-
     <string name="crashreporting_thankyou">Dziękuję! Jeśli chcesz zmienić zdanie, zrób to w ustawieniach.</string>
     <string name="about_licenses">Licencje Open-source</string>
     <string name="about_changelog">Changelog</string>
@@ -35,24 +29,19 @@
     <string name="about_privacypolicy">Polityka prywatności</string>
     <string name="about_info">Informacje ogólne</string>
     <string name="about_help_translating">Pomoc w tłumaczeniu</string>
-
     <string name="window_speedtest_runtest">Rozpocznij test</string>
-
     <string name="error_no_webbrowser_installed">Nie posiadasz aplikacji, która mogłaby otworzyć ten link.</string>
-
     <string name="button_main_dnsrules">Zasady DNS</string>
-
     <string name="window_dnsrules_customhosts">Własne hosty</string>
     <plurals name="window_dnsrules_subtitle">
-	<item quantity="one">%1d zasada</item>
-	<item quantity="few">%1d zasady</item>
-	<item quantity="many"></item>
-</plurals>
+        <item quantity="one">%1d zasada</item>
+        <item quantity="few">%1d zasady</item>
+        <item quantity="many"/>
+    </plurals>
     <string name="window_dnsrules_hostalreadyexists">Zasada dla tego hosta już istnieje.</string>
     <string name="window_dnsrules_customhosts_message">Zdefiniuj własnych hostów tutaj.</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Zasady z tego źródła: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Zasady z tego źródła: %1d (%2$d nieużywanych duplikatów)</string>
-
     <string name="windows_querylogging_search_hint">Szukaj hosta w logu żądań</string>
     <string name="windows_querylogging_search">Wyszukiwanie hostów</string>
     <string name="windows_querylogging_time">Czas</string>
@@ -68,4 +57,6 @@
     <string name="windows_querylogging_create_dnsrule">Stwórz zasadę DNS dla tego hosta</string>
     <string name="windows_querylogging_dnsrule_created">Zasada DNS została utworzona.</string>
     <string name="window_main_privatedns_info">Prywatny DNS jest aktywny, twoje zapytania DNS są już chronione. Włącz Nebulo jeśli chcesz używać DNS-Over-HTTP albo innych użytecznych funkcji.</string>
+    <string name="about_contact_developer">Kontakt z programistą</string>
+    <string name="crashreporting_thankyou_gotit">Gotowe!</string>
 </resources>

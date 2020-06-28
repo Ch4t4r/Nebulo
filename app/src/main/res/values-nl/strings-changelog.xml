@@ -1,10 +1,11 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="changelog_build_23_1">Niet-standaard poorten worden nu weergegeven voor DoT-servers</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_build_23_1">Niet-standaard poorten worden nu weergegeven voor DoT-servers</string>
     <string name="changelog_build_23_2">Dit dialoogvenster is toegevoegd om wijzigingen te markeren</string>
     <string name="changelog_build_23_3">Het exporteren van DNS-aanvragen toont nu een dialoogvenster met voortgangsbalk</string>
     <string name="changelog_build_23_4">De serverimport verholpen die niet werkte op OS-versies lager dan Android 7</string>
     <string name="changelog_build_23_5">Het DNS-verzoek logboek toont nu het protocol dat is gebruikt om het verzoek te verzenden</string>
-    <string name="changelog_build_23_6">De app kan nu worden beveiligd met een pincode</string>
+    <string name="changelog_build_23_6">U kunt de app nu beveiligen met een pincode in de instellingen</string>
     <string name="changelog_build_24_1">Er is een probleem opgelost waardoor de app op apparaten crashte zonder een vingerafdruksensor</string>
     <string name="changelog_build_25_1">Verbeterde afhandeling van IPv6 / IPv4 - de app werkt nu betrouwbaar in netwerken die slechts één van deze ondersteunen</string>
     <string name="changelog_build_25_2">Nieuwe DNS-servers toegevoegd</string>
@@ -47,15 +48,15 @@
     <string name="changelog_build_33_3">Een aantal iconen vervangen</string>
     <string name="changelog_build_33_4">Enkele crashes opgelost</string>
     <string name="changelog_build_33_5">Een weergave toegevoegd om DNS-server snelheden te testen</string>
-    <string name="changelog_build_33_6">U kunt nu aangepaste IP-adressen voor hosts opgeven. Hosts kunnen worden geïmporteerd uit URL\'s en handmatig worden toegevoegd.</string>
+    <string name="changelog_build_33_6">U kunt nu aangepaste IP-adressen voor hosts opgeven. Hosts kunnen worden geïmporteerd uit URL\'s en handmatig worden toegevoegd</string>
     <string name="changelog_build_33_7">Enkele aanpassingen in het ontwerp</string>
     <string name="changelog_build_34_1">Crash gerelateerd aan de database gerepareerd</string>
     <string name="changelog_build_35_1">Enkele crashes verholpen gerelateerd aan het importeren van DNS regels</string>
     <string name="changelog_build_35_2">Het afbreken van de import van de DNS regel bevriest nu de UI niet meer</string>
-    <string name="changelog_build_35_3">Kleine prestatieverbeteringen voor dns-over-https</string>
+    <string name="changelog_build_35_3">Kleine prestatieverbeteringen voor DNS-over-HTTPS</string>
     <string name="changelog_build_35_4">De host bronnen van de DNS-regels laten nu zien hoeveel regels er van hen zijn geïmporteerd</string>
     <string name="changelog_build_36_1">U kunt de DNS-regels nu exporteren</string>
-    <string name="changelog_build_36_2">Dns-regels kunnen nu uit bestanden worden geïmporteerd</string>
+    <string name="changelog_build_36_2">DNS-regels kunnen nu uit bestanden worden geïmporteerd</string>
     <string name="changelog_build_36_3">Probleem opgelost waarbij DNS-regels uit zeer kleine bronnen niet werden geïmporteerd</string>
     <string name="changelog_build_36_4">De regel import kan nu niet-standaard letters (zoals umlauts) herkennen</string>
     <string name="changelog_build_36_5">De DNS-regels staan nu in het paginamenu</string>
@@ -64,7 +65,7 @@
     <string name="changelog_build_37_2">Enkele verbeteringen in het ontwerp</string>
     <string name="changelog_build_37_3">Het importeren van de DNS-regels gaat nu sneller</string>
     <string name="changelog_build_37_4">Geïmporteerde DNS-regels nemen nu minder ruimte in beslag op het apparaat</string>
-    <string name="changelog_build_38_1">Dit is een prestatiegerichte update die DNS-query\'s sneller moet uitvoeren, minder geheugen moet gebruiken en minder batterijverbruik vereist.</string>
+    <string name="changelog_build_38_1">Dit is een prestatiegerichte update die DNS-query\'s sneller moet uitvoeren, minder geheugen moet gebruiken en minder batterijverbruik vereist</string>
     <string name="changelog_build_38_2">Een crash op sommige apparaten verholpen met betrekking tot de interne database</string>
     <string name="changelog_build_39_1">Crash verholpen die van invloed was op de meeste DNS-servers</string>
     <string name="changelog_build_40_1">Prestatie en geheugenverbeteringen</string>
@@ -73,7 +74,7 @@
     <string name="changelog_build_40_4">De PIN-functie werkt nu op Android Q</string>
     <string name="changelog_build_40_5">U kunt domeinen nu whitelisten in de dns-regels. Als ze op de whitelist staan, worden ze naar de dns-server verzonden, ongeacht of ze aanwezig zijn in de ingeschakelde dns-regel bronnen</string>
     <string name="changelog_build_40_6">De dns-regel import / export-notificatie kan nu worden aangeklikt</string>
-    <string name="changelog_build_41_1">Dns-regel bronnen kunnen nu worden gebruikt als whitelist</string>
+    <string name="changelog_build_41_1">DNS-regel bronnen kunnen nu worden gebruikt als whitelist</string>
     <string name="changelog_build_41_2">De host bronnen geven nu aan hoeveel regels in een bestand duplicaat waren</string>
     <string name="changelog_build_41_3">Nieuwe servers toegevoegd</string>
     <string name="changelog_build_41_4">Door de gebruiker gedefinieerde servers kunnen nu worden bewerkt</string>
@@ -123,4 +124,10 @@
     <string name="changelog_build_55_4">Het DNS-verzoek logboek laadt de aanvragen nu in blokken in plaats van allemaal tegelijk</string>
     <string name="changelog_build_58_1">De primaire URL kan leeg worden gelaten bij het toevoegen van een server</string>
     <string name="changelog_build_58_2">Er wordt nu een melding weergegeven wanneer Nebulo de toestemming voor de VPN verliest</string>
-    </resources>
+    <string name="changelog_build_59_5">Vaste ingangsvalidatie van DNS-over-HTTPS die sommige geldige servers niet toestaat</string>
+    <string name="changelog_build_59_1">Nieuwe vertalingen toegevoegd</string>
+    <string name="changelog_build_59_6">De pincode moet nu na enige tijd opnieuw worden ingevoerd</string>
+    <string name="changelog_build_59_4">Nebulo kan nu worden hervat vanaf het hoofdscherm</string>
+    <string name="changelog_build_59_3">Nebulo detecteert nu de ondersteunde modus bij het toevoegen van een DNS-over-HTTPS-server</string>
+    <string name="changelog_build_59_2">Nebulo hergebruikt nu de aansluitingen waardoor het batterijverbruik wordt verlaagd</string>
+</resources>

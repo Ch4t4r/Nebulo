@@ -177,22 +177,6 @@ fun Context.isAppBatteryOptimized(): Boolean {
     return !pwrm.isIgnoringBatteryOptimizations(packageName)
 }
 
-fun Array<*>.toStringArray(): Array<String> {
-    val stringArray = arrayOfNulls<String>(size)
-    for ((index, value) in withIndex()) {
-        stringArray[index] = value.toString()
-    }
-    return stringArray as Array<String>
-}
-
-fun IntArray.toStringArray(): Array<String> {
-    val stringArray = arrayOfNulls<String>(size)
-    for ((index, value) in withIndex()) {
-        stringArray[index] = value.toString()
-    }
-    return stringArray as Array<String>
-}
-
 fun <T:Activity>Activity.restart(activityClass:Class<T>? = null) {
     val intent = (if(activityClass != null) Intent(this, activityClass) else intent)
         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -206,16 +190,6 @@ fun Context.showEmailChooser(chooserTitle: String, subject: String, recipent: St
     intent.putExtra(Intent.EXTRA_EMAIL, recipent)
     intent.putExtra(Intent.EXTRA_TEXT, text)
     startActivity(Intent.createChooser(intent, chooserTitle))
-}
-
-fun ConnectivityManager.isMobileNetwork(network: Network): Boolean {
-    val capabilities = getNetworkCapabilities(network)
-    return capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
-}
-
-fun ConnectivityManager.isWifiNetwork(network: Network): Boolean {
-    val capabilities = getNetworkCapabilities(network)
-    return capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
 }
 
 fun ConnectivityManager.isVpnNetwork(network: Network): Boolean {

@@ -1,9 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="dialog_serverconfiguration_title">Serverkonfiguration</string>
-    <string name="dialog_serverconfiguration_https">Dns-über-https (DoH)</string>
-    <string name="dialog_serverconfiguration_tls">Dns-über-tls (DoT)</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_serverconfiguration_title">Serverkonfiguration</string>
     <string name="dialog_serverconfiguration_addserver">Neuer Server</string>
-
     <string name="dialog_newserver_title_https">Neuer Server (DoH)</string>
     <string name="dialog_newserver_title_tls">Neuer Server (DoT)</string>
     <string name="dialog_newserver_name">Servername</string>
@@ -12,38 +10,30 @@
     <string name="dialog_newserver_secondaryserver">Sekundärer Server (Optional)</string>
     <string name="dialog_deleteconfig_title">Konfiguration löschen\?</string>
     <string name="dialog_deleteconfig_text">Möchtest du die Konfiguration %1$s löschen\?</string>
-
     <string name="dialog_appchoosal_showsystemapps">Zeige Systemapps</string>
     <string name="dialog_appchoosal_whitelist">Nutze DoH/DoT nur in ausgewählten Apps</string>
-
     <plurals name="dialog_serverimport_title">
         <item quantity="one">Import von %1d Server</item>
         <item quantity="other">Import von %1d Servern</item>
     </plurals>
-
     <string name="dialog_serverimport_done">Fertig</string>
     <string name="dialog_serverimport_priority">Priorität %1d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
-    <string name="dialog_serverimport_servertype_doh">Typ: Dns-über-https (DoH)</string>
-    <string name="dialog_serverimport_servertype_dot">Typ: Dns-über-tls (DoT)</string>
+    <string name="dialog_serverimport_servertype_doh">Typ: DNS-über-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Typ: DNS-over-TLS (DoT)</string>
     <string name="dialog_serverimport_text">Bitte wähle die Server aus, welche du importieren möchtest.
 \n
 \nServer welche bereits importiert wurden werden, falls hier nochmal ausgewählt, doppelt angezeigt werden.</string>
-
     <string name="dialog_serverimportfailed_title">Import fehlgeschlagen</string>
     <string name="dialog_serverimportfailed_text">Die Server konnten nicht importiert werden.</string>
     <string name="dialog_serverimportfailed_text_exception">Die Server konnten nicht importiert werden.
 \n(%1s)</string>
-
     <string name="dialog_logexport_text">Wie möchtest du die Logs teilen\?</string>
     <string name="dialog_logexport_general">App auswählen</string>
     <string name="dialog_logexport_email">E-Mail</string>
-
     <string name="dialog_deletelogs_text">Bist du dir sicher, dass du alle Logs löschen willst\?</string>
-
     <string name="dialog_error_title">Absturzmeldung</string>
     <string name="dialog_error_text">Es sieht so aus, als sei die App abgestürzt. Möchtest du die Logs an den Entwickler schicken\?</string>
-
     <string name="dialog_batteryoptimization_title">Batterieoptimierungen</string>
     <string name="dialog_batteryoptimization_message">Auf einigen Geräten wird die App nicht darüber informiert, dass das Gerät fertig gestartet wurde, wenn die Batterieoptimierungen für diese App aktiv sind.
 \nDie App ist aktuell nicht von diesen Optimierungen ausgeschlossen, möchtest du dies vornehmen\?
@@ -51,23 +41,16 @@
 \nBevor du diese deaktivierst solltest du testen, ob es auch ohne deaktivieren dieser funktioniert.</string>
     <string name="dialog_batteryoptimization_whitelist">Deaktivieren</string>
     <string name="dialog_batteryoptimization_ignore">Ignorieren</string>
-
     <string name="dialog_rate_confirmation">Möchtest du den Play Store öffnen, um die App zu bewerten\?</string>
-
     <string name="dialog_changelog_title">Änderungsprotokoll</string>
     <string name="dialog_changelog_infotext">Die App wurde seitdem du sie zuletzt geöffnet hast geupdated. In the folgenden Liste siehst du die Änderungen. Klicke die Box unten an, um diesen Dialog in Zukunft nicht mehr zu sehen.</string>
     <string name="dialog_changelog_dont_show_again">Nicht mehr zeigen</string>
-
     <string name="dialog_about_licenses">Lizenzen</string>
-
     <string name="dialog_query_export_title">Exportiere Anfragen…</string>
     <string name="dialog_query_export_message">Bitte warte solange bis die Anfragen exportiert wurden</string>
-
     <string name="dialog_pin_message">Bitte gebe deine PIN an.</string>
     <string name="dialog_pin_hint">PIN</string>
-
     <string name="dialog_enable_logging">Möchtest du die Protokollierung aktivieren\? Die Protokolle enthalten statistische, sowie Testinformationen und ausgeführte Aktionen in der App. Die Protokolle werden niemals automatisch verschickt.</string>
-
     <string name="dialog_crashreporting_title">Automatische Absturzmeldung</string>
     <string name="dialog_crashreportingusages_title">Übertragene Daten</string>
     <string name="dialog_crashreportingusages_message">Klicke auf eine der Gruppen um zu sehen, welche Daten bei einem Absturz übertragen werden.</string>
@@ -88,7 +71,6 @@
 \nKlicke auf \"Daten ansehen\" um einzusehen, welche Arten von Daten übermittelt werden. Dort befindet sich ebenfalls ein Link zur Datenschutzerklärung.</string>
     <string name="dialog_clearqueries_title">Alle Anfragen leeren</string>
     <string name="dialog_clearqueries_message">Bist du dir sicher, dass du alle gespeicherten Anfragen löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
-
     <string name="dialog_credits_title">Danksagungen</string>
     <string name="dialog_credits_message" formatted="true">- App icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 
 \n- Türkische Übersetzung von Kemal Oktay Aktoğan 
@@ -99,14 +81,13 @@
 \n- Einige Icons von Font Awesome
 \n
 \nMöchtest du deinen Namen hier sehen\? Trage noch heute &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;etwas bei&lt;/a&gt;.</string>
-
     <string name="dialog_join_group_title">Der Gemeinde beitreten</string>
     <string name="dialog_join_group_message">Hallo!
 \n
 \nWusstest du schon, dass diese App eine Telegramgruppe hat\? Die Gruppe enthält reguläre Updates und ist der perfekte Platz, um Fragen zu stellen und Diskussionen anzuregen.
 \nWir sind eine großartige Gemeinde von über 200 Personen, möchtest du ein Teil davon werden\?</string>
     <string name="dialog_join_group_positive">Gerne!</string>
-<string name="dialog_speedresult_title">Ergebnisse des Geschwindigkeitstests</string>
+    <string name="dialog_speedresult_title">Ergebnisse des Geschwindigkeitstests</string>
     <string name="dialog_speedresult_message">%1d Server getestet
 \n%2d DoT Server erreichbar, %3d nicht erreichbar
 \n%4d DoH Server erreichbar, %5d nicht erreichbar
@@ -114,20 +95,16 @@
 \n
 \nSchnellster Server: %7s
 \nLangsamster Server: %8s</string>
-
     <string name="dialog_speedtest_useserver_title">Server auswählen</string>
     <string name="dialog_speedtest_useserver_message">Möchtest du den Server %1s nutzen\? Er erreichte Platz %2d von %3d mit einer durchschnittlichen Antwortzeit von %4d ms.</string>
-<string name="dialog_deletehostsource_title">%1s löschen\?</string>
+    <string name="dialog_deletehostsource_title">%1s löschen\?</string>
     <string name="dialog_deletehostsource_message">Bist du dir sicher, dass du die Quelle %1s löschen willst\? Dies kann nicht rückgängig gemacht werden, Hosts aus dieser Quelle werden gelöscht.</string>
-
     <string name="dialog_clearuserrules_title">Alle DNS Regeln leeren\?</string>
     <string name="dialog_clearuserrules_message">Bist du dir sicher, dass du alle von dir definierten DNS Regeln löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
-
     <string name="dialog_newhostsource_title">Neue Regel Quelle</string>
     <string name="dialog_newhostsource_name">Name</string>
     <string name="dialog_newhostsource_url">URL</string>
-    <string name="dialog_newhostsource_error_name_empty">Bitte gebe einen Namen an.</string>
-
+    <string name="dialog_newhostsource_error_name_empty">Bitte gebe einen Namen an</string>
     <string name="dialog_newdnsrule_title">Neue DNS Regel</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
     <string name="dialog_newdnsrule_hint_ipv4address">IPv4 Adresse</string>
@@ -135,11 +112,11 @@
     <string name="dialog_newdnsrule_host_invalid">Bitte gebe einen validen Host an</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Bitte gebe eine valide IPv4 Adresse an</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Bitte gebe eine valide IPv6 Adresse an</string>
-<string name="dialog_newhostsource_choose_file">Datei wählen</string>
+    <string name="dialog_newhostsource_choose_file">Datei wählen</string>
     <string name="dialog_exportdnsrules_title">DNS Regeln exportieren</string>
     <string name="dialog_exportdnsrules_export_user_rules">Exportiere eigene DNS Regeln</string>
     <string name="dialog_exportdnsrules_export_sources">Exportiere DNS Regeln aus angegebenen Quellen</string>
-<string name="dialog_newdnsrule_whitelist">Whitelist</string>
+    <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Adressangabe</string>
     <string name="dialog_newhostsource_use_as_whitelist">Als Whitelist benutzen</string>
     <string name="dialog_newhostsource_edit_title">Neue Regelquelle</string>
@@ -147,26 +124,24 @@
     <string name="dialog_editdelete_title">Was möchtest du tun\?</string>
     <string name="dialog_editdelete_edit">Editieren</string>
     <string name="dialog_editdelete_delete">Löschen</string>
-<string name="dialog_servicekilled_message">Die App hat erkannt, dass sie nach der letzten Ausführung nicht ordnungsgemäß beendet wurde. Dies deutet sehr stark darauf hin, dass das System die App zwangsweise geschlossen hat, ohne dieser die Möglichkeit zu geben, sich selbst neu zu starten. 
+    <string name="dialog_servicekilled_message">Die App hat erkannt, dass sie nach der letzten Ausführung nicht ordnungsgemäß beendet wurde. Dies deutet sehr stark darauf hin, dass das System die App zwangsweise geschlossen hat, ohne dieser die Möglichkeit zu geben, sich selbst neu zu starten. 
 \n 
 \nAuf den meisten Geräten existieren einige Optionen, welche dieses Verhalten seitens des System verhindern, mindestens aber verzögern können. 
 \nSo kannst du zum Beispiel in den Systemeinstellungen die Batterieoptimierungen für Nebulo deaktivieren, oder die App nicht aus der Liste der zuletzt verwendeten Apps entfernen. 
 \n 
-\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser). Klicke auf Einstellungen um in ein Menü zu kommen, wo die die Batterieoptimierungen für Nebulo deaktivieren kannst.</string>
+\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser). Klicke auf Einstellungen um in ein Menü zu kommen, wo die Batterieoptimierungen für Nebulo deaktivieren kannst.</string>
     <string name="dialog_servicekilled_more_info">Mehr Informationen</string>
-<plurals name="dialog_excludedapps_infotext">
-	<item quantity="one">%1d App ist standardmäßig ausgewählt und kann nicht abgewählt werden</item>
-	<item quantity="other">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</item>
-</plurals>
-
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">%1d App ist standardmäßig ausgewählt und kann nicht abgewählt werden</item>
+        <item quantity="other">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</item>
+    </plurals>
     <string name="dialog_newhostsource_wildcard_info">Es können Regelquellen genutzt werden, welche Wildcard Domains benutzen.</string>
     <string name="dialog_newdnsrule_wildcard_info">Der Host der Regel unterstützt Wildcards. Benutze einen Stern (*), um eine Beliebige Anzahl an Buchstaben, Nummern und Sonderzeichen, außer einem Punkt(.) abzudecken. Nutze zwei Sterne (**), um den Punkt (.) mit einzuschließen.</string>
-
     <string name="dialog_overlaydetected_title">Systemweites Overlay festgestellt</string>
     <string name="dialog_overlaydetected_message">Es scheint ein systemweites Overlay (z.B. eine Chatblase, oder ein Farb-/Nachtfilter) aktiv zu sein. Auf den meisten Geräten ist es nicht möglich, der App den benötigten Zugang zum VPN zu gewähren, wenn ein Overlay sichtbar ist.
 \n
 \nBitte deaktivere dein Overlay, solltest du im nächsten Dialog nicht auf OK klicken können.</string>
-<string name="dialog_hostsourcerefresh_title">Hostquellen aktualisieren</string>
+    <string name="dialog_hostsourcerefresh_title">Hostquellen aktualisieren</string>
     <string name="dialog_hostsourcerefresh_automatic_refresh">Hostquellen automatisch aktualisieren</string>
     <string name="dialog_hostsourcerefresh_wifi_only">Nur bei WLAN-Verbindung</string>
     <string name="dialog_hostsourcerefresh_refresh_every">Aktualisiere alle</string>
@@ -177,14 +152,13 @@
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Wochen</string>
     <string name="dialog_logexport_loading_title">Bereite Logdateien vor</string>
     <string name="dialog_cleardnscache_message">Bist du dir sicher, dass du den DNS Cache leeren möchtest\?</string>
-
-<string name="dialog_vpninformation_title">Wie diese App funktioniert</string>
+    <string name="dialog_vpninformation_title">Wie diese App funktioniert</string>
     <string name="dialog_vpninformation_message">Nebulo funktioniert, indem ein dummy-VPN aufgesetzt wird, welcher alle deine DNS Anfragen abfängt und zu einem sicheren Server deiner Wahl weiterleitet. Es handelt sich um keinen echten VPN, weder wird deine Identität versteckt, noch ändert es deine IP-Adresse.
 \n
 \nAußer DNS-Paketen werden keine Daten über diese App verschickt.</string>
-<string name="dialog_exportdnsrules_whitelist">Exportiere Whitelist Regeln</string>
+    <string name="dialog_exportdnsrules_whitelist">Exportiere Whitelist Regeln</string>
     <string name="dialog_exportdnsrules_nonwhitelist">Exportiere normale Regeln</string>
     <string name="dialog_raterequest_title">Bist du mit Nebulo zufrieden\?</string>
     <string name="dialog_raterequest_message">Würdest du dir einen Moment Zeit nehmen die App im Store zu bewerten, wenn du mit ihr zufrieden bist\?</string>
-<string name="dialog_vpn_permission_denied_message">Das System hat es Nebulo untersagt, den Dummy-VPN zu starten. Bitte öffne die App und gewähre dieses Recht durch Klicken auf den Startknopf.</string>
+    <string name="dialog_vpn_permission_denied_message">Das System hat es Nebulo untersagt, den Dummy-VPN zu starten. Bitte öffne die App und gewähre dieses Recht durch Klicken auf den Startknopf.</string>
 </resources>

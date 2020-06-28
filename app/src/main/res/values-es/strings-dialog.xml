@@ -1,2 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="dialog_serverconfiguration_title">Configuración del servidor</string>
+    <string name="dialog_newserver_title_tls">Añadir un servidor (DoT)</string>
+    <string name="dialog_deleteconfig_text">¿Quieres borra la configuración %1$s\?</string>
+    <string name="dialog_serverconfiguration_addserver">Añadir un servidor</string>
+    <string name="dialog_newserver_title_https">Añadir un servidor (DoH)</string>
+    <string name="dialog_newserver_name">Nombre del servidor</string>
+    <string name="dialog_newserver_name_hint">Ejemplo</string>
+    <string name="dialog_newserver_primaryserver">Servidor primario</string>
+    <string name="dialog_newserver_secondaryserver">Servidor secundario (Opcional)</string>
+    <string name="dialog_deleteconfig_title">¿Borrar configuración\?</string>
+    <string name="dialog_appchoosal_showsystemapps">Mostrar aplicaciones del sistema</string>
+    <string name="dialog_logexport_email">Correo electrónico</string>
+    <string name="dialog_crashreportingusages_message">Haga clic en uno de los grupos para ver qué datos se transmiten en las colisiones.</string>
+    <string name="dialog_join_group_message">¡Hola!
+\n
+\n¿Sabías que esta aplicación tiene un grupo de telegramas\? Contiene actualizaciones regulares y es el lugar perfecto para discusiones y preguntas.
+\nSomos una gran comunidad de más de 200 personas, ¿te gustaría formar parte de ella\?</string>
+    <string name="dialog_overlaydetected_message">Parece haber una superposición de todo el sistema (por ejemplo, una burbuja de charla, un filtro de color o nocturno) activa. La mayoría de los dispositivos no permiten habilitar una VPN en este caso.
+\n
+\nSi no puedes hacer clic en OK en el siguiente diálogo, por favor deshabilita la superposición.</string>
+    <string name="dialog_vpninformation_message">Nebulo trabaja usando una VPN falsa para capturar todas sus solicitudes de DNS, que luego son reenviadas a un servidor seguro de su elección.
+\nEsta VPN falsa no es una VPN real y no oculta su identidad, ni cambia su dirección IP.
+\n
+\nNingún dato real, excepto las solicitudes de DNS, se transmite usando esta aplicación.</string>
+    <string name="dialog_serverimportfailed_text">El servidor o los servidores no pudieron ser importados.</string>
+    <string name="dialog_error_text">Parece que la aplicación ha fallado. ¿Quieres enviar los archivos de registro de errores al desarrollador\?</string>
+    <string name="dialog_batteryoptimization_message">En algunos dispositivos, la aplicación no será notificada de que el dispositivo ha terminado de arrancar a menos que las optimizaciones de la batería estén desactivadas para ello.
+\nLa aplicación no está actualmente en la lista blanca de la optimización de la batería, ¿quieres hacer esto\?
+\n
+\nDeberías probar si funciona con la optimización activada antes de desactivarla.</string>
+    <string name="dialog_changelog_infotext">La aplicación ha sido actualizada desde la última vez que la abriste. En la siguiente lista puede ver el registro de cambios. Marca la casilla de abajo y no verás este mensaje en el futuro.</string>
+    <string name="dialog_crashreporting_message">¡Gracias por usar Nebulo!
+\n
+\nEsta aplicación utiliza software de código abierto y de terceros autoalojados para facilitar el seguimiento de las caídas de la aplicación tan pronto como se producen. Sólo si está activada, la aplicación transmitirá informes de fallos cuando se produzca un fallo. Estos informes contienen datos adicionales sobre la aplicación y el dispositivo. Esto incluye un identificador que se utiliza para rastrear los bloqueos que provienen del mismo usuario, pero que no se puede utilizar para rastrear nada más. Habilitar el informe de fallos es opcional, pero me ayudaría mucho.
+\nLos informes se envían de forma segura a través de HTTPS.
+\n
+\nHaga clic en \"Ver datos\" abajo para ver qué tipo de datos se transmiten y para un enlace a la política de privacidad.</string>
+    <string name="dialog_crashreporting_message_notester">¡Gracias por usar Nebulo!
+\n
+\nEsta aplicación utiliza software de código abierto y de terceros autoalojados para facilitar el seguimiento de las caídas de la aplicación tan pronto como se producen. Sólo si está activada, la aplicación transmitirá informes de fallos cuando se produzca un fallo. Estos informes contienen datos adicionales sobre la aplicación y el dispositivo. Esto incluye un identificador que se utiliza para rastrear los bloqueos que provienen del mismo usuario, pero que no se puede utilizar para rastrear nada más. Habilitar el informe de fallos es opcional, pero haría que la reparación de los errores fuera más fácil y rápida.
+\nLos informes se envían de forma segura a través de HTTPS
+\n
+\nHaga clic en \"Ver datos\" abajo para ver qué tipo de datos se transmiten y para un enlace a la política de privacidad.</string>
+    <string name="dialog_speedresult_title">Los resultados de la prueba de velocidad</string>
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d servidores probados
+\n %2d Servidores DoT alcanzables, %3d no alcanzables
+\n %4d Servidores DoH alcanzables, %5d no alcanzables
+\n Tiempo de respuesta promedio: %6d ms.
+\n
+\n El servidor más rápido: %7s
+\n El servidor más lento: %8s</string>
+    <string name="dialog_speedtest_useserver_message">¿Quieres usar el servidor %1s\? Se clasificó %2d de %3d con un tiempo de respuesta de %4d ms.</string>
+    <string name="dialog_clearuserrules_title">¿Despejar todas las reglas del DNS\?</string>
+    <string name="dialog_clearuserrules_message">¿Quieres limpiar todas las reglas del DNS\? Esto no se puede deshacer.</string>
+    <string name="dialog_newhostsource_error_name_empty">Por favor, proporcione un nombre</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Por favor, proporcione una dirección IPv6 válida</string>
+    <string name="dialog_exportdnsrules_title">Exportar las reglas del DNS</string>
+    <string name="dialog_editdelete_title">¿Qué quieres hacer\?</string>
+    <string name="dialog_servicekilled_message">La aplicación detectó que no se detuvo correctamente la última vez que estuvo activa. Esto indica claramente que su sistema eligió forzar la parada de la aplicación sin ninguna posibilidad de que la aplicación se reinicie a sí misma.
+\n
+\nEn la mayoría de los dispositivos tienes algunas opciones para evitar o al menos retrasar que el sistema detenga la aplicación.
+\nPor ejemplo, puedes desactivar las optimizaciones de la batería para la aplicación en la configuración del sistema o evitar que la aplicación se borre de la lista de recientes.
+\n
+\nSi eliges ignorar esto, no volverás a ver este diálogo. Puedes leer más y recibir consejos para resolver esto con el botón de abajo (abre una página web externa en tu navegador). Haz clic en configuración para abrir la configuración de Android, donde puedes desactivar las optimizaciones de la batería para Nebulo.</string>
+    <string name="dialog_cleardnscache_message">¿Estás seguro de que quieres limpiar el caché del DNS\?</string>
+    <string name="dialog_vpn_permission_denied_message">El sistema ha negado a Nebulo el inicio de su VPN. Por favor, abra la aplicación para conceder el permiso allí pulsando el botón de inicio.</string>
+    <string name="dialog_appchoosal_whitelist">Sólo usa DoH/DoT en las aplicaciones seleccionadas</string>
+    <string name="dialog_serverimport_done">Hecho</string>
+    <string name="dialog_serverimport_priority">Prioridad %1d</string>
+    <string name="dialog_serverimport_experimental">Experimental</string>
+    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Por favor, seleccione los servidores que desea importar. 
+\n 
+\nSi selecciona servidores ya importados, se duplicarán.</string>
+    <string name="dialog_serverimportfailed_title">Importación fallida</string>
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Los servidores no han podido ser importados. 
+\n(%1s)</string>
+    <string name="dialog_logexport_general">Elija la aplicación</string>
+    <string name="dialog_batteryoptimization_title">Optimización de la batería</string>
+    <string name="dialog_batteryoptimization_whitelist">Desactivar</string>
+    <string name="dialog_changelog_dont_show_again">No vuelvas a aparecer</string>
+    <string name="dialog_about_licenses">Licencias</string>
+    <string name="dialog_query_export_message">Por favor, espere mientras se exportan las consultas</string>
+    <string name="dialog_crashreporting_title">Reporte automático de colisión</string>
+    <string name="dialog_crashreportingusages_title">Los datos transmitidos</string>
+    <string name="dialog_crashreporting_positive">Habilitar el reporte de accidentes</string>
+    <string name="dialog_crashreporting_negative">No, gracias.</string>
+    <string name="dialog_crashreporting_neutral">Ver datos</string>
+    <string name="dialog_credits_title">Créditos</string>
+    <string name="dialog_join_group_title">Únete a la comunidad</string>
+    <string name="dialog_join_group_positive">¡Sí!</string>
+    <string name="dialog_deletehostsource_title">¿Borrar los %1s\?</string>
+    <string name="dialog_newhostsource_title">Nueva fuente de reglas</string>
+    <string name="dialog_newhostsource_name">Nombre</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newdnsrule_title">Nueva regla del DNS</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">Dirección IPv4</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">Dirección IPv6</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Por favor, proporcione una dirección IPv4 válida</string>
+    <string name="dialog_newhostsource_choose_file">Elija el archivo</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Exportar reglas DNS de host personalizadas</string>
+    <string name="dialog_exportdnsrules_export_sources">Exportar reglas DNS de fuentes de host habilitadas</string>
+    <string name="dialog_newdnsrule_whitelist">Lista blanca</string>
+    <string name="dialog_newdnsrule_specify_address">Dirección</string>
+    <string name="dialog_newhostsource_use_as_whitelist">Usar como lista blanca</string>
+    <string name="dialog_newhostsource_edit_title">Nueva fuente de reglas</string>
+    <string name="dialog_newdnsrule_edit">Editar la regla del DNS</string>
+    <string name="dialog_editdelete_edit">Edita</string>
+    <string name="dialog_editdelete_delete">Eliminar</string>
+    <string name="dialog_servicekilled_more_info">Más información</string>
+    <string name="dialog_newhostsource_wildcard_info">Puede utilizar listas de hosts que hacen uso de dominios comodines.</string>
+    <string name="dialog_overlaydetected_title">Se ha detectado una superposición en todo el sistema</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">Actualizar sólo en WIFI</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">Refrescar cada</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">Refrésquese ahora</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">Horario</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">Días</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">Semanas</string>
+    <string name="dialog_vpninformation_title">Cómo funciona esta aplicación</string>
+    <string name="dialog_exportdnsrules_whitelist">Reglas de la lista blanca de exportación</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">Exportar las reglas normales</string>
+    <string name="dialog_raterequest_title">¿Estás disfrutando de Nebulo\?</string>
+    <string name="dialog_logexport_text">¿Cómo quieres compartir los registros de depuración\?</string>
+    <string name="dialog_rate_confirmation">¿Quieres abrir el play store para calificar la aplicación\?</string>
+    <string name="dialog_deletehostsource_message">¿Estás seguro de que quieres borrar la fuente de host %1s\? Esto no puede deshacerse, los hosts de esta fuente serán eliminados.</string>
+    <string name="dialog_newdnsrule_wildcard_info">El host apoya a los comodines. Utilice un asterisco (*) para cualquier cantidad de caracteres, números y caracteres especiales permitidos excepto el punto (.). Utilice dos asteriscos (**) para incluir el punto (.).</string>
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">%1d aplicación está excluida por defecto y no puede ser deseleccionada</item>
+        <item quantity="other">%1d aplicaciones están excluidas por defecto y no pueden ser deseleccionadas</item>
+    </plurals>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">Importación de %1d servidor</item>
+        <item quantity="other">Importación de %1d servidores</item>
+    </plurals>
+    <string name="dialog_serverimport_servertype_doh">Tipo: DNS-over-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_dot">Tipo: DNS-over-TLS (DoT)</string>
+    <string name="dialog_deletelogs_text">¿Estás seguro de que quieres borrar todos los registros de depuración\?</string>
+    <string name="dialog_error_title">Informe de fallo</string>
+    <string name="dialog_batteryoptimization_ignore">Ignore</string>
+    <string name="dialog_changelog_title">Registro de cambios</string>
+    <string name="dialog_query_export_title">Exportar consultas…</string>
+    <string name="dialog_pin_message">Por favor, proporcione su PIN.</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_enable_logging">¿Quiere habilitar los registros\? Los registros contienen información estadística, información de depuración y acciones en la aplicación. Los registros generados no se comparten a menos que lo haga usted mismo.</string>
+    <string name="dialog_clearqueries_title">Borrar todas las consultas del DNS</string>
+    <string name="dialog_clearqueries_message">¿Estás seguro de que quieres borrar las consultas del DNS registradas\? Esto no puede ser revertido.</string>
+    <string name="dialog_credits_message" formatted="true">- Icono de la aplicación por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; . 
+\n- Traducción al turco por Kemal Oktay Aktoğan 
+\n- Traducción al ruso por bruleto 
+\n- Traducción al holandés por Bas Koedijk 
+\n- Traducción al portugués de Rafael W. Bohnenberger 
+\n- Traducción al indonesio por Gloeyisk 
+\n- Traducción al catalán de Daniel Alomar
+\n- Traducción al castellano de Daniel Alomar y Víctor Bayas
+\n- Algunos iconos de Font Awesome 
+\n 
+\n ¿Quieres ver tu nombre aquí\? Siéntase libre de &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuir&lt;/a&gt;.</string>
+    <string name="dialog_speedtest_useserver_title">Seleccione el servidor</string>
+    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_host_invalid">Por favor, proporcione un host válido</string>
+    <string name="dialog_hostsourcerefresh_title">Actualizar las fuentes de hosts</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Refrescar automáticamente las fuentes del hosts</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutas</string>
+    <string name="dialog_logexport_loading_title">Preparando los registros</string>
+    <string name="dialog_raterequest_message">¡Hola! Si estás disfrutando de Nebulo, ¿podrías tomarte un momento para evaluarlo en la tienda\?</string>
+</resources>

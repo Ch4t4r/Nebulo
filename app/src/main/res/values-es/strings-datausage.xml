@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dialog_crashreportingusages_data_device_1">Arquitectura (x86, arm, …)</string>
+    <string name="dialog_crashreportingusages_data_user_1">La identificación aleatoria se usa para rastrear los choques</string>
+    <string name="dialog_crashreportingusages_data_4">Datos del sistema operativo</string>
+    <string name="dialog_crashreportingusages_data_3">Datos de la aplicación</string>
+    <string name="dialog_crashreportingusages_data_2">Datos del dispositivo</string>
+    <string name="dialog_crashreportingusages_data_1">Datos de usuario</string>
+    <string name="dialog_crashreportingusages_data_os_4">Root (sí/no)</string>
+    <string name="dialog_crashreportingusages_data_os_3">Versión del núcleo</string>
+    <string name="dialog_crashreportingusages_data_os_2">Versión (por ejemplo, 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_1">Nombre (por ejemplo, Androide)</string>
+    <string name="dialog_crashreportingusages_data_app_6">Servidor DNS secundario</string>
+    <string name="dialog_crashreportingusages_data_app_5">Servidor DNS primario</string>
+    <string name="dialog_crashreportingusages_data_app_4">Nombre del servidor DNS</string>
+    <string name="dialog_crashreportingusages_data_app_3">Versión de la base de datos</string>
+    <string name="dialog_crashreportingusages_data_app_2">Versión de la aplicación</string>
+    <string name="dialog_crashreportingusages_data_app_1">Hora de inicio de la aplicación</string>
+    <string name="dialog_crashreportingusages_data_device_10">Idioma</string>
+    <string name="dialog_crashreportingusages_data_device_9">Modelo</string>
+    <string name="dialog_crashreportingusages_data_device_8">Marca</string>
+    <string name="dialog_crashreportingusages_data_device_7">Fabricante</string>
+    <string name="dialog_crashreportingusages_data_device_6">Resolución de la pantalla</string>
+    <string name="dialog_crashreportingusages_data_device_5">En línea en el momento del choque (sí/no)</string>
+    <string name="dialog_crashreportingusages_data_device_4">Estado de carga (sí/no)</string>
+    <string name="dialog_crashreportingusages_data_device_3">Memoria libre/utilizada (RAM)</string>
+    <string name="dialog_crashreportingusages_data_device_2">Orientación (paisaje, retrato)</string>
+</resources>

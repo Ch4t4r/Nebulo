@@ -1,8 +1,10 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="menu_main">应用状态</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_main">应用状态</string>
     <string name="menu_settings">设置</string>
-    <string name="menu_querylogging">记录查询</string>
-    <string name="menu_create_shortcut">新增服务器</string>
+    <string name="menu_querylogging">已记录请求</string>
+    <string name="menu_create_shortcut">添加服务器快捷方式</string>
     <string name="menu_rate">评分</string>
-    <string name="menu_about">关于</string>
-    </resources>
+    <string name="menu_about">关于此应用</string>
+    <string name="menu_show_on_fdroid">在 F-Droid 上展示</string>
+</resources>

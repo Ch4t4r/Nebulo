@@ -148,11 +148,6 @@ fun Fragment.log(e: Throwable) {
     if (context != null) requireContext().log(e)
 }
 
-fun Fragment.closeLogger() {
-    if (Logger.isOpen())
-        Logger.getInstance(requireContext()).destroy()
-}
-
 class Logger private constructor(context: Context) {
     private val logFile: File
     private val fileWriter: BufferedWriter
