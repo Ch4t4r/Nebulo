@@ -465,6 +465,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("Service onStartCommand", intent = intent)
+        runInNonVpnMode = getPreferences().runWithoutVpn
         if (intent != null && intent.hasExtra("command")) {
             when (intent.getSerializableExtra("command") as Command) {
                 Command.STOP -> {
