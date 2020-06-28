@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -15,6 +16,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.*
 import com.frostnerd.general.isInt
+import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.R
@@ -25,6 +27,7 @@ import com.frostnerd.smokescreen.dialog.AppChoosalDialog
 import com.frostnerd.smokescreen.dialog.CrashReportingEnableDialog
 import com.frostnerd.smokescreen.dialog.LoadingDialog
 import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
+import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import com.frostnerd.smokescreen.util.preferences.Theme
@@ -239,6 +242,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun processNonVpnCategory() {
+        val enabled = findPreference("run_without_vpn") as CheckBoxPreference
         val port = findPreference("non_vpn_server_port") as EditTextPreference
         val connectInfo = findPreference("nonvpn_connect_info")
         port.setOnPreferenceChangeListener { _, newValue ->
@@ -249,6 +253,18 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else {
                 false
             }
+        }
+        enabled.setOnPreferenceChangeListener { _, newValue ->
+            val value = newValue as Boolean
+            val serviceRunning = requireContext().isServiceRunning(DnsVpnService::class.java)
+            if(value && serviceRunning) {
+                DnsVpnService.sendCommand(requireContext(), Command.STOP)
+            } else if(!value) {
+                if(serviceRunning && VpnService.prepare(requireContext()) == null)
+                    DnsVpnService.restartVpn(requireContext(), false)
+                else if(serviceRunning) DnsVpnService.sendCommand(requireContext(), Command.STOP)
+            }
+            true
         }
         port.summary = getString(R.string.summary_local_server_port, requireContext().getPreferences().dnsServerModePort.toString())
         connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, requireContext().getPreferences().dnsServerModePort.toString())
