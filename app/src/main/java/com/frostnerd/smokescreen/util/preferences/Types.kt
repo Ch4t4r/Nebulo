@@ -25,58 +25,6 @@ import kotlin.reflect.KProperty
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-class ServerConfigurationPreference(key: String, defaultValue: (String) -> ServerConfiguration) :
-    PreferenceTypeWithDefault<SharedPreferences, ServerConfiguration>(key, defaultValue) {
-    constructor(key: String, defaultValue: ServerConfiguration) : this(key, { defaultValue })
-
-    private val encodedDivider = "/~~/"
-
-    override fun getValue(thisRef: TypedPreferences<SharedPreferences>, property: KProperty<*>): ServerConfiguration {
-        if (thisRef.sharedPreferences.contains(key)) {
-            val encoded = thisRef.sharedPreferences.getString(key, "0")!!
-            return if (encoded.contains(encodedDivider)) {
-                val split = encoded.split(encodedDivider)
-                val requestType = RequestType.fromId(split[1].toInt())!!
-                val responseType = ResponseType.fromId(split[2].toInt())!!
-                ServerConfiguration.createSimpleServerConfig(split[0], requestType, responseType)
-            } else {
-                return AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
-                    (it[encoded.toInt()] ?: error("Server with ID ${encoded.toInt()} not found")).serverConfigurations.entries.first().value
-                }
-            }
-        } else return defaultValue(key)
-    }
-
-    override fun setValue(
-        thisRef: TypedPreferences<SharedPreferences>,
-        property: KProperty<*>,
-        value: ServerConfiguration
-    ) {
-        var encoded: String? = null
-
-        AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
-            for ((id, config) in it) {
-                for (serverConfiguration in config.serverConfigurations) {
-                    if (serverConfiguration.value == value) {
-                        encoded = id.toString()
-                        break
-                    }
-                }
-            }
-        }
-
-        if (encoded == null) {
-            encoded = value.urlCreator.address.getUrl() + encodedDivider + value.transportConfig.requestType.id +
-                    encodedDivider + value.transportConfig.responseType.id
-        }
-
-        thisRef.edit {listener ->
-            putString(key, encoded)
-            listener(key, value)
-        }
-    }
-}
-
 class StringBasedIntPreferenceWithDefault<PrefType : SharedPreferences>(
     key: String,
     defaultValue: (key: String) -> Int
@@ -100,9 +48,4 @@ class StringBasedIntPreferenceWithDefault<PrefType : SharedPreferences>(
 fun <PrefType : SharedPreferences> stringBasedIntPref(
     key: String,
     defaultValue: Int
-): StringBasedIntPreferenceWithDefault<PrefType> = StringBasedIntPreferenceWithDefault(key, defaultValue)
-
-fun <PrefType : SharedPreferences> stringBasedIntPref(
-    key: String,
-    defaultValue: (key: String) -> Int
 ): StringBasedIntPreferenceWithDefault<PrefType> = StringBasedIntPreferenceWithDefault(key, defaultValue)

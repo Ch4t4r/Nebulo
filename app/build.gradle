@@ -110,6 +110,11 @@ android {
         disable 'MissingTranslation'
         disable 'InvalidPeriodicWorkRequestInterval'
     }
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
 }
 
 dependencies {
@@ -131,7 +136,7 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.3.4'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "androidx.preference:preference:1.1.1"
-    implementation "com.google.android.material:material:1.2.0-alpha06"
+    implementation "com.google.android.material:material:1.2.0-beta01"
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-alpha01'
 
     implementation "androidx.room:room-runtime:$room_version"

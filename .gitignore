@@ -34,6 +34,11 @@ captures/
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
+.idea/markdown-navigator.xml
+.idea/markdown-navigator-enh.xml
+
+.idea/navEditor.xml
+
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries

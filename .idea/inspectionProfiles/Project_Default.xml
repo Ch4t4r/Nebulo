@@ -1,9 +1,5 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
-    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
-      <searchConfiguration name="Use Preferences (from AndroidUtils) instead of SharedPreferences" text="SharedPreferences" recursive="false" caseInsensitive="true" type="JAVA" />
-      <searchConfiguration name="Use Preferences (from AndroidUtils) instead of SharedPreferences" text="PreferenceManager.getDefaultSharedPreferences();" recursive="false" caseInsensitive="true" type="JAVA" />
-    </inspection_tool>
   </profile>
 </component>

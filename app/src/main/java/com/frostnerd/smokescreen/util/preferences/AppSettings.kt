@@ -143,10 +143,6 @@ interface AppSettings {
         }
         userServers = mutableServers
     }
-
-    fun shouldShowCrashReportingConsentDialog(): Boolean {
-        return !isReleaseVersion && !crashReportingConsent && !crashReportingConsentAsked && !BuildConfig.DEBUG
-    }
 }
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context, version = 1, migrate = migration) {

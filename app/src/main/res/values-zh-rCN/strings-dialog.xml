@@ -1,2 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <plurals name="dialog_excludedapps_infotext">
+        <item quantity="one">默认有%1d个应用被选中，且不可被取消选中</item>
+        <item quantity="other"/>
+    </plurals>
+    <string name="dialog_appchoosal_showsystemapps">显示系统应用</string>
+    <string name="dialog_deleteconfig_text">您是否想删除名为 %1$s 的配置？</string>
+    <string name="dialog_deleteconfig_title">是否删除配置？</string>
+    <string name="dialog_newserver_secondaryserver">次要服务器（可选）</string>
+    <string name="dialog_newserver_primaryserver">首要服务器</string>
+    <string name="dialog_newserver_name_hint">范例</string>
+    <string name="dialog_newserver_title_tls">添加服务器（DoT）</string>
+    <string name="dialog_newserver_title_https">添加服务器（DoH）</string>
+    <string name="dialog_serverconfiguration_addserver">添加服务器</string>
+    <string name="dialog_serverconfiguration_title">服务器配置</string>
+    <string name="dialog_appchoosal_whitelist">仅在选定的应用中使用DoH/DoT</string>
+    <string name="dialog_newserver_name">服务器名称</string>
+    <plurals name="dialog_serverimport_title">
+        <item quantity="one">导入%1d个服务器</item>
+        <item quantity="other"/>
+    </plurals>
+    <string name="dialog_serverimport_priority">优先级 %1d</string>
+    <string name="dialog_serverimport_experimental">实验性功能</string>
+    <string name="dialog_serverimport_servertype_doh">类型：DNS-over-HTTPS（DoH）</string>
+    <string name="dialog_serverimport_servertype_dot">类型：DNS-over-TLS（DoT）</string>
+    <string name="dialog_serverimport_done">完成</string>
+    <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">请选择您想导入的服务器。
+\n
+\n如果您选择了已被导入的服务器，那么服务器将会有重复。</string>
+    <string name="dialog_serverimportfailed_title">导入失败</string>
+    <string name="dialog_serverimportfailed_text">无法导入服务器。</string>
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">无法导入服务器。
+\n(%1s)</string>
+    <string name="dialog_logexport_text">您想如何分享日志？</string>
+    <string name="dialog_logexport_email">电子邮件</string>
+    <string name="dialog_deletelogs_text">您确定您想删除所有日志吗？</string>
+    <string name="dialog_error_title">崩溃报告</string>
+    <string name="dialog_batteryoptimization_title">电池优化</string>
+    <string name="dialog_batteryoptimization_message">在一些设备上，设备启动完成后，如果应用的电池优化没有被禁用，应用不会收到启动完成通知。
+\n本应用目前并未在电池优化白名单中。您想将应用列入白名单中吗？
+\n
+\n在禁用应用的电池优化之前，请先测试应用能否正常工作。</string>
+    <string name="dialog_batteryoptimization_whitelist">禁用</string>
+    <string name="dialog_batteryoptimization_ignore">忽略</string>
+    <string name="dialog_rate_confirmation">您想打开Play商店来为应用评分吗？</string>
+    <string name="dialog_changelog_title">更新日志</string>
+    <string name="dialog_error_text">应用似乎崩溃了。您想将崩溃日志文件发送给开发者吗？</string>
+    <string name="dialog_logexport_general">选择应用</string>
+    <string name="dialog_logexport_loading_title">正在准备日志</string>
+    <string name="dialog_changelog_infotext">本应用自您上次启动后已被更新。您可以在下面的列表中看到更新日志。若您勾选位于下方的框，则此消息以后将不再显示。</string>
+    <string name="dialog_changelog_dont_show_again">不再显示</string>
+    <string name="dialog_about_licenses">许可</string>
+    <string name="dialog_query_export_title">正在导出请求项…</string>
+    <string name="dialog_query_export_message">正在导出查询请求项，请稍候</string>
+    <string name="dialog_pin_message">请输入您的PIN。</string>
+    <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_enable_logging">您是否要启用日志？日志包含统计信息、调试信息和应用所执行的操作。除非您自己想要共享日志，否则生成的日志不会被共享。</string>
+    <string name="dialog_crashreporting_title">自动发送崩溃报告</string>
+    <string name="dialog_crashreportingusages_title">被传送数据</string>
+    <string name="dialog_crashreportingusages_message">请点击任一组别以查看崩溃时应用发送了什么信息。</string>
+    <string name="dialog_crashreporting_positive">启用崩溃报告</string>
+    <string name="dialog_crashreporting_negative">不了，谢谢。</string>
+    <string name="dialog_crashreporting_neutral">查看数据</string>
+    <string name="dialog_crashreporting_message_notester">感谢使用Nebulo！
+\n
+\n本应用使用开源和自托管的第三方软件以便于在崩溃发生时第一时间追踪崩溃。当且仅当启用崩溃报告后，应用才会在崩溃时发送崩溃报告。这些崩溃报告包含关于应用与您的设备的一些附加信息，包括用于追踪同一用户崩溃的一个ID，而这个ID除此用途外无法用于他用。启用崩溃报告是可选的，但是如果您启用了崩溃报告，修复漏洞会更加简便快捷。
+\n崩溃报告一律使用HTTPS安全地传输。
+\n
+\n点击下方的“查看数据”以查看会传送什么数据，以及阅读隐私政策。</string>
+    <string name="dialog_clearqueries_title">清除所有请求项</string>
+    <string name="dialog_clearqueries_message">您确定您要清除所有已记录请求吗？此操作无法撤销。</string>
+    <string name="dialog_credits_title">致谢名单</string>
+    <string name="dialog_join_group_title">加入社区</string>
+    <string name="dialog_join_group_positive">好啊！</string>
+    <string name="dialog_speedresult_title">测速结果</string>
+    <string name="dialog_crashreporting_message">感谢使用Nebulo！
+\n
+\n本应用使用开源和自托管的第三方软件以便于在崩溃发生时第一时间追踪崩溃。当且仅当启用崩溃报告后，应用才会在崩溃时发送崩溃报告。这些崩溃报告包含关于应用与您的设备的一些附加信息，包括用于追踪同一用户崩溃的一个ID，而这个ID除此用途外无法用于他用。启用崩溃报告是可选的，但是如果您启用了崩溃报告，对我将会有很大帮助。
+\n崩溃报告一律使用HTTPS安全地传输。
+\n
+\n点击下方的“查看数据”以查看会传送什么数据，以及阅读隐私政策。</string>
+    <string name="dialog_credits_message" formatted="true">- 应用图标由 &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 绘制。 
+\n- 土耳其语翻译由 Kemal Oktay Aktoğan 完成 
+\n- 俄语翻译由 bruleto 完成 
+\n- 荷兰语翻译由 Bas Koedijk 完成 
+\n- 葡萄牙语翻译由 Rafael W. Bohnenberger 完成 
+\n- 印度尼西亚语翻译由 Gloeyisk 完成 
+\n- 加泰罗尼亚语翻译由 Daniel Alomar 完成 
+\n- 西班牙语翻译由 Daniel Alomar 与 Victor Bayas 完成 
+\n- 一些图标来自 Font Awesome 
+\n- 简体中文翻译由 Ediel Chedlyramber 完成
+\n 
+\n想要在这里看到您的名字吗？您可以随意为此应用&lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;做出贡献&lt;/a&gt;。</string>
+    <string name="dialog_join_group_message">嘿，你好！
+\n
+\n你知道这款应用有Telegram群组吗？群组包含有定期的更新，同时也是讨论与提问的极佳去处。
+\n我们是一个由超过200人组成的优质社群，你想成为其中的一分子吗？</string>
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">已测试 %1d 个服务器
+\n %2d 个DoT服务器可用，%3d个不可用
+\n %4d 个DoH服务器可用，%5d个不可用
+\n 平均响应时间：%6d ms。
+\n
+\n 最快的服务器：%7s
+\n 最慢的服务器：%8s</string>
+    <string name="dialog_speedtest_useserver_title">选择服务器</string>
+    <string name="dialog_speedtest_useserver_message">您想使用 %1s 服务器吗？它在%3d个服务器中排名第%2d，响应时间为%4d毫秒。</string>
+    <string name="dialog_deletehostsource_title">是否删除 %1s？</string>
+    <string name="dialog_deletehostsource_message">您确定您要删除规则源 %1s 吗？此操作无法撤销，此规则源下的规则将被删除。</string>
+    <string name="dialog_newhostsource_name">名称</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newdnsrule_title">新建DNS规则</string>
+    <string name="dialog_newhostsource_title">添加规则源</string>
+    <string name="dialog_newhostsource_wildcard_info">您可以使用带有域名通配符的规则列表。</string>
+    <string name="dialog_newdnsrule_hint_host">域名</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">IPv6 地址</string>
+    <string name="dialog_newdnsrule_host_invalid">请提供有效域名</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">请提供有效IPv4地址</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">请提供有效IPv6地址</string>
+    <string name="dialog_clearuserrules_title">是否清除所有DNS规则？</string>
+    <string name="dialog_clearuserrules_message">您确认您要清除所有DNS规则吗？此操作无法撤销。</string>
+    <string name="dialog_newhostsource_error_name_empty">请命名</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">IPv4 地址</string>
+    <string name="dialog_newhostsource_choose_file">选择文件</string>
+    <string name="dialog_newdnsrule_whitelist">白名单</string>
+    <string name="dialog_newdnsrule_specify_address">地址</string>
+    <string name="dialog_newhostsource_use_as_whitelist">用作白名单</string>
+    <string name="dialog_newhostsource_edit_title">添加规则源</string>
+    <string name="dialog_newdnsrule_wildcard_info">域名支持使用通配符。使用一个星号（*）来匹配除点号（.）以外的任意长度的任意字母、数字及允许使用的特殊符号。使用两个星号（**）以增加对点号（.）的匹配。</string>
+    <string name="dialog_newdnsrule_edit">编辑DNS规则</string>
+    <string name="dialog_exportdnsrules_title">导出DNS规则</string>
+    <string name="dialog_exportdnsrules_whitelist">导出白名单规则</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">导出普通规则</string>
+    <string name="dialog_exportdnsrules_export_user_rules">导出自定义域名DNS规则</string>
+    <string name="dialog_exportdnsrules_export_sources">从启用的规则源导出DNS规则</string>
+    <string name="dialog_editdelete_title">您想做什么？</string>
+    <string name="dialog_editdelete_delete">删除</string>
+    <string name="dialog_editdelete_edit">编辑</string>
+    <string name="dialog_servicekilled_message">本应用检测到应用在上次活跃时没有被正确地中止运行。这表明您的系统选择了强行终止应用，而不允许让应用自行重启。
+\n
+\n在大多数设备上，您有几个选项可以防止或至少延迟系统终止应用运行的时间。
+\n比如，您可以在系统设置中禁用应用的电池优化功能，或者避免将应用从最近使用列表中清除。
+\n
+\n如果您选择忽略，则不会再看到此对话框。您可以点击下面的按钮（在浏览器中打开外部网站）以阅读更多内容，并获得解决这种问题的方法。点击设置以进入Android设置，在这里您可以禁用Nebulo的电池优化。</string>
+    <string name="dialog_servicekilled_more_info">更多信息</string>
+    <string name="dialog_overlaydetected_title">检测到系统遮罩层</string>
+    <string name="dialog_overlaydetected_message">有一个系统范围内的遮罩层（如聊天气泡、滤色器或夜视过滤器）似乎正处于活跃状态。大多数设备不允许您在这种情况下启用VPN。
+\n
+\n如果您不能在即将出现的对话框中点击确定，请禁用覆盖层。</string>
+    <string name="dialog_vpninformation_message">Nebulo通过使用一个傀儡VPN连接来重定向您所有的DNS请求至一个您选择的安全的服务器。
+\n这个傀儡VPN并非真正的VPN，它也无法隐藏您的身份，无法更改您的IP地址。
+\n
+\n除DNS请求以外，使用本应用不会传输实际的数据。</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">分钟</string>
+    <string name="dialog_hostsourcerefresh_title">更新规则源</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">自动更新规则源</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">仅在Wi-Fi下更新</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">更新，每隔</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">立刻更新</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">个小时</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">天</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">周</string>
+    <string name="dialog_cleardnscache_message">您确定您想清空DNS缓存吗？</string>
+    <string name="dialog_vpninformation_title">本应用如何工作</string>
+    <string name="dialog_raterequest_title">您是否喜欢Nebulo？</string>
+    <string name="dialog_raterequest_message">你好！如果你喜欢Nebulo，你愿意花一点时间在应用商店里为它打分吗？</string>
+    <string name="dialog_vpn_permission_denied_message">系统拒绝了Nebulo启动VPN。请启动应用，并在应用内点击启动按钮以给予VPN权限。</string>
+    <string name="dialog_help_translating_message" translatable="false">此应用虽已被翻译为若干语言，但是还有更多语言尚未被翻译或者翻译完全——包括您使用的语言。
+\n
+\n这也是为何我在翻译这个应用上诚恳地希望能够得到您的帮助，以能够尽可能多地增多受众。如果您有意愿协助将这个应用翻译为您所使用的语言，不要犹豫，请联系我，或者&lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/TRANSLATING.md&gt;了解如何帮助。&lt;/a&gt;</string>
+    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false"/>
+    <string name="dialog_newserver_secondaryserver_hint" translatable="false"/>
+    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false"/>
+    <string name="dialog_newserver_primaryserver_hint" translatable="false"/>
+    <string name="dialog_serverconfiguration_tls" translatable="false"/>
+    <string name="dialog_serverconfiguration_https" translatable="false"/>
+    <string name="dialog_doh_detect_type_message">请稍等片刻。</string>
+    <string name="dialog_doh_detect_type_title">检测服务器类型</string>
+</resources>

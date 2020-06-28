@@ -1,13 +1,11 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="notification_channel_default">Varsayılan Kanal</string>
-    <string name="notification_channel_default_description">Bildirimlerin gönderilmesi için varsayılan kanal.</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_channel_default">Varsayılan Kanal</string>
+    <string name="notification_channel_default_description">Bildirimlerin gönderilmesi için varsayılan kanal</string>
     <string name="notification_channel_foreground_service">Kalıcı Bildirim Kanalı</string>
     <string name="notification_channel_foreground_service_description">Kullanıcı tarafından kaldırılamayan bildirimler için kullanılan kanal</string>
-
     <string name="notification_channel_noconnection">Bağlantı uyarı kanalı</string>
     <string name="notification_channel_noconnection_description">Hiçbir bağlantı görünmediğinde bildirimleri göstermek için kullanılan kanal</string>
-
     <string name="notification_main_text">Sorgular %1$s adresine gönderilir
 \n
 \n%2$d Uygulama, DoH/DoT’den hariç tutuldu
@@ -27,37 +25,29 @@
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">Şu ana kadar %1$d sorgu</string>
-
     <string name="notification_noconnection_title">Bağlantı yok</string>
-    <string name="notification_noconnection_text">Uygulama şu anda DNS sorgularınızı iletmiyor çünkü bağlantınız kötü ya da yok.</string>
-
+    <string name="notification_noconnection_text">Uygulama şu anda DNS sorgularınızı iletmiyor çünkü bağlantınız kötü ya da yok</string>
     <string name="notification_vpnrestart_title">VPN yeniden başlatılıyor</string>
-    <string name="notification_vpnrestart_text">VPN hizmeti yakında yeniden başlatılacak.</string>
-
+    <string name="notification_vpnrestart_text">VPN hizmeti yakında yeniden başlatılacak</string>
     <string name="notification_appcrash_title">Nebulo çöktü</string>
-    <string name="notification_appcrash_message">Nebulo çöktü. Ana menüye gitmek ve gerekirse uygulamayı yeniden başlatmak için burayı tıklayın.</string>
-<string name="notification_ruleimport_title">DNS kuralı ithâlatı</string>
+    <string name="notification_appcrash_message">Nebulo çöktü. Ana menüye gitmek ve gerekirse uygulamayı yeniden başlatmak için burayı tıklayın</string>
+    <string name="notification_ruleimport_title">DNS kuralı ithâlatı</string>
     <string name="notification_ruleimport_message">%1s(%2s)\'den DNS kuralları ithal ediliyor</string>
     <string name="notification_ruleimport_secondarymessage">İthâlata hazırlanıyor…</string>
     <string name="notification_ruleimport_tertiarymessage">İthâlat bitiyor…</string>
-
     <string name="notification_ruleimportfinished_title">DNS kuralı ithâlatı tamamlandı</string>
     <string name="notification_ruleimportfinished_message">%1d kural(lar)ı içe aktarıldı (%2$d kopya çıkarıldı)</string>
-
     <string name="notification_ruleexport_title">DNS kural ihracatı</string>
     <string name="notification_ruleexport_message">İhrâcat kuralları (%1d/%2d)</string>
     <string name="notification_ruleexport_secondarymessage">İhrâcat hazırlanıyor…</string>
-
     <string name="notification_ruleexportfinished_title">DNS kural ihrâcatı tamamlandı</string>
-    <string name="notification_ruleexportfinished_message">%1d kural(lar)ı ihrâc edildi.</string>
-<string name="notification_channel_pin">Pin ile ilgili kanal</string>
-    <string name="notification_channel_pin_description">Pin ile ilgili bildirimler için kullanılan kanal, yani ne zaman verilmesi gerektiği</string>
-
+    <string name="notification_ruleexportfinished_message">%1d kural(lar)ı ihrâc edildi</string>
+    <string name="notification_channel_pin">Pin ile ilgili kanal</string>
+    <string name="notification_channel_pin_description">PIN ile ilgili bildirimler için kullanılan kanal, yani ne zaman verilmesi gerektiği</string>
     <string name="notification_pin_title">PIN gerekli</string>
-    <string name="notification_pin_message">Bu işlemi gerçekleştirmek için PIN\'iniz gerekir. Onaylamak için buraya tıklayın.</string>
-
+    <string name="notification_pin_message">Bu işlemi gerçekleştirmek için PIN\'iniz gerekir. Onaylamak için buraya tıklayın</string>
     <string name="notification_service_killed_title">Pil iyileştirmesi hakkında bilgi</string>
-    <string name="notification_service_killed_message">Uygulama daha önce sistem tarafından durdurulmuş gibi görünüyor. Daha fazlasını öğrenmek için buraya tıklayın.</string>
+    <string name="notification_service_killed_message">Uygulama daha önce sistem tarafından durdurulmuş gibi görünüyor. Daha fazlasını öğrenmek için buraya tıklayın</string>
     <string name="notification_service_killed_ignore">Yoksay</string>
-<string name="notification_simple_text">Geçerli sunucu: %1$s</string>
-    </resources>
+    <string name="notification_simple_text">Geçerli sunucu: %1$s</string>
+</resources>

@@ -13,6 +13,7 @@ import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
 import java.io.StringReader
 import java.io.StringWriter
+import java.util.*
 import kotlin.reflect.KProperty
 
 /*
@@ -53,7 +54,7 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
                     var id = 0
                     var info: DnsServerInformation<*>? = null
                     while (reader.peek() != JsonToken.END_OBJECT) {
-                        when (reader.nextName().toLowerCase()) {
+                        when (reader.nextName().toLowerCase(Locale.ROOT)) {
                             "id" -> id = reader.nextInt()
                             "server_https", "server" -> info = httpsTypeAdapter.read(reader)!!
                             "server_tls" -> info = tlsTypeAdapter.read(reader)!!

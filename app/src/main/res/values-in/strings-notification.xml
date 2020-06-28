@@ -1,13 +1,11 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="notification_channel_default">Saluran default</string>
-    <string name="notification_channel_default_description">Saluran default untuk memposting pemberitahuan.</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_channel_default">Saluran default</string>
+    <string name="notification_channel_default_description">Saluran default untuk memposting pemberitahuan</string>
     <string name="notification_channel_foreground_service">Saluran Pemberitahuan Permanen</string>
     <string name="notification_channel_foreground_service_description">Saluran digunakan untuk notifikasi yang tidak dapat dihapus oleh pengguna</string>
-
     <string name="notification_channel_noconnection">Saluran peringatan koneksi</string>
     <string name="notification_channel_noconnection_description">Saluran digunakan untuk menampilkan notifikasi ketika tidak ada koneksi</string>
-
     <string name="notification_main_text">Kueri dikirim ke %1$s
 \n
 \n%2$d Aplikasi dikecualikan dari DoH/DoT
@@ -27,13 +25,10 @@
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1$d kueri sejauh ini</string>
-
     <string name="notification_noconnection_title">Tidak ada koneksi</string>
-    <string name="notification_noconnection_text">Apl saat ini tidak meneruskan permintaan DNS Anda karena koneksi yang buruk.</string>
-
+    <string name="notification_noconnection_text">Apl saat ini tidak meneruskan permintaan DNS Anda karena koneksi yang buruk</string>
     <string name="notification_vpnrestart_title">Memulai ulang Vpn</string>
-    <string name="notification_vpnrestart_text">Layanan Vpn akan segera dimulai kembali.</string>
-
+    <string name="notification_vpnrestart_text">Layanan Vpn akan segera dimulai kembali</string>
     <string name="notification_appcrash_title">Nebulo telah rusak</string>
-    <string name="notification_appcrash_message">Nebulo telah rusak. Klik di sini untuk pergi ke menu utama dan untuk memulai ulang apl.</string>
+    <string name="notification_appcrash_message">Nebulo telah rusak. Klik di sini untuk pergi ke menu utama dan untuk memulai ulang apl</string>
 </resources>

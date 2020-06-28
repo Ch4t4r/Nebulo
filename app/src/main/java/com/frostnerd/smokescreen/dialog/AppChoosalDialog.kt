@@ -21,6 +21,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.HashSet
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -58,7 +60,7 @@ class AppChoosalDialog(
         packageManager.getInstalledApplications(PackageManager.GET_META_DATA).filter {
             !hiddenAppPackages.contains(it.packageName)
         }.sortedBy {
-            labels.getOrPut(it.packageName) { it.loadLabel(packageManager).toString() }.toLowerCase()
+            labels.getOrPut(it.packageName) { it.loadLabel(packageManager).toString() }.toLowerCase(Locale.ROOT)
         }.toMutableList()
     }
     private val filteredPackets: MutableList<ApplicationInfo> = emptyList<ApplicationInfo>().toMutableList()

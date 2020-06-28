@@ -134,7 +134,7 @@ class ConfigureActivity : BaseActivity() {
                 }
             }
         }
-        val typeAdapter = ArrayAdapter<String>(
+        val typeAdapter = ArrayAdapter(
             this, android.R.layout.simple_spinner_item,
             arrayListOf(
                 this.getString(R.string.dialog_serverconfiguration_https),

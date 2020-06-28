@@ -146,16 +146,16 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                     view.ipv6Til.visibility = View.GONE
                 } else {
                     view.host.setText(printableHost(dnsRule.host))
-                    when {
-                        dnsRule.type == Record.TYPE.A -> {
+                    when (dnsRule.type) {
+                        Record.TYPE.A -> {
                             view.ipv4Address.setText(dnsRule.target)
                             view.ipv6Address.text = null
                         }
-                        dnsRule.type == Record.TYPE.AAAA -> {
+                        Record.TYPE.AAAA -> {
                             view.ipv4Address.text = null
                             view.ipv6Address.setText(dnsRule.target)
                         }
-                        dnsRule.type == Record.TYPE.ANY -> {
+                        Record.TYPE.ANY -> {
                             view.ipv4Address.setText(dnsRule.target)
                             view.ipv6Address.setText(dnsRule.ipv6Target)
                         }

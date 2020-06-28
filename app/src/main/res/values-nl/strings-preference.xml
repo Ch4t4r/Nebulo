@@ -1,168 +1,111 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="preference_category_general">Algemeen</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_category_general">Algemeen</string>
     <string name="title_theme">Thema</string>
     <string name="summary_theme">Stelt het thema van deze app in</string>
-
     <string name="title_start_on_boot">Start bij het opstarten</string>
     <string name="summary_start_on_boot">Start de app wanneer de telefoon is ingeschakeld</string>
-
     <string name="title_start_after_update">Start na update</string>
     <string name="summary_start_after_update">Start de app nadat deze is bijgewerkt</string>
-
     <string name="title_excluded_apps">Uitgesloten apps</string>
-    <string name="summary_excluded_apps">Sluit hier apps uit, bijvoorbeeld als ze geen verbinding meer met internet kunnen maken - geselecteerde apps zullen dns-over-https niet meer gebruiken.</string>
-
-
-
+    <string name="summary_excluded_apps">Sluit hier apps uit, bijvoorbeeld als ze geen verbinding meer met internet kunnen maken - geselecteerde apps zullen dns-over-https niet meer gebruiken</string>
     <string name="preference_category_notification">Notificatie</string>
-
     <string name="title_show_notification_on_lockscreen">Weergave op het vergrendelscherm</string>
     <string name="summary_show_notification_on_lockscreen">Stelt in of de melding op het vergrendelscherm moet worden weergegeven</string>
-
     <string name="title_notification_hide_icon">Verberg icoon</string>
     <string name="summary_notification_hide_icon">Verberg het icoon in de navigatiebalk bovenaan</string>
-
     <string name="title_notification_allow_stop">Stoppen toestaan</string>
     <string name="summary_notification_allow_stop">Toestaan dat de app wordt stopgezet vanaf de notificatie</string>
-
     <string name="title_notification_allow_pause">Pauzeren toestaan</string>
     <string name="summary_notification_allow_pause">Toestaan dat de app wordt gepauzeerd vanaf de notificatie</string>
-
-
     <string name="preference_category_pin">PIN-beveiliging</string>
-
     <string name="title_preference_enable_pin">Pincode</string>
     <string name="summary_preference_enable_pin">Vraag om een pincode bij het openen of stoppen van de app</string>
-
     <string name="title_preference_pin_use_fingerprint">Vingerafdruk toestaan</string>
-    <string name="summary_preference_pin_use_fingerprint">Sta toe om uw vingerafdruk te gebruiken in plaats van pincode.</string>
-
+    <string name="summary_preference_pin_use_fingerprint">Sta toe om uw vingerafdruk te gebruiken in plaats van pincode</string>
     <string name="title_preference_change_pin">Verander pincode</string>
     <string name="summary_preference_change_pin">Verander de pincode. Alleen numerieke waarden zijn toegestaan.
 \nHuidige pincode: %1s</string>
-
     <string name="preference_category_cache">Cache controle</string>
-
     <string name="title_dnscache_enabled">Gebruik DNS-cache</string>
-    <string name="summary_dnscache_enabled">Schakelt DNS-cache in. Het cachegeheugen onthoudt oude verzoeken om toekomstige vragen sneller te beantwoorden
-\n
-\nHet systeem heeft al een cache, schakel deze in als u het gedrag wilt aanpassen.</string>
-
+    <string name="summary_dnscache_enabled">Schakelt DNS-cache in. Het cachegeheugen onthoudt oude verzoeken om toekomstige vragen sneller te beantwoorden 
+\n 
+\nHet systeem heeft al een cache, schakel deze in als u het gedrag wilt aanpassen</string>
     <string name="title_dnscache_keepacrosslaunches">DNS-cache behouden</string>
     <string name="summary_dnscache_keepacrosslaunches">Sla de DNS-cache op bij het sluiten van de App</string>
-
     <string name="title_dnscache_maxsize">Maximale Cache grootte</string>
     <string name="summary_dnscache_maxsize">Stelt het maximale aantal vermeldingen in het cachegeheugen in</string>
-
     <string name="title_dnscache_usedefaulttimes">Standaard cache tijd</string>
     <string name="summary_dnscache_usedefaulttimes">Houd DNS-aanvragen in de cache zoals aanbevolen door de DNS-server (met behulp van de TTL)</string>
-
     <string name="title_dnscache_minimum_cache_time">Minimale cache tijd</string>
-    <string name="summary_dnscache_minimum_cache_time">De minimale opslag tijd in het cachegeheugen, ongeacht of de standaard cache tijd daarvoor korter zou zijn. Lange cache tijden kunnen ertoe leiden dat de gegevens in het cachegeheugen niet synchroon lopen met de werkelijke gegevens.
-\nHuidig: %1d seconden.</string>
-
+    <string name="summary_dnscache_minimum_cache_time">De minimale opslag tijd in het cachegeheugen, ongeacht of de standaard cache tijd daarvoor korter zou zijn. Lange cache tijden kunnen ertoe leiden dat de gegevens in het cachegeheugen niet synchroon lopen met de werkelijke gegevens. 
+\nHuidig: %1d seconden</string>
     <string name="title_dnscache_customcachetime">Aangepaste cache tijd (seconden)</string>
-    <string name="summary_dnscache_customcachetime">Wijzigt hoe lang alle aanvragen in de cache worden opgeslagen, ongeacht of de standaard cache tijd langer is. Lange cache tijden kunnen ertoe leiden dat de gegevens in het cachegeheugen niet synchroon lopen met de werkelijke gegevens.
-\nHuidig: %1d Seconden.</string>
-
+    <string name="summary_dnscache_customcachetime">Wijzigt hoe lang alle aanvragen in de cache worden opgeslagen, ongeacht of de standaard cache tijd langer is. Lange cache tijden kunnen ertoe leiden dat de gegevens in het cachegeheugen niet synchroon lopen met de werkelijke gegevens. 
+\nHuidig: %1d Seconden</string>
     <string name="title_dnscache_nxdomaincachetime">Cache tijd voor NXDomain (seconden)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die NXDOMAIN verzoeken in het cachegeheugen hebben. Dit verbetert de prestaties voor niet bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)Huidig: %1d seconden.</string>
-
-
+    <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die NXDOMAIN verzoeken in het cachegeheugen hebben. Dit verbetert de prestaties voor niet bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)
+\nHuidig: %1d seconden</string>
     <string name="preference_category_logging">Loggen</string>
-
     <string name="title_enable_logging">Loggen inschakelen</string>
-    <string name="summary_enable_logging">Maakt het loggen van foutopsporingsinformatie mogelijk (bevat statistische gegevens). Deze logs worden niet automatisch verzonden.</string>
-
+    <string name="summary_enable_logging">Maakt het loggen van foutopsporingsinformatie mogelijk (bevat statistische gegevens). Deze logs worden niet automatisch verzonden</string>
     <string name="title_send_logs">Verzend logs</string>
-    <string name="summary_send_logs">Klik hier om de logs naar de ontwikkelaar te sturen.</string>
-
+    <string name="summary_send_logs">Klik hier om de logs naar de ontwikkelaar te sturen</string>
     <string name="title_delete_all_logs">Verwijder alle logs</string>
-    <string name="summary_delete_all_logs">Verwijdert alle logs die op uw apparaat zijn opgeslagen.</string>
-
-
+    <string name="summary_delete_all_logs">Verwijdert alle logs die op uw apparaat zijn opgeslagen</string>
     <string name="preference_category_ip">IP instellingen</string>
-
     <string name="title_enable_ipv6">IPv6 inschakelen</string>
     <string name="summary_enable_ipv6">Gebruik IPv6 als aan het apparaat een IPv6-adres is toegewezen</string>
-
     <string name="title_enable_ipv4">IPv4 inschakelen</string>
     <string name="summary_enable_ipv4">Gebruik IPv4 als aan het apparaat een IPv4-adres is toegewezen</string>
-
     <string name="title_force_ipv6">Forceer IPv6</string>
-    <string name="summary_force_ipv6">De app dwingen om IPv6-verzoeken te accepteren, zelfs als het apparaat geen IPv6 gebruikt.</string>
-
+    <string name="summary_force_ipv6">De app dwingen om IPv6-verzoeken te accepteren, zelfs als het apparaat geen IPv6 gebruikt</string>
     <string name="title_force_ipv4">Forceer IPv4</string>
-    <string name="summary_force_ipv4">De app dwingen om IPv4-verzoeken te accepteren, zelfs als het apparaat geen IPv4 gebruikt.</string>
-
+    <string name="summary_force_ipv4">De app dwingen om IPv4-verzoeken te accepteren, zelfs als het apparaat geen IPv4 gebruikt</string>
     <string name="title_allow_ipv4_traffic">IPv4-verkeer toestaan</string>
-    <string name="summary_allow_ipv4_traffic">Toestaan dat IPv4-verkeer wordt gebruikt, zelfs als IPv4 is uitgeschakeld.
-\nIndien uitgeschakeld zijn geen IPv4-verbindingen toegestaan terwijl de app wordt uitgevoerd.</string>
-
+    <string name="summary_allow_ipv4_traffic">Toestaan dat IPv4-verkeer wordt gebruikt, zelfs als IPv4 is uitgeschakeld. 
+\nIndien uitgeschakeld zijn geen IPv4-verbindingen toegestaan terwijl de app wordt uitgevoerd</string>
     <string name="title_allow_ipv6_traffic">IPv6-verkeer toestaan</string>
-    <string name="summary_allow_ipv6_traffic">Toestaan dat IPv6-verkeer wordt gebruikt, zelfs als IPv4 is uitgeschakeld.
-\nIndien uitgeschakeld zijn geen IPv6-verbindingen toegestaan terwijl de app wordt uitgevoerd.</string>
-
-
+    <string name="summary_allow_ipv6_traffic">Toestaan dat IPv6-verkeer wordt gebruikt, zelfs als IPv4 is uitgeschakeld. 
+\nIndien uitgeschakeld zijn geen IPv6-verbindingen toegestaan terwijl de app wordt uitgevoerd</string>
     <string name="preference_category_network">Netwerk</string>
-
     <string name="title_disallow_other_vpns">Andere VPN\'s niet toestaan</string>
     <string name="summary_disallow_other_vpns">Sta niet toe dat andere VPN\'s worden gestart als de app niet expliciet wordt gestopt</string>
-
     <string name="title_catch_other_dns_servers">Onderschep ander DNS-verkeer</string>
     <string name="summary_catch_other_dns_servers">Onderschep verkeer van bekende DNS-servers en verzend het met Nebulo</string>
-
     <string name="title_bypass_searchdomains">Zoekdomeinen omleiding</string>
-    <string name="summary_bypass_searchdomains">Stuur zoekdomeinen (bijvoorbeeld MyPC.local of MyPc.fritz.box) naar de Dns-server van uw netwerk in plaats van de DoH-server.
-\nDit wordt sterk aanbevolen. Die verzoeken verlaten uw netwerk niet.</string>
-
+    <string name="summary_bypass_searchdomains">Stuur zoekdomeinen (bijvoorbeeld MyPC.local of MyPc.fritz.box) naar de Dns-server van uw netwerk in plaats van de DoH-server. 
+\nDit wordt sterk aanbevolen. Die verzoeken verlaten uw netwerk niet</string>
     <string name="title_pause_on_captiveportal">Pauzeer bij inlogpagina</string>
-    <string name="summary_pause_on_captiveportal">Stuur geen DNS-aanvragen naar de geconfigureerde server als u zich moet aanmelden op een inlogpagina. Het zal automatisch worden hervat kort na het inloggen.
-\nAls u deze optie uitschakelt, is het u misschien niet toegestaan de inlogpagina te openen.</string>
-
+    <string name="summary_pause_on_captiveportal">Stuur geen DNS-aanvragen naar de geconfigureerde server als u zich moet aanmelden op een inlogpagina. Het zal automatisch worden hervat kort na het inloggen. 
+\nAls u deze optie uitschakelt, is het u misschien niet toegestaan de inlogpagina te openen</string>
     <string name="title_show_noconnection_notification">Melding bij geen verbinding</string>
     <string name="summary_show_noconnection_notification">Laat een melding zien wanneer de app geen of een slechte verbinding heeft</string>
-
-
     <string name="preference_category_querylogging">Dns-verzoeken beheren</string>
-
     <string name="title_log_queries">DNS-verzoeken loggen</string>
     <string name="summary_log_queries">Sla alle DNS-verzoeken en hun antwoorden op</string>
-
     <string name="title_export_queries">Exporteer DNS-verzoeken</string>
     <string name="summary_export_queries">Exporteer DNS-verzoeken als CSV (%1d verzoeken)</string>
-
     <string name="title_delete_queries">Wis DNS-verzoeken</string>
-    <string name="summary_delete_queries">Klik hier om alle geregistreerde DNS-verzoeken te verwijderen.</string>
-<string name="title_advanced_logging">Geavanceerd loggen</string>
-    <string name="summary_advanced_logging">Voegt uitgebreid Loggen toe, wat kan helpen bij aanhoudende problemen.</string>
-
+    <string name="summary_delete_queries">Klik hier om alle geregistreerde DNS-verzoeken te verwijderen</string>
+    <string name="title_advanced_logging">Geavanceerd loggen</string>
+    <string name="summary_advanced_logging">Voegt uitgebreid Loggen toe, wat kan helpen bij aanhoudende problemen</string>
     <string name="title_language">Taal</string>
     <string name="summary_language">Wijzig de taal van de app</string>
-
     <string name="title_map_query_refused">Geweigerde zoekopdrachten interpreteren als niet toegestane hosts</string>
-    <string name="summary_map_query_refused">Sommige DNS servers kunnen een zoekopdracht weigeren te beantwoorden als de host niet is toegestaan of wordt geblokkeerd. Deze instelling blokkeert de host in plaats van de zoekopdracht te weigeren, anders kan het systeem in de war raken.</string>
-
+    <string name="summary_map_query_refused">Sommige DNS servers kunnen een zoekopdracht weigeren te beantwoorden als de host niet is toegestaan of wordt geblokkeerd. Deze instelling blokkeert de host in plaats van de zoekopdracht te weigeren, anders kan het systeem in de war raken</string>
     <string name="title_simple_notification">Eenvoudige melding</string>
     <string name="summary_simple_notification">Gebruik een eenvoudige tekst in de melding</string>
-
     <string name="title_clear_dnscache">DNS cache wissen</string>
-    <string name="summary_clear_dnscache">Klik hier om de DNS-cache te wissen, bijvoorbeeld wanneer websites niet meer goed werken omdat ze in de cache zijn opgeslagen.</string>
-
+    <string name="summary_clear_dnscache">Klik hier om de DNS-cache te wissen, bijvoorbeeld wanneer websites niet meer goed werken omdat ze in de cache zijn opgeslagen</string>
     <string name="title_crashreporting_type">Automatische crashrapportage</string>
-    <string name="summary_crashreporting_type">Configureer welke gegevens naar de ontwikkelaar moeten worden verzonden wanneer de app crasht. Crashgegevens bevatten nooit persoonlijke gegevens en helpen problemen sneller op te lossen.</string>
-
-
+    <string name="summary_crashreporting_type">Configureer welke gegevens naar de ontwikkelaar moeten worden verzonden wanneer de app crasht. Crashgegevens bevatten nooit persoonlijke gegevens en helpen problemen sneller op te lossen</string>
     <string name="crashreporting_type_full">Volledig (rapporteer statistische en debug gegevens)</string>
     <string name="crashreporting_type_minimal">Minimaal (alleen Android &amp; App-versie melden)</string>
     <string name="crashreporting_type_off">Uit (Stuur geen crashrapporten)</string>
     <string name="title_restart_vpn_on_networkchange">Herstart bij netwerkwijziging</string>
-    <string name="summary_restart_vpn_on_networkchange">Start de app opnieuw als het netwerk verandert. Schakel dit in wanneer u problemen ondervindt bij het schakelen tussen netwerken.
-\n Geen effect wanneer de app niet actief is.</string>
-
+    <string name="summary_restart_vpn_on_networkchange">Start de app opnieuw als het netwerk verandert. Schakel dit in wanneer u problemen ondervindt bij het schakelen tussen netwerken. 
+\n Geen effect wanneer de app niet actief is</string>
     <string name="title_show_revoked_notification">Melding bij verloren autorisatie</string>
     <string name="summary_show_revoked_notification">Toon een melding wanneer Nebulo de toestemming voor de VPN verliest</string>
-
-
-    </resources>
+</resources>

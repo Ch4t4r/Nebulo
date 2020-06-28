@@ -1,16 +1,13 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="notification_channel_default">Canale predefinito</string>
-    <string name="notification_channel_default_description">Canale predefinito per inviare notifiche.</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_channel_default">Canale predefinito</string>
+    <string name="notification_channel_default_description">Canale predefinito per inviare notifiche</string>
     <string name="notification_channel_foreground_service">Canale di notifica permanente</string>
     <string name="notification_channel_foreground_service_description">Canale usato per notifiche che non possono esere rimosse dall\'utente</string>
-
     <string name="notification_channel_noconnection">Canale avviso connessione</string>
     <string name="notification_channel_noconnection_description">Canale usato per mostrare notifiche quando non sembra esserci una connessione</string>
-
     <string name="notification_channel_pin">Canale relativo al Pin</string>
-    <string name="notification_channel_pin_description">Canale usato per notifiche relative al pin, cioè quando deve essere inserito</string>
-
+    <string name="notification_channel_pin_description">Canale usato per notifiche relative al PIN, cioè quando deve essere inserito</string>
     <string name="notification_main_text">Le richieste vengono inviate a %1$s
 \n
 \n%2$d app sono escluse da DoH/DoT
@@ -30,41 +27,31 @@
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1$d richieste finora</string>
-
     <string name="notification_noconnection_title">Nessuna connessione</string>
-    <string name="notification_noconnection_text">L\'app attualmente non sta inoltrando le tue richieste DNS perchè non hai una connessione attiva.</string>
-
+    <string name="notification_noconnection_text">L\'app attualmente non sta inoltrando le tue richieste DNS perché non hai una connessione attiva</string>
     <string name="notification_vpnrestart_title">Riavvio della Vpn</string>
-    <string name="notification_vpnrestart_text">Il servizio Vpn verrà presto riavviato.</string>
-
+    <string name="notification_vpnrestart_text">Il servizio Vpn verrà presto riavviato</string>
     <string name="notification_appcrash_title">Errore di Nebulo</string>
-    <string name="notification_appcrash_message">Nebulo è andato in crash. Clicca qui per andare al menu principale e riavviare l\'app, se necessario.</string>
-
+    <string name="notification_appcrash_message">Nebulo è andato in crash. Clicca qui per andare al menu principale e riavviare l\'app, se necessario</string>
     <string name="notification_ruleimport_title">Importa regole DNS</string>
     <string name="notification_ruleimport_message">Importazione regole DNS da %1s (%2s)</string>
     <string name="notification_ruleimport_secondarymessage">Preparazione importazione…</string>
     <string name="notification_ruleimport_tertiarymessage">Terminando importazione…</string>
-
     <string name="notification_ruleimportfinished_title">Importazione regole DNS terminata</string>
     <string name="notification_ruleimportfinished_message">%1d regole sono state importate (%2$d doppi omessi)</string>
-
     <string name="notification_ruleexport_title">Esporta regole DNS</string>
     <string name="notification_ruleexport_message">Esportazione regole (%1d/%2d)</string>
     <string name="notification_ruleexport_secondarymessage">Preparazione esportazione…</string>
-
     <string name="notification_ruleexportfinished_title">Esportazione regole DNS terminata</string>
-    <string name="notification_ruleexportfinished_message">%1d regole sono state esportate.</string>
-
+    <string name="notification_ruleexportfinished_message">%1d regole sono state esportate</string>
     <string name="notification_pin_title">PIN necessario</string>
-    <string name="notification_pin_message">È necessario il tuo PIN per compiere questa azione. Clicca qui per confermare.</string>
-
+    <string name="notification_pin_message">È necessario il tuo PIN per compiere questa azione. Clicca qui per confermare</string>
     <string name="notification_service_killed_title">Informazioni sull\'ottimizzazione della batteria</string>
-    <string name="notification_service_killed_message">Sembra che l\'app sia stata precedentemente fermata dal sistema. Clicca qui per informazioni.</string>
+    <string name="notification_service_killed_message">Sembra che l\'app sia stata precedentemente fermata dal sistema. Clicca qui per informazioni</string>
     <string name="notification_service_killed_ignore">Ignora</string>
-<string name="notification_simple_text">Server attuale: %1$s</string>
+    <string name="notification_simple_text">Server attuale: %1$s</string>
     <string name="notification_channel_high_priorty">Alta priorità</string>
     <string name="notification_channel_high_priorty_description">Canale per notifiche ad alta priorità, ad esempio quando l\'app perde l\'autorizzazione alla VPN</string>
-
     <string name="notification_service_revoked_title">Autorizzazione VPN revocata dal sistema</string>
     <string name="notification_service_revoked_message">Clicca qui per riavviare</string>
 </resources>

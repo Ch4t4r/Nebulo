@@ -4,6 +4,4 @@
     <string name="tasker_action">Aktion</string>
     <string name="tasker_start_app_custom_url">Starte die app mit %1s (Modus: %2s)</string>
     <string name="tasker_start_app_custom_urls">Starte die app mit %1s and %2s (Modus: %3s)</string>
-    <string name="tasker_mode_doh">DoH</string>
-    <string name="tasker_mode_dot">DoT</string>
     </resources>

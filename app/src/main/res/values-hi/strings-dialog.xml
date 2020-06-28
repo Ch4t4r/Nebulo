@@ -121,7 +121,7 @@
 \n सबसे धीमा सर्वर: %8s</string>
 
     <string name="dialog_speedtest_useserver_title">सर्वर का चयन करें</string>
-    <string name="dialog_speedtest_useserver_message">क्या आप सर्वर %1s का उपयोग करना चाहते हैं\? यह %4d ms की प्रतिक्रिया समय के साथ %3 में से %2d स्थान पर है|</string>
+    <string name="dialog_speedtest_useserver_message">क्या आप सर्वर %1s का उपयोग करना चाहते हैं\? यह %4d ms की प्रतिक्रिया समय के साथ %3d में से %2d स्थान पर है|</string>
 
     <string name="dialog_deletehostsource_title">%1s को हटाएं\?</string>
     <string name="dialog_deletehostsource_message">क्या आप सुनिश्चित हैं कि आप होस्ट स्रोत %1s को हटाना चाहते हैं\? यह वापस नहीं किया जा सकता है, इस स्रोत से होस्ट हटा दिए जाएंगे।</string>

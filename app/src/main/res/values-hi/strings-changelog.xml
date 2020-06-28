@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="changelog_build_23_1">गैर-पूर्व निर्धारित द्वार अब DoT सर्वर के लिए दिखाए जाते हैं</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_build_23_1">गैर-पूर्व निर्धारित द्वार अब DoT सर्वर के लिए दिखाए जाते हैं</string>
     <string name="changelog_build_23_2">परिवर्तनों को उजागर करने के लिए इस संवाद को जोड़ा</string>
     <string name="changelog_build_23_3">प्रश्न निर्यात सेटिंग्स अब एक संवाद दिखाती है जो यह बता रही है कि क्या यह खुल हो रहा है</string>
     <string name="changelog_build_23_4">Android 7 से नीचे के OS संस्करणों पर काम नहीं करने वाला सर्वर आयात ठीक कर दिया है</string>
@@ -55,7 +56,7 @@
     <string name="changelog_build_35_3">DNS-over-HTTPs के लिए छोटा प्रदर्शन सुधार</string>
     <string name="changelog_build_35_4">DNS नियमों के होस्ट स्रोत अब दिखाते हैं कि उनसे कितने नियम आयात किए गए थे</string>
     <string name="changelog_build_36_1">अब आप DNS नियम निर्यात कर सकते हैं</string>
-    <string name="changelog_build_36_2">Dns नियम अब फ़ाइलों से आयात किए जा सकते हैं</string>
+    <string name="changelog_build_36_2">DNS नियम अब फ़ाइलों से आयात किए जा सकते हैं</string>
     <string name="changelog_build_36_3">बहुत छोटे स्रोतों से DNS नियम आयात नहीं किए जा रहे थे, इसे ठीक किया</string>
     <string name="changelog_build_36_4">नियम आयात अब गैर-पूर्व निर्धारित अक्षरों को पहचान सकता है</string>
     <string name="changelog_build_36_5">DNS नियमों को साइडबार मेनू में ले जाया गया</string>
@@ -123,4 +124,10 @@
     <string name="changelog_build_58_1">सर्वर जोड़ते समय प्राथमिक होस्ट / URL खाली हो सकता है</string>
     <string name="changelog_build_58_2">जब Nebulo VPN को अनुमति खो देता है तो एक सूचना दिखाई जाती है</string>
     <string name="changelog_build_55_4">क्वेरी लॉग अब एक ही बार में प्रश्नों को लोड करता है</string>
+    <string name="changelog_build_59_6">पिन को अब कुछ समय बाद फिर से दर्ज करना होगा</string>
+    <string name="changelog_build_59_5">डीएनएस-ओवर-एचटीटीपीएस के फिक्स्ड इनपुट सत्यापन कुछ वैध सर्वरों की अनुमति नहीं देते हैं</string>
+    <string name="changelog_build_59_4">नेबुलो को अब मुख्य स्क्रीन से फिर से शुरू किया जा सकता है</string>
+    <string name="changelog_build_59_3">DNS-over-HTTPS सर्वर को जोड़ने पर Nebulo अब समर्थित मोड का पता लगाता है</string>
+    <string name="changelog_build_59_2">जोड़ा पुन: उपयोग कनेक्शन, बैटरी उपयोग को कम करने</string>
+    <string name="changelog_build_59_1">नए अनुवाद जोड़े गए</string>
 </resources>

@@ -1,8 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="activity_label_import_servers">Importeer server(s)</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activity_label_import_servers">Importeer server(s)</string>
     <string name="activity_label_enable_logging">Exporteer log/Loggen inschakelen</string>
-
     <string name="all_stop">Stop</string>
     <string name="all_start">Start</string>
     <string name="all_pause">Pause</string>
@@ -12,17 +11,12 @@
     <string name="information">Informatie</string>
     <string name="open_app">Open app</string>
     <string name="all_close">Sluit</string>
-
-    <string name="error_invalid_url">Geef a.u.b een geldige URL op.</string>
-
+    <string name="error_invalid_url">Geef a.u.b een geldige URL op</string>
     <string name="main_dnssurveillance_privacystatement">Privacyverklaring van %1s</string>
-
     <string name="quicksettings_stop_text">Stop Nebulo</string>
     <string name="quicksettings_start_text">Start Nebulo</string>
-
     <string name="crashreporting_thankyou">Bedankt! Als u van gedachten verandert, ga dan naar de instellingen.</string>
     <string name="crashreporting_thankyou_gotit">Ik snap het!</string>
-
     <string name="about_share">Deel</string>
     <string name="about_licenses">Open-source licenties</string>
     <string name="about_changelog">Changelog</string>
@@ -31,8 +25,7 @@
     <string name="about_privacypolicy">Privacybeleid</string>
     <string name="about_credits">Credits</string>
     <string name="about_info">Algemene informatie</string>
-
-<string name="activity_label_import_queries">Importeer zoekopdrachten</string>
+    <string name="activity_label_import_queries">Importeer zoekopdrachten</string>
     <string name="main_dnssurveillance_infotext">Houd er rekening mee dat de DNS-server waarmee u bent verbonden, in staat is om op te nemen welke sites u bezoekt. Raadpleeg de respectieve privacyverklaringen voor meer informatie.</string>
     <string name="about_app">Deze app is open source. De broncode is toegankelijk via &lt;a href=https://nebulo.app/source&gt; nebulo.app/source &lt;/a&gt;.
 \nVerder bevat de app geen advertenties en worden er geen gegevens over u bijgehouden of verzameld. 
@@ -46,23 +39,18 @@
 \nGelicentieerd onder GPLv3. 
 \n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
     <string name="app_share_text">Hé, ik heb deze app gevonden die uw DNS-zoekopdrachten codeert om u meer privacy en veiligheid te bieden. Bekijk het hier: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
-
     <string name="about_help_translating">Help met vertalen</string>
-
-<string name="activity_label_speed_test">Server snelheidsvergelijking</string>
+    <string name="activity_label_speed_test">Server snelheidsvergelijking</string>
     <string name="window_speedtest_runtest">Start de test</string>
-    <string name="error_no_webbrowser_installed">U hebt geen enkele app geïnstalleerd om deze link te bekijken.</string>
-
+    <string name="error_no_webbrowser_installed">U hebt geen enkele app geïnstalleerd om deze link te bekijken</string>
     <string name="button_main_dnsrules">DNS regels</string>
-
     <string name="window_dnsrules_customhosts">Aangepaste hosts</string>
-    <string name="window_dnsrules_customhosts_message">Definieer hier al uw aangepaste hosts.</string>
-<string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regels van deze bron: -</string>
+    <string name="window_dnsrules_customhosts_message">Definieer hier al uw aangepaste hosts</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regels van deze bron: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount">Regels van deze bron: %1d (%2$d duplicaten niet in gebruik)</string>
-<string name="error_invalid_pin">Geef uw PIN-code op.</string>
-    <string name="error_invalid_servername">Geef een naam op.</string>
-
-    <string name="window_dnsrules_hostalreadyexists">Er is al een regel voor deze host.</string>
+    <string name="error_invalid_pin">Geef uw PIN-code op</string>
+    <string name="error_invalid_servername">Geef een naam op</string>
+    <string name="window_dnsrules_hostalreadyexists">Er is al een regel voor deze host</string>
     <plurals name="window_dnsrules_subtitle">
         <item quantity="one">%1d regel</item>
         <item quantity="other">%1d regels</item>
@@ -75,18 +63,16 @@
     <string name="windows_querylogging_latency">Latentie</string>
     <string name="windows_querylogging_responses">Antwoorden</string>
     <string name="windows_querylogging_create_dnsrule">Maak DNS-regel aan voor deze host</string>
-    <string name="windows_querylogging_dnsrule_created">DNS-regel is aangemaakt.</string>
+    <string name="windows_querylogging_dnsrule_created">DNS-regel is aangemaakt</string>
     <string name="windows_querylogging_usedserver_dnsrules">Afgehandeld met DNS-regels</string>
     <string name="windows_querylogging_usedserver_cache">Afgehandeld met cache</string>
-<string name="windows_querylogging_search_hint">Zoek naar een host in het DNS verzoek-logboek</string>
+    <string name="windows_querylogging_search_hint">Zoek naar een host in het DNS verzoek-logboek</string>
     <string name="windows_querylogging_search">Host zoeken</string>
     <string name="window_main_privatedns_info">Privé-DNS is actief, uw aanvragen zijn al beveiligd. Schakel Nebulo in als u DNS-over-HTTPS of andere handige functies wilt gebruiken.</string>
-<string name="windows_querylogging_hostsource">Bron van DNS-regel</string>
+    <string name="windows_querylogging_hostsource">Bron van DNS-regel</string>
     <string name="windows_querylogging_hostsource__user">Gebruikers regels</string>
     <string name="windows_querylogging_hostsource__unknown">Onbekend</string>
     <string name="error_webview_missing">WebView niet gevonden, wordt het momenteel bijgewerkt of verwijderd\?</string>
-
-    <string name="error_invalid_host">Geef een geldige host op.</string>
-    <string name="error_cannot_open_settings">Kan systeeminstellingen niet openen.</string>
-
-    </resources>
+    <string name="error_invalid_host">Geef een geldige host op</string>
+    <string name="error_cannot_open_settings">Kan systeeminstellingen niet openen</string>
+</resources>

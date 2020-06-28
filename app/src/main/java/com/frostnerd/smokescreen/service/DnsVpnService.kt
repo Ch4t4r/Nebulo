@@ -272,8 +272,6 @@ class DnsVpnService : VpnService(), Runnable {
         if(runInNonVpnMode) return
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         networkCallback = object : ConnectivityManager.NetworkCallback() {
-            private var waitingForNetwork = false
-
             override fun onLost(network: Network?) {
                 super.onLost(network)
                 val activeNetwork = mgr.activeNetworkInfo
@@ -886,7 +884,7 @@ class DnsVpnService : VpnService(), Runnable {
                             if (address is Inet6Address && useIpv6) {
                                 log("Adding route for Ipv6 $address")
                                 builder.addRoute(address, 128)
-                            } else if (address is Inet4Address && useIpv4 && !address.hostAddress.equals("1.1.1.1")) {
+                            } else if (address is Inet4Address && useIpv4 && address.hostAddress != "1.1.1.1") {
                                 log("Adding route for Ipv4 $address")
                                 builder.addRoute(address, 32)
                             }
@@ -904,7 +902,7 @@ class DnsVpnService : VpnService(), Runnable {
 
 
         if (useIpv4) {
-            serverConfig.getAllDnsIpAddresses(true, false).forEach {
+            serverConfig.getAllDnsIpAddresses(ipv4 = true, ipv6 = false).forEach {
                 log("Adding $it as dummy DNS server address")
                 builder.addDnsServer(it)
                 builder.addRoute(it, 32)
@@ -917,7 +915,7 @@ class DnsVpnService : VpnService(), Runnable {
         } else if (deviceHasIpv4 && allowIpv4Traffic) builder.allowFamily(OsConstants.AF_INET) // If not allowing no IPv4 connections work anymore.
 
         if (useIpv6) {
-            serverConfig.getAllDnsIpAddresses(false, true).forEach {
+            serverConfig.getAllDnsIpAddresses(ipv4 = false, ipv6 = true).forEach {
                 log("Adding $it as dummy DNS server address")
                 builder.addDnsServer(it)
                 builder.addRoute(it, 128)
@@ -941,9 +939,9 @@ class DnsVpnService : VpnService(), Runnable {
             )) {
                 if (isPackageInstalled(defaultBypassPackage)) { //TODO Check what is faster: catching the exception, or checking ourselves
                     builder.addDisallowedApplication(defaultBypassPackage)
+                    packageBypassAmount++
                 } else log("Package $defaultBypassPackage not installed, thus not bypassing")
             }
-            packageBypassAmount = userBypass.size
         } else {
             log("Mode is set to whitelist, whitelisting ${userBypass.size} packages.")
             for (pkg in userBypass) {

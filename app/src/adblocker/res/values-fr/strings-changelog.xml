@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="changelog_build_41_adblocker_1">Ajout de deux nouvelles sources de règles DNS</string>
+    <string name="changelog_build_29_2">Ajout du DNS AdGuard</string>
+    <string name="changelog_build_29_1">Les serveurs qui bloquent les publicités sont maintenant affichés dans des constructions autres que celles des Playstores (y compris celle-ci !)</string>
+</resources>

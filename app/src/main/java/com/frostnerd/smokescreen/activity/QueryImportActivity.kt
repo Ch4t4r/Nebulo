@@ -65,8 +65,8 @@ class QueryImportActivity: AppCompatActivity() {
                                 val source = if(split[5].equals("false", true) || split[5].equals("true", true)) {
                                     if (split[5].toBoolean()) QueryListener.Source.CACHE
                                     else QueryListener.Source.UPSTREAM
-                                } else QueryListener.Source.values().find {
-                                    it.name.equals(split[5], true)
+                                } else QueryListener.Source.values().find { source ->
+                                    source.name.equals(split[5], true)
                                 } ?: QueryListener.Source.UPSTREAM
                                 queries.add(DnsQuery(
                                     name=split[0],

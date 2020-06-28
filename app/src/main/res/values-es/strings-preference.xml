@@ -1,52 +1,111 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="preference_category_general">General</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_category_general">General</string>
     <string name="title_theme">Tema</string>
     <string name="summary_theme">Establece el tema para esta aplicación</string>
-
     <string name="title_start_on_boot">Iniciar en el arranque</string>
-    <string name="summary_start_on_boot">Iniciar la aplicación cuando se prenda el teléfono</string>
-
+    <string name="summary_start_on_boot">Iniciar la aplicación cuando el teléfono esté encendido</string>
     <string name="title_start_after_update">Iniciar después de una actualización</string>
     <string name="summary_start_after_update">Iniciar la aplicación después de que haya sido actualizada</string>
-
     <string name="title_excluded_apps">Aplicaciónes excluidas</string>
-    <string name="summary_excluded_apps">Excluya aplicaciones de la aplicación aquí, por ejemplo si ya no vuelven a conectarse al internet - aplicaciones seleccionadas ya no usarán dns-over-https.</string>
-
-
-
+    <string name="summary_excluded_apps">Excluir las aplicaciones de la aplicación aquí, por ejemplo si ya no pueden conectarse a Internet - las aplicaciones seleccionadas no usarán más DNS-over-HTTPS o DNS-over-TLS</string>
     <string name="preference_category_notification">Notificación</string>
-
     <string name="title_show_notification_on_lockscreen">Mostrar en pantalla de bloqueo</string>
     <string name="summary_show_notification_on_lockscreen">Establece si se muestra la notificación en la pantalla de bloqueo</string>
-
     <string name="title_notification_hide_icon">Esconder ícono</string>
     <string name="summary_notification_hide_icon">Esconder el ícono de la barra de navegación de arriba</string>
-
     <string name="title_notification_allow_stop">Permitir detener</string>
     <string name="summary_notification_allow_stop">Permite que la aplicación sea detenida desde la notificación</string>
-
     <string name="title_notification_allow_pause">Permitir pausar</string>
     <string name="summary_notification_allow_pause">Permite que la aplicación sea pausada desde la notificación</string>
-
-
     <string name="preference_category_pin">Protección por PIN</string>
-
-    <string name="title_preference_enable_pin">Pin</string>
+    <string name="title_preference_enable_pin">El código PIN</string>
     <string name="summary_preference_enable_pin">Pide un PIN al abrir o detener la aplicación</string>
-
     <string name="title_preference_pin_use_fingerprint">Permitir huella</string>
-    <string name="summary_preference_pin_use_fingerprint">Permitir que su huella sea usada en vez del pin</string>
-
-    <string name="title_preference_change_pin">Cambiar pin</string>
-    <string name="summary_preference_change_pin">Cambie el pin. Solo se permiten valores numéricos.
-\nPin actual: %1s</string>
-
+    <string name="summary_preference_pin_use_fingerprint">Permita que su huella dactilar sea usada en lugar del código PIN</string>
+    <string name="title_preference_change_pin">Cambiar PIN</string>
+    <string name="summary_preference_change_pin">Cambie el pin. Solo se permiten valores numéricos. 
+\nPIN actual: %1s</string>
     <string name="preference_category_cache">Control de caché</string>
-
     <string name="title_dnscache_enabled">Usar caché DNS</string>
-    <string name="summary_dnscache_enabled">Habilita el cache DNS de la aplicación. El caché memoriza solicitudes viejas para responder a futuras preguntas más rapido</string>
-
+    <string name="summary_dnscache_enabled">Activa la caché del DNS de las aplicaciones. El caché memoriza las antiguas solicitudes para responder más rápido a las futuras preguntas. 
+\n 
+\nEl sistema ya tiene un caché, habilítalo si quieres personalizar el comportamiento</string>
     <string name="title_dnscache_keepacrosslaunches">Mantener caché DNS</string>
     <string name="title_dnscache_maxsize">Tamaño máximo de cache</string>
-    </resources>
+    <string name="summary_clear_dnscache">Haga clic aquí para borrar el caché del DNS, por ejemplo cuando los sitios web comienzan a comportarse mal porque están en caché</string>
+    <string name="summary_enable_ipv6">Usar IPv6, si el dispositivo tiene una dirección IPv6 asignada</string>
+    <string name="title_allow_ipv6_traffic">Permitir el tráfico IPv6</string>
+    <string name="preference_category_network">Red</string>
+    <string name="preference_category_querylogging">Registro de consulta</string>
+    <string name="title_log_queries">Registro de consulta</string>
+    <string name="summary_export_queries">Exportación de las consultas como CSV (%1d consultas)</string>
+    <string name="summary_show_noconnection_notification">Mostrar una notificación cuando la aplicación no tiene o tiene una mala conexión</string>
+    <string name="summary_dnscache_usedefaulttimes">Mantener las solicitudes en la caché durante todo el tiempo que el servidor DNS se comunique usando el TTL</string>
+    <string name="summary_dnscache_minimum_cache_time">El tiempo mínimo de almacenamiento en caché de las entradas debe ser menor, independientemente de que el tiempo de almacenamiento en caché por defecto sea más corto. Tiempos de almacenamiento en caché largos podrían hacer que los datos almacenados en caché no estuvieran sincronizados con los datos reales. 
+\nActual: %1d Segundos</string>
+    <string name="summary_dnscache_customcachetime">Cambia el tiempo de almacenamiento en caché de todas las solicitudes, sin importar si el tiempo de almacenamiento en caché predeterminado para ello sería más largo. Los tiempos de almacenamiento en caché largos podrían causar que los datos almacenados en caché no estén sincronizados con los datos reales. 
+\nActual: %1d Segundos</string>
+    <string name="summary_enable_logging">Permite el registro de información de depuración (contiene datos estadísticos). Estos registros no se envían automáticamente</string>
+    <string name="summary_send_logs">Haga clic aquí para enviar los registros al desarrollador</string>
+    <string name="summary_delete_all_logs">Borra todos los registros almacenados en su dispositivo</string>
+    <string name="summary_crashreporting_type">Configurar qué datos deben ser transmitidos al desarrollador cuando la aplicación falla. Los datos del fallo nunca contienen datos personales y ayudan a solucionar los problemas más rápidamente</string>
+    <string name="summary_allow_ipv4_traffic">Permitir que el tráfico IPv4 sea utilizado, incluso si el IPv4 está deshabilitado. 
+\nSi está desactivado, no se permite ninguna conexión IPv4 mientras se ejecuta la aplicación</string>
+    <string name="summary_allow_ipv6_traffic">Permitir el uso de tráfico IPv6, incluso si IPv4 está desactivado. 
+\nSi está deshabilitado, no se permite ninguna conexión IPv6 mientras se ejecuta la aplicación</string>
+    <string name="summary_restart_vpn_on_networkchange">Reinicie silenciosamente la aplicación cuando la red cambie. Habilite esto cuando tenga problemas al cambiar de red. 
+\n No tiene efecto cuando la aplicación no está activa</string>
+    <string name="summary_disallow_other_vpns">No permitas que otras VPNs se inicien si la aplicación no se detiene explícitamente</string>
+    <string name="summary_catch_other_dns_servers">Interceptar el tráfico de los servidores DNS conocidos y transmitirlo usando Nebulo</string>
+    <string name="summary_map_query_refused">Algunos servidores DNS pueden negarse a responder a una consulta si el host no está permitido o está bloqueado. Esta configuración bloquea el host en lugar de rechazar la consulta, de lo contrario el sistema podría confundirse</string>
+    <string name="summary_delete_queries">Haga clic aquí para borrar todas las consultas registradas</string>
+    <string name="title_dnscache_usedefaulttimes">Tiempo de caché predeterminado</string>
+    <string name="title_dnscache_minimum_cache_time">Tiempo mínimo de caché</string>
+    <string name="title_dnscache_customcachetime">Tiempo de caché personalizado (segundos)</string>
+    <string name="title_dnscache_nxdomaincachetime">Tiempo de caché para NXDomain (segundos)</string>
+    <string name="summary_dnscache_nxdomaincachetime">Cambia la cantidad de tiempo que las solicitudes de NXDOMAIN se almacenan en caché. Esto mejora el rendimiento para los dominios no existentes (por ejemplo, si están bloqueados) 
+\nCorriente: %1d Segundos</string>
+    <string name="title_send_logs">Envíe los registros</string>
+    <string name="title_delete_all_logs">Borrar todos los registros</string>
+    <string name="preference_category_ip">Ajustes de IP</string>
+    <string name="title_enable_ipv6">Habilitar IPv6</string>
+    <string name="title_enable_ipv4">Habilitar IPv4</string>
+    <string name="summary_enable_ipv4">Usar IPv4, si el dispositivo tiene una dirección IPv4 asignada</string>
+    <string name="title_force_ipv6">Fuerza IPv6</string>
+    <string name="summary_force_ipv6">Obligar a la aplicación a aceptar peticiones IPv6, incluso cuando el dispositivo no utiliza IPv6</string>
+    <string name="title_force_ipv4">Fuerza IPv4</string>
+    <string name="summary_force_ipv4">Obligar a la aplicación a aceptar peticiones IPv4, incluso cuando el dispositivo no utiliza IPv4</string>
+    <string name="title_allow_ipv4_traffic">Permitir el tráfico IPv4</string>
+    <string name="title_disallow_other_vpns">No permitir otras VPNs</string>
+    <string name="title_bypass_searchdomains">Bypass de Searchdomains</string>
+    <string name="title_show_noconnection_notification">Notificación sin conexión</string>
+    <string name="summary_log_queries">Registra todas las consultas y sus respuestas</string>
+    <string name="title_export_queries">Exportación de las consultas</string>
+    <string name="title_delete_queries">Limpia las consultes</string>
+    <string name="title_catch_other_dns_servers">Interceptar otro tráfico de DNS</string>
+    <string name="title_map_query_refused">Interpretar las consultas rechazadas como anfitriones rechazados</string>
+    <string name="title_language">Idioma</string>
+    <string name="summary_language">Cambiar el idioma de la aplicación</string>
+    <string name="title_simple_notification">Notificación simple</string>
+    <string name="summary_simple_notification">Utilice un texto sencillo en la notificación</string>
+    <string name="title_clear_dnscache">Limpiar la caché del DNS</string>
+    <string name="title_crashreporting_type">Reporte automático de colisión</string>
+    <string name="crashreporting_type_full">Completo (Informe de datos estadísticos y de depuración)</string>
+    <string name="crashreporting_type_minimal">Mínimo (Sólo informe de Android y versión de la App)</string>
+    <string name="crashreporting_type_off">Desactivado (No enviar informes de fallos)</string>
+    <string name="title_restart_vpn_on_networkchange">Reiniciar en el cambio de red</string>
+    <string name="title_show_revoked_notification">Notificación de pérdida de permiso</string>
+    <string name="summary_show_revoked_notification">Mostrar una notificación cuando Nebulo pierda el permiso para la VPN</string>
+    <string name="summary_dnscache_maxsize">Establece el máximo de ingresos que puede mantener el caché en cualquier momento</string>
+    <string name="summary_dnscache_keepacrosslaunches">Mantiene el cache DNS en múltiples lanzamientos</string>
+    <string name="summary_advanced_logging">Añade más registro, lo que podría ayudar con problemas más persistentes</string>
+    <string name="title_pause_on_captiveportal">Pausa en el portal cautivo</string>
+    <string name="summary_bypass_searchdomains">Envía los searchdomains (por ejemplo, MyPC.local o MyPc.fritz.box) al servidor Dns de tu red en lugar del servidor DoH. 
+\nEsto es muy recomendable. Esas consultas no salen de su red</string>
+    <string name="preference_category_logging">Registro de depuración</string>
+    <string name="title_enable_logging">Habilitar el registro</string>
+    <string name="summary_pause_on_captiveportal">No usa el DoH si se detecta un portal cautivo. Se reanudará automáticamente poco después de iniciar la sesión. 
+\nSi lo desactiva, podría impedirle abrir el portal cautivo para iniciar sesión</string>
+    <string name="title_advanced_logging">Registro avanzado</string>
+</resources>

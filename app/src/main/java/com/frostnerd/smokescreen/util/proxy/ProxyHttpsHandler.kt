@@ -27,7 +27,7 @@ import java.net.InetAddress
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ProxyHttpsHandler(
-    val ownAddresses:List<String>,
+    private val ownAddresses:List<String>,
     serverConfigurations: List<ServerConfiguration>,
     connectTimeout: Long,
     val queryCountCallback: (() -> Unit)? = null,

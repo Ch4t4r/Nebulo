@@ -150,9 +150,9 @@ class QueryLogDetailFragment : Fragment() {
                 query.askedServer!!.startsWith("https") -> getString(R.string.fragment_querydetail_mode_doh)
                 else -> getString(R.string.fragment_querydetail_mode_dot)
             }
-            resolvedBy.text = when {
-                query.responseSource == QueryListener.Source.CACHE -> getString(R.string.windows_querylogging_usedserver_cache)
-                query.responseSource == QueryListener.Source.LOCALRESOLVER -> getString(R.string.windows_querylogging_usedserver_dnsrules)
+            resolvedBy.text = when (query.responseSource) {
+                QueryListener.Source.CACHE -> getString(R.string.windows_querylogging_usedserver_cache)
+                QueryListener.Source.LOCALRESOLVER -> getString(R.string.windows_querylogging_usedserver_dnsrules)
                 else -> query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
             }
             responses.text = query.getParsedResponses().joinToString(separator = "\n") {
@@ -167,7 +167,11 @@ class QueryLogDetailFragment : Fragment() {
                 hostSourceWrap.visibility = View.VISIBLE
                 hostSourceFetchJob = GlobalScope.launch(Dispatchers.IO) {
                     val sourceRule = getDatabase().dnsRuleDao().findRuleTargetEntity(query.name, query.type, true)
-                        ?: getDatabase().dnsRuleDao().findPossibleWildcardRuleTarget(query.name, query. type, true, false, true).firstOrNull {
+                        ?: getDatabase().dnsRuleDao().findPossibleWildcardRuleTarget(query.name, query. type,
+                            useUserRules = true,
+                            includeWhitelistEntries = false,
+                            includeNonWhitelistEntries = true
+                        ).firstOrNull {
                             DnsRuleDialog.databaseHostToMatcher(it.host).reset(query.name).matches()
                         }
                     val text = if (sourceRule != null) {

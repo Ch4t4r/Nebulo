@@ -74,9 +74,9 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
         }
     }
 
-    private suspend fun preloadWhitelistEntries() {
+    private fun preloadWhitelistEntries() {
         cachedNonWildcardWhitelisted.addAll(dao.getRandomNonWildcardWhitelistEntries(100).map {
-            hashHost(it.toLowerCase(), Record.TYPE.ANY)
+            hashHost(it.toLowerCase(Locale.ROOT), Record.TYPE.ANY)
         })
     }
 
@@ -112,8 +112,8 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
                 uniformQuestion,
                 type,
                 useUserRules,
-                true,
-                false
+                includeWhitelistEntries = true,
+                includeNonWhitelistEntries = false
             ).firstOrNull {
                 DnsRuleDialog.databaseHostToMatcher(it.host).reset(uniformQuestion)
                     .matches()
@@ -156,8 +156,8 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
                         uniformQuestion,
                         type,
                         useUserRules,
-                        false,
-                        true
+                        includeWhitelistEntries = false,
+                        includeNonWhitelistEntries = true
                     ).firstOrNull {
                         DnsRuleDialog.databaseHostToMatcher(it.host)
                             .reset(uniformQuestion).matches()
