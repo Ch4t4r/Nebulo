@@ -1086,8 +1086,10 @@ class DnsVpnService : VpnService(), Runnable {
         vpnProxy?.maxRetries = 15
 
         if(runInNonVpnMode) {
-            dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, InetAddress.getLocalHost(), getPreferences().dnsServerModePort)
-            dnsServerProxy!!.startServer()
+            GlobalScope.launch {
+                dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, InetAddress.getLocalHost(), getPreferences().dnsServerModePort)
+                dnsServerProxy!!.startServer()
+            }
         } else {
             log("VPN proxy creating, trying to run...")
             fileDescriptor?.let {
