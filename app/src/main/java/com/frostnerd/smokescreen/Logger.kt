@@ -7,10 +7,10 @@ import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.database.EXECUTED_MIGRATIONS
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
-import io.sentry.Sentry
-import io.sentry.event.Event
-import io.sentry.event.EventBuilder
-import io.sentry.event.interfaces.ExceptionInterface
+import io.sentry.core.Sentry
+import io.sentry.core.SentryEvent
+import io.sentry.core.SentryLevel
+import io.sentry.core.protocol.Message
 import leakcanary.LeakSentry
 import java.io.*
 import java.text.SimpleDateFormat
@@ -48,30 +48,33 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
             }
         } || publishedExceptions.put(e, e.stackTrace.toHashSet()) != null) return
     else {
-        Sentry.getContext().addExtra("database_migrations",  EXECUTED_MIGRATIONS.sortedBy { it.first }.joinToString {
+        EXECUTED_MIGRATIONS.sortedBy { it.first }.joinToString {
             "${it.first} -> ${it.second}"
-        })
+        }.takeIf { it.isNotBlank() }?.apply {
+            Sentry.setExtra("database_migrations", this)
+        }
         if (e is OutOfMemoryError) {
-            EventBuilder().withMessage(e.message)
-                .withLevel(Event.Level.ERROR)
-                .withExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
-                .withSentryInterface(ExceptionInterface(e)).build().apply {
-                    Sentry.capture(this)
+            Sentry.captureEvent(SentryEvent(e).apply {
+                message = Message().apply {
+                    this.message = e.message
                 }
+                level = SentryLevel.ERROR
+                setExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
+            })
         } else if (getPreferences().crashreportingType == Crashreporting.FULL && extras != null && extras.isNotEmpty()) {
             // Extra data is only passed when not in data-saving mode.
-            EventBuilder().withMessage(e.message)
-                .withLevel(Event.Level.ERROR)
-                .apply {
-                    extras.forEach { (key, value) ->
-                        withExtra(key, value)
-                    }
+            Sentry.captureEvent(SentryEvent(e).apply {
+                message = Message().apply {
+                    this.message = e.message
                 }
-                .withSentryInterface(ExceptionInterface(e)).build().apply {
-                    Sentry.capture(this)
+                level = SentryLevel.ERROR
+                extras.forEach { (key, value) ->
+                    setTag(key, value)
                 }
+                setExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
+            })
         } else {
-            Sentry.capture(e)
+            Sentry.captureException(e)
         }
     }
 }

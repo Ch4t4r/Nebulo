@@ -12,12 +12,15 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
-import com.frostnerd.smokescreen.util.crashhelpers.DatasavingSentryEventHelper
+import com.frostnerd.smokescreen.util.crashhelpers.DataSavingSentryEventProcessor
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
-import io.sentry.Sentry
-import io.sentry.android.AndroidSentryClientFactory
-import io.sentry.event.User
+import io.sentry.android.core.*
+import io.sentry.core.Integration
+import io.sentry.core.Sentry
+import io.sentry.core.SentryOptions
+import io.sentry.core.UncaughtExceptionHandlerIntegration
+import io.sentry.core.protocol.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -117,54 +120,53 @@ class SmokeScreen : Application() {
                             // This passes some device-related data, but nothing which allows user actions to be tracked across the app
                             // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
 
-                            Sentry.init(
-                                BuildConfig.SENTRY_DSN,
-                                AndroidSentryClientFactory(this@SmokeScreen)
-                            )
-                            Sentry.getContext().user =
-                                User(getPreferences().crashReportingUUID, null, null, null)
-                            Sentry.getStoredClient().apply {
-                                addTag("user.language", Locale.getDefault().displayLanguage)
-                                addTag("app.database_version", AppDatabase.currentVersion.toString())
-                                addTag("app.dns_server_name", getPreferences().dnsServerConfig.name)
-                                addTag(
-                                    "app.dns_server_primary",
-                                    getPreferences().dnsServerConfig.servers[0].address.formatToString()
-                                )
-                                addTag(
-                                    "app.dns_server_secondary",
-                                    getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
-                                )
-                                addTag(
-                                    "app.installer_package",
-                                    packageManager.getInstallerPackageName(packageName)
-                                )
-                                addTag("richdata", "true")
-                                addTag("app.fromCi", BuildConfig.FROM_CI.toString())
-                                addTag("app.commit", BuildConfig.COMMIT_HASH)
+                            SentryAndroid.init(this@SmokeScreen) {
+                                it.dsn = BuildConfig.SENTRY_DSN
                             }
+                            Sentry.setUser(User().apply {
+                                this.username = getPreferences().crashReportingUUID
+                            })
+                            Sentry.setTag("user.language", Locale.getDefault().displayLanguage)
+                            Sentry.setTag(
+                                "app.database_version",
+                                AppDatabase.currentVersion.toString()
+                            )
+                            Sentry.setTag(
+                                "app.dns_server_name",
+                                getPreferences().dnsServerConfig.name
+                            )
+                            Sentry.setTag(
+                                "app.dns_server_primary",
+                                getPreferences().dnsServerConfig.servers[0].address.formatToString()
+                            )
+                            Sentry.setTag(
+                                "app.dns_server_secondary",
+                                getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
+                                    ?: ""
+                            )
+                            Sentry.setTag(
+                                "app.installer_package",
+                                packageManager.getInstallerPackageName(packageName) ?: ""
+                            )
+                            Sentry.setTag("richdata", "true")
+                            Sentry.setTag("app.fromCi", BuildConfig.FROM_CI.toString())
+                            Sentry.setTag("app.commit", BuildConfig.COMMIT_HASH)
                             sentryReady = true
                         } else if (enabledType == Crashreporting.MINIMAL || forceStatus == Status.DATASAVING) {
                             // Inits Sentry in datasaving mode
                             // Only data absolutely necessary is transmitted (Android version, app version).
                             // Only crashes will be reported, no regular events.
-                            Sentry.init(
-                                BuildConfig.SENTRY_DSN,
-                                AndroidSentryClientFactory(this@SmokeScreen)
-                            )
-                            Sentry.getContext().user =
-                                User("anon-" + BuildConfig.VERSION_CODE, null, null, null)
-                            Sentry.getStoredClient().apply {
-                                addTag("richdata", "false")
-                                addTag("dist", BuildConfig.VERSION_CODE.toString())
-                                addTag("app.commit", BuildConfig.COMMIT_HASH)
-                                addTag("app.fromCi", BuildConfig.FROM_CI.toString())
-                                addExtra("dist", BuildConfig.VERSION_CODE)
-                                this.builderHelpers.forEach {
-                                    this.removeBuilderHelper(it)
-                                }
-                                this.addBuilderHelper(DatasavingSentryEventHelper())
+                            SentryAndroid.init(this@SmokeScreen) {
+                                it.dsn = BuildConfig.SENTRY_DSN
+                                setupSentryForDatasaving(it)
                             }
+                            Sentry.setUser(User().apply {
+                                this.username = "anon-" + BuildConfig.VERSION_CODE
+                            })
+                            Sentry.setTag("richdata", "false")
+                            Sentry.setTag("dist", BuildConfig.VERSION_CODE.toString())
+                            Sentry.setTag("app.commit", BuildConfig.COMMIT_HASH)
+                            Sentry.setTag("app.fromCi", BuildConfig.FROM_CI.toString())
                             sentryReady = true
                         }
                     }
@@ -173,6 +175,21 @@ class SmokeScreen : Application() {
                 }
             }
         }
+    }
+
+    private fun setupSentryForDatasaving(sentryOptions: SentryOptions) {
+        val remove = mutableListOf<Integration>()
+        sentryOptions.integrations.forEach {
+            if (it is PhoneStateBreadcrumbsIntegration ||
+                it is SystemEventsBreadcrumbsIntegration ||
+                it is TempSensorBreadcrumbsIntegration ||
+                it is AppComponentsBreadcrumbsIntegration ||
+                it is SystemEventsBreadcrumbsIntegration ||
+                it is AppLifecycleIntegration
+            ) remove.add(it)
+        }
+        remove.forEach { sentryOptions.integrations.remove(it) }
+        sentryOptions.eventProcessors.add(DataSavingSentryEventProcessor())
     }
 
     override fun onLowMemory() {
