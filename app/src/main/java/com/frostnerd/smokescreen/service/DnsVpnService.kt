@@ -454,6 +454,25 @@ class DnsVpnService : VpnService(), Runnable {
         noConnectionNotificationShown = true
     }
 
+    private fun showDnsServerModeNotification(port:Int, originalPort:Int) {
+        val portDiffersFromConfig = port != originalPort
+        val channel = if(portDiffersFromConfig) Notifications.getHighPriorityChannelId(this) else Notifications.getDefaultNotificationChannelId(this)
+        val icon = if(portDiffersFromConfig) R.drawable.ic_cloud_warn else R.drawable.ic_mainnotification
+        var contentText = getString(R.string.notification_dnsserver_message, port)
+        if(portDiffersFromConfig) contentText += "\n" + getString(R.string.notification_dnsserver_portdiffers, originalPort)
+        NotificationCompat.Builder(this, channel)
+            .setContentTitle(getString(R.string.notification_dnsserver_title))
+            .setSmallIcon(icon)
+            .setContentText(contentText)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(contentText))
+            .setOngoing(true)
+            .setAutoCancel(true)
+            .setContentIntent(DeepActionState.DNSSERVERMODE_SETTINGS.pendingIntentTo(this))
+            .build().also {
+                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_DNSSERVER_MODE, it)
+            }
+    }
+
     private fun hideNoConnectionNotification() {
         if (noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(
             Notifications.ID_NO_CONNECTION
@@ -704,6 +723,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun destroy(isStoppingCompletely: Boolean = true) {
         log("Destroying the VPN")
         if (isStoppingCompletely || connectedToANetwork == true) hideNoConnectionNotification()
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_DNSSERVER_MODE)
         if (!destroyed) {
             vpnProxy?.stop()
             dnsServerProxy?.stop()
@@ -1083,8 +1103,10 @@ class DnsVpnService : VpnService(), Runnable {
                      newFixedThreadPoolContext(2, "proxy-pool")
                  ), logger = VpnLogger(applicationContext))
                  vpnProxy?.maxRetries = 15
-                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, InetAddress.getLocalHost(), getPreferences().dnsServerModePort)
-                 dnsServerProxy!!.startServer()
+                 val preferredPort = getPreferences().dnsServerModePort
+                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, InetAddress.getLocalHost(), preferredPort)
+                 val actualPort = dnsServerProxy!!.startServer()
+                 showDnsServerModeNotification(actualPort, preferredPort)
                  log("Non-VPN proxy started.")
              }
         } else {

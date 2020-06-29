@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.SettingsActivity
+import com.frostnerd.smokescreen.util.DeepActionState
 import kotlinx.android.synthetic.main.fragment_settings_overview.*
 
 /*
@@ -31,6 +32,21 @@ class SettingsOverviewFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_settings_overview, container, false)
+    }
+
+    override fun setArguments(args: Bundle?) {
+        super.setArguments(args)
+        processArguments(args)
+    }
+
+    private fun processArguments(args: Bundle?) {
+        args?.getSerializable("deep_action")?.let {
+            it as? DeepActionState
+        }?.apply {
+            if(this == DeepActionState.DNSSERVERMODE_SETTINGS) {
+                nonVpnMode?.performClick()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,5 +78,6 @@ class SettingsOverviewFragment: Fragment() {
         nonVpnMode.setOnClickListener {
             SettingsActivity.showCategory(requireContext(), SettingsActivity.Category.SERVER_MODE)
         }
+        processArguments(arguments)
     }
 }
