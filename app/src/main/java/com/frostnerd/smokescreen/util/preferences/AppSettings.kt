@@ -38,6 +38,12 @@ interface AppSettings {
         val isReleaseVersion = BuildConfig.VERSION_NAME.let {
             !it.contains("alpha", true) && !it.contains("beta", true)
         }
+        val isBetaVersion = BuildConfig.VERSION_NAME.let {
+            it.contains("beta", true)
+        }
+        val isAlphaVersion = BuildConfig.VERSION_NAME.let {
+            it.contains("alpha", true)
+        }
     }
     val cacheControl:ExpirationCacheControl
 
@@ -192,7 +198,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var nxDomainCacheTime: Int by stringBasedIntPref("dnscache_nxdomain_cachetime", 1800)
     override var loggingEnabled: Boolean by booleanPref(
         "logging_enabled",
-        !AppSettings.isReleaseVersion
+        AppSettings.isAlphaVersion
     )
     fun shouldLogDnsQueriesToConsole():Boolean = loggingEnabled && (!AppSettings.isReleaseVersion || advancedLogging || BuildConfig.DEBUG)
     var advancedLogging:Boolean by booleanPref(
