@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="tasker_use_custom_server">指定自訂伺服器</string>
+    <string name="tasker_start_app_custom_urls">使用 %1s 與 %2s 開啟應用程式（模式：%3s）</string>
+    <string name="tasker_start_app_custom_url">使用 %1s 開啟應用程式（模式：%2s）</string>
+    <string name="tasker_action">動作</string>
+    <string name="tasker_start_if_running">即使已在執行也要啟動（可能會覆蓋設定值）</string>
+</resources>
