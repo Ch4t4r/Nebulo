@@ -4,15 +4,15 @@
 .gradle
 local.properties
 .DS_Store
+!app/build/outputs/mapping/**/mapping.txt
+!app/build/outputs/mapping/normalRelease/mapping.txt
+!app/build/outputs/mapping/adblockerFdroid/mapping.txt
 /build/**
 captures/
 .externalNativeBuild
 .idea/assetWizardSettings.xml
 .idea/markdown-navigator/profiles_settings.xml
 .idea/caches
-
-!app/build/outputs/mapping/**/mapping.txt
-
 
 # Created by https://www.gitignore.io/api/intellij
 # User-specific stuff
