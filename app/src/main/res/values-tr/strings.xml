@@ -28,8 +28,6 @@
     <string name="app_share_text">Selam, size daha fazla gizlilik ve güvenlik sağlamak için DNS sorgularınızı şifreleyen bu uygulamayı buldum. Buradan kontrol edin: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
     <string name="quicksettings_stop_text">Nebulo\'yu Durdur</string>
     <string name="quicksettings_start_text">Nebulo\'yu Başlat</string>
-    <string name="crashreporting_thankyou">Teşekkür ederim! Fikrinizi değiştirirseniz, ayarlara gidin.</string>
-    <string name="crashreporting_thankyou_gotit">Anladım!</string>
     <string name="about_share">Paylaş</string>
     <string name="about_licenses">Açık kaynaklı lisanslar</string>
     <string name="about_changelog">Değişiklikler</string>

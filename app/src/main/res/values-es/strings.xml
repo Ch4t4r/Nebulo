@@ -41,8 +41,6 @@
     <string name="about_contact_developer">Contacte con el desarrollador</string>
     <string name="about_licenses">Licencias de código abierto</string>
     <string name="about_share">Compartir</string>
-    <string name="crashreporting_thankyou_gotit">¡Entendido!</string>
-    <string name="crashreporting_thankyou">¡Gracias! Si cambias de opinión, ve a los ajustes.</string>
     <string name="quicksettings_start_text">Iniciar Nebulo</string>
     <string name="quicksettings_stop_text">Detener Nebulo</string>
     <string name="app_share_text">Oye, encontré esta aplicación que encripta tus consultas DNS para darte más privacidad y seguridad. Compruébalo aquí: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>

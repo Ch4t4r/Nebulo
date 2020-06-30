@@ -20,7 +20,6 @@
     <string name="main_dnssurveillance_infotext">请注意，您连接到的DNS服务器能够记录您正在访问的站点。有关详细信息，请查看相应的隐私声明。</string>
     <string name="quicksettings_stop_text">停止 Nebulo</string>
     <string name="quicksettings_start_text">开启 Nebulo</string>
-    <string name="crashreporting_thankyou_gotit">去设置!</string>
     <string name="about_share">分享</string>
     <string name="about_licenses">开源许可证</string>
     <string name="about_changelog">更新日志</string>
@@ -59,7 +58,6 @@
     <string name="error_no_webbrowser_installed">您没有安装任何可以访问该链接的应用</string>
     <string name="about_help_translating">协助翻译</string>
     <string name="about_credits">致谢名单</string>
-    <string name="crashreporting_thankyou">谢谢！如果您改变了您的想法，请点击设置。</string>
     <string name="app_share_text">嘿，我发现这个应用可以加密你的DNS请求，来提供更好的隐私保护和安全性。看看这个应用吧： https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
     <string name="about_app">此应用为开源软件。源代码可于&lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;获取。
 \n此外，此应用不包含广告，同时也不会跟踪您或尝试收集关于您的任何信息。

@@ -22,7 +22,6 @@
     <string name="error_invalid_url">Podaj prawidłowy adres URL.</string>
     <string name="error_invalid_pin">Podaj swój PIN.</string>
     <string name="error_invalid_servername">Podaj nazwę.</string>
-    <string name="crashreporting_thankyou">Dziękuję! Jeśli chcesz zmienić zdanie, zrób to w ustawieniach.</string>
     <string name="about_licenses">Licencje Open-source</string>
     <string name="about_changelog">Changelog</string>
     <string name="about_telegram_group">Grupa Telegram</string>
@@ -58,5 +57,4 @@
     <string name="windows_querylogging_dnsrule_created">Zasada DNS została utworzona.</string>
     <string name="window_main_privatedns_info">Prywatny DNS jest aktywny, twoje zapytania DNS są już chronione. Włącz Nebulo jeśli chcesz używać DNS-Over-HTTP albo innych użytecznych funkcji.</string>
     <string name="about_contact_developer">Kontakt z programistą</string>
-    <string name="crashreporting_thankyou_gotit">Gotowe!</string>
 </resources>

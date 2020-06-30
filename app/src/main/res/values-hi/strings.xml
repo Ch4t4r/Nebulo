@@ -43,9 +43,6 @@
     <string name="quicksettings_stop_text">Nebulo बंद करे</string>
     <string name="quicksettings_start_text">Nebulo शुरू करे</string>
 
-    <string name="crashreporting_thankyou">धन्यवाद! यदि आप अपना चुनाव बदलते हैं, तो सेटिंग्स में जाएं।</string>
-    <string name="crashreporting_thankyou_gotit">समझ गया!</string>
-
     <string name="about_share">शेयर करे</string>
     <string name="about_licenses">ओपन-सोर्स लाइसेंस</string>
     <string name="about_changelog">बदलाव सूची</string>

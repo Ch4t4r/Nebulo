@@ -51,9 +51,6 @@
         <item>4</item>
     </string-array>
 
-    <string name="crashreporting_thankyou">Thank you! If you change your mind, head to the settings.</string>
-    <string name="crashreporting_thankyou_gotit">Got it!</string>
-
     <string name="about_share">Share</string>
     <string name="about_licenses">Open-source licenses</string>
     <string name="about_changelog">Changelog</string>

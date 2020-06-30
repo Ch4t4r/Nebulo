@@ -40,9 +40,6 @@
     <string name="quicksettings_start_text">подключить Nebulo</string>
 
 
-    <string name="crashreporting_thankyou">Спасибо! Отключить отправку отчетов вы можете в настройках.</string>
-    <string name="crashreporting_thankyou_gotit">Понятно!</string>
-
     <string name="about_share">Рассказать другу</string>
     <string name="about_licenses">Используемые лицензии</string>
     <string name="about_changelog">Список изменений</string>
