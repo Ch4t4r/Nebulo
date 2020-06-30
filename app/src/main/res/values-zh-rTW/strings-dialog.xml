@@ -1,9 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false">example-dot.com[:443]</string>
-    <string name="dialog_newserver_secondaryserver_hint" translatable="false">example-doh.com[/dns-query]</string>
-    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false">example-dot.com[:443]</string>
-    <string name="dialog_newserver_primaryserver_hint" translatable="false">example-doh.com[/dns-query]</string>
-    <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
-    <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
 </resources>
