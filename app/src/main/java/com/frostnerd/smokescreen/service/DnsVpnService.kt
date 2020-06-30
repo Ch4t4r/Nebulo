@@ -465,7 +465,7 @@ class DnsVpnService : VpnService(), Runnable {
             .setSmallIcon(icon)
             .setContentText(contentText)
             .setStyle(NotificationCompat.BigTextStyle().bigText(contentText))
-            .setOngoing(true)
+            .setOngoing(false)
             .setAutoCancel(true)
             .setContentIntent(DeepActionState.DNSSERVERMODE_SETTINGS.pendingIntentTo(this))
             .build().also {
