@@ -66,6 +66,7 @@ class QueryLogFragment : Fragment(), BackpressFragment {
         val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView: SearchView = menu.findItem(R.id.search)!!.actionView as SearchView
         searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+        searchView.queryHint = getString(R.string.windows_querylogging_search_hint)
         searchView.setOnQueryTextListener(listFragment)
     }
 
