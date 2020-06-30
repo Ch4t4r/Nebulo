@@ -49,23 +49,26 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
         private const val VPN_REQUEST_CODE = 1
 
         fun prepareVpn(context: Context, serverInfo:DnsServerInformation<*>? = null) {
-            val vpnIntent = try {
-                VpnService.prepare(context).apply {
-                    this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            if(context.getPreferences().runWithoutVpn) DnsVpnService.startVpn(context, serverInfo)
+            else {
+                val vpnIntent = try {
+                    VpnService.prepare(context).apply {
+                        this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                    }
+                } catch (ex:NullPointerException) { // Caused by VpnService.prepare(), maybe Android Bug?
+                    Intent()
                 }
-            } catch (ex:NullPointerException) { // Caused by VpnService.prepare(), maybe Android Bug?
-                Intent()
-            }
 
-            if (vpnIntent == null) {
-                DnsVpnService.startVpn(context, serverInfo)
-            } else {
-                val intent = Intent(context, BackgroundVpnConfigureActivity::class.java)
-                if(serverInfo != null) {
-                    writeServerInfoToIntent(serverInfo, intent)
+                if (vpnIntent == null) {
+                    DnsVpnService.startVpn(context, serverInfo)
+                } else {
+                    val intent = Intent(context, BackgroundVpnConfigureActivity::class.java)
+                    if(serverInfo != null) {
+                        writeServerInfoToIntent(serverInfo, intent)
+                    }
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(intent)
                 }
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                context.startActivity(intent)
             }
         }
 
@@ -133,8 +136,12 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
         supportActionBar?.hide()
         actionBar?.hide()
 
-        val vpnIntent = VpnService.prepare(this).apply {
-            this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+        val vpnIntent = if(getPreferences().runWithoutVpn) {
+            null
+        } else {
+            VpnService.prepare(this).apply {
+                this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            }
         }
         if (vpnIntent == null) {
             startService()

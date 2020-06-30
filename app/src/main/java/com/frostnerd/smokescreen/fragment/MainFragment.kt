@@ -76,7 +76,11 @@ class MainFragment : Fragment() {
         startButton.setOnClickListener {
             proxyState = when (proxyState) {
                 ProxyState.RUNNING -> {
-                    DnsVpnService.sendCommand(requireContext(), Command.STOP, PinActivity.passPinExtras())
+                    DnsVpnService.sendCommand(
+                        requireContext(),
+                        Command.STOP,
+                        PinActivity.passPinExtras()
+                    )
                     ProxyState.NOT_RUNNING
                 }
                 ProxyState.PAUSED -> {
@@ -90,13 +94,14 @@ class MainFragment : Fragment() {
             }
             updateVpnIndicators()
         }
-        startButton.setOnTouchListener { _, event ->
+        startButton.setOnTouchListener { innerView , event ->
             if (proxyState == ProxyState.RUNNING || proxyState == ProxyState.STARTING) {
                 false
             } else {
+                var handled = false
                 if (event.flags and MotionEvent.FLAG_WINDOW_IS_OBSCURED != 0) {
                     if (event.action == MotionEvent.ACTION_UP) {
-                        if (VpnService.prepare(requireContext()) != null) {
+                        if (!getPreferences().runWithoutVpn && VpnService.prepare(requireContext()) != null) {
                             showInfoTextDialog(requireContext(),
                                 getString(R.string.dialog_overlaydetected_title),
                                 getString(R.string.dialog_overlaydetected_message),
@@ -108,10 +113,14 @@ class MainFragment : Fragment() {
                                     proxyState = ProxyState.STARTING
                                 }
                             )
-                            true
-                        } else false
-                    } else false
-                } else false
+                            handled = true
+                        }
+                    }
+                }
+                if(!handled) {
+                    innerView.performClick()
+                }
+                true
             }
         }
         speedTest.setOnClickListener {
@@ -181,27 +190,31 @@ class MainFragment : Fragment() {
     }
 
     private fun startVpn() {
-        val prepare = VpnService.prepare(requireContext()).apply {
-            this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-        }
-
-        if (prepare == null) {
+        if(getPreferences().runWithoutVpn) {
             requireContext().startService(Intent(requireContext(), DnsVpnService::class.java))
-            getPreferences().vpnInformationShown = true
         } else {
-            if (getPreferences().vpnInformationShown) {
-                startActivityForResult(prepare, vpnRequestCode)
-            } else {
-                showInfoTextDialog(requireContext(),
-                    getString(R.string.dialog_vpninformation_title),
-                    getString(R.string.dialog_vpninformation_message),
-                    neutralButton = getString(android.R.string.ok) to { dialog, _ ->
-                        startActivityForResult(prepare, vpnRequestCode)
-                        dialog.dismiss()
-                    }, withDialog = {
-                        setCancelable(false)
-                    })
+            val prepare = VpnService.prepare(requireContext()).apply {
+                this?.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            }
+
+            if (prepare == null) {
+                requireContext().startService(Intent(requireContext(), DnsVpnService::class.java))
                 getPreferences().vpnInformationShown = true
+            } else {
+                if (getPreferences().vpnInformationShown) {
+                    startActivityForResult(prepare, vpnRequestCode)
+                } else {
+                    showInfoTextDialog(requireContext(),
+                        getString(R.string.dialog_vpninformation_title),
+                        getString(R.string.dialog_vpninformation_message),
+                        neutralButton = getString(android.R.string.ok) to { dialog, _ ->
+                            startActivityForResult(prepare, vpnRequestCode)
+                            dialog.dismiss()
+                        }, withDialog = {
+                            setCancelable(false)
+                        })
+                    getPreferences().vpnInformationShown = true
+                }
             }
         }
     }

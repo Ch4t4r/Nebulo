@@ -37,6 +37,7 @@ class Notifications {
         const val ID_PIN = 8
         const val ID_SERVICE_KILLED = 9
         const val ID_SERVICE_REVOKED = 10
+        const val ID_DNSSERVER_MODE = 11
         const val ID_VPN_RESTART = 999
 
 

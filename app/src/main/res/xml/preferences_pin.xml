@@ -17,7 +17,7 @@
                 android:key="pin"
                 android:dependency="enable_pin"
                 android:inputType="number"
-                android:digits="012345789"
+                android:digits="0123456789"
                 android:defaultValue="1234"
                 android:summary="@string/summary_preference_change_pin"/>
     </PreferenceCategory>

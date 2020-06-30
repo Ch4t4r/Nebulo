@@ -27,7 +27,7 @@ import kotlin.random.Random
  */
 
 enum class DeepActionState {
-    DNS_RULES, BATTERY_OPTIMIZATION_DIALOG;
+    DNS_RULES, BATTERY_OPTIMIZATION_DIALOG, DNSSERVERMODE_SETTINGS;
 
 
     fun intentTo(context:Context): Intent {

@@ -57,4 +57,8 @@
 
     <string name="notification_service_revoked_title">VPN permission revoked by system</string>
     <string name="notification_service_revoked_message">Click here to restart</string>
+
+    <string name="notification_dnsserver_title">Running in non-VPN mode</string>
+    <string name="notification_dnsserver_message">DNS server is running on localhost:%1d. Forward queries using third-party apps</string>
+    <string name="notification_dnsserver_portdiffers">Configured Port %1d could not be used.</string>
 </resources>

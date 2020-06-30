@@ -34,6 +34,7 @@ import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.proxy.*
+import com.frostnerd.vpntunnelproxy.Proxy
 import com.frostnerd.vpntunnelproxy.RetryingVPNTunnelProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import kotlinx.coroutines.*
@@ -44,10 +45,7 @@ import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
 import java.lang.Exception
-import java.net.Inet4Address
-import java.net.Inet6Address
-import java.net.InetAddress
-import java.net.UnknownHostException
+import java.net.*
 import java.util.*
 import java.util.concurrent.TimeoutException
 import kotlin.coroutines.CoroutineContext
@@ -76,8 +74,9 @@ import kotlin.math.pow
  */
 class DnsVpnService : VpnService(), Runnable {
     private var fileDescriptor: ParcelFileDescriptor? = null
-    private var dnsProxy: SmokeProxy? = null
+    private var dnsProxy: DnsPacketProxy? = null
     private var vpnProxy: RetryingVPNTunnelProxy? = null
+    private var dnsServerProxy:DnsServerPacketProxy? = null
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var noConnectionNotificationBuilder: NotificationCompat.Builder
@@ -97,6 +96,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var queryCount = 0
     private var dnsCache:SimpleDnsCache? = null
     private var localResolver:LocalResolver? = null
+    private var runInNonVpnMode:Boolean = getPreferences().runWithoutVpn
     private val addressResolveScope:CoroutineScope by lazy {
         CoroutineScope(newSingleThreadContext("service-resolve-retry"))
     }
@@ -269,6 +269,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private fun addNetworkChangeListener() {
+        if(runInNonVpnMode) return
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onLost(network: Network?) {
@@ -453,6 +454,25 @@ class DnsVpnService : VpnService(), Runnable {
         noConnectionNotificationShown = true
     }
 
+    private fun showDnsServerModeNotification(port:Int, originalPort:Int) {
+        val portDiffersFromConfig = port != originalPort
+        val channel = if(portDiffersFromConfig) Notifications.getHighPriorityChannelId(this) else Notifications.getDefaultNotificationChannelId(this)
+        val icon = if(portDiffersFromConfig) R.drawable.ic_cloud_warn else R.drawable.ic_mainnotification
+        var contentText = getString(R.string.notification_dnsserver_message, port)
+        if(portDiffersFromConfig) contentText += "\n" + getString(R.string.notification_dnsserver_portdiffers, originalPort)
+        NotificationCompat.Builder(this, channel)
+            .setContentTitle(getString(R.string.notification_dnsserver_title))
+            .setSmallIcon(icon)
+            .setContentText(contentText)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(contentText))
+            .setOngoing(false)
+            .setAutoCancel(true)
+            .setContentIntent(DeepActionState.DNSSERVERMODE_SETTINGS.pendingIntentTo(this))
+            .build().also {
+                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_DNSSERVER_MODE, it)
+            }
+    }
+
     private fun hideNoConnectionNotification() {
         if (noConnectionNotificationShown) (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(
             Notifications.ID_NO_CONNECTION
@@ -462,6 +482,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("Service onStartCommand", intent = intent)
+        runInNonVpnMode = getPreferences().runWithoutVpn
         if (intent != null && intent.hasExtra("command")) {
             when (intent.getSerializableExtra("command") as Command) {
                 Command.STOP -> {
@@ -508,14 +529,14 @@ class DnsVpnService : VpnService(), Runnable {
                     updateNotification()
                 }
                 Command.INVALIDATE_DNS_CACHE -> {
-                    dnsProxy?.cache?.clear()
+                    dnsProxy?.dnsCache?.clear()
                     restartVpn(this, false)
                 }
             }
         } else {
             log("No command passed, fetching servers and establishing connection if needed")
             log("Checking whether The VPN is prepared")
-            if (prepare(this) != null) {
+            if (!runInNonVpnMode && prepare(this) != null) {
                 log("The VPN isn't prepared, stopping self and starting Background configure")
                 updateNotification()
                 stopForeground(true)
@@ -626,13 +647,13 @@ class DnsVpnService : VpnService(), Runnable {
                         primaryServer,
                         secondaryServer,
                         packageBypassAmount,
-                        dnsProxy?.cache?.livingCachedEntries() ?: 0
+                        (dnsProxy?.dnsCache as SimpleDnsCache?)?.livingCachedEntries() ?: 0
                     )
                     else -> getString(
                         if (getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
                         primaryServer,
                         packageBypassAmount,
-                        dnsProxy?.cache?.livingCachedEntries() ?: 0
+                        (dnsProxy?.dnsCache as SimpleDnsCache?)?.livingCachedEntries() ?: 0
                     )
                 }
             if (simpleNotification) {
@@ -650,10 +671,10 @@ class DnsVpnService : VpnService(), Runnable {
 
     private fun establishVpn() {
         log("Establishing VPN")
-        if (fileDescriptor == null) {
+        if (vpnProxy == null) {
             destroyed = false
             val runVpn = {
-                fileDescriptor = createBuilder().establish()
+                if(!runInNonVpnMode) fileDescriptor = createBuilder().establish()
                 run()
                 setNotificationText()
                 updateNotification()
@@ -674,7 +695,7 @@ class DnsVpnService : VpnService(), Runnable {
     private fun recreateVpn(reloadServerConfiguration: Boolean, intent: Intent?) {
         log("Recreating the VPN (destroying & establishing)")
         destroy(false)
-        if (prepare(this) == null) {
+        if (runInNonVpnMode || prepare(this) == null) {
             log("VpnService is still prepared, establishing VPN.")
             destroyed = false
             if (reloadServerConfiguration || !this::serverConfig.isInitialized) {
@@ -702,8 +723,10 @@ class DnsVpnService : VpnService(), Runnable {
     private fun destroy(isStoppingCompletely: Boolean = true) {
         log("Destroying the VPN")
         if (isStoppingCompletely || connectedToANetwork == true) hideNoConnectionNotification()
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_DNSSERVER_MODE)
         if (!destroyed) {
             vpnProxy?.stop()
+            dnsServerProxy?.stop()
             fileDescriptor?.close()
             addressResolveScope.cancel()
             lastVPNStopTime = System.currentTimeMillis()
@@ -1005,6 +1028,7 @@ class DnsVpnService : VpnService(), Runnable {
     override fun run() {
         log("run() called")
         log("Starting with config: $serverConfig")
+        log("Running in non-vpn mode: $runInNonVpnMode")
 
         log("Creating handle.")
         var defaultHandle: DnsHandle? = null
@@ -1058,27 +1082,54 @@ class DnsVpnService : VpnService(), Runnable {
         dnsCache = createDnsCache()
         localResolver = createLocalResolver()
 
-        dnsProxy = SmokeProxy(
-            defaultHandle!!,
-            handles + createProxyBypassHandlers(),
-            dnsCache,
-            createQueryLogger(),
-            localResolver
-        )
         log("DnsProxy created, creating VPN proxy")
-        vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
-            newFixedThreadPoolContext(2, "proxy-pool")
-        ), logger = VpnLogger(applicationContext))
-        vpnProxy?.maxRetries = 15
-
-        log("VPN proxy creating, trying to run...")
-        fileDescriptor?.let {
-            vpnProxy?.runProxyWithRetry(it, it)
-        } ?: run {
-            recreateVpn(false, null)
-            return
+         if(runInNonVpnMode) {
+             log("Running in non-VPN mode, starting async")
+             GlobalScope.launch {
+                 dnsProxy = NonIPSmokeProxy(
+                     defaultHandle!!,
+                     handles + createProxyBypassHandlers(),
+                     dnsCache,
+                     createQueryLogger(),
+                     localResolver,
+                     InetAddress.getLocalHost(),
+                     getPreferences().dnsServerModePort
+                 )
+                 vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, socketProtector = object:Proxy.SocketProtector {
+                     override fun protectDatagramSocket(socket: DatagramSocket) {}
+                     override fun protectSocket(socket: Socket) {}
+                     override fun protectSocket(socket: Int) {}
+                 }, coroutineScope = CoroutineScope(
+                     newFixedThreadPoolContext(2, "proxy-pool")
+                 ), logger = VpnLogger(applicationContext))
+                 vpnProxy?.maxRetries = 15
+                 val preferredPort = getPreferences().dnsServerModePort
+                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, InetAddress.getLocalHost(), preferredPort)
+                 val actualPort = dnsServerProxy!!.startServer()
+                 showDnsServerModeNotification(actualPort, preferredPort)
+                 log("Non-VPN proxy started.")
+             }
+        } else {
+             dnsProxy = SmokeProxy(
+                 defaultHandle!!,
+                 handles + createProxyBypassHandlers(),
+                 dnsCache,
+                 createQueryLogger(),
+                 localResolver
+             )
+            vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
+                newFixedThreadPoolContext(2, "proxy-pool")
+            ), logger = VpnLogger(applicationContext))
+             vpnProxy?.maxRetries = 15
+             log("VPN proxy creating, trying to run...")
+             fileDescriptor?.let {
+                 vpnProxy?.runProxyWithRetry(it, it)
+             } ?: run {
+                 recreateVpn(false, null)
+                 return
+             }
+             log("VPN proxy started.")
         }
-        log("VPN proxy started.")
         currentTrafficStats = vpnProxy?.trafficStats
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_SERVICE_REVOKED)

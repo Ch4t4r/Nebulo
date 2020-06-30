@@ -207,7 +207,7 @@ class MainActivity : NavigationDrawerActivity() {
     private fun handleDeepAction(intent:Intent? = null) {
         if(intent?.hasExtra("deep_action") == true) {
             whenDrawerIsReady {
-                when(intent.getSerializableExtra("deep_action")) {
+                when(val deepAction = intent.getSerializableExtra("deep_action")) {
                     DeepActionState.DNS_RULES -> {
                         clickItem(drawerItems.find {
                             it is ClickableDrawerItem && it.title == getString(R.string.button_main_dnsrules)
@@ -215,6 +215,13 @@ class MainActivity : NavigationDrawerActivity() {
                     }
                     DeepActionState.BATTERY_OPTIMIZATION_DIALOG -> {
                         BatteryOptimizationInfoDialog(this).show()
+                    }
+                    DeepActionState.DNSSERVERMODE_SETTINGS -> {
+                        drawerItems.find {
+                            it is ClickableDrawerItem && it.title == getString(R.string.menu_settings)
+                        }?.apply {
+                            clickItem(this, Bundle().apply { putSerializable("deep_action", deepAction) })
+                        }
                     }
                 }
             }
@@ -229,7 +236,10 @@ class MainActivity : NavigationDrawerActivity() {
             )
             fragmentItem(getString(R.string.menu_settings),
                 iconLeft = getDrawable(R.drawable.ic_menu_settings),
-                fragmentCreator = singleInstanceFragment { SettingsOverviewFragment() })
+                fragmentCreator = singleInstanceFragment { args ->
+                    SettingsOverviewFragment().also {
+                    it.arguments = args
+                } })
             if (getPreferences().queryLoggingEnabled) {
                 divider()
                 fragmentItem(getString(R.string.menu_querylogging),
