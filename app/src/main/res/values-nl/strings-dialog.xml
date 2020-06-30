@@ -162,13 +162,5 @@
     <string name="dialog_raterequest_title">Bent u tevreden over Nebulo\?</string>
     <string name="dialog_raterequest_message">Hallo daar! Als u tevreden bent met Nebulo, wilt u dan even de tijd nemen om het in de Play Store ™ te beoordelen\?</string>
     <string name="dialog_vpn_permission_denied_message">Het systeem heeft Nebulo geweigerd om zijn VPN te starten. Open de app om de toestemming daar te verlenen door op de startknop te klikken.</string>
-    <string name="dialog_help_translating_message" translatable="false">Deze app is vertaald in een paar talen, maar er ontbreken er nog velen of zijn onvolledig - inclusief die van jou.
-\n
-\nDaarom vraag ik u vriendelijk om uw hulp bij het vertalen van deze app om een zo breed mogelijk publiek te bereiken. Als u bereid bent te helpen deze app in uw taal te vertalen, neem dan gerust contact met mij op of &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/TRANSLATING.md&gt; lees hier hoe u kunt helpen.&lt;/a&gt;</string>
-    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false">voorbeeld-dot.com[:443]</string>
-    <string name="dialog_newserver_secondaryserver_hint" translatable="false">voorbeeld-doh.com[/dns-query]</string>
-    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false">voorbeeld-dot.com[:443]</string>
-    <string name="dialog_newserver_primaryserver_hint" translatable="false">voorbeeld-doh.com[/dns-query]</string>
-    <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
-    <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
+
 </resources>

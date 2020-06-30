@@ -25,19 +25,13 @@
     <string name="dialog_appchoosal_showsystemapps">Mostrar aplicacions del sistema</string>
     <string name="dialog_deleteconfig_text">Vols esborrar la configuració %1$s\?</string>
     <string name="dialog_deleteconfig_title">Esborrar configuració\?</string>
-    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false">exemple-dot.com[:443]</string>
-    <string name="dialog_newserver_secondaryserver_hint" translatable="false">exemple-doh.com[/dns-query]</string>
     <string name="dialog_newserver_secondaryserver">Servidor secundari (opcional)</string>
-    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false">exemple-dot.com[:443]</string>
-    <string name="dialog_newserver_primaryserver_hint" translatable="false">exemple-doh.com[/dns-query]</string>
     <string name="dialog_newserver_primaryserver">Servidor primari</string>
-    <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
     <string name="dialog_newserver_name_hint">Exemple</string>
     <string name="dialog_newserver_name">Nom del servidor</string>
     <string name="dialog_newserver_title_tls">Afegir un servidor (DoT)</string>
     <string name="dialog_newserver_title_https">Afegir un servidor (DoH)</string>
     <string name="dialog_serverconfiguration_addserver">Afegir un servidor</string>
-    <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverconfiguration_title">Configuració del servidor</string>
     <string name="dialog_error_title">Informe de fallada</string>
     <string name="dialog_logexport_general">Tria aplicació</string>

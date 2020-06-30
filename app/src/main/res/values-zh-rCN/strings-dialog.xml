@@ -165,15 +165,7 @@
     <string name="dialog_raterequest_title">您是否喜欢Nebulo？</string>
     <string name="dialog_raterequest_message">你好！如果你喜欢Nebulo，你愿意花一点时间在应用商店里为它打分吗？</string>
     <string name="dialog_vpn_permission_denied_message">系统拒绝了Nebulo启动VPN。请启动应用，并在应用内点击启动按钮以给予VPN权限。</string>
-    <string name="dialog_help_translating_message" translatable="false">此应用虽已被翻译为若干语言，但是还有更多语言尚未被翻译或者翻译完全——包括您使用的语言。
-\n
-\n这也是为何我在翻译这个应用上诚恳地希望能够得到您的帮助，以能够尽可能多地增多受众。如果您有意愿协助将这个应用翻译为您所使用的语言，不要犹豫，请联系我，或者&lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/TRANSLATING.md&gt;了解如何帮助。&lt;/a&gt;</string>
-    <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false"/>
-    <string name="dialog_newserver_secondaryserver_hint" translatable="false"/>
-    <string name="dialog_newserver_primaryserver_hint_dot" translatable="false"/>
-    <string name="dialog_newserver_primaryserver_hint" translatable="false"/>
-    <string name="dialog_serverconfiguration_tls" translatable="false"/>
-    <string name="dialog_serverconfiguration_https" translatable="false"/>
+
     <string name="dialog_doh_detect_type_message">请稍等片刻。</string>
     <string name="dialog_doh_detect_type_title">检测服务器类型</string>
 </resources>
