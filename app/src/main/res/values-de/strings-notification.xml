@@ -56,4 +56,5 @@
     <string name="notification_service_revoked_message">Klicke hier um Nebulo zu starten</string>
     <string name="notification_dnsserver_message">DNS Server läuft unter localhost:%1d. Leite Anfragen mit Apps von Fremdanbietern weiter</string>
     <string name="notification_dnsserver_title">Nicht-VPN Modus</string>
+    <string name="notification_dnsserver_portdiffers">Eingestellter Port %1d konnte nicht genutzt werden.</string>
 </resources>
