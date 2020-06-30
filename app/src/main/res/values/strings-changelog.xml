@@ -380,6 +380,7 @@
     <string name="changelog_build_59_4">Nebulo can now be resumed from the main screen</string>
     <string name="changelog_build_59_5">Fixed input validation of DNS-over-HTTPS not allowing some valid servers</string>
     <string name="changelog_build_59_6">The PIN now has to be re-entered after some time</string>
+    <string name="changelog_build_59_7">Nebulo can now run in (experimental) non-VPN mode, where it uses a DNS Server instead of a dummy VPN. This requires third-party apps for forwarding DNS queries to Nebulo</string>
 
     <string-array name="changelog_build_59">
         <item>Version 1.2.3 (Build 59)</item>
