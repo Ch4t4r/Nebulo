@@ -164,4 +164,6 @@
     <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutas</string>
     <string name="dialog_logexport_loading_title">Preparando los registros</string>
     <string name="dialog_raterequest_message">¡Hola! Si estás disfrutando de Nebulo, ¿podrías tomarte un momento para evaluarlo en la tienda\?</string>
+    <string name="dialog_doh_detect_type_message">Por favor, espere un momento.</string>
+    <string name="dialog_doh_detect_type_title">Detectando tipo de servidor</string>
 </resources>

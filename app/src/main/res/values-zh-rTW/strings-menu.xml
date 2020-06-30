@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="menu_show_on_fdroid">在 F-Droid 上顯示</string>
+    <string name="menu_about">關於此應用程式</string>
+    <string name="menu_rate">評分</string>
+    <string name="menu_create_shortcut">建立伺服器捷徑</string>
+    <string name="menu_querylogging">紀錄查詢</string>
+    <string name="menu_settings">設定</string>
+    <string name="menu_main">應用程式狀態</string>
+</resources>

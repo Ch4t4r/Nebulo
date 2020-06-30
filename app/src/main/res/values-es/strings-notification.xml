@@ -54,4 +54,7 @@
     <string name="notification_main_subtext">%1$d consultas hasta ahora</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
+    <string name="notification_dnsserver_portdiffers">El puerto configurado %1d no se pudo utilizar.</string>
+    <string name="notification_dnsserver_message">El servidor DNS está funcionando en localhost:%1d. Reenvío de consultas con aplicaciones de terceros</string>
+    <string name="notification_dnsserver_title">Ejecutando en modo no VPN</string>
 </resources>

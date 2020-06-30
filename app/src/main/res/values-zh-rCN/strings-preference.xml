@@ -108,4 +108,14 @@
     <string name="crashreporting_type_off">关闭（不发送崩溃报告）</string>
     <string name="crashreporting_type_minimal">最少（仅报告Android版本与应用版本）</string>
     <string name="crashreporting_type_full">完整（统计与调试数据）</string>
+    <string name="summary_local_server_port">DNS服务器将会监听的端口。仅允许大于1024的端口。
+\n当前：%1s</string>
+    <string name="title_local_server_port">服务器端口</string>
+    <string name="summary_run_without_vpn">当选中后，Nebulo将在您的设备上设置DNS服务器</string>
+    <string name="title_run_without_vpn">无VPN运行</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">服务器将在 localhost:%1s 上运行</string>
+    <string name="summary_category_nonvpnmode">将Nebulo配置为设备上的DNS服务器，而不使用伪VPN。启用后，您必须使用第三方应用手动将DNS请求转发到Nebulo。
+\n
+\n这个功能是试验性的。</string>
+    <string name="preference_category_nonvpnmode">无VPN模式</string>
 </resources>
