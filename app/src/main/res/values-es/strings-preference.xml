@@ -108,4 +108,14 @@
     <string name="summary_pause_on_captiveportal">No usa el DoH si se detecta un portal cautivo. Se reanudará automáticamente poco después de iniciar la sesión. 
 \nSi lo desactiva, podría impedirle abrir el portal cautivo para iniciar sesión</string>
     <string name="title_advanced_logging">Registro avanzado</string>
+    <string name="summary_local_server_port">Puerto del servidor DNS que se va a alojar Sólo se permiten los puertos superiores a 1024.
+\nActualmente:% 1s</string>
+    <string name="title_local_server_port">Puerto del servidor</string>
+    <string name="summary_run_without_vpn">Cuando está marcado, Nebulo aloja un servidor DNS en su dispositivo</string>
+    <string name="title_run_without_vpn">Funciona sin VPN</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">El servidor se alojará en localhost:%1s</string>
+    <string name="summary_category_nonvpnmode">Configurar Nebulo para que actúe como un servidor DNS en el dispositivo en lugar de usar una VPN falsa. Cuando se habilita, hay que reenviar manualmente las consultas DNS a Nebulo usando aplicaciones de terceros.
+\n
+\nEsta característica es experimental.</string>
+    <string name="preference_category_nonvpnmode">Modo no VPN</string>
 </resources>
