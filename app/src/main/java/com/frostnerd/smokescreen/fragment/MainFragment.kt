@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
+import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
+import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
@@ -269,16 +271,26 @@ class MainFragment : Fragment() {
     }
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
-        activity?.runOnUiThread {
-            val url = serverInfo.specification.privacyPolicyURL
-            val text = view?.findViewById<TextView>(R.id.privacyStatementText)
-            if (url != null && text != null) {
-                text.text =
-                    getString(R.string.main_dnssurveillance_privacystatement, serverInfo.name)
-                text.tag = url
-                text.visibility = View.VISIBLE
-            } else if (text != null) {
-                text.visibility = View.GONE
+        activity?.let { activity ->
+            if (!serverInfo.specification.privacyPolicyURL.isNullOrBlank()) {
+                LifecycleCoroutineScope(activity, ui = false).launch {
+                    val url = URL(serverInfo.specification.privacyPolicyURL)
+                    launchWithLifecylce(true) {
+                        val text = view?.findViewById<TextView>(R.id.privacyStatementText)
+                        text?.text =
+                            getString(
+                                R.string.main_dnssurveillance_privacystatement,
+                                serverInfo.name
+                            )
+                        text?.tag = url
+                        text?.visibility = View.VISIBLE
+                    }
+                }
+            } else {
+                LifecycleCoroutineScope(activity, ui = true).launch {
+                    val text = view?.findViewById<TextView>(R.id.privacyStatementText)
+                    text?.visibility = View.GONE
+                }
             }
         }
     }
