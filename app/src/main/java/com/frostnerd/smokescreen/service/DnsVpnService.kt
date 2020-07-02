@@ -819,6 +819,9 @@ class DnsVpnService : VpnService(), Runnable {
     private fun createBuilder(): Builder {
         log("Creating the VpnBuilder.")
         val builder = Builder()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            builder.setUnderlyingNetworks(null)
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val mgr =
                 getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
