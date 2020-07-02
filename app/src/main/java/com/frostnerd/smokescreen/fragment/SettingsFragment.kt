@@ -258,9 +258,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if(value && serviceRunning) {
                 DnsVpnService.restartVpn(requireContext(), false)
             } else if(!value) {
-                if(serviceRunning && VpnService.prepare(requireContext()) == null)
+                if(serviceRunning)
                     DnsVpnService.restartVpn(requireContext(), false)
-                else if(serviceRunning) DnsVpnService.sendCommand(requireContext(), Command.STOP)
             }
             true
         }
