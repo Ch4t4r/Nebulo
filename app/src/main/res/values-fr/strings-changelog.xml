@@ -130,4 +130,6 @@
     <string name="changelog_build_59_3">Nebulo détecte désormais le mode supporté lors de l\'ajout d\'un serveur DNS-sur-HTTPS</string>
     <string name="changelog_build_59_2">Ajout de la réutilisation des connexions, réduction de l\'utilisation des piles</string>
     <string name="changelog_build_59_1">Ajout de nouvelles traductions</string>
+    <string name="changelog_build_61_1">Promotion de la version bêta jusqu\'à la version complète</string>
+    <string name="changelog_build_59_7">Nebulo peut maintenant fonctionner en mode (expérimental) non-VPN, où il utilise un serveur DNS au lieu d\'un VPN factice. Cela nécessite l\'utilisation d\'applications tierces pour transmettre les requêtes DNS à Nebulo</string>
 </resources>
