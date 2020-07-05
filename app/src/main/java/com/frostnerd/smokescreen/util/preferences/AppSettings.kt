@@ -198,7 +198,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var nxDomainCacheTime: Int by stringBasedIntPref("dnscache_nxdomain_cachetime", 1800)
     override var loggingEnabled: Boolean by booleanPref(
         "logging_enabled",
-        AppSettings.isAlphaVersion
+        AppSettings.isAlphaVersion || BuildConfig.DEBUG
     )
     fun shouldLogDnsQueriesToConsole():Boolean = loggingEnabled && (!AppSettings.isReleaseVersion || advancedLogging || BuildConfig.DEBUG)
     var advancedLogging:Boolean by booleanPref(
