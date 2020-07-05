@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/preference_category_cache">
-        <CheckBoxPreference
+    <androidx.preference.PreferenceCategory android:title="@string/preference_category_cache">
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="false"
                 android:key="dnscache_enabled"
                 android:summary="@string/summary_dnscache_enabled"
                 android:title="@string/title_dnscache_enabled" />
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="false"
                 android:key="dnscache_keepacrosslaunches"
                 android:summary="@string/summary_dnscache_keepacrosslaunches"
                 android:title="@string/title_dnscache_keepacrosslaunches" />
 
-        <Preference
+        <androidx.preference.Preference
                 android:key="clear_dns_cache"
                 android:dependency="dnscache_enabled"
                 android:summary="@string/summary_clear_dnscache"
                 android:title="@string/title_clear_dnscache" />
 
-        <EditTextPreference
+        <androidx.preference.EditTextPreference
                 android:defaultValue="1000"
                 android:digits="012345789"
                 android:inputType="number"
                 android:key="dnscache_maxsize"
                 android:summary="@string/summary_dnscache_maxsize"
                 android:title="@string/title_dnscache_maxsize" />
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="true"
                 android:key="dnscache_use_default_time"
                 android:summary="@string/summary_dnscache_usedefaulttimes"
                 android:title="@string/title_dnscache_usedefaulttimes" />
-        <EditTextPreference
+        <androidx.preference.EditTextPreference
                 android:defaultValue="10"
                 android:digits="012345789"
                 android:inputType="number"
@@ -39,7 +39,7 @@
                 android:summary="@string/summary_dnscache_minimum_cache_time"
                 android:title="@string/title_dnscache_minimum_cache_time" />
 
-        <EditTextPreference
+        <androidx.preference.EditTextPreference
                 android:defaultValue="100"
                 android:digits="012345789"
                 android:inputType="number"
@@ -47,12 +47,12 @@
                 android:summary="@string/summary_dnscache_customcachetime"
                 android:title="@string/title_dnscache_customcachetime" />
 
-        <EditTextPreference
+        <androidx.preference.EditTextPreference
                 android:defaultValue="1800"
                 android:digits="0123456789"
                 android:inputType="number"
                 android:key="dnscache_nxdomain_cachetime"
                 android:summary="@string/summary_dnscache_nxdomaincachetime"
                 android:title="@string/title_dnscache_nxdomaincachetime" />
-    </PreferenceCategory>
-</PreferenceScreen>
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

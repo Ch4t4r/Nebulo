@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/preference_category_querylogging">
-        <CheckBoxPreference
+    <androidx.preference.PreferenceCategory android:title="@string/preference_category_querylogging">
+        <androidx.preference.CheckBoxPreference
                 android:key="log_dns_queries"
                 android:title="@string/title_log_queries"
                 android:summary="@string/summary_log_queries"
                 android:defaultValue="false"/>
 
-        <Preference
+        <androidx.preference.Preference
                 android:key="generate_queries"
                 android:title="Generate queries"/>
 
-        <Preference
+        <androidx.preference.Preference
                 android:key="export_dns_queries"
                 android:title="@string/title_export_queries"
                 android:dependency="log_dns_queries"
                 android:summary="@string/summary_export_queries"/>
 
-        <Preference
+        <androidx.preference.Preference
                 android:key="clear_dns_queries"
                 android:title="@string/title_delete_queries"
                 android:summary="@string/summary_delete_queries"
                 android:dependency="log_dns_queries"
                 />
-    </PreferenceCategory>
-</PreferenceScreen>
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

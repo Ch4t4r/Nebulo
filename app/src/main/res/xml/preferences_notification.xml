@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/preference_category_notification">
-        <CheckBoxPreference
+    <androidx.preference.PreferenceCategory android:title="@string/preference_category_notification">
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="true"
                 android:key="show_notification_on_lockscreen"
                 android:summary="@string/summary_show_notification_on_lockscreen"
                 android:title="@string/title_show_notification_on_lockscreen" />
 
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="false"
                 android:key="simple_notification"
                 android:summary="@string/summary_simple_notification"
                 android:title="@string/title_simple_notification" />
 
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="false"
                 android:key="hide_notification_icon"
                 android:summary="@string/summary_notification_hide_icon"
                 android:title="@string/title_notification_hide_icon" />
 
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="true"
                 android:key="notification_allow_stop"
                 android:summary="@string/summary_notification_allow_stop"
                 android:title="@string/title_notification_allow_stop" />
 
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="true"
                 android:key="notification_allow_pause"
                 android:summary="@string/summary_notification_allow_pause"
                 android:title="@string/title_notification_allow_pause" />
 
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="false"
                 android:key="show_no_connection_notification"
                 android:summary="@string/summary_show_noconnection_notification"
                 android:title="@string/title_show_noconnection_notification" />
 
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="true"
                 android:key="show_vpn_revoked_notification"
                 android:summary="@string/summary_show_revoked_notification"
                 android:title="@string/title_show_revoked_notification" />
-    </PreferenceCategory>
-</PreferenceScreen>
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>
