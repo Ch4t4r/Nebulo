@@ -77,6 +77,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var dnsProxy: DnsPacketProxy? = null
     private var vpnProxy: RetryingVPNTunnelProxy? = null
     private var dnsServerProxy:DnsServerPacketProxy? = null
+    private var ipTablesRedirector: IpTablesPacketRedirector? = null
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var noConnectionNotificationBuilder: NotificationCompat.Builder
@@ -265,6 +266,7 @@ class DnsVpnService : VpnService(), Runnable {
                 }
             }
         }
+        clearPreviousIptablesRedirect(true)
         log("Service created.")
     }
 
@@ -727,6 +729,7 @@ class DnsVpnService : VpnService(), Runnable {
         if (!destroyed) {
             vpnProxy?.stop()
             dnsServerProxy?.stop()
+            if(ipTablesRedirector == null || ipTablesRedirector?.endForward() == true) getPreferences().lastIptablesRedirectAddress = null
             fileDescriptor?.close()
             addressResolveScope.cancel()
             lastVPNStopTime = System.currentTimeMillis()
@@ -1107,9 +1110,16 @@ class DnsVpnService : VpnService(), Runnable {
                  ), logger = VpnLogger(applicationContext))
                  vpnProxy?.maxRetries = 15
                  val preferredPort = getPreferences().dnsServerModePort
-                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, InetAddress.getLocalHost(), preferredPort)
+                 val bindAddress = InetAddress.getLocalHost()
+                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, bindAddress, preferredPort)
                  val actualPort = dnsServerProxy!!.startServer()
                  showDnsServerModeNotification(actualPort, preferredPort)
+                 if(getPreferences().nonVpnUseIptables) {
+                     val hostAddr = bindAddress.hostAddress
+                     ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr , logger)
+                     ipTablesRedirector?.beginForward()
+                     getPreferences().lastIptablesRedirectAddress = "$hostAddr:$actualPort"
+                 }
                  log("Non-VPN proxy started.")
              }
         } else {

@@ -72,6 +72,7 @@ class MainFragment : Fragment() {
             else ProxyState.RUNNING
         } else ProxyState.NOT_RUNNING
         updateVpnIndicators()
+        context?.clearPreviousIptablesRedirect()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -26,9 +26,13 @@ import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
+import com.frostnerd.general.service.isServiceRunning
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
+import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
+import com.frostnerd.smokescreen.util.proxy.IpTablesPacketRedirector
 import io.sentry.android.core.BuildInfoProvider
 import io.sentry.android.core.util.RootChecker
 import io.sentry.core.NoOpLogger
@@ -260,6 +264,13 @@ fun Context.hasDeviceIpv6Address(): Boolean {
 
 fun Context.isDeviceRooted():Boolean {
     return RootChecker(this, BuildInfoProvider(), NoOpLogger.getInstance()).isDeviceRooted
+}
+
+fun Context.clearPreviousIptablesRedirect(forceClear:Boolean = false) {
+    if(forceClear || !isServiceRunning(DnsVpnService::class.java) || getPreferences().vpnServiceState == VpnServiceState.STOPPED) getPreferences().lastIptablesRedirectAddress?.split(":")?.apply {
+        IpTablesPacketRedirector(this[1].toInt(), this[0], logger).endForward()
+        getPreferences().lastIptablesRedirectAddress = null
+    }
 }
 
 operator fun Level.compareTo(otherLevel:Level):Int {
