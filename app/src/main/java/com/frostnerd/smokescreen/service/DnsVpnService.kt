@@ -331,7 +331,8 @@ class DnsVpnService : VpnService(), Runnable {
             "notification_allow_pause",
             "dns_rules_enabled",
             "simple_notification",
-            "pin"
+            "pin",
+            "nonvpn_use_iptables"
         )
         settingsSubscription = getPreferences().listenForChanges(
             relevantSettings,
