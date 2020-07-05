@@ -243,6 +243,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val enabled = findPreference("run_without_vpn") as CheckBoxPreference
         val port = findPreference("non_vpn_server_port") as EditTextPreference
         val connectInfo = findPreference("nonvpn_connect_info")
+        val iptablesMode = findPreference("nonvpn_use_iptables")
         port.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().isNotEmpty() && newValue.toString().isInt() && newValue.toString().toInt() > 1024) {
                 port.summary = getString(R.string.summary_local_server_port, newValue.toString())
@@ -265,6 +266,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         port.summary = getString(R.string.summary_local_server_port, requireContext().getPreferences().dnsServerModePort.toString())
         connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, requireContext().getPreferences().dnsServerModePort.toString())
+        val rooted = context?.isDeviceRooted() ?: false
+        if(!rooted) {
+            iptablesMode.isVisible = false
+        }
     }
 
     @SuppressLint("NewApi")

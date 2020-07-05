@@ -163,6 +163,9 @@
     <string name="title_local_server_port">Server port</string>
     <string name="summary_local_server_port">Port of the DNS server which will be hosted. Only ports above 1024 are allowed.\nCurrently: %1s</string>
 
+    <string name="title_iptables_mode">Use IpTables</string>
+    <string name="summary_iptables_mode">Forward queries to Nebulo using IpTables. This requires root privileges. When enabled no external apps need to be used when in non-vpn mode.</string>
+
     <string-array name="languages">
         <item>System language</item>
         <item>English</item>

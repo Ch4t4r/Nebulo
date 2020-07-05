@@ -20,5 +20,12 @@
                 />
 
         <Preference android:key="nonvpn_connect_info" android:summary="@string/summary_category_nonvpnmode_forwardinfo" />
+
+        <CheckBoxPreference
+                android:key="nonvpn_use_iptables"
+                android:defaultValue="false"
+                android:dependency="run_without_vpn"
+                android:title="@string/title_iptables_mode"
+                android:summary="@string/summary_iptables_mode" />
     </PreferenceCategory>
 </PreferenceScreen>

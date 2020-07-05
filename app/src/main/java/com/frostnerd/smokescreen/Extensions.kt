@@ -29,6 +29,9 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
+import io.sentry.android.core.BuildInfoProvider
+import io.sentry.android.core.util.RootChecker
+import io.sentry.core.NoOpLogger
 import leakcanary.LeakSentry
 import java.net.Inet4Address
 import java.net.Inet6Address
@@ -253,6 +256,10 @@ fun Context.hasDeviceIpv6Address(): Boolean {
     }
     log("No IPv6 addresses found.")
     return !hasNetwork
+}
+
+fun Context.isDeviceRooted():Boolean {
+    return RootChecker(this, BuildInfoProvider(), NoOpLogger.getInstance()).isDeviceRooted
 }
 
 operator fun Level.compareTo(otherLevel:Level):Int {
