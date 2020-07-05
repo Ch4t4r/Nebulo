@@ -166,6 +166,9 @@
     <string name="title_iptables_mode">Use iptables</string>
     <string name="summary_iptables_mode">Forward queries to Nebulo using iptables. This requires root privileges. When enabled no external apps need to be used when in non-vpn mode.</string>
 
+    <string name="title_check_iptables">Check for iptables</string>
+    <string name="summary_check_iptables">Check whether your device supports iptables</string>
+
     <string-array name="languages">
         <item>System language</item>
         <item>English</item>

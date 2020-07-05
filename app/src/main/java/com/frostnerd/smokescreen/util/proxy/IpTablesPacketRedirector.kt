@@ -1,6 +1,7 @@
 package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.smokescreen.Logger
+import com.frostnerd.smokescreen.util.processSuCommand
 import java.io.DataOutputStream
 import java.lang.Exception
 
@@ -42,7 +43,7 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
     fun beginForward():Boolean {
         return try {
             logger?.log("Using iptables to forward queries to $dnsServerIpAddress:$dnsServerPort", logTag)
-            processSuCommand(generateIpTablesCommand(true))
+            processSuCommand(generateIpTablesCommand(true), logger)
         } catch (ex:Exception) {
             false
         }
@@ -51,7 +52,7 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
     fun endForward():Boolean {
         return try {
             logger?.log("Removing IPTables forwarding rule", logTag)
-            processSuCommand(generateIpTablesCommand(false))
+            processSuCommand(generateIpTablesCommand(false), logger)
         } catch (ex:Exception) {
             false
         }
@@ -69,37 +70,5 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
             append(":")
             append(dnsServerPort)
         }
-    }
-
-    /**
-     * @return Whether the command has been executed successfully
-     */
-    private fun processSuCommand(command:String):Boolean {
-        return try {
-            val su = runCommandWithSU(command)
-            su.errorStream.readBytes().takeIf {
-                it.isNotEmpty()
-            }?.apply {
-                logger?.log("Command '$command' yielded error output ${String(this)}", logTag)
-            }
-
-            su.waitFor()
-            return su.exitValue() == 0
-        } catch (ex:Exception) {
-            logger?.log("Command '$command' yielded exception: ${Logger.stacktraceToString(ex)}", logTag)
-            false
-        }
-    }
-
-    private fun runCommandWithSU(command:String):Process {
-        val su = Runtime.getRuntime().exec("su")
-        DataOutputStream(su.outputStream).apply {
-            writeBytes(command)
-            writeBytes("\n")
-            writeBytes("exit")
-            writeBytes("\n")
-            flush()
-        }.close()
-        return su
     }
 }

@@ -10,6 +10,7 @@ import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
@@ -18,6 +19,7 @@ import androidx.preference.*
 import com.frostnerd.general.isInt
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
+import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.MainActivity
@@ -31,6 +33,7 @@ import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import com.frostnerd.smokescreen.util.preferences.Theme
+import com.frostnerd.smokescreen.util.processSuCommand
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -244,6 +247,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val port = findPreference("non_vpn_server_port") as EditTextPreference
         val connectInfo = findPreference("nonvpn_connect_info")
         val iptablesMode = findPreference("nonvpn_use_iptables")
+        val checkIpTables = findPreference("check_iptables")
         port.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().isNotEmpty() && newValue.toString().isInt() && newValue.toString().toInt() > 1024) {
                 port.summary = getString(R.string.summary_local_server_port, newValue.toString())
@@ -269,6 +273,27 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val rooted = context?.isDeviceRooted() ?: false
         if(!rooted) {
             iptablesMode.isVisible = false
+            checkIpTables.isVisible = false
+        } else {
+            checkIpTables.setOnPreferenceClickListener {
+                val context = context
+                if(context != null) {
+                    val dialog = LoadingDialog(context, R.string.title_check_iptables, R.string.dialog_doh_detect_type_message)
+                    dialog.show()
+                    launchWithLifecylce(false) {
+                        val supported = processSuCommand("iptables -t nat -L OUTPUT", context?.logger)
+                        launchWithLifecylce(true) {
+                            dialog.dismiss()
+                            if(supported) {
+                                Toast.makeText(context, R.string.iptables_supported, Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(context, R.string.iptables_not_supported, Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }
+                }
+                true
+            }
         }
     }
 
