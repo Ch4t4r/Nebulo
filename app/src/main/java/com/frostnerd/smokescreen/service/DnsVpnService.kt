@@ -456,11 +456,20 @@ class DnsVpnService : VpnService(), Runnable {
         noConnectionNotificationShown = true
     }
 
-    private fun showDnsServerModeNotification(port:Int, originalPort:Int) {
+    private enum class IpTablesMode {
+        DISABLED, ACTIVE, FAILED
+    }
+
+    private fun showDnsServerModeNotification(port:Int, originalPort:Int, iptablesMode:IpTablesMode) {
         val portDiffersFromConfig = port != originalPort
-        val channel = if(portDiffersFromConfig) Notifications.getHighPriorityChannelId(this) else Notifications.getDefaultNotificationChannelId(this)
-        val icon = if(portDiffersFromConfig) R.drawable.ic_cloud_warn else R.drawable.ic_mainnotification
-        var contentText = getString(R.string.notification_dnsserver_message, port)
+        val isNotificationImportant = portDiffersFromConfig || iptablesMode == IpTablesMode.FAILED
+        val channel = if(isNotificationImportant) Notifications.getHighPriorityChannelId(this) else Notifications.getDefaultNotificationChannelId(this)
+        val icon = if(isNotificationImportant) R.drawable.ic_cloud_warn else R.drawable.ic_mainnotification
+        var contentText = when (iptablesMode) {
+            IpTablesMode.DISABLED -> getString(R.string.notification_dnsserver_message, port)
+            IpTablesMode.FAILED -> getString(R.string.notification_dnsserver_message_iptables_failed, port)
+            else -> getString(R.string.notification_dnsserver_message_iptables_active, port)
+        }
         if(portDiffersFromConfig) contentText += "\n" + getString(R.string.notification_dnsserver_portdiffers, originalPort)
         NotificationCompat.Builder(this, channel)
             .setContentTitle(getString(R.string.notification_dnsserver_title))
@@ -1113,13 +1122,15 @@ class DnsVpnService : VpnService(), Runnable {
                  val bindAddress = InetAddress.getLocalHost()
                  dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, bindAddress, preferredPort)
                  val actualPort = dnsServerProxy!!.startServer()
-                 showDnsServerModeNotification(actualPort, preferredPort)
-                 if(getPreferences().nonVpnUseIptables) {
+                 val iptablesMode = if(getPreferences().nonVpnUseIptables) {
                      val hostAddr = bindAddress.hostAddress
                      ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr , logger)
-                     ipTablesRedirector?.beginForward()
+                     val couldPlaceRule = ipTablesRedirector?.beginForward() ?: false
                      getPreferences().lastIptablesRedirectAddress = "$hostAddr:$actualPort"
-                 }
+                     if(couldPlaceRule) IpTablesMode.ACTIVE
+                     else IpTablesMode.FAILED
+                 } else IpTablesMode.DISABLED
+                 showDnsServerModeNotification(actualPort, preferredPort, iptablesMode)
                  log("Non-VPN proxy started.")
              }
         } else {
