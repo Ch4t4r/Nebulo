@@ -1,7 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="dialog_serverconfiguration_title">सर्वर सेटिंग्स</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="dialog_serverconfiguration_title">सर्वर सेटिंग्स</string>
     <string name="dialog_serverconfiguration_addserver">एक सर्वर जोड़ें</string>
-
     <string name="dialog_newserver_title_https">एक सर्वर जोड़ें (DoH)</string>
     <string name="dialog_newserver_title_tls">एक सर्वर जोड़ें (DoT)</string>
     <string name="dialog_newserver_name">सर्वर का नाम</string>
@@ -10,19 +10,16 @@
     <string name="dialog_newserver_secondaryserver">द्वितीय सर्वर (वैकल्पिक)</string>
     <string name="dialog_deleteconfig_title">सेटिंग्स हटाएं\?</string>
     <string name="dialog_deleteconfig_text">क्या आप सेटिंग्स %1$s को हटाना चाहते हैं\?</string>
-
     <string name="dialog_appchoosal_showsystemapps">सिस्टम ऐप्स दिखाएं</string>
     <string name="dialog_appchoosal_whitelist">केवल चयनित ऐप में DoH / DoT का उपयोग करें</string>
-    
     <plurals name="dialog_excludedapps_infotext">
-	<item quantity="one">%1d ऐप पूर्व निर्धारित रूप से बाहर रखा गया है और इसे अचयनित नहीं किया जा सकता है</item>
-	<item quantity="other">%1d ऐप्स पूर्व निर्धारित रूप से बाहर रखे गये है और इन्हे अचयनित नहीं किया जा सकता है</item>
-</plurals>
-
+        <item quantity="one">%1d ऐप पूर्व निर्धारित रूप से बाहर रखा गया है और इसे अचयनित नहीं किया जा सकता है</item>
+        <item quantity="other">%1d ऐप्स पूर्व निर्धारित रूप से बाहर रखे गये है और इन्हे अचयनित नहीं किया जा सकता है</item>
+    </plurals>
     <plurals name="dialog_serverimport_title">
-	<item quantity="one">%1d सर्वर का आयात</item>
-	<item quantity="other">%1d सर्वर की आयात</item>
-</plurals>
+        <item quantity="one">%1d सर्वर का आयात</item>
+        <item quantity="other">%1d सर्वर की आयात</item>
+    </plurals>
     <string name="dialog_serverimport_done">पूर्ण</string>
     <string name="dialog_serverimport_priority">प्राथमिकता %1d</string>
     <string name="dialog_serverimport_experimental">प्रायोगिक</string>
@@ -31,22 +28,17 @@
     <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">कृपया उन सर्वरों का चयन करें जिन्हें आप आयात करना चाहते हैं|
 \n
 \nआपके द्वारा पहले से ही आयात किए गए सर्वर डुप्लिकेट हो जाएंगे।</string>
-
     <string name="dialog_serverimportfailed_title">आयात विफल रहा</string>
     <string name="dialog_serverimportfailed_text">सर्वर आयात नहीं किया जा सका।</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">सर्वर आयात नहीं किया जा सका।
 \n(%1s)</string>
-
     <string name="dialog_logexport_loading_title">लॉग तैयार कर रहा है</string>
     <string name="dialog_logexport_text">आप लॉग को कैसे शेयर करना चाहते हैं\?</string>
     <string name="dialog_logexport_general">ऐप चुनें</string>
     <string name="dialog_logexport_email">ईमेल</string>
-
     <string name="dialog_deletelogs_text">क्या आप वाकई सभी लॉग हटाना चाहते हैं\?</string>
-
     <string name="dialog_error_title">क्रैश रिपोर्ट</string>
     <string name="dialog_error_text">ऐसा लग रहा है कि ऐप क्रैश हो गया है। क्या आप डेवलपर को त्रुटि लॉग फ़ाइल भेजना चाहते हैं\?</string>
-
     <string name="dialog_batteryoptimization_title">बैटरी अनुकूलन</string>
     <string name="dialog_batteryoptimization_message">"कुछ डिवाइस पर ऐप को सूचित नहीं किया जाएगा कि डिवाइस की शुरू होने की प्रक्रिया समाप्त हो गयी  है जब तक कि बैटरी अनुकूलन अक्षम न हो ।
 \nऐप वर्तमान में बैटरी अनुकूलन सूची में नहीं है, क्या आप ऐसा करना चाहते हैं\?
@@ -54,23 +46,16 @@
 \nआपको परीक्षण करना चाहिए कि यह बैटरी अनुकूलन अक्षम करने से पहले सक्षम बैटरी अनुकूलन के साथ काम करता है या नहीं।"</string>
     <string name="dialog_batteryoptimization_whitelist">अक्षम करे</string>
     <string name="dialog_batteryoptimization_ignore">नज़रअंदाज़ करे</string>
-
     <string name="dialog_rate_confirmation">क्या आप ऐप का मूल्यांकन करने के लिए प्ले स्टोर खोलना चाहते हैं\?</string>
-
     <string name="dialog_changelog_title">बदलाव सूची</string>
     <string name="dialog_changelog_infotext">यह ऐप अपडेट किया गया है। निम्नलिखित सूची में आप बदलाव देख सकते हैं। नीचे दिए गए बॉक्स को चेक करें और भविष्य में आपको यह संदेश दिखाई नहीं देगा।</string>
     <string name="dialog_changelog_dont_show_again">फिर मत दिखाना</string>
-
     <string name="dialog_about_licenses">लाइसेंस</string>
-
     <string name="dialog_query_export_title">प्रश्न निर्यात कर रहा है…</string>
     <string name="dialog_query_export_message">प्रश्न निर्यात किए जा रहे हैं, कृपया प्रतीक्षा करें</string>
-
     <string name="dialog_pin_message">कृपया अपना पिन डाले।</string>
     <string name="dialog_pin_hint">पिन</string>
-
     <string name="dialog_enable_logging">"क्या आप लॉगिंग सक्षम करना चाहते हैं\? लॉग में ऐप की सांख्यिकीय जानकारी, डिबग जानकारी और क्रियाों  की जानकारी होती हैं। जब तक आप स्वयं सक्षम नहीं करते, तब तक लिखे गए लॉग शेयर नहीं किए जाते हैं।"</string>
-
     <string name="dialog_crashreporting_title">स्वचालित क्रैश रिपोर्टिंग</string>
     <string name="dialog_crashreportingusages_title">संचारित डेटा</string>
     <string name="dialog_crashreportingusages_message">क्रैश पर कौन सी जानकारी संचारित होती है, यह देखने के लिए किसी एक समूह पर क्लिक करें।</string>
@@ -89,10 +74,8 @@
 \nरिपोर्ट HTTPS द्वारा अधिक सुरक्षित रूप से भेजी जाती हैं।
 \n
 \nगोपनीयता नीति के लिंक के लिए और किस प्रकार की जानकारी संचारित कि जाती है, यह देखने के लिए नीचे \'जानकारी देखें\' पर क्लिक करें।</string>
-
     <string name="dialog_clearqueries_title">सभी प्रश्न हटाएँ</string>
     <string name="dialog_clearqueries_message">क्या आप वाकई लॉग इन प्रश्नों को क्लियर करना चाहते हैं\? यह वापस नहीं लिया जा सकता है।</string>
-
     <string name="dialog_credits_title">आभार सूची</string>
     <string name="dialog_credits_message" formatted="true">- ऐप आइकन - &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;.
 \n- तुर्की अनुवाद - Kemal Oktay Aktoğan
@@ -103,14 +86,12 @@
 \n- कुछ आइकन - Font Awesome
 \n
 \n यहां अपना नाम देखना चाहते हैं\? बेझिझक &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;योगदान दें&lt;/a&gt;.</string>
-
     <string name="dialog_join_group_title">समुदाय में शामिल हों</string>
     <string name="dialog_join_group_message">प्रिय उपयोगकर्ता!
 \n
 \nक्या आप जानते हैं कि इस ऐप के लिए एक टेलीग्राम समूह है\? जिसमे एप के बारे में नियमित अपडेट एवं चर्चाए और सवालों के पूछे जाते है।
 \nहम 200 से अधिक लोगों का एक महान समुदाय हैं, क्या आप इसका हिस्सा बनना चाहेंगे\?</string>
     <string name="dialog_join_group_positive">हाँ!</string>
-
     <string name="dialog_speedresult_title">गति परीक्षण के परिणाम</string>
     <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d सर्वरों का परीक्षण किया गया
 \n %2d DoT सर्वर उपलब्ध है, %3d उपलब्ध नहीं है
@@ -119,24 +100,19 @@
 \n
 \n सबसे तेज़ सर्वर: %7s
 \n सबसे धीमा सर्वर: %8s</string>
-
     <string name="dialog_speedtest_useserver_title">सर्वर का चयन करें</string>
     <string name="dialog_speedtest_useserver_message">क्या आप सर्वर %1s का उपयोग करना चाहते हैं\? यह %4d ms की प्रतिक्रिया समय के साथ %3d में से %2d स्थान पर है|</string>
-
     <string name="dialog_deletehostsource_title">%1s को हटाएं\?</string>
     <string name="dialog_deletehostsource_message">क्या आप सुनिश्चित हैं कि आप होस्ट स्रोत %1s को हटाना चाहते हैं\? यह वापस नहीं किया जा सकता है, इस स्रोत से होस्ट हटा दिए जाएंगे।</string>
-
     <string name="dialog_clearuserrules_title">सभी DNS नियम हटाएँ जाये\?</string>
     <string name="dialog_clearuserrules_message">क्या आप सभी DNS नियम हटा देना चाहते हैं\? इसे वापस नहीं किया जा सकता है।</string>
-
     <string name="dialog_newhostsource_title">नया नियम स्रोत</string>
     <string name="dialog_newhostsource_edit_title">नया नियम स्रोत</string>
     <string name="dialog_newhostsource_name">नाम</string>
     <string name="dialog_newhostsource_wildcard_info">आप उन होस्ट सूचियों का उपयोग कर सकते हैं जो वाइल्डकार्ड डोमेन का उपयोग करती हैं।</string>
     <string name="dialog_newhostsource_choose_file">फ़ाइल का चयन</string>
     <string name="dialog_newhostsource_use_as_whitelist">श्वेतसूची के रूप में उपयोग करें</string>
-    <string name="dialog_newhostsource_error_name_empty">कृपया एक नाम दें।</string>
-
+    <string name="dialog_newhostsource_error_name_empty">कृपया एक नाम दें</string>
     <string name="dialog_newdnsrule_title">नया DNS नियम</string>
     <string name="dialog_newdnsrule_edit">DNS नियम संपादित करें</string>
     <string name="dialog_newdnsrule_whitelist">श्वेतसूची</string>
@@ -148,17 +124,14 @@
     <string name="dialog_newdnsrule_ipv4_invalid">"कृपया उचित  IPv4 पता डाले"</string>
     <string name="dialog_newdnsrule_ipv6_invalid">कृपया उचित IPv6 पता डाले</string>
     <string name="dialog_newdnsrule_wildcard_info">होस्ट वाइल्डकार्ड का समर्थन करता है। किसी भी वर्ण, संख्या और अनुमत विशेष वर्णों की अवधि (.) को छोड़कर तारांकन चिह्न (*) का उपयोग करें। अवधि (.) को शामिल करने के लिए दो तारांकन (**) का उपयोग करें।</string>
-
     <string name="dialog_exportdnsrules_title">DNS नियम निर्यात करें</string>
     <string name="dialog_exportdnsrules_whitelist">श्वेतसूची नियमों का निर्यात करें</string>
     <string name="dialog_exportdnsrules_nonwhitelist">सामान्य नियम निर्यात करें</string>
     <string name="dialog_exportdnsrules_export_user_rules">स्वनिर्धारित होस्ट DNS नियम निर्यात करें</string>
     <string name="dialog_exportdnsrules_export_sources">सक्रिय होस्ट स्रोतों से DNS नियम निर्यात करें</string>
-
     <string name="dialog_editdelete_title">आप क्या करना चाहते हैं\?</string>
     <string name="dialog_editdelete_edit">संपादित करें</string>
     <string name="dialog_editdelete_delete">हटाएं</string>
-
     <string name="dialog_servicekilled_message">पता चलता है की एप पिछली बार सक्रिय होने के बाद इसे ठीक से बंद नहीं किया गया था। यह दृढ़ता से संकेत करता है कि आपके सिस्टम ने एप को जबरन बंद होने को मजबूर किया और ऐप को फिर से शुरू होने की कोई भी संभावना नहीं रखी| 
 \n
 \nअधिकांश उपकरणों पर आपके पास कुछ विकल्प हैं, जिससे सिस्टम को ऐप को रोकने से विलम्बित या प्रतिबंधीत किया जा सकता है |
@@ -167,12 +140,10 @@
 \nयदि आपने इसे अनदेखा करना चुनते है तो आप इस सुचना को दोबारा नहीं देखेंगे। आप इसे हल करने के लिए अधिक पढ़ सकते हैं और सुझाव प्राप्त कर सकते हैं, नीचे दिए गए बटन को दबाये (आपके ब्राउज़र में एक बाहरी वेबसाइट खोलता 
 \n है)। Android सेटिंग्स खोलने के लिए, सेटिंग्स पर क्लिक करें जहां आप Nebulo के लिए बैटरी अनुकूलन को अक्षम कर सकते हैं।</string>
     <string name="dialog_servicekilled_more_info">अधिक जानकारी</string>
-
     <string name="dialog_overlaydetected_title">सिस्टम-विस्तृत ओवरले का पता चला</string>
     <string name="dialog_overlaydetected_message">ऐसा लगता है कि सिस्टम-विस्तृत ओवरले सक्रिय है (उदा. एक चैट बबल, रंग फिल्टर या नाइट फिल्टर)| अधिकांश डिवाइस आपको इस मामले में वीपीएन को सक्षम करने की अनुमति नहीं देते हैं।
 \n
 \nयदि आप अगले संवाद में ओके पर क्लिक नहीं कर सकते हैं तो कृपया ओवरले को निष्क्रिय कर दें।</string>
-
     <string name="dialog_hostsourcerefresh_title">होस्ट स्रोतों को रिफ्रेश करें</string>
     <string name="dialog_hostsourcerefresh_automatic_refresh">होस्ट स्रोतों को स्वचालित रिफ्रेश करें</string>
     <string name="dialog_hostsourcerefresh_wifi_only">WIFI पर ही रिफ्रेश करें</string>
@@ -183,15 +154,15 @@
     <string name="dialog_hostsourcerefresh_timeunit_days">दिन</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">सप्ताह</string>
     <string name="dialog_cleardnscache_message">क्या आप वाकई DNS कैश हटाना चाहते हैं\?</string>
-
     <string name="dialog_vpninformation_title">ऐप कैसे काम करता है</string>
     <string name="dialog_vpninformation_message">Nebulo आपके सभी अनुरोधों को पकड़ने के लिए एक आभासी VPN का उपयोग करता है, और फिर उन अनुरोधों को आपकी पसंद के सुरक्षित सर्वर पर भेज दिया जाता है।
 \nयह आभासी VPN असली VPN नहीं है और न ही यह आपकी पहचान छिपाता है और न ही यह आपके IP पते को बदलता है।
 \n
 \nDNS अनुरोधों को छोड़कर कोई वास्तविक जानकारी, इस ऐप का उपयोग करके संचारित नहीं कि जाती है।</string>
-
     <string name="dialog_raterequest_title">क्या आप Nebulo का आनंद ले रहे हैं\?</string>
     <string name="dialog_raterequest_message">यदि आप Nebulo का आनंद ले रहे हैं, तो क्या आप ऐप स्टोर पर इसे रेट करने में सहायता करेंगे\?</string>
-
     <string name="dialog_vpn_permission_denied_message">सिस्टम ने Nebulo को अपना VPN शुरू करने से मना कर दिया है। कृपया \'शुरू करे\' बटन पर क्लिक करके वहां अनुमति देने के लिए ऐप खोलें।</string>
+    <string name="dialog_doh_detect_type_message">एक क्षण प्रतीक्षा करें।</string>
+    <string name="dialog_doh_detect_type_title">सर्वर प्रकार का पता लगाना</string>
+    <string name="dialog_newhostsource_url">यूआरएल</string>
 </resources>
