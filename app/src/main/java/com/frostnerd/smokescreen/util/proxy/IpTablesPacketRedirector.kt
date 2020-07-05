@@ -43,7 +43,9 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
     fun beginForward():Boolean {
         return try {
             logger?.log("Using iptables to forward queries to $dnsServerIpAddress:$dnsServerPort", logTag)
-            processSuCommand(generateIpTablesCommand(true), logger)
+            processSuCommand(generateIpTablesCommand(true, udp = true), logger).also {
+                processSuCommand(generateIpTablesCommand(true, udp = false), logger) // Process TCP as well, but ignore result. UDP is more important.
+            }
         } catch (ex:Exception) {
             false
         }
@@ -52,7 +54,9 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
     fun endForward():Boolean {
         return try {
             logger?.log("Removing IPTables forwarding rule", logTag)
-            processSuCommand(generateIpTablesCommand(false), logger)
+            processSuCommand(generateIpTablesCommand(false, udp = true), logger).also {
+                processSuCommand(generateIpTablesCommand(false, udp = false), logger)
+            }
         } catch (ex:Exception) {
             false
         }
@@ -60,12 +64,15 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
 
     // Append: iptables -t nat -I OUTPUT -p udp --dport 53 -j DNAT --to-destination <ip>:<port>"
     // Drop:   iptables -t nat -D OUTPUT -p udp --dport 53 -j DNAT --to-destination <ip>:<port>"
-    private fun generateIpTablesCommand(append:Boolean):String {
+    private fun generateIpTablesCommand(append:Boolean, udp:Boolean):String {
         return buildString {
             append("iptables -t nat ")
             if(append) append("-I")
             else append("-D")
-            append("OUTPUT -p udp --dport 53 -j DNAT --to-destination ")
+            append(" OUTPUT -p ")
+            if(udp)append("udp")
+            else append("tcp")
+            append(" --dport 53 -j DNAT --to-destination ")
             append(dnsServerIpAddress)
             append(":")
             append(dnsServerPort)
