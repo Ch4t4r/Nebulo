@@ -41,6 +41,7 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
      */
     fun beginForward():Boolean {
         return try {
+            logger?.log("Using iptables to forward queries to $dnsServerIpAddress:$dnsServerPort", logTag)
             processSuCommand(generateIpTablesCommand(true))
         } catch (ex:Exception) {
             false
@@ -49,6 +50,7 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
 
     fun endForward():Boolean {
         return try {
+            logger?.log("Removing IPTables forwarding rule", logTag)
             processSuCommand(generateIpTablesCommand(false))
         } catch (ex:Exception) {
             false
