@@ -44,7 +44,6 @@ import org.minidns.record.Record
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
 import java.io.Serializable
-import java.lang.Exception
 import java.net.*
 import java.util.*
 import java.util.concurrent.TimeoutException

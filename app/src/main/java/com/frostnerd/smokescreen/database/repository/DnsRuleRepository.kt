@@ -2,7 +2,6 @@ package com.frostnerd.smokescreen.database.repository
 
 import com.frostnerd.smokescreen.database.dao.DnsRuleDao
 import com.frostnerd.smokescreen.database.entities.DnsRule
-import com.frostnerd.smokescreen.database.entities.HostSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

@@ -1,6 +1,5 @@
 package com.frostnerd.smokescreen.dialog
 
-import android.app.AlertDialog
 import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View

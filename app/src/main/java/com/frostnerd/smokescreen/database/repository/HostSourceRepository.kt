@@ -1,6 +1,5 @@
 package com.frostnerd.smokescreen.database.repository
 
-import androidx.room.Delete
 import com.frostnerd.smokescreen.database.dao.HostSourceDao
 import com.frostnerd.smokescreen.database.entities.HostSource
 import kotlinx.coroutines.CoroutineScope

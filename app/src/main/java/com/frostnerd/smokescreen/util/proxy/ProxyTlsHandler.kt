@@ -1,7 +1,5 @@
 package com.frostnerd.smokescreen.util.proxy
 
-import com.frostnerd.dnstunnelproxy.DnsPacketProxy
-import com.frostnerd.dnstunnelproxy.IPPacket
 import com.frostnerd.dnstunnelproxy.Packet
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
