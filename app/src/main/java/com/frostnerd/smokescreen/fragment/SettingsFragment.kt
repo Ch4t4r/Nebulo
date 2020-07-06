@@ -281,14 +281,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     val dialog = LoadingDialog(context, R.string.title_check_iptables, R.string.dialog_doh_detect_type_message)
                     dialog.show()
                     launchWithLifecylce(false) {
-                        val supported = processSuCommand("iptables -t nat -L OUTPUT", context?.logger)
+                        val supported = processSuCommand("iptables -t nat -L OUTPUT", context.logger)
+                        val ipv6Supported = processSuCommand("ip6tables -t nat -L PREROUTING", context.logger)
                         launchWithLifecylce(true) {
                             dialog.dismiss()
-                            if(supported) {
-                                Toast.makeText(context, R.string.iptables_supported, Toast.LENGTH_LONG).show()
-                            } else {
-                                Toast.makeText(context, R.string.iptables_not_supported, Toast.LENGTH_LONG).show()
-                            }
+                            val text = if(supported) {
+                                if(ipv6Supported) R.string.iptables_supported
+                                else R.string.iptables_supported_ipv6_unsupported
+                            } else R.string.iptables_not_supported
+                            Toast.makeText(context, text, Toast.LENGTH_LONG).show()
                         }
                     }
                 }
