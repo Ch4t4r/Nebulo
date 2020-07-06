@@ -1,12 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-
     <string name="activity_label_import_queries">प्रश्नों की आयात करे</string>
     <string name="activity_label_import_servers">सर्वर आयात करें</string>
     <string name="activity_label_speed_test">सर्वर गति की तुलना</string>
-
     <string name="activity_label_enable_logging">लिखे हुए प्रश्न निर्यात करे / प्रश्न लिखना सक्षम करें</string>
-
     <string name="all_stop">बंद करें</string>
     <string name="all_start">शुरू करें</string>
     <string name="all_pause">रोकिये</string>
@@ -16,17 +13,14 @@
     <string name="information">जानकारी</string>
     <string name="open_app">ऐप खोलें</string>
     <string name="all_close">बंद करे</string>
-
-    <string name="error_invalid_url">कृपया उचित URL दें |</string>
-    <string name="error_invalid_host">कृपया उचित होस्ट दें |</string>
-    <string name="error_invalid_pin">कृपया अपना पिन डाले ।</string>
-    <string name="error_invalid_servername">कृपया अपना नाम दें ।</string>
+    <string name="error_invalid_url">कृपया उचित URL दें</string>
+    <string name="error_invalid_host">कृपया उचित होस्ट दें</string>
+    <string name="error_invalid_pin">कृपया अपना पिन डाले</string>
+    <string name="error_invalid_servername">कृपया अपना नाम दें</string>
     <string name="error_webview_missing">WebView पैकेज नहीं मिला, क्या यह वर्तमान में अपडेट हो रहा है या हटाया जा रहा है \?</string>
-    <string name="error_cannot_open_settings">सिस्टम सेटिंग नहीं खोल सकते ।</string>
-
+    <string name="error_cannot_open_settings">सिस्टम सेटिंग नहीं खोल सकते</string>
     <string name="main_dnssurveillance_infotext">ध्यान रखें कि आप जिस DNS सर्वर से जुड़े हैं, वह यह रिकॉर्ड करने में सक्षम है कि आप किन साइटों पर जा रहे हैं। अधिक जानकारी के लिए संबंधित गोपनीयता विवरण की जाँच करें।</string>
     <string name="main_dnssurveillance_privacystatement">गोपनीयता विवरण - %1s</string>
-
     <string name="about_app">यह ऐप ओपन सोर्स है | सोर्स कोड यहाँ पर उपलब्ध है &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt; |
 \nइसके अलावा ऐप में कोई विज्ञापन नहीं हैं और आपके बारे में कोई जानकारी जमा नहीं की जाती है या आप पर इंटरनेट द्वारा नज़र नहीं रखी जाती है |
 \n
@@ -39,10 +33,8 @@
 \nGPLv3 के तहत लाइसेंस प्राप्त है|
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
     <string name="app_share_text">देखिये, मुझे यह ऐप मिला है जो आपको अधिक गोपनीयता और सुरक्षा देने के लिए आपके DNS प्रश्नों को एन्क्रिप्ट करता है। यहां से डाउनलोड कीजिए: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
-
     <string name="quicksettings_stop_text">Nebulo बंद करे</string>
     <string name="quicksettings_start_text">Nebulo शुरू करे</string>
-
     <string name="about_share">शेयर करे</string>
     <string name="about_licenses">ओपन-सोर्स लाइसेंस</string>
     <string name="about_changelog">बदलाव सूची</string>
@@ -52,23 +44,18 @@
     <string name="about_credits">आभार सूची</string>
     <string name="about_info">सामान्य जानकारी</string>
     <string name="about_help_translating">अनुवाद करने में सहायता करें</string>
-
     <string name="window_speedtest_runtest">परीक्षण शुरू करें</string>
-
-    <string name="error_no_webbrowser_installed">इस लिंक को देखने के लिए आपके पास उचित ऐप उपलब्ध नहीं है।</string>
-
+    <string name="error_no_webbrowser_installed">इस लिंक को देखने के लिए आपके पास उचित ऐप उपलब्ध नहीं है</string>
     <string name="button_main_dnsrules">DNS नियम</string>
-
     <string name="window_dnsrules_customhosts">स्वनिर्धारित होस्ट</string>
     <plurals name="window_dnsrules_subtitle">
-	<item quantity="one">%1d नियम</item>
-	<item quantity="other">%1d - नियम</item>
-</plurals>
-    <string name="window_dnsrules_hostalreadyexists">इस होस्ट के लिए पहले से ही एक नियम है।</string>
-    <string name="window_dnsrules_customhosts_message">अपने सभी स्वनिर्धारित होस्ट को यहां लिखें ।</string>
+        <item quantity="one">%1d नियम</item>
+        <item quantity="other">%1d - नियम</item>
+    </plurals>
+    <string name="window_dnsrules_hostalreadyexists">इस होस्ट के लिए पहले से ही एक नियम है</string>
+    <string name="window_dnsrules_customhosts_message">अपने सभी स्वनिर्धारित होस्ट को यहां लिखें</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">इस स्रोत से नियम: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">इस स्रोत से नियम: %1d (%2$d डुप्लिकेट उपयोग में नहीं)</string>
-
     <string name="windows_querylogging_search_hint">प्रश्नों की सूची में होस्ट की खोज करें</string>
     <string name="windows_querylogging_search">होस्ट-खोज</string>
     <string name="windows_querylogging_time">समय</string>
@@ -82,9 +69,8 @@
     <string name="windows_querylogging_latency">विलंबता</string>
     <string name="windows_querylogging_responses">प्रतिक्रिया</string>
     <string name="windows_querylogging_create_dnsrule">इस होस्ट के लिए DNS नियम बनाएँ</string>
-    <string name="windows_querylogging_dnsrule_created">DNS नियम बनाया गया है।</string>
+    <string name="windows_querylogging_dnsrule_created">DNS नियम बनाया गया है</string>
     <string name="windows_querylogging_usedserver_dnsrules">DNS नियमों से हल किया गया</string>
     <string name="windows_querylogging_usedserver_cache">कैश (cache) से हल किया गया</string>
-
-    <string name="window_main_privatedns_info">निजी DNS सक्रिय है, आपके प्रश्न पहले से ही सुरक्षित हैं। यदि आप DNS-over-HTTPs या अन्य उपयोगी सुविधाओं का उपयोग करना चाहते हैं, तो Nebulo को सक्षम करें।</string>
+    <string name="window_main_privatedns_info">निजी DNS सक्रिय है, आपके प्रश्न पहले से ही सुरक्षित हैं। यदि आप DNS-over-HTTPS या अन्य उपयोगी सुविधाओं का उपयोग करना चाहते हैं तो Nebulo को सक्षम करें।</string>
 </resources>

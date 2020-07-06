@@ -108,4 +108,14 @@
 \n Nessun effetto quando l\'app non è attiva</string>
     <string name="title_show_revoked_notification">Notifica per revoca autorizzazione</string>
     <string name="summary_show_revoked_notification">Mostra una notifica quando Nebulo perde l\'autorizzazione alla VPN</string>
+    <string name="summary_local_server_port">Porta del server DNS che sarà ospitato. Sono ammesse solo le porte superiori a 1024.
+\nAttualmente: %1s</string>
+    <string name="title_local_server_port">Porta server</string>
+    <string name="summary_run_without_vpn">Quando si seleziona Nebulo ospita un server DNS sul dispositivo</string>
+    <string name="title_run_without_vpn">Esegui senza VPN</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Il server sarà ospitato su localhost:%1s</string>
+    <string name="summary_category_nonvpnmode">Configurare Nebulo per agire come server DNS sul dispositivo invece di utilizzare una VPN fittizia. Quando è attivata, è necessario inoltrare manualmente le query DNS a Nebulo utilizzando applicazioni di terze parti.
+\n
+\nQuesta caratteristica è sperimentale.</string>
+    <string name="preference_category_nonvpnmode">Modo non-VPN</string>
 </resources>

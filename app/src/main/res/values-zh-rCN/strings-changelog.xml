@@ -1,2 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="changelog_build_32_1">对用户界面进行了细小的修整</string>
+    <string name="changelog_build_32_4">在抽屉菜单中添加了显示当前正在使用的服务器及其解析后IP地址的位置</string>
+    <string name="changelog_build_32_3">添加了拦截外部DNS流量的设置项（比如异步DNS）</string>
+    <string name="changelog_build_32_2">现在在网络差时DNS-over-TLS会更可靠地工作</string>
+    <string name="changelog_build_31_4">修复了一些崩溃问题</string>
+    <string name="changelog_build_30_4">修复了一些崩溃问题</string>
+    <string name="changelog_build_31_3">当应用崩溃并且自动崩溃报告启用时，应用会显示一条通知</string>
+    <string name="changelog_build_31_2">添加了禁用在通知上显示的停止/暂停按钮的设置项</string>
+    <string name="changelog_build_31_1">添加了不完整的德语翻译</string>
+    <string name="changelog_build_30_3">澄清了通知中的黑名单/白名单文本</string>
+    <string name="changelog_build_30_2">修复了隐私政策不加载的问题</string>
+    <string name="changelog_build_30_1">添加了新的通知图标</string>
+    <string name="changelog_build_29_5">添加了清除已记录请求项的设置</string>
+    <string name="changelog_build_29_4">修复了大量的崩溃问题</string>
+    <string name="changelog_build_29_3">添加了隐私政策</string>
+    <string name="changelog_build_29_2">添加了自动崩溃报告（可选参与）</string>
+    <string name="changelog_build_29_1">添加了新的应用图标（感谢RKBDI）</string>
+    <string name="changelog_build_28_5">小规模地改善性能</string>
+    <string name="changelog_build_28_4">现在UncensoredDNS是默认的服务器</string>
+    <string name="changelog_build_28_3">修复了部分DoT服务器不工作的问题</string>
+    <string name="changelog_build_28_2">现在对DoH服务器使用了一个更高的超时值（应可改善连接情况差下的网络状况）</string>
+    <string name="changelog_build_28_1">通知中的“停止”按钮现在又可以使用了</string>
+    <string name="changelog_build_27_4">在通知中加入了“暂停”按钮</string>
+    <string name="changelog_build_27_3">在无网络/网络状况差的情况下显示的通知现在默认禁用，并可以在设置中启用</string>
+    <string name="changelog_build_27_2">现在当应用崩溃后，日志再次变得可以分享了</string>
+    <string name="changelog_build_27_1">修复了大量的崩溃问题</string>
+    <string name="changelog_build_26_4">应用使用了错误的UncensoredDNS服务器</string>
+    <string name="changelog_build_26_3">现在“无连接”通知可以被忽略</string>
+    <string name="changelog_build_26_2">修复了“无网络”通知消息不会正确地消失的问题</string>
+    <string name="changelog_build_26_1">应用现在不会在当服务器仅有IPv4地址，而用户所处网络只有IPv6地址的情况下崩溃</string>
+    <string name="changelog_build_25_4">现在应用不会在使用未知服务器的情况下崩溃——它会使用之前提及的通知消息来通知用户</string>
+    <string name="changelog_build_25_3">现在应用会在网络连接状况差或没有网络连接时显示通知</string>
+    <string name="changelog_build_25_2">添加了新的DNS服务器</string>
+    <string name="changelog_build_25_1">改进了对IPv6/IPv6的处理方法——现在应用可以在仅支持两者中的一个的网络中可靠地工作</string>
+    <string name="changelog_build_24_1">修复了应用在无指纹传感器的设备上崩溃的问题</string>
+    <string name="changelog_build_23_6">现在可以在应用设置中使用PIN来保护应用</string>
+    <string name="changelog_build_23_5">现在会在请求日志中显示发送查询请求时使用的协议</string>
+    <string name="changelog_build_23_4">修复了Android 7以下的版本当中服务器导入不能工作的问题</string>
+    <string name="changelog_build_23_3">导出请求项设置现在会显示一个对话框，以表明是否正在加载中</string>
+    <string name="changelog_build_23_2">添加了此对话框以突出展示更新</string>
+    <string name="changelog_build_23_1">现在对DoT服务器展示非默认端口选项</string>
+</resources>

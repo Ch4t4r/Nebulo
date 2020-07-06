@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="changelog_build_41_adblocker_1">添加了两个新的DNS规则源</string>
+    <string name="changelog_build_29_2">添加了AdGuard DNS</string>
+    <string name="changelog_build_29_1">可屏蔽广告的服务器现在会在非Play商店的构建版本中显示（包括这个版本！）</string>
+</resources>
