@@ -156,4 +156,13 @@
     <string name="dialog_vpninformation_title">Como funciona este aplicativo</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Semanas</string>
     <string name="dialog_logexport_loading_title">Preparação de logs</string>
+    <string name="dialog_doh_detect_type_message">Por favor, espere um momento.</string>
+    <string name="dialog_doh_detect_type_title">Detecção do tipo de servidor</string>
+    <string name="dialog_vpninformation_message">Nebulo trabalha usando uma VPN fictícia para capturar todos os seus pedidos DNS, que são então encaminhados para um servidor seguro à sua escolha.
+\nEsta VPN fictícia não é uma VPN real e não esconde a sua identidade, nem muda o seu endereço IP.
+\n
+\nNenhum dado real, exceto para pedidos DNS, é transmitido usando este aplicativo.</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Atualize automaticamente as fontes do host</string>
+    <string name="dialog_hostsourcerefresh_title">Actualizar fontes anfitriãs</string>
+    <string name="dialog_exportdnsrules_whitelist">Exportar regras da lista branca</string>
 </resources>
