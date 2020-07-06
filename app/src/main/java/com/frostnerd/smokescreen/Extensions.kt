@@ -1,7 +1,9 @@
 package com.frostnerd.smokescreen
 
 import android.app.Activity
+import android.app.AlarmManager
 import android.app.KeyguardManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -26,6 +28,7 @@ import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
+import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
@@ -177,11 +180,18 @@ fun Context.isAppBatteryOptimized(): Boolean {
     return !pwrm.isIgnoringBatteryOptimizations(packageName)
 }
 
-fun <T:Activity>Activity.restart(activityClass:Class<T>? = null) {
+fun <T:Activity>Activity.restart(activityClass:Class<T>? = null, exitProcess:Boolean = false) {
     val intent = (if(activityClass != null) Intent(this, activityClass) else intent)
-        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
-    finish()
-    startActivity(intent)
+        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    if(exitProcess) {
+        finish()
+        val pendingIntent = PendingIntent.getActivity(this, RequestCodes.RESTART_WHOLE_APP, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+        (getSystemService(Context.ALARM_SERVICE) as AlarmManager).setExact(AlarmManager.RTC, System.currentTimeMillis() + 800, pendingIntent)
+        kotlin.system.exitProcess(0)
+    } else {
+        finish()
+        startActivity(intent)
+    }
 }
 
 fun Context.showEmailChooser(chooserTitle: String, subject: String, recipent: String, text: String) {

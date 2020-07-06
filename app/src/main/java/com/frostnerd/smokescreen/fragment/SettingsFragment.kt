@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
@@ -29,6 +30,7 @@ import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import com.frostnerd.smokescreen.util.preferences.Theme
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -286,21 +288,31 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
             log("Updated theme to $newValue")
             if (newTheme != null) {
-                removePreferenceListener()
                 requireContext().getPreferences().theme = newTheme
-                requireActivity().restart(MainActivity::class.java)
+                askRestartApp()
                 true
             } else {
                 false
             }
         }
         language.setOnPreferenceChangeListener { _, _ ->
-            requireActivity().restart(MainActivity::class.java)
+            askRestartApp()
             true
         }
         findPreference("app_exclusion_list").setOnPreferenceClickListener {
             showExcludedAppsDialog()
             true
+        }
+    }
+
+    private fun askRestartApp() {
+        val activity = activity ?: return
+        activity.findViewById<View>(android.R.id.content)?.apply {
+            Snackbar.make(this, R.string.restart_app_for_changes, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.restart_app) {
+                    removePreferenceListener()
+                    activity.restart(MainActivity::class.java, true)
+                }.show()
         }
     }
 

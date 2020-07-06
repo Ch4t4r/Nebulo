@@ -30,6 +30,7 @@ import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.util.DeepActionState
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
@@ -164,6 +165,9 @@ class DnsVpnService : VpnService(), Runnable {
         }
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+    }
 
     override fun onCreate() {
         super.onCreate()

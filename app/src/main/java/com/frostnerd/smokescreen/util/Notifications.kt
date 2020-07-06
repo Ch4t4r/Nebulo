@@ -140,4 +140,5 @@ object RequestCodes {
     const val PIN_NOTIFICATION = 9
     const val REQUEST_CODE_IGNORE_SERVICE_KILLED = 10
     const val RESTART_AFTER_REVOKE = 11
+    const val RESTART_WHOLE_APP = 12
 }
