@@ -458,17 +458,18 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     private enum class IpTablesMode {
-        DISABLED, ACTIVE, FAILED
+        DISABLED, ACTIVE, FAILED, ACTIVE_NO_IPV6
     }
 
     private fun showDnsServerModeNotification(port:Int, originalPort:Int, iptablesMode:IpTablesMode) {
         val portDiffersFromConfig = port != originalPort
-        val isNotificationImportant = portDiffersFromConfig || iptablesMode == IpTablesMode.FAILED
+        val isNotificationImportant = portDiffersFromConfig || iptablesMode == IpTablesMode.FAILED || iptablesMode == IpTablesMode.ACTIVE_NO_IPV6
         val channel = if(isNotificationImportant) Notifications.getHighPriorityChannelId(this) else Notifications.getDefaultNotificationChannelId(this)
         val icon = if(isNotificationImportant) R.drawable.ic_cloud_warn else R.drawable.ic_mainnotification
         var contentText = when (iptablesMode) {
             IpTablesMode.DISABLED -> getString(R.string.notification_dnsserver_message, port)
             IpTablesMode.FAILED -> getString(R.string.notification_dnsserver_message_iptables_failed, port)
+            IpTablesMode.ACTIVE_NO_IPV6 -> getString(R.string.notification_dnsserver_message_iptables_active_no_ipv6, port)
             else -> getString(R.string.notification_dnsserver_message_iptables_active, port)
         }
         if(portDiffersFromConfig) contentText += "\n" + getString(R.string.notification_dnsserver_portdiffers, originalPort)
@@ -1049,7 +1050,8 @@ class DnsVpnService : VpnService(), Runnable {
         log("Creating handle.")
         var defaultHandle: DnsHandle? = null
         val handles = mutableListOf<DnsHandle>()
-        val ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
+        val deviceHasIpv6 = hasDeviceIpv6Address()
+        val ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || deviceHasIpv6)
         val ipv4Enabled = !ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
         serverConfig.httpsConfiguration?.forEach {
@@ -1128,7 +1130,10 @@ class DnsVpnService : VpnService(), Runnable {
                      ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr , logger)
                      val couldPlaceRule = ipTablesRedirector?.beginForward() ?: false
                      getPreferences().lastIptablesRedirectAddress = "$hostAddr:$actualPort"
-                     if(couldPlaceRule) IpTablesMode.ACTIVE
+                     if(couldPlaceRule) {
+                         if(deviceHasIpv6) IpTablesMode.ACTIVE_NO_IPV6
+                         else IpTablesMode.ACTIVE
+                     }
                      else IpTablesMode.FAILED
                  } else IpTablesMode.DISABLED
                  showDnsServerModeNotification(actualPort, preferredPort, iptablesMode)
