@@ -52,7 +52,7 @@
     <string name="dialog_changelog_dont_show_again">不再显示</string>
     <string name="dialog_about_licenses">许可</string>
     <string name="dialog_query_export_title">正在导出请求项…</string>
-    <string name="dialog_query_export_message">正在导出查询请求项，请稍候</string>
+    <string name="dialog_query_export_message">正在导出请求项，请稍候</string>
     <string name="dialog_pin_message">请输入您的PIN。</string>
     <string name="dialog_pin_hint">PIN</string>
     <string name="dialog_enable_logging">您是否要启用日志？日志包含统计信息、调试信息和应用所执行的操作。除非您自己想要共享日志，否则生成的日志不会被共享。</string>
@@ -165,7 +165,6 @@
     <string name="dialog_raterequest_title">您是否喜欢Nebulo？</string>
     <string name="dialog_raterequest_message">你好！如果你喜欢Nebulo，你愿意花一点时间在应用商店里为它打分吗？</string>
     <string name="dialog_vpn_permission_denied_message">系统拒绝了Nebulo启动VPN。请启动应用，并在应用内点击启动按钮以给予VPN权限。</string>
-
     <string name="dialog_doh_detect_type_message">请稍等片刻。</string>
     <string name="dialog_doh_detect_type_title">检测服务器类型</string>
 </resources>
