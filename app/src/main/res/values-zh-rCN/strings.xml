@@ -34,8 +34,8 @@
     <string name="windows_querylogging_type">记录类型</string>
     <string name="windows_querylogging_question">请求域名</string>
     <string name="windows_querylogging_used_server">服务器</string>
-    <string name="windows_querylogging_hostsource">DNS规则来源</string>
-    <string name="windows_querylogging_hostsource__user">用户规则</string>
+    <string name="windows_querylogging_hostsource">DNS规则源</string>
+    <string name="windows_querylogging_hostsource__user">用户自定规则</string>
     <string name="windows_querylogging_hostsource__unknown">未知</string>
     <string name="windows_querylogging_protocol">处理方式</string>
     <string name="windows_querylogging_latency">延迟</string>
@@ -53,7 +53,7 @@
     <string name="window_dnsrules_customhosts_message">在此处设置您的所有自定义规则</string>
     <plurals name="window_dnsrules_subtitle">
         <item quantity="one">%1d 条规则</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="error_no_webbrowser_installed">您没有安装任何可以访问该链接的应用</string>
     <string name="about_help_translating">协助翻译</string>
