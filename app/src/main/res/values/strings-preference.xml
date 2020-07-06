@@ -164,7 +164,7 @@
     <string name="summary_local_server_port">Port of the DNS server which will be hosted. Only ports above 1024 are allowed.\nCurrently: %1s</string>
 
     <string name="title_iptables_mode">Use iptables</string>
-    <string name="summary_iptables_mode">Forward queries to Nebulo using iptables. This requires root privileges. When enabled no external apps need to be used when in non-vpn mode.</string>
+    <string name="summary_iptables_mode">Forward queries to Nebulo using iptables. This requires root privileges. When enabled no external apps need to be used when in non-vpn mode. Depending on your version of ip6tables this might not work, causing DNS queries to bypass Nebulo.</string>
 
     <string name="title_check_iptables">Check for iptables</string>
     <string name="summary_check_iptables">Check whether your device supports iptables</string>
