@@ -73,4 +73,6 @@
     <string name="error_invalid_pin">Veuillez fournir votre code PIN</string>
     <string name="error_invalid_url">Veuillez fournir une url valide</string>
     <string name="activity_label_speed_test">Comparaison de la vitesse des serveurs</string>
+    <string name="restart_app">Redémarrer</string>
+    <string name="restart_app_for_changes">Redémarrez l\'application pour que les changements prennent effet.</string>
 </resources>
