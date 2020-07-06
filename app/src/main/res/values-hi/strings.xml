@@ -73,4 +73,6 @@
     <string name="windows_querylogging_usedserver_dnsrules">DNS नियमों से हल किया गया</string>
     <string name="windows_querylogging_usedserver_cache">कैश (cache) से हल किया गया</string>
     <string name="window_main_privatedns_info">निजी DNS सक्रिय है, आपके प्रश्न पहले से ही सुरक्षित हैं। यदि आप DNS-over-HTTPS या अन्य उपयोगी सुविधाओं का उपयोग करना चाहते हैं तो Nebulo को सक्षम करें।</string>
+    <string name="restart_app">पुनः आरंभ करें</string>
+    <string name="restart_app_for_changes">परिवर्तनों को प्रभावी करने के लिए एप्लिकेशन को पुनरारंभ करें।</string>
 </resources>
