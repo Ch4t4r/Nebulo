@@ -22,7 +22,7 @@
     <string name="title_preference_enable_pin">Código PIN</string>
     <string name="summary_preference_enable_pin">Solicitar código PIN para abrir ou parar o aplicativo</string>
     <string name="title_preference_pin_use_fingerprint">Permitir impressão digital</string>
-    <string name="summary_preference_pin_use_fingerprint">Permitir usar o scanner de impressões digitais em vez do código PIN.</string>
+    <string name="summary_preference_pin_use_fingerprint">Permitir usar o scanner de impressões digitais em vez do código PIN</string>
     <string name="title_preference_change_pin">Mudar o código PIN</string>
     <string name="summary_preference_change_pin">Clique aqui para mudar o PIN. Apenas dígitos numéricos são aceitos.
 \nCódigo PIN atual: %1s</string>
@@ -107,4 +107,14 @@
     <string name="title_language">Idioma</string>
     <string name="summary_show_revoked_notification">Mostrar uma notificação quando o Nebulo perde a permissão para a VPN</string>
     <string name="summary_simple_notification">Use um texto simples na Notificação</string>
+    <string name="summary_local_server_port">Porta do servidor DNS que será hospedado. Só são permitidas portas acima de 1024.
+\nAtualmente: %1s</string>
+    <string name="title_local_server_port">Porta do servidor</string>
+    <string name="summary_run_without_vpn">Quando verificado, o Nebulo hospeda um servidor DNS no seu dispositivo</string>
+    <string name="title_run_without_vpn">Funciona sem VPN</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">O servidor será hospedado em localhost:%1s</string>
+    <string name="summary_category_nonvpnmode">Configure o Nebulo para agir como um servidor DNS no dispositivo em vez de usar uma VPN fictícia. Quando ativado, você tem que encaminhar manualmente as consultas DNS para o Nebulo usando aplicações de terceiros.
+\n
+\nEsta característica é experimental.</string>
+    <string name="preference_category_nonvpnmode">Modo não-VPN</string>
 </resources>
