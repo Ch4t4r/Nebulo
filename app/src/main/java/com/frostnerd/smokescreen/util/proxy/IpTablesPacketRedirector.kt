@@ -2,7 +2,6 @@ package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.smokescreen.Logger
 import com.frostnerd.smokescreen.util.processSuCommand
-import java.io.DataOutputStream
 import java.lang.Exception
 
 /*
@@ -32,50 +31,80 @@ import java.lang.Exception
  *
  */
 class IpTablesPacketRedirector(var dnsServerPort:Int,
-                               var dnsServerIpAddress:String,
+                               var dnsServerIpAddressIpv4:String,
+                               var dnsServerIpAddressIpv6:String?,
                                private val logger:Logger?) {
     private val logTag = "IpTablesPacketRedirector"
+
+    enum class IpTablesMode {
+        DISABLED, SUCCEEDED, FAILED, SUCCEEDED_NO_IPV6
+    }
 
     /**
      * Begins the redirect using iptables. All DNS requests on port 53 will be forwarded to the specified IP Address.
      * @return Whether the redirect rule could be created in IPTables
      */
-    fun beginForward():Boolean {
-        return try {
-            logger?.log("Using iptables to forward queries to $dnsServerIpAddress:$dnsServerPort", logTag)
-            processSuCommand(generateIpTablesCommand(true, udp = true), logger).also {
-                processSuCommand(generateIpTablesCommand(true, udp = false), logger) // Process TCP as well, but ignore result. UDP is more important.
-            }
-        } catch (ex:Exception) {
-            false
-        }
+    fun beginForward(): IpTablesMode = processForward(true)
+    fun endForward(): IpTablesMode = processForward(false)
+
+    private fun processForward(createForward:Boolean): IpTablesMode {
+        if(createForward) logger?.log("Using iptables to forward queries to $dnsServerIpAddressIpv4:$dnsServerPort (and possibly $dnsServerIpAddressIpv6)", logTag)
+        else logger?.log("Removing IPTables forwarding rule", logTag)
+        val ipv4Success = processDnsForward(append = createForward, ipv6 = false)
+        val ipv6Success = dnsServerIpAddressIpv6 == null || processDnsForward(
+            append = createForward,
+            ipv6 = true
+        )
+        return if (ipv4Success) {
+            if (ipv6Success) IpTablesMode.SUCCEEDED
+            else IpTablesMode.SUCCEEDED_NO_IPV6
+        } else IpTablesMode.FAILED
     }
 
-    fun endForward():Boolean {
+    private fun processDnsForward(append: Boolean, ipv6:Boolean):Boolean {
         return try {
-            logger?.log("Removing IPTables forwarding rule", logTag)
-            processSuCommand(generateIpTablesCommand(false, udp = true), logger).also {
-                processSuCommand(generateIpTablesCommand(false, udp = false), logger)
+            processSuCommand(
+                generateIpTablesCommand(append, udp = true, ipv6 = ipv6),
+                logger
+            ).also {
+                processSuCommand(
+                    generateIpTablesCommand(append, udp = false, ipv6 = ipv6),
+                    logger
+                ) // Process TCP as well, but ignore result. UDP is more important.
             }
-        } catch (ex:Exception) {
-            false
-        }
+            true
+        } catch (ex:Exception) { false }
     }
 
     // Append: iptables -t nat -I OUTPUT -p udp --dport 53 -j DNAT --to-destination <ip>:<port>"
     // Drop:   iptables -t nat -D OUTPUT -p udp --dport 53 -j DNAT --to-destination <ip>:<port>"
-    private fun generateIpTablesCommand(append:Boolean, udp:Boolean):String {
-        return buildString {
-            append("iptables -t nat ")
-            if(append) append("-I")
-            else append("-D")
-            append(" OUTPUT -p ")
-            if(udp)append("udp")
-            else append("tcp")
-            append(" --dport 53 -j DNAT --to-destination ")
-            append(dnsServerIpAddress)
-            append(":")
-            append(dnsServerPort)
+    private fun generateIpTablesCommand(append:Boolean, udp:Boolean, ipv6:Boolean):String {
+        return if(ipv6) {
+            buildString {
+                append("ip6tables -t nat ")
+                if(append) append("-I")
+                else append("-D")
+                append(" PREROUTING -p ")
+                if(udp)append("udp")
+                else append("tcp")
+                append(" --dport 53 -j DNAT --to-destination [")
+                append(dnsServerIpAddressIpv6)
+                append("]:")
+                append(dnsServerPort)
+            }
+        } else {
+            buildString {
+                append("iptables -t nat ")
+                if(append) append("-I")
+                else append("-D")
+                append(" OUTPUT -p ")
+                if(udp)append("udp")
+                else append("tcp")
+                append(" --dport 53 -j DNAT --to-destination ")
+                append(dnsServerIpAddressIpv4)
+                append(":")
+                append(dnsServerPort)
+            }
         }
     }
 }

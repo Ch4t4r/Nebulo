@@ -267,9 +267,12 @@ fun Context.isDeviceRooted():Boolean {
 }
 
 fun Context.clearPreviousIptablesRedirect(forceClear:Boolean = false) {
-    if(forceClear || !isServiceRunning(DnsVpnService::class.java) || getPreferences().vpnServiceState == VpnServiceState.STOPPED) getPreferences().lastIptablesRedirectAddress?.split(":")?.apply {
-        IpTablesPacketRedirector(this[1].toInt(), this[0], logger).endForward()
-        getPreferences().lastIptablesRedirectAddress = null
+    if(forceClear || !isServiceRunning(DnsVpnService::class.java) || getPreferences().vpnServiceState == VpnServiceState.STOPPED)
+        getPreferences().lastIptablesRedirectAddress?.split(":")?.apply {
+            val ipv6 = getPreferences().lastIptablesRedirectAddressIPv6?.split("]")?.get(0)?.replace("[", "")
+            IpTablesPacketRedirector(this[1].toInt(), this[0], ipv6, logger).endForward()
+            getPreferences().lastIptablesRedirectAddress = null
+            getPreferences().lastIptablesRedirectAddressIPv6 = null
     }
 }
 

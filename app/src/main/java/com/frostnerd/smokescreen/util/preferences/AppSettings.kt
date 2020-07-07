@@ -267,6 +267,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     var dnsServerModePort:Int by stringBasedIntPref("non_vpn_server_port", 11053)
     var nonVpnUseIptables:Boolean by booleanPref("nonvpn_use_iptables", false)
     var lastIptablesRedirectAddress:String? by stringPref("nonvpn_iptables_last_address")
+    var lastIptablesRedirectAddressIPv6:String? by stringPref("nonvpn_iptables_last_address_ipv6")
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {
