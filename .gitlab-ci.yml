@@ -21,9 +21,8 @@ lint:
   script:
     - ./gradlew lintNormalRelease
     - ./gradlew lintAdblockerFdroid
-  only:
-    - release
-    - translations
+  except:
+    - master
 
 #test:
 #  stage: test
