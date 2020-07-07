@@ -79,6 +79,9 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
     }
 }
 
+val Context.logger:Logger?
+get() = if(Logger.isEnabled(this)) Logger.getInstance(this) else null
+
 fun Context.log(text: String, tag: String? = this::class.java.simpleName, vararg formatArgs: Any) {
     if (Logger.isEnabled(this)) {
         Logger.getInstance(this).log(text, tag, formatArgs)

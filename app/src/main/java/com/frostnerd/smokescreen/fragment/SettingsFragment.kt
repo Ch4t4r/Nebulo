@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
@@ -18,6 +19,7 @@ import androidx.preference.*
 import com.frostnerd.general.isInt
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
+import com.frostnerd.lifecyclemanagement.launchWithLifecylce
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.MainActivity
@@ -31,6 +33,7 @@ import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import com.frostnerd.smokescreen.util.preferences.Theme
 import com.google.android.material.snackbar.Snackbar
+import com.frostnerd.smokescreen.util.processSuCommand
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -243,6 +246,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val enabled = findPreference("run_without_vpn") as CheckBoxPreference
         val port = findPreference("non_vpn_server_port") as EditTextPreference
         val connectInfo = findPreference("nonvpn_connect_info")
+        val iptablesMode = findPreference("nonvpn_use_iptables")
+        val checkIpTables = findPreference("check_iptables")
         port.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().isNotEmpty() && newValue.toString().isInt() && newValue.toString().toInt() > 1024) {
                 port.summary = getString(R.string.summary_local_server_port, newValue.toString())
@@ -265,6 +270,32 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         port.summary = getString(R.string.summary_local_server_port, requireContext().getPreferences().dnsServerModePort.toString())
         connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, requireContext().getPreferences().dnsServerModePort.toString())
+        val rooted = context?.isDeviceRooted() ?: false
+        if(!rooted) {
+            iptablesMode.isVisible = false
+            checkIpTables.isVisible = false
+        } else {
+            checkIpTables.setOnPreferenceClickListener {
+                val context = context
+                if(context != null) {
+                    val dialog = LoadingDialog(context, R.string.title_check_iptables, R.string.dialog_doh_detect_type_message)
+                    dialog.show()
+                    launchWithLifecylce(false) {
+                        val supported = processSuCommand("iptables -t nat -L OUTPUT", context.logger)
+                        val ipv6Supported = processSuCommand("ip6tables -t nat -L PREROUTING", context.logger)
+                        launchWithLifecylce(true) {
+                            dialog.dismiss()
+                            val text = if(supported) {
+                                if(ipv6Supported) R.string.iptables_supported
+                                else R.string.iptables_supported_ipv6_unsupported
+                            } else R.string.iptables_not_supported
+                            Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+                true
+            }
+        }
     }
 
     @SuppressLint("NewApi")

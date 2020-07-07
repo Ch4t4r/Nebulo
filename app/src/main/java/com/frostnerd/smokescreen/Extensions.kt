@@ -29,9 +29,16 @@ import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.smokescreen.util.RequestCodes
+import com.frostnerd.general.service.isServiceRunning
+import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
+import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
+import com.frostnerd.smokescreen.util.proxy.IpTablesPacketRedirector
+import io.sentry.android.core.BuildInfoProvider
+import io.sentry.android.core.util.RootChecker
+import io.sentry.core.NoOpLogger
 import leakcanary.LeakSentry
 import java.net.Inet4Address
 import java.net.Inet6Address
@@ -263,6 +270,29 @@ fun Context.hasDeviceIpv6Address(): Boolean {
     }
     log("No IPv6 addresses found.")
     return !hasNetwork
+}
+
+fun Context.isDeviceRooted():Boolean {
+    return RootChecker(this, BuildInfoProvider(), NoOpLogger.getInstance()).isDeviceRooted
+}
+
+fun Context.clearPreviousIptablesRedirect(forceClear:Boolean = false) {
+    if(forceClear || !isServiceRunning(DnsVpnService::class.java) || getPreferences().vpnServiceState == VpnServiceState.STOPPED) {
+        val ipv4 = getPreferences().lastIptablesRedirectAddress?.split(":")?.let {
+            it[0] to it[1].toInt()
+        }
+        val ipv6 = getPreferences().lastIptablesRedirectAddressIPv6?.split("]:")?.let {
+            it[0].subSequence(1, it[0].length).toString() to it[1].toInt()
+        }
+        val port = ipv4?.second ?: ipv6?.second ?: return  // Neither IPv4 nor IPv6 present if null
+        IpTablesPacketRedirector(port, ipv4?.first, ipv6?.first, logger).endForward()
+        getPreferences().apply {
+            edit {
+                lastIptablesRedirectAddress = null
+                lastIptablesRedirectAddressIPv6 = null
+            }
+        }
+    }
 }
 
 operator fun Level.compareTo(otherLevel:Level):Int {

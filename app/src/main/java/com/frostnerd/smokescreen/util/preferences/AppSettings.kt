@@ -201,7 +201,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var nxDomainCacheTime: Int by stringBasedIntPref("dnscache_nxdomain_cachetime", 1800)
     override var loggingEnabled: Boolean by booleanPref(
         "logging_enabled",
-        AppSettings.isAlphaVersion
+        AppSettings.isAlphaVersion || BuildConfig.DEBUG
     )
     fun shouldLogDnsQueriesToConsole():Boolean = loggingEnabled && (!AppSettings.isReleaseVersion || advancedLogging || BuildConfig.DEBUG)
     var advancedLogging:Boolean by booleanPref(
@@ -268,6 +268,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
 
     var runWithoutVpn:Boolean by booleanPref("run_without_vpn", false)
     var dnsServerModePort:Int by stringBasedIntPref("non_vpn_server_port", 11053)
+    var nonVpnUseIptables:Boolean by booleanPref("nonvpn_use_iptables", false)
+    var lastIptablesRedirectAddress:String? by stringPref("nonvpn_iptables_last_address")
+    var lastIptablesRedirectAddressIPv6:String? by stringPref("nonvpn_iptables_last_address_ipv6")
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

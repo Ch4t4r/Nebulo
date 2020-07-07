@@ -77,6 +77,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var dnsProxy: DnsPacketProxy? = null
     private var vpnProxy: RetryingVPNTunnelProxy? = null
     private var dnsServerProxy:DnsServerPacketProxy? = null
+    private var ipTablesRedirector: IpTablesPacketRedirector? = null
     private var destroyed = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var noConnectionNotificationBuilder: NotificationCompat.Builder
@@ -268,6 +269,7 @@ class DnsVpnService : VpnService(), Runnable {
                 }
             }
         }
+        clearPreviousIptablesRedirect(true)
         log("Service created.")
     }
 
@@ -332,7 +334,8 @@ class DnsVpnService : VpnService(), Runnable {
             "notification_allow_pause",
             "dns_rules_enabled",
             "simple_notification",
-            "pin"
+            "pin",
+            "nonvpn_use_iptables"
         )
         settingsSubscription = getPreferences().listenForChanges(
             relevantSettings,
@@ -457,11 +460,17 @@ class DnsVpnService : VpnService(), Runnable {
         noConnectionNotificationShown = true
     }
 
-    private fun showDnsServerModeNotification(port:Int, originalPort:Int) {
+    private fun showDnsServerModeNotification(port:Int, originalPort:Int, iptablesMode: IpTablesPacketRedirector.IpTablesMode) {
         val portDiffersFromConfig = port != originalPort
-        val channel = if(portDiffersFromConfig) Notifications.getHighPriorityChannelId(this) else Notifications.getDefaultNotificationChannelId(this)
-        val icon = if(portDiffersFromConfig) R.drawable.ic_cloud_warn else R.drawable.ic_mainnotification
-        var contentText = getString(R.string.notification_dnsserver_message, port)
+        val isNotificationImportant = portDiffersFromConfig || iptablesMode == IpTablesPacketRedirector.IpTablesMode.FAILED || iptablesMode == IpTablesPacketRedirector.IpTablesMode.SUCCEEDED_NO_IPV6
+        val channel = if(isNotificationImportant) Notifications.getHighPriorityChannelId(this) else Notifications.getDefaultNotificationChannelId(this)
+        val icon = if(isNotificationImportant) R.drawable.ic_cloud_warn else R.drawable.ic_mainnotification
+        var contentText = when (iptablesMode) {
+            IpTablesPacketRedirector.IpTablesMode.DISABLED -> getString(R.string.notification_dnsserver_message, port)
+            IpTablesPacketRedirector.IpTablesMode.FAILED -> getString(R.string.notification_dnsserver_message_iptables_failed, port)
+            IpTablesPacketRedirector.IpTablesMode.SUCCEEDED_NO_IPV6 -> getString(R.string.notification_dnsserver_message_iptables_active_no_ipv6, port)
+            else -> getString(R.string.notification_dnsserver_message_iptables_active, port)
+        }
         if(portDiffersFromConfig) contentText += "\n" + getString(R.string.notification_dnsserver_portdiffers, originalPort)
         NotificationCompat.Builder(this, channel)
             .setContentTitle(getString(R.string.notification_dnsserver_title))
@@ -730,6 +739,10 @@ class DnsVpnService : VpnService(), Runnable {
         if (!destroyed) {
             vpnProxy?.stop()
             dnsServerProxy?.stop()
+            if(ipTablesRedirector == null || ipTablesRedirector?.endForward() == IpTablesPacketRedirector.IpTablesMode.SUCCEEDED) {
+                getPreferences().lastIptablesRedirectAddress = null
+                getPreferences().lastIptablesRedirectAddressIPv6 = null
+            }
             fileDescriptor?.close()
             addressResolveScope.cancel()
             lastVPNStopTime = System.currentTimeMillis()
@@ -1039,7 +1052,8 @@ class DnsVpnService : VpnService(), Runnable {
         log("Creating handle.")
         var defaultHandle: DnsHandle? = null
         val handles = mutableListOf<DnsHandle>()
-        val ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || hasDeviceIpv6Address())
+        val deviceHasIpv6 = hasDeviceIpv6Address()
+        val ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || deviceHasIpv6)
         val ipv4Enabled = !ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
         serverConfig.httpsConfiguration?.forEach {
@@ -1110,9 +1124,19 @@ class DnsVpnService : VpnService(), Runnable {
                  ), logger = VpnLogger(applicationContext))
                  vpnProxy?.maxRetries = 15
                  val preferredPort = getPreferences().dnsServerModePort
-                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, InetAddress.getLocalHost(), preferredPort)
+                 val bindAddress = if(ipv4Enabled) InetAddress.getLocalHost() else InetAddress.getByName("::1")
+                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, bindAddress, preferredPort)
                  val actualPort = dnsServerProxy!!.startServer()
-                 showDnsServerModeNotification(actualPort, preferredPort)
+                 val iptablesMode = if(getPreferences().nonVpnUseIptables) {
+                     val hostAddr = if(ipv4Enabled) bindAddress.hostAddress else null
+                     val ipv6Address = if(deviceHasIpv6) "::1" else null
+                     ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr, ipv6Address, logger)
+                     ipTablesRedirector?.beginForward().also {
+                         getPreferences().lastIptablesRedirectAddress = "$hostAddr:$actualPort"
+                         if(ipv6Address != null) getPreferences().lastIptablesRedirectAddressIPv6 = "[$ipv6Address]:$actualPort"
+                     } ?: IpTablesPacketRedirector.IpTablesMode.FAILED
+                 } else IpTablesPacketRedirector.IpTablesMode.DISABLED
+                 showDnsServerModeNotification(actualPort, preferredPort, iptablesMode)
                  log("Non-VPN proxy started.")
              }
         } else {
