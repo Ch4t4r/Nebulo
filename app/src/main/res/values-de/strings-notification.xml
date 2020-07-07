@@ -57,4 +57,8 @@
     <string name="notification_dnsserver_message">DNS Server läuft unter localhost:%1d. Leite Anfragen mit Apps von Fremdanbietern weiter</string>
     <string name="notification_dnsserver_title">Nicht-VPN Modus</string>
     <string name="notification_dnsserver_portdiffers">Eingestellter Port %1d konnte nicht genutzt werden.</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNS Server läuft unter localhost:%1d. Initalisierung von iptables ist fehlgeschlagen, Anfragen müssen durch Drittanbieteapps weitergeleitet werden</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS Server läuft unter localhost:%1d. Anfragen werden mit iptables weitergeleitet.
+\nWarnung: IPv6 ist aktiv, Anfragen könnten Nebulo nicht erreichen.</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS Server läuft unter localhost:%1d. Anfragen werden mit iptables weitergeleitet</string>
 </resources>
