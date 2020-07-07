@@ -108,4 +108,14 @@
     <string name="title_catch_other_dns_servers">Interception d\'autres trafics DNS</string>
     <string name="crashreporting_type_full">Complet (Rapport statistique et données de débogage)</string>
     <string name="crashreporting_type_minimal">Minimale (Ne concerne que la version Android et App)</string>
+    <string name="summary_local_server_port">Port du serveur DNS qui sera hébergé. Seuls les ports supérieurs à 1024 sont autorisés.
+\nActuellement : %1s</string>
+    <string name="title_local_server_port">Port du serveur</string>
+    <string name="summary_run_without_vpn">Si vous avez vérifié, Nebulo héberge un serveur DNS sur votre appareil</string>
+    <string name="title_run_without_vpn">Fonctionner sans VPN</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Le serveur sera hébergé sur localhost:%1s</string>
+    <string name="summary_category_nonvpnmode">Configurez Nebulo pour qu\'il agisse comme serveur DNS sur l\'appareil au lieu d\'utiliser un VPN fictif. Lorsque cette fonction est activée, vous devez manuellement transmettre les requêtes DNS à Nebulo en utilisant des applications tierces.
+\n
+\nCe dispositif est expérimental.</string>
+    <string name="preference_category_nonvpnmode">Mode non-VPN</string>
 </resources>

@@ -54,4 +54,7 @@
     <string name="notification_channel_default_description">Canal par défaut pour l\'affichage des notifications</string>
     <string name="notification_channel_default">Canal par défaut</string>
     <string name="notification_ruleexport_title">DNS règle l\'exportation</string>
+    <string name="notification_dnsserver_portdiffers">Le port configuré %1d n\'a pas pu être utilisé.</string>
+    <string name="notification_dnsserver_message">Le serveur DNS fonctionne sur localhost:%1d. Transférer des requêtes en utilisant des applications tierces</string>
+    <string name="notification_dnsserver_title">Fonctionnement en mode non-VPN</string>
 </resources>

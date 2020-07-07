@@ -15,7 +15,7 @@
     <string name="all_close">Fechar</string>
     <string name="error_invalid_url">Por favor, forneça um url válido</string>
     <string name="error_invalid_pin">Por favor, forneça seu PIN</string>
-    <string name="error_invalid_servername">Por favor, forneça um nome.</string>
+    <string name="error_invalid_servername">Por favor, forneça um nome</string>
     <string name="main_dnssurveillance_infotext">Esteja ciente de que o servidor de DNS ao qual você está conectado é capaz de registrar quais sites você está visitando. Verifique as respectivas declarações de privacidade para obter mais informações.</string>
     <string name="main_dnssurveillance_privacystatement">Declaração de privacidade de %1s</string>
     <string name="about_app">Este aplicativo é de código aberto. O código-fonte pode ser acessado em &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
@@ -73,4 +73,6 @@
     <string name="windows_querylogging_search_hint">Pesquisar por um anfitrião no log de consultas</string>
     <string name="error_cannot_open_settings">Não é possível abrir as configurações do sistema</string>
     <string name="error_webview_missing">O pacote WebView não foi encontrado, ele está sendo atualizado ou removido\?</string>
+    <string name="restart_app">Reinicie</string>
+    <string name="restart_app_for_changes">Reinicie o aplicativo para que as alterações entrem em vigor.</string>
 </resources>

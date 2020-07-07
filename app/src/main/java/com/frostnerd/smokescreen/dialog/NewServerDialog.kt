@@ -33,7 +33,6 @@ import okhttp3.OkHttpClient
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
-import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 /*

@@ -73,4 +73,6 @@
     <string name="all_stop">Detener</string>
     <string name="activity_label_speed_test">Comparación de la velocidad del servidor</string>
     <string name="activity_label_import_servers">Importar servidor(es)</string>
+    <string name="restart_app">Reinicie</string>
+    <string name="restart_app_for_changes">Reinicie la aplicación para que los cambios surtan efecto.</string>
 </resources>

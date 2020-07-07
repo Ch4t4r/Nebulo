@@ -54,4 +54,7 @@
     <string name="notification_simple_text">Servidor actual: %1$s</string>
     <string name="notification_channel_high_priorty_description">Canal para notificações de alta prioridade, por exemplo, quando o aplicativo perde a permissão para a VPN</string>
     <string name="notification_channel_high_priorty">Alta prioridade</string>
+    <string name="notification_dnsserver_portdiffers">Porta configurada %1d não pôde ser usada.</string>
+    <string name="notification_dnsserver_message">O servidor DNS está rodando em localhost:%1d. Encaminhamento de consultas usando aplicações de terceiros</string>
+    <string name="notification_dnsserver_title">Funcionamento em modo não VPN</string>
 </resources>

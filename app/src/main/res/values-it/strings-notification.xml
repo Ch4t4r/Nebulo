@@ -54,4 +54,7 @@
     <string name="notification_channel_high_priorty_description">Canale per notifiche ad alta priorità, ad esempio quando l\'app perde l\'autorizzazione alla VPN</string>
     <string name="notification_service_revoked_title">Autorizzazione VPN revocata dal sistema</string>
     <string name="notification_service_revoked_message">Clicca qui per riavviare</string>
+    <string name="notification_dnsserver_portdiffers">La porta configurata %1d non può essere utilizzata.</string>
+    <string name="notification_dnsserver_message">Il server DNS è in esecuzione su localhost:%1d. Inoltrare le query utilizzando applicazioni di terze parti</string>
+    <string name="notification_dnsserver_title">Funzionamento in modalità non-VPN</string>
 </resources>

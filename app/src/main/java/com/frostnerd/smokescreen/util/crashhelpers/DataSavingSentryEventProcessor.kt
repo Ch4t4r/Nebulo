@@ -2,7 +2,8 @@ package com.frostnerd.smokescreen.util.crashhelpers
 
 import android.os.Build
 import com.frostnerd.smokescreen.BuildConfig
-import io.sentry.core.*
+import io.sentry.core.EventProcessor
+import io.sentry.core.SentryEvent
 import io.sentry.core.protocol.App
 import io.sentry.core.protocol.Device
 import io.sentry.core.protocol.OperatingSystem

@@ -1,167 +1,121 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="preference_category_general">सामान्य</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_category_general">सामान्य</string>
     <string name="title_language">भाषा</string>
     <string name="summary_language">ऐप की भाषा बदलें</string>
-
     <string name="title_theme">थीम</string>
     <string name="summary_theme">इस ऐप की थीम सेट करता है</string>
-
     <string name="title_start_on_boot">फोन के साथ ऐप को शुरू करे</string>
     <string name="summary_start_on_boot">फोन चालू होने पर ऐप शुरू करें</string>
-
     <string name="title_start_after_update">अपडेट के बाद शुरू करें</string>
     <string name="summary_start_after_update">अपडेट होने के बाद ऐप को शुरू करें</string>
-
     <string name="title_excluded_apps">अपवर्जित ऐप्स</string>
-    <string name="summary_excluded_apps">यहाँ Nebulo से बाकी ऐप्स को हटाए, उदाहरण के लिए यदि वह ऐप्स अब इंटरनेट से कनेक्ट नहीं कर सकते हैं, तो चयनित ऐप्स DNS-over-HTTPs का उपयोग नहीं करेंगे।</string>
-
-
-
+    <string name="summary_excluded_apps">एप्लिकेशन से एप्लिकेशन यहां छोड़ें, उदाहरण के लिए यदि वे अब इंटरनेट से कनेक्ट नहीं कर सकते हैं - चयनित एप्लिकेशन अब DNS-HTTPS या DNS-over-TLS का उपयोग नहीं करेंगे</string>
     <string name="preference_category_notification">अधिसूचना</string>
-
     <string name="title_show_notification_on_lockscreen">लॉकस्क्रीन पर दिखाएं</string>
     <string name="summary_show_notification_on_lockscreen">सेट करें कि क्या लॉकस्क्रीन पर नोटिफिकेशन दिखाना है</string>
-
     <string name="title_simple_notification">सरल अधिसूचना</string>
     <string name="summary_simple_notification">अधिसूचना में एक सरल पाठ का उपयोग करें</string>
-
     <string name="title_notification_hide_icon">ऑइकन छुपायें</string>
     <string name="summary_notification_hide_icon">शीर्ष पर नेविगेशन बार से आइकन छिपाएं</string>
-
     <string name="title_notification_allow_stop">रोकने की अनुमति दें</string>
     <string name="summary_notification_allow_stop">ऐप को सूचना से बंद करने की अनुमति दें</string>
-
     <string name="title_notification_allow_pause">ठहरने की अनुमति दें</string>
     <string name="summary_notification_allow_pause">ऐप को सूचना से ठहरने की अनुमति दें</string>
-
     <string name="title_show_noconnection_notification">संचार न होने पर अधिसूचना</string>
     <string name="summary_show_noconnection_notification">जब ऐप का कोई संचार नहीं है या खराब संचार है, तो एक अधिसूचना दिखाएं</string>
-
     <string name="title_show_revoked_notification">अनुमति खो जाने पर अधिसूचना</string>
     <string name="summary_show_revoked_notification">जब Nebulo VPN को अनुमति खो देता है, तो सूचना दिखाएं</string>
-
-
     <string name="preference_category_pin">पिन सुरक्षा</string>
-
     <string name="title_preference_enable_pin">पिन</string>
     <string name="summary_preference_enable_pin">ऐप को खोलते या रोकते समय पिन के लिए पूछें</string>
-
     <string name="title_preference_pin_use_fingerprint">अंगुली की छाप की अनुमति दें</string>
-    <string name="summary_preference_pin_use_fingerprint">पिन के बजाय अपने अंगुली की छाप का उपयोग करने की अनुमति दें।</string>
-
+    <string name="summary_preference_pin_use_fingerprint">पिन के बजाय अपने अंगुली की छाप का उपयोग करने की अनुमति दें</string>
     <string name="title_preference_change_pin">पिन बदलिए</string>
     <string name="summary_preference_change_pin">पिन बदलें। केवल संख्यात्मक मान की अनुमति है.
 \nवर्तमान पिन: %1s</string>
-
     <string name="preference_category_cache">कैश (Cache) नियंत्रण</string>
-
     <string name="title_dnscache_enabled">DNS कैश का उपयोग करें</string>
-    <string name="summary_dnscache_enabled">ऐप के DNS कैश को सक्षम करता है। कैश भविष्य के सवालों का तेजी से जवाब देने के लिए पुराने अनुरोधों को याद करता है।
-\n
-\nसिस्टम में पहले से ही कैश है, इसे सक्षम करें यदि आप व्यवहार को स्वनिर्धारित करना चाहते हैं।</string>
-
+    <string name="summary_dnscache_enabled">ऐप के DNS कैश को सक्षम करता है। कैश भविष्य के सवालों का तेजी से जवाब देने के लिए पुराने अनुरोधों को याद करता है। 
+\n 
+\nसिस्टम में पहले से ही कैश है, इसे सक्षम करें यदि आप व्यवहार को स्वनिर्धारित करना चाहते हैं</string>
     <string name="title_dnscache_keepacrosslaunches">DNS कैश रखें</string>
     <string name="summary_dnscache_keepacrosslaunches">DNS कैश को कई ऐप शुरूआत में रखें</string>
-
     <string name="title_clear_dnscache">DNS कैश हटाएँ</string>
-    <string name="summary_clear_dnscache">DNS कैश को खाली करने के लिए यहां क्लिक करें, उदाहरण के लिए कैश की वजह से वेबसाइटें गलत व्यवहार करना शुरू कर देती हैं।</string>
-
+    <string name="summary_clear_dnscache">DNS कैश को खाली करने के लिए यहां क्लिक करें, उदाहरण के लिए कैश की वजह से वेबसाइटें गलत व्यवहार करना शुरू कर देती हैं</string>
     <string name="title_dnscache_maxsize">अधिकतम कैश आकार</string>
     <string name="summary_dnscache_maxsize">किसी भी समय कैशे में जमा होने वाली अधिकतम प्रविष्टियों सेट करता है</string>
-
     <string name="title_dnscache_usedefaulttimes">पूर्व निर्धारित कैश समय</string>
     <string name="summary_dnscache_usedefaulttimes">जब तक DNS सर्वर संचार के लिए TTL का उपयोग करता है, तब तक अनुरोध में कैश रखें</string>
-
     <string name="title_dnscache_minimum_cache_time">न्यूनतम कैश समय</string>
     <string name="summary_dnscache_minimum_cache_time">प्रविष्टियों को कैश में रखने के समय की न्यूनतम राशि, भले ही इसके लिए पूर्व निर्धारित कैशिंग समय कम हो। लंबे कैशिंग समय के कारण कैश की जानकारी वास्तविक जानकारी से मेल नहीं खा सकती है | 
-\nवर्तमान: %1d सेकंड।</string>
-
+\nवर्तमान: %1d सेकंड</string>
     <string name="title_dnscache_customcachetime">स्वनिर्धारित कैश समय (सेकंड)</string>
     <string name="summary_dnscache_customcachetime">कब तक सभी अनुरोधों को कैश किया जाता है इस राशि को बदलता है, इससे कोई फर्क नहीं पड़ता कि क्या इसके लिए पूर्व निर्धारित कैश समय लंबा हो। लंबे कैशिंग समय के कारण कैश की जानकारी वास्तविक जानकारी से मेल नहीं खा सकती है | 
-\nवर्तमान: %1d सेकंड।</string>
-
+\nवर्तमान: %1d सेकंड</string>
     <string name="title_dnscache_nxdomaincachetime">NXDomain के लिए कैश समय (सेकंड)</string>
-    <string name="summary_dnscache_nxdomaincachetime">NXDOMAIN अनुरोधों को कैश किये गए समय राशि बदलता है। यह गैर-मौजूदा डोमेन के प्रदर्शन को बढ़ाता है (उदा. जैसे यदि वे बाधित हैं)|\nCurrent: %1d Seconds</string>
-
-
+    <string name="summary_dnscache_nxdomaincachetime">NXDOMAIN अनुरोधों को कैश किये गए समय राशि बदलता है। यह गैर-मौजूदा डोमेन के प्रदर्शन को बढ़ाता है (उदा. जैसे यदि वे बाधित हैं)|
+\nवर्तमान: %1d डी सेकंड्स</string>
     <string name="preference_category_logging">लॉगिंग</string>
-
     <string name="title_enable_logging">लॉगिंग करने दे</string>
-    <string name="summary_enable_logging">डीबग जानकारी के लॉगिंग को सक्षम करता है (इसमें सांख्यिक जानकारी होती है)। ये लॉग स्वचालित रूप से नहीं भेजे जाते हैं।</string>
-
+    <string name="summary_enable_logging">डीबग जानकारी के लॉगिंग को सक्षम करता है (इसमें सांख्यिक जानकारी होती है)। ये लॉग स्वचालित रूप से नहीं भेजे जाते हैं</string>
     <string name="title_advanced_logging">उच्च लॉगिंग</string>
-    <string name="summary_advanced_logging">अधिक लॉग जोड़ता है, जो लगातार आने वाली समस्याओं के सुलझाने में मदद कर सकता है।</string>
-
+    <string name="summary_advanced_logging">अधिक लॉग जोड़ता है, जो लगातार आने वाली समस्याओं के सुलझाने में मदद कर सकता है</string>
     <string name="title_send_logs">लॉग्स भेजें</string>
-    <string name="summary_send_logs">डेवलपर को लॉग भेजने के लिए यहां क्लिक करें।</string>
-
+    <string name="summary_send_logs">डेवलपर को लॉग भेजने के लिए यहां क्लिक करें</string>
     <string name="title_delete_all_logs">सभी लॉग हटाएं</string>
-    <string name="summary_delete_all_logs">आपके डिवाइस पर संग्रहीत सभी लॉग हटाता है।</string>
-
+    <string name="summary_delete_all_logs">आपके डिवाइस पर संग्रहीत सभी लॉग हटाता है</string>
     <string name="title_crashreporting_type">स्वचालित क्रैश रिपोर्टिंग</string>
-    <string name="summary_crashreporting_type">ऐप क्रैश होने पर डेवलपर को कौन सी जानकारी संचारित कि जानी चाहिए, यह सेट करें। क्रैश जानकारी में कभी भी व्यक्तिगत जानकारी नहीं होती है और समस्याओं को तेज़ी से ठीक करने में मदद करता है।</string>
-
-
+    <string name="summary_crashreporting_type">ऐप क्रैश होने पर डेवलपर को कौन सी जानकारी संचारित कि जानी चाहिए, यह सेट करें। क्रैश जानकारी में कभी भी व्यक्तिगत जानकारी नहीं होती है और समस्याओं को तेज़ी से ठीक करने में मदद करता है</string>
     <string name="preference_category_ip">IP सेटिंग्स</string>
-
     <string name="title_enable_ipv6">IPv6 सक्षम करें</string>
     <string name="summary_enable_ipv6">IPv6 का उपयोग करें, यदि डिवाइस में IPv6 पता सौंपा गया है</string>
-
     <string name="title_enable_ipv4">IPv4 सक्षम करें</string>
     <string name="summary_enable_ipv4">IPv4 का उपयोग करें, यदि डिवाइस में IPv4 पता सौंपा गया है</string>
-
     <string name="title_force_ipv6">दृढ़तापूर्वक IPv6 सक्षम करें</string>
-    <string name="summary_force_ipv6">IPv6 अनुरोधों को स्वीकार करने के लिए ऐप को बाध्य करें, तब भी जब डिवाइस IPv6 का उपयोग नहीं करता है।</string>
-
+    <string name="summary_force_ipv6">IPv6 अनुरोधों को स्वीकार करने के लिए ऐप को बाध्य करें, तब भी जब डिवाइस IPv6 का उपयोग नहीं करता है</string>
     <string name="title_force_ipv4">दृढ़तापूर्वक IPv4 सक्षम करें</string>
-    <string name="summary_force_ipv4">IPv4 अनुरोधों को स्वीकार करने के लिए ऐप को बाध्य करें, तब भी जब डिवाइस IPv4 का उपयोग नहीं करता है।</string>
-
+    <string name="summary_force_ipv4">IPv4 अनुरोधों को स्वीकार करने के लिए ऐप को बाध्य करें, तब भी जब डिवाइस IPv4 का उपयोग नहीं करता है</string>
     <string name="title_allow_ipv4_traffic">IPv4 यातायात की अनुमति दें</string>
-    <string name="summary_allow_ipv4_traffic">IPv4 यातायात का उपयोग करने की अनुमति दें, भले ही IPv4 अक्षम हो।
-\nयदि अक्षम है, तो ऐप चलाने के दौरान किसी भी IPv4 संचार की अनुमति नहीं है।</string>
-
+    <string name="summary_allow_ipv4_traffic">IPv4 यातायात का उपयोग करने की अनुमति दें, भले ही IPv4 अक्षम हो। 
+\nयदि अक्षम है, तो ऐप चलाने के दौरान किसी भी IPv4 संचार की अनुमति नहीं है</string>
     <string name="title_allow_ipv6_traffic">IPv6 यातायात की अनुमति दें</string>
-    <string name="summary_allow_ipv6_traffic">IPv6 यातायात का उपयोग करने की अनुमति दें, भले ही IPv4 अक्षम हो।
-\nयदि अक्षम है, तो ऐप चलाने के दौरान किसी भी IPv6 संचार की अनुमति नहीं है।</string>
-
-
+    <string name="summary_allow_ipv6_traffic">IPv6 यातायात का उपयोग करने की अनुमति दें, भले ही IPv4 अक्षम हो। 
+\nयदि अक्षम है, तो ऐप चलाने के दौरान किसी भी IPv6 संचार की अनुमति नहीं है</string>
     <string name="preference_category_network">नेटवर्क</string>
-
     <string name="title_restart_vpn_on_networkchange">नेटवर्क परिवर्तन पर पुनरारंभ करें</string>
     <string name="summary_restart_vpn_on_networkchange">नेटवर्क में परिवर्तन होने पर चुपचाप ऐप को पुनरारंभ करें। इसे सक्षम करें, अगर नेटवर्क के बीच बदलाव करते समय समस्याओं का सामना करना पड़ता हो | 
-\n जब ऐप सक्रिय न हो तो कोई प्रभाव नहीं।</string>
-
+\n जब ऐप सक्रिय न हो तो कोई प्रभाव नहीं</string>
     <string name="title_disallow_other_vpns">अन्य VPN को अस्वीकार करें</string>
     <string name="summary_disallow_other_vpns">यदि ऐप को स्पष्ट रूप से रोका नहीं गया है, तो अन्य VPN शुरू करने की अनुमति न दें</string>
-
     <string name="title_catch_other_dns_servers">अन्य DNS यातायात में अवरोध करे</string>
     <string name="summary_catch_other_dns_servers">ज्ञात DNS सर्वर के यातायात में अवरोध करे और इसे Nebulo द्वारा संचारित करें</string>
-
     <string name="title_map_query_refused">अस्वीकृत प्रश्नों को अस्वीकार होस्ट के रूप में अवरोध करे</string>
-    <string name="summary_map_query_refused">यदि होस्ट को अनुमति नहीं है या अवरुद्ध है, तो कुछ DNS सर्वर प्रश्नों का उत्तर देने से इनकार कर सकते हैं। यह सेटिंग, प्रश्नों को मना करने के बजाय होस्ट को अवरुद्ध कर देती है, अन्यथा सिस्टम भ्रमित हो सकता है।</string>
-
+    <string name="summary_map_query_refused">यदि होस्ट को अनुमति नहीं है या अवरुद्ध है, तो कुछ DNS सर्वर प्रश्नों का उत्तर देने से इनकार कर सकते हैं। यह सेटिंग, प्रश्नों को मना करने के बजाय होस्ट को अवरुद्ध कर देती है, अन्यथा सिस्टम भ्रमित हो सकता है</string>
     <string name="title_bypass_searchdomains">खोज-डोमेन से बचकर निकले</string>
-    <string name="summary_bypass_searchdomains">DoH सर्वर के बजाय अपने नेटवर्क के DNS सर्वर पर खोज-डोमेन (जैसे MyPC.local या MyPc.fritz.box) भेजें।
-\nयह अत्यधिक सिफारिशित है। वे प्रश्न आपके नेटवर्क को नहीं छोड़ते हैं।</string>
-
+    <string name="summary_bypass_searchdomains">DoH सर्वर के बजाय अपने नेटवर्क के DNS सर्वर पर खोज-डोमेन (जैसे MyPC.local या MyPc.fritz.box) भेजें। 
+\nयह अत्यधिक सिफारिशित है। वे प्रश्न आपके नेटवर्क को नहीं छोड़ते हैं</string>
     <string name="title_pause_on_captiveportal">क़ैदी प्रवेशमार्ग पर ठहरे</string>
-    <string name="summary_pause_on_captiveportal">यदिक़ैदी प्रवेशमार्ग का पता चला है, तो DoH का उपयोग न करें। लॉग इन करने के तुरंत बाद यह फिर से शुरू हो जाएगा।
-\nइसे अक्षम करने से आप लॉग इन करने के लिए क़ैदी प्रवेशमार्ग को खोलने से रोक सकते हैं।</string>
-
-
+    <string name="summary_pause_on_captiveportal">यदिक़ैदी प्रवेशमार्ग का पता चला है, तो DoH का उपयोग न करें। लॉग इन करने के तुरंत बाद यह फिर से शुरू हो जाएगा। 
+\nइसे अक्षम करने से आप लॉग इन करने के लिए क़ैदी प्रवेशमार्ग को खोलने से रोक सकते हैं</string>
     <string name="preference_category_querylogging">प्रश्न लिखना सक्षम करे</string>
-
     <string name="title_log_queries">प्रश्न लिखना सक्षम करे</string>
     <string name="summary_log_queries">सभी प्रश्नों और उनकी प्रतिक्रियाओं को लिखे</string>
-
     <string name="title_export_queries">प्रश्न निर्यात करे</string>
     <string name="summary_export_queries">CSV के रूप में निर्यात प्रश्न (%1d प्रश्न)</string>
-
     <string name="title_delete_queries">प्रश्न हटाएँ</string>
-    <string name="summary_delete_queries">सभी लिखे गए प्रश्नों को हटाने के लिए यहां क्लिक करें।</string>
-
+    <string name="summary_delete_queries">सभी लिखे गए प्रश्नों को हटाने के लिए यहां क्लिक करें</string>
     <string name="crashreporting_type_full">पूर्ण (सांख्यिकी और डीबग जानकारी रिपोर्ट)</string>
     <string name="crashreporting_type_minimal">न्यूनतम (केवल Android और ऐप संस्करण रिपोर्ट)</string>
     <string name="crashreporting_type_off">बंद (क्रैश रिपोर्ट न भेजें)</string>
-    </resources>
+    <string name="summary_local_server_port">DNS सर्वर का पोर्ट जिसे होस्ट किया जाएगा। केवल 1024 से अधिक बंदरगाहों की अनुमति है।
+\nवर्तमान में: %1s</string>
+    <string name="title_local_server_port">सर्वर पोर्ट</string>
+    <string name="summary_run_without_vpn">जब चेक किया गया नेबुलो आपके डिवाइस पर एक DNS सर्वर को होस्ट करता है</string>
+    <string name="title_run_without_vpn">वीपीएन के बिना चलाएं</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">सर्वर को लोकलहोस्ट पर होस्ट किया जाएगा: %1s</string>
+    <string name="summary_category_nonvpnmode">एक डमी वीपीएन का उपयोग करने के बजाय डिवाइस पर DNS सर्वर के रूप में कार्य करने के लिए नेबुलो को कॉन्फ़िगर करें। जब आप सक्षम होते हैं तो आपको थर्ड पार्टी ऐप्स का उपयोग करके DNS प्रश्नों को नेबुलो में फॉरवर्ड करना होता है।
+\n
+\nयह सुविधा प्रायोगिक है।</string>
+    <string name="preference_category_nonvpnmode">गैर-वीपीएन मोड</string>
+</resources>

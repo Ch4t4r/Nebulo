@@ -19,7 +19,6 @@ import io.sentry.android.core.*
 import io.sentry.core.Integration
 import io.sentry.core.Sentry
 import io.sentry.core.SentryOptions
-import io.sentry.core.UncaughtExceptionHandlerIntegration
 import io.sentry.core.protocol.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

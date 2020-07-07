@@ -5,7 +5,10 @@ import com.frostnerd.smokescreen.database.converters.StringListConverter
 import com.frostnerd.smokescreen.database.dao.DnsQueryDao
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.getPreferences
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter

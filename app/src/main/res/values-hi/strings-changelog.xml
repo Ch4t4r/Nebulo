@@ -130,4 +130,6 @@
     <string name="changelog_build_59_3">DNS-over-HTTPS सर्वर को जोड़ने पर Nebulo अब समर्थित मोड का पता लगाता है</string>
     <string name="changelog_build_59_2">जोड़ा पुन: उपयोग कनेक्शन, बैटरी उपयोग को कम करने</string>
     <string name="changelog_build_59_1">नए अनुवाद जोड़े गए</string>
+    <string name="changelog_build_61_1">पूरी रिलीज के लिए प्रचारित बीटा बिल्ड</string>
+    <string name="changelog_build_59_7">नेबुलो अब (प्रायोगिक) गैर-वीपीएन मोड में चल सकता है, जहां यह डमी वीपीएन के बजाय डीएनएस सर्वर का उपयोग करता है। DNS प्रश्नों को नेबुलो के लिए अग्रेषित करने के लिए इसे तृतीय-पक्ष एप्लिकेशन की आवश्यकता होती है</string>
 </resources>

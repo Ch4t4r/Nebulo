@@ -1,7 +1,6 @@
 package com.frostnerd.smokescreen.util.preferences
 
 import android.content.SharedPreferences
-import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
 import kotlin.reflect.KProperty

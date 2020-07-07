@@ -157,6 +157,9 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
             neverExpires()
         }
     })
+    init {
+        filterForeignKeys = false
+    }
 
     var lastCrashTimeStamp:Long? by longPref("last_crash_timestamp")
 

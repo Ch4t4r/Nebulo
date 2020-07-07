@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Preference android:summary="@string/summary_category_nonvpnmode" />
+    <androidx.preference.Preference android:summary="@string/summary_category_nonvpnmode" />
 
-    <PreferenceCategory android:title="@string/preference_category_nonvpnmode">
-        <CheckBoxPreference
+    <androidx.preference.PreferenceCategory android:title="@string/preference_category_nonvpnmode">
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="false"
                 android:key="run_without_vpn"
                 android:summary="@string/summary_run_without_vpn"
                 android:title="@string/title_run_without_vpn" />
 
-        <EditTextPreference
+        <androidx.preference.EditTextPreference
                 android:defaultValue="11053"
                 android:dependency="run_without_vpn"
                 android:digits="0123456789"
@@ -35,5 +35,5 @@
                 android:key="check_iptables"
                 android:summary="@string/summary_check_iptables"
                 android:title="@string/title_check_iptables" />
-    </PreferenceCategory>
-</PreferenceScreen>
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

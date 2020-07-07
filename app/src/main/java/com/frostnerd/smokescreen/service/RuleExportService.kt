@@ -14,6 +14,7 @@ import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.ExportType
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.watchIfEnabled
@@ -48,6 +49,10 @@ class RuleExportService : IntentService("RuleExportService") {
 
     companion object {
         const val BROADCAST_EXPORT_DONE = "com.frostnerd.nebulo.RULE_EXPORT_DONE"
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
     }
 
     override fun onCreate() {

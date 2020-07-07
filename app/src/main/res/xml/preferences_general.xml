@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/preference_category_general">
-        <ListPreference
+    <androidx.preference.PreferenceCategory android:title="@string/preference_category_general">
+        <androidx.preference.ListPreference
                 android:entries="@array/languages"
                 android:entryValues="@array/language_values"
                 android:key="language"
@@ -10,7 +10,7 @@
                 android:summary="@string/summary_language"
                 android:title="@string/title_language" />
 
-        <ListPreference
+        <androidx.preference.ListPreference
                 android:defaultValue="1"
                 android:entries="@array/theme"
                 android:entryValues="@array/themeValues"
@@ -18,22 +18,22 @@
                 android:summary="@string/summary_theme"
                 android:title="@string/title_theme" />
 
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="true"
                 android:key="start_on_boot"
                 android:summary="@string/summary_start_on_boot"
                 android:title="@string/title_start_on_boot" />
 
-        <CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
                 android:defaultValue="true"
                 android:key="start_after_update"
                 android:summary="@string/summary_start_after_update"
                 android:title="@string/title_start_after_update" />
 
-        <Preference
+        <androidx.preference.Preference
                 android:key="app_exclusion_list"
                 android:summary="@string/summary_excluded_apps"
                 android:title="@string/title_excluded_apps" />
-    </PreferenceCategory>
+    </androidx.preference.PreferenceCategory>
 
-</PreferenceScreen>
+</androidx.preference.PreferenceScreen>

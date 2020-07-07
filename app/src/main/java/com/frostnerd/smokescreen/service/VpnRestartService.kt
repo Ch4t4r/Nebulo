@@ -1,12 +1,14 @@
 package com.frostnerd.smokescreen.service
 
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.log
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.watchIfEnabled
 import leakcanary.LeakSentry
@@ -34,6 +36,10 @@ class VpnRestartService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
     }
 
     override fun onCreate() {

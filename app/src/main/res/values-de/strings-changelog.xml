@@ -130,4 +130,6 @@
     <string name="changelog_build_59_3">Nebulo erkennt nun den unterstützten Modi eines DNS-over-HTTPS Servers</string>
     <string name="changelog_build_59_2">Aufgebaute Verbindungen werden nun wiederverwendet, dies verringert den Batterieverbrauch</string>
     <string name="changelog_build_59_1">Neue Übersetzungen hinzugefügt</string>
+    <string name="changelog_build_61_1">Beta Version zu vollwertigem Release befördert</string>
+    <string name="changelog_build_59_7">Nebulo kann nun in einem nicht-VPN Modus gestartet werden (experimentell), in welchem ein lokaler DNS Server statt des Dummy VPN genutzt wird. Hierfür werden Drittanbieterapps benötigt, um die DNS Anfragen zu Nebulo weiterzuleiten</string>
 </resources>

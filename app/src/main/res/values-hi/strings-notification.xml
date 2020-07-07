@@ -1,19 +1,15 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="notification_channel_default">पूर्व निर्धारित माध्यम</string>
-    <string name="notification_channel_default_description">सूचनाएं प्रकाशित करने के लिए पूर्व निर्धारित माध्यम|</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_channel_default">पूर्व निर्धारित माध्यम</string>
+    <string name="notification_channel_default_description">सूचनाएं पोस्ट करने के लिए डिफ़ॉल्ट चैनल</string>
     <string name="notification_channel_foreground_service">स्थायी सूचना माध्यम</string>
     <string name="notification_channel_foreground_service_description">सूचनाओं के लिए उपयोग किया जाने वाला माध्यम जिसे उपयोगकर्ता द्वारा हटाया नहीं जा सकता है</string>
-
     <string name="notification_channel_noconnection">संपर्क चेतावनी माध्यम</string>
     <string name="notification_channel_noconnection_description">संपर्क की उपलब्धी नहीं होने पर सूचनाएँ दिखाने के लिए उपयोग किया जाने वाला माध्यम</string>
-
     <string name="notification_channel_pin">पिन संबंधी माध्यम</string>
-    <string name="notification_channel_pin_description">पिन संबंधित सूचनाओं के लिए उपयोग किया जाने वाला माध्यम (अर्थात् जब पिन प्रदान करना होता है)</string>
-
+    <string name="notification_channel_pin_description">चैनल का उपयोग पिन से संबंधित सूचनाओं के लिए किया जाता है, अर्थात् जब इसे प्रदान करना होता है</string>
     <string name="notification_channel_high_priorty">उच्च प्राथमिकता</string>
     <string name="notification_channel_high_priorty_description">उच्च प्राथमिकता सूचनाओं के लिए माध्यम । उदाहरण - जब ऐप वीपीएन (VPN) की अनुमति खो देता है</string>
-
     <string name="notification_simple_text">वर्तमान सर्वर: %1$s</string>
     <string name="notification_main_text">प्रश्न यहाँ भेजें जा रहे है - %1$s
 \n
@@ -31,40 +27,34 @@
 \n
 \n%3$d ऐप्स DoH / DoT का उपयोग कर रहे हैं
 \nकैश (cache) में प्रविष्टियाँ - %4$d</string>
-    <string name="notification_main_title_tls"></string>
+    <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_subtext">अब तक भेजें गए प्रश्न - %1$d</string>
-
     <string name="notification_noconnection_title">कोई संपर्क नहीं</string>
-    <string name="notification_noconnection_text">वर्तमान में ऍप आपके DNS प्रश्नों को भेज नहीं रहा है क्योंकि संपर्क खराब है या उपलब्ध नहीं है।</string>
-
+    <string name="notification_noconnection_text">वर्तमान में ऍप आपके DNS प्रश्नों को भेज नहीं रहा है क्योंकि संपर्क खराब है या उपलब्ध नहीं है</string>
     <string name="notification_vpnrestart_title">VPN को फिर से शुरू किया जा रहा है</string>
-    <string name="notification_vpnrestart_text">VPN सेवा को जल्द ही फिर से शुरू किया जाएगा।</string>
-
+    <string name="notification_vpnrestart_text">VPN सेवा को जल्द ही फिर से शुरू किया जाएगा</string>
     <string name="notification_appcrash_title">Nebulo क्रैश हो गया है</string>
-    <string name="notification_appcrash_message">Nebulo क्रैश हो गया है। यदि आवश्यक हो, तो मुख्य मेनू पर जाने के लिए और ऐप को फिर से शुरू करने के लिए यहां क्लिक करें।</string>
-
+    <string name="notification_appcrash_message">Nebulo क्रैश हो गया है। यदि आवश्यक हो, तो मुख्य मेनू पर जाने के लिए और ऐप को फिर से शुरू करने के लिए यहां क्लिक करें</string>
     <string name="notification_ruleimport_title">DNS नियम आयात</string>
     <string name="notification_ruleimport_message">%1s (%2s) से DNS नियम आयात हो रहे है</string>
     <string name="notification_ruleimport_secondarymessage">आयात की तैयारी हो रही है…</string>
     <string name="notification_ruleimport_tertiarymessage">आयात समाप्त हो रहा है…</string>
-
     <string name="notification_ruleimportfinished_title">DNS नियम आयात समाप्त</string>
     <string name="notification_ruleimportfinished_message">%1d नियम आयात किए गए (%2$d डुप्लिकेट छूट गए)</string>
-
     <string name="notification_ruleexport_title">DNS नियम निर्यात</string>
     <string name="notification_ruleexport_message">नियमों की निर्यात हो रही है (%1d/%2d)</string>
     <string name="notification_ruleexport_secondarymessage">निर्यात की तैयारी हो रही है…</string>
-
     <string name="notification_ruleexportfinished_title">DNS नियम निर्यात समाप्त हुई</string>
-    <string name="notification_ruleexportfinished_message">%1d नियमों का निर्यात किया गया।</string>
-
+    <string name="notification_ruleexportfinished_message">%1d नियमों का निर्यात किया गया</string>
     <string name="notification_pin_title">पिन की आवश्यकता है</string>
-    <string name="notification_pin_message">इस क्रिया को करने के लिए आपका पिन आवश्यक है। इसकी पुष्टि के लिए यहां क्लिक करें।</string>
-
+    <string name="notification_pin_message">इस क्रिया को करने के लिए आपका पिन आवश्यक है। इसकी पुष्टि के लिए यहां क्लिक करें</string>
     <string name="notification_service_killed_title">बैटरी अनुकूलन के बारे में जानकारी</string>
-    <string name="notification_service_killed_message">ऐसा लगता है, ऐप को सिस्टम द्वारा पहले बंद कर दिया गया था। और जानने के लिए यहां क्लिक करे।</string>
+    <string name="notification_service_killed_message">ऐसा लगता है, ऐप को सिस्टम द्वारा पहले बंद कर दिया गया था। और जानने के लिए यहां क्लिक करे</string>
     <string name="notification_service_killed_ignore">नज़रअंदाज़</string>
-
     <string name="notification_service_revoked_title">VPN अनुमति को सिस्टम ने रद्द किया है</string>
     <string name="notification_service_revoked_message">फिर से शुरू करने के लिए यहां क्लिक करें</string>
+    <string name="notification_dnsserver_portdiffers">कॉन्फ़िगर किया गया पोर्ट%1d का उपयोग नहीं किया जा सका।</string>
+    <string name="notification_dnsserver_message">DNS सर्वर लोकलहोस्ट पर चल रहा है:%1d। तृतीय-पक्ष एप्लिकेशन का उपयोग करके क्वेरी को अग्रेषित करें</string>
+    <string name="notification_dnsserver_title">गैर-वीपीएन मोड में चल रहा है</string>
+    <string name="notification_main_title_https">Nebulo (DoH)</string>
 </resources>
