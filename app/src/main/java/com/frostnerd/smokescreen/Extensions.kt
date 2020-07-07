@@ -267,12 +267,21 @@ fun Context.isDeviceRooted():Boolean {
 }
 
 fun Context.clearPreviousIptablesRedirect(forceClear:Boolean = false) {
-    if(forceClear || !isServiceRunning(DnsVpnService::class.java) || getPreferences().vpnServiceState == VpnServiceState.STOPPED)
-        getPreferences().lastIptablesRedirectAddress?.split(":")?.apply {
-            val ipv6 = getPreferences().lastIptablesRedirectAddressIPv6?.split("]")?.get(0)?.replace("[", "")
-            IpTablesPacketRedirector(this[1].toInt(), this[0], ipv6, logger).endForward()
-            getPreferences().lastIptablesRedirectAddress = null
-            getPreferences().lastIptablesRedirectAddressIPv6 = null
+    if(forceClear || !isServiceRunning(DnsVpnService::class.java) || getPreferences().vpnServiceState == VpnServiceState.STOPPED) {
+        val ipv4 = getPreferences().lastIptablesRedirectAddress?.split(":")?.let {
+            it[0] to it[1].toInt()
+        }
+        val ipv6 = getPreferences().lastIptablesRedirectAddressIPv6?.split("]:")?.let {
+            it[0].subSequence(1, it[0].length).toString() to it[1].toInt()
+        }
+        val port = ipv4?.second ?: ipv6?.second ?: return  // Neither IPv4 nor IPv6 present if null
+        IpTablesPacketRedirector(port, ipv4?.first, ipv6?.first, logger).endForward()
+        getPreferences().apply {
+            edit {
+                lastIptablesRedirectAddress = null
+                lastIptablesRedirectAddressIPv6 = null
+            }
+        }
     }
 }
 

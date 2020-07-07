@@ -1121,11 +1121,11 @@ class DnsVpnService : VpnService(), Runnable {
                  ), logger = VpnLogger(applicationContext))
                  vpnProxy?.maxRetries = 15
                  val preferredPort = getPreferences().dnsServerModePort
-                 val bindAddress = InetAddress.getLocalHost()
+                 val bindAddress = if(ipv4Enabled) InetAddress.getLocalHost() else InetAddress.getByName("::1")
                  dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, bindAddress, preferredPort)
                  val actualPort = dnsServerProxy!!.startServer()
                  val iptablesMode = if(getPreferences().nonVpnUseIptables) {
-                     val hostAddr = bindAddress.hostAddress
+                     val hostAddr = if(ipv4Enabled) bindAddress.hostAddress else null
                      val ipv6Address = if(deviceHasIpv6) "::1" else null
                      ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr, ipv6Address, logger)
                      ipTablesRedirector?.beginForward().also {

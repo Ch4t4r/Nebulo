@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.util.proxy
 import com.frostnerd.smokescreen.Logger
 import com.frostnerd.smokescreen.util.processSuCommand
 import java.lang.Exception
+import java.lang.IllegalStateException
 
 /*
  * Copyright (C) 2020 Daniel Wolf (Ch4t4r)
@@ -31,13 +32,18 @@ import java.lang.Exception
  *
  */
 class IpTablesPacketRedirector(var dnsServerPort:Int,
-                               var dnsServerIpAddressIpv4:String,
+                               var dnsServerIpAddressIpv4:String?,
                                var dnsServerIpAddressIpv6:String?,
                                private val logger:Logger?) {
     private val logTag = "IpTablesPacketRedirector"
 
     enum class IpTablesMode {
         DISABLED, SUCCEEDED, FAILED, SUCCEEDED_NO_IPV6
+    }
+
+    init {
+        if(dnsServerIpAddressIpv4 == null && dnsServerIpAddressIpv6 == null)
+            throw IllegalStateException("Either IPv6 or IPv4 have to be present.")
     }
 
     /**
@@ -48,15 +54,16 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
     fun endForward(): IpTablesMode = processForward(false)
 
     private fun processForward(createForward:Boolean): IpTablesMode {
-        if(createForward) logger?.log("Using iptables to forward queries to $dnsServerIpAddressIpv4:$dnsServerPort (and possibly $dnsServerIpAddressIpv6)", logTag)
+        if(createForward) logger?.log("Using iptables to forward queries to $dnsServerIpAddressIpv4:$dnsServerPort and $dnsServerIpAddressIpv6)", logTag)
         else logger?.log("Removing IPTables forwarding rule", logTag)
-        val ipv4Success = processDnsForward(append = createForward, ipv6 = false)
+        val ipv4Success = dnsServerIpAddressIpv4 == null || processDnsForward(append = createForward, ipv6 = false)
         val ipv6Success = dnsServerIpAddressIpv6 == null || processDnsForward(
             append = createForward,
             ipv6 = true
         )
         return if (ipv4Success) {
             if (ipv6Success) IpTablesMode.SUCCEEDED
+            else if(dnsServerIpAddressIpv4 == null)  IpTablesMode.FAILED
             else IpTablesMode.SUCCEEDED_NO_IPV6
         } else IpTablesMode.FAILED
     }
