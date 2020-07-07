@@ -79,7 +79,6 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
                     logger
                 ) // Process TCP as well, but ignore result. UDP is more important.
             }
-            true
         } catch (ex:Exception) { false }
     }
 
