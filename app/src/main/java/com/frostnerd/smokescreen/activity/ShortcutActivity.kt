@@ -49,7 +49,7 @@ class ShortcutActivity : AppCompatActivity() {
                 val serverInfo = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
                 val hiddenDohServers = getPreferences().removedDefaultDoHServers
                 val hiddenDoTServers = getPreferences().removedDefaultDoTServers
-                serverInfo?.let { info ->
+                val restartService = serverInfo?.let { info ->
                     (getPreferences().userServers.map {
                         it.serverInformation
                     } + AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {servers ->
@@ -64,10 +64,15 @@ class ShortcutActivity : AppCompatActivity() {
                     }).firstOrNull {
                         info.name == it.name && it.servers.firstOrNull()?.address?.formatToString() == info.servers.firstOrNull()?.address?.formatToString()
                     }
-                }?.apply {
-                    getPreferences().dnsServerConfig = this
-                }
-                DnsVpnService.restartVpn(this, serverInfo)
+                }?.let {
+                    if(getPreferences().dnsServerConfig != it) {
+                        getPreferences().dnsServerConfig = it
+                        false
+                    } else {
+                        true
+                    }
+                } ?: true
+                if(restartService) DnsVpnService.restartVpn(this, serverInfo)
             }
         }
         finish()
