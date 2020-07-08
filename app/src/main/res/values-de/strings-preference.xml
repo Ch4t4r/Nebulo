@@ -118,4 +118,8 @@
 \n
 \nDiese Funktion is experimentell.</string>
     <string name="preference_category_nonvpnmode">Nicht-VPN Modus</string>
+    <string name="summary_check_iptables">Hier klicken um Unerstützung von iptables zu überprüfen</string>
+    <string name="title_check_iptables">Auf iptables überprüfen</string>
+    <string name="summary_iptables_mode">DNS Anfragen mit iptables zu Nebulo weiterleiten. Dies benötigt root-Rechte. Wenn aktiviert wird keine weitere App im nicht-VPN Modus benötigt. Dies funktioniert möglicherweise nicht, wenn dein Netzwerk IPv6-fähig ist.</string>
+    <string name="title_iptables_mode">Nutzer iptables</string>
 </resources>
