@@ -970,6 +970,7 @@ class DnsVpnService : VpnService(), Runnable {
         log("Applying disallowed packages.")
         val userBypass = getPreferences().userBypassPackages
         val defaultBypass = getPreferences().defaultBypassPackages
+        packageBypassAmount = 0
         if (getPreferences().isBypassBlacklist || userBypass.size == 0) {
             log("Mode is set to blacklist, bypassing ${userBypass.size + defaultBypass.size} packages.")
             for (defaultBypassPackage in CombinedIterator(
