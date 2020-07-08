@@ -8,10 +8,13 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.general.StringUtil
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.fromServerUrls
+import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.DnsVpnService
 
 /*
@@ -43,7 +46,28 @@ class ShortcutActivity : AppCompatActivity() {
                 val secondaryUrl = intent.getStringExtra("secondary_url") ?: null
                 DnsVpnService.restartVpn(this, HttpsDnsServerInformation.fromServerUrls(primaryUrl, secondaryUrl))
             } else {
-                DnsVpnService.restartVpn(this, BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent))
+                val serverInfo = BackgroundVpnConfigureActivity.readServerInfoFromIntent(intent)
+                val hiddenDohServers = getPreferences().removedDefaultDoHServers
+                val hiddenDoTServers = getPreferences().removedDefaultDoTServers
+                serverInfo?.let { info ->
+                    (getPreferences().userServers.map {
+                        it.serverInformation
+                    } + AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {servers ->
+                        servers.filter {
+                            it.key !in hiddenDohServers
+                        }.values.toList()
+                    } + AbstractTLSDnsHandle.waitUntilKnownServersArePopulated {
+                            servers ->
+                        servers.filter {
+                            it.key !in hiddenDoTServers
+                        }.values.toList()
+                    }).firstOrNull {
+                        info.name == it.name && it.servers.firstOrNull()?.address?.formatToString() == info.servers.firstOrNull()?.address?.formatToString()
+                    }
+                }?.apply {
+                    getPreferences().dnsServerConfig = this
+                }
+                DnsVpnService.restartVpn(this, serverInfo)
             }
         }
         finish()
