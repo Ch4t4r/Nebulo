@@ -75,4 +75,7 @@
     <string name="error_cannot_open_settings">Impossibile aprire le impostazioni di sistema</string>
     <string name="restart_app">Riavvia</string>
     <string name="restart_app_for_changes">Riavvia l\'app per applicare le modifiche.</string>
+    <string name="iptables_not_supported">Il tuo dispositivo non supporta le iptables</string>
+    <string name="iptables_supported_ipv6_unsupported">Iptables supportate, ma non IPv6.</string>
+    <string name="iptables_supported">Congratulazioni, le iptables sono supportate dal tuo dispositivo!</string>
 </resources>
