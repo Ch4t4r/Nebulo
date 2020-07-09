@@ -57,4 +57,8 @@
     <string name="notification_dnsserver_portdiffers">La porta configurata %1d non può essere utilizzata.</string>
     <string name="notification_dnsserver_message">Il server DNS è in esecuzione su localhost:%1d. Inoltrare le query utilizzando applicazioni di terze parti</string>
     <string name="notification_dnsserver_title">Funzionamento in modalità non-VPN</string>
+    <string name="notification_dnsserver_message_iptables_failed">Server DNS in esecuzione su localhost:%1d. Inizializzazione iptables fallita, le richieste devono essere inoltrate con app di terze parti</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Server DNS in esecuzione su localhost:%1d. Le richieste sono inoltrate usando iptables.
+\nAttenzione: IPv6 è attivo, le richieste potrebbero aggirare Nebulo.</string>
+    <string name="notification_dnsserver_message_iptables_active">Server DNS in esecuzione su localhost:%1d. Le richieste sono inoltrate usando iptables</string>
 </resources>
