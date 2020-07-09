@@ -131,5 +131,7 @@
     <string name="changelog_build_59_2">Aggiunto riutilizzo connessioni, ridotto consumo batteria</string>
     <string name="changelog_build_59_1">Aggiunte nuove traduzioni</string>
     <string name="changelog_build_61_1">Promossa la compilazione beta fino al rilascio completo</string>
-    <string name="changelog_build_59_7">Nebulo può ora funzionare in modalità non-VPN (sperimentale), dove utilizza un server DNS al posto di una finta VPN. Ciò richiede applicazioni di terze parti per inoltrare le query DNS a Nebulo</string>
+    <string name="changelog_build_59_7">Nebulo può ora funzionare in modalità non-VPN (sperimentale), dove utilizza un server DNS al posto di una finta VPN. Richiede app di terze parti per inoltrare le richieste DNS a Nebulo</string>
+    <string name="changelog_build_62_2">Aggiunto supporto alle iptables in modalità non-vpn. Richiede un dispositivo con root</string>
+    <string name="changelog_build_62_1">Quando si avvia Nebulo da una scorciatoria server, quel server ora è persistente</string>
 </resources>
