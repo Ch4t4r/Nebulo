@@ -75,4 +75,7 @@
     <string name="window_main_privatedns_info">निजी DNS सक्रिय है, आपके प्रश्न पहले से ही सुरक्षित हैं। यदि आप DNS-over-HTTPS या अन्य उपयोगी सुविधाओं का उपयोग करना चाहते हैं तो Nebulo को सक्षम करें।</string>
     <string name="restart_app">पुनः आरंभ करें</string>
     <string name="restart_app_for_changes">परिवर्तनों को प्रभावी करने के लिए एप्लिकेशन को पुनरारंभ करें।</string>
+    <string name="iptables_not_supported">आपका डिवाइस iptables का समर्थन नहीं करता है</string>
+    <string name="iptables_supported_ipv6_unsupported">Iptables समर्थित है, लेकिन IPv6 समर्थित नहीं है।</string>
+    <string name="iptables_supported">बधाई हो, iptables आपके डिवाइस द्वारा समर्थित है!</string>
 </resources>
