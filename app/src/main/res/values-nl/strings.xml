@@ -73,4 +73,9 @@
     <string name="error_webview_missing">WebView niet gevonden, wordt het momenteel bijgewerkt of verwijderd\?</string>
     <string name="error_invalid_host">Geef een geldige host op</string>
     <string name="error_cannot_open_settings">Kan systeeminstellingen niet openen</string>
+    <string name="iptables_not_supported">Uw toestel ondersteunt geen iptables</string>
+    <string name="iptables_supported_ipv6_unsupported">Iptables wordt ondersteund, maar IPv6 wordt niet ondersteund.</string>
+    <string name="iptables_supported">Gefeliciteerd, iptables wordt ondersteund door uw apparaat!</string>
+    <string name="restart_app">Herstart</string>
+    <string name="restart_app_for_changes">Start de app opnieuw op om de veranderingen in werking te laten treden.</string>
 </resources>
