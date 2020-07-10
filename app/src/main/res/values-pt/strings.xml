@@ -75,4 +75,7 @@
     <string name="error_webview_missing">O pacote WebView não foi encontrado, ele está sendo atualizado ou removido\?</string>
     <string name="restart_app">Reinicie</string>
     <string name="restart_app_for_changes">Reinicie o aplicativo para que as alterações entrem em vigor.</string>
+    <string name="iptables_not_supported">O seu dispositivo não suporta iptables</string>
+    <string name="iptables_supported_ipv6_unsupported">O Iptables é suportado, mas o IPv6 não é suportado.</string>
+    <string name="iptables_supported">Parabéns, o iptables é suportado pelo seu aparelho!</string>
 </resources>
