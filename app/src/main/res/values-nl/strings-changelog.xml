@@ -132,4 +132,6 @@
     <string name="changelog_build_59_2">Nebulo hergebruikt nu de aansluitingen waardoor het batterijverbruik wordt verlaagd</string>
     <string name="changelog_build_61_1">Bevorderde bètaopbouw tot volledige vrijgave</string>
     <string name="changelog_build_59_7">De Nebulo kan nu in (experimentele) niet-VPN-modus draaien, waarbij gebruik wordt gemaakt van een DNS-server in plaats van een dummy VPN. Hiervoor zijn apps van derden nodig voor het doorsturen van DNS-query\'s naar de Nebulo.</string>
+    <string name="changelog_build_62_2">Ondersteuning toegevoegd voor iptables in non-vpn modus. Hiervoor is een rooted device nodig</string>
+    <string name="changelog_build_62_1">Bij het starten van de Nebulo vanaf een serversnelkoppeling blijft die server nu bestaan</string>
 </resources>
