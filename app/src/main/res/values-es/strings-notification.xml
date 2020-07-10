@@ -57,4 +57,8 @@
     <string name="notification_dnsserver_portdiffers">El puerto configurado %1d no se pudo utilizar.</string>
     <string name="notification_dnsserver_message">El servidor DNS está funcionando en localhost:%1d. Reenvío de consultas con aplicaciones de terceros</string>
     <string name="notification_dnsserver_title">Ejecutando en modo no VPN</string>
+    <string name="notification_dnsserver_message_iptables_failed">El servidor DNS está funcionando en localhost:%1d. La inicialización de iptables falló, las consultas tienen que ser reenviadas con aplicaciones de terceros</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">El servidor DNS está funcionando en localhost:%1d. Las consultas se reenvían usando iptables.
+\nAdvertencia: IPv6 está activo, las consultas podrían eludir a Nebulo.</string>
+    <string name="notification_dnsserver_message_iptables_active">El servidor DNS está funcionando en localhost:%1d. Las consultas se reenvían usando iptables</string>
 </resources>
