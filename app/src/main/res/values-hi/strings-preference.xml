@@ -118,4 +118,8 @@
 \n
 \nयह सुविधा प्रायोगिक है।</string>
     <string name="preference_category_nonvpnmode">गैर-वीपीएन मोड</string>
+    <string name="summary_check_iptables">जांचें कि आपका डिवाइस iptables का समर्थन करता है या नहीं</string>
+    <string name="title_check_iptables">Iptables की जाँच करें</string>
+    <string name="summary_iptables_mode">नेबूलो को iptables का उपयोग करके क्वेरी को अग्रेषित करें। इसके लिए रूट विशेषाधिकारों की आवश्यकता होती है। जब गैर-वीपीएन मोड में सक्षम होने पर किसी बाहरी ऐप का उपयोग करने की आवश्यकता नहीं होती है। जब आप IPv6 नेटवर्क पर होते हैं तो यह काम नहीं कर सकता है।</string>
+    <string name="title_iptables_mode">Iptables का उपयोग करें</string>
 </resources>
