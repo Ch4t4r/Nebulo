@@ -118,4 +118,8 @@
 \n
 \nEsta característica es experimental.</string>
     <string name="preference_category_nonvpnmode">Modo no VPN</string>
+    <string name="summary_check_iptables">Compruebe si su dispositivo es compatible con los iptables</string>
+    <string name="title_check_iptables">Comprueba si hay iptables</string>
+    <string name="summary_iptables_mode">Reenvía las consultas a Nebulo usando iptables. Esto requiere privilegios de root. Cuando está habilitado, no es necesario utilizar aplicaciones externas cuando se está en modo no VPN. Esto podría no funcionar cuando se está en una red IPv6.</string>
+    <string name="title_iptables_mode">Usar iptables</string>
 </resources>
