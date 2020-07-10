@@ -132,4 +132,6 @@
     <string name="changelog_build_59_1">Ajout de nouvelles traductions</string>
     <string name="changelog_build_61_1">Promotion de la version bêta jusqu\'à la version complète</string>
     <string name="changelog_build_59_7">Nebulo peut maintenant fonctionner en mode (expérimental) non-VPN, où il utilise un serveur DNS au lieu d\'un VPN factice. Cela nécessite l\'utilisation d\'applications tierces pour transmettre les requêtes DNS à Nebulo</string>
+    <string name="changelog_build_62_2">Ajout du support pour iptables en mode non-vpn. Cela nécessite un périphérique racine</string>
+    <string name="changelog_build_62_1">Lorsque vous démarrez Nebulo à partir d\'un raccourci du serveur, celui-ci est maintenant persistant</string>
 </resources>
