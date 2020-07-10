@@ -75,4 +75,7 @@
     <string name="activity_label_import_servers">Importar servidor(es)</string>
     <string name="restart_app">Reinicie</string>
     <string name="restart_app_for_changes">Reinicie la aplicación para que los cambios surtan efecto.</string>
+    <string name="iptables_not_supported">Su dispositivo no es compatible con los iptables</string>
+    <string name="iptables_supported_ipv6_unsupported">Iptables está soportado, pero IPv6 no está soportado.</string>
+    <string name="iptables_supported">Felicitaciones, iptables es compatible con su dispositivo!</string>
 </resources>
