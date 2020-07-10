@@ -57,4 +57,8 @@
     <string name="notification_dnsserver_message">DNS सर्वर लोकलहोस्ट पर चल रहा है:%1d। तृतीय-पक्ष एप्लिकेशन का उपयोग करके क्वेरी को अग्रेषित करें</string>
     <string name="notification_dnsserver_title">गैर-वीपीएन मोड में चल रहा है</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNS सर्वर localhost:% 1d पर चल रहा है। IPtables की शुरुआत विफल रही, प्रश्नों को तृतीय-पक्ष एप्लिकेशन के साथ अग्रेषित किया जाना है</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS सर्वर localhost:%1d पर चल रहा है। Iptables का उपयोग करके क्वेरी को अग्रेषित किया जाता है।
+\nचेतावनी: IPv6 सक्रिय है, प्रश्न Nebulo को बायपास कर सकते हैं।</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS सर्वर localhost:%1d पर चल रहा है। IPtables का उपयोग करके क्वेरीज़ अग्रेषित की जाती हैं</string>
 </resources>
