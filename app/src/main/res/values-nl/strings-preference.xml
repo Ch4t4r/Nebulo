@@ -108,4 +108,18 @@
 \n Geen effect wanneer de app niet actief is</string>
     <string name="title_show_revoked_notification">Melding bij verloren autorisatie</string>
     <string name="summary_show_revoked_notification">Toon een melding wanneer Nebulo de toestemming voor de VPN verliest</string>
+    <string name="summary_check_iptables">Controleer of uw apparaat iptables ondersteunt</string>
+    <string name="title_check_iptables">Controleer op iptables</string>
+    <string name="summary_iptables_mode">Vragen doorsturen naar de Nebulo met behulp van iptables. Hiervoor zijn root-privileges nodig. Indien ingeschakeld hoeven er geen externe apps te worden gebruikt in de non-vpn modus. Dit werkt misschien niet als u zich op een IPv6 netwerk bevindt.</string>
+    <string name="title_iptables_mode">Gebruik iptables</string>
+    <string name="summary_local_server_port">Poort van de DNS-server die zal worden gehost. Alleen poorten boven 1024 zijn toegestaan.
+\nMomenteel: %1s</string>
+    <string name="title_local_server_port">Server-poort</string>
+    <string name="summary_run_without_vpn">Indien aangevinkt host de Nebulo een DNS server op uw apparaat</string>
+    <string name="title_run_without_vpn">Rennen zonder VPN</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server wordt gehost op localhost:%1s</string>
+    <string name="summary_category_nonvpnmode">Configureer de Nebulo om te fungeren als een DNS-server op het apparaat in plaats van een dummy VPN te gebruiken. Indien ingeschakeld moet u handmatig DNS-query\'s doorsturen naar de Nebulo met behulp van apps van derden.
+\n
+\nDeze functie is experimenteel.</string>
+    <string name="preference_category_nonvpnmode">Niet-VPN-modus</string>
 </resources>
