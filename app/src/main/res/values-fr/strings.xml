@@ -75,4 +75,7 @@
     <string name="activity_label_speed_test">Comparaison de la vitesse des serveurs</string>
     <string name="restart_app">Redémarrer</string>
     <string name="restart_app_for_changes">Redémarrez l\'application pour que les changements prennent effet.</string>
+    <string name="iptables_not_supported">Votre appareil ne prend pas en charge iptables</string>
+    <string name="iptables_supported_ipv6_unsupported">Iptables est supporté, mais IPv6 n\'est pas supporté.</string>
+    <string name="iptables_supported">Félicitations, iptables est pris en charge par votre appareil !</string>
 </resources>
