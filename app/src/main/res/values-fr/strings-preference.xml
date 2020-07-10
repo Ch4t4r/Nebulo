@@ -118,4 +118,8 @@
 \n
 \nCe dispositif est expérimental.</string>
     <string name="preference_category_nonvpnmode">Mode non-VPN</string>
+    <string name="summary_check_iptables">Vérifiez si votre appareil est compatible avec iptables</string>
+    <string name="title_check_iptables">Vérifier pour iptables</string>
+    <string name="summary_iptables_mode">Transmettez les requêtes à Nebulo en utilisant iptables. Cela nécessite des privilèges de root. Lorsqu\'elle est activée, aucune application externe ne doit être utilisée en mode non-vpn. Cela peut ne pas fonctionner lorsque vous êtes sur un réseau IPv6.</string>
+    <string name="title_iptables_mode">Utiliser iptables</string>
 </resources>
