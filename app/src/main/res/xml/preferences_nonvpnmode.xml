@@ -36,4 +36,8 @@
                 android:summary="@string/summary_check_iptables"
                 android:title="@string/title_check_iptables" />
     </androidx.preference.PreferenceCategory>
+
+    <PreferenceCategory android:title="preference_category_nonvpnmode_help" android:key="nonvpn_help">
+
+    </PreferenceCategory>
 </androidx.preference.PreferenceScreen>

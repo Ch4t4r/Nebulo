@@ -296,6 +296,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
         }
+
+        var installedThirdPartyApps = 0
+
+        if(installedThirdPartyApps == 0) {
+            findPreference("nonvpn_help").isVisible = false
+        }
     }
 
     @SuppressLint("NewApi")
