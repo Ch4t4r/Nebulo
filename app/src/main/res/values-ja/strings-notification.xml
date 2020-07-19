@@ -1,2 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="notification_channel_pin_description">PINに関連した通知に使用されるチャンネル、つまりPINを入力する場合に使用されます</string>
+    <string name="notification_channel_high_priorty">高優先度</string>
+    <string name="notification_service_revoked_title">システムによってVPNの許可が取り消されました</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNSサーバーが localhost:%1dで起動中です。iptablesの初期化に失敗したため、DNSクエリはサードパーティアプリを使って転送されます</string>
+    <string name="notification_main_subtext">これまでのリクエストクエリ:%1$d</string>
+    <string name="notification_dnsserver_portdiffers">ポート: %1dでDNSサーバーを起動することができません。</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNSサーバーが localhost:%1dで起動中です。DNSクエリはiptablesを使って転送されます。
+\n警告:IPv6が有効のため、クエリがNebuloにより転送されない場合があります。</string>
+    <string name="notification_dnsserver_message">DNS サーバーがlocalhost:%1dで起動中です。DNSクエリはサードパーティアプリを使って転送されます</string>
+    <string name="notification_dnsserver_message_iptables_active">DNSサーバーが localhost:%1dで起動中です。DNSクエリはiptablesを使って転送されます</string>
+    <string name="notification_dnsserver_title">非VPNモードで起動中</string>
+    <string name="notification_service_revoked_message">ここをタップして再起動</string>
+    <string name="notification_service_killed_ignore">無視</string>
+    <string name="notification_service_killed_message">前回システムによりアプリが停止されたようです。ここをタップして詳細を確認</string>
+    <string name="notification_service_killed_title">バッテリー最適化に関する情報</string>
+    <string name="notification_pin_message">その操作を実行するにはPINの入力が必要です。ここをタップして確認してください</string>
+    <string name="notification_pin_title">PIN入力が必要</string>
+    <string name="notification_ruleexportfinished_message">%1d のルールがエクスポートされました</string>
+    <string name="notification_ruleexportfinished_title">DNSルールのエクスポートが終了しました</string>
+    <string name="notification_ruleexport_secondarymessage">エクスポートの準備中…</string>
+    <string name="notification_ruleexport_message">ルールのエクスポート (%1d/%2d)</string>
+    <string name="notification_ruleexport_title">DNSルールのエクスポート</string>
+    <string name="notification_ruleimportfinished_message">1d 個のルールをインポートしました (%2$d 個が重複のためスキップしました)</string>
+    <string name="notification_ruleimportfinished_title">DNSルールのインポートが終了しました</string>
+    <string name="notification_ruleimport_tertiarymessage">インポートを終了しています…</string>
+    <string name="notification_ruleimport_secondarymessage">インポートの準備中…</string>
+    <string name="notification_ruleimport_message">1s (%2s) からの DNS ルールのインポート</string>
+    <string name="notification_ruleimport_title">DNSルールのインポート</string>
+    <string name="notification_appcrash_message">Nebuloがクラッシュしました。ここをタップしてメインメニューに移動し、必要に応じてアプリを再起動してください</string>
+    <string name="notification_appcrash_title">Nebuloがクラッシュしました</string>
+    <string name="notification_vpnrestart_text">VPNサービスがまもなく再開されます</string>
+    <string name="notification_vpnrestart_title">VPNを再起動中</string>
+    <string name="notification_noconnection_text">未接続または接続不良のため、このアプリは現在DNSクエリを転送していません</string>
+    <string name="notification_noconnection_title">未接続</string>
+    <string name="notification_main_title_https">Nebulo (DoH)</string>
+    <string name="notification_main_title_tls">Nebulo (DoT)</string>
+    <string name="notification_main_text_with_secondary_whitelist">クエリは %1$s と %2$s に送信されています
+\n
+\n3$d のアプリはDoH/DoTを使用しています
+\nキャッシュ内の %4$d エントリ</string>
+    <string name="notification_main_text_whitelist">クエリは %1$s に送信されています
+\n
+\n2$d のアプリはDoH/DoTを使用しています
+\nキャッシュ内の %3$d エントリ</string>
+    <string name="notification_main_text_with_secondary">クエリは %1$s と %2$s に送信されています
+\n
+\n3$d のアプリはDoH/DoTから除外されています
+\nキャッシュ内の %4$d エントリ</string>
+    <string name="notification_main_text">クエリは %1$s に送信されます
+\n
+\n2$d のアプリがDoH/DoTから除外されています
+\nキャッシュ内の %3$d エントリ</string>
+    <string name="notification_simple_text">現在のサーバー: %1$s</string>
+    <string name="notification_channel_high_priorty_description">アプリがVPNへのアクセス許可を失った場合など、優先度の高い通知用チャンネル</string>
+    <string name="notification_channel_pin">PIN関連チャンネル</string>
+    <string name="notification_channel_noconnection_description">接続ができないと思われる場合に通知を表示するために使用されるチャンネル</string>
+    <string name="notification_channel_noconnection">接続警告チャンネル</string>
+    <string name="notification_channel_foreground_service_description">ユーザーにより削除できない通知に使用するチャンネル</string>
+    <string name="notification_channel_foreground_service">恒久的通知チャンネル</string>
+    <string name="notification_channel_default_description">通知投稿用のデフォルトチャンネル</string>
+    <string name="notification_channel_default">デフォルトチャンネル</string>
+</resources>
