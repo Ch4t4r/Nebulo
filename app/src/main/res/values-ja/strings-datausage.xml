@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="dialog_crashreportingusages_data_1">ユーザーデータ</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_crashreportingusages_data_1">ユーザーデータ</string>
     <string name="dialog_crashreportingusages_data_2">デバイスデータ</string>
     <string name="dialog_crashreportingusages_data_3">アプリデータ</string>
     <string name="dialog_crashreportingusages_data_4">OSデータ</string>
@@ -23,5 +24,5 @@
     <string name="dialog_crashreportingusages_data_os_1">名前（例：Android）</string>
     <string name="dialog_crashreportingusages_data_os_2">バージョン（例：8.1.0）</string>
     <string name="dialog_crashreportingusages_data_os_3">カーネルバージョン</string>
-    <string name="dialog_crashreportingusages_data_os_4">ルート（はい/いいえ）</string>
-    </resources>
+    <string name="dialog_crashreportingusages_data_os_4">Root取得済（はい/いいえ）</string>
+</resources>
