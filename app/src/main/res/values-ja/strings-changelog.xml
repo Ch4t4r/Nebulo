@@ -1,10 +1,11 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="changelog_build_23_1">DoTサーバーにデフォルト以外のポートが表示されるようになりました</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_build_23_1">DoTサーバーにデフォルト以外のポートが表示されるようになりました</string>
     <string name="changelog_build_23_2">変更を強調するためにこのダイアログを追加</string>
     <string name="changelog_build_23_3">クエリのエクスポート設定に、ロード中かどうかを示すダイアログが表示されるようになりました</string>
     <string name="changelog_build_23_4">サーバーのインポートがAndroidバージョン7以下で機能しない問題を修正</string>
     <string name="changelog_build_23_5">クエリログに、クエリの送信に使用されたプロトコルが表示されるようになりました</string>
-    <string name="changelog_build_23_6">設定でアプリをピン保護することができます</string>
+    <string name="changelog_build_23_6">PINを設定することで、アプリを保護することができるようになりました</string>
     <string name="changelog_build_24_1">指紋センサーがないデバイスでアプリがクラッシュするのを修正</string>
     <string name="changelog_build_25_1">IPv6 / IPv6処理の改善 - アプリはどちらか一方のみをサポートするネットワーク上で動作します</string>
     <string name="changelog_build_25_2">新しいDNSサーバーを追加</string>
@@ -42,4 +43,5 @@
     <string name="changelog_build_32_4">現在使用中のサーバーとそれが解決されるIPアドレスを示すビューを引き出しを追加</string>
     <string name="changelog_build_32_5">アプリは異なる内部アドレスを使用しています</string>
     <string name="changelog_build_32_6">いくつかのクラッシュとアプリのフリーズを修正</string>
-    </resources>
+    <string name="changelog_build_33_1">トルコ語、インドネシア語、ロシア語とドイツ語の翻訳を追加しました</string>
+</resources>
