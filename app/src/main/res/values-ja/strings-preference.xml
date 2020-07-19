@@ -1,2 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="summary_dnscache_minimum_cache_time">最小キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きい値を設定すると、キャッシュされたレコードが実際のレコードと一致しなくなり、サービスが正常に動作しなくなる可能性があります。
+\n現在の値: %1d 秒。</string>
+    <string name="summary_dnscache_customcachetime">キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きく設定すると、キャッシュされたレコードと実際のレコードが一致しなくなり、サービスが正常に動作しなくなる可能性があります。
+\n現在の値: %1d 秒。</string>
+    <string name="title_enable_logging">動作ログを記録します。</string>
+    <string name="preference_category_logging">動作ログ</string>
+    <string name="summary_dnscache_nxdomaincachetime">NXDOMAINリクエストがキャッシュされる時間を変更します。これにより、存在しないドメインに対する応答パフォーマンスが向上します（ブロックされている場合など）。
+\n現在の値：％1d秒</string>
+    <string name="title_dnscache_nxdomaincachetime">NXDomainのキャッシュ時間(秒)</string>
+    <string name="title_dnscache_customcachetime">カスタムキャッシュ時間(秒)</string>
+    <string name="title_dnscache_minimum_cache_time">最小キャッシュ時間</string>
+    <string name="summary_dnscache_usedefaulttimes">DNSサーバーにTTL(Time To Live)が設定されている場合、TTLと同じ時間だけキャッシュします。</string>
+    <string name="title_dnscache_usedefaulttimes">デフォルトのキャッシュ時間</string>
+    <string name="summary_dnscache_maxsize">キャッシュが常に保持できる最大エントリ数を設定します。</string>
+    <string name="title_dnscache_maxsize">最大キャッシュサイズ</string>
+    <string name="summary_clear_dnscache">DNSキャッシュ機能によりwebサイトが正しく表示されない場合は、ここをタップしてDNSキャッシュをクリアしてください。</string>
+    <string name="title_clear_dnscache">DNSキャッシュのクリア</string>
+    <string name="summary_dnscache_keepacrosslaunches">複数のアプリにまたがるDNSキャッシュを保持します。</string>
+    <string name="title_dnscache_keepacrosslaunches">DNSキャッシュの保持</string>
+    <string name="summary_dnscache_enabled">アプリによるDNSキャッシュを有効にします。以前のリクエストを保存することで今後のリクエストを素早く解決します。
+\n
+\nシステムにもキャッシュ機能がありますが、これをカスタマイズしたい場合はこの機能を有効にしてください。</string>
+    <string name="title_dnscache_enabled">DNSキャッシュ</string>
+    <string name="preference_category_cache">キャッシュ制御</string>
+    <string name="summary_preference_change_pin">PINを変更します。半角数字のみ利用できます。
+\n現在のPIN: %1s</string>
+    <string name="title_preference_change_pin">PINの変更</string>
+    <string name="summary_show_revoked_notification">NebuloがVPNの制御に失敗した時に通知します。</string>
+    <string name="summary_notification_allow_pause">通知からアプリの一時停止を許可します。</string>
+    <string name="summary_notification_allow_stop">通知からアプリの停止を許可します。</string>
+    <string name="summary_start_after_update">アプリの更新後に自動で開始します。</string>
+    <string name="summary_start_on_boot">電源オン時にアプリを自動で起動します。</string>
+    <string name="title_start_on_boot">ブート後に起動</string>
+    <string name="summary_theme">このアプリのテーマを設定します。</string>
+    <string name="summary_language">アプリの言語を変更します。</string>
+    <string name="summary_preference_pin_use_fingerprint">PIN入力の代わりに指紋認証を使用します。</string>
+    <string name="title_preference_pin_use_fingerprint">指紋認証を使用する</string>
+    <string name="summary_preference_enable_pin">アプリ起動時や停止時にPINを要求するかどうかを指定します。</string>
+    <string name="title_preference_enable_pin">PIN</string>
+    <string name="preference_category_pin">PINプロテクション</string>
+    <string name="title_show_revoked_notification">VPN権限喪失時に通知</string>
+    <string name="title_show_noconnection_notification">接続されていない場合の通知</string>
+    <string name="summary_show_noconnection_notification">未接続または接続に失敗している時に通知します。</string>
+    <string name="title_notification_allow_pause">一時停止の許可</string>
+    <string name="title_notification_allow_stop">停止の許可</string>
+    <string name="summary_notification_hide_icon">上部ナビゲーションバーのアイコンを非表示にします。</string>
+    <string name="title_notification_hide_icon">アイコンを隠す</string>
+    <string name="summary_simple_notification">簡単なテキストで通知します。</string>
+    <string name="title_simple_notification">シンプル通知</string>
+    <string name="summary_show_notification_on_lockscreen">ロック画面に通知を表示するかどうかを設定します。</string>
+    <string name="title_show_notification_on_lockscreen">ロック画面に表示</string>
+    <string name="preference_category_notification">通知</string>
+    <string name="summary_excluded_apps">DNS over HTTPSまたはDNS over TLSを経由させないアプリ(インターネットに一切接続しないアプリなど)を指定します。</string>
+    <string name="title_excluded_apps">除外するアプリ</string>
+    <string name="title_start_after_update">更新後に開始</string>
+    <string name="title_theme">テーマ</string>
+    <string name="title_language">言語</string>
+    <string name="preference_category_general">ゼネラル</string>
+</resources>
