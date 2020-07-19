@@ -1,2 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="window_main_privatedns_info">プライベートDNSが有効のため、DNSクエリはすでに保護されています。DNS over HTTPSやその他の便利な機能を使用したい場合は、Nebuloを有効にしてください。</string>
+    <string name="windows_querylogging_usedserver_cache">DNSキャッシュで解決済</string>
+    <string name="windows_querylogging_usedserver_dnsrules">以下のDNSルールで解決済</string>
+    <string name="window_dnsrules_customhosts">ホスト名のカスタマイズ</string>
+    <string name="about_app">このアプリはオープンソースです。ソースコードは&lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;から確認することができます。
+\nこのアプリは広告表示やユーザーの情報取得や収集することは一切ありません。
+\n
+\nVersion %1s
+\nBuild %2d
+\nDatabase version %3d
+\nCrashreport ID: %4s
+\n
+\n© Daniel Wolf 2019
+\nLicensed under GPLv3.
+\n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
+    <string name="main_dnssurveillance_infotext">接続したDNSサーバーは、あなたが訪れたサイト情報を記録することができることに注意してください。詳しい情報については、DNSサービスの個人情報保護方針を確認してください。</string>
+    <string name="main_dnssurveillance_privacystatement">1sの個人情報保護方針</string>
+    <string name="activity_label_enable_logging">動作ログのエクスポート/ログ取得を有効にする</string>
+    <string name="activity_label_speed_test">サーバー反応速度の比較</string>
+    <string name="windows_querylogging_dnsrule_created">DNSルールが作成されました</string>
+    <string name="windows_querylogging_responses">レスポンス</string>
+    <string name="windows_querylogging_protocol">プロトコル</string>
+    <string name="windows_querylogging_hostsource__user">ユーザールール</string>
+    <string name="windows_querylogging_hostsource">DNSルールのソース</string>
+    <string name="windows_querylogging_used_server">使用するサーバー</string>
+    <string name="window_dnsrules_customhosts_message">変更したいホスト名をここに入力</string>
+    <string name="window_speedtest_runtest">テストを開始</string>
+    <string name="about_info">一般情報</string>
+    <string name="about_credits">クレジット</string>
+    <string name="about_privacypolicy">プライバシーポリシー</string>
+    <string name="iptables_not_supported">このデバイスはiptablesをサポートしていません</string>
+    <string name="iptables_supported_ipv6_unsupported">Iptablesはサポートされますが、IPv6はサポートされません。</string>
+    <string name="iptables_supported">このデバイスはiptablesをサポートしています、おめでとう!</string>
+    <string name="restart_app">再起動</string>
+    <string name="restart_app_for_changes">変更を反映するには、アプリを再起動してください。</string>
+    <string name="windows_querylogging_create_dnsrule">このホストに対するDNSルールを作成します</string>
+    <string name="windows_querylogging_latency">レイテンシ</string>
+    <string name="windows_querylogging_hostsource__unknown">不明</string>
+    <string name="windows_querylogging_question">質問</string>
+    <string name="about_help_translating">翻訳に協力</string>
+    <string name="about_telegram_group">Telegramグループ</string>
+    <string name="about_contact_developer">開発者に連絡</string>
+    <string name="about_changelog">変更履歴</string>
+    <string name="about_licenses">オープンソースライセンス</string>
+    <string name="all_start">開始</string>
+    <string name="windows_querylogging_type">タイプ</string>
+    <string name="windows_querylogging_time">時間</string>
+    <string name="windows_querylogging_search">ホスト名検索</string>
+    <string name="windows_querylogging_search_hint">クエリログからホスト名を検索</string>
+    <string name="window_dnsrules_hostalreadyexists">既にこのホスト名に対するルールが登録されています</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">取り込んだルール数: -</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">取り込んだルール数: %1d (重複しているルール数: %2$d)</string>
+    <plurals name="window_dnsrules_subtitle">
+        <item quantity="other">%1dのルール</item>
+    </plurals>
+    <string name="button_main_dnsrules">DNSルール</string>
+    <string name="error_no_webbrowser_installed">このリンクを表示するためのアプリがインストールされていません</string>
+    <string name="about_share">シェアする</string>
+    <string name="quicksettings_start_text">Nebuloを開始</string>
+    <string name="quicksettings_stop_text">Nebuloの停止</string>
+    <string name="app_share_text">DNSクエリを暗号化してプライバシーとセキュリティを強化するアプリを見つけました。ここで見つけてください: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
+    <string name="error_webview_missing">WebViewパッケージが更新または削除されているため、見つかりません。</string>
+    <string name="error_cannot_open_settings">システム設定を開くことができません</string>
+    <string name="error_invalid_servername">名前を入力してください</string>
+    <string name="error_invalid_pin">PINを入力してください</string>
+    <string name="error_invalid_host">有効なホスト名を入力してください</string>
+    <string name="error_invalid_url">有効なURLを入力してください</string>
+    <string name="all_close">閉じる</string>
+    <string name="open_app">アプリを起動</string>
+    <string name="information">情報</string>
+    <string name="all_yes">はい</string>
+    <string name="all_no">いいえ</string>
+    <string name="all_resume">再開</string>
+    <string name="all_pause">一時停止</string>
+    <string name="all_stop">停止</string>
+    <string name="activity_label_import_servers">サーバーのインポート</string>
+    <string name="activity_label_import_queries">クエリのインポート</string>
+</resources>
