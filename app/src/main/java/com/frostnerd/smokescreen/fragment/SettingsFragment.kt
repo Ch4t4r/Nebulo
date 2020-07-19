@@ -248,6 +248,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val connectInfo = findPreference("nonvpn_connect_info")
         val iptablesMode = findPreference("nonvpn_use_iptables")
         val checkIpTables = findPreference("check_iptables")
+        val helpNetguard = findPreference("nonvpn_help_netguard")
         port.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().isNotEmpty() && newValue.toString().isInt() && newValue.toString().toInt() > 1024) {
                 port.summary = getString(R.string.summary_local_server_port, newValue.toString())
@@ -298,6 +299,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         var installedThirdPartyApps = 0
+        if(isPackageInstalled(requireContext(), "eu.faircode.netguard")) {
+            installedThirdPartyApps++
+            helpNetguard.setOnPreferenceClickListener {
+                AlertDialog.Builder(requireContext(), getPreferences().theme.dialogStyle)
+                    .setTitle("NetGuard")
+                    .setMessage(getString(R.string.dialog_nonvpn_help_netguard, port.text.toInt()))
+                    .setPositiveButton(R.string.all_close, null)
+                    .show()
+                true
+            }
+        } else {
+            helpNetguard.isVisible = false
+        }
 
         if(installedThirdPartyApps == 0) {
             findPreference("nonvpn_help").isVisible = false
