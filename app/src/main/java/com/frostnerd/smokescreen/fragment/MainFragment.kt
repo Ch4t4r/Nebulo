@@ -120,7 +120,7 @@ class MainFragment : Fragment() {
                         }
                     }
                 }
-                if(!handled) {
+                if(event.action == MotionEvent.ACTION_UP && !handled) {
                     innerView.performClick()
                 }
                 true
