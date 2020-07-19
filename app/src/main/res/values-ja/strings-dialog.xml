@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="dialog_serverconfiguration_title">サーバー構成</string>
-    <string name="dialog_serverconfiguration_addserver">サーバーを追加する</string>
-    <string name="dialog_newserver_title_https">サーバーを追加する（DoH）</string>
-    <string name="dialog_newserver_title_tls">サーバーを追加する（DoT）</string>
-    <string name="dialog_newserver_name">サーバーの名前</string>
+    <string name="dialog_serverconfiguration_addserver">サーバー追加</string>
+    <string name="dialog_newserver_title_https">サーバー追加（DoH）</string>
+    <string name="dialog_newserver_title_tls">サーバー追加（DoT）</string>
+    <string name="dialog_newserver_name">サーバー名</string>
     <string name="dialog_newserver_name_hint">例</string>
     <string name="dialog_newserver_primaryserver">プライマリサーバ</string>
-    <string name="dialog_newserver_secondaryserver">セコンダリーサーバ（オプション）</string>
+    <string name="dialog_newserver_secondaryserver">セカンダリサーバ（オプション）</string>
     <string name="dialog_deleteconfig_title">設定を削除しますか？</string>
     <string name="dialog_deleteconfig_text">設定%1sを削除しますか？</string>
     <string name="dialog_appchoosal_showsystemapps">システムアプリを表示する</string>
@@ -16,47 +16,48 @@
         <item quantity="other">%1dのアプリはデフォルトで除外されており、選択を解除できません</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="other">Import of %1d servers</item>
+        <item quantity="other">%1d サーバーのインポート</item>
     </plurals>
-    <string name="dialog_serverimport_done">完了</string>
+    <string name="dialog_serverimport_done">完了しました</string>
     <string name="dialog_serverimport_priority">優先度%1d</string>
     <string name="dialog_serverimport_experimental">実験的</string>
-    <string name="dialog_serverimport_servertype_doh">タイプ：Dns-over-HTTPS（DoH）</string>
-    <string name="dialog_serverimport_servertype_dot">タイプ：Dns-over-TLS（DoT）</string>
-    <string name="dialog_serverimport_text">インポートしたいサーバーを選択してください。
+    <string name="dialog_serverimport_servertype_doh">タイプ：DNS-over-HTTPS（DoH）</string>
+    <string name="dialog_serverimport_servertype_dot">タイプ：DNS-over-TLS（DoT）</string>
+    <string name="dialog_serverimport_text">インポートしたいサーバーを選択してください。 
+\n
 \nすでにインポートされているサーバーは、選択すると複製されます。</string>
     <string name="dialog_serverimportfailed_title">インポートに失敗しました</string>
     <string name="dialog_serverimportfailed_text">サーバーをインポートできませんでした。</string>
     <string name="dialog_serverimportfailed_text_exception">サーバーをインポートできませんでした。
 \n（%1s）</string>
     <string name="dialog_logexport_text">ログをどのように共有しますか？</string>
-    <string name="dialog_logexport_general">一般輸出</string>
+    <string name="dialog_logexport_general">アプリを選択</string>
     <string name="dialog_logexport_email">メール</string>
     <string name="dialog_deletelogs_text">すべてのログを削除してよろしいですか？</string>
     <string name="dialog_error_title">クラッシュレポート</string>
     <string name="dialog_error_text">アプリがクラッシュしたようです。 エラーログファイルを開発者に送信しますか？</string>
     <string name="dialog_batteryoptimization_title">バッテリーの最適化</string>
     <string name="dialog_vpn_permission_denied_message">システムがNebuloのVPNの起動を拒否しています。アプリを開いて、起動ボタンをクリックしてそこに許可を与えてください。</string>
-    <string name="dialog_raterequest_message">お待たせしましたネブロを楽しんでいるなら、ストアで評価してくれませんか？</string>
-    <string name="dialog_raterequest_title">ネブロ楽しんでますか？</string>
+    <string name="dialog_raterequest_message">こんにちは! いつもNebuloをご利用いただきありがとうございます。時間があればGooglePlayストアでこのアプリを評価してくれませんか？</string>
+    <string name="dialog_raterequest_title">Nebuloを楽しんでいますか？</string>
     <string name="dialog_exportdnsrules_nonwhitelist">通常のルールをエクスポート</string>
     <string name="dialog_exportdnsrules_whitelist">ホワイトリストルールのエクスポート</string>
-    <string name="dialog_vpninformation_message">Nebuloは、ダミーのVPNを使用して、すべてのDNSリクエストをキャプチャし、選択した安全なサーバーに転送します。
-\nこのダミーVPNは、実際のVPNではなく、どちらもあなたのアイデンティティを隠すことはありません、また、それはあなたのIPアドレスを変更することはありません。
-\n
+    <string name="dialog_vpninformation_message">Nebuloは、ダミーのVPNを使用して、すべてのDNSリクエストをキャプチャし、選択した安全なサーバーに転送します。 
+\nこのダミーVPNは、実際のVPNではなく、どちらもあなたの個人情報を隠すことはありません、また、それはあなたのIPアドレスを変更することはありません。 
+\n 
 \n本アプリを使用してDNSリクエスト以外の実際のデータを送信することはありません。</string>
     <string name="dialog_vpninformation_title">このアプリの仕組み</string>
     <string name="dialog_cleardnscache_message">本当にDNSキャッシュをクリアしますか？</string>
     <string name="dialog_logexport_loading_title">ログの準備</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">週</string>
-    <string name="dialog_hostsourcerefresh_timeunit_days">日数</string>
-    <string name="dialog_hostsourcerefresh_timeunit_hours">時間</string>
-    <string name="dialog_hostsourcerefresh_timeunit_minutes">分数</string>
-    <string name="dialog_hostsourcerefresh_refresh_now">今すぐリフレッシュ</string>
-    <string name="dialog_hostsourcerefresh_refresh_every">毎回リフレッシュ</string>
-    <string name="dialog_hostsourcerefresh_wifi_only">WIFIのみでリフレッシュ</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">日</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">時</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">分</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">今すぐ更新</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">毎回更新する</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">WIFI時のみ更新する</string>
     <string name="dialog_hostsourcerefresh_automatic_refresh">ホストソースを自動的に更新する</string>
-    <string name="dialog_hostsourcerefresh_title">ホストソースをリフレッシュ</string>
+    <string name="dialog_hostsourcerefresh_title">ホストソースを更新する</string>
     <string name="dialog_overlaydetected_message">システム全体のオーバーレイ(チャットバブル、カラーフィルタ、ナイトフィルタなど)が有効になっているようです。ほとんどのデバイスでは、この場合VPNを有効にすることはできません。
 \n
 \n次のダイアログでOKをクリックできない場合は、オーバーレイを無効にしてください。</string>
@@ -72,11 +73,11 @@
 \n無視を選択した場合、このダイアログは二度と表示されません。以下のボタンをクリックすると、この問題を解決するためのヒントが表示されます（ブラウザの外部サイトが開きます）。設定をクリックして、Nebuloのバッテリー最適化を無効にすることができるAndroidの設定を開きます。</string>
     <string name="dialog_editdelete_delete">削除</string>
     <string name="dialog_editdelete_edit">編集</string>
-    <string name="dialog_editdelete_title">何がしたいの？</string>
+    <string name="dialog_editdelete_title">このサーバーを編集または削除しますか？</string>
     <string name="dialog_newdnsrule_edit">DNSルールの編集</string>
     <string name="dialog_newhostsource_edit_title">新しいルールソース</string>
     <string name="dialog_newhostsource_use_as_whitelist">ホワイトリストとして使用</string>
-    <string name="dialog_newdnsrule_specify_address">住所</string>
+    <string name="dialog_newdnsrule_specify_address">IPアドレス</string>
     <string name="dialog_newdnsrule_whitelist">ホワイトリスト</string>
     <string name="dialog_exportdnsrules_export_sources">有効なホストソースからDNSルールをエクスポート</string>
     <string name="dialog_exportdnsrules_export_user_rules">カスタムホストのDNSルールをエクスポート</string>
@@ -84,28 +85,28 @@
     <string name="dialog_newhostsource_choose_file">ファイルを選択</string>
     <string name="dialog_newdnsrule_ipv6_invalid">有効なIPv6アドレスを入力してください</string>
     <string name="dialog_newdnsrule_ipv4_invalid">有効なIPv4アドレスを入力してください</string>
-    <string name="dialog_newdnsrule_host_invalid">有効なホストを提供してください</string>
-    <string name="dialog_newdnsrule_hint_ipv6address">アイピーブイエルエルアドレス</string>
-    <string name="dialog_newdnsrule_hint_ipv4address">アイピーブイフォーアドレス</string>
+    <string name="dialog_newdnsrule_host_invalid">有効なホスト名を入力して下さい</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">IPv6アドレス</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">IPv4アドレス</string>
     <string name="dialog_newdnsrule_hint_host">ホスト</string>
     <string name="dialog_newdnsrule_title">新しいDNSルール</string>
-    <string name="dialog_newhostsource_error_name_empty">お名前をお願いします。</string>
+    <string name="dialog_newhostsource_error_name_empty">名前を入力してください</string>
     <string name="dialog_newhostsource_url">ＵＲＬ</string>
-    <string name="dialog_newhostsource_name">名前</string>
+    <string name="dialog_newhostsource_name">名称</string>
     <string name="dialog_newhostsource_title">新しいルールソース</string>
-    <string name="dialog_clearuserrules_message">DNSのルールをすべてクリアしたいのでしょうか？これは元に戻すことはできません。</string>
+    <string name="dialog_clearuserrules_message">DNSのルールをすべてクリアしてよいですか？これを元に戻すことはできません。</string>
     <string name="dialog_clearuserrules_title">すべてのDNSルールをクリアしますか？</string>
-    <string name="dialog_deletehostsource_message">ホスト・ソース %1s を削除してもよろしいですか\?これは元に戻すことはできません。このソースからのホストは削除されます。</string>
-    <string name="dialog_deletehostsource_title">削除 %1s\?</string>
+    <string name="dialog_deletehostsource_message">ホスト・ソース「 %1s」 を削除してもよろしいですか\?これを元に戻すことはできません。このソースのホストは削除されます。</string>
+    <string name="dialog_deletehostsource_title">%1sを削除しますか\?</string>
     <string name="dialog_speedtest_useserver_message">サーバ %1s を使用しますか？それは %3d のうち %2d にランク付けされ、応答時間は %4d ms です。</string>
     <string name="dialog_speedtest_useserver_title">サーバーを選択</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">テストされた %1d サーバ
-\n %2d DoT サーバには到達可能、%3d には到達できません。
-\n %4d DoH サーバには到達可能、%5d には到達できません。
-\n 平均応答時間: %6d ms.
-\n
-\n 最速サーバ。%7s
-\n 最も遅いサーバ。%8s</string>
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">テストされた %1d サーバ 
+\n %2d DoT サーバには到達可能、%3d には到達できません。 
+\n %4d DoH サーバには到達可能、%5d には到達できません。 
+\n 平均応答時間: %6d ms. 
+\n 
+\n 最も速いサーバー: %7s 
+\n 最も遅いサーバー: %8s</string>
     <string name="dialog_speedresult_title">スピードテスト結果</string>
     <string name="dialog_join_group_positive">イェーイ！</string>
     <string name="dialog_join_group_message">お待たせしました。
@@ -113,17 +114,20 @@
 \nこのアプリにはTelegramグループがあることを知っていましたか？それは定期的な更新が含まれており、議論や質問のための完璧な場所です。
 \n200人以上が参加する素晴らしいコミュニティですが、あなたも参加してみませんか？</string>
     <string name="dialog_join_group_title">コミュニティに参加する</string>
-    <string name="dialog_credits_message" formatted="true">- App icon by &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
-\n- トルコ語翻訳 by Kemal Oktay Aktoğan
-\n- ロシア語翻訳 by bruleto
-\n- オランダ語訳：Bas Koedijk
-\n- ポルトガル語翻訳：ラファエル・W・ボーネンベルガー
-\n- Gloeyiskによるインドネシア語翻訳
-\n- フォントAwesomeからのいくつかのアイコン
+    <string name="dialog_credits_message" formatted="true">- &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; のアプリアイコン 。
+\n- トルコ語翻訳 by Kemal Oktay Aktoğan 
+\n- ロシア語翻訳 by bruleto 
+\n- オランダ語訳 by Bas Koedijk 
+\n- ポルトガル語翻訳 by Rafael W. Bohnenberger 
+\n- インドネシア語翻訳 by Gloeyisk 
+\n- カタロニア語翻訳 by Daniel Alomar 
+\n- スペイン語翻訳 by Daniel Alomar and Victor Bayas 
+\n- 簡体中国語翻訳 by Ediel Chedlyramber
+\nFont Awesome提供のアイコン 
 \n 
-\n ここであなたの名前を見たいですか？遠慮なく&lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribute&lt;/a&gt;.</string>
+\n ここにあなたの名前を載せてみませんか\? &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;ここ&lt;/a&gt;を気軽に覗いてみてください(英語サイト)。</string>
     <string name="dialog_credits_title">クレジット</string>
-    <string name="dialog_clearqueries_message">ログに記録されたクエリをクリアしますか？これを元に戻すことはできません。</string>
+    <string name="dialog_clearqueries_message">クエリログをクリアしますか？この操作は元に戻すことはできません。</string>
     <string name="dialog_crashreporting_message_notester">この度はNebuloをご利用いただきありがとうございます
 \n
 \nこのアプリは、オープンソースおよび自ホストのサードパーティ製ソフトウェアを使用しており、アプリのクラッシュが発生するとすぐに簡単に追跡できるようになっています。有効にすると、アプリがクラッシュに遭遇したときに、アプリはクラッシュレポートを送信します。これらのレポートには、アプリとデバイスに関する追加データが含まれます。これには、同じユーザーからのクラッシュを追跡するために使用されるIDが含まれますが、他の何かを追跡するために使用することはできません。クラッシュレポートを有効にすることはオプションですが、バグの修正をより簡単かつ迅速に行うことができます。
@@ -131,32 +135,34 @@
 \n
 \n下記の「データを見る」をクリックすると、どのようなデータが送信されているか、また個人情報保護方針へのリンクが表示されます。</string>
     <string name="dialog_clearqueries_title">すべてのクエリをクリア</string>
-    <string name="dialog_crashreporting_message">この度はNebuloをご利用いただきありがとうございます
-\n
-\nこのアプリは、オープンソースおよび自ホストのサードパーティ製ソフトウェアを使用しており、アプリのクラッシュが発生するとすぐに簡単に追跡できるようになっています。有効にすると、アプリがクラッシュに遭遇したときに、アプリはクラッシュレポートを送信します。これらのレポートには、アプリとデバイスに関する追加データが含まれます。これには、同じユーザーからのクラッシュを追跡するために使用されるIDが含まれますが、他の何かを追跡するために使用することはできません。クラッシュレポートを有効にするのは任意ですが、非常に助かります。
-\nレポートは HTTPS で安全に送信されます。
-\n
+    <string name="dialog_crashreporting_message">この度はNebuloをご利用いただきありがとうございます !
+\n 
+\nこのアプリは、オープンソースおよび自ホストのサードパーティ製ソフトウェアを使用しており、アプリのクラッシュが発生するとすぐに簡単に追跡できるようになっています。有効にすると、アプリがクラッシュに遭遇したときに、アプリはクラッシュレポートを送信します。これらのレポートには、アプリとデバイスに関する追加データが含まれます。これには、同じユーザーからのクラッシュを追跡するために使用されるIDが含まれますが、他の何かを追跡するために使用することはできません。クラッシュレポートを有効にするのは任意ですが、非常に助かります。 
+\nレポートは HTTPS で安全に送信されます。 
+\n 
 \n下記の「データを見る」をクリックすると、どのようなデータが送信されているか、また個人情報保護方針へのリンクが表示されます。</string>
     <string name="dialog_crashreporting_neutral">データを見る</string>
-    <string name="dialog_crashreporting_negative">いえ、結構です。</string>
+    <string name="dialog_crashreporting_negative">いいえ、結構です。</string>
     <string name="dialog_crashreporting_positive">クラッシュレポートを有効にする</string>
     <string name="dialog_crashreportingusages_message">グループのいずれかをクリックすると、クラッシュ時にどのデータが送信されるかを確認することができます。</string>
     <string name="dialog_crashreportingusages_title">送信データ</string>
-    <string name="dialog_crashreporting_title">自動衝突報告</string>
-    <string name="dialog_pin_message">暗証番号をご記入ください。</string>
+    <string name="dialog_crashreporting_title">自動クラッシュレポート送信</string>
+    <string name="dialog_pin_message">PINを入力してください。</string>
     <string name="dialog_query_export_message">クエリがエクスポートされるまでお待ちください</string>
     <string name="dialog_query_export_title">クエリのエクスポート…</string>
     <string name="dialog_about_licenses">ライセンス</string>
-    <string name="dialog_changelog_dont_show_again">二度と表示しないでください</string>
+    <string name="dialog_changelog_dont_show_again">次から表示しない</string>
     <string name="dialog_changelog_infotext">最後にアプリを開いてから更新されています。以下のリストでは、変更履歴を見ることができます。以下のボックスにチェックを入れると、今後このメッセージが表示されなくなります。</string>
     <string name="dialog_changelog_title">変更履歴</string>
-    <string name="dialog_pin_hint">暗証番号</string>
+    <string name="dialog_pin_hint">PIN</string>
     <string name="dialog_batteryoptimization_ignore">無視</string>
-    <string name="dialog_batteryoptimization_whitelist">無効化</string>
-    <string name="dialog_rate_confirmation">アプリを評価するためにプレイストアを開きますか？</string>
+    <string name="dialog_batteryoptimization_whitelist">無効</string>
+    <string name="dialog_rate_confirmation">アプリを評価するためにGooglePlayストアを開きますか？</string>
     <string name="dialog_batteryoptimization_message">一部のデバイスでは、バッテリー最適化が無効になっていない限り、アプリはデバイスの起動が終了したことを通知しません。
 \nアプリは現在、バッテリー最適化からホワイトリストされていませんが、これを行いますか？
 \n
 \n最適化を有効にした状態で動作するかどうかをテストしてから無効にする必要があります。</string>
     <string name="dialog_enable_logging">ログを有効にしますか？ログには、統計情報、デバッグ情報、アプリ内のアクションが含まれます。生成されたログは、自分で行わない限り共有されません。</string>
+    <string name="dialog_doh_detect_type_message">しばらくお待ちください。</string>
+    <string name="dialog_doh_detect_type_title">サーバータイプを検知します</string>
 </resources>
