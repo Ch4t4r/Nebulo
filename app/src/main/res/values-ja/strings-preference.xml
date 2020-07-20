@@ -22,7 +22,7 @@
     <string name="summary_dnscache_enabled">アプリによるDNSキャッシュを有効にします。以前のリクエストを保存することで今後のリクエストを素早く解決します。
 \n
 \nシステムにもキャッシュ機能がありますが、これをカスタマイズしたい場合はこの機能を有効にしてください。</string>
-    <string name="title_dnscache_enabled">DNSキャッシュ</string>
+    <string name="title_dnscache_enabled">DNSキャッシュを有効にする</string>
     <string name="preference_category_cache">キャッシュ制御</string>
     <string name="summary_preference_change_pin">PINを変更します。半角数字のみ利用できます。
 \n現在のPIN: %1s</string>
@@ -40,7 +40,7 @@
     <string name="summary_preference_enable_pin">アプリ起動時や停止時にPINを要求するかどうかを指定します。</string>
     <string name="title_preference_enable_pin">PIN</string>
     <string name="preference_category_pin">PINプロテクション</string>
-    <string name="title_show_revoked_notification">VPN権限喪失時に通知</string>
+    <string name="title_show_revoked_notification">許可が失なわれた時の通知</string>
     <string name="title_show_noconnection_notification">接続されていない場合の通知</string>
     <string name="summary_show_noconnection_notification">未接続または接続に失敗している時に通知します。</string>
     <string name="title_notification_allow_pause">一時停止の許可</string>
@@ -58,4 +58,68 @@
     <string name="title_theme">テーマ</string>
     <string name="title_language">言語</string>
     <string name="preference_category_general">ゼネラル</string>
+    <string name="crashreporting_type_off">Off (クラッシュレポートを送信しない)</string>
+    <string name="crashreporting_type_minimal">最小限(Androidとアプリのバージョンのみ報告する)</string>
+    <string name="crashreporting_type_full">フル(統計とデバッグデータを報告する)</string>
+    <string name="summary_check_iptables">使用している端末がiptablesに対応しているかを確認します</string>
+    <string name="title_check_iptables">iptablesの確認</string>
+    <string name="summary_iptables_mode">iptablesを使ってDNSクエリをNebuloに転送します。この機能はroot権限が必要です。非VPNモードでもサードパーティアプリは必要ありません。IPv6ネットワーク下では、正常に動作しない可能性があります。</string>
+    <string name="title_iptables_mode">iptablesを使用</string>
+    <string name="summary_local_server_port">設置されるDNSサーバーの使用ポート番号を指定します。1024以上が指定可能です。
+\n現在のポート番号: %1s</string>
+    <string name="title_local_server_port">ポート番号</string>
+    <string name="summary_run_without_vpn">チェックを入れると、Nebuloは端末にDNSサーバーを設置します</string>
+    <string name="title_run_without_vpn">非VPNで稼働</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">サーバーが localhost:%1s で稼働します</string>
+    <string name="summary_category_nonvpnmode">ダミーのVPNを使用する替わりに、デバイス上にDNSサーバーを設置し機能するようNebuloを構成します。このモードを使う場合、サードパーティのアプリを使用してDNSクエリをNebuloに手動で転送する必要があります。
+\n
+\nこの機能は実験的に実装しています。</string>
+    <string name="preference_category_nonvpnmode">非VPNモード</string>
+    <string name="summary_delete_queries">記録されたクエリを削除する場合、ここをタップします</string>
+    <string name="title_delete_queries">クエリのクリア</string>
+    <string name="summary_export_queries">記録したクエリをCSVファイルでエクスポートします。 (%1d クエリ)</string>
+    <string name="title_export_queries">クエリのエクスポート</string>
+    <string name="summary_log_queries">すべてのDNSクエリとその回答をログとして記録します</string>
+    <string name="title_log_queries">クエリのログ</string>
+    <string name="preference_category_querylogging">クエリのログ</string>
+    <string name="summary_pause_on_captiveportal">フリーWi-Fi接続時などに表示されるキャプティブポータル検出時にDoH機能をいったん停止します。このときポータルにログインすると、すぐに自動的に再開されます。
+\nこの機能を無効にすると、キャプティブポータルサイトを開くことができなくなり、ログインができなくなる場合があります</string>
+    <string name="title_pause_on_captiveportal">キャプティブポータルの一時停止</string>
+    <string name="summary_bypass_searchdomains">ローカルネットワークで使用される検索ドメイン（MyPC.localやMyPc.fritz.boxなど）の名前解決を、ローカルネットワークのDNSサーバーに送信します(DoH/DoTサーバーは使用しません)。
+\nローカルネットワーク下では、有効にすることを特に推奨します</string>
+    <string name="title_bypass_searchdomains">検索ドメインのバイパス</string>
+    <string name="summary_map_query_refused">DNS サーバーによっては、ホストが許可されていないかブロックされている場合、問い合わせに対する応答(クエリ)を拒否することがあります。この設定では、問い合わせを拒否する代わりにホストをブロックします</string>
+    <string name="title_map_query_refused">拒否されたクエリを許可されていないホストとして処理する</string>
+    <string name="summary_catch_other_dns_servers">既知のDNSトラフィックをインターセプトし、Nebuloを使って送信します</string>
+    <string name="title_catch_other_dns_servers">他 DNS トラフィックの受信</string>
+    <string name="summary_disallow_other_vpns">アプリが明示的に停止していない場合、他のアプリなどにより他のVPNの起動を許可しないようにします</string>
+    <string name="title_disallow_other_vpns">他のVPNを許可しない</string>
+    <string name="summary_restart_vpn_on_networkchange">ネットワークが変更された時、アプリをサイレントで起動しなおします。ネットワークの切り替え時に問題が発生した場合に有効にしてください。
+\n アプリが非アクティブの場合は効果はありません</string>
+    <string name="title_restart_vpn_on_networkchange">ネットワーク変更時にアプリを再起動</string>
+    <string name="preference_category_network">ネットワーク</string>
+    <string name="summary_allow_ipv6_traffic">IPv4が無効になっている場合でも、IPv6トラフィックの使用を許可します。
+\n無効にした場合、アプリの実行中はIPv6で接続できません</string>
+    <string name="summary_force_ipv4">デバイスがIPv4を使用していない場合でも、アプリがIPv4リクエストを強制的に受け入れるようにします</string>
+    <string name="title_allow_ipv4_traffic">IPv4トラフィックの許可</string>
+    <string name="title_allow_ipv6_traffic">IPv6 トラフィックの許可</string>
+    <string name="summary_allow_ipv4_traffic">IPv4が無効になっている場合でも、IPv4トラフィックの使用を許可します。
+\n無効にした場合、アプリの実行中はIPv4で接続できません</string>
+    <string name="title_force_ipv6">IPv6強制</string>
+    <string name="title_force_ipv4">IPv4強制</string>
+    <string name="summary_force_ipv6">デバイスがIPv6を使用していない場合でも、アプリがIPv6リクエストを強制的に受け入れるようにします</string>
+    <string name="summary_enable_ipv4">デバイスにIPv4アドレスが割り当てられている場合は、IPv4を使用します</string>
+    <string name="summary_enable_ipv6">デバイスにIPv6アドレスが割り当てられている場合は、IPv6を使用します</string>
+    <string name="title_enable_ipv4">IPv4を有効にする</string>
+    <string name="title_enable_ipv6">IPv6を有効にする</string>
+    <string name="preference_category_ip">IPアドレス設定</string>
+    <string name="summary_crashreporting_type">アプリがクラッシュしたときに開発者に送信するデータを指定します。クラッシュ時のデータには個人情報が含まれることはありません。このデータは問題をより早く解決するのに役立ちます。</string>
+    <string name="title_crashreporting_type">クラッシュ自動報告</string>
+    <string name="summary_delete_all_logs">デバイスに保存されているすべてのログを削除します</string>
+    <string name="title_delete_all_logs">すべてのログを削除する</string>
+    <string name="summary_send_logs">ここをタップすると開発者にログを送信します</string>
+    <string name="title_send_logs">ログの送信</string>
+    <string name="summary_advanced_logging">根本的な問題の解決に役立つログの種類が追加されます</string>
+    <string name="title_advanced_logging">詳細ログ取得</string>
+    <string name="summary_enable_logging">デバッグ情報（統計データを含む）のログを有効にします。これらのログは自動で送信されません</string>
 </resources>
