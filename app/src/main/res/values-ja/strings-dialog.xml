@@ -38,7 +38,7 @@
     <string name="dialog_error_text">アプリがクラッシュしたようです。 エラーログファイルを開発者に送信しますか？</string>
     <string name="dialog_batteryoptimization_title">バッテリーの最適化</string>
     <string name="dialog_vpn_permission_denied_message">システムがNebuloのVPNの起動を拒否しています。アプリを開いて、起動ボタンをクリックしてそこに許可を与えてください。</string>
-    <string name="dialog_raterequest_message">こんにちは! いつもNebuloをご利用いただきありがとうございます。時間があればGooglePlayストアでこのアプリを評価してくれませんか？</string>
+    <string name="dialog_raterequest_message">こんにちは! いつもNebuloをご利用いただきありがとうございます。時間があればアプリストアでこのアプリを評価してくれませんか？</string>
     <string name="dialog_raterequest_title">Nebuloを楽しんでいますか？</string>
     <string name="dialog_exportdnsrules_nonwhitelist">通常のルールをエクスポート</string>
     <string name="dialog_exportdnsrules_whitelist">ホワイトリストルールのエクスポート</string>
@@ -109,9 +109,9 @@
 \n 最も遅いサーバー: %8s</string>
     <string name="dialog_speedresult_title">スピードテスト結果</string>
     <string name="dialog_join_group_positive">イェーイ！</string>
-    <string name="dialog_join_group_message">お待たせしました。
-\n
-\nこのアプリにはTelegramグループがあることを知っていましたか？それは定期的な更新が含まれており、議論や質問のための完璧な場所です。
+    <string name="dialog_join_group_message">こんにちは!
+\n 
+\nこのアプリにはTelegramグループがあることを知っていましたか？それは定期的な更新が含まれており、議論や質問のための完璧な場所です。 
 \n200人以上が参加する素晴らしいコミュニティですが、あなたも参加してみませんか？</string>
     <string name="dialog_join_group_title">コミュニティに参加する</string>
     <string name="dialog_credits_message" formatted="true">- &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; のアプリアイコン 。
@@ -128,11 +128,11 @@
 \n ここにあなたの名前を載せてみませんか\? &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;ここ&lt;/a&gt;を気軽に覗いてみてください(英語サイト)。</string>
     <string name="dialog_credits_title">クレジット</string>
     <string name="dialog_clearqueries_message">クエリログをクリアしますか？この操作は元に戻すことはできません。</string>
-    <string name="dialog_crashreporting_message_notester">この度はNebuloをご利用いただきありがとうございます
-\n
-\nこのアプリは、オープンソースおよび自ホストのサードパーティ製ソフトウェアを使用しており、アプリのクラッシュが発生するとすぐに簡単に追跡できるようになっています。有効にすると、アプリがクラッシュに遭遇したときに、アプリはクラッシュレポートを送信します。これらのレポートには、アプリとデバイスに関する追加データが含まれます。これには、同じユーザーからのクラッシュを追跡するために使用されるIDが含まれますが、他の何かを追跡するために使用することはできません。クラッシュレポートを有効にすることはオプションですが、バグの修正をより簡単かつ迅速に行うことができます。
-\nレポートは HTTPS で安全に送信されます。
-\n
+    <string name="dialog_crashreporting_message_notester">この度はNebuloをご利用いただきありがとうございます!
+\n 
+\nこのアプリは、オープンソースおよび自ホストのサードパーティ製ソフトウェアを使用しており、アプリのクラッシュが発生するとすぐに簡単に追跡できるようになっています。有効にすると、アプリがクラッシュに遭遇したときに、アプリはクラッシュレポートを送信します。これらのレポートには、アプリとデバイスに関する追加データが含まれます。これには、同じユーザーからのクラッシュを追跡するために使用されるIDが含まれますが、他の何かを追跡するために使用することはできません。クラッシュレポートを有効にすることはオプションですが、バグの修正をより簡単かつ迅速に行うことができます。 
+\nレポートは HTTPS で安全に送信されます。 
+\n 
 \n下記の「データを見る」をクリックすると、どのようなデータが送信されているか、また個人情報保護方針へのリンクが表示されます。</string>
     <string name="dialog_clearqueries_title">すべてのクエリをクリア</string>
     <string name="dialog_crashreporting_message">この度はNebuloをご利用いただきありがとうございます !
@@ -157,10 +157,10 @@
     <string name="dialog_pin_hint">PIN</string>
     <string name="dialog_batteryoptimization_ignore">無視</string>
     <string name="dialog_batteryoptimization_whitelist">無効</string>
-    <string name="dialog_rate_confirmation">アプリを評価するためにGooglePlayストアを開きますか？</string>
-    <string name="dialog_batteryoptimization_message">一部のデバイスでは、バッテリー最適化が無効になっていない限り、アプリはデバイスの起動が終了したことを通知しません。
-\nアプリは現在、バッテリー最適化からホワイトリストされていませんが、これを行いますか？
-\n
+    <string name="dialog_rate_confirmation">アプリを評価するためにアプリストアを開きますか？</string>
+    <string name="dialog_batteryoptimization_message">一部のデバイスでは、バッテリー最適化が無効になっていない限り、アプリはデバイスの起動が終了したことを通知しません。 
+\nアプリは現在、バッテリー最適化の対象外となっていませんが、これを行いますか？ 
+\n 
 \n最適化を有効にした状態で動作するかどうかをテストしてから無効にする必要があります。</string>
     <string name="dialog_enable_logging">ログを有効にしますか？ログには、統計情報、デバッグ情報、アプリ内のアクションが含まれます。生成されたログは、自分で行わない限り共有されません。</string>
     <string name="dialog_doh_detect_type_message">しばらくお待ちください。</string>
