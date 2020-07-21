@@ -190,4 +190,17 @@
 
     <string name="dialog_doh_detect_type_title">Detecting server type</string>
     <string name="dialog_doh_detect_type_message">Please wait a moment.</string>
+
+    <string name="dialog_nonvpn_help_netguard">To use Non-VPN mode together with NetGuard, do the following:\n
+        - Check that you have the F-Droid version of NetGuard installed. It does not work with the version from GPlay.\n
+        - Go to settings > Advanced options\n
+        - Enable "Filter traffic" (if not enabled already)\n
+        - Click on Port Forwarding\n
+        - Add the following rules:\n\n
+        • Protocol UDP, source port 53, destination 127.0.0.1, destination port %1d, destination app nobody\n
+        • Repeat for TCP\n\n
+        - Go back to advanced options\n
+        - Scroll down, set both VPN DNS fields to 127.0.0.1\n
+        - Start Nebulo (in non-VPN mode) and start NetGuard
+    </string>
 </resources>
