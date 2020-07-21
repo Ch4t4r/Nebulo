@@ -246,7 +246,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val enabled = findPreference("run_without_vpn") as CheckBoxPreference
         val port = findPreference("non_vpn_server_port") as EditTextPreference
         val connectInfo = findPreference("nonvpn_connect_info")
-        val iptablesMode = findPreference("nonvpn_use_iptables")
+        val iptablesCategory = findPreference("nonvpn_category_iptables")
         val checkIpTables = findPreference("check_iptables")
         val helpNetguard = findPreference("nonvpn_help_netguard")
         port.setOnPreferenceChangeListener { _, newValue ->
@@ -273,8 +273,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, requireContext().getPreferences().dnsServerModePort.toString())
         val rooted = context?.isDeviceRooted() ?: false
         if(!rooted) {
-            iptablesMode.isVisible = false
-            checkIpTables.isVisible = false
+            iptablesCategory.isVisible = false
         } else {
             checkIpTables.setOnPreferenceClickListener {
                 val context = context

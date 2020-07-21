@@ -4,6 +4,7 @@ import com.frostnerd.smokescreen.Logger
 import com.frostnerd.smokescreen.util.processSuCommand
 import java.lang.Exception
 import java.lang.IllegalStateException
+import kotlin.math.log
 
 /*
  * Copyright (C) 2020 Daniel Wolf (Ch4t4r)
@@ -34,11 +35,13 @@ import java.lang.IllegalStateException
 class IpTablesPacketRedirector(var dnsServerPort:Int,
                                var dnsServerIpAddressIpv4:String?,
                                var dnsServerIpAddressIpv6:String?,
+                               var disableIpv6IfIp6TablesFails:Boolean,
                                private val logger:Logger?) {
     private val logTag = "IpTablesPacketRedirector"
 
     enum class IpTablesMode {
-        DISABLED, SUCCEEDED, FAILED, SUCCEEDED_NO_IPV6
+        DISABLED, SUCCEEDED, FAILED, SUCCEEDED_NO_IPV6,
+        SUCCEEDED_DISABLED_IPV6
     }
 
     init {
@@ -51,19 +54,24 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
      * @return Whether the redirect rule could be created in IPTables
      */
     fun beginForward(): IpTablesMode = processForward(true)
-    fun endForward(): IpTablesMode = processForward(false)
+    fun endForward(): IpTablesMode = processForward(false).also {
+        processDisableIpv6(false) // Always disable IPv6 blocking
+    }
 
     private fun processForward(createForward:Boolean): IpTablesMode {
         if(createForward) logger?.log("Using iptables to forward queries to $dnsServerIpAddressIpv4:$dnsServerPort and $dnsServerIpAddressIpv6)", logTag)
         else logger?.log("Removing IPTables forwarding rule", logTag)
         val ipv4Success = dnsServerIpAddressIpv4 == null || processDnsForward(append = createForward, ipv6 = false)
-        val ipv6Success = dnsServerIpAddressIpv6 == null || processDnsForward(
+        // Create IPv6 rule, or disable IPv6 if the setting is enabled and the device isn't IPv6 only
+        val ipv6CreateSuccess = dnsServerIpAddressIpv6 == null || processDnsForward(
             append = createForward,
             ipv6 = true
-        )
+        ) || (disableIpv6IfIp6TablesFails && dnsServerIpAddressIpv4 != null && processDisableIpv6(true))
+        val ipv6Success = ipv6CreateSuccess || (disableIpv6IfIp6TablesFails && dnsServerIpAddressIpv4 != null && processDisableIpv6(true))
         return if (ipv4Success) {
-            if (ipv6Success) IpTablesMode.SUCCEEDED
-            else if(dnsServerIpAddressIpv4 == null)  IpTablesMode.FAILED
+            if(ipv6CreateSuccess) IpTablesMode.SUCCEEDED
+            else if (ipv6Success) IpTablesMode.SUCCEEDED_DISABLED_IPV6
+            else if(dnsServerIpAddressIpv4 == null) IpTablesMode.FAILED
             else IpTablesMode.SUCCEEDED_NO_IPV6
         } else IpTablesMode.FAILED
     }
@@ -111,6 +119,16 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
                 append(":")
                 append(dnsServerPort)
             }
+        }
+    }
+
+    private fun processDisableIpv6(createRule:Boolean):Boolean {
+        return if(createRule) {
+            processSuCommand("ip6tables -A OUTPUT -p udp --destination-port 53 -j DROP", logger) &&
+                    processSuCommand("ip6tables -A OUTPUT -p tcp --destination-port 53 -j DROP", logger)
+        } else {
+            processSuCommand("ip6tables -D OUTPUT -p udp --destination-port 53 -j DROP", logger) &&
+                    processSuCommand("ip6tables -D OUTPUT -p tcp --destination-port 53 -j DROP", logger)
         }
     }
 }

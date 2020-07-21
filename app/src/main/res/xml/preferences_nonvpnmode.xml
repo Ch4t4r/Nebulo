@@ -23,18 +23,27 @@
                 android:key="nonvpn_connect_info"
                 android:summary="@string/summary_category_nonvpnmode_forwardinfo" />
 
-        <CheckBoxPreference
-                android:defaultValue="false"
-                android:dependency="run_without_vpn"
-                android:key="nonvpn_use_iptables"
-                android:summary="@string/summary_iptables_mode"
-                android:title="@string/title_iptables_mode" />
+        <PreferenceCategory android:title="@string/preference_category_iptables" android:key="nonvpn_category_iptables">
+            <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:dependency="run_without_vpn"
+                    android:key="nonvpn_use_iptables"
+                    android:summary="@string/summary_iptables_mode"
+                    android:title="@string/title_iptables_mode" />
 
-        <Preference
-                android:dependency="run_without_vpn"
-                android:key="check_iptables"
-                android:summary="@string/summary_check_iptables"
-                android:title="@string/title_check_iptables" />
+            <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="nonvpn_iptables_disable_ipv6"
+                    android:dependency="nonvpn_use_iptables"
+                    android:title="@string/title_iptables_disable_ipv6"
+                    android:summary="@string/summary_iptables_disable_ipv6" />
+
+            <Preference
+                    android:dependency="run_without_vpn"
+                    android:key="check_iptables"
+                    android:summary="@string/summary_check_iptables"
+                    android:title="@string/title_check_iptables" />
+        </PreferenceCategory>
     </androidx.preference.PreferenceCategory>
 
     <PreferenceCategory android:title="@string/preference_category_nonvpnmode_help" android:key="nonvpn_help">
