@@ -285,7 +285,8 @@ fun Context.clearPreviousIptablesRedirect(forceClear:Boolean = false) {
             it[0].subSequence(1, it[0].length).toString() to it[1].toInt()
         }
         val port = ipv4?.second ?: ipv6?.second ?: return  // Neither IPv4 nor IPv6 present if null
-        IpTablesPacketRedirector(port, ipv4?.first, ipv6?.first, logger).endForward()
+        // Always pass true for disableIpv6IfIp6TablesFails to always drop the rule
+        IpTablesPacketRedirector(port, ipv4?.first, ipv6?.first, true, logger).endForward()
         getPreferences().apply {
             edit {
                 lastIptablesRedirectAddress = null

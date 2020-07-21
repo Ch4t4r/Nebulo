@@ -335,7 +335,8 @@ class DnsVpnService : VpnService(), Runnable {
             "dns_rules_enabled",
             "simple_notification",
             "pin",
-            "nonvpn_use_iptables"
+            "nonvpn_use_iptables",
+            "nonvpn_iptables_disable_ipv6"
         )
         settingsSubscription = getPreferences().listenForChanges(
             relevantSettings,
@@ -1131,12 +1132,15 @@ class DnsVpnService : VpnService(), Runnable {
                  val iptablesMode = if(getPreferences().nonVpnUseIptables) {
                      val hostAddr = if(ipv4Enabled) bindAddress.hostAddress else null
                      val ipv6Address = if(deviceHasIpv6) "::1" else null
-                     ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr, ipv6Address, logger)
+                     ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr, ipv6Address, getPreferences().iptablesModeDisableIpv6, logger)
                      ipTablesRedirector?.beginForward().also {
                          getPreferences().lastIptablesRedirectAddress = "$hostAddr:$actualPort"
                          if(ipv6Address != null) getPreferences().lastIptablesRedirectAddressIPv6 = "[$ipv6Address]:$actualPort"
                      } ?: IpTablesPacketRedirector.IpTablesMode.FAILED
                  } else IpTablesPacketRedirector.IpTablesMode.DISABLED
+                 if(iptablesMode == IpTablesPacketRedirector.IpTablesMode.SUCCEEDED_DISABLED_IPV6) {
+                     dnsProxy?.dnsHandles?.forEach { it.ipv6Enabled = false }
+                 }
                  showDnsServerModeNotification(actualPort, preferredPort, iptablesMode)
                  log("Non-VPN proxy started.")
              }
