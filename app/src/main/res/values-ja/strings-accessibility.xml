@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="contentdescription_main_infoimage">情報アイコン</string>
-    <string name="contentdescription_main_servericon">サーバアイコン</string>
+    <string name="contentdescription_main_servericon">サーバーアイコン</string>
     <string name="contentdescription_main_statusimage">アプリが起動しているかどうかを示すイメージ</string>
     <string name="contentdescription_shared_app_icon">アプリアイコン</string>
     <string name="contentdescription_clear_search">サーチをクリアする</string>
