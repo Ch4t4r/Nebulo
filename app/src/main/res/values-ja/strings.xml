@@ -5,7 +5,7 @@
     <string name="windows_querylogging_usedserver_dnsrules">以下のDNSルールで解決済</string>
     <string name="window_dnsrules_customhosts">ホスト名のカスタマイズ</string>
     <string name="about_app">このアプリはオープンソースです。ソースコードは&lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;から確認することができます。
-\nこのアプリは広告表示やユーザーの情報取得や収集することは一切ありません。
+\nこのアプリは広告表示やユーザーの情報取得や収集をすることは一切ありません。
 \n
 \nVersion %1s
 \nBuild %2d
@@ -61,7 +61,7 @@
     <string name="quicksettings_start_text">Nebuloを開始</string>
     <string name="quicksettings_stop_text">Nebuloの停止</string>
     <string name="app_share_text">DNSクエリを暗号化してプライバシーとセキュリティを強化するアプリを見つけました。ここで見つけてください: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
-    <string name="error_webview_missing">WebViewパッケージが更新または削除されているため、見つかりません。</string>
+    <string name="error_webview_missing">Android System WebViewアプリが見つかりませんでした。アプリが更新中または削除されていないか確認してください。</string>
     <string name="error_cannot_open_settings">システム設定を開くことができません</string>
     <string name="error_invalid_servername">名前を入力してください</string>
     <string name="error_invalid_pin">PINを入力してください</string>
