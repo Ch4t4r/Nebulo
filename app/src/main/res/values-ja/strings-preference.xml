@@ -7,7 +7,7 @@
     <string name="title_enable_logging">動作ログを記録します。</string>
     <string name="preference_category_logging">動作ログ</string>
     <string name="summary_dnscache_nxdomaincachetime">NXDOMAINリクエストがキャッシュされる時間を変更します。これにより、存在しないドメインに対する応答パフォーマンスが向上します（ブロックされている場合など）。
-\n現在の値：％1d秒</string>
+\n現在の値：%1d秒</string>
     <string name="title_dnscache_nxdomaincachetime">NXDomainのキャッシュ時間(秒)</string>
     <string name="title_dnscache_customcachetime">カスタムキャッシュ時間(秒)</string>
     <string name="title_dnscache_minimum_cache_time">最小キャッシュ時間</string>
