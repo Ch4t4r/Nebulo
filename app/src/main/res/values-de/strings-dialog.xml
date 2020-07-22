@@ -166,4 +166,17 @@
     <string name="dialog_vpn_permission_denied_message">Das System hat es Nebulo untersagt, den Dummy-VPN zu starten. Bitte öffne die App und gewähre dieses Recht durch Klicken auf den Startknopf.</string>
     <string name="dialog_doh_detect_type_title">Erkenne Servertyp</string>
     <string name="dialog_doh_detect_type_message">Bitte warte einen kleinen Augenblick.</string>
+    <string name="dialog_nonvpn_help_netguard">Um den nicht-VPN Modus mit NetGuard zu nutzen, tue folgendes:
+\n- Überprüfe, dass du die F-Droid Version von NetGuard installiert hast. Es funktioniert nicht mit der Version von GPlay.
+\n- Gehe zu Einstellungen -&gt; Erweiterte Optionen
+\n- Aktiviere die Option \"Datenverkehr filtern\" (auch die Option für UDP direkt darunter)
+\n- Klicke auf \"Portweiterleitung\"
+\n- Füge die folgenden Regeln hinzu:
+\n
+\n• Protokoll UDP, Quellport 53, Zieladdresse 127.0.0.1, Zielport %1d, Zielanwendung \"Keiner\"
+\n• Wiederhole dies für Protokoll TCP
+\n
+\n- Gehe zurück zu den erweiterten Optionen
+\n- Scrolle nach unten, trage bei beiden \"VPN-DNS\" Feldern 127.0.0.1 ein
+\n- Starte Nebulo (im nicht-VPN Modus) und starte NetGuard</string>
 </resources>
