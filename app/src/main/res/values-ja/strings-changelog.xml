@@ -63,4 +63,11 @@
     <string name="changelog_build_33_7">いくつかのデザインを微調整しました</string>
     <string name="changelog_build_33_6">ホスト名に対するIPアドレスを変更できるようにしました。ホスト名はURLからのファイルインポートまたは手動での追加に対応しています</string>
     <string name="changelog_build_33_2">自動クラッシュレポート無効時にアプリがクラッシュした場合、そのときに表示される通知にログファイルを送信するボタンを追加しました</string>
+    <string name="changelog_build_40_3">設定の「除外するアプリ」のリストからGoogle Playを削除できるようにしました</string>
+    <string name="changelog_build_40_4">Android 10でPIN機能を利用できるにようにしました</string>
+    <string name="changelog_build_40_2">ビルトインされたDNSサーバー名を長く押すことによって削除できるようにしました</string>
+    <string name="changelog_build_40_1">処理パフォーマンスおよびメモリの扱い方を向上させました</string>
+    <string name="changelog_build_39_1">多くのDNSサーバーに影響するアプリクラッシュが発生する現象を修正しました</string>
+    <string name="changelog_build_38_2">機種により内部データベースに起因するクラッシュが起きる現象を修正しました</string>
+    <string name="changelog_build_37_4">インポートされたDNSルールのサイズが端末上でより少なくなるようにしました</string>
 </resources>
