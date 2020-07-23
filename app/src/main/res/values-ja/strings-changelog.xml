@@ -47,4 +47,20 @@
     <string name="changelog_build_33_5">DNSサーバーの反応速度を計測する画面を追加しました</string>
     <string name="changelog_build_33_4">時折アプリがクラッシュする現象を修正しました</string>
     <string name="changelog_build_33_3">いくつかのアイコンを変更しました</string>
+    <string name="changelog_build_37_3">DNSルールのインポート処理が少し速くなりました</string>
+    <string name="changelog_build_37_2">UIデザインを少し改良しました</string>
+    <string name="changelog_build_37_1">いくつかのクラッシュを修正しました</string>
+    <string name="changelog_build_36_6">いくつかの機種固有に起因するクラッシュを修正しました</string>
+    <string name="changelog_build_36_5">DNSルールに関する設定をサイドバーメニューに移動しました</string>
+    <string name="changelog_build_36_4">非基本文字(ウムラウト記号など)を含んだルールファイルをインポートできるようになりました</string>
+    <string name="changelog_build_36_3">非常に小さいファイルからDNSルールをインポートできない現象を修正しました</string>
+    <string name="changelog_build_36_2">DNSルールをファイルからインポートできるようにしました</string>
+    <string name="changelog_build_36_1">DNSルールをエクスポートできるようにしました</string>
+    <string name="changelog_build_35_3">DNS over HTTPS のパフォーマンスが少し向上しました</string>
+    <string name="changelog_build_35_2">DNSルールインポートに失敗しても、UIが固まらないようにしました</string>
+    <string name="changelog_build_35_1">DNSルールのインポートに起因するアプリクラッシュを修正しました</string>
+    <string name="changelog_build_34_1">データベースに起因するアプリクラッシュを修正しました</string>
+    <string name="changelog_build_33_7">いくつかのデザインを微調整しました</string>
+    <string name="changelog_build_33_6">ホスト名に対するIPアドレスを変更できるようにしました。ホスト名はURLからのファイルインポートまたは手動での追加に対応しています</string>
+    <string name="changelog_build_33_2">自動クラッシュレポート無効時にアプリがクラッシュした場合、そのときに表示される通知にログファイルを送信するボタンを追加しました</string>
 </resources>
