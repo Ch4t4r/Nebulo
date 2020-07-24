@@ -118,7 +118,7 @@ interface DnsRuleDao {
     fun getAllUserRules(includeWhitelistEntries: Boolean, includeNonWhitelistEntries: Boolean):List<DnsRule>
 
 
-    @Query("SELECT * FROM DnsRule WHERE importedFrom IS NOT NULL AND ((:includeWhitelistEntries=1 AND target='') OR (:includeNonWhitelistEntries=1 AND target!='')) ORDER BY host LIMIT :limit OFFSET :offset")
+    @Query("SELECT * FROM DnsRule WHERE importedFrom IS NOT NULL AND ((:includeWhitelistEntries=1 AND target='') OR (:includeNonWhitelistEntries=1 AND target!='')) ORDER BY host, target LIMIT :limit OFFSET :offset")
     fun getAllNonUserRules(offset:Int, limit:Int, includeWhitelistEntries: Boolean, includeNonWhitelistEntries: Boolean):List<DnsRule>
 
     @Delete
