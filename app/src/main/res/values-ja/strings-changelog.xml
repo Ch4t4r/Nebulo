@@ -70,4 +70,13 @@
     <string name="changelog_build_39_1">多くのDNSサーバーに影響するアプリクラッシュが発生する現象を修正しました</string>
     <string name="changelog_build_38_2">機種により内部データベースに起因するクラッシュが起きる現象を修正しました</string>
     <string name="changelog_build_37_4">インポートされたDNSルールのサイズが端末上でより少なくなるようにしました</string>
+    <string name="changelog_build_41_5">サーバーリストには、現在のネットワーク（IPv4またはIPv6）をサポートするサーバーのみを表示するようにしました</string>
+    <string name="changelog_build_41_4">ユーザー定義サーバーを編集できるようにしました</string>
+    <string name="changelog_build_41_3">新しくサーバーを追加しました</string>
+    <string name="changelog_build_41_2">DNSルールのホストソース内で重複していたルールの数を表示するようにしました</string>
+    <string name="changelog_build_41_1">DNSルールのソースをホワイトリストとして利用できるようにしました</string>
+    <string name="changelog_build_40_6">ルールのインポート/エクスポート通知をタップできるようにしました</string>
+    <string name="changelog_build_40_5">DNSルールでドメインをホワイトリストとして登録できるようにしました。ホワイトリストに登録されている場合、提供するファイルに存在するかどうかに関係なく、DNSサーバーに問い合わせるようになります</string>
+    <string name="changelog_build_38_1">DNSクエリ処理の高速化およびメモリ使用量を削減、またバッテリー消費を抑えるようにパフォーマンスを向上させました</string>
+    <string name="changelog_build_35_4">DNSルールのhostsファイルからインポートしたルールの数を表示するようにしました</string>
 </resources>
