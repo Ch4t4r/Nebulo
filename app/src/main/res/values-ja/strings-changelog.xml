@@ -79,4 +79,23 @@
     <string name="changelog_build_40_5">DNSルールでドメインをホワイトリストとして登録できるようにしました。ホワイトリストに登録されている場合、提供するファイルに存在するかどうかに関係なく、DNSサーバーに問い合わせるようになります</string>
     <string name="changelog_build_38_1">DNSクエリ処理の高速化およびメモリ使用量を削減、またバッテリー消費を抑えるようにパフォーマンスを向上させました</string>
     <string name="changelog_build_35_4">DNSルールのhostsファイルからインポートしたルールの数を表示するようにしました</string>
+    <string name="changelog_build_47_6">UIデザインを変更しました</string>
+    <string name="changelog_build_47_5">新しくサーバーを追加しました</string>
+    <string name="changelog_build_47_4">メイン画面にプライベートDNSが有効かどうかを表示するようにしました(Android 9以上)</string>
+    <string name="changelog_build_47_3">アプリ内から言語を変更できるようになりました</string>
+    <string name="changelog_build_47_2">クエリログで特定のホストを検索できるようになりました</string>
+    <string name="changelog_build_47_1">クエリログにIPアドレスとそのホストに対するTTLを表示するようにしました</string>
+    <string name="changelog_build_45_2">DNSクエリログの仕様の見直しをしました</string>
+    <string name="changelog_build_45_1">設定情報画面を複数のレイアウトに分割して読みやすくしました</string>
+    <string name="changelog_build_44_4">DNSルールにワイルドカードが利用できるようにしました</string>
+    <string name="changelog_build_44_3">ホストソースのダウンロードおよび解析を、ソースの中身が更新された時のみに実行するようにしました</string>
+    <string name="changelog_build_44_2">DNSルールを定期的に更新させるための設定を追加しました</string>
+    <string name="changelog_build_44_1">まれに画面が消える問題に関し、自動で復旧を試みるよう処理を追加しました</string>
+    <string name="changelog_build_43_5">システムによりアプリが強制終了されると、可能な解決策を示したダイアログが表示されるようにしました</string>
+    <string name="changelog_build_43_4">DNSルール画面に現在のルール数の合計を表示するようにしました</string>
+    <string name="changelog_build_43_3">dnsmasq形式のホストソースがインポートできない問題を修正しました</string>
+    <string name="changelog_build_43_2">スピードテスト画面に現在のネットワークでサポートするサーバーのみを表示するようにしました</string>
+    <string name="changelog_build_43_1">サイドバーメニュー内サーバー情報に現在のサーバーのレイテンシを表示するようにしました</string>
+    <string name="changelog_build_41_7">DNSルールを別ウィンドウで表示しないようにしました</string>
+    <string name="changelog_build_41_6">ホストソース名をタップすることで編集できるようにしました</string>
 </resources>
