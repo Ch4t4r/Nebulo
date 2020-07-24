@@ -635,15 +635,15 @@ class DnsRuleFragment : Fragment() {
     }
 
     companion object {
-        const val latestSourcesVersion = 2
+        const val latestSourcesVersion = 3
         private val defaultHostSources:Map<Int, List<HostSource>> by lazy(LazyThreadSafetyMode.NONE) {
             mutableMapOf<Int, List<HostSource>>().apply {
                 put(1, mutableListOf(
-                    HostSource("Energized Basic", "https://raw.githubusercontent.com/EnergizedProtection/block/master/basic/formats/domains.txt"),
-                    HostSource("Energized Blu", "https://raw.githubusercontent.com/EnergizedProtection/block/master/blu/formats/domains.txt"),
-                    HostSource("Energized Spark", "https://raw.githubusercontent.com/EnergizedProtection/block/master/spark/formats/domains.txt"),
-                    HostSource("Energized Porn", "https://raw.githubusercontent.com/EnergizedProtection/block/master/porn/formats/domains.txt"),
-                    HostSource("Energized Ultimate", "https://raw.githubusercontent.com/EnergizedProtection/block/master/ultimate/formats/domains.txt"),
+                    HostSource("Energized Basic", "https://block.energized.pro/basic/formats/domains.txt"),
+                    HostSource("Energized Blu", "https://block.energized.pro/blu/formats/domains.txt"),
+                    HostSource("Energized Spark", "https://block.energized.pro/spark/formats/domains.txt"),
+                    HostSource("Energized Porn", "https://block.energized.pro/porn/formats/domains.txt"),
+                    HostSource("Energized Ultimate", "https://block.energized.pro/ultimate/formats/domains.txt"),
                     HostSource("AdAway", "https://adaway.org/hosts.txt"),
                     HostSource("StevenBlack unified", "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"),
                     HostSource("CoinBlockerList", "https://zerodot1.gitlab.io/CoinBlockerLists/hosts"),
@@ -662,14 +662,30 @@ class DnsRuleFragment : Fragment() {
                 })
             }
         }
+        private val updatedHostSources:Map<Int, List<HostSource>> by lazy {
+            mutableMapOf<Int, List<HostSource>>().apply {
+                put(3, (defaultHostSources[1] ?: error("")).subList(0, 4))
+            }
+        }
 
         fun getDefaultHostSources(versionStart:Int):List<HostSource> {
             return getDefaultHostSources(versionStart..Integer.MAX_VALUE)
         }
 
+        fun getUpdatedHostSources(versionStart:Int):List<HostSource> {
+            return getUpdatedHostSources(versionStart..Integer.MAX_VALUE)
+        }
+
         private fun getDefaultHostSources(versionRange:IntRange): List<HostSource> {
             if(versionRange.first > latestSourcesVersion) return emptyList()
             return defaultHostSources.filter {
+                it.key in versionRange
+            }.values.flatten()
+        }
+
+        private fun getUpdatedHostSources(versionRange: IntRange):List<HostSource> {
+            if(versionRange.first > latestSourcesVersion) return emptyList()
+            return updatedHostSources.filter {
                 it.key in versionRange
             }.values.flatten()
         }

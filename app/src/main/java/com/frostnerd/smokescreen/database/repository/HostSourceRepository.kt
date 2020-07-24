@@ -22,4 +22,12 @@ class HostSourceRepository(private val hostSourceDao: HostSourceDao) {
             hostSourceDao.insertAll(sources)
         }
     }
+
+    fun updateAllURLsAsync(sources:Collection<HostSource>, coroutineScope: CoroutineScope = GlobalScope) {
+        coroutineScope.launch {
+            sources.forEach {
+                hostSourceDao.changeSourceURLByName(it.name, it.source)
+            }
+        }
+    }
 }
