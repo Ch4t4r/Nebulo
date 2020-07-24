@@ -175,7 +175,9 @@ class RuleImportService : IntentService("RuleImportService") {
         var count = 0
         val maxCount = getDatabase().hostSourceDao().getEnabledCount()
         val newChecksums = mutableMapOf<HostSource, String>()
-        getDatabase().hostSourceDao().getAllEnabled().forEach {
+        getDatabase().hostSourceDao().getAllEnabled().sortedByDescending {
+            it.whitelistSource // Process whitelist first
+        }.forEach {
             log("Importing HostSource $it")
             if (!isAborted) {
                 updateNotification(it, count, maxCount.toInt())
