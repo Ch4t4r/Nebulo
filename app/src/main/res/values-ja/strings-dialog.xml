@@ -6,8 +6,8 @@
     <string name="dialog_newserver_title_tls">サーバー追加（DoT）</string>
     <string name="dialog_newserver_name">サーバー名</string>
     <string name="dialog_newserver_name_hint">例</string>
-    <string name="dialog_newserver_primaryserver">プライマリサーバ</string>
-    <string name="dialog_newserver_secondaryserver">セカンダリサーバ（オプション）</string>
+    <string name="dialog_newserver_primaryserver">プライマリサーバー</string>
+    <string name="dialog_newserver_secondaryserver">セカンダリサーバー（オプション）</string>
     <string name="dialog_deleteconfig_title">設定を削除しますか？</string>
     <string name="dialog_deleteconfig_text">設定%1sを削除しますか？</string>
     <string name="dialog_appchoosal_showsystemapps">システムアプリを表示する</string>
