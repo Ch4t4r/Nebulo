@@ -124,7 +124,7 @@
     <string name="summary_enable_logging">デバッグ情報（統計データを含む）のログを有効にします。これらのログは自動で送信されません。</string>
     <string name="summary_nonvpn_help">ここをタップして、このアプリと連携させるための手順を入手して下さい。</string>
     <string name="preference_category_nonvpnmode_help">サードパーティーアプリ側の操作手順</string>
-    <string name="summary_iptables_disable_ipv6">iptables使用時にIPv4が代わりに使用される時にIPv6を無効にして下さい。IPv6が有効だと、DNS問い合わせがiptablesの処理から外れることがあります。</string>
+    <string name="summary_iptables_disable_ipv6">iptablesを使用かつ代わりにIPv4を使用する時はIPv6を無効にして下さい。IPv6が有効だと、DNS問い合わせがiptablesの処理から外れることがあります。</string>
     <string name="title_iptables_disable_ipv6">IPv6を無効にする</string>
     <string name="preference_category_iptables">Iptables</string>
 </resources>
