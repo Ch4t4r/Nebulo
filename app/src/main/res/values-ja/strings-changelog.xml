@@ -10,8 +10,8 @@
     <string name="changelog_build_25_1">IPv6/IPv6の扱いを改善しました。アプリはどちらか一方のみをサポートするネットワーク上で動作します</string>
     <string name="changelog_build_25_2">新しいDNSサーバーを追加しました</string>
     <string name="changelog_build_25_3">ネットワーク未接続や接続不良時に通知が表示されるようになりました</string>
-    <string name="changelog_build_25_4">未知のホスト設定時にアプリがクラッシュする現象を修正しました。代わりに通知を表示するようにしました</string>
-    <string name="changelog_build_26_1">IPv6のみのネットワーク下でIPv4アドレスしか持たないDNSサーバーを指定すると、アプリがクラッシュする現象を修正しました</string>
+    <string name="changelog_build_25_4">未知のホスト設定時にアプリがクラッシュする問題を修正しました。代わりに通知を表示するようにしました</string>
+    <string name="changelog_build_26_1">IPv6のみのネットワーク下でIPv4アドレスしか持たないDNSサーバーを指定すると、アプリがクラッシュする問題を修正しました</string>
     <string name="changelog_build_26_2">未接続に関する通知が正しく消えない問題を修正しました</string>
     <string name="changelog_build_26_3">未接続に関する通知を取り消しできるようになりました</string>
     <string name="changelog_build_26_4">UncensoredDNSのサーバー情報が間違った状態で登録されていました。これを修正しました</string>
