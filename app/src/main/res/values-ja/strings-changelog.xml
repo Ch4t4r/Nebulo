@@ -104,7 +104,7 @@
     <string name="changelog_build_62_2">非VPNモードでのiptablesサポートを追加しました。この機能にはroot取得済みのデバイスが必要です</string>
     <string name="changelog_build_62_1">サーバーのショートカットからNebuloを起動すると、そのサーバーは永続化されるようにしました</string>
     <string name="changelog_build_61_1">ベータビルドをフルリリースに移行しました</string>
-    <string name="changelog_build_59_7">ダミーVPNではなくDNSサーバーを使用する「非VPNモード」機能を追加しました。非VPNモードの使用には、DNSクエリをNebuloに転送するためのサードパーティアプリが必要です</string>
+    <string name="changelog_build_59_7">ダミーVPNの代わりにDNSサーバーを使用する「非VPNモード」機能を追加しました(実験的)。非VPNモードの使用には、DNSクエリをNebuloに転送するためのサードパーティアプリが必要です</string>
     <string name="changelog_build_59_6">しばらくしてからPINを再入力するようにしました</string>
     <string name="changelog_build_59_4">メイン画面からアプリを再開できるようにしました</string>
     <string name="changelog_build_59_3">DNS over HTTPSサーバー追加時にサポートされるモードを検出するようにしました</string>
