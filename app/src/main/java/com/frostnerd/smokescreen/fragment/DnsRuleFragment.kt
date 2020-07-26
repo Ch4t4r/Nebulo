@@ -551,6 +551,7 @@ class DnsRuleFragment : Fragment() {
                 source?.also {
                     changeSourceStatus(it, isChecked)
                 }
+                refresh.isEnabled = isChecked
             }
             refresh.setOnClickListener {
                 source?.also(refreshSource)
@@ -566,6 +567,7 @@ class DnsRuleFragment : Fragment() {
             enabled.isChecked = source.enabled
             subText.text = source.source
             whitelistIndicator.visibility = if(source.whitelistSource) View.VISIBLE else View.GONE
+            refresh.isEnabled = source.enabled
         }
 
         override fun destroy() {}
