@@ -45,7 +45,7 @@ interface HostSourceDao {
     @Delete
     fun delete(hostSource: HostSource)
 
-    @Query("SELECT * FROM HostSource ORDER BY name ASC")
+    @Query("SELECT * FROM HostSource ORDER BY name COLLATE NOCASE ASC")
     fun getAll(): List<HostSource>
 
     @Query("SELECT * FROM HostSource WHERE enabled > 0 ORDER BY whitelistSource DESC")

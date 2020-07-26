@@ -109,7 +109,7 @@ class DnsRuleFragment : Fragment() {
             NewHostSourceDialog(requireContext(), onSourceCreated = { newSource ->
                 if (!sourceAdapterList.contains(newSource)) {
                     val insertPos = sourceAdapterList.indexOfFirst {
-                        it.name > newSource.name
+                        it.name.compareTo(newSource.name, true) > 0
                     }.let {
                         when (it) {
                             0 -> 0
