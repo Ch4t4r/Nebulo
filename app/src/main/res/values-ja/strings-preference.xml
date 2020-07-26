@@ -27,12 +27,12 @@
     <string name="summary_preference_change_pin">PINを変更します。半角数字のみ利用できます。
 \n現在のPIN: %1s</string>
     <string name="title_preference_change_pin">PINの変更</string>
-    <string name="summary_show_revoked_notification">NebuloがVPNの制御に失敗した時に通知します。</string>
+    <string name="summary_show_revoked_notification">NebuloがVPNの権限を失った時に通知します。</string>
     <string name="summary_notification_allow_pause">通知からアプリの一時停止を許可します。</string>
     <string name="summary_notification_allow_stop">通知からアプリの停止を許可します。</string>
-    <string name="summary_start_after_update">アプリの更新後に自動で開始します。</string>
+    <string name="summary_start_after_update">アプリの更新後に自動で起動します。</string>
     <string name="summary_start_on_boot">電源オン時にアプリを自動で起動します。</string>
-    <string name="title_start_on_boot">ブート後に起動</string>
+    <string name="title_start_on_boot">ブート後に開始</string>
     <string name="summary_theme">このアプリのテーマを設定します。</string>
     <string name="summary_language">アプリの言語を変更します。</string>
     <string name="summary_preference_pin_use_fingerprint">PIN入力の代わりに指紋認証を使用します。</string>
@@ -41,7 +41,7 @@
     <string name="title_preference_enable_pin">PIN</string>
     <string name="preference_category_pin">PINプロテクション</string>
     <string name="title_show_revoked_notification">許可が失なわれた時の通知</string>
-    <string name="title_show_noconnection_notification">接続されていない場合の通知</string>
+    <string name="title_show_noconnection_notification">未接続時の通知</string>
     <string name="summary_show_noconnection_notification">未接続または接続に失敗している時に通知します。</string>
     <string name="title_notification_allow_pause">一時停止の許可</string>
     <string name="title_notification_allow_stop">停止の許可</string>
