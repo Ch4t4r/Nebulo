@@ -228,4 +228,18 @@
         <item>minimal</item>
         <item>off</item>
     </string-array>
+
+    <string name="fallbackdns_isp">Service provider (Unencrypted)</string>
+    <string-array name="fallbackDns" translatable="false">
+        <item>@string/fallbackdns_isp</item>
+        <item>Cloudflare (DoH)</item>
+        <item>Google (DoH)</item>
+        <item>Quad9 (DoH)</item>
+    </string-array>
+    <string-array name="fallbackDnsValues" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>

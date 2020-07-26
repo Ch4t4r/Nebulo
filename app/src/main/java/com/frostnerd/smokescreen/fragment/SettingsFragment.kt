@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.*
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.general.isInt
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
@@ -321,6 +322,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun processGeneralCategory() {
         val startOnBoot = findPreference("start_on_boot") as CheckBoxPreference
         val language = findPreference("language")
+        val fallbackDns = findPreference("fallback_dns")
         startOnBoot.setOnPreferenceChangeListener { preference, newValue ->
             if (newValue == false) true
             else {
@@ -352,6 +354,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
         findPreference("app_exclusion_list").setOnPreferenceClickListener {
             showExcludedAppsDialog()
             true
+        }
+        fallbackDns.setOnPreferenceChangeListener { _, newValue ->
+            val pos = newValue.toString().toInt()
+            // Right now the fallback DNS is statically bound at these positions.
+            // Later on user-added servers can be used. This will only be possible when the IP address
+            // can be specified for user-added servers: https://git.frostnerd.com/PublicAndroidApps/smokescreen/-/issues/230
+            getPreferences().fallbackDns = when(pos) {
+                2 -> AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
+                    it[0] // The IDs are stable and won't change. 0 == Cloudflare
+                }
+                3 -> AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
+                    it[1] // 1 == Google stable
+                }
+                4 -> AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
+                    it[3] // 3 == Quad9
+                }
+                else -> null // 1 or > 4 == ISP
+            }
+            false // Do not persist int value.
         }
     }
 

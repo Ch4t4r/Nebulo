@@ -37,6 +37,9 @@
 
         <androidx.preference.Preference
                 android:key="fallback_dns"
+                android:defaultValue="1"
+                android:entries="@array/fallbackDns"
+                android:entryValues="@array/fallbackDnsValues"
                 android:summary="@string/summary_fallback_dns"
                 android:title="@string/title_fallback_dns" />
     </androidx.preference.PreferenceCategory>
