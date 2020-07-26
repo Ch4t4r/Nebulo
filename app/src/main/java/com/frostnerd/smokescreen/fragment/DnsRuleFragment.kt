@@ -79,6 +79,7 @@ class DnsRuleFragment : Fragment() {
     private var fileChosenCallback: ((Uri) -> Unit)? = null
     private var userRulesJob: Job? = null
     private var totalRuleCount:Long? = null
+    private var importSourceSnackbar:Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +88,11 @@ class DnsRuleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_dns_rules, container, false)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        importSourceSnackbar?.dismiss()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,6 +121,14 @@ class DnsRuleFragment : Fragment() {
                     sourceAdapter.notifyItemInserted(insertPos)
                     list.scrollToPosition(insertPos)
                     newSource.id = getDatabase().hostSourceDao().insert(newSource)
+                    importSourceSnackbar = Snackbar.make(contentFrame, R.string.window_dnsrules_refresh_sources, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.dialog_hostsourcerefresh_refresh_now) {
+                            importSourceSnackbar?.dismiss()
+                            requireContext().startService(Intent(requireContext(), RuleImportService::class.java).putExtra("sources", longArrayOf(newSource.id)))
+                            refreshProgress.show()
+                            refreshProgressShown = true
+                        }
+                    importSourceSnackbar?.show()
                 }
             }, showFileChooser = { callback ->
                 fileChosenCallback = callback
@@ -131,6 +145,7 @@ class DnsRuleFragment : Fragment() {
                 } else {
                     requireContext().startService(Intent(requireContext(), RuleImportService::class.java))
                     refreshProgress.show()
+                    importSourceSnackbar?.dismiss()
                     refreshProgressShown = true
                 }
             }, refreshConfigChanged = {
@@ -247,6 +262,7 @@ class DnsRuleFragment : Fragment() {
                         }, fileChosenRequestCode)
                     }, hostSource = hostSource).show()
                 }, refreshSource = {
+                    importSourceSnackbar?.dismiss()
                     requireContext().startService(Intent(requireContext(), RuleImportService::class.java).putExtra("sources", longArrayOf(it.id)))
                     refreshProgress.show()
                     refreshProgressShown = true
