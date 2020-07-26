@@ -1,98 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                   android:orientation="vertical"
-                                   android:layout_width="match_parent"
-                                   app:cardElevation="0dp"
-                                   app:cardCornerRadius="6dp"
-                                   app:cardBackgroundColor="?inputElementColor"
-                                   android:layout_height="wrap_content">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:cardBackgroundColor="?inputElementColor"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="0dp">
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:background="?selectableItemBackground"
             android:id="@+id/cardContent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground">
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:id="@+id/contentWrap"
-                android:layout_height="wrap_content">
+        <LinearLayout
+                android:id="@+id/textWrap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/buttonWrap"
+                android:orientation="vertical"
+                android:paddingStart="12dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
 
             <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:paddingStart="12dp"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp"
-                    android:orientation="vertical"
-                    android:layout_toStartOf="@id/buttonWrap"
-                    android:layout_alignParentStart="true"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-
-                    <ImageView
-                            android:layout_width="24dp"
-                            android:src="@drawable/ic_shield"
-                            android:layout_gravity="center_vertical"
-                            android:id="@+id/sourceWhitelistIndicator"
-                            android:visibility="gone"
-                            android:tint="?android:attr/textColor"
-                            android:layout_marginEnd="8dp"
-                            android:layout_height="24dp"/>
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:id="@+id/text"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
-                            android:layout_height="wrap_content"/>
-
-                </LinearLayout>
+                <ImageView
+                        android:id="@+id/sourceWhitelistIndicator"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_shield"
+                        android:tint="?android:attr/textColor"
+                        android:visibility="gone" />
 
                 <TextView
+                        android:id="@+id/text"
                         android:layout_width="wrap_content"
-                        android:id="@+id/subText"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
+                    android:id="@+id/subText"
                     android:layout_width="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/buttonWrap"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
 
-                <Switch
-                        android:layout_width="wrap_content"
-                        android:id="@+id/enable"
-                        android:layout_height="wrap_content"/>
+        <LinearLayout
+                android:id="@+id/buttonWrap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical">
 
-                <ImageButton
-                        android:layout_width="48dp"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:src="@drawable/ic_delete"
-                        android:id="@+id/delete"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="48dp"/>
-            </LinearLayout>
-        </RelativeLayout>
+            <Switch
+                    android:id="@+id/enable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <ImageButton
+                    android:id="@+id/delete"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_delete"
+                    android:tint="?android:attr/textColor" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonWrap"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/refreshWrap"
+                android:gravity="center_vertical">
+
+            <ImageButton
+                    android:id="@+id/refresh"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_refresh"
+                    android:tint="?android:attr/textColor" />
+        </LinearLayout>
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_below="@id/contentWrap"
-                android:layout_centerHorizontal="true"
                 android:id="@+id/ruleCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textWrap"
+                android:layout_toLeftOf="@id/refreshWrap"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
-                android:text="@string/window_dnsrules_customhosts_hostsource_rulecount_pending"
-                android:layout_height="wrap_content"/>
+                android:text="@string/window_dnsrules_customhosts_hostsource_rulecount_pending" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

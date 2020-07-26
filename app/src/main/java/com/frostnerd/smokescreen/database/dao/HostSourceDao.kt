@@ -39,10 +39,13 @@ interface HostSourceDao {
     @Query("UPDATE HostSource SET enabled=:enabled WHERE id=:sourceId")
     fun setSourceEnabled(sourceId:Long, enabled:Boolean)
 
+    @Query("UPDATE HostSource SET source=:source WHERE name=:name")
+    fun changeSourceURLByName(name:String, source:String)
+
     @Delete
     fun delete(hostSource: HostSource)
 
-    @Query("SELECT * FROM HostSource ORDER BY name ASC")
+    @Query("SELECT * FROM HostSource ORDER BY name COLLATE NOCASE ASC")
     fun getAll(): List<HostSource>
 
     @Query("SELECT * FROM HostSource WHERE enabled > 0 ORDER BY whitelistSource DESC")

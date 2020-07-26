@@ -168,12 +168,20 @@ class MainActivity : NavigationDrawerActivity() {
                     else -> 2 // Previous app version didn't have versioning, but had sources
                 }
             }
+            log("Updating host sources from $versionToStartFrom ")
             DnsRuleFragment.getDefaultHostSources(versionToStartFrom).apply {
                 if(isNotEmpty()) {
+                    log("Inserting ${this.size} hostsources")
                     getDatabase().hostSourceRepository().insertAllAsync(this)
-                    getPreferences().hostSourcesVersion = DnsRuleFragment.latestSourcesVersion
                 }
             }
+            DnsRuleFragment.getUpdatedHostSources(versionToStartFrom).apply {
+                if(isNotEmpty()) {
+                    log("Updating ${this.size} hostsources")
+                    getDatabase().hostSourceRepository().updateAllURLsAsync(this)
+                }
+            }
+            getPreferences().hostSourcesVersion = DnsRuleFragment.latestSourcesVersion
         }
         handleDeepAction()
         if(!isServiceRunning(DnsVpnService::class.java) &&

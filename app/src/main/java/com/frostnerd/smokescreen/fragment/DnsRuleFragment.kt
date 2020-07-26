@@ -38,6 +38,7 @@ import kotlinx.android.synthetic.main.item_datasource.view.*
 import kotlinx.android.synthetic.main.item_datasource.view.cardContent
 import kotlinx.android.synthetic.main.item_datasource.view.delete
 import kotlinx.android.synthetic.main.item_datasource.view.enable
+import kotlinx.android.synthetic.main.item_datasource.view.refresh
 import kotlinx.android.synthetic.main.item_datasource.view.text
 import kotlinx.android.synthetic.main.item_datasource_rules.view.*
 import kotlinx.android.synthetic.main.item_dnsrule_host.view.*
@@ -78,6 +79,7 @@ class DnsRuleFragment : Fragment() {
     private var fileChosenCallback: ((Uri) -> Unit)? = null
     private var userRulesJob: Job? = null
     private var totalRuleCount:Long? = null
+    private var importSourceSnackbar:Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +88,11 @@ class DnsRuleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_dns_rules, container, false)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        importSourceSnackbar?.dismiss()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -102,7 +109,7 @@ class DnsRuleFragment : Fragment() {
             NewHostSourceDialog(requireContext(), onSourceCreated = { newSource ->
                 if (!sourceAdapterList.contains(newSource)) {
                     val insertPos = sourceAdapterList.indexOfFirst {
-                        it.name > newSource.name
+                        it.name.compareTo(newSource.name, true) > 0
                     }.let {
                         when (it) {
                             0 -> 0
@@ -114,6 +121,14 @@ class DnsRuleFragment : Fragment() {
                     sourceAdapter.notifyItemInserted(insertPos)
                     list.scrollToPosition(insertPos)
                     newSource.id = getDatabase().hostSourceDao().insert(newSource)
+                    importSourceSnackbar = Snackbar.make(contentFrame, R.string.window_dnsrules_refresh_sources, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.dialog_hostsourcerefresh_refresh_now) {
+                            importSourceSnackbar?.dismiss()
+                            requireContext().startService(Intent(requireContext(), RuleImportService::class.java).putExtra("sources", longArrayOf(newSource.id)))
+                            refreshProgress.show()
+                            refreshProgressShown = true
+                        }
+                    importSourceSnackbar?.show()
                 }
             }, showFileChooser = { callback ->
                 fileChosenCallback = callback
@@ -130,6 +145,7 @@ class DnsRuleFragment : Fragment() {
                 } else {
                     requireContext().startService(Intent(requireContext(), RuleImportService::class.java))
                     refreshProgress.show()
+                    importSourceSnackbar?.dismiss()
                     refreshProgressShown = true
                 }
             }, refreshConfigChanged = {
@@ -245,6 +261,11 @@ class DnsRuleFragment : Fragment() {
                             this.type = "text/*"
                         }, fileChosenRequestCode)
                     }, hostSource = hostSource).show()
+                }, refreshSource = {
+                    importSourceSnackbar?.dismiss()
+                    requireContext().startService(Intent(requireContext(), RuleImportService::class.java).putExtra("sources", longArrayOf(it.id)))
+                    refreshProgress.show()
+                    refreshProgressShown = true
                 })
                 1 -> CustomRulesViewHolder(
                     view,
@@ -526,31 +547,33 @@ class DnsRuleFragment : Fragment() {
         view: View,
         deleteSource: (HostSource) -> Unit,
         changeSourceStatus: (HostSource, enabled: Boolean) -> Unit,
-        editSource: (HostSource) -> Unit
+        editSource: (HostSource) -> Unit,
+        refreshSource:(HostSource) -> Unit
     ) : BaseViewHolder(view) {
         val text = view.text
         val subText = view.subText
         val enabled = view.enable
         val delete = view.delete
         val ruleCount = view.ruleCount
+        val refresh = view.refresh
         val whitelistIndicator = view.sourceWhitelistIndicator
         private var source: HostSource? = null
 
         init {
             delete.setOnClickListener {
-                source?.also {
-                    deleteSource(it)
-                }
+                source?.also(deleteSource)
             }
             enabled.setOnCheckedChangeListener { _, isChecked ->
                 source?.also {
                     changeSourceStatus(it, isChecked)
                 }
+                refresh.isEnabled = isChecked
+            }
+            refresh.setOnClickListener {
+                source?.also(refreshSource)
             }
             view.cardContent.setOnClickListener {
-                source?.also {
-                    editSource(it)
-                }
+                source?.also(editSource)
             }
         }
 
@@ -560,6 +583,7 @@ class DnsRuleFragment : Fragment() {
             enabled.isChecked = source.enabled
             subText.text = source.source
             whitelistIndicator.visibility = if(source.whitelistSource) View.VISIBLE else View.GONE
+            refresh.isEnabled = source.enabled
         }
 
         override fun destroy() {}
@@ -635,15 +659,15 @@ class DnsRuleFragment : Fragment() {
     }
 
     companion object {
-        const val latestSourcesVersion = 2
+        const val latestSourcesVersion = 3
         private val defaultHostSources:Map<Int, List<HostSource>> by lazy(LazyThreadSafetyMode.NONE) {
             mutableMapOf<Int, List<HostSource>>().apply {
                 put(1, mutableListOf(
-                    HostSource("Energized Basic", "https://raw.githubusercontent.com/EnergizedProtection/block/master/basic/formats/domains.txt"),
-                    HostSource("Energized Blu", "https://raw.githubusercontent.com/EnergizedProtection/block/master/blu/formats/domains.txt"),
-                    HostSource("Energized Spark", "https://raw.githubusercontent.com/EnergizedProtection/block/master/spark/formats/domains.txt"),
-                    HostSource("Energized Porn", "https://raw.githubusercontent.com/EnergizedProtection/block/master/porn/formats/domains.txt"),
-                    HostSource("Energized Ultimate", "https://raw.githubusercontent.com/EnergizedProtection/block/master/ultimate/formats/domains.txt"),
+                    HostSource("Energized Basic", "https://block.energized.pro/basic/formats/domains.txt"),
+                    HostSource("Energized Blu", "https://block.energized.pro/blu/formats/domains.txt"),
+                    HostSource("Energized Spark", "https://block.energized.pro/spark/formats/domains.txt"),
+                    HostSource("Energized Porn", "https://block.energized.pro/porn/formats/domains.txt"),
+                    HostSource("Energized Ultimate", "https://block.energized.pro/ultimate/formats/domains.txt"),
                     HostSource("AdAway", "https://adaway.org/hosts.txt"),
                     HostSource("StevenBlack unified", "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"),
                     HostSource("CoinBlockerList", "https://zerodot1.gitlab.io/CoinBlockerLists/hosts"),
@@ -662,14 +686,30 @@ class DnsRuleFragment : Fragment() {
                 })
             }
         }
+        private val updatedHostSources:Map<Int, List<HostSource>> by lazy {
+            mutableMapOf<Int, List<HostSource>>().apply {
+                put(3, (defaultHostSources[1] ?: error("")).subList(0, 4))
+            }
+        }
 
         fun getDefaultHostSources(versionStart:Int):List<HostSource> {
             return getDefaultHostSources(versionStart..Integer.MAX_VALUE)
         }
 
+        fun getUpdatedHostSources(versionStart:Int):List<HostSource> {
+            return getUpdatedHostSources(versionStart..Integer.MAX_VALUE)
+        }
+
         private fun getDefaultHostSources(versionRange:IntRange): List<HostSource> {
             if(versionRange.first > latestSourcesVersion) return emptyList()
             return defaultHostSources.filter {
+                it.key in versionRange
+            }.values.flatten()
+        }
+
+        private fun getUpdatedHostSources(versionRange: IntRange):List<HostSource> {
+            if(versionRange.first > latestSourcesVersion) return emptyList()
+            return updatedHostSources.filter {
                 it.key in versionRange
             }.values.flatten()
         }
