@@ -35,7 +35,7 @@
                 android:summary="@string/summary_excluded_apps"
                 android:title="@string/title_excluded_apps" />
 
-        <androidx.preference.Preference
+        <androidx.preference.ListPreference
                 android:key="fallback_dns"
                 android:defaultValue="1"
                 android:entries="@array/fallbackDns"

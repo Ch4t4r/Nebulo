@@ -372,7 +372,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 }
                 else -> null // 1 or > 4 == ISP
             }
-            false // Do not persist int value.
+            true
         }
     }
 
