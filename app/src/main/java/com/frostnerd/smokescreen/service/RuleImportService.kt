@@ -62,6 +62,7 @@ class RuleImportService : IntentService("RuleImportService") {
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
     private var isAborted = false
+    private lateinit var sources:List<HostSource>
 
     companion object {
         const val BROADCAST_IMPORT_DONE = "com.frostnerd.nebulo.RULE_IMPORT_DONE"
@@ -90,6 +91,13 @@ class RuleImportService : IntentService("RuleImportService") {
 
     override fun onHandleIntent(intent: Intent?) {
         createNotification()
+        sources = (intent?.takeIf { it.hasExtra("sources") }?.getLongArrayExtra("sources")?.let { ids ->
+            getDatabase().hostSourceDao().getAllEnabled().filter {
+                it.id in ids
+            }
+        } ?: getDatabase().hostSourceDao().getAllEnabled()).sortedByDescending {
+            it.whitelistSource // Process whitelist first
+        }
         startWork()
     }
 
@@ -175,9 +183,7 @@ class RuleImportService : IntentService("RuleImportService") {
         var count = 0
         val maxCount = getDatabase().hostSourceDao().getEnabledCount()
         val newChecksums = mutableMapOf<HostSource, String>()
-        getDatabase().hostSourceDao().getAllEnabled().sortedByDescending {
-            it.whitelistSource // Process whitelist first
-        }.forEach {
+        sources.forEach {
             log("Importing HostSource $it")
             if (!isAborted) {
                 updateNotification(it, count, maxCount.toInt())

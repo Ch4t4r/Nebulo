@@ -38,6 +38,7 @@ import kotlinx.android.synthetic.main.item_datasource.view.*
 import kotlinx.android.synthetic.main.item_datasource.view.cardContent
 import kotlinx.android.synthetic.main.item_datasource.view.delete
 import kotlinx.android.synthetic.main.item_datasource.view.enable
+import kotlinx.android.synthetic.main.item_datasource.view.refresh
 import kotlinx.android.synthetic.main.item_datasource.view.text
 import kotlinx.android.synthetic.main.item_datasource_rules.view.*
 import kotlinx.android.synthetic.main.item_dnsrule_host.view.*
@@ -245,6 +246,10 @@ class DnsRuleFragment : Fragment() {
                             this.type = "text/*"
                         }, fileChosenRequestCode)
                     }, hostSource = hostSource).show()
+                }, refreshSource = {
+                    requireContext().startService(Intent(requireContext(), RuleImportService::class.java).putExtra("sources", longArrayOf(it.id)))
+                    refreshProgress.show()
+                    refreshProgressShown = true
                 })
                 1 -> CustomRulesViewHolder(
                     view,
@@ -526,31 +531,32 @@ class DnsRuleFragment : Fragment() {
         view: View,
         deleteSource: (HostSource) -> Unit,
         changeSourceStatus: (HostSource, enabled: Boolean) -> Unit,
-        editSource: (HostSource) -> Unit
+        editSource: (HostSource) -> Unit,
+        refreshSource:(HostSource) -> Unit
     ) : BaseViewHolder(view) {
         val text = view.text
         val subText = view.subText
         val enabled = view.enable
         val delete = view.delete
         val ruleCount = view.ruleCount
+        val refresh = view.refresh
         val whitelistIndicator = view.sourceWhitelistIndicator
         private var source: HostSource? = null
 
         init {
             delete.setOnClickListener {
-                source?.also {
-                    deleteSource(it)
-                }
+                source?.also(deleteSource)
             }
             enabled.setOnCheckedChangeListener { _, isChecked ->
                 source?.also {
                     changeSourceStatus(it, isChecked)
                 }
             }
+            refresh.setOnClickListener {
+                source?.also(refreshSource)
+            }
             view.cardContent.setOnClickListener {
-                source?.also {
-                    editSource(it)
-                }
+                source?.also(editSource)
             }
         }
 
