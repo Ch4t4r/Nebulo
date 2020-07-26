@@ -17,6 +17,8 @@
     <string name="title_excluded_apps">Excluded apps</string>
     <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use DNS-over-HTTPS or DNS-over-TLS anymore</string>
 
+    <string name="title_fallback_dns">Fallback DNS server</string>
+    <string name="summary_fallback_dns">Configure the DNS server Nebulo uses internally. This defaults to your service providers DNS server</string>
 
 
     <string name="preference_category_notification">Notification</string>

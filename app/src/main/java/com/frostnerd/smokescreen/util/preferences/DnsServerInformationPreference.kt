@@ -8,6 +8,7 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapte
 import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
+import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceType
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
 import com.frostnerd.smokescreen.hasTlsServer
 import kotlin.reflect.KProperty
@@ -30,8 +31,8 @@ import kotlin.reflect.KProperty
  * 
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class DnsServerInformationPreference(key: String, defaultValue: (String) -> DnsServerInformation<*>) :
-    PreferenceTypeWithDefault<SharedPreferences, DnsServerInformation<*>>(key, defaultValue) {
+class DnsServerInformationPreference(key: String) :
+    PreferenceType<SharedPreferences, DnsServerInformation<*>>(key) {
     private val tlsTypeAdapter = DnsServerInformationTypeAdapter()
     private val httpsTypeAdapter = HttpsDnsServerInformationTypeAdapter()
 
@@ -43,7 +44,7 @@ class DnsServerInformationPreference(key: String, defaultValue: (String) -> DnsS
     override fun getValue(
         thisRef: TypedPreferences<SharedPreferences>,
         property: KProperty<*>
-    ): DnsServerInformation<*> {
+    ): DnsServerInformation<*>? {
         return if(thisRef.sharedPreferences.contains(key + "_type")) {
             val type = thisRef.sharedPreferences.getString(key + "_type", "")
             val json = thisRef.sharedPreferences.getString(key, "")
@@ -52,26 +53,28 @@ class DnsServerInformationPreference(key: String, defaultValue: (String) -> DnsS
                 "tls" -> tlsTypeAdapter.fromJson(json) as DnsServerInformation<TLSUpstreamAddress>
                 else -> throw IllegalStateException("Unknown type $type")
             }
-
-        } else {
-            defaultValue(key).also {
-                setValue(thisRef, property, it)
-            }
-        }
+        } else null
     }
 
     override fun setValue(
         thisRef: TypedPreferences<SharedPreferences>,
         property: KProperty<*>,
-        value: DnsServerInformation<*>
+        value: DnsServerInformation<*>?
     ) {
-        val type = if(value.hasTlsServer()) "tls" else "https"
-        val json:String = if(type == "tls") tlsTypeAdapter.toJson(value)
-        else httpsTypeAdapter.toJson(value as HttpsDnsServerInformation)
-        thisRef.edit {listener ->
-            listener(key, value)
-            putString(key + "_type", type)
-            putString(key, json)
+        if(value != null) {
+            val type = if(value.hasTlsServer()) "tls" else "https"
+            val json:String = if(type == "tls") tlsTypeAdapter.toJson(value)
+            else httpsTypeAdapter.toJson(value as HttpsDnsServerInformation)
+            thisRef.edit {listener ->
+                listener(key, value)
+                putString(key + "_type", type)
+                putString(key, json)
+            }
+        } else {
+            thisRef.edit { listener ->
+                listener(key, null)
+                remove(key)
+            }
         }
     }
 
