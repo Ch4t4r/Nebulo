@@ -122,4 +122,9 @@
     <string name="title_check_iptables">Controlla iptables</string>
     <string name="summary_iptables_mode">Inoltra le richieste a Nebulo usando iptables. Richiede privilegi di root. Se attivato, non serve usare app esterne quando in modalità non-vpn. Potrebbe non funzionare quando sei su una rete IPv6.</string>
     <string name="title_iptables_mode">Usa iptables</string>
+    <string name="summary_nonvpn_help">Clicca qui per ricevere istruzioni su come usarle con questa app</string>
+    <string name="preference_category_nonvpnmode_help">Istruzioni per app di terze parti</string>
+    <string name="summary_iptables_disable_ipv6">Disattiva IPv6 quando si usano le iptables e può essere usato IPv4. Potrebbe correggere le richieste DNS che aggirano le iptables quando IPv6 è attivo.</string>
+    <string name="title_iptables_disable_ipv6">Disattiva IPv6</string>
+    <string name="preference_category_iptables">Iptables</string>
 </resources>

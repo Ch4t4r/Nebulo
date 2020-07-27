@@ -9,8 +9,8 @@
     <string name="dialog_crashreportingusages_data_device_2">向き（横、縦）</string>
     <string name="dialog_crashreportingusages_data_device_3">空き／使用メモリ（RAM）</string>
     <string name="dialog_crashreportingusages_data_device_4">充電状態（はい/いいえ）</string>
-    <string name="dialog_crashreportingusages_data_device_5">クラッシュ時にオンライン（yes / no）</string>
-    <string name="dialog_crashreportingusages_data_device_6">画面の解像度</string>
+    <string name="dialog_crashreportingusages_data_device_5">クラッシュ時にオンライン（はい / いいえ）</string>
+    <string name="dialog_crashreportingusages_data_device_6">画面解像度</string>
     <string name="dialog_crashreportingusages_data_device_7">メーカー</string>
     <string name="dialog_crashreportingusages_data_device_8">ブランド</string>
     <string name="dialog_crashreportingusages_data_device_9">モデル</string>
@@ -19,8 +19,8 @@
     <string name="dialog_crashreportingusages_data_app_2">アプリのバージョン</string>
     <string name="dialog_crashreportingusages_data_app_3">データベースのバージョン</string>
     <string name="dialog_crashreportingusages_data_app_4">DNSサーバー名</string>
-    <string name="dialog_crashreportingusages_data_app_5">プライマリDNSサーバ</string>
-    <string name="dialog_crashreportingusages_data_app_6">セカンダリDNSサーバ</string>
+    <string name="dialog_crashreportingusages_data_app_5">プライマリDNSサーバー</string>
+    <string name="dialog_crashreportingusages_data_app_6">セカンダリDNSサーバー</string>
     <string name="dialog_crashreportingusages_data_os_1">名前（例：Android）</string>
     <string name="dialog_crashreportingusages_data_os_2">バージョン（例：8.1.0）</string>
     <string name="dialog_crashreportingusages_data_os_3">カーネルバージョン</string>

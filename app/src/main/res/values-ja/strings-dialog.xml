@@ -6,8 +6,8 @@
     <string name="dialog_newserver_title_tls">サーバー追加（DoT）</string>
     <string name="dialog_newserver_name">サーバー名</string>
     <string name="dialog_newserver_name_hint">例</string>
-    <string name="dialog_newserver_primaryserver">プライマリサーバ</string>
-    <string name="dialog_newserver_secondaryserver">セカンダリサーバ（オプション）</string>
+    <string name="dialog_newserver_primaryserver">プライマリサーバー</string>
+    <string name="dialog_newserver_secondaryserver">セカンダリサーバー（オプション）</string>
     <string name="dialog_deleteconfig_title">設定を削除しますか？</string>
     <string name="dialog_deleteconfig_text">設定%1sを削除しますか？</string>
     <string name="dialog_appchoosal_showsystemapps">システムアプリを表示する</string>
@@ -165,4 +165,21 @@
     <string name="dialog_enable_logging">ログを有効にしますか？ログには、統計情報、デバッグ情報、アプリ内のアクションが含まれます。生成されたログは、自分で行わない限り共有されません。</string>
     <string name="dialog_doh_detect_type_message">しばらくお待ちください。</string>
     <string name="dialog_doh_detect_type_title">サーバータイプを検知します</string>
+    <string name="dialog_nonvpn_help_netguard">NetGuardと連携させて非VPNモードを使用するには、以下の手順を実施してください。
+\n- F-DroidバージョンのNetGuardを入手しインストールして下さい。GooglePlayからインストールしたバージョンでは動作しません。
+\n- NetGuardを起動し、[設定]-[高度なオプション]に移動します。
+\n- \"トラフィックをフィルター\"を有効にします。(無効になっていた場合に実施)
+\n- [ポート転送]をタップします。
+\n- 右上の+をタップして次の各項目を設定後、[OK]をタップしてルールを追加します。
+\n
+\n ・プロトコル: UDP
+\n ・送信元ポート: 53
+\n ・宛先アドレス: 127.0.0.1
+\n ・宛先ポート: %1d
+\n ・送信先アプリ: nobody
+\n ※TCPプロトコルについても同じポートとアドレスを設定してルールを追加します。
+\n
+\n-高度なオプション に戻ります。
+\n-画画をスクロールさせ、VPN DNS(2箇所)に\"127.0.0.1\"を設定します。
+\n-非VPNモードでNebuloを起動します。その後NetGuardを起動してください</string>
 </resources>
