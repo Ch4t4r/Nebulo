@@ -127,4 +127,7 @@
     <string name="summary_iptables_disable_ipv6">Disattiva IPv6 quando si usano le iptables e può essere usato IPv4. Potrebbe correggere le richieste DNS che aggirano le iptables quando IPv6 è attivo.</string>
     <string name="title_iptables_disable_ipv6">Disattiva IPv6</string>
     <string name="preference_category_iptables">Iptables</string>
+    <string name="fallbackdns_isp">Fornitore di servizi (non criptato)</string>
+    <string name="summary_fallback_dns">Configurare il server DNS che Nebulo utilizza internamente. Questo è predefinito per il server DNS dei vostri fornitori di servizi. Questo server configurato viene utilizzato solo per scopi interni e non gestisce le normali query DNS.</string>
+    <string name="title_fallback_dns">Server DNS di fallback</string>
 </resources>
