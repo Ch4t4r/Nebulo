@@ -127,4 +127,7 @@
     <string name="summary_iptables_disable_ipv6">Deaktiviere IPv6 wenn iptables genutzt wird und stattdessen IPv4 genutzt werden kann. Dies behebt das Problem, dass DNS Anfragen in IPv6-Netzen möglicherweise Nebulo nicht erreichen.</string>
     <string name="title_iptables_disable_ipv6">IPv6 deaktivieren</string>
     <string name="preference_category_iptables">Iptables</string>
+    <string name="fallbackdns_isp">Netzanbieter (unverschlüsselt)</string>
+    <string name="summary_fallback_dns">Konfiguriere den DNS Server, welcher intern von Nebulo genutzt wird. Standardmäßig ist dies der DNS Server deines Netzanbieters. Der hier konfigurierte Server wird nur für interne Zwecke genutzt und nicht für normale DNS Anfragen.</string>
+    <string name="title_fallback_dns">Fallback DNS Server</string>
 </resources>
