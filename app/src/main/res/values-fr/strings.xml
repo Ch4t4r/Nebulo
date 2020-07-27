@@ -78,4 +78,5 @@
     <string name="iptables_not_supported">Votre appareil ne prend pas en charge iptables</string>
     <string name="iptables_supported_ipv6_unsupported">Iptables est supporté, mais IPv6 n\'est pas supporté.</string>
     <string name="iptables_supported">Félicitations, iptables est pris en charge par votre appareil !</string>
+    <string name="window_dnsrules_refresh_sources">Rafraîchir les règles d\'importation à la source</string>
 </resources>
