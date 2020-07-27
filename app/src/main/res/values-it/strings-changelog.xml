@@ -134,4 +134,6 @@
     <string name="changelog_build_59_7">Nebulo può ora funzionare in modalità non-VPN (sperimentale), dove utilizza un server DNS al posto di una finta VPN. Richiede app di terze parti per inoltrare le richieste DNS a Nebulo</string>
     <string name="changelog_build_62_2">Aggiunto supporto alle iptables in modalità non-vpn. Richiede un dispositivo con root</string>
     <string name="changelog_build_62_1">Quando si avvia Nebulo da una scorciatoria server, quel server ora è persistente</string>
+    <string name="changelog_build_62_4">Il server DNS interno (fallback) può ora essere configurato</string>
+    <string name="changelog_build_62_3">Le fonti delle regole DNS possono ora essere aggiornate individualmente</string>
 </resources>
