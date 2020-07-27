@@ -63,6 +63,7 @@ class RuleImportService : IntentService("RuleImportService") {
     private var ruleCount: Int = 0
     private var isAborted = false
     private lateinit var sources:List<HostSource>
+    private lateinit var sourcesIds:List<Long>
 
     companion object {
         const val BROADCAST_IMPORT_DONE = "com.frostnerd.nebulo.RULE_IMPORT_DONE"
@@ -98,6 +99,7 @@ class RuleImportService : IntentService("RuleImportService") {
         } ?: getDatabase().hostSourceDao().getAllEnabled()).sortedByDescending {
             it.whitelistSource // Process whitelist first
         }
+        sourcesIds = sources.map { it.id }
         startWork()
     }
 
@@ -178,15 +180,14 @@ class RuleImportService : IntentService("RuleImportService") {
 
     private fun startWork() {
         val dnsRuleDao = getDatabase().dnsRuleDao()
-        dnsRuleDao.markNonUserRulesForDeletion()
+        dnsRuleDao.markNonUserRulesForDeletion(sourcesIds) // Stage all, ignoring if the source is actually processed in this run
         dnsRuleDao.deleteStagedRules()
         var count = 0
-        val maxCount = getDatabase().hostSourceDao().getEnabledCount()
         val newChecksums = mutableMapOf<HostSource, String>()
         sources.forEach {
             log("Importing HostSource $it")
             if (!isAborted) {
-                updateNotification(it, count, maxCount.toInt())
+                updateNotification(it, count, sources.size)
                 count++
                 if (it.isFileSource) {
                     log("Importing from file")
@@ -228,7 +229,7 @@ class RuleImportService : IntentService("RuleImportService") {
                                 dnsRuleDao.unstageRulesOfSource(it.id)
                                 log("Unstaged rules for ${it.name}")
                             }
-                            else -> log("Downloading resource of ${it.name} failed.")
+                            else -> log("Downloading resource of ${it.name} failed (response=${response.code}.")
                         }
                     } catch (ex: java.lang.Exception) {
                         ex.printStackTrace()

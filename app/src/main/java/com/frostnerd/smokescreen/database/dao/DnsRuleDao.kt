@@ -45,8 +45,8 @@ interface DnsRuleDao {
     @Query("DELETE FROM DnsRule WHERE importedFrom IS NULL")
     fun deleteAllUserRules()
 
-    @Query("UPDATE DnsRule SET stagingType=1 WHERE importedFrom IS NOT NULL AND stagingType=0")
-    fun markNonUserRulesForDeletion()
+    @Query("UPDATE DnsRule SET stagingType=1 WHERE importedFrom IS NOT NULL AND stagingType=0 AND importedFrom IN(:sources)")
+    fun markNonUserRulesForDeletion(sources:List<Long>)
 
     @Query("UPDATE DnsRule SET stagingType=0 WHERE importedFrom=:hostSourceId AND stagingType=1")
     fun unstageRulesOfSource(hostSourceId:Long)
