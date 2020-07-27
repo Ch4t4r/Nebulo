@@ -6,6 +6,8 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
+import com.frostnerd.dnstunnelproxy.AddressCreator
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.activity.LoggingDialogActivity
 import com.frostnerd.smokescreen.activity.PinActivity
@@ -24,8 +26,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import leakcanary.LeakSentry
+import okhttp3.OkHttpClient
+import org.minidns.dnsmessage.DnsMessage
+import org.minidns.dnsmessage.Question
+import org.minidns.record.A
+import org.minidns.record.AAAA
+import org.minidns.record.Record
 import java.net.InetAddress
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 
 /*
@@ -50,6 +59,40 @@ class SmokeScreen : Application() {
     companion object {
         var sentryReady:Boolean = false
             private set
+
+        private fun setFallbackDns(to: HttpsDnsServerInformation?) {
+            if (to == null) AddressCreator.globalResolve = AddressCreator.defaultResolver
+            else {
+                val httpClient = OkHttpClient.Builder()
+                    .connectTimeout(3000, TimeUnit.MILLISECONDS)
+                    .readTimeout(3000, TimeUnit.MILLISECONDS)
+                    .build()
+                val configs = to.serverConfigurations.values
+                AddressCreator.globalResolve = {
+                    val responsesIpv4 = configs.random().query(httpClient, Question(it, Record.TYPE.A))?.takeIf {
+                        it.responseCode == DnsMessage.RESPONSE_CODE.NO_ERROR
+                    }?.answerSection?.map {
+                        it.payload as A
+                    }?.map {
+                        it.inetAddress
+                    }
+                    val responsesIpv6 = configs.random().query(httpClient, Question(it, Record.TYPE.AAAA))?.takeIf {
+                        it.responseCode == DnsMessage.RESPONSE_CODE.NO_ERROR
+                    }?.answerSection?.map {
+                        it.payload as AAAA
+                    }?.map {
+                        it.inetAddress
+                    }
+
+                    val responses = if(responsesIpv4 != null) {
+                        if(responsesIpv6 != null) responsesIpv4 + responsesIpv6
+                        else responsesIpv4
+                    } else responsesIpv6
+
+                    responses?.takeIf { it.isNotEmpty() }?.toTypedArray() ?: error("")
+                }
+            }
+        }
     }
     private var defaultUncaughtExceptionHandler: Thread.UncaughtExceptionHandler? = null
     val customUncaughtExceptionHandler = EnrichableUncaughtExceptionHandler()
@@ -99,6 +142,14 @@ class SmokeScreen : Application() {
         super.onCreate()
         log("Application created.")
         LeakSentry.watchIfEnabled(this)
+        handleFallbackDns()
+    }
+
+    private fun handleFallbackDns() {
+        setFallbackDns(getPreferences().fallbackDns as HttpsDnsServerInformation?)
+        getPreferences().listenForChanges("fallback_dns_server", getPreferences().preferenceChangeListener { changes ->
+            setFallbackDns(changes["fallback_dns_server"]?.second as HttpsDnsServerInformation?)
+        })
     }
 
     fun closeSentry() {
