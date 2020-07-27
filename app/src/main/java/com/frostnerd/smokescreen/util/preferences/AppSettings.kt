@@ -181,6 +181,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)
     override var userBypassPackages by mutableStringSetPref("user_bypass_packages", mutableSetOf("com.android.vending", "ch.threema.app.work", "ch.threema.app"))
     override var isBypassBlacklist: Boolean by booleanPref("user_bypass_blacklist", true)
+    var fallbackDns: DnsServerInformation<*>? by cache(DnsServerInformationPreference("fallback_dns_server"), cacheControl)
 
     override var showNotificationOnLockscreen: Boolean by booleanPref("show_notification_on_lockscreen", true)
     var simpleNotification:Boolean by booleanPref("simple_notification", false)
@@ -242,11 +243,12 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     ) {
         shouldContain(BuildConfig.APPLICATION_ID)
     }, cacheControl)
-    override var dnsServerConfig: DnsServerInformation<*> by cache(DnsServerInformationPreference("dns_server_config") {
-        AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(-1) { knownServers ->
-            knownServers.getValue(9)
+    override var dnsServerConfig: DnsServerInformation<*> by cache(DnsServerInformationPreference("dns_server_config"), cacheControl)
+        .toNonOptionalPreference(true) {
+            AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(-1) { knownServers ->
+                knownServers.getValue(9)
+            }
         }
-    }, cacheControl)
 
     var customHostsEnabled:Boolean by booleanPref("custom_hosts", true)
     var dnsRulesEnabled:Boolean by booleanPref("dns_rules_enabled", false)

@@ -17,6 +17,8 @@
     <string name="title_excluded_apps">Excluded apps</string>
     <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use DNS-over-HTTPS or DNS-over-TLS anymore</string>
 
+    <string name="title_fallback_dns">Fallback DNS server</string>
+    <string name="summary_fallback_dns">Configure the DNS server Nebulo uses internally. This defaults to your service providers DNS server. This configured server is only used for internal purposes and does not handle your normal DNS queries.</string>
 
 
     <string name="preference_category_notification">Notification</string>
@@ -225,5 +227,19 @@
         <item>full</item>
         <item>minimal</item>
         <item>off</item>
+    </string-array>
+
+    <string name="fallbackdns_isp">Service provider (Unencrypted)</string>
+    <string-array name="fallbackDns" translatable="false">
+        <item>@string/fallbackdns_isp</item>
+        <item>Cloudflare (DoH)</item>
+        <item>Google (DoH)</item>
+        <item>Quad9 (DoH)</item>
+    </string-array>
+    <string-array name="fallbackDnsValues" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
 </resources>
