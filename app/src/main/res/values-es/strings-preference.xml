@@ -122,4 +122,12 @@
     <string name="title_check_iptables">Comprueba si hay iptables</string>
     <string name="summary_iptables_mode">Reenvía las consultas a Nebulo usando iptables. Esto requiere privilegios de root. Cuando está habilitado, no es necesario utilizar aplicaciones externas cuando se está en modo no VPN. Esto podría no funcionar cuando se está en una red IPv6.</string>
     <string name="title_iptables_mode">Usar iptables</string>
+    <string name="fallbackdns_isp">Proveedor de servicios (Sin codificar)</string>
+    <string name="summary_nonvpn_help">Haga clic aquí para obtener instrucciones sobre cómo usar esta aplicación</string>
+    <string name="preference_category_nonvpnmode_help">Instrucciones para aplicaciones de terceros</string>
+    <string name="summary_iptables_disable_ipv6">Deshabilitar IPv6 cuando se usa iptables y se puede usar IPv4 en su lugar. Esto podría arreglar las consultas DNS que evitan las iptables cuando IPv6 está activado.</string>
+    <string name="title_iptables_disable_ipv6">Desactivar IPv6</string>
+    <string name="preference_category_iptables">Iptables</string>
+    <string name="summary_fallback_dns">Configurar el servidor DNS que Nebulo usa internamente. Esto es por defecto el servidor DNS de su proveedor de servicios. Este servidor configurado sólo se utiliza para propósitos internos y no maneja sus consultas DNS normales.</string>
+    <string name="title_fallback_dns">Servidor DNS de fallback</string>
 </resources>
