@@ -107,7 +107,7 @@
     <string name="dialog_clearuserrules_title">Limpar todas as regras de DNS\?</string>
     <string name="dialog_clearuserrules_message">Você quer limpar todas as regras de DNS\? Isto não pode ser desfeito.</string>
     <string name="dialog_newhostsource_title">Nova fonte de regras</string>
-    <string name="dialog_newhostsource_edit_title">Nova fonte de regras</string>
+    <string name="dialog_newhostsource_edit_title">Editar fonte da regra</string>
     <string name="dialog_newhostsource_name">Nome</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newhostsource_choose_file">Escolher arquivo</string>
@@ -165,4 +165,17 @@
     <string name="dialog_hostsourcerefresh_automatic_refresh">Atualize automaticamente as fontes do host</string>
     <string name="dialog_hostsourcerefresh_title">Actualizar fontes anfitriãs</string>
     <string name="dialog_exportdnsrules_whitelist">Exportar regras da lista branca</string>
+    <string name="dialog_nonvpn_help_netguard">Para usar o modo Não-VPN em conjunto com o NetGuard, faça o seguinte:
+\n - Verifique se você tem a versão F-Droid do NetGuard instalada. Ela não funciona com a versão do GPlay.
+\n - Vá para configurações &gt; Opções avançadas
+\n - Activar o tráfego do filtro (se ainda não estiver activado)
+\n - Clique em Port Forwarding
+\n - Adicione as seguintes regras:
+\n
+\n - Protocolo UDP, porta de origem 53, destino 127.0.0.1, porta de destino %1d, aplicação de destino ninguém
+\n - Repetir para TCP
+\n
+\n - Voltar às opções avançadas
+\n - Role para baixo, defina ambos os campos DNS VPN para 127.0.0.1
+\n - Iniciar o Nebulo (em modo não-VPN) e iniciar o NetGuard</string>
 </resources>
