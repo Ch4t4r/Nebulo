@@ -166,7 +166,19 @@
     <string name="dialog_raterequest_title">Ti sta piacendo Nebulo\?</string>
     <string name="dialog_raterequest_message">Ehilà! Se ti piace Nebulo, potresti prenderti un momento per valutarlo nello store\?</string>
     <string name="dialog_vpn_permission_denied_message">Il sistema ha impedito a Nebulo di avviare la sua VPN. Apri l\'app per concedere l\'autorizzazione cliccando il pulsante Avvia.</string>
-
     <string name="dialog_doh_detect_type_message">Attendere prego.</string>
     <string name="dialog_doh_detect_type_title">Rilevazione tipo di server</string>
+    <string name="dialog_nonvpn_help_netguard">Per usare la modalità Non-VPN assieme a NetGuard, segui questi passi:
+\n - controlla di avere la versione F-Droid di NetGuard installata. Non funziona con la versione da GPlay.
+\n - vai nelle impostazioni &gt; Opzioni avanzate
+\n - attiva Filtra traffico (se non già attivo)
+\n - clicca su Port Forwarding
+\n - aggiungi le seguenti regole:
+\n
+\n • Protocollo UDP, porta di origine 53, destinazione 127.0.0.1, porta di destinazione %1d, applicazione di destinazione nessuno
+\n • Ripeti per il TCP
+\n
+\n - torna alle opzioni avanzate
+\n - scorri giù, imposta entrambi i campi VPN DNS a 127.0.0.1
+\n - avvia Nebulo (in modalità non-VPN) e avvia NetGuard</string>
 </resources>
