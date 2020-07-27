@@ -407,6 +407,8 @@
         <item>Version 1.3.1 (Build 62)</item>
         <item>@string/changelog_build_62_1</item>
         <item>@string/changelog_build_62_2</item>
+        <item>@string/changelog_build_62_3</item>
+        <item>@string/changelog_build_62_4</item>
     </string-array>
 
     <string name="changelog_build_55_4">The query log now loads the queries in chunks instead of all at once</string>
