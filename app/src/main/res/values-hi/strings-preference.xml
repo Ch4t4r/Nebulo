@@ -122,4 +122,11 @@
     <string name="title_check_iptables">Iptables की जाँच करें</string>
     <string name="summary_iptables_mode">नेबूलो को iptables का उपयोग करके क्वेरी को अग्रेषित करें। इसके लिए रूट विशेषाधिकारों की आवश्यकता होती है। जब गैर-वीपीएन मोड में सक्षम होने पर किसी बाहरी ऐप का उपयोग करने की आवश्यकता नहीं होती है। जब आप IPv6 नेटवर्क पर होते हैं तो यह काम नहीं कर सकता है।</string>
     <string name="title_iptables_mode">Iptables का उपयोग करें</string>
+    <string name="fallbackdns_isp">सेवा प्रदाता (अनएन्क्रिप्टेड)</string>
+    <string name="summary_nonvpn_help">इस ऐप के साथ उपयोग करने के निर्देश प्राप्त करने के लिए यहां क्लिक करें</string>
+    <string name="preference_category_nonvpnmode_help">तृतीय-पक्ष एप्लिकेशन के लिए निर्देश</string>
+    <string name="summary_iptables_disable_ipv6">IPv6 का उपयोग करते समय IPv6 को अक्षम करें और इसके बजाय IPv4 का उपयोग किया जा सकता है। IPv6 सक्षम होने पर यह iptables को दरकिनार करते हुए DNS प्रश्नों को ठीक कर सकता है।</string>
+    <string name="title_iptables_disable_ipv6">IPv6 को अक्षम करें</string>
+    <string name="preference_category_iptables">Iptables</string>
+    <string name="summary_fallback_dns">DNS सर्वर Nebulo को आंतरिक रूप से उपयोग करता है कॉन्फ़िगर करें। यह आपके सेवा प्रदाताओं के डीएनएस सर्वर को डिफॉल्ट करता है। यह कॉन्फ़िगर किया गया सर्वर केवल आंतरिक उद्देश्यों के लिए उपयोग किया जाता है और आपके सामान्य DNS प्रश्नों को संभालता नहीं है।</string>
 </resources>
