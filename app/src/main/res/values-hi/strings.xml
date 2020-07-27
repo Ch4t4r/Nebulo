@@ -78,4 +78,5 @@
     <string name="iptables_not_supported">आपका डिवाइस iptables का समर्थन नहीं करता है</string>
     <string name="iptables_supported_ipv6_unsupported">Iptables समर्थित है, लेकिन IPv6 समर्थित नहीं है।</string>
     <string name="iptables_supported">बधाई हो, iptables आपके डिवाइस द्वारा समर्थित है!</string>
+    <string name="window_dnsrules_refresh_sources">स्रोत से नियमों को आयात करने के लिए ताज़ा करें</string>
 </resources>
