@@ -136,7 +136,7 @@
     <string name="dialog_newdnsrule_hint_ipv6address">Adresse IPv6</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Veuillez fournir une adresse IPv6 valide</string>
     <string name="dialog_exportdnsrules_title">Exporter les règles du DNS</string>
-    <string name="dialog_newhostsource_edit_title">Nouvelle source de règles</string>
+    <string name="dialog_newhostsource_edit_title">Modifier la source de la règle</string>
     <string name="dialog_newdnsrule_edit">Modifier la règle DNS</string>
     <string name="dialog_editdelete_title">Que voulez-vous faire \?</string>
     <string name="dialog_editdelete_delete">Supprimer</string>
@@ -164,4 +164,17 @@
     <string name="dialog_raterequest_title">Vous appréciez Nebulo \?</string>
     <string name="dialog_doh_detect_type_message">Veuillez patienter un instant.</string>
     <string name="dialog_doh_detect_type_title">Détection du type de serveur</string>
+    <string name="dialog_nonvpn_help_netguard">Pour utiliser le mode Non-VPN avec NetGuard, procédez comme suit :
+\n - Vérifiez que vous avez bien installé la version F-Droid de NetGuard. Elle ne fonctionne pas avec la version de GPlay.
+\n - Allez dans les paramètres &gt; Options avancées
+\n - Activer le filtrage du trafic (si ce n\'est pas déjà fait)
+\n - Cliquez sur \"Port Forwarding
+\n - Ajouter les règles suivantes :
+\n
+\n - Protocole UDP, port source 53, destination 127.0.0.1, port de destination %1d, application de destination nobody
+\n - Répéter pour TCP
+\n
+\n - Retour aux options avancées
+\n - Faites défiler vers le bas, réglez les deux champs DNS VPN sur 127.0.0.1
+\n - Démarrez Nebulo (en mode non-VPN) et lancez NetGuard</string>
 </resources>
