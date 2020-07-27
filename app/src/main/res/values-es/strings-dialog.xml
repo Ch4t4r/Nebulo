@@ -104,7 +104,7 @@
     <string name="dialog_newdnsrule_whitelist">Lista blanca</string>
     <string name="dialog_newdnsrule_specify_address">Dirección</string>
     <string name="dialog_newhostsource_use_as_whitelist">Usar como lista blanca</string>
-    <string name="dialog_newhostsource_edit_title">Nueva fuente de reglas</string>
+    <string name="dialog_newhostsource_edit_title">Editar fuente de reglas</string>
     <string name="dialog_newdnsrule_edit">Editar la regla del DNS</string>
     <string name="dialog_editdelete_edit">Edita</string>
     <string name="dialog_editdelete_delete">Eliminar</string>
