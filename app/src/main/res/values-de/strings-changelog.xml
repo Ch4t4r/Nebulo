@@ -134,4 +134,6 @@
     <string name="changelog_build_59_7">Nebulo kann nun in einem nicht-VPN Modus gestartet werden (experimentell), in welchem ein lokaler DNS Server statt des Dummy VPN genutzt wird. Hierfür werden Drittanbieterapps benötigt, um die DNS Anfragen zu Nebulo weiterzuleiten</string>
     <string name="changelog_build_62_2">Unterstützung von iptables im Nicht-VPN Modus hinzugefügt. Dies benötigt root-Rechte</string>
     <string name="changelog_build_62_1">Beim Starten von Nebulo durch ein Shortcut wird der Server nun gespeichert</string>
+    <string name="changelog_build_62_4">Der interne (Fallback) DNS Server kann nun konfiguriert werden</string>
+    <string name="changelog_build_62_3">Quellen von DNS Regeln können nun einzeln aktualisiert werden</string>
 </resources>
