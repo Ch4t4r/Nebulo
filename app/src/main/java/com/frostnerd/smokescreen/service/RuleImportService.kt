@@ -61,6 +61,7 @@ class RuleImportService : IntentService("RuleImportService") {
     private val ruleCommitSize = 10000
     private var notification: NotificationCompat.Builder? = null
     private var ruleCount: Int = 0
+    private var newlyAddedRuleCount:Int = 0
     private var isAborted = false
     private lateinit var sources:List<HostSource>
     private lateinit var sourcesIds:List<Long>
@@ -139,10 +140,9 @@ class RuleImportService : IntentService("RuleImportService") {
         successNotification.setSmallIcon(R.drawable.ic_mainnotification)
         successNotification.setAutoCancel(true)
         successNotification.setContentTitle(getString(R.string.notification_ruleimportfinished_title))
-        val actualRuleCount = getDatabase().dnsRuleDao().getNonUserCount()
         getString(R.string.notification_ruleimportfinished_message,
-            actualRuleCount,
-            ruleCount - actualRuleCount).apply {
+            ruleCount,
+            ruleCount - newlyAddedRuleCount).apply {
             successNotification.setContentText(this)
             successNotification.setStyle(NotificationCompat.BigTextStyle().bigText(this))
         }
@@ -261,6 +261,7 @@ class RuleImportService : IntentService("RuleImportService") {
             getDatabase().hostSourceDao().removeChecksumForDisabled()
             log("Done.")
             if(isServiceRunning(DnsVpnService::class.java)) DnsVpnService.restartVpn(this, false)
+            newlyAddedRuleCount = sourcesIds.sumBy { dnsRuleDao.getCountForHostSource(it) }
             showSuccessNotification()
         } else {
             dnsRuleDao.deleteStagedRules()
