@@ -22,8 +22,8 @@
 Nebulo is a free, open-source, non-root and small sized DNS changer for Android utilizing dns-over-https and dns-over-tls to bring privacy and security to your phone.
 It is fast, contains no ads or tracking and offers a lot of flexibility.
 
-# Our mission
-Our mission is to provide access to dns-over-tls and dns-over-https as a tool against censorship and tracking. Many countries block controversial or government-critical websites using DNS which can possibly be circumvented using either of those protocols.
+# My mission
+My mission is to provide access to dns-over-tls and dns-over-https as a tool against censorship and tracking. Many countries block controversial or government-critical websites using DNS which can possibly be circumvented using either of those protocols.
 The second topic, tracking, is nearly as important as the topic of censorship. Many ISPs use their own DNS servers as a way of tracking their users. Using DoH/DoT puts an end to this by encrypting your dns queries.
 
 # How it works
@@ -73,10 +73,12 @@ Go to the [play store](https://play.google.com/store/apps/details?id=com.frostne
     - Or add it yourself, fdroid.frostnerd.com/fdroid with fingerprint 74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26
     - You can use the [QR-Code as well](material/fdroid_qr.jpg) .
     - I recommend using [Aurora Droid](https://gitlab.com/AuroraOSS/auroradroid) , it contains the repository by default
-2. Update your repositories (by pulling down to refresh)
-3. Search for Nebulo
-4. Download the app.
-5. Don't forget to check for updates sometimes.
+2. (Optional, for older versions of Nebulo) Add the F-Droid archive by clicking [this link](https://fdroidarchive.frostnerd.com/?fingerprint=74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26).
+    -  Or add it yourself, fdroidarchive.frostnerd.com with fingerprint 74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26
+3. Update your repositories (by pulling down to refresh)
+4. Search for Nebulo
+5. Download the app.
+6. Don't forget to check for updates sometimes.
 
 
 ## Binary
