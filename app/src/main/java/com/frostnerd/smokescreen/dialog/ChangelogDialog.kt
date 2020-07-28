@@ -58,7 +58,7 @@ class ChangelogDialog(context: Context, versionToStartFrom:Int, val showOptOut:B
                 changes[versionCode] = changelog.toList()
             } else {
                 misses++
-                if(misses > 5) break
+                if(misses > 15) break
             }
         }
         setOnShowListener {
