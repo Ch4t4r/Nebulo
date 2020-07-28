@@ -42,8 +42,8 @@
     <string name="dialog_raterequest_title">Nebuloを楽しんでいますか？</string>
     <string name="dialog_exportdnsrules_nonwhitelist">通常のルールをエクスポート</string>
     <string name="dialog_exportdnsrules_whitelist">ホワイトリストルールのエクスポート</string>
-    <string name="dialog_vpninformation_message">Nebuloは、ダミーのVPNを使用して、すべてのDNSリクエストをキャプチャし、選択した安全なサーバーに転送します。 
-\nこのダミーVPNは、実際のVPNではなく、どちらもあなたの個人情報を隠すことはありません、また、それはあなたのIPアドレスを変更することはありません。 
+    <string name="dialog_vpninformation_message">Nebuloは、ダミーのVPNを使用して、すべてのDNSリクエストをキャプチャし指定したサーバーに安全に転送します。 
+\nこのダミーVPNは実際のVPNではなく、どちらもあなたの個人情報を隠すことはありません、またあなたのIPアドレスを変更することはありません。 
 \n 
 \n本アプリを使用してDNSリクエスト以外の実際のデータを送信することはありません。</string>
     <string name="dialog_vpninformation_title">このアプリの仕組み</string>
@@ -75,7 +75,7 @@
     <string name="dialog_editdelete_edit">編集</string>
     <string name="dialog_editdelete_title">このサーバーを編集または削除しますか？</string>
     <string name="dialog_newdnsrule_edit">DNSルールの編集</string>
-    <string name="dialog_newhostsource_edit_title">新しいルールソース</string>
+    <string name="dialog_newhostsource_edit_title">ルールソースの編集</string>
     <string name="dialog_newhostsource_use_as_whitelist">ホワイトリストとして使用</string>
     <string name="dialog_newdnsrule_specify_address">IPアドレス</string>
     <string name="dialog_newdnsrule_whitelist">ホワイトリスト</string>
@@ -94,7 +94,7 @@
     <string name="dialog_newhostsource_url">ＵＲＬ</string>
     <string name="dialog_newhostsource_name">名称</string>
     <string name="dialog_newhostsource_title">新しいルールソース</string>
-    <string name="dialog_clearuserrules_message">DNSのルールをすべてクリアしてよいですか？これを元に戻すことはできません。</string>
+    <string name="dialog_clearuserrules_message">すべてのDNSルールをクリアしますか？これを元に戻すことはできません。</string>
     <string name="dialog_clearuserrules_title">すべてのDNSルールをクリアしますか？</string>
     <string name="dialog_deletehostsource_message">ホスト・ソース「 %1s」 を削除してもよろしいですか\?これを元に戻すことはできません。このソースのホストは削除されます。</string>
     <string name="dialog_deletehostsource_title">%1sを削除しますか\?</string>
