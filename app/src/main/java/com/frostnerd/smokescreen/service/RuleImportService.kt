@@ -97,9 +97,7 @@ class RuleImportService : IntentService("RuleImportService") {
             getDatabase().hostSourceDao().getAllEnabled().filter {
                 it.id in ids
             }
-        } ?: getDatabase().hostSourceDao().getAllEnabled()).sortedByDescending {
-            it.whitelistSource // Process whitelist first
-        }
+        } ?: getDatabase().hostSourceDao().getAllEnabled()).sortedWith(compareBy({it.whitelistSource}, {it.name}))
         sourcesIds = sources.map { it.id }
         startWork()
     }
