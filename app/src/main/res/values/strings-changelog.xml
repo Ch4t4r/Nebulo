@@ -404,7 +404,7 @@
     <string name="changelog_build_62_3">DNS rule sources can now be updated individually</string>
     <string name="changelog_build_62_4">The internal (fallback) DNS server can now be configured</string>
     <string-array name="changelog_build_62">
-        <item>Version 1.3.1 (Build 62)</item>
+        <item>Version 1.4.0 (Build 62)</item>
         <item>@string/changelog_build_62_1</item>
         <item>@string/changelog_build_62_2</item>
         <item>@string/changelog_build_62_3</item>
