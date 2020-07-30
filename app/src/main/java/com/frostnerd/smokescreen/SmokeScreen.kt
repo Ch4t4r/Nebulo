@@ -60,9 +60,13 @@ class SmokeScreen : Application() {
         var sentryReady:Boolean = false
             private set
 
-        private fun setFallbackDns(to: HttpsDnsServerInformation?) {
-            if (to == null) AddressCreator.globalResolve = AddressCreator.defaultResolver
+        private fun setFallbackDns(to: HttpsDnsServerInformation?, context: Context) {
+            if (to == null) {
+                context.log("Using no fallback DNS server")
+                AddressCreator.globalResolve = AddressCreator.defaultResolver
+            }
             else {
+                context.log("Using fallback server: $to")
                 val httpClient = OkHttpClient.Builder()
                     .connectTimeout(3000, TimeUnit.MILLISECONDS)
                     .readTimeout(3000, TimeUnit.MILLISECONDS)
@@ -146,9 +150,9 @@ class SmokeScreen : Application() {
     }
 
     private fun handleFallbackDns() {
-        setFallbackDns(getPreferences().fallbackDns as HttpsDnsServerInformation?)
+        setFallbackDns(getPreferences().fallbackDns as HttpsDnsServerInformation?, this)
         getPreferences().listenForChanges("fallback_dns_server", getPreferences().preferenceChangeListener { changes ->
-            setFallbackDns(changes["fallback_dns_server"]?.second as HttpsDnsServerInformation?)
+            setFallbackDns(changes["fallback_dns_server"]?.second as HttpsDnsServerInformation?, this@SmokeScreen)
         })
     }
 
