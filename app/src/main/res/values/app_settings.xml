@@ -5,8 +5,8 @@
     <bool name="add_default_hostsources">false</bool>
 
     <string-array name="interface_address_prefixes">
-        <item>192.168.0/24</item>
-        <item>172.18.234/12</item>
         <item>10.18.234/8</item>
+        <item>172.18.234/12</item>
+        <item>192.168.0/24</item>
     </string-array>
 </resources>
