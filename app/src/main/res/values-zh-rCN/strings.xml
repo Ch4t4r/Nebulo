@@ -73,4 +73,5 @@
     <string name="main_dnssurveillance_privacystatement">使用 %1s 的隐私声明</string>
     <string name="error_webview_missing">没有找到WebView软件包。当前它是正在更新，还是已被移除？</string>
     <string name="activity_label_import_queries">导入请求项</string>
+    <string name="restart_app_for_changes">重启应用以使更改生效</string>
 </resources>
