@@ -127,7 +127,7 @@
 \n 
 \n ここにあなたの名前を載せてみませんか\? &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;ここ&lt;/a&gt;を気軽に覗いてみてください(英語サイト)。</string>
     <string name="dialog_credits_title">クレジット</string>
-    <string name="dialog_clearqueries_message">クエリログをクリアしますか？この操作は元に戻すことはできません。</string>
+    <string name="dialog_clearqueries_message">クエリログをクリアしますか？この操作を元に戻すことはできません。</string>
     <string name="dialog_crashreporting_message_notester">この度はNebuloをご利用いただきありがとうございます!
 \n 
 \nこのアプリは、オープンソースおよび自ホストのサードパーティ製ソフトウェアを使用しており、アプリのクラッシュが発生するとすぐに簡単に追跡できるようになっています。有効にすると、アプリがクラッシュに遭遇したときに、アプリはクラッシュレポートを送信します。これらのレポートには、アプリとデバイスに関する追加データが含まれます。これには、同じユーザーからのクラッシュを追跡するために使用されるIDが含まれますが、他の何かを追跡するために使用することはできません。クラッシュレポートを有効にすることはオプションですが、バグの修正をより簡単かつ迅速に行うことができます。 
@@ -149,7 +149,7 @@
     <string name="dialog_crashreporting_title">自動クラッシュレポート送信</string>
     <string name="dialog_pin_message">PINを入力してください。</string>
     <string name="dialog_query_export_message">クエリがエクスポートされるまでお待ちください</string>
-    <string name="dialog_query_export_title">クエリのエクスポート…</string>
+    <string name="dialog_query_export_title">クエリのエクスポート中…</string>
     <string name="dialog_about_licenses">ライセンス</string>
     <string name="dialog_changelog_dont_show_again">次から表示しない</string>
     <string name="dialog_changelog_infotext">最後にアプリを開いてから更新されています。以下のリストでは、変更履歴を見ることができます。以下のボックスにチェックを入れると、今後このメッセージが表示されなくなります。</string>
