@@ -110,7 +110,7 @@
     <string name="dialog_clearuserrules_title">Eliminare tutte le regole DNS\?</string>
     <string name="dialog_clearuserrules_message">Sei sicuro di volere eliminare tutte le regole DNS\? Non può essere annullato.</string>
     <string name="dialog_newhostsource_title">Nuova fonte regole</string>
-    <string name="dialog_newhostsource_edit_title">Nuova fonte regole</string>
+    <string name="dialog_newhostsource_edit_title">Modifica fonte regole</string>
     <string name="dialog_newhostsource_name">Nome</string>
     <string name="dialog_newhostsource_wildcard_info">Puoi usare liste di host che fanno uso di domini jolly.</string>
     <string name="dialog_newhostsource_url">URL</string>
