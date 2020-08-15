@@ -1,6 +1,8 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="tasker_start_if_running">Memulai walaupun sudah berjalan (dapat mengesampingkan konfigurasi)</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tasker_start_if_running">Memulai walaupun sudah berjalan (dapat mengesampingkan konfigurasi)</string>
     <string name="tasker_action">Tindakan</string>
     <string name="tasker_start_app_custom_url">Mulai aplikasi dengan %1s (Mode: %2s)</string>
     <string name="tasker_start_app_custom_urls">Mulai aplikasi dengan %1s dan %2s (Mode: %3s)</string>
-    </resources>
+    <string name="tasker_use_custom_server">Spesifikasi server khusus</string>
+</resources>
