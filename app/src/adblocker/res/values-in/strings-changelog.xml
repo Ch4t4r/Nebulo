@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="changelog_build_41_adblocker_1">Menambahkan dua sumber aturan DNS baru</string>
+    <string name="changelog_build_29_2">Adguard DNS ditambahkan</string>
+    <string name="changelog_build_29_1">Server yang memblokir iklan sekarang ditampilkan di build non-playstore (termasuk yang ini!)</string>
+</resources>
