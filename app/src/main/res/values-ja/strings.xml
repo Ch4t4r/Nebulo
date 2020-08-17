@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="window_main_privatedns_info">プライベートDNSが有効のため、DNSクエリはすでに保護されています。DNS over HTTPSやその他の便利な機能を使用したい場合は、Nebuloを有効にしてください。</string>
+    <string name="window_main_privatedns_info">既にプライベートDNSが有効のため、DNSクエリは保護されています。DNS over HTTPSやその他の便利な機能を使用したい場合は、Nebuloを有効にしてください。</string>
     <string name="windows_querylogging_usedserver_cache">DNSキャッシュで解決済</string>
-    <string name="windows_querylogging_usedserver_dnsrules">以下のDNSルールで解決済</string>
+    <string name="windows_querylogging_usedserver_dnsrules">DNSルールで解決済</string>
     <string name="window_dnsrules_customhosts">ホスト名のカスタマイズ</string>
     <string name="about_app">このアプリはオープンソースです。ソースコードは&lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;から確認することができます。
 \nこのアプリは広告表示やユーザーの情報取得や収集をすることは一切ありません。
@@ -24,7 +24,7 @@
     <string name="windows_querylogging_protocol">プロトコル</string>
     <string name="windows_querylogging_hostsource__user">ユーザールール</string>
     <string name="windows_querylogging_hostsource">DNSルールのソース</string>
-    <string name="windows_querylogging_used_server">使用するサーバー</string>
+    <string name="windows_querylogging_used_server">使用サーバー</string>
     <string name="window_dnsrules_customhosts_message">変更したいホスト名をここに入力</string>
     <string name="window_speedtest_runtest">テストを開始</string>
     <string name="about_info">一般情報</string>
@@ -35,7 +35,7 @@
     <string name="iptables_supported">このデバイスはiptablesをサポートしています、おめでとう!</string>
     <string name="restart_app">再起動</string>
     <string name="restart_app_for_changes">変更を反映するには、アプリを再起動してください。</string>
-    <string name="windows_querylogging_create_dnsrule">このホストに対するDNSルールを作成します</string>
+    <string name="windows_querylogging_create_dnsrule">このホストのDNSルール作成</string>
     <string name="windows_querylogging_latency">レイテンシ</string>
     <string name="windows_querylogging_hostsource__unknown">不明</string>
     <string name="windows_querylogging_question">問い合わせ</string>
@@ -51,7 +51,7 @@
     <string name="windows_querylogging_search_hint">クエリログからホスト名を検索</string>
     <string name="window_dnsrules_hostalreadyexists">既にこのホスト名に対するルールが登録されています</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">取り込んだルール数: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">取り込んだルール数: %1d (重複しているため未使用: %2$d)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">取り込んだルール数: %1d (重複未使用: %2$d)</string>
     <plurals name="window_dnsrules_subtitle">
         <item quantity="other">%1dのルール</item>
     </plurals>
@@ -77,4 +77,5 @@
     <string name="all_stop">停止</string>
     <string name="activity_label_import_servers">サーバーのインポート</string>
     <string name="activity_label_import_queries">クエリのインポート</string>
+    <string name="window_dnsrules_refresh_sources">ソースからルールをインポートするには更新してください</string>
 </resources>

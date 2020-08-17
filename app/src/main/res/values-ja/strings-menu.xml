@@ -3,8 +3,8 @@
     <string name="menu_show_on_fdroid">F-Droidでの表示</string>
     <string name="menu_main">アプリの状態</string>
     <string name="menu_about">このアプリについて</string>
-    <string name="menu_rate">レート</string>
-    <string name="menu_create_shortcut">サーバーのショートカットを作成する</string>
-    <string name="menu_querylogging">ログされたクエリ</string>
+    <string name="menu_rate">このアプリを評価</string>
+    <string name="menu_create_shortcut">サーバーのショートカット作成</string>
+    <string name="menu_querylogging">クエリログ</string>
     <string name="menu_settings">設定</string>
 </resources>
