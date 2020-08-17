@@ -2,6 +2,7 @@
 
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -28,8 +29,8 @@
                         android:layout_width="24dp"
                         android:id="@+id/timeImage"
                         android:src="@drawable/ic_query_time"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="24dp"/>
+                        android:layout_height="24dp"
+                        app:tint="?android:attr/textColor" />
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -60,8 +61,8 @@
                         android:layout_width="24dp"
                         android:id="@+id/questionImage"
                         android:src="@drawable/ic_query_question"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="24dp"/>
+                        android:layout_height="24dp"
+                        app:tint="?android:attr/textColor" />
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -92,8 +93,8 @@
                         android:layout_width="24dp"
                         android:id="@+id/typeImage"
                         android:src="@drawable/ic_query_type"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="24dp"/>
+                        android:layout_height="24dp"
+                        app:tint="?android:attr/textColor" />
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -124,8 +125,8 @@
                         android:layout_width="24dp"
                         android:id="@+id/serverImage"
                         android:src="@drawable/ic_query_askedserver"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="24dp"/>
+                        android:layout_height="24dp"
+                        app:tint="?android:attr/textColor" />
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -157,8 +158,8 @@
                         android:layout_width="24dp"
                         android:id="@+id/hostSourceImage"
                         android:src="@drawable/ic_view_list"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="24dp"/>
+                        android:layout_height="24dp"
+                        app:tint="?android:attr/textColor" />
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -189,8 +190,8 @@
                         android:layout_width="24dp"
                         android:id="@+id/protocolImage"
                         android:src="@drawable/ic_lock_white"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="24dp"/>
+                        android:layout_height="24dp"
+                        app:tint="?android:attr/textColor" />
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -221,8 +222,8 @@
                         android:layout_width="24dp"
                         android:id="@+id/latencyImage"
                         android:src="@drawable/ic_query_latency"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="24dp"/>
+                        android:layout_height="24dp"
+                        app:tint="?android:attr/textColor" />
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -252,8 +253,8 @@
                         android:layout_width="24dp"
                         android:id="@+id/responseImage"
                         android:src="@drawable/ic_exclamation"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="24dp"/>
+                        android:layout_height="24dp"
+                        app:tint="?android:attr/textColor" />
 
                 <TextView
                         android:layout_width="wrap_content"

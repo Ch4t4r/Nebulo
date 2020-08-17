@@ -37,8 +37,8 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_shield"
-                        android:tint="?android:attr/textColor"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        app:tint="?android:attr/textColor" />
 
                 <TextView
                         android:id="@+id/text"

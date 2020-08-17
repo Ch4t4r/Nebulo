@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -19,7 +20,7 @@
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:contentDescription="@string/contentdescription_main_statusimage"
-                android:tint="?attr/inputElementColor" />
+                app:tint="?attr/inputElementColor" />
 
         <TextView
                 android:layout_width="wrap_content"

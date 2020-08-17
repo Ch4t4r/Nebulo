@@ -21,8 +21,8 @@
                 android:id="@+id/whitelistIndicator"
                 android:layout_centerVertical="true"
                 android:visibility="gone"
-                android:tint="?android:attr/textColor"
-                android:layout_height="32dp"/>
+                android:layout_height="32dp"
+                app:tint="?android:attr/textColor" />
 
         <LinearLayout
                 android:layout_width="match_parent"
