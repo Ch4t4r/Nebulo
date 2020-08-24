@@ -251,7 +251,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val checkIpTables = findPreference("check_iptables")
         val helpNetguard = findPreference("nonvpn_help_netguard")
         port.setOnPreferenceChangeListener { _, newValue ->
-            if (newValue.toString().isNotEmpty() && newValue.toString().isInt() && newValue.toString().toInt() > 1024) {
+            if (newValue.toString().toIntOrNull()?.let { it in 1025..65535 } == true) {
                 port.summary = getString(R.string.summary_local_server_port, newValue.toString())
                 connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, newValue.toString())
                 true
