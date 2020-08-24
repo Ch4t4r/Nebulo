@@ -28,7 +28,9 @@
 \nPin saat ini: %1s</string>
     <string name="preference_category_cache">Kontrol cache</string>
     <string name="title_dnscache_enabled">Gunakan cache DNS</string>
-    <string name="summary_dnscache_enabled">Mengaktifkan cache DNS apl. Cache menghafal permintaan lama untuk menjawab pertanyaan selanjutnya dengan lebih cepat</string>
+    <string name="summary_dnscache_enabled">Mengaktifkan cache DNS aplikasi. Cache mengingat permintaan lama untuk menjawab pertanyaan mendatang lebih cepat.
+\n
+\nSistem sudah memiliki cache, aktifkan ini jika Anda ingin menyesuaikan perilaku</string>
     <string name="title_dnscache_keepacrosslaunches">Simpan cache DNS</string>
     <string name="summary_dnscache_keepacrosslaunches">Simpan cache DNS di beberapa peluncuran</string>
     <string name="title_dnscache_maxsize">Ukuran cache maksimum</string>
@@ -86,4 +88,46 @@
     <string name="summary_export_queries">Ekspor kueri sebagai CSV (%1d kueri)</string>
     <string name="title_delete_queries">Hapus kueri</string>
     <string name="summary_delete_queries">Klik di sini untuk menghapus semua kueri yang dicatat</string>
+    <string name="preference_category_nonvpnmode_help">Panduan untuk aplikasi pihak ketiga</string>
+    <string name="title_check_iptables">Memeriksa iptables</string>
+    <string name="crashreporting_type_off">Mati (jangan mengirim laporan rusak)</string>
+    <string name="fallbackdns_isp">Penyedia layanan (tidak terenkripsi)</string>
+    <string name="crashreporting_type_minimal">Sedikit (hanya laporan Android &amp; versi Aplikasi)</string>
+    <string name="crashreporting_type_full">Penuh (laporan statistik dan data debug)</string>
+    <string name="summary_nonvpn_help">Klik disini untuk mendapatkan intruksi tentang cara menggunakan dengan aplikasi ini</string>
+    <string name="summary_check_iptables">Periksa apakah perangkat anda mendukung iptables</string>
+    <string name="summary_iptables_disable_ipv6">Nonaktifkan IPv6 saat menggunakan iptables dan IPv4 dapat digunakan sebagai gantinya. Ini mungkin memperbaiki kueri DNS yang melewati iptables saat IPv6 diaktifkan.</string>
+    <string name="title_iptables_disable_ipv6">Matikan IPv6</string>
+    <string name="summary_iptables_mode">Teruskan kueri ke Nebulo menggunakan iptables. Ini membutuhkan hak akses root. Saat diaktifkan, tidak ada aplikasi eksternal yang perlu digunakan saat dalam mode non-vpn. Ini mungkin tidak berfungsi ketika Anda berada di jaringan IPv6.</string>
+    <string name="title_iptables_mode">Gunakan iptables</string>
+    <string name="preference_category_iptables">Iptables</string>
+    <string name="summary_local_server_port">Port server DNS yang akan dihosting. Hanya port di atas 1024 yang diperbolehkan.
+\nSaat ini: %1s</string>
+    <string name="title_local_server_port">Port server</string>
+    <string name="summary_run_without_vpn">Saat dicentang, Nebulo menghosting server DNS di perangkat Anda</string>
+    <string name="title_run_without_vpn">Jalankan tanpa VPN</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server akan dihosting di localhost:%1s</string>
+    <string name="summary_category_nonvpnmode">Konfigurasikan Nebulo untuk bertindak sebagai server DNS pada perangkat daripada menggunakan VPN tiruan. Saat diaktifkan, Anda secara manual harus meneruskan kueri DNS ke Nebulo menggunakan aplikasi pihak ketiga.
+\n
+\nFitur ini bersifat eksperimental.</string>
+    <string name="preference_category_nonvpnmode">Mode non-VPN</string>
+    <string name="summary_map_query_refused">Beberapa server DNS mungkin menolak untuk menjawab pertanyaan jika host tidak diizinkan atau diblokir. Pengaturan ini memblokir host alih-alih menolak kueri, jika tidak, sistem mungkin akan bingung</string>
+    <string name="title_map_query_refused">Menafsirkan permintaan yang ditolak sebagai host yang tidak diizinkan</string>
+    <string name="summary_restart_vpn_on_networkchange">Mulai ulang aplikasi secara diam-diam saat jaringan berubah. Aktifkan ini saat menghadapi masalah saat beralih antar jaringan.
+\n Tidak ada efek saat aplikasi tidak aktif</string>
+    <string name="title_restart_vpn_on_networkchange">Mulai ulang ketika jaringan berubah</string>
+    <string name="summary_crashreporting_type">Konfigurasikan data apa yang harus dikirim ke pengembang saat aplikasi rusak. Data kerusakan tidak pernah berisi data pribadi dan membantu memperbaiki masalah lebih cepat</string>
+    <string name="title_crashreporting_type">Pelaporan kerusakan otomatis</string>
+    <string name="summary_advanced_logging">Menambahkan lebih banyak pencatatan, yang dapat membantu mengatasi masalah yang lebih terus-menerus</string>
+    <string name="title_advanced_logging">Pencatatan lanjutan</string>
+    <string name="summary_clear_dnscache">Klik di sini untuk menghapus cache DNS, misalnya saat situs web mulai berperilaku tidak semestinya karena mereka di-cache</string>
+    <string name="title_clear_dnscache">Hapus cache DNS</string>
+    <string name="summary_show_revoked_notification">Tampilkan pemberitahuan ketika Nebulo kehilangan izin ke VPN</string>
+    <string name="title_show_revoked_notification">Pemberitahuan tentang izin hilang</string>
+    <string name="summary_simple_notification">Gunakan teks sederhana pada pemberitahuan</string>
+    <string name="title_simple_notification">Pemberitahuan sederhana</string>
+    <string name="summary_fallback_dns">Konfigurasikan server DNS yang digunakan Nebulo secara internal. Ini default ke server DNS penyedia layanan Anda. Server yang dikonfigurasi ini hanya digunakan untuk tujuan internal dan tidak menangani kueri DNS normal Anda.</string>
+    <string name="title_fallback_dns">Server DNS cadangan</string>
+    <string name="summary_language">Ubah bahasa pada aplikasi</string>
+    <string name="title_language">Bahasa</string>
 </resources>

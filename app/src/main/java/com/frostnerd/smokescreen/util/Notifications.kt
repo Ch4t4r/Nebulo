@@ -47,7 +47,7 @@ class Notifications {
                 val channel = NotificationChannel(
                     "service_foreground_notification",
                     context.getString(R.string.notification_channel_foreground_service),
-                    NotificationManager.IMPORTANCE_LOW
+                    NotificationManager.IMPORTANCE_DEFAULT
                 )
                 channel.enableLights(false)
                 channel.enableVibration(false)

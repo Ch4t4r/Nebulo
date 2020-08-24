@@ -4,7 +4,7 @@
 \n現在の値: %1d 秒。</string>
     <string name="summary_dnscache_customcachetime">キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きく設定すると、キャッシュされたレコードと実際のレコードが一致しなくなり、サービスが正常に動作しなくなる可能性があります。
 \n現在の値: %1d 秒。</string>
-    <string name="title_enable_logging">動作ログを記録します。</string>
+    <string name="title_enable_logging">動作ログの取得</string>
     <string name="preference_category_logging">動作ログ</string>
     <string name="summary_dnscache_nxdomaincachetime">NXDOMAINリクエストがキャッシュされる時間を変更します。これにより、存在しないドメインに対する応答パフォーマンスが向上します（ブロックされている場合など）。
 \n現在の値：%1d秒</string>
@@ -19,8 +19,7 @@
     <string name="title_clear_dnscache">DNSキャッシュのクリア</string>
     <string name="summary_dnscache_keepacrosslaunches">複数のアプリにまたがるDNSキャッシュを保持します。</string>
     <string name="title_dnscache_keepacrosslaunches">DNSキャッシュの保持</string>
-    <string name="summary_dnscache_enabled">アプリによるDNSキャッシュを有効にします。以前のリクエストを保存することで今後のリクエストを素早く解決します。
-\n
+    <string name="summary_dnscache_enabled">アプリによるDNSキャッシュを有効にします。以前のリクエストを保存することで今後のリクエストを素早く解決します。 
 \nシステムにもキャッシュ機能がありますが、これをカスタマイズしたい場合はこの機能を有効にしてください。</string>
     <string name="title_dnscache_enabled">DNSキャッシュを有効にする</string>
     <string name="preference_category_cache">キャッシュ制御</string>
@@ -57,7 +56,7 @@
     <string name="title_start_after_update">更新後に開始</string>
     <string name="title_theme">テーマ</string>
     <string name="title_language">言語</string>
-    <string name="preference_category_general">ゼネラル</string>
+    <string name="preference_category_general">全般</string>
     <string name="crashreporting_type_off">オフ (クラッシュレポートを送信しない)</string>
     <string name="crashreporting_type_minimal">最小限(Androidとアプリのバージョンのみ報告する)</string>
     <string name="crashreporting_type_full">フル(統計とデバッグデータを報告する)</string>
@@ -68,7 +67,7 @@
     <string name="summary_local_server_port">設置されるDNSサーバーの使用ポート番号を指定します。1024以上が指定可能です。
 \n現在のポート番号: %1s</string>
     <string name="title_local_server_port">ポート番号</string>
-    <string name="summary_run_without_vpn">チェックを入れると、Nebuloは端末にDNSサーバーを設置します</string>
+    <string name="summary_run_without_vpn">チェックを入れると、Nebuloは端末内にDNSサーバーを設置します</string>
     <string name="title_run_without_vpn">非VPNで稼働</string>
     <string name="summary_category_nonvpnmode_forwardinfo">サーバーが localhost:%1s で稼働します。</string>
     <string name="summary_category_nonvpnmode">ダミーのVPNを使用する替わりに、デバイス上にDNSサーバーを設置し機能するようNebuloを構成します。このモードを使う場合、サードパーティのアプリを使用してDNSクエリをNebuloに手動で転送する必要があります。
@@ -80,10 +79,10 @@
     <string name="summary_export_queries">記録したクエリをCSVファイルでエクスポートします。 (%1d クエリ)</string>
     <string name="title_export_queries">クエリのエクスポート</string>
     <string name="summary_log_queries">すべてのDNSクエリとその回答をログとして記録します。</string>
-    <string name="title_log_queries">クエリのログ</string>
-    <string name="preference_category_querylogging">クエリのログ</string>
-    <string name="summary_pause_on_captiveportal">フリーWi-Fi接続時などに表示されるキャプティブポータル検出時にDoH機能を一旦停止します。このときポータルにログインすると、すぐに自動的に再開されます。
-\nこの機能を無効にすると、キャプティブポータルサイトを開くことができなくなり、ログインができなくなる場合があります。</string>
+    <string name="title_log_queries">クエリログ</string>
+    <string name="preference_category_querylogging">クエリログ</string>
+    <string name="summary_pause_on_captiveportal">フリーWi-Fi接続時などに表示されるキャプティブポータル検出時にDoH機能を一旦停止します。このときポータルにログインすると、すぐに自動的に再開されます。 
+\nこの機能を無効にすると、キャプティブポータルサイトが開けず、ログインできなくなる場合があります。</string>
     <string name="title_pause_on_captiveportal">キャプティブポータルの一時停止</string>
     <string name="summary_bypass_searchdomains">ローカルネットワークなどで使用される検索ドメイン（MyPC.localやMyPc.fritz.boxなど）の名前解決を、ローカルネットワークのDNSサーバーに送信します(DoH/DoTサーバーは使用しません)。
 \n本機能を有効にすることを特に推奨します。</string>
@@ -127,4 +126,7 @@
     <string name="summary_iptables_disable_ipv6">iptablesを使用かつ代わりにIPv4を使用する時はIPv6を無効にして下さい。IPv6が有効だと、DNS問い合わせがiptablesの処理から外れることがあります。</string>
     <string name="title_iptables_disable_ipv6">IPv6を無効にする</string>
     <string name="preference_category_iptables">Iptables</string>
+    <string name="fallbackdns_isp">サービスプロバイダー(非暗号化)</string>
+    <string name="summary_fallback_dns">Nebuloがアプリ内部で使用するDNSサーバーを設定します。デフォルトは接続しているプロバイダーが提供するDNSサーバーです。ここで指定したサーバーは内部処理のみに使用され、アプリで扱う通常のDNSクエリには影響しません。</string>
+    <string name="title_fallback_dns">フォールバックDNSサーバー</string>
 </resources>

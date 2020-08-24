@@ -31,4 +31,34 @@
     <string name="notification_vpnrestart_text">Layanan Vpn akan segera dimulai kembali</string>
     <string name="notification_appcrash_title">Nebulo telah rusak</string>
     <string name="notification_appcrash_message">Nebulo telah rusak. Klik di sini untuk pergi ke menu utama dan untuk memulai ulang apl</string>
+    <string name="notification_ruleimport_title">Impor aturan DNS</string>
+    <string name="notification_simple_text">Server saat ini: %1$s</string>
+    <string name="notification_channel_pin_description">Saluran yang digunakan untuk notifikasi terkait PIN, yaitu ketika harus disediakan</string>
+    <string name="notification_channel_high_priorty_description">Saluran untuk pemberitahuan prioritas tinggi misalnya ketika aplikasi kehilangan izin ke VPN</string>
+    <string name="notification_channel_high_priorty">Prioritas tinggi</string>
+    <string name="notification_channel_pin">Pin-Saluran terkait</string>
+    <string name="notification_dnsserver_portdiffers">Port yang dikonfigurasi% 1d tidak dapat digunakan.</string>
+    <string name="notification_dnsserver_message_iptables_failed">Server DNS berjalan di localhost:% 1d. Gagal menginisialisasi iptables, kueri harus diteruskan dengan aplikasi pihak ketiga</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Server DNS berjalan di localhost:% 1d. Kueri diteruskan menggunakan iptables.
+\nPeringatan: IPv6 aktif, kueri mungkin melewati Nebulo.</string>
+    <string name="notification_dnsserver_message_iptables_active">Server DNS berjalan di localhost:% 1d. Kueri diteruskan menggunakan iptables</string>
+    <string name="notification_dnsserver_message">Server DNS berjalan di localhost:% 1d. Teruskan kueri menggunakan aplikasi pihak ketiga</string>
+    <string name="notification_dnsserver_title">Berjalan pada mode non-VPN</string>
+    <string name="notification_service_revoked_message">Klik disini untuk memulai</string>
+    <string name="notification_service_revoked_title">Izin VPN dibatalkan oleh sistem</string>
+    <string name="notification_service_killed_ignore">Abaikan</string>
+    <string name="notification_service_killed_message">Sepertinya aplikasi tersebut sebelumnya dihentikan oleh sistem. Klik di sini untuk mempelajari lebih lanjut</string>
+    <string name="notification_service_killed_title">Informasi mengenai optimasi baterai</string>
+    <string name="notification_pin_message">PIN Anda diperlukan untuk melakukan tindakan itu. Klik di sini untuk mengkonfirmasinya</string>
+    <string name="notification_pin_title">Membutuhkan PIN</string>
+    <string name="notification_ruleexportfinished_message">%1d aturan telah diekspor</string>
+    <string name="notification_ruleexportfinished_title">Mengekspor aturan DNS selesai</string>
+    <string name="notification_ruleimport_secondarymessage">Menyiapkan impor…</string>
+    <string name="notification_ruleexport_secondarymessage">Menyiapkan ekspor…</string>
+    <string name="notification_ruleexport_message">Mengekspor aturan (%1d/%2d)</string>
+    <string name="notification_ruleexport_title">Ekspor aturan DNS</string>
+    <string name="notification_ruleimportfinished_message">%1d aturan telah diimpor (%2$d duplikat dihilangkan)</string>
+    <string name="notification_ruleimport_tertiarymessage">Menyelesaikan impor…</string>
+    <string name="notification_ruleimportfinished_title">Mengimpor aturan DNS selesai</string>
+    <string name="notification_ruleimport_message">Mengimpor aturan DNS dari %1s (%2s)</string>
 </resources>

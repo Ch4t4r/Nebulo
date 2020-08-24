@@ -8,6 +8,7 @@ import android.text.Html
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
+import android.util.AndroidRuntimeException
 import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
@@ -72,8 +73,14 @@ fun showInfoTextDialog(context:Context, title:String, text:String,
         textView?.setLinkTextColor(Color.parseColor("#64B5F6"))
         withDialog?.invoke(dialog)
     } catch (ex: Exception) {
-        if(ex.message?.contains("webview") == false) throw ex
-        else Toast.makeText(context, R.string.error_webview_missing, Toast.LENGTH_LONG).show()
+        if (ex is AndroidRuntimeException ||
+            ex.message?.let {
+                it.contains("webview", true) ||
+                        it.contains("donor package", true)
+            } == true
+        ) Toast.makeText(context, R.string.error_webview_missing, Toast.LENGTH_LONG)
+            .show()
+        else throw ex
     }
 }
 

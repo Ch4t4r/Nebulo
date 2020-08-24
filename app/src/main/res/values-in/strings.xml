@@ -1,9 +1,8 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="activity_label_import_queries">Impor kueri</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="activity_label_import_queries">Impor kueri</string>
     <string name="activity_label_import_servers">Impor server</string>
-
     <string name="activity_label_enable_logging">Ekspor log/Aktifkan pencatatan</string>
-
     <string name="all_stop">Berhenti</string>
     <string name="all_start">Mulai</string>
     <string name="all_pause">Jeda</string>
@@ -13,10 +12,8 @@
     <string name="information">Informasi</string>
     <string name="open_app">Buka apl</string>
     <string name="all_close">Tutup</string>
-
     <string name="main_dnssurveillance_infotext">Perlu diketahui bahwa server DNS yang terhubung dengan Anda dapat merekam situs mana yang Anda kunjungi. Periksa pernyataan privasi untuk informasi lebih lanjut.</string>
     <string name="main_dnssurveillance_privacystatement">Pernyataan privasi %1s</string>
-
     <string name="about_app">Apl ini adalah open source. Kode sumber dapat diakses di &lt;a href=https://nebulo.app/source&gt; nebulo.app/source &lt;/a&gt;.
 \nSelain itu apl ini tidak mengandung iklan dan tidak melacak atau mengumpulkan data tentang Anda.
 \n
@@ -29,10 +26,8 @@
 \nDilisensikan berdasarkan GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
     <string name="app_share_text">Hai, saya menemukan apl ini yang mengenkripsi kueri DNS Anda untuk memberi Anda lebih banyak privasi dan keamanan. Lihat di sini: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
-
     <string name="quicksettings_stop_text">Hentikan Nebulo</string>
     <string name="quicksettings_start_text">Mulai Nebulo</string>
-
     <string name="about_share">Membagi</string>
     <string name="about_licenses">Lisensi Open-source</string>
     <string name="about_changelog">Log perubahan</string>
@@ -42,5 +37,45 @@
     <string name="about_credits">Kredit</string>
     <string name="about_info">Informasi umum</string>
     <string name="about_help_translating">Bantu menerjemahkan</string>
-
+    <string name="window_dnsrules_refresh_sources">Perbaharui untuk mengimpor aturan dari sumber</string>
+    <string name="iptables_not_supported">Perangkat anda tidak mendukung iptables</string>
+    <string name="iptables_supported_ipv6_unsupported">Iptables mendukung, tapi IPv6 tidak mendukung.</string>
+    <string name="iptables_supported">Selamat, perangkat anda mendukung iptables!</string>
+    <string name="restart_app">Mulai ulang</string>
+    <string name="restart_app_for_changes">Mulai ulang aplikasi untuk mendapatkan perubahan.</string>
+    <string name="window_main_privatedns_info">DNS pribadi telah aktif, kueri anda telah siap diproteksi. aktifkan Nebulo jika anda ingin menggunakan DNS-over-HTTPS atau fitur berguna lainnya.</string>
+    <string name="windows_querylogging_usedserver_cache">Selesaikan dengan cache</string>
+    <string name="windows_querylogging_usedserver_dnsrules">Selesaikan dengan aturan sumber</string>
+    <string name="windows_querylogging_dnsrule_created">Aturan DNS telah dibuat</string>
+    <string name="windows_querylogging_create_dnsrule">Buat aturan DNS dari host ini</string>
+    <string name="windows_querylogging_responses">Respon</string>
+    <string name="windows_querylogging_latency">Latensi</string>
+    <string name="windows_querylogging_protocol">Protokol</string>
+    <string name="windows_querylogging_hostsource__unknown">Tidak diketahui</string>
+    <string name="windows_querylogging_hostsource__user">Aturan pengguna</string>
+    <string name="windows_querylogging_hostsource">Sumber aturan DNS</string>
+    <string name="windows_querylogging_used_server">Server digunakan</string>
+    <string name="windows_querylogging_question">Pertanyaan</string>
+    <string name="windows_querylogging_type">Tipe</string>
+    <string name="windows_querylogging_time">Waktu</string>
+    <string name="windows_querylogging_search">Cari-host</string>
+    <string name="windows_querylogging_search_hint">Cari host di log kueri</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Aturan dari sumber ini: %1d (%2$d duplikat tidak digunakan)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Aturan dari sumber ini: -</string>
+    <string name="window_dnsrules_customhosts_message">Definisikan semua hosts khusus anda disini</string>
+    <string name="window_dnsrules_hostalreadyexists">Sudah ada aturan untuk host ini</string>
+    <plurals name="window_dnsrules_subtitle">
+        <item quantity="other">%1d aturan</item>
+    </plurals>
+    <string name="window_dnsrules_customhosts">Hosts khusus</string>
+    <string name="button_main_dnsrules">Aturan DNS</string>
+    <string name="error_no_webbrowser_installed">Anda tidak memiliki aplikasi terpasang untuk melihat link ini</string>
+    <string name="window_speedtest_runtest">Mulai menguji</string>
+    <string name="error_cannot_open_settings">Tidak dapat membuka pengaturan sistem</string>
+    <string name="error_webview_missing">Paket WebView tidak ditemukan, apakah ingin memperbaharui atau menghapus\?</string>
+    <string name="error_invalid_servername">Harap berikan nama</string>
+    <string name="error_invalid_pin">Harap berikan PIN anda</string>
+    <string name="error_invalid_host">Harap berikan host valid</string>
+    <string name="error_invalid_url">Harap berikan url valid</string>
+    <string name="activity_label_speed_test">Perbandingan kecepatan server</string>
 </resources>

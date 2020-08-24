@@ -134,4 +134,6 @@
     <string name="changelog_build_47_7">DNSルールの処理を改善しました</string>
     <string name="changelog_build_43_6">いくつかのクラッシュを修正しました</string>
     <string name="changelog_build_41_8">いくつかのクラッシュを修正しました</string>
+    <string name="changelog_build_62_4">内部(フォールバック)DNSが指定できるようになりました</string>
+    <string name="changelog_build_62_3">DNSルールソースを個別に更新できるようになりました</string>
 </resources>

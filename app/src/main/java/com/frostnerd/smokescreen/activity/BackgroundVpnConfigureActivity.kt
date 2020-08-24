@@ -130,9 +130,9 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         setTheme(getPreferences().theme.dialogStyle)
         super.onCreate(savedInstanceState)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
         actionBar?.hide()
 

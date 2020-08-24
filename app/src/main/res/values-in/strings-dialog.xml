@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="dialog_serverconfiguration_addserver">Tambahkan server</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="dialog_serverconfiguration_addserver">Tambahkan server</string>
     <string name="dialog_serverconfiguration_title">Konfigurasi server</string>
     <string name="dialog_newserver_title_https">Tambahkan server (DoH)</string>
     <string name="dialog_newserver_title_tls">Tambahkan server (DoT)</string>
@@ -10,16 +10,12 @@
     <string name="dialog_newserver_secondaryserver">Server sekunder (Opsional)</string>
     <string name="dialog_deleteconfig_title">Hapus konfigurasi\?</string>
     <string name="dialog_deleteconfig_text">Anda ingin menghapus konfigurasi %1$s\?</string>
-
     <string name="dialog_appchoosal_showsystemapps">Tampilkan apl sistem</string>
     <string name="dialog_appchoosal_whitelist">Hanya gunakan DoH/DoT di apl yang dipilih</string>
-
     <plurals name="dialog_excludedapps_infotext">
         <item quantity="other">%1d apl dikecualikan secara default dan tidak dapat dipilih</item>
     </plurals>
-
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Impor server %1d</item>
         <item quantity="other">Impor server %1d</item>
     </plurals>
     <string name="dialog_serverimport_done">Selesai</string>
@@ -30,45 +26,33 @@
     <string name="dialog_serverimport_text">Silakan pilih server yang ingin Anda impor.
 \n
 \nServer yang sudah diimpor akan diduplikat jika Anda memilihnya.</string>
-
     <string name="dialog_serverimportfailed_title">Gagal mengimpor</string>
     <string name="dialog_serverimportfailed_text">Server tidak dapat diimpor.</string>
     <string name="dialog_serverimportfailed_text_exception">Server tidak dapat diimpor.
 \n(%1s)</string>
-
     <string name="dialog_logexport_text">Bagaimana Anda ingin membagikan log\?</string>
-    <string name="dialog_logexport_general">Ekspor umum</string>
-    <string name="dialog_logexport_email">Email</string>
-
+    <string name="dialog_logexport_general">Pilih aplikasi</string>
+    <string name="dialog_logexport_email">E-mail</string>
     <string name="dialog_deletelogs_text">Apakah Anda yakin ingin menghapus semua log\?</string>
-
     <string name="dialog_error_title">Laporan kerusakan</string>
     <string name="dialog_error_text">Sepertinya aplikasi rusak. Apakah Anda ingin mengirim file log kerusakan ke pengembang\?</string>
-
     <string name="dialog_batteryoptimization_title">Optimalisasi baterai</string>
-    <string name="dialog_batteryoptimization_message">Pada beberapa perangkat apl ini tidak akan diberi tahu bahwa apl telah selesai booting kecuali optimasi baterai dinonaktifkan.
-\nApl ini tidak masuk daftar putih dari optimasi baterai, apakah Anda ingin melakukan ini\?
+    <string name="dialog_batteryoptimization_message">Di beberapa perangkat, aplikasi tidak akan diberi tahu bahwa perangkat telah selesai booting kecuali pengoptimalan baterai dinonaktifkan.
+\nAplikasi saat ini tidak masuk daftar putih dari pengoptimalan baterai, apakah Anda ingin melakukan ini\?
 \n
-\nAnda harus menguji apakah itu berfungsi dengan pengoptimalan sebelum menonaktifkannya.</string>
+\nAnda harus menguji apakah itu berfungsi dengan pengoptimalan diaktifkan sebelum menonaktifkannya.</string>
     <string name="dialog_batteryoptimization_whitelist">Nonaktifkan</string>
-    <string name="dialog_batteryoptimization_ignore">Mengabaikan</string>
-
+    <string name="dialog_batteryoptimization_ignore">Abaikan</string>
     <string name="dialog_rate_confirmation">Apakah Anda ingin membuka Play Store untuk memberi penilaian apl ini\?</string>
-
     <string name="dialog_changelog_title">Log perubahan</string>
     <string name="dialog_changelog_infotext">Apl ini telah diperbarui sejak Anda terakhir kali membukanya. Dalam daftar berikut, Anda dapat melihat log perubahan. Centang kotak di bawah dan Anda tidak akan melihat pesan ini di masa mendatang.</string>
-    <string name="dialog_changelog_dont_show_again">Jangan perlihatkan lagi</string>
-
+    <string name="dialog_changelog_dont_show_again">Jangan tampilkan lagi</string>
     <string name="dialog_about_licenses">Lisensi</string>
-
     <string name="dialog_query_export_title">Mengekspor kueri…</string>
     <string name="dialog_query_export_message">Harap tunggu permintaan sedang diekspor</string>
-
     <string name="dialog_pin_message">Harap berikan PIN Anda.</string>
     <string name="dialog_pin_hint">PIN</string>
-
     <string name="dialog_enable_logging">Apakah Anda ingin mengaktifkan pencatatan\? Log berisi informasi statistik, informasi debug, dan tindakan di apl. Log yang dibuat tidak akan dibagikan kecuali Anda melakukannya sendiri.</string>
-
     <string name="dialog_crashreporting_title">Pelaporan kerusakan otomatis</string>
     <string name="dialog_crashreportingusages_title">Data yang dikirimkan</string>
     <string name="dialog_crashreportingusages_message">Klik pada salah satu grup untuk melihat data mana yang dikirim disaat terjadi kerusakan.</string>
@@ -87,23 +71,111 @@
 \nLaporan dikirim dengan aman melalui HTTPS
 \n
 \nKlik \'Lihat data\' di bawah untuk melihat jenis data apa yang dikirimkan dan untuk tautan ke kebijakan privasi.</string>
-
     <string name="dialog_clearqueries_title">Hapus semua kueri</string>
-    <string name="dialog_clearqueries_message">Apakah Anda yakin ingin menghapus pertanyaan yang dicatat\? Ini tidak bisa dikembalikan.</string>
-
+    <string name="dialog_clearqueries_message">Apakah Anda yakin ingin menghapus kueri yang dicatat\? Ini tidak bisa dikembalikan.</string>
     <string name="dialog_credits_title">Kredit</string>
-    <string name="dialog_credits_message" formatted="true">- Ikon aplikasi oleh &lt;a href=https://dribbble.com/rkbdi&gt; RKBDI &lt;/a&gt;.
-\n - Terjemahan Turki oleh Kemal Oktay Aktoğan
-\n - Terjemahan Rusia oleh bruleto
-\n - Terjemahan Belanda oleh Bas Koedijk
-\n 
-\n Ingin melihat nama Anda di sini\? Silakan &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt; berkontribusi &lt;/a&gt;.</string>
-
-    <string name="dialog_join_group_title">Bergabunglah dengan komunitas</string>
-    <string name="dialog_join_group_message">Hai!
+    <string name="dialog_credits_message" formatted="true">- Ikon aplikasi oleh &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; . 
+\n- Terjemahan Turki oleh Kemal Oktay Aktoğan
+\n- Terjemahan Rusia oleh bruleto
+\n- Terjemahan Belanda oleh Bas Koedijk 
+\n- Terjemahan Portugis oleh Rafael W. Bohnenberger
+\n- Terjemahan bahasa Indonesia oleh Gloeyisk
+\n- Terjemahan Catalan oleh Daniel Alomar
+\n- Terjemahan bahasa Spanyol oleh Daniel Alomar dan Victor Bayas
+\n- Beberapa ikon dari Font Awesome
+\n- Terjemahan Cina (Sederhana) oleh Ediel Chedlyramber 
 \n
-\nTahukah Anda bahwa apl ini memiliki grup Telegram\? Ini berisi pembaruan rutin dan merupakan tempat yang sempurna untuk berdiskusi dan bertanya.
+\nIngin melihat nama Anda di sini\? Silakan &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribute&lt;/a&gt;.</string>
+    <string name="dialog_join_group_title">Bergabunglah dengan komunitas</string>
+    <string name="dialog_join_group_message">Hai! 
+\n
+\nTahukah Anda bahwa apl ini memiliki grup Telegram\? Ini berisi pembaruan rutin dan merupakan tempat yang sempurna untuk berdiskusi dan bertanya. 
 \nKami adalah komunitas hebat dengan lebih dari 200 orang, apakah Anda ingin menjadi bagian darinya\?</string>
     <string name="dialog_join_group_positive">Ya!</string>
-
-    </resources>
+    <string name="dialog_editdelete_edit">Edit</string>
+    <string name="dialog_nonvpn_help_netguard">Untuk menggunakan mode Non-VPN bersama dengan NetGuard, lakukan hal berikut:
+\n - Pastikan Anda telah menginstal NetGuard versi F-Droid. Ini tidak berfungsi dengan versi dari GPlay.
+\n - Buka pengaturan&gt; Opsi lanjutan
+\n - Aktifkan lalu lintas Filter (jika belum diaktifkan)
+\n - Klik pada Port Forwarding
+\n - Tambahkan aturan berikut:
+\n
+\n • Protokol UDP, port sumber 53, tujuan 127.0.0.1, port tujuan %1d, tidak ada aplikasi tujuan
+\n • Ulangi untuk TCP
+\n
+\n - Kembali ke opsi lanjutan
+\n - Gulir ke bawah, setel kedua bidang DNS VPN ke 127.0.0.1
+\n - Mulai Nebulo (dalam mode non-VPN) dan mulai NetGuard</string>
+    <string name="dialog_doh_detect_type_message">Tolong tunggu sebentar.</string>
+    <string name="dialog_doh_detect_type_title">Mendeteksi tipe server</string>
+    <string name="dialog_vpn_permission_denied_message">Sistem telah menolak Nebulo untuk memulai VPN-nya. Silakan buka aplikasi untuk memberikan izin di sana dengan mengklik tombol mulai.</string>
+    <string name="dialog_raterequest_message">Hai semua! Jika anda senang dengan Nebulo, maukah Anda meluangkan waktu sejenak untuk memberi rating di toko\?</string>
+    <string name="dialog_raterequest_title">Apa Anda senang dengan Nebulo\?</string>
+    <string name="dialog_vpninformation_message">Nebulo bekerja dengan menggunakan VPN palsu untuk menangkap semua permintaan DNS Anda, yang kemudian diteruskan ke server aman pilihan Anda.
+\nVPN tiruan ini bukan VPN asli dan juga tidak menyembunyikan identitas Anda, juga tidak mengubah alamat IP Anda.
+\n
+\nTidak ada data aktual, kecuali untuk permintaan DNS, yang dikirim menggunakan aplikasi ini.</string>
+    <string name="dialog_vpninformation_title">Bagaimana aplikasi ini bekerja</string>
+    <string name="dialog_cleardnscache_message">Apa Anda yakin ingin menghapus cache DNS\?</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">Minggu</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">Hari</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">Jam</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Menit</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">Perbaharui sekarang</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">Perbaharui setiap</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">Perbaharui hanya pada WIFI</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Otomatis Perbaharui sumber host</string>
+    <string name="dialog_hostsourcerefresh_title">Perbaharui sumber host</string>
+    <string name="dialog_overlaydetected_message">Tampaknya ada hamparan seluruh sistem (mis. Gelembung obrolan, filter warna atau malam) yang aktif. Dalam kasus ini, sebagian besar perangkat tidak mengizinkan Anda untuk mengaktifkan VPN.
+\n
+\nJika Anda tidak dapat mengklik OK di dialog berikutnya, nonaktifkan overlay.</string>
+    <string name="dialog_overlaydetected_title">Overlay seluruh sistem terdeteksi</string>
+    <string name="dialog_servicekilled_more_info">Informasi lain</string>
+    <string name="dialog_servicekilled_message">Aplikasi mendeteksi bahwa itu tidak dihentikan dengan semestinya saat terakhir kali aktif. Ini sangat menunjukkan bahwa sistem Anda memilih untuk menghentikan aplikasi secara paksa tanpa ada kemungkinan aplikasi untuk memulai ulang sendiri.
+\n
+\nDi sebagian besar perangkat, Anda memiliki beberapa opsi untuk mencegah atau setidaknya menunda sistem menghentikan aplikasi.
+\nMisalnya, Anda dapat menonaktifkan pengoptimalan baterai untuk aplikasi di pengaturan sistem atau menghindari menghapus aplikasi dari daftar terbaru.
+\n
+\nJika Anda memilih untuk mengabaikan ini, Anda tidak akan melihat dialog ini lagi. Anda dapat membaca lebih lanjut dan menerima tip untuk memecahkan masalah ini dengan tombol di bawah ini (membuka situs web eksternal di browser Anda). Klik pengaturan untuk membuka pengaturan Android di mana Anda dapat menonaktifkan pengoptimalan baterai untuk Nebulo.</string>
+    <string name="dialog_editdelete_delete">Hapus</string>
+    <string name="dialog_editdelete_title">Apa yang ingin anda lakukan\?</string>
+    <string name="dialog_exportdnsrules_export_sources">Ekspor aturan DNS dari sumber host yang aktif</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Ekspor aturan khusus host DNS</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">Ekspor aturan normal</string>
+    <string name="dialog_exportdnsrules_whitelist">Ekspor aturan daftar putih</string>
+    <string name="dialog_exportdnsrules_title">Ekspor aturan DNS</string>
+    <string name="dialog_newdnsrule_wildcard_info">Host ini mendukung wildcards. Gunakan bintang (*) untuk sejumlah karakter, angka dan karakter khusus yang diperbolehkan kecuali titik (.). Gunakan dua tanda bintang (**) untuk menyertakan titik (.).</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Harap berikan alamat IPv6 yang benar</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Harap berikan alamat IPv4 yang benar</string>
+    <string name="dialog_newdnsrule_host_invalid">Harap berikan host yang benar</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">Alamat IPv6</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">Alamat IPv4</string>
+    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_specify_address">Alamat</string>
+    <string name="dialog_newdnsrule_whitelist">Daftar putih</string>
+    <string name="dialog_newdnsrule_edit">Ubah aturan DNS</string>
+    <string name="dialog_newdnsrule_title">Aturan DNS baru</string>
+    <string name="dialog_newhostsource_error_name_empty">Harap berikan nama</string>
+    <string name="dialog_newhostsource_use_as_whitelist">Gunakan sebagai daftar putih</string>
+    <string name="dialog_newhostsource_choose_file">Pilih file</string>
+    <string name="dialog_newhostsource_url">URL</string>
+    <string name="dialog_newhostsource_wildcard_info">Anda dapat menggunakan daftar host yang menggunakan domain wildcard.</string>
+    <string name="dialog_newhostsource_name">Nama</string>
+    <string name="dialog_newhostsource_edit_title">Ubah sumber aturan</string>
+    <string name="dialog_newhostsource_title">Sumber aturan baru</string>
+    <string name="dialog_clearuserrules_message">Anda akan menghapus semua aturan DNS\? Ini tidak dapat dikembalikan.</string>
+    <string name="dialog_clearuserrules_title">Hapus semua aturan DNS\?</string>
+    <string name="dialog_deletehostsource_message">Apakah anda yakin ingin menghapus sumber host %1s\? Ini tidak dapat dikembalikan, host dari sumber ini akan hilang.</string>
+    <string name="dialog_deletehostsource_title">Hapus %1s\?</string>
+    <string name="dialog_speedtest_useserver_message">Apakah Anda ingin menggunakan server %1s\? Ini peringkat %2d dari %3d dengan waktu respon %4d ms.</string>
+    <string name="dialog_speedtest_useserver_title">Pilih server</string>
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d server diuji
+\n%2d server DoT dapat dijangkau, %3d tidak dapat dijangkau
+\n%4d server DoH dapat dijangkau, %5d tidak dapat dijangkau
+\nWaktu respons rata-rata: %6d ms.
+\n
+\nServer tercepat: %7s
+\nServer paling lambat: %8s</string>
+    <string name="dialog_speedresult_title">Hasil tes kecepatan</string>
+    <string name="dialog_logexport_loading_title">Menyiapkan catatan</string>
+</resources>

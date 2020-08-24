@@ -31,7 +31,7 @@ class VpnLogger(private val context: Context): Logger() {
     }
 
     override fun logException(ex: Exception, terminal: Boolean, level: Level) {
-        if (terminal) context.log(ex)
+        if (terminal || level == Level.WARNING) context.log(ex)
         else if(Level.INFO >= minLogLevel) context.log(com.frostnerd.smokescreen.Logger.stacktraceToString(ex), "$tag, VPN-LIBRARY, $level")
     }
 
