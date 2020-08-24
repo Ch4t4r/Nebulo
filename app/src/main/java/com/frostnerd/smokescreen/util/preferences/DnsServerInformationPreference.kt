@@ -48,10 +48,14 @@ class DnsServerInformationPreference(key: String) :
         return if(thisRef.sharedPreferences.contains(key + "_type")) {
             val type = thisRef.sharedPreferences.getString(key + "_type", "")
             val json = thisRef.sharedPreferences.getString(key, "")
-            when (type) {
-                "https" -> httpsTypeAdapter.fromJson(json)
-                "tls" -> tlsTypeAdapter.fromJson(json) as DnsServerInformation<TLSUpstreamAddress>
-                else -> throw IllegalStateException("Unknown type $type")
+            if(json.isNullOrBlank()) {
+                null
+            } else {
+                when (type) {
+                    "https" -> httpsTypeAdapter.fromJson(json)
+                    "tls" -> tlsTypeAdapter.fromJson(json) as DnsServerInformation<TLSUpstreamAddress>
+                    else -> throw IllegalStateException("Unknown type $type")
+                }
             }
         } else null
     }
