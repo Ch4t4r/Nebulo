@@ -45,7 +45,7 @@
     <string name="windows_querylogging_usedserver_dnsrules">DNS规则</string>
     <string name="windows_querylogging_usedserver_cache">缓存记录</string>
     <string name="about_info">总概资料</string>
-    <string name="window_main_privatedns_info">私密DNS已经启用，您的DNS请求已经被保护。如果您想使用 DNS-over-HTTPS 等实用特性的话，请启用Nebulo。</string>
+    <string name="window_main_privatedns_info">私人DNS是活动的，你的查询已经受到保护。如果你想使用dns-over-https或其他有用的功能，请启用Nebulo。</string>
     <string name="windows_querylogging_search">域名搜索</string>
     <string name="windows_querylogging_search_hint">在请求日志中搜索域名</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">来自此源的规则条数： %1d （未使用 %2$d 条重复规则）</string>
@@ -73,5 +73,8 @@
     <string name="main_dnssurveillance_privacystatement">使用 %1s 的隐私声明</string>
     <string name="error_webview_missing">没有找到WebView软件包。当前它是正在更新，还是已被移除？</string>
     <string name="activity_label_import_queries">导入请求项</string>
-    <string name="restart_app_for_changes">重启应用以使更改生效</string>
+    <string name="restart_app_for_changes">重启应用以使更改生效。</string>
+    <string name="iptables_supported">恭喜，您的设备支持iptables！</string>
+    <string name="iptables_not_supported">您的设备不支持iptables</string>
+    <string name="restart_app">重启应用</string>
 </resources>
