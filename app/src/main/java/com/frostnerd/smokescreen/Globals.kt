@@ -48,29 +48,38 @@ fun showPrivacyPolicyDialog(context: Context) {
     dialog.show()
 }
 
-fun showInfoTextDialog(context:Context, title:String, text:String,
+fun showInfoTextDialog(context:Context,
+                       title:String,
+                       text:String,
                        positiveButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
                        negativeButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
                        neutralButton:Pair<String, ((DialogInterface, Int) -> Unit)?>? = context.getString(android.R.string.ok) to null,
-                       withDialog: (AlertDialog.() -> Unit)? = null) {
+                       withDialog: (AlertDialog.() -> Unit)? = null,
+                        linkifyText:Boolean = false) {
     try {
         val stringWithLinks = SpannableString(text)
-        Linkify.addLinks(stringWithLinks, Linkify.ALL)
-
-        val span = Html.fromHtml(stringWithLinks.toString().replace("\n", "<br>"))
 
         val dialogBuilder = AlertDialog.Builder(context, context.getPreferences().theme.dialogStyle)
-            .setTitle(title)
-            .setMessage(span)
+                            .setTitle(title)
+        if(linkifyText) {
+            Linkify.addLinks(stringWithLinks, Linkify.ALL)
+            val span = Html.fromHtml(stringWithLinks.toString().replace("\n", "<br>"))
+            dialogBuilder.setMessage(span)
+        } else {
+            dialogBuilder.setMessage(text)
+        }
+
         if(neutralButton != null) dialogBuilder.setNeutralButton(neutralButton.first, neutralButton.second)
         if(positiveButton != null) dialogBuilder.setPositiveButton(positiveButton.first, positiveButton.second)
         if(negativeButton != null) dialogBuilder.setNegativeButton(negativeButton.first, negativeButton.second)
 
         val dialog = dialogBuilder.show()
-        val textView = dialog.findViewById<TextView>(android.R.id.message)
-        textView?.movementMethod = LinkMovementMethod.getInstance()
-        textView?.linksClickable = true
-        textView?.setLinkTextColor(Color.parseColor("#64B5F6"))
+        if(linkifyText) {
+            val textView = dialog.findViewById<TextView>(android.R.id.message)
+            textView?.movementMethod = LinkMovementMethod.getInstance()
+            textView?.linksClickable = true
+            textView?.setLinkTextColor(Color.parseColor("#64B5F6"))
+        }
         withDialog?.invoke(dialog)
     } catch (ex: Exception) {
         if (ex is AndroidRuntimeException ||
