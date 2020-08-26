@@ -98,7 +98,7 @@ class AboutFragment : Fragment() {
         }
         val languageCode = Locale.getDefault().toString()
         if (!resources.getStringArray(R.array.missing_languages).any {
-                languageCode.startsWith(it)
+                languageCode.startsWith(it, true)
             }) view.translating.visibility = View.GONE
         else view.translating.setOnClickListener {
             showInfoTextDialog(requireContext(), getString(R.string.about_help_translating),
