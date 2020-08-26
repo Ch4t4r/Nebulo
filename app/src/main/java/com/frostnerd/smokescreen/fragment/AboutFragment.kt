@@ -47,7 +47,8 @@ class AboutFragment : Fragment() {
             showInfoTextDialog(
                 requireContext(),
                 getString(R.string.dialog_credits_title),
-                getString(R.string.dialog_credits_message)
+                getString(R.string.dialog_credits_message),
+                linkifyText = true
             )
         }
         view.privacyPolicy.setOnClickListener {
@@ -93,12 +94,13 @@ class AboutFragment : Fragment() {
                     BuildConfig.VERSION_CODE,
                     AppDatabase.currentVersion,
                     if (requireContext().getPreferences().crashreportingType == Crashreporting.FULL) requireContext().getPreferences().crashReportingUUID else "---"
-                )
+                ),
+                linkifyText = true
             )
         }
         val languageCode = Locale.getDefault().toString()
         if (!resources.getStringArray(R.array.missing_languages).any {
-                languageCode.startsWith(it)
+                languageCode.startsWith(it, true)
             }) view.translating.visibility = View.GONE
         else view.translating.setOnClickListener {
             showInfoTextDialog(requireContext(), getString(R.string.about_help_translating),
