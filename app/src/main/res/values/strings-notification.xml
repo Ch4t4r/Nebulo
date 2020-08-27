@@ -64,4 +64,7 @@
     <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS server is running on localhost:%1d. Queries are forwarded using iptables.\nWarning: IPv6 is active, queries might bypass Nebulo.</string>
     <string name="notification_dnsserver_message_iptables_failed">DNS server is running on localhost:%1d. Initializing iptables failed, queries have to be forwarded with third-party apps</string>
     <string name="notification_dnsserver_portdiffers">Configured Port %1d could not be used.</string>
+
+    <string name="notification_privatednswarning_title">Private Dns</string>
+    <string name="notification_privatednswarning_text">Please disable Private Dns in the system settings to use Nebulo.</string>
 </resources>

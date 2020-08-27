@@ -249,28 +249,33 @@ class DnsVpnService : VpnService(), Runnable {
         }
         log("Service onCreate()")
         createNotification()
-        updateServiceTile()
-        subscribeToSettings()
-        addNetworkChangeListener()
-        screenStateReceiver =
-            registerReceiver(listOf(Intent.ACTION_SCREEN_OFF, Intent.ACTION_SCREEN_ON)) {
-                if (it?.action == Intent.ACTION_SCREEN_OFF) {
-                    lastScreenOff = System.currentTimeMillis()
-                } else {
-                    if (lastScreenOff != null && System.currentTimeMillis() - lastScreenOff!! >= 60000) {
-                        if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
+        if(isPrivateDnsActive) {
+            showPrivateDnsNotification()
+            stopSelf()
+        } else {
+            updateServiceTile()
+            subscribeToSettings()
+            addNetworkChangeListener()
+            screenStateReceiver =
+                registerReceiver(listOf(Intent.ACTION_SCREEN_OFF, Intent.ACTION_SCREEN_ON)) {
+                    if (it?.action == Intent.ACTION_SCREEN_OFF) {
+                        lastScreenOff = System.currentTimeMillis()
+                    } else {
+                        if (lastScreenOff != null && System.currentTimeMillis() - lastScreenOff!! >= 60000) {
+                            if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
+                        }
+                    }
+                }
+            dnsRuleRefreshReceiver = registerLocalReceiver(listOf(BROADCAST_DNSRULES_REFRESHED)) {
+                vpnProxy?.apply {
+                    ((packetProxy as DnsPacketProxy).localResolver)?.apply {
+                        (this as DnsRuleResolver).refreshRuleCount()
                     }
                 }
             }
-        dnsRuleRefreshReceiver = registerLocalReceiver(listOf(BROADCAST_DNSRULES_REFRESHED)) {
-            vpnProxy?.apply {
-                ((packetProxy as DnsPacketProxy).localResolver)?.apply {
-                    (this as DnsRuleResolver).refreshRuleCount()
-                }
-            }
+            clearPreviousIptablesRedirect(true)
+            log("Service created.")
         }
-        clearPreviousIptablesRedirect(true)
-        log("Service created.")
     }
 
     private fun addNetworkChangeListener() {
@@ -491,6 +496,24 @@ class DnsVpnService : VpnService(), Runnable {
             Notifications.ID_NO_CONNECTION
         )
         noConnectionNotificationShown = false
+    }
+
+    private fun showPrivateDnsNotification() {
+        val notificationBuilder = NotificationCompat.Builder(
+            this,
+            Notifications.getHighPriorityChannelId(this)
+        )
+        notificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
+        notificationBuilder.setOngoing(false)
+        notificationBuilder.setSmallIcon(R.drawable.ic_cloud_strikethrough)
+        notificationBuilder.setContentTitle(getString(R.string.notification_privatednswarning_title))
+        notificationBuilder.setContentText(getString(R.string.notification_privatednswarning_text))
+        notificationBuilder.setStyle(
+            NotificationCompat.BigTextStyle(
+                notificationBuilder
+            ).bigText(getString(R.string.notification_privatednswarning_text))
+        )
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_PRIVATEDNS_WARNING, notificationBuilder.build())
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
