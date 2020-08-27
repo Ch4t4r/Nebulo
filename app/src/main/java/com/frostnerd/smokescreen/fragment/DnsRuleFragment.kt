@@ -351,7 +351,7 @@ class DnsRuleFragment : Fragment() {
                                     notifyRulesChanged()
                                 } else {
                                     Snackbar.make(
-                                        requireActivity().findViewById(android.R.id.content),
+                                        requireActivity().findViewById(R.id.contentFrame),
                                         R.string.window_dnsrules_hostalreadyexists,
                                         Snackbar.LENGTH_LONG
                                     ).show()
