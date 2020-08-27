@@ -39,9 +39,8 @@ class Notifications {
         const val ID_SERVICE_REVOKED = 10
         const val ID_DNSSERVER_MODE = 11
         const val ID_PRIVATEDNS_WARNING = 12
+        const val ID_MULTIPLEUSERS_WARNING = 13
         const val ID_VPN_RESTART = 999
-
-
 
         fun servicePersistentNotificationChannel(context: Context):String {
             if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

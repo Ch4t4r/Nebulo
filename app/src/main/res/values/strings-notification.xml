@@ -67,4 +67,7 @@
 
     <string name="notification_privatednswarning_title">Private Dns</string>
     <string name="notification_privatednswarning_text">Please disable Private Dns in the system settings to use Nebulo.</string>
+
+    <string name="notification_multipleuserswarning_title">Dummy VPN could not be established</string>
+    <string name="notification_multipleuserswarning_text">Nebulo could not start its dummy VPN because of an Android bug. This happens when there are multiple users on your device.</string>
 </resources>

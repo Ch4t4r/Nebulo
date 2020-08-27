@@ -249,6 +249,7 @@ class DnsVpnService : VpnService(), Runnable {
         }
         log("Service onCreate()")
         createNotification()
+        hideMultipleUserNotification()
         if(isPrivateDnsActive) {
             showPrivateDnsNotification()
             stopForeground(true)
@@ -533,6 +534,28 @@ class DnsVpnService : VpnService(), Runnable {
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_PRIVATEDNS_WARNING)
     }
 
+    private fun showMultipleUserNotification() {
+        val notificationBuilder = NotificationCompat.Builder(
+            this,
+            Notifications.getHighPriorityChannelId(this)
+        )
+        notificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
+        notificationBuilder.setOngoing(false)
+        notificationBuilder.setSmallIcon(R.drawable.ic_cloud_strikethrough)
+        notificationBuilder.setContentTitle(getString(R.string.notification_multipleuserswarning_title))
+        notificationBuilder.setContentText(getString(R.string.notification_multipleuserswarning_text))
+        notificationBuilder.setStyle(
+            NotificationCompat.BigTextStyle(
+                notificationBuilder
+            ).bigText(getString(R.string.notification_multipleuserswarning_text))
+        )
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_MULTIPLEUSERS_WARNING, notificationBuilder.build())
+    }
+
+    private fun hideMultipleUserNotification() {
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_MULTIPLEUSERS_WARNING)
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("Service onStartCommand", intent = intent)
         runInNonVpnMode = getPreferences().runWithoutVpn
@@ -731,10 +754,19 @@ class DnsVpnService : VpnService(), Runnable {
         if (vpnProxy == null) {
             destroyed = false
             val runVpn = {
-                if(!runInNonVpnMode) fileDescriptor = createBuilder().establish()
-                run()
-                setNotificationText()
-                updateNotification()
+                try {
+                    if(!runInNonVpnMode) fileDescriptor = createBuilder().establish()
+                    run()
+                    setNotificationText()
+                    updateNotification()
+                } catch (ex:SecurityException) {
+                    if(ex.message?.contains("INTERACT_ACROSS_USERS", true) == true) {
+                        showMultipleUserNotification()
+                        stopForeground(true)
+                        destroy()
+                        stopSelf()
+                    }
+                }
             }
             val timeDiff = lastVPNStopTime?.let { System.currentTimeMillis() - it }
             if(timeDiff != null && timeDiff < 750) {
