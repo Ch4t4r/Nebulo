@@ -309,6 +309,16 @@ class DnsVpnService : VpnService(), Runnable {
                 }
                 if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
             }
+
+            override fun onLinkPropertiesChanged(network: Network, linkProperties: LinkProperties) {
+                super.onLinkPropertiesChanged(network, linkProperties)
+                if(isPrivateDnsActive) {
+                    showPrivateDnsNotification()
+                    destroy()
+                    stopForeground(true)
+                    stopSelf()
+                }
+            }
         }
         val builder = NetworkRequest.Builder()
         builder.addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
