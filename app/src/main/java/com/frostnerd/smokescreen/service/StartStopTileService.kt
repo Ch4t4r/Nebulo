@@ -4,12 +4,16 @@ import android.app.Service
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import androidx.annotation.RequiresApi
 import com.frostnerd.general.service.isServiceRunning
+import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.watchIfEnabled
 import leakcanary.LeakSentry
 
@@ -40,6 +44,8 @@ fun Context.updateServiceTile() {
 
 @RequiresApi(Build.VERSION_CODES.N)
 class StartStopTileService:TileService() {
+    private var settingsSubscription:TypedPreferences<SharedPreferences>.OnPreferenceChangeListener? = null
+
     override fun onCreate() {
         super.onCreate()
         LeakSentry.watchIfEnabled(this, "StartStopTileService")
@@ -52,7 +58,19 @@ class StartStopTileService:TileService() {
 
     override fun onStartListening() {
         super.onStartListening()
+        settingsSubscription = getPreferences().let {
+            it.listenForChangesOn(it::vpnServiceState, it.preferenceChangeListener { changes ->
+                val newState = changes.entries.first().value.second as VpnServiceState
+                updateTileState(newState == VpnServiceState.STARTED)
+            })
+        }
         updateTileState()
+    }
+
+    override fun onStopListening() {
+        super.onStopListening()
+        updateTileState()
+        settingsSubscription?.also { getPreferences().unregisterOnChangeListener(it) }
     }
 
     override fun onClick() {
@@ -63,11 +81,6 @@ class StartStopTileService:TileService() {
             DnsVpnService.startVpn(this)
             updateTileState(true)
         }
-    }
-
-    override fun onStopListening() {
-        super.onStopListening()
-        updateTileState()
     }
 
     override fun onTileAdded() {
