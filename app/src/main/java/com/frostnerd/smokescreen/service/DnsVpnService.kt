@@ -83,13 +83,13 @@ class DnsVpnService : VpnService(), Runnable {
     private lateinit var noConnectionNotificationBuilder: NotificationCompat.Builder
     private var noConnectionNotificationShown = false
     private lateinit var serverConfig: DnsServerConfiguration
-    private lateinit var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener
+    private var settingsSubscription: TypedPreferences<SharedPreferences>.OnPreferenceChangeListener? = null
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
     private var pauseNotificationAction: NotificationCompat.Action? = null
     private var packageBypassAmount = 0
     private var connectedToANetwork: Boolean? = null
     private var lastScreenOff: Long? = null
-    private lateinit var screenStateReceiver: BroadcastReceiver
+    private var screenStateReceiver: BroadcastReceiver? = null
     private var dnsRuleRefreshReceiver:BroadcastReceiver? = null
     private var simpleNotification = getPreferences().simpleNotification
     private var lastVPNStopTime:Long? = null
@@ -251,6 +251,8 @@ class DnsVpnService : VpnService(), Runnable {
         createNotification()
         if(isPrivateDnsActive) {
             showPrivateDnsNotification()
+            stopForeground(true)
+            destroy()
             stopSelf()
         } else {
             updateServiceTile()
@@ -519,6 +521,10 @@ class DnsVpnService : VpnService(), Runnable {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("Service onStartCommand", intent = intent)
         runInNonVpnMode = getPreferences().runWithoutVpn
+        if(destroyed) {
+            updateNotification()
+            return START_NOT_STICKY
+        }
         if (intent != null && intent.hasExtra("command")) {
             when (intent.getSerializableExtra("command") as Command) {
                 Command.STOP -> {
@@ -777,7 +783,7 @@ class DnsVpnService : VpnService(), Runnable {
                     )
                     networkCallback = null
                 }
-                tryUnregisterReceiver(screenStateReceiver)
+                screenStateReceiver?.also { tryUnregisterReceiver(it) }
             }
             vpnProxy = null
             fileDescriptor = null
@@ -791,7 +797,7 @@ class DnsVpnService : VpnService(), Runnable {
         super.onDestroy()
         log("onDestroy() called (Was destroyed from within: $destroyed)")
         log("Unregistering settings listener")
-        getPreferences().unregisterOnChangeListener(settingsSubscription)
+        settingsSubscription?.also { getPreferences().unregisterOnChangeListener(it) }
         log("Unregistered.")
 
         if (!destroyed && resources.getBoolean(R.bool.keep_service_alive)) {
