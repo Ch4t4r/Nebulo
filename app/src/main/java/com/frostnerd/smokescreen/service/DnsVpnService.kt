@@ -258,6 +258,7 @@ class DnsVpnService : VpnService(), Runnable {
             updateServiceTile()
             subscribeToSettings()
             addNetworkChangeListener()
+            hidePrivateDnsNotification()
             screenStateReceiver =
                 registerReceiver(listOf(Intent.ACTION_SCREEN_OFF, Intent.ACTION_SCREEN_ON)) {
                     if (it?.action == Intent.ACTION_SCREEN_OFF) {
@@ -516,6 +517,10 @@ class DnsVpnService : VpnService(), Runnable {
             ).bigText(getString(R.string.notification_privatednswarning_text))
         )
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_PRIVATEDNS_WARNING, notificationBuilder.build())
+    }
+
+    private fun hidePrivateDnsNotification() {
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_PRIVATEDNS_WARNING)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
