@@ -94,7 +94,7 @@
     <string name="windows_querylogging_usedserver_dnsrules">Resolved with DNS Rules</string>
     <string name="windows_querylogging_usedserver_cache">Resolved with cache</string>
 
-    <string name="window_main_privatedns_info">Private DNS is active, your queries are already protected. Enable Nebulo if you wish to use DNS-over-HTTPS or other useful features.</string>
+    <string name="window_main_privatedns_info">Private DNS is active, your queries are already protected. Enable Nebulo if you wish to use DNS-over-HTTPS or other useful features.\nTo enable Nebulo disable Private DNS.</string>
 
     <string name="restart_app_for_changes">Restart the app for changes to take effect.</string>
     <string name="restart_app">Restart</string>

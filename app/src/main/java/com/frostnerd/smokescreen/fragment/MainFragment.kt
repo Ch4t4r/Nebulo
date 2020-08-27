@@ -3,12 +3,9 @@ package com.frostnerd.smokescreen.fragment
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.net.Uri
 import android.net.VpnService
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -231,14 +228,8 @@ class MainFragment : Fragment() {
     }
 
     private fun updateVpnIndicators() {
-        val privateDnsActive = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
-            false
-        } else {
-            (requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).let {
-                if (it.activeNetwork == null) false
-                else it.getLinkProperties(it.activeNetwork)?.isPrivateDnsActive ?: false
-            }
-        }
+        val privateDnsActive = requireContext().isPrivateDnsActive
+        var startButtonVisibility = View.VISIBLE
         when(proxyState) {
             ProxyState.RUNNING -> {
                 privateDnsInfo.visibility = View.INVISIBLE
@@ -261,6 +252,7 @@ class MainFragment : Fragment() {
                 if (privateDnsActive) {
                     statusImage.setImageResource(R.drawable.ic_lock)
                     statusImage.clearAnimation()
+                    startButtonVisibility = View.INVISIBLE
                     privateDnsInfo.visibility = View.VISIBLE
                 } else {
                     statusImage.setImageResource(R.drawable.ic_lock_open)
@@ -269,6 +261,7 @@ class MainFragment : Fragment() {
                 }
             }
         }
+        startButton.visibility = startButtonVisibility
     }
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
