@@ -20,7 +20,7 @@ import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.general.isInt
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
-import com.frostnerd.lifecyclemanagement.launchWithLifecylce
+import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.MainActivity
@@ -250,6 +250,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val iptablesCategory = findPreference("nonvpn_category_iptables")
         val checkIpTables = findPreference("check_iptables")
         val helpNetguard = findPreference("nonvpn_help_netguard")
+        val helpGeneric = findPreference("nonvpn_help_generic")
         port.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().toIntOrNull()?.let { it in 1025..65535 } == true) {
                 port.summary = getString(R.string.summary_local_server_port, newValue.toString())
@@ -281,10 +282,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 if(context != null) {
                     val dialog = LoadingDialog(context, R.string.title_check_iptables, R.string.dialog_doh_detect_type_message)
                     dialog.show()
-                    launchWithLifecylce(false) {
+                    launchWithLifecycle(false) {
                         val supported = processSuCommand("iptables -t nat -L OUTPUT", context.logger)
                         val ipv6Supported = processSuCommand("ip6tables -t nat -L PREROUTING", context.logger)
-                        launchWithLifecylce(true) {
+                        launchWithLifecycle(true) {
                             dialog.dismiss()
                             val text = if(supported) {
                                 if(ipv6Supported) R.string.iptables_supported
@@ -315,6 +316,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         if(installedThirdPartyApps == 0) {
             findPreference("nonvpn_help").isVisible = false
+        }
+        helpGeneric.setOnPreferenceClickListener {
+            val portValue = port.text.toInt()
+            showInfoTextDialog(requireContext(),
+            getString(R.string.preference_category_nonvpnmode_help),
+            getString(R.string.dialog_nonvpn_help_generic, portValue, portValue),
+            neutralButton = getString(R.string.all_close) to null)
+            true
         }
     }
 

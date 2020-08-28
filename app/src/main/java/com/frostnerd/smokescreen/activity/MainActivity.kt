@@ -12,7 +12,7 @@ import com.frostnerd.dnstunnelproxy.KnownDnsServers
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.lifecyclemanagement.launchWithLifecylce
+import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.*
@@ -85,7 +85,7 @@ class MainActivity : NavigationDrawerActivity() {
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             val update = {
-                launchWithLifecylce(false) {
+                launchWithLifecycle(false) {
                     val server = getPreferences().dnsServerConfig
                     val primaryAddress = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
                         retryIfError = true,

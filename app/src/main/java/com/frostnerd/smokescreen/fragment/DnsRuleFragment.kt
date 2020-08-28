@@ -21,7 +21,7 @@ import com.frostnerd.cacheadapter.ListDataSource
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
-import com.frostnerd.lifecyclemanagement.launchWithLifecylce
+import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
@@ -97,7 +97,7 @@ class DnsRuleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userRulesJob = launchWithLifecylce(false) {
+        userRulesJob = launchWithLifecycle(false) {
             userDnsRules = getDatabase().dnsRuleDao().getAllUserRules().toMutableList()
             userRulesJob = null
             launch {
@@ -307,7 +307,7 @@ class DnsRuleFragment : Fragment() {
                             }
                         }
                         if(userRulesJob == null) changeVisibility()
-                        else launchWithLifecylce(false) {
+                        else launchWithLifecycle(false) {
                             userRulesJob?.join()
                             changeVisibility()
                         }
@@ -421,7 +421,7 @@ class DnsRuleFragment : Fragment() {
                                 }
                             })
                     }
-                    data.enabled -> launchWithLifecylce(false) {
+                    data.enabled -> launchWithLifecycle(false) {
                         val prev = sourceRuleCount[data]
                         sourceRuleCount[data] = getDatabase().dnsRuleDao().getCountForHostSource(data.id)
                         if(prev != sourceRuleCount[data]) runOnUiThread {
@@ -490,12 +490,12 @@ class DnsRuleFragment : Fragment() {
             refreshProgress.hide()
             refreshProgressShown = false
 
-            launchWithLifecylce(false) {
+            launchWithLifecycle(false) {
                 sourceRuleCount.keys.forEach {
                     val index = sourceAdapterList.indexOf(it)
                     if(index >= 0 && (sourceAdapterList[index].enabled || sourceRuleCount[it] != null)) {
                         sourceRuleCount[it] = null
-                        launchWithLifecylce(true) {
+                        launchWithLifecycle(true) {
                             sourceAdapter.notifyItemChanged(index)
                         }
                     } else sourceRuleCount[it] = null
