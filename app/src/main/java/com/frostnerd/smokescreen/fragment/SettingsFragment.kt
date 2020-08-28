@@ -314,9 +314,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             helpNetguard.isVisible = false
         }
 
-        if(installedThirdPartyApps == 0) {
-            findPreference("nonvpn_help").isVisible = false
-        }
         helpGeneric.setOnPreferenceClickListener {
             val portValue = port.text.toInt()
             showInfoTextDialog(requireContext(),

@@ -51,5 +51,9 @@
                 android:key="nonvpn_help_netguard"
                 android:title="NetGuard"
                 android:summary="@string/summary_nonvpn_help" />
+        <Preference
+                android:key="nonvpn_help_generic"
+                android:title="@string/nonvpn_help_generic_title"
+                android:summary="@string/summary_nonvpn_help_generic" />
     </PreferenceCategory>
 </androidx.preference.PreferenceScreen>

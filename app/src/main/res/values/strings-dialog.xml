@@ -203,4 +203,6 @@
         - Scroll down, set both VPN DNS fields to 127.0.0.1\n
         - Start Nebulo (in non-VPN mode) and start NetGuard
     </string>
+
+    <string name="dialog_nonvpn_help_generic">To use Nebulo in non-vpn mode together with a third-party VPN app you have to change your DNS settings inside this other app.\nNot all VPN apps allow you to change the DNS settings. If yours does, simply set the DNS server to \'localhost:%1d\' or \'127.0.0.1:%2d\' (you can configure the port above).\n\nAfter configuring the apps simply start both.</string>
 </resources>
