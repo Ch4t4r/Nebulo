@@ -126,9 +126,11 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                         ipv6Target = secondaryTarget,
                         isWildcard = isWildcard
                     ) ?: DnsRule(type, host, primaryTarget, secondaryTarget, isWildcard = isWildcard)
-                    onRuleCreated(
-                        newRule
-                    )
+                    if(dnsRule == null || newRule != dnsRule) {
+                        onRuleCreated(
+                            newRule
+                        )
+                    }
                 }
             }
             getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener {
