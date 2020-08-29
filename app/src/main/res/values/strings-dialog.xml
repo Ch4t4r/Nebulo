@@ -137,6 +137,7 @@
     <string name="dialog_newdnsrule_title">New DNS rule</string>
     <string name="dialog_newdnsrule_edit">Edit DNS rule</string>
     <string name="dialog_newdnsrule_whitelist">Whitelist</string>
+    <string name="dialog_newdnsrule_block_host">Block this host</string>
     <string name="dialog_newdnsrule_specify_address">Address</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
     <string name="dialog_newdnsrule_hint_ipv4address">IPv4 address</string>

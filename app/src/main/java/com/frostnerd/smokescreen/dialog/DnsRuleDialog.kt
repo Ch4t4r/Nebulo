@@ -35,6 +35,7 @@ import java.util.regex.Matcher
 class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (DnsRule) -> Unit) :
     AlertDialog(context, context.getPreferences().theme.dialogStyle) {
     private var isWhitelist = false
+    private var isBlockHost = true
     companion object {
         private val matchers = MaxSizeMap<String, Matcher>(150, 10)
 
@@ -96,13 +97,17 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                     }
                     val primaryTarget = if (isWhitelist) {
                         ""
+                    } else if(isBlockHost) {
+                      "0.0.0.0"
                     } else when (type) {
                         Record.TYPE.A, Record.TYPE.ANY -> view.ipv4Address.text.toString()
                         else -> view.ipv6Address.text.toString()
                     }
                     val secondaryTarget = if (isWhitelist) {
                         null
-                    } else when (type) {
+                    } else if(isBlockHost){
+                        "::1"
+                    }else when (type) {
                         Record.TYPE.AAAA, Record.TYPE.ANY -> view.ipv6Address.text.toString()
                         else -> null
                     }
@@ -132,12 +137,24 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                     if (isWhitelist) context.getString(R.string.dialog_newdnsrule_specify_address)
                     else context.getString(R.string.dialog_newdnsrule_whitelist)
 
-                val visibility = if (isWhitelist) View.GONE else View.VISIBLE
+                val visibility = if (isWhitelist || isBlockHost) View.GONE else View.VISIBLE
                 view.ipv4Til.visibility = visibility
                 view.ipv6Til.visibility = visibility
+                view.blockHost.visibility = if (isWhitelist) View.GONE else View.VISIBLE
+            }
+            view.blockHost.setOnCheckedChangeListener { _, isChecked ->
+                isBlockHost = isChecked
+                if(isBlockHost) {
+                    view.ipv4Til.visibility = View.GONE
+                    view.ipv6Til.visibility = View.GONE
+                } else {
+                    view.ipv4Til.visibility = View.VISIBLE
+                    view.ipv6Til.visibility = View.VISIBLE
+                }
             }
             if (dnsRule != null) {
                 if (dnsRule.isWhitelistRule()) {
+                    isBlockHost = false
                     isWhitelist = true
                     view.host.setText(printableHost(dnsRule.host))
                     getButton(DialogInterface.BUTTON_NEUTRAL).text =
@@ -159,6 +176,10 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                             view.ipv4Address.setText(dnsRule.target)
                             view.ipv6Address.setText(dnsRule.ipv6Target)
                         }
+                    }
+                    isBlockHost = dnsRule.target == "0.0.0.0" && dnsRule.ipv6Target == "::1"
+                    if(!isBlockHost) {
+                        view.blockHost.isChecked = false
                     }
                 }
             }

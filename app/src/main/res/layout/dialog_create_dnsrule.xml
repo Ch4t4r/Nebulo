@@ -24,10 +24,20 @@
                 android:inputType="textUri"
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+    
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:id="@+id/blockHost"
+            android:text="@string/dialog_newdnsrule_block_host"
+            android:checked="true"
+            android:layout_marginBottom="16dp"
+            android:textColor="?android:attr/textColor"
+            android:layout_height="wrap_content" />
 
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:id="@+id/ipv4Til"
+            android:visibility="gone"
             app:errorEnabled="true"
             android:textColorHint="?android:attr/textColorSecondary"
             android:layout_height="wrap_content">
@@ -44,6 +54,7 @@
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:id="@+id/ipv6Til"
+            android:visibility="gone"
             app:errorEnabled="true"
             android:textColorHint="?android:attr/textColorSecondary"
             android:layout_height="wrap_content">
