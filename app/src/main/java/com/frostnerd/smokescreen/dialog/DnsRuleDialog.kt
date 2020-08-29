@@ -119,13 +119,8 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                         } else it.replace(Regex("^www\\."), "")
                     }
 
-                    val newRule = dnsRule?.copy(
-                        type = type,
-                        host = host,
-                        target = primaryTarget,
-                        ipv6Target = secondaryTarget,
-                        isWildcard = isWildcard
-                    ) ?: DnsRule(type, host, primaryTarget, secondaryTarget, isWildcard = isWildcard)
+                    val newRule = DnsRule(type, host, primaryTarget, secondaryTarget, isWildcard = isWildcard)
+                    if(dnsRule != null) newRule.id = dnsRule.id
                     if(dnsRule == null || newRule != dnsRule) {
                         onRuleCreated(
                             newRule
