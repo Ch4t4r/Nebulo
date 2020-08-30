@@ -74,7 +74,8 @@
     <string name="title_catch_other_dns_servers">Interceptar outro tráfego de DNS</string>
     <string name="summary_catch_other_dns_servers">Interceptar o tráfego de servidores DNS conhecidos e encaminhá-lo com segurança para o servidor configurado usando o nebulo</string>
     <string name="title_bypass_searchdomains">Ignorar domínios de pesquisa</string>
-    <string name="summary_bypass_searchdomains">Encaminhar tais domínios (por exemplo, MeuPC.local ou MeuPC.fritz.box) para o servidor DNS da sua rede local em vez do servidor de DNS configurado. Isso é expressamente recomendado. Essas consultas não saem da sua rede</string>
+    <string name="summary_bypass_searchdomains">Encaminhar tais domínios (por exemplo, MeuPC.local ou MeuPC.fritz.box) para o servidor DNS da sua rede local em vez do servidor de DNS configurado.
+\nIsso é expressamente recomendado. Essas consultas não saem da sua rede</string>
     <string name="title_pause_on_captiveportal">Pausar na página de login da rede</string>
     <string name="summary_pause_on_captiveportal">Não encaminhe DNS para o servidor configurado quando for detectado que você precisar efetuar login com credenciais de acesso (por exemplo, em redes públicas de Wi-Fi). Nebulo continuará automaticamente após a autenticação bem-sucedida. 
 \nDesativar esta opção pode impedir que você abra a página de login</string>
@@ -129,4 +130,6 @@
     <string name="preference_category_iptables">Iptables</string>
     <string name="summary_fallback_dns">Configure o servidor DNS que o Nebulo usa internamente. Este padrão é o servidor DNS do seu provedor de serviços. Este servidor configurado é utilizado apenas para fins internos e não lida com as suas consultas DNS normais.</string>
     <string name="title_fallback_dns">Fallback servidor DNS</string>
+    <string name="summary_nonvpn_help_generic">Clique aqui para obter instruções sobre como configurar aplicações VPN</string>
+    <string name="nonvpn_help_generic_title">Aplicações VPN genéricas</string>
 </resources>
