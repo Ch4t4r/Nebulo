@@ -61,4 +61,8 @@
     <string name="notification_channel_foreground_service">恒久的通知チャンネル</string>
     <string name="notification_channel_default_description">通知投稿用のデフォルトチャンネル</string>
     <string name="notification_channel_default">デフォルトチャンネル</string>
+    <string name="notification_multipleuserswarning_text">NebuloはAndroidのバグのためにダミーVPNを起動できませんでした。これは、お使いのデバイスに複数のユーザーがいる場合に発生します。</string>
+    <string name="notification_multipleuserswarning_title">ダミーVPNが確立できませんでした</string>
+    <string name="notification_privatednswarning_text">Nebuloを使用するには、システム設定でプライベートDNSを無効にしてください。</string>
+    <string name="notification_privatednswarning_title">プライベートDNS</string>
 </resources>
