@@ -412,4 +412,10 @@
     </string-array>
 
     <string name="changelog_build_55_4">The query log now loads the queries in chunks instead of all at once</string>
+
+    <string-array name="changelog_build_63">
+        <item>Version 1.4.1 (Build 63)</item>
+        <item>@string/changelog_build_30_4</item>
+        <item>@string/changelog_build_28_5</item>
+    </string-array>
 </resources>
