@@ -11,8 +11,8 @@ android {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 62
-        versionName "1.4.0"
+        versionCode 63
+        versionName "1.4.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("Boolean", "FROM_CI", String.valueOf(getSystemVariableOrDefault("CI_COMMIT_SHORT_SHA", "") != ""))
