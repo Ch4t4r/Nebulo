@@ -59,7 +59,7 @@ class StartStopTileService:TileService() {
     override fun onStartListening() {
         super.onStartListening()
         settingsSubscription = getPreferences().let {
-            it.listenForChangesOn(it::vpnServiceState, it.preferenceChangeListener { changes ->
+            it.listenForChanges("vpn_service_state", it.preferenceChangeListener { changes ->
                 val newState = changes.entries.first().value.second as VpnServiceState
                 updateTileState(newState == VpnServiceState.STARTED)
             })
