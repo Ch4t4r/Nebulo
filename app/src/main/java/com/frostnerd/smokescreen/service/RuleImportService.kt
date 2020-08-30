@@ -219,6 +219,7 @@ class RuleImportService : IntentService("RuleImportService") {
                                 }?.second?.apply {
                                     newChecksums[it] = this.replace("\"", "<qt>")
                                 }
+                                log("Now parsing content...")
                                 processLines(it, response.body!!.byteStream())
                             }
                             localDataIsRecent -> {
