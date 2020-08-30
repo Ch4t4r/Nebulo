@@ -130,4 +130,6 @@
     <string name="preference_category_iptables">Iptables</string>
     <string name="summary_fallback_dns">Configurar el servidor DNS que Nebulo usa internamente. Esto es por defecto el servidor DNS de su proveedor de servicios. Este servidor configurado sólo se utiliza para propósitos internos y no maneja sus consultas DNS normales.</string>
     <string name="title_fallback_dns">Servidor DNS de fallback</string>
+    <string name="summary_nonvpn_help_generic">Haga clic aquí para obtener instrucciones sobre cómo configurar las aplicaciones VPN</string>
+    <string name="nonvpn_help_generic_title">Aplicaciones genéricas de VPN</string>
 </resources>
