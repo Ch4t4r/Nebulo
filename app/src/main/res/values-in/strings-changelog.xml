@@ -129,4 +129,11 @@
     <string name="changelog_build_33_3">Mengganti beberapa ikon</string>
     <string name="changelog_build_33_2">Pemberitahuan yang ditampilkan ketika aplikasi mogok saat pelaporan kerusakan otomatis dinonaktifkan sekarang memiliki tombol untuk mengirim file log</string>
     <string name="changelog_build_33_1">Terjemahan Turki, Indonesia, Rusia, dan Belanda telah ditambahkan</string>
+    <string name="changelog_build_55_4">Log kueri sekarang memuat kueri dalam potongan, bukan sekaligus</string>
+    <string name="changelog_build_62_4">Server DNS internal (fallback) sekarang dapat dikonfigurasi</string>
+    <string name="changelog_build_62_3">Sumber aturan DNS sekarang dapat diperbarui satu per satu</string>
+    <string name="changelog_build_62_2">Menambahkan dukungan untuk iptables dalam mode non-vpn. Ini membutuhkan perangkat yang di-rooting</string>
+    <string name="changelog_build_62_1">Saat memulai Nebulo dari pintasan server, server tersebut sekarang tetap ada</string>
+    <string name="changelog_build_61_1">Versi beta yang dipromosikan menjadi rilis penuh</string>
+    <string name="changelog_build_59_7">Nebulo sekarang dapat berjalan dalam mode non-VPN (eksperimental), di mana ia menggunakan Server DNS, bukan VPN tiruan. Ini membutuhkan aplikasi pihak ketiga untuk meneruskan kueri DNS ke Nebulo</string>
 </resources>
