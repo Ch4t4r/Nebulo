@@ -61,4 +61,8 @@
     <string name="notification_dnsserver_message_iptables_active_no_ipv6">Le serveur DNS fonctionne sur localhost:%1d. Les requêtes sont transférées en utilisant iptables.
 \nAttention : IPv6 est actif, les requêtes peuvent contourner Nebulo.</string>
     <string name="notification_dnsserver_message_iptables_active">Le serveur DNS fonctionne sur localhost:%1d. Les requêtes sont transférées en utilisant iptables</string>
+    <string name="notification_multipleuserswarning_text">Nebulo n\'a pas pu démarrer son VPN factice à cause d\'un bug d\'Android. Cela se produit lorsqu\'il y a plusieurs utilisateurs sur votre appareil.</string>
+    <string name="notification_multipleuserswarning_title">Un VPN factice n\'a pas pu être mis en place</string>
+    <string name="notification_privatednswarning_text">Veuillez désactiver les Dns privés dans les paramètres du système pour utiliser Nebulo.</string>
+    <string name="notification_privatednswarning_title">Dns privés</string>
 </resources>
