@@ -61,4 +61,8 @@
     <string name="notification_dnsserver_message_iptables_active_no_ipv6">Server DNS in esecuzione su localhost:%1d. Le richieste sono inoltrate usando iptables.
 \nAttenzione: IPv6 è attivo, le richieste potrebbero aggirare Nebulo.</string>
     <string name="notification_dnsserver_message_iptables_active">Server DNS in esecuzione su localhost:%1d. Le richieste sono inoltrate usando iptables</string>
+    <string name="notification_multipleuserswarning_text">Nebulo non ha potuto avviare la sua VPN manichino a causa di un bug Android. Questo accade quando ci sono più utenti sul dispositivo.</string>
+    <string name="notification_multipleuserswarning_title">Dummy VPN non poteva essere stabilito</string>
+    <string name="notification_privatednswarning_text">Si prega di disattivare i DNS privati nelle impostazioni di sistema per utilizzare Nebulo.</string>
+    <string name="notification_privatednswarning_title">Dns privato</string>
 </resources>

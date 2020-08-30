@@ -47,7 +47,8 @@
     <string name="window_dnsrules_hostalreadyexists">Il existe déjà une règle pour cet host</string>
     <string name="window_dnsrules_customhosts">Hosts personnalisés</string>
     <string name="error_invalid_host">Veuillez fournir un host valide</string>
-    <string name="window_main_privatedns_info">Le DNS privé est actif, vos requêtes sont déjà protégées. Activez Nebulo si vous souhaitez utiliser le DNS-sur-HTTPS ou d\'autres fonctions utiles.</string>
+    <string name="window_main_privatedns_info">Le DNS privé est actif, vos requêtes sont déjà protégées. Activez Nebulo si vous souhaitez utiliser le DNS-sur-HTTPS ou d\'autres fonctions utiles.
+\nPour activer Nebulo, désactivez le DNS privé.</string>
     <string name="windows_querylogging_usedserver_cache">Résolu avec cache</string>
     <string name="windows_querylogging_usedserver_dnsrules">Résolu avec les règles du DNS</string>
     <string name="windows_querylogging_dnsrule_created">Une règle DNS a été créée</string>

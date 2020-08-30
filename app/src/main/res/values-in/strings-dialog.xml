@@ -178,4 +178,5 @@
 \nServer paling lambat: %8s</string>
     <string name="dialog_speedresult_title">Hasil tes kecepatan</string>
     <string name="dialog_logexport_loading_title">Menyiapkan catatan</string>
+    <string name="dialog_newdnsrule_block_host">Cekal domain ini</string>
 </resources>

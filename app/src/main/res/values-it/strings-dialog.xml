@@ -181,4 +181,5 @@
 \n - torna alle opzioni avanzate
 \n - scorri giù, imposta entrambi i campi VPN DNS a 127.0.0.1
 \n - avvia Nebulo (in modalità non-VPN) e avvia NetGuard</string>
+    <string name="dialog_newdnsrule_block_host">Blocca questo host</string>
 </resources>

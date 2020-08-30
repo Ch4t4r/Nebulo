@@ -130,4 +130,6 @@
     <string name="title_fallback_dns">Server DNS cadangan</string>
     <string name="summary_language">Ubah bahasa pada aplikasi</string>
     <string name="title_language">Bahasa</string>
+    <string name="summary_nonvpn_help_generic">Klik di sini untuk mendapatkan instruksi tentang cara mengkonfigurasi aplikasi VPN</string>
+    <string name="nonvpn_help_generic_title">Aplikasi VPN umum</string>
 </resources>

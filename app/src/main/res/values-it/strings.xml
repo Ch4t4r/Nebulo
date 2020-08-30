@@ -66,7 +66,8 @@
     <string name="windows_querylogging_dnsrule_created">La regola DNS è stata creata</string>
     <string name="windows_querylogging_usedserver_dnsrules">Risolto con regole DNS</string>
     <string name="windows_querylogging_usedserver_cache">Risolto con la cache</string>
-    <string name="window_main_privatedns_info">Private DNS è attivo, le tue richieste sono già protette. Attiva Nebulo se vuoi usare DNS-over-HTTPS o altre funzioni utili.</string>
+    <string name="window_main_privatedns_info">Private DNS è attivo, le tue richieste sono già protette. Attiva Nebulo se vuoi usare DNS-over-HTTPS o altre funzioni utili.
+\nPer abilitare Nebulo disabilitare il DNS privato.</string>
     <string name="windows_querylogging_hostsource">Fonte della regola DNS</string>
     <string name="windows_querylogging_hostsource__user">Regole dell\'utente</string>
     <string name="windows_querylogging_hostsource__unknown">Sconosciuto</string>

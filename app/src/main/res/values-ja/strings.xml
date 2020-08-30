@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="window_main_privatedns_info">既にプライベートDNSが有効のため、DNSクエリは保護されています。DNS over HTTPSやその他の便利な機能を使用したい場合は、Nebuloを有効にしてください。</string>
+    <string name="window_main_privatedns_info">既にプライベートDNSが有効のため、DNSクエリは保護されています。DNS over HTTPSやその他の便利な機能を使用したい場合は、Nebuloを有効にしてください。
+\nNebuloを有効にするには、プライベートDNSを無効にします。</string>
     <string name="windows_querylogging_usedserver_cache">DNSキャッシュで解決済</string>
     <string name="windows_querylogging_usedserver_dnsrules">DNSルールで解決済</string>
     <string name="window_dnsrules_customhosts">ホスト名のカスタマイズ</string>

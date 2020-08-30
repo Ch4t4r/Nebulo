@@ -61,4 +61,8 @@
     <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS Server läuft unter localhost:%1d. Anfragen werden mit iptables weitergeleitet.
 \nWarnung: IPv6 ist aktiv, Anfragen könnten Nebulo nicht erreichen.</string>
     <string name="notification_dnsserver_message_iptables_active">DNS Server läuft unter localhost:%1d. Anfragen werden mit iptables weitergeleitet</string>
+    <string name="notification_multipleuserswarning_text">Nebulo konnte wegen eines Android-Fehlers den Dummy VPN nicht erstellen. Dieser Fehler tritt bei mehreren Nutzern auf einem Gerät auf.</string>
+    <string name="notification_multipleuserswarning_title">Dummy VPN konnte nicht erstellt werden</string>
+    <string name="notification_privatednswarning_text">Bitte deaktiviere Privates DNS in den Systemeinstellungen um Nebulo zu benutzen.</string>
+    <string name="notification_privatednswarning_title">Privates DNS</string>
 </resources>

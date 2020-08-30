@@ -14,7 +14,8 @@
     <string name="error_invalid_host">Por favor, proporcione un host válido</string>
     <string name="activity_label_enable_logging">Exportar registros de depuración/activar registro de depuración</string>
     <string name="activity_label_import_queries">Importar consultas DNS</string>
-    <string name="window_main_privatedns_info">El DNS privado está activo, sus consultas ya están protegidas. Habilite Nebulo si desea utilizar DNS-over-HTTPS u otras características útiles.</string>
+    <string name="window_main_privatedns_info">El DNS privado está activo, sus consultas ya están protegidas. Habilite Nebulo si desea utilizar DNS-over-HTTPS u otras características útiles.
+\nPara habilitar Nebulo, deshabilite el DNS privado.</string>
     <string name="windows_querylogging_usedserver_cache">Resuelto con el caché</string>
     <string name="windows_querylogging_usedserver_dnsrules">Resuelto con las reglas del DNS</string>
     <string name="windows_querylogging_dnsrule_created">Se ha creado la regla del DNS</string>

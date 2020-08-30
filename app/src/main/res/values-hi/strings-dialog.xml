@@ -107,7 +107,7 @@
     <string name="dialog_clearuserrules_title">सभी DNS नियम हटाएँ जाये\?</string>
     <string name="dialog_clearuserrules_message">क्या आप सभी DNS नियम हटा देना चाहते हैं\? इसे वापस नहीं किया जा सकता है।</string>
     <string name="dialog_newhostsource_title">नया नियम स्रोत</string>
-    <string name="dialog_newhostsource_edit_title">नया नियम स्रोत</string>
+    <string name="dialog_newhostsource_edit_title">नियम स्रोत संपादित करें</string>
     <string name="dialog_newhostsource_name">नाम</string>
     <string name="dialog_newhostsource_wildcard_info">आप उन होस्ट सूचियों का उपयोग कर सकते हैं जो वाइल्डकार्ड डोमेन का उपयोग करती हैं।</string>
     <string name="dialog_newhostsource_choose_file">फ़ाइल का चयन</string>
@@ -165,4 +165,5 @@
     <string name="dialog_doh_detect_type_message">एक क्षण प्रतीक्षा करें।</string>
     <string name="dialog_doh_detect_type_title">सर्वर प्रकार का पता लगाना</string>
     <string name="dialog_newhostsource_url">यूआरएल</string>
+    <string name="dialog_newdnsrule_block_host">इस डोमेन को ब्लॉक करें</string>
 </resources>
