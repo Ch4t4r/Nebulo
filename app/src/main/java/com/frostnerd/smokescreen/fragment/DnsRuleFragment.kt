@@ -685,7 +685,9 @@ class DnsRuleFragment : Fragment() {
                     forEach { it.enabled = false }
                 })
                 put(4, mutableListOf(
-                    HostSource("Energized Unified", "https://block.energized.pro/unified/formats/domains.txt", false)
+                    HostSource("Energized Unified", "https://block.energized.pro/unified/formats/domains.txt", false).apply {
+                        enabled = false
+                    }
                 ))
             }
         }
