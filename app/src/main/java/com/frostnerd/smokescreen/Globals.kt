@@ -51,8 +51,8 @@ fun showPrivacyPolicyDialog(context: Context) {
 fun showInfoTextDialog(context:Context,
                        title:String,
                        text:String,
-                       positiveButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
-                       negativeButton:Pair<String, (DialogInterface, Int) -> Unit>? = null,
+                       positiveButton:Pair<String, ((DialogInterface, Int) -> Unit)?>? = null,
+                       negativeButton:Pair<String, ((DialogInterface, Int) -> Unit)?>? = null,
                        neutralButton:Pair<String, ((DialogInterface, Int) -> Unit)?>? = context.getString(android.R.string.ok) to null,
                        withDialog: (AlertDialog.() -> Unit)? = null,
                         linkifyText:Boolean = false) {

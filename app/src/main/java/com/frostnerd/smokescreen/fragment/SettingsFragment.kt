@@ -316,10 +316,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         helpGeneric.setOnPreferenceClickListener {
             val portValue = port.text.toInt()
-            showInfoTextDialog(requireContext(),
-            getString(R.string.preference_category_nonvpnmode_help),
-            getString(R.string.dialog_nonvpn_help_generic, portValue, portValue),
-            neutralButton = getString(R.string.all_close) to null)
+            showInfoTextDialog(
+                requireContext(),
+                getString(R.string.preference_category_nonvpnmode_help),
+                getString(R.string.dialog_nonvpn_help_generic, portValue, portValue),
+                positiveButton = getString(R.string.all_close) to null,
+                neutralButton = null
+            )
             true
         }
     }
