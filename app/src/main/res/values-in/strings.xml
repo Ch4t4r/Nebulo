@@ -43,7 +43,8 @@
     <string name="iptables_supported">Selamat, perangkat anda mendukung iptables!</string>
     <string name="restart_app">Mulai ulang</string>
     <string name="restart_app_for_changes">Mulai ulang aplikasi untuk mendapatkan perubahan.</string>
-    <string name="window_main_privatedns_info">DNS pribadi telah aktif, kueri anda telah siap diproteksi. aktifkan Nebulo jika anda ingin menggunakan DNS-over-HTTPS atau fitur berguna lainnya.</string>
+    <string name="window_main_privatedns_info">DNS pribadi telah aktif, kueri anda telah siap diproteksi. aktifkan Nebulo jika anda ingin menggunakan DNS-over-HTTPS atau fitur berguna lainnya.
+\nUntuk mengaktifkan Nebulo nonaktifkan DNS Pribadi.</string>
     <string name="windows_querylogging_usedserver_cache">Selesaikan dengan cache</string>
     <string name="windows_querylogging_usedserver_dnsrules">Selesaikan dengan aturan sumber</string>
     <string name="windows_querylogging_dnsrule_created">Aturan DNS telah dibuat</string>
