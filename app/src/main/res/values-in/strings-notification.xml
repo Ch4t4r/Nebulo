@@ -61,4 +61,8 @@
     <string name="notification_ruleimport_tertiarymessage">Menyelesaikan impor…</string>
     <string name="notification_ruleimportfinished_title">Mengimpor aturan DNS selesai</string>
     <string name="notification_ruleimport_message">Mengimpor aturan DNS dari %1s (%2s)</string>
+    <string name="notification_multipleuserswarning_text">Nebulo tidak dapat memulai VPN tiruannya karena bug Android. Ini terjadi jika ada beberapa pengguna di perangkat Anda.</string>
+    <string name="notification_multipleuserswarning_title">VPN tiruan tidak dapat dibuat</string>
+    <string name="notification_privatednswarning_text">Nonaktifkan Private Dns di pengaturan sistem untuk menggunakan Nebulo.</string>
+    <string name="notification_privatednswarning_title">Pribadi Dns</string>
 </resources>
