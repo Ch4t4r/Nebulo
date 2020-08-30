@@ -29,11 +29,19 @@ The second topic, tracking, is nearly as important as the topic of censorship. M
 # How it works
 Nebulo uses the VPN API of the Android system to create a dummy VPN which intercepts all packets for the dns servers of your device. This dummy VPN is __not__ a real VPN and does not tunnel your packets - it only handles dns packets. As only one VPN can be activate at any given time you have to decice between using Nebulo or a real VPN.
 
+## Non-VPN mode
+Since 1.4.0 Nebulo can run without requiring the dummy VPN. In this mode Nebulo hosts a DNS server locally, which forwards all DNS queries it receives according to the settings you configured in Nebulo.<br>
+In this mode you manually have to forward all the DNS queries your decice creates to Nebulos local DNS server (normally this is what the dummy VPN is used for).<br>
+If your device is rooted Nebulo has an inbuilt solution using `iptables`. If it isn't rooted you have to use third-party apps which are able to forward the DNS queries to Nebulo.
+Known third-party apps this works with are NetGuard and V2Ray (although there might be others). You can find instructions on how to configure these apps to work together with Nebulo in the settings.<br>
+Please note that the App exclusion setting inside the general category won't have any effect in non-VPN mode. You have to configure excluded apps inside the third-party app you are using.
+
+
 ## What this is based on
 Nebulo is a completely original piece of software. It doesn't use any other dependency under the hood for the dns capabilities. Check the [dependencies](https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/app/build.gradle#L100) to see what is used for everything build around DoH/DoT.
 
 ## Incompatibilities, compatibilities and possible problems 
-- As mentioned no other VPN can be active when Nebulo is running.
+- As mentioned no other VPN can be active when Nebulo is running (at least when not running in Non-VPN mode mentioned above)
 - Nebulo works fine with non-VPN firewalls in place (such as AFWall+), but changes in firewall profiles [could break the VPN](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues/84), requiring a restart of Nebulo.
 - Other means of ad-blocking, like modifying the `/etc/hosts` file or the `AdAway` app go hand in hand with Nebulo as well. 
     - The AdGuard app might cause Nebulo not to receive DNS queries
