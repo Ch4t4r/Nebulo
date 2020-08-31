@@ -3,6 +3,7 @@ All dates in dd.mm.yyy.
 **30.08.2020**<br>
 1.4.1, Build 63:
 - This is a stability update which fixes a few bugs and crashes.
+
 1.4.1.1, Build 65:
 - Hotfix for 1.4.1
 
