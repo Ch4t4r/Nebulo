@@ -1,5 +1,19 @@
 All dates in dd.mm.yyy.
 
+**30.08.2020**<br>
+1.4.1, Build 63:
+- This is a stability update which fixes a few bugs and crashes.
+1.4.1.1, Build 65:
+- Hotfix for 1.4.1
+
+
+**29.07.2020**<br>
+1.4.0, Build 62:
+- When starting Nebulo from a server shortcut that server is now persisted
+- Added support for iptables in non-vpn mode. This requires a rooted device
+- DNS rule sources can now be updated individuall
+- The internal DNS server can now be configured
+
 **07.07.2020**<br>
 1.3.0, Build 61:
 - There are now new translations
