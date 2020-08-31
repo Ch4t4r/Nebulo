@@ -57,7 +57,7 @@ The app consists of a few core features:
  * Query logging
  * DNS rules, where you can specify your own IP addresses for hosts
     * Rules can be imported from files and URLs (supports 4 different formats)
-    * You can block hosts by using 0.0.0.0 and ::1 as targets
+    * You can block hosts by using 0.0.0.0 and ::1 as targets (If you check the box "Block this host" those targets are automatically used. You don't have to do anything else.)
     * The DNS rules prevent CNAME cloaking
  * Highly customizable settings
     * Disable IPv4/IPv6
