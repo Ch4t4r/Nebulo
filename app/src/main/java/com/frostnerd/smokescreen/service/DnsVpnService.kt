@@ -79,6 +79,7 @@ class DnsVpnService : VpnService(), Runnable {
     private var dnsServerProxy:DnsServerPacketProxy? = null
     private var ipTablesRedirector: IpTablesPacketRedirector? = null
     private var destroyed = false
+    private var stopping = false
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var noConnectionNotificationBuilder: NotificationCompat.Builder
     private var noConnectionNotificationShown = false
@@ -559,7 +560,7 @@ class DnsVpnService : VpnService(), Runnable {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("Service onStartCommand", intent = intent)
         runInNonVpnMode = getPreferences().runWithoutVpn
-        if(destroyed) {
+        if(stopping) {
             updateNotification()
             return START_NOT_STICKY
         }
@@ -841,6 +842,7 @@ class DnsVpnService : VpnService(), Runnable {
     }
 
     override fun onDestroy() {
+        stopping = true
         super.onDestroy()
         log("onDestroy() called (Was destroyed from within: $destroyed)")
         log("Unregistering settings listener")
