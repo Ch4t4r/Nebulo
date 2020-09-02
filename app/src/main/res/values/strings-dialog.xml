@@ -212,4 +212,11 @@
 
     <string name="dialog_querylog_information_title">Information about query log</string>
     <string name="dialog_querylog_information_message">This list shows you all past queries Nebulo logged while it was active. The list updates close to realtime when Nebulo is currently active.\n\nIcons at the start of the row indicate what happened with the query.\n\nFlag: The host was resolved from the DNS rules, or was blocked by the DNS server\nArrow: Nebulo forwarded the query to the DNS server\nDatabase: Nebulo retrieved the DNS response from the cache</string>
+
+    <string name="dialog_dnsrules_search_title">Search for a host</string>
+    <string name="dialog_dnsrules_search_message">Enter a host below to search for it in the DNS rules.</string>
+    <string name="dialog_dnsrules_status_not_found">No DNS rule found for this host.</string>
+    <string name="dialog_dnsrules_status_userrule">This host is part of the DNS rules defined by you.</string>
+    <string name="dialog_dnsrules_status_fromsource">This host is part of the source %1s</string>
+    <string name="dialog_dnsrules_status_sourcenotfound">This host is in the DNS rules, but the source is unknown.</string>
 </resources>
