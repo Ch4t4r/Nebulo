@@ -62,6 +62,7 @@
     <string name="about_help_translating">Help translating</string>
 
     <string name="window_speedtest_runtest">Start the test</string>
+    <string name="window_speedtest_information">The lower the values, the faster Nebulo is able to communicate with the server. This for example increases your browsing speed.</string>
 
     <string name="error_no_webbrowser_installed">You don\'t have any app installed to view this link</string>
 
