@@ -80,7 +80,7 @@ class NewServerDialog(
             }?.takeIf {
                 it.pathSegments.size == 1 && it.pathSegments[0] == "" // But isn't an URL (no path in string)
             }?.takeIf {
-              it.host.contains(Regex("[.:]")) // It should contain at least one period (or colon for IPv6), either because it's an IP Address or a domain (like test.com). This explicitly prevents local-only domains (like localhost or raspberry)
+                it.host.contains(Regex("[.:]")) // It should contain at least one period (or colon for IPv6), either because it's an IP Address or a domain (like test.com). This explicitly prevents local-only domains (like localhost or raspberry)
             }?.let { url ->
                 val port = if(s.indexOf(":").let {
                         it == -1 || s.toCharArray().getOrNull(it + 1)?.isDigit() != true
@@ -95,8 +95,14 @@ class NewServerDialog(
                     }
                 }.firstOrNull()?.servers?.firstOrNull {
                     it.address.host == url.host
-                }?.address ?: TLSUpstreamAddress(url.host, port)
+                }?.address ?: TLSUpstreamAddress(applyCase(s.split(":").first(), url.host), port)
             }
+        }
+        private fun applyCase(from:String, to:String):String {
+            val index = to.indexOf(from, ignoreCase = true).takeIf {
+                it >= 0
+            } ?: return to
+            return to.replaceRange(index, index + from.length, from)
         }
     }
 
@@ -301,7 +307,12 @@ class NewServerDialog(
         context.log("Creating HttpsUpstreamAddress for `$url`")
 
         val parsedUrl = url.toHttpUrl()
-        val host = parsedUrl.host
+        val hostFromInput = url.indexOf(parsedUrl.host, ignoreCase = true).takeIf {
+            it > 0
+        }?.let {
+            url.subSequence(it, it + parsedUrl.host.length).toString()
+        }
+        val host = hostFromInput ?: parsedUrl.host
         val port = parsedUrl.port
         val path = parsedUrl.pathSegments.takeIf {
             it.isNotEmpty() && (it.size > 1 || !it.contains("")) // Non-empty AND contains something other than "" (empty string used when there is no path)
