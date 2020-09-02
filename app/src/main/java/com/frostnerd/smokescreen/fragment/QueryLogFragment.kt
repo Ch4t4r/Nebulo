@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.fragment.querylogfragment.QueryLogDetailFragment
 import com.frostnerd.smokescreen.fragment.querylogfragment.QueryLogListFragment
+import com.frostnerd.smokescreen.showInfoTextDialogWithClose
 import kotlinx.android.synthetic.main.fragment_querylog_main.*
 
 /*
@@ -68,6 +69,14 @@ class QueryLogFragment : Fragment(), BackpressFragment {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
         searchView.queryHint = getString(R.string.windows_querylogging_search_hint)
         searchView.setOnQueryTextListener(listFragment)
+        menu.findItem(R.id.info)!!.setOnMenuItemClickListener {
+            showInfoTextDialogWithClose(
+                requireContext(),
+                getString(R.string.dialog_querylog_information_title),
+                getString(R.string.dialog_querylog_information_message)
+            )
+            true
+        }
     }
 
     fun displayQueryDetailed(query:DnsQuery, switchToDetailView:Boolean = true) {

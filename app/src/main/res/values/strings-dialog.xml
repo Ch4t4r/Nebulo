@@ -210,4 +210,6 @@
     <string name="dialog_latency_sidebar_title">Information about latency</string>
     <string name="dialog_latency_sidebar_message">The latency shown here is not your ping or how fast your network is.\n It shows how long it takes for Nebulo to send a request and get an answer from the DNS server. The displayed value is not always the most current one and fluctuations can be possible.\n This can cause the value to be displayed higher than it is because it has become lower since it was measured.</string>
 
+    <string name="dialog_querylog_information_title">Information about query log</string>
+    <string name="dialog_querylog_information_message">This list shows you all past queries Nebulo logged while it was active. The list updates close to realtime when Nebulo is currently active.\n\nIcons at the start of the row indicate what happened with the query.\n\nFlag: The host was resolved from the DNS rules, or was blocked by the DNS server\nArrow: Nebulo forwarded the query to the DNS server\nDatabase: Nebulo retrieved the DNS response from the cache</string>
 </resources>

@@ -104,4 +104,6 @@
     <string name="iptables_not_supported">Your device does not support iptables</string>
     
     <string name="window_dnsrules_refresh_sources">Refresh to import rules from source</string>
+
+    <string name="window_querylog_information">Information</string>
 </resources>
