@@ -106,4 +106,6 @@
     <string name="window_dnsrules_refresh_sources">Refresh to import rules from source</string>
 
     <string name="window_querylog_information">Information</string>
+
+    <string name="about_help_faq">Frequently asked questions</string>
 </resources>

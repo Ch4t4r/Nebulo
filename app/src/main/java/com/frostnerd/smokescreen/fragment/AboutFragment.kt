@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.fragment
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.AppDatabase
@@ -114,6 +116,19 @@ class AboutFragment : Fragment() {
         view.about.setOnLongClickListener {
             if(queryGenStepOne) QueryGeneratorDialog(requireContext())
             true
+        }
+        view.faq.setOnClickListener {
+            try {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://nebulo.app/faq")
+                    )
+                )
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(requireContext(), R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG)
+                    .show()
+            }
         }
     }
 }
