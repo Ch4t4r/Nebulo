@@ -2,4 +2,11 @@
 <resources>
     <string name="hint_search">بحث</string>
     <string name="contentdescription_main_servericon">السيرفر</string>
+    <string name="hint_searchterm">إيجاد</string>
+    <string name="contentdescription_stop_app">إيقاف التطبيق</string>
+    <string name="contentdescription_start_app">تشغيل التطبيق</string>
+    <string name="contentdescription_clear_search">حذف البحث</string>
+    <string name="contentdescription_shared_app_icon">شعار التطبيق</string>
+    <string name="contentdescription_main_statusimage">تم الاتصال بنجاح</string>
+    <string name="contentdescription_main_infoimage">من نحن</string>
 </resources>
