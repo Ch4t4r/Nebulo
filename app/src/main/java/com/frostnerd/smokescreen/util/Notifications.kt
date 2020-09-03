@@ -140,6 +140,23 @@ class Notifications {
             }
             return "dnsrule_channel"
         }
+
+        fun getBadConnectionChannelId(context: Context):String {
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    "badconnection_channel",
+                    context.getString(R.string.notification_channel_dnsrules),
+                    NotificationManager.IMPORTANCE_DEFAULT
+                )
+                channel.enableLights(false)
+                channel.enableVibration(false)
+                channel.setSound(null, null)
+                channel.description = context.getString(R.string.notification_channel_dnsrules_description)
+                channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+                (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
+            }
+            return "badconnection_channel"
+        }
     }
 }
 
