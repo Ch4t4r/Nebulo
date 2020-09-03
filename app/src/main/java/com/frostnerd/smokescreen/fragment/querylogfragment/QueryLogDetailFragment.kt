@@ -173,7 +173,7 @@ class QueryLogDetailFragment : Fragment() {
     private fun showRuleSource(query:DnsQuery) {
         hostSourceFetchJob = GlobalScope.launch(Dispatchers.IO) {
             val sourceRule = if(query.name.startsWith("www", ignoreCase = true)) {
-                getDatabase().dnsRuleDao().findRuleTargetEntity(query.name.replaceFirst("www.", ""), query.type, true)
+                getDatabase().dnsRuleDao().findRuleTargetEntity(query.name.replaceFirst("www.", "", ignoreCase = true), query.type, true)
                     ?: getDatabase().dnsRuleDao().findRuleTargetEntity(query.name, query.type, true)
             } else {
                 getDatabase().dnsRuleDao().findRuleTargetEntity(query.name, query.type, true)

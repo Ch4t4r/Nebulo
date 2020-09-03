@@ -16,10 +16,20 @@
             android:theme="@style/AppTheme_Mono"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/information"
+            android:layout_marginTop="6dp"
+            android:layout_below="@id/toolBar"
+            android:gravity="center_horizontal"
+            android:text="@string/window_speedtest_information"
+            android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_above="@id/startTest"
-            android:layout_below="@id/toolBar"
+            android:layout_below="@id/information"
             android:layout_marginTop="12dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"

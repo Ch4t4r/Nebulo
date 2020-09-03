@@ -125,6 +125,11 @@ class MainActivity : NavigationDrawerActivity() {
                     update()
                 }
             }
+            view.infoButton.setOnClickListener {
+                showInfoTextDialogWithClose(this,
+                        getString(R.string.dialog_latency_sidebar_title),
+                        getString(R.string.dialog_latency_sidebar_message))
+            }
             networkManager.registerNetworkCallback(NetworkRequest.Builder().apply {
                 addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
             }.build(), cardNetworkCallback!!)
