@@ -2,10 +2,11 @@
 A selection of common questions and a collection of technical aspects of Nebulo. Feel free to ask a question in the issues and I'll add it here as well.
 
 ## Non-VPN mode
+(Go [here](docs/NONVPNMODE.md) for documentation)
 Since 1.4.0 Nebulo can run without requiring the dummy VPN. In this mode Nebulo hosts a DNS server locally, which forwards all DNS queries it receives according to the settings you configured in Nebulo.<br>
-In this mode you manually have to forward all the DNS queries your decice creates to Nebulos local DNS server (normally this is what the dummy VPN is used for).<br>
-If your device is rooted Nebulo has an inbuilt solution using iptables. If it isn't rooted you have to use third-party apps which are able to forward the DNS queries to Nebulo.
-Known third-party apps this works with are NetGuard and V2Ray (although there might be others). You can find instructions on how to configure these apps to work together with Nebulo in the settings.<br>
+In this mode you manually have to forward all the DNS queries your device creates to Nebulos local DNS server (normally this is what the dummy VPN is used for).<br><br>
+If your device is rooted Nebulo has an inbuilt solution using iptables. If it isn't rooted you have to use third-party apps which are able to forward the DNS queries to Nebulo.<br>
+Known third-party apps this works with are NetGuard and V2Ray (although there might be others). You can find instructions on how to configure these apps to work together with Nebulo in the settings or by clicking [here](docs/NONVPNMODE.md).<br>
 Please note that the App exclusion setting inside the general category won't have any effect in non-VPN mode. You have to configure excluded apps inside the third-party app you are using.
 
 ## Query logging
