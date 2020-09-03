@@ -20,6 +20,9 @@
     <string name="title_fallback_dns">Internal DNS server</string>
     <string name="summary_fallback_dns">Configure the DNS server Nebulo uses internally. This defaults to your service providers DNS server. This configured server is only used for internal purposes and does not handle your normal DNS queries.</string>
 
+    <string name="title_inform_bad_connection">Inform me of a bad connection</string>
+    <string name="summary_inform_bad_connection">Inform me with a notification and in the main menu when the DNS server currently is slow or not reachable</string>
+
 
     <string name="preference_category_notification">Notification</string>
 
