@@ -96,25 +96,29 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
      * @return The average response time (in ms)
      */
     fun runTest(@IntRange(from = 1) passes: Int, strategy: Strategy = Strategy.AVERAGE): Int? {
-        val TTLs = mutableListOf<Int>()
+        val latencies = mutableListOf<Int>()
 
+        var firstPass = strategy == Strategy.AVERAGE
         for (i in 0 until passes) {
             if (server is HttpsDnsServerInformation) {
                 server.serverConfigurations.values.forEach {
-                    TTLs += testHttps(it) ?: 0
+                    if(firstPass) testHttps(it)
+                    latencies += testHttps(it) ?: 0
                 }
             } else {
                 (server as DnsServerInformation<TLSUpstreamAddress>).servers.forEach {
-                    TTLs += testTls(it.address) ?: 0
+                    if(firstPass) testTls(it.address)
+                    latencies += testTls(it.address) ?: 0
                 }
             }
+            firstPass = false
         }
         return if(strategy == Strategy.BEST_CASE) {
-            TTLs.minByOrNull {
+            latencies.minByOrNull {
                 it
             }
         } else {
-            TTLs.sum().let {
+            latencies.sum().let {
                 if(it <= 0) null else it
             }
         }
