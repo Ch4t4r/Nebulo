@@ -1,2 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="preference_category_nonvpnmode">وضع من غير VPN</string>
+    <string name="summary_delete_queries">انقر هنا لحذف جميع الاستعلامات المسجلة</string>
+    <string name="title_delete_queries">مسح الاستعلامات</string>
+    <string name="summary_export_queries">‮–</string>
+    <string name="title_export_queries">تصدير الاستعلامات</string>
+    <string name="summary_log_queries">تسجيل جميع الاستفسارات وردودهم</string>
+    <string name="title_log_queries">تسجيل الاستعلام</string>
+    <string name="preference_category_querylogging">تسجيل الاستعلام</string>
+    <string name="summary_pause_on_captiveportal">لا تستخدم DoH إذا تم الكشف عن بوابة مقيدة. سيتم استئنافه تلقائيًا بعد وقت قصير من تسجيل الدخول.
+\nقد يمنعك تعطيله من فتح موقع المدخل المقيد لتسجيل الدخول</string>
+    <string name="title_pause_on_captiveportal">توقف مؤقتًا على البوابة المقيدة</string>
+    <string name="summary_bypass_searchdomains">أرسل نطاقات البحث (مثل MyPC.local أو MyPc.fritz.box) إلى خادم Dns لشبكتك بدلاً من خادم DoH.
+\nينصح بهذا بشدة. هذه الاستعلامات لا تغادر شبكتك</string>
+    <string name="title_bypass_searchdomains">تجاوز نطاقات البحث</string>
+    <string name="summary_map_query_refused">قد ترفض بعض خوادم DNS الإجابة على استعلام إذا كان المضيف غير مسموح به أو محظور. يعمل هذا الإعداد على حظر المضيف بدلاً من رفض الاستعلام ، وإلا فقد يحدث ارتباك في النظام</string>
+    <string name="title_map_query_refused">رفض التفسير الاستعلامات كمضيفين غير مسموح بهم</string>
+    <string name="summary_catch_other_dns_servers">اعتراض حركة المرور لخوادم DNS المعروفة وإرسالها باستخدام Nebulo</string>
+    <string name="title_catch_other_dns_servers">اعتراض حركة مرور DNS الأخرى</string>
+    <string name="summary_disallow_other_vpns">لا تسمح بتشغيل شبكات VPN الأخرى إذا لم يتم إيقاف التطبيق بشكل صريح</string>
+    <string name="title_disallow_other_vpns">عدم السماح بشبكات VPN الأخرى</string>
+    <string name="summary_restart_vpn_on_networkchange">إعادة تشغيل التطبيق بصمت عندما تتغير الشبكة. قم بتمكين هذا عند مواجهة المشاكل عند التبديل بين الشبكات.
+\n لا يوجد تأثير عندما يكون التطبيق غير نشط</string>
+    <string name="title_restart_vpn_on_networkchange">أعد التشغيل عند تغيير الشبكة</string>
+    <string name="preference_category_network">الشبكة</string>
+    <string name="summary_allow_ipv6_traffic">السماح باستخدام حركة مرور IPv6 ، حتى إذا تم تعطيل IPv4.
+\nفي حالة التعطيل ، لا يُسمح باتصالات IPv6 أثناء تشغيل التطبيق</string>
+    <string name="title_allow_ipv6_traffic">السماح بحركة مرور IPv6</string>
+    <string name="summary_allow_ipv4_traffic">السماح باستخدام حركة مرور IPv4 ، حتى إذا تم تعطيل IPv4.
+\nفي حالة التعطيل ، لا يُسمح باتصالات IPv4 أثناء تشغيل التطبيق</string>
+    <string name="title_allow_ipv4_traffic">السماح بحركة مرور IPv4</string>
+    <string name="summary_force_ipv4">إجبار التطبيق على قبول طلبات IPv4 ، حتى عندما لا يستخدم الجهاز IPv4</string>
+    <string name="title_force_ipv4">فرض IPv4</string>
+    <string name="summary_force_ipv6">إجبار التطبيق على قبول طلبات IPv6 ، حتى عندما لا يستخدم الجهاز IPv6</string>
+    <string name="title_force_ipv6">فرض IPv6</string>
+    <string name="summary_enable_ipv4">استخدم IPv4 ، إذا تم تعيين عنوان IPv4 للجهاز</string>
+    <string name="title_enable_ipv4">تمكين IPv4</string>
+    <string name="summary_enable_ipv6">استخدم IPv6 ، إذا تم تعيين عنوان IPv6 للجهاز</string>
+    <string name="title_enable_ipv6">تمكين IPv6</string>
+    <string name="preference_category_ip">إعدادات IP</string>
+    <string name="summary_crashreporting_type">قم بتكوين البيانات التي يجب إرسالها إلى المطور عند تعطل التطبيق. لا تحتوي بيانات الأعطال على بيانات شخصية مطلقًا وتساعد على إصلاح المشكلات بشكل أسرع</string>
+    <string name="title_crashreporting_type">الإبلاغ عن الأعطال التلقائي</string>
+    <string name="summary_delete_all_logs">يحذف جميع السجلات المخزنة على جهازك</string>
+    <string name="title_delete_all_logs">احذف جميع السجلات</string>
+    <string name="summary_send_logs">انقر هنا لإرسال السجلات إلى المطور</string>
+    <string name="title_send_logs">إرسال سجلات</string>
+    <string name="summary_advanced_logging">اضف المزيد من السجلات، للمساعدة بحل المشاكل المتكررة</string>
+    <string name="title_advanced_logging">تسجيل متقدم</string>
+    <string name="summary_enable_logging">تمكين تسجيل معلومات التصحيح (يحتوي على بيانات إحصائية). لا يتم إرسال هذه السجلات تلقائيًا</string>
+    <string name="title_enable_logging">تمكين التسجيل</string>
+    <string name="preference_category_logging">التسجيل</string>
+    <string name="summary_dnscache_nxdomaincachetime">تغيير مقدار الوقت الذي تم فيه تخزين طلبات NXDOMAIN مؤقتًا. يؤدي ذلك إلى تحسين أداء المجالات غير الموجودة (على سبيل المثال ، إذا كانت محظورة)
+\nالحالي:٪ 1d ثانية</string>
+    <string name="title_dnscache_nxdomaincachetime">وقت التخزين المؤقت لـ NXDomain (بالثواني)</string>
+    <string name="summary_dnscache_customcachetime">تغيير مدة تخزين جميع الطلبات في ذاكرة التخزين المؤقت بغض النظر عما إذا كان وقت التخزين المؤقت الافتراضي لها أطول. قد تتسبب فترات التخزين المؤقت الطويلة في عدم تزامن البيانات المخزنة مؤقتًا مع البيانات الفعلية.
+\nالحالي:٪ 1d ثانية</string>
+    <string name="title_dnscache_customcachetime">تخصيص وقت ذاكرة التخزين المؤقت (بالثواني)</string>
+    <string name="summary_dnscache_minimum_cache_time">يجب تخزين الحد الأدنى من إدخالات الوقت في ذاكرة التخزين المؤقت ، بغض النظر عما إذا كان وقت التخزين المؤقت الافتراضي أقصر. قد تتسبب فترات التخزين المؤقت الطويلة في عدم تزامن البيانات المخزنة مؤقتًا مع البيانات الفعلية.
+\nالحالي:٪ 1d ثانية</string>
+    <string name="title_dnscache_minimum_cache_time">الحد الأدنى لوقت التخزين المؤقت</string>
+    <string name="summary_dnscache_usedefaulttimes">احتفظ بالطلبات في ذاكرة التخزين المؤقت طالما أن خادم DNS يتواصل باستخدام TTL</string>
+    <string name="title_dnscache_usedefaulttimes">وقت التخزين المؤقت الافتراضي</string>
+    <string name="summary_dnscache_maxsize">تحديد عدد الادخالات بذاكرة التخزين المؤقت كل الوقت</string>
+    <string name="title_dnscache_maxsize">الحد الأقصى لمساحة ذاكرة التخزين المؤقت</string>
+    <string name="summary_clear_dnscache">اضغط هنا لمسح ذاكرة التخزين المؤقت ل DNS في حال حدوث مشكلة ما</string>
+    <string name="title_clear_dnscache">مسح ذاكرة التخزين المؤقت لـ DNS</string>
+    <string name="summary_dnscache_keepacrosslaunches">احتفظ بذاكرة التخزين المؤقت لـ DNS عبر عمليات إطلاق متعددة</string>
+    <string name="title_dnscache_keepacrosslaunches">احتفظ بذاكرة التخزين المؤقت لـ DNS</string>
+    <string name="summary_dnscache_enabled">تفعيل ذاكرة التخزين المؤقت لنظام أسماء النطاقات للتطبيقات. تحفظ ذاكرة التخزين المؤقت الطلبات القديمة للإجابة على الأسئلة المستقبلية بشكل أسرع.
+\n
+\nيحتوي النظام بالفعل على ذاكرة تخزين مؤقت ، قم بتمكينها ان اردت التحكم بها بشكل افضل</string>
+    <string name="title_dnscache_enabled">استخدم ذاكرة التخزين المؤقتة لـ DNS</string>
+    <string name="preference_category_cache">التحكم في ذاكرة التخزين المؤقت</string>
+    <string name="summary_preference_change_pin">تغيير رمز الحماية، استخدم الارقام 1,2,3 فقط
+\nرمز الحماية PIN الخاص بك هو :٪ 1s</string>
+    <string name="title_preference_change_pin">تغيير رمز الحماية PIN</string>
+    <string name="summary_preference_pin_use_fingerprint">السماح ببصمة الاصبع بدلا عن رمز الحماية PIN</string>
+    <string name="title_preference_pin_use_fingerprint">السماح ببصمة الاصبع</string>
+    <string name="summary_preference_enable_pin">اطلب ال PIN عند قفل وتشغيل التطبيق</string>
+    <string name="title_preference_enable_pin">رمز القفل</string>
+    <string name="preference_category_pin">وضع رمز قفل PIN</string>
+    <string name="summary_show_revoked_notification">إظهار إشعار عندما يفقد Nebulo الإذن للشبكة الظاهرية الخاصة</string>
+    <string name="title_show_revoked_notification">اشعار عند فقدان الاذن</string>
+    <string name="summary_show_noconnection_notification">عرض اشعار عند عدم توفر اتصال او يوجد اتصال سيء</string>
+    <string name="title_show_noconnection_notification">اشعار بان التطبيق غير متصل</string>
+    <string name="summary_notification_allow_pause">اسمح بإيقاف التطبيق مؤقتاً من الاشعارات</string>
+    <string name="title_notification_allow_pause">اسمح بالتوقف المؤقت</string>
+    <string name="summary_notification_allow_stop">"السماح  بايقاف التطبيق من الاشعارات"</string>
+    <string name="title_notification_allow_stop">تأكيد التوقف</string>
+    <string name="summary_notification_hide_icon">اخفاء ايقونة التطبيق من شريط الاشعارات الاعلى</string>
+    <string name="title_notification_hide_icon">اخفاء</string>
+    <string name="summary_simple_notification">استخدم نصوص بسيطة في الاشعارات</string>
+    <string name="title_simple_notification">اشعار بسيط</string>
+    <string name="summary_show_notification_on_lockscreen">ضبط ظهور الاشعارات على شاشة القفل</string>
+    <string name="title_show_notification_on_lockscreen">اظهار على شاشة القفل</string>
+    <string name="preference_category_notification">التنبيهات</string>
+    <string name="summary_fallback_dns">يتم اعداد سيرفر DNS للاستخدام المحلي على Nebulo, في العادة يكون سيرفر DNS لمزودي خدمة الاتصالات لديك، يستخدم لاغراض داخلية فقط لا يقدم علاج لكل استعلامات DNS الطبيعية</string>
+    <string name="title_fallback_dns">نطاق سيرفر DNS</string>
+    <string name="summary_excluded_apps">احظر هذه التطبيقات، مثل التي تعمل بلا انترنت - اختر قائمة التطبيقات التي تريد حظرها من استخدام تشفير استعلامات DNS او تشفير حركة مرور DNS</string>
+    <string name="title_excluded_apps">تطبيقات محظورة</string>
+    <string name="summary_start_after_update">ابدأ بعد انتهاء التحديث بنجاح</string>
+    <string name="title_start_after_update">ابدأ بعد التحديث</string>
+    <string name="summary_start_on_boot">شغل التطبيق مع فتح الجهاز</string>
+    <string name="title_start_on_boot">ابدأ مع تشغيل الجهاز</string>
+    <string name="summary_theme">تطبيق هذا المظهر</string>
+    <string name="title_theme">مظهر التطبيق</string>
+    <string name="summary_language">تغيير اللغة</string>
+    <string name="title_language">لغة التطبيق</string>
+    <string name="preference_category_general">اعدادات عامة</string>
+</resources>

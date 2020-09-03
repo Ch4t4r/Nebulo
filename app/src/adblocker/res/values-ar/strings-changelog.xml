@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="changelog_build_41_adblocker_1">اضف قواعد DNS جديدة</string>
+    <string name="changelog_build_29_2">استخدام DNS لحجب الاعلانات</string>
+    <string name="changelog_build_29_1">يوجد سيرفرات تحجب الاعلانات بالاصدارات غير الرسمية (وهذا أيضاً!)</string>
+</resources>
