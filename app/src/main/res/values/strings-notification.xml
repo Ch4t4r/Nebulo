@@ -18,6 +18,9 @@
     <string name="notification_channel_dnsrules">DNS Rule Notification Channel</string>
     <string name="notification_channel_dnsrules_description">Channel used for import/export of DNS rules</string>
 
+    <string name="notification_channel_badconnection">Bad connection notification channel</string>
+    <string name="notification_channel_badconnection_description">Channel used for notifications when Nebulo has a bad connection</string>
+
     <string name="notification_simple_text">Current server: %1$s</string>
     <string name="notification_main_text">Queries are sent to %1$s\n\n%2$d Apps are excluded from DoH/DoT\n%3$d entries in the cache</string>
     <string name="notification_main_text_with_secondary">Queries are sent to %1$s and %2$s\n\n%3$d Apps are excluded from DoH/DoT\n%4$d entries in the cache</string>
