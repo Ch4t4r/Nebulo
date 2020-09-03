@@ -104,7 +104,7 @@ class MainActivity : NavigationDrawerActivity() {
                         view.dns2.text = secondaryAddress
                     }
 
-                    val latency = DnsSpeedTest(server, log = {}).runTest(3, DnsSpeedTest.Strategy.BEST_CASE)
+                    val latency = DnsSpeedTest(server, log = {}).runTest(3, DnsSpeedTest.Strategy.WEIGHTED_AVERAGE)
                     runOnUiThread {
                         view.latency.text = if (latency != null && latency > 0) {
                             "$latency ms"

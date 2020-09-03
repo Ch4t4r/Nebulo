@@ -98,7 +98,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
     fun runTest(@IntRange(from = 1) passes: Int, strategy: Strategy = Strategy.AVERAGE): Int? {
         val latencies = mutableListOf<Int>()
 
-        var firstPass = strategy == Strategy.AVERAGE
+        var firstPass = strategy != Strategy.BEST_CASE
         for (i in 0 until passes) {
             if (server is HttpsDnsServerInformation) {
                 server.serverConfigurations.values.forEach {
@@ -117,8 +117,17 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             latencies.minByOrNull {
                 it
             }
-        } else {
+        } else if(strategy == Strategy.AVERAGE){
             latencies.sum().let {
+                if(it <= 0) null else it
+            }?.div(passes)
+        } else {
+            var pos = 0
+            latencies.sumBy {
+                // Weight first responses less (min 80%)
+                val weight = maxOf(100, minOf(80, 100-(passes - pos++)*5))
+                (it*weight)/100
+            }.let {
                 if(it <= 0) null else it
             }
         }
@@ -265,6 +274,6 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
     }
 
     enum class Strategy {
-        AVERAGE, BEST_CASE
+        AVERAGE, BEST_CASE, WEIGHTED_AVERAGE
     }
 }
