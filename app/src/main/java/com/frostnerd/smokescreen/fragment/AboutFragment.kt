@@ -118,17 +118,7 @@ class AboutFragment : Fragment() {
             true
         }
         view.faq.setOnClickListener {
-            try {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://nebulo.app/faq")
-                    )
-                )
-            } catch (e: ActivityNotFoundException) {
-                Toast.makeText(requireContext(), R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG)
-                    .show()
-            }
+            requireContext().tryOpenBrowser("https://nebulo.app/faq")
         }
     }
 }

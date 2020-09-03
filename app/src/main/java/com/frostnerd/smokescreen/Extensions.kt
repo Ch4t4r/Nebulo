@@ -4,10 +4,7 @@ import android.app.Activity
 import android.app.AlarmManager
 import android.app.KeyguardManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.hardware.fingerprint.FingerprintManager
 import android.net.ConnectivityManager
 import android.net.Network
@@ -15,6 +12,7 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -424,3 +422,16 @@ val Context.isPrivateDnsActive: Boolean
             else it.getLinkProperties(it.activeNetwork)?.isPrivateDnsActive ?: false
         }
     }
+
+fun Context.tryOpenBrowser(withLink:String) {
+    try {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(withLink)
+            )
+        )
+    } catch (e: ActivityNotFoundException) {
+        Toast.makeText(this, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show()
+    }
+}
