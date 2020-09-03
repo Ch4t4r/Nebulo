@@ -81,7 +81,7 @@ class RuleExportService : IntentService("RuleExportService") {
 
     private fun createNotification() {
         if (notification == null) {
-            notification = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
+            notification = NotificationCompat.Builder(this, Notifications.getDnsRuleChannelId(this))
             notification!!.setSmallIcon(R.drawable.ic_mainnotification)
             notification!!.setOngoing(true)
             notification!!.setAutoCancel(false)

@@ -48,6 +48,13 @@ fun showPrivacyPolicyDialog(context: Context) {
     dialog.show()
 }
 
+fun showInfoTextDialogWithClose(
+    context: Context,
+    title: String,
+    text: String,
+    withDialog: (AlertDialog.() -> Unit)? = null,
+) = showInfoTextDialog(context, title, text, neutralButton = null, positiveButton = context.getString(R.string.all_close) to null, withDialog = withDialog)
+
 fun showInfoTextDialog(context:Context,
                        title:String,
                        text:String,

@@ -95,22 +95,43 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
      * @param passes The amount of requests to make
      * @return The average response time (in ms)
      */
-    fun runTest(@IntRange(from = 1) passes: Int): Int? {
-        var ttl = 0
+    fun runTest(@IntRange(from = 1) passes: Int, strategy: Strategy = Strategy.AVERAGE): Int? {
+        val latencies = mutableListOf<Int>()
 
+        var firstPass = true
         for (i in 0 until passes) {
             if (server is HttpsDnsServerInformation) {
                 server.serverConfigurations.values.forEach {
-                    ttl += testHttps(it) ?: 0
+                    if(firstPass) testHttps(it)
+                    latencies += testHttps(it) ?: 0
                 }
             } else {
                 (server as DnsServerInformation<TLSUpstreamAddress>).servers.forEach {
-                    ttl += testTls(it.address) ?: 0
+                    if(firstPass) testTls(it.address)
+                    latencies += testTls(it.address) ?: 0
                 }
             }
+            firstPass = false
         }
-        return (ttl / passes).let {
-            if (it <= 0) null else it
+        return if(strategy == Strategy.BEST_CASE) {
+            latencies.minByOrNull {
+                it
+            }
+        } else if(strategy == Strategy.AVERAGE){
+            latencies.sum().let {
+                if(it <= 0) null else it
+            }?.div(passes)
+        } else {
+            var pos = 0
+            latencies.sumBy {
+                // Weight first responses less (min 80%)
+                val minWeight = 90
+                val step = minOf(2, (100-minWeight)/passes)
+                val weight = maxOf(100, minOf(minWeight, 100-(passes - pos++)*step))
+                (it*weight)/100
+            }.let {
+                if(it <= 0) null else it
+            }
         }
     }
 
@@ -252,5 +273,9 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             }
             return res
         }
+    }
+
+    enum class Strategy {
+        AVERAGE, BEST_CASE, WEIGHTED_AVERAGE
     }
 }

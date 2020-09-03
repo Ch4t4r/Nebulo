@@ -108,7 +108,7 @@ class RuleImportService : IntentService("RuleImportService") {
 
     private fun createNotification() {
         if (notification == null) {
-            notification = NotificationCompat.Builder(this, Notifications.servicePersistentNotificationChannel(this))
+            notification = NotificationCompat.Builder(this, Notifications.getDnsRuleChannelId(this))
             notification!!.setSmallIcon(R.drawable.ic_mainnotification)
             notification!!.setOngoing(true)
             notification!!.setAutoCancel(false)
@@ -219,6 +219,7 @@ class RuleImportService : IntentService("RuleImportService") {
                                 }?.second?.apply {
                                     newChecksums[it] = this.replace("\"", "<qt>")
                                 }
+                                log("Now parsing content...")
                                 processLines(it, response.body!!.byteStream())
                             }
                             localDataIsRecent -> {

@@ -128,7 +128,7 @@
     <string name="preference_category_iptables">Iptables</string>
     <string name="fallbackdns_isp">サービスプロバイダー(非暗号化)</string>
     <string name="summary_fallback_dns">Nebuloがアプリ内部で使用するDNSサーバーを設定します。デフォルトは接続しているプロバイダーが提供するDNSサーバーです。ここで指定したサーバーは内部処理のみに使用され、アプリで扱う通常のDNSクエリには影響しません。</string>
-    <string name="title_fallback_dns">フォールバックDNSサーバー</string>
+    <string name="title_fallback_dns">内部DNSサーバー</string>
     <string name="summary_nonvpn_help_generic">VPNアプリの設定方法についてはこちらをクリックしてください</string>
     <string name="nonvpn_help_generic_title">ジェネリックなVPNアプリ</string>
 </resources>

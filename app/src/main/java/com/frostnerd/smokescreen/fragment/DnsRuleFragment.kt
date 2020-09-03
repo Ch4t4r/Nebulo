@@ -533,13 +533,20 @@ class DnsRuleFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_dnsrule, menu)
-        val switch =  menu.getItem(0)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)
+        val switch =  menu.findItem(R.id.rulesEnabled)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)
+        val search = menu.findItem(R.id.search)
         switch?.isChecked = getPreferences().dnsRulesEnabled.also {
             overlay.visibility = if(it) View.GONE else View.VISIBLE
+            search.isEnabled = it
         }
         switch?.setOnCheckedChangeListener { _, isChecked ->
             getPreferences().dnsRulesEnabled = isChecked
             overlay.visibility = if(isChecked) View.GONE else View.VISIBLE
+            search.isEnabled = isChecked
+        }
+        search?.setOnMenuItemClickListener {
+            DnsRuleSearchDialog(requireContext()).show()
+            true
         }
     }
 
@@ -659,7 +666,7 @@ class DnsRuleFragment : Fragment() {
     }
 
     companion object {
-        const val latestSourcesVersion = 3
+        const val latestSourcesVersion = 4
         private val defaultHostSources:Map<Int, List<HostSource>> by lazy(LazyThreadSafetyMode.NONE) {
             mutableMapOf<Int, List<HostSource>>().apply {
                 put(1, mutableListOf(
@@ -684,11 +691,17 @@ class DnsRuleFragment : Fragment() {
                 ).apply {
                     forEach { it.enabled = false }
                 })
+                put(4, mutableListOf(
+                    HostSource("Energized Unified", "https://block.energized.pro/unified/formats/domains.txt", false).apply {
+                        enabled = false
+                    }
+                ))
             }
         }
         private val updatedHostSources:Map<Int, List<HostSource>> by lazy {
             mutableMapOf<Int, List<HostSource>>().apply {
                 put(3, (defaultHostSources[1] ?: error("")).subList(0, 4))
+                put(4, mutableListOf(defaultHostSources.getValue(1)[4]))
             }
         }
 

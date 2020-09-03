@@ -131,5 +131,5 @@
     <string name="summary_fallback_dns">DNS सर्वर Nebulo को आंतरिक रूप से उपयोग करता है कॉन्फ़िगर करें। यह आपके सेवा प्रदाताओं के डीएनएस सर्वर को डिफॉल्ट करता है। यह कॉन्फ़िगर किया गया सर्वर केवल आंतरिक उद्देश्यों के लिए उपयोग किया जाता है और आपके सामान्य DNS प्रश्नों को संभालता नहीं है।</string>
     <string name="summary_nonvpn_help_generic">वीपीएन एप्लिकेशन को कॉन्फ़िगर करने के तरीके के बारे में निर्देश प्राप्त करने के लिए यहां क्लिक करें</string>
     <string name="nonvpn_help_generic_title">जेपीएन ऐप्स</string>
-    <string name="title_fallback_dns">फॉलबैक DNS सर्वर</string>
+    <string name="title_fallback_dns">आंतरिक DNS सर्वर</string>
 </resources>

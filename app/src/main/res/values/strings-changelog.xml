@@ -412,4 +412,36 @@
     </string-array>
 
     <string name="changelog_build_55_4">The query log now loads the queries in chunks instead of all at once</string>
+
+    <string-array name="changelog_build_63">
+        <item>Version 1.4.1 (Build 63)</item>
+        <item>@string/changelog_build_30_4</item>
+        <item>@string/changelog_build_28_5</item>
+    </string-array>
+
+    <string name="changelog_build_66_1">Added frequently asked questions. You can find them in the \'About this app\' navigation item</string>
+    <string name="changelog_build_66_2">Adding servers is now case-sensitive. This fixes problems with NextDNS</string>
+    <string name="changelog_build_66_3">Added a dialog to the DNS rules to check whether a host is listed somewhere</string>
+    <string name="changelog_build_66_4">Added a help entry to the query log to explain what the icons mean</string>
+    <string name="changelog_build_66_5">The DNS speed test now more accurately shows the latency</string>
+    <string name="changelog_build_66_6">Added BraveDNS and Cloudflare security</string>
+    <string name="changelog_build_66_7">Added introduction screens when first launching the app</string>
+    <string name="changelog_build_66_8">Added a server selection screen when first launching the app</string>
+    <string name="changelog_build_66_9">Added a notification shown when the current server has a bad connection</string>
+    <string name="changelog_build_66_10">Added a filter to the query log</string>
+    <string name="changelog_build_66_11">Added a field showing how many queries have been resolved with DNS rules</string>
+    <string-array name="changelog_build_66">
+        <item>Version 1.5.0 (Build 66)</item>
+        <item>@string/changelog_build_66_1</item>
+        <item>@string/changelog_build_66_2</item>
+        <item>@string/changelog_build_66_3</item>
+        <item>@string/changelog_build_66_4</item>
+        <item>@string/changelog_build_66_5</item>
+        <item>@string/changelog_build_66_6</item>
+        <item>@string/changelog_build_66_7</item>
+        <item>@string/changelog_build_66_8</item>
+        <item>@string/changelog_build_66_9</item>
+        <item>@string/changelog_build_66_10</item>
+        <item>@string/changelog_build_66_11</item>
+    </string-array>
 </resources>

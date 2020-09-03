@@ -8,4 +8,10 @@
             app:actionViewClass="androidx.appcompat.widget.SearchView"
             app:showAsAction="collapseActionView|ifRoom" />
 
+    <item
+            android:id="@+id/info"
+            android:icon="@drawable/ic_info_24dp"
+            android:title="@string/window_querylog_information"
+            app:showAsAction="ifRoom" />
+
 </menu>

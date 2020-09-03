@@ -165,30 +165,39 @@ class QueryLogDetailFragment : Fragment() {
 
             if(query.responseSource == QueryListener.Source.LOCALRESOLVER) {
                 hostSourceWrap.visibility = View.VISIBLE
-                hostSourceFetchJob = GlobalScope.launch(Dispatchers.IO) {
-                    val sourceRule = getDatabase().dnsRuleDao().findRuleTargetEntity(query.name, query.type, true)
-                        ?: getDatabase().dnsRuleDao().findPossibleWildcardRuleTarget(query.name, query. type,
-                            useUserRules = true,
-                            includeWhitelistEntries = false,
-                            includeNonWhitelistEntries = true
-                        ).firstOrNull {
-                            DnsRuleDialog.databaseHostToMatcher(it.host).reset(query.name).matches()
-                        }
-                    val text = if (sourceRule != null) {
-                        if(sourceRule.importedFrom == null) {
-                            getString(R.string.windows_querylogging_hostsource__user)
-                        } else {
-                            getDatabase().hostSourceDao().findById(sourceRule.importedFrom)?.name ?: getString(R.string.windows_querylogging_hostsource__unknown)
-                        }
-                    } else {
-                        getString(R.string.windows_querylogging_hostsource__unknown)
-                    }
-                    if(hostSourceFetchJob?.isCancelled == false) launch(Dispatchers.Main) {
-                        hostSource.text = text
-                    }
-                }
+                showRuleSource(query)
             } else hostSourceWrap.visibility = View.GONE
         }
     }
 
+    private fun showRuleSource(query:DnsQuery) {
+        hostSourceFetchJob = GlobalScope.launch(Dispatchers.IO) {
+            val sourceRule = if(query.name.startsWith("www", ignoreCase = true)) {
+                getDatabase().dnsRuleDao().findRuleTargetEntity(query.name.replaceFirst("www.", "", ignoreCase = true), query.type, true)
+                    ?: getDatabase().dnsRuleDao().findRuleTargetEntity(query.name, query.type, true)
+            } else {
+                getDatabase().dnsRuleDao().findRuleTargetEntity(query.name, query.type, true)
+            } ?: getDatabase().dnsRuleDao().findPossibleWildcardRuleTarget(
+                        query.name, query.type,
+                        useUserRules = true,
+                        includeWhitelistEntries = false,
+                        includeNonWhitelistEntries = true
+                    ).firstOrNull {
+                        DnsRuleDialog.databaseHostToMatcher(it.host).reset(query.name).matches()
+                    }
+            val text = if (sourceRule != null) {
+                if (sourceRule.importedFrom == null) {
+                    getString(R.string.windows_querylogging_hostsource__user)
+                } else {
+                    getDatabase().hostSourceDao().findById(sourceRule.importedFrom)?.name
+                        ?: getString(R.string.windows_querylogging_hostsource__unknown)
+                }
+            } else {
+                getString(R.string.windows_querylogging_hostsource__unknown)
+            }
+            if (hostSourceFetchJob?.isCancelled == false) launch(Dispatchers.Main) {
+                hostSource.text = text
+            }
+        }
+    }
 }

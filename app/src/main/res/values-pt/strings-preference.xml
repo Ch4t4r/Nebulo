@@ -129,7 +129,7 @@
     <string name="title_iptables_disable_ipv6">Desabilitar IPv6</string>
     <string name="preference_category_iptables">Iptables</string>
     <string name="summary_fallback_dns">Configure o servidor DNS que o Nebulo usa internamente. Este padrão é o servidor DNS do seu provedor de serviços. Este servidor configurado é utilizado apenas para fins internos e não lida com as suas consultas DNS normais.</string>
-    <string name="title_fallback_dns">Fallback servidor DNS</string>
+    <string name="title_fallback_dns">Servidor DNS interno</string>
     <string name="summary_nonvpn_help_generic">Clique aqui para obter instruções sobre como configurar aplicações VPN</string>
     <string name="nonvpn_help_generic_title">Aplicações VPN genéricas</string>
 </resources>

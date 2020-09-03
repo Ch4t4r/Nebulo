@@ -127,7 +127,7 @@
     <string name="summary_simple_notification">Gunakan teks sederhana pada pemberitahuan</string>
     <string name="title_simple_notification">Pemberitahuan sederhana</string>
     <string name="summary_fallback_dns">Konfigurasikan server DNS yang digunakan Nebulo secara internal. Ini default ke server DNS penyedia layanan Anda. Server yang dikonfigurasi ini hanya digunakan untuk tujuan internal dan tidak menangani kueri DNS normal Anda.</string>
-    <string name="title_fallback_dns">Server DNS cadangan</string>
+    <string name="title_fallback_dns">Server DNS internal</string>
     <string name="summary_language">Ubah bahasa pada aplikasi</string>
     <string name="title_language">Bahasa</string>
     <string name="summary_nonvpn_help_generic">Klik di sini untuk mendapatkan instruksi tentang cara mengkonfigurasi aplikasi VPN</string>

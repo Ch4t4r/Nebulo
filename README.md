@@ -30,12 +30,7 @@ The second topic, tracking, is nearly as important as the topic of censorship. M
 Nebulo uses the VPN API of the Android system to create a dummy VPN which intercepts all packets for the dns servers of your device. This dummy VPN is __not__ a real VPN and does not tunnel your packets - it only handles dns packets. As only one VPN can be activate at any given time you have to decice between using Nebulo or a real VPN.
 
 ## Non-VPN mode
-Since 1.4.0 Nebulo can run without requiring the dummy VPN. In this mode Nebulo hosts a DNS server locally, which forwards all DNS queries it receives according to the settings you configured in Nebulo.<br>
-In this mode you manually have to forward all the DNS queries your decice creates to Nebulos local DNS server (normally this is what the dummy VPN is used for).<br>
-If your device is rooted Nebulo has an inbuilt solution using `iptables`. If it isn't rooted you have to use third-party apps which are able to forward the DNS queries to Nebulo.
-Known third-party apps this works with are NetGuard and V2Ray (although there might be others). You can find instructions on how to configure these apps to work together with Nebulo in the settings.<br>
-Please note that the App exclusion setting inside the general category won't have any effect in non-VPN mode. You have to configure excluded apps inside the third-party app you are using.
-
+Look in the [FAQ](FAQ.md).
 
 ## What this is based on
 Nebulo is a completely original piece of software. It doesn't use any other dependency under the hood for the dns capabilities. Check the [dependencies](https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/app/build.gradle#L100) to see what is used for everything build around DoH/DoT.
@@ -57,13 +52,16 @@ The app consists of a few core features:
  * Query logging
  * DNS rules, where you can specify your own IP addresses for hosts
     * Rules can be imported from files and URLs (supports 4 different formats)
-    * You can block hosts by using 0.0.0.0 and ::1 as targets
+    * You can block hosts by using 0.0.0.0 and ::1 as targets (If you check the box "Block this host" those targets are automatically used. You don't have to do anything else.)
     * The DNS rules prevent CNAME cloaking
  * Highly customizable settings
     * Disable IPv4/IPv6
     * Allow captive portals
     * Allow search domains on the current network
     * ... And more
+
+# FAQ
+For a growing collection of frequenty asked questions (FAQ), take a look [here](FAQ.md).
 
 # Help wanted
 Requesting your support: the app is getting closer to a proper release but it's still missing an important aspect: translations.

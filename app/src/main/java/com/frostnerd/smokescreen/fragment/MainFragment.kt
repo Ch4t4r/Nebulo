@@ -230,6 +230,7 @@ class MainFragment : Fragment() {
     private fun updateVpnIndicators() {
         val privateDnsActive = requireContext().isPrivateDnsActive
         var startButtonVisibility = View.VISIBLE
+        var privacyTextVisibility = View.VISIBLE
         when(proxyState) {
             ProxyState.RUNNING -> {
                 privateDnsInfo.visibility = View.INVISIBLE
@@ -252,6 +253,7 @@ class MainFragment : Fragment() {
                 if (privateDnsActive) {
                     statusImage.setImageResource(R.drawable.ic_lock)
                     statusImage.clearAnimation()
+                    privacyTextVisibility = View.INVISIBLE
                     startButtonVisibility = View.INVISIBLE
                     privateDnsInfo.visibility = View.VISIBLE
                 } else {
@@ -262,6 +264,7 @@ class MainFragment : Fragment() {
             }
         }
         startButton.visibility = startButtonVisibility
+        privacyTextWrap.visibility = privacyTextVisibility
     }
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {

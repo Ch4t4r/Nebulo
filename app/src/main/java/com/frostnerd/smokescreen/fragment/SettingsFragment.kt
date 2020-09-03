@@ -325,6 +325,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             )
             true
         }
+        findPreference("nonvpn_help_faq").setOnPreferenceClickListener {
+            requireContext().tryOpenBrowser("https://nebulo.app/faq#non-vpn-mode")
+            true
+        }
     }
 
     @SuppressLint("NewApi")
