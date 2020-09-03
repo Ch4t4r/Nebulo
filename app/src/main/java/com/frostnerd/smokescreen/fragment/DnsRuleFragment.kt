@@ -534,14 +534,17 @@ class DnsRuleFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_dnsrule, menu)
         val switch =  menu.findItem(R.id.rulesEnabled)?.actionView?.findViewById<Switch>(R.id.actionbarSwitch)
+        val search = menu.findItem(R.id.search)
         switch?.isChecked = getPreferences().dnsRulesEnabled.also {
             overlay.visibility = if(it) View.GONE else View.VISIBLE
+            search.isEnabled = it
         }
         switch?.setOnCheckedChangeListener { _, isChecked ->
             getPreferences().dnsRulesEnabled = isChecked
             overlay.visibility = if(isChecked) View.GONE else View.VISIBLE
+            search.isEnabled = isChecked
         }
-        menu.findItem(R.id.search).setOnMenuItemClickListener {
+        search?.setOnMenuItemClickListener {
             DnsRuleSearchDialog(requireContext()).show()
             true
         }
