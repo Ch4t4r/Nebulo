@@ -1,5 +1,5 @@
-# No-VPN mode
-As explained in the [FAQ](../FAQ.md) Nebulo has a no-VPN mode where it does not require the dummy VPN.<br>
+# Non-VPN mode
+As explained in the [FAQ](../FAQ.md) Nebulo has a non-VPN mode where it does not require the dummy VPN.<br>
 As this dummy VPN is normally used to force Android to send all DNS queries to Nebulo you have to configure this yourself.<br>
 If your phone is rooted you simply have to enable the iptables setting (which you also only see when your phone is rooted). If you want to know how it works scroll down.<br><br>
 If your phone is not rooted you have to use third-party apps to forward DNS queries to Nebulo.
