@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.DefaultViewHolder
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.dnstunnelproxy.QueryListener
+import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
@@ -51,13 +52,16 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val live = requireContext().getDatabase().dnsQueryDao().getAllLive()
-        val source = LiveDataSource(this, live, true)
-        unfilteredAdapter = createAdapter(source)
+        launchWithLifecycle(false) {
+            val live = requireContext().getDatabase().dnsQueryDao().getAllLive()
+            unfilteredAdapter = createAdapter(LiveDataSource(this@QueryLogListFragment, live, true))
 
-        list.layoutManager = LinearLayoutManager(requireContext())
-        list.adapter = unfilteredAdapter
-        progress.visibility = View.GONE
+            launchWithLifecycle(true) {
+                list.layoutManager = LinearLayoutManager(requireContext())
+                list.adapter = unfilteredAdapter
+                progress.visibility = View.GONE
+            }
+        }
     }
 
     private fun createAdapter(source:LiveDataSource<DnsQuery>): RecyclerView.Adapter<DefaultViewHolder> {
