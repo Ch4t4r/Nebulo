@@ -318,7 +318,9 @@ class RuleImportService : IntentService("RuleImportService") {
             }
         }
         if(!isAborted) {
-            ruleCount += commitLines(parsers, true)
+            if (parsers.isNotEmpty()) {
+                ruleCount += commitLines(parsers, true)
+            }
             source.ruleCount = ruleCount
             getDatabase().hostSourceDao().update(source)
         }
@@ -328,7 +330,7 @@ class RuleImportService : IntentService("RuleImportService") {
         parsers: Map<Matcher, Pair<Int, MutableList<DnsRule>>>,
         forceCommit: Boolean = false
     ):Int {
-        val hosts = parsers[parsers.keys.minBy {
+        val hosts = parsers[parsers.keys.minByOrNull {
             parsers[it]!!.first
         } ?: parsers.keys.first()]!!.second
         return if (hosts.size > ruleCommitSize || forceCommit) {
