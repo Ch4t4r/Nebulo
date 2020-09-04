@@ -109,4 +109,20 @@
     <string name="window_querylog_information">Information</string>
 
     <string name="about_help_faq">Frequently asked questions</string>
+
+    <string name="warning_server_currently_unstable">The server %1s seems to be unstable right now.</string>
+    <string name="warning_server_currently_unstable_expanded">The server %1s seems to be unstable right now, impacting your browsing speed. Consider switching to a more stable server.</string>
+
+
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="zero">%1d queries have been handled by DNS rules this far</item>
+        <item quantity="one">%1d query has been handled by DNS rules this far</item>
+        <item quantity="other">%1d queries have been handled by DNS rules this far</item>
+    </plurals>
+
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="zero">%1d queries have been blocked this far</item>
+        <item quantity="one">%1d query have been blocked this far</item>
+        <item quantity="other">%1d queries have been blocked this far</item>
+    </plurals>
 </resources>

@@ -156,7 +156,7 @@
 
 
     <string name="preference_category_nonvpnmode">Non-VPN mode</string>
-    <string name="summary_category_nonvpnmode">Configure Nebulo to act as a DNS server on the device instead of using a dummy VPN. When enabled you manually have to forward DNS queries to Nebulo using third party apps.\n\nThis feature is experimental.</string>
+    <string name="summary_category_nonvpnmode">Configure Nebulo to act as a DNS server on the device instead of using a dummy VPN. When enabled you manually have to forward DNS queries to Nebulo using third party apps</string>
     <string name="summary_category_nonvpnmode_forwardinfo">Server will be hosted on localhost:%1s</string>
 
     <string name="title_run_without_vpn">Run without VPN</string>
@@ -183,6 +183,8 @@
     <string name="nonvpn_help_generic_title">Generic VPN apps</string>
     <string name="summary_nonvpn_help_generic">Click here to get instructions on how to configure VPN apps</string>
 
+    <string name="title_nonvpn_help_faq">Documentation</string>
+    <string name="summary_nonvpn_help_faq">Click here to open a browser window with help and documentation for non-VPN mode</string>
 
     <string-array name="languages">
         <item>System language</item>

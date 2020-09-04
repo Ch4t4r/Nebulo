@@ -175,9 +175,9 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                         }
                     }
                     isBlockHost = dnsRule.target == "0.0.0.0" && dnsRule.ipv6Target == "::1"
-                    if(!isBlockHost) {
-                        view.blockHost.isChecked = false
-                    }
+                }
+                if(!isBlockHost) {
+                    view.blockHost.isChecked = false
                 }
             }
         }
