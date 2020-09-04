@@ -1,2 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="about_changelog">سِجل التغييرات</string>
+    <string name="about_licenses">تراخيص مفتوحة المصدر</string>
+    <string name="about_share">مشاركة</string>
+    <string name="quicksettings_start_text">تشغيل Nebulo</string>
+    <string name="quicksettings_stop_text">إيقاف Nebulo</string>
+    <string name="app_share_text">مرحبًا ، لقد وجدت هذا التطبيق الذي يشفر استعلامات DNS الخاصة بك لمنحك المزيد من الخصوصية والأمان. تحقق منه هنا: https://play.google.com/store/apps/details؟id=com.frostnerd.smokescreen</string>
+    <string name="about_app">هذا التطبيق مفتوح المصدر. يمكن الوصول إلى شفرة المصدر على &lt;a href=https://nebulo.app/source&gt; nebulo.app/source &lt;/a&gt;.
+\nعلاوة على ذلك ، لا يحتوي التطبيق على إعلانات ولا يتتبع أو يجمع أي بيانات عنك.
+\n
+\nالإصدار٪ 1s
+\nبناء٪ 2d
+\nإصدار قاعدة البيانات٪ 3d
+\nمعرف Crashreport:٪ 4s
+\n
+\n© دانيال وولف 2019
+\nمرخص بموجب GPLv3.
+\n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
+    <string name="main_dnssurveillance_privacystatement">بيان الخصوصية لـ٪ 1s</string>
+    <string name="main_dnssurveillance_infotext">كن على علم بأن خادم DNS الذي تتصل به قادر على تسجيل المواقع التي تزورها. تحقق من بيانات الخصوصية المعنية لمزيد من المعلومات.</string>
+    <string name="error_cannot_open_settings">لا يمكن فتح إعدادات النظام</string>
+    <string name="error_webview_missing">لم يتم العثور على حزمة WebView ، هل يتم تحديثها أو إزالتها حاليًا؟</string>
+    <string name="error_invalid_servername">يرجى تقديم اسم</string>
+    <string name="error_invalid_pin">من فضلك قدم رمز الحماية PIN خاصتك</string>
+    <string name="error_invalid_host">يرجى تقديم مضيف صالح</string>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="zero">لم يتم حظر٪ 1d اي استعلام حتى الآن</item>
+        <item quantity="one">تم حظر٪ 1d استعلام حتى الآن</item>
+        <item quantity="two">تم حظر٪ 1d استعلامين حتى الآن</item>
+        <item quantity="few">تم حظر٪ 1d استعلامات حتى الآن</item>
+        <item quantity="many">تم حظر٪ 1d استعلامات حتى الآن</item>
+        <item quantity="other">تم حظر٪ 1d الاستعلامات حتى الآن</item>
+    </plurals>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="zero">لم يمت معالجة استعلامات بواسطة قواعد DNS حتى الآن</item>
+        <item quantity="one">تم معالجة٪ 1d استعلام بواسطة قواعد DNS حتى الآن</item>
+        <item quantity="two">تمت معالجة٪ 1d استعلامين بواسطة قواعد DNS حتى الآن</item>
+        <item quantity="few">تمت معالجة٪ 1d استعلام بواسطة قواعد DNS حتى الآن</item>
+        <item quantity="many">تمت معالجة٪ 1d استعلامات بواسطة قواعد DNS حتى الآن</item>
+        <item quantity="other">تمت معالجة٪ 1d الاستعلامات بواسطة قواعد DNS حتى الآن</item>
+    </plurals>
+    <string name="warning_server_currently_unstable_expanded">يبدو أن الخادم٪ 1s غير مستقر الآن ، مما يؤثر على سرعة الاستعراض لديك. ضع في اعتبارك التبديل إلى خادم أكثر استقرارًا.</string>
+    <string name="warning_server_currently_unstable">يبدو أن الخادم٪ 1s غير مستقر الآن.</string>
+    <string name="about_help_faq">اسئلة متكررة</string>
+    <string name="window_querylog_information">معلومات</string>
+    <string name="window_dnsrules_refresh_sources">قم بالتحديث لاستيراد القواعد من المصدر</string>
+    <string name="iptables_not_supported">جهازك لا يدعم الجدار الناري</string>
+    <string name="iptables_supported_ipv6_unsupported">الجدار الناري مدعومة ، لكن IPv6 غير مدعوم.</string>
+    <string name="iptables_supported">تهانينا ،الجدار الناري مدعوم من جهازك!</string>
+    <string name="restart_app">اعادة تشغيل</string>
+    <string name="restart_app_for_changes">اعد تشغيل التطبيق لتنفيذ التغييرات.</string>
+    <string name="window_main_privatedns_info">DNS الخاص نشط ، استعلاماتك محمية بالفعل. قم بتمكين Nebulo إذا كنت ترغب في استخدام تشفير البيانات DNS-over-HTTPS أو ميزات مفيدة أخرى.</string>
+    <string name="windows_querylogging_usedserver_cache">تم حلها مع ذاكرة التخزين المؤقت</string>
+    <string name="windows_querylogging_usedserver_dnsrules">تم حلها باستخدام قواعد DNS</string>
+    <string name="windows_querylogging_dnsrule_created">تم إنشاء قاعدة DNS</string>
+    <string name="windows_querylogging_create_dnsrule">إنشاء قاعدة DNS لهذا المضيف</string>
+    <string name="windows_querylogging_responses">استجابات</string>
+    <string name="windows_querylogging_latency">وقت الإستجابة</string>
+    <string name="windows_querylogging_protocol">اتفاقية</string>
+    <string name="windows_querylogging_hostsource__unknown">غير معروف</string>
+    <string name="windows_querylogging_hostsource__user">قواعد المستخدم</string>
+    <string name="windows_querylogging_hostsource">مصدر قاعدة DNS</string>
+    <string name="windows_querylogging_used_server">السيرفر المستخدم</string>
+    <string name="windows_querylogging_question">سؤال</string>
+    <string name="windows_querylogging_type">النوع</string>
+    <string name="windows_querylogging_time">توقيت</string>
+    <string name="windows_querylogging_search">البحث عن المضيف</string>
+    <string name="windows_querylogging_search_hint">ابحث عن مضيف في سجل الاستعلام</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">القواعد من هذا المصدر:٪ 1d (٪ 2 $ d مكررة غير مستخدمة)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">القواعد من هذا المصدر: -</string>
+    <string name="window_dnsrules_customhosts_message">حدد جميع المضيفين المخصصين هنا</string>
+    <string name="window_dnsrules_hostalreadyexists">هناك بالفعل قاعدة لهذا المضيف</string>
+    <plurals name="window_dnsrules_subtitle">
+        <item quantity="zero">قاعدة</item>
+        <item quantity="one">قواعد</item>
+        <item quantity="two">قاعدتين</item>
+        <item quantity="few">قواعد</item>
+        <item quantity="many">قواعد</item>
+        <item quantity="other">القواعد</item>
+    </plurals>
+    <string name="window_dnsrules_customhosts">استضافات خاصة</string>
+    <string name="button_main_dnsrules">قواعد DNS</string>
+    <string name="error_no_webbrowser_installed">ليس لديك أي تطبيق مثبت لعرض هذا الرابط</string>
+    <string name="window_speedtest_information">كلما انخفضت القيم ، زادت سرعة اتصال Nebulo بالخادم. هذا على سبيل المثال يزيد من سرعة التصفح لديك.</string>
+    <string name="window_speedtest_runtest">ابدأ الاختبار</string>
+    <string name="about_help_translating">ساعد في الترجمة</string>
+    <string name="about_info">معلومات عامة</string>
+    <string name="about_credits">المساهمون</string>
+    <string name="about_privacypolicy">سياسة الخصوصية</string>
+    <string name="about_telegram_group">مجموعة تليجرام</string>
+    <string name="about_contact_developer">اتصل بالمطور</string>
+    <string name="error_invalid_url">يرجى تقديم عنوان url صالح</string>
+    <string name="all_close">إغلاق</string>
+    <string name="open_app">افتح التطبيق</string>
+    <string name="information">معلومات</string>
+    <string name="all_yes">نعم</string>
+    <string name="all_no">لا</string>
+    <string name="all_resume">إستمرار</string>
+    <string name="all_pause">إيقاف مؤقت</string>
+    <string name="all_start">تشغيل</string>
+    <string name="all_stop">إيقاف</string>
+    <string name="activity_label_enable_logging">تصدير السجلات / تمكين التسجيل</string>
+    <string name="activity_label_speed_test">مقارنة سرعة الخادم</string>
+    <string name="activity_label_import_servers">استيراد سيرفر/سيرفرات</string>
+    <string name="activity_label_import_queries">استيراد الاستعلامات</string>
+</resources>
