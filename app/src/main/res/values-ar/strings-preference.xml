@@ -86,7 +86,7 @@
     <string name="title_show_noconnection_notification">اشعار بان التطبيق غير متصل</string>
     <string name="summary_notification_allow_pause">اسمح بإيقاف التطبيق مؤقتاً من الاشعارات</string>
     <string name="title_notification_allow_pause">اسمح بالتوقف المؤقت</string>
-    <string name="summary_notification_allow_stop">"السماح  بايقاف التطبيق من الاشعارات"</string>
+    <string name="summary_notification_allow_stop">"اسمح  بايقاف التطبيق من الاشعارات"</string>
     <string name="title_notification_allow_stop">تأكيد التوقف</string>
     <string name="summary_notification_hide_icon">اخفاء ايقونة التطبيق من شريط الاشعارات الاعلى</string>
     <string name="title_notification_hide_icon">اخفاء</string>
@@ -96,7 +96,7 @@
     <string name="title_show_notification_on_lockscreen">اظهار على شاشة القفل</string>
     <string name="preference_category_notification">التنبيهات</string>
     <string name="summary_fallback_dns">يتم اعداد سيرفر DNS للاستخدام المحلي على Nebulo, في العادة يكون سيرفر DNS لمزودي خدمة الاتصالات لديك، يستخدم لاغراض داخلية فقط لا يقدم علاج لكل استعلامات DNS الطبيعية</string>
-    <string name="title_fallback_dns">نطاق سيرفر DNS</string>
+    <string name="title_fallback_dns">خادم DNS داخلي</string>
     <string name="summary_excluded_apps">احظر هذه التطبيقات، مثل التي تعمل بلا انترنت - اختر قائمة التطبيقات التي تريد حظرها من استخدام تشفير استعلامات DNS او تشفير حركة مرور DNS</string>
     <string name="title_excluded_apps">تطبيقات محظورة</string>
     <string name="summary_start_after_update">ابدأ بعد انتهاء التحديث بنجاح</string>
@@ -108,4 +108,30 @@
     <string name="summary_language">تغيير اللغة</string>
     <string name="title_language">لغة التطبيق</string>
     <string name="preference_category_general">اعدادات عامة</string>
+    <string name="summary_nonvpn_help_faq">انقر هنا لفتح نافذة متصفح تحتوي على تعليمات وتوثيق للوضع بخلاف VPN</string>
+    <string name="title_nonvpn_help_faq">توثيق</string>
+    <string name="nonvpn_help_generic_title">تطبيقات VPN العامة</string>
+    <string name="summary_inform_bad_connection">أبلغني بإشعار وفي القائمة الرئيسية عندما يكون خادم DNS بطيئًا حاليًا أو لا يمكن الوصول إليه</string>
+    <string name="title_inform_bad_connection">أبلغني عن الاتصال السيئ</string>
+    <string name="fallbackdns_isp">مزود الخدمة (غير مشفر)</string>
+    <string name="crashreporting_type_off">ايقاف(لا تشغل تقرير الاخطاء)</string>
+    <string name="crashreporting_type_minimal">تقرير مختصر (عن الاندرويد وإصدار التطببق)</string>
+    <string name="crashreporting_type_full">استعراض كامل(لتقرير الاحصائيات والاخطاء)</string>
+    <string name="summary_nonvpn_help_generic">انقر هنا للحصول على إرشادات حول كيفية تكوين تطبيقات VPN</string>
+    <string name="summary_nonvpn_help">انقر هنا للحصول على إرشادات حول كيفية استخدام هذا التطبيق</string>
+    <string name="preference_category_nonvpnmode_help">كيفية ااتعامل مع تطبيقات طرف ثالث</string>
+    <string name="summary_check_iptables">فحص الجهاز للتحقق من دعمه للجدار الناري</string>
+    <string name="title_check_iptables">فحص الجدار الناري</string>
+    <string name="summary_iptables_disable_ipv6">قم بتعطيل IPv6 عند استخدام الجدار الناريويمكن استخدام IPv4 بدلاً من ذلك. قد يؤدي هذا إلى إصلاح استعلامات DNS التي تتجاوز الجدار الناري عند تمكين IPv6.</string>
+    <string name="title_iptables_disable_ipv6">تعطيل IPv6</string>
+    <string name="summary_iptables_mode">إعادة توجيه الاستعلامات إلى Nebulo باستخدام الجدار الناري. يتطلب امتيازات ال ROOT . عند التمكين ، لا يلزم استخدام تطبيقات خارجية عندما تكون في وضع غير vpn. قد لا يعمل هذا عندما تكون على شبكة IPv6.</string>
+    <string name="title_iptables_mode">استخدام الجدار الناري</string>
+    <string name="preference_category_iptables">الجدار الناري</string>
+    <string name="summary_local_server_port">منفذ سيرفر DNS الذي سيتم استضافته. يسمح فقط بالمنافذ فوق 1024.
+\nحاليًا:٪ 1s</string>
+    <string name="title_local_server_port">منفذ الخادم</string>
+    <string name="summary_run_without_vpn">عند تحديده ، يستضيف Nebulo خادم DNS على جهازك</string>
+    <string name="title_run_without_vpn">تشغيل من غير VPN</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">سوف يتم استضافة السيرفر على الاستضافة المحلية في : %1s</string>
+    <string name="summary_category_nonvpnmode">قم بتكوين Nebulo للعمل كخادم DNS على الجهاز بدلاً من استخدام VPN وهمية. عند التمكين ، يتعين عليك إعادة توجيه استعلامات DNS يدويًا إلى Nebulo باستخدام تطبيقات الطرف الثالث</string>
 </resources>
