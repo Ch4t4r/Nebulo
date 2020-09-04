@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tasker_start_app_custom_urls">بدء التطبيق باستخدام %1s و%2s (الوضع %3s)</string>
-    <string name="tasker_start_app_custom_url">بدء التطبيق باستخدام%1s (الوضع:%2s)</string>
+    <string name="tasker_start_app_custom_urls">بدء التطبيق باستخدام 1s% و2s% (الوضع 3s%)</string>
+    <string name="tasker_start_app_custom_url">بدء التطبيق باستخدام 1s% (الوضع: 2s%)</string>
     <string name="tasker_action">حركة</string>
     <string name="tasker_use_custom_server">تحديد سيرفرات مخصصة</string>
     <string name="tasker_start_if_running">اعادة بدء(قد يتجاوز بعض اعدادات التكوين)</string>
