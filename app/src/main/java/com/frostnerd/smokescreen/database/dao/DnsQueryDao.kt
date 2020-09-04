@@ -36,6 +36,21 @@ interface DnsQueryDao {
     @Query("SELECT * FROM DnsQuery WHERE name LIKE '%' ||:hostPart || '%'")
     fun getAllWithHostLive(hostPart:String): LiveData<List<DnsQuery>>
 
+    @Query("SELECT * FROM DnsQuery WHERE (responseSource='UPSTREAM' AND (:showForwarded=1 OR (:showBlockedByServer=1 AND responseTime>0))) " +
+            "OR (responseSource='CACHE' AND :showCache=1) " +
+            "OR (responseSource='LOCALRESOLVER' AND :showDnsRules=1) " +
+            "OR (responseSource='CACHE_AND_LOCALRESOLVER' AND (:showCache=1 OR :showDnsRules=1)) " +
+            "OR (responseSource='OTHER' AND :showForwarded=1)")
+    fun getAllWithFilterLive(showForwarded:Boolean, showCache:Boolean, showDnsRules:Boolean, showBlockedByServer:Boolean):LiveData<List<DnsQuery>>
+
+    @Query("SELECT * FROM DnsQuery WHERE (responseSource='UPSTREAM' AND (:showForwarded=1 OR (:showBlockedByServer=1 AND responseTime>0)) " +
+            "OR (responseSource='CACHE' AND :showCache=1) " +
+            "OR (responseSource='LOCALRESOLVER' AND :showDnsRules=1) " +
+            "OR (responseSource='CACHE_AND_LOCALRESOLVER' AND (:showCache=1 OR :showDnsRules=1)) " +
+            "OR (responseSource='OTHER' AND :showForwarded=1)) " +
+            "AND name LIKE '%' ||:hostPart || '%'")
+    fun getAllWithHostAndFilterLive(hostPart:String, showForwarded:Boolean, showCache:Boolean, showDnsRules:Boolean, showBlockedByServer:Boolean):LiveData<List<DnsQuery>>
+
     @Query("SELECT MAX(id) FROM DnsQuery")
     fun getLastInsertedId():Long
 

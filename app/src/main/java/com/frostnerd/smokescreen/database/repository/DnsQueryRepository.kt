@@ -1,9 +1,12 @@
 package com.frostnerd.smokescreen.database.repository
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.frostnerd.smokescreen.database.converters.StringListConverter
 import com.frostnerd.smokescreen.database.dao.DnsQueryDao
 import com.frostnerd.smokescreen.database.entities.DnsQuery
+import com.frostnerd.smokescreen.dialog.QueryLogFilterDialog
 import com.frostnerd.smokescreen.getPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -33,6 +36,48 @@ import java.io.FileWriter
  */
 
 class DnsQueryRepository(private val dnsQueryDao: DnsQueryDao) {
+
+    fun getAllWithFilterLive(filterConfig: QueryLogFilterDialog.FilterConfig): LiveData<List<DnsQuery>> {
+        return dnsQueryDao.getAllWithFilterLive(filterConfig.showForwarded, filterConfig.showCache, filterConfig.showDnsrules, filterConfig.showBlockedByDns).let {
+            filterDnsQuery(filterConfig, it)
+        }
+    }
+
+    fun getAllWithHostAndFilterLive(hostPart:String, filterConfig: QueryLogFilterDialog.FilterConfig): LiveData<List<DnsQuery>> {
+        return dnsQueryDao.getAllWithHostAndFilterLive(hostPart, filterConfig.showForwarded, filterConfig.showCache, filterConfig.showDnsrules, filterConfig.showBlockedByDns).let {
+            filterDnsQuery(filterConfig, it)
+        }
+    }
+
+    private fun filterDnsQuery(filterConfig: QueryLogFilterDialog.FilterConfig, liveData: LiveData<List<DnsQuery>>):LiveData<List<DnsQuery>> {
+        if(filterConfig.showForwarded && filterConfig.showBlockedByDns) {
+            return liveData
+        } else{
+            val holdsAllData = liveData.value?.let {
+                dnsQueryDao.getCount() == it.size
+            } ?: false
+
+            return when {
+                holdsAllData -> {
+                    liveData
+                }
+                filterConfig.showForwarded -> {
+                    Transformations.map(liveData) {
+                        it.filter {
+                            !it.isHostBlockedByDnsServer
+                        }
+                    }
+                }
+                else -> { // showForwarded = false, showBlockedByDns = true
+                    Transformations.map(liveData) {
+                        it.filter {
+                            it.isHostBlockedByDnsServer
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     fun insertAllAsync(dnsQueries:List<DnsQuery>): Job {
         return GlobalScope.launch(Dispatchers.IO) {

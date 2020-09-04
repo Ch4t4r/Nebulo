@@ -10,6 +10,9 @@ import com.frostnerd.smokescreen.database.converters.DnsTypeConverter
 import com.frostnerd.smokescreen.database.converters.QuerySourceConverter
 import com.frostnerd.smokescreen.database.converters.StringListConverter
 import com.frostnerd.smokescreen.database.recordFromBase64
+import com.frostnerd.smokescreen.equalsAny
+import org.minidns.record.A
+import org.minidns.record.AAAA
 import org.minidns.record.Record
 
 /*
@@ -40,13 +43,37 @@ data class DnsQuery(
     var responseSource:QueryListener.Source,
     val questionTime: Long,
     var responseTime: Long = 0,
-    var responses: MutableList<String>
+    var responses: List<String>,
+    var isHostBlockedByDnsServer:Boolean = responsesBlockHost(responses)
 ) {
     @delegate:Ignore
     val shortName:String by lazy { calculateShortName() }
+    @delegate:Ignore
+    val parsedResponses:List<Record<*>> by lazy {
+        parseResponses(responses)
+    }
 
     companion object {
         private val SHORT_DOMAIN_REGEX = "^((?:[^.]{1,3}\\.)+)([\\w]{4,})(?:\\.(?:[^.]*))*\$".toRegex()
+
+        private fun responsesBlockHost(responses:List<String>):Boolean {
+            return parseResponses(responses).any {
+                (it.type == Record.TYPE.A && (it.payload as A).toString() == "0.0.0.0") ||
+                        (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString().equalsAny("::0", "0:0:0:0:0:0:0:0"))
+            }
+        }
+
+        private fun parseResponses(responses:List<String>): List<Record<*>> {
+            if(responses.isEmpty()) return emptyList()
+
+            val parsedResponses = mutableListOf<Record<*>>()
+            for (response in responses) {
+                parsedResponses.add(recordFromBase64(response))
+            }
+            return parsedResponses
+        }
+
+        fun encodeResponse(record: Record<*>):String = Base64.encodeToString(record.toByteArray(), Base64.NO_WRAP)
     }
 
     /**
@@ -62,16 +89,6 @@ data class DnsQuery(
             return name
         } else return name
     }
-
-    fun getParsedResponses(): List<Record<*>> {
-        val responses = mutableListOf<Record<*>>()
-        for (response in this.responses) {
-            responses.add(recordFromBase64(response))
-        }
-        return responses
-    }
-
-    fun encodeResponse(record: Record<*>):String = Base64.encodeToString(record.toByteArray(), Base64.NO_WRAP)
 
     override fun toString(): String {
         return "DnsQuery(id=$id, type=$type, name='$name', askedServer=$askedServer, questionTime=$questionTime, responseTime=$responseTime, responses={${responses.size}})"

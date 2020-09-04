@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/querylog_filter_info"
+            android:layout_marginBottom="12dp"
+            android:layout_height="wrap_content" />
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:id="@+id/showForwarded"
+            android:text="@string/querylog_filter_type_forwarded"
+            android:textColor="?android:attr/textColor"
+            android:layout_height="wrap_content"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:id="@+id/showCache"
+            android:text="@string/querylog_filter_type_cache"
+            android:textColor="?android:attr/textColor"
+            android:layout_height="wrap_content"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:id="@+id/showDnsRules"
+            android:text="@string/querylog_filter_type_dnsrules"
+            android:textColor="?android:attr/textColor"
+            android:layout_height="wrap_content"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:id="@+id/showBlockedByDns"
+            android:text="@string/querylog_filter_type_blocked_by_server"
+            android:textColor="?android:attr/textColor"
+            android:layout_height="wrap_content"/>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:id="@+id/shortenDomain"
+            android:layout_marginTop="32dp"
+            android:text="@string/querylog_filter_shorten_domain"
+            android:textColor="?android:attr/textColor"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
