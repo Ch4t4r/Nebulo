@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="menu_show_on_fdroid">عرض على F-Droid</string>
+    <string name="menu_about">عن هذا التطبيق</string>
+    <string name="menu_rate">قيمنا</string>
+    <string name="menu_create_shortcut">عمل اختصار للسيرفر</string>
+    <string name="menu_querylogging">سِجل الاستعلامات</string>
+    <string name="menu_settings">الإعدادات</string>
+    <string name="menu_main">الصفحة الرئيسية</string>
+</resources>
