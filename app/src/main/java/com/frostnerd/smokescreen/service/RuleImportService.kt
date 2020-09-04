@@ -233,6 +233,7 @@ class RuleImportService : IntentService("RuleImportService") {
                     } catch (ex: java.lang.Exception) {
                         ex.printStackTrace()
                         log("Downloading resource of ${it.name} failed ($ex)")
+                        newChecksums.remove(it)
                     } finally {
                         response?.body?.close()
                     }
