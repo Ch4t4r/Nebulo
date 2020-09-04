@@ -65,7 +65,8 @@ If not, click on the plus button in the round circle to add a new source. You ca
 If you define a source as whitelist source by selecting the checkbox the hosts in this source will never be blocked by other DNS rules.<br>
 Newly added sources are enabled by default and you can toggle them by clicking on the switch of each row.
 To delete a source click on the trashcan.<br>
-Any of those actions requires a refresh (explained in the next text).
+Any of those actions requires a refresh (explained in the next text).<br>
+You can find almost all lists out there on [this page](https://filterlists.com/).
 
 #### Refreshing the sources
 After changing the rule sources (enabling, deleting, adding or disabling a rule source) you have to refresh the DNS rules.
