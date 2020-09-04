@@ -50,29 +50,19 @@ class DnsQueryRepository(private val dnsQueryDao: DnsQueryDao) {
     }
 
     private fun filterDnsQuery(filterConfig: QueryLogFilterDialog.FilterConfig, liveData: LiveData<List<DnsQuery>>):LiveData<List<DnsQuery>> {
-        if(filterConfig.showForwarded && filterConfig.showBlockedByDns) {
-            return liveData
-        } else{
-            val holdsAllData = liveData.value?.let {
-                dnsQueryDao.getCount() == it.size
-            } ?: false
-
-            return when {
-                holdsAllData -> {
-                    liveData
-                }
-                filterConfig.showForwarded -> {
-                    Transformations.map(liveData) {
-                        it.filter {
-                            !it.isHostBlockedByDnsServer
-                        }
+        return if(filterConfig.showForwarded == filterConfig.showBlockedByDns) {
+            liveData
+        } else {
+             if(filterConfig.showForwarded && !filterConfig.showBlockedByDns) {
+                Transformations.map(liveData) {
+                    it.filterNot { query ->
+                        query.isHostBlockedByDnsServer
                     }
                 }
-                else -> { // showForwarded = false, showBlockedByDns = true
-                    Transformations.map(liveData) {
-                        it.filter {
-                            it.isHostBlockedByDnsServer
-                        }
+            } else {
+                Transformations.map(liveData) {
+                    it.filter { query ->
+                        query.isHostBlockedByDnsServer
                     }
                 }
             }
