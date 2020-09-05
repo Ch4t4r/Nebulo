@@ -136,4 +136,15 @@
     <string name="changelog_build_41_8">いくつかのクラッシュを修正しました</string>
     <string name="changelog_build_62_4">内部(フォールバック)DNSが指定できるようになりました</string>
     <string name="changelog_build_62_3">DNSルールソースを個別に更新できるようになりました</string>
+    <string name="changelog_build_66_4">クエリログに表示されているアイコンの説明をヘルプに追加しました</string>
+    <string name="changelog_build_66_6">ビルトインのDNSサーバーにBraveDNSとCloudflare securityを追加しました</string>
+    <string name="changelog_build_66_11">DNSルールにより解決したクエリのカウント値を追加しました</string>
+    <string name="changelog_build_66_10">クエリログをフィルタリング表示できるようにしました</string>
+    <string name="changelog_build_66_9">現在のサーバーが接続不良の時、それを画面を通知するようにしました</string>
+    <string name="changelog_build_66_8">初めてこのアプリを起動した時に表示する「DNSサーバーの選択」画面を追加しました</string>
+    <string name="changelog_build_66_7">初めてこのアプリを起動した時に表示する画面を追加しました</string>
+    <string name="changelog_build_66_5">DNS速度テストで表示されるレイテンシをより正確になるようにしました</string>
+    <string name="changelog_build_66_3">ホストがDNSルールに登録済みかどうかをチェックするダイアログを追加しました</string>
+    <string name="changelog_build_66_2">追加するサーバー名の大文字小文字を区別するようにしました。これによりNextDNSに関連する不具合が修正されました</string>
+    <string name="changelog_build_66_1">FAQ(よくある質問)を追加しました。ナビゲーションアイテムの「このアプリについて」から見つけることができます</string>
 </resources>
