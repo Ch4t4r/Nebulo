@@ -520,8 +520,10 @@ class DnsRuleFragment : Fragment() {
     }
 
     private fun updateRuleCountTitle() {
-        activity?.runOnUiThread {
-            (activity as AppCompatActivity?)?.supportActionBar?.subtitle = resources.getQuantityString(R.plurals.window_dnsrules_subtitle, totalRuleCount!!.toInt(), totalRuleCount)
+         activity?.runOnUiThread {
+             (activity as AppCompatActivity?)?.supportActionBar?.subtitle = if(getPreferences().dnsRulesEnabled) {
+                 resources.getQuantityString(R.plurals.window_dnsrules_subtitle, totalRuleCount!!.toInt(), totalRuleCount)
+             } else null
         }
     }
 
@@ -543,6 +545,7 @@ class DnsRuleFragment : Fragment() {
             getPreferences().dnsRulesEnabled = isChecked
             overlay.visibility = if(isChecked) View.GONE else View.VISIBLE
             search.isEnabled = isChecked
+            updateRuleCountTitle()
         }
         search?.setOnMenuItemClickListener {
             DnsRuleSearchDialog(requireContext()).show()
