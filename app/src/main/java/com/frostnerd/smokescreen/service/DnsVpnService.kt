@@ -1297,9 +1297,11 @@ class DnsVpnService : VpnService(), Runnable {
         }
         currentTrafficStats = vpnProxy?.trafficStats
         if(!watchdogDisabledForSession && getPreferences().enableConnectionWatchDog) connectionWatchDog = currentTrafficStats?.let {
-            ConnectionWatchdog(it, 30*1000, 10*60*10000) {
+            ConnectionWatchdog(it, 30*1000, 10*60*10000,onBadServerConnection =  {
                 showBadConnectionNotification()
-            }
+            }, onBadConnectionResolved = {
+                hideBadConnectionNotification()
+            })
         }
         hideBadConnectionNotification()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))

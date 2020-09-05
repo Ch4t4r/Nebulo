@@ -26,7 +26,8 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
                          val debounceCallbackByMs:Long? = null,
                          val badLatencyThresholdMs:Int = 750,
                          val badPacketLossThresholdPercent:Int = 30,
-                         private val onBadServerConnection:() -> Unit) {
+                         private val onBadServerConnection:() -> Unit,
+                         private val onBadConnectionResolved:() -> Unit) {
     val supervisor = SupervisorJob()
     val scope = CoroutineScope(supervisor + Dispatchers.IO)
     private var running = true
@@ -34,6 +35,7 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
     private var packetLossAtLastCheck:Int? = null
     private var packetCountAtLastCheck:Int? = null
     private var lastCallbackCall:Long? = null
+    private var measurementsWithBadConnection:Int = 0
 
     init {
         scope.launch {
@@ -50,12 +52,18 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
             val currentLatency = trafficStats.floatingAverageLatency.toInt()
             val currentPacketLossPercent = (100*trafficStats.failedAnswers)/(trafficStats.packetsReceivedFromDevice*0.9)
 
-            if(currentLatency > badLatencyThresholdMs*1.3 ||
+            val hasBadConnection = if(currentLatency > badLatencyThresholdMs*1.3 ||
                 (latencyAtLastCheck?.let { it > badLatencyThresholdMs } == true && currentLatency > badLatencyThresholdMs)) {
+                true
+            } else currentPacketLossPercent > badPacketLossThresholdPercent*1.3 || (
+                        packetLossAtLastCheck?.let { it > badPacketLossThresholdPercent } == true && currentPacketLossPercent > badPacketLossThresholdPercent)
+
+            if(hasBadConnection) {
+                measurementsWithBadConnection++
                 callCallback()
-            } else if(currentPacketLossPercent > badPacketLossThresholdPercent*1.3 || (
-                        packetLossAtLastCheck?.let { it > badPacketLossThresholdPercent } == true && currentPacketLossPercent > badPacketLossThresholdPercent)) {
-                callCallback()
+            } else if(measurementsWithBadConnection != 0){
+                if(measurementsWithBadConnection == 1) onBadConnectionResolved()
+                measurementsWithBadConnection = maxOf(0, measurementsWithBadConnection - minOf(1,maxOf(8, measurementsWithBadConnection/12)))
             }
 
             latencyAtLastCheck = trafficStats.floatingAverageLatency.toInt()
