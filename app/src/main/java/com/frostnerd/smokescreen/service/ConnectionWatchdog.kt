@@ -24,7 +24,7 @@ import kotlinx.coroutines.*
 class ConnectionWatchdog(private val trafficStats: TrafficStats,
                          val checkIntervalMs:Long,
                          val debounceCallbackByMs:Long? = null,
-                         val badLatencyThresholdMs:Int = 900,
+                         val badLatencyThresholdMs:Int = 750,
                          val badPacketLossThresholdPercent:Int = 30,
                          private val onBadServerConnection:() -> Unit) {
     val supervisor = SupervisorJob()
