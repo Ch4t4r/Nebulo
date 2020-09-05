@@ -78,5 +78,5 @@
     <string name="notification_multipleuserswarning_text">Nebulo could not start its dummy VPN because of an Android bug. This happens when there are multiple users on your device.</string>
 
     <string name="notification_bad_connection_title">Bad server connection</string>
-    <string name="notification_bad_connection_text">Your connection to the DNS server is bad right now. This might impact your browsing. Consider selecting another server.</string>
+    <string name="notification_bad_connection_text">Your connection to the DNS server is bad right now. This might impact your surfing speed negatively. Consider selecting another server.</string>
 </resources>
