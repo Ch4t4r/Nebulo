@@ -99,6 +99,8 @@ class DnsVpnService : VpnService(), Runnable {
     private var dnsCache:SimpleDnsCache? = null
     private var localResolver:LocalResolver? = null
     private var runInNonVpnMode:Boolean = getPreferences().runWithoutVpn
+    private var connectionWatchDog:ConnectionWatchdog? = null
+    private var watchdogDisabledForSession = false
     private val addressResolveScope:CoroutineScope by lazy {
         CoroutineScope(newSingleThreadContext("service-resolve-retry"))
     }
@@ -356,7 +358,8 @@ class DnsVpnService : VpnService(), Runnable {
             "simple_notification",
             "pin",
             "nonvpn_use_iptables",
-            "nonvpn_iptables_disable_ipv6"
+            "nonvpn_iptables_disable_ipv6",
+            "connection_watchdog"
         )
         settingsSubscription = getPreferences().listenForChanges(
             relevantSettings,
@@ -557,6 +560,49 @@ class DnsVpnService : VpnService(), Runnable {
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_MULTIPLEUSERS_WARNING)
     }
 
+    private fun showBadConnectionNotification() {
+        val builder = NotificationCompat.Builder(
+            this,
+            Notifications.getBadConnectionChannelId(this)
+        )
+        builder.priority = NotificationCompat.PRIORITY_DEFAULT
+        builder.setOngoing(false)
+        builder.setSmallIcon(R.drawable.ic_cloud_strikethrough)
+        builder.setContentTitle(getString(R.string.notification_bad_connection_title))
+        builder.setContentText(getString(R.string.notification_bad_connection_text))
+        builder.setStyle(
+            NotificationCompat.BigTextStyle(
+                notificationBuilder
+            ).bigText(getString(R.string.notification_bad_connection_text))
+        )
+        val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra(
+            "command",
+            Command.IGNORE_BAD_CONNECTION
+        )
+        val ignorePendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            PendingIntent.getForegroundService(
+                this@DnsVpnService,
+                RequestCodes.REQUEST_CODE_IGNORE_BAD_CONNECTION,
+                ignoreIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        } else {
+            PendingIntent.getService(
+                this@DnsVpnService,
+                RequestCodes.REQUEST_CODE_IGNORE_BAD_CONNECTION,
+                ignoreIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
+
+        builder.addAction(NotificationCompat.Action(null, getString(R.string.notification_service_killed_ignore), ignorePendingIntent))
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_BAD_SERVER_CONNECTION, builder.build())
+    }
+
+    private fun hideBadConnectionNotification() {
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_BAD_SERVER_CONNECTION)
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("Service onStartCommand", intent = intent)
         runInNonVpnMode = getPreferences().runWithoutVpn
@@ -612,6 +658,11 @@ class DnsVpnService : VpnService(), Runnable {
                 Command.INVALIDATE_DNS_CACHE -> {
                     dnsProxy?.dnsCache?.clear()
                     restartVpn(this, false)
+                }
+                Command.IGNORE_BAD_CONNECTION -> {
+                    watchdogDisabledForSession = true
+                    connectionWatchDog?.stop()
+                    hideBadConnectionNotification()
                 }
             }
         } else {
@@ -817,6 +868,7 @@ class DnsVpnService : VpnService(), Runnable {
         if (!destroyed) {
             vpnProxy?.stop()
             dnsServerProxy?.stop()
+            connectionWatchDog?.stop()
             if(ipTablesRedirector == null || ipTablesRedirector?.endForward() == IpTablesPacketRedirector.IpTablesMode.SUCCEEDED) {
                 getPreferences().lastIptablesRedirectAddress = null
                 getPreferences().lastIptablesRedirectAddressIPv6 = null
@@ -1244,6 +1296,12 @@ class DnsVpnService : VpnService(), Runnable {
              log("VPN proxy started.")
         }
         currentTrafficStats = vpnProxy?.trafficStats
+        if(!watchdogDisabledForSession && getPreferences().enableConnectionWatchDog) connectionWatchDog = currentTrafficStats?.let {
+            ConnectionWatchdog(it, 30*1000, 10*60*10000) {
+                showBadConnectionNotification()
+            }
+        }
+        hideBadConnectionNotification()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_SERVICE_REVOKED)
     }
@@ -1431,7 +1489,7 @@ class DnsVpnService : VpnService(), Runnable {
 }
 
 enum class Command : Serializable {
-    STOP, RESTART, PAUSE_RESUME, IGNORE_SERVICE_KILLED, INVALIDATE_DNS_CACHE
+    STOP, RESTART, PAUSE_RESUME, IGNORE_SERVICE_KILLED, INVALIDATE_DNS_CACHE, IGNORE_BAD_CONNECTION
 }
 
 data class DnsServerConfiguration(

@@ -40,6 +40,7 @@ class Notifications {
         const val ID_DNSSERVER_MODE = 11
         const val ID_PRIVATEDNS_WARNING = 12
         const val ID_MULTIPLEUSERS_WARNING = 13
+        const val ID_BAD_SERVER_CONNECTION = 14
         const val ID_VPN_RESTART = 999
 
         fun servicePersistentNotificationChannel(context: Context):String {
@@ -175,4 +176,5 @@ object RequestCodes {
     const val REQUEST_CODE_IGNORE_SERVICE_KILLED = 10
     const val RESTART_AFTER_REVOKE = 11
     const val RESTART_WHOLE_APP = 12
+    const val REQUEST_CODE_IGNORE_BAD_CONNECTION = 13
 }

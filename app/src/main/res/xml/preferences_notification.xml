@@ -43,5 +43,11 @@
                 android:key="show_vpn_revoked_notification"
                 android:summary="@string/summary_show_revoked_notification"
                 android:title="@string/title_show_revoked_notification" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="connection_watchdog"
+            android:summary="@string/summary_inform_bad_connection"
+            android:title="@string/title_inform_bad_connection"/>
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
