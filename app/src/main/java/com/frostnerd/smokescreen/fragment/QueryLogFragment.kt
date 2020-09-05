@@ -50,7 +50,7 @@ class QueryLogFragment : Fragment(), BackpressFragment {
         return if(viewpager != null && viewpager.currentItem == 1) {
             viewpager.currentItem = 0
             true
-        } else false
+        } else listFragment.onBackPressed()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,6 +69,7 @@ class QueryLogFragment : Fragment(), BackpressFragment {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
         searchView.queryHint = getString(R.string.windows_querylogging_search_hint)
         searchView.setOnQueryTextListener(listFragment)
+        searchView.setOnCloseListener(listFragment)
         menu.findItem(R.id.info)!!.setOnMenuItemClickListener {
             showInfoTextDialogWithClose(
                 requireContext(),

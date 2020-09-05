@@ -13,6 +13,7 @@ import com.frostnerd.cacheadapter.DefaultViewHolder
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
+import com.frostnerd.smokescreen.BackpressFragment
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
@@ -41,7 +42,8 @@ import kotlinx.android.synthetic.main.item_logged_query.view.*
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
+class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener, BackpressFragment,
+    SearchView.OnCloseListener {
     private lateinit var unfilteredAdapter:RecyclerView.Adapter<*>
     private var currentSearchText:String? = null
     private var filterConfig = QueryLogFilterDialog.FilterConfig.showAllConfig
@@ -49,6 +51,14 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return layoutInflater.inflate(R.layout.fragment_querylog_list, container, false)
+    }
+
+    override fun onBackPressed(): Boolean {
+        return if(filterConfig != QueryLogFilterDialog.FilterConfig.showAllConfig) {
+            clearFilter()
+            updateAdapter()
+            true
+        } else false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -129,7 +139,6 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
             view?.progress?.visibility = View.VISIBLE
             launchWithLifecycle(ui = false) {
                 val updatedAdapter = createUpdatedAdapter()
-                println("Created new adapter!")
                 launchWithLifecycle(true) {
                     view?.progress?.visibility = View.GONE
                     list.adapter = updatedAdapter
@@ -148,6 +157,10 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
         return parent.detailFragment.currentQuery?.id == dnsQuery.id
     }
 
+    private fun clearFilter() {
+        filterConfig = QueryLogFilterDialog.FilterConfig.showAllConfig
+    }
+
     override fun onQueryTextSubmit(query: String?): Boolean {
         if(!query.isNullOrBlank() && query.trim() != currentSearchText) {
             currentSearchText = query.trim()
@@ -157,6 +170,11 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
             updateAdapter()
         }
         return true
+    }
+
+    override fun onClose(): Boolean {
+        clearFilter()
+        return false
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
