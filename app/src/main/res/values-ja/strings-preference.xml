@@ -70,9 +70,7 @@
     <string name="summary_run_without_vpn">チェックを入れると、Nebuloは端末内にDNSサーバーを設置します</string>
     <string name="title_run_without_vpn">非VPNで稼働</string>
     <string name="summary_category_nonvpnmode_forwardinfo">サーバーが localhost:%1s で稼働します。</string>
-    <string name="summary_category_nonvpnmode">ダミーのVPNを使用する替わりに、デバイス上にDNSサーバーを設置し機能するようNebuloを構成します。このモードを使う場合、サードパーティのアプリを使用してDNSクエリをNebuloに手動で転送する必要があります。
-\n
-\nこの機能は実験的に実装しています。</string>
+    <string name="summary_category_nonvpnmode">ダミーのVPNを使用する替わりに、デバイス上にDNSサーバーを設置し機能するようNebuloを構成します。このモードを使う場合、サードパーティのアプリを使用してDNSクエリをNebuloに手動で転送する必要があります。</string>
     <string name="preference_category_nonvpnmode">非VPNモード</string>
     <string name="summary_delete_queries">記録されたクエリを削除する場合、ここをタップします。</string>
     <string name="title_delete_queries">クエリのクリア</string>
@@ -131,4 +129,8 @@
     <string name="title_fallback_dns">内部DNSサーバー</string>
     <string name="summary_nonvpn_help_generic">VPNアプリの設定方法についてはこちらをクリックしてください</string>
     <string name="nonvpn_help_generic_title">ジェネリックなVPNアプリ</string>
+    <string name="summary_nonvpn_help_faq">ここをタップすると、非VPNモードについてのヘルプおよび作業内容についてのウィンドウが開きます。</string>
+    <string name="title_nonvpn_help_faq">作業内容</string>
+    <string name="summary_inform_bad_connection">DNSサーバーが遅延またはDNSサーバーに到達しなくなった時にメインメニュー内でその旨を通知します。</string>
+    <string name="title_inform_bad_connection">接続不良を知らせる</string>
 </resources>
