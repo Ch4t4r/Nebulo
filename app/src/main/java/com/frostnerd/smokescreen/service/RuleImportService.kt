@@ -286,28 +286,37 @@ class RuleImportService : IntentService("RuleImportService") {
         var ruleCount = 0
         val sourceId = source.id
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
-            var validParsings = 0
+            var remainingMatcher:Matcher? = null
+            var hostsOfRemainingMatcher:MutableList<DnsRule>? = null
             lines.forEach { _line ->
                 val line = _line.trim()
                 if (!isAborted) {
                     if (parsers.isNotEmpty() && !line.startsWith("#") && !line.startsWith("!") && !line.isBlank()) {
                         lineCount++
-                        val iterator = parsers.iterator()
-                        for ((matcher, hosts) in iterator) {
-                            if (matcher.reset(line).matches()) {
-                                validParsings++
-                                val rule = processLine(matcher, sourceId, source.whitelistSource)
-                                if (rule != null) hosts.second.add(rule.apply {
+                        if(remainingMatcher != null) {
+                            if (remainingMatcher!!.reset(line).matches()) {
+                                val rule = processLine(remainingMatcher!!, sourceId, source.whitelistSource)
+                                if (rule != null) hostsOfRemainingMatcher!!.add(rule.apply {
                                     stagingType = 2
                                 })
                                 if (lineCount > ruleCommitSize) {
                                     ruleCount += commitLines(parsers)
                                     lineCount = 0
                                 }
-                            } else {
-                                // If validParsings is at least 26 we know for sure that the current active parser had at least 5 successful hits
-                                // So we are going to keep it for the rest of the document, even if it fails
-                                if(validParsings <= 25) {
+                            }
+                        } else {
+                            val iterator = parsers.iterator()
+                            for ((matcher, hosts) in iterator) {
+                                if (matcher.reset(line).matches()) {
+                                    val rule = processLine(matcher, sourceId, source.whitelistSource)
+                                    if (rule != null) hosts.second.add(rule.apply {
+                                        stagingType = 2
+                                    })
+                                    if (lineCount > ruleCommitSize) {
+                                        ruleCount += commitLines(parsers)
+                                        lineCount = 0
+                                    }
+                                } else {
                                     if (hosts.first > 5) {
                                         log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
                                         iterator.remove()
@@ -315,6 +324,9 @@ class RuleImportService : IntentService("RuleImportService") {
                                     if (parsers.isEmpty()) {
                                         log("No parsers left. Aborting.")
                                         return@forEach
+                                    } else if(parsers.size == 1) {
+                                        remainingMatcher = parsers.keys.first()
+                                        hostsOfRemainingMatcher = parsers.values.first().second
                                     }
                                 }
                             }
