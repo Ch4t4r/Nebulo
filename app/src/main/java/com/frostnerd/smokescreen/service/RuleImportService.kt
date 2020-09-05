@@ -286,6 +286,7 @@ class RuleImportService : IntentService("RuleImportService") {
         var ruleCount = 0
         val sourceId = source.id
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
+            var validParsings = 0
             lines.forEach { _line ->
                 val line = _line.trim()
                 if (!isAborted) {
@@ -294,6 +295,7 @@ class RuleImportService : IntentService("RuleImportService") {
                         val iterator = parsers.iterator()
                         for ((matcher, hosts) in iterator) {
                             if (matcher.reset(line).matches()) {
+                                validParsings++
                                 val rule = processLine(matcher, sourceId, source.whitelistSource)
                                 if (rule != null) hosts.second.add(rule.apply {
                                     stagingType = 2
@@ -303,12 +305,16 @@ class RuleImportService : IntentService("RuleImportService") {
                                     lineCount = 0
                                 }
                             } else {
-                                if (hosts.first > 5) {
-                                    log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
-                                    iterator.remove()
-                                } else parsers[matcher] = hosts.copy(hosts.first + 1)
-                                if (parsers.isEmpty()) {
-                                    log("No parsers left. Aborting.")
+                                // If validParsings is at least 26 we know for sure that the current active parser had at least 5 successful hits
+                                // So we are going to keep it for the rest of the document, even if it fails
+                                if(validParsings <= 25) {
+                                    if (hosts.first > 5) {
+                                        log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
+                                        iterator.remove()
+                                    } else parsers[matcher] = hosts.copy(hosts.first + 1)
+                                    if (parsers.isEmpty()) {
+                                        log("No parsers left. Aborting.")
+                                    }
                                 }
                             }
                         }
