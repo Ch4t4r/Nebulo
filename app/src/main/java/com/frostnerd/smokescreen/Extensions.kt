@@ -435,3 +435,20 @@ fun Context.tryOpenBrowser(withLink:String) {
         Toast.makeText(this, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show()
     }
 }
+
+enum class FAQTopics(val id: String) {
+    DNSRULES("dns-rules")
+}
+
+fun Context.askOpenFAQ(topic: FAQTopics?) {
+    showInfoTextDialog(
+        this,
+        getString(R.string.about_help_faq),
+        getString(R.string.dialog_open_faq),
+        positiveButton = getString(R.string.all_yes) to { _, _ ->
+            tryOpenBrowser("https://nebulo.app/faq#${topic?.id ?: ""}")
+        },
+        negativeButton = getString(R.string.all_no) to { _, _ -> },
+        neutralButton = null
+    )
+}

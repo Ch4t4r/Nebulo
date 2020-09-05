@@ -206,6 +206,7 @@ class DnsRuleFragment : Fragment() {
                 }.show()
             }
         }
+        faq.setOnClickListener { requireContext().askOpenFAQ(FAQTopics.DNSRULES) }
         sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
         sourceRuleCount = sourceAdapterList.map {
             it to (null as Int?)

@@ -64,6 +64,15 @@
                         android:elevation="0dp"
                         android:layout_height="wrap_content"/>
             </com.github.jorgecastilloprz.FABProgressCircle>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:id="@+id/faq"
+                    android:tint="#000000"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_query_question"
+                    android:elevation="0dp"
+                    android:layout_height="wrap_content"/>
         </LinearLayout>
     </RelativeLayout>
     <View
