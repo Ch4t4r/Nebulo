@@ -179,6 +179,7 @@ class NewServerDialog(
                     secondaryServer.setText(server.serverInformation.servers[1].address.formatToString())
                 }
             }
+            serverName.requestFocus()
         }
     }
 
