@@ -288,6 +288,7 @@ class RuleImportService : IntentService("RuleImportService") {
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
             var remainingMatcher:Matcher? = null
             var hostsOfRemainingMatcher:MutableList<DnsRule>? = null
+            var successfulMatches = 0
             lines.forEach { _line ->
                 val line = _line.trim()
                 if (!isAborted) {
@@ -308,6 +309,7 @@ class RuleImportService : IntentService("RuleImportService") {
                             val iterator = parsers.iterator()
                             for ((matcher, hosts) in iterator) {
                                 if (matcher.reset(line).matches()) {
+                                    successfulMatches+=1
                                     val rule = processLine(matcher, sourceId, source.whitelistSource)
                                     if (rule != null) hosts.second.add(rule.apply {
                                         stagingType = 2
@@ -317,16 +319,18 @@ class RuleImportService : IntentService("RuleImportService") {
                                         lineCount = 0
                                     }
                                 } else {
-                                    if (hosts.first > 5) {
-                                        log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
-                                        iterator.remove()
-                                    } else parsers[matcher] = hosts.copy(hosts.first + 1)
-                                    if (parsers.isEmpty()) {
-                                        log("No parsers left. Aborting.")
-                                        return@forEach
-                                    } else if(parsers.size == 1) {
+                                    if(successfulMatches > 35) {
                                         remainingMatcher = parsers.keys.first()
                                         hostsOfRemainingMatcher = parsers.values.first().second
+                                    } else {
+                                        if (hosts.first > 5) {
+                                            log("Matcher $matcher failed 5 times, last for '$line'. Removing.")
+                                            iterator.remove()
+                                        } else parsers[matcher] = hosts.copy(hosts.first + 1)
+                                        if (parsers.isEmpty()) {
+                                            log("No parsers left. Aborting.")
+                                            return@forEach
+                                        }
                                     }
                                 }
                             }
