@@ -65,4 +65,8 @@
     <string name="notification_multipleuserswarning_title">ダミーVPNが確立できませんでした</string>
     <string name="notification_privatednswarning_text">Nebuloを使用するには、システム設定でプライベートDNSを無効にしてください。</string>
     <string name="notification_privatednswarning_title">プライベートDNS</string>
+    <string name="notification_channel_badconnection_description">Nebulo接続不良の通知に使用するチャンネル</string>
+    <string name="notification_channel_badconnection">接続不良通知チャンネル</string>
+    <string name="notification_channel_dnsrules_description">DNSルールのインポート/エクスポートに使用するチャンネル</string>
+    <string name="notification_channel_dnsrules">DNSルール通知チャンネル</string>
 </resources>
