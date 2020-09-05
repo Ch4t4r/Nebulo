@@ -171,19 +171,16 @@ class PinActivity: BaseActivity() {
 
             dialog?.getButton(DialogInterface.BUTTON_POSITIVE)?.setOnClickListener {
                 if(pinInput.text.toString() == getPreferences().pin || hashMD5(pinInput.text.toString()) == masterPassword) {
-                    view.pinInputTil.error = null
+                    view.pinInput.error = null
                     onPinPassed()
                 } else {
                     (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(200)
-                    view.pinInputTil.error = getString(R.string.error_invalid_pin)
-                    handler.postDelayed( {
-                        view.pinInputTil.error = null
-                    },2000)
+                    view.pinInput.error = getString(R.string.error_invalid_pin)
                 }
             }
             pinInput.addTextChangedListener(object:TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    view.pinInputTil.error = null
+                    view.pinInput.error = null
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
