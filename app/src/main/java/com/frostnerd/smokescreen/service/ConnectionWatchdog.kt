@@ -50,9 +50,11 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
             val currentLatency = trafficStats.floatingAverageLatency.toInt()
             val currentPacketLossPercent = (100*trafficStats.failedAnswers)/(trafficStats.packetsReceivedFromDevice*0.9)
 
-            if(latencyAtLastCheck?.let { it > badLatencyThresholdMs } == true && currentLatency > badLatencyThresholdMs) {
+            if(currentLatency > badLatencyThresholdMs*1.3 ||
+                (latencyAtLastCheck?.let { it > badLatencyThresholdMs } == true && currentLatency > badLatencyThresholdMs)) {
                 callCallback()
-            } else if(packetLossAtLastCheck?.let { it > badPacketLossThresholdPercent } == true && currentPacketLossPercent > badPacketLossThresholdPercent) {
+            } else if(currentPacketLossPercent > badPacketLossThresholdPercent*1.3 || (
+                        packetLossAtLastCheck?.let { it > badPacketLossThresholdPercent } == true && currentPacketLossPercent > badPacketLossThresholdPercent)) {
                 callCallback()
             }
 
