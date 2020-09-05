@@ -79,4 +79,15 @@
     <string name="activity_label_import_servers">サーバーのインポート</string>
     <string name="activity_label_import_queries">クエリのインポート</string>
     <string name="window_dnsrules_refresh_sources">ソースからルールをインポートするには更新してください</string>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="other">これまでに %1d ものクエリがブロックされています。</item>
+    </plurals>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="other">ここまで %1d ものクエリがDNSルールにより処理されています。</item>
+    </plurals>
+    <string name="warning_server_currently_unstable">サーバー %1s は現在不安定のようです。</string>
+    <string name="warning_server_currently_unstable_expanded">サーバー %1s は現在不安定のようです。これによりブラウジングの速度に影響が出る可能性があります。他の安定したサーバーに切り替えることをお勧めします。</string>
+    <string name="about_help_faq">よくある質問</string>
+    <string name="window_querylog_information">情報</string>
+    <string name="window_speedtest_information">この値が低ければ低いほど、サーバーとより高速に通信することができます。これにより例えばブラウジングの速度が向上します。</string>
 </resources>
