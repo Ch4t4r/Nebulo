@@ -314,6 +314,7 @@ class RuleImportService : IntentService("RuleImportService") {
                                     } else parsers[matcher] = hosts.copy(hosts.first + 1)
                                     if (parsers.isEmpty()) {
                                         log("No parsers left. Aborting.")
+                                        return@forEach
                                     }
                                 }
                             }
