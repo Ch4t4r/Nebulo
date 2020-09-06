@@ -16,6 +16,7 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
+import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
@@ -110,7 +111,7 @@ class SpeedTestActivity : BaseActivity() {
     }
 
     private fun prepareList() {
-        prepareListJob = launchWithLifecycle(true) {
+        prepareListJob = launchWithLifecycleUi {
             val hiddenDotServers = getPreferences().removedDefaultDoTServers
             val hiddenDohServers = getPreferences().removedDefaultDoHServers
             val hasIpv4 = hasDeviceIpv4Address()
@@ -169,7 +170,7 @@ class SpeedTestActivity : BaseActivity() {
 
     private fun startTest() {
         if(wasStartedBefore) prepareList()
-        testJob = launchWithLifecycle(false) {
+        testJob = launchWithLifecycle {
             prepareListJob?.join()
             testRunning = true
             wasStartedBefore = true

@@ -13,6 +13,7 @@ import com.frostnerd.cacheadapter.DefaultViewHolder
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
+import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.BackpressFragment
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
@@ -62,11 +63,11 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener, Backpres
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        launchWithLifecycle(false) {
+        launchWithLifecycle {
             val live = requireContext().getDatabase().dnsQueryDao().getAllLive()
             unfilteredAdapter = createAdapter(LiveDataSource(this@QueryLogListFragment, live, true))
 
-            launchWithLifecycle(true) {
+            launchWithLifecycleUi {
                 list.layoutManager = LinearLayoutManager(requireContext())
                 list.adapter = unfilteredAdapter
                 progress.visibility = View.GONE
@@ -135,11 +136,11 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener, Backpres
     }
 
     private fun updateAdapter() {
-        launchWithLifecycle(true) {
+        launchWithLifecycleUi {
             view?.progress?.visibility = View.VISIBLE
-            launchWithLifecycle(ui = false) {
+            launchWithLifecycle {
                 val updatedAdapter = createUpdatedAdapter()
-                launchWithLifecycle(true) {
+                launchWithLifecycleUi {
                     view?.progress?.visibility = View.GONE
                     list.adapter = updatedAdapter
                 }

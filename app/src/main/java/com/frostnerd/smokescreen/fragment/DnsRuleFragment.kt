@@ -97,7 +97,7 @@ class DnsRuleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userRulesJob = launchWithLifecycle(false) {
+        userRulesJob = launchWithLifecycle {
             userDnsRules = getDatabase().dnsRuleDao().getAllUserRules().toMutableList()
             userRulesJob = null
             launch {
@@ -308,7 +308,7 @@ class DnsRuleFragment : Fragment() {
                             }
                         }
                         if(userRulesJob == null) changeVisibility()
-                        else launchWithLifecycle(false) {
+                        else launchWithLifecycle {
                             userRulesJob?.join()
                             changeVisibility()
                         }
@@ -422,7 +422,7 @@ class DnsRuleFragment : Fragment() {
                                 }
                             })
                     }
-                    data.enabled -> launchWithLifecycle(false) {
+                    data.enabled -> launchWithLifecycle {
                         val prev = sourceRuleCount[data]
                         sourceRuleCount[data] = getDatabase().dnsRuleDao().getCountForHostSource(data.id)
                         if(prev != sourceRuleCount[data]) runOnUiThread {
@@ -491,12 +491,12 @@ class DnsRuleFragment : Fragment() {
             refreshProgress.hide()
             refreshProgressShown = false
 
-            launchWithLifecycle(false) {
+            launchWithLifecycle {
                 sourceRuleCount.keys.forEach {
                     val index = sourceAdapterList.indexOf(it)
                     if(index >= 0 && (sourceAdapterList[index].enabled || sourceRuleCount[it] != null)) {
                         sourceRuleCount[it] = null
-                        launchWithLifecycle(true) {
+                        launchUi {
                             sourceAdapter.notifyItemChanged(index)
                         }
                     } else sourceRuleCount[it] = null

@@ -21,6 +21,7 @@ import com.frostnerd.general.isInt
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
+import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.MainActivity
@@ -282,10 +283,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 if(context != null) {
                     val dialog = LoadingDialog(context, R.string.title_check_iptables, R.string.dialog_doh_detect_type_message)
                     dialog.show()
-                    launchWithLifecycle(false) {
+                    launchWithLifecycle {
                         val supported = processSuCommand("iptables -t nat -L OUTPUT", context.logger)
                         val ipv6Supported = processSuCommand("ip6tables -t nat -L PREROUTING", context.logger)
-                        launchWithLifecycle(true) {
+                        launchWithLifecycleUi {
                             dialog.dismiss()
                             val text = if(supported) {
                                 if(ipv6Supported) R.string.iptables_supported
@@ -632,7 +633,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
 fun Context.showLogExportDialog(onDismiss: (() -> Unit)? = null) {
     log("Trying to send logs..")
-    val scope = if (this is LifecycleOwner) LifecycleCoroutineScope(this, ui = false)
+    val scope = if (this is LifecycleOwner) LifecycleCoroutineScope(this)
     else GlobalScope
 
     val loadingDialog = LoadingDialog(this, R.string.dialog_logexport_loading_title).also {

@@ -92,7 +92,7 @@ class MainActivity : NavigationDrawerActivity() {
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             val update = {
-                launchWithLifecycle(false) {
+                launchWithLifecycle {
                     val server = getPreferences().dnsServerConfig
                     val primaryAddress = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
                         retryIfError = true,
