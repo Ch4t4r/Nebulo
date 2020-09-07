@@ -105,8 +105,8 @@ class ProxyTlsHandler(
         } else true
     }
 
-    override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean {
-        return mapQueryRefusedToHostBlock
+    override suspend fun shouldModifyUpstreamResponse(dnsMessage: DnsMessage): Boolean {
+        return mapQueryRefusedToHostBlock && dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED
     }
 
     override fun verifyConnection(sslSession: SSLSession, outgoingPacket: DatagramPacket) {

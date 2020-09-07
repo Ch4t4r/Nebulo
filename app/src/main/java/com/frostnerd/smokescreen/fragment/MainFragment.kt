@@ -17,8 +17,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
+import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity

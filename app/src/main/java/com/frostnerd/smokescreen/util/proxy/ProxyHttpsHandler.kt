@@ -4,7 +4,7 @@ import com.frostnerd.dnstunnelproxy.AddressCreator
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
-import com.frostnerd.vpntunnelproxy.ReceivedAnswer
+import com.frostnerd.vpntunnelproxy.FutureAnswer
 import org.minidns.dnsmessage.DnsMessage
 import java.net.InetAddress
 
@@ -76,6 +76,10 @@ class ProxyHttpsHandler(
 
     override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = ownAddresses.any { it.equals(destinationAddress.hostAddress, true) }
 
-    override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean =
-        mapQueryRefusedToHostBlock
+    override suspend fun shouldModifyUpstreamResponse(dnsMessage: DnsMessage): Boolean =
+        mapQueryRefusedToHostBlock && dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED
+
+    override fun informFailedRequest(request: FutureAnswer, failureReason: Throwable?) {
+
+    }
 }

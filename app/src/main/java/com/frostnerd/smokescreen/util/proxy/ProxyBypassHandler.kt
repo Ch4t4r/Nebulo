@@ -74,7 +74,7 @@ class ProxyBypassHandler(private val searchDomains:List<String>, private val des
         return upstreamAddress
     }
 
-    override suspend fun shouldModifyUpstreamResponse(answer: ReceivedAnswer, receivedPayload: ByteArray): Boolean {
+    override suspend fun shouldModifyUpstreamResponse(dnsMessage: DnsMessage): Boolean {
         return false
     }
 
