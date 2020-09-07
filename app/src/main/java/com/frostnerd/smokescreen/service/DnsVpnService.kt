@@ -72,7 +72,7 @@ import kotlin.math.pow
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class DnsVpnService : VpnService(), Runnable {
+class DnsVpnService : VpnService(), Runnable, CoroutineScope {
     private var fileDescriptor: ParcelFileDescriptor? = null
     private var dnsProxy: DnsPacketProxy? = null
     private var vpnProxy: RetryingVPNTunnelProxy? = null
@@ -94,16 +94,17 @@ class DnsVpnService : VpnService(), Runnable {
     private var dnsRuleRefreshReceiver:BroadcastReceiver? = null
     private var simpleNotification = getPreferences().simpleNotification
     private var lastVPNStopTime:Long? = null
-    private val coroutineScope:CoroutineContext = SupervisorJob()
     private var queryCount = 0
     private var dnsCache:SimpleDnsCache? = null
     private var localResolver:LocalResolver? = null
     private var runInNonVpnMode:Boolean = getPreferences().runWithoutVpn
     private var connectionWatchDog:ConnectionWatchdog? = null
     private var watchdogDisabledForSession = false
+    private val coroutineSupervisor = SupervisorJob()
     private val addressResolveScope:CoroutineScope by lazy {
         CoroutineScope(newSingleThreadContext("service-resolve-retry"))
     }
+    override val coroutineContext: CoroutineContext = coroutineSupervisor
 
     /*
         URLs passed to the Service, which haven't been retrieved from the settings.
@@ -778,14 +779,12 @@ class DnsVpnService : VpnService(), Runnable {
                         if (getPreferences().isBypassBlacklist) R.string.notification_main_text_with_secondary else R.string.notification_main_text_with_secondary_whitelist,
                         primaryServer,
                         secondaryServer,
-                        packageBypassAmount,
-                        (dnsProxy?.dnsCache as SimpleDnsCache?)?.livingCachedEntries() ?: 0
+                        packageBypassAmount
                     )
                     else -> getString(
                         if (getPreferences().isBypassBlacklist) R.string.notification_main_text else R.string.notification_main_text_whitelist,
                         primaryServer,
-                        packageBypassAmount,
-                        (dnsProxy?.dnsCache as SimpleDnsCache?)?.livingCachedEntries() ?: 0
+                        packageBypassAmount
                     )
                 }
             if (simpleNotification) {
@@ -822,7 +821,7 @@ class DnsVpnService : VpnService(), Runnable {
             }
             val timeDiff = lastVPNStopTime?.let { System.currentTimeMillis() - it }
             if(timeDiff != null && timeDiff < 750) {
-                GlobalScope.launch(coroutineScope) {
+                launch {
                     delay(750-timeDiff)
                     if(isActive) runVpn()
                 }
@@ -895,6 +894,7 @@ class DnsVpnService : VpnService(), Runnable {
 
     override fun onDestroy() {
         stopping = true
+        coroutineSupervisor.cancel()
         super.onDestroy()
         log("onDestroy() called (Was destroyed from within: $destroyed)")
         log("Unregistering settings listener")
@@ -913,8 +913,8 @@ class DnsVpnService : VpnService(), Runnable {
             destroy()
             LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_INACTIVE))
         }
-        updateServiceTile()
         getPreferences().vpnServiceState = VpnServiceState.STOPPED
+        updateServiceTile()
         log("onDestroy() done.")
     }
 
@@ -1197,9 +1197,10 @@ class DnsVpnService : VpnService(), Runnable {
                 connectTimeout = 20000,
                 queryCountCallback = {
                     if (!simpleNotification) {
-                        setNotificationText()
                         queryCount++
-                        updateNotification()
+                        launch(Dispatchers.IO) {
+                            updateNotification()
+                        }
                     }
                 },
                 mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
@@ -1237,7 +1238,7 @@ class DnsVpnService : VpnService(), Runnable {
         log("DnsProxy created, creating VPN proxy")
          if(runInNonVpnMode) {
              log("Running in non-VPN mode, starting async")
-             GlobalScope.launch {
+             launch (Dispatchers.IO) {
                  dnsProxy = NonIPSmokeProxy(
                      defaultHandle!!,
                      handles + createProxyBypassHandlers(),
@@ -1429,7 +1430,7 @@ class DnsVpnService : VpnService(), Runnable {
             log("Restoring old cache")
             var restored = 0
             var tooOld = 0
-            GlobalScope.launch {
+            launch {
                 for (cachedResponse in getDatabase().cachedResponseRepository().getAllAsync(
                     GlobalScope
                 )) {
