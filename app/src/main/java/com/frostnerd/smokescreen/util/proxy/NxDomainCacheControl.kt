@@ -12,7 +12,7 @@ class NxDomainCacheControl(context: Context) :CacheControl {
     private val cacheTime = context.getPreferences().customDnsCacheTime.toLong()
     private val nxDomainCacheTime = context.getPreferences().nxDomainCacheTime.toLong()
 
-    override suspend fun getTtl(
+    override fun getTtl(
         answerMessage: DnsMessage,
         dnsName: DnsName,
         type: Record.TYPE,
@@ -21,7 +21,7 @@ class NxDomainCacheControl(context: Context) :CacheControl {
         return if (answerMessage.responseCode == DnsMessage.RESPONSE_CODE.NX_DOMAIN) nxDomainCacheTime else cacheTime
     }
 
-    override suspend fun getTtl(question: Question, record: Record<*>): Long =
+    override fun getTtl(question: Question, record: Record<*>): Long =
         cacheTime
 
 

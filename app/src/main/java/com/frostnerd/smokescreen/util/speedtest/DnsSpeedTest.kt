@@ -1,10 +1,6 @@
 package com.frostnerd.smokescreen.util.speedtest
 
 import androidx.annotation.IntRange
-import cn.danielw.fop.ObjectFactory
-import cn.danielw.fop.ObjectPool
-import cn.danielw.fop.PoolConfig
-import cn.danielw.fop.Poolable
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
@@ -12,6 +8,7 @@ import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import okhttp3.Dns
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -62,28 +59,6 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
         PinnedDns((server as HttpsDnsServerInformation).serverConfigurations.values.map {
             it.urlCreator.address
         })
-    }
-    private val connectionPool = ConcurrentHashMap<TLSUpstreamAddress, ObjectPool<Socket>>()
-    private var poolConfig:PoolConfig = PoolConfig().apply {
-        this.maxSize = 1
-        this.minSize = 1
-        this.partitionSize = 1
-        this.maxIdleMilliseconds = 60*1000*5
-    }
-    private val poolFactory = object: ObjectFactory<Socket> {
-        private val sslSocketFactory = SSLSocketFactory.getDefault()
-
-        override fun validate(t: Socket): Boolean {
-            return t.isClosed || !t.isConnected
-        }
-
-        override fun destroy(t: Socket) {
-            t.closeQuietly()
-        }
-
-        override fun create(): Socket {
-            return sslSocketFactory.createSocket()
-        }
     }
 
     companion object {
@@ -137,6 +112,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
 
     private fun testHttps(config: ServerConfiguration): Int? {
         val msg = createTestDnsPacket()
+        val start = System.currentTimeMillis()
         val url: URL = config.urlCreator.createUrl(msg, config.urlCreator.address)
         try {
             url.toString().toHttpUrl()
@@ -151,7 +127,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             val body = config.bodyCreator!!.createBody(msg, config.urlCreator.address)
             if (body != null) {
                 requestBuilder.header("Content-Type", config.contentType)
-                requestBuilder.post(body.rawBody.toRequestBody(body.mediaType, 0, body.rawBody.size))
+                requestBuilder.post(body.rawBody.toRequestBody(body.mediaType?.toMediaTypeOrNull(), 0, body.rawBody.size))
             } else {
                 log("DoH test failed once for ${server.name}: BodyCreator didn't create a body")
                 return null
@@ -159,7 +135,6 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
         }
         var response:Response? = null
         try {
-            val start = System.currentTimeMillis()
             response = httpClient.newCall(requestBuilder.build()).execute()
             if(!response.isSuccessful) {
                 log("DoH test failed once for ${server.name}: Request not successful (${response.code})")
@@ -188,27 +163,15 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
         }
     }
 
-    private fun obtainTlsSocket(address: TLSUpstreamAddress): Poolable<Socket>? {
-        return try {
-            connectionPool.getOrPut(address) {
-                ObjectPool(poolConfig, poolFactory)
-            }.borrowObject()
-        } catch (e: RuntimeException) {
-            null
-        }
-    }
-
     private fun testTls(address: TLSUpstreamAddress): Int? {
         val addr =
             address.addressCreator.resolveOrGetResultOrNull(retryIfError = true, runResolveNow = true) ?: run {
                 log("DoT test failed once for ${server.name}: Address failed to resolve ($address)")
                 return null
             }
-        var socketPooled: Poolable<Socket>? = null
         var socket:Socket? = null
         try {
-            socketPooled = obtainTlsSocket(address)
-            socket = socketPooled?.`object` ?: SSLSocketFactory.getDefault().createSocket()
+            socket = SSLSocketFactory.getDefault().createSocket()
             val msg = createTestDnsPacket()
             val start = System.currentTimeMillis()
             socket!!.connect(InetSocketAddress(addr[0], address.port), connectTimeout)
@@ -237,7 +200,6 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             return null
         } finally {
             socket?.close()
-            socketPooled?.returnObject()
         }
     }
 

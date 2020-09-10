@@ -49,7 +49,7 @@ class ProxyTlsHandler(
         ProxyBypassHandler.knownSearchDomains.isNotEmpty()
     private val hostnameVerifier = HttpsURLConnection.getDefaultHostnameVerifier()
 
-    override suspend fun forwardDnsQuestion(
+    override fun forwardDnsQuestion(
         deviceWriteToken: DeviceWriteToken,
         dnsMessage: DnsMessage,
         originalEnvelope: Packet,
@@ -78,7 +78,7 @@ class ProxyTlsHandler(
     override fun informFailedRequest(request: FutureAnswer, failureReason:Throwable?) {
     }
 
-    override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
+    override fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
         return if(dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED) {
             if(dnsMessage.questions.isNotEmpty()) {
                 val answer = if(dnsMessage.question.type == Record.TYPE.A) {
@@ -89,14 +89,14 @@ class ProxyTlsHandler(
         } else dnsMessage
     }
 
-    override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): TLSUpstreamAddress {
+    override fun remapDestination(destinationAddress: InetAddress, port: Int): TLSUpstreamAddress {
         queryCountCallback?.invoke()
         return upstreamAddresses[0]
     }
 
-    override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = ownAddresses.any { it.equals(destinationAddress.hostAddress, true) }
+    override fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = ownAddresses.any { it.equals(destinationAddress.hostAddress, true) }
 
-    override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
+    override fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
         return if(dnsMessage.questions.size > 0) {
             val name = dnsMessage.question.name
             return !ProxyBypassHandler.knownSearchDomains.any {
@@ -105,7 +105,7 @@ class ProxyTlsHandler(
         } else true
     }
 
-    override suspend fun shouldModifyUpstreamResponse(dnsMessage: DnsMessage): Boolean {
+    override fun shouldModifyUpstreamResponse(dnsMessage: DnsMessage): Boolean {
         return mapQueryRefusedToHostBlock && dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED
     }
 

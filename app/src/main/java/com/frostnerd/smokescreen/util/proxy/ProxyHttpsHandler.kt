@@ -41,7 +41,7 @@ class ProxyHttpsHandler(
         return "ProxyHttpsHandler"
     }
 
-    override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
+    override fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
         return if(dnsMessage.questions.size > 0) {
             val name = dnsMessage.question.name
             return !ProxyBypassHandler.knownSearchDomains.any {
@@ -50,7 +50,7 @@ class ProxyHttpsHandler(
         } else true
     }
 
-    override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
+    override fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
         return if(dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED) {
             if(dnsMessage.questions.isNotEmpty()) {
                 val answer = if(dnsMessage.question.type == org.minidns.record.Record.TYPE.A) {
@@ -69,14 +69,14 @@ class ProxyHttpsHandler(
         } else dnsMessage
     }
 
-    override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
+    override fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
         queryCountCallback?.invoke()
         return dummyUpstreamAddress
     }
 
-    override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = ownAddresses.any { it.equals(destinationAddress.hostAddress, true) }
+    override fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean = ownAddresses.any { it.equals(destinationAddress.hostAddress, true) }
 
-    override suspend fun shouldModifyUpstreamResponse(dnsMessage: DnsMessage): Boolean =
+    override fun shouldModifyUpstreamResponse(dnsMessage: DnsMessage): Boolean =
         mapQueryRefusedToHostBlock && dnsMessage.responseCode == DnsMessage.RESPONSE_CODE.REFUSED
 
     override fun informFailedRequest(request: FutureAnswer, failureReason: Throwable?) {

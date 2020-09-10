@@ -38,6 +38,7 @@ import com.frostnerd.smokescreen.util.proxy.*
 import com.frostnerd.vpntunnelproxy.Proxy
 import com.frostnerd.vpntunnelproxy.RetryingVPNTunnelProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
+import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import kotlinx.coroutines.*
 import leakcanary.LeakSentry
 import org.minidns.dnsname.DnsName
@@ -1188,7 +1189,9 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         val ipv6Enabled = getPreferences().enableIpv6 && (getPreferences().forceIpv6 || deviceHasIpv6)
         val ipv4Enabled = !ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
+        var forwardingMode = VPNTunnelProxy.ForwardingMode.MIXED
         serverConfig.httpsConfiguration?.forEach {
+            forwardingMode = VPNTunnelProxy.ForwardingMode.NO_POLLABLE
             val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
             log("Creating handle for DoH $it with IP-Addresses $addresses")
             val handle = ProxyHttpsHandler(
@@ -1211,6 +1214,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             else handles.add(handle)
         }
         serverConfig.tlsConfiguration?.forEach {
+            forwardingMode = if(forwardingMode == VPNTunnelProxy.ForwardingMode.NO_POLLABLE) VPNTunnelProxy.ForwardingMode.MIXED
+            else forwardingMode
             val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
             log("Creating handle for DoH $it with IP-Addresses $addresses")
             val handle = ProxyTlsHandler(
@@ -1248,13 +1253,16 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                      InetAddress.getLocalHost(),
                      getPreferences().dnsServerModePort
                  )
-                 vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, socketProtector = object:Proxy.SocketProtector {
-                     override fun protectDatagramSocket(socket: DatagramSocket) {}
-                     override fun protectSocket(socket: Socket) {}
-                     override fun protectSocket(socket: Int) {}
-                 }, coroutineScope = CoroutineScope(
-                     newFixedThreadPoolContext(2, "proxy-pool")
-                 ), logger = VpnLogger(applicationContext))
+                 vpnProxy = RetryingVPNTunnelProxy(
+                     dnsProxy!!,
+                     socketProtector = object : Proxy.SocketProtector {
+                         override fun protectDatagramSocket(socket: DatagramSocket) {}
+                         override fun protectSocket(socket: Socket) {}
+                         override fun protectSocket(socket: Int) {}
+                     },
+                     logger = VpnLogger(applicationContext)
+                 )
+                 vpnProxy?.forwardingMode = forwardingMode
                  vpnProxy?.maxRetries = 15
                  val preferredPort = getPreferences().dnsServerModePort
                  val bindAddress = if(ipv4Enabled) InetAddress.getLocalHost() else InetAddress.getByName("::1")
@@ -1283,10 +1291,13 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                  createQueryLogger(),
                  localResolver
              )
-            vpnProxy = RetryingVPNTunnelProxy(dnsProxy!!, vpnService = this, coroutineScope = CoroutineScope(
-                newFixedThreadPoolContext(2, "proxy-pool")
-            ), logger = VpnLogger(applicationContext))
+             vpnProxy = RetryingVPNTunnelProxy(
+                 dnsProxy!!,
+                 vpnService = this,
+                 logger = VpnLogger(applicationContext)
+             )
              vpnProxy?.maxRetries = 15
+             vpnProxy?.forwardingMode = forwardingMode
              log("VPN proxy creating, trying to run...")
              fileDescriptor?.let {
                  vpnProxy?.runProxyWithRetry(it, it)
@@ -1295,7 +1306,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                  return
              }
              log("VPN proxy started.")
-        }
+         }
         currentTrafficStats = vpnProxy?.trafficStats
         if(!watchdogDisabledForSession && getPreferences().enableConnectionWatchDog) connectionWatchDog = currentTrafficStats?.let {
             ConnectionWatchdog(it, 30*1000, 10*60*10000,onBadServerConnection =  {

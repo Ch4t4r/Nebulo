@@ -67,20 +67,16 @@ class SmokeScreen : Application() {
             }
             else {
                 context.log("Using fallback server: $to")
-                val httpClient = OkHttpClient.Builder()
-                    .connectTimeout(3000, TimeUnit.MILLISECONDS)
-                    .readTimeout(3000, TimeUnit.MILLISECONDS)
-                    .build()
                 val configs = to.serverConfigurations.values
                 AddressCreator.globalResolve = {
-                    val responsesIpv4 = configs.random().query(httpClient, Question(it, Record.TYPE.A))?.takeIf {
+                    val responsesIpv4 = configs.random().query(Question(it, Record.TYPE.A))?.takeIf {
                         it.responseCode == DnsMessage.RESPONSE_CODE.NO_ERROR
                     }?.answerSection?.map {
                         it.payload as A
                     }?.map {
                         it.inetAddress
                     }
-                    val responsesIpv6 = configs.random().query(httpClient, Question(it, Record.TYPE.AAAA))?.takeIf {
+                    val responsesIpv6 = configs.random().query(Question(it, Record.TYPE.AAAA))?.takeIf {
                         it.responseCode == DnsMessage.RESPONSE_CODE.NO_ERROR
                     }?.answerSection?.map {
                         it.payload as AAAA
