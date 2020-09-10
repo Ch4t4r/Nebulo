@@ -1224,9 +1224,10 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 connectTimeout = 8000,
                 queryCountCallback = {
                     if (!simpleNotification) {
-                        setNotificationText()
                         queryCount++
-                        updateNotification()
+                        launch(Dispatchers.IO) {
+                            updateNotification()
+                        }
                     }
                 }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
             )
