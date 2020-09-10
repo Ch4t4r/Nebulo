@@ -15,7 +15,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
@@ -26,8 +28,7 @@ import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.net.URL
 
 
@@ -53,6 +54,7 @@ class MainFragment : Fragment() {
     private val vpnRequestCode: Int = 1
     private var proxyState:ProxyState = ProxyState.NOT_RUNNING
     private var vpnStateReceiver: BroadcastReceiver? = null
+    private var latencyCheckJob:Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +72,7 @@ class MainFragment : Fragment() {
         } else ProxyState.NOT_RUNNING
         updateVpnIndicators()
         context?.clearPreviousIptablesRedirect()
+        runLatencyCheck()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -149,13 +152,14 @@ class MainFragment : Fragment() {
                 updateVpnIndicators()
             }
         }
-        serverButton.setOnClickListener {
+        mainServerWrap.setOnClickListener {
             ServerChoosalDialog(requireActivity() as AppCompatActivity) { config ->
                 updatePrivacyPolicyLink(config)
                 val prefs = requireContext().getPreferences()
                 prefs.edit {
                     prefs.dnsServerConfig = config
                 }
+                displayServer(config)
             }.show()
         }
         privacyStatementText.setOnClickListener {
@@ -182,6 +186,14 @@ class MainFragment : Fragment() {
             }
         }
         updateVpnIndicators()
+        displayServer(getPreferences().dnsServerConfig)
+    }
+
+    private fun displayServer(config:DnsServerInformation<*>) {
+        serverName.text = config.name
+        serverURL.text = if(config.hasTlsServer()) config.servers.firstOrNull()?.address?.formatToString() ?: "-"
+        else (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(true) ?: "-"
+        serverLatency.text = ""
     }
 
     override fun onDestroy() {
@@ -229,41 +241,36 @@ class MainFragment : Fragment() {
 
     private fun updateVpnIndicators() {
         val privateDnsActive = requireContext().isPrivateDnsActive
-        var startButtonVisibility = View.VISIBLE
+        var startButtonEnabled = true
         var privacyTextVisibility = View.VISIBLE
+        var privateDNSVisibility = View.GONE
+        var serverLatencyVisibility = View.INVISIBLE
         when(proxyState) {
             ProxyState.RUNNING -> {
-                privateDnsInfo.visibility = View.INVISIBLE
-                statusImage.setImageResource(R.drawable.ic_lock)
-                statusImage.clearAnimation()
-                startButton.setText(R.string.all_stop)
+                startButton.setImageResource(R.drawable.ic_lock)
+                serverLatencyVisibility = View.VISIBLE
             }
             ProxyState.STARTING -> {
-                privateDnsInfo.visibility = View.INVISIBLE
-                startButton.setText(R.string.all_stop)
-                statusImage.setImageResource(R.drawable.ic_lock_half_open)
+                startButton.setImageResource(R.drawable.ic_lock_half_open)
             }
             ProxyState.PAUSED -> {
-                privateDnsInfo.visibility = View.INVISIBLE
-                startButton.setText(R.string.all_resume)
-                statusImage.setImageResource(R.drawable.ic_lock_half_open)
+                startButton.setImageResource(R.drawable.ic_lock_half_open)
             }
             else -> {
-                startButton.setText(R.string.all_start)
                 if (privateDnsActive) {
-                    statusImage.setImageResource(R.drawable.ic_lock)
-                    statusImage.clearAnimation()
-                    privacyTextVisibility = View.INVISIBLE
-                    startButtonVisibility = View.INVISIBLE
-                    privateDnsInfo.visibility = View.VISIBLE
+                    startButton.setImageResource(R.drawable.ic_lock)
+                    privacyTextVisibility = View.GONE
+                    startButtonEnabled = false
+                    privateDNSVisibility = View.VISIBLE
                 } else {
-                    statusImage.setImageResource(R.drawable.ic_lock_open)
-                    statusImage.clearAnimation()
+                    startButton.setImageResource(R.drawable.ic_lock_open)
                     privateDnsInfo.visibility = View.INVISIBLE
                 }
             }
         }
-        startButton.visibility = startButtonVisibility
+        startButton.isEnabled = startButtonEnabled
+        serverLatency.visibility = serverLatencyVisibility
+        privateDnsInfo.visibility = privateDNSVisibility
         privacyTextWrap.visibility = privacyTextVisibility
     }
 
@@ -287,6 +294,19 @@ class MainFragment : Fragment() {
                 launchWithLifecycleUi {
                     val text = view?.findViewById<TextView>(R.id.privacyStatementText)
                     text?.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    fun runLatencyCheck() {
+        latencyCheckJob = launchWithLifecycle(cancelOn = setOf(Lifecycle.Event.ON_PAUSE)) {
+            if(isActive) {
+                launchUi {
+                    val latency = DnsVpnService.currentTrafficStats?.floatingAverageLatency?.takeIf { it > 0 }
+                    serverLatency.text = latency?.let { "$it\nms" }
+                    delay(750)
+                    runLatencyCheck()
                 }
             }
         }
