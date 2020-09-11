@@ -283,8 +283,7 @@ class NewServerDialog(
                 val detectedTypes = mutableListOf<Pair<RequestType, ResponseType>>()
                 for (availableType in availableTypes) {
                     try {
-                        val response = ServerConfiguration.createSimpleServerConfig(address, availableType.key, availableType.value).query(client = httpClient,
-                            question = Question("example.com", Record.TYPE.A))
+                        val response = ServerConfiguration.createSimpleServerConfig(address, availableType.key, availableType.value).query(question = Question("example.com", Record.TYPE.A))
                         if(response != null && response.responseCode == DnsMessage.RESPONSE_CODE.NO_ERROR) {
                             detectedTypes.add(availableType.toPair())
                         }

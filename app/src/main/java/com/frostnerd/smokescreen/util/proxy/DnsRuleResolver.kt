@@ -193,7 +193,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
         }
     }
 
-    override suspend fun canResolve(question: Question): Boolean {
+    override fun canResolve(question: Question): Boolean {
         return if ((ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount)) || (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA)) {
             false
         } else {
@@ -216,7 +216,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
         }
     }
 
-    override suspend fun resolve(question: Question): List<Record<*>> {
+    override fun resolve(question: Question): List<Record<*>> {
         val result = resolveResults.remove(question.hashCode())
         return result?.let {
             val data = if (question.type == Record.TYPE.A) {
@@ -246,7 +246,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
 
     // Handle CNAME Cloaking
     // Does not need to handle whitelist as the query has already been forwarded
-    override suspend fun mapResponse(message: DnsMessage): DnsMessage {
+    override fun mapResponse(message: DnsMessage): DnsMessage {
         if(ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount) || message.questions.size == 0) return message // No rules or only whitelist rules present
         else if(whitelistCount != 0 && hashHost(message.question.name.toString().replace(wwwRegex, "").toLowerCase(Locale.ROOT), message.question.type).let {
                 cachedWildcardWhitelisted.contains(it) || cachedNonWildcardWhitelisted.contains(it)

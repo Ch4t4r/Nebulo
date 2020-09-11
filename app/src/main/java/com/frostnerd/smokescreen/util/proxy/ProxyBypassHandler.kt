@@ -36,7 +36,7 @@ class ProxyBypassHandler(private val searchDomains:List<String>, private val des
         val knownSearchDomains = listOf("fritz.box")
     }
 
-    override suspend fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
+    override fun shouldHandleRequest(dnsMessage: DnsMessage): Boolean {
         if(dnsMessage.questions.isEmpty()) return false
         val name = dnsMessage.question.name
         return searchDomains.any {
@@ -48,7 +48,7 @@ class ProxyBypassHandler(private val searchDomains:List<String>, private val des
         return "ProxyBypassHandler[$searchDomains]"
     }
 
-    override suspend fun forwardDnsQuestion(
+    override fun forwardDnsQuestion(
         deviceWriteToken: DeviceWriteToken,
         dnsMessage: DnsMessage,
         originalEnvelope: Packet,
@@ -59,22 +59,22 @@ class ProxyBypassHandler(private val searchDomains:List<String>, private val des
         sendPacketToUpstreamDNSServer(deviceWriteToken, packet, originalEnvelope)
     }
 
-    override suspend fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean {
+    override fun shouldHandleDestination(destinationAddress: InetAddress, port: Int): Boolean {
         return true
     }
 
     override fun informFailedRequest(request: FutureAnswer, failureReason:Throwable?) {
     }
 
-    override suspend fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
+    override fun modifyUpstreamResponse(dnsMessage: DnsMessage): DnsMessage {
         return dnsMessage
     }
 
-    override suspend fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
+    override fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
         return upstreamAddress
     }
 
-    override suspend fun shouldModifyUpstreamResponse(dnsMessage: DnsMessage): Boolean {
+    override fun shouldModifyUpstreamResponse(dnsMessage: DnsMessage): Boolean {
         return false
     }
 

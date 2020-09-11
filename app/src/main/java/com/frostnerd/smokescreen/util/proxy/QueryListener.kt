@@ -65,7 +65,7 @@ class QueryListener(private val context: Context) : QueryListener {
             }
     }
 
-    override suspend fun onDeviceQuery(questionMessage: DnsMessage, srcPort: Int) {
+    override fun onDeviceQuery(questionMessage: DnsMessage, srcPort: Int) {
         if (writeQueriesToLog) {
             context.log("Query from device: $questionMessage")
         }
@@ -85,7 +85,7 @@ class QueryListener(private val context: Context) : QueryListener {
         }
     }
 
-    override suspend fun onQueryForwarded(
+    override fun onQueryForwarded(
         questionMessage: DnsMessage,
         destination: UpstreamAddress,
         usedHandle: DnsHandle
@@ -100,7 +100,7 @@ class QueryListener(private val context: Context) : QueryListener {
         }
     }
 
-    override suspend fun onQueryResponse(
+    override fun onQueryResponse(
         responseMessage: DnsMessage,
         source: QueryListener.Source
     ) {

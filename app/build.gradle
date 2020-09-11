@@ -138,7 +138,7 @@ dependencies {
     implementation 'com.frostnerd.utilskt:lifecycle:1.2.0'
     implementation 'com.frostnerd.utilskt:preferences:1.5.29' // https://git.frostnerd.com/AndroidUtils/preferenceskt
     implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.4.0' // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
-    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:1.8.0' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:2.0.0' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
     implementation 'com.frostnerd.utilskt:general:1.0.25' // https://git.frostnerd.com/AndroidUtils/generalkt
     implementation 'com.frostnerd.utilskt:adapters:1.2.0' // https://git.frostnerd.com/AndroidUtils/Adapters
 
@@ -160,6 +160,8 @@ dependencies {
     implementation 'com.squareup.leakcanary:leaksentry:2.0-alpha-3'
 
     leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+
+    implementation "com.squareup.okhttp3:okhttp:4.8.1"
 
     testImplementation 'junit:junit:4.13'
     testImplementation "org.robolectric:robolectric:4.3.1"
