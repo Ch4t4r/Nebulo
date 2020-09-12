@@ -65,4 +65,8 @@
     <string name="notification_multipleuserswarning_title">Dummy VPN non poteva essere stabilito</string>
     <string name="notification_privatednswarning_text">Si prega di disattivare i DNS privati nelle impostazioni di sistema per utilizzare Nebulo.</string>
     <string name="notification_privatednswarning_title">Dns privato</string>
+    <string name="notification_channel_badconnection_description">Canale usato per le notifiche quando Nebulo ha una connessione debole</string>
+    <string name="notification_channel_badconnection">Canale di notifica di connessione debole</string>
+    <string name="notification_channel_dnsrules_description">Canale usato per l\'importazione/esportazione di regole DNS</string>
+    <string name="notification_channel_dnsrules">Canale di notifica delle regole DNS</string>
 </resources>
