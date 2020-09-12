@@ -182,4 +182,26 @@
 \n - scorri giù, imposta entrambi i campi VPN DNS a 127.0.0.1
 \n - avvia Nebulo (in modalità non-VPN) e avvia NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Blocca questo host</string>
+    <string name="querylog_filter_type_blocked_by_server">Bloccato dal server DNS</string>
+    <string name="querylog_filter_type_forwarded">Risolto dal server DNS</string>
+    <string name="querylog_filter_info">Seleziona quali tipi di richieste vuoi vedere</string>
+    <string name="querylog_filter_title">Filtra il registro delle richieste</string>
+    <string name="dialog_dnsrules_status_sourcenotfound">Questo host è nelle regole DNS, ma la fonte è sconosciuta.</string>
+    <string name="dialog_dnsrules_status_fromsource">Questo host fa parte della fonte %1s</string>
+    <string name="dialog_dnsrules_status_userrule">Questo host fa parte delle regole DNS da te definite.</string>
+    <string name="dialog_dnsrules_status_not_found">Nessuna regola DNS trovata per questo host.</string>
+    <string name="dialog_dnsrules_search_message">Inserisci un host qui sotto per cercarlo nelle regole DNS.</string>
+    <string name="dialog_dnsrules_search_title">Cerca un host</string>
+    <string name="dialog_querylog_information_message">Questo elenco mostra tutte le richieste passate che Nebulo ha registrato mentre era attivo. L\'elenco si aggiorna quasi in tempo reale quando Nebulo è attivo.
+\n
+\nLe icone all\'inizio della riga indicano cosa è successo con la richiesta.
+\n
+\nBandiera: l\'host è stato risolto dalle regole DNS o è stato bloccato dal server DNS
+\nFreccia: Nebulo ha inoltrato la richiesta al server DNS
+\nDatabase: Nebulo ha recuperato la risposta DNS dalla cache</string>
+    <string name="dialog_querylog_information_title">Informazioni sul registro delle richieste</string>
+    <string name="dialog_latency_sidebar_message">La latenza mostrata qui non è il tuo ping o la velocità della tua rete.
+\n Mostra quanto tempo ci vuole perché Nebulo invii una richiesta e ottenga una risposta dal server DNS. Il valore visualizzato non è sempre quello più attuale e sono possibili fluttuazioni.
+\n Ciò può far sì che il valore visualizzato sia più alto di quanto non lo sia perché è diventato più basso da quando è stato misurato.</string>
+    <string name="dialog_latency_sidebar_title">Informazioni sulla latenza</string>
 </resources>
