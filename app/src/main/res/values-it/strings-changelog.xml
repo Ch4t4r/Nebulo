@@ -136,4 +136,15 @@
     <string name="changelog_build_62_1">Quando si avvia Nebulo da una scorciatoria server, quel server ora è persistente</string>
     <string name="changelog_build_62_4">Il server DNS interno (fallback) può ora essere configurato</string>
     <string name="changelog_build_62_3">Le fonti delle regole DNS possono ora essere aggiornate individualmente</string>
+    <string name="changelog_build_66_11">Aggiunto un campo che mostra quante richieste sono state risolte con le regole DNS</string>
+    <string name="changelog_build_66_10">Aggiunto un filtro al registro delle richieste</string>
+    <string name="changelog_build_66_9">Aggiunta una notifica mostrata quando il server attuale ha una connessione debole</string>
+    <string name="changelog_build_66_8">Aggiunta una schermata di selezione del server al primo avvio dell\'app</string>
+    <string name="changelog_build_66_7">Aggiunte schermate introduttive al primo avvio dell\'app</string>
+    <string name="changelog_build_66_6">Aggiunta la sicurezza BraveDNS e Cloudflare</string>
+    <string name="changelog_build_66_5">Il test di velocità DNS mostra ora con maggiore precisione la latenza</string>
+    <string name="changelog_build_66_4">Aggiunta una voce di aiuto al registro delle richieste per spiegare il significato delle icone</string>
+    <string name="changelog_build_66_3">Aggiunta una finestra alle regole DNS per verificare se un host è elencato da qualche parte</string>
+    <string name="changelog_build_66_2">L\'aggiunta di server ora tiene conto di maiuscole e minuscole. Ciò risolve i problemi con NextDNS</string>
+    <string name="changelog_build_66_1">Aggiunte le domande frequenti. Puoi trovarle nella voce di menu \"Riguardo questa app\"</string>
 </resources>
