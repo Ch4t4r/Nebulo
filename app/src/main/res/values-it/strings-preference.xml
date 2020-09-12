@@ -114,9 +114,7 @@
     <string name="summary_run_without_vpn">Quando selezionato, Nebulo ospita un server DNS sul dispositivo</string>
     <string name="title_run_without_vpn">Esegui senza VPN</string>
     <string name="summary_category_nonvpnmode_forwardinfo">Il server sarà ospitato su localhost:%1s</string>
-    <string name="summary_category_nonvpnmode">Configura Nebulo per agire come server DNS sul dispositivo invece di utilizzare una VPN fittizia. Quando attivato, devi inoltrare manualmente le richieste DNS a Nebulo usando app di terze parti. 
-\n 
-\nQuesta funzionalità è sperimentale.</string>
+    <string name="summary_category_nonvpnmode">Configura Nebulo per agire come server DNS sul dispositivo invece di utilizzare una VPN fittizia. Quando attivato, devi inoltrare manualmente le richieste DNS a Nebulo usando app di terze parti</string>
     <string name="preference_category_nonvpnmode">Modalità non-VPN</string>
     <string name="summary_check_iptables">Controlla se il tuo dispositivo supporta le iptables</string>
     <string name="title_check_iptables">Controlla iptables</string>
@@ -132,4 +130,8 @@
     <string name="title_fallback_dns">Server DNS interno</string>
     <string name="summary_nonvpn_help_generic">Clicca qui per ottenere istruzioni su come configurare le applicazioni VPN</string>
     <string name="nonvpn_help_generic_title">Applicazioni VPN generiche</string>
+    <string name="summary_nonvpn_help_faq">Clicca qui per aprire una finestra del browser con aiuto e documentazione per la modalità non-VPN</string>
+    <string name="title_nonvpn_help_faq">Documentazione</string>
+    <string name="summary_inform_bad_connection">Informami con una notifica e nel menu principale quando il server DNS è lento o non raggiungibile</string>
+    <string name="title_inform_bad_connection">Informami di una connessione debole</string>
 </resources>
