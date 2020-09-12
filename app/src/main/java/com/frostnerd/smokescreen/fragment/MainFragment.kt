@@ -246,23 +246,21 @@ class MainFragment : Fragment() {
         var privateDNSVisibility = View.GONE
         var serverLatencyVisibility = View.INVISIBLE
         var statusTxt:Int = R.string.window_main_unprotected
-        var enableInfoText:Int = R.string.window_main_click_to_enable
         var enableInfoVisibility = View.VISIBLE
         when(proxyState) {
             ProxyState.RUNNING -> {
                 startButton.setImageResource(R.drawable.ic_lock)
                 serverLatencyVisibility = View.VISIBLE
                 statusTxt = R.string.window_main_protected
-                enableInfoText = R.string.window_main_click_to_disable
+                enableInfoVisibility = View.GONE
             }
             ProxyState.STARTING -> {
                 startButton.setImageResource(R.drawable.ic_lock_half_open)
-                enableInfoText = R.string.window_main_click_to_disable
+                enableInfoVisibility = View.GONE
             }
             ProxyState.PAUSED -> {
                 startButton.setImageResource(R.drawable.ic_lock_half_open)
                 statusTxt = R.string.window_main_unprotected
-                enableInfoText = R.string.window_main_click_to_enable
             }
             else -> {
                 if (privateDnsActive) {
@@ -276,7 +274,6 @@ class MainFragment : Fragment() {
                     startButton.setImageResource(R.drawable.ic_lock_open)
                     privateDnsInfo.visibility = View.INVISIBLE
                     statusTxt = R.string.window_main_unprotected
-                    enableInfoText = R.string.window_main_click_to_enable
                 }
             }
         }
@@ -285,7 +282,6 @@ class MainFragment : Fragment() {
         privateDnsInfo.visibility = privateDNSVisibility
         privacyTextWrap.visibility = privacyTextVisibility
         enableInformation.visibility = enableInfoVisibility
-        enableInformation.setText(enableInfoText)
         statusText.setText(statusTxt)
 
     }

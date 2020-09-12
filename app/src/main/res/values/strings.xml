@@ -99,7 +99,6 @@
     <string name="window_main_protected">Protected!</string>
     <string name="window_main_unprotected">Not protected</string>
     <string name="window_main_click_to_enable">Click to enable.</string>
-    <string name="window_main_click_to_disable">Click to disable.</string>
 
 
     <string name="restart_app_for_changes">Restart the app for changes to take effect.</string>
