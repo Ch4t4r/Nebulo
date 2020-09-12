@@ -49,6 +49,7 @@ import java.io.Serializable
 import java.net.*
 import java.util.*
 import java.util.concurrent.TimeoutException
+import java.util.logging.Level
 import kotlin.coroutines.CoroutineContext
 import kotlin.math.floor
 import kotlin.math.min
@@ -1254,6 +1255,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                      InetAddress.getLocalHost(),
                      getPreferences().dnsServerModePort
                  )
+                 val logger = VpnLogger(applicationContext)
                  vpnProxy = RetryingVPNTunnelProxy(
                      dnsProxy!!,
                      socketProtector = object : Proxy.SocketProtector {
@@ -1261,7 +1263,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                          override fun protectSocket(socket: Socket) {}
                          override fun protectSocket(socket: Int) {}
                      },
-                     logger = VpnLogger(applicationContext)
+                     logger = if(logger.minLogLevel != Level.OFF) VpnLogger(applicationContext) else null,
+                     errorLogger = logger
                  )
                  vpnProxy?.forwardingMode = forwardingMode
                  vpnProxy?.maxRetries = 15
@@ -1272,7 +1275,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                  val iptablesMode = if(getPreferences().nonVpnUseIptables) {
                      val hostAddr = if(ipv4Enabled) bindAddress.hostAddress else null
                      val ipv6Address = if(deviceHasIpv6) "::1" else null
-                     ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr, ipv6Address, getPreferences().iptablesModeDisableIpv6, logger)
+                     ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr, ipv6Address, getPreferences().iptablesModeDisableIpv6, this@DnsVpnService.logger)
                      ipTablesRedirector?.beginForward().also {
                          getPreferences().lastIptablesRedirectAddress = "$hostAddr:$actualPort"
                          if(ipv6Address != null) getPreferences().lastIptablesRedirectAddressIPv6 = "[$ipv6Address]:$actualPort"
@@ -1292,10 +1295,12 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                  createQueryLogger(),
                  localResolver
              )
+             val logger = VpnLogger(applicationContext)
              vpnProxy = RetryingVPNTunnelProxy(
                  dnsProxy!!,
                  vpnService = this,
-                 logger = VpnLogger(applicationContext)
+                 logger = if(logger.minLogLevel != Level.OFF) VpnLogger(applicationContext) else null,
+                 errorLogger = logger
              )
              vpnProxy?.maxRetries = 15
              vpnProxy?.forwardingMode = forwardingMode

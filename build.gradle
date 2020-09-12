@@ -35,7 +35,7 @@ buildscript {
     ext.ANDROID_COMPILE_SDK = (System.getenv("ANDROID_COMPILE_SDK") == null ? 29 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
     ext.ANDROID_TARGET_SDK = (System.getenv("ANDROID_TARGET_SDK") == null ? ANDROID_COMPILE_SDK : System.getenv("ANDROID_TARGET_SDK")).toInteger()
     ext.ANDROID_MIN_SDK = (System.getenv("ANDROID_MIN_SDK") == null ? 14 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
-    ext.KOTLIN_VERSION = System.getenv("KOTLIN_VERSION") == null ? "1.4.0" : System.getenv("KOTLIN_VERSION")
+    ext.KOTLIN_VERSION = System.getenv("KOTLIN_VERSION") == null ? "1.4.10" : System.getenv("KOTLIN_VERSION")
     ext.ANDROID_GRADLE_PLUGIN_VERSION = System.getenv("ANDROID_GRADLE_PLUGIN_VERSION") == null ? "3.6.3" : System.getenv("ANDROID_GRADLE_PLUGIN_VERSION")
     ext.APPCOMPAT_VERSION = "1.2.0"
     ext.COROUTINE_VERSION = "1.3.9"
