@@ -45,7 +45,7 @@ class QueryListener(private val context: Context) : QueryListener {
     private var doneQueries = LinkedHashMap<DnsQuery, Boolean>()
     private val askedServer: String
     var lastDnsResponse: DnsMessage? = null
-    private val databaseWriteJob: Job
+    private val databaseWriteJob: Job?
 
     init {
         val config = context.getPreferences().dnsServerConfig
@@ -56,13 +56,13 @@ class QueryListener(private val context: Context) : QueryListener {
                 false
             )
         }
-        databaseWriteJob =
+        databaseWriteJob = if (logQueriesToDb)
             GlobalScope.launch(newSingleThreadContext("QueryListener-DatabaseWrite")) {
                 while (isActive) {
                     delay(1500)
                     insertQueries()
                 }
-            }
+            } else null
     }
 
     override fun onDeviceQuery(questionMessage: DnsMessage, srcPort: Int) {
@@ -128,7 +128,7 @@ class QueryListener(private val context: Context) : QueryListener {
     }
 
     override fun cleanup() {
-        databaseWriteJob.cancel()
+        databaseWriteJob?.cancel()
         insertQueries()
         waitingQueryLogs.clear()
         queryLogState.clear()
