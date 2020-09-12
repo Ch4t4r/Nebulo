@@ -60,20 +60,27 @@ class MainActivity : NavigationDrawerActivity() {
     private var cardNetworkCallback:ConnectivityManager.NetworkCallback? = null
     private val networkManager by lazy { getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager }
     private var pinLastPassed:Long? = null
+    private var navigatedInternal = false
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
     }
 
+    override fun startActivity(intent: Intent?, options: Bundle?) {
+        navigatedInternal = intent?.component?.packageName?.equals(packageName) ?: false
+        super.startActivity(intent, options)
+    }
+
     override fun onResume() {
         super.onResume()
-        if(getPreferences().enablePin) {
+        if(!navigatedInternal && getPreferences().enablePin) {
             pinLastPassed = intent?.getLongExtra("pin_validated_at", 0)
             if(pinLastPassed == null || System.currentTimeMillis() >= pinLastPassed!! + PIN_TIMEOUT) {
                 startActivity(PinActivity.openAppIntent(this, intent?.extras))
                 finish()
             }
         }
+        navigatedInternal = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +92,7 @@ class MainActivity : NavigationDrawerActivity() {
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             val update = {
-                launchWithLifecycle(false) {
+                launchWithLifecycle {
                     val server = getPreferences().dnsServerConfig
                     val primaryAddress = server.servers.first().address.addressCreator.resolveOrGetResultOrNull(
                         retryIfError = true,
@@ -129,6 +136,9 @@ class MainActivity : NavigationDrawerActivity() {
                 showInfoTextDialogWithClose(this,
                         getString(R.string.dialog_latency_sidebar_title),
                         getString(R.string.dialog_latency_sidebar_message))
+            }
+            view.refresh.setOnClickListener {
+                update()
             }
             networkManager.registerNetworkCallback(NetworkRequest.Builder().apply {
                 addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)

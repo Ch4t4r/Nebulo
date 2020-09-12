@@ -120,23 +120,11 @@ class NewServerDialog(
         ) { _, _ -> }
 
         setOnShowListener {
-            addUrlTextWatcher(primaryServerWrap, primaryServer, false)
-            addUrlTextWatcher(secondaryServerWrap, secondaryServer, true)
-            serverName.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    serverNameWrap.error = if (s.isNullOrBlank()) context.getString(R.string.error_invalid_servername)
-                    else null
-                }
-
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
-            })
-            serverNameWrap.error = context.getString(R.string.error_invalid_servername)
             getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-                if (inputsValid()) {
+                val primaryValid = isServerUrlValid(true)
+                val secondaryValid = isServerUrlValid(false)
+                val nameValid = serverName.text?.isNotBlank() ?: false
+                if (primaryValid && secondaryValid && nameValid) {
                     val name = serverName.text.toString()
                     var primary = primaryServer.text.toString().trim()
                     var secondary =
@@ -147,6 +135,20 @@ class NewServerDialog(
                     invokeCallback(name, primary, secondary, onServerAdded)
                     dismiss()
                 } else {
+                    serverName.error = if(nameValid) null
+                    else context.getString(R.string.error_invalid_servername)
+
+                    primaryServer.error = when {
+                        primaryValid -> null
+                        dnsOverHttps -> context.getString(R.string.error_invalid_url)
+                        else -> context.getString(R.string.error_invalid_host)
+                    }
+                    secondaryServer.error = when {
+                        secondaryValid -> null
+                        dnsOverHttps -> context.getString(R.string.error_invalid_url)
+                        else -> context.getString(R.string.error_invalid_host)
+                    }
+
                     val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                     vibrator.vibrate(250)
                 }
@@ -177,21 +179,34 @@ class NewServerDialog(
                     secondaryServer.setText(server.serverInformation.servers[1].address.formatToString())
                 }
             }
+            serverName.requestFocus()
         }
     }
 
     private fun setHintAndTitle(view:View, dnsOverHttps: Boolean, titleOverride:String?) {
         if (dnsOverHttps) {
             if(titleOverride == null) setTitle(R.string.dialog_newserver_title_https)
-            view.primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint)
-            view.secondaryServer.apply {
-                if(isFocused || error != null) setHint(R.string.dialog_newserver_secondaryserver_hint)
+            view.primaryServer.setOnFocusChangeListener { v , hasFocus ->
+                v as TextInputEditText
+                if(hasFocus) v.setHint(R.string.dialog_newserver_primaryserver_hint)
+                else v.setHint(null)
+            }
+            view.secondaryServer.setOnFocusChangeListener { v, hasFocus ->
+                v as TextInputEditText
+                if(hasFocus) v.setHint(R.string.dialog_newserver_secondaryserver_hint)
+                else v.setHint(null)
             }
         }else {
             if(titleOverride == null) setTitle(R.string.dialog_newserver_title_tls)
-            view.primaryServer.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
-            view.secondaryServer.apply {
-                if(isFocused || error != null) setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
+            view.primaryServer.setOnFocusChangeListener { v , hasFocus ->
+                v as TextInputEditText
+                if(hasFocus) v.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
+                else v.hint = null
+            }
+            view.secondaryServer.setOnFocusChangeListener { v , hasFocus ->
+                v as TextInputEditText
+                if(hasFocus) v.setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
+                else v.hint = null
             }
         }
         if(titleOverride != null) setTitle(titleOverride)
@@ -268,8 +283,7 @@ class NewServerDialog(
                 val detectedTypes = mutableListOf<Pair<RequestType, ResponseType>>()
                 for (availableType in availableTypes) {
                     try {
-                        val response = ServerConfiguration.createSimpleServerConfig(address, availableType.key, availableType.value).query(client = httpClient,
-                            question = Question("example.com", Record.TYPE.A))
+                        val response = ServerConfiguration.createSimpleServerConfig(address, availableType.key, availableType.value).query(question = Question("example.com", Record.TYPE.A))
                         if(response != null && response.responseCode == DnsMessage.RESPONSE_CODE.NO_ERROR) {
                             detectedTypes.add(availableType.toPair())
                         }
@@ -331,34 +345,11 @@ class NewServerDialog(
         else HttpsUpstreamAddress(host, port)
     }
 
-    private fun addUrlTextWatcher(input: TextInputLayout, editText: TextInputEditText, emptyAllowed: Boolean) {
-        editText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                var valid = (emptyAllowed && s.isBlank())
-                valid = valid || (!s.isBlank() && dnsOverHttps && isValidDoH(s.toString()))
-                valid = valid || (!s.isBlank() && !dnsOverHttps && isValidDot(s.toString()))
-
-                input.error = when {
-                    valid -> {
-                        null
-                    }
-                    dnsOverHttps -> context.getString(R.string.error_invalid_url)
-                    else -> context.getString(R.string.error_invalid_host)
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-        })
+    private fun isServerUrlValid(primary:Boolean):Boolean {
+        val s = (if(primary) primaryServer.text else secondaryServer.text) ?: ""
+        var valid = (!primary && s.isBlank())
+        valid = valid || (!s.isBlank() && dnsOverHttps && isValidDoH(s.toString()))
+        return valid || (!s.isBlank() && !dnsOverHttps && isValidDot(s.toString()))
     }
-
-    private fun inputsValid(): Boolean = serverNameWrap.error == null &&
-            primaryServerWrap.error == null &&
-            secondaryServerWrap.error == null
-
     override fun destroy() {}
 }

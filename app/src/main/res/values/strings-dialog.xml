@@ -223,5 +223,10 @@
     <string name="querylog_filter_title">Filter query log</string>
     <string name="querylog_filter_info">Select which types of queries you want to see</string>
     <string name="querylog_filter_type_forwarded">Resolved by the DNS server</string>
+    <string name="querylog_filter_type_cache">Resolved by DNS cache</string>
+    <string name="querylog_filter_type_dnsrules">Resolved by DNS rules</string>
     <string name="querylog_filter_type_blocked_by_server">Blocked by the DNS server</string>
+    <string name="querylog_filter_shorten_domain">Display shorter version of domain in list</string>
+
+    <string name="dialog_open_faq">Do you want to have a look at the frequently asked questions and documentation for this feature?</string>
 </resources>

@@ -12,17 +12,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.DefaultViewHolder
 import com.frostnerd.cacheadapter.ModelAdapterBuilder
 import com.frostnerd.dnstunnelproxy.QueryListener
+import com.frostnerd.lifecyclemanagement.launchWithLifecycle
+import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
+import com.frostnerd.smokescreen.BackpressFragment
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
-import com.frostnerd.smokescreen.equalsAny
+import com.frostnerd.smokescreen.dialog.QueryLogFilterDialog
 import com.frostnerd.smokescreen.fragment.QueryLogFragment
 import com.frostnerd.smokescreen.util.LiveDataSource
 import kotlinx.android.synthetic.main.fragment_querylog_list.*
+import kotlinx.android.synthetic.main.fragment_querylog_list.view.*
 import kotlinx.android.synthetic.main.item_logged_query.view.*
-import org.minidns.record.A
-import org.minidns.record.AAAA
-import org.minidns.record.Record
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -42,26 +43,50 @@ import org.minidns.record.Record
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
+class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener, BackpressFragment,
+    SearchView.OnCloseListener {
     private lateinit var unfilteredAdapter:RecyclerView.Adapter<*>
     private var currentSearchText:String? = null
+    private var filterConfig = QueryLogFilterDialog.FilterConfig.showAllConfig
+    private var shortenDomains:Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return layoutInflater.inflate(R.layout.fragment_querylog_list, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val live = requireContext().getDatabase().dnsQueryDao().getAllLive()
-        val source = LiveDataSource(this, live, true)
-        unfilteredAdapter = createAdapter(source)
-
-        list.layoutManager = LinearLayoutManager(requireContext())
-        list.adapter = unfilteredAdapter
-        progress.visibility = View.GONE
+    override fun onBackPressed(): Boolean {
+        return if(filterConfig != QueryLogFilterDialog.FilterConfig.showAllConfig) {
+            clearFilter()
+            updateAdapter()
+            true
+        } else false
     }
 
-    private fun createAdapter(source:LiveDataSource<DnsQuery>): RecyclerView.Adapter<DefaultViewHolder> {
-        return ModelAdapterBuilder.newBuilder(source) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        launchWithLifecycle {
+            val live = requireContext().getDatabase().dnsQueryDao().getAllLive()
+            unfilteredAdapter = createAdapter(LiveDataSource(this@QueryLogListFragment, live, true))
+
+            launchWithLifecycleUi {
+                list.layoutManager = LinearLayoutManager(requireContext())
+                list.adapter = unfilteredAdapter
+                progress.visibility = View.GONE
+            }
+        }
+        view.filter.setOnClickListener {
+            QueryLogFilterDialog(requireContext(), filterConfig, shortenDomains) { config, shortenDomain ->
+                val filterChanged = config != filterConfig
+                val shortenDomainsChanged = shortenDomains != shortenDomain
+                filterConfig = config
+                shortenDomains = shortenDomain
+                if(filterChanged) updateAdapter()
+                else if(shortenDomainsChanged) list.adapter?.notifyDataSetChanged()
+            }.show()
+        }
+    }
+
+    private fun createAdapter(forSource:LiveDataSource<DnsQuery>): RecyclerView.Adapter<DefaultViewHolder> {
+        return ModelAdapterBuilder.newBuilder(forSource) {
             viewBuilder = { parent, viewType ->
                 val createdView = layoutInflater.inflate(R.layout.item_logged_query, parent, false)
                 createdView.setOnClickListener {
@@ -70,18 +95,15 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
                 createdView
             }
             getItemCount = {
-                source.currentSize()
+                forSource.currentSize()
             }
             bindModelView = { viewHolder, position, data ->
-                viewHolder.itemView.findViewById<TextView>(R.id.text).text = data.shortName
+                viewHolder.itemView.findViewById<TextView>(R.id.text).text = if(shortenDomains) data.shortName else data.name
                 viewHolder.itemView.tag = data
                 viewHolder.itemView.typeImage.setImageResource(
                     when (data.responseSource) {
                         QueryListener.Source.UPSTREAM ->
-                            if (data.getParsedResponses().any {
-                                    (it.type == Record.TYPE.A && (it.payload as A).toString() == "0.0.0.0"
-                                            || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString().equalsAny("::1", "::0", "0:0:0:0:0:0:0:0", "0:0:0:0:0:0:0:1")))
-                                }) R.drawable.ic_flag
+                            if (data.isHostBlockedByDnsServer) R.drawable.ic_flag
                             else R.drawable.ic_reply
                         QueryListener.Source.CACHE, QueryListener.Source.CACHE_AND_LOCALRESOLVER -> R.drawable.ic_database
                         QueryListener.Source.LOCALRESOLVER -> R.drawable.ic_flag
@@ -99,6 +121,33 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
         }.build()
     }
 
+    private fun createUpdatedAdapter():RecyclerView.Adapter<*> {
+        return if(currentSearchText.isNullOrBlank() && filterConfig.showAll) {
+            unfilteredAdapter
+        } else {
+            val liveData = when {
+                currentSearchText.isNullOrBlank() -> requireContext().getDatabase().dnsQueryRepository().getAllWithFilterLive(filterConfig)
+                filterConfig.showAll -> requireContext().getDatabase().dnsQueryDao().getAllWithHostLive(currentSearchText!!)
+                else -> requireContext().getDatabase().dnsQueryRepository().getAllWithHostAndFilterLive(currentSearchText!!, filterConfig)
+            }
+            val source = LiveDataSource(this, liveData, true)
+            createAdapter(source)
+        }
+    }
+
+    private fun updateAdapter() {
+        launchWithLifecycleUi {
+            view?.progress?.visibility = View.VISIBLE
+            launchWithLifecycle {
+                val updatedAdapter = createUpdatedAdapter()
+                launchWithLifecycleUi {
+                    view?.progress?.visibility = View.GONE
+                    list.adapter = updatedAdapter
+                }
+            }
+        }
+    }
+
     private fun displayQuery(dnsQuery: DnsQuery, switchToDetailView:Boolean = true) {
         (parentFragment as QueryLogFragment).displayQueryDetailed(dnsQuery, switchToDetailView)
     }
@@ -109,17 +158,24 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener {
         return parent.detailFragment.currentQuery?.id == dnsQuery.id
     }
 
+    private fun clearFilter() {
+        filterConfig = QueryLogFilterDialog.FilterConfig.showAllConfig
+    }
+
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if(!query.isNullOrBlank() && query != currentSearchText) {
-            val live = requireContext().getDatabase().dnsQueryDao().getAllWithHostLive(query)
-            val source = LiveDataSource(this, live, true)
-            list.adapter = createAdapter(source)
-            currentSearchText = query
+        if(!query.isNullOrBlank() && query.trim() != currentSearchText) {
+            currentSearchText = query.trim()
+            updateAdapter()
         } else if(query.isNullOrBlank() && !currentSearchText.isNullOrBlank()) {
-            list.adapter = unfilteredAdapter
             currentSearchText = null
+            updateAdapter()
         }
         return true
+    }
+
+    override fun onClose(): Boolean {
+        clearFilter()
+        return false
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {

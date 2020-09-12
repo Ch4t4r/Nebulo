@@ -92,7 +92,7 @@ class QueryLogDetailFragment : Fragment() {
         createDnsRule.setOnClickListener {
             val query = currentQuery
             if(query != null) {
-                val answerIP = query.getParsedResponses().firstOrNull {
+                val answerIP = query.parsedResponses.firstOrNull {
                     it.type == query.type
                 }?.payload?.toString() ?: if(query.type == Record.TYPE.A) "0.0.0.0" else "::1"
                 DnsRuleDialog(requireContext(), DnsRule(query.type, query.name, target = answerIP), onRuleCreated = { newRule ->
@@ -155,7 +155,7 @@ class QueryLogDetailFragment : Fragment() {
                 QueryListener.Source.LOCALRESOLVER -> getString(R.string.windows_querylogging_usedserver_dnsrules)
                 else -> query.askedServer?.replace("tls::", "")?.replace("https::", "") ?: "-"
             }
-            responses.text = query.getParsedResponses().joinToString(separator = "\n") {
+            responses.text = query.parsedResponses.joinToString(separator = "\n") {
                 val payload = it.payload
                 "$payload (${it.type.name}, TTL: ${it.ttl})"
             }.let {

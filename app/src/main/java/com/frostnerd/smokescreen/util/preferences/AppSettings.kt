@@ -274,6 +274,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     var lastIptablesRedirectAddress:String? by stringPref("nonvpn_iptables_last_address")
     var lastIptablesRedirectAddressIPv6:String? by stringPref("nonvpn_iptables_last_address_ipv6")
     var iptablesModeDisableIpv6:Boolean by booleanPref("nonvpn_iptables_disable_ipv6", false)
+
+    var enableConnectionWatchDog:Boolean by booleanPref("connection_watchdog", true)
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

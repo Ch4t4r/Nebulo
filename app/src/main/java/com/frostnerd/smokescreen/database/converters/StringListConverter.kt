@@ -25,15 +25,17 @@ import com.google.gson.reflect.TypeToken
  */
 class StringListConverter {
     private val gson = Gson()
-    private val type = object:TypeToken<MutableList<String>>() {}.type
+    private val type = object:TypeToken<List<String>>() {}.type
 
     @TypeConverter
-    fun stringToList(value: String): MutableList<String> {
-        return gson.fromJson(value, type)
+    fun stringToList(value: String): List<String> {
+        return if(value == "[]") emptyList()
+        else gson.fromJson(value, type)
     }
 
     @TypeConverter
-    fun someObjectListToString(value: MutableList<String>): String {
-        return gson.toJson(value)
+    fun someObjectListToString(value: List<String>): String {
+        return if(value.isEmpty()) "[]"
+        else gson.toJson(value)
     }
 }

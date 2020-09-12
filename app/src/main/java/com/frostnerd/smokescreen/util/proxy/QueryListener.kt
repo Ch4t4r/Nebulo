@@ -7,11 +7,15 @@ import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.equalsAny
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.hasTlsServer
 import com.frostnerd.smokescreen.log
 import kotlinx.coroutines.*
 import org.minidns.dnsmessage.DnsMessage
+import org.minidns.record.A
+import org.minidns.record.AAAA
+import org.minidns.record.Record
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -41,7 +45,7 @@ class QueryListener(private val context: Context) : QueryListener {
     private var doneQueries = LinkedHashMap<DnsQuery, Boolean>()
     private val askedServer: String
     var lastDnsResponse: DnsMessage? = null
-    private val databaseWriteJob: Job
+    private val databaseWriteJob: Job?
 
     init {
         val config = context.getPreferences().dnsServerConfig
@@ -52,16 +56,16 @@ class QueryListener(private val context: Context) : QueryListener {
                 false
             )
         }
-        databaseWriteJob =
+        databaseWriteJob = if (logQueriesToDb)
             GlobalScope.launch(newSingleThreadContext("QueryListener-DatabaseWrite")) {
                 while (isActive) {
                     delay(1500)
                     insertQueries()
                 }
-            }
+            } else null
     }
 
-    override suspend fun onDeviceQuery(questionMessage: DnsMessage, srcPort: Int) {
+    override fun onDeviceQuery(questionMessage: DnsMessage, srcPort: Int) {
         if (writeQueriesToLog) {
             context.log("Query from device: $questionMessage")
         }
@@ -72,7 +76,7 @@ class QueryListener(private val context: Context) : QueryListener {
                 askedServer = null,
                 responseSource = QueryListener.Source.UPSTREAM,
                 questionTime = System.currentTimeMillis(),
-                responses = mutableListOf()
+                responses = emptyList()
             )
             synchronized(waitingQueryLogs) {
                 waitingQueryLogs[questionMessage.id] = query
@@ -81,7 +85,7 @@ class QueryListener(private val context: Context) : QueryListener {
         }
     }
 
-    override suspend fun onQueryForwarded(
+    override fun onQueryForwarded(
         questionMessage: DnsMessage,
         destination: UpstreamAddress,
         usedHandle: DnsHandle
@@ -96,7 +100,7 @@ class QueryListener(private val context: Context) : QueryListener {
         }
     }
 
-    override suspend fun onQueryResponse(
+    override fun onQueryResponse(
         responseMessage: DnsMessage,
         source: QueryListener.Source
     ) {
@@ -112,15 +116,19 @@ class QueryListener(private val context: Context) : QueryListener {
             val wasInserted = queryLogState.remove(responseMessage.id)!! != 0 // Update if already inserted (0=insert)
             query.responseTime = System.currentTimeMillis()
             query.responses = responseMessage.answerSection.map {
-                query.encodeResponse(it)
-            }.toMutableList()
+                DnsQuery.encodeResponse(it)
+            }
+            query.isHostBlockedByDnsServer = responseMessage.answerSection.any {
+                (it.type == Record.TYPE.A && (it.payload as A).toString() == "0.0.0.0"
+                        || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString().equalsAny("::1", "::0", "0:0:0:0:0:0:0:0", "0:0:0:0:0:0:0:1")))
+            }
             query.responseSource = source
             doneQueries[query] = wasInserted
         }
     }
 
     override fun cleanup() {
-        databaseWriteJob.cancel()
+        databaseWriteJob?.cancel()
         insertQueries()
         waitingQueryLogs.clear()
         queryLogState.clear()

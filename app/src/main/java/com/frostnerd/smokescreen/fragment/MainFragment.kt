@@ -17,8 +17,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
+import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
@@ -270,9 +270,9 @@ class MainFragment : Fragment() {
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
         activity?.let { activity ->
             if (!serverInfo.specification.privacyPolicyURL.isNullOrBlank()) {
-                LifecycleCoroutineScope(activity, ui = false).launch {
+                launchWithLifecycle {
                     val url = URL(serverInfo.specification.privacyPolicyURL)
-                    launchWithLifecycle(true) {
+                    launchUi {
                         val text = view?.findViewById<TextView>(R.id.privacyStatementText)
                         text?.text =
                             getString(
@@ -284,7 +284,7 @@ class MainFragment : Fragment() {
                     }
                 }
             } else {
-                LifecycleCoroutineScope(activity, ui = true).launch {
+                launchWithLifecycleUi {
                     val text = view?.findViewById<TextView>(R.id.privacyStatementText)
                     text?.visibility = View.GONE
                 }

@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.webkit.URLUtil
 import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.doOnTextChanged
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.getPreferences
@@ -64,6 +65,7 @@ class NewHostSourceDialog(
                 view.url.setText(it.toString())
             }
         }
+        view.name.doOnTextChanged { _, _, _, _ -> view.nameTil.error = null }
         setOnShowListener {
             if (hostSource != null) {
                 view.url.setText(hostSource.source)
@@ -74,6 +76,7 @@ class NewHostSourceDialog(
                 private var previousText:String = ""
 
                 override fun afterTextChanged(s: Editable?) {
+                    view.urlTil.error = null
                     val alteredString = if(s.isNullOrBlank()) "" else if(s.contains("://")) s.toString() else "https://$s"
                     if(URLUtil.isValidUrl(alteredString)) {
                         if(view.name.text.isNullOrBlank() || !userModifiedName) {

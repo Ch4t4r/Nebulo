@@ -97,7 +97,7 @@ class DnsRuleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userRulesJob = launchWithLifecycle(false) {
+        userRulesJob = launchWithLifecycle {
             userDnsRules = getDatabase().dnsRuleDao().getAllUserRules().toMutableList()
             userRulesJob = null
             launch {
@@ -206,6 +206,7 @@ class DnsRuleFragment : Fragment() {
                 }.show()
             }
         }
+        faq.setOnClickListener { requireContext().askOpenFAQ(FAQTopic.DNSRULES) }
         sourceAdapterList = getDatabase().hostSourceDao().getAll().toMutableList()
         sourceRuleCount = sourceAdapterList.map {
             it to (null as Int?)
@@ -307,7 +308,7 @@ class DnsRuleFragment : Fragment() {
                             }
                         }
                         if(userRulesJob == null) changeVisibility()
-                        else launchWithLifecycle(false) {
+                        else launchWithLifecycle {
                             userRulesJob?.join()
                             changeVisibility()
                         }
@@ -421,7 +422,7 @@ class DnsRuleFragment : Fragment() {
                                 }
                             })
                     }
-                    data.enabled -> launchWithLifecycle(false) {
+                    data.enabled -> launchWithLifecycle {
                         val prev = sourceRuleCount[data]
                         sourceRuleCount[data] = getDatabase().dnsRuleDao().getCountForHostSource(data.id)
                         if(prev != sourceRuleCount[data]) runOnUiThread {
@@ -490,12 +491,12 @@ class DnsRuleFragment : Fragment() {
             refreshProgress.hide()
             refreshProgressShown = false
 
-            launchWithLifecycle(false) {
+            launchWithLifecycle {
                 sourceRuleCount.keys.forEach {
                     val index = sourceAdapterList.indexOf(it)
                     if(index >= 0 && (sourceAdapterList[index].enabled || sourceRuleCount[it] != null)) {
                         sourceRuleCount[it] = null
-                        launchWithLifecycle(true) {
+                        launchUi {
                             sourceAdapter.notifyItemChanged(index)
                         }
                     } else sourceRuleCount[it] = null
@@ -520,8 +521,10 @@ class DnsRuleFragment : Fragment() {
     }
 
     private fun updateRuleCountTitle() {
-        activity?.runOnUiThread {
-            (activity as AppCompatActivity?)?.supportActionBar?.subtitle = resources.getQuantityString(R.plurals.window_dnsrules_subtitle, totalRuleCount!!.toInt(), totalRuleCount)
+         activity?.runOnUiThread {
+             (activity as AppCompatActivity?)?.supportActionBar?.subtitle = if(getPreferences().dnsRulesEnabled) {
+                 resources.getQuantityString(R.plurals.window_dnsrules_subtitle, totalRuleCount!!.toInt(), totalRuleCount)
+             } else null
         }
     }
 
@@ -543,6 +546,7 @@ class DnsRuleFragment : Fragment() {
             getPreferences().dnsRulesEnabled = isChecked
             overlay.visibility = if(isChecked) View.GONE else View.VISIBLE
             search.isEnabled = isChecked
+            updateRuleCountTitle()
         }
         search?.setOnMenuItemClickListener {
             DnsRuleSearchDialog(requireContext()).show()
