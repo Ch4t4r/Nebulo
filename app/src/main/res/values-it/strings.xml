@@ -80,4 +80,17 @@
     <string name="iptables_supported_ipv6_unsupported">Iptables supportate, ma non IPv6.</string>
     <string name="iptables_supported">Congratulazioni, le iptables sono supportate dal tuo dispositivo!</string>
     <string name="window_dnsrules_refresh_sources">Aggiornare le regole di importazione dalla fonte</string>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="one">Finora %1d richiesta è stata bloccata</item>
+        <item quantity="other">Finora %1d richieste sono state bloccate</item>
+    </plurals>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="one">Finora %1d richiesta è stata gestita dalle regole DNS</item>
+        <item quantity="other">Finora %1d richieste sono state gestite dalle regole DNS</item>
+    </plurals>
+    <string name="warning_server_currently_unstable_expanded">Il server %1s sembra essere instabile in questo momento, con un impatto sulla velocità di navigazione. Considera il passaggio ad un server più stabile.</string>
+    <string name="warning_server_currently_unstable">Il server %1s sembra essere instabile in questo momento.</string>
+    <string name="about_help_faq">Domande frequenti</string>
+    <string name="window_querylog_information">Informazioni</string>
+    <string name="window_speedtest_information">Più bassi sono i valori, più velocemente Nebulo è in grado di comunicare con il server. Questo per esempio aumenta la velocità di navigazione.</string>
 </resources>
