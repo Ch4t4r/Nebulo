@@ -162,11 +162,6 @@ dependencies {
     leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
     implementation "com.squareup.okhttp3:okhttp:4.8.1"
-
-    testImplementation 'junit:junit:4.13'
-    testImplementation "org.robolectric:robolectric:4.3.1"
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
 def getGitCommitHash() {
