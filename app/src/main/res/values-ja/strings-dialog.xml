@@ -205,4 +205,8 @@
     <string name="dialog_dnsrules_search_title">ホストを検索する</string>
     <string name="dialog_querylog_information_title">クエリログに関する情報</string>
     <string name="dialog_latency_sidebar_title">レイテンシに関する情報</string>
+    <string name="dialog_open_faq">この機能についての「よくある質問」やドキュメントを見ますか\?</string>
+    <string name="querylog_filter_shorten_domain">簡略化したドメインをリストに表示する</string>
+    <string name="querylog_filter_type_dnsrules">DNSルールにより解決済み</string>
+    <string name="querylog_filter_type_cache">DNSキャッシュにより解決済み</string>
 </resources>
