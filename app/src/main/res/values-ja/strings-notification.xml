@@ -36,22 +36,18 @@
     <string name="notification_noconnection_title">未接続</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
-    <string name="notification_main_text_with_secondary_whitelist">クエリは %1$s と %2$s に送信中
+    <string name="notification_main_text_with_secondary_whitelist">クエリは %1$s と %2$s に送信中 
 \n 
-\n%3$d 個のアプリがDoH/DoTを使用中
-\nキャッシュ内の %4$d エントリ</string>
-    <string name="notification_main_text_whitelist">クエリは %1$s に送信中
+\n%3$d 個のアプリがDoH/DoTを使用中</string>
+    <string name="notification_main_text_whitelist">クエリは %1$s に送信中 
 \n 
-\n%2$d個のアプリがDoH/DoTを使用中
-\nキャッシュ内の %3$d エントリ</string>
-    <string name="notification_main_text_with_secondary">クエリは %1$s と %2$s に送信中
+\n%2$d個のアプリがDoH/DoTを使用中</string>
+    <string name="notification_main_text_with_secondary">クエリは %1$s と %2$s に送信中 
 \n 
-\n%3$d 個のアプリがDoH/DoTから除外
-\nキャッシュ内の %4$d エントリ</string>
-    <string name="notification_main_text">クエリは %1$s に送信中
+\n%3$d 個のアプリがDoH/DoTから除外</string>
+    <string name="notification_main_text">クエリは %1$s に送信中 
 \n 
-\n%2$d 個のアプリがDoH/DoTから除外
-\nキャッシュ内の %3$d エントリ</string>
+\n%2$d 個のアプリがDoH/DoTから除外</string>
     <string name="notification_simple_text">現在のサーバー: %1$s</string>
     <string name="notification_channel_high_priorty_description">アプリがVPNへのアクセス許可を失った場合など、優先度の高い通知用チャンネル</string>
     <string name="notification_channel_pin">PIN関連チャンネル</string>
@@ -69,4 +65,6 @@
     <string name="notification_channel_badconnection">接続不良通知チャンネル</string>
     <string name="notification_channel_dnsrules_description">DNSルールのインポート/エクスポートに使用するチャンネル</string>
     <string name="notification_channel_dnsrules">DNSルール通知チャンネル</string>
+    <string name="notification_bad_connection_text">DNSサーバーの接続がよくありません。これによりネットサーフィン速度に悪影響が出る可能性があります。他のサーバーに変更をおすすめします。</string>
+    <string name="notification_bad_connection_title">サーバー接続不良</string>
 </resources>
