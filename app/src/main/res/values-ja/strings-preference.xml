@@ -2,8 +2,8 @@
 <resources>
     <string name="summary_dnscache_minimum_cache_time">最小キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きい値を設定すると、キャッシュされたレコードが実際のレコードと一致しなくなり、サービスが正常に動作しなくなる可能性があります。
 \n現在の値: %1d 秒。</string>
-    <string name="summary_dnscache_customcachetime">キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きく設定すると、キャッシュされたレコードと実際のレコードが一致しなくなり、サービスが正常に動作しなくなる可能性があります。
-\n現在の値: %1d 秒。</string>
+    <string name="summary_dnscache_customcachetime">キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きく設定すると、キャッシュされたレコードと実際のレコードが一致しなくなり、サービスが正常に動作しなくなる可能性があります。 
+\n現在の値: %1d 秒</string>
     <string name="title_enable_logging">動作ログの取得</string>
     <string name="preference_category_logging">動作ログ</string>
     <string name="summary_dnscache_nxdomaincachetime">NXDOMAINリクエストがキャッシュされる時間を変更します。これにより、存在しないドメインに対する応答パフォーマンスが向上します（ブロックされている場合など）。
@@ -41,7 +41,7 @@
     <string name="preference_category_pin">PINプロテクション</string>
     <string name="title_show_revoked_notification">許可が失なわれた時の通知</string>
     <string name="title_show_noconnection_notification">未接続時の通知</string>
-    <string name="summary_show_noconnection_notification">未接続または接続に失敗している時に通知します。</string>
+    <string name="summary_show_noconnection_notification">現在DNSサーバー未接続時に通知します。</string>
     <string name="title_notification_allow_pause">一時停止の許可</string>
     <string name="title_notification_allow_stop">停止の許可</string>
     <string name="summary_notification_hide_icon">上部ナビゲーションバーのアイコンを非表示にします。</string>
@@ -82,8 +82,8 @@
     <string name="summary_pause_on_captiveportal">フリーWi-Fi接続時などに表示されるキャプティブポータル検出時にDoH機能を一旦停止します。このときポータルにログインすると、すぐに自動的に再開されます。 
 \nこの機能を無効にすると、キャプティブポータルサイトが開けず、ログインできなくなる場合があります。</string>
     <string name="title_pause_on_captiveportal">キャプティブポータルの一時停止</string>
-    <string name="summary_bypass_searchdomains">ローカルネットワークなどで使用される検索ドメイン（MyPC.localやMyPc.fritz.boxなど）の名前解決を、ローカルネットワークのDNSサーバーに送信します(DoH/DoTサーバーは使用しません)。
-\n本機能を有効にすることを特に推奨します。</string>
+    <string name="summary_bypass_searchdomains">ローカルネットワークなどで使用される検索ドメイン（MyPC.localやMyPc.fritz.boxなど）の名前解決を、ローカルネットワークのDNSサーバーに送信します(DoH/DoTサーバーは使用しません)。 
+\n本機能を有効にすることを特に推奨します。これらのクエリはローカルネットワークから出ることはありません。</string>
     <string name="title_bypass_searchdomains">検索ドメインのバイパス</string>
     <string name="summary_map_query_refused">DNS サーバーによっては、ホストが許可されていないかブロックされている場合、問い合わせに対する応答(クエリ)を拒否することがあります。この設定では、問い合わせを拒否する代わりにホストをブロックします。</string>
     <string name="title_map_query_refused">拒否されたクエリを許可されていないホストとして処理する</string>
