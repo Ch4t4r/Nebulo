@@ -378,7 +378,7 @@ class QueryGeneratorDialog(context: Context):AlertDialog(context, context.getPre
                 for(i in 0 until runCount) {
                     urlsToUse.shuffle()
                     for (url in urlsToUse) {
-                        openUrl(callWithChrome, if(url.startsWith("http")) url else "http://$url")
+                        openUrl(callWithChrome, if(url.startsWith("http")) url else "https://$url")
                         logFileWriter.write(System.currentTimeMillis().toString() + " '" + url + "'\n")
                         logFileWriter.flush()
                         val delayMs = delay.text.toString().toLong() + if(randomTimeout.isChecked) Random.nextLong(0, 20000) else 0
