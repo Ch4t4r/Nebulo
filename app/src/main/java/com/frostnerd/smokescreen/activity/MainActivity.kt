@@ -130,9 +130,6 @@ class MainActivity : NavigationDrawerActivity() {
                         getString(R.string.dialog_latency_sidebar_title),
                         getString(R.string.dialog_latency_sidebar_message))
             }
-            view.refresh.setOnClickListener {
-                update()
-            }
             networkManager.registerNetworkCallback(NetworkRequest.Builder().apply {
                 addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
             }.build(), cardNetworkCallback!!)
