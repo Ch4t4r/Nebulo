@@ -1243,84 +1243,92 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         localResolver = createLocalResolver()
 
         log("DnsProxy created, creating VPN proxy")
-         if(runInNonVpnMode) {
-             log("Running in non-VPN mode, starting async")
-             launch (Dispatchers.IO) {
-                 dnsProxy = NonIPSmokeProxy(
-                     defaultHandle!!,
-                     handles + createProxyBypassHandlers(),
-                     dnsCache,
-                     createQueryLogger(),
-                     localResolver,
-                     InetAddress.getLocalHost(),
-                     getPreferences().dnsServerModePort
-                 )
-                 val logger = VpnLogger(applicationContext)
-                 vpnProxy = RetryingVPNTunnelProxy(
-                     dnsProxy!!,
-                     socketProtector = object : Proxy.SocketProtector {
-                         override fun protectDatagramSocket(socket: DatagramSocket) {}
-                         override fun protectSocket(socket: Socket) {}
-                         override fun protectSocket(socket: Int) {}
-                     },
-                     logger = if(logger.minLogLevel != Level.OFF) VpnLogger(applicationContext) else null,
-                     errorLogger = logger
-                 )
-                 vpnProxy?.forwardingMode = forwardingMode
-                 vpnProxy?.maxRetries = 15
-                 val preferredPort = getPreferences().dnsServerModePort
-                 val bindAddress = if(ipv4Enabled) InetAddress.getLocalHost() else InetAddress.getByName("::1")
-                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, bindAddress, preferredPort)
-                 val actualPort = dnsServerProxy!!.startServer()
-                 val iptablesMode = if(getPreferences().nonVpnUseIptables) {
-                     val hostAddr = if(ipv4Enabled) bindAddress.hostAddress else null
-                     val ipv6Address = if(deviceHasIpv6) "::1" else null
-                     ipTablesRedirector = IpTablesPacketRedirector(actualPort,hostAddr, ipv6Address, getPreferences().iptablesModeDisableIpv6, this@DnsVpnService.logger)
-                     ipTablesRedirector?.beginForward().also {
-                         getPreferences().lastIptablesRedirectAddress = "$hostAddr:$actualPort"
-                         if(ipv6Address != null) getPreferences().lastIptablesRedirectAddressIPv6 = "[$ipv6Address]:$actualPort"
-                     } ?: IpTablesPacketRedirector.IpTablesMode.FAILED
-                 } else IpTablesPacketRedirector.IpTablesMode.DISABLED
-                 if(iptablesMode == IpTablesPacketRedirector.IpTablesMode.SUCCEEDED_DISABLED_IPV6) {
-                     dnsProxy?.dnsHandles?.forEach { it.ipv6Enabled = false }
-                 }
-                 showDnsServerModeNotification(actualPort, preferredPort, iptablesMode)
-                 log("Non-VPN proxy started.")
-             }
+        val logger = VpnLogger(applicationContext)
+        if (runInNonVpnMode) {
+            log("Running in non-VPN mode, starting async")
+            launch(Dispatchers.IO) {
+                dnsProxy = NonIPSmokeProxy(
+                    defaultHandle!!,
+                    handles + createProxyBypassHandlers(),
+                    dnsCache,
+                    createQueryLogger(),
+                    localResolver,
+                    InetAddress.getLocalHost(),
+                    getPreferences().dnsServerModePort
+                )
+                vpnProxy = RetryingVPNTunnelProxy(
+                    dnsProxy!!,
+                    socketProtector = object : Proxy.SocketProtector {
+                        override fun protectDatagramSocket(socket: DatagramSocket) {}
+                        override fun protectSocket(socket: Socket) {}
+                        override fun protectSocket(socket: Int) {}
+                    },
+                    logger = if (logger.minLogLevel != Level.OFF) VpnLogger(applicationContext) else null,
+                    errorLogger = logger
+                )
+                vpnProxy?.forwardingMode = forwardingMode
+                vpnProxy?.maxRetries = 15
+                val preferredPort = getPreferences().dnsServerModePort
+                val bindAddress =
+                    if (ipv4Enabled) InetAddress.getLocalHost() else InetAddress.getByName("::1")
+                dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, bindAddress, preferredPort)
+                val actualPort = dnsServerProxy!!.startServer()
+                val iptablesMode = if (getPreferences().nonVpnUseIptables) {
+                    val hostAddr = if (ipv4Enabled) bindAddress.hostAddress else null
+                    val ipv6Address = if (deviceHasIpv6) "::1" else null
+                    ipTablesRedirector = IpTablesPacketRedirector(
+                        actualPort,
+                        hostAddr,
+                        ipv6Address,
+                        getPreferences().iptablesModeDisableIpv6,
+                        this@DnsVpnService.logger
+                    )
+                    ipTablesRedirector?.beginForward().also {
+                        getPreferences().lastIptablesRedirectAddress = "$hostAddr:$actualPort"
+                        if (ipv6Address != null) getPreferences().lastIptablesRedirectAddressIPv6 =
+                            "[$ipv6Address]:$actualPort"
+                    } ?: IpTablesPacketRedirector.IpTablesMode.FAILED
+                } else IpTablesPacketRedirector.IpTablesMode.DISABLED
+                if (iptablesMode == IpTablesPacketRedirector.IpTablesMode.SUCCEEDED_DISABLED_IPV6) {
+                    dnsProxy?.dnsHandles?.forEach { it.ipv6Enabled = false }
+                }
+                showDnsServerModeNotification(actualPort, preferredPort, iptablesMode)
+                log("Non-VPN proxy started.")
+            }
         } else {
-             dnsProxy = SmokeProxy(
-                 defaultHandle!!,
-                 handles + createProxyBypassHandlers(),
-                 dnsCache,
-                 createQueryLogger(),
-                 localResolver
-             )
-             val logger = VpnLogger(applicationContext)
-             vpnProxy = RetryingVPNTunnelProxy(
-                 dnsProxy!!,
-                 vpnService = this,
-                 logger = if(logger.minLogLevel != Level.OFF) VpnLogger(applicationContext) else null,
-                 errorLogger = logger
-             )
-             vpnProxy?.maxRetries = 15
-             vpnProxy?.forwardingMode = forwardingMode
-             log("VPN proxy creating, trying to run...")
-             fileDescriptor?.let {
-                 vpnProxy?.runProxyWithRetry(it, it)
-             } ?: run {
-                 recreateVpn(false, null)
-                 return
-             }
-             log("VPN proxy started.")
-         }
-        currentTrafficStats = vpnProxy?.trafficStats
-        if(!watchdogDisabledForSession && getPreferences().enableConnectionWatchDog) connectionWatchDog = currentTrafficStats?.let {
-            ConnectionWatchdog(it, 30*1000, 10*60*10000,onBadServerConnection =  {
-                showBadConnectionNotification()
-            }, onBadConnectionResolved = {
-                hideBadConnectionNotification()
-            })
+            dnsProxy = SmokeProxy(
+                defaultHandle!!,
+                handles + createProxyBypassHandlers(),
+                dnsCache,
+                createQueryLogger(),
+                localResolver
+            )
+            vpnProxy = RetryingVPNTunnelProxy(
+                dnsProxy!!,
+                vpnService = this,
+                logger = if (logger.minLogLevel != Level.OFF) VpnLogger(applicationContext) else null,
+                errorLogger = logger
+            )
+            vpnProxy?.maxRetries = 15
+            vpnProxy?.forwardingMode = forwardingMode
+            log("VPN proxy creating, trying to run...")
+            fileDescriptor?.let {
+                vpnProxy?.runProxyWithRetry(it, it)
+            } ?: run {
+                recreateVpn(false, null)
+                return
+            }
+            log("VPN proxy started.")
         }
+        currentTrafficStats = vpnProxy?.trafficStats
+        if (!watchdogDisabledForSession && getPreferences().enableConnectionWatchDog) connectionWatchDog =
+            currentTrafficStats?.let {
+                ConnectionWatchdog(it, 30 * 1000, 10 * 60 * 10000, onBadServerConnection = {
+                    showBadConnectionNotification()
+                }, onBadConnectionResolved = {
+                    hideBadConnectionNotification()
+                }, logger = this@DnsVpnService.logger, advancedLogging = getPreferences().advancedLogging)
+            }
         hideBadConnectionNotification()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_SERVICE_REVOKED)
