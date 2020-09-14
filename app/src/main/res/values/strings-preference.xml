@@ -166,7 +166,7 @@
     <string name="summary_run_without_vpn">When checked Nebulo hosts a DNS server on your device</string>
 
     <string name="title_local_server_port">Server port</string>
-    <string name="summary_local_server_port">Port of the DNS server which will be hosted. Only ports above 1024 are allowed.\nCurrently: %1s</string>
+    <string name="summary_local_server_port">Port of the DNS server which will be hosted. Only ports above 1024 are allowed</string>
 
 
     <string name="preference_category_iptables">Iptables</string>
