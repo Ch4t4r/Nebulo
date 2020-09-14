@@ -110,13 +110,6 @@ class MainActivity : NavigationDrawerActivity() {
                         view.dns1.text = primaryAddress
                         view.dns2.text = secondaryAddress
                     }
-
-                    val latency = DnsSpeedTest(server, log = {}).runTest(3, DnsSpeedTest.Strategy.WEIGHTED_AVERAGE)
-                    runOnUiThread {
-                        view.latency.text = if (latency != null && latency > 0) {
-                            "$latency ms"
-                        } else "- ms"
-                    }
                 }
             }
             update()
@@ -136,9 +129,6 @@ class MainActivity : NavigationDrawerActivity() {
                 showInfoTextDialogWithClose(this,
                         getString(R.string.dialog_latency_sidebar_title),
                         getString(R.string.dialog_latency_sidebar_message))
-            }
-            view.refresh.setOnClickListener {
-                update()
             }
             networkManager.registerNetworkCallback(NetworkRequest.Builder().apply {
                 addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
