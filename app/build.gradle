@@ -162,6 +162,7 @@ dependencies {
     leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation 'com.github.AppIntro:AppIntro:6.0.0'
 }
 
 def getGitCommitHash() {

@@ -75,15 +75,23 @@ class PinActivity: BaseActivity() {
         }
 
         fun openAppIntent(context: Context, appExtras:Bundle? = null):Intent {
-            return if(shouldValidatePin(context, null)) {
-                val intent = Intent(context, PinActivity::class.java)
-                if(appExtras != null) intent.putExtra("extras", appExtras)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.putExtra("pin_type", PinType.APP)
-                intent
-            } else {
-                Intent(context, MainActivity::class.java).apply {
-                    if(appExtras != null) putExtras(appExtras)
+            return when {
+                shouldValidatePin(context, null) -> {
+                    val intent = Intent(context, PinActivity::class.java)
+                    if(appExtras != null) intent.putExtra("extras", appExtras)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    intent.putExtra("pin_type", PinType.APP)
+                    intent
+                }
+                context.getPreferences().shouldShowAppIntro() -> {
+                    Intent(context, NebuloAppIntro::class.java).apply {
+                        if(appExtras != null) putExtras(appExtras)
+                    }
+                }
+                else -> {
+                    Intent(context, MainActivity::class.java).apply {
+                        if(appExtras != null) putExtras(appExtras)
+                    }
                 }
             }
         }
@@ -195,7 +203,13 @@ class PinActivity: BaseActivity() {
 
     private fun onPinPassed(pinEnabled:Boolean = true) {
         when(getPinType()) {
-            PinType.APP -> {
+            PinType.APP -> if(getPreferences().shouldShowAppIntro()) {
+                val startIntent = Intent(this, NebuloAppIntro::class.java)
+                intent?.extras?.getBundle("extras")?.also {
+                    startIntent.putExtra("extras", it)
+                }
+                startActivity(passPin(startIntent))
+            } else {
                 val startIntent = Intent(this, MainActivity::class.java)
                 startIntent.putExtras(intent?.extras?.getBundle("extras") ?: Bundle())
                 //if(pinEnabled) startIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
