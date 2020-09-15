@@ -22,7 +22,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.Decision
 import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
-import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
+import com.frostnerd.dnstunnelproxy.json.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress

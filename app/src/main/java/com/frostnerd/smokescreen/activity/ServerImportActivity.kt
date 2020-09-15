@@ -5,7 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
-import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
+import com.frostnerd.dnstunnelproxy.json.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.general.readJsonArray
 import com.frostnerd.general.readJsonObject
