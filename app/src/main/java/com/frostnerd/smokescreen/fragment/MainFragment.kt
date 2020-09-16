@@ -199,6 +199,7 @@ class MainFragment : Fragment() {
         serverURL.text = if(config.hasTlsServer()) config.servers.firstOrNull()?.address?.formatToString() ?: "-"
         else (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(true) ?: "-"
         serverLatency.text = ""
+        serverIndicator.backgroundTintList = null
     }
 
     override fun onDestroy() {
@@ -284,11 +285,11 @@ class MainFragment : Fragment() {
         }
         startButton.isEnabled = startButtonEnabled
         serverLatency.visibility = serverLatencyVisibility
+        if(serverLatencyVisibility != View.VISIBLE) serverIndicator.backgroundTintList = null
         privateDnsInfo.visibility = privateDNSVisibility
         privacyTextWrap.visibility = privacyTextVisibility
         enableInformation.visibility = enableInfoVisibility
         statusText.setText(statusTxt)
-
     }
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
