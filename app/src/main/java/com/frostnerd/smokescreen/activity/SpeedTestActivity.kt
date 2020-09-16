@@ -126,9 +126,7 @@ class SpeedTestActivity : BaseActivity() {
                             || hasIpv6 == (TransportProtocol.IPV6 in server.supportedTransportProtocols)
                 }
             }.filter {
-                !it.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !resources.getBoolean(
-                    R.bool.hide_adblocking_servers
-                )
+                !it.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || BuildConfig.SHOW_ALL_SERVERS
             }
             val testResults = dnsServers.map {
                 SpeedTest(it, null)

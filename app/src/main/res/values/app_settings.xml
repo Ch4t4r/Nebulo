@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <bool name="keep_service_alive">true</bool>
-    <bool name="hide_adblocking_servers">true</bool>
     <bool name="add_default_hostsources">false</bool>
 
     <string-array name="interface_address_prefixes">

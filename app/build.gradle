@@ -59,20 +59,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
             buildConfigField("Boolean", "LEAK_DETECTION", "false")
+            buildConfigField("Boolean", "SHOW_ALL_SERVERS", "false")
         }
         debug {
             initWith buildTypes.debug
             buildConfigField("Boolean", "LEAK_DETECTION", "false")
+            buildConfigField("Boolean", "SHOW_ALL_SERVERS", "true")
         }
         leakCanary {
             matchingFallbacks = ['debug']
             initWith buildTypes.debug
             buildConfigField("Boolean", "LEAK_DETECTION", "true")
+            buildConfigField("Boolean", "SHOW_ALL_SERVERS", "false")
         }
         fdroid {
             matchingFallbacks = ['release']
             initWith release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("Boolean", "SHOW_ALL_SERVERS", "true")
         }
         unsignedRelease {
             minifyEnabled true
@@ -80,6 +84,7 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("Boolean", "LEAK_DETECTION", "false")
+            buildConfigField("Boolean", "SHOW_ALL_SERVERS", "false")
         }
     }
     flavorDimensions "version"
