@@ -38,6 +38,8 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
     private var latencyAtLastCheck:Int? = null
     private var packetLossAtLastCheck:Int? = null
     private var packetCountAtLastCheck:Int? = null
+    private var lastFailedAnswerCount:Int = 0
+    private var lastTotalPacketCount:Int = 0
     private var lastCallbackCall:Long? = null
     private var measurementsWithBadConnection:Int = 0
 
@@ -63,7 +65,10 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
             && packetCountAtLastCheck?.let { trafficStats.packetsReceivedFromDevice - it > 10 } != false
         ) { // Not enough data to act on.
             val currentLatency = trafficStats.floatingAverageLatency.toInt()
-            val currentPacketLossPercent = (100*trafficStats.failedAnswers)/(trafficStats.packetsReceivedFromDevice*0.9)
+            val currentPacketLossPercent = (100*(trafficStats.failedAnswers - lastFailedAnswerCount))/((trafficStats.packetsReceivedFromDevice - lastTotalPacketCount)*0.9)
+            lastFailedAnswerCount = trafficStats.failedAnswers.toInt()
+            lastTotalPacketCount = trafficStats.packetsReceivedFromDevice.toInt()
+
             logFine("Current latency: $currentLatency")
             logFine("Current packet loss: $currentPacketLossPercent")
 
