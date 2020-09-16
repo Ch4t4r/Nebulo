@@ -257,11 +257,11 @@ class MainFragment : Fragment() {
                 startButton.setImageResource(R.drawable.ic_lock)
                 serverLatencyVisibility = View.VISIBLE
                 statusTxt = R.string.window_main_protected
-                enableInfoVisibility = View.GONE
+                enableInfoVisibility = View.INVISIBLE
             }
             ProxyState.STARTING -> {
                 startButton.setImageResource(R.drawable.ic_lock_half_open)
-                enableInfoVisibility = View.GONE
+                enableInfoVisibility = View.INVISIBLE
             }
             ProxyState.PAUSED -> {
                 startButton.setImageResource(R.drawable.ic_lock_half_open)
@@ -274,7 +274,7 @@ class MainFragment : Fragment() {
                     startButtonEnabled = false
                     privateDNSVisibility = View.VISIBLE
                     statusTxt = R.string.window_main_protected
-                    enableInfoVisibility = View.GONE
+                    enableInfoVisibility = View.INVISIBLE
                 } else {
                     startButton.setImageResource(R.drawable.ic_lock_open)
                     privateDnsInfo.visibility = View.INVISIBLE
