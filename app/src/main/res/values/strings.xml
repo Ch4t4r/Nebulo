@@ -129,6 +129,16 @@
     <string name="appintro_forth_title">One last thing</string>
     <string name="appintro_forth_description">You can configure Nebulo to be used as a system-wide ad- and tracking-blocker.\n\nYou are even able to use it together with some firewall apps to increase your control over your privacy even more.</string>
 
+    <string name="appintro_server_choose_title">First things first</string>
+    <string name="appintro_server_choose_description">Which kind of server do you want to use in Nebulo?</string>
+    <string name="appintro_server_choose_disclaimer">There are servers which fit multiple or even all categories. Nebulo automatically chooses the fastest one.</string>
+
+    <string name="appintro_server_choose_first">The fastest one</string>
+    <string name="appintro_server_choose_second">A fast server, with a focus privacy</string>
+    <string name="appintro_server_choose_third">A true privacy focused server</string>
+    <string name="appintro_server_choose_forth">A server which protects me from harmful websites and apps</string>
+    <string name="appintro_server_choose_adblock">A server which blocks ads and tracking</string>
+
     <plurals name="dnsrule_total_resolve_count">
         <item quantity="zero">%1d queries have been handled by DNS rules this far</item>
         <item quantity="one">%1d query has been handled by DNS rules this far</item>

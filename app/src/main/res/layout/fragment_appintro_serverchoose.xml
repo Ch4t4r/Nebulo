@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/windowBackground"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+    <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/appintro_server_choose_title"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@string/appintro_server_choose_description"
+            android:textSize="18sp" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/appintro_server_choose_disclaimer"
+            android:textSize="13sp"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"/>
+
+    <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:id="@+id/buttonGroup"
+            android:gravity="center_vertical">
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/appintro_server_choose_first"
+                android:textColor="?android:attr/textColor" />
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/appintro_server_choose_second"
+                android:textColor="?android:attr/textColor" />
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/appintro_server_choose_third"
+                android:textColor="?android:attr/textColor" />
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/appintro_server_choose_forth"
+                android:textColor="?android:attr/textColor" />
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:text="@string/appintro_server_choose_adblock"
+                android:textColor="?android:attr/textColor" />
+    </RadioGroup>
+</LinearLayout>

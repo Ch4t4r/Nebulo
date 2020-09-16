@@ -7,7 +7,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.frostnerd.dnstunnelproxy.AddressCreator
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.activity.LoggingDialogActivity
 import com.frostnerd.smokescreen.activity.PinActivity
@@ -137,6 +139,8 @@ class SmokeScreen : Application() {
     override fun onCreate() {
         if(!BuildConfig.LEAK_DETECTION) LeakSentry.config = LeakSentry.config.copy(enabled = false)
         initSentry()
+        AbstractTLSDnsHandle
+        AbstractHttpsDNSHandle
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
