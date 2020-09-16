@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.net.VpnService
 import android.os.Bundle
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
@@ -27,6 +30,7 @@ import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.*
 import java.net.URL
@@ -73,6 +77,7 @@ class MainFragment : Fragment() {
         updateVpnIndicators()
         context?.clearPreviousIptablesRedirect()
         runLatencyCheck()
+        determineLatencyBounds()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -311,16 +316,52 @@ class MainFragment : Fragment() {
         }
     }
 
-    fun runLatencyCheck() {
+    private var greatLatencyThreshold = 100
+    private var goodLatencyThreshold = 170
+    private  var averageLatencyThreshold = 280
+    private fun runLatencyCheck() {
         latencyCheckJob = launchWithLifecycle(cancelOn = setOf(Lifecycle.Event.ON_PAUSE)) {
             if(isActive) {
                 launchUi {
                     val latency = DnsVpnService.currentTrafficStats?.floatingAverageLatency?.takeIf { it > 0 }
-                    serverLatency.text = latency?.let { "$it\nms" }
+                    if(latency != null) {
+                        serverLatency.text = latency.let { "$it\nms" }
+                        val color = when {
+                            latency < greatLatencyThreshold -> Color.parseColor("#43A047")
+                            latency < goodLatencyThreshold -> Color.parseColor("#9CCC65")
+                            latency < averageLatencyThreshold -> Color.parseColor("#FFB300")
+                            else -> Color.parseColor("#E53935")
+                        }
+                        serverIndicator.backgroundTintList = ColorStateList.valueOf(color)
+                    }
                     delay(750)
                     runLatencyCheck()
                 }
             }
+        }
+    }
+
+    private fun determineLatencyBounds() {
+        // Use the ping for the best servers to deviate the thresholds
+        // The deviation will only increase the thresholds, not decrease it.
+        // This is to avoid measuring smaller servers on the benchmarks of the "better" ones
+        // But if a "good" server has a bad connection, chances are the smaller ones do as well
+        // And in that case the smaller server should be measured on the bigger ones to have a point of reference
+        // as the values I chose are between average to best-case, not worst-case.
+        launchWithLifecycle {
+            val fastServerAverage = AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(1500) {
+                setOf(it[0], it[1], it[3], it[28]) // Google, CF, Quad9, CF security
+            }.mapNotNull {
+                DnsSpeedTest(it as DnsServerInformation<*>, log = {}).runTest(4)
+            }.let {
+                it.sum() / it.size
+            }
+            val rawFactor = maxOf(greatLatencyThreshold.toDouble(), greatLatencyThreshold*(fastServerAverage.toDouble()/greatLatencyThreshold))/greatLatencyThreshold
+            val adjustmentFactor = 1 + (rawFactor - 1)/2
+            val pingStepAdjustment = (12*adjustmentFactor)-12 //High deviation from 100ms -> Higher differences between steps in rating
+            greatLatencyThreshold = (greatLatencyThreshold * adjustmentFactor + pingStepAdjustment*0.8).toInt()
+            goodLatencyThreshold = (goodLatencyThreshold * adjustmentFactor + pingStepAdjustment*1.2).toInt()
+            averageLatencyThreshold = (goodLatencyThreshold * adjustmentFactor + pingStepAdjustment*1.7).toInt()
         }
     }
 
