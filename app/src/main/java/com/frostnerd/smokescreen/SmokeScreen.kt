@@ -150,10 +150,25 @@ class SmokeScreen : Application() {
     }
 
     private fun handleFallbackDns() {
-        setFallbackDns(getPreferences().fallbackDns as HttpsDnsServerInformation?, this)
-        getPreferences().listenForChanges("fallback_dns_server", getPreferences().preferenceChangeListener { changes ->
-            setFallbackDns(changes["fallback_dns_server"]?.second as HttpsDnsServerInformation?, this@SmokeScreen)
+        val preferences = getPreferences()
+        var runWithoutVPN = preferences.runWithoutVpn
+        var fallback = preferences.fallbackDns as HttpsDnsServerInformation?
+        preferences.listenForChanges(setOf("fallback_dns_server", "run_without_vpn"), preferences.preferenceChangeListener { changes ->
+            var newFallback = if("fallback_dns_server" in changes) changes["fallback_dns_server"]?.second as HttpsDnsServerInformation? else fallback
+            val newRunWithoutVPN = changes["run_without_vpn"]?.second as Boolean? ?: runWithoutVPN
+            runWithoutVPN = newRunWithoutVPN
+            fallback = newFallback
+
+            if(runWithoutVPN && newFallback == null) newFallback = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
+                it[0] // The IDs are stable and won't change. 0 == Cloudflare
+            }
+            setFallbackDns(newFallback, this@SmokeScreen)
         })
+
+        if(preferences.runWithoutVpn && fallback == null) fallback = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {
+            it[0] // The IDs are stable and won't change. 0 == Cloudflare
+        }
+        setFallbackDns(fallback, this)
     }
 
     fun closeSentry() {
