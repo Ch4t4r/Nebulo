@@ -21,6 +21,7 @@ import androidx.lifecycle.Lifecycle
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
@@ -349,16 +350,18 @@ class MainFragment : Fragment() {
         // And in that case the smaller server should be measured on the bigger ones to have a point of reference
         // as the values I chose are between average to best-case, not worst-case.
         launchWithLifecycle {
-            val fastServerAverage = AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(1500) {
-                setOf(it[0], it[1], it[3], it[28]) // Google, CF, Quad9, CF security
-            }.mapNotNull {
+            val fastServerAverage = (AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(1500) {
+                setOf(it[0], it[1], it[3]) // Google, CF, Quad9
+            } + AbstractTLSDnsHandle.suspendUntilKnownServersArePopulated(1500) {
+                setOf(it[1], it[0]) //Quad9, CF
+            }).mapNotNull {
                 DnsSpeedTest(it as DnsServerInformation<*>, log = {}).runTest(4)
             }.let {
                 it.sum() / it.size
             }
             val rawFactor = maxOf(greatLatencyThreshold.toDouble(), greatLatencyThreshold*(fastServerAverage.toDouble()/greatLatencyThreshold))/greatLatencyThreshold
             val adjustmentFactor = 1 + (rawFactor - 1)/2
-            val pingStepAdjustment = (12*adjustmentFactor)-12 //High deviation from 100ms -> Higher differences between steps in rating
+            val pingStepAdjustment = (12*rawFactor)-12 //High deviation from 100ms -> Higher differences between steps in rating
             greatLatencyThreshold = (greatLatencyThreshold * adjustmentFactor + pingStepAdjustment*0.8).toInt()
             goodLatencyThreshold = (goodLatencyThreshold * adjustmentFactor + pingStepAdjustment*1.2).toInt()
             averageLatencyThreshold = (goodLatencyThreshold * adjustmentFactor + pingStepAdjustment*1.7).toInt()
