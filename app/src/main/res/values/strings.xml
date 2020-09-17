@@ -134,7 +134,7 @@
     <string name="appintro_server_choose_disclaimer">There are servers which fit multiple or even all categories. Nebulo automatically chooses the fastest one.</string>
 
     <string name="appintro_server_choose_first">The fastest one</string>
-    <string name="appintro_server_choose_second">A fast server, with a focus privacy</string>
+    <string name="appintro_server_choose_second">A fast server, with a focus on privacy</string>
     <string name="appintro_server_choose_third">A true privacy focused server</string>
     <string name="appintro_server_choose_forth">A server which protects me from harmful websites and apps</string>
     <string name="appintro_server_choose_adblock">A server which blocks ads and tracking</string>

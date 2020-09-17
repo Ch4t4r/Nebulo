@@ -200,6 +200,7 @@ class MainFragment : Fragment() {
         serverURL.text = if(config.hasTlsServer()) config.servers.firstOrNull()?.address?.formatToString() ?: "-"
         else (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(true) ?: "-"
         serverLatency.text = ""
+        serverIndicator.backgroundTintList = null
     }
 
     override fun onDestroy() {
@@ -258,11 +259,11 @@ class MainFragment : Fragment() {
                 startButton.setImageResource(R.drawable.ic_lock)
                 serverLatencyVisibility = View.VISIBLE
                 statusTxt = R.string.window_main_protected
-                enableInfoVisibility = View.GONE
+                enableInfoVisibility = View.INVISIBLE
             }
             ProxyState.STARTING -> {
                 startButton.setImageResource(R.drawable.ic_lock_half_open)
-                enableInfoVisibility = View.GONE
+                enableInfoVisibility = View.INVISIBLE
             }
             ProxyState.PAUSED -> {
                 startButton.setImageResource(R.drawable.ic_lock_half_open)
@@ -275,7 +276,7 @@ class MainFragment : Fragment() {
                     startButtonEnabled = false
                     privateDNSVisibility = View.VISIBLE
                     statusTxt = R.string.window_main_protected
-                    enableInfoVisibility = View.GONE
+                    enableInfoVisibility = View.INVISIBLE
                 } else {
                     startButton.setImageResource(R.drawable.ic_lock_open)
                     privateDnsInfo.visibility = View.INVISIBLE
@@ -285,11 +286,11 @@ class MainFragment : Fragment() {
         }
         startButton.isEnabled = startButtonEnabled
         serverLatency.visibility = serverLatencyVisibility
+        if(serverLatencyVisibility != View.VISIBLE) serverIndicator.backgroundTintList = null
         privateDnsInfo.visibility = privateDNSVisibility
         privacyTextWrap.visibility = privacyTextVisibility
         enableInformation.visibility = enableInfoVisibility
         statusText.setText(statusTxt)
-
     }
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
