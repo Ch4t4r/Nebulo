@@ -33,12 +33,6 @@
                 android:title="@string/title_notification_allow_pause" />
 
         <androidx.preference.CheckBoxPreference
-                android:defaultValue="false"
-                android:key="show_no_connection_notification"
-                android:summary="@string/summary_show_noconnection_notification"
-                android:title="@string/title_show_noconnection_notification" />
-
-        <androidx.preference.CheckBoxPreference
                 android:defaultValue="true"
                 android:key="show_vpn_revoked_notification"
                 android:summary="@string/summary_show_revoked_notification"

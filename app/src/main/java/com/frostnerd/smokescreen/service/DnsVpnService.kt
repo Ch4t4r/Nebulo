@@ -455,7 +455,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
     }
 
     private fun showNoConnectionNotification() {
-        if (!getPreferences().showNoConnectionNotification) return
+        if (!getPreferences().enableConnectionWatchDog) return
         if (!this::noConnectionNotificationBuilder.isInitialized) {
             noConnectionNotificationBuilder = NotificationCompat.Builder(
                 this,

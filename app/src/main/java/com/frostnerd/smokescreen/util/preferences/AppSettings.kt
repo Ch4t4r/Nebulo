@@ -102,7 +102,6 @@ interface AppSettings {
 
     var bypassSearchdomains: Boolean
     var pauseOnCaptivePortal:Boolean
-    var showNoConnectionNotification:Boolean
 
     // Query logging category
     var queryLoggingEnabled: Boolean
@@ -226,7 +225,6 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     var restartVpnOnNetworkChange:Boolean by booleanPref("restart_vpn_networkchange", false)
     override var bypassSearchdomains: Boolean by booleanPref("bypass_searchdomains", true)
     override var pauseOnCaptivePortal: Boolean by booleanPref("pause_on_captive_portal", true)
-    override var showNoConnectionNotification:Boolean by booleanPref("show_no_connection_notification", false)
     var mapQueryRefusedToHostBlock:Boolean by booleanPref("map_query_refused", true)
 
     override var queryLoggingEnabled: Boolean by booleanPref("log_dns_queries", false)
