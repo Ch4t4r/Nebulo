@@ -152,9 +152,7 @@ class ServerChoosalDialog(
             defaultConfig.sortedByDescending {
                 it.name
             }.filter {
-                !it.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || !context.resources.getBoolean(
-                    R.bool.hide_adblocking_servers
-                )
+                !it.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || BuildConfig.SHOW_ALL_SERVERS
             }.filter {
                 it.servers.all { server ->
                     hasIpv4 == (TransportProtocol.IPV4 in server.supportedTransportProtocols)

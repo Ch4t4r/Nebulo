@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.net.VpnService
 import android.os.Bundle
@@ -15,7 +17,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
@@ -25,9 +31,9 @@ import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.net.URL
 
 
@@ -53,6 +59,7 @@ class MainFragment : Fragment() {
     private val vpnRequestCode: Int = 1
     private var proxyState:ProxyState = ProxyState.NOT_RUNNING
     private var vpnStateReceiver: BroadcastReceiver? = null
+    private var latencyCheckJob:Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +77,8 @@ class MainFragment : Fragment() {
         } else ProxyState.NOT_RUNNING
         updateVpnIndicators()
         context?.clearPreviousIptablesRedirect()
+        runLatencyCheck()
+        determineLatencyBounds()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -149,13 +158,14 @@ class MainFragment : Fragment() {
                 updateVpnIndicators()
             }
         }
-        serverButton.setOnClickListener {
+        mainServerWrap.setOnClickListener {
             ServerChoosalDialog(requireActivity() as AppCompatActivity) { config ->
                 updatePrivacyPolicyLink(config)
                 val prefs = requireContext().getPreferences()
                 prefs.edit {
                     prefs.dnsServerConfig = config
                 }
+                displayServer(config)
             }.show()
         }
         privacyStatementText.setOnClickListener {
@@ -182,6 +192,15 @@ class MainFragment : Fragment() {
             }
         }
         updateVpnIndicators()
+        displayServer(getPreferences().dnsServerConfig)
+    }
+
+    private fun displayServer(config:DnsServerInformation<*>) {
+        serverName.text = config.name
+        serverURL.text = if(config.hasTlsServer()) config.servers.firstOrNull()?.address?.formatToString() ?: "-"
+        else (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(true) ?: "-"
+        serverLatency.text = ""
+        serverIndicator.backgroundTintList = null
     }
 
     override fun onDestroy() {
@@ -229,42 +248,49 @@ class MainFragment : Fragment() {
 
     private fun updateVpnIndicators() {
         val privateDnsActive = requireContext().isPrivateDnsActive
-        var startButtonVisibility = View.VISIBLE
+        var startButtonEnabled = true
         var privacyTextVisibility = View.VISIBLE
+        var privateDNSVisibility = View.GONE
+        var serverLatencyVisibility = View.INVISIBLE
+        var statusTxt:Int = R.string.window_main_unprotected
+        var enableInfoVisibility = View.VISIBLE
         when(proxyState) {
             ProxyState.RUNNING -> {
-                privateDnsInfo.visibility = View.INVISIBLE
-                statusImage.setImageResource(R.drawable.ic_lock)
-                statusImage.clearAnimation()
-                startButton.setText(R.string.all_stop)
+                startButton.setImageResource(R.drawable.ic_lock)
+                serverLatencyVisibility = View.VISIBLE
+                statusTxt = R.string.window_main_protected
+                enableInfoVisibility = View.INVISIBLE
             }
             ProxyState.STARTING -> {
-                privateDnsInfo.visibility = View.INVISIBLE
-                startButton.setText(R.string.all_stop)
-                statusImage.setImageResource(R.drawable.ic_lock_half_open)
+                startButton.setImageResource(R.drawable.ic_lock_half_open)
+                enableInfoVisibility = View.INVISIBLE
             }
             ProxyState.PAUSED -> {
-                privateDnsInfo.visibility = View.INVISIBLE
-                startButton.setText(R.string.all_resume)
-                statusImage.setImageResource(R.drawable.ic_lock_half_open)
+                startButton.setImageResource(R.drawable.ic_lock_half_open)
+                statusTxt = R.string.window_main_unprotected
             }
             else -> {
-                startButton.setText(R.string.all_start)
                 if (privateDnsActive) {
-                    statusImage.setImageResource(R.drawable.ic_lock)
-                    statusImage.clearAnimation()
-                    privacyTextVisibility = View.INVISIBLE
-                    startButtonVisibility = View.INVISIBLE
-                    privateDnsInfo.visibility = View.VISIBLE
+                    startButton.setImageResource(R.drawable.ic_lock)
+                    privacyTextVisibility = View.GONE
+                    startButtonEnabled = false
+                    privateDNSVisibility = View.VISIBLE
+                    statusTxt = R.string.window_main_protected
+                    enableInfoVisibility = View.INVISIBLE
                 } else {
-                    statusImage.setImageResource(R.drawable.ic_lock_open)
-                    statusImage.clearAnimation()
+                    startButton.setImageResource(R.drawable.ic_lock_open)
                     privateDnsInfo.visibility = View.INVISIBLE
+                    statusTxt = R.string.window_main_unprotected
                 }
             }
         }
-        startButton.visibility = startButtonVisibility
+        startButton.isEnabled = startButtonEnabled
+        serverLatency.visibility = serverLatencyVisibility
+        if(serverLatencyVisibility != View.VISIBLE) serverIndicator.backgroundTintList = null
+        privateDnsInfo.visibility = privateDNSVisibility
         privacyTextWrap.visibility = privacyTextVisibility
+        enableInformation.visibility = enableInfoVisibility
+        statusText.setText(statusTxt)
     }
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
@@ -289,6 +315,57 @@ class MainFragment : Fragment() {
                     text?.visibility = View.GONE
                 }
             }
+        }
+    }
+
+    private var greatLatencyThreshold = 100
+    private var goodLatencyThreshold = 170
+    private  var averageLatencyThreshold = 280
+    private fun runLatencyCheck() {
+        latencyCheckJob = launchWithLifecycle(cancelOn = setOf(Lifecycle.Event.ON_PAUSE)) {
+            if(isActive) {
+                launchUi {
+                    val latency = DnsVpnService.currentTrafficStats?.floatingAverageLatency?.takeIf { it > 0 }
+                    if(latency != null) {
+                        serverLatency.text = latency.let { "$it\nms" }
+                        val color = when {
+                            latency < greatLatencyThreshold -> Color.parseColor("#43A047")
+                            latency < goodLatencyThreshold -> Color.parseColor("#9CCC65")
+                            latency < averageLatencyThreshold -> Color.parseColor("#FFB300")
+                            else -> Color.parseColor("#E53935")
+                        }
+                        serverIndicator.backgroundTintList = ColorStateList.valueOf(color)
+                    }
+                    delay(750)
+                    runLatencyCheck()
+                }
+            }
+        }
+    }
+
+    private fun determineLatencyBounds() {
+        // Use the ping for the best servers to deviate the thresholds
+        // The deviation will only increase the thresholds, not decrease it.
+        // This is to avoid measuring smaller servers on the benchmarks of the "better" ones
+        // But if a "good" server has a bad connection, chances are the smaller ones do as well
+        // And in that case the smaller server should be measured on the bigger ones to have a point of reference
+        // as the values I chose are between average to best-case, not worst-case.
+        launchWithLifecycle {
+            val fastServerAverage = (AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(1500) {
+                setOf(it[0], it[1], it[3]) // Google, CF, Quad9
+            } + AbstractTLSDnsHandle.suspendUntilKnownServersArePopulated(1500) {
+                setOf(it[1], it[0]) //Quad9, CF
+            }).mapNotNull {
+                DnsSpeedTest(it as DnsServerInformation<*>, log = {}).runTest(4)
+            }.let {
+                it.sum() / it.size
+            }
+            val rawFactor = maxOf(greatLatencyThreshold.toDouble(), greatLatencyThreshold*(fastServerAverage.toDouble()/greatLatencyThreshold))/greatLatencyThreshold
+            val adjustmentFactor = 1 + (rawFactor - 1)/2
+            val pingStepAdjustment = (12*rawFactor)-12 //High deviation from 100ms -> Higher differences between steps in rating
+            greatLatencyThreshold = (greatLatencyThreshold * adjustmentFactor + pingStepAdjustment*0.8).toInt()
+            goodLatencyThreshold = (goodLatencyThreshold * adjustmentFactor + pingStepAdjustment*1.2).toInt()
+            averageLatencyThreshold = (goodLatencyThreshold * adjustmentFactor + pingStepAdjustment*1.7).toInt()
         }
     }
 

@@ -96,6 +96,10 @@
     <string name="windows_querylogging_usedserver_cache">Resolved with cache</string>
 
     <string name="window_main_privatedns_info">Private DNS is active, your queries are already protected. Enable Nebulo if you wish to use DNS-over-HTTPS or other useful features.\nTo enable Nebulo disable Private DNS.</string>
+    <string name="window_main_protected">Protected!</string>
+    <string name="window_main_unprotected">Not protected</string>
+    <string name="window_main_click_to_enable">Click to enable.</string>
+
 
     <string name="restart_app_for_changes">Restart the app for changes to take effect.</string>
     <string name="restart_app">Restart</string>
@@ -113,6 +117,27 @@
     <string name="warning_server_currently_unstable">The server %1s seems to be unstable right now.</string>
     <string name="warning_server_currently_unstable_expanded">The server %1s seems to be unstable right now, impacting your browsing speed. Consider switching to a more stable server.</string>
 
+    <string name="appintro_first_title">Welcome to Nebulo.</string>
+    <string name="appintro_first_description">Nebulo is an app to protect your privacy and secure your device.\n\nTake back control of data your ISP or other entities have treated as theirs for a long time.</string>
+
+    <string name="appintro_second_title">Your privacy matters</string>
+    <string name="appintro_second_description">By adding encryption to DNS, one of the oldest protocol of the Internet, it is in your hands.\n\nMake it harder for your ISP to track you by using DNS-over-HTTPS and DNS-over-TLS with Nebulo.</string>
+
+    <string name="appintro_third_title">Fully equipped for greatness</string>
+    <string name="appintro_third_description">Nebulo comes bundled with a ton of useful features like monitoring DNS activity, PIN protection, a speed test and much more.\n\nExplore the app to discover what free open-source software has to offer.</string>
+
+    <string name="appintro_forth_title">One last thing</string>
+    <string name="appintro_forth_description">You can configure Nebulo to be used as a system-wide ad- and tracking-blocker.\n\nYou are even able to use it together with some firewall apps to increase your control over your privacy even more.</string>
+
+    <string name="appintro_server_choose_title">First things first</string>
+    <string name="appintro_server_choose_description">Which kind of server do you want to use in Nebulo?</string>
+    <string name="appintro_server_choose_disclaimer">There are servers which fit multiple or even all categories. Nebulo automatically chooses the fastest one.</string>
+
+    <string name="appintro_server_choose_first">The fastest one</string>
+    <string name="appintro_server_choose_second">A fast server, with a focus on privacy</string>
+    <string name="appintro_server_choose_third">A true privacy focused server</string>
+    <string name="appintro_server_choose_forth">A server which protects me from harmful websites and apps</string>
+    <string name="appintro_server_choose_adblock">A server which blocks ads and tracking</string>
 
     <plurals name="dnsrule_total_resolve_count">
         <item quantity="zero">%1d queries have been handled by DNS rules this far</item>

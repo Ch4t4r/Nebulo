@@ -29,26 +29,11 @@
             android:src="@drawable/ic_info"
             android:tint="?android:attr/textColor" />
 
-    <ImageButton
-            android:id="@+id/refresh"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center_vertical"
-            android:layout_below="@id/infoButton"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="4dp"
-            android:adjustViewBounds="true"
-            android:padding="8dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_refresh"
-            android:tint="?android:attr/textColor" />
-
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_centerVertical="true"
             android:layout_toStartOf="@id/infoButton"
             android:layout_toEndOf="@id/icon"
             android:orientation="vertical">
@@ -59,13 +44,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold" />
-
-        <TextView
-                android:id="@+id/latency"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="- ms"
-                tools:ignore="HardcodedText" />
 
         <TextView
                 android:id="@+id/dns1"

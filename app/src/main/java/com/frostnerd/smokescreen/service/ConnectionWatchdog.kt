@@ -1,5 +1,6 @@
 package com.frostnerd.smokescreen.service
 
+import com.frostnerd.smokescreen.Logger
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import kotlinx.coroutines.*
 
@@ -27,13 +28,18 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
                          val badLatencyThresholdMs:Int = 750,
                          val badPacketLossThresholdPercent:Int = 30,
                          private val onBadServerConnection:() -> Unit,
-                         private val onBadConnectionResolved:() -> Unit) {
+                         private val onBadConnectionResolved:() -> Unit,
+                         private val logger:Logger?,
+                         private val advancedLogging:Boolean = false
+                         ) {
     val supervisor = SupervisorJob()
     val scope = CoroutineScope(supervisor + Dispatchers.IO)
     private var running = true
     private var latencyAtLastCheck:Int? = null
     private var packetLossAtLastCheck:Int? = null
     private var packetCountAtLastCheck:Int? = null
+    private var lastFailedAnswerCount:Int = 0
+    private var lastTotalPacketCount:Int = 0
     private var lastCallbackCall:Long? = null
     private var measurementsWithBadConnection:Int = 0
 
@@ -43,20 +49,36 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
         }
     }
 
+    private fun logFine(text:String) {
+        if(advancedLogging) logger?.log(text, "ConnectionWatchdog")
+    }
+
+    private fun log(text:String) {
+        logger?.log(text, "ConnectionWatchdog")
+    }
+
     private suspend fun checkConnection() {
         delay(checkIntervalMs)
+        log("Beginning connection check")
         if(trafficStats.packetsReceivedFromDevice >= 15
             && trafficStats.bytesSentToDevice > 0
             && packetCountAtLastCheck?.let { trafficStats.packetsReceivedFromDevice - it > 10 } != false
         ) { // Not enough data to act on.
             val currentLatency = trafficStats.floatingAverageLatency.toInt()
-            val currentPacketLossPercent = (100*trafficStats.failedAnswers)/(trafficStats.packetsReceivedFromDevice*0.9)
+            val currentPacketLossPercent = (100*(trafficStats.failedAnswers - lastFailedAnswerCount))/((trafficStats.packetsReceivedFromDevice - lastTotalPacketCount)*0.9)
+            lastFailedAnswerCount = trafficStats.failedAnswers.toInt()
+            lastTotalPacketCount = trafficStats.packetsReceivedFromDevice.toInt()
+
+            logFine("Current latency: $currentLatency")
+            logFine("Current packet loss: $currentPacketLossPercent")
 
             val hasBadConnection = if(currentLatency > badLatencyThresholdMs*1.3 ||
                 (latencyAtLastCheck?.let { it > badLatencyThresholdMs } == true && currentLatency > badLatencyThresholdMs)) {
                 true
             } else currentPacketLossPercent > badPacketLossThresholdPercent*1.3 || (
                         packetLossAtLastCheck?.let { it > badPacketLossThresholdPercent } == true && currentPacketLossPercent > badPacketLossThresholdPercent)
+
+            logFine("Deeming this connection bad: $hasBadConnection")
 
             if(hasBadConnection) {
                 measurementsWithBadConnection++
@@ -70,6 +92,7 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
             packetLossAtLastCheck = currentPacketLossPercent.toInt()
         }
         if(running) {
+            log("Connection check done.")
             scope.launch {
                 checkConnection()
             }
@@ -78,6 +101,7 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
 
     private fun callCallback() {
         if(!running) return
+        logFine("Calling callback.")
         if(debounceCallbackByMs == null || lastCallbackCall == null) onBadServerConnection()
         else if(System.currentTimeMillis() - lastCallbackCall!! > debounceCallbackByMs) onBadServerConnection()
         lastCallbackCall = System.currentTimeMillis()

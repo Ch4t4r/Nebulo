@@ -2,7 +2,7 @@ package com.frostnerd.smokescreen.util.preferences
 
 import android.content.SharedPreferences
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
-import com.frostnerd.dnstunnelproxy.DnsServerInformationTypeAdapter
+import com.frostnerd.dnstunnelproxy.json.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences

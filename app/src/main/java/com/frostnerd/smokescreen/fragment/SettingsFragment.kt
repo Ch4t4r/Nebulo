@@ -254,7 +254,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val helpGeneric = findPreference("nonvpn_help_generic")
         port.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().toIntOrNull()?.let { it in 1025..65535 } == true) {
-                port.summary = getString(R.string.summary_local_server_port, newValue.toString())
+                port.summary = getString(R.string.summary_local_server_port)
                 connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, newValue.toString())
                 true
             } else {
@@ -272,7 +272,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
             true
         }
-        port.summary = getString(R.string.summary_local_server_port, requireContext().getPreferences().dnsServerModePort.toString())
+        port.summary = getString(R.string.summary_local_server_port)
         connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, requireContext().getPreferences().dnsServerModePort.toString())
         val rooted = context?.isDeviceRooted() ?: false
         if(!rooted) {
