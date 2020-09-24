@@ -3,7 +3,7 @@
     <string name="preference_category_nonvpnmode">وضع من غير VPN</string>
     <string name="summary_delete_queries">انقر هنا لحذف جميع الاستعلامات المسجلة</string>
     <string name="title_delete_queries">مسح الاستعلامات</string>
-    <string name="summary_export_queries">‮–</string>
+    <string name="summary_export_queries">تصدير الاستعلامات كملف CSV (%1d استعلامات)</string>
     <string name="title_export_queries">تصدير الاستعلامات</string>
     <string name="summary_log_queries">تسجيل جميع الاستفسارات وردودهم</string>
     <string name="title_log_queries">تسجيل الاستعلام</string>
