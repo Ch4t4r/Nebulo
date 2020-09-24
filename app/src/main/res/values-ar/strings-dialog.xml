@@ -5,7 +5,7 @@
     <string name="querylog_filter_info">حدد أنواع الاستعلامات التي تريد رؤيتها</string>
     <string name="querylog_filter_title">تصفية سجل الاستعلام</string>
     <string name="dialog_dnsrules_status_sourcenotfound">هذا المضيف موجود في قواعد DNS ، لكن المصدر غير معروف.</string>
-    <string name="dialog_dnsrules_status_fromsource">هذا المضيف جزء من المصدر٪ 1s</string>
+    <string name="dialog_dnsrules_status_fromsource">هذا المضيف جزء من المصدر% 1s</string>
     <string name="dialog_dnsrules_status_userrule">هذا المضيف هو جزء من قواعد DNS التي حددتها.</string>
     <string name="dialog_dnsrules_status_not_found">لم يتم العثور على قاعدة DNS لهذا المضيف.</string>
     <string name="dialog_dnsrules_search_message">أدخل مضيفًا أدناه للبحث عنه في قواعد DNS.</string>
@@ -82,17 +82,17 @@
     <string name="dialog_newhostsource_title">مصدر قاعدة جديد</string>
     <string name="dialog_clearuserrules_message">هل تريد مسح جميع قواعد DNS؟ هذا لا يمكن التراجع عنها.</string>
     <string name="dialog_clearuserrules_title">مسح جميع قواعد DNS؟</string>
-    <string name="dialog_deletehostsource_message">هل تريد بالتأكيد حذف المصدر المضيف٪ 1s؟ لا يمكن التراجع عن هذا ، ستتم إزالة المضيفين من هذا المصدر.</string>
-    <string name="dialog_deletehostsource_title">هل تريد حذف٪ 1s؟</string>
-    <string name="dialog_speedtest_useserver_message">هل تريد استخدام الخادم٪ 1s؟ لقد صنفت٪ 2d من٪ 3d مع وقت استجابة٪ 4d ms.</string>
+    <string name="dialog_deletehostsource_message">هل تريد بالتأكيد حذف المصدر المضيف %1s؟ لا يمكن التراجع عن هذا ، ستتم إزالة المضيفين من هذا المصدر.</string>
+    <string name="dialog_deletehostsource_title">هل تريد حذف %1s؟</string>
+    <string name="dialog_speedtest_useserver_message">هل تريد استخدام الخادم %1s؟ لقد صنفت %2d من %3d مع وقت استجابة %4d ms.</string>
     <string name="dialog_speedtest_useserver_title">اختر سيرفر</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">تم اختبار٪ 1d من الخوادم
-\n يمكن الوصول إلى٪ 2d من خوادم DoT ، ولا يمكن الوصول إلى٪ 3d
-\n يمكن الوصول إلى٪ 4d DoH من الخوادم ، ولا يمكن الوصول إلى٪ 5d
-\n متوسط وقت الاستجابة:٪ 6d ms.
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">تم اختبار%1d من الخوادم
+\n يمكن الوصول إلى %2d من خوادم DoT ، ولا يمكن الوصول إلى %3d
+\n يمكن الوصول إلى %4d DoH من الخوادم ، ولا يمكن الوصول إلى %5d
+\n متوسط وقت الاستجابة: %6d ms.
 \n
-\n الخادم الأسرع:٪ 7s
-\n أبطأ خادم:٪ 8s</string>
+\n الخادم الأسرع: %7s
+\n أبطأ خادم: %8s</string>
     <string name="dialog_speedresult_title">نتائج اختبار السرعة</string>
     <string name="dialog_join_group_positive">أجل!</string>
     <string name="dialog_join_group_message">مرحبا!
@@ -136,7 +136,7 @@
     <string name="dialog_pin_hint">رمز الحماية PIN</string>
     <string name="dialog_pin_message">من فضلك قدم رمز الحماية PIN الخاص بك.</string>
     <string name="dialog_query_export_message">يرجى الانتظار بينما يتم تصدير الاستعلامات</string>
-    <string name="dialog_query_export_title">جارٍ تصدير الاستعلامات ...</string>
+    <string name="dialog_query_export_title">جارٍ تصدير الاستعلامات …</string>
     <string name="dialog_about_licenses">التراخيص</string>
     <string name="dialog_changelog_dont_show_again">لا تعرضه مرة اخرى</string>
     <string name="dialog_changelog_infotext">تم تحديث التطبيق منذ آخر مرة قمت بفتحه. في القائمة التالية يمكنك مشاهدة سجل التغيير. حدد المربع أدناه ولن ترى هذه الرسالة في المستقبل.</string>
@@ -157,7 +157,7 @@
     <string name="dialog_logexport_text">كيف تريد مشاركة السجلات؟</string>
     <string name="dialog_logexport_loading_title">تحضير السجلات</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">تعذر استيراد الخوادم.
-\n(٪ 1s)</string>
+\n(% 1s)</string>
     <string name="dialog_serverimportfailed_text">تعذر استيراد الخادم (الخوادم).</string>
     <string name="dialog_serverimportfailed_title">فشل الاستيراد</string>
     <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">يرجى تحديد الخوادم التي ترغب في استيرادها.
@@ -166,27 +166,27 @@
     <string name="dialog_serverimport_servertype_dot">النوع: DNS-over-TLS (DoT) برتكول الحماية</string>
     <string name="dialog_serverimport_servertype_doh">النوع: DNS-over-HTTPS (DoH) برتكول التشفير</string>
     <string name="dialog_serverimport_experimental">تجريبي</string>
-    <string name="dialog_serverimport_priority">الأولوية٪ 1d</string>
+    <string name="dialog_serverimport_priority">الأولوية%1d</string>
     <string name="dialog_serverimport_done">تم</string>
     <plurals name="dialog_serverimport_title">
-        <item quantity="zero">لم يتم استيراد سيرفر ٪ 1d</item>
-        <item quantity="one">استيراد سيرفر ٪ 1d</item>
-        <item quantity="two">استيراد سيرفرين ٪ 1d</item>
-        <item quantity="few">استيراد سيرفر ٪ 1d</item>
-        <item quantity="many">استيراد سيرفرات ٪ 1d</item>
-        <item quantity="other">استيراد السيرفرات ٪ 1d</item>
+        <item quantity="zero">لم يتم استيراد سيرفر %1d</item>
+        <item quantity="one">استيراد سيرفر %1d</item>
+        <item quantity="two">استيراد سيرفرين %1d</item>
+        <item quantity="few">استيراد سيرفر %1d</item>
+        <item quantity="many">استيراد سيرفرات %1d</item>
+        <item quantity="other">استيراد السيرفرات %1d</item>
     </plurals>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="zero">لم يتم استبعاد اي تطبيق٪ 1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="one">يتم استبعاد تطبيق واحد ٪ 1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="two">يتم استبعاد تطبيقين ٪ 1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="few">يتم استبعاد تطبيق ٪ 1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="many">يتم استبعاد تطبيقات ٪ 1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="other">يتم استبعاد التطبيقات ٪ 1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="zero">لم يتم استبعاد اي تطبيق%1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="one">يتم استبعاد تطبيق واحد %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="two">يتم استبعاد تطبيقين %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="few">يتم استبعاد تطبيق %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="many">يتم استبعاد تطبيقات %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="other">يتم استبعاد التطبيقات %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
     </plurals>
     <string name="dialog_appchoosal_whitelist">استخدم DoH / DoT فقط في التطبيقات المحددة</string>
     <string name="dialog_appchoosal_showsystemapps">إظهار تطبيقات النظام</string>
-    <string name="dialog_deleteconfig_text">هل تريد حذف التكوين٪ 1 $ s؟</string>
+    <string name="dialog_deleteconfig_text">هل تريد حذف التكوين %1s؟</string>
     <string name="dialog_deleteconfig_title">حذف التكوين؟</string>
     <string name="dialog_newserver_secondaryserver">الخادم الثانوي (اختياري)</string>
     <string name="dialog_newserver_primaryserver">الخادم الأساسي</string>

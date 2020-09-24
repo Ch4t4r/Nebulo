@@ -17,7 +17,7 @@
 \n© دانيال وولف 2019
 \nمرخص بموجب GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
-    <string name="main_dnssurveillance_privacystatement">بيان الخصوصية لـ٪ 1s</string>
+    <string name="main_dnssurveillance_privacystatement">بيان الخصوصية لـ%1s</string>
     <string name="main_dnssurveillance_infotext">كن على علم بأن خادم DNS الذي تتصل به قادر على تسجيل المواقع التي تزورها. تحقق من بيانات الخصوصية المعنية لمزيد من المعلومات.</string>
     <string name="error_cannot_open_settings">لا يمكن فتح إعدادات النظام</string>
     <string name="error_webview_missing">لم يتم العثور على حزمة WebView ، هل يتم تحديثها أو إزالتها حاليًا؟</string>
@@ -73,11 +73,11 @@
     <string name="window_dnsrules_hostalreadyexists">هناك بالفعل قاعدة لهذا المضيف</string>
     <plurals name="window_dnsrules_subtitle">
         <item quantity="zero">%1d قاعدة</item>
-        <item quantity="one"></item>
-        <item quantity="two"></item>
-        <item quantity="few"></item>
-        <item quantity="many"></item>
-        <item quantity="other"></item>
+        <item quantity="one">%1d قاعدة</item>
+        <item quantity="two">%1d قاعدة</item>
+        <item quantity="few">%1d قاعدة</item>
+        <item quantity="many">%1d قاعدة</item>
+        <item quantity="other">%1d قاعدة</item>
     </plurals>
     <string name="window_dnsrules_customhosts">استضافات خاصة</string>
     <string name="button_main_dnsrules">قواعد DNS</string>

@@ -194,6 +194,7 @@
 
     <string-array name="languages">
         <item>System language</item>
+        <item>Arabic</item>
         <item>Chinese (Simplified)</item>
         <item>Catalan</item>
         <item>Dutch</item>
@@ -210,6 +211,7 @@
     </string-array>
     <string-array name="language_values">
         <item>auto</item>
+        <item>ar</item>
         <item>zh_rCN</item>
         <item>ca</item>
         <item>nl</item>

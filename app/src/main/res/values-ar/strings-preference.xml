@@ -51,13 +51,13 @@
     <string name="title_enable_logging">تمكين التسجيل</string>
     <string name="preference_category_logging">التسجيل</string>
     <string name="summary_dnscache_nxdomaincachetime">تغيير مقدار الوقت الذي تم فيه تخزين طلبات NXDOMAIN مؤقتًا. يؤدي ذلك إلى تحسين أداء المجالات غير الموجودة (على سبيل المثال ، إذا كانت محظورة)
-\nالحالي:٪ 1d ثانية</string>
+\nالحالي: %1d ثانية</string>
     <string name="title_dnscache_nxdomaincachetime">وقت التخزين المؤقت لـ NXDomain (بالثواني)</string>
     <string name="summary_dnscache_customcachetime">تغيير مدة تخزين جميع الطلبات في ذاكرة التخزين المؤقت بغض النظر عما إذا كان وقت التخزين المؤقت الافتراضي لها أطول. قد تتسبب فترات التخزين المؤقت الطويلة في عدم تزامن البيانات المخزنة مؤقتًا مع البيانات الفعلية.
-\nالحالي:٪ 1d ثانية</string>
+\nالحالي: %1d ثانية</string>
     <string name="title_dnscache_customcachetime">تخصيص وقت ذاكرة التخزين المؤقت (بالثواني)</string>
     <string name="summary_dnscache_minimum_cache_time">يجب تخزين الحد الأدنى من إدخالات الوقت في ذاكرة التخزين المؤقت ، بغض النظر عما إذا كان وقت التخزين المؤقت الافتراضي أقصر. قد تتسبب فترات التخزين المؤقت الطويلة في عدم تزامن البيانات المخزنة مؤقتًا مع البيانات الفعلية.
-\nالحالي:٪ 1d ثانية</string>
+\nالحالي: %1d ث</string>
     <string name="title_dnscache_minimum_cache_time">الحد الأدنى لوقت التخزين المؤقت</string>
     <string name="summary_dnscache_usedefaulttimes">احتفظ بالطلبات في ذاكرة التخزين المؤقت طالما أن خادم DNS يتواصل باستخدام TTL</string>
     <string name="title_dnscache_usedefaulttimes">وقت التخزين المؤقت الافتراضي</string>
@@ -72,8 +72,8 @@
 \nيحتوي النظام بالفعل على ذاكرة تخزين مؤقت ، قم بتمكينها ان اردت التحكم بها بشكل افضل</string>
     <string name="title_dnscache_enabled">استخدم ذاكرة التخزين المؤقتة لـ DNS</string>
     <string name="preference_category_cache">التحكم في ذاكرة التخزين المؤقت</string>
-    <string name="summary_preference_change_pin">تغيير رمز الحماية، استخدم الارقام 1,2,3 فقط
-\nرمز الحماية PIN الخاص بك هو :٪ 1s</string>
+    <string name="summary_preference_change_pin">تغيير رمز الحماية، استخدم الارقام …,1,2,3 فقط
+\nرمز الحماية PIN الخاص بك هو : %1s</string>
     <string name="title_preference_change_pin">تغيير رمز الحماية PIN</string>
     <string name="summary_preference_pin_use_fingerprint">السماح ببصمة الاصبع بدلا عن رمز الحماية PIN</string>
     <string name="title_preference_pin_use_fingerprint">السماح ببصمة الاصبع</string>
@@ -128,7 +128,7 @@
     <string name="title_iptables_mode">استخدام الجدار الناري</string>
     <string name="preference_category_iptables">الجدار الناري</string>
     <string name="summary_local_server_port">منفذ سيرفر DNS الذي سيتم استضافته. يسمح فقط بالمنافذ فوق 1024.
-\nحاليًا:٪ 1s</string>
+\nحاليًا: %1s</string>
     <string name="title_local_server_port">منفذ الخادم</string>
     <string name="summary_run_without_vpn">عند تحديده ، يستضيف Nebulo خادم DNS على جهازك</string>
     <string name="title_run_without_vpn">تشغيل من غير VPN</string>

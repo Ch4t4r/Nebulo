@@ -5,14 +5,14 @@
     <string name="notification_pin_title">مطلوب رمز الحماية PIN</string>
     <string name="notification_ruleexportfinished_message">%1d تم تصدير قواعد</string>
     <string name="notification_ruleexportfinished_title">انتهى تصدير قاعدة DNS</string>
-    <string name="notification_ruleexport_secondarymessage">جارٍ تحضير التصدير ...</string>
-    <string name="notification_ruleexport_message">قواعد التصدير (%1d/%2d)</string>
+    <string name="notification_ruleexport_secondarymessage">جارٍ تحضير التصدير …</string>
+    <string name="notification_ruleexport_message">قواعد التصدير (%2d/%1d)</string>
     <string name="notification_ruleexport_title">تصدير قاعدة DNS</string>
     <string name="notification_ruleimportfinished_message">تم استيراد قواعد%1d (تم حذف%2$d تكرار)</string>
     <string name="notification_ruleimportfinished_title">انتهى استيراد قاعدة DNS</string>
-    <string name="notification_ruleimport_tertiarymessage">جارٍ إنهاء الاستيراد ...</string>
-    <string name="notification_ruleimport_secondarymessage">جارٍ تحضير الاستيراد ...</string>
-    <string name="notification_ruleimport_message">استيراد قواعد DNS من %1s (%2s)</string>
+    <string name="notification_ruleimport_tertiarymessage">جارٍ إنهاء الاستيراد …</string>
+    <string name="notification_ruleimport_secondarymessage">جارٍ تحضير الاستيراد …</string>
+    <string name="notification_ruleimport_message">استيراد قواعد DNS من%1s (%2s)</string>
     <string name="notification_ruleimport_title">استيراد قاعدة DNS</string>
     <string name="notification_appcrash_message">تحطم نيبولو. انقر هنا للذهاب إلى القائمة الرئيسية وإعادة تشغيل التطبيق ، إذا لزم الأمر</string>
     <string name="notification_appcrash_title">Nebulo تعطل</string>
@@ -20,7 +20,7 @@
     <string name="notification_vpnrestart_title">إعادة تشغيل Vpn</string>
     <string name="notification_noconnection_text">لا يقوم التطبيق حاليًا بإعادة توجيه استعلامات DNS الخاصة بك لأنه إما ليس لديك اتصال او اتصالك بالانترنت سيئ</string>
     <string name="notification_noconnection_title">لا يوجد اتصال</string>
-    <string name="notification_main_subtext">%1$d من الاستعلامات حتى الآن</string>
+    <string name="notification_main_subtext">%1d من الاستعلامات حتى الآن</string>
     <string name="notification_multipleuserswarning_text">لم يتمكن Nebulo من بدء تشغيل VPN الوهمي بسبب خطأ في Android. يحدث هذا عندما يكون هناك عدة مستخدمين على جهازك.</string>
     <string name="notification_multipleuserswarning_title">تعذر إنشاء شبكة افتراضية خاصة وهمية</string>
     <string name="notification_privatednswarning_text">يرجى تعطيل نظام عنوان DNS الخاص في إعدادات النظام لاستخدام Nebulo.</string>
@@ -38,24 +38,19 @@
     <string name="notification_service_killed_message">يبدو أن النظام قد أوقف التطبيق سابقًا. انقر هنا لمعرفة المزيد</string>
     <string name="notification_main_title_https">Nebulo (برتكول التشفير DoH)</string>
     <string name="notification_main_title_tls">Nebulo (برتكول الحماية DoT)</string>
-    <string name="notification_main_text_with_secondary_whitelist">"يتم إرسال الاستعلامات إلى%1$s و%2$s
+    <string name="notification_main_text_with_secondary_whitelist">يتم إرسال الاستعلامات إلى%1s و%2s
 \n
-\n%3$d تستخدم تطبيقات  DoH / DoT
-\n%4$d إدخالات في ذاكرة التخزين المؤقت"</string>
-    <string name="notification_main_text_whitelist">"يتم إرسال الاستعلامات إلى%1$s
+\n%3d تستخدم تطبيقات  DoH / DoT</string>
+    <string name="notification_main_text_whitelist">يتم إرسال الاستعلامات إلى%1s
 \n
-\n%2$d تستخدم تطبيقات  DoH / DoT
+\n%2d تستخدم تطبيقات  DoH / DoT</string>
+    <string name="notification_main_text_with_secondary">يتم إرسال الاستعلامات إلى%1s و %2s
 \n
-\n%3$d إدخالات في ذاكرة التخزين المؤقت"</string>
-    <string name="notification_main_text_with_secondary">يتم إرسال الاستعلامات إلى%1$s و %2$s
+\nتطبيقات %3d مستبعدة من DoH / DoT</string>
+    <string name="notification_main_text">يتم إرسال الاستعلامات إلى %1s
 \n
-\nتطبيقات %3$d مستبعدة من DoH / DoT
-\n%4$d إدخالات في ذاكرة التخزين المؤقت</string>
-    <string name="notification_main_text">يتم إرسال الاستعلامات إلى %1$s
-\n
-\nتم %2$d تطبيقات من DoH / DoT
-\n%3$d إدخالات في ذاكرة التخزين المؤقت</string>
-    <string name="notification_simple_text">الخادم الحالي: %1$s</string>
+\nتم %2$d تطبيقات من DoH / DoT</string>
+    <string name="notification_simple_text">الخادم الحالي: %1s</string>
     <string name="notification_channel_badconnection_description">القناة المستخدمة للإشعارات عندما يكون لدى Nebulo اتصال سيئ</string>
     <string name="notification_channel_badconnection">قناة إعلام اتصال سيئة</string>
     <string name="notification_channel_dnsrules_description">القناة المستخدمة لاستيراد / تصدير قواعد DNS</string>
