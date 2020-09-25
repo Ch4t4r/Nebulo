@@ -204,4 +204,8 @@
 \n Mostra quanto tempo ci vuole perché Nebulo invii una richiesta e ottenga una risposta dal server DNS. Il valore visualizzato non è sempre quello più attuale e sono possibili fluttuazioni.
 \n Ciò può far sì che il valore visualizzato sia più alto di quanto non lo sia perché è diventato più basso da quando è stato misurato.</string>
     <string name="dialog_latency_sidebar_title">Informazioni sulla latenza</string>
+    <string name="dialog_open_faq">Vuoi dare un\'occhiata alle domande frequenti e alla documentazione per questa funzionalità\?</string>
+    <string name="querylog_filter_shorten_domain">Mostra versione ridotta del dominio nella lista</string>
+    <string name="querylog_filter_type_dnsrules">Risolto dalle regole DNS</string>
+    <string name="querylog_filter_type_cache">Risolto dalla cache DNS</string>
 </resources>
