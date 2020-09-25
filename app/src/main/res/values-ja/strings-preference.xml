@@ -64,8 +64,7 @@
     <string name="title_check_iptables">iptablesの確認</string>
     <string name="summary_iptables_mode">iptablesを使ってDNSクエリをNebuloに転送します。この機能はroot権限が必要です。非VPNモードでもサードパーティアプリは必要ありません。IPv6ネットワーク下では、正常に動作しない可能性があります。</string>
     <string name="title_iptables_mode">iptablesを使用</string>
-    <string name="summary_local_server_port">設置されるDNSサーバーの使用ポート番号を指定します。1024以上が指定可能です。
-\n現在のポート番号: %1s</string>
+    <string name="summary_local_server_port">設置されるDNSサーバーの使用ポート番号を指定します。1024以上が指定可能です。</string>
     <string name="title_local_server_port">ポート番号</string>
     <string name="summary_run_without_vpn">チェックを入れると、Nebuloは端末内にDNSサーバーを設置します</string>
     <string name="title_run_without_vpn">非VPNで稼働</string>
