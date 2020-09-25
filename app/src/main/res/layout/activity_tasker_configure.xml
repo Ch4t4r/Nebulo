@@ -84,6 +84,8 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:inputType="textUri"
+                            android:textDirection="locale"
+                            android:textAlignment="viewStart"
                             android:maxLines="1"
                             android:nextFocusDown="@id/secondaryServer" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -103,6 +105,8 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:inputType="textUri"
+                            android:textDirection="locale"
+                            android:textAlignment="viewStart"
                             android:maxLines="1"
                             android:nextFocusUp="@id/primaryServer" />
                 </com.google.android.material.textfield.TextInputLayout>

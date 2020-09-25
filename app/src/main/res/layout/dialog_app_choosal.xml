@@ -47,6 +47,8 @@
                     android:hint="@string/hint_searchterm"
                     android:id="@+id/search"
                     android:inputType="text"
+                    android:textDirection="locale"
+                    android:textAlignment="viewStart"
                     android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -39,6 +39,8 @@
                     android:inputType="text"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
+                    android:textDirection="locale"
+                    android:textAlignment="viewStart"
                     android:nextFocusDown="@id/secondaryServer"
                     android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -56,6 +58,8 @@
                     android:layout_width="match_parent"
                     android:id="@+id/primaryServer"
                     android:inputType="textUri"
+                    android:textDirection="locale"
+                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:nextFocusDown="@id/secondaryServer"
@@ -77,6 +81,8 @@
                     android:inputType="textUri"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
+                    android:textDirection="locale"
+                    android:textAlignment="viewStart"
                     android:nextFocusDown="@id/primaryServer"
                     android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>

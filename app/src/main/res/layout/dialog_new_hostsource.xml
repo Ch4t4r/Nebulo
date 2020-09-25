@@ -20,6 +20,8 @@
                 android:layout_width="match_parent"
                 android:hint="@string/dialog_newhostsource_name"
                 android:id="@+id/name"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -39,6 +41,8 @@
                     android:layout_width="match_parent"
                     android:hint="@string/dialog_newhostsource_url"
                     android:id="@+id/url"
+                    android:textDirection="locale"
+                    android:textAlignment="viewStart"
                     android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
