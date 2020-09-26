@@ -29,6 +29,8 @@
                 android:hint="@string/hint_searchterm"
                 android:id="@+id/searchTerm"
                 android:text="example.com"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
                 tools:ignore="HardcodedText"
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>

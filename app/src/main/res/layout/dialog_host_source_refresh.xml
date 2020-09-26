@@ -53,6 +53,8 @@
                         android:imeOptions="actionNext"
                         android:text="12"
                         android:maxLines="1"
+                        android:textDirection="locale"
+                        android:textAlignment="viewStart"
                         android:layout_height="wrap_content"
                         tools:ignore="HardcodedText" />
             </com.google.android.material.textfield.TextInputLayout>

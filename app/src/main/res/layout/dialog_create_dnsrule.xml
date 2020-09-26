@@ -22,6 +22,8 @@
                 android:hint="@string/dialog_newdnsrule_hint_host"
                 android:id="@+id/host"
                 android:inputType="textUri"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
     
@@ -47,6 +49,8 @@
                 android:hint="@string/dialog_newdnsrule_hint_ipv4address"
                 android:id="@+id/ipv4Address"
                 android:text="0.0.0.0"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
                 tools:ignore="HardcodedText"
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,6 +68,8 @@
                 android:hint="@string/dialog_newdnsrule_hint_ipv6address"
                 android:id="@+id/ipv6Address"
                 android:text="::1"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
                 tools:ignore="HardcodedText"
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>

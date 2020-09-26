@@ -17,7 +17,7 @@
 \n© دانيال وولف 2019
 \nمرخص بموجب GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
-    <string name="main_dnssurveillance_privacystatement">بيان الخصوصية لـ%1s</string>
+    <string name="main_dnssurveillance_privacystatement">بيان الخصوصية لـ %1s</string>
     <string name="main_dnssurveillance_infotext">عليك التاكد بان سيرفر DNS المتصل به لديه الحق بالوصول للموقع، تاكد من صفحة الخصوصية الخاصة به للتاكد من ذلك.</string>
     <string name="error_cannot_open_settings">لا يمكن فتح إعدادات النظام</string>
     <string name="error_webview_missing">لم يتم العثور على حزمة WebView ، هل يتم تحديثها أو إزالتها حاليًا؟</string>
