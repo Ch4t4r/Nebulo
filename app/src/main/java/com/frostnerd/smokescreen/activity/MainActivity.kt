@@ -25,8 +25,8 @@ import com.frostnerd.smokescreen.fragment.*
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
+import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
-import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.menu_cardview.view.*
 import kotlin.random.Random
 
@@ -89,6 +89,7 @@ class MainActivity : NavigationDrawerActivity() {
         AbstractHttpsDNSHandle // Loads the known servers.
         AbstractTLSDnsHandle
         KnownDnsServers
+        Notifications.createAllChannels(this)
         setCardView { viewParent, suggestedHeight ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             val update = {

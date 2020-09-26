@@ -43,6 +43,16 @@ class Notifications {
         const val ID_BAD_SERVER_CONNECTION = 14
         const val ID_VPN_RESTART = 999
 
+        fun createAllChannels(context: Context) {
+            servicePersistentNotificationChannel(context)
+            noConnectionNotificationChannelId(context)
+            getDefaultNotificationChannelId(context)
+            getPinNotificationChannelId(context)
+            getHighPriorityChannelId(context)
+            getDnsRuleChannelId(context)
+            getBadConnectionChannelId(context)
+        }
+
         fun servicePersistentNotificationChannel(context: Context):String {
             if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(
