@@ -161,14 +161,9 @@ class NebuloAppIntro:AppIntro() {
 
         val filteredServer = filteredMaybePendingResult.filter {
             it.value != null
-        }.sortedWith(compareBy({
-            val desiredCapabilityCount = capabilitiesDesired.count { desired ->
-                it.key.hasCapability(desired)
-            }
-            capabilitiesDesired.size - desiredCapabilityCount // Rank servers which have the desired capabilities better
-        }, {
+        }.sortedWith(compareBy {
             it.value
-        })).map {
+        }).map {
             it.key
         }.firstOrNull() ?: filteredMaybePendingResult.toList().firstOrNull()?.key
         ?: AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[3] // Index 3 = Quad9
