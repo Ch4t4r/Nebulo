@@ -318,9 +318,9 @@ class MainFragment : Fragment() {
         }
     }
 
-    private var greatLatencyThreshold = 100
-    private var goodLatencyThreshold = 170
-    private  var averageLatencyThreshold = 280
+    private var greatLatencyThreshold = 130
+    private var goodLatencyThreshold = 200
+    private  var averageLatencyThreshold = 310
     private fun runLatencyCheck() {
         latencyCheckJob = launchWithLifecycle(cancelOn = setOf(Lifecycle.Event.ON_PAUSE)) {
             if(isActive) {
