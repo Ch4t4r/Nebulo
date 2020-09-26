@@ -38,6 +38,10 @@
     <string name="fragment_querydetail_mode_dot" translatable="false">DNS-over-TLS</string>
     <string name="fragment_querydetail_mode_doh" translatable="false">DNS-over-HTTPS</string>
 
+    <string name="theme_mono">Mono</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_true_black">True black</string>
+    <string name="theme_blue">Blue</string>
     <string-array name="theme">
         <item>Mono</item>
         <item>Dark</item>
