@@ -90,4 +90,31 @@
     <string name="about_help_faq">よくある質問</string>
     <string name="window_querylog_information">情報</string>
     <string name="window_speedtest_information">この値が低ければ低いほど、サーバーとより高速に通信することができます。これにより例えばブラウジングの速度が向上します。</string>
+    <string name="appintro_server_choose_description">Nebuloで使用したいサーバーの用途を指定してください。</string>
+    <string name="appintro_server_choose_third">プライバシーを重視したサーバー</string>
+    <string name="appintro_server_choose_disclaimer">指定した複数または以下の全てのカテゴリーの中から、反応速度が最も速いサーバーを自動で選択します。</string>
+    <string name="appintro_third_description">NebuloはDNS応答状況のモニタリングやパスワード(PIN)保護、DNSサーバーの反応速度比較など、様々な使える機能を満載しています。
+\n
+\nこの無料のオープンソースソフトウェアでどんなことができるか、是非アプリを使って探し出してください。</string>
+    <string name="appintro_third_title">卓越した機能が満載</string>
+    <string name="appintro_server_choose_adblock">広告&amp;トラッキングブロック機能を持つサーバー</string>
+    <string name="appintro_server_choose_forth">有害なウェブサイトやアプリから保護するサーバー</string>
+    <string name="appintro_server_choose_second">プライバシーに配慮した速いサーバー</string>
+    <string name="appintro_server_choose_first">最も速いサーバー</string>
+    <string name="appintro_server_choose_title">最初に</string>
+    <string name="appintro_forth_description">Nebuloを広告&amp;トラッキングブロッカーとして使用することも可能です。
+\n
+\nファイアウォールアプリと併用することにより、さらにプライバシー制御を強化することも可能になります。</string>
+    <string name="appintro_forth_title">最後に一言</string>
+    <string name="appintro_second_description">インターネットで最も古いプロトコルの1つであるDNSを暗号化させることにより、その制御をあなたの手にすることができます。
+\n
+\nNebuloでDNS over HTTPSおよびDNS over TLSを使用することで、外部からのデータの傍聴をさらに難しくします。</string>
+    <string name="appintro_second_title">プライバシーに関する問題点</string>
+    <string name="appintro_first_description">Nebuloはあなたのプライバシーを保護してあなたの端末をセキュアにするアプリです。
+\n
+\n長い間インターネットプロバイダーまたは他の何かによってずっと扱われていたデータが思いのままに制御できるようになります。</string>
+    <string name="appintro_first_title">Nebuloにようこそ。</string>
+    <string name="window_main_unprotected">保護されていません</string>
+    <string name="window_main_protected">保護されました!</string>
+    <string name="window_main_click_to_enable">タップして有効にする。</string>
 </resources>

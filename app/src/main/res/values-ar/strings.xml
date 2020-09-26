@@ -18,7 +18,7 @@
 \nمرخص بموجب GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
     <string name="main_dnssurveillance_privacystatement">بيان الخصوصية لـ %1s</string>
-    <string name="main_dnssurveillance_infotext">كن على علم بأن خادم DNS الذي تتصل به قادر على تسجيل المواقع التي تزورها. تحقق من بيانات الخصوصية المعنية لمزيد من المعلومات.</string>
+    <string name="main_dnssurveillance_infotext">عليك التاكد بان سيرفر DNS المتصل به لديه الحق بالوصول للموقع، تاكد من صفحة الخصوصية الخاصة به للتاكد من ذلك.</string>
     <string name="error_cannot_open_settings">لا يمكن فتح إعدادات النظام</string>
     <string name="error_webview_missing">لم يتم العثور على حزمة WebView ، هل يتم تحديثها أو إزالتها حاليًا؟</string>
     <string name="error_invalid_servername">يرجى تقديم اسم</string>
@@ -40,8 +40,8 @@
         <item quantity="many">تمت معالجة%1d استعلامات بواسطة قواعد DNS حتى الآن</item>
         <item quantity="other">تمت معالجة%1d الاستعلامات بواسطة قواعد DNS حتى الآن</item>
     </plurals>
-    <string name="warning_server_currently_unstable_expanded">يبدو أن الخادم%1s غير مستقر الآن ، مما يؤثر على سرعة الاستعراض لديك. ضع في اعتبارك التبديل إلى خادم أكثر استقرارًا.</string>
-    <string name="warning_server_currently_unstable">يبدو أن الخادم%1s غير مستقر الآن.</string>
+    <string name="warning_server_currently_unstable_expanded">يبدو أن السيرفر%1s غير مستقر الآن ، مما يؤثر على سرعة الاستعراض لديك. ضع في اعتبارك التبديل إلى سيرفر أكثر استقرارًا.</string>
+    <string name="warning_server_currently_unstable">يبدو أن السيرفر%1s غير مستقر الآن.</string>
     <string name="about_help_faq">اسئلة متكررة</string>
     <string name="window_querylog_information">معلومات</string>
     <string name="window_dnsrules_refresh_sources">قم بالتحديث لاستيراد القواعد من المصدر</string>
@@ -59,15 +59,15 @@
     <string name="windows_querylogging_latency">وقت الإستجابة</string>
     <string name="windows_querylogging_protocol">اتفاقية</string>
     <string name="windows_querylogging_hostsource__unknown">غير معروف</string>
-    <string name="windows_querylogging_hostsource__user">قواعد المستخدم</string>
+    <string name="windows_querylogging_hostsource__user">قواعد المستسيرفرات</string>
     <string name="windows_querylogging_hostsource">مصدر قاعدة DNS</string>
-    <string name="windows_querylogging_used_server">السيرفر المستخدم</string>
+    <string name="windows_querylogging_used_server">السيرفر المستسيرفرات</string>
     <string name="windows_querylogging_question">سؤال</string>
     <string name="windows_querylogging_type">النوع</string>
     <string name="windows_querylogging_time">توقيت</string>
     <string name="windows_querylogging_search">البحث عن المضيف</string>
     <string name="windows_querylogging_search_hint">ابحث عن مضيف في سجل الاستعلام</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">القواعد من هذا المصدر:%1d ( %2$dمكررة غير مستخدمة)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">القواعد من هذا المصدر:%1d ( %2$dمكررة غير مستسيرفراتة)</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">القواعد من هذا المصدر: -</string>
     <string name="window_dnsrules_customhosts_message">حدد جميع المضيفين المخصصين هنا</string>
     <string name="window_dnsrules_hostalreadyexists">هناك بالفعل قاعدة لهذا المضيف</string>
@@ -82,7 +82,7 @@
     <string name="window_dnsrules_customhosts">استضافات خاصة</string>
     <string name="button_main_dnsrules">قواعد DNS</string>
     <string name="error_no_webbrowser_installed">ليس لديك أي تطبيق مثبت لعرض هذا الرابط</string>
-    <string name="window_speedtest_information">كلما انخفضت القيم ، زادت سرعة اتصال Nebulo بالخادم. هذا على سبيل المثال يزيد من سرعة التصفح لديك.</string>
+    <string name="window_speedtest_information">كلما انخفضت القيم ، زادت سرعة اتصال Nebulo بالسيرفر. هذا على سبيل المثال يزيد من سرعة التصفح لديك.</string>
     <string name="window_speedtest_runtest">ابدأ الاختبار</string>
     <string name="about_help_translating">ساعد في الترجمة</string>
     <string name="about_info">معلومات عامة</string>
@@ -101,7 +101,14 @@
     <string name="all_start">تشغيل</string>
     <string name="all_stop">إيقاف</string>
     <string name="activity_label_enable_logging">تصدير السجلات / تمكين التسجيل</string>
-    <string name="activity_label_speed_test">مقارنة سرعة الخادم</string>
+    <string name="activity_label_speed_test">مقارنة سرعة السيرفر</string>
     <string name="activity_label_import_servers">استيراد سيرفر/سيرفرات</string>
     <string name="activity_label_import_queries">استيراد الاستعلامات</string>
+    <string name="window_main_click_to_enable">اضغط للتشغيل.</string>
+    <string name="window_main_unprotected">متوقف</string>
+    <string name="window_main_protected">يعمل!</string>
+    <string name="theme_mono">لون احادي</string>
+    <string name="theme_dark">مظلم</string>
+    <string name="theme_true_black">اسود غامق</string>
+    <string name="theme_blue">ازرق</string>
 </resources>
