@@ -78,7 +78,7 @@
     <string name="summary_pause_on_captiveportal">Leite DNS Anfragen nicht an den konfigurierten Server weiter, wenn eine Anmeldung im Netzerk benötigt wird. Die Weiterleitung wird kurz nach der Anmeldung automatisch vorgesetzt. 
 \nDas Deaktivieren dieser Option macht es möglicherweise nicht möglich, die Anmeldeseite zu öffnen</string>
     <string name="title_show_noconnection_notification">Benachrichtigung bei keiner Verbindung</string>
-    <string name="summary_show_noconnection_notification">Zeige eine Benachrichtigung, wenn die App keine oder nur eine schlechte Verbindung hat</string>
+    <string name="summary_show_noconnection_notification">Zeige eine Benachrichtigung, wenn die App keine Verbindung zum DNS Server hat</string>
     <string name="preference_category_querylogging">Anfragenspeicherung</string>
     <string name="title_log_queries">Speichere Anfragen</string>
     <string name="summary_log_queries">Speichere alle vom Gerät gestellten DNS Anfragen und deren Antworten</string>
@@ -108,15 +108,12 @@
 \nDies hat keinen Effekt, wenn die App nicht aktiv ist</string>
     <string name="title_show_revoked_notification">Benachrichtigung bei verlorener Berechtigung</string>
     <string name="summary_show_revoked_notification">Zeige eine Benachrichtigung, wenn Nebulo die Berechtigung für den VPN verliert</string>
-    <string name="summary_local_server_port">Port des DNS Servers, welcher gestartet wird. Nur Ports über 1024 sind erlaubt.
-\nAktuell: %1s</string>
+    <string name="summary_local_server_port">Port des DNS Servers, welcher gestartet wird. Nur Ports über 1024 sind erlaubt.</string>
     <string name="title_local_server_port">Serverport</string>
     <string name="summary_run_without_vpn">Wenn aktiviert wird Nebulo einen DNS Server auf deinem Gerät starten</string>
     <string name="title_run_without_vpn">Ohne VPN nutzen</string>
     <string name="summary_category_nonvpnmode_forwardinfo">Server wird unter localhost:%1s bereitgestellt</string>
-    <string name="summary_category_nonvpnmode">Konfiguriert Nebulo als DNS Server zu agieren, anstatt einen Dummy VPN zu benutzen. Wenn diese Einstellung aktiviert ist, müssen DNS Anfragen von anderen Apps zu Nebulo weitergleitet werden.
-\n
-\nDiese Funktion is experimentell.</string>
+    <string name="summary_category_nonvpnmode">Konfiguriert Nebulo als DNS Server zu agieren, anstatt einen Dummy VPN zu benutzen. Wenn diese Einstellung aktiviert ist, müssen DNS Anfragen von anderen Apps zu Nebulo weitergleitet werden.</string>
     <string name="preference_category_nonvpnmode">Nicht-VPN Modus</string>
     <string name="summary_check_iptables">Hier klicken um Unerstützung von iptables zu überprüfen</string>
     <string name="title_check_iptables">Auf iptables überprüfen</string>
@@ -132,4 +129,7 @@
     <string name="title_fallback_dns">Interner DNS Server</string>
     <string name="summary_nonvpn_help_generic">Klicke hier für eine Anleitung für VPN Apps</string>
     <string name="nonvpn_help_generic_title">Generische VPN Apps</string>
+    <string name="summary_nonvpn_help_faq">Klicke hier um ein Browserfenster mit der Hilfe und Dokumentation zu öffnen</string>
+    <string name="title_nonvpn_help_faq">Dokumantation</string>
+    <string name="title_inform_bad_connection">Informiere mich bei schlechter Verbindung</string>
 </resources>

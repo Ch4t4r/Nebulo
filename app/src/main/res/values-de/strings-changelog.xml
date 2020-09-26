@@ -136,4 +136,15 @@
     <string name="changelog_build_62_1">Beim Starten von Nebulo durch ein Shortcut wird der Server nun gespeichert</string>
     <string name="changelog_build_62_4">Der interne (Fallback) DNS Server kann nun konfiguriert werden</string>
     <string name="changelog_build_62_3">Quellen von DNS Regeln können nun einzeln aktualisiert werden</string>
+    <string name="changelog_build_66_11">Ein Feld hinzugefügt welches anzeigt, wie viele Anfragen mit den DNS Regeln aufgelöst wurden</string>
+    <string name="changelog_build_66_10">Einen Filter zum Anfragenprotokoll hinzugefügt</string>
+    <string name="changelog_build_66_9">Eine Benachrichtigung hinzugefügt, wenn der DNS Server eine hohe Latenz oder Paketverlust hat</string>
+    <string name="changelog_build_66_8">Eine Serverauswahl beim ersten Starten der App hinzugefügt</string>
+    <string name="changelog_build_66_7">Begrüßungsbildschirme beim ersten Starten der App hinzugefügt</string>
+    <string name="changelog_build_66_6">BraveDNS und Cloudflare security hinzugefügt</string>
+    <string name="changelog_build_66_5">Der DNS Geschwindigkeitstest ist nun genauer</string>
+    <string name="changelog_build_66_4">Einen Hilfe Eintrag zum Anfragenprotokoll hinzugefügt welcher erklärt, wofür die Icons stehen</string>
+    <string name="changelog_build_66_3">Einen Dialog hinzugefügt um zu testen, ob ein Host Teil einer DNS Regel ist</string>
+    <string name="changelog_build_66_2">Das Hinzufügen eines Servers beachtet nun die Groß/Kleinschreibung. Dies behebt Probleme mit NextDNS</string>
+    <string name="changelog_build_66_1">FAQ hinzugefügt. Du findest diese im Menüeintrag \'Über diese App\'</string>
 </resources>

@@ -180,4 +180,8 @@
 \n- Scrolle nach unten, trage bei beiden \"VPN-DNS\" Feldern 127.0.0.1 ein
 \n- Starte Nebulo (im nicht-VPN Modus) und starte NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Diesen Host blockieren</string>
+    <string name="dialog_open_faq">Möchtest du dir die häufig gestellten Fragen und die Dokumentation zu dieser Funktion ansehen\?</string>
+    <string name="querylog_filter_shorten_domain">Kürzere Version der Domain anzeigen</string>
+    <string name="querylog_filter_type_dnsrules">Von DNS Regeln aufgelöst</string>
+    <string name="querylog_filter_type_cache">Vom DNS Cache aufgelöst</string>
 </resources>

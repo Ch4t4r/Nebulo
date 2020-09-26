@@ -81,4 +81,48 @@
     <string name="iptables_supported_ipv6_unsupported">Iptables wird unterstützt, IPv6 allerdings nicht.</string>
     <string name="iptables_supported">Glückwunsch, dein Gerät unterstützt iptables!</string>
     <string name="window_dnsrules_refresh_sources">Aktualisieren um die Regeln zu importieren</string>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="one">%1d Anfrage wurde bisher blockiert</item>
+        <item quantity="other">%1d Anfragen wurden bisher blockiert</item>
+    </plurals>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="one">%1d Anfrage wurde bisher von den DNS Regeln aufgelöst</item>
+        <item quantity="other">%1d Anfragen wurde bisher von den DNS Regeln aufgelöst</item>
+    </plurals>
+    <string name="appintro_server_choose_adblock">Ein Server, welcher Werbung und Tracking blockiert</string>
+    <string name="appintro_server_choose_forth">Ein Server, welcher mich vor böswilligen Webseiten und Apps beschützt</string>
+    <string name="appintro_server_choose_third">Ein auf meine Privatspähre zentrierter Server</string>
+    <string name="appintro_server_choose_second">Ein schneller Server, welcher auch meine Privatspähre achtet</string>
+    <string name="appintro_server_choose_first">Den schnellsten</string>
+    <string name="appintro_server_choose_disclaimer">Es existieren Server, welche mehrere Kategorien gleichzeitig erfüllen. Nebulo wählt automatisch den schnellsten.</string>
+    <string name="appintro_server_choose_description">Welche Art von Server möchtest du in Nebulo verwenden\?</string>
+    <string name="appintro_server_choose_title">Das wichtigste zuerst</string>
+    <string name="appintro_forth_description">Du kannst Nebulo so konfigurieren, dass es als systemweiter Werbe- und Trackingblocker agiert.
+\n
+\nDo kannst Nebulo sogar zusammen mit manchen Firewall-Apps benutzen, um eine Privatsphäre noch mehr zu schützen.</string>
+    <string name="appintro_forth_title">Eine letzte Sache</string>
+    <string name="appintro_third_description">Nebulo kommt mit einer Tonne an sinnvollen Funktionen wie beispielsweise PIN-Schutz, Geschwindigkeittests oder Überwachung der DNS-Aktivität.
+\n
+\nErkunde die App um zu entdecken, was Open-Source Software zu bieten hat.</string>
+    <string name="appintro_third_title">Voll ausgestattet für große Dinge</string>
+    <string name="appintro_second_description">Durch Verschlüsseln von DNS, einem der ältesten Protokolle des Internets, liegt es in deiner Hand.
+\n
+\nMache es schwieriger für deinen Netzbetreiber dich zu tracken, indem du DNS-über-HTTPS oder DNS-über-TLS in Nebulo verwendest.</string>
+    <string name="appintro_second_title">Deine Privatsphäre ist wichtig</string>
+    <string name="appintro_first_description">Nebulo ist eine App um deine Privatsphäre und dein Gerät zu schützen.
+\n
+\nErlange die Kontrolle über deine Daten zurück, welche den Netzanbieter und andere für sich beanspruchen.</string>
+    <string name="appintro_first_title">Willkommen zu Nebulo.</string>
+    <string name="warning_server_currently_unstable_expanded">Der Server %1s scheint gerade instabil zu sein. Dies könnte deine Surfgeschwindigkeit beeinträchtigen.</string>
+    <string name="warning_server_currently_unstable">Der Server %1s scheint gerade instabil zu sein.</string>
+    <string name="about_help_faq">Häufig gestellte Fragen</string>
+    <string name="window_querylog_information">Information</string>
+    <string name="window_main_click_to_enable">Klicke zum Aktivieren.</string>
+    <string name="window_main_unprotected">Nicht geschützt</string>
+    <string name="window_main_protected">Geschützt!</string>
+    <string name="window_speedtest_information">Je kleiner die Werte, desto schneller kann Nebulo mit dem Server kommunizieren. Dies kann die Surfgeschwindigkeit erhöhen.</string>
+    <string name="theme_blue">Blau</string>
+    <string name="theme_true_black">Echtes Schwarz</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="theme_mono">Mono</string>
 </resources>

@@ -65,4 +65,10 @@
     <string name="notification_multipleuserswarning_title">Dummy VPN konnte nicht erstellt werden</string>
     <string name="notification_privatednswarning_text">Bitte deaktiviere Privates DNS in den Systemeinstellungen um Nebulo zu benutzen.</string>
     <string name="notification_privatednswarning_title">Privates DNS</string>
+    <string name="notification_bad_connection_text">Deine Verbindung zum DNS Server ist gerade schlecht. Dies könnte deine Surfgeschwindigkeit möglicherweise beeinträchtigen.</string>
+    <string name="notification_bad_connection_title">Schlechte Serververbindung</string>
+    <string name="notification_channel_badconnection_description">Kanal, welcher genutzt wird, wenn die Verbindung zum DNS Server schlecht ist</string>
+    <string name="notification_channel_badconnection">Kanal bei schlechter Verbindung</string>
+    <string name="notification_channel_dnsrules_description">Kanal welcher für den Import/Export von DNS Regeln genutzt wird</string>
+    <string name="notification_channel_dnsrules">Channel für DNS Regeln</string>
 </resources>
