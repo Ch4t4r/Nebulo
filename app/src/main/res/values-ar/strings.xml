@@ -104,4 +104,7 @@
     <string name="activity_label_speed_test">مقارنة سرعة الخادم</string>
     <string name="activity_label_import_servers">استيراد سيرفر/سيرفرات</string>
     <string name="activity_label_import_queries">استيراد الاستعلامات</string>
+    <string name="window_main_click_to_enable">اضغط للتشغيل.</string>
+    <string name="window_main_unprotected">متوقف</string>
+    <string name="window_main_protected">يعمل!</string>
 </resources>
