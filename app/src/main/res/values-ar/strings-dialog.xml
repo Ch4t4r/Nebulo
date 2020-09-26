@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="querylog_filter_type_blocked_by_server">محظور بواسطة خادم DNS</string>
-    <string name="querylog_filter_type_forwarded">تم حلها بواسطة خادم DNS</string>
+    <string name="querylog_filter_type_blocked_by_server">محظور بواسطة سيرفر DNS</string>
+    <string name="querylog_filter_type_forwarded">تم حلها بواسطة سيرفر DNS</string>
     <string name="querylog_filter_info">حدد أنواع الاستعلامات التي تريد رؤيتها</string>
     <string name="querylog_filter_title">تصفية سجل الاستعلام</string>
     <string name="dialog_dnsrules_status_sourcenotfound">هذا المضيف موجود في قواعد DNS ، لكن المصدر غير معروف.</string>
@@ -14,12 +14,12 @@
 \n
 \nتشير الرموز الموجودة في بداية الصف إلى ما حدث للاستعلام.
 \n
-\nعلامة: تم حل المضيف من قواعد DNS ، أو تم حظره بواسطة خادم DNS
-\nالسهم: قام Nebulo بإعادة توجيه الاستعلام إلى خادم DNS
+\nعلامة: تم حل المضيف من قواعد DNS ، أو تم حظره بواسطة سيرفر DNS
+\nالسهم: قام Nebulo بإعادة توجيه الاستعلام إلى سيرفر DNS
 \nقاعدة البيانات: استرد Nebulo استجابة DNS من ذاكرة التخزين المؤقت</string>
     <string name="dialog_querylog_information_title">معلومات حول سجل الاستعلام</string>
     <string name="dialog_latency_sidebar_message">وقت الاستجابة الموضح هنا ليس اختبار الاتصال الخاص بك أو مدى سرعة الشبكة.
-\n يوضح المدة التي يستغرقها Nebulo لإرسال طلب والحصول على إجابة من خادم DNS. القيمة المعروضة ليست دائمًا هي القيمة الأحدث ويمكن أن تكون التقلبات ممكنة.
+\n يوضح المدة التي يستغرقها Nebulo لإرسال طلب والحصول على إجابة من سيرفر DNS. القيمة المعروضة ليست دائمًا هي القيمة الأحدث ويمكن أن تكون التقلبات ممكنة.
 \n يمكن أن يتسبب هذا في عرض القيمة أعلى مما هي عليه لأنها أصبحت أقل منذ قياسها.</string>
     <string name="dialog_latency_sidebar_title">معلومات حول زمن الوصول</string>
     <string name="dialog_doh_detect_type_message">فضلا انتظر لحظة.</string>
@@ -27,7 +27,7 @@
     <string name="dialog_vpn_permission_denied_message">لم يستطع النظام تشغيل Nebulo VPN بشكل صحيح. يرجى فتح التطبيق لمنح الإذن من خلال النقر على زر البدء.</string>
     <string name="dialog_raterequest_message">مرحبا! إذا كنت تستمتع بـ Nebulo ، فهل يمكنك قضاء بعض الوقت لتقييمه في المتجر؟</string>
     <string name="dialog_raterequest_title">هل تستمتع بتطبيق نيبولو؟</string>
-    <string name="dialog_vpninformation_message">يعمل Nebulo باستخدام شبكة افتراضية خاصة وهمية لالتقاط جميع طلبات DNS الخاصة بك ، والتي يتم إعادة توجيهها بعد ذلك إلى خادم آمن من اختيارك.
+    <string name="dialog_vpninformation_message">يعمل Nebulo باستخدام شبكة افتراضية خاصة وهمية لالتقاط جميع طلبات DNS الخاصة بك ، والتي يتم إعادة توجيهها بعد ذلك إلى سيرفر آمن من اختيارك.
 \nهذه VPN الافتراضية ليست شبكة افتراضية خاصة ولا تخفي هويتك ولا تغير عنوان IP الخاص بك.
 \n
 \nلا يتم إرسال أي بيانات فعلية ، باستثناء طلبات DNS ، باستخدام هذا التطبيق.</string>
@@ -61,7 +61,7 @@
     <string name="dialog_exportdnsrules_nonwhitelist">تصدير القواعد العادية</string>
     <string name="dialog_exportdnsrules_whitelist">قواعد تصدير القائمة البيضاء</string>
     <string name="dialog_exportdnsrules_title">تصدير قواعد DNS</string>
-    <string name="dialog_newdnsrule_wildcard_info">المضيف يدعم أحرف البدل. استخدم العلامة النجمية (*) لأي عدد من الأحرف والأرقام والأحرف الخاصة المسموح بها باستثناء النقطة (.). استخدم نجمتين (**) لتضمين النقطة (.).</string>
+    <string name="dialog_newdnsrule_wildcard_info">المضيف يدعم أحرف البدل. استسيرفرات العلامة النجمية (*) لأي عدد من الأحرف والأرقام والأحرف الخاصة المسموح بها باستثناء النقطة (.). استسيرفرات نجمتين (**) لتضمين النقطة (.).</string>
     <string name="dialog_newdnsrule_ipv6_invalid">يرجى تقديم عنوان IPv6 صالح</string>
     <string name="dialog_newdnsrule_ipv4_invalid">يرجى تقديم عنوان IPv4 صالح</string>
     <string name="dialog_newdnsrule_host_invalid">يرجى تقديم مضيف صالح</string>
@@ -73,10 +73,10 @@
     <string name="dialog_newdnsrule_edit">تحرير قاعدة DNS</string>
     <string name="dialog_newdnsrule_title">قاعدة DNS جديدة</string>
     <string name="dialog_newhostsource_error_name_empty">يرجى تقديم اسم</string>
-    <string name="dialog_newhostsource_use_as_whitelist">استخدم كقائمة بيضاء</string>
+    <string name="dialog_newhostsource_use_as_whitelist">استسيرفرات كقائمة بيضاء</string>
     <string name="dialog_newhostsource_choose_file">اختر ملف</string>
     <string name="dialog_newhostsource_url">الرابط</string>
-    <string name="dialog_newhostsource_wildcard_info">يمكنك استخدام قوائم المضيف التي تستخدم نطاقات البدل.</string>
+    <string name="dialog_newhostsource_wildcard_info">يمكنك استخدام قوائم المضيف التي تستسيرفرات نطاقات البدل.</string>
     <string name="dialog_newhostsource_name">الاسم</string>
     <string name="dialog_newhostsource_edit_title">مصدر قاعدة جديد</string>
     <string name="dialog_newhostsource_title">مصدر قاعدة جديد</string>
@@ -84,15 +84,15 @@
     <string name="dialog_clearuserrules_title">مسح جميع قواعد DNS؟</string>
     <string name="dialog_deletehostsource_message">هل تريد بالتأكيد حذف المصدر المضيف %1s؟ لا يمكن التراجع عن هذا ، ستتم إزالة المضيفين من هذا المصدر.</string>
     <string name="dialog_deletehostsource_title">هل تريد حذف %1s؟</string>
-    <string name="dialog_speedtest_useserver_message">هل تريد استخدام الخادم %1s؟ لقد صنفت %2d من %3d مع وقت استجابة %4d ms.</string>
+    <string name="dialog_speedtest_useserver_message">هل تريد استخدام السيرفر %1s؟ لقد صنفت %2d من %3d مع وقت استجابة %4d ms.</string>
     <string name="dialog_speedtest_useserver_title">اختر سيرفر</string>
     <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">تم اختبار%1d من الخوادم
 \n يمكن الوصول إلى %2d من خوادم DoT ، ولا يمكن الوصول إلى %3d
 \n يمكن الوصول إلى %4d DoH من الخوادم ، ولا يمكن الوصول إلى %5d
 \n متوسط وقت الاستجابة: %6d ms.
 \n
-\n الخادم الأسرع: %7s
-\n أبطأ خادم: %8s</string>
+\n السيرفر الأسرع: %7s
+\n أبطأ سيرفر: %8s</string>
     <string name="dialog_speedresult_title">نتائج اختبار السرعة</string>
     <string name="dialog_join_group_positive">أجل!</string>
     <string name="dialog_join_group_message">مرحبا!
@@ -116,13 +116,13 @@
     <string name="dialog_clearqueries_title">مسح جميع الاستفسارات</string>
     <string name="dialog_crashreporting_message_notester">شكرا لك على استخدام Nebulo!
 \n
-\nيستخدم هذا التطبيق برنامج جهة خارجية مفتوح المصدر ومستضافًا ذاتيًا لتسهيل تتبع أعطال التطبيق بمجرد حدوثها. إذا تم تمكين التطبيق ، فسيتم إرسال تقارير الأعطال فقط إذا تم تمكينها عندما يواجه التطبيق تعطلًا. تحتوي هذه التقارير على بيانات إضافية حول التطبيق وجهازك. يتضمن هذا معرفًا يتم استخدامه لتتبع الأعطال القادمة من نفس المستخدم ، ولكن لا يمكن استخدامه لتتبع أي شيء آخر. يُعد تمكين الإبلاغ عن الأعطال أمرًا اختياريًا ولكنه سيجعل إصلاح الأخطاء أسهل وأسرع.
+\nيستسيرفرات هذا التطبيق برنامج جهة خارجية مفتوح المصدر ومستضافًا ذاتيًا لتسهيل تتبع أعطال التطبيق بمجرد حدوثها. إذا تم تمكين التطبيق ، فسيتم إرسال تقارير الأعطال فقط إذا تم تمكينها عندما يواجه التطبيق تعطلًا. تحتوي هذه التقارير على بيانات إضافية حول التطبيق وجهازك. يتضمن هذا معرفًا يتم استخدامه لتتبع الأعطال القادمة من نفس المستسيرفرات ، ولكن لا يمكن استخدامه لتتبع أي شيء آخر. يُعد تمكين الإبلاغ عن الأعطال أمرًا اختياريًا ولكنه سيجعل إصلاح الأخطاء أسهل وأسرع.
 \nيتم إرسال التقارير بشكل آمن عبر HTTPS
 \n
 \nانقر فوق \"انظر البيانات\" أدناه لمعرفة نوع البيانات التي يتم نقلها وللحصول على رابط لسياسة الخصوصية.</string>
     <string name="dialog_crashreporting_message">شكرا لك على استخدام Nebulo!
 \n
-\nيستخدم هذا التطبيق برنامج جهة خارجية مفتوح المصدر ومستضافًا ذاتيًا لتسهيل تتبع أعطال التطبيق بمجرد حدوثها. إذا تم تمكين التطبيق ، فسيتم إرسال تقارير الأعطال فقط إذا تم تمكينها عندما يواجه التطبيق تعطلًا. تحتوي هذه التقارير على بيانات إضافية حول التطبيق وجهازك. يتضمن هذا معرفًا يتم استخدامه لتتبع الأعطال القادمة من نفس المستخدم ، ولكن لا يمكن استخدامه لتتبع أي شيء آخر. يُعد تمكين الإبلاغ عن الأعطال اختياريًا ولكنه سيساعدني كثيرًا.
+\nيستسيرفرات هذا التطبيق برنامج جهة خارجية مفتوح المصدر ومستضافًا ذاتيًا لتسهيل تتبع أعطال التطبيق بمجرد حدوثها. إذا تم تمكين التطبيق ، فسيتم إرسال تقارير الأعطال فقط إذا تم تمكينها عندما يواجه التطبيق تعطلًا. تحتوي هذه التقارير على بيانات إضافية حول التطبيق وجهازك. يتضمن هذا معرفًا يتم استخدامه لتتبع الأعطال القادمة من نفس المستسيرفرات ، ولكن لا يمكن استخدامه لتتبع أي شيء آخر. يُعد تمكين الإبلاغ عن الأعطال اختياريًا ولكنه سيساعدني كثيرًا.
 \nيتم إرسال التقارير بشكل آمن عبر HTTPS.
 \n
 \nانقر فوق \"انظر البيانات\" أدناه لمعرفة نوع البيانات التي يتم نقلها وللحصول على رابط لسياسة الخصوصية.</string>
@@ -158,7 +158,7 @@
     <string name="dialog_logexport_loading_title">تحضير السجلات</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">تعذر استيراد الخوادم.
 \n(% 1s)</string>
-    <string name="dialog_serverimportfailed_text">تعذر استيراد الخادم (الخوادم).</string>
+    <string name="dialog_serverimportfailed_text">تعذر استيراد السيرفر (الخوادم).</string>
     <string name="dialog_serverimportfailed_title">فشل الاستيراد</string>
     <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">يرجى تحديد الخوادم التي ترغب في استيرادها.
 \n
@@ -184,12 +184,12 @@
         <item quantity="many">يتم استبعاد تطبيقات %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
         <item quantity="other">يتم استبعاد التطبيقات %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
     </plurals>
-    <string name="dialog_appchoosal_whitelist">استخدم DoH / DoT فقط في التطبيقات المحددة</string>
+    <string name="dialog_appchoosal_whitelist">استسيرفرات DoH / DoT فقط في التطبيقات المحددة</string>
     <string name="dialog_appchoosal_showsystemapps">إظهار تطبيقات النظام</string>
     <string name="dialog_deleteconfig_text">هل تريد حذف التكوين %1s؟</string>
     <string name="dialog_deleteconfig_title">حذف التكوين؟</string>
-    <string name="dialog_newserver_secondaryserver">الخادم الثانوي (اختياري)</string>
-    <string name="dialog_newserver_primaryserver">الخادم الأساسي</string>
+    <string name="dialog_newserver_secondaryserver">السيرفر الثانوي (اختياري)</string>
+    <string name="dialog_newserver_primaryserver">السيرفر الأساسي</string>
     <string name="dialog_newserver_name_hint">مثال</string>
     <string name="dialog_newserver_name">اسم السيرفر</string>
     <string name="dialog_newserver_title_tls">اضف سيرفر(DoT)</string>
