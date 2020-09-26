@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
@@ -199,8 +200,19 @@ class MainFragment : Fragment() {
         serverName.text = config.name
         serverURL.text = if(config.hasTlsServer()) config.servers.firstOrNull()?.address?.formatToString() ?: "-"
         else (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(true) ?: "-"
-        serverLatency.text = ""
+        serverLatency.text = "-\nms"
         serverIndicator.backgroundTintList = null
+        val layoutChangeListener = object:View.OnLayoutChangeListener {
+            override fun onLayoutChange(
+                v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int
+            ) {
+                serverIndicator.updateLayoutParams {
+                    height = mainServerWrap.measuredHeight
+                }
+                mainServerWrap.removeOnLayoutChangeListener(this)
+            }
+        }
+        mainServerWrap.addOnLayoutChangeListener(layoutChangeListener)
     }
 
     override fun onDestroy() {
