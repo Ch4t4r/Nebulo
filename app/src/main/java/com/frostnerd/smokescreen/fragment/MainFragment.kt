@@ -263,13 +263,11 @@ class MainFragment : Fragment() {
         var startButtonEnabled = true
         var privacyTextVisibility = View.VISIBLE
         var privateDNSVisibility = View.GONE
-        var serverLatencyVisibility = View.INVISIBLE
         var statusTxt:Int = R.string.window_main_unprotected
         var enableInfoVisibility = View.VISIBLE
         when(proxyState) {
             ProxyState.RUNNING -> {
                 startButton.setImageResource(R.drawable.ic_lock)
-                serverLatencyVisibility = View.VISIBLE
                 statusTxt = R.string.window_main_protected
                 enableInfoVisibility = View.INVISIBLE
             }
@@ -280,8 +278,10 @@ class MainFragment : Fragment() {
             ProxyState.PAUSED -> {
                 startButton.setImageResource(R.drawable.ic_lock_half_open)
                 statusTxt = R.string.window_main_unprotected
+                serverLatency.text = "-\nms"
             }
             else -> {
+                serverLatency.text = "-\nms"
                 if (privateDnsActive) {
                     startButton.setImageResource(R.drawable.ic_lock)
                     privacyTextVisibility = View.GONE
@@ -297,8 +297,6 @@ class MainFragment : Fragment() {
             }
         }
         startButton.isEnabled = startButtonEnabled
-        serverLatency.visibility = serverLatencyVisibility
-        if(serverLatencyVisibility != View.VISIBLE) serverIndicator.backgroundTintList = null
         privateDnsInfo.visibility = privateDNSVisibility
         privacyTextWrap.visibility = privacyTextVisibility
         enableInformation.visibility = enableInfoVisibility
@@ -339,6 +337,7 @@ class MainFragment : Fragment() {
                 launchUi {
                     val latency = DnsVpnService.currentTrafficStats?.floatingAverageLatency?.takeIf { it > 0 }
                     if(latency != null) {
+                        serverLatency.visibility = View.VISIBLE
                         serverLatency.text = latency.let { "$it\nms" }
                         val color = when {
                             latency < greatLatencyThreshold -> Color.parseColor("#43A047")
@@ -347,8 +346,14 @@ class MainFragment : Fragment() {
                             else -> Color.parseColor("#E53935")
                         }
                         serverIndicator.backgroundTintList = ColorStateList.valueOf(color)
+                        delay(750)
+                    } else {
+                        serverLatency.visibility = View.INVISIBLE
+                        serverLatency.text = "-\nms"
+                        serverIndicator.backgroundTintList = null
+                        delay(1500)
                     }
-                    delay(750)
+
                     runLatencyCheck()
                 }
             }
