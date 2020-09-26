@@ -8,22 +8,18 @@
     <string name="notification_channel_noconnection_description">Canale usato per mostrare notifiche quando non sembra esserci una connessione</string>
     <string name="notification_channel_pin">Canale relativo al Pin</string>
     <string name="notification_channel_pin_description">Canale usato per notifiche relative al PIN, cioè quando deve essere inserito</string>
-    <string name="notification_main_text">Le richieste vengono inviate a %1$s
-\n
-\n%2$d app sono escluse da DoH/DoT
-\n%3$d elementi nella cache</string>
-    <string name="notification_main_text_with_secondary">Le richieste vengono inviate a %1$s e %2$s
-\n
-\n%3$d app sono escluse da DoH/DoT
-\n%4$d elementi nella cache</string>
-    <string name="notification_main_text_whitelist">Le richieste vengono inviate a %1$s
-\n
-\n%2$d app stanno usando DoH/DoT
-\n%3$d elementi nella cache</string>
-    <string name="notification_main_text_with_secondary_whitelist">Le richieste vengono inviate a %1$s e %2$s
-\n
-\n%3$d app stanno usando DoH/DoT
-\n%4$d elementi nella cache</string>
+    <string name="notification_main_text">Le richieste vengono inviate a %1$s 
+\n 
+\n%2$d app sono escluse da DoH/DoT</string>
+    <string name="notification_main_text_with_secondary">Le richieste vengono inviate a %1$s e %2$s 
+\n 
+\n%3$d app sono escluse da DoH/DoT</string>
+    <string name="notification_main_text_whitelist">Le richieste vengono inviate a %1$s 
+\n 
+\n%2$d app stanno usando DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Le richieste vengono inviate a %1$s e %2$s 
+\n 
+\n%3$d app stanno usando DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1$d richieste finora</string>
@@ -69,4 +65,6 @@
     <string name="notification_channel_badconnection">Canale di notifica di connessione debole</string>
     <string name="notification_channel_dnsrules_description">Canale usato per l\'importazione/esportazione di regole DNS</string>
     <string name="notification_channel_dnsrules">Canale di notifica delle regole DNS</string>
+    <string name="notification_bad_connection_text">In questo momento la tua connessione al server DNS è scarsa. Ciò potrebbe peggiorare la velocità di navigazione. Considera la possibilità di selezionare un altro server.</string>
+    <string name="notification_bad_connection_title">Connessione al server scarsa</string>
 </resources>

@@ -93,4 +93,31 @@
     <string name="about_help_faq">Domande frequenti</string>
     <string name="window_querylog_information">Informazioni</string>
     <string name="window_speedtest_information">Più bassi sono i valori, più velocemente Nebulo è in grado di comunicare con il server. Questo per esempio aumenta la velocità di navigazione.</string>
+    <string name="appintro_server_choose_adblock">Un server che blocca pubblicità e tracciamento</string>
+    <string name="appintro_server_choose_forth">Un server che mi protegge da siti e app dannosi</string>
+    <string name="appintro_server_choose_third">Un server veramente incentrato sulla privacy</string>
+    <string name="appintro_server_choose_disclaimer">Ci sono server adatti per più o addirittura per tutte le categorie. Nebulo sceglie automaticamente il più veloce.</string>
+    <string name="appintro_server_choose_second">Un server veloce, orientato alla privacy</string>
+    <string name="appintro_server_choose_first">Il più veloce</string>
+    <string name="appintro_server_choose_description">Quale tipo di server vuoi usare in Nebulo\?</string>
+    <string name="appintro_server_choose_title">Prima le cose importanti</string>
+    <string name="appintro_forth_description">Puoi configurare Nebulo per essere usato come bloccatore di pubblicità e di tracker a livello di sistema.
+\n
+\nPuoi anche utilizzarlo assieme ad alcune app firewall per aumentare ancora di più il controllo sulla tua privacy.</string>
+    <string name="appintro_forth_title">Un\'ultima cosa</string>
+    <string name="appintro_third_description">Nebulo è fornito di una tonnellata di funzioni utili come il monitoraggio dell\'attività DNS, protezione con PIN, un test di velocità e molto altro.
+\n
+\nEsplora l\'app per scoprire cosa offre il software open-source libero.</string>
+    <string name="appintro_third_title">Attrezzato per essere magnifico</string>
+    <string name="appintro_second_description">Aggiungendo la crittografia al DNS, uno dei più antichi protocolli internet, torna nelle tue mani.
+\n
+\nRendi più difficile al tuo ISP tracciarti usando DNS-over-HTTPS e DNS-over-TLS con Nebulo.</string>
+    <string name="appintro_second_title">La tua privacy è importante</string>
+    <string name="appintro_first_description">Nebulo è un\'app che protegge la tua privacy e il tuo dispositivo.
+\n
+\nRiprendi il controllo dei dati che il tuo ISP o altre entità hanno trattato come propri per molto tempo.</string>
+    <string name="appintro_first_title">Benvenuti su Nebulo.</string>
+    <string name="window_main_click_to_enable">Clicca per attivare.</string>
+    <string name="window_main_unprotected">Non protetto</string>
+    <string name="window_main_protected">Protetto!</string>
 </resources>
