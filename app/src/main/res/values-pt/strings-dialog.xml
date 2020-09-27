@@ -67,12 +67,11 @@
 \nOs relatórios são enviados com segurança por HTTPS. 
 \n
 \nClique em \"ver dados\" abaixo para ver que tipo de dados são transmitidos e para um link para a política de privacidade.</string>
-    <string name="dialog_crashreporting_message_notester">Obrigado por usar Nebulo!
-\n
-\nEste aplicativo está usando software de terceiros de código aberto e auto-hospedado para facilitar o rastreio de falhas de aplicativo assim que elas ocorrem. Se e somente se habilitado, o aplicativo transmitirá relatórios de travamento quando encontrar uma falha. Estes relatórios contêm dados adicionais sobre o aplicativo e seu dispositivo. Isso inclui um ID que é usado para rastrear falhas provenientes do mesmo usuário, mas não pode ser usado para rastrear qualquer outra coisa. Ativar o relatório de travamento é opcional, mas tornaria as correções de bugs mais fáceis e rápidas.
-\n
+    <string name="dialog_crashreporting_message_notester">Obrigado por usar Nebulo! 
+\n 
+\nEste aplicativo está usando software de terceiros de código aberto e auto-hospedado para facilitar o rastreio de falhas de aplicativo assim que elas ocorrem. Se e somente se habilitado, o aplicativo transmitirá relatórios de travamento quando encontrar uma falha. Estes relatórios contêm dados adicionais sobre o aplicativo e seu dispositivo. Isso inclui um ID que é usado para rastrear falhas provenientes do mesmo usuário, mas não pode ser usado para rastrear qualquer outra coisa. Ativar o relatório de travamento é opcional, mas tornaria as correções de bugs mais fáceis e rápidas. 
 \nOs relatórios são enviados com segurança por HTTPS. 
-\n
+\n 
 \nClique em \"ver dados\" abaixo para ver que tipo de dados são transmitidos e para um link para a política de privacidade.</string>
     <string name="dialog_clearqueries_title">Limpar todas as consultas</string>
     <string name="dialog_clearqueries_message">Tem certeza de que deseja limpar as consultas registradas\? Isto não pode ser revertido.</string>
@@ -82,8 +81,11 @@
 \n- Tradução russa por bruleto 
 \n- Tradução holandesa por Bas Koedijk 
 \n- Tradução portuguesa por Rafael W. Bohnenberger 
-\n- Tradução indonésia por Gloeyisk
-\n- Alguns ícones do Font Awesome
+\n- Tradução indonésia por Gloeyisk 
+\n- Tradução catalão por Daniel Alomar 
+\n- Tradução espanhola por Daniel Alomar e Victor Bayas 
+\n- Alguns ícones do Font Awesome 
+\n- Tradução chinesa (Simplificado) por Ediel Chedlyramber 
 \n 
 \n Quer ver seu nome aqui\? Sinta-se à vontade para &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuir&lt;/a&gt;.</string>
     <string name="dialog_join_group_title">Junte-se à comunidade</string>
