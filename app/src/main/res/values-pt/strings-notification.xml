@@ -8,18 +8,18 @@
     <string name="notification_channel_noconnection_description">Canal usado para exibir notificações quando nenhuma conexão está disponível</string>
     <string name="notification_channel_pin">Canal relacionado ao código PIN</string>
     <string name="notification_channel_pin_description">Canal que é usado para notificações relacionadas ao código PIN como, por exemplo, quando ele não foi fornecido</string>
-    <string name="notification_main_text">Consultas enviadas para %1s
-\n 
-\n%2d aplicativos excluídos do DoH/DoT</string>
-    <string name="notification_main_text_with_secondary">Consultas enviadas para %1s e %2s
-\n 
-\n%3d aplicativos excluídos do DoH/DoT</string>
-    <string name="notification_main_text_whitelist">Consultas enviadas para %1s
-\n 
-\n%2d aplicativos usando DoH/DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">Consultas enviadas para %1s e %2s
-\n 
-\n%3d aplicativos usando DoH/DoT</string>
+    <string name="notification_main_text">Consultas enviadas para %1s 
+\n  
+\n%2d aplicações excluídas do DoH/DoT</string>
+    <string name="notification_main_text_with_secondary">Consultas enviadas para %1s e %2s 
+\n  
+\n%3d aplicações excluídas do DoH/DoT</string>
+    <string name="notification_main_text_whitelist">Consultas enviadas para %1s 
+\n  
+\n%2d aplicações usando DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Consultas enviadas para %1s e %2s 
+\n  
+\n%3d aplicações usando DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1d consultas até agora</string>
@@ -61,4 +61,10 @@
     <string name="notification_multipleuserswarning_title">O Dummy VPN não pôde ser estabelecido</string>
     <string name="notification_privatednswarning_text">Por favor, desactive as Dns privadas nas definições do sistema para usar o Nebulo.</string>
     <string name="notification_privatednswarning_title">Dns privados</string>
+    <string name="notification_bad_connection_text">A sua ligação com o servidor DNS está má agora mesmo. Isto pode ter um impacto negativo na sua velocidade de navegação. Considere selecionar outro servidor.</string>
+    <string name="notification_bad_connection_title">Má ligação ao servidor</string>
+    <string name="notification_channel_badconnection">Canal de notificação de má ligação</string>
+    <string name="notification_channel_badconnection_description">Canal utilizado para notificações quando o Nebulo tem uma má ligação</string>
+    <string name="notification_channel_dnsrules_description">Canal utilizado para a importação/exportação de regras DNS</string>
+    <string name="notification_channel_dnsrules">Canal de Notificação de Regras DNS</string>
 </resources>
