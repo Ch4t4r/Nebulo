@@ -136,4 +136,15 @@
     <string name="changelog_build_62_1">Ao iniciar o Nebulo a partir de um atalho do servidor, esse servidor agora persiste</string>
     <string name="changelog_build_62_4">O servidor DNS interno (fallback) pode agora ser configurado</string>
     <string name="changelog_build_62_3">As fontes de regras do DNS podem agora ser actualizadas individualmente</string>
+    <string name="changelog_build_66_11">Adicionado um campo que mostra quantas consultas foram resolvidas com regras DNS</string>
+    <string name="changelog_build_66_10">Adicionado um filtro ao registo de consultas</string>
+    <string name="changelog_build_66_9">Adicionada uma notificação mostrada quando o servidor atual tem uma má ligação</string>
+    <string name="changelog_build_66_8">Adicionada uma apresentação de seleção de servidor ao iniciar a aplicação pela primeira vez</string>
+    <string name="changelog_build_66_7">Adicionados ecrãs de introdução ao lançar a aplicação pela primeira vez</string>
+    <string name="changelog_build_66_6">Adicionado a segurança do BraveDNS e Cloudflare</string>
+    <string name="changelog_build_66_5">O teste de velocidade do DNS agora mostra com mais precisão a latência</string>
+    <string name="changelog_build_66_4">Adicionada uma entrada de ajuda ao registo de consulta para explicar o que os ícones significam</string>
+    <string name="changelog_build_66_3">Adicionado um diálogo às regras do DNS para verificar se um hospedeiro está listado em algum lugar</string>
+    <string name="changelog_build_66_2">Adicionar servidores agora diferencia maiúsculas de minúsculas. Isso corrige problemas com NextDNS</string>
+    <string name="changelog_build_66_1">Adicionadas perguntas frequentes. Pode encontrá-las no item de navegação \'Sobre esta aplicação\'</string>
 </resources>
