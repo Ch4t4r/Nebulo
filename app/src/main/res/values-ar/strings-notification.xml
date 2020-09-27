@@ -26,11 +26,11 @@
     <string name="notification_privatednswarning_text">يرجى تعطيل نظام عنوان DNS الخاص في إعدادات النظام لاستخدام Nebulo.</string>
     <string name="notification_privatednswarning_title">عنوان DNS خاص</string>
     <string name="notification_dnsserver_portdiffers">تعذر استخدام المنفذ المكون%1d.</string>
-    <string name="notification_dnsserver_message_iptables_failed">سيرفر DNS قيد التشغيل على المضيف المحلي:%1d. فشلت تهيئة iptables ، يجب إعادة توجيه الاستعلامات مع تطبيقات الطرف الثالث</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">سيرفر DNS قيد التشغيل على المضيف المحلي:%1d. يتم توجيه الاستعلامات باستخدام iptables.
+    <string name="notification_dnsserver_message_iptables_failed">سيرفر DNS قيد التشغيل على %2s:%1d فشلت تهيئة iptables ، يجب إعادة توجيه الاستعلامات مع تطبيقات الطرف الثالث</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">سيرفر DNS قيد التشغيل على %2s:%1d يتم توجيه الاستعلامات باستخدام iptables.
 \nتحذير: IPv6 نشط ، الاستعلامات قد تتجاوز Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">سيرفر DNS قيد التشغيل على المضيف المحلي:%1d. يتم توجيه الاستعلامات باستخدام الجدار الناري</string>
-    <string name="notification_dnsserver_message">سيرفر DNS قيد التشغيل على المضيف المحلي:%1d. استعلامات إعادة التوجيه باستخدام تطبيقات الطرف الثالث</string>
+    <string name="notification_dnsserver_message_iptables_active">سيرفر DNS قيد التشغيل على %2s:%1d يتم توجيه الاستعلامات باستخدام الجدار الناري</string>
+    <string name="notification_dnsserver_message">سيرفر DNS قيد التشغيل على %2s:%1d. استعلامات إعادة التوجيه باستخدام تطبيقات الطرف الثالث</string>
     <string name="notification_dnsserver_title">يعمل بوضع بلا VPN</string>
     <string name="notification_service_revoked_message">انقر هنا لإعادة التشغيل</string>
     <string name="notification_service_revoked_title">تم إلغاء إذن VPN من قبل النظام</string>
