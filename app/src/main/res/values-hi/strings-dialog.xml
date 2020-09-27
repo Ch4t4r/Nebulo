@@ -9,7 +9,7 @@
     <string name="dialog_newserver_primaryserver">प्राथमिक सर्वर</string>
     <string name="dialog_newserver_secondaryserver">द्वितीय सर्वर (वैकल्पिक)</string>
     <string name="dialog_deleteconfig_title">सेटिंग्स हटाएं\?</string>
-    <string name="dialog_deleteconfig_text">क्या आप सेटिंग्स %1$s को हटाना चाहते हैं\?</string>
+    <string name="dialog_deleteconfig_text">क्या आप सेटिंग्स %1s को हटाना चाहते हैं\?</string>
     <string name="dialog_appchoosal_showsystemapps">सिस्टम ऐप्स दिखाएं</string>
     <string name="dialog_appchoosal_whitelist">केवल चयनित ऐप में DoH / DoT का उपयोग करें</string>
     <plurals name="dialog_excludedapps_infotext">

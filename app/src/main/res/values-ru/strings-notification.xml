@@ -6,25 +6,25 @@
     <string name="notification_channel_foreground_service_description">Используемый канал для уведомлений, которые не могут быть удалены пользователем</string>
     <string name="notification_channel_noconnection">Канал для уведомления об отсутствии соединения</string>
     <string name="notification_channel_noconnection_description">Канал, используемый для отображения уведомлений при отсутствии соединения</string>
-    <string name="notification_main_text">Запросы идут к %1$s
+    <string name="notification_main_text">Запросы идут к %1s
 \n
-\n%2$d исключенных приложений
-\n%3$d записей в кэше</string>
-    <string name="notification_main_text_with_secondary">Запросы идут к %1$s и %2$s
+\n%2d исключенных приложений
+\n%3d записей в кэше</string>
+    <string name="notification_main_text_with_secondary">Запросы идут к %1s и %2s
 \n
-\n%3$d исключенных приложений
-\n%4$d записей в кэше</string>
-    <string name="notification_main_text_whitelist">Запросов к %1$s
+\n%3d исключенных приложений
+\n%4d записей в кэше</string>
+    <string name="notification_main_text_whitelist">Запросов к %1s
 \n
-\n%2$d исключенных приложений
-\n%3$d записей в кэше</string>
-    <string name="notification_main_text_with_secondary_whitelist">Запросов к %1$s и %2$s
+\n%2d исключенных приложений
+\n%3d записей в кэше</string>
+    <string name="notification_main_text_with_secondary_whitelist">Запросов к %1s и %2s
 \n
-\n%3$d приложений используют DoH/DoT
-\n%4$d записей в кэше</string>
+\n%3d приложений используют DoH/DoT
+\n%4d записей в кэше</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">%1$d запросов</string>
+    <string name="notification_main_subtext">%1d запросов</string>
     <string name="notification_noconnection_title">Нет соединения</string>
     <string name="notification_noconnection_text">Приложение не перенаправляет ваши DNS запросы, так как нет соединения либо оно нестабильно</string>
     <string name="notification_vpnrestart_title">Перезапуск VPN</string>

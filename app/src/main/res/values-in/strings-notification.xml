@@ -6,25 +6,25 @@
     <string name="notification_channel_foreground_service_description">Saluran digunakan untuk notifikasi yang tidak dapat dihapus oleh pengguna</string>
     <string name="notification_channel_noconnection">Saluran peringatan koneksi</string>
     <string name="notification_channel_noconnection_description">Saluran digunakan untuk menampilkan notifikasi ketika tidak ada koneksi</string>
-    <string name="notification_main_text">Kueri dikirim ke %1$s
+    <string name="notification_main_text">Kueri dikirim ke %1s
 \n
-\n%2$d Aplikasi dikecualikan dari DoH/DoT
-\n%3$d entri dalam cache</string>
-    <string name="notification_main_text_with_secondary">Kueri dikirim ke %1$s dan %2$s
+\n%2d Aplikasi dikecualikan dari DoH/DoT
+\n%3d entri dalam cache</string>
+    <string name="notification_main_text_with_secondary">Kueri dikirim ke %1s dan %2s
 \n
-\n%3$d Aplikasi dikecualikan dari DoH/DoT
-\n%4$d entri dalam cache</string>
-    <string name="notification_main_text_whitelist">Kueri dikirim ke %1$s
+\n%3d Aplikasi dikecualikan dari DoH/DoT
+\n%4d entri dalam cache</string>
+    <string name="notification_main_text_whitelist">Kueri dikirim ke %1s
 \n
-\n%2$d Aplikasi menggunakan DoH/DoT
-\n%3$d entri dalam cache</string>
-    <string name="notification_main_text_with_secondary_whitelist">Kueri dikirim ke %1$s dan %2$s
+\n%2d Aplikasi menggunakan DoH/DoT
+\n%3d entri dalam cache</string>
+    <string name="notification_main_text_with_secondary_whitelist">Kueri dikirim ke %1s dan %2s
 \n
-\n%3$d Aplikasi menggunakan DoH / DoT
-\n%4$d entri dalam cache</string>
+\n%3d Aplikasi menggunakan DoH / DoT
+\n%4d entri dalam cache</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">%1$d kueri sejauh ini</string>
+    <string name="notification_main_subtext">%1d kueri sejauh ini</string>
     <string name="notification_noconnection_title">Tidak ada koneksi</string>
     <string name="notification_noconnection_text">Apl saat ini tidak meneruskan permintaan DNS Anda karena koneksi yang buruk</string>
     <string name="notification_vpnrestart_title">Memulai ulang Vpn</string>
@@ -32,7 +32,7 @@
     <string name="notification_appcrash_title">Nebulo telah rusak</string>
     <string name="notification_appcrash_message">Nebulo telah rusak. Klik di sini untuk pergi ke menu utama dan untuk memulai ulang apl</string>
     <string name="notification_ruleimport_title">Impor aturan DNS</string>
-    <string name="notification_simple_text">Server saat ini: %1$s</string>
+    <string name="notification_simple_text">Server saat ini: %1s</string>
     <string name="notification_channel_pin_description">Saluran yang digunakan untuk notifikasi terkait PIN, yaitu ketika harus disediakan</string>
     <string name="notification_channel_high_priorty_description">Saluran untuk pemberitahuan prioritas tinggi misalnya ketika aplikasi kehilangan izin ke VPN</string>
     <string name="notification_channel_high_priorty">Prioritas tinggi</string>
@@ -57,7 +57,7 @@
     <string name="notification_ruleexport_secondarymessage">Menyiapkan ekspor…</string>
     <string name="notification_ruleexport_message">Mengekspor aturan (%1d/%2d)</string>
     <string name="notification_ruleexport_title">Ekspor aturan DNS</string>
-    <string name="notification_ruleimportfinished_message">%1d aturan telah diimpor (%2$d duplikat dihilangkan)</string>
+    <string name="notification_ruleimportfinished_message">%1d aturan telah diimpor (%2d duplikat dihilangkan)</string>
     <string name="notification_ruleimport_tertiarymessage">Menyelesaikan impor…</string>
     <string name="notification_ruleimportfinished_title">Mengimpor aturan DNS selesai</string>
     <string name="notification_ruleimport_message">Mengimpor aturan DNS dari %1s (%2s)</string>

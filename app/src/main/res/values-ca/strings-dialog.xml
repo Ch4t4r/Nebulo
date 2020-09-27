@@ -23,7 +23,7 @@
     </plurals>
     <string name="dialog_appchoosal_whitelist">Només fes servir DoH/DoT en les aplicacions seleccionades</string>
     <string name="dialog_appchoosal_showsystemapps">Mostrar aplicacions del sistema</string>
-    <string name="dialog_deleteconfig_text">Vols esborrar la configuració %1$s\?</string>
+    <string name="dialog_deleteconfig_text">Vols esborrar la configuració %1s\?</string>
     <string name="dialog_deleteconfig_title">Esborrar configuració\?</string>
     <string name="dialog_newserver_secondaryserver">Servidor secundari (opcional)</string>
     <string name="dialog_newserver_primaryserver">Servidor primari</string>

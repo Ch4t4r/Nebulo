@@ -5,7 +5,7 @@
         <item quantity="other"/>
     </plurals>
     <string name="dialog_appchoosal_showsystemapps">显示系统应用</string>
-    <string name="dialog_deleteconfig_text">您是否想删除名为 %1$s 的配置？</string>
+    <string name="dialog_deleteconfig_text">您是否想删除名为 %1s 的配置？</string>
     <string name="dialog_deleteconfig_title">是否删除配置？</string>
     <string name="dialog_newserver_secondaryserver">次要服务器（可选）</string>
     <string name="dialog_newserver_primaryserver">首要服务器</string>

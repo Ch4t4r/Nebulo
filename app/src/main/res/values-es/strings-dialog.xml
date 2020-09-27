@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="dialog_serverconfiguration_title">Configuración del servidor</string>
     <string name="dialog_newserver_title_tls">Añadir un servidor (DoT)</string>
-    <string name="dialog_deleteconfig_text">¿Quieres borra la configuración %1$s\?</string>
+    <string name="dialog_deleteconfig_text">¿Quieres borra la configuración %1s\?</string>
     <string name="dialog_serverconfiguration_addserver">Añadir un servidor</string>
     <string name="dialog_newserver_title_https">Añadir un servidor (DoH)</string>
     <string name="dialog_newserver_name">Nombre del servidor</string>

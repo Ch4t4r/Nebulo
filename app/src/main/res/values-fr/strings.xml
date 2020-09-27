@@ -62,7 +62,7 @@
     <string name="windows_querylogging_question">Question</string>
     <string name="windows_querylogging_type">Tapez</string>
     <string name="windows_querylogging_time">Heure</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Règles provenant de cette source : %1d (%2$d doublons non utilisés)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Règles provenant de cette source : %1d (%2d doublons non utilisés)</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Règles provenant de cette source : -</string>
     <string name="button_main_dnsrules">Règles du DNS</string>
     <string name="error_no_webbrowser_installed">Vous n\'avez pas d\'application installée pour voir ce lien</string>

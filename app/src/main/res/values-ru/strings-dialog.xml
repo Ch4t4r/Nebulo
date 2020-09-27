@@ -9,7 +9,7 @@
     <string name="dialog_newserver_primaryserver">Первичный DNS сервер</string>
     <string name="dialog_newserver_secondaryserver">Вторичный DNS сервер (Опционально)</string>
     <string name="dialog_deleteconfig_title">Удалить сервер\?</string>
-    <string name="dialog_deleteconfig_text">Вы действительно хотите удалить сервер %1$s\?</string>
+    <string name="dialog_deleteconfig_text">Вы действительно хотите удалить сервер %1s\?</string>
     <string name="dialog_appchoosal_showsystemapps">Показать системные приложения</string>
     <string name="dialog_appchoosal_whitelist">Использовать DoH/DoT только в отмеченных приложениях</string>
     <plurals name="dialog_excludedapps_infotext">

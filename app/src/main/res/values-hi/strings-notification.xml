@@ -10,25 +10,25 @@
     <string name="notification_channel_pin_description">चैनल का उपयोग पिन से संबंधित सूचनाओं के लिए किया जाता है, अर्थात् जब इसे प्रदान करना होता है</string>
     <string name="notification_channel_high_priorty">उच्च प्राथमिकता</string>
     <string name="notification_channel_high_priorty_description">उच्च प्राथमिकता सूचनाओं के लिए माध्यम । उदाहरण - जब ऐप वीपीएन (VPN) की अनुमति खो देता है</string>
-    <string name="notification_simple_text">वर्तमान सर्वर: %1$s</string>
-    <string name="notification_main_text">प्रश्न यहाँ भेजें जा रहे है - %1$s
+    <string name="notification_simple_text">वर्तमान सर्वर: %1s</string>
+    <string name="notification_main_text">प्रश्न यहाँ भेजें जा रहे है - %1s
 \n
-\n%2$d ऐप्स को DoH/DoT से बाहर रखा गया है 
-\nकैश (cache) में प्रविष्टियाँ - %3$d</string>
-    <string name="notification_main_text_with_secondary">प्रश्न यहाँ भेजें जा रहे है - %1$s और %2$s
+\n%2d ऐप्स को DoH/DoT से बाहर रखा गया है
+\nकैश (cache) में प्रविष्टियाँ - %3d</string>
+    <string name="notification_main_text_with_secondary">प्रश्न यहाँ भेजें जा रहे है - %1s और %2s
 \n
-\n%3$d ऐप्स को DoH/DoT से बाहर रखा गया है 
-\nकैश (cache) में प्रविष्टियाँ - %4$d</string>
-    <string name="notification_main_text_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1$s
+\n%3d ऐप्स को DoH/DoT से बाहर रखा गया है
+\nकैश (cache) में प्रविष्टियाँ - %4d</string>
+    <string name="notification_main_text_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1s
 \n
-\n%2$d ऐप्स DoH / DoT का उपयोग कर रहे हैं
-\nकैश (cache) में प्रविष्टियाँ - %3$d</string>
-    <string name="notification_main_text_with_secondary_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1$s और %2$s
+\n%2d ऐप्स DoH / DoT का उपयोग कर रहे हैं
+\nकैश (cache) में प्रविष्टियाँ - %3d</string>
+    <string name="notification_main_text_with_secondary_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1s और %2s
 \n
-\n%3$d ऐप्स DoH / DoT का उपयोग कर रहे हैं
-\nकैश (cache) में प्रविष्टियाँ - %4$d</string>
+\n%3d ऐप्स DoH / DoT का उपयोग कर रहे हैं
+\nकैश (cache) में प्रविष्टियाँ - %4d</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
-    <string name="notification_main_subtext">अब तक भेजें गए प्रश्न - %1$d</string>
+    <string name="notification_main_subtext">अब तक भेजें गए प्रश्न - %1d</string>
     <string name="notification_noconnection_title">कोई संपर्क नहीं</string>
     <string name="notification_noconnection_text">वर्तमान में ऍप आपके DNS प्रश्नों को भेज नहीं रहा है क्योंकि संपर्क खराब है या उपलब्ध नहीं है</string>
     <string name="notification_vpnrestart_title">VPN को फिर से शुरू किया जा रहा है</string>
@@ -40,7 +40,7 @@
     <string name="notification_ruleimport_secondarymessage">आयात की तैयारी हो रही है…</string>
     <string name="notification_ruleimport_tertiarymessage">आयात समाप्त हो रहा है…</string>
     <string name="notification_ruleimportfinished_title">DNS नियम आयात समाप्त</string>
-    <string name="notification_ruleimportfinished_message">%1d नियम आयात किए गए (%2$d डुप्लिकेट छूट गए)</string>
+    <string name="notification_ruleimportfinished_message">%1d नियम आयात किए गए (%2d डुप्लिकेट छूट गए)</string>
     <string name="notification_ruleexport_title">DNS नियम निर्यात</string>
     <string name="notification_ruleexport_message">नियमों की निर्यात हो रही है (%1d/%2d)</string>
     <string name="notification_ruleexport_secondarymessage">निर्यात की तैयारी हो रही है…</string>

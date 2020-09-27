@@ -9,7 +9,7 @@
     <string name="dialog_newserver_primaryserver">Server primer</string>
     <string name="dialog_newserver_secondaryserver">Server sekunder (Opsional)</string>
     <string name="dialog_deleteconfig_title">Hapus konfigurasi\?</string>
-    <string name="dialog_deleteconfig_text">Anda ingin menghapus konfigurasi %1$s\?</string>
+    <string name="dialog_deleteconfig_text">Anda ingin menghapus konfigurasi %1s\?</string>
     <string name="dialog_appchoosal_showsystemapps">Tampilkan apl sistem</string>
     <string name="dialog_appchoosal_whitelist">Hanya gunakan DoH/DoT di apl yang dipilih</string>
     <plurals name="dialog_excludedapps_infotext">

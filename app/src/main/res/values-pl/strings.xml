@@ -40,7 +40,7 @@
     <string name="window_dnsrules_hostalreadyexists">Zasada dla tego hosta już istnieje.</string>
     <string name="window_dnsrules_customhosts_message">Zdefiniuj własnych hostów tutaj.</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Zasady z tego źródła: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Zasady z tego źródła: %1d (%2$d nieużywanych duplikatów)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Zasady z tego źródła: %1d (%2d nieużywanych duplikatów)</string>
     <string name="windows_querylogging_search_hint">Szukaj hosta w logu żądań</string>
     <string name="windows_querylogging_search">Wyszukiwanie hostów</string>
     <string name="windows_querylogging_time">Czas</string>

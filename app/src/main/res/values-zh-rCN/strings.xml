@@ -48,7 +48,7 @@
     <string name="window_main_privatedns_info">私人DNS是活动的，你的查询已经受到保护。如果你想使用dns-over-https或其他有用的功能，请启用Nebulo。</string>
     <string name="windows_querylogging_search">域名搜索</string>
     <string name="windows_querylogging_search_hint">在请求日志中搜索域名</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">来自此源的规则条数： %1d （未使用 %2$d 条重复规则）</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">来自此源的规则条数： %1d （未使用 %2d 条重复规则）</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">来自此源的规则条数： -</string>
     <string name="window_dnsrules_customhosts_message">在此处设置您的所有自定义规则</string>
     <plurals name="window_dnsrules_subtitle">

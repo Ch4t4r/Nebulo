@@ -6,25 +6,25 @@
     <string name="notification_channel_foreground_service_description">Kullanıcı tarafından kaldırılamayan bildirimler için kullanılan kanal</string>
     <string name="notification_channel_noconnection">Bağlantı uyarı kanalı</string>
     <string name="notification_channel_noconnection_description">Hiçbir bağlantı görünmediğinde bildirimleri göstermek için kullanılan kanal</string>
-    <string name="notification_main_text">Sorgular %1$s adresine gönderilir
+    <string name="notification_main_text">Sorgular %1s adresine gönderilir
 \n
-\n%2$d Uygulama, DoH/DoT’den hariç tutuldu
-\n%3$d girdi önbellekte</string>
-    <string name="notification_main_text_with_secondary">Sorgular %1$s ve %2$s adresine gönderilir
+\n%2d Uygulama, DoH/DoT’den hariç tutuldu
+\n%3d girdi önbellekte</string>
+    <string name="notification_main_text_with_secondary">Sorgular %1s ve %2s adresine gönderilir
 \n
-\n%3$d Uygulama, DoH/DoT’den hariç tutuldu
-\n%4$d girdi önbellekte</string>
-    <string name="notification_main_text_whitelist">Sorgular %1$s adresine gönderilir
+\n%3d Uygulama, DoH/DoT’den hariç tutuldu
+\n%4d girdi önbellekte</string>
+    <string name="notification_main_text_whitelist">Sorgular %1s adresine gönderilir
 \n
-\n%2$d Uygulama DoH/DoT kullanıyor
-\n%3$d girdi önbellekte</string>
-    <string name="notification_main_text_with_secondary_whitelist">Sorgular %1$s ve %2$s adresine gönderilir
+\n%2d Uygulama DoH/DoT kullanıyor
+\n%3d girdi önbellekte</string>
+    <string name="notification_main_text_with_secondary_whitelist">Sorgular %1s ve %2s adresine gönderilir
 \n
-\n%3$d Uygulama DoH/DoT kullanıyor
-\n%4$d girdi önbellekte</string>
+\n%3d Uygulama DoH/DoT kullanıyor
+\n%4d girdi önbellekte</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">Şu ana kadar %1$d sorgu</string>
+    <string name="notification_main_subtext">Şu ana kadar %1d sorgu</string>
     <string name="notification_noconnection_title">Bağlantı yok</string>
     <string name="notification_noconnection_text">Uygulama şu anda DNS sorgularınızı iletmiyor çünkü bağlantınız kötü ya da yok</string>
     <string name="notification_vpnrestart_title">VPN yeniden başlatılıyor</string>
@@ -36,7 +36,7 @@
     <string name="notification_ruleimport_secondarymessage">İthâlata hazırlanıyor…</string>
     <string name="notification_ruleimport_tertiarymessage">İthâlat bitiyor…</string>
     <string name="notification_ruleimportfinished_title">DNS kuralı ithâlatı tamamlandı</string>
-    <string name="notification_ruleimportfinished_message">%1d kural(lar)ı içe aktarıldı (%2$d kopya çıkarıldı)</string>
+    <string name="notification_ruleimportfinished_message">%1d kural(lar)ı içe aktarıldı (%2d kopya çıkarıldı)</string>
     <string name="notification_ruleexport_title">DNS kural ihracatı</string>
     <string name="notification_ruleexport_message">İhrâcat kuralları (%1d/%2d)</string>
     <string name="notification_ruleexport_secondarymessage">İhrâcat hazırlanıyor…</string>
@@ -49,5 +49,5 @@
     <string name="notification_service_killed_title">Pil iyileştirmesi hakkında bilgi</string>
     <string name="notification_service_killed_message">Uygulama daha önce sistem tarafından durdurulmuş gibi görünüyor. Daha fazlasını öğrenmek için buraya tıklayın</string>
     <string name="notification_service_killed_ignore">Yoksay</string>
-    <string name="notification_simple_text">Geçerli sunucu: %1$s</string>
+    <string name="notification_simple_text">Geçerli sunucu: %1s</string>
 </resources>

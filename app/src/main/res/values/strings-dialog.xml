@@ -17,7 +17,7 @@
     <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false">example-dot.com[:443]</string>
 
     <string name="dialog_deleteconfig_title">Delete configuration?</string>
-    <string name="dialog_deleteconfig_text">Do you want to delete the configuration %1$s?</string>
+    <string name="dialog_deleteconfig_text">Do you want to delete the configuration %1s?</string>
 
     <string name="dialog_appchoosal_showsystemapps">Show system apps</string>
     <string name="dialog_appchoosal_whitelist">Only use DoH/DoT in selected apps</string>

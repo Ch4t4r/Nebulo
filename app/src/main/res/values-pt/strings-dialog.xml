@@ -9,7 +9,7 @@
     <string name="dialog_newserver_primaryserver">Servidor principal</string>
     <string name="dialog_newserver_secondaryserver">Servidor secundário (opcional)</string>
     <string name="dialog_deleteconfig_title">Excluir configuração\?</string>
-    <string name="dialog_deleteconfig_text">Você deseja excluir a configuração %1$s\?</string>
+    <string name="dialog_deleteconfig_text">Você deseja excluir a configuração %1s\?</string>
     <string name="dialog_appchoosal_showsystemapps">Mostrar aplicativos do sistema</string>
     <string name="dialog_appchoosal_whitelist">Apenas use DoH/DoT em aplicativos selecionados</string>
     <plurals name="dialog_excludedapps_infotext">

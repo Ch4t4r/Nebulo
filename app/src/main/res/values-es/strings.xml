@@ -29,7 +29,7 @@
     <string name="windows_querylogging_used_server">Servidor usado</string>
     <string name="windows_querylogging_question">Consulta</string>
     <string name="windows_querylogging_time">Tiempo</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Reglas de esta fuente: %1d (%2$d duplicados no en uso)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Reglas de esta fuente: %1d (%2d duplicados no en uso)</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Reglas de esta fuente: -</string>
     <string name="button_main_dnsrules">Reglas de DNS</string>
     <string name="error_no_webbrowser_installed">No tienes ninguna aplicación instalada para ver este enlace</string>

@@ -52,7 +52,7 @@
     <string name="window_dnsrules_hostalreadyexists">C\'è già una regola per questo host</string>
     <string name="window_dnsrules_customhosts_message">Definisci qui tutti i tuoi host personalizzati</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regole da questa fonte: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regole da questa fonte: %1d (%2$d doppi non usati)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regole da questa fonte: %1d (%2d doppi non usati)</string>
     <string name="windows_querylogging_search_hint">Cerca un host nel registro delle richieste</string>
     <string name="windows_querylogging_search">Ricerca host</string>
     <string name="windows_querylogging_time">Orario</string>

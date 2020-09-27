@@ -8,7 +8,7 @@
     <string name="notification_ruleexport_secondarymessage">جارٍ تحضير التصدير …</string>
     <string name="notification_ruleexport_message">قواعد التصدير (%2d/%1d)</string>
     <string name="notification_ruleexport_title">تصدير قاعدة DNS</string>
-    <string name="notification_ruleimportfinished_message">تم استيراد قواعد%1d (تم حذف%2$d تكرار)</string>
+    <string name="notification_ruleimportfinished_message">تم استيراد قواعد%1d (تم حذف%2d تكرار)</string>
     <string name="notification_ruleimportfinished_title">انتهى استيراد قاعدة DNS</string>
     <string name="notification_ruleimport_tertiarymessage">جارٍ إنهاء الاستيراد …</string>
     <string name="notification_ruleimport_secondarymessage">جارٍ تحضير الاستيراد …</string>
@@ -49,7 +49,7 @@
 \nتطبيقات %3d مستبعدة من DoH / DoT</string>
     <string name="notification_main_text">يتم إرسال الاستعلامات إلى %1s
 \n
-\nتم %2$d تطبيقات من DoH / DoT</string>
+\nتم %2d تطبيقات من DoH / DoT</string>
     <string name="notification_simple_text">السيرفر الحالي: %1s</string>
     <string name="notification_channel_badconnection_description">القناة المستسيرفراتة للإشعارات عندما يكون لدى Nebulo اتصال سيئ</string>
     <string name="notification_channel_badconnection">قناة إعلام اتصال سيئة</string>

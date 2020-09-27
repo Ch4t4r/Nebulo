@@ -9,7 +9,7 @@
     <string name="dialog_newserver_primaryserver">Primärer Server</string>
     <string name="dialog_newserver_secondaryserver">Sekundärer Server (Optional)</string>
     <string name="dialog_deleteconfig_title">Konfiguration löschen\?</string>
-    <string name="dialog_deleteconfig_text">Möchtest du die Konfiguration %1$s löschen\?</string>
+    <string name="dialog_deleteconfig_text">Möchtest du die Konfiguration %1s löschen\?</string>
     <string name="dialog_appchoosal_showsystemapps">Zeige Systemapps</string>
     <string name="dialog_appchoosal_whitelist">Nutze DoH/DoT nur in ausgewählten Apps</string>
     <plurals name="dialog_serverimport_title">

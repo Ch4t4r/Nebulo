@@ -52,7 +52,7 @@
     <string name="windows_querylogging_search_hint">クエリログからホスト名を検索</string>
     <string name="window_dnsrules_hostalreadyexists">既にこのホスト名に対するルールが登録されています</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">取り込んだルール数: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">取り込んだルール数: %1d (重複未使用: %2$d)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">取り込んだルール数: %1d (重複未使用: %2d)</string>
     <plurals name="window_dnsrules_subtitle">
         <item quantity="other">%1dのルール</item>
     </plurals>

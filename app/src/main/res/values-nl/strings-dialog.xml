@@ -9,7 +9,7 @@
     <string name="dialog_newserver_primaryserver">Primaire server</string>
     <string name="dialog_newserver_secondaryserver">Secundaire server (Optioneel)</string>
     <string name="dialog_deleteconfig_title">Verwijder configuratie\?</string>
-    <string name="dialog_deleteconfig_text">Wilt u de configuratie %1$s\? verwijderen\?</string>
+    <string name="dialog_deleteconfig_text">Wilt u de configuratie %1s\? verwijderen\?</string>
     <string name="dialog_appchoosal_showsystemapps">Systeem-apps weergeven</string>
     <string name="dialog_appchoosal_whitelist">Gebruik alleen DoH / DoT in geselecteerde apps</string>
     <plurals name="dialog_excludedapps_infotext">

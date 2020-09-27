@@ -28,7 +28,7 @@
     <string name="dialog_newserver_title_https">Ajouter un serveur (DoH)</string>
     <string name="dialog_newserver_title_tls">Ajouter un serveur (DoT)</string>
     <string name="dialog_newserver_name_hint">Exemple</string>
-    <string name="dialog_deleteconfig_text">Voulez-vous supprimer la configuration %1$s \?</string>
+    <string name="dialog_deleteconfig_text">Voulez-vous supprimer la configuration %1s \?</string>
     <string name="dialog_appchoosal_showsystemapps">Afficher les applications du système</string>
     <string name="dialog_appchoosal_whitelist">N\'utiliser que DoH/DoT dans les applications sélectionnées</string>
     <string name="dialog_serverimport_experimental">Expérimental</string>

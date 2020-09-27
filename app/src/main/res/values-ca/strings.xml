@@ -43,7 +43,7 @@
     <string name="window_dnsrules_hostalreadyexists">Ja hi ha una regla per a aquest amfitrió</string>
     <string name="window_dnsrules_customhosts_message">Definiu tots els amfitrions personalitzats aquí</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Normes d’aquesta font: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regles d\'aquest origen: %1d (%2$d duplicats no utilitzats)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regles d\'aquest origen: %1d (%2d duplicats no utilitzats)</string>
     <string name="windows_querylogging_search_hint">Cerqueu un amfitrió al registre de consultes</string>
     <string name="windows_querylogging_search">Cerca d\'amfitrió</string>
     <string name="windows_querylogging_time">Temps</string>

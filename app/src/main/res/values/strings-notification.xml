@@ -21,14 +21,14 @@
     <string name="notification_channel_badconnection">Bad connection notification channel</string>
     <string name="notification_channel_badconnection_description">Channel used for notifications when Nebulo has a bad connection</string>
 
-    <string name="notification_simple_text">Current server: %1$s</string>
-    <string name="notification_main_text">Queries are sent to %1$s\n\n%2$d Apps are excluded from DoH/DoT</string>
-    <string name="notification_main_text_with_secondary">Queries are sent to %1$s and %2$s\n\n%3$d Apps are excluded from DoH/DoT</string>
-    <string name="notification_main_text_whitelist">Queries are sent to %1$s\n\n%2$d Apps are using DoH/DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">Queries are sent to %1$s and %2$s\n\n%3$d Apps are using DoH/DoT</string>
+    <string name="notification_simple_text">Current server: %1s</string>
+    <string name="notification_main_text">Queries are sent to %1s\n\n%2d Apps are excluded from DoH/DoT</string>
+    <string name="notification_main_text_with_secondary">Queries are sent to %1s and %2s\n\n%3d Apps are excluded from DoH/DoT</string>
+    <string name="notification_main_text_whitelist">Queries are sent to %1s\n\n%2d Apps are using DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Queries are sent to %1s and %2s\n\n%3d Apps are using DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">%1$d queries so far</string>
+    <string name="notification_main_subtext">%1d queries so far</string>
 
     <string name="notification_noconnection_title">No connection</string>
     <string name="notification_noconnection_text">The app currently isn\'t forwarding your DNS queries because you either have no or a bad connection</string>
@@ -45,7 +45,7 @@
     <string name="notification_ruleimport_tertiarymessage">Finishing import…</string>
 
     <string name="notification_ruleimportfinished_title">DNS rule import finished</string>
-    <string name="notification_ruleimportfinished_message">%1d rules have been imported (%2$d duplicates omitted)</string>
+    <string name="notification_ruleimportfinished_message">%1d rules have been imported (%2d duplicates omitted)</string>
 
     <string name="notification_ruleexport_title">DNS rule export</string>
     <string name="notification_ruleexport_message">Exporting rules (%1d/%2d)</string>

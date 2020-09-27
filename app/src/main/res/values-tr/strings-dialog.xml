@@ -9,7 +9,7 @@
     <string name="dialog_newserver_primaryserver">Birincil sunucu</string>
     <string name="dialog_newserver_secondaryserver">İkincil sunucu (İsteğe bağlı)</string>
     <string name="dialog_deleteconfig_title">Yapılandırma silinsin mi\?</string>
-    <string name="dialog_deleteconfig_text">%1$s yapılandırmasını silmek istiyor musunuz\?</string>
+    <string name="dialog_deleteconfig_text">%1s yapılandırmasını silmek istiyor musunuz\?</string>
     <string name="dialog_appchoosal_showsystemapps">Sistem uygulamalarını göster</string>
     <string name="dialog_appchoosal_whitelist">Yalnızca seçili uygulamalarda DoH/DoT kullanın</string>
     <plurals name="dialog_excludedapps_infotext">

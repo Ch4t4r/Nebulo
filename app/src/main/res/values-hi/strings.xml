@@ -55,7 +55,7 @@
     <string name="window_dnsrules_hostalreadyexists">इस होस्ट के लिए पहले से ही एक नियम है</string>
     <string name="window_dnsrules_customhosts_message">अपने सभी स्वनिर्धारित होस्ट को यहां लिखें</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">इस स्रोत से नियम: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">इस स्रोत से नियम: %1d (%2$d डुप्लिकेट उपयोग में नहीं)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">इस स्रोत से नियम: %1d (%2d डुप्लिकेट उपयोग में नहीं)</string>
     <string name="windows_querylogging_search_hint">प्रश्नों की सूची में होस्ट की खोज करें</string>
     <string name="windows_querylogging_search">होस्ट-खोज</string>
     <string name="windows_querylogging_time">समय</string>

@@ -11,7 +11,7 @@
     <string name="notification_ruleexportfinished_title">S\'ha finalitzat l\'exportació de regles DNS</string>
     <string name="notification_ruleexport_message">Exportant regles (%1d/%2d)</string>
     <string name="notification_ruleexport_title">Exportació de regla DNS</string>
-    <string name="notification_ruleimportfinished_message">%1d regles han sigut importades (%2$d duplicades omeses)</string>
+    <string name="notification_ruleimportfinished_message">%1d regles han sigut importades (%2d duplicades omeses)</string>
     <string name="notification_ruleimportfinished_title">Importació de regla DNS finalitzada</string>
     <string name="notification_ruleimport_tertiarymessage">Finalitzant importació…</string>
     <string name="notification_ruleimport_secondarymessage">Preparant importació…</string>
@@ -23,26 +23,26 @@
     <string name="notification_vpnrestart_title">Reiniciant Vpn</string>
     <string name="notification_noconnection_text">L’aplicació actualment no reenvia les vostres consultes DNS perquè la connexió es dolenta o no en teniu</string>
     <string name="notification_noconnection_title">Sense connexió</string>
-    <string name="notification_main_subtext">%1$d consultes fins ara</string>
+    <string name="notification_main_subtext">%1d consultes fins ara</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
-    <string name="notification_main_text_with_secondary_whitelist">Les consultes s’envien a %1$s i %2$s
+    <string name="notification_main_text_with_secondary_whitelist">Les consultes s’envien a %1s i %2s
 \n
-\n%3$d Aplicacions fan servir DoH/DoT
-\n%4$d entrades a la memòria cau</string>
-    <string name="notification_main_text_whitelist">Les consultes s’envien a %1$s
+\n%3d Aplicacions fan servir DoH/DoT
+\n%4d entrades a la memòria cau</string>
+    <string name="notification_main_text_whitelist">Les consultes s’envien a %1s
 \n
-\n%2$d Aplicacions fan servir DoH/DoT
-\n%3$d entrades a la memòria cau</string>
-    <string name="notification_main_text_with_secondary">Les consultes s’envien a %1$s i %2$s
+\n%2d Aplicacions fan servir DoH/DoT
+\n%3d entrades a la memòria cau</string>
+    <string name="notification_main_text_with_secondary">Les consultes s’envien a %1s i %2s
 \n
-\n%3$d Aplicacions excloses de DoH/DoT
-\n%4$d entrades a la memòria cau</string>
-    <string name="notification_main_text">Les consultes s’envien a %1$s
+\n%3d Aplicacions excloses de DoH/DoT
+\n%4d entrades a la memòria cau</string>
+    <string name="notification_main_text">Les consultes s’envien a %1s
 \n
-\n%2$d Aplicacions excloses de DoH/DoT
-\n%3$d entrades a la memòria cau</string>
-    <string name="notification_simple_text">Servidor actual: %1$s</string>
+\n%2d Aplicacions excloses de DoH/DoT
+\n%3d entrades a la memòria cau</string>
+    <string name="notification_simple_text">Servidor actual: %1s</string>
     <string name="notification_channel_high_priorty_description">Canal per a notificacions d\'alta prioritat, per exemple, quan l\'aplicació perd permís a la VPN</string>
     <string name="notification_channel_high_priorty">Alta prioritat</string>
     <string name="notification_channel_pin_description">Canal utilitzat per a les notificacions relacionades amb el PIN, és a dir, quan s\'ha de proporcionar</string>
