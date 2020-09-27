@@ -15,7 +15,7 @@
     <string name="notification_main_text_whitelist">Anfragen werden an %1s gesendet
 \n
 \n%2d Apps nutzen DoH/DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">Anfragen werden an %1s und%2s gesendet
+    <string name="notification_main_text_with_secondary_whitelist">Anfragen werden an %1s und %2s gesendet
 \n
 \n%3d Apps nutzen DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
