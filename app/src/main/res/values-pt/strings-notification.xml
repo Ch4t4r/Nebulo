@@ -10,20 +10,16 @@
     <string name="notification_channel_pin_description">Canal que é usado para notificações relacionadas ao código PIN como, por exemplo, quando ele não foi fornecido</string>
     <string name="notification_main_text">Consultas enviadas para %1s
 \n 
-\n%2d aplicativos excluídos do DoH/DoT
-\n%3d entradas no cache</string>
+\n%2d aplicativos excluídos do DoH/DoT</string>
     <string name="notification_main_text_with_secondary">Consultas enviadas para %1s e %2s
 \n 
-\n%3d aplicativos excluídos do DoH/DoT
-\n%4d entradas no cache</string>
+\n%3d aplicativos excluídos do DoH/DoT</string>
     <string name="notification_main_text_whitelist">Consultas enviadas para %1s
 \n 
-\n%2d aplicativos usando DoH/DoT
-\n%3d entradas no cache</string>
+\n%2d aplicativos usando DoH/DoT</string>
     <string name="notification_main_text_with_secondary_whitelist">Consultas enviadas para %1s e %2s
 \n 
-\n%3d aplicativos usando DoH/DoT
-\n%4d entradas no cache</string>
+\n%3d aplicativos usando DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1d consultas até agora</string>

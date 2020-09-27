@@ -13,20 +13,16 @@
     <string name="notification_simple_text">वर्तमान सर्वर: %1s</string>
     <string name="notification_main_text">प्रश्न यहाँ भेजें जा रहे है - %1s
 \n
-\n%2d ऐप्स को DoH/DoT से बाहर रखा गया है
-\nकैश (cache) में प्रविष्टियाँ - %3d</string>
+\n%2d ऐप्स को DoH/DoT से बाहर रखा गया है</string>
     <string name="notification_main_text_with_secondary">प्रश्न यहाँ भेजें जा रहे है - %1s और %2s
 \n
-\n%3d ऐप्स को DoH/DoT से बाहर रखा गया है
-\nकैश (cache) में प्रविष्टियाँ - %4d</string>
+\n%3d ऐप्स को DoH/DoT से बाहर रखा गया है</string>
     <string name="notification_main_text_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1s
 \n
-\n%2d ऐप्स DoH / DoT का उपयोग कर रहे हैं
-\nकैश (cache) में प्रविष्टियाँ - %3d</string>
+\n%2d ऐप्स DoH / DoT का उपयोग कर रहे हैं</string>
     <string name="notification_main_text_with_secondary_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1s और %2s
 \n
-\n%3d ऐप्स DoH / DoT का उपयोग कर रहे हैं
-\nकैश (cache) में प्रविष्टियाँ - %4d</string>
+\n%3d ऐप्स DoH / DoT का उपयोग कर रहे हैं</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_subtext">अब तक भेजें गए प्रश्न - %1d</string>
     <string name="notification_noconnection_title">कोई संपर्क नहीं</string>

@@ -8,20 +8,16 @@
     <string name="notification_channel_noconnection_description">Saluran digunakan untuk menampilkan notifikasi ketika tidak ada koneksi</string>
     <string name="notification_main_text">Kueri dikirim ke %1s
 \n
-\n%2d Aplikasi dikecualikan dari DoH/DoT
-\n%3d entri dalam cache</string>
+\n%2d Aplikasi dikecualikan dari DoH/DoT</string>
     <string name="notification_main_text_with_secondary">Kueri dikirim ke %1s dan %2s
 \n
-\n%3d Aplikasi dikecualikan dari DoH/DoT
-\n%4d entri dalam cache</string>
+\n%3d Aplikasi dikecualikan dari DoH/DoT</string>
     <string name="notification_main_text_whitelist">Kueri dikirim ke %1s
 \n
-\n%2d Aplikasi menggunakan DoH/DoT
-\n%3d entri dalam cache</string>
+\n%2d Aplikasi menggunakan DoH/DoT</string>
     <string name="notification_main_text_with_secondary_whitelist">Kueri dikirim ke %1s dan %2s
 \n
-\n%3d Aplikasi menggunakan DoH / DoT
-\n%4d entri dalam cache</string>
+\n%3d Aplikasi menggunakan DoH / DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1d kueri sejauh ini</string>

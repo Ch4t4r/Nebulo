@@ -28,20 +28,16 @@
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_text_with_secondary_whitelist">Les consultes s’envien a %1s i %2s
 \n
-\n%3d Aplicacions fan servir DoH/DoT
-\n%4d entrades a la memòria cau</string>
+\n%3d Aplicacions fan servir DoH/DoT</string>
     <string name="notification_main_text_whitelist">Les consultes s’envien a %1s
 \n
-\n%2d Aplicacions fan servir DoH/DoT
-\n%3d entrades a la memòria cau</string>
+\n%2d Aplicacions fan servir DoH/DoT</string>
     <string name="notification_main_text_with_secondary">Les consultes s’envien a %1s i %2s
 \n
-\n%3d Aplicacions excloses de DoH/DoT
-\n%4d entrades a la memòria cau</string>
+\n%3d Aplicacions excloses de DoH/DoT</string>
     <string name="notification_main_text">Les consultes s’envien a %1s
 \n
-\n%2d Aplicacions excloses de DoH/DoT
-\n%3d entrades a la memòria cau</string>
+\n%2d Aplicacions excloses de DoH/DoT</string>
     <string name="notification_simple_text">Servidor actual: %1s</string>
     <string name="notification_channel_high_priorty_description">Canal per a notificacions d\'alta prioritat, per exemple, quan l\'aplicació perd permís a la VPN</string>
     <string name="notification_channel_high_priorty">Alta prioritat</string>

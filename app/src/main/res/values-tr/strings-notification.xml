@@ -8,20 +8,16 @@
     <string name="notification_channel_noconnection_description">Hiçbir bağlantı görünmediğinde bildirimleri göstermek için kullanılan kanal</string>
     <string name="notification_main_text">Sorgular %1s adresine gönderilir
 \n
-\n%2d Uygulama, DoH/DoT’den hariç tutuldu
-\n%3d girdi önbellekte</string>
+\n%2d Uygulama, DoH/DoT’den hariç tutuldu</string>
     <string name="notification_main_text_with_secondary">Sorgular %1s ve %2s adresine gönderilir
 \n
-\n%3d Uygulama, DoH/DoT’den hariç tutuldu
-\n%4d girdi önbellekte</string>
+\n%3d Uygulama, DoH/DoT’den hariç tutuldu</string>
     <string name="notification_main_text_whitelist">Sorgular %1s adresine gönderilir
 \n
-\n%2d Uygulama DoH/DoT kullanıyor
-\n%3d girdi önbellekte</string>
+\n%2d Uygulama DoH/DoT kullanıyor</string>
     <string name="notification_main_text_with_secondary_whitelist">Sorgular %1s ve %2s adresine gönderilir
 \n
-\n%3d Uygulama DoH/DoT kullanıyor
-\n%4d girdi önbellekte</string>
+\n%3d Uygulama DoH/DoT kullanıyor</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">Şu ana kadar %1d sorgu</string>

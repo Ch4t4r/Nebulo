@@ -8,20 +8,16 @@
     <string name="notification_channel_noconnection_description">Канал, используемый для отображения уведомлений при отсутствии соединения</string>
     <string name="notification_main_text">Запросы идут к %1s
 \n
-\n%2d исключенных приложений
-\n%3d записей в кэше</string>
+\n%2d исключенных приложений</string>
     <string name="notification_main_text_with_secondary">Запросы идут к %1s и %2s
 \n
-\n%3d исключенных приложений
-\n%4d записей в кэше</string>
+\n%3d исключенных приложений</string>
     <string name="notification_main_text_whitelist">Запросов к %1s
 \n
-\n%2d исключенных приложений
-\n%3d записей в кэше</string>
+\n%2d исключенных приложений</string>
     <string name="notification_main_text_with_secondary_whitelist">Запросов к %1s и %2s
 \n
-\n%3d приложений используют DoH/DoT
-\n%4d записей в кэше</string>
+\n%3d приложений используют DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1d запросов</string>

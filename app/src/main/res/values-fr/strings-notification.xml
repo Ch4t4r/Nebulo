@@ -28,20 +28,16 @@
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_text_with_secondary_whitelist">Les demandes sont envoyées à %1s et %2s
 \n
-\n%3d Les applications utilisent le DoH/DoT
-\nentrées %4d dans le cache</string>
+\n%3d Les applications utilisent le DoH/DoT</string>
     <string name="notification_main_text_whitelist">Les demandes sont envoyées à %1s
 \n
-\n%2d Les applications utilisent le DoH/DoT
-\n%3d entrées dans le cache</string>
+\n%2d Les applications utilisent le DoH/DoT</string>
     <string name="notification_main_text_with_secondary">Les demandes sont envoyées à %1s et %2s
 \n
-\n%3d Les applications sont exclues du DoH/DoT
-\nentrées %4d dans le cache</string>
+\n%3d Les applications sont exclues du DoH/DoT</string>
     <string name="notification_main_text">Les demandes sont envoyées à %1s
 \n
-\n%2d Les applications sont exclues du DoH/DoT
-\n%3d entrées dans le cache</string>
+\n%2d Les applications sont exclues du DoH/DoT</string>
     <string name="notification_simple_text">Serveur actuel : %1s</string>
     <string name="notification_channel_high_priorty_description">Canal pour les notifications de haute priorité, par exemple lorsque l\'application perd l\'autorisation d\'utiliser le VPN</string>
     <string name="notification_channel_high_priorty">Haute priorité</string>

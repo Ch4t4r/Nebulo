@@ -8,20 +8,16 @@
     <string name="notification_channel_noconnection_description">Kanal, welcher benutzt wird, um Benachrichtungen zu zeigen, wenn der Betrieb der App unterbrochen ist</string>
     <string name="notification_main_text">Anfragen werden an %1s gesendet
 \n
-\n%2d Apps sind von DoH/DoT ausgeschlossen
-\n%3d Einträge im Cache</string>
+\n%2d Apps sind von DoH/DoT ausgeschlossen</string>
     <string name="notification_main_text_with_secondary">Anfragen werden an %1s und %2s gesendet
 \n
-\n%3d Apps sind von DoH/DoT ausgeschlossen
-\n%4d Einträge im Cache</string>
+\n%3d Apps sind von DoH/DoT ausgeschlossen</string>
     <string name="notification_main_text_whitelist">Anfragen werden an %1s gesendet
 \n
-\n%2d Apps nutzen DoH/DoT
-\n%3d Einträge im Cache</string>
+\n%2d Apps nutzen DoH/DoT</string>
     <string name="notification_main_text_with_secondary_whitelist">Anfragen werden an %1s und%2s gesendet
 \n
-\n%3d Apps nutzen DoH/DoT
-\n%4d Einträge im Cache</string>
+\n%3d Apps nutzen DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">Bisher %1d Anfragen</string>
