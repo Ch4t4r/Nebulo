@@ -80,4 +80,48 @@
     <string name="iptables_supported_ipv6_unsupported">O Iptables é suportado, mas o IPv6 não é suportado.</string>
     <string name="iptables_supported">Parabéns, o iptables é suportado pelo seu aparelho!</string>
     <string name="window_dnsrules_refresh_sources">Actualizar para regras de importação da fonte</string>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="one">%1d consulta foi bloqueadas até agora</item>
+        <item quantity="other">%1d consultas foram bloqueadas até agora</item>
+    </plurals>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="one">%1d consulta foi tratada por regras de DNS até agora</item>
+        <item quantity="other">%1d consultas foram tratadas por regras de DNS até agora</item>
+    </plurals>
+    <string name="appintro_server_choose_adblock">Um servidor que bloqueia anúncios e rastreamento</string>
+    <string name="appintro_server_choose_forth">Um servidor que me protege de sites e aplicações nocivas</string>
+    <string name="appintro_server_choose_third">Um verdadeiro servidor focado na privacidade</string>
+    <string name="appintro_server_choose_second">Um servidor rápido, com foco na privacidade</string>
+    <string name="appintro_server_choose_first">O mais rápido</string>
+    <string name="appintro_server_choose_disclaimer">Existem servidores que se encaixam em várias ou mesmo em todas as categorias. O Nebulo escolhe automaticamente o mais rápido.</string>
+    <string name="appintro_server_choose_description">Que tipo de servidor deseja usar no Nebulo\?</string>
+    <string name="appintro_server_choose_title">Antes de mais nada</string>
+    <string name="appintro_forth_description">Pode configurar o Nebulo para ser usado como um bloqueador de anúncios e rastreamento em todo o sistema.
+\n
+\nPode até usá-lo junto com algumas aplicações de firewall para aumentar ainda mais o controle sobre sua privacidade.</string>
+    <string name="appintro_forth_title">Uma última coisa</string>
+    <string name="appintro_third_description">Nebulo vem com uma tonelada de recursos úteis, como monitoramento de atividade DNS, proteção de PIN, um teste de velocidade e muito mais.
+\n
+\nExplore a aplicação para descobrir o que o software livre de código aberto tem a oferecer.</string>
+    <string name="appintro_third_title">Totalmente equipado para grandeza</string>
+    <string name="appintro_second_description">Ao adicionar criptografia ao DNS, um dos mais antigos protocolos da Internet, ele está em suas mãos.
+\n
+\nTorna mais difícil para o seu ISP rastreá-lo usando DNS-over-HTTPS e DNS-over-TLS com o Nebulo.</string>
+    <string name="appintro_second_title">Sua privacidade é importante</string>
+    <string name="appintro_first_description">Nebulo é uma aplicação para proteger a sua privacidade e proteger o seu dispositivo.
+\n
+\nRecupere o controlo dos dados que o seu ISP ou outras entidades têm tratado como seus durante muito tempo.</string>
+    <string name="appintro_first_title">Bem-vindo ao Nebulo.</string>
+    <string name="warning_server_currently_unstable_expanded">O servidor %1s parece estar instável de momento, afetando sua velocidade de navegação. Considere mudar para um servidor mais estável.</string>
+    <string name="warning_server_currently_unstable">O servidor %1s parece estar instável neste momento.</string>
+    <string name="about_help_faq">Perguntas frequentes</string>
+    <string name="window_querylog_information">Informação</string>
+    <string name="window_main_click_to_enable">Clique para ativar.</string>
+    <string name="window_main_unprotected">Não protegido</string>
+    <string name="window_main_protected">Protegido!</string>
+    <string name="window_speedtest_information">Quanto mais baixos forem os valores, mais rápido o Nebulo é capaz de comunicar com o servidor. Isto, por exemplo, aumenta a sua velocidade de navegação.</string>
+    <string name="theme_blue">Azul</string>
+    <string name="theme_true_black">Preto</string>
+    <string name="theme_dark">Escuro</string>
+    <string name="theme_mono">Mono</string>
 </resources>
