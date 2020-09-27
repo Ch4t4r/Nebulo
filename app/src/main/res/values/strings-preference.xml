@@ -160,10 +160,13 @@
 
     <string name="preference_category_nonvpnmode">Non-VPN mode</string>
     <string name="summary_category_nonvpnmode">Configure Nebulo to act as a DNS server on the device instead of using a dummy VPN. When enabled you manually have to forward DNS queries to Nebulo using third party apps</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Server will be hosted on localhost:%1s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server will be hosted on %1s:%1s</string>
 
     <string name="title_run_without_vpn">Run without VPN</string>
     <string name="summary_run_without_vpn">When checked Nebulo hosts a DNS server on your device</string>
+
+    <string name="title_nonvpn_use_lanip">Use Device IP instead of localhost</string>
+    <string name="summary_nonvpn_use_lanip">Some apps don\'t allow localhost to be entered as DNS. With this setting the devices IP in the network is used instead. The address will change depending on your network, pay attention to the notification.</string>
 
     <string name="title_local_server_port">Server port</string>
     <string name="summary_local_server_port">Port of the DNS server which will be hosted. Only ports above 1024 are allowed</string>

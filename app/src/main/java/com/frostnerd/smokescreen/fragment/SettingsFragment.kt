@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -40,6 +41,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.net.InetAddress
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -252,10 +254,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val checkIpTables = findPreference("check_iptables")
         val helpNetguard = findPreference("nonvpn_help_netguard")
         val helpGeneric = findPreference("nonvpn_help_generic")
+        val useLanIP = findPreference("nonvpn_use_lanip") as CheckBoxPreference
+        val bindAddress = if(useLanIP.isChecked) {
+            requireContext().getLanIP(getPreferences().enableIpv4)?.hostAddress ?: "localhost"
+        } else "localhost"
         port.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().toIntOrNull()?.let { it in 1025..65535 } == true) {
-                port.summary = getString(R.string.summary_local_server_port)
-                connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, newValue.toString())
+                connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, bindAddress, newValue.toString())
                 true
             } else {
                 false
@@ -273,7 +278,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
         port.summary = getString(R.string.summary_local_server_port)
-        connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, requireContext().getPreferences().dnsServerModePort.toString())
+        connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, bindAddress, requireContext().getPreferences().dnsServerModePort.toString())
         val rooted = context?.isDeviceRooted() ?: false
         if(!rooted) {
             iptablesCategory.isVisible = false
@@ -328,6 +333,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         findPreference("nonvpn_help_faq").setOnPreferenceClickListener {
             requireContext().openFAQ(FAQTopic.NONVPNMODE)
+            true
+        }
+        useLanIP.setOnPreferenceChangeListener { _, newValue ->
+            if(newValue as Boolean) {
+                connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, bindAddress, port.text)
+            } else {
+                connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, bindAddress, port.text)
+            }
             true
         }
     }

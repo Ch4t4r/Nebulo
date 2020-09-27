@@ -362,7 +362,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             "pin",
             "nonvpn_use_iptables",
             "nonvpn_iptables_disable_ipv6",
-            "connection_watchdog"
+            "connection_watchdog",
+            "nonvpn_use_lanip"
         )
         settingsSubscription = getPreferences().listenForChanges(
             relevantSettings,
@@ -487,16 +488,16 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         noConnectionNotificationShown = true
     }
 
-    private fun showDnsServerModeNotification(port:Int, originalPort:Int, iptablesMode: IpTablesPacketRedirector.IpTablesMode) {
+    private fun showDnsServerModeNotification(address:String, port:Int, originalPort:Int, iptablesMode: IpTablesPacketRedirector.IpTablesMode) {
         val portDiffersFromConfig = port != originalPort
         val isNotificationImportant = portDiffersFromConfig || iptablesMode == IpTablesPacketRedirector.IpTablesMode.FAILED || iptablesMode == IpTablesPacketRedirector.IpTablesMode.SUCCEEDED_NO_IPV6
         val channel = if(isNotificationImportant) Notifications.getHighPriorityChannelId(this) else Notifications.getDefaultNotificationChannelId(this)
         val icon = if(isNotificationImportant) R.drawable.ic_cloud_warn else R.drawable.ic_mainnotification
         var contentText = when (iptablesMode) {
-            IpTablesPacketRedirector.IpTablesMode.DISABLED -> getString(R.string.notification_dnsserver_message, port)
-            IpTablesPacketRedirector.IpTablesMode.FAILED -> getString(R.string.notification_dnsserver_message_iptables_failed, port)
-            IpTablesPacketRedirector.IpTablesMode.SUCCEEDED_NO_IPV6 -> getString(R.string.notification_dnsserver_message_iptables_active_no_ipv6, port)
-            else -> getString(R.string.notification_dnsserver_message_iptables_active, port)
+            IpTablesPacketRedirector.IpTablesMode.DISABLED -> getString(R.string.notification_dnsserver_message, address, port)
+            IpTablesPacketRedirector.IpTablesMode.FAILED -> getString(R.string.notification_dnsserver_message_iptables_failed, address, port)
+            IpTablesPacketRedirector.IpTablesMode.SUCCEEDED_NO_IPV6 -> getString(R.string.notification_dnsserver_message_iptables_active_no_ipv6, address, port)
+            else -> getString(R.string.notification_dnsserver_message_iptables_active, address, port)
         }
         if(portDiffersFromConfig) contentText += "\n" + getString(R.string.notification_dnsserver_portdiffers, originalPort)
         NotificationCompat.Builder(this, channel)
@@ -1269,8 +1270,11 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 vpnProxy?.forwardingMode = forwardingMode
                 vpnProxy?.maxRetries = 15
                 val preferredPort = getPreferences().dnsServerModePort
-                val bindAddress =
-                    if (ipv4Enabled) InetAddress.getLocalHost() else InetAddress.getByName("::1")
+                val defaultBindAddress = if (ipv4Enabled) InetAddress.getLocalHost() else InetAddress.getByName("::1")
+                val bindAddress = if(getPreferences().nonVPNUseLanIP) {
+                    getLanIP(true) ?: defaultBindAddress
+                } else defaultBindAddress
+
                 dnsServerProxy = DnsServerPacketProxy(vpnProxy!!, bindAddress, preferredPort)
                 val actualPort = dnsServerProxy!!.startServer()
                 val iptablesMode = if (getPreferences().nonVpnUseIptables) {
@@ -1292,7 +1296,9 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 if (iptablesMode == IpTablesPacketRedirector.IpTablesMode.SUCCEEDED_DISABLED_IPV6) {
                     dnsProxy?.dnsHandles?.forEach { it.ipv6Enabled = false }
                 }
-                showDnsServerModeNotification(actualPort, preferredPort, iptablesMode)
+
+                val usedAddress = if(bindAddress == defaultBindAddress) "localhost" else bindAddress.hostAddress
+                showDnsServerModeNotification(usedAddress, actualPort, preferredPort, iptablesMode)
                 log("Non-VPN proxy started.")
             }
         } else {
