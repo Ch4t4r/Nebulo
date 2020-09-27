@@ -117,7 +117,7 @@
     <string name="title_local_server_port">Server-poort</string>
     <string name="summary_run_without_vpn">Indien aangevinkt host de Nebulo een DNS server op uw apparaat</string>
     <string name="title_run_without_vpn">Rennen zonder VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Server wordt gehost op localhost:%1s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server wordt gehost op %1s:%2s</string>
     <string name="summary_category_nonvpnmode">Configureer de Nebulo om te fungeren als een DNS-server op het apparaat in plaats van een dummy VPN te gebruiken. Indien ingeschakeld moet u handmatig DNS-query\'s doorsturen naar de Nebulo met behulp van apps van derden.
 \n
 \nDeze functie is experimenteel.</string>

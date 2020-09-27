@@ -40,6 +40,7 @@ import io.sentry.core.NoOpLogger
 import leakcanary.LeakSentry
 import java.net.Inet4Address
 import java.net.Inet6Address
+import java.net.InetAddress
 import java.util.logging.Level
 
 /*
@@ -268,6 +269,29 @@ fun Context.hasDeviceIpv6Address(): Boolean {
     }
     log("No IPv6 addresses found.")
     return !hasNetwork
+}
+
+fun Context.getLanIP(ipv4:Boolean): InetAddress? {
+    val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    for (network in mgr.allNetworks) {
+        if(network == null) continue
+        val info =  try {
+            mgr.getNetworkInfo(network)
+        } catch (ex:NullPointerException) {
+            // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
+            log("Exception when trying to determine IPv6 capability: $ex")
+            null
+        } ?: continue
+        if(!info.isConnected) continue
+        val capabilities = mgr.getNetworkCapabilities(network) ?: continue
+        if (capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)) {
+            val linkProperties = mgr.getLinkProperties(network) ?: continue
+            return linkProperties.linkAddresses.firstOrNull {
+                ipv4 && it.address is Inet4Address || !ipv4 && it.address is Inet6Address
+            }?.address ?: continue
+        }
+    }
+    return null
 }
 
 fun Context.isDeviceRooted():Boolean {

@@ -51,6 +51,6 @@
     <string name="notification_channel_pin_description">与PIN相关的通知频道，推送诸如必须提供PIN等的通知</string>
     <string name="notification_channel_pin">PIN相关通知频道</string>
     <string name="notification_dnsserver_portdiffers">指定的 %1d 端口无法使用。</string>
-    <string name="notification_dnsserver_message">DNS服务器正在运行在 localhost:%1d 。使用第三方应用转发请求中</string>
+    <string name="notification_dnsserver_message">DNS服务器正在运行在 %1s:%2d 。使用第三方应用转发请求中</string>
     <string name="notification_dnsserver_title">正在无VPN模式下运行</string>
 </resources>

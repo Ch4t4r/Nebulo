@@ -51,12 +51,12 @@
     <string name="notification_channel_default">Canal par défaut</string>
     <string name="notification_ruleexport_title">DNS règle l\'exportation</string>
     <string name="notification_dnsserver_portdiffers">Le port configuré %1d n\'a pas pu être utilisé.</string>
-    <string name="notification_dnsserver_message">Le serveur DNS fonctionne sur localhost:%1d. Transférer des requêtes en utilisant des applications tierces</string>
+    <string name="notification_dnsserver_message">Le serveur DNS fonctionne sur %1s:%2d. Transférer des requêtes en utilisant des applications tierces</string>
     <string name="notification_dnsserver_title">Fonctionnement en mode non-VPN</string>
-    <string name="notification_dnsserver_message_iptables_failed">Le serveur DNS fonctionne sur localhost:%1d. L\'initialisation d\'iptables a échoué, les requêtes doivent être transmises avec des applications tierces</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Le serveur DNS fonctionne sur localhost:%1d. Les requêtes sont transférées en utilisant iptables.
+    <string name="notification_dnsserver_message_iptables_failed">Le serveur DNS fonctionne sur %1s:%2d. L\'initialisation d\'iptables a échoué, les requêtes doivent être transmises avec des applications tierces</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Le serveur DNS fonctionne sur %1s:%2d. Les requêtes sont transférées en utilisant iptables.
 \nAttention : IPv6 est actif, les requêtes peuvent contourner Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">Le serveur DNS fonctionne sur localhost:%1d. Les requêtes sont transférées en utilisant iptables</string>
+    <string name="notification_dnsserver_message_iptables_active">Le serveur DNS fonctionne sur %1s:%2d. Les requêtes sont transférées en utilisant iptables</string>
     <string name="notification_multipleuserswarning_text">Nebulo n\'a pas pu démarrer son VPN factice à cause d\'un bug d\'Android. Cela se produit lorsqu\'il y a plusieurs utilisateurs sur votre appareil.</string>
     <string name="notification_multipleuserswarning_title">Un VPN factice n\'a pas pu être mis en place</string>
     <string name="notification_privatednswarning_text">Veuillez désactiver les Dns privés dans les paramètres du système pour utiliser Nebulo.</string>
