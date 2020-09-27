@@ -55,10 +55,10 @@
     <string name="notification_service_revoked_title">VPN-machtiging ingetrokken door systeem</string>
     <string name="notification_service_revoked_message">Klik hier om opnieuw te starten</string>
     <string name="notification_dnsserver_portdiffers">Geconfigureerde Poort %1d kon niet worden gebruikt.</string>
-    <string name="notification_dnsserver_message_iptables_failed">DNS-server draait op localhost:%1d. Het initialiseren van iptables is mislukt, vragen moeten worden doorgestuurd met apps van derden</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS-server draait op localhost:%1d. Query\'s worden doorgestuurd met behulp van iptables.
+    <string name="notification_dnsserver_message_iptables_failed">DNS-server draait op %1s:%2d. Het initialiseren van iptables is mislukt, vragen moeten worden doorgestuurd met apps van derden</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS-server draait op %1s:%2d. Query\'s worden doorgestuurd met behulp van iptables.
 \nWaarschuwing: IPv6 is actief, queries kunnen de Nebulo omzeilen.</string>
-    <string name="notification_dnsserver_message_iptables_active">DNS-server draait op localhost:%1d. Query\'s worden doorgestuurd met behulp van iptables</string>
-    <string name="notification_dnsserver_message">DNS-server draait op localhost:%1d. Vragen doorsturen met behulp van apps van derden</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS-server draait op %1s:%2d. Query\'s worden doorgestuurd met behulp van iptables</string>
+    <string name="notification_dnsserver_message">DNS-server draait op %1s:%2d. Vragen doorsturen met behulp van apps van derden</string>
     <string name="notification_dnsserver_title">In niet-VPN-modus</string>
 </resources>

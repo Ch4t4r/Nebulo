@@ -55,12 +55,12 @@
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_dnsserver_portdiffers">El puerto configurado %1d no se pudo utilizar.</string>
-    <string name="notification_dnsserver_message">El servidor DNS está funcionando en localhost:%1d. Reenvío de consultas con aplicaciones de terceros</string>
+    <string name="notification_dnsserver_message">El servidor DNS está funcionando en %1s:%2d. Reenvío de consultas con aplicaciones de terceros</string>
     <string name="notification_dnsserver_title">Ejecutando en modo no VPN</string>
-    <string name="notification_dnsserver_message_iptables_failed">El servidor DNS está funcionando en localhost:%1d. La inicialización de iptables falló, las consultas tienen que ser reenviadas con aplicaciones de terceros</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">El servidor DNS está funcionando en localhost:%1d. Las consultas se reenvían usando iptables.
+    <string name="notification_dnsserver_message_iptables_failed">El servidor DNS está funcionando en %1s:%2d. La inicialización de iptables falló, las consultas tienen que ser reenviadas con aplicaciones de terceros</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">El servidor DNS está funcionando en %1s:%2d. Las consultas se reenvían usando iptables.
 \nAdvertencia: IPv6 está activo, las consultas podrían eludir a Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">El servidor DNS está funcionando en localhost:%1d. Las consultas se reenvían usando iptables</string>
+    <string name="notification_dnsserver_message_iptables_active">El servidor DNS está funcionando en %1s:%2d. Las consultas se reenvían usando iptables</string>
     <string name="notification_multipleuserswarning_text">Nebulo no pudo iniciar su VPN ficticio por un error de Android. Esto ocurre cuando hay varios usuarios en su dispositivo.</string>
     <string name="notification_multipleuserswarning_title">No se pudo establecer una VPN ficticia</string>
     <string name="notification_privatednswarning_text">Por favor, deshabilite el Dns privado en la configuración del sistema para usar Nebulo.</string>

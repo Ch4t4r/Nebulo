@@ -106,7 +106,7 @@
     <string name="title_local_server_port">Port server</string>
     <string name="summary_run_without_vpn">Saat dicentang, Nebulo menghosting server DNS di perangkat Anda</string>
     <string name="title_run_without_vpn">Jalankan tanpa VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Server akan dihosting di localhost:%1s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server akan dihosting di %1s:%2s</string>
     <string name="summary_category_nonvpnmode">Konfigurasikan Nebulo untuk bertindak sebagai server DNS pada perangkat daripada menggunakan VPN tiruan. Saat diaktifkan, Anda secara manual harus meneruskan kueri DNS ke Nebulo menggunakan aplikasi pihak ketiga.
 \n
 \nFitur ini bersifat eksperimental.</string>

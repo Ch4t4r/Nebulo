@@ -49,8 +49,8 @@
     <string name="error_invalid_pin">Lütfen PIN’inizi girin</string>
     <string name="error_invalid_servername">Lütfen bir isim girin</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">% 1d kuralı</item>
-        <item quantity="other">% 1d kuralları</item>
+        <item quantity="one">%1d kuralı</item>
+        <item quantity="other">%1d kuralları</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">Bu ana bilgisayar için zaten bir kural var</string>
     <string name="windows_querylogging_time">Zaman</string>

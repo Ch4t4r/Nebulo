@@ -55,12 +55,12 @@
     <string name="notification_channel_high_priorty_description">Canal para notificações de alta prioridade, por exemplo, quando o aplicativo perde a permissão para a VPN</string>
     <string name="notification_channel_high_priorty">Alta prioridade</string>
     <string name="notification_dnsserver_portdiffers">Porta configurada %1d não pôde ser usada.</string>
-    <string name="notification_dnsserver_message">O servidor DNS está rodando em localhost:%1d. Encaminhamento de consultas usando aplicações de terceiros</string>
+    <string name="notification_dnsserver_message">O servidor DNS está rodando em %1s:%2d. Encaminhamento de consultas usando aplicações de terceiros</string>
     <string name="notification_dnsserver_title">Funcionamento em modo não VPN</string>
-    <string name="notification_dnsserver_message_iptables_failed">O servidor DNS está rodando em localhost:%1d. Inicializando o iptables falhou, as consultas têm de ser encaminhadas com aplicações de terceiros</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">O servidor DNS está rodando em localhost:%1d. As consultas são encaminhadas utilizando iptables.
+    <string name="notification_dnsserver_message_iptables_failed">O servidor DNS está rodando em %1s:%2d. Inicializando o iptables falhou, as consultas têm de ser encaminhadas com aplicações de terceiros</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">O servidor DNS está rodando em %1s:%2d. As consultas são encaminhadas utilizando iptables.
 \nAtenção: IPv6 está activo, as consultas podem contornar o Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">O servidor DNS está rodando em localhost:%1d. As consultas são encaminhadas utilizando iptables</string>
+    <string name="notification_dnsserver_message_iptables_active">O servidor DNS está rodando em %1s:%2d. As consultas são encaminhadas utilizando iptables</string>
     <string name="notification_multipleuserswarning_text">Nebulo não conseguiu iniciar a sua VPN fictícia por causa de um bug Android. Isto acontece quando há vários utilizadores no seu dispositivo.</string>
     <string name="notification_multipleuserswarning_title">O Dummy VPN não pôde ser estabelecido</string>
     <string name="notification_privatednswarning_text">Por favor, desactive as Dns privadas nas definições do sistema para usar o Nebulo.</string>

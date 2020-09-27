@@ -3,13 +3,13 @@
     <string name="notification_channel_pin_description">PINに関連した通知に使用されるチャンネル、つまりPINを入力する場合に使用されます</string>
     <string name="notification_channel_high_priorty">高優先度</string>
     <string name="notification_service_revoked_title">システムによってVPNの許可が取り消されました</string>
-    <string name="notification_dnsserver_message_iptables_failed">DNSサーバーが localhost:%1dで起動中です。iptablesの初期化に失敗したため、DNSクエリはサードパーティアプリを使って転送されます</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNSサーバーが %1s:%2dで起動中です。iptablesの初期化に失敗したため、DNSクエリはサードパーティアプリを使って転送されます</string>
     <string name="notification_main_subtext">これまでのリクエストクエリ:%1$d</string>
     <string name="notification_dnsserver_portdiffers">ポート: %1dでDNSサーバーを起動することができません。</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNSサーバーが localhost:%1dで起動中です。DNSクエリはiptablesを使って転送されます。 
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNSサーバーが %1s:%2dで起動中です。DNSクエリはiptablesを使って転送されます。
 \n警告:IPv6が有効のため、クエリがNebuloをバイパスする場合があります。</string>
-    <string name="notification_dnsserver_message">DNS サーバーがlocalhost:%1dで起動中です。DNSクエリはサードパーティアプリを使って転送されます</string>
-    <string name="notification_dnsserver_message_iptables_active">DNSサーバーが localhost:%1dで起動中です。DNSクエリはiptablesを使って転送されます</string>
+    <string name="notification_dnsserver_message">DNS サーバーが%1s:%2dで起動中です。DNSクエリはサードパーティアプリを使って転送されます</string>
+    <string name="notification_dnsserver_message_iptables_active">DNSサーバーが %1s:%2dで起動中です。DNSクエリはiptablesを使って転送されます</string>
     <string name="notification_dnsserver_title">非VPNモードで起動中</string>
     <string name="notification_service_revoked_message">ここをタップして再起動</string>
     <string name="notification_service_killed_ignore">無視</string>

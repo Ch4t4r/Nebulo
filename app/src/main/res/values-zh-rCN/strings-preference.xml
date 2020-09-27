@@ -113,7 +113,7 @@
     <string name="title_local_server_port">服务器端口</string>
     <string name="summary_run_without_vpn">当选中后，Nebulo将在您的设备上设置DNS服务器</string>
     <string name="title_run_without_vpn">无VPN运行</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">服务器将在 localhost:%1s 上运行</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">服务器将在 %1s:%2s 上运行</string>
     <string name="summary_category_nonvpnmode">将Nebulo配置为设备上的DNS服务器，而不使用伪VPN。启用后，您必须使用第三方应用手动将DNS请求转发到Nebulo。
 \n
 \n这个功能是试验性的。</string>
