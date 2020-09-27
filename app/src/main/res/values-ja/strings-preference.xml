@@ -2,7 +2,7 @@
 <resources>
     <string name="summary_dnscache_minimum_cache_time">最小キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きい値を設定すると、キャッシュされたレコードが実際のレコードと一致しなくなり、サービスが正常に動作しなくなる可能性があります。
 \n現在の値: %1d 秒。</string>
-    <string name="summary_dnscache_customcachetime">キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きく設定すると、キャッシュされたレコードと実際のレコードが一致しなくなり、サービスが正常に動作しなくなる可能性があります。 
+    <string name="summary_dnscache_customcachetime">キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きく設定すると、キャッシュされたレコードと実際のレコードが一致しなくなり、サービスが正常に動作しなくなる可能性があります。
 \n現在の値: %1d 秒</string>
     <string name="title_enable_logging">動作ログの取得</string>
     <string name="preference_category_logging">動作ログ</string>
@@ -68,7 +68,7 @@
     <string name="title_local_server_port">ポート番号</string>
     <string name="summary_run_without_vpn">チェックを入れると、Nebuloは端末内にDNSサーバーを設置します</string>
     <string name="title_run_without_vpn">非VPNで稼働</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">サーバーが localhost:%1s で稼働します。</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">サーバーが %1s:%2s で稼働します。</string>
     <string name="summary_category_nonvpnmode">ダミーのVPNを使用する替わりに、デバイス上にDNSサーバーを設置し機能するようNebuloを構成します。このモードを使う場合、サードパーティのアプリを使用してDNSクエリをNebuloに手動で転送する必要があります。</string>
     <string name="preference_category_nonvpnmode">非VPNモード</string>
     <string name="summary_delete_queries">記録されたクエリを削除する場合、ここをタップします。</string>
@@ -81,7 +81,7 @@
     <string name="summary_pause_on_captiveportal">フリーWi-Fi接続時などに表示されるキャプティブポータル検出時にDoH機能を一旦停止します。このときポータルにログインすると、すぐに自動的に再開されます。 
 \nこの機能を無効にすると、キャプティブポータルサイトが開けず、ログインできなくなる場合があります。</string>
     <string name="title_pause_on_captiveportal">キャプティブポータルの一時停止</string>
-    <string name="summary_bypass_searchdomains">ローカルネットワークなどで使用される検索ドメイン（MyPC.localやMyPc.fritz.boxなど）の名前解決を、ローカルネットワークのDNSサーバーに送信します(DoH/DoTサーバーは使用しません)。 
+    <string name="summary_bypass_searchdomains">ローカルネットワークなどで使用される検索ドメイン（MyPC.localやMyPc.fritz.boxなど）の名前解決を、ローカルネットワークのDNSサーバーに送信します(DoH/DoTサーバーは使用しません)。
 \n本機能を有効にすることを特に推奨します。これらのクエリはローカルネットワークから出ることはありません。</string>
     <string name="title_bypass_searchdomains">検索ドメインのバイパス</string>
     <string name="summary_map_query_refused">DNS サーバーによっては、ホストが許可されていないかブロックされている場合、問い合わせに対する応答(クエリ)を拒否することがあります。この設定では、問い合わせを拒否する代わりにホストをブロックします。</string>

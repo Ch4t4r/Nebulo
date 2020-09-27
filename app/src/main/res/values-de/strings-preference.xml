@@ -112,7 +112,7 @@
     <string name="title_local_server_port">Serverport</string>
     <string name="summary_run_without_vpn">Wenn aktiviert wird Nebulo einen DNS Server auf deinem Gerät starten</string>
     <string name="title_run_without_vpn">Ohne VPN nutzen</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Server wird unter localhost:%1s bereitgestellt</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server wird unter %1s:%2s bereitgestellt</string>
     <string name="summary_category_nonvpnmode">Konfiguriert Nebulo als DNS Server zu agieren, anstatt einen Dummy VPN zu benutzen. Wenn diese Einstellung aktiviert ist, müssen DNS Anfragen von anderen Apps zu Nebulo weitergleitet werden.</string>
     <string name="preference_category_nonvpnmode">Nicht-VPN Modus</string>
     <string name="summary_check_iptables">Hier klicken um Unerstützung von iptables zu überprüfen</string>

@@ -15,6 +15,12 @@
                 android:summary="@string/summary_run_without_vpn"
                 android:title="@string/title_run_without_vpn" />
 
+        <androidx.preference.CheckBoxPreference
+                android:defaultValue="false"
+                android:key="nonvpn_use_lanip"
+                android:summary="@string/summary_nonvpn_use_lanip"
+                android:title="@string/title_nonvpn_use_lanip" />
+
         <androidx.preference.EditTextPreference
                 android:defaultValue="11053"
                 android:dependency="run_without_vpn"

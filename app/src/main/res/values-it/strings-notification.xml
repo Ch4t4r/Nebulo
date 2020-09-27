@@ -51,12 +51,12 @@
     <string name="notification_service_revoked_title">Autorizzazione VPN revocata dal sistema</string>
     <string name="notification_service_revoked_message">Clicca qui per riavviare</string>
     <string name="notification_dnsserver_portdiffers">La porta configurata %1d non può essere utilizzata.</string>
-    <string name="notification_dnsserver_message">Il server DNS è in esecuzione su localhost:%1d. Inoltrare le query utilizzando applicazioni di terze parti</string>
+    <string name="notification_dnsserver_message">Il server DNS è in esecuzione su %1s:%2d. Inoltrare le query utilizzando applicazioni di terze parti</string>
     <string name="notification_dnsserver_title">Funzionamento in modalità non-VPN</string>
-    <string name="notification_dnsserver_message_iptables_failed">Server DNS in esecuzione su localhost:%1d. Inizializzazione iptables fallita, le richieste devono essere inoltrate con app di terze parti</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Server DNS in esecuzione su localhost:%1d. Le richieste sono inoltrate usando iptables.
+    <string name="notification_dnsserver_message_iptables_failed">Server DNS in esecuzione su %1s:%2d. Inizializzazione iptables fallita, le richieste devono essere inoltrate con app di terze parti</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Server DNS in esecuzione su %1s:%2d. Le richieste sono inoltrate usando iptables.
 \nAttenzione: IPv6 è attivo, le richieste potrebbero aggirare Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">Server DNS in esecuzione su localhost:%1d. Le richieste sono inoltrate usando iptables</string>
+    <string name="notification_dnsserver_message_iptables_active">Server DNS in esecuzione su %1s:%2d. Le richieste sono inoltrate usando iptables</string>
     <string name="notification_multipleuserswarning_text">Nebulo non ha potuto avviare la sua VPN manichino a causa di un bug Android. Questo accade quando ci sono più utenti sul dispositivo.</string>
     <string name="notification_multipleuserswarning_title">Dummy VPN non poteva essere stabilito</string>
     <string name="notification_privatednswarning_text">Si prega di disattivare i DNS privati nelle impostazioni di sistema per utilizzare Nebulo.</string>

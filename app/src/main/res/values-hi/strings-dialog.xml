@@ -96,7 +96,7 @@
     <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d सर्वरों का परीक्षण किया गया
 \n %2d DoT सर्वर उपलब्ध है, %3d उपलब्ध नहीं है
 \n %4d DoH सर्वर उपलब्ध है, %5d उपलब्ध नहीं है
-\n औसत प्रतिक्रिया समय:% 6d ms. 
+\n औसत प्रतिक्रिया समय: %6d ms.
 \n
 \n सबसे तेज़ सर्वर: %7s
 \n सबसे धीमा सर्वर: %8s</string>
