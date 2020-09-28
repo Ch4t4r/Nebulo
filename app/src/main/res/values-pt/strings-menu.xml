@@ -1,9 +1,10 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="menu_main">Status</string>
-    <string name="menu_settings">Configurações</string>
-    <string name="menu_querylogging">Consultas registradas</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_main">Estado da aplicação</string>
+    <string name="menu_settings">Definições</string>
+    <string name="menu_querylogging">Consultas registadas</string>
     <string name="menu_create_shortcut">Criar um atalho do servidor</string>
     <string name="menu_rate">Avaliar</string>
-    <string name="menu_about">Sobre este aplicativo</string>
+    <string name="menu_about">Sobre esta aplicação</string>
     <string name="menu_show_on_fdroid">Mostrar no F-Droid</string>
 </resources>
