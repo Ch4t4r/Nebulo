@@ -132,4 +132,6 @@
     <string name="title_nonvpn_help_faq">作業内容</string>
     <string name="summary_inform_bad_connection">DNSサーバーが遅延またはDNSサーバーに到達しなくなった時にメインメニュー内でその旨を通知します。</string>
     <string name="title_inform_bad_connection">接続不良を知らせる</string>
+    <string name="summary_nonvpn_use_lanip">いくつかのアプリでは、DNSのIPアドレスにlocalhost(127.0.0.1)を指定することができません。この設定を有効にすると、代わりにローカルネットワークで割り当てられたIPアドレスを使用できるようになります。なお接続しているローカルネットワークによってこのIPアドレスが変わることがありますので注意してください。</string>
+    <string name="title_nonvpn_use_lanip">localhostの代替としてデバイスIP使用</string>
 </resources>
