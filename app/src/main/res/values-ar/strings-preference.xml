@@ -52,7 +52,7 @@
     <string name="preference_category_logging">التسجيل</string>
     <string name="summary_dnscache_nxdomaincachetime">تغيير مقدار الوقت الذي تم فيه تخزين طلبات NXDOMAIN مؤقتًا. يؤدي ذلك إلى تحسين أداء المجالات غير الموجودة (على سبيل المثال ، إذا كانت محظورة)
 \nالحالي: %1d ثانية</string>
-    <string name="title_dnscache_nxdomaincachetime">وقت التخزين المؤقت لـ NXDomain (بالثواني)</string>
+    <string name="title_dnscache_nxdomaincachetime">وقت التخزين المؤقت ل NXDomain (بالثواني)</string>
     <string name="summary_dnscache_customcachetime">تغيير مدة تخزين جميع الطلبات في ذاكرة التخزين المؤقت بغض النظر عما إذا كان وقت التخزين المؤقت الافتراضي لها أطول. قد تتسبب فترات التخزين المؤقت الطويلة في عدم تزامن البيانات المخزنة مؤقتًا مع البيانات الفعلية.
 \nالحالي: %1d ثانية</string>
     <string name="title_dnscache_customcachetime">تخصيص وقت ذاكرة التخزين المؤقت (بالثواني)</string>
@@ -64,13 +64,13 @@
     <string name="summary_dnscache_maxsize">تحديد عدد الادخالات بذاكرة التخزين المؤقت كل الوقت</string>
     <string name="title_dnscache_maxsize">الحد الأقصى لمساحة ذاكرة التخزين المؤقت</string>
     <string name="summary_clear_dnscache">اضغط هنا لمسح ذاكرة التخزين المؤقت ل DNS في حال حدوث مشكلة ما</string>
-    <string name="title_clear_dnscache">مسح ذاكرة التخزين المؤقت لـ DNS</string>
-    <string name="summary_dnscache_keepacrosslaunches">احتفظ بذاكرة التخزين المؤقت لـ DNS عبر عمليات إطلاق متعددة</string>
-    <string name="title_dnscache_keepacrosslaunches">احتفظ بذاكرة التخزين المؤقت لـ DNS</string>
+    <string name="title_clear_dnscache">مسح ذاكرة التخزين المؤقت ل DNS</string>
+    <string name="summary_dnscache_keepacrosslaunches">احتفظ بذاكرة التخزين المؤقت ل DNS عبر عمليات إطلاق متعددة</string>
+    <string name="title_dnscache_keepacrosslaunches">احتفظ بذاكرة التخزين المؤقت ل DNS</string>
     <string name="summary_dnscache_enabled">تفعيل ذاكرة التخزين المؤقت لنظام أسماء النطاقات للتطبيقات. تحفظ ذاكرة التخزين المؤقت الطلبات القديمة للإجابة على الأسئلة المستقبلية بشكل أسرع.
 \n
 \nيحتوي النظام بالفعل على ذاكرة تخزين مؤقت ، قم بتمكينها ان اردت التحكم بها بشكل افضل</string>
-    <string name="title_dnscache_enabled">استسيرفرات ذاكرة التخزين المؤقتة لـ DNS</string>
+    <string name="title_dnscache_enabled">استسيرفرات ذاكرة التخزين المؤقتة ل DNS</string>
     <string name="preference_category_cache">التحكم في ذاكرة التخزين المؤقت</string>
     <string name="summary_preference_change_pin">تغيير رمز الحماية، استسيرفرات الارقام …,1,2,3 فقط
 \nرمز الحماية PIN الخاص بك هو : %1s</string>
@@ -86,7 +86,7 @@
     <string name="title_show_noconnection_notification">اشعار بان التطبيق غير متصل</string>
     <string name="summary_notification_allow_pause">اسمح بإيقاف التطبيق مؤقتاً من الاشعارات</string>
     <string name="title_notification_allow_pause">اسمح بالتوقف المؤقت</string>
-    <string name="summary_notification_allow_stop">"اسمح  بايقاف التطبيق من الاشعارات"</string>
+    <string name="summary_notification_allow_stop">اسمح بايقاف التطبيق من الاشعارات</string>
     <string name="title_notification_allow_stop">تأكيد التوقف</string>
     <string name="summary_notification_hide_icon">اخفاء ايقونة التطبيق من شريط الاشعارات الاعلى</string>
     <string name="title_notification_hide_icon">اخفاء</string>
@@ -95,7 +95,7 @@
     <string name="summary_show_notification_on_lockscreen">ضبط ظهور الاشعارات على شاشة القفل</string>
     <string name="title_show_notification_on_lockscreen">اظهار على شاشة القفل</string>
     <string name="preference_category_notification">التنبيهات</string>
-    <string name="summary_fallback_dns">يتم اعداد سيرفر DNS للاستخدام المحلي على Nebulo, في العادة يكون سيرفر DNS لمزودي سيرفراتة الاتصالات لديك، يستسيرفرات لاغراض داخلية فقط لا يقدم علاج لكل استعلامات DNS الطبيعية</string>
+    <string name="summary_fallback_dns">يتم اعداد سيرفر DNS للاستخدام المحلي على Nebulo, في العادة يكون سيرفر DNS لمزودي سيرفراتة الاتصالات لديك، يستسيرفرات لاغراض داخلية فقط لا يقدم علاج لكل استعلامات DNS الطبيعية.</string>
     <string name="title_fallback_dns">سيرفر DNS داخلي</string>
     <string name="summary_excluded_apps">احظر هذه التطبيقات، مثل التي تعمل بلا انترنت - اختر قائمة التطبيقات التي تريد حظرها من استخدام تشفير استعلامات DNS او تشفير حركة مرور DNS</string>
     <string name="title_excluded_apps">تطبيقات محظورة</string>
@@ -127,8 +127,7 @@
     <string name="summary_iptables_mode">إعادة توجيه الاستعلامات إلى Nebulo باستخدام الجدار الناري. يتطلب امتيازات ال ROOT . عند التمكين ، لا يلزم استخدام تطبيقات خارجية عندما تكون في وضع غير vpn. قد لا يعمل هذا عندما تكون على شبكة IPv6.</string>
     <string name="title_iptables_mode">استخدام الجدار الناري</string>
     <string name="preference_category_iptables">الجدار الناري</string>
-    <string name="summary_local_server_port">منفذ سيرفر DNS الذي سيتم استضافته. يسمح فقط بالمنافذ فوق 1024.
-\nحاليًا: %1s</string>
+    <string name="summary_local_server_port">منفذ سيرفر DNS الذي سيتم استضافته. يسمح فقط بالمنافذ فوق 1024</string>
     <string name="title_local_server_port">منفذ السيرفر</string>
     <string name="summary_run_without_vpn">عند تحديده ، يستضيف Nebulo سيرفر DNS على جهازك</string>
     <string name="title_run_without_vpn">تشغيل من غير VPN</string>
