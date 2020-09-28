@@ -17,7 +17,7 @@
 \n© دانيال وولف 2019
 \nمرخص بموجب GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt; support@frostnerd.com &lt;/a&gt;</string>
-    <string name="main_dnssurveillance_privacystatement">بيان الخصوصية لـ %1s</string>
+    <string name="main_dnssurveillance_privacystatement">بيان الخصوصية ل %1s</string>
     <string name="main_dnssurveillance_infotext">عليك التاكد بان سيرفر DNS المتصل به لديه الحق بالوصول للموقع، تاكد من صفحة الخصوصية الخاصة به للتاكد من ذلك.</string>
     <string name="error_cannot_open_settings">لا يمكن فتح إعدادات النظام</string>
     <string name="error_webview_missing">لم يتم العثور على حزمة WebView ، هل يتم تحديثها أو إزالتها حاليًا؟</string>
@@ -50,7 +50,8 @@
     <string name="iptables_supported">تهانينا ،الجدار الناري مدعوم من جهازك!</string>
     <string name="restart_app">اعادة تشغيل</string>
     <string name="restart_app_for_changes">اعد تشغيل التطبيق لتنفيذ التغييرات.</string>
-    <string name="window_main_privatedns_info">DNS الخاص نشط ، استعلاماتك محمية بالفعل. قم بتمكين Nebulo إذا كنت ترغب في استخدام تشفير البيانات DNS-over-HTTPS أو ميزات مفيدة أخرى.</string>
+    <string name="window_main_privatedns_info">DNS الخاص نشط ، استعلاماتك محمية بالفعل. قم بتمكين Nebulo إذا كنت ترغب في استخدام تشفير البيانات DNS-over-HTTPS أو ميزات مفيدة أخرى.
+\nلتمكين Nebulo ، قم بتعطيل Private DNS.</string>
     <string name="windows_querylogging_usedserver_cache">تم حلها مع ذاكرة التخزين المؤقت</string>
     <string name="windows_querylogging_usedserver_dnsrules">تم حلها باستخدام قواعد DNS</string>
     <string name="windows_querylogging_dnsrule_created">تم إنشاء قاعدة DNS</string>
@@ -111,4 +112,28 @@
     <string name="theme_dark">مظلم</string>
     <string name="theme_true_black">اسود غامق</string>
     <string name="theme_blue">ازرق</string>
+    <string name="appintro_server_choose_adblock">الخادم الذي يمنع الإعلانات والتتبع</string>
+    <string name="appintro_server_choose_forth">خادم يحميني من المواقع والتطبيقات الضارة</string>
+    <string name="appintro_server_choose_third">خادم حقيقي يركز على الخصوصية</string>
+    <string name="appintro_server_choose_second">خادم سريع ، مع التركيز على الخصوصية</string>
+    <string name="appintro_server_choose_first">الأسرع</string>
+    <string name="appintro_server_choose_disclaimer">هناك خوادم تناسب عدة فئات أو حتى جميع الفئات. يختار Nebulo تلقائيًا الأسرع.</string>
+    <string name="appintro_server_choose_description">ما نوع الخادم الذي تريد استخدامه في Nebulo؟</string>
+    <string name="appintro_server_choose_title">اهم الاشياء اولا</string>
+    <string name="appintro_forth_description">يمكنك تكوين Nebulo لاستخدامه كحاجب إعلان وتتبع على مستوى النظام.
+\n
+\nيمكنك حتى استخدامه مع بعض تطبيقات جدار الحماية لزيادة تحكمك في خصوصيتك بشكل أكبر.</string>
+    <string name="appintro_forth_title">شيء أخير</string>
+    <string name="appintro_third_description">يأتي Nebulo مزودًا بالعديد من الميزات المفيدة مثل مراقبة نشاط DNS وحماية PIN واختبار السرعة وغير ذلك الكثير.
+\n
+\nاستكشف التطبيق لاكتشاف ما تقدمه البرامج المجانية مفتوحة المصدر.</string>
+    <string name="appintro_third_title">مجهزة تجهيزا كاملا للعظمة</string>
+    <string name="appintro_second_description">بإضافة التشفير إلى DNS ، وهو أحد أقدم بروتوكولات الإنترنت ، فهو بين يديك.
+\n
+\nاجعل من الصعب على مزود خدمة الإنترنت تتبعك باستخدام DNS-over-HTTPS و DNS-over-TLS مع Nebulo.</string>
+    <string name="appintro_second_title">خصوصيتك مهمة</string>
+    <string name="appintro_first_description">Nebulo هو تطبيق لحماية خصوصيتك وتأمين جهازك.
+\n
+\nاستعد السيطرة على البيانات التي تعامل معها مزود خدمة الإنترنت أو الكيانات الأخرى على أنها بياناتها لفترة طويلة.</string>
+    <string name="appintro_first_title">مرحبًا بكم في نيبولو.</string>
 </resources>
