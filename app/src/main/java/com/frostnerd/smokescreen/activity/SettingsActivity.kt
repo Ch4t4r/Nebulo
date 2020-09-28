@@ -58,6 +58,7 @@ class SettingsActivity : BaseActivity() {
                 putSerializable("category", intent.getSerializableExtra("category") ?: category ?: Category.GENERAL)
             }
         }).commit()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
