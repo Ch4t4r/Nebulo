@@ -113,7 +113,7 @@
     <string name="title_local_server_port">सर्वर पोर्ट</string>
     <string name="summary_run_without_vpn">जब चेक किया गया नेबुलो आपके डिवाइस पर एक DNS सर्वर को होस्ट करता है</string>
     <string name="title_run_without_vpn">वीपीएन के बिना चलाएं</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">सर्वर को लोकलहोस्ट पर होस्ट किया जाएगा: %1s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">सर्वर को %1s:%2s पर होस्ट किया जाएगा</string>
     <string name="summary_category_nonvpnmode">एक डमी वीपीएन का उपयोग करने के बजाय डिवाइस पर DNS सर्वर के रूप में कार्य करने के लिए नेबुलो को कॉन्फ़िगर करें। जब आप सक्षम होते हैं तो आपको थर्ड पार्टी ऐप्स का उपयोग करके DNS प्रश्नों को नेबुलो में फॉरवर्ड करना होता है।
 \n
 \nयह सुविधा प्रायोगिक है।</string>

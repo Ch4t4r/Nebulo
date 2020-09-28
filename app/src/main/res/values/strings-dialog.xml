@@ -205,7 +205,7 @@
         - Start Nebulo (in non-VPN mode) and start NetGuard
     </string>
 
-    <string name="dialog_nonvpn_help_generic">To use Nebulo in non-vpn mode together with a third-party VPN app you have to change your DNS settings inside this other app.\nNot all VPN apps allow you to change the DNS settings. If yours does, simply set the DNS server to \'%1s:%2d\' or \'127.0.0.1:%2d\' (you can configure the port above).\n\nAfter configuring the apps simply start both.</string>
+    <string name="dialog_nonvpn_help_generic">To use Nebulo in non-vpn mode together with a third-party VPN app you have to change your DNS settings inside this other app.\nNot all VPN apps allow you to change the DNS settings. If yours does, simply set the DNS server to \'%1s:%2d\' (you can configure the port above).\n\nAfter configuring the apps simply start both.</string>
 
     <string name="dialog_latency_sidebar_title">Information about latency</string>
     <string name="dialog_latency_sidebar_message">The latency shown here is not your ping or how fast your network is.\n It shows how long it takes for Nebulo to send a request and get an answer from the DNS server. The displayed value is not always the most current one and fluctuations can be possible.\n This can cause the value to be displayed higher than it is because it has become lower since it was measured.</string>

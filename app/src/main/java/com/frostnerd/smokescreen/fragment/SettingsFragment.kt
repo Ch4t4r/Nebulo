@@ -325,7 +325,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             showInfoTextDialog(
                 requireContext(),
                 getString(R.string.preference_category_nonvpnmode_help),
-                getString(R.string.dialog_nonvpn_help_generic, portValue, portValue),
+                getString(R.string.dialog_nonvpn_help_generic, bindAddress, portValue),
                 positiveButton = getString(R.string.all_close) to null,
                 neutralButton = null
             )
