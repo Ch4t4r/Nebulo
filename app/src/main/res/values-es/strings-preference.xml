@@ -40,7 +40,7 @@
     <string name="preference_category_querylogging">Registro de consulta</string>
     <string name="title_log_queries">Registro de consulta</string>
     <string name="summary_export_queries">Exportación de las consultas como CSV (%1d consultas)</string>
-    <string name="summary_show_noconnection_notification">Mostrar una notificación cuando la aplicación no tiene o tiene una mala conexión</string>
+    <string name="summary_show_noconnection_notification">Mostrar una notificación cuando la aplicación no tiene actualmente ninguna conexión con el servidor DNS</string>
     <string name="summary_dnscache_usedefaulttimes">Mantener las solicitudes en la caché durante todo el tiempo que el servidor DNS se comunique usando el TTL</string>
     <string name="summary_dnscache_minimum_cache_time">El tiempo mínimo de almacenamiento en caché de las entradas debe ser menor, independientemente de que el tiempo de almacenamiento en caché por defecto sea más corto. Tiempos de almacenamiento en caché largos podrían hacer que los datos almacenados en caché no estuvieran sincronizados con los datos reales. 
 \nActual: %1d Segundos</string>
@@ -108,15 +108,12 @@
     <string name="summary_pause_on_captiveportal">No usa el DoH si se detecta un portal cautivo. Se reanudará automáticamente poco después de iniciar la sesión. 
 \nSi lo desactiva, podría impedirle abrir el portal cautivo para iniciar sesión</string>
     <string name="title_advanced_logging">Registro avanzado</string>
-    <string name="summary_local_server_port">Puerto del servidor DNS que se va a alojar Sólo se permiten los puertos superiores a 1024.
-\nActualmente:%1s</string>
+    <string name="summary_local_server_port">Puerto del servidor DNS que se va a alojar Sólo se permiten los puertos superiores a 1024.</string>
     <string name="title_local_server_port">Puerto del servidor</string>
     <string name="summary_run_without_vpn">Cuando está marcado, Nebulo aloja un servidor DNS en su dispositivo</string>
     <string name="title_run_without_vpn">Funciona sin VPN</string>
     <string name="summary_category_nonvpnmode_forwardinfo">El servidor se alojará en %1s:%2s</string>
-    <string name="summary_category_nonvpnmode">Configurar Nebulo para que actúe como un servidor DNS en el dispositivo en lugar de usar una VPN falsa. Cuando se habilita, hay que reenviar manualmente las consultas DNS a Nebulo usando aplicaciones de terceros.
-\n
-\nEsta característica es experimental.</string>
+    <string name="summary_category_nonvpnmode">Configurar Nebulo para que actúe como un servidor DNS en el dispositivo en lugar de usar una VPN falsa. Cuando se habilita, hay que reenviar manualmente las consultas DNS a Nebulo usando aplicaciones de terceros.</string>
     <string name="preference_category_nonvpnmode">Modo no VPN</string>
     <string name="summary_check_iptables">Compruebe si su dispositivo es compatible con los iptables</string>
     <string name="title_check_iptables">Comprueba si hay iptables</string>
@@ -132,4 +129,9 @@
     <string name="title_fallback_dns">Servidor DNS interno</string>
     <string name="summary_nonvpn_help_generic">Haga clic aquí para obtener instrucciones sobre cómo configurar las aplicaciones VPN</string>
     <string name="nonvpn_help_generic_title">Aplicaciones genéricas de VPN</string>
+    <string name="summary_nonvpn_help_faq">Haga clic aquí para abrir una ventana del navegador con ayuda y documentación para el modo no-VPN</string>
+    <string name="title_nonvpn_help_faq">Documentación</string>
+    <string name="summary_nonvpn_use_lanip">Algunas aplicaciones no permiten que el localhost sea introducido como DNS. Con esta configuración se utiliza el IP de los dispositivos en la red en su lugar. La dirección cambiará dependiendo de la red, presta atención a la notificación.</string>
+    <string name="title_nonvpn_use_lanip">Usar el dispositivo IP en lugar del host local</string>
+    <string name="title_inform_bad_connection">Infórmame de una mala conexión</string>
 </resources>
