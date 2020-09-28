@@ -80,4 +80,48 @@
     <string name="iptables_supported_ipv6_unsupported">Iptables está soportado, pero IPv6 no está soportado.</string>
     <string name="iptables_supported">Felicitaciones, iptables es compatible con su dispositivo!</string>
     <string name="window_dnsrules_refresh_sources">Actualizar las normas de importación de la fuente</string>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="one">%1d consulta ha sido bloqueada hasta ahora</item>
+        <item quantity="other">%1d consultas han sido bloqueadas hasta ahora</item>
+    </plurals>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="one">%1d consulta ha sido manejada por las reglas del DNS hasta ahora</item>
+        <item quantity="other">%1d consultas han sido manejadas por las reglas del DNS hasta ahora</item>
+    </plurals>
+    <string name="appintro_server_choose_adblock">Un servidor que bloquea los anuncios y el seguimiento</string>
+    <string name="appintro_server_choose_forth">Un servidor que me protege de sitios web y aplicaciones dañinas</string>
+    <string name="appintro_server_choose_third">Un verdadero servidor centrado en la privacidad</string>
+    <string name="appintro_server_choose_second">Un servidor rápido, con un enfoque en la privacidad</string>
+    <string name="appintro_server_choose_first">El más rápido</string>
+    <string name="appintro_server_choose_disclaimer">Hay servidores que se ajustan a múltiples o incluso a todas las categorías. Nebulo escoge automáticamente el más rápido.</string>
+    <string name="appintro_server_choose_description">¿Qué tipo de servidor quieres usar en Nebulo\?</string>
+    <string name="appintro_server_choose_title">Lo primero es lo primero</string>
+    <string name="appintro_forth_description">Puedes configurar Nebulo para que se use como un bloqueador de anuncios y rastreo en todo el sistema.
+\n
+\nIncluso puedes usarlo junto con algunas aplicaciones de cortafuegos para aumentar aún más el control sobre tu privacidad.</string>
+    <string name="appintro_forth_title">Una última cosa</string>
+    <string name="appintro_third_description">Nebulo viene con un montón de características útiles como el monitoreo de la actividad del DNS, la protección del PIN, una prueba de velocidad y mucho más.
+\n
+\nExplora la aplicación para descubrir lo que el software libre de código abierto tiene que ofrecer.</string>
+    <string name="appintro_third_title">Totalmente equipado para la grandeza</string>
+    <string name="appintro_second_description">Al añadir la encriptación al DNS, uno de los protocolos más antiguos de Internet, está en tus manos.
+\n
+\nDificulta a tu proveedor de servicios de Internet el rastreo de tu persona usando DNS-over-HTTPS y DNS-over-TLS con Nebulo.</string>
+    <string name="appintro_second_title">Su privacidad importa</string>
+    <string name="appintro_first_description">Nebulo es una aplicación para proteger su privacidad y asegurar su dispositivo.
+\n
+\nRecuperar el control de los datos que su proveedor de servicios de Internet u otras entidades han tratado como suyos durante mucho tiempo.</string>
+    <string name="appintro_first_title">Bienvenido a Nebulo.</string>
+    <string name="warning_server_currently_unstable_expanded">El servidor %1s parece estar inestable ahora mismo, impactando en su velocidad de navegación. Considera la posibilidad de cambiar a un servidor más estable.</string>
+    <string name="warning_server_currently_unstable">El servidor %1s parece estar inestable ahora mismo.</string>
+    <string name="about_help_faq">Preguntas frecuentes</string>
+    <string name="window_querylog_information">Información</string>
+    <string name="window_main_click_to_enable">Haga clic para activar.</string>
+    <string name="window_main_unprotected">No está protegido</string>
+    <string name="window_main_protected">¡Protegido!</string>
+    <string name="window_speedtest_information">Cuanto más bajos sean los valores, más rápido podrá Nebulo comunicarse con el servidor. Esto, por ejemplo, aumenta la velocidad de navegación.</string>
+    <string name="theme_blue">Azul</string>
+    <string name="theme_true_black">Negro verdadero</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_mono">Mono</string>
 </resources>
