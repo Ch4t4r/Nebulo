@@ -100,10 +100,10 @@
     <string name="dialog_deletehostsource_title">%1sを削除しますか\?</string>
     <string name="dialog_speedtest_useserver_message">サーバ %1s を使用しますか？それは %3d のうち %2d にランク付けされ、応答時間は %4d ms です。</string>
     <string name="dialog_speedtest_useserver_title">サーバーを選択</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d のサーバ ーをテストしました。
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d のサーバ ーをテストしました。 
 \n DoT サーバーのうち、%2d 個のサーバーはアクセス可能、%3d 個 のサーバーがアクセスできませんでした。 
 \n DoH サーバーのうち、%4d 個のサーバーはアクセス可能、%5d 個のサーバーがアクセスできませんでした。 
-\n 平均応答時間: %6d ms. 
+\n 平均応答時間: %6d ms です。
 \n 
 \n 最も速いサーバー: %7s 
 \n 最も遅いサーバー: %8s</string>
