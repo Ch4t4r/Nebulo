@@ -61,18 +61,18 @@
     <string name="dialog_crashreporting_positive">Ativar relatórios de falhas</string>
     <string name="dialog_crashreporting_negative">Não, obrigado.</string>
     <string name="dialog_crashreporting_neutral">Ver dados</string>
-    <string name="dialog_crashreporting_message">Obrigado por usar Nebulo! 
-\n 
-\nEsta aplicação está usando software de terceiros de código aberto e auto-hospedado para facilitar o rastreio de falhas de aplicativo assim que elas ocorrem. Se e somente se habilitado, o aplicativo transmitirá relatórios de travamento quando encontrar uma falha. Estes relatórios contêm dados adicionais sobre o aplicativo e seu dispositivo. Isso inclui um ID que é usado para rastrear falhas provenientes do mesmo usuário, mas não pode ser usado para rastrear qualquer outra coisa. Ativar o relatório de travamento é opcional, mas me ajudaria muito. 
-\nOs relatórios são enviados com segurança por HTTPS. 
-\n 
-\nClique em \"ver dados\" abaixo para ver que tipo de dados são transmitidos e para um link para a política de privacidade.</string>
-    <string name="dialog_crashreporting_message_notester">Obrigado por usar Nebulo! 
-\n 
-\nEste aplicativo está usando software de terceiros de código aberto e auto-hospedado para facilitar o rastreio de falhas de aplicativo assim que elas ocorrem. Se e somente se habilitado, o aplicativo transmitirá relatórios de travamento quando encontrar uma falha. Estes relatórios contêm dados adicionais sobre o aplicativo e seu dispositivo. Isso inclui um ID que é usado para rastrear falhas provenientes do mesmo usuário, mas não pode ser usado para rastrear qualquer outra coisa. Ativar o relatório de travamento é opcional, mas tornaria as correções de bugs mais fáceis e rápidas. 
-\nOs relatórios são enviados com segurança por HTTPS. 
-\n 
-\nClique em \"ver dados\" abaixo para ver que tipo de dados são transmitidos e para um link para a política de privacidade.</string>
+    <string name="dialog_crashreporting_message">Obrigado por usar o Nebulo!
+\n
+\nEsta aplicação usa software de terceiros de código aberto e auto-hospedado para facilitar o rastreamento de falash da aplicação assim que ocorrem. Se e somente se ativado, a aplicação irá transmitir relatórios de falha quando a aplicação encontrar uma falha. Esses relatórios contêm dados adicionais sobre o aplicativo e dispositivo. Isso inclui uma identificação que é usado para rastrear falhas provenientes do mesmo utilizador, mas não pode ser usado para rastrear mais nada. Ativar o relatório de falha é opcional, mas me ajudaria muito.
+\nOs relatórios são enviados com segurança por HTTPS.
+\n
+\nClique em \'Ver dados\' abaixo para ver que tipo de dados são transmitidos e para obter um endereço para a política de privacidade.</string>
+    <string name="dialog_crashreporting_message_notester">Obrigado por usar o Nebulo!
+\n
+\nEsta aplicação usa software de terceiros de código aberto e auto-hospedado para facilitar o rastreamento de falhas da aplicação assim que ocorrem. Se e somente se ativado, a aplicação irá transmitir relatórios de falha quando a aplicação encontrar uma falha. Esses relatórios contêm dados adicionais sobre a aplicação e dispositivo. Isso inclui uma identificação que é usado para rastrear falhas provenientes do mesmo utilizador, mas não pode ser usado para rastrear mais nada. Ativar o relatório de falha é opcional, mas tornaria a correção de bugs mais fácil e rápida.
+\nOs relatórios são enviados com segurança por HTTPS
+\n
+\nClique em \'Ver dados\' abaixo para ver que tipo de dados são transmitidos e para obter um endereço para a política de privacidade.</string>
     <string name="dialog_clearqueries_title">Limpar todas as consultas</string>
     <string name="dialog_clearqueries_message">Tem certeza de que deseja limpar as consultas registadas\? Isto não pode ser revertido.</string>
     <string name="dialog_credits_title">Créditos</string>
@@ -91,7 +91,7 @@
     <string name="dialog_join_group_title">Junte-se à comunidade</string>
     <string name="dialog_join_group_message">Olá! 
 \n 
-\nVocê sabia que este aplicativo tem um grupo do Telegram\? Ele contém atualizações regulares e é o lugar perfeito para dúvidas e discussões. 
+\nSabia que esta aplicação tem um grupo do Telegram\? Ele contém atualizações regulares e é o lugar perfeito para dúvidas e discussões. 
 \nSomos uma grande comunidade com mais de 200 pessoas, gostaria de fazer parte dela\?</string>
     <string name="dialog_join_group_positive">Sim!</string>
     <string name="dialog_speedresult_title">Resultados do teste de velocidade</string>
@@ -138,8 +138,8 @@
 \n 
 \nSe optar por ignorar isso, não verá esta caixa de diálogo novamente. Pode ler mais e obter dicas para resolver isso com o botão abaixo (abre um site externo em seu navegador). Clique nas definições para abrir as definições do Android onde pode desativar as otimizações da bateria para o Nebulo.</string>
     <string name="dialog_servicekilled_more_info">Mais informações</string>
-    <string name="dialog_newhostsource_wildcard_info">Pode usar listas de hospedeiros que fazem uso de domínios curinga.</string>
-    <string name="dialog_newdnsrule_wildcard_info">O hospedeiro oferece suporte a caracteres-curinga. Use asterisco (*) para qualquer quantidade de caracteres, números e caracteres especiais permitidos, exceto o ponto (.). Use dois asteriscos (**) para incluir o ponto (.).</string>
+    <string name="dialog_newhostsource_wildcard_info">Pode usar listas de hospedeiros que fazem uso de domínios \'wildcard\'.</string>
+    <string name="dialog_newdnsrule_wildcard_info">O hospedeiro oferece suporte a \'wildcards\'. Use asterisco (*) para qualquer quantidade de caracteres, números e caracteres especiais permitidos, exceto o ponto (.). Use dois asteriscos (**) para incluir o ponto (.).</string>
     <string name="dialog_overlaydetected_title">Sobreposição em todo o sistema detectada</string>
     <string name="dialog_overlaydetected_message">Uma sobreposição em todo o sistema (por exemplo, um balão de chat, filtro colorido ou noturno) parece estar ativa. Com a maioria dos dispositivos, não pode ativar a VPN nesse caso. 
 \n 
