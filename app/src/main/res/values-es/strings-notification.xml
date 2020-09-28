@@ -61,4 +61,10 @@
     <string name="notification_multipleuserswarning_title">No se pudo establecer una VPN ficticia</string>
     <string name="notification_privatednswarning_text">Por favor, deshabilite el Dns privado en la configuración del sistema para usar Nebulo.</string>
     <string name="notification_privatednswarning_title">Soldado Dns</string>
+    <string name="notification_bad_connection_text">Tu conexión con el servidor DNS es mala ahora mismo. Esto podría afectar negativamente a tu velocidad de navegación. Considere la posibilidad de seleccionar otro servidor.</string>
+    <string name="notification_bad_connection_title">Mala conexión con el servidor</string>
+    <string name="notification_channel_badconnection_description">Canal utilizado para las notificaciones cuando Nebulo tiene una mala conexión</string>
+    <string name="notification_channel_badconnection">Canal de notificación de mala conexión</string>
+    <string name="notification_channel_dnsrules_description">Canal utilizado para la importación/exportación de reglas del DNS</string>
+    <string name="notification_channel_dnsrules">Canal de notificación de la regla del DNS</string>
 </resources>
