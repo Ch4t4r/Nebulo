@@ -1,27 +1,28 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="dialog_crashreportingusages_data_1">Dados do usuário</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_crashreportingusages_data_1">Dados de utilizador</string>
     <string name="dialog_crashreportingusages_data_2">Dados do dispositivo</string>
-    <string name="dialog_crashreportingusages_data_3">Dados do aplicativo</string>
-    <string name="dialog_crashreportingusages_data_4">Dados do sistema operacional</string>
+    <string name="dialog_crashreportingusages_data_3">Dados da aplicação</string>
+    <string name="dialog_crashreportingusages_data_4">Dados do sistema operatico</string>
     <string name="dialog_crashreportingusages_data_user_1">ID aleatório para rastrear falhas</string>
     <string name="dialog_crashreportingusages_data_device_1">Arquitetura do dispositivo (x86, arm, …)</string>
-    <string name="dialog_crashreportingusages_data_device_2">Orientação da tela (retrato, paisagem)</string>
+    <string name="dialog_crashreportingusages_data_device_2">Orientação do ecrã (retrato, paisagem)</string>
     <string name="dialog_crashreportingusages_data_device_3">Memória livre/usada (RAM)</string>
-    <string name="dialog_crashreportingusages_data_device_4">Carregando (sim/não)</string>
-    <string name="dialog_crashreportingusages_data_device_5">On-line no momento da falha (sim/não)</string>
-    <string name="dialog_crashreportingusages_data_device_6">Resolução de tela</string>
+    <string name="dialog_crashreportingusages_data_device_4">A carregar (sim/não)</string>
+    <string name="dialog_crashreportingusages_data_device_5">Online no momento da falha (sim/não)</string>
+    <string name="dialog_crashreportingusages_data_device_6">Resolução de ecrã</string>
     <string name="dialog_crashreportingusages_data_device_7">Fabricante</string>
     <string name="dialog_crashreportingusages_data_device_8">Marca</string>
     <string name="dialog_crashreportingusages_data_device_9">Modelo</string>
     <string name="dialog_crashreportingusages_data_device_10">Idioma</string>
-    <string name="dialog_crashreportingusages_data_app_1">Hora de início do aplicativo</string>
-    <string name="dialog_crashreportingusages_data_app_2">Versão do aplicativo</string>
-    <string name="dialog_crashreportingusages_data_app_3">Versão de banco de dados</string>
+    <string name="dialog_crashreportingusages_data_app_1">Hora de início da aplicação</string>
+    <string name="dialog_crashreportingusages_data_app_2">Versão a aplicação</string>
+    <string name="dialog_crashreportingusages_data_app_3">Versão de base de dados</string>
     <string name="dialog_crashreportingusages_data_app_4">Nome do servidor DNS</string>
     <string name="dialog_crashreportingusages_data_app_5">Servidor DNS principal</string>
     <string name="dialog_crashreportingusages_data_app_6">Servidor DNS secundário</string>
-    <string name="dialog_crashreportingusages_data_os_1">Nome (p. ex., android)</string>
-    <string name="dialog_crashreportingusages_data_os_2">Versão (p. ex., 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_os_1">Nome (ex: android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Versão (ex: 8.1.0)</string>
     <string name="dialog_crashreportingusages_data_os_3">Versão do kernel</string>
     <string name="dialog_crashreportingusages_data_os_4">Presença de root (sim/não)</string>
-    </resources>
+</resources>
