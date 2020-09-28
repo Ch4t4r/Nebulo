@@ -15,17 +15,16 @@
     <string name="error_invalid_url">Bitte gebe eine valide URL an</string>
     <string name="main_dnssurveillance_infotext">Bitte beachte, dass der DNS Server, mit welchem du verbunden bist, sehen kann, welche Webseiten zu besuchst. Überprüfe die Datenschutzerklärung des Servers für mehr Informationen.</string>
     <string name="main_dnssurveillance_privacystatement">Datenschutzerklärung von %1s</string>
-    <string name="about_app">Diese App ist quelloffen. Der Quellcode kann unter &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt; abgerufen werden.
-\nWeiterhin enthält diese App keine Werbung und setzt kein Tracking ein.
-\n
-\n
-\nVersion %1s
-\nBuild %2d
-\nDatenbankversion %3d
-\nCrashreport ID: %4s
-\n
-\n© Daniel Wolf 2019
-\nLicensed under GPLv3.
+    <string name="about_app">Diese App ist quelloffen. Der Quellcode kann unter &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt; abgerufen werden. 
+\nWeiterhin enthält diese App keine Werbung und setzt kein Tracking ein. 
+\n 
+\nVersion %1s 
+\nBuild %2d 
+\nDatenbankversion %3d 
+\nCrashreport ID: %4s 
+\n 
+\n© Daniel Wolf 2019 
+\nLicensed under GPLv3. 
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
     <string name="app_share_text">Hey, ich habe diese App gefunden, welche deine DNS Anfragen verschlüsselt und dir so mehr Sicherheit und Privatsphäre gibt. Schau sie dir mal an: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
     <string name="quicksettings_stop_text">Nebulo stoppen</string>
