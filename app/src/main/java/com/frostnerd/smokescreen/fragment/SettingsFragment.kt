@@ -258,6 +258,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val bindAddress = if(useLanIP.isChecked) {
             requireContext().getLanIP(getPreferences().enableIpv4)?.hostAddress ?: "localhost"
         } else "localhost"
+        val bindAddressAsIP = if(useLanIP.isChecked) {
+            requireContext().getLanIP(getPreferences().enableIpv4)?.hostAddress ?: "127.0.0.1"
+        } else "127.0.0.1"
         port.setOnPreferenceChangeListener { _, newValue ->
             if (newValue.toString().toIntOrNull()?.let { it in 1025..65535 } == true) {
                 connectInfo.summary = getString(R.string.summary_category_nonvpnmode_forwardinfo, bindAddress, newValue.toString())
@@ -311,7 +314,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             helpNetguard.setOnPreferenceClickListener {
                 AlertDialog.Builder(requireContext(), getPreferences().theme.dialogStyle)
                     .setTitle("NetGuard")
-                    .setMessage(getString(R.string.dialog_nonvpn_help_netguard, port.text.toInt()))
+                    .setMessage(getString(R.string.dialog_nonvpn_help_netguard, bindAddressAsIP, port.text.toInt(), bindAddressAsIP))
                     .setPositiveButton(R.string.all_close, null)
                     .show()
                 true

@@ -174,13 +174,13 @@
 \n
 \n ・プロトコル: UDP
 \n ・送信元ポート: 53
-\n ・宛先アドレス: 127.0.0.1
-\n ・宛先ポート: %1d
+\n ・宛先アドレス: %1s
+\n ・宛先ポート: %2d
 \n ・送信先アプリ: nobody
 \n ※TCPプロトコルについても同じポートとアドレスを設定してルールを追加します。
 \n
 \n-高度なオプション に戻ります。
-\n-画画をスクロールさせ、VPN DNS(2箇所)に\"127.0.0.1\"を設定します。
+\n-画画をスクロールさせ、VPN DNS(2箇所)に\"%3s\"を設定します。
 \n-非VPNモードでNebuloを起動します。その後NetGuardを起動してください</string>
     <string name="dialog_newdnsrule_block_host">このドメインをブロック</string>
     <string name="dialog_dnsrules_status_sourcenotfound">このホスト名はDNSルール内に存在しますが、ソースは不明です。</string>

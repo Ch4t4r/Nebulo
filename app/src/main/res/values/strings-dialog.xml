@@ -198,10 +198,10 @@
         - Enable "Filter traffic" (if not enabled already)\n
         - Click on Port Forwarding\n
         - Add the following rules:\n\n
-        • Protocol UDP, source port 53, destination 127.0.0.1, destination port %1d, destination app nobody\n
+        • Protocol UDP, source port 53, destination %1s, destination port %2d, destination app nobody\n
         • Repeat for TCP\n\n
         - Go back to advanced options\n
-        - Scroll down, set both VPN DNS fields to 127.0.0.1\n
+        - Scroll down, set both VPN DNS fields to %3s\n
         - Start Nebulo (in non-VPN mode) and start NetGuard
     </string>
 

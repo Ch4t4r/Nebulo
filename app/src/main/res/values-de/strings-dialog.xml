@@ -173,11 +173,11 @@
 \n- Klicke auf \"Portweiterleitung\"
 \n- Füge die folgenden Regeln hinzu:
 \n
-\n• Protokoll UDP, Quellport 53, Zieladdresse 127.0.0.1, Zielport %1d, Zielanwendung \"Keiner\"
+\n• Protokoll UDP, Quellport 53, Zieladdresse %1s, Zielport %2d, Zielanwendung \"Keiner\"
 \n• Wiederhole dies für Protokoll TCP
 \n
 \n- Gehe zurück zu den erweiterten Optionen
-\n- Scrolle nach unten, trage bei beiden \"VPN-DNS\" Feldern 127.0.0.1 ein
+\n- Scrolle nach unten, trage bei beiden \"VPN-DNS\" Feldern %3s ein
 \n- Starte Nebulo (im nicht-VPN Modus) und starte NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Diesen Host blockieren</string>
     <string name="dialog_open_faq">Möchtest du dir die häufig gestellten Fragen und die Dokumentation zu dieser Funktion ansehen\?</string>

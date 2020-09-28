@@ -100,11 +100,11 @@
 \n - Klik pada Port Forwarding
 \n - Tambahkan aturan berikut:
 \n
-\n • Protokol UDP, port sumber 53, tujuan 127.0.0.1, port tujuan %1d, tidak ada aplikasi tujuan
+\n • Protokol UDP, port sumber 53, tujuan %1s, port tujuan %2d, tidak ada aplikasi tujuan
 \n • Ulangi untuk TCP
 \n
 \n - Kembali ke opsi lanjutan
-\n - Gulir ke bawah, setel kedua bidang DNS VPN ke 127.0.0.1
+\n - Gulir ke bawah, setel kedua bidang DNS VPN ke %3s
 \n - Mulai Nebulo (dalam mode non-VPN) dan mulai NetGuard</string>
     <string name="dialog_doh_detect_type_message">Tolong tunggu sebentar.</string>
     <string name="dialog_doh_detect_type_title">Mendeteksi tipe server</string>

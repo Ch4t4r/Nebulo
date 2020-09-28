@@ -175,11 +175,11 @@
 \n - clicca su Port Forwarding
 \n - aggiungi le seguenti regole:
 \n
-\n • Protocollo UDP, porta di origine 53, destinazione 127.0.0.1, porta di destinazione %1d, applicazione di destinazione nessuno
+\n • Protocollo UDP, porta di origine 53, destinazione %1s, porta di destinazione %2d, applicazione di destinazione nessuno
 \n • Ripeti per il TCP
 \n
 \n - torna alle opzioni avanzate
-\n - scorri giù, imposta entrambi i campi VPN DNS a 127.0.0.1
+\n - scorri giù, imposta entrambi i campi VPN DNS a %3s
 \n - avvia Nebulo (in modalità non-VPN) e avvia NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Blocca questo host</string>
     <string name="querylog_filter_type_blocked_by_server">Bloccato dal server DNS</string>
