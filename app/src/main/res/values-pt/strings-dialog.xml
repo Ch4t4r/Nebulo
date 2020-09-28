@@ -9,12 +9,12 @@
     <string name="dialog_newserver_primaryserver">Servidor principal</string>
     <string name="dialog_newserver_secondaryserver">Servidor secundário (opcional)</string>
     <string name="dialog_deleteconfig_title">Excluir configuração\?</string>
-    <string name="dialog_deleteconfig_text">Você deseja excluir a configuração %1s\?</string>
-    <string name="dialog_appchoosal_showsystemapps">Mostrar aplicativos do sistema</string>
-    <string name="dialog_appchoosal_whitelist">Apenas use DoH/DoT em aplicativos selecionados</string>
+    <string name="dialog_deleteconfig_text">Deseja excluir a configuração %1s\?</string>
+    <string name="dialog_appchoosal_showsystemapps">Mostrar aplicações do sistema</string>
+    <string name="dialog_appchoosal_whitelist">Apenas use DoH/DoT em aplicações selecionadas</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d aplicativo é excluído por padrão e não pode ser desmarcado</item>
-        <item quantity="other">%1d aplicativos são excluídos por padrão e não podem ser desmarcados</item>
+        <item quantity="one">%1d aplicação é excluída por padrão e não pode ser desmarcada</item>
+        <item quantity="other">%1d aplicações são excluídas por padrão e não podem ser desmarcadas</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
         <item quantity="one">Importação de %1d servidor</item>
@@ -25,47 +25,47 @@
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Tipo: DNS-via-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Tipo: DNS-via-TLS (DoT)</string>
-    <string name="dialog_serverimport_text">Por favor, selecione os servidores que você deseja importar. 
+    <string name="dialog_serverimport_text">Por favor, selecione os servidores que deseja importar. 
 \n 
-\nServidores que já foram importados serão duplicados se você os selecionar.</string>
-    <string name="dialog_serverimportfailed_title">Importação falhou</string>
+\nServidores que já foram importados serão duplicados se os selecionar.</string>
+    <string name="dialog_serverimportfailed_title">Falhou ao importar</string>
     <string name="dialog_serverimportfailed_text">Não foi possível importar o(s) servidor(es).</string>
     <string name="dialog_serverimportfailed_text_exception">Não foi possível importar os servidores. 
 \n(%1s)</string>
-    <string name="dialog_logexport_text">Como você deseja compartilhar os registros\?</string>
-    <string name="dialog_logexport_general">Escolha o aplicativo</string>
+    <string name="dialog_logexport_text">Como deseja partilhar os registos\?</string>
+    <string name="dialog_logexport_general">Escolha a aplicação</string>
     <string name="dialog_logexport_email">E-Mail</string>
-    <string name="dialog_deletelogs_text">Tem certeza de que deseja excluir todos os registros\?</string>
+    <string name="dialog_deletelogs_text">Tem certeza de que deseja excluir todos os registos\?</string>
     <string name="dialog_error_title">Relatório de falhas</string>
-    <string name="dialog_error_text">Parece que o aplicativo travou. Você deseja enviar os arquivos de registro de erros para o desenvolvedor\?</string>
+    <string name="dialog_error_text">Parece que a aplicação parou. Deseja enviar os ficheiros de registo de erros para o programador\?</string>
     <string name="dialog_batteryoptimization_title">Otimização da bateria</string>
-    <string name="dialog_batteryoptimization_message">Em alguns dispositivos, o aplicativo não será notificado de que o dispositivo concluiu a inicialização, a menos que as otimizações de bateria estejam desativadas para ele.
-\nNo momento, o aplicativo não está na lista de aplicativos não otimizados, deseja alterar isso\?
-\n
+    <string name="dialog_batteryoptimization_message">Em alguns dispositivos, a aplicação não será notificado de que o dispositivo concluiu a inicialização, a menos que as otimizações de bateria estejam desativada. 
+\nNo momento, a aplicação não está na lista de aplicações não otimizadas, deseja alterar isso\? 
+\n 
 \nVocê deve testar se ele funciona com a otimização ativada antes de desativá-lo.</string>
-    <string name="dialog_batteryoptimization_whitelist">Desabilitar</string>
+    <string name="dialog_batteryoptimization_whitelist">Desativar</string>
     <string name="dialog_batteryoptimization_ignore">Ignorar</string>
-    <string name="dialog_rate_confirmation">Você deseja abrir a Play Store para classificar o aplicativo\?</string>
-    <string name="dialog_changelog_title">Histórico de mudanças</string>
-    <string name="dialog_changelog_infotext">O aplicativo foi atualizado desde a última vez que você o abriu. Na lista a seguir você pode ver o histórico de mudanças. Marque a caixa abaixo e você não verá esta mensagem no futuro.</string>
-    <string name="dialog_changelog_dont_show_again">Não mostrar de novo</string>
+    <string name="dialog_rate_confirmation">Deseja abrir a Play Store para classificar a aplicação\?</string>
+    <string name="dialog_changelog_title">Histórico de alterações</string>
+    <string name="dialog_changelog_infotext">A aplicação foi atualizada desde a última vez que a abriu. Na lista a seguir pode ver o histórico de alterções. Marque a caixa abaixo e não verá esta mensagem no futuro.</string>
+    <string name="dialog_changelog_dont_show_again">Não voltar a mostrar</string>
     <string name="dialog_about_licenses">Licenças</string>
-    <string name="dialog_query_export_title">Exportando consultas…</string>
-    <string name="dialog_query_export_message">Por favor, aguarde enquanto as consultas estão sendo exportadas</string>
+    <string name="dialog_query_export_title">A exportar consultas…</string>
+    <string name="dialog_query_export_message">Por favor, aguarde enquanto as consultas são exportadas</string>
     <string name="dialog_pin_message">Por favor, forneça seu PIN.</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_enable_logging">Você quer habilitar o registro\? Os registros contêm informações estatísticas, informações de depuração e ações no aplicativo. Os registros gerados não são compartilhados, a menos que você mesmo faça isso.</string>
-    <string name="dialog_crashreporting_title">Relatório de travamento automático</string>
+    <string name="dialog_enable_logging">Quer ativar o registo\? Os registos contêm informações estatísticas, informações de depuração e ações na aplicação. Os registos gerados não são partiçhador, a menos que o faça.</string>
+    <string name="dialog_crashreporting_title">Relatório de falhas automático</string>
     <string name="dialog_crashreportingusages_title">Dados transmitidos</string>
     <string name="dialog_crashreportingusages_message">Clique em um dos grupos para ver quais dados são transmitidos em falhas.</string>
-    <string name="dialog_crashreporting_positive">Habilitar relatórios de travamento</string>
+    <string name="dialog_crashreporting_positive">Ativar relatórios de falhas</string>
     <string name="dialog_crashreporting_negative">Não, obrigado.</string>
     <string name="dialog_crashreporting_neutral">Ver dados</string>
-    <string name="dialog_crashreporting_message">Obrigado por ser um testador do aplicativo!
-\n
-\nEste aplicativo está usando software de terceiros de código aberto e auto-hospedado para facilitar o rastreio de falhas de aplicativo assim que elas ocorrem. Se e somente se habilitado, o aplicativo transmitirá relatórios de travamento quando encontrar uma falha. Estes relatórios contêm dados adicionais sobre o aplicativo e seu dispositivo. Isso inclui um ID que é usado para rastrear falhas provenientes do mesmo usuário, mas não pode ser usado para rastrear qualquer outra coisa. Ativar o relatório de travamento é opcional, mas me ajudaria muito.
+    <string name="dialog_crashreporting_message">Obrigado por usar Nebulo! 
+\n 
+\nEsta aplicação está usando software de terceiros de código aberto e auto-hospedado para facilitar o rastreio de falhas de aplicativo assim que elas ocorrem. Se e somente se habilitado, o aplicativo transmitirá relatórios de travamento quando encontrar uma falha. Estes relatórios contêm dados adicionais sobre o aplicativo e seu dispositivo. Isso inclui um ID que é usado para rastrear falhas provenientes do mesmo usuário, mas não pode ser usado para rastrear qualquer outra coisa. Ativar o relatório de travamento é opcional, mas me ajudaria muito. 
 \nOs relatórios são enviados com segurança por HTTPS. 
-\n
+\n 
 \nClique em \"ver dados\" abaixo para ver que tipo de dados são transmitidos e para um link para a política de privacidade.</string>
     <string name="dialog_crashreporting_message_notester">Obrigado por usar Nebulo! 
 \n 
@@ -74,7 +74,7 @@
 \n 
 \nClique em \"ver dados\" abaixo para ver que tipo de dados são transmitidos e para um link para a política de privacidade.</string>
     <string name="dialog_clearqueries_title">Limpar todas as consultas</string>
-    <string name="dialog_clearqueries_message">Tem certeza de que deseja limpar as consultas registradas\? Isto não pode ser revertido.</string>
+    <string name="dialog_clearqueries_message">Tem certeza de que deseja limpar as consultas registadas\? Isto não pode ser revertido.</string>
     <string name="dialog_credits_title">Créditos</string>
     <string name="dialog_credits_message" formatted="true">- Ícone do aplicativo por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; . 
 \n- Tradução turca por Kemal Oktay Aktoğan 
@@ -89,9 +89,9 @@
 \n 
 \n Quer ver seu nome aqui\? Sinta-se à vontade para &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuir&lt;/a&gt;.</string>
     <string name="dialog_join_group_title">Junte-se à comunidade</string>
-    <string name="dialog_join_group_message">Olá!
-\n
-\nVocê sabia que este aplicativo tem um grupo do Telegram\? Ele contém atualizações regulares e é o lugar perfeito para dúvidas e discussões.
+    <string name="dialog_join_group_message">Olá! 
+\n 
+\nVocê sabia que este aplicativo tem um grupo do Telegram\? Ele contém atualizações regulares e é o lugar perfeito para dúvidas e discussões. 
 \nSomos uma grande comunidade com mais de 200 pessoas, gostaria de fazer parte dela\?</string>
     <string name="dialog_join_group_positive">Sim!</string>
     <string name="dialog_speedresult_title">Resultados do teste de velocidade</string>
@@ -103,69 +103,69 @@
 \n Servidor mais rápido: %7s
 \n Servidor mais lento: %8s</string>
     <string name="dialog_speedtest_useserver_title">Selecionar servidor</string>
-    <string name="dialog_speedtest_useserver_message">Você quer usar o servidor %1s\? Ele se classificou como %2d de %3d, com um tempo de resposta de %4d ms.</string>
-    <string name="dialog_deletehostsource_title">Excluir %1s\?</string>
-    <string name="dialog_deletehostsource_message">Tem certeza de que deseja excluir a fonte de host %1s\? Isso não pode ser revertido, os hosts dessa fonte serão removidos.</string>
+    <string name="dialog_speedtest_useserver_message">Quer usar o servidor %1s\? Ele se classificou como %2d de %3d, com um tempo de resposta de %4d ms.</string>
+    <string name="dialog_deletehostsource_title">Eliminar %1s\?</string>
+    <string name="dialog_deletehostsource_message">Tem certeza de que deseja eliminar %1s\? Isso não pode ser revertido, os hospedeiros dessa fonte serão removidos.</string>
     <string name="dialog_clearuserrules_title">Limpar todas as regras de DNS\?</string>
-    <string name="dialog_clearuserrules_message">Você quer limpar todas as regras de DNS\? Isto não pode ser desfeito.</string>
+    <string name="dialog_clearuserrules_message">Quer limpar todas as regras de DNS\? Isto não pode ser desfeito.</string>
     <string name="dialog_newhostsource_title">Nova fonte de regras</string>
     <string name="dialog_newhostsource_edit_title">Editar fonte da regra</string>
     <string name="dialog_newhostsource_name">Nome</string>
     <string name="dialog_newhostsource_url">URL</string>
-    <string name="dialog_newhostsource_choose_file">Escolher arquivo</string>
+    <string name="dialog_newhostsource_choose_file">Escolher ficheiro</string>
     <string name="dialog_newhostsource_use_as_whitelist">Usar como lista branca</string>
     <string name="dialog_newhostsource_error_name_empty">Por favor, forneça um nome</string>
     <string name="dialog_newdnsrule_title">Nova regra de DNS</string>
     <string name="dialog_newdnsrule_edit">Editar regra de DNS</string>
     <string name="dialog_newdnsrule_whitelist">Lista branca</string>
     <string name="dialog_newdnsrule_specify_address">Endereço</string>
-    <string name="dialog_newdnsrule_hint_host">Host</string>
+    <string name="dialog_newdnsrule_hint_host">Hospedeiro</string>
     <string name="dialog_newdnsrule_hint_ipv4address">Endereço IPv4</string>
     <string name="dialog_newdnsrule_hint_ipv6address">Endereço IPv6</string>
-    <string name="dialog_newdnsrule_host_invalid">Por favor, forneça um host válido</string>
+    <string name="dialog_newdnsrule_host_invalid">Por favor, forneça um hospedeiro válido</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Por favor, forneça um endereço IPv4 válido</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Por favor, forneça um endereço IPv6 válido</string>
     <string name="dialog_exportdnsrules_title">Exportar regras de DNS</string>
     <string name="dialog_exportdnsrules_export_user_rules">Exportar suas próprias regras de DNS</string>
-    <string name="dialog_exportdnsrules_export_sources">Exportar regras de DNS de fontes de host habilitadas</string>
-    <string name="dialog_editdelete_title">O que você quer fazer\?</string>
+    <string name="dialog_exportdnsrules_export_sources">Exportar regras de DNS de fontes de hospedeiros ativados</string>
+    <string name="dialog_editdelete_title">O que quer fazer\?</string>
     <string name="dialog_editdelete_edit">Editar</string>
-    <string name="dialog_editdelete_delete">Excluir</string>
-    <string name="dialog_servicekilled_message">O aplicativo detectou que não foi finalizado corretamente na última vez em que estava ativo. Isso fortemente indica que seu sistema optou por forçar a parada sem que o aplicativo pudesse se reiniciar. 
+    <string name="dialog_editdelete_delete">Eliminar</string>
+    <string name="dialog_servicekilled_message">A aplicação detetou que não foi finalizado corretamente na última vez em que estava ativo. Isso fortemente indica que seu sistema optou por forçar a paragem sem que a aplicação pudesse se reiniciar. 
 \n 
-\nNa maioria dos dispositivos, você tem algumas opções para impedir ou ao menos atrasar o sistema de parar o aplicativo. 
-\nPor exemplo, você pode desativar a otimização de bateria para o aplicativo nas configurações do sistema ou evitar excluí-lo da lista de aplicativos recentes. 
+\nNa maioria dos dispositivos, tem algumas opções para impedir ou ao menos atrasar o sistema de parar a aplicação. 
+\nPor exemplo, pode desativar a otimização de bateria para a aplicação nas configurações do sistema ou evitar excluí-lo da lista de aplicações recentes. 
 \n 
-\nSe você optar por ignorar isso, você não verá esta caixa de diálogo novamente. Você pode ler mais e obter dicas para resolver isso com o botão abaixo (abre um site externo em seu navegador). Clique nas definições para abrir as definições do Android onde pode desactivar as optimizações da bateria para o Nebulo.</string>
+\nSe optar por ignorar isso, não verá esta caixa de diálogo novamente. Pode ler mais e obter dicas para resolver isso com o botão abaixo (abre um site externo em seu navegador). Clique nas definições para abrir as definições do Android onde pode desativar as otimizações da bateria para o Nebulo.</string>
     <string name="dialog_servicekilled_more_info">Mais informações</string>
-    <string name="dialog_newhostsource_wildcard_info">Você pode usar listas de hosts que fazem uso de domínios curinga.</string>
-    <string name="dialog_newdnsrule_wildcard_info">O host oferece suporte a caracteres-curinga. Use asterisco (*) para qualquer quantidade de caracteres, números e caracteres especiais permitidos, exceto o ponto (.). Use dois asteriscos (**) para incluir o ponto (.).</string>
+    <string name="dialog_newhostsource_wildcard_info">Pode usar listas de hospedeiros que fazem uso de domínios curinga.</string>
+    <string name="dialog_newdnsrule_wildcard_info">O hospedeiro oferece suporte a caracteres-curinga. Use asterisco (*) para qualquer quantidade de caracteres, números e caracteres especiais permitidos, exceto o ponto (.). Use dois asteriscos (**) para incluir o ponto (.).</string>
     <string name="dialog_overlaydetected_title">Sobreposição em todo o sistema detectada</string>
-    <string name="dialog_overlaydetected_message">Uma sobreposição em todo o sistema (por exemplo, um balão de chat, filtro colorido ou noturno) parece estar ativa. Com a maioria dos dispositivos, você não pode habilitar a VPN nesse caso. 
-\n
-\nSe você não puder clicar em OK na próxima caixa de diálogo, desative a sobreposição.</string>
-    <string name="dialog_hostsourcerefresh_wifi_only">Atualizar somente com WIFI</string>
+    <string name="dialog_overlaydetected_message">Uma sobreposição em todo o sistema (por exemplo, um balão de chat, filtro colorido ou noturno) parece estar ativa. Com a maioria dos dispositivos, não pode ativar a VPN nesse caso. 
+\n 
+\nSe não puder clicar em OK na próxima caixa de diálogo, desative a sobreposição.</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">Atualizar somente em WIFI</string>
     <string name="dialog_hostsourcerefresh_refresh_every">Atualizar a cada</string>
-    <string name="dialog_raterequest_title">Você está gostando do Nebulo\?</string>
+    <string name="dialog_raterequest_title">Você está a gostar do Nebulo\?</string>
     <string name="dialog_exportdnsrules_nonwhitelist">Exportar regras normais</string>
     <string name="dialog_hostsourcerefresh_refresh_now">Actualizar agora</string>
-    <string name="dialog_hostsourcerefresh_timeunit_minutes">Acta</string>
-    <string name="dialog_hostsourcerefresh_timeunit_hours">Horário</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Minutos</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">Horas</string>
     <string name="dialog_hostsourcerefresh_timeunit_days">Dias</string>
     <string name="dialog_cleardnscache_message">Tem a certeza que quer limpar o cache DNS\?</string>
     <string name="dialog_raterequest_message">Olá! Se estás a gostar do Nebulo, podes tirar um momento para o avaliar na loja\?</string>
-    <string name="dialog_vpn_permission_denied_message">O sistema negou a Nebulo a iniciar a sua VPN. Por favor, abra o aplicativo para conceder a permissão lá clicando no botão iniciar.</string>
-    <string name="dialog_vpninformation_title">Como funciona este aplicativo</string>
+    <string name="dialog_vpn_permission_denied_message">O sistema negou a Nebulo a iniciar a sua VPN. Por favor, abra a aplicação para conceder a permissão lá clicando no botão iniciar.</string>
+    <string name="dialog_vpninformation_title">Como funciona esta aplicação</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Semanas</string>
-    <string name="dialog_logexport_loading_title">Preparação de logs</string>
-    <string name="dialog_doh_detect_type_message">Por favor, espere um momento.</string>
-    <string name="dialog_doh_detect_type_title">Detecção do tipo de servidor</string>
-    <string name="dialog_vpninformation_message">Nebulo trabalha usando uma VPN fictícia para capturar todos os seus pedidos DNS, que são então encaminhados para um servidor seguro à sua escolha.
-\nEsta VPN fictícia não é uma VPN real e não esconde a sua identidade, nem muda o seu endereço IP.
-\n
-\nNenhum dado real, exceto para pedidos DNS, é transmitido usando este aplicativo.</string>
-    <string name="dialog_hostsourcerefresh_automatic_refresh">Atualize automaticamente as fontes do host</string>
-    <string name="dialog_hostsourcerefresh_title">Actualizar fontes anfitriãs</string>
+    <string name="dialog_logexport_loading_title">Preparação de registos</string>
+    <string name="dialog_doh_detect_type_message">Por favor, aguarde um momento.</string>
+    <string name="dialog_doh_detect_type_title">Deteção do tipo de servidor</string>
+    <string name="dialog_vpninformation_message">Nebulo trabalha usando uma VPN fictícia para capturar todos os seus pedidos DNS, que são então encaminhados para um servidor seguro à sua escolha. 
+\nEsta VPN fictícia não é uma VPN real e não esconde a sua identidade, nem muda o seu endereço IP. 
+\n 
+\nNenhum dado real, exceto para pedidos DNS, é transmitido usando esta aplicação.</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Atualize automaticamente as fontes de hospedeiros</string>
+    <string name="dialog_hostsourcerefresh_title">Atualizar fontes de hospedeiros</string>
     <string name="dialog_exportdnsrules_whitelist">Exportar regras da lista branca</string>
     <string name="dialog_nonvpn_help_netguard">Para usar o modo Não-VPN em conjunto com o NetGuard, faça o seguinte:
 \n - Verifique se você tem a versão F-Droid do NetGuard instalada. Ela não funciona com a versão do GPlay.
