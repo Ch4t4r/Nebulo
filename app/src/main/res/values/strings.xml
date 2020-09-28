@@ -1,12 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">Nebulo</string>
-
     <string name="activity_label_import_queries">Import queries</string>
     <string name="activity_label_import_servers">Import server(s)</string>
     <string name="activity_label_speed_test">Server speed comparison</string>
-
     <string name="activity_label_enable_logging">Export logs/Enable logging</string>
-
     <string name="all_stop">Stop</string>
     <string name="all_start">Start</string>
     <string name="all_pause">Pause</string>
@@ -16,28 +14,21 @@
     <string name="information">Information</string>
     <string name="open_app">Open app</string>
     <string name="all_close">Close</string>
-
     <string name="error_invalid_url">Please provide a valid url</string>
     <string name="error_invalid_host">Please provide a valid host</string>
     <string name="error_invalid_pin">Please provide your PIN</string>
     <string name="error_invalid_servername">Please provide a name</string>
     <string name="error_webview_missing">WebView package not found, is it currently updating or removed?</string>
     <string name="error_cannot_open_settings">Cannot open system settings</string>
-
     <string name="main_dnssurveillance_infotext">Be aware that the DNS server you are connected to is able to record which sites you are visiting. Check the respective privacy statements for more information.</string>
     <string name="main_dnssurveillance_privacystatement">Privacy statement of %1s</string>
-
-    <string name="about_app">This app is open source. The source code can be accessed at <![CDATA[<a href="https://nebulo.app/source">nebulo.app/source</a>]]>.\nFurthermore the app doesn\'t contain ads and does not track or collect any data about you.\n\nVersion %1s\nBuild %2d\nDatabase version %3d\nCrashreport ID: %4s\n\n&#169; Daniel Wolf 2019\nLicensed under GPLv3.\n<![CDATA[<a href="mailto:support@frostnerd.com">support@frostnerd.com</a>]]></string>
+    <string name="about_app">This app is open source. The source code can be accessed at <![CDATA[<a href="https://nebulo.app/source">nebulo.app/source</a>]]>.\nFurthermore the app doesn\'t contain ads and does not track or collect any data about you.\n\nVersion %1s\nBuild %2d\nDatabase version %3d\nCrashreport ID: %4s\n\n© Daniel Wolf 2019\nLicensed under GPLv3.\n<![CDATA[<a href="mailto:support@frostnerd.com">support@frostnerd.com</a>]]></string>
     <string name="support_contact_mail" translatable="false">support@frostnerd.com</string>
-
     <string name="app_share_text">Hey, I found this app which encrypts your DNS queries to give you more privacy and security. Check it out here: https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen</string>
-
     <string name="quicksettings_stop_text">Stop Nebulo</string>
     <string name="quicksettings_start_text">Start Nebulo</string>
-
     <string name="fragment_querydetail_mode_dot" translatable="false">DNS-over-TLS</string>
     <string name="fragment_querydetail_mode_doh" translatable="false">DNS-over-HTTPS</string>
-
     <string name="theme_mono">Mono</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_true_black">True black</string>
@@ -54,7 +45,6 @@
         <item>3</item>
         <item>4</item>
     </string-array>
-
     <string name="about_share">Share</string>
     <string name="about_licenses">Open-source licenses</string>
     <string name="about_changelog">Changelog</string>
@@ -64,14 +54,10 @@
     <string name="about_credits">Credits</string>
     <string name="about_info">General information</string>
     <string name="about_help_translating">Help translating</string>
-
     <string name="window_speedtest_runtest">Start the test</string>
     <string name="window_speedtest_information">The lower the values, the faster Nebulo is able to communicate with the server. This for example increases your browsing speed.</string>
-
     <string name="error_no_webbrowser_installed">You don\'t have any app installed to view this link</string>
-
     <string name="button_main_dnsrules">DNS rules</string>
-
     <string name="window_dnsrules_customhosts">Custom hosts</string>
     <plurals name="window_dnsrules_subtitle">
         <item quantity="one">%1d rule</item>
@@ -80,8 +66,7 @@
     <string name="window_dnsrules_hostalreadyexists">There already is a rule for this host</string>
     <string name="window_dnsrules_customhosts_message">Define all your custom hosts here</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">Rules from this source: %1d (%2d duplicates not in use)</string>
-
+    <string xmlns:tools="http://schemas.android.com/tools" name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Rules from this source: %1d (%2d duplicates not in use)</string>
     <string name="windows_querylogging_search_hint">Search for a host in the query log</string>
     <string name="windows_querylogging_search">Host-search</string>
     <string name="windows_querylogging_time">Time</string>
@@ -98,60 +83,42 @@
     <string name="windows_querylogging_dnsrule_created">DNS rule has been created</string>
     <string name="windows_querylogging_usedserver_dnsrules">Resolved with DNS Rules</string>
     <string name="windows_querylogging_usedserver_cache">Resolved with cache</string>
-
     <string name="window_main_privatedns_info">Private DNS is active, your queries are already protected. Enable Nebulo if you wish to use DNS-over-HTTPS or other useful features.\nTo enable Nebulo disable Private DNS.</string>
     <string name="window_main_protected">Protected!</string>
     <string name="window_main_unprotected">Not protected</string>
     <string name="window_main_click_to_enable">Click to enable.</string>
-
-
     <string name="restart_app_for_changes">Restart the app for changes to take effect.</string>
     <string name="restart_app">Restart</string>
-
     <string name="iptables_supported">Congratulations, iptables is supported by your device!</string>
     <string name="iptables_supported_ipv6_unsupported">Iptables is supported, but IPv6 is not supported.</string>
     <string name="iptables_not_supported">Your device does not support iptables</string>
-    
     <string name="window_dnsrules_refresh_sources">Refresh to import rules from source</string>
-
     <string name="window_querylog_information">Information</string>
-
     <string name="about_help_faq">Frequently asked questions</string>
-
     <string name="warning_server_currently_unstable">The server %1s seems to be unstable right now.</string>
     <string name="warning_server_currently_unstable_expanded">The server %1s seems to be unstable right now, impacting your browsing speed. Consider switching to a more stable server.</string>
-
     <string name="appintro_first_title">Welcome to Nebulo.</string>
     <string name="appintro_first_description">Nebulo is an app to protect your privacy and secure your device.\n\nTake back control of data your ISP or other entities have treated as theirs for a long time.</string>
-
     <string name="appintro_second_title">Your privacy matters</string>
     <string name="appintro_second_description">By adding encryption to DNS, one of the oldest protocol of the Internet, it is in your hands.\n\nMake it harder for your ISP to track you by using DNS-over-HTTPS and DNS-over-TLS with Nebulo.</string>
-
     <string name="appintro_third_title">Fully equipped for greatness</string>
     <string name="appintro_third_description">Nebulo comes bundled with a ton of useful features like monitoring DNS activity, PIN protection, a speed test and much more.\n\nExplore the app to discover what free open-source software has to offer.</string>
-
     <string name="appintro_forth_title">One last thing</string>
     <string name="appintro_forth_description">You can configure Nebulo to be used as a system-wide ad- and tracking-blocker.\n\nYou are even able to use it together with some firewall apps to increase your control over your privacy even more.</string>
-
     <string name="appintro_server_choose_title">First things first</string>
     <string name="appintro_server_choose_description">Which kind of server do you want to use in Nebulo?</string>
     <string name="appintro_server_choose_disclaimer">There are servers which fit multiple or even all categories. Nebulo automatically chooses the fastest one.</string>
-
     <string name="appintro_server_choose_first">The fastest one</string>
     <string name="appintro_server_choose_second">A fast server, with a focus on privacy</string>
     <string name="appintro_server_choose_third">A true privacy focused server</string>
     <string name="appintro_server_choose_forth">A server which protects me from harmful websites and apps</string>
     <string name="appintro_server_choose_adblock">A server which blocks ads and tracking</string>
-
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="zero">%1d queries have been handled by DNS rules this far</item>
         <item quantity="one">%1d query has been handled by DNS rules this far</item>
         <item quantity="other">%1d queries have been handled by DNS rules this far</item>
     </plurals>
-
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="zero">%1d queries have been blocked this far</item>
-        <item quantity="one">%1d query have been blocked this far</item>
+        <item quantity="one">%1d query has been blocked this far</item>
         <item quantity="other">%1d queries have been blocked this far</item>
     </plurals>
 </resources>
