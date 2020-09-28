@@ -3,7 +3,7 @@
     <string name="activity_label_import_queries">Importar consultas</string>
     <string name="activity_label_import_servers">Importar servidor(es)</string>
     <string name="activity_label_speed_test">Comparar velocidade</string>
-    <string name="activity_label_enable_logging">Exportar registros/Ativar registro</string>
+    <string name="activity_label_enable_logging">Exportar registos/Ativar registo</string>
     <string name="all_stop">Parar</string>
     <string name="all_start">Iniciar</string>
     <string name="all_pause">Pausar</string>
@@ -11,42 +11,42 @@
     <string name="all_no">Não</string>
     <string name="all_yes">Sim</string>
     <string name="information">Informação</string>
-    <string name="open_app">Abrir aplicativo</string>
+    <string name="open_app">Abrir aplicação</string>
     <string name="all_close">Fechar</string>
     <string name="error_invalid_url">Por favor, forneça um url válido</string>
-    <string name="error_invalid_pin">Por favor, forneça seu PIN</string>
+    <string name="error_invalid_pin">Por favor, forneça o seu PIN</string>
     <string name="error_invalid_servername">Por favor, forneça um nome</string>
-    <string name="main_dnssurveillance_infotext">Esteja ciente de que o servidor de DNS ao qual você está conectado é capaz de registrar quais sites você está visitando. Verifique as respectivas declarações de privacidade para obter mais informações.</string>
+    <string name="main_dnssurveillance_infotext">Esteja ciente de que o servidor de DNS ao qual está a ligar é capaz de registar quais sites que está visitando. Verifique as respetivas declarações de privacidade para obter mais informações.</string>
     <string name="main_dnssurveillance_privacystatement">Declaração de privacidade de %1s</string>
-    <string name="about_app">Este aplicativo é de código aberto. O código-fonte pode ser acessado em &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
-\nAlém disso, o aplicativo não contém anúncios e não rastreia ou coleta dados sobre você.
-\n
-\nVersão %1s
-\nBuild %2d
-\nVersão do banco de dados %3d
-\nID do relatório de erros: %4s
-\n
-\n© Daniel Wolf 2019
-\nLicenciado sob GPLv3.
+    <string name="about_app">Esta aplicação é de código aberto. O código-aberto pode ser acedido em &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;. 
+\nAlém disso, a aplicação não contém anúncios e não rastreia ou coleta dados sobre si. 
+\n 
+\nVersão %1s 
+\nBuild %2d 
+\nVersão do base de dados %3d 
+\nID do relatório de erros: %4s 
+\n 
+\n© Daniel Wolf 2019 
+\nLicenciado sob GPLv3. 
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
-    <string name="app_share_text">Ei, eu encontrei este aplicativo que criptografa suas consultas dns para lhe dar mais privacidade e segurança. Confira aqui: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
+    <string name="app_share_text">Ei, encontrei esta aplicação que encripta as consultas DNS que fornece mais privacidade e segurança. Confira aqui: https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
     <string name="quicksettings_stop_text">Parar o Nebulo</string>
     <string name="quicksettings_start_text">Iniciar o Nebulo</string>
-    <string name="about_share">Compartilhar</string>
+    <string name="about_share">Partilhar</string>
     <string name="about_licenses">Licenças de código aberto</string>
-    <string name="about_changelog">Histórico de mudanças</string>
-    <string name="about_contact_developer">Entrar em contato com o desenvolvedor</string>
+    <string name="about_changelog">Histórico de alterações</string>
+    <string name="about_contact_developer">Entrar em contacto com o programador</string>
     <string name="about_telegram_group">Grupo do Telegram</string>
     <string name="about_privacypolicy">Política de privacidade</string>
     <string name="about_credits">Créditos</string>
     <string name="about_info">Informação geral</string>
     <string name="about_help_translating">Ajudar a traduzir</string>
     <string name="window_speedtest_runtest">Iniciar o teste</string>
-    <string name="error_no_webbrowser_installed">Você não tem nenhum aplicativo instalado para visualizar este link</string>
+    <string name="error_no_webbrowser_installed">Não tem nenhuma aplicação instalado para abrir este endereço</string>
     <string name="button_main_dnsrules">Regras de DNS</string>
-    <string name="window_dnsrules_customhosts">Hosts customizados</string>
-    <string name="window_dnsrules_hostalreadyexists">Já existe uma regra para este host</string>
-    <string name="window_dnsrules_customhosts_message">Defina todos os seus hosts personalizados aqui</string>
+    <string name="window_dnsrules_customhosts">Hospedeiros personalizados</string>
+    <string name="window_dnsrules_hostalreadyexists">Já existe uma regra para este hospedeiro</string>
+    <string name="window_dnsrules_customhosts_message">Defina todos os seus hospedeiros personalizados aqui</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regras desta fonte: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount">Regras desta fonte: %1d (%2d duplicatas não usadas)</string>
     <plurals name="window_dnsrules_subtitle">
@@ -54,31 +54,31 @@
         <item quantity="other">%1d regras</item>
     </plurals>
     <string name="windows_querylogging_used_server">Servidor em uso</string>
-    <string name="windows_querylogging_search">Pesquisa de host</string>
-    <string name="error_invalid_host">Por favor, providencie um host válido</string>
-    <string name="window_main_privatedns_info">O DNS privado está ativo, suas consultas já estão protegidas. Habilite o Nebulo se você deseja usar DNS-over-HTTPS ou outros recursos úteis.
+    <string name="windows_querylogging_search">Pesquisa de hospedeiro</string>
+    <string name="error_invalid_host">Por favor, forneça um hospedeiro válido</string>
+    <string name="window_main_privatedns_info">O DNS privado está ativo, as suas consultas já estão protegidas. Ative o Nebulo se deseja usar DNS-over-HTTPS ou outros recursos úteis. 
 \nPara ativar o Nebulo, desative o DNS privado.</string>
     <string name="windows_querylogging_usedserver_cache">Resolvido com cache</string>
     <string name="windows_querylogging_usedserver_dnsrules">Resolvido com regras DNS</string>
     <string name="windows_querylogging_dnsrule_created">A regra DNS foi criada</string>
-    <string name="windows_querylogging_create_dnsrule">Criar regra DNS para este host</string>
+    <string name="windows_querylogging_create_dnsrule">Criar regra DNS para este hospedeiro</string>
     <string name="windows_querylogging_responses">Respostas</string>
     <string name="windows_querylogging_latency">Latência</string>
     <string name="windows_querylogging_protocol">Protocolo</string>
     <string name="windows_querylogging_hostsource__unknown">Desconhecido</string>
-    <string name="windows_querylogging_hostsource__user">Regras de utilização</string>
+    <string name="windows_querylogging_hostsource__user">Regras de utilizador</string>
     <string name="windows_querylogging_hostsource">Fonte da regra do DNS</string>
     <string name="windows_querylogging_question">Pergunta</string>
     <string name="windows_querylogging_type">Tipo</string>
     <string name="windows_querylogging_time">Hora</string>
-    <string name="windows_querylogging_search_hint">Pesquisar por um anfitrião no log de consultas</string>
-    <string name="error_cannot_open_settings">Não é possível abrir as configurações do sistema</string>
-    <string name="error_webview_missing">O pacote WebView não foi encontrado, ele está sendo atualizado ou removido\?</string>
-    <string name="restart_app">Reinicie</string>
-    <string name="restart_app_for_changes">Reinicie o aplicativo para que as alterações entrem em vigor.</string>
+    <string name="windows_querylogging_search_hint">Pesquisar por um hospedeiro no registo de consultas</string>
+    <string name="error_cannot_open_settings">Não é possível abrir as definições de sistema</string>
+    <string name="error_webview_missing">O pacote WebView não foi encontrado, ele está a ser atualizado ou removido\?</string>
+    <string name="restart_app">Reiniciar</string>
+    <string name="restart_app_for_changes">Reinicie a aplicação para que as alterações entrem em vigor.</string>
     <string name="iptables_not_supported">O seu dispositivo não suporta iptables</string>
     <string name="iptables_supported_ipv6_unsupported">O Iptables é suportado, mas o IPv6 não é suportado.</string>
-    <string name="iptables_supported">Parabéns, o iptables é suportado pelo seu aparelho!</string>
+    <string name="iptables_supported">Parabéns, o iptables é suportado pelo no seu dispositivo!</string>
     <string name="window_dnsrules_refresh_sources">Actualizar para regras de importação da fonte</string>
     <plurals name="dnsrule_total_resolve_count_block">
         <item quantity="one">%1d consulta foi bloqueadas até agora</item>
@@ -104,7 +104,7 @@
 \n
 \nExplore a aplicação para descobrir o que o software livre de código aberto tem a oferecer.</string>
     <string name="appintro_third_title">Totalmente equipado para grandeza</string>
-    <string name="appintro_second_description">Ao adicionar criptografia ao DNS, um dos mais antigos protocolos da Internet, ele está em suas mãos.
+    <string name="appintro_second_description">Ao adicionar encriptação ao DNS, um dos mais antigos protocolos da Internet, está nas suas mãos.
 \n
 \nTorna mais difícil para o seu ISP rastreá-lo usando DNS-over-HTTPS e DNS-over-TLS com o Nebulo.</string>
     <string name="appintro_second_title">Sua privacidade é importante</string>
@@ -119,7 +119,7 @@
     <string name="window_main_click_to_enable">Clique para ativar.</string>
     <string name="window_main_unprotected">Não protegido</string>
     <string name="window_main_protected">Protegido!</string>
-    <string name="window_speedtest_information">Quanto mais baixos forem os valores, mais rápido o Nebulo é capaz de comunicar com o servidor. Isto, por exemplo, aumenta a sua velocidade de navegação.</string>
+    <string name="window_speedtest_information">Quanto mais baixos forem os valores, mais rápido o Nebulo é capaz de comunicar com o servidor. Isto por exemplo aumenta a sua velocidade de navegação.</string>
     <string name="theme_blue">Azul</string>
     <string name="theme_true_black">Preto</string>
     <string name="theme_dark">Escuro</string>
