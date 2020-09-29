@@ -470,7 +470,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
             noConnectionNotificationBuilder.setStyle(
                 NotificationCompat.BigTextStyle(
-                    notificationBuilder
+                    noConnectionNotificationBuilder
                 ).bigText(getString(R.string.notification_noconnection_text))
             )
         }
