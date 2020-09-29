@@ -55,7 +55,7 @@ class ProxyHttpsHandler(
             if(dnsMessage.questions.isNotEmpty()) {
                 val answer = if(dnsMessage.question.type == org.minidns.record.Record.TYPE.A) {
                     org.minidns.record.A("0.0.0.0")
-                } else org.minidns.record.AAAA("::1")
+                } else org.minidns.record.AAAA("::")
                 dnsMessage.asBuilder().setResponseCode(DnsMessage.RESPONSE_CODE.NO_ERROR).addAnswer(
                     org.minidns.record.Record(
                         dnsMessage.question.name,

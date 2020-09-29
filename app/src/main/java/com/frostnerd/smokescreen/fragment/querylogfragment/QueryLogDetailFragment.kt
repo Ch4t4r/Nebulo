@@ -94,7 +94,7 @@ class QueryLogDetailFragment : Fragment() {
             if(query != null) {
                 val answerIP = query.parsedResponses.firstOrNull {
                     it.type == query.type
-                }?.payload?.toString() ?: if(query.type == Record.TYPE.A) "0.0.0.0" else "::1"
+                }?.payload?.toString() ?: if(query.type == Record.TYPE.A) "0.0.0.0" else "::"
                 DnsRuleDialog(requireContext(), DnsRule(query.type, query.name, target = answerIP), onRuleCreated = { newRule ->
                     val id = if (newRule.isWhitelistRule()) {
                         getDatabase().dnsRuleDao().insertWhitelist(newRule)

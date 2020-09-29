@@ -120,7 +120,7 @@ class QueryListener(private val context: Context) : QueryListener {
             }
             query.isHostBlockedByDnsServer = responseMessage.answerSection.any {
                 (it.type == Record.TYPE.A && (it.payload as A).toString() == "0.0.0.0"
-                        || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString().equalsAny("::1", "::0", "0:0:0:0:0:0:0:0", "0:0:0:0:0:0:0:1")))
+                        || (it.type == Record.TYPE.AAAA && (it.payload as AAAA).toString().equalsAny("::1", "::", "::0", "0:0:0:0:0:0:0:0", "0:0:0:0:0:0:0:1")))
             }
             query.responseSource = source
             doneQueries[query] = wasInserted

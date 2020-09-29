@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
+import com.frostnerd.smokescreen.equalsAny
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.util.MaxSizeMap
 import kotlinx.android.synthetic.main.dialog_create_dnsrule.view.*
@@ -106,7 +107,7 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                     val secondaryTarget = if (isWhitelist) {
                         null
                     } else if(isBlockHost){
-                        "::1"
+                        "::"
                     }else when (type) {
                         Record.TYPE.AAAA, Record.TYPE.ANY -> view.ipv6Address.text.toString()
                         else -> null
@@ -174,7 +175,7 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                             view.ipv6Address.setText(dnsRule.ipv6Target)
                         }
                     }
-                    isBlockHost = dnsRule.target == "0.0.0.0" && dnsRule.ipv6Target == "::1"
+                    isBlockHost = dnsRule.target == "0.0.0.0" && dnsRule.ipv6Target?.equalsAny("::1", "::") == true
                 }
                 if(!isBlockHost) {
                     view.blockHost.isChecked = false

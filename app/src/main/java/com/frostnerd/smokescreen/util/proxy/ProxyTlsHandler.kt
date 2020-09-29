@@ -83,7 +83,7 @@ class ProxyTlsHandler(
             if(dnsMessage.questions.isNotEmpty()) {
                 val answer = if(dnsMessage.question.type == Record.TYPE.A) {
                     A("0.0.0.0")
-                } else AAAA("::1")
+                } else AAAA("::")
                 dnsMessage.asBuilder().setResponseCode(DnsMessage.RESPONSE_CODE.NO_ERROR).addAnswer(Record(dnsMessage.question.name, dnsMessage.question.type, Record.CLASS.IN.value, 50L, answer)).build()
             } else dnsMessage
         } else dnsMessage
