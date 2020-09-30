@@ -209,7 +209,6 @@ class MainFragment : Fragment() {
                 serverIndicator.updateLayoutParams {
                     height = mainServerWrap.measuredHeight
                 }
-                mainServerWrap.removeOnLayoutChangeListener(this)
             }
         }
         mainServerWrap.addOnLayoutChangeListener(layoutChangeListener)
