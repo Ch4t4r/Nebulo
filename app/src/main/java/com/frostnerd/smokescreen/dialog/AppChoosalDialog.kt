@@ -155,7 +155,7 @@ class AppChoosalDialog(
 
                     })
                     view.findViewById<View>(R.id.clearSearch).setOnClickListener {
-                        searchEditText.setText("")
+                        if(!searchEditText.text.isNullOrBlank()) searchEditText.setText("")
                     }
                 }
             }
