@@ -25,6 +25,7 @@
     <string name="about_app"><![CDATA[This app is open source. The source code can be accessed at <a href="https://nebulo.app/source">nebulo.app/source</a>.\nFurthermore the app doesn\'t contain ads and does not track or collect any data about you.\n\nVersion %1s\nBuild %2d\nDatabase version %3d\nCrashreport ID: %4s\n\n© Daniel Wolf 2019–2020\nLicensed under GPLv3.\n<a href="mailto:support@frostnerd.com">support@frostnerd.com</a>]]></string>
     <string name="support_contact_mail" translatable="false">support@frostnerd.com</string>
     <string name="app_share_text">Hey, I found this app which encrypts your DNS queries to give you more privacy and security. Check it out here: https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen</string>
+    <string name="app_share_fdroid">Hey, I found this app which encrypts your DNS queries to give you more privacy and security. Check it out by downloading from here: https://nebulo.app/source#installation</string>
     <string name="quicksettings_stop_text">Stop Nebulo</string>
     <string name="quicksettings_start_text">Start Nebulo</string>
     <string name="fragment_querydetail_mode_dot" translatable="false">DNS-over-TLS</string>

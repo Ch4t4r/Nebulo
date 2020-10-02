@@ -74,11 +74,19 @@ class AboutFragment : Fragment() {
             )
         }
         view.share.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
-            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_share_text))
-            startActivity(Intent.createChooser(intent, getString(R.string.about_share)))
+            if(BuildConfig.SHOW_ALL_SERVERS) {
+                showInfoTextDialog(requireContext(),
+                    getString(R.string.dialog_share_title),
+                    getString(R.string.dialog_share_message),
+                    positiveButton = "F-Droid" to { _, _ ->
+                        shareWithType(true)
+                    },
+                    neutralButton = "Google Play" to { _, _ ->
+                        shareWithType(false)
+                    })
+            } else {
+                shareWithType(false)
+            }
         }
         view.changelog.setOnClickListener {
             ChangelogDialog(requireContext(), 22, showOptOut = false, showInfoText = false).show()
@@ -120,5 +128,13 @@ class AboutFragment : Fragment() {
         view.faq.setOnClickListener {
             requireContext().tryOpenBrowser("https://nebulo.app/faq")
         }
+    }
+
+    private fun shareWithType(fdroid:Boolean) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+        intent.putExtra(Intent.EXTRA_TEXT, getString(if(fdroid) R.string.app_share_fdroid else R.string.app_share_text))
+        startActivity(Intent.createChooser(intent, getString(R.string.about_share)))
     }
 }

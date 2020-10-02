@@ -229,4 +229,7 @@
     <string name="querylog_filter_shorten_domain">Display shorter version of domain in list</string>
 
     <string name="dialog_open_faq">Do you want to have a look at the frequently asked questions and documentation for this feature?</string>
+
+    <string name="dialog_share_title">Select link type</string>
+    <string name="dialog_share_message">Which link do you want to share?</string>
 </resources>
