@@ -3,7 +3,7 @@
     <string name="preference_category_general">Geral</string>
     <string name="title_theme">Tema</string>
     <string name="summary_theme">Define a aparência da aplicação</string>
-    <string name="title_start_on_boot">Executar na inicialização</string>
+    <string name="title_start_on_boot">Executar ao iniciar</string>
     <string name="summary_start_on_boot">Iniciar a aplicação automaticamente quando o telefone for ligado</string>
     <string name="title_start_after_update">Iniciar após atualização</string>
     <string name="summary_start_after_update">Iniciar a aplicação automaticamente depois de ser atualizada</string>
