@@ -185,4 +185,6 @@
     <string name="querylog_filter_shorten_domain">Kürzere Version der Domain anzeigen</string>
     <string name="querylog_filter_type_dnsrules">Von DNS Regeln aufgelöst</string>
     <string name="querylog_filter_type_cache">Vom DNS Cache aufgelöst</string>
+    <string name="dialog_share_message">Welchen Link möchtest du teilen\?</string>
+    <string name="dialog_share_title">Linktypen wählen</string>
 </resources>
