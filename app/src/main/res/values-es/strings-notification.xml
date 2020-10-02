@@ -35,7 +35,7 @@
     <string name="notification_ruleexport_secondarymessage">Preparando la exportación…</string>
     <string name="notification_ruleexport_message">Normas de exportación (%1d/%2d)</string>
     <string name="notification_ruleexport_title">Las DNS rigen la exportación</string>
-    <string name="notification_ruleimportfinished_message">Se han importado las reglas %1d (%2d duplicados omitidos)</string>
+    <string name="notification_ruleimportfinished_message">Se han importado las reglas %1s (%2s duplicados omitidos)</string>
     <string name="notification_ruleimportfinished_title">La importación de la regla del DNS ha terminado</string>
     <string name="notification_ruleimport_tertiarymessage">Terminando la importación…</string>
     <string name="notification_ruleimport_secondarymessage">Preparando la importación…</string>

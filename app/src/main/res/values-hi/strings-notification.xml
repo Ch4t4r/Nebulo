@@ -36,7 +36,7 @@
     <string name="notification_ruleimport_secondarymessage">आयात की तैयारी हो रही है…</string>
     <string name="notification_ruleimport_tertiarymessage">आयात समाप्त हो रहा है…</string>
     <string name="notification_ruleimportfinished_title">DNS नियम आयात समाप्त</string>
-    <string name="notification_ruleimportfinished_message">%1d नियम आयात किए गए (%2d डुप्लिकेट छूट गए)</string>
+    <string name="notification_ruleimportfinished_message">%1s नियम आयात किए गए (%2s डुप्लिकेट छूट गए)</string>
     <string name="notification_ruleexport_title">DNS नियम निर्यात</string>
     <string name="notification_ruleexport_message">नियमों की निर्यात हो रही है (%1d/%2d)</string>
     <string name="notification_ruleexport_secondarymessage">निर्यात की तैयारी हो रही है…</string>

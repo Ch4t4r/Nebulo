@@ -9,17 +9,14 @@ import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.entities.HostSource
 import com.frostnerd.smokescreen.database.getDatabase
-import com.frostnerd.smokescreen.log
-import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
-import com.frostnerd.smokescreen.watchIfEnabled
 import leakcanary.LeakSentry
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -139,8 +136,8 @@ class RuleImportService : IntentService("RuleImportService") {
         successNotification.setAutoCancel(true)
         successNotification.setContentTitle(getString(R.string.notification_ruleimportfinished_title))
         getString(R.string.notification_ruleimportfinished_message,
-            ruleCount,
-            ruleCount - newlyAddedRuleCount).apply {
+            getPreferences().numberFormatter.format(ruleCount),
+            getPreferences().numberFormatter.format(ruleCount - newlyAddedRuleCount)).apply {
             successNotification.setContentText(this)
             successNotification.setStyle(NotificationCompat.BigTextStyle().bigText(this))
         }

@@ -11,7 +11,7 @@
     <string name="notification_ruleexportfinished_title">Exportation des règles DNS terminée</string>
     <string name="notification_ruleexport_secondarymessage">Préparer l\'exportation…</string>
     <string name="notification_ruleexport_message">Règles d\'exportation (%1d/%2d)</string>
-    <string name="notification_ruleimportfinished_message">%1d règles ont été importées (%2d doublons omis)</string>
+    <string name="notification_ruleimportfinished_message">%1s règles ont été importées (%2s doublons omis)</string>
     <string name="notification_ruleimportfinished_title">L\'importation des règles DNS est terminée</string>
     <string name="notification_ruleimport_tertiarymessage">Finir l\'importation…</string>
     <string name="notification_ruleimport_secondarymessage">Préparer l\'importation…</string>

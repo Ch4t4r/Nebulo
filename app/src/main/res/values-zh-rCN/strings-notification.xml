@@ -35,7 +35,7 @@
     <string name="notification_ruleimport_secondarymessage">准备导入…</string>
     <string name="notification_ruleimport_tertiarymessage">正在完成导入…</string>
     <string name="notification_ruleimportfinished_title">DNS规则导入完成</string>
-    <string name="notification_ruleimportfinished_message">已导入 %1d 条规则（省略 %2d 条重复规则）</string>
+    <string name="notification_ruleimportfinished_message">已导入 %1s 条规则（省略 %2s 条重复规则）</string>
     <string name="notification_ruleexport_title">导出DNS规则</string>
     <string name="notification_ruleexport_message">导出规则中 （%1d/%2d）</string>
     <string name="notification_ruleexport_secondarymessage">准备导出…</string>

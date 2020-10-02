@@ -22,7 +22,7 @@
     <string name="notification_ruleexport_secondarymessage">エクスポートの準備中…</string>
     <string name="notification_ruleexport_message">ルールのエクスポート (%1d/%2d)</string>
     <string name="notification_ruleexport_title">DNSルールのエクスポート</string>
-    <string name="notification_ruleimportfinished_message">%1d 個のルールをインポートしました (%2d 個が重複のためスキップしました)</string>
+    <string name="notification_ruleimportfinished_message">%1s 個のルールをインポートしました (%2s 個が重複のためスキップしました)</string>
     <string name="notification_ruleimportfinished_title">DNSルールのインポート完了</string>
     <string name="notification_ruleimport_tertiarymessage">インポートを終了しています…</string>
     <string name="notification_ruleimport_secondarymessage">インポートの準備中…</string>

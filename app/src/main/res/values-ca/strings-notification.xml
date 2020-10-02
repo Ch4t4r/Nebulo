@@ -11,7 +11,7 @@
     <string name="notification_ruleexportfinished_title">S\'ha finalitzat l\'exportació de regles DNS</string>
     <string name="notification_ruleexport_message">Exportant regles (%1d/%2d)</string>
     <string name="notification_ruleexport_title">Exportació de regla DNS</string>
-    <string name="notification_ruleimportfinished_message">%1d regles han sigut importades (%2d duplicades omeses)</string>
+    <string name="notification_ruleimportfinished_message">%1s regles han sigut importades (%2s duplicades omeses)</string>
     <string name="notification_ruleimportfinished_title">Importació de regla DNS finalitzada</string>
     <string name="notification_ruleimport_tertiarymessage">Finalitzant importació…</string>
     <string name="notification_ruleimport_secondarymessage">Preparant importació…</string>

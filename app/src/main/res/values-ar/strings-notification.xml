@@ -8,7 +8,7 @@
     <string name="notification_ruleexport_secondarymessage">جارٍ تحضير التصدير …</string>
     <string name="notification_ruleexport_message">قواعد التصدير (%2d/%1d)</string>
     <string name="notification_ruleexport_title">تصدير قاعدة DNS</string>
-    <string name="notification_ruleimportfinished_message">تم استيراد قواعد%1d (تم حذف%2d تكرار)</string>
+    <string name="notification_ruleimportfinished_message">تم استيراد قواعد%1s (تم حذف%2s تكرار)</string>
     <string name="notification_ruleimportfinished_title">انتهى استيراد قاعدة DNS</string>
     <string name="notification_ruleimport_tertiarymessage">جارٍ إنهاء الاستيراد …</string>
     <string name="notification_ruleimport_secondarymessage">جارٍ تحضير الاستيراد …</string>

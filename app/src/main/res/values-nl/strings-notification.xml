@@ -31,7 +31,7 @@
     <string name="notification_ruleimport_message">Importeren van DNS-regels uit %1s (%2s)</string>
     <string name="notification_ruleimport_secondarymessage">Importeren voorbereiden …</string>
     <string name="notification_ruleimportfinished_title">DNS-regels importeren voltooid</string>
-    <string name="notification_ruleimportfinished_message">%1d regels zijn geïmporteerd (%2d duplicaten weggelaten)</string>
+    <string name="notification_ruleimportfinished_message">%1s regels zijn geïmporteerd (%2s duplicaten weggelaten)</string>
     <string name="notification_ruleimport_tertiarymessage">Importeren voltooien…</string>
     <string name="notification_ruleexport_title">DNS-regels exporteren</string>
     <string name="notification_ruleexport_message">Exporteer regels (%1d/%2d)</string>
