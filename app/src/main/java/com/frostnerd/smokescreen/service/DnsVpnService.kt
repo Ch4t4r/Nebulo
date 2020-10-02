@@ -1300,6 +1300,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
 
                 val usedAddress = if(bindAddress == defaultBindAddress) "localhost" else bindAddress.hostAddress
                 showDnsServerModeNotification(usedAddress, actualPort, preferredPort, iptablesMode)
+                currentTrafficStats = vpnProxy?.trafficStats
+                createConnectionWatchdog()
                 log("Non-VPN proxy started.")
             }
         } else {
@@ -1328,6 +1330,13 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             log("VPN proxy started.")
         }
         currentTrafficStats = vpnProxy?.trafficStats
+        createConnectionWatchdog()
+        hideBadConnectionNotification()
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_SERVICE_REVOKED)
+    }
+
+    private fun createConnectionWatchdog() {
         if (!watchdogDisabledForSession && getPreferences().enableConnectionWatchDog) connectionWatchDog =
             currentTrafficStats?.let {
                 ConnectionWatchdog(it, 30 * 1000, 10 * 60 * 10000, onBadServerConnection = {
@@ -1336,9 +1345,6 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                     hideBadConnectionNotification()
                 }, logger = this@DnsVpnService.logger, advancedLogging = getPreferences().advancedLogging)
             }
-        hideBadConnectionNotification()
-        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_VPN_ACTIVE))
-        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_SERVICE_REVOKED)
     }
 
     private fun createQueryLogger(): QueryListener? {
