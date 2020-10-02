@@ -48,10 +48,10 @@
     <string name="window_dnsrules_hostalreadyexists">Já existe uma regra para este host</string>
     <string name="window_dnsrules_customhosts_message">Defina todos os seus hosts personalizados aqui</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regras desta fonte: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regras desta fonte: %1d (%2d duplicatas não usadas)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regras desta fonte: %1s (%2s duplicatas não usadas)</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1d regra</item>
-        <item quantity="other">%1d regras</item>
+        <item quantity="one">%1s regra</item>
+        <item quantity="other">%1s regras</item>
     </plurals>
     <string name="windows_querylogging_used_server">Servidor em uso</string>
     <string name="windows_querylogging_search">Pesquisa de host</string>

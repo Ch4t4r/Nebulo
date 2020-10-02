@@ -61,12 +61,12 @@
     <string name="windows_querylogging_time">Waktu</string>
     <string name="windows_querylogging_search">Cari-host</string>
     <string name="windows_querylogging_search_hint">Cari host di log kueri</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Aturan dari sumber ini: %1d (%2d duplikat tidak digunakan)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Aturan dari sumber ini: %1s (%2s duplikat tidak digunakan)</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Aturan dari sumber ini: -</string>
     <string name="window_dnsrules_customhosts_message">Definisikan semua hosts khusus anda disini</string>
     <string name="window_dnsrules_hostalreadyexists">Sudah ada aturan untuk host ini</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="other">%1d aturan</item>
+        <item quantity="other">%1s aturan</item>
     </plurals>
     <string name="window_dnsrules_customhosts">Hosts khusus</string>
     <string name="button_main_dnsrules">Aturan DNS</string>

@@ -49,13 +49,13 @@
     <string name="button_main_dnsrules">DNS नियम</string>
     <string name="window_dnsrules_customhosts">स्वनिर्धारित होस्ट</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1d नियम</item>
-        <item quantity="other">%1d - नियम</item>
+        <item quantity="one">%1s नियम</item>
+        <item quantity="other">%1s - नियम</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">इस होस्ट के लिए पहले से ही एक नियम है</string>
     <string name="window_dnsrules_customhosts_message">अपने सभी स्वनिर्धारित होस्ट को यहां लिखें</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">इस स्रोत से नियम: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">इस स्रोत से नियम: %1d (%2d डुप्लिकेट उपयोग में नहीं)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">इस स्रोत से नियम: %1s (%2s डुप्लिकेट उपयोग में नहीं)</string>
     <string name="windows_querylogging_search_hint">प्रश्नों की सूची में होस्ट की खोज करें</string>
     <string name="windows_querylogging_search">होस्ट-खोज</string>
     <string name="windows_querylogging_time">समय</string>

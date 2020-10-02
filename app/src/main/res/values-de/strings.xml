@@ -45,13 +45,13 @@
     <string name="window_dnsrules_customhosts">Eigene Hosts</string>
     <string name="window_dnsrules_customhosts_message">Gebe hier Hosts von Hand ein</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regeln aus dieser Quelle: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regeln aus dieser Quelle: %1d (%2d Duplikate werden nicht genutzt)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regeln aus dieser Quelle: %1s (%2s Duplikate werden nicht genutzt)</string>
     <string name="error_invalid_pin">Bitte gebe deine PIN an</string>
     <string name="error_invalid_servername">Bitte gebe einen Namen an</string>
     <string name="window_dnsrules_hostalreadyexists">Es existiert bereits eine Regel für diesen Host</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1d Regel</item>
-        <item quantity="other">%1d Regeln</item>
+        <item quantity="one">%1s Regel</item>
+        <item quantity="other">%1s Regeln</item>
     </plurals>
     <string name="windows_querylogging_time">Zeitpunkt</string>
     <string name="windows_querylogging_type">Typ</string>

@@ -46,13 +46,13 @@
     <string name="button_main_dnsrules">Regole DNS</string>
     <string name="window_dnsrules_customhosts">Hosts personalizzati</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1d regola</item>
-        <item quantity="other">%1d regole</item>
+        <item quantity="one">%1s regola</item>
+        <item quantity="other">%1s regole</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">C\'è già una regola per questo host</string>
     <string name="window_dnsrules_customhosts_message">Definisci qui tutti i tuoi host personalizzati</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regole da questa fonte: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regole da questa fonte: %1d (%2d doppi non usati)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regole da questa fonte: %1s (%2s doppi non usati)</string>
     <string name="windows_querylogging_search_hint">Cerca un host nel registro delle richieste</string>
     <string name="windows_querylogging_search">Ricerca host</string>
     <string name="windows_querylogging_time">Orario</string>

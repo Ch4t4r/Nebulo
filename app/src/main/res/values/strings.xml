@@ -61,13 +61,13 @@
     <string name="button_main_dnsrules">DNS rules</string>
     <string name="window_dnsrules_customhosts">Custom hosts</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1d rule</item>
-        <item quantity="other">%1d rules</item>
+        <item quantity="one">%1s rule</item>
+        <item quantity="other">%1s rules</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">There already is a rule for this host</string>
     <string name="window_dnsrules_customhosts_message">Define all your custom hosts here</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>
-    <string xmlns:tools="http://schemas.android.com/tools" name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Rules from this source: %1d (%2d duplicates not in use)</string>
+    <string xmlns:tools="http://schemas.android.com/tools" name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Rules from this source: %1s (%2s duplicates not in use)</string>
     <string name="windows_querylogging_search_hint">Search for a host in the query log</string>
     <string name="windows_querylogging_search">Host-search</string>
     <string name="windows_querylogging_time">Time</string>

@@ -331,8 +331,8 @@ class MainFragment : Fragment() {
                 launchUi {
                     val latency = DnsVpnService.currentTrafficStats?.floatingAverageLatency?.takeIf { it > 0 }
                     if(latency != null) {
-                        serverLatency.visibility = View.VISIBLE
-                        serverLatency.text = latency.let { "$it\nms" }
+                        serverLatency?.visibility = View.VISIBLE
+                        serverLatency?.text = latency.let { "$it\nms" }
                         val color = when {
                             latency < greatLatencyThreshold -> Color.parseColor("#43A047")
                             latency < goodLatencyThreshold -> Color.parseColor("#9CCC65")
@@ -342,9 +342,9 @@ class MainFragment : Fragment() {
                         serverIndicator.backgroundTintList = ColorStateList.valueOf(color)
                         delay(750)
                     } else {
-                        serverLatency.visibility = View.INVISIBLE
-                        serverLatency.text = "-\nms"
-                        serverIndicator.backgroundTintList = null
+                        serverLatency?.visibility = View.INVISIBLE
+                        serverLatency?.text = "-\nms"
+                        serverIndicator?.backgroundTintList = null
                         delay(1500)
                     }
 

@@ -412,15 +412,17 @@ class DnsRuleFragment : Fragment() {
                 (viewHolder as SourceViewHolder).display(data)
                 when {
                     sourceRuleCount[data] != null -> {
+                        val activeCountFormatted = getPreferences().numberFormatter.format(sourceRuleCount[data])
+                        val duplicateCountFormatted = getPreferences().numberFormatter.format(data.ruleCount.let {
+                            when (it) {
+                                null -> 0
+                                0 -> 0
+                                else -> it - sourceRuleCount[data]!!
+                            }
+                        })
                         viewHolder.ruleCount.text = getString(R.string.window_dnsrules_customhosts_hostsource_rulecount,
-                            sourceRuleCount[data],
-                            data.ruleCount.let {
-                                when (it) {
-                                    null -> 0
-                                    0 -> 0
-                                    else -> it - sourceRuleCount[data]!!
-                                }
-                            })
+                            activeCountFormatted,
+                            duplicateCountFormatted)
                     }
                     data.enabled -> launchWithLifecycle {
                         val prev = sourceRuleCount[data]
@@ -523,7 +525,8 @@ class DnsRuleFragment : Fragment() {
     private fun updateRuleCountTitle() {
          activity?.runOnUiThread {
              (activity as AppCompatActivity?)?.supportActionBar?.subtitle = if(getPreferences().dnsRulesEnabled) {
-                 resources.getQuantityString(R.plurals.window_dnsrules_subtitle, totalRuleCount!!.toInt(), totalRuleCount)
+                 val formattedString = getPreferences().numberFormatter.format(totalRuleCount)
+                 resources.getQuantityString(R.plurals.window_dnsrules_subtitle, totalRuleCount!!.toInt(), formattedString)
              } else null
         }
     }

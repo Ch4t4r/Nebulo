@@ -68,17 +68,17 @@
     <string name="windows_querylogging_time">توقيت</string>
     <string name="windows_querylogging_search">البحث عن المضيف</string>
     <string name="windows_querylogging_search_hint">ابحث عن مضيف في سجل الاستعلام</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">القواعد من هذا المصدر:%1d ( %2dمكررة غير مستسيرفراتة)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">القواعد من هذا المصدر:%1s ( %2sمكررة غير مستسيرفراتة)</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">القواعد من هذا المصدر: -</string>
     <string name="window_dnsrules_customhosts_message">حدد جميع المضيفين المخصصين هنا</string>
     <string name="window_dnsrules_hostalreadyexists">هناك بالفعل قاعدة لهذا المضيف</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="zero">%1d قاعدة</item>
-        <item quantity="one">%1d قاعدة</item>
-        <item quantity="two">%1d قاعدة</item>
-        <item quantity="few">%1d قاعدة</item>
-        <item quantity="many">%1d قاعدة</item>
-        <item quantity="other">%1d قاعدة</item>
+        <item quantity="zero">%1s قاعدة</item>
+        <item quantity="one">%1s قاعدة</item>
+        <item quantity="two">%1s قاعدة</item>
+        <item quantity="few">%1s قاعدة</item>
+        <item quantity="many">%1s قاعدة</item>
+        <item quantity="other">%1s قاعدة</item>
     </plurals>
     <string name="window_dnsrules_customhosts">استضافات خاصة</string>
     <string name="button_main_dnsrules">قواعد DNS</string>

@@ -12,6 +12,7 @@ import com.frostnerd.preferenceskt.typedpreferences.cache.buildCacheStrategy
 import com.frostnerd.preferenceskt.typedpreferences.types.*
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.dialog.HostSourceRefreshDialog
+import java.text.NumberFormat
 import java.util.*
 
 /*
@@ -177,6 +178,18 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var lastLogId: Int by intPref("last_log_id", 0)
 
     var language:String by stringPref("language", "auto")
+    val languageAsLocale: Locale
+        get() {
+            if(language == "auto") return Locale.getDefault()
+            val country = language.split("_").getOrNull(1)
+            return if (country != null) Locale(
+                language.split("_")[0],
+                country
+            ) else Locale(language)
+        }
+    val numberFormatter by lazy(mode = LazyThreadSafetyMode.NONE) {
+        NumberFormat.getInstance(languageAsLocale)
+    }
     override var theme: Theme by ThemePreference("theme", Theme.MONO)
     override var startAppOnBoot: Boolean by booleanPref("start_on_boot", true)
     override var startAppAfterUpdate: Boolean by booleanPref("start_after_update", true)

@@ -45,13 +45,13 @@
     <string name="window_dnsrules_customhosts">Aangepaste hosts</string>
     <string name="window_dnsrules_customhosts_message">Definieer hier al uw aangepaste hosts</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regels van deze bron: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regels van deze bron: %1d (%2d duplicaten niet in gebruik)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regels van deze bron: %1s (%2s duplicaten niet in gebruik)</string>
     <string name="error_invalid_pin">Geef uw PIN-code op</string>
     <string name="error_invalid_servername">Geef een naam op</string>
     <string name="window_dnsrules_hostalreadyexists">Er is al een regel voor deze host</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1d regel</item>
-        <item quantity="other">%1d regels</item>
+        <item quantity="one">%1s regel</item>
+        <item quantity="other">%1s regels</item>
     </plurals>
     <string name="windows_querylogging_time">Tijd</string>
     <string name="windows_querylogging_type">Type</string>
