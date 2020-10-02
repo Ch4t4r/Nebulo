@@ -12,6 +12,7 @@ import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.database.entities.DnsRule
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.ExportType
+import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.sendLocalBroadcast
 import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
@@ -108,7 +109,9 @@ class RuleExportService : IntentService("RuleExportService") {
 
     private fun updateNotification(ruleCount: Int, totalRuleCount: Int) {
         notification?.setProgress(totalRuleCount, ruleCount, false)
-        val text = getString(R.string.notification_ruleexport_message, ruleCount, totalRuleCount)
+        val text = getString(R.string.notification_ruleexport_message,
+            getPreferences().numberFormatter.format(ruleCount),
+            getPreferences().numberFormatter.format(totalRuleCount))
         notification!!.setContentText(text)
         notification!!.setStyle(NotificationCompat.BigTextStyle().bigText(text))
         startForeground(Notifications.ID_DNSRULE_EXPORT, notification!!.build())

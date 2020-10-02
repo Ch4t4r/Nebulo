@@ -9,7 +9,7 @@
     <string name="notification_pin_title">PIN obligatori</string>
     <string name="notification_ruleexportfinished_message">S\'han exportat %1d regles</string>
     <string name="notification_ruleexportfinished_title">S\'ha finalitzat l\'exportació de regles DNS</string>
-    <string name="notification_ruleexport_message">Exportant regles (%1d/%2d)</string>
+    <string name="notification_ruleexport_message">Exportant regles (%1s/%2s)</string>
     <string name="notification_ruleexport_title">Exportació de regla DNS</string>
     <string name="notification_ruleimportfinished_message">%1s regles han sigut importades (%2s duplicades omeses)</string>
     <string name="notification_ruleimportfinished_title">Importació de regla DNS finalitzada</string>

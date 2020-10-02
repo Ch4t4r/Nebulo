@@ -36,7 +36,7 @@
     <string name="notification_ruleimportfinished_title">Importazione regole DNS terminata</string>
     <string name="notification_ruleimportfinished_message">%1s regole sono state importate (%2s doppi omessi)</string>
     <string name="notification_ruleexport_title">Esporta regole DNS</string>
-    <string name="notification_ruleexport_message">Esportazione regole (%1d/%2d)</string>
+    <string name="notification_ruleexport_message">Esportazione regole (%1s/%2s)</string>
     <string name="notification_ruleexport_secondarymessage">Preparazione esportazione…</string>
     <string name="notification_ruleexportfinished_title">Esportazione regole DNS terminata</string>
     <string name="notification_ruleexportfinished_message">%1d regole sono state esportate</string>

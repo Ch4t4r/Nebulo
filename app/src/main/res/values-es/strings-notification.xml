@@ -33,7 +33,7 @@
     <string name="notification_pin_title">Se requiere un PIN</string>
     <string name="notification_ruleexportfinished_title">Exportación de la regla del DNS terminada</string>
     <string name="notification_ruleexport_secondarymessage">Preparando la exportación…</string>
-    <string name="notification_ruleexport_message">Normas de exportación (%1d/%2d)</string>
+    <string name="notification_ruleexport_message">Normas de exportación (%1s/%2s)</string>
     <string name="notification_ruleexport_title">Las DNS rigen la exportación</string>
     <string name="notification_ruleimportfinished_message">Se han importado las reglas %1s (%2s duplicados omitidos)</string>
     <string name="notification_ruleimportfinished_title">La importación de la regla del DNS ha terminado</string>

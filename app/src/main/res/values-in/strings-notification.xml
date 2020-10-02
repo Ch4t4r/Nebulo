@@ -51,7 +51,7 @@
     <string name="notification_ruleexportfinished_title">Mengekspor aturan DNS selesai</string>
     <string name="notification_ruleimport_secondarymessage">Menyiapkan impor…</string>
     <string name="notification_ruleexport_secondarymessage">Menyiapkan ekspor…</string>
-    <string name="notification_ruleexport_message">Mengekspor aturan (%1d/%2d)</string>
+    <string name="notification_ruleexport_message">Mengekspor aturan (%1s/%2s)</string>
     <string name="notification_ruleexport_title">Ekspor aturan DNS</string>
     <string name="notification_ruleimportfinished_message">%1s aturan telah diimpor (%2s duplikat dihilangkan)</string>
     <string name="notification_ruleimport_tertiarymessage">Menyelesaikan impor…</string>

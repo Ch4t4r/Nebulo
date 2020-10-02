@@ -34,7 +34,7 @@
     <string name="notification_ruleimportfinished_title">DNS kuralı ithâlatı tamamlandı</string>
     <string name="notification_ruleimportfinished_message">%1s kural(lar)ı içe aktarıldı (%2s kopya çıkarıldı)</string>
     <string name="notification_ruleexport_title">DNS kural ihracatı</string>
-    <string name="notification_ruleexport_message">İhrâcat kuralları (%1d/%2d)</string>
+    <string name="notification_ruleexport_message">İhrâcat kuralları (%1s/%2s)</string>
     <string name="notification_ruleexport_secondarymessage">İhrâcat hazırlanıyor…</string>
     <string name="notification_ruleexportfinished_title">DNS kural ihrâcatı tamamlandı</string>
     <string name="notification_ruleexportfinished_message">%1d kural(lar)ı ihrâc edildi</string>

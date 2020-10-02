@@ -34,7 +34,7 @@
     <string name="notification_ruleimportfinished_message">%1s Regeln wurden importiert (%2s Duplikate ausgelassen)</string>
     <string name="notification_ruleimport_tertiarymessage">Beende Import…</string>
     <string name="notification_ruleexport_title">DNS Regel Export</string>
-    <string name="notification_ruleexport_message">Exportiere Regeln (%1d/%2d)</string>
+    <string name="notification_ruleexport_message">Exportiere Regeln (%1s/%2s)</string>
     <string name="notification_ruleexport_secondarymessage">Bereite Export vor…</string>
     <string name="notification_ruleexportfinished_title">DNS Regel Export fertiggestellt</string>
     <string name="notification_ruleexportfinished_message">%1d Regeln wurden exportiert</string>
