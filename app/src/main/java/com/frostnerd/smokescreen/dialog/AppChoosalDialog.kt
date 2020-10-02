@@ -195,6 +195,10 @@ class AppChoosalDialog(
                  it.flags and systemAppMask == 0
             }
         }
+        filteredPackets.sortByDescending {
+            currentSelectedApps.contains(it.packageName) ||
+                    defaultChosenUnselectablePackages.contains(it.packageName)
+        }
     }
 
     inner class AppViewHolder(itemView: View) : BaseViewHolder(itemView) {
