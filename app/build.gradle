@@ -11,13 +11,13 @@ android {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 66
+        versionCode 67
         versionName "2.0-alpha"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("Boolean", "FROM_CI", String.valueOf(getSystemVariableOrDefault("CI_COMMIT_SHORT_SHA", "") != ""))
         buildConfigField("String", "COMMIT_HASH", '"' + getGitCommitHash() + '"')
-        buildConfigField("String", "SENTRY_DSN", '"https://fadeddb58abf408db50809922bf064cc@sentry.frostnerd.com:443/2"')
+        buildConfigField("String", "SENTRY_DSN", '""')
 
         kapt {
             arguments {
