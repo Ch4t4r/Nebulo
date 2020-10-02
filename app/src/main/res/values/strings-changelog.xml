@@ -444,4 +444,17 @@
         <item>@string/changelog_build_66_10</item>
         <item>@string/changelog_build_66_11</item>
     </string-array>
+
+    <string name="changelog_build_67_1">A different IPv6 address (::) is now used internally to ignore a host</string>
+    <string name="changelog_build_67_2">Added a search to the app exclusion dialog</string>
+    <string name="changelog_build_67_3">Fix server latency not being shown in Non-VPN mode</string>
+    <string name="changelog_build_67_4">Added better formatting of numbers in DNS rules</string>
+    <string-array name="changelog_build_67">
+        <item>Version 1.5.0-alpha (Build 67)</item>
+        <item>@string/changelog_build_67_1</item>
+        <item>@string/changelog_build_67_2</item>
+        <item>@string/changelog_build_67_3</item>
+        <item>@string/changelog_build_67_4</item>
+    </string-array>
+
 </resources>
