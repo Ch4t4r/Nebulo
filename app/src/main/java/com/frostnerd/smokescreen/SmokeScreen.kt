@@ -138,7 +138,7 @@ class SmokeScreen : Application() {
     }
 
     override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(newBase, newBase))
     }
 
     override fun onCreate() {
