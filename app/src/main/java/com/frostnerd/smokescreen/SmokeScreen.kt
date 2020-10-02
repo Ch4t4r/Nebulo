@@ -14,6 +14,7 @@ import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.activity.LoggingDialogActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
+import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.util.crashhelpers.DataSavingSentryEventProcessor
@@ -134,6 +135,10 @@ class SmokeScreen : Application() {
             Notifications.ID_APP_CRASH,
             notification.build()
         )
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(this, newBase))
     }
 
     override fun onCreate() {
