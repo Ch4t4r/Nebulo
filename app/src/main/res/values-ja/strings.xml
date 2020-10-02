@@ -13,7 +13,7 @@
 \nDatabase version %3d
 \nCrashreport ID: %4s
 \n
-\n© Daniel Wolf 2019
+\n© Daniel Wolf 2019–2020
 \nLicensed under GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
     <string name="main_dnssurveillance_infotext">接続したDNSサーバーは、あなたが訪れたサイト情報を記録することができることに注意してください。詳しい情報については、DNSサービスの個人情報保護方針を確認してください。</string>
