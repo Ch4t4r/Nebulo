@@ -431,7 +431,7 @@
     <string name="changelog_build_66_10">Added a filter to the query log</string>
     <string name="changelog_build_66_11">Added a field showing how many queries have been resolved with DNS rules</string>
     <string-array name="changelog_build_66">
-        <item>Version 1.5.0 (Build 66)</item>
+        <item>Version 1.5.0-alpha (Build 66)</item>
         <item>@string/changelog_build_66_1</item>
         <item>@string/changelog_build_66_2</item>
         <item>@string/changelog_build_66_3</item>
