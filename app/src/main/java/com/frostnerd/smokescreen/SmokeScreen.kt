@@ -137,10 +137,6 @@ class SmokeScreen : Application() {
         )
     }
 
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LanguageContextWrapper.attachFromSettings(newBase, newBase))
-    }
-
     override fun onCreate() {
         if(!BuildConfig.LEAK_DETECTION) LeakSentry.config = LeakSentry.config.copy(enabled = false)
         initSentry()
