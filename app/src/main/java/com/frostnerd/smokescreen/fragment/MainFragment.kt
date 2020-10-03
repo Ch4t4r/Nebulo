@@ -329,25 +329,26 @@ class MainFragment : Fragment() {
         latencyCheckJob = launchWithLifecycle(cancelOn = setOf(Lifecycle.Event.ON_PAUSE)) {
             if(isActive) {
                 launchUi {
-                    val latency = DnsVpnService.currentTrafficStats?.floatingAverageLatency?.takeIf { it > 0 }
-                    if(latency != null) {
-                        serverLatency?.visibility = View.VISIBLE
-                        serverLatency?.text = latency.let { "$it\nms" }
-                        val color = when {
-                            latency < greatLatencyThreshold -> Color.parseColor("#43A047")
-                            latency < goodLatencyThreshold -> Color.parseColor("#9CCC65")
-                            latency < averageLatencyThreshold -> Color.parseColor("#FFB300")
-                            else -> Color.parseColor("#E53935")
+                    if(view != null) {
+                        val latency = DnsVpnService.currentTrafficStats?.floatingAverageLatency?.takeIf { it > 0 }
+                        if(latency != null) {
+                            serverLatency?.visibility = View.VISIBLE
+                            serverLatency?.text = latency.let { "$it\nms" }
+                            val color = when {
+                                latency < greatLatencyThreshold -> Color.parseColor("#43A047")
+                                latency < goodLatencyThreshold -> Color.parseColor("#9CCC65")
+                                latency < averageLatencyThreshold -> Color.parseColor("#FFB300")
+                                else -> Color.parseColor("#E53935")
+                            }
+                            serverIndicator.backgroundTintList = ColorStateList.valueOf(color)
+                            delay(750)
+                        } else {
+                            serverLatency?.visibility = View.INVISIBLE
+                            serverLatency?.text = "-\nms"
+                            serverIndicator?.backgroundTintList = null
+                            delay(1500)
                         }
-                        serverIndicator.backgroundTintList = ColorStateList.valueOf(color)
-                        delay(750)
-                    } else {
-                        serverLatency?.visibility = View.INVISIBLE
-                        serverLatency?.text = "-\nms"
-                        serverIndicator?.backgroundTintList = null
-                        delay(1500)
                     }
-
                     runLatencyCheck()
                 }
             }
