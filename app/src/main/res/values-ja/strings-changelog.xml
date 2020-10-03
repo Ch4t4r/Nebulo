@@ -147,4 +147,8 @@
     <string name="changelog_build_66_3">ホストがDNSルールに登録済みかどうかをチェックするダイアログを追加しました</string>
     <string name="changelog_build_66_2">追加するサーバー名の大文字小文字を区別するようにしました。これによりNextDNSに関連する不具合が修正されました</string>
     <string name="changelog_build_66_1">FAQ(よくある質問)を追加しました。ナビゲーションアイテムの「このアプリについて」から見つけることができます</string>
+    <string name="changelog_build_67_4">DNSルールに数値のより良いフォーマットを追加しました</string>
+    <string name="changelog_build_67_2">\"アプリの除外\"画面でアプリ検索ができるようにしました</string>
+    <string name="changelog_build_67_3">非VPNモードでサーバーのレイテンシが表示されない問題を修正しました</string>
+    <string name="changelog_build_67_1">ホストを無視するために、別のIPv6アドレス(::)を内部で使用するようにしました</string>
 </resources>
