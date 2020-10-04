@@ -136,4 +136,6 @@
 \n
 \nاستعد السيطرة على البيانات التي تعامل معها مزود خدمة الإنترنت أو الكيانات الأخرى على أنها بياناتها لفترة طويلة.</string>
     <string name="appintro_first_title">مرحبًا بكم في نيبولو.</string>
+    <string name="app_share_fdroid">مرحبا، لقد وجدت هذا التطبيق يقوم بتشفير استعلامات DNS ويمنحك المزيد من الأمان والخصوصية، قم بتحميله الان :
+\nhttps://nebulo.app/source#installation</string>
 </resources>
