@@ -209,4 +209,6 @@
     <string name="querylog_filter_shorten_domain">簡略化したドメインをリストに表示する</string>
     <string name="querylog_filter_type_dnsrules">DNSルールにより解決済み</string>
     <string name="querylog_filter_type_cache">DNSキャッシュにより解決済み</string>
+    <string name="dialog_share_message">どのリンクでシェアしますか\?</string>
+    <string name="dialog_share_title">リンクタイプを選択</string>
 </resources>
