@@ -156,7 +156,7 @@
     <string name="dialog_logexport_general">اختر تطبيق</string>
     <string name="dialog_logexport_text">كيف تريد مشاركة السجلات؟</string>
     <string name="dialog_logexport_loading_title">تحضير السجلات</string>
-    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">تعذر استيراد الخوادم.
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">تعذر استيراد السيرفرات. 
 \n(% 1s)</string>
     <string name="dialog_serverimportfailed_text">تعذر استيراد السيرفر (الخوادم).</string>
     <string name="dialog_serverimportfailed_title">فشل الاستيراد</string>
@@ -184,7 +184,7 @@
         <item quantity="many">يتم استبعاد تطبيقات %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
         <item quantity="other">يتم استبعاد التطبيقات %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
     </plurals>
-    <string name="dialog_appchoosal_whitelist">استسيرفرات DoH / DoT فقط في التطبيقات المحددة</string>
+    <string name="dialog_appchoosal_whitelist">استخدام DoH / DoT فقط في التطبيقات المحددة</string>
     <string name="dialog_appchoosal_showsystemapps">إظهار تطبيقات النظام</string>
     <string name="dialog_deleteconfig_text">هل تريد حذف التكوين %1s؟</string>
     <string name="dialog_deleteconfig_title">حذف التكوين؟</string>
