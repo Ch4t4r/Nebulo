@@ -369,9 +369,11 @@ class MainFragment : Fragment() {
                 setOf(it[1], it[0]) //Quad9, CF
             }).mapNotNull {
                 DnsSpeedTest(it as DnsServerInformation<*>, log = {}).runTest(4)
-            }.let {
+            }.takeIf {
+                it.isNotEmpty()
+            }?.let {
                 it.sum() / it.size
-            }
+            } ?: return@launchWithLifecycle
             val rawFactor = maxOf(greatLatencyThreshold.toDouble(), greatLatencyThreshold*(fastServerAverage.toDouble()/greatLatencyThreshold))/greatLatencyThreshold
             val adjustmentFactor = 1 + (rawFactor - 1)/2
             val pingStepAdjustment = (12*rawFactor)-12 //High deviation from 100ms -> Higher differences between steps in rating
