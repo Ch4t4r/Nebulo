@@ -2,9 +2,9 @@
 <resources>
     <string name="changelog_build_62_1">عند بدء تشغيل Nebulo من اختصار السيرفر ، استمر هذا السيرفر الآن</string>
     <string name="changelog_build_61_1">تمت ترقية إصدار بيتا إلى الإصدار الكامل</string>
-    <string name="changelog_build_59_7">يمكن الآن تشغيل Nebulo في وضع غير VPN (تجريبي) ، حيث يستسيرفرات سيرفر DNS بدلاً من VPN الوهمي. يتطلب هذا تطبيقات الطرف الثالث لإعادة توجيه استعلامات DNS إلى Nebulo</string>
+    <string name="changelog_build_59_7">يمكن الآن تشغيل Nebulo في وضع غير VPN (تجريبي)، حيث يستخدم سيرفر DNS بدلاً من VPN الوهمي. يتطلب هذا تطبيقات الطرف الثالث لإعادة توجيه استعلامات DNS إلى Nebulo</string>
     <string name="changelog_build_59_6">يجب الآن إعادة إدخال رقم التعريف الشخصي بعد مرور بعض الوقت</string>
-    <string name="changelog_build_59_5">لا يسمح التحقق من صحة الإدخال الثابت لـ DNS-over-HTTPS ببعض الخوادم الصالحة</string>
+    <string name="changelog_build_59_5">لا يسمح التحقق من صحة الإدخال الثابت لـ DNS-over-HTTPS ببعض السيرفرات الصالحة</string>
     <string name="changelog_build_59_4">يمكن الآن استئناف Nebulo من الشاشة الرئيسية</string>
     <string name="changelog_build_59_3">يكتشف Nebulo الآن الوضع المدعوم عند إضافة سيرفر DNS-over-HTTPS</string>
     <string name="changelog_build_59_2">تمت إضافة إعادة استخدام الاتصالات ، مما يقلل من استخدام البطارية</string>
@@ -15,9 +15,9 @@
     <string name="changelog_build_54_2">يتيح لك إنشاء اختصار سيرفر الآن تحديد واحد من القائمة</string>
     <string name="changelog_build_54_1">تم إصلاح بعض تطبيقات VoIP التي لا تتصل عندما يكون Nebulo نشطًا</string>
     <string name="changelog_build_52_3">تم إصلاح عطل نادرًا ما حدث مع تسجيل الاستعلام النشط</string>
-    <string name="changelog_build_52_2">تم إصلاح الخلل الذي منع إضافة خوادم DoH بشرطة مائلة متعددة (/) بشكل صحيح</string>
+    <string name="changelog_build_52_2">تم إصلاح الخلل الذي منع إضافة سيرفرات DoH بشرطة مائلة متعددة (/) بشكل صحيح</string>
     <string name="changelog_build_52_1">تمنع قواعد DNS الآن إخفاء CNAME</string>
-    <string name="changelog_build_51_3">خوادم محدثة</string>
+    <string name="changelog_build_51_3">سيرفرات محدثة</string>
     <string name="changelog_build_51_2">لا يتم تصدير قواعد DNS البدل الثابتة بشكل صحيح</string>
     <string name="changelog_build_51_1">يمكن الآن تصدير قواعد DNS القائمة البيضاء أيضًا</string>
     <string name="changelog_build_49_8">تم إصلاح بعض الأخطاء التي قد تتسبب في عدم قيام التطبيق بإعادة توجيه استعلامات DNS بعد مرور بعض الوقت على بعض الأجهزة</string>
@@ -75,7 +75,7 @@
     <string name="changelog_build_66_5">يُظهر اختبار سرعة DNS الآن بشكل أكثر دقة وقت الاستجابة</string>
     <string name="changelog_build_66_4">تمت إضافة إدخال تعليمات إلى سجل الاستعلام لشرح معنى الرموز</string>
     <string name="changelog_build_66_3">تمت إضافة مربع حوار إلى قواعد DNS للتحقق مما إذا كان المضيف مدرجًا في مكان ما</string>
-    <string name="changelog_build_66_2">أصبحت إضافة الخوادم الآن حساسة لحالة الأحرف. هذا يعمل على إصلاح مشاكل NextDNS</string>
+    <string name="changelog_build_66_2">أصبحت إضافة السيرفرات الآن حساسة لحالة الأحرف. هذا يعمل على إصلاح مشاكل NextDNS</string>
     <string name="changelog_build_66_1">تمت إضافة الأسئلة المتداولة. يمكنك العثور عليها في عنصر التنقل \"حول هذا التطبيق\"</string>
     <string name="changelog_build_55_4">يقوم سجل الاستعلام الآن بتحميل الاستعلامات إلى أجزاء بدلاً من تحميلها دفعة واحدة</string>
     <string name="changelog_build_62_4">صار بامكانك تكوين سيرفر DNS الداخلي(احتياطي)</string>
@@ -147,4 +147,5 @@
     <string name="changelog_build_23_3">يتم عرض نافذة بما يتم تحميله الان</string>
     <string name="changelog_build_23_2">تمت إضافة مربع الحوار هذا لإبراز التغييرات</string>
     <string name="changelog_build_23_1">تظهر المنافذ غير الافتراضية الآن لخوادم DoT</string>
+    <string name="changelog_build_67_1">يستخدم الان عنوان IPv6 (::) مختلف لتجاهل المضيف</string>
 </resources>
