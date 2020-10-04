@@ -17,12 +17,12 @@
     <string name="dialog_crashreportingusages_data_device_6">دقة الشاشة</string>
     <string name="dialog_crashreportingusages_data_device_5">متصل بالإنترنت في وقت التعطل (نعم / لا)</string>
     <string name="dialog_crashreportingusages_data_device_4">حالة الشحن (نعم / لا)</string>
-    <string name="dialog_crashreportingusages_data_device_3">فارغ/مستسيرفرات ذاكرة الوصول العشوائي</string>
+    <string name="dialog_crashreportingusages_data_device_3">فارغ/مستخدم ذاكرة الوصول العشوائي</string>
     <string name="dialog_crashreportingusages_data_device_2">اتجاه التطبيق (افقي، راسي)</string>
     <string name="dialog_crashreportingusages_data_device_1">معمارية المعالج(x86, arm,...)</string>
-    <string name="dialog_crashreportingusages_data_user_1">معرف عشوائي يستسيرفرات لتتبع الأعطال</string>
+    <string name="dialog_crashreportingusages_data_user_1">معرف عشوائي يستخدم لتتبع الأعطال</string>
     <string name="dialog_crashreportingusages_data_4">بيانات نظام التشغيل</string>
     <string name="dialog_crashreportingusages_data_3">معلومات التطبيق</string>
     <string name="dialog_crashreportingusages_data_2">بيانات الجهاز</string>
-    <string name="dialog_crashreportingusages_data_1">بيانات المستسيرفرات</string>
+    <string name="dialog_crashreportingusages_data_1">بيانات المستخدم</string>
 </resources>
