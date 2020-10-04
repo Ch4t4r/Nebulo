@@ -95,7 +95,7 @@
     <string name="summary_show_notification_on_lockscreen">ضبط ظهور الاشعارات على شاشة القفل</string>
     <string name="title_show_notification_on_lockscreen">اظهار على شاشة القفل</string>
     <string name="preference_category_notification">التنبيهات</string>
-    <string name="summary_fallback_dns">يتم اعداد سيرفر DNS للاستخدام المحلي على Nebulo, في العادة يكون سيرفر DNS لمزودي سيرفراتة الاتصالات لديك، يستسيرفرات لاغراض داخلية فقط لا يقدم علاج لكل استعلامات DNS الطبيعية.</string>
+    <string name="summary_fallback_dns">يتم اعداد سيرفر DNS للاستخدام المحلي على Nebulo, في العادة يكون سيرفر DNS لمزودي خدمة الاتصالات لديك، يستخدم لاغراض داخلية فقط لا يقدم علاج لكل استعلامات DNS الطبيعية.</string>
     <string name="title_fallback_dns">سيرفر DNS داخلي</string>
     <string name="summary_excluded_apps">احظر هذه التطبيقات، مثل التي تعمل بلا انترنت - اختر قائمة التطبيقات التي تريد حظرها من استخدام تشفير استعلامات DNS او تشفير حركة مرور DNS</string>
     <string name="title_excluded_apps">تطبيقات محظورة</string>
