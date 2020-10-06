@@ -147,4 +147,8 @@
     <string name="changelog_build_66_3">Einen Dialog hinzugefügt um zu testen, ob ein Host Teil einer DNS Regel ist</string>
     <string name="changelog_build_66_2">Das Hinzufügen eines Servers beachtet nun die Groß/Kleinschreibung. Dies behebt Probleme mit NextDNS</string>
     <string name="changelog_build_66_1">FAQ hinzugefügt. Du findest diese im Menüeintrag \'Über diese App\'</string>
+    <string name="changelog_build_67_4">Die Zahlen in den DNS Regeln sind nun besser formatiert</string>
+    <string name="changelog_build_67_3">Einen Fehler behoben, durch welchen die Serverlatenz im Nicht-VPN Modus nicht angezeigt wurde</string>
+    <string name="changelog_build_67_2">Eine Suche zum Appauswahl-Dialog hinzugefügt</string>
+    <string name="changelog_build_67_1">Eine andere IPv6 Adresse (::) wird nun intern genutzt um einen Host zu ignorieren</string>
 </resources>
