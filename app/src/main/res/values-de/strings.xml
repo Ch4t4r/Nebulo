@@ -86,7 +86,7 @@
     </plurals>
     <plurals name="dnsrule_total_resolve_count">
         <item quantity="one">%1d Anfrage wurde bisher von den DNS Regeln aufgelöst</item>
-        <item quantity="other">%1d Anfragen wurde bisher von den DNS Regeln aufgelöst</item>
+        <item quantity="other">%1d Anfragen wurden bisher von den DNS Regeln aufgelöst</item>
     </plurals>
     <string name="appintro_server_choose_adblock">Ein Server, welcher Werbung und Tracking blockiert</string>
     <string name="appintro_server_choose_forth">Ein Server, welcher mich vor böswilligen Webseiten und Apps beschützt</string>
@@ -124,4 +124,5 @@
     <string name="theme_true_black">Echtes Schwarz</string>
     <string name="theme_dark">Dunkel</string>
     <string name="theme_mono">Mono</string>
+    <string name="app_share_fdroid">Hey, ich habe diese App gefunden, welche deine DNS Anfragen verschlüsselt und dir so mehr Sicherheit und Privatsphäre gibt. Schau sie dir mal an: https://nebulo.app/source#installation</string>
 </resources>
