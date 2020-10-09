@@ -125,7 +125,7 @@
     <string name="dialog_newdnsrule_whitelist">白名单</string>
     <string name="dialog_newdnsrule_specify_address">地址</string>
     <string name="dialog_newhostsource_use_as_whitelist">用作白名单</string>
-    <string name="dialog_newhostsource_edit_title">添加规则源</string>
+    <string name="dialog_newhostsource_edit_title">编辑规则源</string>
     <string name="dialog_newdnsrule_wildcard_info">域名支持使用通配符。使用一个星号（*）来匹配除点号（.）以外的任意长度的任意字母、数字及允许使用的特殊符号。使用两个星号（**）以增加对点号（.）的匹配。</string>
     <string name="dialog_newdnsrule_edit">编辑DNS规则</string>
     <string name="dialog_exportdnsrules_title">导出DNS规则</string>
@@ -167,4 +167,6 @@
     <string name="dialog_vpn_permission_denied_message">系统拒绝了Nebulo启动VPN。请启动应用，并在应用内点击启动按钮以给予VPN权限。</string>
     <string name="dialog_doh_detect_type_message">请稍等片刻。</string>
     <string name="dialog_doh_detect_type_title">检测服务器类型</string>
+    <string name="dialog_share_message">您希望分享什么链接？</string>
+    <string name="dialog_share_title">选择链接类型</string>
 </resources>
