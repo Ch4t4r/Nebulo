@@ -45,7 +45,8 @@
     <string name="windows_querylogging_usedserver_dnsrules">DNS规则</string>
     <string name="windows_querylogging_usedserver_cache">缓存记录</string>
     <string name="about_info">总概资料</string>
-    <string name="window_main_privatedns_info">私人DNS是活动的，你的查询已经受到保护。如果你想使用dns-over-https或其他有用的功能，请启用Nebulo。</string>
+    <string name="window_main_privatedns_info">私人DNS已经启用，您的DNS请求已经被保护。如果您想使用 DNS-over-HTTPS 等实用特性的话，请改而启用Nebulo。
+\n为使用Nebulo，请关闭私人DNS。</string>
     <string name="windows_querylogging_search">域名搜索</string>
     <string name="windows_querylogging_search_hint">在请求日志中搜索域名</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">来自此源的规则条数： %1s （未使用 %2s 条重复规则）</string>
@@ -76,4 +77,49 @@
     <string name="iptables_supported">恭喜，您的设备支持iptables！</string>
     <string name="iptables_not_supported">您的设备不支持iptables</string>
     <string name="restart_app">重启应用</string>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="other">已有 %1d 个请求被屏蔽</item>
+    </plurals>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="other">现已有 %1d 个请求根据DNS规则处理</item>
+    </plurals>
+    <string name="appintro_server_choose_adblock">屏蔽广告与跟踪的服务器</string>
+    <string name="appintro_server_choose_forth">能保护我免于受有害网站及应用影响的服务器</string>
+    <string name="appintro_server_choose_third">真正注重隐私的服务器</string>
+    <string name="appintro_server_choose_second">注重隐私保护，且速度快的服务器</string>
+    <string name="appintro_server_choose_first">最快的服务器</string>
+    <string name="appintro_server_choose_disclaimer">有一些服务器可以被归入多个类别，甚至下面列出的所有类别中。 Nebulo 会自动选择最快的服务器。</string>
+    <string name="appintro_server_choose_description">您希望在 Nebulo 中使用什么类型的服务器呢？</string>
+    <string name="appintro_server_choose_title">首先</string>
+    <string name="appintro_forth_description">您可以配置 Nebulo 以拦截全系统的广告与跟踪。
+\n
+\n您甚至能够将它与一些防火墙应用一起使用，以进一步增强您对您隐私的控制。</string>
+    <string name="appintro_forth_title">最后一件事</string>
+    <string name="appintro_third_description">Nebulo 包含有大量诸如监控DNS活动、PIN保护与速度测试等的实用特性。
+\n
+\n此自由开源应用到底能够提供哪些功能，还等待您的探索与发掘。</string>
+    <string name="appintro_third_title">装备齐全，成就宏远</string>
+    <string name="appintro_second_title">您的隐私，至关重要</string>
+    <string name="appintro_second_description">通过为DNS协议这互联网最古老的协议之一加密，它的掌控权就在您的手中了。
+\n
+\n通过使用 Nebulo 以 DNS-over-HTTPS 与 DNS-over-TLS 加密 DNS ，您可以让您的 ISP 更难跟踪您。</string>
+    <string name="appintro_first_description">Nebulo 是一款保护您的隐私和您的设备的应用。
+\n
+\n是时候把被ISP或其他实体当成他们自己该拥有的您自己的数据控制权拿回来了。</string>
+    <string name="appintro_first_title">欢迎使用 Nebulo。</string>
+    <string name="warning_server_currently_unstable_expanded">%1s 服务器现在似乎不稳定，且在影响您的浏览速度。请考虑切换至更加稳定的服务器。</string>
+    <string name="warning_server_currently_unstable">%1s 服务器现在似乎不稳定。</string>
+    <string name="about_help_faq">常见问题</string>
+    <string name="window_querylog_information">信息</string>
+    <string name="window_dnsrules_refresh_sources">刷新以从规则源导入规则</string>
+    <string name="iptables_supported_ipv6_unsupported">现支持Iptables，但不支持IPv6。</string>
+    <string name="window_main_click_to_enable">点击启用。</string>
+    <string name="window_main_unprotected">未保护</string>
+    <string name="window_main_protected">已保护！</string>
+    <string name="window_speedtest_information">这个值越低，Nebulo与服务器间通信的速度就会越快。例如，可以通过调整该值来加快网页浏览速度。</string>
+    <string name="theme_blue">蓝色</string>
+    <string name="theme_true_black">纯黑</string>
+    <string name="theme_dark">暗色</string>
+    <string name="theme_mono">单色</string>
+    <string name="app_share_fdroid">嘿！我找到了这个应用，它可以加密你的DNS请求来更好地保护你的隐私和安全。在这里下载看看吧： https://nebulo.app/source#installation</string>
 </resources>
