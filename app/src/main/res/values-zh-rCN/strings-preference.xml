@@ -89,7 +89,7 @@
     <string name="preference_category_pin">PIN保护</string>
     <string name="summary_show_revoked_notification">当Nebulo失去VPN权限时显示一个通知</string>
     <string name="title_show_revoked_notification">失去权限通知</string>
-    <string name="summary_show_noconnection_notification">在应用无连接或者连接状况差时显示一个通知</string>
+    <string name="summary_show_noconnection_notification">在应用与DNS服务器间无连接时显示通知</string>
     <string name="title_show_noconnection_notification">无连接通知</string>
     <string name="title_dnscache_enabled">使用DNS缓存</string>
     <string name="summary_delete_queries">点击此处以清除所有已记录的请求项</string>
@@ -108,14 +108,30 @@
     <string name="crashreporting_type_off">关闭（不发送崩溃报告）</string>
     <string name="crashreporting_type_minimal">最少（仅报告Android版本与应用版本）</string>
     <string name="crashreporting_type_full">完整（统计与调试数据）</string>
-    <string name="summary_local_server_port">DNS服务器将会监听的端口。仅允许大于1024的端口。
-\n当前：%1s</string>
+    <string name="summary_local_server_port">DNS服务器将会监听的端口。仅允许大于1024的端口。</string>
     <string name="title_local_server_port">服务器端口</string>
     <string name="summary_run_without_vpn">当选中后，Nebulo将在您的设备上设置DNS服务器</string>
     <string name="title_run_without_vpn">无VPN运行</string>
     <string name="summary_category_nonvpnmode_forwardinfo">服务器将在 %1s:%2s 上运行</string>
-    <string name="summary_category_nonvpnmode">将Nebulo配置为设备上的DNS服务器，而不使用伪VPN。启用后，您必须使用第三方应用手动将DNS请求转发到Nebulo。
-\n
-\n这个功能是试验性的。</string>
+    <string name="summary_category_nonvpnmode">将Nebulo配置为设备上的DNS服务器，而不使用伪VPN。启用后，您必须使用第三方应用手动将DNS请求转发到Nebulo。</string>
     <string name="preference_category_nonvpnmode">无VPN模式</string>
+    <string name="fallbackdns_isp">服务提供商（未加密）</string>
+    <string name="summary_nonvpn_help_faq">点此使用浏览器打开无VPN模式的帮助与文档</string>
+    <string name="title_nonvpn_help_faq">文档</string>
+    <string name="summary_nonvpn_help_generic">点此知晓如何配置VPN应用</string>
+    <string name="nonvpn_help_generic_title">一般VPN应用</string>
+    <string name="summary_nonvpn_help">点此获取配置第三方应用与Nebulo一起工作的指南</string>
+    <string name="preference_category_nonvpnmode_help">第三方应用配置指南</string>
+    <string name="summary_check_iptables">检查设备是否支持 iptables</string>
+    <string name="title_check_iptables">检测iptables</string>
+    <string name="summary_iptables_disable_ipv6">使用iptables时禁用IPv6，而放行IPv4。这可能会解决启用IPv6后绕过iptables的DNS查询问题。</string>
+    <string name="title_iptables_disable_ipv6">禁用 IPv6</string>
+    <string name="summary_iptables_mode">使用iptables转发查询至Nebulo。需要root权限。启用后，在无vpn模式下不需要额外使用应用。当您在IPv6网络上时，Nebulo可能无法工作。</string>
+    <string name="title_iptables_mode">使用 iptables</string>
+    <string name="preference_category_iptables">Iptables</string>
+    <string name="summary_nonvpn_use_lanip">某些应用程序不允许将 localhost 设为DNS。此设置将使用 localhost 改为使用网络中的本机IP。地址将根据您的网络变动而更改，请留意应用通知。</string>
+    <string name="title_nonvpn_use_lanip">使用本机IP代替localhost</string>
+    <string name="title_inform_bad_connection">连接差时通知我</string>
+    <string name="summary_fallback_dns">设置 Nebulo 内部使用的 DNS 服务器。应用默认使用服务提供商的 DNS 服务器。这个服务器仅会用于应用内部，不会用于处理您普通的DNS请求。</string>
+    <string name="title_fallback_dns">内置DNS服务器</string>
 </resources>
