@@ -53,4 +53,18 @@
     <string name="notification_dnsserver_portdiffers">指定的 %1d 端口无法使用。</string>
     <string name="notification_dnsserver_message">DNS服务器正在运行在 %1s:%2d 。使用第三方应用转发请求中</string>
     <string name="notification_dnsserver_title">正在无VPN模式下运行</string>
+    <string name="notification_privatednswarning_text">请在系统设置中禁用私人 DNS 以使用 Nebulo 。</string>
+    <string name="notification_privatednswarning_title">私人DNS</string>
+    <string name="notification_bad_connection_text">您与DNS服务器目前的网络连接不佳。这可能会对您的浏览速度产生负面影响。请考虑更换其他服务器。</string>
+    <string name="notification_bad_connection_title">服务器网络不佳</string>
+    <string name="notification_multipleuserswarning_text">由于某个 Android 漏洞， Nebulo 无法启动伪 VPN 。当您的设备上有多个用户时会发生这种情况。</string>
+    <string name="notification_multipleuserswarning_title">伪 VPN 无法建立</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNS 服务器运行于 %1s:%2d 。iptables 初始化失败，请求必须通过第三方应用转发</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS 服务器运行于 %1s:%2d 。请求通过 iptables 转发。
+\n注意：IPv6已启用，请求可能绕过Nebulo。</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS 服务器运行于 %1s:%2d 。请求通过 iptables 转发</string>
+    <string name="notification_channel_badconnection_description">网络不佳时 Nebulo 用于通知的频道</string>
+    <string name="notification_channel_badconnection">网络不佳通知通道</string>
+    <string name="notification_channel_dnsrules_description">用于导入/导出 DNS 规则的频道</string>
+    <string name="notification_channel_dnsrules">DNS规则通知频道</string>
 </resources>
