@@ -208,4 +208,6 @@
     <string name="querylog_filter_shorten_domain">Mostra versione ridotta del dominio nella lista</string>
     <string name="querylog_filter_type_dnsrules">Risolto dalle regole DNS</string>
     <string name="querylog_filter_type_cache">Risolto dalla cache DNS</string>
+    <string name="dialog_share_message">Quale link vuoi condividere\?</string>
+    <string name="dialog_share_title">Seleziona tipo di link</string>
 </resources>
