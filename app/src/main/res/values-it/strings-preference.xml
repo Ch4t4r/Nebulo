@@ -133,4 +133,6 @@
     <string name="title_nonvpn_help_faq">Documentazione</string>
     <string name="summary_inform_bad_connection">Informami con una notifica e nel menu principale quando il server DNS è lento o non raggiungibile</string>
     <string name="title_inform_bad_connection">Informami di una connessione debole</string>
+    <string name="summary_nonvpn_use_lanip">Alcune app non permettono di usare localhost come DNS. Con questa opzione vengono quindi usati gli IP dei dispositivi nella rete. L\'indirizzo cambierà a seconda della tua rete, fai attenzione alla notifica.</string>
+    <string name="title_nonvpn_use_lanip">Usa l\'IP del dispositivo al posto di localhost</string>
 </resources>
