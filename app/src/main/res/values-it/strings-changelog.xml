@@ -147,4 +147,8 @@
     <string name="changelog_build_66_3">Aggiunta una finestra alle regole DNS per verificare se un host è elencato da qualche parte</string>
     <string name="changelog_build_66_2">L\'aggiunta di server ora tiene conto di maiuscole e minuscole. Ciò risolve i problemi con NextDNS</string>
     <string name="changelog_build_66_1">Aggiunte le domande frequenti. Puoi trovarle nella voce di menu \"Riguardo questa app\"</string>
+    <string name="changelog_build_67_4">Aggiunta migliore formattazione dei numeri nelle regole DNS</string>
+    <string name="changelog_build_67_3">Corretta la latenza server non mostrata in modalità Non-VPN</string>
+    <string name="changelog_build_67_2">Aggiunta una ricerca alla finestra di esclusione di app</string>
+    <string name="changelog_build_67_1">Ora viene usato internamente un indirizzo IPv6 diverso (::) per ignorare un host</string>
 </resources>
