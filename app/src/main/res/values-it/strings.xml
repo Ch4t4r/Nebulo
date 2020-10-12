@@ -120,4 +120,9 @@
     <string name="window_main_click_to_enable">Clicca per attivare.</string>
     <string name="window_main_unprotected">Non protetto</string>
     <string name="window_main_protected">Protetto!</string>
+    <string name="theme_true_black">Nero vero</string>
+    <string name="theme_blue">Blu</string>
+    <string name="theme_dark">Scuro</string>
+    <string name="theme_mono">Mono</string>
+    <string name="app_share_fdroid">Ehi, ho trovato questa app che cripta le tue richieste DNS per offrirti più privacy e sicurezza. Provala scaricandola da qui: https://nebulo.app/source#installation</string>
 </resources>
