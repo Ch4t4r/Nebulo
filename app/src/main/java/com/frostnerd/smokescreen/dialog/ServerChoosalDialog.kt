@@ -10,9 +10,12 @@ import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.TransportProtocol
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
 import kotlinx.android.synthetic.main.dialog_server_configuration.view.*
 import kotlinx.coroutines.Dispatchers
@@ -41,7 +44,7 @@ import kotlinx.coroutines.launch
 class ServerChoosalDialog(
     context: AppCompatActivity,
     selectedServer:DnsServerInformation<*>?,
-    showTls:Boolean = selectedServer?.hasTlsServer() ?: true,
+    selectedType:ServerType = if(selectedServer == null) ServerType.DOT else ServerType.detect(selectedServer),
     onEntrySelected: (config: DnsServerInformation<*>) -> Unit
 ) :
     BaseDialog(context, context.getPreferences().theme.dialogStyle) {
@@ -70,19 +73,20 @@ class ServerChoosalDialog(
         ) { _, _ ->
             currentSelectedServer?.apply(onEntrySelected)
         }
-        loadServerData(showTls)
+        loadServerData(selectedType)
 
         val spinnerAdapter = ArrayAdapter(
             context, android.R.layout.simple_spinner_item,
             arrayListOf(
                 context.getString(R.string.dialog_serverconfiguration_https),
-                context.getString(R.string.dialog_serverconfiguration_tls)
+                context.getString(R.string.dialog_serverconfiguration_tls),
+                context.getString(R.string.dialog_serverconfiguration_quic)
             )
         )
         spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
         val spinner = layout.findViewById<Spinner>(R.id.spinner)
         spinner.adapter = spinnerAdapter
-        if(showTls) spinner.setSelection(1)
+        if(selectedType != ServerType.DOH) spinner.setSelection(selectedType.index)
         layout.findViewById<RadioGroup>(R.id.knownServersGroup).setOnCheckedChangeListener { group, _ ->
             val button = layout.findViewById(group.checkedRadioButtonId) as RadioButton
             val payload = button.tag
@@ -94,7 +98,7 @@ class ServerChoosalDialog(
             }
         }
         layout.findViewById<Button>(R.id.addServer).setOnClickListener {
-            NewServerDialog(context, title = null, dnsOverHttps = spinner.selectedItemPosition == 0, server = null, onServerAdded = { info ->
+            NewServerDialog(context, title = null, ServerType.from(spinner.selectedItemPosition), server = null, onServerAdded = { info ->
                 val config = createButtonForUserConfiguration(
                     context.getPreferences().addUserServerConfiguration(
                         info
@@ -109,7 +113,7 @@ class ServerChoosalDialog(
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    loadServerData(position == 1)
+                    loadServerData(ServerType.from(position))
                     layout.knownServersGroup.removeAllViews()
                     addKnownServers()
                 }
@@ -117,28 +121,32 @@ class ServerChoosalDialog(
         }
     }
 
-    private fun loadServerData(tls: Boolean) {
-        if (tls) {
+    private fun loadServerData(type:ServerType) {
+        if (type == ServerType.DOT) {
             val hiddenServers = context.getPreferences().removedDefaultDoTServers
             defaultConfig = AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { servers ->
                 servers.filter {
                     it.key !in hiddenServers
                 }.values.toList()
             }
-            userConfig = context.getPreferences().userServers.filter {
-                !it.isHttpsServer()
-            }.toList()
-        } else {
+        } else if(type == ServerType.DOH){
             val hiddenServers = context.getPreferences().removedDefaultDoHServers
             defaultConfig = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {servers ->
                 servers.filter {
                     it.key !in hiddenServers
                 }.values.toList()
             }
-            userConfig = context.getPreferences().userServers.filter {
-                it.isHttpsServer()
-            }.toList()
+        } else if(type == ServerType.DOQ) {
+            val hiddenServers = context.getPreferences().removedDefaultDoQServers
+            defaultConfig = AbstractQuicDnsHandle.waitUntilKnownServersArePopulated { servers ->
+                servers.filter {
+                    it.key !in hiddenServers
+                }.values.toList()
+            }
         }
+        userConfig = context.getPreferences().userServers.filter {
+            it.type == type
+        }.toList()
     }
 
     private fun addKnownServers(then:(() -> Unit)? = null) {
@@ -188,6 +196,7 @@ class ServerChoosalDialog(
                     payload as DnsServerInformation<*>
                 }
             if (info.hasTlsServer() != currentSelectedServer.hasTlsServer()) continue
+            if (info.hasQuicServer() != currentSelectedServer.hasQuicServer()) continue
             if (info.name != currentSelectedServer.name) continue
             if (info.servers.size < currentSelectedServer.servers.size) continue
             val primaryMatches: Boolean
@@ -196,14 +205,22 @@ class ServerChoosalDialog(
                 primaryMatches = info.servers[0].address.host == currentSelectedServer.servers[0].address.host
                 secondaryMatches =
                     currentSelectedServer.servers.size == 1 || (info.servers[1].address.host == currentSelectedServer.servers[1].address.host)
-            } else {
+            } else if(info.hasHttpsServer()) {
                 val httpsInfo = info as HttpsDnsServerInformation
                 val currentHttpsInfo = currentSelectedServer as HttpsDnsServerInformation
                 primaryMatches =
                     httpsInfo.serverConfigurations.values.first().urlCreator.address.getUrl() == currentHttpsInfo.serverConfigurations.values.first().urlCreator.address.getUrl()
                 secondaryMatches = currentHttpsInfo.serverConfigurations.size == 1 ||
                         httpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.address.getUrl() == currentHttpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.address.getUrl()
-            }
+            } else if(info.hasQuicServer()){
+                val firstAddress = (info.servers.first().address as QuicUpstreamAddress).getUrl(true)
+                val secondAddress = (info.servers[1].address as? QuicUpstreamAddress)?.getUrl(true)
+                val currentFirstAddress = (currentSelectedServer.servers.first().address as QuicUpstreamAddress).getUrl(true)
+                val currentSecondAddress = (currentSelectedServer.servers[1].address as? QuicUpstreamAddress)?.getUrl(true)
+
+                primaryMatches = firstAddress.equals(currentFirstAddress, true)
+                secondaryMatches = secondAddress.equals(currentSecondAddress, true)
+            } else error("Unknown type")
             if (primaryMatches && secondaryMatches) {
                 child.isChecked = true
                 break
@@ -220,11 +237,15 @@ class ServerChoosalDialog(
         if (info.hasTlsServer()) {
             primaryServer = info.servers[0].address.formatToString()
             secondaryServer = info.servers.getOrNull(1)?.address?.formatToString()
-        } else {
+        } else if(info.hasHttpsServer()){
             val configs = (info as HttpsDnsServerInformation).servers
             primaryServer = configs[0].address.getUrl(true)
             secondaryServer = configs.getOrNull(1)?.address?.getUrl(true)
-        }
+        } else if(info.hasQuicServer()) {
+            val configs = info.servers
+            primaryServer = (configs[0].address as QuicUpstreamAddress).getUrl(true)
+            secondaryServer = (configs.getOrNull(1)?.address as? QuicUpstreamAddress)?.getUrl(true)
+        } else error("Unknown type")
         button.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
@@ -300,8 +321,11 @@ class ServerChoosalDialog(
                 context.getPreferences().removeUserServerConfiguration(userConfiguration)
 
                 if (button.isChecked) {
-                    currentSelectedServer =
-                        if (userConfiguration.isHttpsServer()) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
+                    currentSelectedServer = when(userConfiguration.type) {
+                        ServerType.DOT ->AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
+                        ServerType.DOH -> AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
+                        ServerType.DOQ -> TODO()
+                    }
                     markCurrentSelectedServer()
                     context.getPreferences().dnsServerConfig = currentSelectedServer!!
                 }
@@ -310,7 +334,7 @@ class ServerChoosalDialog(
     }
 
     private fun showUserConfigEditDialog(userConfiguration: UserServerConfiguration, button: RadioButton) {
-        NewServerDialog(context, null, userConfiguration.isHttpsServer(), server = userConfiguration, onServerAdded = {
+        NewServerDialog(context, null, userConfiguration.type, server = userConfiguration, onServerAdded = {
             context.getPreferences().userServers.toMutableSet().apply {
                 remove(userConfiguration)
                 context.getPreferences().userServers = this
@@ -320,7 +344,7 @@ class ServerChoosalDialog(
                 currentSelectedServer = newConfig.serverInformation
                 context.getPreferences().dnsServerConfig = newConfig.serverInformation
             }
-            loadServerData(layout.spinner.selectedItemPosition == 1)
+            loadServerData(ServerType.from(layout.spinner.selectedItemPosition))
             layout.knownServersGroup.removeAllViews()
             addKnownServers()
         }).show()
@@ -350,7 +374,7 @@ class ServerChoosalDialog(
 
                 if (button.isChecked) {
                     currentSelectedServer =
-                        if (isHttps) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
+                        if (isHttps) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value
                     markCurrentSelectedServer()
                     context.getPreferences().dnsServerConfig = currentSelectedServer!!
                 }

@@ -8,6 +8,9 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapte
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
 import com.frostnerd.smokescreen.hasHttpsServer
+import com.frostnerd.smokescreen.hasQuicServer
+import com.frostnerd.smokescreen.hasTlsServer
+import com.frostnerd.smokescreen.util.ServerType
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
@@ -83,12 +86,19 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
             jsonWriter.beginObject()
             jsonWriter.name("id")
             jsonWriter.value(server.id)
-            if(server.isHttpsServer()) {
-                jsonWriter.name("server_https")
-                httpsTypeAdapter.write(jsonWriter, server.serverInformation as HttpsDnsServerInformation)
-            } else {
-                jsonWriter.name("server_tls")
-                tlsTypeAdapter.write(jsonWriter, server.serverInformation)
+            when(server.type) {
+                ServerType.DOH -> {
+                    jsonWriter.name("server_https")
+                    httpsTypeAdapter.write(jsonWriter, server.serverInformation as HttpsDnsServerInformation)
+                }
+                ServerType.DOT -> {
+                    jsonWriter.name("server_tls")
+                    tlsTypeAdapter.write(jsonWriter, server.serverInformation)
+                }
+                ServerType.DOQ -> {
+                    jsonWriter.name("server_quic")
+                    TODO()
+                }
             }
             jsonWriter.endObject()
         }
@@ -102,7 +112,13 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
 }
 
 class UserServerConfiguration(val id: Int, val serverInformation: DnsServerInformation<*>) {
-    fun isHttpsServer(): Boolean {
-        return serverInformation is HttpsDnsServerInformation || serverInformation.hasHttpsServer()
+    val type:ServerType
+    get() {
+        return when {
+            serverInformation.hasHttpsServer() -> ServerType.DOH
+            serverInformation.hasTlsServer() -> ServerType.DOT
+            serverInformation.hasQuicServer() -> ServerType.DOQ
+            else -> error("Unknown type")
+        }
     }
 }

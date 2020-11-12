@@ -19,6 +19,7 @@ import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
+import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -56,7 +57,7 @@ import java.util.concurrent.TimeUnit
 class NewServerDialog(
     context: Context,
     title: String? = null,
-    var dnsOverHttps: Boolean,
+    var type: ServerType,
     onServerAdded: (serverInfo: DnsServerInformation<*>) -> Unit,
     server: UserServerConfiguration? = null
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
@@ -108,7 +109,7 @@ class NewServerDialog(
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_server, null, false)
-        setHintAndTitle(view,dnsOverHttps, title)
+        setHintAndTitle(view, title)
         setView(view)
 
         setButton(
@@ -130,8 +131,8 @@ class NewServerDialog(
                     var secondary =
                         if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString().trim()
 
-                    if (dnsOverHttps && !primary.startsWith("http", ignoreCase = true)) primary = "https://$primary"
-                    if (dnsOverHttps && secondary != null && !secondary.startsWith("http", ignoreCase = true)) secondary = "https://$secondary"
+                    if (type == ServerType.DOH && !primary.startsWith("http", ignoreCase = true)) primary = "https://$primary"
+                    if (type == ServerType.DOH && secondary != null && !secondary.startsWith("http", ignoreCase = true)) secondary = "https://$secondary"
                     invokeCallback(name, primary, secondary, onServerAdded)
                     dismiss()
                 } else {
@@ -140,12 +141,12 @@ class NewServerDialog(
 
                     primaryServer.error = when {
                         primaryValid -> null
-                        dnsOverHttps -> context.getString(R.string.error_invalid_url)
+                        type == ServerType.DOH || type == ServerType.DOQ -> context.getString(R.string.error_invalid_url)
                         else -> context.getString(R.string.error_invalid_host)
                     }
                     secondaryServer.error = when {
                         secondaryValid -> null
-                        dnsOverHttps -> context.getString(R.string.error_invalid_url)
+                        type == ServerType.DOH || type == ServerType.DOQ -> context.getString(R.string.error_invalid_url)
                         else -> context.getString(R.string.error_invalid_host)
                     }
 
@@ -157,17 +158,26 @@ class NewServerDialog(
                 context, android.R.layout.simple_spinner_item,
                 arrayListOf(
                     context.getString(R.string.dialog_serverconfiguration_https),
-                    context.getString(R.string.dialog_serverconfiguration_tls)
+                    context.getString(R.string.dialog_serverconfiguration_tls),
+                    context.getString(R.string.dialog_serverconfiguration_quic)
                 )
             )
             spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
             serverType.adapter = spinnerAdapter
-            serverType.setSelection(if (dnsOverHttps) 0 else 1)
+            serverType.setSelection(when(type) {
+                ServerType.DOH -> 0
+                ServerType.DOT -> 1
+                ServerType.DOQ -> 2
+            })
             serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
                 override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
-                    dnsOverHttps = position == 0
-                    setHintAndTitle(view, dnsOverHttps, title)
+                    type = when(position) {
+                        0 -> ServerType.DOH
+                        1 -> ServerType.DOT
+                        else -> ServerType.DOQ
+                    }
+                    setHintAndTitle(view, title)
                     primaryServer.text = primaryServer.text
                     secondaryServer.text = secondaryServer.text
                 }
@@ -183,8 +193,8 @@ class NewServerDialog(
         }
     }
 
-    private fun setHintAndTitle(view:View, dnsOverHttps: Boolean, titleOverride:String?) {
-        if (dnsOverHttps) {
+    private fun setHintAndTitle(view:View, titleOverride:String?) {
+        if (type == ServerType.DOH) {
             if(titleOverride == null) setTitle(R.string.dialog_newserver_title_https)
             view.primaryServer.setOnFocusChangeListener { v , hasFocus ->
                 v as TextInputEditText
@@ -218,7 +228,7 @@ class NewServerDialog(
         secondary: String?,
         onServerAdded: (DnsServerInformation<*>) -> Unit
     ) {
-        if (dnsOverHttps) {
+        if (type == ServerType.DOH) {
             detectDohServerTypes(name, primary, secondary, onServerAdded)
         } else {
             val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
@@ -347,9 +357,9 @@ class NewServerDialog(
 
     private fun isServerUrlValid(primary:Boolean):Boolean {
         val s = (if(primary) primaryServer.text else secondaryServer.text) ?: ""
-        var valid = (!primary && s.isBlank())
-        valid = valid || (!s.isBlank() && dnsOverHttps && isValidDoH(s.toString()))
-        return valid || (!s.isBlank() && !dnsOverHttps && isValidDot(s.toString()))
+        var valid = (!primary && s.isBlank()) // Valid if secondary and empty
+        valid = valid || (!s.isBlank() && (type == ServerType.DOQ || type == ServerType.DOH) && isValidDoH(s.toString())) // Valid if non-empty and valid URL
+        return valid || (!s.isBlank() && (type == ServerType.DOT) && isValidDot(s.toString())) // Valid if non-empty and valid host
     }
     override fun destroy() {}
 }

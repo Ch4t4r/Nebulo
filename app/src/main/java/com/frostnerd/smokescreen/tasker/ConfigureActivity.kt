@@ -15,6 +15,7 @@ import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
+import com.frostnerd.smokescreen.util.ServerType
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_tasker_configure.*
@@ -153,7 +154,7 @@ class ConfigureActivity : BaseActivity() {
             }
         }
         selectServer.setOnClickListener {
-            ServerChoosalDialog(this@ConfigureActivity, null, serverType.selectedItemPosition == 1) {
+            ServerChoosalDialog(this@ConfigureActivity, null, ServerType.from(serverType.selectedItemPosition)) {
                 val typePosition = if(it.hasTlsServer()) 1 else 0
                 if(serverType.selectedItemPosition != typePosition) serverType.setSelection(typePosition)
                 primaryServer.setText(it.servers.first().address.formatToString())
@@ -167,14 +168,20 @@ class ConfigureActivity : BaseActivity() {
     }
 
     private fun setHints() {
-        val doh = serverType.selectedItemPosition == 0
+        val type = ServerType.from(serverType.selectedItemPosition)
         primaryServer.hint = if(primaryServer.hasFocus() || primaryServerWrap.error != null) {
-            if(doh) getString(R.string.dialog_newserver_primaryserver_hint)
-            else getString(R.string.dialog_newserver_primaryserver_hint_dot)
+            when(type) {
+                ServerType.DOH -> getString(R.string.dialog_newserver_primaryserver_hint)
+                ServerType.DOT -> getString(R.string.dialog_newserver_primaryserver_hint_dot)
+                ServerType.DOQ -> getString(R.string.dialog_newserver_primaryserver_hint_doq)
+            }
         } else null
         secondaryServer.hint = if(secondaryServer.hasFocus()) {
-            if(doh) getString(R.string.dialog_newserver_secondaryserver_hint)
-            else getString(R.string.dialog_newserver_secondaryserver_hint_dot)
+            when(type) {
+                ServerType.DOH -> getString(R.string.dialog_newserver_secondaryserver_hint)
+                ServerType.DOT -> getString(R.string.dialog_newserver_secondaryserver_hint_dot)
+                ServerType.DOQ -> getString(R.string.dialog_newserver_secondaryserver_hint_doq)
+            }
         } else null
     }
 

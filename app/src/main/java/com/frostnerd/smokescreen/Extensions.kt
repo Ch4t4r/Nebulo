@@ -24,6 +24,7 @@ import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.json.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.smokescreen.util.RequestCodes
@@ -330,7 +331,13 @@ fun DnsServerInformation<*>.hasTlsServer():Boolean {
 
 fun DnsServerInformation<*>.hasHttpsServer():Boolean {
     return this.servers.any {
-        it is HttpsUpstreamAddress
+        it.address is HttpsUpstreamAddress && it.address !is QuicUpstreamAddress
+    }
+}
+
+fun DnsServerInformation<*>.hasQuicServer():Boolean {
+    return this.servers.any {
+        it.address is QuicUpstreamAddress
     }
 }
 
