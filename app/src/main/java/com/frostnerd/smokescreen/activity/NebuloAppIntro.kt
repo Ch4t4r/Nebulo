@@ -92,7 +92,8 @@ class NebuloAppIntro:AppIntro() {
                     title = getString(R.string.appintro_first_title),
                     description = getString(R.string.appintro_first_description),
                     titleColor = textColor,
-                    descriptionColor = textColor, backgroundColor = backgroundColor
+                    descriptionColor = textColor, backgroundColor = backgroundColor,
+                    imageDrawable = R.drawable.intro_lock
                 ))
 
             addSlide(
