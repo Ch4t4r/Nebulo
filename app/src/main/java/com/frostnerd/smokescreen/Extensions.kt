@@ -30,6 +30,7 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
@@ -322,6 +323,9 @@ fun Context.clearPreviousIptablesRedirect(forceClear:Boolean = false) {
 operator fun Level.compareTo(otherLevel:Level):Int {
     return this.intValue() - otherLevel.intValue()
 }
+
+val DnsServerInformation<*>.type
+    get() = ServerType.detect(this)
 
 fun DnsServerInformation<*>.hasTlsServer():Boolean {
     return this.servers.any {

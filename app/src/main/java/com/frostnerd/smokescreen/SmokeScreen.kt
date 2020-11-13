@@ -140,8 +140,7 @@ class SmokeScreen : Application() {
     override fun onCreate() {
         if(!BuildConfig.LEAK_DETECTION) LeakSentry.config = LeakSentry.config.copy(enabled = false)
         initSentry()
-        AbstractTLSDnsHandle
-        AbstractHttpsDNSHandle
+        loadKnownDNSServers()
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()

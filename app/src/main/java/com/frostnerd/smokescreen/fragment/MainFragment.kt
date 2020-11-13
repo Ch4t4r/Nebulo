@@ -22,6 +22,7 @@ import androidx.lifecycle.Lifecycle
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
@@ -32,6 +33,7 @@ import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.*
@@ -198,8 +200,11 @@ class MainFragment : Fragment() {
 
     private fun displayServer(config:DnsServerInformation<*>) {
         serverName.text = config.name
-        serverURL.text = if(config.hasTlsServer()) config.servers.firstOrNull()?.address?.formatToString() ?: "-"
-        else (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(true) ?: "-"
+        serverURL.text = when(config.type) {
+            ServerType.DOH -> (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(true) ?: "-"
+            ServerType.DOT -> config.servers.firstOrNull()?.address?.formatToString() ?: "-"
+            ServerType.DOQ -> (config.servers.firstOrNull()?.address as? QuicUpstreamAddress)?.getUrl(true) ?: "-"
+        }
         serverLatency.text = "-\nms"
         serverIndicator.backgroundTintList = null
         mainServerWrap.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->

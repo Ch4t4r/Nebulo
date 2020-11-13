@@ -16,6 +16,7 @@ import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.general.CombinedIterator
@@ -178,9 +179,6 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
 
     override fun onCreate() {
         super.onCreate()
-        AbstractHttpsDNSHandle // Loads the known servers.
-        AbstractTLSDnsHandle
-        KnownDnsServers
         if (getPreferences().vpnServiceState == VpnServiceState.STARTED &&
             !getPreferences().ignoreServiceKilled &&
             getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE

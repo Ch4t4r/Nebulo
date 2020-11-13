@@ -14,6 +14,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
+import com.frostnerd.dnstunnelproxy.KnownDnsServers
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
+import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
 import okhttp3.internal.toHexString
 import java.util.*
@@ -119,4 +123,11 @@ fun opaqueColor(@ColorInt color: Int, opactiy: Int): Int {
 
 interface BackpressFragment {
     fun onBackPressed():Boolean
+}
+
+fun loadKnownDNSServers() {
+    AbstractHttpsDNSHandle // Loads the known servers.
+    AbstractTLSDnsHandle
+    AbstractQuicDnsHandle
+    KnownDnsServers
 }
