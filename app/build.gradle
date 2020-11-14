@@ -6,11 +6,11 @@ apply plugin: 'kotlin-kapt'
 def debugKeyPath = new File(System.properties['user.home'], ".android/debug.keystore")
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 68
         versionName "2.0-beta"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

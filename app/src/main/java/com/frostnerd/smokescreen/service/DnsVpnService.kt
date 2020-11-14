@@ -287,7 +287,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         if(runInNonVpnMode) return
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         networkCallback = object : ConnectivityManager.NetworkCallback() {
-            override fun onLost(network: Network?) {
+            override fun onLost(network: Network) {
                 super.onLost(network)
                 val activeNetwork = mgr.activeNetworkInfo
                 val networkInfo = mgr.getNetworkInfo(network)
@@ -295,7 +295,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 handleChange()
             }
 
-            override fun onAvailable(network: Network?) {
+            override fun onAvailable(network: Network) {
                 super.onAvailable(network)
                 val activeNetwork = mgr.activeNetworkInfo
                 val networkInfo = mgr.getNetworkInfo(network)
@@ -324,7 +324,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         }
         val builder = NetworkRequest.Builder()
         builder.addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
-        mgr.registerNetworkCallback(builder.build(), networkCallback)
+        mgr.registerNetworkCallback(builder.build(), networkCallback!!)
     }
 
     private fun subscribeToSettings() {
@@ -895,7 +895,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             if (isStoppingCompletely) {
                 if (networkCallback != null) {
                     (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).unregisterNetworkCallback(
-                        networkCallback
+                        networkCallback!!
                     )
                     networkCallback = null
                 }
@@ -1423,7 +1423,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                     val linkProperties = mgr.getLinkProperties(network) ?: continue
                     if (!linkProperties.domains.isNullOrBlank() && linkProperties.dnsServers.isNotEmpty()) {
                         log("Bypassing domains ${linkProperties.domains} for network of type ${networkInfo.typeName}")
-                        val domains = linkProperties.domains.split(",").toList()
+                        val domains = linkProperties.domains!!.split(",").toList()
                         bypassHandlers.add(
                             ProxyBypassHandler(
                                 domains,
