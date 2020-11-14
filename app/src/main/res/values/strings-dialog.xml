@@ -3,7 +3,7 @@
     <string name="dialog_serverconfiguration_title">Server configuration</string>
     <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
-    <string name="dialog_serverconfiguration_quic" translatable="false">DNS-over-Quic (DoQ)</string>
+    <string name="dialog_serverconfiguration_quic" translatable="false">DNS-over-QUIC (DoQ)</string>
     <string name="dialog_serverconfiguration_addserver">Add a server</string>
 
     <string name="dialog_newserver_title_https">Add a server (DoH)</string>
