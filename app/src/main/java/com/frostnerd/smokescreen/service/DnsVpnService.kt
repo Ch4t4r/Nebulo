@@ -1259,7 +1259,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             else handles.add(handle)
         }
         val cronetEngine = serverConfig.quicConfiguration?.let { createCronetEngineIfInstalled(this, *it.toTypedArray()) }
-        if(serverConfig.quicConfiguration == null && cronetEngine == null) {
+        if(serverConfig.quicConfiguration != null && cronetEngine == null) {
             showCronetErrorNotification()
             destroy(true)
             return
