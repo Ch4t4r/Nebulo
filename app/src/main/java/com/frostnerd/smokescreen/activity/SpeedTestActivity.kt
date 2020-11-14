@@ -201,7 +201,7 @@ class SpeedTestActivity : BaseActivity() {
                 if(testJob?.isCancelled == false) {
                     pendingTest.started = true
                     log("Running SpeedTest for ${pendingTest.server.name}")
-                    val res = DnsSpeedTest(pendingTest.server, highestLatency, highestLatency+250, engine) { line ->
+                    val res = DnsSpeedTest(this@SpeedTestActivity, pendingTest.server, highestLatency, highestLatency+250, engine) { line ->
                         log(line)
                     }.runTest(passes)
 

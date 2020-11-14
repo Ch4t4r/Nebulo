@@ -1,13 +1,16 @@
 package com.frostnerd.smokescreen.util.speedtest
 
+import android.content.Context
 import androidx.annotation.IntRange
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.HTTPSResponseHolder
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.closeSilently
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
+import com.frostnerd.smokescreen.createHttpCronetEngineIfInstalled
 import com.frostnerd.smokescreen.type
 import com.frostnerd.smokescreen.util.ServerType
 import okhttp3.Dns
@@ -23,6 +26,7 @@ import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
 import java.io.DataInputStream
 import java.io.DataOutputStream
+import java.lang.IllegalStateException
 import java.net.*
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLSocketFactory
@@ -47,7 +51,8 @@ import kotlin.random.Random
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
-class DnsSpeedTest(val server: DnsServerInformation<*>,
+class DnsSpeedTest(context:Context,
+                   val server: DnsServerInformation<*>,
                    private val connectTimeout: Int = 2500,
                    private val readTimeout:Int = 1500,
                    private val cronetEngine: CronetEngine?,
@@ -64,6 +69,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             it.urlCreator.address
         })
     }
+    private val httpsCronetEngine = createHttpCronetEngineIfInstalled(context)
 
     companion object {
         val testDomains = listOf("google.com", "frostnerd.com", "amazon.com", "youtube.com", "github.com",
@@ -75,6 +81,7 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
      * @return The average response time (in ms)
      */
     fun runTest(@IntRange(from = 1) passes: Int, strategy: Strategy = Strategy.AVERAGE): Int? {
+        log("Running with cronet: ${httpsCronetEngine != null}. Testing DoQ: ${cronetEngine != null}")
         val latencies = mutableListOf<Int>()
 
         var firstPass = true
@@ -89,15 +96,21 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
                 ServerType.DOH -> {
                     server as HttpsDnsServerInformation
                     server.serverConfigurations.values.forEach {
-                        if(firstPass) testHttps(it)
-                        latencies += testHttps(it) ?: 0
+                        latencies += if(httpsCronetEngine == null) {
+                            if(firstPass) testHttps(it)
+                            testHttps(it) ?: 0
+                        } else {
+                            if(firstPass) testHttpsCronet(it)
+                            testHttpsCronet(it) ?: 0
+                        }
+
                     }
                 }
                 ServerType.DOQ -> {
                     (server as DnsServerInformation<QuicUpstreamAddress>).servers.forEach {
                         if(cronetEngine != null) {
-                            if(firstPass) testQuic(it.address, cronetEngine)
-                            latencies += testQuic(it.address, cronetEngine) ?: 0
+                            if(firstPass) testQuic(it.address)
+                            latencies += testQuic(it.address) ?: 0
                         }
                     }
                 }
@@ -179,6 +192,53 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
         }
     }
 
+    private fun testHttpsCronet(config: ServerConfiguration): Int? {
+        val msg = createTestDnsPacket()
+        val start = System.currentTimeMillis()
+        val url: URL = config.urlCreator.createUrl(msg, config.urlCreator.address)
+        try {
+            url.toString().toHttpUrl()
+            log("Using URL: $url")
+        } catch (ignored:IllegalArgumentException) {
+            log("Invalid URL: $url")
+            return null
+        }
+
+        try {
+            val connection = httpsCronetEngine!!.openConnection(url) as HttpURLConnection
+            connection.connectTimeout = connectTimeout
+            if(config.requestHasBody) {
+                val body = config.bodyCreator?.createBody(msg, config.urlCreator.address) ?: return null
+                connection.requestMethod = "POST"
+                connection.setRequestProperty("Content-Type", config.contentType)
+                connection.doOutput = true
+                body.mediaType?.also {connection.setRequestProperty("Accept", it) }
+                connection.readTimeout = (connectTimeout*1.5).toInt()
+                val outputStream = connection.outputStream
+                outputStream.write(body.rawBody)
+                outputStream.flush()
+            } else {
+                connection.requestMethod = "GET"
+                connection.connect()
+            }
+            val status = connection.responseCode
+            if(status == 200) {
+                val data = connection.inputStream.readBytes().takeIf {
+                    it.isNotEmpty()
+                } ?: return null
+                val time = System.currentTimeMillis() - start
+                return if(testResponse(DnsMessage(data))) {
+                    time.toInt()
+                } else null
+            } else {
+                connection.inputStream.readBytes()
+                return null
+            }
+        } catch (ex:Throwable) {
+            return null
+        }
+    }
+
     private fun testTls(address: TLSUpstreamAddress): Int? {
         val addr =
             address.addressCreator.resolveOrGetResultOrNull(retryIfError = true, runResolveNow = true) ?: run {
@@ -219,14 +279,14 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
         }
     }
 
-    fun testQuic(address: QuicUpstreamAddress, engine:CronetEngine):Int? {
+    fun testQuic(address: QuicUpstreamAddress):Int? {
         val url: URL = URL(address.getUrl(false))
         var connection: HttpURLConnection? = null
         var wasEstablished = false
         val msg = createTestDnsPacket()
         try {
             val start = System.currentTimeMillis()
-            connection = engine.openConnection(url) as HttpURLConnection
+            connection = cronetEngine!!.openConnection(url) as HttpURLConnection
             connection.connectTimeout = connectTimeout
             connection.requestMethod = "POST"
             connection.setRequestProperty("Content-Type", "application/dns-message")
