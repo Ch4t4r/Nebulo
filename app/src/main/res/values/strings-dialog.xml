@@ -40,6 +40,7 @@
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Type: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Type: DNS-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_servertype_doq">Type: DNS-over-QUIC (DoQ)</string>
     <string xmlns:tools="http://schemas.android.com/tools" name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Please select the servers you wish to import.\n\nServers which are already imported will be duplicate if you select them.</string>
 
     <string name="dialog_serverimportfailed_title">Import failed</string>

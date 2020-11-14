@@ -1,9 +1,9 @@
 package com.frostnerd.smokescreen.util
 
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
-import com.frostnerd.smokescreen.hasHttpsServer
-import com.frostnerd.smokescreen.hasQuicServer
-import com.frostnerd.smokescreen.hasTlsServer
+import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 
 /*
  * Copyright (C) 2020 Daniel Wolf (Ch4t4r)
@@ -41,6 +41,24 @@ enum class ServerType(val index:Int) {
                 else -> {
                     error("Unknown Type")
                 }
+            }
+        }
+
+        private fun DnsServerInformation<*>.hasTlsServer():Boolean {
+            return this.servers.any {
+                it.address is TLSUpstreamAddress
+            }
+        }
+
+        private fun DnsServerInformation<*>.hasHttpsServer():Boolean {
+            return this.servers.any {
+                it.address is HttpsUpstreamAddress && it.address !is QuicUpstreamAddress
+            }
+        }
+
+        private fun DnsServerInformation<*>.hasQuicServer():Boolean {
+            return this.servers.any {
+                it.address is QuicUpstreamAddress
             }
         }
 

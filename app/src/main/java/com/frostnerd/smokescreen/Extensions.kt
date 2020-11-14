@@ -331,29 +331,10 @@ operator fun Level.compareTo(otherLevel:Level):Int {
 val DnsServerInformation<*>.type
     get() = ServerType.detect(this)
 
-fun DnsServerInformation<*>.hasTlsServer():Boolean {
-    return this.servers.any {
-        it.address is TLSUpstreamAddress
-    }
-}
-
-fun DnsServerInformation<*>.hasHttpsServer():Boolean {
-    return this.servers.any {
-        it.address is HttpsUpstreamAddress && it.address !is QuicUpstreamAddress
-    }
-}
-
-fun DnsServerInformation<*>.hasQuicServer():Boolean {
-    return this.servers.any {
-        it.address is QuicUpstreamAddress
-    }
-}
-
 fun DnsServerInformation<*>.toJson():String {
-    return if(hasTlsServer()) {
-        DnsServerInformationTypeAdapter().toJson(this)
-    } else {
-        HttpsDnsServerInformationTypeAdapter().toJson(this as HttpsDnsServerInformation)
+    return when(type) {
+        ServerType.DOH ->  HttpsDnsServerInformationTypeAdapter().toJson(this as HttpsDnsServerInformation)
+        ServerType.DOT, ServerType.DOQ -> DnsServerInformationTypeAdapter().toJson(this)
     }
 }
 
