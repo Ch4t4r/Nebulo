@@ -458,9 +458,11 @@
     </string-array>
 
     <string name="changelog_build_69_1">Add support for DNS-over-QUIC</string>
+    <string name="changelog_build_69_2">Increase performance of DNS-over-HTTPS queries</string>
     <string-array name="changelog_build_69">
         <item>Version 2.0-alpha (Build 69)</item>
         <item>@string/changelog_build_69_1</item>
+        <item>@string/changelog_build_69_2</item>
     </string-array>
 
 </resources>
