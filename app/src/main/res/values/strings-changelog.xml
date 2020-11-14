@@ -457,4 +457,10 @@
         <item>@string/changelog_build_67_4</item>
     </string-array>
 
+    <string name="changelog_build_69_1">Add support for DNS-over-QUIC</string>
+    <string-array name="changelog_build_69">
+        <item>Version 2.0-alpha (Build 69)</item>
+        <item>@string/changelog_build_69_1</item>
+    </string-array>
+
 </resources>
