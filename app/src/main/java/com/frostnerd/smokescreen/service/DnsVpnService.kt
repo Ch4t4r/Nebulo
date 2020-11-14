@@ -464,9 +464,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             noConnectionNotificationBuilder.setContentTitle(getString(R.string.notification_noconnection_title))
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
             noConnectionNotificationBuilder.setStyle(
-                NotificationCompat.BigTextStyle(
-                    noConnectionNotificationBuilder
-                ).bigText(getString(R.string.notification_noconnection_text))
+                NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_noconnection_text))
             )
         }
         noConnectionNotificationBuilder.setWhen(System.currentTimeMillis())
@@ -549,9 +547,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         notificationBuilder.setContentTitle(getString(R.string.notification_multipleuserswarning_title))
         notificationBuilder.setContentText(getString(R.string.notification_multipleuserswarning_text))
         notificationBuilder.setStyle(
-            NotificationCompat.BigTextStyle(
-                notificationBuilder
-            ).bigText(getString(R.string.notification_multipleuserswarning_text))
+            NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_multipleuserswarning_text))
         )
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_MULTIPLEUSERS_WARNING, notificationBuilder.build())
     }
@@ -571,9 +567,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         builder.setContentTitle(getString(R.string.notification_bad_connection_title))
         builder.setContentText(getString(R.string.notification_bad_connection_text))
         builder.setStyle(
-            NotificationCompat.BigTextStyle(
-                notificationBuilder
-            ).bigText(getString(R.string.notification_bad_connection_text))
+            NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_bad_connection_text))
         )
         val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra(
             "command",
@@ -614,9 +608,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         builder.setContentTitle(getString(R.string.notification_cronet_failed_title))
         builder.setContentText(getString(R.string.notification_cronet_failed_text))
         builder.setStyle(
-            NotificationCompat.BigTextStyle(
-                builder
-            ).bigText(getString(R.string.notification_cronet_failed_text))
+            NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_cronet_failed_text))
         )
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_CRONET_FAILED, builder.build())
     }
@@ -817,7 +809,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 notificationBuilder.setContentText(text)
             } else {
                 notificationBuilder.setStyle(
-                    NotificationCompat.BigTextStyle(notificationBuilder).bigText(
+                    NotificationCompat.BigTextStyle().bigText(
                         text
                     )
                 )
