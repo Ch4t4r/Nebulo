@@ -41,6 +41,7 @@ class Notifications {
         const val ID_PRIVATEDNS_WARNING = 12
         const val ID_MULTIPLEUSERS_WARNING = 13
         const val ID_BAD_SERVER_CONNECTION = 14
+        const val ID_CRONET_FAILED = 15
         const val ID_VPN_RESTART = 999
 
         fun createAllChannels(context: Context) {

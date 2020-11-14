@@ -603,6 +603,28 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_BAD_SERVER_CONNECTION)
     }
 
+    private fun showCronetErrorNotification() {
+        val builder = NotificationCompat.Builder(
+            this,
+            Notifications.getHighPriorityChannelId(this)
+        )
+        builder.priority = NotificationCompat.PRIORITY_DEFAULT
+        builder.setOngoing(false)
+        builder.setSmallIcon(R.drawable.ic_cloud_strikethrough)
+        builder.setContentTitle(getString(R.string.notification_cronet_failed_title))
+        builder.setContentText(getString(R.string.notification_cronet_failed_text))
+        builder.setStyle(
+            NotificationCompat.BigTextStyle(
+                builder
+            ).bigText(getString(R.string.notification_cronet_failed_text))
+        )
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_CRONET_FAILED, builder.build())
+    }
+
+    private fun hideCronetErrorNotification() {
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_CRONET_FAILED)
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("Service onStartCommand", intent = intent)
         runInNonVpnMode = getPreferences().runWithoutVpn
@@ -1244,7 +1266,12 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             if (defaultHandle == null) defaultHandle = handle
             else handles.add(handle)
         }
-        val cronetEngine = serverConfig.quicConfiguration?.let { AbstractQuicDnsHandle.createEngine(this, *it.toTypedArray()) }
+        val cronetEngine = serverConfig.quicConfiguration?.let { createCronetEngineIfInstalled(this, *it.toTypedArray()) }
+        if(serverConfig.quicConfiguration == null && cronetEngine == null) {
+            showCronetErrorNotification()
+            destroy(true)
+            return
+        } else hideCronetErrorNotification()
         serverConfig.quicConfiguration?.forEach {
             val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
             log("Creating handle for DoQ $it with IP-Addresses $addresses")
