@@ -28,6 +28,7 @@ import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
@@ -106,7 +107,7 @@ class MainFragment : Fragment() {
             }
             updateVpnIndicators()
         }
-        startButton.setOnTouchListener { innerView , event ->
+        startButton.setOnTouchListener { innerView, event ->
             if (proxyState == ProxyState.RUNNING || proxyState == ProxyState.STARTING) {
                 false
             } else {
@@ -198,12 +199,16 @@ class MainFragment : Fragment() {
         displayServer(getPreferences().dnsServerConfig)
     }
 
-    private fun displayServer(config:DnsServerInformation<*>) {
+    private fun displayServer(config: DnsServerInformation<*>) {
         serverName.text = config.name
         serverURL.text = when(config.type) {
-            ServerType.DOH -> (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(true) ?: "-"
+            ServerType.DOH -> (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(
+                true
+            ) ?: "-"
             ServerType.DOT -> config.servers.firstOrNull()?.address?.formatToString() ?: "-"
-            ServerType.DOQ -> (config.servers.firstOrNull()?.address as? QuicUpstreamAddress)?.getUrl(true) ?: "-"
+            ServerType.DOQ -> (config.servers.firstOrNull()?.address as? QuicUpstreamAddress)?.getUrl(
+                true
+            ) ?: "-"
         }
         serverLatency.text = "-\nms"
         serverIndicator.backgroundTintList = null
@@ -368,7 +373,9 @@ class MainFragment : Fragment() {
         // And in that case the smaller server should be measured on the bigger ones to have a point of reference
         // as the values I chose are between average to best-case, not worst-case.
         launchWithLifecycle {
-            val fastServerAverage = (AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(1500) {
+            val fastServerAverage = (AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(
+                1500
+            ) {
                 setOf(it[0], it[1], it[3]) // Google, CF, Quad9
             } + AbstractTLSDnsHandle.suspendUntilKnownServersArePopulated(1500) {
                 setOf(it[1], it[0]) //Quad9, CF
@@ -379,7 +386,10 @@ class MainFragment : Fragment() {
             }?.let {
                 it.sum() / it.size
             } ?: return@launchWithLifecycle
-            val rawFactor = maxOf(greatLatencyThreshold.toDouble(), greatLatencyThreshold*(fastServerAverage.toDouble()/greatLatencyThreshold))/greatLatencyThreshold
+            val rawFactor = maxOf(
+                greatLatencyThreshold.toDouble(),
+                greatLatencyThreshold * (fastServerAverage.toDouble() / greatLatencyThreshold)
+            )/greatLatencyThreshold
             val adjustmentFactor = 1 + (rawFactor - 1)/2
             val pingStepAdjustment = (12*rawFactor)-12 //High deviation from 100ms -> Higher differences between steps in rating
             greatLatencyThreshold = (greatLatencyThreshold * adjustmentFactor + pingStepAdjustment*0.8).toInt()
