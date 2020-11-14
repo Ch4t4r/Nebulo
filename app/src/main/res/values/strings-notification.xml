@@ -22,8 +22,8 @@
     <string name="notification_channel_badconnection_description">Channel used for notifications when Nebulo has a bad connection</string>
 
     <string name="notification_simple_text">Current server: %1s</string>
-    <string name="notification_main_text">Queries are sent to %1s\n\n%2d Apps are excluded from DoH/DoT</string>
-    <string name="notification_main_text_with_secondary">Queries are sent to %1s and %2s\n\n%3d Apps are excluded from DoH/DoT</string>
+    <string name="notification_main_text">Queries are sent to %1s\n\n%2d Apps are excluded from Nebulo</string>
+    <string name="notification_main_text_with_secondary">Queries are sent to %1s and %2s\n\n%3d Apps are excluded from Nebulo</string>
     <string name="notification_main_text_whitelist">Queries are sent to %1s\n\n%2d Apps are using DoH/DoT</string>
     <string name="notification_main_text_with_secondary_whitelist">Queries are sent to %1s and %2s\n\n%3d Apps are using DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
