@@ -119,7 +119,7 @@
                         android:contentDescription="@string/contentdescription_main_servericon"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/ic_main_server"
-                        android:tint="?android:attr/textColor" />
+                        app:tint="?android:attr/textColor" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

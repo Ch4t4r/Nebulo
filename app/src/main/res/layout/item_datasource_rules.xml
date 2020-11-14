@@ -63,8 +63,8 @@
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:src="@drawable/ic_delete_sweep"
                         android:id="@+id/clear"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="48dp"/>
+                        android:layout_height="48dp"
+                        app:tint="?android:attr/textColor" />
             </LinearLayout>
 
 
@@ -77,15 +77,15 @@
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:src="@drawable/ic_add"
                         android:id="@+id/add"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="48dp"/>
+                        android:layout_height="48dp"
+                        app:tint="?android:attr/textColor" />
                 <ImageButton
                         android:layout_width="48dp"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:src="@drawable/ic_chevron_right"
                         android:id="@+id/openList"
-                        android:tint="?android:attr/textColor"
-                        android:layout_height="48dp"/>
+                        android:layout_height="48dp"
+                        app:tint="?android:attr/textColor" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

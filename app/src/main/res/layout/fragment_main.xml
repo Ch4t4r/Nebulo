@@ -30,7 +30,7 @@
                 android:padding="32dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_lock_open"
-                android:tint="?android:attr/textColor" />
+                app:tint="?android:attr/textColor" />
 
         <TextView
                 android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_main_server"
-                        android:tint="?android:attr/textColor" />
+                        app:tint="?android:attr/textColor" />
 
                 <LinearLayout
                         android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
                 android:background="@drawable/main_roundbuttons"
                 android:contentDescription="@string/contentdescription_main_servericon"
                 android:src="@drawable/ic_wifi"
-                android:tint="?android:attr/textColor" />
+                app:tint="?android:attr/textColor" />
 
     </RelativeLayout>
 </RelativeLayout>
