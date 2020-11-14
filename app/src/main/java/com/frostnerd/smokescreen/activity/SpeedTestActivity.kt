@@ -19,6 +19,7 @@ import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.dialog.SpeedtestPassesDialog
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
@@ -69,6 +70,15 @@ class SpeedTestActivity : BaseActivity() {
             startTest.isEnabled = false
             abort.visibility = View.VISIBLE
             info.visibility = View.GONE
+        }
+        startTest.setOnLongClickListener {
+            SpeedtestPassesDialog(this) {
+                startTest(it)
+                startTest.isEnabled = false
+                abort.visibility = View.VISIBLE
+                info.visibility = View.GONE
+            }.show()
+            true
         }
         abort.setOnClickListener {
             abort.visibility = View.GONE
@@ -175,7 +185,7 @@ class SpeedTestActivity : BaseActivity() {
         }
     }
 
-    private fun startTest() {
+    private fun startTest(passes:Int = 3) {
         if(wasStartedBefore) prepareList()
         testJob = launchWithLifecycle {
             prepareListJob?.join()
@@ -194,7 +204,7 @@ class SpeedTestActivity : BaseActivity() {
                     log("Running SpeedTest for ${pendingTest.server.name}")
                     val res = DnsSpeedTest(pendingTest.server, highestLatency, highestLatency+250, engine) { line ->
                         log(line)
-                    }.runTest(3)
+                    }.runTest(passes)
 
                     if (res != null) pendingTest.latency = res
                     else pendingTest.error = true
