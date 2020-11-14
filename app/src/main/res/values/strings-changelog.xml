@@ -431,7 +431,7 @@
     <string name="changelog_build_66_10">Added a filter to the query log</string>
     <string name="changelog_build_66_11">Added a field showing how many queries have been resolved with DNS rules</string>
     <string-array name="changelog_build_66">
-        <item>Version 1.5.0-alpha (Build 66)</item>
+        <item>Version 2.0-alpha (Build 66)</item>
         <item>@string/changelog_build_66_1</item>
         <item>@string/changelog_build_66_2</item>
         <item>@string/changelog_build_66_3</item>
@@ -450,11 +450,19 @@
     <string name="changelog_build_67_3">Fix server latency not being shown in Non-VPN mode</string>
     <string name="changelog_build_67_4">Added better formatting of numbers in DNS rules</string>
     <string-array name="changelog_build_67">
-        <item>Version 1.5.0-alpha (Build 67)</item>
+        <item>Version 2.0-alpha (Build 67)</item>
         <item>@string/changelog_build_67_1</item>
         <item>@string/changelog_build_67_2</item>
         <item>@string/changelog_build_67_3</item>
         <item>@string/changelog_build_67_4</item>
+    </string-array>
+
+    <string name="changelog_build_69_1">Add support for DNS-over-QUIC</string>
+    <string name="changelog_build_69_2">Increase performance of DNS-over-HTTPS queries</string>
+    <string-array name="changelog_build_69">
+        <item>Version 2.0-alpha (Build 69)</item>
+        <item>@string/changelog_build_69_1</item>
+        <item>@string/changelog_build_69_2</item>
     </string-array>
 
 </resources>

@@ -12,6 +12,8 @@ import com.frostnerd.dnstunnelproxy.Decision
 import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.quic.QUIC
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
@@ -19,6 +21,7 @@ import com.frostnerd.lifecyclemanagement.BaseDialog
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
+import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -56,7 +59,7 @@ import java.util.concurrent.TimeUnit
 class NewServerDialog(
     context: Context,
     title: String? = null,
-    var dnsOverHttps: Boolean,
+    var type: ServerType,
     onServerAdded: (serverInfo: DnsServerInformation<*>) -> Unit,
     server: UserServerConfiguration? = null
 ) : BaseDialog(context, context.getPreferences().theme.dialogStyle) {
@@ -108,7 +111,7 @@ class NewServerDialog(
 
     init {
         val view = layoutInflater.inflate(R.layout.dialog_new_server, null, false)
-        setHintAndTitle(view,dnsOverHttps, title)
+        setHintAndTitle(view, title)
         setView(view)
 
         setButton(
@@ -130,8 +133,8 @@ class NewServerDialog(
                     var secondary =
                         if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString().trim()
 
-                    if (dnsOverHttps && !primary.startsWith("http", ignoreCase = true)) primary = "https://$primary"
-                    if (dnsOverHttps && secondary != null && !secondary.startsWith("http", ignoreCase = true)) secondary = "https://$secondary"
+                    if ((type == ServerType.DOH || type == ServerType.DOQ) && !primary.startsWith("http", ignoreCase = true)) primary = "https://$primary"
+                    if ((type == ServerType.DOH || type == ServerType.DOQ) && secondary != null && !secondary.startsWith("http", ignoreCase = true)) secondary = "https://$secondary"
                     invokeCallback(name, primary, secondary, onServerAdded)
                     dismiss()
                 } else {
@@ -140,12 +143,12 @@ class NewServerDialog(
 
                     primaryServer.error = when {
                         primaryValid -> null
-                        dnsOverHttps -> context.getString(R.string.error_invalid_url)
+                        type == ServerType.DOH || type == ServerType.DOQ -> context.getString(R.string.error_invalid_url)
                         else -> context.getString(R.string.error_invalid_host)
                     }
                     secondaryServer.error = when {
                         secondaryValid -> null
-                        dnsOverHttps -> context.getString(R.string.error_invalid_url)
+                        type == ServerType.DOH || type == ServerType.DOQ -> context.getString(R.string.error_invalid_url)
                         else -> context.getString(R.string.error_invalid_host)
                     }
 
@@ -157,17 +160,26 @@ class NewServerDialog(
                 context, android.R.layout.simple_spinner_item,
                 arrayListOf(
                     context.getString(R.string.dialog_serverconfiguration_https),
-                    context.getString(R.string.dialog_serverconfiguration_tls)
+                    context.getString(R.string.dialog_serverconfiguration_tls),
+                    context.getString(R.string.dialog_serverconfiguration_quic)
                 )
             )
             spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
             serverType.adapter = spinnerAdapter
-            serverType.setSelection(if (dnsOverHttps) 0 else 1)
+            serverType.setSelection(when(type) {
+                ServerType.DOH -> 0
+                ServerType.DOT -> 1
+                ServerType.DOQ -> 2
+            })
             serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
                 override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
-                    dnsOverHttps = position == 0
-                    setHintAndTitle(view, dnsOverHttps, title)
+                    type = when(position) {
+                        0 -> ServerType.DOH
+                        1 -> ServerType.DOT
+                        else -> ServerType.DOQ
+                    }
+                    setHintAndTitle(view, title)
                     primaryServer.text = primaryServer.text
                     secondaryServer.text = secondaryServer.text
                 }
@@ -183,33 +195,41 @@ class NewServerDialog(
         }
     }
 
-    private fun setHintAndTitle(view:View, dnsOverHttps: Boolean, titleOverride:String?) {
-        if (dnsOverHttps) {
-            if(titleOverride == null) setTitle(R.string.dialog_newserver_title_https)
-            view.primaryServer.setOnFocusChangeListener { v , hasFocus ->
-                v as TextInputEditText
-                if(hasFocus) v.setHint(R.string.dialog_newserver_primaryserver_hint)
-                else v.setHint(null)
+    private fun setHintAndTitle(view:View, titleOverride:String?) {
+        val title:Int
+        val hint:Int
+        val secondaryHint:Int
+
+        when(type) {
+            ServerType.DOH -> {
+                title = R.string.dialog_newserver_title_https
+                hint = R.string.dialog_newserver_primaryserver_hint
+                secondaryHint = R.string.dialog_newserver_secondaryserver_hint
             }
-            view.secondaryServer.setOnFocusChangeListener { v, hasFocus ->
-                v as TextInputEditText
-                if(hasFocus) v.setHint(R.string.dialog_newserver_secondaryserver_hint)
-                else v.setHint(null)
+            ServerType.DOT -> {
+                title = R.string.dialog_newserver_title_tls
+                hint = R.string.dialog_newserver_primaryserver_hint_dot
+                secondaryHint = R.string.dialog_newserver_secondaryserver_hint_dot
             }
-        }else {
-            if(titleOverride == null) setTitle(R.string.dialog_newserver_title_tls)
-            view.primaryServer.setOnFocusChangeListener { v , hasFocus ->
-                v as TextInputEditText
-                if(hasFocus) v.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
-                else v.hint = null
-            }
-            view.secondaryServer.setOnFocusChangeListener { v , hasFocus ->
-                v as TextInputEditText
-                if(hasFocus) v.setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
-                else v.hint = null
+            ServerType.DOQ -> {
+                title = R.string.dialog_newserver_title_quic
+                hint = R.string.dialog_newserver_primaryserver_hint_doq
+                secondaryHint = R.string.dialog_newserver_secondaryserver_hint_doq
             }
         }
+        view.primaryServer.setOnFocusChangeListener { v , hasFocus ->
+            (v as TextInputEditText)
+            if(hasFocus) v.setHint(hint)
+            else v.hint = null
+        }
+        view.secondaryServer.setOnFocusChangeListener { v , hasFocus ->
+            v as TextInputEditText
+            if(hasFocus) v.setHint(secondaryHint)
+            else v.hint = null
+        }
+
         if(titleOverride != null) setTitle(titleOverride)
+        else setTitle(title)
     }
 
     private fun invokeCallback(
@@ -218,36 +238,68 @@ class NewServerDialog(
         secondary: String?,
         onServerAdded: (DnsServerInformation<*>) -> Unit
     ) {
-        if (dnsOverHttps) {
-            detectDohServerTypes(name, primary, secondary, onServerAdded)
-        } else {
-            val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
-            serverInfo.add(
-                DnsServerConfiguration(
-                    address = parseDotAddress(primary)!!,
-                    experimental = false,
-                    supportedProtocols = listOf(TLS),
-                    preferredProtocol = TLS
+        when(type) {
+            ServerType.DOH -> {
+                detectDohServerTypes(name, primary, secondary, onServerAdded)
+            }
+            ServerType.DOT -> {
+                val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
+                serverInfo.add(
+                    DnsServerConfiguration(
+                        address = parseDotAddress(primary)!!,
+                        experimental = false,
+                        supportedProtocols = listOf(TLS),
+                        preferredProtocol = TLS
+                    )
                 )
-            )
-            if (!secondary.isNullOrBlank()) serverInfo.add(
-                DnsServerConfiguration(
-                    address = parseDotAddress(secondary)!!, experimental = false, supportedProtocols = listOf(TLS), preferredProtocol = TLS
+                if (!secondary.isNullOrBlank()) serverInfo.add(
+                    DnsServerConfiguration(
+                        address = parseDotAddress(secondary)!!, experimental = false, supportedProtocols = listOf(TLS), preferredProtocol = TLS
+                    )
                 )
-            )
-            onServerAdded.invoke(
-                DnsServerInformation(
-                    name,
-                    HttpsDnsServerSpecification(
-                        Decision.UNKNOWN,
-                        Decision.UNKNOWN,
-                        Decision.UNKNOWN,
-                        Decision.UNKNOWN
-                    ),
-                    serverInfo,
-                    emptyList()
+                onServerAdded.invoke(
+                    DnsServerInformation(
+                        name,
+                        HttpsDnsServerSpecification(
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN
+                        ),
+                        serverInfo,
+                        emptyList()
+                    )
                 )
-            )
+            }
+            ServerType.DOQ -> {
+                val serverInfo = mutableListOf<DnsServerConfiguration<QuicUpstreamAddress>>()
+                serverInfo.add(
+                    DnsServerConfiguration(
+                        address = QuicUpstreamAddress(createHttpsUpstreamAddress(primary)),
+                        experimental = false,
+                        supportedProtocols = listOf(QUIC),
+                        preferredProtocol = QUIC
+                    )
+                )
+                if (!secondary.isNullOrBlank()) serverInfo.add(
+                    DnsServerConfiguration(
+                        address = QuicUpstreamAddress(createHttpsUpstreamAddress(secondary)), experimental = false, supportedProtocols = listOf(QUIC), preferredProtocol = QUIC
+                    )
+                )
+                onServerAdded.invoke(
+                    DnsServerInformation(
+                        name,
+                        HttpsDnsServerSpecification(
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN
+                        ),
+                        serverInfo,
+                        emptyList()
+                    )
+                )
+            }
         }
     }
 
@@ -347,9 +399,9 @@ class NewServerDialog(
 
     private fun isServerUrlValid(primary:Boolean):Boolean {
         val s = (if(primary) primaryServer.text else secondaryServer.text) ?: ""
-        var valid = (!primary && s.isBlank())
-        valid = valid || (!s.isBlank() && dnsOverHttps && isValidDoH(s.toString()))
-        return valid || (!s.isBlank() && !dnsOverHttps && isValidDot(s.toString()))
+        var valid = (!primary && s.isBlank()) // Valid if secondary and empty
+        valid = valid || (!s.isBlank() && (type == ServerType.DOQ || type == ServerType.DOH) && isValidDoH(s.toString())) // Valid if non-empty and valid URL
+        return valid || (!s.isBlank() && (type == ServerType.DOT) && isValidDot(s.toString())) // Valid if non-empty and valid host
     }
     override fun destroy() {}
 }

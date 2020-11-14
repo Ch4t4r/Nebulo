@@ -22,16 +22,19 @@ import androidx.lifecycle.Lifecycle
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
 import com.frostnerd.smokescreen.service.Command
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.*
@@ -104,7 +107,7 @@ class MainFragment : Fragment() {
             }
             updateVpnIndicators()
         }
-        startButton.setOnTouchListener { innerView , event ->
+        startButton.setOnTouchListener { innerView, event ->
             if (proxyState == ProxyState.RUNNING || proxyState == ProxyState.STARTING) {
                 false
             } else {
@@ -196,10 +199,17 @@ class MainFragment : Fragment() {
         displayServer(getPreferences().dnsServerConfig)
     }
 
-    private fun displayServer(config:DnsServerInformation<*>) {
+    private fun displayServer(config: DnsServerInformation<*>) {
         serverName.text = config.name
-        serverURL.text = if(config.hasTlsServer()) config.servers.firstOrNull()?.address?.formatToString() ?: "-"
-        else (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(true) ?: "-"
+        serverURL.text = when(config.type) {
+            ServerType.DOH -> (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(
+                true
+            ) ?: "-"
+            ServerType.DOT -> config.servers.firstOrNull()?.address?.formatToString() ?: "-"
+            ServerType.DOQ -> (config.servers.firstOrNull()?.address as? QuicUpstreamAddress)?.getUrl(
+                true
+            ) ?: "-"
+        }
         serverLatency.text = "-\nms"
         serverIndicator.backgroundTintList = null
         mainServerWrap.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
@@ -329,25 +339,26 @@ class MainFragment : Fragment() {
         latencyCheckJob = launchWithLifecycle(cancelOn = setOf(Lifecycle.Event.ON_PAUSE)) {
             if(isActive) {
                 launchUi {
-                    val latency = DnsVpnService.currentTrafficStats?.floatingAverageLatency?.takeIf { it > 0 }
-                    if(latency != null) {
-                        serverLatency?.visibility = View.VISIBLE
-                        serverLatency?.text = latency.let { "$it\nms" }
-                        val color = when {
-                            latency < greatLatencyThreshold -> Color.parseColor("#43A047")
-                            latency < goodLatencyThreshold -> Color.parseColor("#9CCC65")
-                            latency < averageLatencyThreshold -> Color.parseColor("#FFB300")
-                            else -> Color.parseColor("#E53935")
+                    if(view != null) {
+                        val latency = DnsVpnService.currentTrafficStats?.floatingAverageLatency?.takeIf { it > 0 }
+                        if(latency != null) {
+                            serverLatency?.visibility = View.VISIBLE
+                            serverLatency?.text = latency.let { "$it\nms" }
+                            val color = when {
+                                latency < greatLatencyThreshold -> Color.parseColor("#43A047")
+                                latency < goodLatencyThreshold -> Color.parseColor("#9CCC65")
+                                latency < averageLatencyThreshold -> Color.parseColor("#FFB300")
+                                else -> Color.parseColor("#E53935")
+                            }
+                            serverIndicator.backgroundTintList = ColorStateList.valueOf(color)
+                            delay(750)
+                        } else {
+                            serverLatency?.visibility = View.INVISIBLE
+                            serverLatency?.text = "-\nms"
+                            serverIndicator?.backgroundTintList = null
+                            delay(1500)
                         }
-                        serverIndicator.backgroundTintList = ColorStateList.valueOf(color)
-                        delay(750)
-                    } else {
-                        serverLatency?.visibility = View.INVISIBLE
-                        serverLatency?.text = "-\nms"
-                        serverIndicator?.backgroundTintList = null
-                        delay(1500)
                     }
-
                     runLatencyCheck()
                 }
             }
@@ -362,16 +373,23 @@ class MainFragment : Fragment() {
         // And in that case the smaller server should be measured on the bigger ones to have a point of reference
         // as the values I chose are between average to best-case, not worst-case.
         launchWithLifecycle {
-            val fastServerAverage = (AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(1500) {
+            val fastServerAverage = (AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(
+                1500
+            ) {
                 setOf(it[0], it[1], it[3]) // Google, CF, Quad9
             } + AbstractTLSDnsHandle.suspendUntilKnownServersArePopulated(1500) {
                 setOf(it[1], it[0]) //Quad9, CF
             }).mapNotNull {
-                DnsSpeedTest(it as DnsServerInformation<*>, log = {}).runTest(4)
-            }.let {
+                DnsSpeedTest(requireContext(), it as DnsServerInformation<*>, log = {}, cronetEngine = null /* We do not need quic here*/ ).runTest(4)
+            }.takeIf {
+                it.isNotEmpty()
+            }?.let {
                 it.sum() / it.size
-            }
-            val rawFactor = maxOf(greatLatencyThreshold.toDouble(), greatLatencyThreshold*(fastServerAverage.toDouble()/greatLatencyThreshold))/greatLatencyThreshold
+            } ?: return@launchWithLifecycle
+            val rawFactor = maxOf(
+                greatLatencyThreshold.toDouble(),
+                greatLatencyThreshold * (fastServerAverage.toDouble() / greatLatencyThreshold)
+            )/greatLatencyThreshold
             val adjustmentFactor = 1 + (rawFactor - 1)/2
             val pingStepAdjustment = (12*rawFactor)-12 //High deviation from 100ms -> Higher differences between steps in rating
             greatLatencyThreshold = (greatLatencyThreshold * adjustmentFactor + pingStepAdjustment*0.8).toInt()

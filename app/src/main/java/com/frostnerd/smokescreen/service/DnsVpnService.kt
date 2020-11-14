@@ -13,10 +13,9 @@ import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.dnstunnelproxy.QueryListener
-import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
-import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.general.CombinedIterator
 import com.frostnerd.general.service.isServiceRunning
@@ -29,10 +28,7 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.PinType
 import com.frostnerd.smokescreen.database.entities.CachedResponse
 import com.frostnerd.smokescreen.database.getDatabase
-import com.frostnerd.smokescreen.util.DeepActionState
-import com.frostnerd.smokescreen.util.LanguageContextWrapper
-import com.frostnerd.smokescreen.util.Notifications
-import com.frostnerd.smokescreen.util.RequestCodes
+import com.frostnerd.smokescreen.util.*
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.proxy.*
 import com.frostnerd.vpntunnelproxy.Proxy
@@ -178,9 +174,6 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
 
     override fun onCreate() {
         super.onCreate()
-        AbstractHttpsDNSHandle // Loads the known servers.
-        AbstractTLSDnsHandle
-        KnownDnsServers
         if (getPreferences().vpnServiceState == VpnServiceState.STARTED &&
             !getPreferences().ignoreServiceKilled &&
             getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE
@@ -292,7 +285,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         if(runInNonVpnMode) return
         val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         networkCallback = object : ConnectivityManager.NetworkCallback() {
-            override fun onLost(network: Network?) {
+            override fun onLost(network: Network) {
                 super.onLost(network)
                 val activeNetwork = mgr.activeNetworkInfo
                 val networkInfo = mgr.getNetworkInfo(network)
@@ -300,7 +293,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 handleChange()
             }
 
-            override fun onAvailable(network: Network?) {
+            override fun onAvailable(network: Network) {
                 super.onAvailable(network)
                 val activeNetwork = mgr.activeNetworkInfo
                 val networkInfo = mgr.getNetworkInfo(network)
@@ -329,7 +322,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         }
         val builder = NetworkRequest.Builder()
         builder.addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
-        mgr.registerNetworkCallback(builder.build(), networkCallback)
+        mgr.registerNetworkCallback(builder.build(), networkCallback!!)
     }
 
     private fun subscribeToSettings() {
@@ -469,9 +462,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             noConnectionNotificationBuilder.setContentTitle(getString(R.string.notification_noconnection_title))
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
             noConnectionNotificationBuilder.setStyle(
-                NotificationCompat.BigTextStyle(
-                    noConnectionNotificationBuilder
-                ).bigText(getString(R.string.notification_noconnection_text))
+                NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_noconnection_text))
             )
         }
         noConnectionNotificationBuilder.setWhen(System.currentTimeMillis())
@@ -554,9 +545,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         notificationBuilder.setContentTitle(getString(R.string.notification_multipleuserswarning_title))
         notificationBuilder.setContentText(getString(R.string.notification_multipleuserswarning_text))
         notificationBuilder.setStyle(
-            NotificationCompat.BigTextStyle(
-                notificationBuilder
-            ).bigText(getString(R.string.notification_multipleuserswarning_text))
+            NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_multipleuserswarning_text))
         )
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_MULTIPLEUSERS_WARNING, notificationBuilder.build())
     }
@@ -576,9 +565,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         builder.setContentTitle(getString(R.string.notification_bad_connection_title))
         builder.setContentText(getString(R.string.notification_bad_connection_text))
         builder.setStyle(
-            NotificationCompat.BigTextStyle(
-                notificationBuilder
-            ).bigText(getString(R.string.notification_bad_connection_text))
+            NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_bad_connection_text))
         )
         val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra(
             "command",
@@ -606,6 +593,26 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
 
     private fun hideBadConnectionNotification() {
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_BAD_SERVER_CONNECTION)
+    }
+
+    private fun showCronetErrorNotification() {
+        val builder = NotificationCompat.Builder(
+            this,
+            Notifications.getHighPriorityChannelId(this)
+        )
+        builder.priority = NotificationCompat.PRIORITY_DEFAULT
+        builder.setOngoing(false)
+        builder.setSmallIcon(R.drawable.ic_cloud_strikethrough)
+        builder.setContentTitle(getString(R.string.notification_cronet_failed_title))
+        builder.setContentText(getString(R.string.notification_cronet_failed_text))
+        builder.setStyle(
+            NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_cronet_failed_text))
+        )
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_CRONET_FAILED, builder.build())
+    }
+
+    private fun hideCronetErrorNotification() {
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_CRONET_FAILED)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -768,11 +775,15 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 secondaryServer =
                     serverConfig.httpsConfiguration!!.getOrNull(1)
                         ?.urlCreator?.address?.getUrl(true)
-            } else {
+            } else if(serverConfig.tlsConfiguration != null){
                 notificationBuilder.setContentTitle(getString(R.string.notification_main_title_tls))
                 primaryServer = serverConfig.tlsConfiguration!![0].formatToString()
                 secondaryServer = serverConfig.tlsConfiguration!!.getOrNull(1)?.formatToString()
-            }
+            } else if(serverConfig.quicConfiguration != null) {
+                notificationBuilder.setContentTitle(getString(R.string.notification_main_title_quic))
+                primaryServer = serverConfig.quicConfiguration!![0].getUrl(true)
+                secondaryServer = serverConfig.quicConfiguration!!.getOrNull(1)?.getUrl(true)
+            } else error("Unknown type")
             val text =
                 when {
                     getPreferences().simpleNotification -> getString(
@@ -796,7 +807,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 notificationBuilder.setContentText(text)
             } else {
                 notificationBuilder.setStyle(
-                    NotificationCompat.BigTextStyle(notificationBuilder).bigText(
+                    NotificationCompat.BigTextStyle().bigText(
                         text
                     )
                 )
@@ -882,7 +893,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             if (isStoppingCompletely) {
                 if (networkCallback != null) {
                     (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).unregisterNetworkCallback(
-                        networkCallback
+                        networkCallback!!
                     )
                     networkCallback = null
                 }
@@ -1155,27 +1166,33 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         TLSUpstreamAddress
         return if (userServerConfig != null) {
             userServerConfig!!.let { config ->
-                return if (config is HttpsDnsServerInformation) DnsServerConfiguration(
-                    config.name,
-                    config.serverConfigurations.values.toList(),
-                    null
-                )
-                else {
-                    DnsServerConfiguration(config.name, null, config.servers.map {
+                return when(config.type) {
+                    ServerType.DOH -> DnsServerConfiguration(
+                        config.name,
+                        (config as HttpsDnsServerInformation).serverConfigurations.values.toList(),
+                        null,
+                        null
+                    )
+                    ServerType.DOT -> DnsServerConfiguration(config.name, null, config.servers.map {
                         it.address as TLSUpstreamAddress
+                    }, null)
+                    ServerType.DOQ -> DnsServerConfiguration(config.name, null, null, config.servers.map {
+                        it.address as QuicUpstreamAddress
                     })
                 }
             }
         } else {
             val config = getPreferences().dnsServerConfig
-            if (config.hasTlsServer()) {
-                DnsServerConfiguration(config.name, null, config.servers.map {
-                    it.address as TLSUpstreamAddress
-                })
-            } else {
-                DnsServerConfiguration(config.name, (config as HttpsDnsServerInformation).serverConfigurations.map {
+            when(config.type) {
+                ServerType.DOH -> DnsServerConfiguration(config.name, (config as HttpsDnsServerInformation).serverConfigurations.map {
                     it.value
+                }, null, null)
+                ServerType.DOT -> DnsServerConfiguration(config.name, null, config.servers.map {
+                    it.address as TLSUpstreamAddress
                 }, null)
+                ServerType.DOQ -> DnsServerConfiguration(config.name, null, null, config.servers.map {
+                    it.address as QuicUpstreamAddress
+                })
             }
         }
     }
@@ -1193,6 +1210,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         val ipv4Enabled = !ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
         var forwardingMode = VPNTunnelProxy.ForwardingMode.MIXED
+
+        val httpCronetEngine = createHttpCronetEngineIfInstalled(this)
         serverConfig.httpsConfiguration?.forEach {
             forwardingMode = VPNTunnelProxy.ForwardingMode.NO_POLLABLE
             val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
@@ -1209,7 +1228,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                         }
                     }
                 },
-                mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
+                mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock,
+                cronetEngine = httpCronetEngine
             )
             handle.ipv4Enabled = ipv4Enabled
             handle.ipv6Enabled = ipv6Enabled
@@ -1233,6 +1253,34 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                         }
                     }
                 }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
+            )
+            handle.ipv4Enabled = ipv4Enabled
+            handle.ipv6Enabled = ipv6Enabled
+            if (defaultHandle == null) defaultHandle = handle
+            else handles.add(handle)
+        }
+        val cronetEngine = serverConfig.quicConfiguration?.let { createQuicCronetEngineIfInstalled(this, *it.toTypedArray()) }
+        if(serverConfig.quicConfiguration != null && cronetEngine == null) {
+            showCronetErrorNotification()
+            destroy(true)
+            return
+        } else hideCronetErrorNotification()
+        serverConfig.quicConfiguration?.forEach {
+            val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
+            log("Creating handle for DoQ $it with IP-Addresses $addresses")
+            val handle = ProxyQuicHandler(
+                addresses,
+                listOf(it),
+                connectTimeout = 8000,
+                queryCountCallback = {
+                    if (!simpleNotification) {
+                        queryCount++
+                        launch(Dispatchers.IO) {
+                            updateNotification()
+                        }
+                    }
+                }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock,
+                cronetEngine!!
             )
             handle.ipv4Enabled = ipv4Enabled
             handle.ipv6Enabled = ipv6Enabled
@@ -1376,7 +1424,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                     val linkProperties = mgr.getLinkProperties(network) ?: continue
                     if (!linkProperties.domains.isNullOrBlank() && linkProperties.dnsServers.isNotEmpty()) {
                         log("Bypassing domains ${linkProperties.domains} for network of type ${networkInfo.typeName}")
-                        val domains = linkProperties.domains.split(",").toList()
+                        val domains = linkProperties.domains!!.split(",").toList()
                         bypassHandlers.add(
                             ProxyBypassHandler(
                                 domains,
@@ -1536,13 +1584,15 @@ enum class Command : Serializable {
 data class DnsServerConfiguration(
     val name:String,
     val httpsConfiguration: List<ServerConfiguration>?,
-    val tlsConfiguration: List<TLSUpstreamAddress>?
+    val tlsConfiguration: List<TLSUpstreamAddress>?,
+    val quicConfiguration: List<QuicUpstreamAddress>?
 ) {
 
     fun getAllDnsIpAddresses(ipv4:Boolean, ipv6:Boolean):List<String> {
         val ips = mutableListOf<String>()
         httpsConfiguration?.forEach { ips.addAll(getIpAddressesFor(ipv4, ipv6, it)) }
         tlsConfiguration?.forEach { ips.addAll(getIpAddressesFor(ipv4, ipv6, it)) }
+        quicConfiguration?.forEach { ips.addAll(getIpAddressesFor(ipv4, ipv6, it)) }
         return ips
     }
 
@@ -1564,12 +1614,24 @@ data class DnsServerConfiguration(
         return list
     }
 
-    fun forEachAddress(block: (isHttps: Boolean, UpstreamAddress) -> Unit) {
+    fun getIpAddressesFor(ipv4:Boolean, ipv6:Boolean, address:QuicUpstreamAddress):List<String> {
+        if(quicConfiguration.isNullOrEmpty() || address !in quicConfiguration) return emptyList()
+        val index = quicConfiguration.indexOf(address) + 200
+        val list = mutableListOf<String>()
+        if(ipv4) list.add("203.0.113." + String.format(Locale.ROOT, "%03d", index))
+        if(ipv6) list.add("fd21:c5ea:169d:fff1:3418:d688:36c5:e8" + String.format(Locale.ROOT, "%02x", index))
+        return list
+    }
+
+    fun forEachAddress(block: (type: ServerType, UpstreamAddress) -> Unit) {
         httpsConfiguration?.forEach {
-            block(true, it.urlCreator.address)
+            block(ServerType.DOH, it.urlCreator.address)
         }
         tlsConfiguration?.forEach {
-            block(false, it)
+            block(ServerType.DOT, it)
+        }
+        quicConfiguration?.forEach {
+            block(ServerType.DOQ, it)
         }
     }
 }

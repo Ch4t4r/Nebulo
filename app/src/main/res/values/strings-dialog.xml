@@ -3,18 +3,22 @@
     <string name="dialog_serverconfiguration_title">Server configuration</string>
     <string name="dialog_serverconfiguration_https" translatable="false">DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverconfiguration_tls" translatable="false">DNS-over-TLS (DoT)</string>
+    <string name="dialog_serverconfiguration_quic" translatable="false">DNS-over-QUIC (DoQ)</string>
     <string name="dialog_serverconfiguration_addserver">Add a server</string>
 
     <string name="dialog_newserver_title_https">Add a server (DoH)</string>
     <string name="dialog_newserver_title_tls">Add a server (DoT)</string>
+    <string name="dialog_newserver_title_quic">Add a server (DoQ)</string>
     <string name="dialog_newserver_name">Server name</string>
     <string name="dialog_newserver_name_hint">Example</string>
     <string name="dialog_newserver_primaryserver">Primary server</string>
     <string name="dialog_newserver_primaryserver_hint" translatable="false">example-doh.com[/dns-query]</string>
     <string name="dialog_newserver_primaryserver_hint_dot" translatable="false">example-dot.com[:443]</string>
+    <string name="dialog_newserver_primaryserver_hint_doq" translatable="false">example-doq.com[/dns-query]</string>
     <string name="dialog_newserver_secondaryserver">Secondary server (Optional)</string>
     <string name="dialog_newserver_secondaryserver_hint" translatable="false">example-doh.com[/dns-query]</string>
     <string name="dialog_newserver_secondaryserver_hint_dot" translatable="false">example-dot.com[:443]</string>
+    <string name="dialog_newserver_secondaryserver_hint_doq" translatable="false">example-doq.com[/dns-query]</string>
 
     <string name="dialog_deleteconfig_title">Delete configuration?</string>
     <string name="dialog_deleteconfig_text">Do you want to delete the configuration %1s?</string>
@@ -36,6 +40,7 @@
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Type: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Type: DNS-over-TLS (DoT)</string>
+    <string name="dialog_serverimport_servertype_doq">Type: DNS-over-QUIC (DoQ)</string>
     <string xmlns:tools="http://schemas.android.com/tools" name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Please select the servers you wish to import.\n\nServers which are already imported will be duplicate if you select them.</string>
 
     <string name="dialog_serverimportfailed_title">Import failed</string>
@@ -232,4 +237,7 @@
 
     <string name="dialog_share_title">Select link type</string>
     <string name="dialog_share_message">Which link do you want to share?</string>
+
+    <string name="dialog_speedtestpasses_title">Configure test passes</string>
+    <string name="dialog_speedtestpasses_message">Set how often the test should be run per server. Higher passes increase actuarry</string>
 </resources>

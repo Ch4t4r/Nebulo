@@ -6,11 +6,12 @@ import com.frostnerd.dnstunnelproxy.json.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceType
-import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
-import com.frostnerd.smokescreen.hasTlsServer
+import com.frostnerd.smokescreen.type
+import com.frostnerd.smokescreen.util.ServerType
 import kotlin.reflect.KProperty
 
 /*
@@ -54,6 +55,7 @@ class DnsServerInformationPreference(key: String) :
                 when (type) {
                     "https" -> httpsTypeAdapter.fromJson(json)
                     "tls" -> tlsTypeAdapter.fromJson(json) as DnsServerInformation<TLSUpstreamAddress>
+                    "quic" -> tlsTypeAdapter.fromJson(json) as DnsServerInformation<QuicUpstreamAddress>
                     else -> throw IllegalStateException("Unknown type $type")
                 }
             }
@@ -66,9 +68,17 @@ class DnsServerInformationPreference(key: String) :
         value: DnsServerInformation<*>?
     ) {
         if(value != null) {
-            val type = if(value.hasTlsServer()) "tls" else "https"
-            val json:String = if(type == "tls") tlsTypeAdapter.toJson(value)
-            else httpsTypeAdapter.toJson(value as HttpsDnsServerInformation)
+            val type = when(value.type) {
+                ServerType.DOH -> "https"
+                ServerType.DOT -> "tls"
+                ServerType.DOQ -> "quic"
+            }
+            val json = when(value.type) {
+                ServerType.DOH -> httpsTypeAdapter.toJson(value as HttpsDnsServerInformation)
+                ServerType.DOT -> tlsTypeAdapter.toJson(value)
+                ServerType.DOQ -> tlsTypeAdapter.toJson(value)
+            }
+
             thisRef.edit {listener ->
                 listener(key, value)
                 putString(key + "_type", type)
