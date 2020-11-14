@@ -12,6 +12,8 @@ import com.frostnerd.dnstunnelproxy.Decision
 import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.quic.QUIC
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
@@ -131,8 +133,8 @@ class NewServerDialog(
                     var secondary =
                         if (secondaryServer.text.isNullOrBlank()) null else secondaryServer.text.toString().trim()
 
-                    if (type == ServerType.DOH && !primary.startsWith("http", ignoreCase = true)) primary = "https://$primary"
-                    if (type == ServerType.DOH && secondary != null && !secondary.startsWith("http", ignoreCase = true)) secondary = "https://$secondary"
+                    if ((type == ServerType.DOH || type == ServerType.DOQ) && !primary.startsWith("http", ignoreCase = true)) primary = "https://$primary"
+                    if ((type == ServerType.DOH || type == ServerType.DOQ) && secondary != null && !secondary.startsWith("http", ignoreCase = true)) secondary = "https://$secondary"
                     invokeCallback(name, primary, secondary, onServerAdded)
                     dismiss()
                 } else {
@@ -194,32 +196,40 @@ class NewServerDialog(
     }
 
     private fun setHintAndTitle(view:View, titleOverride:String?) {
-        if (type == ServerType.DOH) {
-            if(titleOverride == null) setTitle(R.string.dialog_newserver_title_https)
-            view.primaryServer.setOnFocusChangeListener { v , hasFocus ->
-                v as TextInputEditText
-                if(hasFocus) v.setHint(R.string.dialog_newserver_primaryserver_hint)
-                else v.setHint(null)
+        val title:Int
+        val hint:Int
+        val secondaryHint:Int
+
+        when(type) {
+            ServerType.DOH -> {
+                title = R.string.dialog_newserver_title_https
+                hint = R.string.dialog_newserver_primaryserver_hint
+                secondaryHint = R.string.dialog_newserver_secondaryserver_hint
             }
-            view.secondaryServer.setOnFocusChangeListener { v, hasFocus ->
-                v as TextInputEditText
-                if(hasFocus) v.setHint(R.string.dialog_newserver_secondaryserver_hint)
-                else v.setHint(null)
+            ServerType.DOT -> {
+                title = R.string.dialog_newserver_title_tls
+                hint = R.string.dialog_newserver_primaryserver_hint_dot
+                secondaryHint = R.string.dialog_newserver_secondaryserver_hint_dot
             }
-        }else {
-            if(titleOverride == null) setTitle(R.string.dialog_newserver_title_tls)
-            view.primaryServer.setOnFocusChangeListener { v , hasFocus ->
-                v as TextInputEditText
-                if(hasFocus) v.setHint(R.string.dialog_newserver_primaryserver_hint_dot)
-                else v.hint = null
-            }
-            view.secondaryServer.setOnFocusChangeListener { v , hasFocus ->
-                v as TextInputEditText
-                if(hasFocus) v.setHint(R.string.dialog_newserver_secondaryserver_hint_dot)
-                else v.hint = null
+            ServerType.DOQ -> {
+                title = R.string.dialog_newserver_title_quic
+                hint = R.string.dialog_newserver_primaryserver_hint_doq
+                secondaryHint = R.string.dialog_newserver_secondaryserver_hint_doq
             }
         }
+        view.primaryServer.setOnFocusChangeListener { v , hasFocus ->
+            (v as TextInputEditText)
+            if(hasFocus) v.setHint(hint)
+            else v.hint = null
+        }
+        view.secondaryServer.setOnFocusChangeListener { v , hasFocus ->
+            v as TextInputEditText
+            if(hasFocus) v.setHint(secondaryHint)
+            else v.hint = null
+        }
+
         if(titleOverride != null) setTitle(titleOverride)
+        else setTitle(title)
     }
 
     private fun invokeCallback(
@@ -228,36 +238,68 @@ class NewServerDialog(
         secondary: String?,
         onServerAdded: (DnsServerInformation<*>) -> Unit
     ) {
-        if (type == ServerType.DOH) {
-            detectDohServerTypes(name, primary, secondary, onServerAdded)
-        } else {
-            val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
-            serverInfo.add(
-                DnsServerConfiguration(
-                    address = parseDotAddress(primary)!!,
-                    experimental = false,
-                    supportedProtocols = listOf(TLS),
-                    preferredProtocol = TLS
+        when(type) {
+            ServerType.DOH -> {
+                detectDohServerTypes(name, primary, secondary, onServerAdded)
+            }
+            ServerType.DOT -> {
+                val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
+                serverInfo.add(
+                    DnsServerConfiguration(
+                        address = parseDotAddress(primary)!!,
+                        experimental = false,
+                        supportedProtocols = listOf(TLS),
+                        preferredProtocol = TLS
+                    )
                 )
-            )
-            if (!secondary.isNullOrBlank()) serverInfo.add(
-                DnsServerConfiguration(
-                    address = parseDotAddress(secondary)!!, experimental = false, supportedProtocols = listOf(TLS), preferredProtocol = TLS
+                if (!secondary.isNullOrBlank()) serverInfo.add(
+                    DnsServerConfiguration(
+                        address = parseDotAddress(secondary)!!, experimental = false, supportedProtocols = listOf(TLS), preferredProtocol = TLS
+                    )
                 )
-            )
-            onServerAdded.invoke(
-                DnsServerInformation(
-                    name,
-                    HttpsDnsServerSpecification(
-                        Decision.UNKNOWN,
-                        Decision.UNKNOWN,
-                        Decision.UNKNOWN,
-                        Decision.UNKNOWN
-                    ),
-                    serverInfo,
-                    emptyList()
+                onServerAdded.invoke(
+                    DnsServerInformation(
+                        name,
+                        HttpsDnsServerSpecification(
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN
+                        ),
+                        serverInfo,
+                        emptyList()
+                    )
                 )
-            )
+            }
+            ServerType.DOQ -> {
+                val serverInfo = mutableListOf<DnsServerConfiguration<QuicUpstreamAddress>>()
+                serverInfo.add(
+                    DnsServerConfiguration(
+                        address = QuicUpstreamAddress(createHttpsUpstreamAddress(primary)),
+                        experimental = false,
+                        supportedProtocols = listOf(QUIC),
+                        preferredProtocol = QUIC
+                    )
+                )
+                if (!secondary.isNullOrBlank()) serverInfo.add(
+                    DnsServerConfiguration(
+                        address = QuicUpstreamAddress(createHttpsUpstreamAddress(secondary)), experimental = false, supportedProtocols = listOf(QUIC), preferredProtocol = QUIC
+                    )
+                )
+                onServerAdded.invoke(
+                    DnsServerInformation(
+                        name,
+                        HttpsDnsServerSpecification(
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN,
+                            Decision.UNKNOWN
+                        ),
+                        serverInfo,
+                        emptyList()
+                    )
+                )
+            }
         }
     }
 

@@ -98,16 +98,23 @@ class ServerChoosalDialog(
             }
         }
         layout.findViewById<Button>(R.id.addServer).setOnClickListener {
-            NewServerDialog(context, title = null, ServerType.from(spinner.selectedItemPosition), server = null, onServerAdded = { info ->
-                val config = createButtonForUserConfiguration(
-                    context.getPreferences().addUserServerConfiguration(
-                        info
+            NewServerDialog(
+                context,
+                title = null,
+                ServerType.from(spinner.selectedItemPosition),
+                server = null,
+                onServerAdded = { info ->
+                    val config = createButtonForUserConfiguration(
+                        context.getPreferences().addUserServerConfiguration(
+                            info
+                        )
                     )
-                )
-                if (info.hasTlsServer() == defaultConfig.any { it.hasTlsServer() }) layout.knownServersGroup.addView(
-                    config
-                )
-            }).show()
+                    println(defaultConfig)
+                    println(info.type)
+                    if (defaultConfig.any { it.type == info.type }) layout.knownServersGroup.addView(
+                        config
+                    )
+                }).show()
         }
         addKnownServers {
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -195,33 +202,36 @@ class ServerChoosalDialog(
                 } else {
                     payload as DnsServerInformation<*>
                 }
-            if (info.hasTlsServer() != currentSelectedServer.hasTlsServer()) continue
-            if (info.hasQuicServer() != currentSelectedServer.hasQuicServer()) continue
+            if (info.type != currentSelectedServer.type) continue
             if (info.name != currentSelectedServer.name) continue
             if (info.servers.size < currentSelectedServer.servers.size) continue
             val primaryMatches: Boolean
             val secondaryMatches: Boolean
-            if (info.hasTlsServer()) {
-                primaryMatches = info.servers[0].address.host == currentSelectedServer.servers[0].address.host
-                secondaryMatches =
-                    currentSelectedServer.servers.size == 1 || (info.servers[1].address.host == currentSelectedServer.servers[1].address.host)
-            } else if(info.hasHttpsServer()) {
-                val httpsInfo = info as HttpsDnsServerInformation
-                val currentHttpsInfo = currentSelectedServer as HttpsDnsServerInformation
-                primaryMatches =
-                    httpsInfo.serverConfigurations.values.first().urlCreator.address.getUrl() == currentHttpsInfo.serverConfigurations.values.first().urlCreator.address.getUrl()
-                secondaryMatches = currentHttpsInfo.serverConfigurations.size == 1 ||
-                        httpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.address.getUrl() == currentHttpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.address.getUrl()
-            } else if(info.hasQuicServer()){
-                val firstAddress = (info.servers.first().address as QuicUpstreamAddress).getUrl(true)
-                val secondAddress = (info.servers[1].address as? QuicUpstreamAddress)?.getUrl(true)
-                val currentFirstAddress = (currentSelectedServer.servers.first().address as QuicUpstreamAddress).getUrl(true)
-                val currentSecondAddress = (currentSelectedServer.servers[1].address as? QuicUpstreamAddress)?.getUrl(true)
+            when(info.type) {
+                ServerType.DOH -> {
+                    val httpsInfo = info as HttpsDnsServerInformation
+                    val currentHttpsInfo = currentSelectedServer as HttpsDnsServerInformation
+                    primaryMatches =
+                        httpsInfo.serverConfigurations.values.first().urlCreator.address.getUrl() == currentHttpsInfo.serverConfigurations.values.first().urlCreator.address.getUrl()
+                    secondaryMatches = currentHttpsInfo.serverConfigurations.size == 1 ||
+                            httpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.address.getUrl() == currentHttpsInfo.serverConfigurations.values.toTypedArray()[1].urlCreator.address.getUrl()
 
-                primaryMatches = firstAddress.equals(currentFirstAddress, true)
-                secondaryMatches = secondAddress.equals(currentSecondAddress, true)
-            } else error("Unknown type")
-            if (primaryMatches && secondaryMatches) {
+                }
+                ServerType.DOT -> {
+                    primaryMatches = info.servers[0].address.host == currentSelectedServer.servers[0].address.host
+                    secondaryMatches =
+                        currentSelectedServer.servers.size == 1 || (info.servers[1].address.host == currentSelectedServer.servers[1].address.host)
+                }
+                ServerType.DOQ -> {
+                    val firstAddress = (info.servers.first().address as QuicUpstreamAddress).getUrl(true)
+                    val secondAddress = (info.servers.getOrNull(1)?.address as? QuicUpstreamAddress)?.getUrl(true)
+                    val currentFirstAddress = (currentSelectedServer.servers.first().address as QuicUpstreamAddress).getUrl(true)
+                    val currentSecondAddress = (currentSelectedServer.servers.getOrNull(1)?.address as? QuicUpstreamAddress)?.getUrl(true)
+                    primaryMatches = firstAddress.equals(currentFirstAddress, true)
+                    secondaryMatches = secondAddress.equals(currentSecondAddress, true)
+                }
+            }
+           if (primaryMatches && secondaryMatches) {
                 child.isChecked = true
                 break
             }
@@ -234,18 +244,22 @@ class ServerChoosalDialog(
         val name = info.name
         val primaryServer: String
         val secondaryServer: String?
-        if (info.hasTlsServer()) {
-            primaryServer = info.servers[0].address.formatToString()
-            secondaryServer = info.servers.getOrNull(1)?.address?.formatToString()
-        } else if(info.hasHttpsServer()){
-            val configs = (info as HttpsDnsServerInformation).servers
-            primaryServer = configs[0].address.getUrl(true)
-            secondaryServer = configs.getOrNull(1)?.address?.getUrl(true)
-        } else if(info.hasQuicServer()) {
-            val configs = info.servers
-            primaryServer = (configs[0].address as QuicUpstreamAddress).getUrl(true)
-            secondaryServer = (configs.getOrNull(1)?.address as? QuicUpstreamAddress)?.getUrl(true)
-        } else error("Unknown type")
+        when(info.type) {
+            ServerType.DOH -> {
+                val configs = (info as HttpsDnsServerInformation).servers
+                primaryServer = configs[0].address.getUrl(true)
+                secondaryServer = configs.getOrNull(1)?.address?.getUrl(true)
+            }
+            ServerType.DOT -> {
+                primaryServer = info.servers[0].address.formatToString()
+                secondaryServer = info.servers.getOrNull(1)?.address?.formatToString()
+            }
+            ServerType.DOQ -> {
+                val configs = info.servers
+                primaryServer = (configs[0].address as QuicUpstreamAddress).getUrl(true)
+                secondaryServer = (configs.getOrNull(1)?.address as? QuicUpstreamAddress)?.getUrl(true)
+            }
+        }
         button.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
@@ -274,15 +288,21 @@ class ServerChoosalDialog(
         val info = userConfiguration.serverInformation
         val primaryServer: String
         val secondaryServer: String?
-        if (info.hasTlsServer()) {
-            primaryServer = info.servers[0].address.formatToString()
-            secondaryServer = info.servers.getOrNull(1)?.address?.formatToString()
-        } else {
-            val configs = (info as HttpsDnsServerInformation).servers
-            primaryServer = configs[0].address.getUrl(true)
-            secondaryServer = configs.getOrNull(1)?.address?.getUrl(true)
+        when(info.type) {
+            ServerType.DOH -> {
+                val configs = (info as HttpsDnsServerInformation).servers
+                primaryServer = configs[0].address.getUrl(true)
+                secondaryServer = configs.getOrNull(1)?.address?.getUrl(true)
+            }
+            ServerType.DOT -> {
+                primaryServer = info.servers[0].address.formatToString()
+                secondaryServer = info.servers.getOrNull(1)?.address?.formatToString()
+            }
+            ServerType.DOQ -> {
+                primaryServer = (info.servers[0].address as QuicUpstreamAddress).getUrl(true)
+                secondaryServer =(info.servers.getOrNull(1)?.address as? QuicUpstreamAddress)?.getUrl(true)
+            }
         }
-
 
         if (secondaryServer == null) button.text =
             "${userConfiguration.serverInformation.name} ($primaryServer)"

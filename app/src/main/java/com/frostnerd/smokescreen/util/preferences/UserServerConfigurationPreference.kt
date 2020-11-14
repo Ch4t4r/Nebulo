@@ -10,6 +10,7 @@ import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefa
 import com.frostnerd.smokescreen.hasHttpsServer
 import com.frostnerd.smokescreen.hasQuicServer
 import com.frostnerd.smokescreen.hasTlsServer
+import com.frostnerd.smokescreen.type
 import com.frostnerd.smokescreen.util.ServerType
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
@@ -41,7 +42,6 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
     PreferenceTypeWithDefault<SharedPreferences, Set<UserServerConfiguration>>(key, defaultValue) {
     private val tlsTypeAdapter = DnsServerInformationTypeAdapter()
     private val httpsTypeAdapter = HttpsDnsServerInformationTypeAdapter()
-
 
     override fun getValue(
         thisRef: TypedPreferences<SharedPreferences>,
@@ -97,7 +97,7 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
                 }
                 ServerType.DOQ -> {
                     jsonWriter.name("server_quic")
-                    TODO()
+                    tlsTypeAdapter.write(jsonWriter, server.serverInformation)
                 }
             }
             jsonWriter.endObject()
@@ -112,13 +112,5 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
 }
 
 class UserServerConfiguration(val id: Int, val serverInformation: DnsServerInformation<*>) {
-    val type:ServerType
-    get() {
-        return when {
-            serverInformation.hasHttpsServer() -> ServerType.DOH
-            serverInformation.hasTlsServer() -> ServerType.DOT
-            serverInformation.hasQuicServer() -> ServerType.DOQ
-            else -> error("Unknown type")
-        }
-    }
+    val type:ServerType = serverInformation.type
 }
