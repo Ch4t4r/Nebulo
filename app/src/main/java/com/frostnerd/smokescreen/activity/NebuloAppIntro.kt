@@ -9,7 +9,7 @@ import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.createCronetEngineIfInstalled
+import com.frostnerd.smokescreen.createQuicCronetEngineIfInstalled
 import com.frostnerd.smokescreen.fragment.AppIntroServerChooseFragment
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
@@ -67,7 +67,7 @@ class NebuloAppIntro:AppIntro() {
             scope.launch {
                 for(server in chunks[i]) {
                     if(!isActive) break
-                    val testResult = DnsSpeedTest(server, log = {}, cronetEngine = createCronetEngineIfInstalled(this@NebuloAppIntro)).runTest(3)
+                    val testResult = DnsSpeedTest(server, log = {}, cronetEngine = createQuicCronetEngineIfInstalled(this@NebuloAppIntro)).runTest(3)
                     synchronized(speedTestResults) {
                         speedTestResults[server] = testResult
                     }

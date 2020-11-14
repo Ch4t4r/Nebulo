@@ -11,7 +11,6 @@ import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.TransportProtocol
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseActivity
@@ -189,7 +188,7 @@ class SpeedTestActivity : BaseActivity() {
         if(wasStartedBefore) prepareList()
         testJob = launchWithLifecycle {
             prepareListJob?.join()
-            val engine = createCronetEngineIfInstalled(this@SpeedTestActivity)
+            val engine = createQuicCronetEngineIfInstalled(this@SpeedTestActivity)
             testRunning = true
             wasStartedBefore = true
             val testsLeft = testResults!!.shuffled()

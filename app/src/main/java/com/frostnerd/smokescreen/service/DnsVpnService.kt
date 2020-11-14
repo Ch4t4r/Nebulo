@@ -13,10 +13,8 @@ import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.dnstunnelproxy.QueryListener
-import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
-import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.general.CombinedIterator
@@ -1212,6 +1210,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         val ipv4Enabled = !ipv6Enabled || (getPreferences().enableIpv4 && (getPreferences().forceIpv4 || hasDeviceIpv4Address()))
 
         var forwardingMode = VPNTunnelProxy.ForwardingMode.MIXED
+
+        val httpCronetEngine = createHttpCronetEngineIfInstalled(this)
         serverConfig.httpsConfiguration?.forEach {
             forwardingMode = VPNTunnelProxy.ForwardingMode.NO_POLLABLE
             val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
@@ -1228,7 +1228,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                         }
                     }
                 },
-                mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock
+                mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock,
+                cronetEngine = httpCronetEngine
             )
             handle.ipv4Enabled = ipv4Enabled
             handle.ipv6Enabled = ipv6Enabled
@@ -1258,7 +1259,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             if (defaultHandle == null) defaultHandle = handle
             else handles.add(handle)
         }
-        val cronetEngine = serverConfig.quicConfiguration?.let { createCronetEngineIfInstalled(this, *it.toTypedArray()) }
+        val cronetEngine = serverConfig.quicConfiguration?.let { createQuicCronetEngineIfInstalled(this, *it.toTypedArray()) }
         if(serverConfig.quicConfiguration != null && cronetEngine == null) {
             showCronetErrorNotification()
             destroy(true)

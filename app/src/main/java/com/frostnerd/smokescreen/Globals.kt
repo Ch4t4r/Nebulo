@@ -135,7 +135,23 @@ fun loadKnownDNSServers() {
     KnownDnsServers
 }
 
-fun createCronetEngineIfInstalled(context: Context, vararg addresses: QuicUpstreamAddress): CronetEngine? {
-    return if(CronetProviderInstaller.isInstalled()) AbstractQuicDnsHandle.createEngine(context, *addresses)
+fun createQuicCronetEngineIfInstalled(context: Context, vararg addresses: QuicUpstreamAddress): CronetEngine? {
+    return if(CronetProviderInstaller.isInstalled()) try {
+        AbstractQuicDnsHandle.createEngine(context, *addresses)
+    } catch (ex:Throwable) { null }
+    else null
+}
+
+fun createHttpCronetEngineIfInstalled(context: Context): CronetEngine? {
+    return if(CronetProviderInstaller.isInstalled()) try {
+        val cacheDir = context.cacheDir.resolve("cronetcachehttp")
+        cacheDir.mkdir()
+        return CronetEngine.Builder(context)
+            .enableHttp2(true)
+            .enableBrotli(true)
+            .enableQuic(true)
+            .setStoragePath(cacheDir.path)
+            .build()
+    } catch (ex:Throwable) { null }
     else null
 }
