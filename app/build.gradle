@@ -143,7 +143,7 @@ dependencies {
     implementation 'com.frostnerd.utilskt:lifecycle:1.2.0'
     implementation 'com.frostnerd.utilskt:preferences:1.5.29' // https://git.frostnerd.com/AndroidUtils/preferenceskt
     implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.4.0' // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
-    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:2.1.11' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:2.1.17' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
     implementation 'com.frostnerd.utilskt:general:1.0.25' // https://git.frostnerd.com/AndroidUtils/generalkt
     implementation 'com.frostnerd.utilskt:adapters:1.2.0' // https://git.frostnerd.com/AndroidUtils/Adapters
 

@@ -10,11 +10,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.dialog.NewServerDialog
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog
+import com.frostnerd.smokescreen.util.ServerType
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_tasker_configure.*
@@ -38,8 +40,15 @@ import kotlinx.android.synthetic.main.activity_tasker_configure.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ConfigureActivity : BaseActivity() {
-    private val dnsOverHttps:Boolean
-    get() = serverType.selectedItemPosition == 0
+    private val type:ServerType
+    get() {
+        return when(serverType.selectedItemPosition) {
+            0 -> ServerType.DOH
+            1 -> ServerType.DOT
+            2 -> ServerType.DOQ
+            else -> error("")
+        }
+    }
 
     override fun getConfiguration(): Configuration {
         return Configuration.withDefaults()
@@ -84,16 +93,24 @@ class ConfigureActivity : BaseActivity() {
                             } else {
                                 val info = BackgroundVpnConfigureActivity.readServerInfoFromIntent(settings)
                                 if (info != null) {
-                                    if (info.hasHttpsServer()) {
-                                        serverType.setSelection(0)
-                                        val httpsInfo = info as HttpsDnsServerInformation
-                                        val configs = httpsInfo.serverConfigurations.values.toTypedArray()
-                                        primaryServer.setText(configs.getOrNull(0)?.urlCreator?.address?.getUrl(true))
-                                        secondaryServer.setText(configs.getOrNull(1)?.urlCreator?.address?.getUrl(true))
-                                    } else {
-                                        serverType.setSelection(1)
-                                        primaryServer.setText(info.servers.getOrNull(0)?.address?.host)
-                                        secondaryServer.setText(info.servers.getOrNull(1)?.address?.host)
+                                    when(info.type) {
+                                        ServerType.DOH -> {
+                                            serverType.setSelection(0)
+                                            val httpsInfo = info as HttpsDnsServerInformation
+                                            val configs = httpsInfo.serverConfigurations.values.toTypedArray()
+                                            primaryServer.setText(configs.getOrNull(0)?.urlCreator?.address?.getUrl(true))
+                                            secondaryServer.setText(configs.getOrNull(1)?.urlCreator?.address?.getUrl(true))
+                                        }
+                                        ServerType.DOT -> {
+                                            serverType.setSelection(1)
+                                            primaryServer.setText(info.servers.getOrNull(0)?.address?.host)
+                                            secondaryServer.setText(info.servers.getOrNull(1)?.address?.host)
+                                        }
+                                        ServerType.DOQ -> {
+                                            serverType.setSelection(2)
+                                            primaryServer.setText(info.servers.getOrNull(0)?.address?.host)
+                                            secondaryServer.setText((info.servers.getOrNull(1)?.address as? QuicUpstreamAddress)?.getUrl(true))
+                                        }
                                     }
                                 }
                             }
@@ -138,7 +155,8 @@ class ConfigureActivity : BaseActivity() {
             this, android.R.layout.simple_spinner_item,
             arrayListOf(
                 this.getString(R.string.dialog_serverconfiguration_https),
-                this.getString(R.string.dialog_serverconfiguration_tls)
+                this.getString(R.string.dialog_serverconfiguration_tls),
+                this.getString(R.string.dialog_serverconfiguration_quic)
             )
         )
         typeAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
@@ -153,8 +171,12 @@ class ConfigureActivity : BaseActivity() {
             }
         }
         selectServer.setOnClickListener {
-            ServerChoosalDialog(this@ConfigureActivity, null, serverType.selectedItemPosition == 1) {
-                val typePosition = if(it.hasTlsServer()) 1 else 0
+            ServerChoosalDialog(this@ConfigureActivity, null, ServerType.from(serverType.selectedItemPosition)) {
+                val typePosition = when(it.type) {
+                    ServerType.DOH -> 0
+                    ServerType.DOT -> 1
+                    ServerType.DOQ -> 2
+                }
                 if(serverType.selectedItemPosition != typePosition) serverType.setSelection(typePosition)
                 primaryServer.setText(it.servers.first().address.formatToString())
                 if(it.servers.size > 1) secondaryServer.setText(it.servers.last().address.formatToString())
@@ -167,14 +189,20 @@ class ConfigureActivity : BaseActivity() {
     }
 
     private fun setHints() {
-        val doh = serverType.selectedItemPosition == 0
+        val type = ServerType.from(serverType.selectedItemPosition)
         primaryServer.hint = if(primaryServer.hasFocus() || primaryServerWrap.error != null) {
-            if(doh) getString(R.string.dialog_newserver_primaryserver_hint)
-            else getString(R.string.dialog_newserver_primaryserver_hint_dot)
+            when(type) {
+                ServerType.DOH -> getString(R.string.dialog_newserver_primaryserver_hint)
+                ServerType.DOT -> getString(R.string.dialog_newserver_primaryserver_hint_dot)
+                ServerType.DOQ -> getString(R.string.dialog_newserver_primaryserver_hint_doq)
+            }
         } else null
         secondaryServer.hint = if(secondaryServer.hasFocus()) {
-            if(doh) getString(R.string.dialog_newserver_secondaryserver_hint)
-            else getString(R.string.dialog_newserver_secondaryserver_hint_dot)
+            when(type) {
+                ServerType.DOH -> getString(R.string.dialog_newserver_secondaryserver_hint)
+                ServerType.DOT -> getString(R.string.dialog_newserver_secondaryserver_hint_dot)
+                ServerType.DOQ -> getString(R.string.dialog_newserver_secondaryserver_hint_doq)
+            }
         } else null
     }
 
@@ -182,8 +210,8 @@ class ConfigureActivity : BaseActivity() {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 var valid = (emptyAllowed && s.isBlank())
-                valid = valid || (!s.isBlank() && dnsOverHttps && NewServerDialog.isValidDoH(s.toString()))
-                valid = valid || (!s.isBlank() && !dnsOverHttps && NewServerDialog.isValidDot(s.toString()))
+                valid = valid || (!s.isBlank() && (type == ServerType.DOH || type == ServerType.DOQ) && NewServerDialog.isValidDoH(s.toString()))
+                valid = valid || (!s.isBlank() && (type == ServerType.DOT) && NewServerDialog.isValidDot(s.toString()))
 
                 input.error = if (valid) {
                     null

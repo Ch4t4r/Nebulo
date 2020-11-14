@@ -11,13 +11,16 @@ import com.frostnerd.dnstunnelproxy.json.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.toJson
+import com.frostnerd.smokescreen.type
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
+import com.frostnerd.smokescreen.util.ServerType
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -74,19 +77,19 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
 
         fun writeServerInfoToIntent(info:DnsServerInformation<*>, intent:Intent) {
             intent.putExtra(extraKeyServerConfig, info.toJson())
-            intent.putExtra(extraKeyServerType, getServerInfoType(info))
+            intent.putExtra(extraKeyServerType, info.type)
         }
 
         fun writeServerInfoToIntent(info:DnsServerInformation<*>, bundle:Bundle) {
             bundle.putString(extraKeyServerConfig, info.toJson())
-            bundle.putString(extraKeyServerType, getServerInfoType(info))
+            bundle.putSerializable(extraKeyServerType, info.type)
         }
 
         fun readServerInfoFromIntent(intent:Intent?):DnsServerInformation<*>? {
             if(intent == null) return null
             if(intent.extras?.containsKey(extraKeyServerConfig) == true) {
                 if(intent.extras?.containsKey(extraKeyServerType) == true) {
-                    return serverInfoFromJson(intent.extras!!.getString(extraKeyServerConfig)!!, intent.extras!!.getString(extraKeyServerType)!!)
+                    return serverInfoFromJson(intent.extras!!.getString(extraKeyServerConfig)!!, intent.extras!!.getSerializable(extraKeyServerType)!! as ServerType)
                 }
             }
             return null
@@ -96,29 +99,20 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
             if(bundle == null) return null
             if(bundle.containsKey(extraKeyServerConfig)) {
                 if(bundle.containsKey(extraKeyServerType)) {
-                    return serverInfoFromJson(bundle.getString(extraKeyServerConfig)!!, bundle.getString(extraKeyServerType)!!)
+                    return serverInfoFromJson(bundle.getString(extraKeyServerConfig)!!, bundle.getSerializable(extraKeyServerType)!! as ServerType)
                 }
             }
             return null
         }
 
-        private fun getServerInfoType(serverInfo: DnsServerInformation<*>): String {
-            return when {
-                serverInfo is HttpsDnsServerInformation -> "https"
-                serverInfo.servers.any {
-                    it.address is TLSUpstreamAddress
-                } -> "tls"
-                else -> "unknown"
-            }
-        }
-
-        private fun serverInfoFromJson(json:String, type:String):DnsServerInformation<*> {
+        private fun serverInfoFromJson(json:String, type:ServerType):DnsServerInformation<*> {
             TLSUpstreamAddress
             HttpsUpstreamAddress
+            QuicUpstreamAddress
             return when(type) {
-                "tls" -> DnsServerInformationTypeAdapter().fromJson(json)
-                "https" -> HttpsDnsServerInformationTypeAdapter().fromJson(json)
-                else -> throw IllegalArgumentException()
+                ServerType.DOH -> HttpsDnsServerInformationTypeAdapter().fromJson(json)
+                ServerType.DOT -> DnsServerInformationTypeAdapter().fromJson(json)
+                ServerType.DOQ -> DnsServerInformationTypeAdapter().fromJson(json)
         }
     }
 }

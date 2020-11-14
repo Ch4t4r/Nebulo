@@ -15,7 +15,8 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.hasTlsServer
+import com.frostnerd.smokescreen.type
+import com.frostnerd.smokescreen.util.ServerType
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -142,9 +143,11 @@ class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformat
                     append(")")
                 }
             }
-            if(server.hasTlsServer()) {
-                serverType.setText(R.string.dialog_serverimport_servertype_dot)
-            } else serverType.setText(R.string.dialog_serverimport_servertype_doh)
+            serverType.setText(when(server.type) {
+                ServerType.DOH -> R.string.dialog_serverimport_servertype_doh
+                ServerType.DOT -> R.string.dialog_serverimport_servertype_dot
+                ServerType.DOQ -> R.string.dialog_serverimport_servertype_doq
+            })
         }
     }
 }

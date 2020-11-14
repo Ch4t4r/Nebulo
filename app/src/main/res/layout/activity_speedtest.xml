@@ -54,7 +54,6 @@
             android:id="@+id/abort"
             android:src="@drawable/ic_times"
             android:background="@drawable/main_roundbuttons"
-            android:tint="?android:attr/textColor"
             android:layout_width="48dp"
             android:layout_alignParentBottom="true"
             android:visibility="gone"
@@ -63,13 +62,13 @@
             android:layout_toStartOf="@id/info"
             android:contentDescription="@string/contentdescription_main_servericon"
             android:layout_alignParentEnd="true"
-            android:layout_height="48dp"/>
+            android:layout_height="48dp"
+            app:tint="?android:attr/textColor" />
 
     <ImageButton
             android:id="@+id/info"
             android:src="@drawable/ic_info"
             android:background="@drawable/main_roundbuttons"
-            android:tint="?android:attr/textColor"
             android:layout_width="48dp"
             android:layout_alignParentBottom="true"
             android:visibility="gone"
@@ -77,6 +76,7 @@
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/contentdescription_main_servericon"
             android:layout_alignParentEnd="true"
-            android:layout_height="48dp"/>
+            android:layout_height="48dp"
+            app:tint="?android:attr/textColor" />
 
 </RelativeLayout>

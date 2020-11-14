@@ -5,7 +5,11 @@ import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
+import com.frostnerd.encrypteddnstunnelproxy.closeSilently
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
+import com.frostnerd.smokescreen.type
+import com.frostnerd.smokescreen.util.ServerType
 import okhttp3.Dns
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -13,14 +17,13 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
-import okhttp3.internal.closeQuietly
+import org.chromium.net.CronetEngine
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.*
-import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLSocketFactory
 import kotlin.random.Random
@@ -47,6 +50,7 @@ import kotlin.random.Random
 class DnsSpeedTest(val server: DnsServerInformation<*>,
                    private val connectTimeout: Int = 2500,
                    private val readTimeout:Int = 1500,
+                   private val cronetEngine: CronetEngine?,
                    val log:(line:String) -> Unit) {
     private val httpClient by lazy {
         OkHttpClient.Builder()
@@ -75,15 +79,27 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
 
         var firstPass = true
         for (i in 0 until passes) {
-            if (server is HttpsDnsServerInformation) {
-                server.serverConfigurations.values.forEach {
-                    if(firstPass) testHttps(it)
-                    latencies += testHttps(it) ?: 0
+            when(server.type) {
+                ServerType.DOT -> {
+                    (server as DnsServerInformation<TLSUpstreamAddress>).servers.forEach {
+                        if(firstPass) testTls(it.address)
+                        latencies += testTls(it.address) ?: 0
+                    }
                 }
-            } else {
-                (server as DnsServerInformation<TLSUpstreamAddress>).servers.forEach {
-                    if(firstPass) testTls(it.address)
-                    latencies += testTls(it.address) ?: 0
+                ServerType.DOH -> {
+                    server as HttpsDnsServerInformation
+                    server.serverConfigurations.values.forEach {
+                        if(firstPass) testHttps(it)
+                        latencies += testHttps(it) ?: 0
+                    }
+                }
+                ServerType.DOQ -> {
+                    (server as DnsServerInformation<QuicUpstreamAddress>).servers.forEach {
+                        if(cronetEngine != null) {
+                            if(firstPass) testQuic(it.address, cronetEngine)
+                            latencies += testQuic(it.address, cronetEngine) ?: 0
+                        }
+                    }
                 }
             }
             firstPass = false
@@ -200,6 +216,47 @@ class DnsSpeedTest(val server: DnsServerInformation<*>,
             return null
         } finally {
             socket?.close()
+        }
+    }
+
+    fun testQuic(address: QuicUpstreamAddress, engine:CronetEngine):Int? {
+        val url: URL = URL(address.getUrl(false))
+        var connection: HttpURLConnection? = null
+        var wasEstablished = false
+        val msg = createTestDnsPacket()
+        try {
+            val start = System.currentTimeMillis()
+            connection = engine.openConnection(url) as HttpURLConnection
+            connection.connectTimeout = connectTimeout
+            connection.requestMethod = "POST"
+            connection.setRequestProperty("Content-Type", "application/dns-message")
+            connection.setRequestProperty("Accept", "application/dns-message")
+            connection.doOutput = true
+            connection.readTimeout = readTimeout
+            wasEstablished = true
+            val outputStream = connection.outputStream
+            outputStream.write(msg.toArray())
+            outputStream.flush()
+            val status = connection.responseCode
+            if(status == 200) {
+                val data = connection.inputStream.readBytes().takeIf {
+                    it.isNotEmpty()
+                } ?: return null
+                val time = (System.currentTimeMillis() - start).toInt()
+                if(!testResponse(DnsMessage(data))) {
+                    log("DoT test failed once for ${server.name}: Testing the response for valid dns message failed")
+                    return null
+                }
+                return time
+            } else {
+               return null
+            }
+        } catch (ex: java.lang.Exception) {
+            return null
+        } finally {
+            if(wasEstablished) try {
+                connection?.inputStream?.closeSilently()
+            } catch (ignored:Throwable) {}
         }
     }
 

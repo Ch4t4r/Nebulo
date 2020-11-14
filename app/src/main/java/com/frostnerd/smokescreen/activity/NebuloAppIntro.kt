@@ -5,9 +5,11 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
+import com.frostnerd.smokescreen.createCronetEngineIfInstalled
 import com.frostnerd.smokescreen.fragment.AppIntroServerChooseFragment
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
@@ -48,22 +50,26 @@ class NebuloAppIntro:AppIntro() {
             it.values.map {
                 it to null
             }.toMap()
+        } + AbstractQuicDnsHandle.waitUntilKnownServersArePopulated(10) {
+            it.values.map {
+                it to null
+            }.toMap()
         }).filter { BuildConfig.SHOW_ALL_SERVERS || !it.key.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) }.toMutableMap()
         private val jobSupervisor = SupervisorJob()
+    }
 
-        init {
-            val parts = 3
-            val context = newFixedThreadPoolContext(parts, "speedtest-pool") + jobSupervisor
-            val scope = CoroutineScope(context)
-            val chunks = speedTestResults.keys.chunked(ceil(speedTestResults.size.toDouble()/parts).toInt())
-            for(i in 0 until parts) {
-                scope.launch {
-                    for(server in chunks[i]) {
-                        if(!isActive) break
-                        val testResult = DnsSpeedTest(server, log = {}).runTest(3)
-                        synchronized(speedTestResults) {
-                            speedTestResults[server] = testResult
-                        }
+    private fun beginSpeedtest() {
+        val parts = 3
+        val context = newFixedThreadPoolContext(parts, "speedtest-pool") + jobSupervisor
+        val scope = CoroutineScope(context)
+        val chunks = speedTestResults.keys.chunked(ceil(speedTestResults.size.toDouble()/parts).toInt())
+        for(i in 0 until parts) {
+            scope.launch {
+                for(server in chunks[i]) {
+                    if(!isActive) break
+                    val testResult = DnsSpeedTest(server, log = {}, cronetEngine = createCronetEngineIfInstalled(this@NebuloAppIntro)).runTest(3)
+                    synchronized(speedTestResults) {
+                        speedTestResults[server] = testResult
                     }
                 }
             }
@@ -72,6 +78,7 @@ class NebuloAppIntro:AppIntro() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getPreferences().theme.id)
+        beginSpeedtest()
         super.onCreate(savedInstanceState)
         setTransformer(AppIntroPageTransformerType.Zoom)
         isImmersive = false

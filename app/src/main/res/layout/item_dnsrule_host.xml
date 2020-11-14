@@ -55,8 +55,8 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:src="@drawable/ic_delete"
                     android:id="@+id/delete"
-                    android:tint="?android:attr/textColor"
-                    android:layout_height="48dp"/>
+                    android:layout_height="48dp"
+                    app:tint="?android:attr/textColor" />
         </LinearLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

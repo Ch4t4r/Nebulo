@@ -7,7 +7,8 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
-import com.frostnerd.smokescreen.hasHttpsServer
+import com.frostnerd.smokescreen.type
+import com.frostnerd.smokescreen.util.ServerType
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
@@ -39,7 +40,6 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
     private val tlsTypeAdapter = DnsServerInformationTypeAdapter()
     private val httpsTypeAdapter = HttpsDnsServerInformationTypeAdapter()
 
-
     override fun getValue(
         thisRef: TypedPreferences<SharedPreferences>,
         property: KProperty<*>
@@ -58,7 +58,6 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
                             "id" -> id = reader.nextInt()
                             "server_https", "server" -> info = httpsTypeAdapter.read(reader)!!
                             "server_tls" -> info = tlsTypeAdapter.read(reader)!!
-
                         }
                     }
                     reader.endObject()
@@ -83,12 +82,19 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
             jsonWriter.beginObject()
             jsonWriter.name("id")
             jsonWriter.value(server.id)
-            if(server.isHttpsServer()) {
-                jsonWriter.name("server_https")
-                httpsTypeAdapter.write(jsonWriter, server.serverInformation as HttpsDnsServerInformation)
-            } else {
-                jsonWriter.name("server_tls")
-                tlsTypeAdapter.write(jsonWriter, server.serverInformation)
+            when(server.type) {
+                ServerType.DOH -> {
+                    jsonWriter.name("server_https")
+                    httpsTypeAdapter.write(jsonWriter, server.serverInformation as HttpsDnsServerInformation)
+                }
+                ServerType.DOT -> {
+                    jsonWriter.name("server_tls")
+                    tlsTypeAdapter.write(jsonWriter, server.serverInformation)
+                }
+                ServerType.DOQ -> {
+                    jsonWriter.name("server_quic")
+                    tlsTypeAdapter.write(jsonWriter, server.serverInformation)
+                }
             }
             jsonWriter.endObject()
         }
@@ -102,7 +108,5 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
 }
 
 class UserServerConfiguration(val id: Int, val serverInformation: DnsServerInformation<*>) {
-    fun isHttpsServer(): Boolean {
-        return serverInformation is HttpsDnsServerInformation || serverInformation.hasHttpsServer()
-    }
+    val type:ServerType = serverInformation.type
 }
