@@ -9,6 +9,7 @@ import androidx.core.app.NotificationCompat
 import com.frostnerd.dnstunnelproxy.AddressCreator
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.activity.LoggingDialogActivity
@@ -140,13 +141,14 @@ class SmokeScreen : Application() {
     override fun onCreate() {
         if(!BuildConfig.LEAK_DETECTION) LeakSentry.config = LeakSentry.config.copy(enabled = false)
         initSentry()
-        loadKnownDNSServers()
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
         log("Application created.")
         LeakSentry.watchIfEnabled(this)
         handleFallbackDns()
+        loadKnownDNSServers()
+        AbstractQuicDnsHandle.installProvider(this, {})
     }
 
     private fun handleFallbackDns() {

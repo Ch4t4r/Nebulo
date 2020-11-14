@@ -380,7 +380,7 @@ class MainFragment : Fragment() {
             } + AbstractTLSDnsHandle.suspendUntilKnownServersArePopulated(1500) {
                 setOf(it[1], it[0]) //Quad9, CF
             }).mapNotNull {
-                DnsSpeedTest(it as DnsServerInformation<*>, log = {}).runTest(4)
+                DnsSpeedTest(it as DnsServerInformation<*>, log = {}, cronetEngine = null /* We do not need quic here*/ ).runTest(4)
             }.takeIf {
                 it.isNotEmpty()
             }?.let {

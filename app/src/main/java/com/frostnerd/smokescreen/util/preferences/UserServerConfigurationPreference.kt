@@ -7,9 +7,6 @@ import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceTypeWithDefault
-import com.frostnerd.smokescreen.hasHttpsServer
-import com.frostnerd.smokescreen.hasQuicServer
-import com.frostnerd.smokescreen.hasTlsServer
 import com.frostnerd.smokescreen.type
 import com.frostnerd.smokescreen.util.ServerType
 import com.google.gson.stream.JsonReader
@@ -61,7 +58,6 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
                             "id" -> id = reader.nextInt()
                             "server_https", "server" -> info = httpsTypeAdapter.read(reader)!!
                             "server_tls" -> info = tlsTypeAdapter.read(reader)!!
-
                         }
                     }
                     reader.endObject()

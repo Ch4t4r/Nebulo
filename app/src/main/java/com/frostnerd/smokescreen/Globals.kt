@@ -17,9 +17,12 @@ import androidx.appcompat.app.AlertDialog
 import com.frostnerd.dnstunnelproxy.KnownDnsServers
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
+import com.google.android.gms.net.CronetProviderInstaller
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
 import okhttp3.internal.toHexString
+import org.chromium.net.CronetEngine
 import java.util.*
 
 
@@ -130,4 +133,9 @@ fun loadKnownDNSServers() {
     AbstractTLSDnsHandle
     AbstractQuicDnsHandle
     KnownDnsServers
+}
+
+fun createCronetEngineIfInstalled(context: Context, vararg addresses: QuicUpstreamAddress): CronetEngine? {
+    return if(CronetProviderInstaller.isInstalled()) AbstractQuicDnsHandle.createEngine(context, *addresses)
+    else null
 }

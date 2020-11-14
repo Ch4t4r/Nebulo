@@ -24,6 +24,7 @@ import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.json.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
@@ -36,10 +37,13 @@ import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
 import com.frostnerd.smokescreen.util.proxy.IpTablesPacketRedirector
+import com.google.android.gms.net.CronetProviderInstaller
 import io.sentry.android.core.BuildInfoProvider
 import io.sentry.android.core.util.RootChecker
 import io.sentry.core.NoOpLogger
 import leakcanary.LeakSentry
+import org.chromium.net.CronetEngine
+import org.chromium.net.CronetProvider
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
