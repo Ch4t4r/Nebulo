@@ -24,20 +24,26 @@ import com.frostnerd.dnstunnelproxy.DnsServerConfiguration
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.json.DnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.*
+import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.smokescreen.service.DnsVpnService
+import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.AppSettingsSharedPreferences
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
 import com.frostnerd.smokescreen.util.proxy.IpTablesPacketRedirector
+import com.google.android.gms.net.CronetProviderInstaller
 import io.sentry.android.core.BuildInfoProvider
 import io.sentry.android.core.util.RootChecker
 import io.sentry.core.NoOpLogger
 import leakcanary.LeakSentry
+import org.chromium.net.CronetEngine
+import org.chromium.net.CronetProvider
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
@@ -322,23 +328,13 @@ operator fun Level.compareTo(otherLevel:Level):Int {
     return this.intValue() - otherLevel.intValue()
 }
 
-fun DnsServerInformation<*>.hasTlsServer():Boolean {
-    return this.servers.any {
-        it.address is TLSUpstreamAddress
-    }
-}
-
-fun DnsServerInformation<*>.hasHttpsServer():Boolean {
-    return this.servers.any {
-        it is HttpsUpstreamAddress
-    }
-}
+val DnsServerInformation<*>.type
+    get() = ServerType.detect(this)
 
 fun DnsServerInformation<*>.toJson():String {
-    return if(hasTlsServer()) {
-        DnsServerInformationTypeAdapter().toJson(this)
-    } else {
-        HttpsDnsServerInformationTypeAdapter().toJson(this as HttpsDnsServerInformation)
+    return when(type) {
+        ServerType.DOH ->  HttpsDnsServerInformationTypeAdapter().toJson(this as HttpsDnsServerInformation)
+        ServerType.DOT, ServerType.DOQ -> DnsServerInformationTypeAdapter().toJson(this)
     }
 }
 

@@ -5,12 +5,11 @@ import com.frostnerd.dnstunnelproxy.DnsHandle
 import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
-import com.frostnerd.smokescreen.equalsAny
-import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.hasTlsServer
-import com.frostnerd.smokescreen.log
+import com.frostnerd.smokescreen.util.ServerType
 import kotlinx.coroutines.*
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.record.A
@@ -49,12 +48,12 @@ class QueryListener(private val context: Context) : QueryListener {
 
     init {
         val config = context.getPreferences().dnsServerConfig
-        askedServer = if (config.hasTlsServer()) {
-            "tls::" + config.servers.first().address.host!!
-        } else {
-            "https::" + (config as HttpsDnsServerInformation).serverConfigurations.values.first().urlCreator.address.getUrl(
+        askedServer = when(config.type) {
+            ServerType.DOH -> "https::" + (config as HttpsDnsServerInformation).serverConfigurations.values.first().urlCreator.address.getUrl(
                 false
             )
+            ServerType.DOT -> "tls::" + config.servers.first().address.host!!
+            ServerType.DOQ -> "quic::" + (config.servers.first().address as QuicUpstreamAddress).getUrl(true)
         }
         databaseWriteJob = if (logQueriesToDb)
             GlobalScope.launch(newSingleThreadContext("QueryListener-DatabaseWrite")) {

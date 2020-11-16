@@ -5,6 +5,7 @@ import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.vpntunnelproxy.FutureAnswer
+import org.chromium.net.CronetEngine
 import org.minidns.dnsmessage.DnsMessage
 import java.net.InetAddress
 
@@ -31,9 +32,10 @@ class ProxyHttpsHandler(
     serverConfigurations: List<ServerConfiguration>,
     connectTimeout: Long,
     val queryCountCallback: (() -> Unit)? = null,
-    val mapQueryRefusedToHostBlock:Boolean
+    val mapQueryRefusedToHostBlock:Boolean,
+    cronetEngine: CronetEngine? = null
 ) :
-    AbstractHttpsDNSHandle(serverConfigurations, connectTimeout) {
+    AbstractHttpsDNSHandle(serverConfigurations, connectTimeout, cronetEngine) {
     override val handlesSpecificRequests: Boolean = ProxyBypassHandler.knownSearchDomains.isNotEmpty()
     private val dummyUpstreamAddress = UpstreamAddress(AddressCreator.fromHostAddress("0.0.0.0"), 1)
 

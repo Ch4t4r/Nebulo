@@ -30,6 +30,7 @@
     <string name="quicksettings_start_text">Start Nebulo</string>
     <string name="fragment_querydetail_mode_dot" translatable="false">DNS-over-TLS</string>
     <string name="fragment_querydetail_mode_doh" translatable="false">DNS-over-HTTPS</string>
+    <string name="fragment_querydetail_mode_doq" translatable="false">DNS-over-QUIC</string>
     <string name="theme_mono">Mono</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_true_black">True black</string>

@@ -148,7 +148,9 @@ class QueryLogDetailFragment : Fragment() {
                 query.responseSource == QueryListener.Source.LOCALRESOLVER -> getString(R.string.windows_querylogging_usedserver_dnsrules)
                 query.askedServer == null -> "-"
                 query.askedServer!!.startsWith("https") -> getString(R.string.fragment_querydetail_mode_doh)
-                else -> getString(R.string.fragment_querydetail_mode_dot)
+                query.askedServer!!.startsWith("tls") -> getString(R.string.fragment_querydetail_mode_doh)
+                query.askedServer!!.startsWith("quic") -> getString(R.string.fragment_querydetail_mode_doq)
+                else -> "-"
             }
             resolvedBy.text = when (query.responseSource) {
                 QueryListener.Source.CACHE -> getString(R.string.windows_querylogging_usedserver_cache)

@@ -11,14 +11,16 @@ import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.TransportProtocol
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.lifecyclemanagement.BaseActivity
 import com.frostnerd.lifecyclemanagement.BaseViewHolder
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.dialog.SpeedtestPassesDialog
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
+import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.SpaceItemDecorator
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import kotlinx.android.synthetic.main.activity_speedtest.*
@@ -68,6 +70,15 @@ class SpeedTestActivity : BaseActivity() {
             abort.visibility = View.VISIBLE
             info.visibility = View.GONE
         }
+        startTest.setOnLongClickListener {
+            SpeedtestPassesDialog(this) {
+                startTest(it)
+                startTest.isEnabled = false
+                abort.visibility = View.VISIBLE
+                info.visibility = View.GONE
+            }.show()
+            true
+        }
         abort.setOnClickListener {
             abort.visibility = View.GONE
             testJob?.cancel()
@@ -79,13 +90,17 @@ class SpeedTestActivity : BaseActivity() {
         }
         info.setOnClickListener {
             if(testResults != null) {
-                val dotCount = testResults!!.count { it.server !is HttpsDnsServerInformation }
-                val dotReachable = testResults!!.count { it.server !is HttpsDnsServerInformation && it.latency != null}
+                val dotCount = testResults!!.count { it.server.type == ServerType.DOT }
+                val dotReachable = testResults!!.count { it.server.type == ServerType.DOT && it.latency != null}
                 val dotNotReachable = dotCount - dotReachable
 
-                val dohCount = testResults!!.size - dotCount
-                val dohReachable = testResults!!.count { it.server is HttpsDnsServerInformation && it.latency != null}
+                val dohCount = testResults!!.count { it.server.type == ServerType.DOH }
+                val dohReachable = testResults!!.count {it.server.type == ServerType.DOH && it.latency != null}
                 val dohNotReachable = dohCount - dohReachable
+
+                val doqCount = testResults!!.count { it.server.type == ServerType.DOQ }
+                val doqReachable = testResults!!.count {it.server.type == ServerType.DOQ && it.latency != null}
+                val doqNotReachable = dohCount - dohReachable
 
                 val avgLatency = testResults!!.sumBy { it.latency ?: 0 }/testResults!!.size
                 val fastestServer = testResults!!.minBy { it.latency ?: Integer.MAX_VALUE}
@@ -98,7 +113,7 @@ class SpeedTestActivity : BaseActivity() {
                         dotReachable,
                         dotNotReachable,
                         dohReachable,
-                        dohNotReachable,
+                        dohNotReachable, // TODO show DoQ results
                         avgLatency,
                         fastestServer?.server?.name ?: "-",
                         slowestServer?.server?.name ?: "-"
@@ -114,13 +129,16 @@ class SpeedTestActivity : BaseActivity() {
         prepareListJob = launchWithLifecycleUi {
             val hiddenDotServers = getPreferences().removedDefaultDoTServers
             val hiddenDohServers = getPreferences().removedDefaultDoHServers
+            val hiddenDoQServers = getPreferences().removedDefaultDoQServers
             val hasIpv4 = hasDeviceIpv4Address()
             val hasIpv6 = hasDeviceIpv6Address()
-            val dnsServers = (AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.filter { it.key !in hiddenDotServers }.values +
+            val unfilteredServers = AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.filter { it.key !in hiddenDotServers }.values +
                     AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.filter { it.key !in hiddenDohServers }.values +
                     getPreferences().userServers.map {
                         it.serverInformation
-                    }).filter {
+                    } +
+                    AbstractQuicDnsHandle.KNOWN_DNS_SERVERS.filter { it.key !in hiddenDoQServers }.values
+            val dnsServers = unfilteredServers.filter {
                 it.servers.all { server ->
                     hasIpv4 == (TransportProtocol.IPV4 in server.supportedTransportProtocols)
                             || hasIpv6 == (TransportProtocol.IPV6 in server.supportedTransportProtocols)
@@ -166,10 +184,11 @@ class SpeedTestActivity : BaseActivity() {
         }
     }
 
-    private fun startTest() {
+    private fun startTest(passes:Int = 3) {
         if(wasStartedBefore) prepareList()
         testJob = launchWithLifecycle {
             prepareListJob?.join()
+            val engine = createQuicCronetEngineIfInstalled(this@SpeedTestActivity)
             testRunning = true
             wasStartedBefore = true
             val testsLeft = testResults!!.shuffled()
@@ -182,9 +201,9 @@ class SpeedTestActivity : BaseActivity() {
                 if(testJob?.isCancelled == false) {
                     pendingTest.started = true
                     log("Running SpeedTest for ${pendingTest.server.name}")
-                    val res = DnsSpeedTest(pendingTest.server, highestLatency, highestLatency+250) { line ->
+                    val res = DnsSpeedTest(this@SpeedTestActivity, pendingTest.server, highestLatency, highestLatency+250, engine) { line ->
                         log(line)
-                    }.runTest(3)
+                    }.runTest(passes)
 
                     if (res != null) pendingTest.latency = res
                     else pendingTest.error = true
@@ -241,8 +260,11 @@ class SpeedTestActivity : BaseActivity() {
                     append("\n")
                 }
             }
-            serverType.text = if(speedTest.server is HttpsDnsServerInformation) getString(R.string.tasker_mode_doh)
-            else getString(R.string.tasker_mode_dot)
+            serverType.text = when(speedTest.server.type) {
+                ServerType.DOT -> getString(R.string.tasker_mode_dot)
+                ServerType.DOH -> getString(R.string.tasker_mode_doh)
+                ServerType.DOQ -> getString(R.string.tasker_mode_doq)
+            }
             if (speedTest.latency == null) {
                 when {
                     speedTest.error -> {
