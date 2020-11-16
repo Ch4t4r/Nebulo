@@ -366,6 +366,7 @@ class MainFragment : Fragment() {
     }
 
     private fun determineLatencyBounds() {
+        val context = requireContext()
         // Use the ping for the best servers to deviate the thresholds
         // The deviation will only increase the thresholds, not decrease it.
         // This is to avoid measuring smaller servers on the benchmarks of the "better" ones
@@ -380,7 +381,7 @@ class MainFragment : Fragment() {
             } + AbstractTLSDnsHandle.suspendUntilKnownServersArePopulated(1500) {
                 setOf(it[1], it[0]) //Quad9, CF
             }).mapNotNull {
-                DnsSpeedTest(requireContext(), it as DnsServerInformation<*>, log = {}, cronetEngine = null /* We do not need quic here*/ ).runTest(4)
+                DnsSpeedTest(context, it as DnsServerInformation<*>, log = {}, cronetEngine = null /* We do not need quic here*/ ).runTest(4)
             }.takeIf {
                 it.isNotEmpty()
             }?.let {
