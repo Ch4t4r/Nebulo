@@ -151,4 +151,6 @@
     <string name="changelog_build_67_2">\"アプリの除外\"画面でアプリ検索ができるようにしました</string>
     <string name="changelog_build_67_3">非VPNモードでサーバーのレイテンシが表示されない問題を修正しました</string>
     <string name="changelog_build_67_1">ホストを無視するために、別のIPv6アドレス(::)を内部で使用するようにしました</string>
+    <string name="changelog_build_69_2">DNS-over-HTTPSのクエリ処理パフォーマンスを上げました</string>
+    <string name="changelog_build_69_1">DNS-over-QUIC対応を追加しました</string>
 </resources>
