@@ -211,4 +211,11 @@
     <string name="querylog_filter_type_cache">DNSキャッシュにより解決済み</string>
     <string name="dialog_share_message">どのリンクでシェアしますか\?</string>
     <string name="dialog_share_title">リンクタイプを選択</string>
+    <string name="dialog_speedtestpasses_message">サーバーごとに行われるスピードテストの試行回数を指定します。値を大きくするほど信頼性が高くなります</string>
+    <string name="dialog_speedtestpasses_title">試行回数の設定</string>
+    <string name="dialog_serverimport_servertype_doq">タイプ: DNS-over-QUIC(DoQ)</string>
+    <string name="dialog_newserver_secondaryserver_hint_doq" translatable="false">example-doq.com[/dns-query]</string>
+    <string name="dialog_newserver_primaryserver_hint_doq" translatable="false">example-doq.com[/dns-query]</string>
+    <string name="dialog_newserver_title_quic">サーバーを追加(DoQ)</string>
+    <string name="dialog_serverconfiguration_quic" translatable="false">DNS-over-QUIC (DoQ)</string>
 </resources>
