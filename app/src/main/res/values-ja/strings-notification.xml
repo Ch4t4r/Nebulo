@@ -67,4 +67,7 @@
     <string name="notification_channel_dnsrules">DNSルール通知チャンネル</string>
     <string name="notification_bad_connection_text">DNSサーバーの接続がよくありません。これによりネットサーフィン速度に悪影響が出る可能性があります。他のサーバーに変更をおすすめします。</string>
     <string name="notification_bad_connection_title">サーバー接続不良</string>
+    <string name="notification_cronet_failed_text">初期化できなかったため、DNS-over-QUICは使用できません。他のサーバーを選択してください。</string>
+    <string name="notification_cronet_failed_title">QUICプロトコルの初期化に失敗しました</string>
+    <string name="notification_main_title_quic">Nebulo (DoQ)</string>
 </resources>
