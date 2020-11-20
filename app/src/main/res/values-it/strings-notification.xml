@@ -67,4 +67,7 @@
     <string name="notification_channel_dnsrules">Canale di notifica delle regole DNS</string>
     <string name="notification_bad_connection_text">In questo momento la tua connessione al server DNS è scarsa. Ciò potrebbe peggiorare la velocità di navigazione. Considera la possibilità di selezionare un altro server.</string>
     <string name="notification_bad_connection_title">Connessione al server scarsa</string>
+    <string name="notification_cronet_failed_text">DNS-over-QUIC non può essere usato perché non è stato inizializzato. Scegli un altro server.</string>
+    <string name="notification_cronet_failed_title">Inizializzazione QUIC fallita</string>
+    <string name="notification_main_title_quic">Nebulo (DoQ)</string>
 </resources>
