@@ -210,4 +210,11 @@
     <string name="querylog_filter_type_cache">Risolto dalla cache DNS</string>
     <string name="dialog_share_message">Quale link vuoi condividere\?</string>
     <string name="dialog_share_title">Seleziona tipo di link</string>
+    <string name="dialog_speedtestpasses_title">Configura passaggi test</string>
+    <string name="dialog_speedtestpasses_message">Imposta quanto spesso eseguire il test per server. Un numero maggiore migliora l\'accuratezza</string>
+    <string name="dialog_serverimport_servertype_doq">Tipo: DNS-over-QUIC (DoQ)</string>
+    <string name="dialog_newserver_secondaryserver_hint_doq" translatable="false">esempio-doq.com[/dns-query]</string>
+    <string name="dialog_newserver_primaryserver_hint_doq" translatable="false">esempio-doq.com[/dns-query]</string>
+    <string name="dialog_newserver_title_quic">Aggiungi un server (DoQ)</string>
+    <string name="dialog_serverconfiguration_quic" translatable="false">DNS-over-QUIC (DoQ)</string>
 </resources>
