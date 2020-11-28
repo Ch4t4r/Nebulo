@@ -19,6 +19,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.preference.*
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.general.isInt
+import com.frostnerd.general.isLong
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
@@ -156,7 +157,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val pinValue = findPreference("pin") as EditTextPreference
 
         pinValue.setOnPreferenceChangeListener { _, newValue ->
-            if (newValue.toString().isNotEmpty() && newValue.toString().isInt()) {
+            if (newValue.toString().isNotEmpty() && newValue.toString().isLong()) {
                 pinValue.summary = getString(R.string.summary_preference_change_pin, newValue.toString())
                 true
             } else {

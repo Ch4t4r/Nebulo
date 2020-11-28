@@ -84,8 +84,14 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
                 measurementsWithBadConnection++
                 callCallback()
             } else if(measurementsWithBadConnection != 0){
-                if(measurementsWithBadConnection == 1) onBadConnectionResolved()
-                measurementsWithBadConnection = maxOf(0, measurementsWithBadConnection - minOf(1,maxOf(8, measurementsWithBadConnection/12)))
+                measurementsWithBadConnection = if(measurementsWithBadConnection <= 1) {
+                    onBadConnectionResolved()
+                    0
+                } else {
+                    logFine("Measurements left till calling callback with resolved status: $measurementsWithBadConnection")
+                    measurementsWithBadConnection - maxOf(2, measurementsWithBadConnection/7) -
+                            if(measurementsWithBadConnection > 100) 10 else 0
+                }
             }
 
             latencyAtLastCheck = trafficStats.floatingAverageLatency.toInt()

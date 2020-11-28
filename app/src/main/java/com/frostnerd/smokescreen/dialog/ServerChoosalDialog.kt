@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import app.cash.exhaustive.Exhaustive
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.TransportProtocol
@@ -344,7 +345,7 @@ class ServerChoosalDialog(
                     currentSelectedServer = when(userConfiguration.type) {
                         ServerType.DOT ->AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
                         ServerType.DOH -> AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
-                        ServerType.DOQ -> TODO()
+                        ServerType.DOQ -> AbstractQuicDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
                     }
                     markCurrentSelectedServer()
                     context.getPreferences().dnsServerConfig = currentSelectedServer!!
@@ -381,20 +382,32 @@ class ServerChoosalDialog(
             )
             .setNegativeButton(R.string.all_no) { _, _ -> }
             .setPositiveButton(R.string.all_yes) { _, _ ->
-                val isHttps = layout.spinner.selectedItemPosition == 0
-                if(isHttps) {
-                    context.getPreferences().removedDefaultDoHServers = context.getPreferences().removedDefaultDoHServers + AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.keys.find {
-                        AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[it] == config
-                    }!!
-                } else {
-                    context.getPreferences().removedDefaultDoTServers = context.getPreferences().removedDefaultDoTServers + AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.keys.find {
-                        AbstractTLSDnsHandle.KNOWN_DNS_SERVERS[it] == config
-                    }!!
+                val type = ServerType.from(layout.spinner.selectedItemPosition)
+                @Exhaustive
+                when(type) {
+                    ServerType.DOH -> {
+                        context.getPreferences().removedDefaultDoHServers = context.getPreferences().removedDefaultDoHServers + AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.keys.find {
+                            AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS[it] == config
+                        }!!
+                    }
+                    ServerType.DOT -> {
+                        context.getPreferences().removedDefaultDoTServers = context.getPreferences().removedDefaultDoTServers + AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.keys.find {
+                            AbstractTLSDnsHandle.KNOWN_DNS_SERVERS[it] == config
+                        }!!
+                    }
+                    ServerType.DOQ -> {
+                        context.getPreferences().removedDefaultDoQServers += AbstractQuicDnsHandle.KNOWN_DNS_SERVERS.keys.find {
+                            AbstractQuicDnsHandle.KNOWN_DNS_SERVERS[it] == config
+                        }!!
+                    }
                 }
 
                 if (button.isChecked) {
-                    currentSelectedServer =
-                        if (isHttps) AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value else AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value
+                    currentSelectedServer = when(type) {
+                        ServerType.DOH -> AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value
+                        ServerType.DOT -> AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value
+                        ServerType.DOQ -> AbstractQuicDnsHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value
+                    }
                     markCurrentSelectedServer()
                     context.getPreferences().dnsServerConfig = currentSelectedServer!!
                 }

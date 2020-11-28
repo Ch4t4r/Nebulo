@@ -1318,7 +1318,12 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 )
                 vpnProxy?.forwardingMode = forwardingMode
                 vpnProxy?.maxRetries = 15
-                val preferredPort = getPreferences().dnsServerModePort
+                val preferredPort = getPreferences().dnsServerModePort.let {
+                    if(it !in 1025..65535) {
+                        getPreferences().dnsServerModePort = 11053
+                        11053
+                    } else it
+                }
                 val defaultBindAddress = if (ipv4Enabled) InetAddress.getLocalHost() else InetAddress.getByName("::1")
                 val bindAddress = if(getPreferences().nonVPNUseLanIP) {
                     getLanIP(true) ?: defaultBindAddress
