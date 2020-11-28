@@ -134,4 +134,6 @@
     <string name="title_inform_bad_connection">Informiere mich bei schlechter Verbindung</string>
     <string name="summary_nonvpn_use_lanip">Manche Apps erlauben es nicht, localhost als DNS Server einzutragen. Mit dieser Einstellung wird statt localhost die IP Adresse im Netzwerk genutzt. Der Nachteil hierbei ist, dass sich diese Adresse von Netzwerk zu Netzwerk ändert.</string>
     <string name="title_nonvpn_use_lanip">Nutzer Geräte IP Addresse anstatt localhost</string>
+    <string name="summary_export_settings">Exportiere alle Einstellungen (schließt DNS Regel Quellen ein) in eine Datei. Diese Datei kann später von Nebulo geöffnet und importiert werden.</string>
+    <string name="title_export_settings">Einstellungen exportieren</string>
 </resources>
