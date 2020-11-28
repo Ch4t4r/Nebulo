@@ -27,7 +27,7 @@
     <string name="notification_main_text_whitelist">Queries are sent to %1s\n\n%2d Apps are using DoH/DoT</string>
     <string name="notification_main_text_with_secondary_whitelist">Queries are sent to %1s and %2s\n\n%3d Apps are using DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
-    <string name="notification_main_title_quic">Nebulo (DoQ)</string>
+    <string name="notification_main_title_quic" translatable="false">Nebulo (DoQ)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1d queries so far</string>
 
