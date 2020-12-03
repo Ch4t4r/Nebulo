@@ -134,4 +134,6 @@
     <string name="title_inform_bad_connection">接続不良を知らせる</string>
     <string name="summary_nonvpn_use_lanip">いくつかのアプリでは、DNSのIPアドレスにlocalhost(127.0.0.1)を指定することができません。この設定を有効にすると、代わりにローカルネットワークで割り当てられたIPアドレスを使用できるようになります。なお接続しているローカルネットワークによってこのIPアドレスが変わることがありますので注意してください。</string>
     <string name="title_nonvpn_use_lanip">localhostの代替としてデバイスIP使用</string>
+    <string name="summary_export_settings">DNSルールのソースを含むすべての設定をファイルにして書き出します。このファイルをNebuloに読み込ませることで設定を元に戻すことができます。</string>
+    <string name="title_export_settings">設定のエクスポート</string>
 </resources>
