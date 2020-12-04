@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="contentdescription_main_infoimage">Ícone de informação</string>
+    <string name="contentdescription_main_servericon">Ícone do servidor</string>
+    <string name="contentdescription_main_statusimage">Imagem que indica se o App está ativo</string>
+    <string name="contentdescription_shared_app_icon">Ícone do App</string>
+    <string name="contentdescription_clear_search">Limpar o histórico</string>
+
+    <string name="contentdescription_start_app">Iniciar o App</string>
+    <string name="contentdescription_stop_app">Parar o App</string>
+    
+    <string name="hint_searchterm">Palavra a ser pesquisada</string>
+    <string name="hint_search">Pesquisar</string>
+</resources>
