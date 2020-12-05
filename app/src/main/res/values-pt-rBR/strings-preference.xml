@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_category_general">Geral</string>
+    <string name="title_theme">Tema</string>
+    <string name="summary_theme">Define o tema do App</string>
+    <string name="title_start_on_boot">Executar ao iniciar</string>
+    <string name="summary_start_on_boot">Iniciar o App automaticamente quando o aparelho for ligado</string>
+    <string name="title_start_after_update">Iniciar após atualização</string>
+    <string name="summary_start_after_update">Iniciar o App automaticamente depois de ser atualizado</string>
+    <string name="title_excluded_apps">Apps excluídos</string>
+    <string name="summary_excluded_apps">Excluir os aplicativos do App aqui, por exemplo, se eles não conseguirem mais se conectar à Internet - os aplicativos selecionados não irão usar DNS-over-HTTPS ou DNS-over-TLS</string>
+    <string name="preference_category_notification">Notificação</string>
+    <string name="title_show_notification_on_lockscreen">Mostrar na tela de bloqueio</string>
+    <string name="summary_show_notification_on_lockscreen">Define se a notificação deve ser exibida na tela de bloqueio</string>
+    <string name="title_notification_hide_icon">Ocultar ícone</string>
+    <string name="summary_notification_hide_icon">Esconde o ícone da notificação na barra superior</string>
+    <string name="title_notification_allow_stop">Permitir parada</string>
+    <string name="summary_notification_allow_stop">Permitir parada a partir da notificação</string>
+    <string name="title_notification_allow_pause">Permitir pausar</string>
+    <string name="summary_notification_allow_pause">Permitir pausar a partir da notificação</string>
+    <string name="preference_category_pin">Proteção por PIN</string>
+    <string name="title_preference_enable_pin">Código PIN</string>
+    <string name="summary_preference_enable_pin">Solicitar código PIN para abrir ou parar o App</string>
+    <string name="title_preference_pin_use_fingerprint">Permitir impressão digital</string>
+    <string name="summary_preference_pin_use_fingerprint">Permitir usar impressões digitais em vez do código PIN</string>
+    <string name="title_preference_change_pin">Mudar o código PIN</string>
+    <string name="summary_preference_change_pin">Clique aqui para mudar o PIN. Apenas dígitos numéricos são aceitos.
+\nCódigo PIN atual: %1s</string>
+    <string name="preference_category_cache">Configurações de cache</string>
+    <string name="title_dnscache_enabled">Usar cache de DNS</string>
+    <string name="summary_dnscache_enabled">Ativa cache do DNS. O cache memoriza consultas antigas para responder a estas mais rapidamente no futuro. 
+\n 
+\nO sistema já possui um cache, ative-o se você quiser personalizar o comportamento</string>
+    <string name="title_dnscache_keepacrosslaunches">Armazenar cache do DNS</string>
+    <string name="summary_dnscache_keepacrosslaunches">Manter o cache do DNS mesmo quando o App for reiniciado</string>
+    <string name="title_dnscache_maxsize">Tamanho máximo do cache</string>
+    <string name="summary_dnscache_maxsize">Definir o número máximo de consultas armazenadas, independentemente do tempo</string>
+    <string name="title_dnscache_usedefaulttimes">Tempo padrão de cache</string>
+    <string name="summary_dnscache_usedefaulttimes">Mantenha as requisições no cache enquanto o servidor DNS se comunicar usando o TTL</string>
+    <string name="title_dnscache_minimum_cache_time">Tempo mínimo de cache</string>
+    <string name="summary_dnscache_minimum_cache_time">A quantidade mínima de entradas de tempo deve ser colocada em cache, não importa se o tempo de cache padrão para isso seria menor. Tempos longos de cache podem fazer com que os dados em cache fiquem fora de sincronia com os dados reais.
+\nAtual: %1d Segundos</string>
+    <string name="title_dnscache_customcachetime">Tempo de cache (segundos)</string>
+    <string name="summary_dnscache_customcachetime">Muda o tempo de cache de todas as solicitações, não importa se o tempo padrão de cache seria maior. Tempos longos de cache podem fazer com que os dados em cache fiquem fora de sincronia com os dados reais.
+\nAtual: %1d Segundos</string>
+    <string name="title_dnscache_nxdomaincachetime">Tempo de cache para NXDomain (segundos)</string>
+    <string name="summary_dnscache_nxdomaincachetime">Alterar quanto tempo cada consulta com a resposta NXDOMAIN é mantida em cache. Isso melhora o desempenho para domínios não existentes (se eles estão bloqueados, por exemplo) 
+\nAtual: %1d Segundos</string>
+    <string name="preference_category_logging">Registro</string>
+    <string name="title_enable_logging">Ativar registro de erros</string>
+    <string name="summary_enable_logging">Ativar o registro de dados de teste (contém ações realizadas no App e dados estatísticos). Esses registros nunca são enviados automaticamente</string>
+    <string name="title_send_logs">Enviar relatórios</string>
+    <string name="summary_send_logs">Clique aqui se quiser enviar os registros para o desenvolvedor</string>
+    <string name="title_delete_all_logs">Excluir todos os registros</string>
+    <string name="summary_delete_all_logs">Excluir todos os registros armazenados no seu dispositivo</string>
+    <string name="preference_category_ip">Configurações de IP</string>
+    <string name="title_enable_ipv6">Ativar IPv6</string>
+    <string name="summary_enable_ipv6">Use ipv6, se o dispositivo tiver um endereço IPv6 atribuído</string>
+    <string name="title_enable_ipv4">Ativar IPv4</string>
+    <string name="summary_enable_ipv4">Use ipv4, se o dispositivo tiver um endereço IPv4 atribuído</string>
+    <string name="title_force_ipv6">Forçar IPv6</string>
+    <string name="summary_force_ipv6">Forçar o App a aceitar consultas IPv6, mesmo que o dispositivo não use IPv6</string>
+    <string name="title_force_ipv4">Forçar IPv4</string>
+    <string name="summary_force_ipv4">Forçar o App a aceitar consultas IPv4, mesmo que o dispositivo não use IPv4</string>
+    <string name="title_allow_ipv4_traffic">Permitir tráfego IPv4</string>
+    <string name="summary_allow_ipv4_traffic">Permitir que o IPv4 seja usado, mesmo que o IPv4 esteja desativado aqui. 
+\nSe não for permitido, nenhuma conexão IPv4 será possível enquanto o App estiver em funcionamento</string>
+    <string name="title_allow_ipv6_traffic">Permitir tráfego IPv6</string>
+    <string name="summary_allow_ipv6_traffic">Permitir que o IPv6 seja usado, mesmo que o IPv6 esteja desativada aqui. 
+\nSe não for permitido, nenhuma conexão IPv6 será possível enquanto o App estiver em funcionamento</string>
+    <string name="preference_category_network">Configurações de rede</string>
+    <string name="title_disallow_other_vpns">Não permitir outras VPNs</string>
+    <string name="summary_disallow_other_vpns">Não permitir que outras VPNs sejam iniciadas, a menos que o App tenha sido explicitamente interrompido</string>
+    <string name="title_catch_other_dns_servers">Interceptar outro tráfego de DNS</string>
+    <string name="summary_catch_other_dns_servers">Interceptar o tráfego de servidores de DNS conhecidos e encaminhá-lo com segurança para o servidor configurado usando o Nebulo</string>
+    <string name="title_bypass_searchdomains">Ignorar domínios de pesquisa</string>
+    <string name="summary_bypass_searchdomains">Encaminhar tais domínios (por exemplo, MeuPC.local ou MeuPC.fritz.box) para o servidor de DNS da sua rede local em vez do servidor de DNS configurado.
+\nIsso é expressamente recomendado. Essas consultas não saem da sua rede própria</string>
+    <string name="title_pause_on_captiveportal">Pausar na página de login da rede</string>
+    <string name="summary_pause_on_captiveportal">Não encaminhe o DNS para o servidor configurado quando for detetado que você precisar efetuar login com credenciais de acesso (por exemplo, em redes públicas de Wi-Fi). Nebulo continuará automaticamente após a autenticação bem-sucedida. 
+\nDesativar esta opção pode impedir que abra a página de login</string>
+    <string name="title_show_noconnection_notification">Notificar quando sem conexão</string>
+    <string name="summary_show_noconnection_notification">Mostrar uma notificação se o App não tiver uma conexão com o servidor de DNS</string>
+    <string name="preference_category_querylogging">Registro de consultas</string>
+    <string name="title_log_queries">Registro de consultas de DNS</string>
+    <string name="summary_log_queries">Registrar todas as consultas de DNS feitas pelo dispositivo e as respostas do servidor</string>
+    <string name="title_export_queries">Exportar consultas de DNS</string>
+    <string name="summary_export_queries">Exportar consultas de DNS como CSV (%1d consultas)</string>
+    <string name="title_delete_queries">Excluir as consultas de DNS</string>
+    <string name="summary_delete_queries">Clique aqui para excluir todas as consultas de DNS do registro</string>
+    <string name="title_advanced_logging">Registro avançado</string>
+    <string name="summary_advanced_logging">Adiciona mais registros, o que pode ajudar com problemas mais persistentes</string>
+    <string name="title_map_query_refused">Interpretar consultas recusadas como hosts não autorizados</string>
+    <string name="summary_language">Alterar o idioma do App</string>
+    <string name="title_show_revoked_notification">Notificação sobre permissão perdida</string>
+    <string name="title_clear_dnscache">Excluir o cache de DNS</string>
+    <string name="summary_clear_dnscache">Clique aqui para excluir o cache de DNS, por exemplo, quando os sites começam a se comportar mal porque estão em cache</string>
+    <string name="title_crashreporting_type">Relatório automático de falhas</string>
+    <string name="title_restart_vpn_on_networkchange">Reinicie com a mudança de rede</string>
+    <string name="summary_map_query_refused">Alguns servidores de DNS podem recusar-se a responder a uma consulta se o host não for permitido ou estiver bloqueado. Esta configuração bloqueia o host em vez de recusar a consulta, caso contrário o sistema pode ficar confuso</string>
+    <string name="crashreporting_type_full">Completo (Relatório de dados estatísticos e de depuração)</string>
+    <string name="crashreporting_type_minimal">Mínimo (Apenas relatório de Android &amp; versão do App)</string>
+    <string name="crashreporting_type_off">Desligado (Não enviar relatórios de falhas)</string>
+    <string name="title_simple_notification">Notificação simples</string>
+    <string name="summary_crashreporting_type">Configure quais dados devem ser transmitidos ao desenvolvedor quando o App falhar. Os dados das falhas nunca contêm dados pessoais e ajudam a resolver problemas mais rapidamente</string>
+    <string name="summary_restart_vpn_on_networkchange">Reinicie silenciosamente o App quando a rede mudar. Ative-o ao enfrentar problemas ao mudar entre redes. 
+\n Sem efeito quando o App não estiver ativo</string>
+    <string name="title_language">Idioma</string>
+    <string name="summary_show_revoked_notification">Mostrar uma notificação quando o Nebulo perde a permissão para a VPN</string>
+    <string name="summary_simple_notification">Use um texto simples na Notificação</string>
+    <string name="summary_local_server_port">Porta do servidor de DNS que será hospedado. Só são permitidas portas acima de 1024</string>
+    <string name="title_local_server_port">Porta do servidor</string>
+    <string name="summary_run_without_vpn">Quando verificado, o Nebulo hospeda um servidor de DNS no seu dispositivo</string>
+    <string name="title_run_without_vpn">Funciona sem VPN</string>
+    <string name="summary_category_nonvpnmode">Configure o Nebulo para agir como um servidor DNS no dispositivo em vez de usar um VPN fictício. Quando ativado, tem que encaminhar manualmente as consultas de DNS para o Nebulo usando aplicativos de terceiros</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">O servidor será hospedado em %1s:%2s</string>
+    <string name="preference_category_nonvpnmode">Modo não-VPN</string>
+    <string name="summary_check_iptables">Verifique se o seu dispositivo suporta iptables</string>
+    <string name="title_check_iptables">Verificar por iptables</string>
+    <string name="summary_iptables_mode">Envie consultas para o Nebulo usando o iptables. Isto requer privilégios Root. Quando ativado, nenhum aplicativo externo precisa ser usado enquanto em modo não-vpn. Isto pode não funcionar quando estiver numa rede IPv6.</string>
+    <string name="title_iptables_mode">Usar iptables</string>
+    <string name="fallbackdns_isp">Fornecedor de serviços (sem encriptação)</string>
+    <string name="summary_nonvpn_help">Clique aqui para obter instruções sobre como usar com este aplicativo</string>
+    <string name="preference_category_nonvpnmode_help">Instruções para aplicativos de terceiros</string>
+    <string name="summary_iptables_disable_ipv6">Desativar IPv6 ao utilizar iptables e IPv4 pode ser utilizado em seu lugar. Isso pode corrigir as consultas de DNS que contornam o iptables quando o IPv6 está ativado.</string>
+    <string name="title_iptables_disable_ipv6">Desativar IPv6</string>
+    <string name="preference_category_iptables">Iptables</string>
+    <string name="summary_fallback_dns">Configure o servidor de DNS que o Nebulo usa internamente. Este padrão é o servidor de DNS do seu provedor de serviços. Este servidor configurado é utilizado apenas para fins internos e não lida com as suas consultas normais de DNS.</string>
+    <string name="title_fallback_dns">Servidor de DNS interno</string>
+    <string name="summary_nonvpn_help_generic">Clique aqui para obter instruções sobre como configurar aplicativos de VPN</string>
+    <string name="nonvpn_help_generic_title">Aplicativos de VPN genéricas</string>
+    <string name="summary_nonvpn_help_faq">Clique aqui para abrir uma janela do navegador com ajuda e documentação para o modo não-VPN</string>
+    <string name="title_nonvpn_help_faq">Documentação</string>
+    <string name="title_inform_bad_connection">Informe-me de uma má conexão</string>
+    <string name="summary_nonvpn_use_lanip">Alguns aplicativos não permitem que localhost seja inserido como DNS. Com esta configuração é utilizado o IP dos dispositivos na rede. O endereço irá mudar dependendo da sua rede, preste atenção à notificação.</string>
+    <string name="title_nonvpn_use_lanip">Usar o IP do dispositivo em vez de localhost</string>
+</resources>
