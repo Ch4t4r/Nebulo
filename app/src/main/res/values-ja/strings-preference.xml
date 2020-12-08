@@ -68,7 +68,7 @@
     <string name="title_local_server_port">ポート番号</string>
     <string name="summary_run_without_vpn">チェックを入れると、Nebuloは端末内にDNSサーバーを設置します</string>
     <string name="title_run_without_vpn">非VPNで稼働</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">サーバーが %1s:%2s で稼働します。</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">サーバーが %1s:%1s で稼働します</string>
     <string name="summary_category_nonvpnmode">ダミーのVPNを使用する替わりに、デバイス上にDNSサーバーを設置し機能するようNebuloを構成します。このモードを使う場合、サードパーティのアプリを使用してDNSクエリをNebuloに手動で転送する必要があります。</string>
     <string name="preference_category_nonvpnmode">非VPNモード</string>
     <string name="summary_delete_queries">記録されたクエリを削除する場合、ここをタップします。</string>
