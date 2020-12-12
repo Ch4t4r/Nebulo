@@ -113,7 +113,7 @@
     <string name="summary_run_without_vpn">Quando verificado, o Nebulo hospeda um servidor de DNS no seu dispositivo</string>
     <string name="title_run_without_vpn">Funciona sem VPN</string>
     <string name="summary_category_nonvpnmode">Configure o Nebulo para agir como um servidor DNS no dispositivo em vez de usar um VPN fictício. Quando ativado, tem que encaminhar manualmente as consultas de DNS para o Nebulo usando aplicativos de terceiros</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">O servidor será hospedado em %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">O servidor será hospedado em %1s:%1s</string>
     <string name="preference_category_nonvpnmode">Modo não-VPN</string>
     <string name="summary_check_iptables">Verifique se o seu dispositivo suporta iptables</string>
     <string name="title_check_iptables">Verificar por iptables</string>
@@ -134,4 +134,6 @@
     <string name="title_inform_bad_connection">Informe-me de uma má conexão</string>
     <string name="summary_nonvpn_use_lanip">Alguns aplicativos não permitem que localhost seja inserido como DNS. Com esta configuração é utilizado o IP dos dispositivos na rede. O endereço irá mudar dependendo da sua rede, preste atenção à notificação.</string>
     <string name="title_nonvpn_use_lanip">Usar o IP do dispositivo em vez de localhost</string>
+    <string name="summary_export_settings">Exportar todas as configurações (incluindo as fontes de regras de DNS) para um arquivo. Depois disso você pode abrir o arquivo para importá-lo ao Nebulo.</string>
+    <string name="title_export_settings">Exportar as configurações</string>
 </resources>
