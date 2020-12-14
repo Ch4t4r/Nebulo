@@ -108,12 +108,12 @@
     <string name="summary_pause_on_captiveportal">No usa el DoH si se detecta un portal cautivo. Se reanudará automáticamente poco después de iniciar la sesión. 
 \nSi lo desactiva, podría impedirle abrir el portal cautivo para iniciar sesión</string>
     <string name="title_advanced_logging">Registro avanzado</string>
-    <string name="summary_local_server_port">Puerto del servidor DNS que se va a alojar Sólo se permiten los puertos superiores a 1024.</string>
+    <string name="summary_local_server_port">Puerto del servidor DNS que se va a alojar Sólo se permiten los puertos superiores a 1024</string>
     <string name="title_local_server_port">Puerto del servidor</string>
     <string name="summary_run_without_vpn">Cuando está marcado, Nebulo aloja un servidor DNS en su dispositivo</string>
     <string name="title_run_without_vpn">Funciona sin VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">El servidor se alojará en %1s:%2s</string>
-    <string name="summary_category_nonvpnmode">Configurar Nebulo para que actúe como un servidor DNS en el dispositivo en lugar de usar una VPN falsa. Cuando se habilita, hay que reenviar manualmente las consultas DNS a Nebulo usando aplicaciones de terceros.</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">El servidor será alojado en %1s:%1s</string>
+    <string name="summary_category_nonvpnmode">Configurar Nebulo para que actúe como un servidor DNS en el dispositivo en lugar de usar una VPN falsa. Cuando se activa, tienes que reenviar manualmente las consultas DNS a Nebulo usando aplicaciones de terceros</string>
     <string name="preference_category_nonvpnmode">Modo no VPN</string>
     <string name="summary_check_iptables">Compruebe si su dispositivo es compatible con los iptables</string>
     <string name="title_check_iptables">Comprueba si hay iptables</string>
@@ -134,4 +134,6 @@
     <string name="summary_nonvpn_use_lanip">Algunas aplicaciones no permiten que el localhost sea introducido como DNS. Con esta configuración se utiliza el IP de los dispositivos en la red en su lugar. La dirección cambiará dependiendo de la red, presta atención a la notificación.</string>
     <string name="title_nonvpn_use_lanip">Usar el dispositivo IP en lugar del host local</string>
     <string name="title_inform_bad_connection">Infórmame de una mala conexión</string>
+    <string name="title_export_settings">Exportar ajustes</string>
+    <string name="summary_export_settings">Exporta todos los ajustes (incluyendo las fuentes de reglas DNS) en un archivo. Más tarde puedes abrir el archivo para importarlo a Nebulo.</string>
 </resources>
