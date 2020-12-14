@@ -56,4 +56,6 @@
     <string name="dialog_query_export_message">Espereu mentre s’exporten les consultes</string>
     <string name="dialog_enable_logging">Voleu activar el registre\? Els registres contenen informació estadística, informació de depuració i accions a l\'aplicació. Els registres generats no es comparteixen tret que ho facis tu mateix.</string>
     <string name="dialog_pin_hint">PIN</string>
+    <string name="dialog_doh_detect_type_message">Si us plau, esperi un moment.</string>
+    <string name="dialog_doh_detect_type_title">Detecció del tipus de servidor</string>
 </resources>
