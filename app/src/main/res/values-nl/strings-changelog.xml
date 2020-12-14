@@ -103,7 +103,7 @@
     <string name="changelog_build_47_7">Verbeterde verwerking van DNS-regels</string>
     <string name="changelog_build_48_1">Een instelling toegevoegd om de melding te vereenvoudigen</string>
     <string name="changelog_build_48_2">Het DNS-logboek toont nu de hostbron van de DNS-regel, als de vraag werd beantwoord vanuit de DNS-regels</string>
-    <string name="changelog_build_48_3">"De taal veranderd nu correct in alle vensters wanneer deze wordt gewijzigd in de instellingen  van de app"</string>
+    <string name="changelog_build_48_3">De taal veranderd nu correct in alle vensters wanneer deze wordt gewijzigd in de instellingen van de app</string>
     <string name="changelog_build_49_1">Dit is de update waarin Nebulo eindelijk de Beta status verlaat!</string>
     <string name="changelog_build_49_2">Er is een instelling toegevoegd die de DNS-cache wist</string>
     <string name="changelog_build_49_3">De automatische crashrapportage kan nu worden ingesteld op volledig, minimaal en uit (voorheen was alleen aan/uit mogelijk)</string>
@@ -131,7 +131,26 @@
     <string name="changelog_build_59_3">Nebulo detecteert nu de ondersteunde modus bij het toevoegen van een DNS-over-HTTPS-server</string>
     <string name="changelog_build_59_2">Nebulo hergebruikt nu de aansluitingen waardoor het batterijverbruik wordt verlaagd</string>
     <string name="changelog_build_61_1">Bevorderde bètaopbouw tot volledige vrijgave</string>
-    <string name="changelog_build_59_7">De Nebulo kan nu in (experimentele) niet-VPN-modus draaien, waarbij gebruik wordt gemaakt van een DNS-server in plaats van een dummy VPN. Hiervoor zijn apps van derden nodig voor het doorsturen van DNS-query\'s naar de Nebulo.</string>
+    <string name="changelog_build_59_7">De Nebulo kan nu in (experimentele) niet-VPN-modus draaien, waarbij gebruik wordt gemaakt van een DNS-server in plaats van een dummy VPN. Hiervoor zijn apps van derden nodig voor het doorsturen van DNS-query\'s naar de Nebulo</string>
     <string name="changelog_build_62_2">Ondersteuning toegevoegd voor iptables in non-vpn modus. Hiervoor is een rooted device nodig</string>
     <string name="changelog_build_62_1">Bij het starten van de Nebulo vanaf een serversnelkoppeling blijft die server nu bestaan</string>
+    <string name="changelog_build_69_1">Ondersteuning voor DNS-over-QUIC toevoegen</string>
+    <string name="changelog_build_69_2">Verhoog de prestaties van DNS-over-HTTPS-query\'s</string>
+    <string name="changelog_build_66_6">BraveDNS en Cloudflare-beveiliging toegevoegd</string>
+    <string name="changelog_build_66_8">Een server selectie scherm toegevoegd bij de eerste lancering van de app</string>
+    <string name="changelog_build_66_1">Veelgestelde vragen toegevoegd. U kunt ze vinden in het \'Over deze app\' navigatie-item</string>
+    <string name="changelog_build_67_4">Betere opmaak van nummers in de DNS-regels toegevoegd</string>
+    <string name="changelog_build_67_3">Fix server latency die niet wordt weergegeven in de niet-VPN-modus</string>
+    <string name="changelog_build_67_2">Een zoekopdracht toegevoegd aan het uitsluitingsdialoogvenster van de app</string>
+    <string name="changelog_build_67_1">Een ander IPv6-adres (::) wordt nu intern gebruikt om een host te negeren</string>
+    <string name="changelog_build_66_11">Een veld toegevoegd dat laat zien hoeveel query\'s zijn opgelost met DNS-regels</string>
+    <string name="changelog_build_66_10">Een filter toegevoegd aan het query logboek</string>
+    <string name="changelog_build_66_9">Een melding toegevoegd die wordt getoond wanneer de huidige server een slechte verbinding heeft</string>
+    <string name="changelog_build_66_7">Inleidende schermen toegevoegd bij de eerste lancering van de app</string>
+    <string name="changelog_build_66_5">De DNS-snelheidstest toont nu nauwkeuriger de latentie aan</string>
+    <string name="changelog_build_66_4">Een hulp-item toegevoegd aan het query-logboek om uit te leggen wat de pictogrammen betekenen</string>
+    <string name="changelog_build_66_3">Een dialoogvenster toegevoegd aan de DNS-regels om te controleren of een host ergens in de lijst voorkomt</string>
+    <string name="changelog_build_66_2">Het toevoegen van servers is nu zaakgevoelig. Dit verhelpt problemen met NextDNS</string>
+    <string name="changelog_build_62_4">De interne (fallback) DNS-server kan nu worden geconfigureerd</string>
+    <string name="changelog_build_62_3">DNS-regelbronnen kunnen nu individueel worden bijgewerkt</string>
 </resources>
