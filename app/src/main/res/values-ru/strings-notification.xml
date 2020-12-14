@@ -6,18 +6,18 @@
     <string name="notification_channel_foreground_service_description">Используемый канал для уведомлений, которые не могут быть удалены пользователем</string>
     <string name="notification_channel_noconnection">Канал для уведомления об отсутствии соединения</string>
     <string name="notification_channel_noconnection_description">Канал, используемый для отображения уведомлений при отсутствии соединения</string>
-    <string name="notification_main_text">Запросы идут к %1s
+    <string name="notification_main_text">Запросы отправляются в %1s
 \n
-\n%2d исключенных приложений</string>
-    <string name="notification_main_text_with_secondary">Запросы идут к %1s и %2s
+\n%2d Приложения исключены из Nebulo</string>
+    <string name="notification_main_text_with_secondary">Запросы отправляются в %1s и %2s
 \n
-\n%3d исключенных приложений</string>
-    <string name="notification_main_text_whitelist">Запросов к %1s
+\n%3d Приложения исключены из Nebulo</string>
+    <string name="notification_main_text_whitelist">Запросы отправляются в %1s
 \n
-\n%2d исключенных приложений</string>
-    <string name="notification_main_text_with_secondary_whitelist">Запросов к %1s и %2s
+\n%2d Приложения используют DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Запросы отправляются в %1s и %2s
 \n
-\n%3d приложений используют DoH/DoT</string>
+\n%3d Приложения используют DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1d запросов</string>
@@ -27,4 +27,46 @@
     <string name="notification_vpnrestart_text">VPN будет перезапущен</string>
     <string name="notification_appcrash_title">Nebulo неожиданно завершилось</string>
     <string name="notification_appcrash_message">Nebulo неожиданно завершилось. Нажмите здесь, чтобы перейти в Главное меню и перезагрузить приложение, если это необходимо</string>
+    <string name="notification_cronet_failed_text">DNS-over-QUIC не может быть использован, так как не может быть инициализирован. Пожалуйста, выберите другой сервер.</string>
+    <string name="notification_cronet_failed_title">QUIC инициализация не прошла</string>
+    <string name="notification_bad_connection_text">Ваше соединение с DNS-сервером сейчас плохо. Это может негативно сказаться на скорости серфинга. Подумайте о выборе другого сервера.</string>
+    <string name="notification_bad_connection_title">Плохое соединение с сервером</string>
+    <string name="notification_multipleuserswarning_text">Небуло не смог запустить свой манекен VPN из-за ошибки Android. Это происходит, когда на вашем устройстве несколько пользователей.</string>
+    <string name="notification_multipleuserswarning_title">Манекен VPN не может быть создан</string>
+    <string name="notification_privatednswarning_text">Для использования Nebulo отключите в настройках системы функцию Private Dns.</string>
+    <string name="notification_privatednswarning_title">Частные гостиницы</string>
+    <string name="notification_dnsserver_portdiffers">Настроенный порт %1d не может быть использован.</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNS-сервер работает на %1s:%2d. Инициализация iptables не прошла успешно, запросы должны пересылаться сторонними приложениями</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS-сервер работает на %1s:%2d. Запросы пересылаются с помощью iptables.
+\nПредупреждение: IPv6 активен, запросы могут обходить Nebulo.</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS-сервер работает на %1s:%2d. Запросы пересылаются с помощью iptables</string>
+    <string name="notification_dnsserver_message">DNS-сервер работает на %1s:%2d. Переадресация запросов с помощью сторонних приложений</string>
+    <string name="notification_dnsserver_title">Работает в режиме, отличном от VPN</string>
+    <string name="notification_service_revoked_message">Нажмите здесь, чтобы перезагрузить</string>
+    <string name="notification_service_revoked_title">отмена системой VPN-разрешения</string>
+    <string name="notification_service_killed_ignore">Игнорировать</string>
+    <string name="notification_service_killed_message">Похоже, что приложение ранее было остановлено системой. Нажмите здесь, чтобы узнать больше</string>
+    <string name="notification_service_killed_title">Информация об оптимизации заряда аккумулятора</string>
+    <string name="notification_pin_message">Для выполнения этого действия требуется ваш PIN-код. Нажмите здесь, чтобы подтвердить его</string>
+    <string name="notification_pin_title">требуемый PIN-код</string>
+    <string name="notification_ruleexportfinished_message">%1d правила экспортированы</string>
+    <string name="notification_ruleexportfinished_title">экспорт правил DNS закончен</string>
+    <string name="notification_ruleexport_secondarymessage">Подготовка экспорта…</string>
+    <string name="notification_ruleexport_message">Правила экспорта (%1s/%2s)</string>
+    <string name="notification_ruleexport_title">Dns правило экспорта</string>
+    <string name="notification_ruleimportfinished_message">Импортированы правила %1s (пропущены дубликаты %2s)</string>
+    <string name="notification_ruleimportfinished_title">импорт правила DNS закончен</string>
+    <string name="notification_ruleimport_tertiarymessage">Завершение импорта…</string>
+    <string name="notification_ruleimport_secondarymessage">Подготовка импорта…</string>
+    <string name="notification_ruleimport_message">Импорт правил DNS из %1s (%2s)</string>
+    <string name="notification_ruleimport_title">импорт правила DNS</string>
+    <string name="notification_simple_text">Текущий сервер: %1s</string>
+    <string name="notification_channel_badconnection_description">Канал, используемый для уведомлений, когда Nebulo имеет плохое соединение</string>
+    <string name="notification_channel_badconnection">Канал уведомления о плохом подключении</string>
+    <string name="notification_channel_dnsrules_description">Канал, используемый для импорта/экспорта правил DNS</string>
+    <string name="notification_channel_dnsrules">Канал уведомления о правилах DNS</string>
+    <string name="notification_channel_high_priorty_description">Канал для высокоприоритетных уведомлений, например, когда приложение теряет разрешение на VPN</string>
+    <string name="notification_channel_high_priorty">Высокий приоритет</string>
+    <string name="notification_channel_pin_description">Канал, используемый для уведомлений, связанных с булавкой, т.е. когда она должна быть предоставлена</string>
+    <string name="notification_channel_pin">Pin-связанный канал</string>
 </resources>
