@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dialog_speedtestpasses_message"></string>
+    <string name="dialog_speedtestpasses_title"></string>
+    <string name="dialog_share_message"></string>
+    <string name="dialog_share_title"></string>
+    <string name="dialog_doh_detect_type_message"></string>
+    <string name="dialog_doh_detect_type_title"></string>
+    <string name="dialog_serverimport_servertype_doq"></string>
+    <string name="dialog_newserver_title_quic"></string>
+</resources>
