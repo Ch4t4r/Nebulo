@@ -4,7 +4,7 @@
     <string name="changelog_build_61_1">تمت ترقية إصدار بيتا إلى الإصدار الكامل</string>
     <string name="changelog_build_59_7">يمكن الآن تشغيل Nebulo في وضع غير VPN (تجريبي)، حيث يستخدم سيرفر DNS بدلاً من VPN الوهمي. يتطلب هذا تطبيقات الطرف الثالث لإعادة توجيه استعلامات DNS إلى Nebulo</string>
     <string name="changelog_build_59_6">يجب الآن إعادة إدخال رقم التعريف الشخصي بعد مرور بعض الوقت</string>
-    <string name="changelog_build_59_5">لا يسمح التحقق من صحة الإدخال الثابت لـ DNS-over-HTTPS ببعض السيرفرات الصالحة</string>
+    <string name="changelog_build_59_5">لا يسمح التحقق من صحة الإدخال الثابت ل DNS-over-HTTPS ببعض السيرفرات الصالحة</string>
     <string name="changelog_build_59_4">يمكن الآن استئناف Nebulo من الشاشة الرئيسية</string>
     <string name="changelog_build_59_3">يكتشف Nebulo الآن الوضع المدعوم عند إضافة سيرفر DNS-over-HTTPS</string>
     <string name="changelog_build_59_2">تمت إضافة إعادة استخدام الاتصالات ، مما يقلل من استخدام البطارية</string>
@@ -26,7 +26,7 @@
     <string name="changelog_build_49_5">يُظهر تصدير ملفات السجل الآن مربع حوار تحميل</string>
     <string name="changelog_build_49_4">يعرض سجل الاستعلام الآن إشارة إلى الوقت الذي ربما يكون فيه سيرفر DNS قد حظر المضيف</string>
     <string name="changelog_build_49_3">يمكن الآن إعداد تقارير الأعطال التلقائية بالكامل ، والحد الأدنى ، وإيقاف التشغيل (كان من الممكن تشغيل / إيقاف فقط في السابق)</string>
-    <string name="changelog_build_49_2">تمت إضافة إعداد يمسح ذاكرة التخزين المؤقت لـ DNS</string>
+    <string name="changelog_build_49_2">تمت إضافة إعداد يمسح ذاكرة التخزين المؤقت ل DNS</string>
     <string name="changelog_build_49_1">هذا هو التحديث حيث يترك Nebulo أخيرًا حالة Beta!</string>
     <string name="changelog_build_48_3">تتحول اللغة الآن بشكل صحيح في جميع النوافذ عند تغييرها في إعدادات التطبيق</string>
     <string name="changelog_build_48_2">يعرض سجل الاستعلام الآن المصدر المضيف لقاعدة DNS ، إذا تم الرد على السؤال من قواعد DNS</string>
@@ -93,7 +93,7 @@
     <string name="changelog_build_36_2">يمكن الآن استيراد قواعد DNS من الملفات</string>
     <string name="changelog_build_36_1">يمكنك الآن تصدير قواعد DNS</string>
     <string name="changelog_build_35_4">تُظهر مصادر المضيف لقواعد DNS الآن عدد القواعد التي تم استيرادها منها</string>
-    <string name="changelog_build_35_3">"تحسين أداء صغير لبرتكول تشفير البيانات  DNS-over-HTTPS"</string>
+    <string name="changelog_build_35_3">تحسين أداء صغير لبرتكول تشفير البيانات DNS-over-HTTPS</string>
     <string name="changelog_build_35_2">لا يؤدي إيقاف استيراد قاعدة DNS الآن إلى تجميد واجهة المستسيرفرات بعد الآن</string>
     <string name="changelog_build_35_1">تم إصلاح بعض الأعطال المتعلقة باستيراد قاعدة DNS</string>
     <string name="changelog_build_34_1">تم إصلاح عطل متعلق بقاعدة البيانات</string>
@@ -112,7 +112,7 @@
     <string name="changelog_build_32_1">إصلاح واجهة المستسيرفرات قليلاً</string>
     <string name="changelog_build_31_4">إصلاح بعض الأعطال</string>
     <string name="changelog_build_31_3">يظهر إشعار الآن في حالة تعطل التطبيق وتم تمكين الإبلاغ عن الأعطال التلقائي</string>
-    <string name="changelog_build_31_2">تمت إضافة الإعدادات لتعطيل أزرار الإيقاف / الإيقاف المؤقت للإشعار</string>
+    <string name="changelog_build_31_2">تمت إضافة الإعدادات لتعطيل أزرار الإيقاف المؤقت للإشعار</string>
     <string name="changelog_build_31_1">تمت إضافة ترجمة ألمانية جزئية</string>
     <string name="changelog_build_30_4">إصلاح بعض الأعطال</string>
     <string name="changelog_build_30_3">توضيح نص القائمة السوداء / القائمة البيضاء في الإخطار</string>
@@ -132,7 +132,7 @@
     <string name="changelog_build_27_3">يظهر اشعار عند وجود اتصال سيء/او لا يوجد اتصال</string>
     <string name="changelog_build_27_2">يمكن الآن مشاركة السجلات مرة أخرى عند تعطل التطبيق</string>
     <string name="changelog_build_27_1">تم إصلاح الكثير من الأعطال</string>
-    <string name="changelog_build_26_4">كان التطبيق يحتوي على خوادم خاطئة لـتسريع الاتصال UncensoredDNS</string>
+    <string name="changelog_build_26_4">كان التطبيق يحتوي على خوادم خاطئة لتسريع الاتصال UncensoredDNS</string>
     <string name="changelog_build_26_3">يمكن الآن رفض إشعار عدم الاتصال</string>
     <string name="changelog_build_26_2">إصلاح إخطار عدم الاتصال لا يتلاشى بشكل صحيح</string>
     <string name="changelog_build_26_1">لم يعد يتعطل التطبيق للسيرفرات التي تحتوي على عناوين IPv4 فقط عندما تحتوي الشبكة على عناوين IPv6 فقط</string>
@@ -148,4 +148,9 @@
     <string name="changelog_build_23_2">تمت إضافة مربع الحوار هذا لإبراز التغييرات</string>
     <string name="changelog_build_23_1">تظهر المنافذ غير الافتراضية الآن لخوادم DoT</string>
     <string name="changelog_build_67_1">يستخدم الان عنوان IPv6 (::) مختلف لتجاهل المضيف</string>
+    <string name="changelog_build_69_2">زيادة أداء استعلامات DNS-over-HTTPS</string>
+    <string name="changelog_build_69_1">أضف دعمًا ل DNS-over-QUIC</string>
+    <string name="changelog_build_67_2">تمت إضافة بحث إلى مربع حوار استثناء التطبيق</string>
+    <string name="changelog_build_67_4">تمت إضافة تنسيق أفضل للأرقام في قواعد DNS</string>
+    <string name="changelog_build_67_3">إصلاح وقت استجابة الخادم لا يظهر في وضع غير VPN</string>
 </resources>
