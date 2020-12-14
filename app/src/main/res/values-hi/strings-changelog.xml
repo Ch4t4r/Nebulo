@@ -20,7 +20,7 @@
     <string name="changelog_build_27_3">ऐप में संचार न होने पे / खराब संचार होने पर दिखाई गई सूचना अब पूर्व निर्धारित रूप से बंद हो जाती है और सेटिंग्स में फिर से सक्षम कीया जा सकता है</string>
     <string name="changelog_build_27_4">अधिसूचना में \'रोकें\' बटन जोड़ा गया</string>
     <string name="changelog_build_28_1">अधिसूचना में स्टॉप बटन फिर से काम करता है</string>
-    <string name="changelog_build_28_2">"DoH सर्वर के लिए एक उच्च समय-सीमा का उपयोग किया जाता है (इसने  खराब कनेक्शन पर नेटवर्क में सुधार करना चाहिए)"</string>
+    <string name="changelog_build_28_2">DoH सर्वर के लिए एक उच्च समय-सीमा का उपयोग किया जाता है (इसने खराब कनेक्शन पर नेटवर्क में सुधार करना चाहिए)</string>
     <string name="changelog_build_28_3">कुछ DoT सर्वर काम नहीं कर रहे हैं, उन्हें ठीक किया</string>
     <string name="changelog_build_28_4">UncensoredDNS सर्वर अब पूर्व निर्धारित रूप में उपयोग किया जाता है</string>
     <string name="changelog_build_28_5">प्रदर्शन में सुधार</string>
@@ -48,7 +48,7 @@
     <string name="changelog_build_33_3">कुछ आइकनों को बदला</string>
     <string name="changelog_build_33_4">कुछ क्रैश ठीक किया</string>
     <string name="changelog_build_33_5">DNS सर्वर की गति का परीक्षण करने के लिए एक दृश्य जोड़ा गया</string>
-    <string name="changelog_build_33_6">"अब आप होस्ट के लिए स्वनिर्धारित पता डाल  सकते हैं। होस्ट को URL से आयात किया जा सकता है।"</string>
+    <string name="changelog_build_33_6">अब आप होस्ट के लिए स्वनिर्धारित पता डाल सकते हैं। होस्ट को URL से आयात किया जा सकता है</string>
     <string name="changelog_build_33_7">कुछ रचना में बदलाव</string>
     <string name="changelog_build_34_1">डेटाबेस से संबंधित क्रैश को ठीक किया</string>
     <string name="changelog_build_35_1">DNS नियम आयात से संबंधित कुछ क्रैश को ठीक किया</string>
@@ -65,9 +65,9 @@
     <string name="changelog_build_37_2">कुछ रचना में सुधार</string>
     <string name="changelog_build_37_3">DNS नियम आयात अब थोड़ा तेज है</string>
     <string name="changelog_build_37_4">आयातित DNS नियम अब डिवाइस पर कम जगह लेते हैं</string>
-    <string name="changelog_build_38_1">यह एक प्रदर्शन केंद्रित अपडेट है जो DNS प्रश्नों को तेज बनाना चाहिए, कम मेमोरी का उपयोग करना चाहिए और बैटरी की खपत कम होनी चाहिए।</string>
+    <string name="changelog_build_38_1">यह एक प्रदर्शन केंद्रित अपडेट है जो DNS प्रश्नों को तेज बनाना चाहिए, कम मेमोरी का उपयोग करना चाहिए और बैटरी की खपत कम होनी चाहिए</string>
     <string name="changelog_build_38_2">आंतरिक डेटाबेस के बारे में कुछ उपकरणों पर एक क्रैश ठीक किया</string>
-    <string name="changelog_build_39_1">"अधिकांश DNS सर्वरों को प्रभावित करने  वाले क्रैश को ठीक किया"</string>
+    <string name="changelog_build_39_1">अधिकांश DNS सर्वरों को प्रभावित करने वाले क्रैश को ठीक किया</string>
     <string name="changelog_build_40_1">प्रदर्शन और स्मृति में सुधार</string>
     <string name="changelog_build_40_2">सर्वर डायलॉग के सभी सर्वर अब उन्हें लंबे समय तक क्लिक करके हटा सकते हैं</string>
     <string name="changelog_build_40_3">Google Play को अब बायपास ऐप्स की सूची से हटाया जा सकता है</string>
