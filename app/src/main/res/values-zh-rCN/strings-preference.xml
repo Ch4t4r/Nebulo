@@ -108,7 +108,7 @@
     <string name="crashreporting_type_off">关闭（不发送崩溃报告）</string>
     <string name="crashreporting_type_minimal">最少（仅报告Android版本与应用版本）</string>
     <string name="crashreporting_type_full">完整（统计与调试数据）</string>
-    <string name="summary_local_server_port">DNS服务器将会监听的端口。仅允许大于1024的端口。</string>
+    <string name="summary_local_server_port">DNS服务器将会监听的端口。仅允许大于1024的端口</string>
     <string name="title_local_server_port">服务器端口</string>
     <string name="summary_run_without_vpn">当选中后，Nebulo将在您的设备上设置DNS服务器</string>
     <string name="title_run_without_vpn">无VPN运行</string>
