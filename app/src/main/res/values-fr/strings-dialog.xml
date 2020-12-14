@@ -181,4 +181,40 @@
 \n - Faites défiler vers le bas, réglez les deux champs DNS VPN sur %3$s
 \n - Démarrez Nebulo (en mode non-VPN) et lancez NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Bloquer cet hôte</string>
+    <string name="dialog_speedtestpasses_message">Définissez la fréquence d\'exécution du test par serveur. Plus le taux de réussite est élevé, plus le nombre de tests effectués est élevé</string>
+    <string name="dialog_speedtestpasses_title">Configurer la réussite aux tests</string>
+    <string name="dialog_share_message">Quel lien souhaitez-vous partager \?</string>
+    <string name="dialog_share_title">Sélectionnez le type de lien</string>
+    <string name="dialog_open_faq">Vous souhaitez consulter les questions fréquemment posées et la documentation relative à cette fonction \?</string>
+    <string name="querylog_filter_shorten_domain">Afficher une version plus courte du domaine dans la liste</string>
+    <string name="querylog_filter_type_blocked_by_server">Bloqué par le serveur DNS</string>
+    <string name="querylog_filter_type_dnsrules">Résolu par les règles du DNS</string>
+    <string name="querylog_filter_type_cache">Résolu par le cache du DNS</string>
+    <string name="querylog_filter_type_forwarded">Résolu par le serveur DNS</string>
+    <string name="querylog_filter_info">Sélectionnez les types de requêtes que vous souhaitez voir</string>
+    <string name="querylog_filter_title">Filtrer le journal des requêtes</string>
+    <string name="dialog_dnsrules_status_sourcenotfound">Cet host figure dans les règles du DNS, mais la source est inconnue.</string>
+    <string name="dialog_dnsrules_status_fromsource">Cet hôte fait partie de la source %1$s</string>
+    <string name="dialog_dnsrules_status_userrule">Cet host fait partie des règles DNS définies par vous.</string>
+    <string name="dialog_dnsrules_status_not_found">Aucune règle DNS trouvée pour cet host.</string>
+    <string name="dialog_dnsrules_search_message">Entrez un host ci-dessous pour le rechercher dans les règles du DNS.</string>
+    <string name="dialog_dnsrules_search_title">Recherche d\'un host</string>
+    <string name="dialog_querylog_information_message">Cette liste vous montre toutes les requêtes passées que Nebulo a enregistrées pendant qu\'il était actif. La liste se met à jour presque en temps réel lorsque Nebulo est actuellement actif.
+\n
+\nLes icônes au début de la ligne indiquent ce qui s\'est passé avec la requête.
+\n
+\nDrapeau : l\'hôte a été résolu à partir des règles du DNS, ou a été bloqué par le serveur DNS
+\nFlèche : Nebulo a transmis la requête au serveur DNS
+\nBase de données : Nebulo a récupéré la réponse DNS dans le cache</string>
+    <string name="dialog_querylog_information_title">Informations sur le journal des requêtes</string>
+    <string name="dialog_latency_sidebar_message">La latence indiquée ici ne correspond pas à votre ping ou à la vitesse de votre réseau.
+\n Elle indique le temps qu\'il faut à Nebulo pour envoyer une requête et obtenir une réponse du serveur DNS. La valeur affichée n\'est pas toujours la plus récente et des fluctuations peuvent être possibles.
+\n La valeur affichée peut donc être plus élevée qu\'elle ne l\'est, car elle est devenue plus basse depuis qu\'elle a été mesurée.</string>
+    <string name="dialog_latency_sidebar_title">Informations sur la latence</string>
+    <string name="dialog_nonvpn_help_generic">Pour utiliser Nebulo en mode non-vpn avec une application VPN tierce, vous devez modifier vos paramètres DNS dans cette autre application.
+\nToutes les applications VPN ne vous permettent pas de modifier les paramètres DNS. Si la vôtre le fait, il suffit de régler le serveur DNS sur \'%1$s :%2$d\' (vous pouvez configurer le port ci-dessus).
+\n
+\nAprès avoir configuré les applications, il suffit de lancer les deux.</string>
+    <string name="dialog_serverimport_servertype_doq">Tapez : DNS-over-QUIC (DoQ)</string>
+    <string name="dialog_newserver_title_quic">Ajouter un serveur (DoQ)</string>
 </resources>
