@@ -136,4 +136,5 @@
     <string name="summary_nonvpn_use_lanip">Sommige apps staan niet toe dat localhost als DNS wordt ingevoerd. Met deze instelling wordt in plaats daarvan het IP van de apparaten in het netwerk gebruikt. Het adres zal veranderen afhankelijk van je netwerk, let op de melding.</string>
     <string name="title_inform_bad_connection">Informeer me over een slechte verbinding</string>
     <string name="title_fallback_dns">Interne DNS-server</string>
+    <string name="summary_inform_bad_connection">Informeer me wanneer de DNS-server op dit moment traag is of anderszins slecht presteert</string>
 </resources>
