@@ -136,4 +136,5 @@
     <string name="title_fallback_dns">内置DNS服务器</string>
     <string name="title_export_settings">出口设置</string>
     <string name="summary_export_settings">将所有设置（包括DNS规则源）导出到一个文件中。您以后可以打开该文件将其导入Nebulo。</string>
+    <string name="summary_inform_bad_connection">当DNS服务器当前速度较慢或性能较差时，通知我</string>
 </resources>
