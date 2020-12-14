@@ -28,19 +28,21 @@
 \nТекущий PIN: %1s</string>
     <string name="preference_category_cache">Настройки кеширования</string>
     <string name="title_dnscache_enabled">Использовать кэш DNS</string>
-    <string name="summary_dnscache_enabled">Включить DNS кэширование. В кэше хранятся предыдущие результаты резолвинга доменов для более быстрого ответа на последующие запросы</string>
+    <string name="summary_dnscache_enabled">Включает DNS кэш приложений. Кэш запоминает старые запросы, чтобы быстрее отвечать на будущие вопросы.
+\n
+\nСистема уже имеет кэш, включите его, если вы хотите настроить поведение</string>
     <string name="title_dnscache_keepacrosslaunches">Хранить DNS кэш</string>
     <string name="summary_dnscache_keepacrosslaunches">Сохранять кэш DNS даже при перезапуске приложения</string>
     <string name="title_dnscache_maxsize">Максимальный размер Кэша</string>
     <string name="summary_dnscache_maxsize">Установите максимальное количество хранимых запросов, независимо от времени</string>
     <string name="title_dnscache_usedefaulttimes">Время кэширования</string>
-    <string name="summary_dnscache_usedefaulttimes">Хранить кэш запросов в течении времени, указанного сервером</string>
+    <string name="summary_dnscache_usedefaulttimes">Храните запросы в кэше до тех пор, пока DNS-сервер взаимодействует с помощью TTL</string>
     <string name="title_dnscache_minimum_cache_time">Минимальное время хранения кэша</string>
     <string name="summary_dnscache_minimum_cache_time">Минимальное время хранения кэшированных запросов. 
 \nТекущее значение: %1d Секунд</string>
     <string name="title_dnscache_customcachetime">Изменение времени хранения кэша (в секундах)</string>
-    <string name="summary_dnscache_customcachetime">Изменить время хранения предыдущих кэшированных запросов. 
-\nТекущее значение: %1d Секунд</string>
+    <string name="summary_dnscache_customcachetime">Изменяет длительность кэширования всех запросов, независимо от того, будет ли время кэширования по умолчанию дольше. Длительное время кэширования может привести к тому, что кэшированные данные будут не синхронизированы с реальными данными.
+\nТекущее значение: %1d секунды</string>
     <string name="title_dnscache_nxdomaincachetime">Время кэширования для NXDomain (Секунды)</string>
     <string name="summary_dnscache_nxdomaincachetime">Изменить значение времени для кэшированных запросов NXDomain. Это повышает производительность для несуществующих доменов (например, если они заблокированы) 
 \nТекущее значение: %1d Секунд</string>
@@ -78,7 +80,7 @@
     <string name="summary_pause_on_captiveportal">Не использовать серверы DoH/DoT при обнаружении captive portal (специальный сетевой сервис для авторизации. Такие сервисы используются, к примеру, в коммерческих Wi-Fi сетях). 
 \nNebulo автоматически продолжит перенаправлять DNS запросы после успешной авторизации на портале</string>
     <string name="title_show_noconnection_notification">Уведомление об отсутствии соединения с сервером DoH/DoT</string>
-    <string name="summary_show_noconnection_notification">Показывать уведомление когда соединение с сервером отсутствует, либо работает неисправно</string>
+    <string name="summary_show_noconnection_notification">Показывать уведомление, когда приложение в настоящее время не имеет соединения с DNS-сервером</string>
     <string name="preference_category_querylogging">Логирование DNS запросов</string>
     <string name="title_log_queries">Логирование DNS запросов</string>
     <string name="summary_log_queries">Логировать все DNS запросы, а также ответы сервера</string>
@@ -86,4 +88,52 @@
     <string name="summary_export_queries">Экспортировать лог запросов в CSV файл (%1d queries)</string>
     <string name="title_delete_queries">Очистить лог запросов</string>
     <string name="summary_delete_queries">Нажмите здесь для удаления всех запросов из лога</string>
+    <string name="title_language">Язык</string>
+    <string name="summary_language">Поменять язык приложения</string>
+    <string name="title_fallback_dns">Внутренний DNS-сервер</string>
+    <string name="summary_fallback_dns">Настройка DNS-сервера, используемого Nebulo внутри компании. По умолчанию это настройка DNS-сервера вашего провайдера. Этот настроенный сервер используется только для внутренних целей и не обрабатывает ваши обычные DNS-запросы.</string>
+    <string name="title_export_settings">Настройки экспорта</string>
+    <string name="summary_export_settings">Экспорт всех настроек (включая источники правил DNS) в файл. В дальнейшем вы можете открыть файл для импорта в Nebulo.</string>
+    <string name="summary_restart_vpn_on_networkchange">Бесшумный перезапуск приложения при изменении сети. Включите эту функцию при возникновении проблем при переключении между сетями.
+\n Нет эффекта, когда приложение не активно</string>
+    <string name="summary_map_query_refused">Некоторые DNS-серверы могут отказать в ответе на запрос, если хост не разрешен или заблокирован. Эта настройка блокирует хост, а не отклоняет запрос, в противном случае система может запутаться</string>
+    <string name="crashreporting_type_off">(Не посылайте отчеты о крушениях)</string>
+    <string name="fallbackdns_isp">Поставщик услуг (нешифрованный)</string>
+    <string name="crashreporting_type_full">Полный (Статистика отчета и отладочные данные)</string>
+    <string name="crashreporting_type_minimal">Минимум (только отчетная версия Android &amp; App)</string>
+    <string name="title_nonvpn_help_faq">Документация</string>
+    <string name="summary_nonvpn_help_faq">Нажмите здесь, чтобы открыть окно браузера со справкой и документацией для не-VPN режима</string>
+    <string name="title_iptables_disable_ipv6">Отключить IPv6</string>
+    <string name="nonvpn_help_generic_title">Общие VPN приложения</string>
+    <string name="summary_nonvpn_help_generic">Щелкните здесь, чтобы получить инструкции по настройке VPN приложений</string>
+    <string name="preference_category_nonvpnmode_help">Инструкции для сторонних приложений</string>
+    <string name="summary_nonvpn_help">Нажмите здесь, чтобы получить инструкции по работе с этим приложением</string>
+    <string name="title_check_iptables">Проверьте наличие iptables</string>
+    <string name="summary_check_iptables">Проверьте, поддерживает ли ваше устройство iptables</string>
+    <string name="summary_iptables_disable_ipv6">При использовании iptables можно отключить IPv6 и вместо этого использовать IPv4. Это может исправить DNS-запросы в обход iptables, когда включен IPv6.</string>
+    <string name="title_iptables_mode">Использовать iptables</string>
+    <string name="summary_iptables_mode">Пересылать запросы в Nebulo с помощью iptables. Для этого требуются привилегии root. Когда включено, никакие внешние приложения не должны использоваться, когда они находятся в не vpn режиме. Это может не сработать, когда вы находитесь в сети IPv6.</string>
+    <string name="summary_local_server_port">Порт сервера DNS, который будет размещен. Разрешены только порты выше 1024</string>
+    <string name="preference_category_iptables">Иптаблицы</string>
+    <string name="title_local_server_port">Порт сервера</string>
+    <string name="title_nonvpn_use_lanip">Использовать IP устройства вместо локального хоста</string>
+    <string name="summary_nonvpn_use_lanip">Некоторые приложения не позволяют локальному хосту быть введенным в качестве DNS. При такой настройке вместо нее используется IP-адрес устройств в сети. Адрес будет меняться в зависимости от вашей сети, обратите внимание на уведомления.</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Сервер будет размещен на %1s: %1s</string>
+    <string name="summary_run_without_vpn">После проверки Nebulo разместил на вашем устройстве DNS-сервер</string>
+    <string name="title_run_without_vpn">Работать без VPN</string>
+    <string name="summary_category_nonvpnmode">Настройте Nebulo на работу в качестве DNS сервера на устройстве вместо использования фиктивного VPN. Когда эта функция включена, вам придется вручную пересылать DNS-запросы в Nebulo, используя приложения сторонних производителей</string>
+    <string name="preference_category_nonvpnmode">Не-VPN режим</string>
+    <string name="title_map_query_refused">Интерпретировать отклоненные запросы как запрещенные хосты</string>
+    <string name="title_restart_vpn_on_networkchange">Перезагрузка при смене сети</string>
+    <string name="summary_crashreporting_type">Настройте, какие данные должны передаваться разработчику при падении приложения. Данные о сбоях никогда не содержат личных данных и помогают быстрее исправить проблемы</string>
+    <string name="title_crashreporting_type">Автоматическое информирование о дорожно-транспортных происшествиях</string>
+    <string name="title_advanced_logging">Расширенный протокол отладки</string>
+    <string name="summary_advanced_logging">Добавляет больше отладочных журналов, что может помочь в решении более насущных проблем</string>
+    <string name="title_clear_dnscache">Очистить DNS кэш</string>
+    <string name="summary_clear_dnscache">Нажмите здесь, чтобы очистить DNS кэш, например, когда веб-сайты начинают неправильно работать, потому что они кэшируются</string>
+    <string name="title_inform_bad_connection">Сообщите мне о плохой связи</string>
+    <string name="title_show_revoked_notification">Уведомление об утере разрешения</string>
+    <string name="summary_show_revoked_notification">Показывать уведомление, когда Небуло теряет разрешение на VPN</string>
+    <string name="summary_simple_notification">Используйте простой текст в уведомлении</string>
+    <string name="title_simple_notification">Простое уведомление</string>
 </resources>
