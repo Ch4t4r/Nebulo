@@ -171,4 +171,54 @@
     <string name="dialog_batteryoptimization_whitelist">Wyłączyć</string>
     <string name="dialog_batteryoptimization_ignore">Ignoruj</string>
     <string name="dialog_batteryoptimization_title">Optymalizacja baterii</string>
+    <string name="dialog_speedtestpasses_message">Określ, jak często test powinien być przeprowadzany na poszczególnych serwerach. Wyższe przepustki zwiększają aktuarialnie</string>
+    <string name="dialog_speedtestpasses_title">Skonfiguruj przepustki testowe</string>
+    <string name="dialog_share_message">Którym linkiem chcesz się podzielić\?</string>
+    <string name="dialog_share_title">Wybierz typ łącza</string>
+    <string name="dialog_open_faq">Chcesz zapoznać się z często zadawanymi pytaniami i dokumentacją dotyczącą tej funkcji\?</string>
+    <string name="querylog_filter_shorten_domain">Wyświetlanie krótszej wersji domeny na liście</string>
+    <string name="querylog_filter_type_blocked_by_server">Zablokowany przez serwer DNS</string>
+    <string name="querylog_filter_type_dnsrules">Rozwiązywane za pomocą zasad DNS</string>
+    <string name="querylog_filter_type_cache">Rozwiązany przez DNS cache</string>
+    <string name="querylog_filter_type_forwarded">Rozwiązany przez serwer DNS</string>
+    <string name="querylog_filter_info">Wybierz typy zapytań, które chcesz zobaczyć</string>
+    <string name="querylog_filter_title">Dziennik zapytań o filtry</string>
+    <string name="dialog_dnsrules_status_sourcenotfound">Ten host jest w regułach DNS, ale źródło jest nieznane.</string>
+    <string name="dialog_dnsrules_status_fromsource">Ten hosta jest częścią źródła %1$s</string>
+    <string name="dialog_dnsrules_status_userrule">Ten host jest częścią zdefiniowanych przez Ciebie reguł DNS.</string>
+    <string name="dialog_dnsrules_status_not_found">Nie znaleziono żadnej reguły DNS dla tego hosta.</string>
+    <string name="dialog_dnsrules_search_message">Wprowadź poniżej hosta, aby wyszukać go w regułach DNS.</string>
+    <string name="dialog_dnsrules_search_title">Poszukiwanie host</string>
+    <string name="dialog_querylog_information_message">Ta lista pokazuje wszystkie poprzednie zapytania Nebulo zalogowane, gdy było aktywne. Lista jest aktualizowana w czasie zbliżonym do czasu rzeczywistego, gdy Nebulo jest aktualnie aktywne.
+\n
+\nIkony na początku rzędu wskazują, co się stało z zapytaniem.
+\n
+\nFlaga: Host został rozwiązany na podstawie reguł DNS lub został zablokowany przez serwer DNS.
+\nStrzałka: Nebulo przekazał zapytanie do serwera DNS
+\nBaza danych: Nebulo odzyskał odpowiedź DNS z pamięci podręcznej</string>
+    <string name="dialog_querylog_information_title">Informacje o dzienniku zapytań</string>
+    <string name="dialog_latency_sidebar_message">Opóźnienie pokazane tutaj nie jest twoim pingiem ani tym jak szybka jest sieć.
+\n Pokazuje ona, jak długo trwa wysyłanie żądania przez Nebulo i otrzymywanie odpowiedzi z serwera DNS. Wyświetlana wartość nie zawsze jest najbardziej aktualna i możliwe są wahania.
+\n Może to spowodować, że wyświetlana wartość będzie wyższa niż jest, ponieważ od momentu jej zmierzenia stała się niższa.</string>
+    <string name="dialog_latency_sidebar_title">Informacje o opóźnieniach</string>
+    <string name="dialog_nonvpn_help_generic">Aby używać Nebulo w trybie innym niż vpn wraz z aplikacją VPN innej firmy, należy zmienić ustawienia DNS wewnątrz tej drugiej aplikacji.
+\nNie wszystkie aplikacje VPN umożliwiają zmianę ustawień DNS. Jeśli tak, po prostu ustaw serwer DNS na \"%1$s:%2$d\" (możesz skonfigurować port powyżej).
+\n
+\nPo skonfigurowaniu aplikacji wystarczy uruchomić obie.</string>
+    <string name="dialog_nonvpn_help_netguard">Aby korzystać z trybu Non-VPN razem z NetGuard, wykonaj następujące czynności:
+\n - Sprawdź, czy masz zainstalowaną wersję F-Droida NetGuard. Nie działa ona z wersją z GPlay.
+\n - Przejdź do ustawień &gt; Opcje zaawansowane
+\n - Włączyć ruch filtrujący (jeśli nie jest już włączony)
+\n - Kliknij na Port Forwarding
+\n - Dodaj następujące zasady:
+\n
+\n - Protokół UDP, port źródłowy 53, port docelowy %1$s, port docelowy %2$d, aplikacja docelowa nikt
+\n - Powtórzyć dla TCP
+\n
+\n - Wróć do opcji zaawansowanych
+\n - Przewiń w dół, ustaw oba pola VPN DNS na %3$s.
+\n - Uruchomić Nebulo (w trybie innym niż VPN) i uruchomić NetGuard</string>
+    <string name="dialog_newdnsrule_block_host">Zablokuj tego host</string>
+    <string name="dialog_serverimport_servertype_doq">Typ: DNS-over-QUIC (DoQ)</string>
+    <string name="dialog_newserver_title_quic">Dodaj serwer (DoQ)</string>
 </resources>
