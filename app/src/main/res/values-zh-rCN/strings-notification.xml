@@ -67,4 +67,6 @@
     <string name="notification_channel_badconnection">网络不佳通知通道</string>
     <string name="notification_channel_dnsrules_description">用于导入/导出 DNS 规则的频道</string>
     <string name="notification_channel_dnsrules">DNS规则通知频道</string>
+    <string name="notification_cronet_failed_text">DNS-over-QUIC无法使用，因为它无法被初始化。请选择其他服务器。</string>
+    <string name="notification_cronet_failed_title">QUIC初始化失败</string>
 </resources>
