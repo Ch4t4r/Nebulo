@@ -136,4 +136,21 @@
     <string name="changelog_build_62_2">Añadido soporte para iptables en modo no VPN. Esto requiere un dispositivo con privilegios de root</string>
     <string name="changelog_build_62_4">El servidor DNS interno (fallback) puede ahora ser configurado</string>
     <string name="changelog_build_62_3">Las fuentes de las reglas del DNS pueden ahora ser actualizadas individualmente</string>
+    <string name="changelog_build_69_1">Agregar soporte para DNS-over-QUIC</string>
+    <string name="changelog_build_69_2">Aumentar el rendimiento de las consultas DNS-over-HTTPS</string>
+    <string name="changelog_build_66_1">Añadí las preguntas más frecuentes. Puedes encontrarlas en el elemento de navegación \"Acerca de esta aplicación\"</string>
+    <string name="changelog_build_66_3">Añadido un diálogo a las reglas del DNS para comprobar si un host está listado en algún lugar</string>
+    <string name="changelog_build_66_7">Se añadieron pantallas de introducción cuando se lanzó la aplicación por primera vez</string>
+    <string name="changelog_build_66_8">Añadió una pantalla de selección de servidor al iniciar la aplicación por primera vez</string>
+    <string name="changelog_build_67_4">Añadido un mejor formato de los números en las reglas del DNS</string>
+    <string name="changelog_build_67_2">Añadida una búsqueda en el diálogo de exclusión de aplicaciones</string>
+    <string name="changelog_build_67_3">Arreglar la latencia del servidor que no se muestra en el modo no VPN</string>
+    <string name="changelog_build_67_1">Una dirección IPv6 diferente (::) se utiliza ahora internamente para ignorar un host</string>
+    <string name="changelog_build_66_10">Añadido un filtro al registro de consultas</string>
+    <string name="changelog_build_66_11">Añadido un campo que muestra cuántas consultas se han resuelto con las reglas del DNS</string>
+    <string name="changelog_build_66_9">Añadido una notificación que se muestra cuando el servidor actual tiene una mala conexión</string>
+    <string name="changelog_build_66_6">Añadido BraveDNS y seguridad Cloudflare</string>
+    <string name="changelog_build_66_4">Añadido una entrada de ayuda al registro de consultas para explicar lo que significan los iconos</string>
+    <string name="changelog_build_66_5">La prueba de velocidad del DNS ahora muestra con más precisión la latencia</string>
+    <string name="changelog_build_66_2">La adición de servidores ahora distingue entre mayúsculas y minúsculas. Esto arregla los problemas con NextDNS</string>
 </resources>
