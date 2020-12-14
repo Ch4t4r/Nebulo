@@ -145,16 +145,17 @@
     <string name="dialog_enable_logging">¿Quiere habilitar los registros\? Los registros contienen información estadística, información de depuración y acciones en la aplicación. Los registros generados no se comparten a menos que lo haga usted mismo.</string>
     <string name="dialog_clearqueries_title">Borrar todas las consultas del DNS</string>
     <string name="dialog_clearqueries_message">¿Estás seguro de que quieres borrar las consultas del DNS registradas\? Esto no puede ser revertido.</string>
-    <string name="dialog_credits_message" formatted="true">- Icono de la aplicación por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; . 
-\n- Traducción al turco por Kemal Oktay Aktoğan 
-\n- Traducción al ruso por bruleto 
-\n- Traducción al holandés por Bas Koedijk 
-\n- Traducción al portugués de Rafael W. Bohnenberger 
-\n- Traducción al indonesio por Gloeyisk 
+    <string name="dialog_credits_message" formatted="true">- Icono de la aplicación por &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
+\n- Traducción al turco por Kemal Oktay Aktoğan
+\n- Traducción al ruso por bruleto
+\n- Traducción al holandés por Bas Koedijk
+\n- Traducción al portugués de Rafael W. Bohnenberger
+\n- Traducción al indonesio por Gloeyisk
 \n- Traducción al catalán de Daniel Alomar
-\n- Traducción al castellano de Daniel Alomar y Víctor Bayas
-\n- Algunos iconos de Font Awesome 
-\n 
+\n- Traducción al español de Daniel Alomar y Víctor Bayas
+\n- Algunos iconos de Font Awesome
+\n- Traducción al chino (simplificado) por Ediel Chedlyramber
+\n
 \n ¿Quieres ver tu nombre aquí\? Siéntase libre de &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuir&lt;/a&gt;.</string>
     <string name="dialog_speedtest_useserver_title">Seleccione el servidor</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
