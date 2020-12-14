@@ -113,7 +113,7 @@
     <string name="summary_run_without_vpn">当选中后，Nebulo将在您的设备上设置DNS服务器</string>
     <string name="title_run_without_vpn">无VPN运行</string>
     <string name="summary_category_nonvpnmode_forwardinfo">服务器将在 %1s:%2s 上运行</string>
-    <string name="summary_category_nonvpnmode">将Nebulo配置为设备上的DNS服务器，而不使用伪VPN。启用后，您必须使用第三方应用手动将DNS请求转发到Nebulo。</string>
+    <string name="summary_category_nonvpnmode">将Nebulo配置为设备上的DNS服务器，而不使用伪VPN。启用后，您必须使用第三方应用手动将DNS请求转发到Nebulo</string>
     <string name="preference_category_nonvpnmode">无VPN模式</string>
     <string name="fallbackdns_isp">服务提供商（未加密）</string>
     <string name="summary_nonvpn_help_faq">点此使用浏览器打开无VPN模式的帮助与文档</string>
@@ -134,4 +134,6 @@
     <string name="title_inform_bad_connection">连接差时通知我</string>
     <string name="summary_fallback_dns">设置 Nebulo 内部使用的 DNS 服务器。应用默认使用服务提供商的 DNS 服务器。这个服务器仅会用于应用内部，不会用于处理您普通的DNS请求。</string>
     <string name="title_fallback_dns">内置DNS服务器</string>
+    <string name="title_export_settings">出口设置</string>
+    <string name="summary_export_settings">将所有设置（包括DNS规则源）导出到一个文件中。您以后可以打开该文件将其导入Nebulo。</string>
 </resources>
