@@ -5,7 +5,7 @@
     <string name="querylog_filter_info">حدد أنواع الاستعلامات التي تريد رؤيتها</string>
     <string name="querylog_filter_title">تصفية سجل الاستعلام</string>
     <string name="dialog_dnsrules_status_sourcenotfound">هذا المضيف موجود في قواعد DNS ، لكن المصدر غير معروف.</string>
-    <string name="dialog_dnsrules_status_fromsource">هذا المضيف جزء من المصدر% 1s</string>
+    <string name="dialog_dnsrules_status_fromsource">هذا المضيف جزء من المصدر%1$s</string>
     <string name="dialog_dnsrules_status_userrule">هذا المضيف هو جزء من قواعد DNS التي حددتها.</string>
     <string name="dialog_dnsrules_status_not_found">لم يتم العثور على قاعدة DNS لهذا المضيف.</string>
     <string name="dialog_dnsrules_search_message">أدخل مضيفًا أدناه للبحث عنه في قواعد DNS.</string>
@@ -197,4 +197,32 @@
     <string name="dialog_newserver_title_https">اضف سيرفر (DoH)</string>
     <string name="dialog_serverconfiguration_addserver">اضف سيرفر</string>
     <string name="dialog_serverconfiguration_title">اعدادات السيرفر</string>
+    <string name="querylog_filter_type_cache">تم حلها بواسطة ذاكرة التخزين المؤقت ل DNS</string>
+    <string name="dialog_speedtestpasses_message">قم بتعيين عدد مرات إجراء الاختبار لكل خادم. التمريرات الأعلى تزيد من اكتواري</string>
+    <string name="dialog_speedtestpasses_title">تكوين اجتياز الاختبار</string>
+    <string name="dialog_share_message">أي رابط تريد مشاركته؟</string>
+    <string name="dialog_share_title">حدد نوع الارتباط</string>
+    <string name="dialog_open_faq">هل تريد إلقاء نظرة على الأسئلة المتداولة والوثائق الخاصة بهذه الميزة؟</string>
+    <string name="querylog_filter_shorten_domain">عرض نسخة أقصر من المجال في القائمة</string>
+    <string name="querylog_filter_type_dnsrules">تم حلها بواسطة قواعد DNS</string>
+    <string name="dialog_nonvpn_help_generic">لاستخدام Nebulo في الوضع non-vpn مع تطبيق VPN تابع لجهة خارجية ، يجب عليك تغيير إعدادات DNS داخل هذا التطبيق الآخر.
+\nلا تسمح لك جميع تطبيقات VPN بتغيير إعدادات DNS. إذا كان لديك ، فما عليك سوى تعيين خادم DNS على \"%1$s: %2$d\" (يمكنك تكوين المنفذ أعلاه).
+\n
+\nبعد تكوين التطبيقات ، ابدأ كليهما.</string>
+    <string name="dialog_nonvpn_help_netguard">لاستخدام وضع Non-VPN مع NetGuard ، قم بما يلي:
+\n - تحقق من تثبيت إصدار F-Droid من NetGuard. لا يعمل مع الإصدار من GPlay.
+\n - اذهب إلى الإعدادات&gt; خيارات متقدمة
+\n - تمكين تصفية حركة المرور (إذا لم يتم تمكينها بالفعل)
+\n - انقر فوق Port Forwarding
+\n - تضاف القواعد التالية:
+\n
+\n • بروتوكول UDP ، منفذ المصدر 53 ، الوجهة %1$s ، منفذ الوجهة %2$d ، تطبيق الوجهة لا أحد
+\n • كرر لبرنامج التعاون الفني
+\n
+\n - ارجع إلى الخيارات المتقدمة
+\n - قم بالتمرير لأسفل ، واضبط حقلي DNS VPN على %3$s
+\n - ابدأ Nebulo (في وضع غير VPN) وابدأ NetGuard</string>
+    <string name="dialog_newdnsrule_block_host">منع هذا المضيف</string>
+    <string name="dialog_serverimport_servertype_doq">النوع: DNS-over-QUIC (DoQ)</string>
+    <string name="dialog_newserver_title_quic">اضف سيرفر (DoQ)</string>
 </resources>
