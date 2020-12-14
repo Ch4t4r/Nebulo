@@ -124,4 +124,5 @@
     <string name="theme_true_black">Negro verdadero</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_mono">Mono</string>
+    <string name="app_share_fdroid">Oye, encontré esta aplicación que encripta tus consultas DNS para darte más privacidad y seguridad. Compruébalo descargándolo de aquí: https://nebulo.app/source#installation</string>
 </resources>
