@@ -11,12 +11,12 @@
     <string name="notification_channel_high_priorty">उच्च प्राथमिकता</string>
     <string name="notification_channel_high_priorty_description">उच्च प्राथमिकता सूचनाओं के लिए माध्यम । उदाहरण - जब ऐप वीपीएन (VPN) की अनुमति खो देता है</string>
     <string name="notification_simple_text">वर्तमान सर्वर: %1s</string>
-    <string name="notification_main_text">प्रश्न यहाँ भेजें जा रहे है - %1s
+    <string name="notification_main_text">प्रश्न %1s को भेजे जाते हैं
 \n
-\n%2d ऐप्स को DoH/DoT से बाहर रखा गया है</string>
+\n%2d ऐप्स को नेबुलो से बाहर रखा गया है</string>
     <string name="notification_main_text_with_secondary">प्रश्न यहाँ भेजें जा रहे है - %1s और %2s
 \n
-\n%3d ऐप्स को DoH/DoT से बाहर रखा गया है</string>
+\n%3d ऐप्स को Nebulo से बाहर रखा गया है</string>
     <string name="notification_main_text_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1s
 \n
 \n%2d ऐप्स DoH / DoT का उपयोग कर रहे हैं</string>
@@ -53,7 +53,7 @@
     <string name="notification_dnsserver_message">DNS सर्वर %1s:%2d पर चल रहा है। तृतीय-पक्ष एप्लिकेशन का उपयोग करके क्वेरी को अग्रेषित करेंं</string>
     <string name="notification_dnsserver_title">गैर-वीपीएन मोड में चल रहा है</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_dnsserver_message_iptables_failed">DNS सर्वर %1s:%1d पर चल रहा है। IPtables की शुरुआत विफल रही, प्रश्नों को तृतीय-पक्ष एप्लिकेशन के साथ अग्रेषित किया जाना है</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNS सर्वर %1s:%2d पर चल रहा है। IPtables की शुरुआत विफल रही, प्रश्नों को तृतीय-पक्ष एप्लिकेशन के साथ अग्रेषित किया जाना है</string>
     <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS सर्वर %1s:%2d पर चल रहा है। Iptables का उपयोग करके क्वेरी को अग्रेषित किया जाता है।
 \nचेतावनी: IPv6 सक्रिय है, प्रश्न Nebulo को बायपास कर सकते हैं।</string>
     <string name="notification_dnsserver_message_iptables_active">DNS सर्वर %1s:%2d पर चल रहा है। IPtables का उपयोग करके क्वेरीज़ अग्रेषित की जाती हैं</string>
