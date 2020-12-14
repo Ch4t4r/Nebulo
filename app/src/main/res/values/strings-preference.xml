@@ -162,7 +162,7 @@
 
     <string name="preference_category_nonvpnmode">Non-VPN mode</string>
     <string name="summary_category_nonvpnmode">Configure Nebulo to act as a DNS server on the device instead of using a dummy VPN. When enabled you manually have to forward DNS queries to Nebulo using third party apps</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Server will be hosted on %1s:%1s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server will be hosted on %1s:%2s</string>
 
     <string name="title_run_without_vpn">Run without VPN</string>
     <string name="summary_run_without_vpn">When checked Nebulo hosts a DNS server on your device</string>
