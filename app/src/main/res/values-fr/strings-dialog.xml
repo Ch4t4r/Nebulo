@@ -71,8 +71,11 @@
 \n- Traduction en néerlandais par Bas Koedijk
 \n- Traduction en portugais par Rafael W. Bohnenberger
 \n- Traduction en indonésien par Gloeyisk
+\n- Traduction en catalan par Daniel Alomar
+\n- Traduction en espagnol par Daniel Alomar et Victor Bayas
 \n- Quelques icônes de Font Awesome
-\n 
+\n- Traduction en chinois (simplifié) par Ediel Chedlyramber
+\n
 \n Vous voulez voir votre nom ici \? N\'hésitez pas à &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;contribuer&lt;/a&gt;.</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
     <string name="dialog_newdnsrule_host_invalid">Veuillez fournir un host valide</string>
