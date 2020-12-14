@@ -80,7 +80,7 @@
     <string name="summary_pause_on_captiveportal">Jangan gunakan DoH jika portal kaptif terdeteksi. Ini akan secara otomatis dilanjutkan segera setelah masuk. 
 \nMenonaktifkannya mungkin mencegah Anda membuka situs portal kaptif untuk masuk</string>
     <string name="title_show_noconnection_notification">Pemberitahuan disaat tidak ada koneksi</string>
-    <string name="summary_show_noconnection_notification">Tampilkan pemberitahuan saat aplikasi sedang dalam koneksi yang buruk</string>
+    <string name="summary_show_noconnection_notification">Tampilkan pemberitahuan ketika aplikasi saat ini tidak memiliki koneksi ke server DNS</string>
     <string name="preference_category_querylogging">Catatan kueri</string>
     <string name="title_log_queries">Catatan kueri</string>
     <string name="summary_log_queries">Catat semua pertanyaan dan tanggapan</string>
@@ -101,15 +101,12 @@
     <string name="summary_iptables_mode">Teruskan kueri ke Nebulo menggunakan iptables. Ini membutuhkan hak akses root. Saat diaktifkan, tidak ada aplikasi eksternal yang perlu digunakan saat dalam mode non-vpn. Ini mungkin tidak berfungsi ketika Anda berada di jaringan IPv6.</string>
     <string name="title_iptables_mode">Gunakan iptables</string>
     <string name="preference_category_iptables">Iptables</string>
-    <string name="summary_local_server_port">Port server DNS yang akan dihosting. Hanya port di atas 1024 yang diperbolehkan.
-\nSaat ini: %1s</string>
+    <string name="summary_local_server_port">Port server DNS yang akan dihosting. Hanya port di atas 1024 yang diperbolehkan</string>
     <string name="title_local_server_port">Port server</string>
     <string name="summary_run_without_vpn">Saat dicentang, Nebulo menghosting server DNS di perangkat Anda</string>
     <string name="title_run_without_vpn">Jalankan tanpa VPN</string>
     <string name="summary_category_nonvpnmode_forwardinfo">Server akan dihosting di %1s:%2s</string>
-    <string name="summary_category_nonvpnmode">Konfigurasikan Nebulo untuk bertindak sebagai server DNS pada perangkat daripada menggunakan VPN tiruan. Saat diaktifkan, Anda secara manual harus meneruskan kueri DNS ke Nebulo menggunakan aplikasi pihak ketiga.
-\n
-\nFitur ini bersifat eksperimental.</string>
+    <string name="summary_category_nonvpnmode">Konfigurasikan Nebulo untuk bertindak sebagai server DNS pada perangkat daripada menggunakan VPN tiruan. Saat diaktifkan, Anda secara manual harus meneruskan kueri DNS ke Nebulo menggunakan aplikasi pihak ketiga</string>
     <string name="preference_category_nonvpnmode">Mode non-VPN</string>
     <string name="summary_map_query_refused">Beberapa server DNS mungkin menolak untuk menjawab pertanyaan jika host tidak diizinkan atau diblokir. Pengaturan ini memblokir host alih-alih menolak kueri, jika tidak, sistem mungkin akan bingung</string>
     <string name="title_map_query_refused">Menafsirkan permintaan yang ditolak sebagai host yang tidak diizinkan</string>
