@@ -1,10 +1,8 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="activity_label_import_queries">Импортировать запросы</string>
     <string name="activity_label_import_servers">Импортировать сервер</string>
-
     <string name="activity_label_enable_logging">Экспорт файлов лога/ Включить логирование</string>
-
     <string name="all_stop">Стоп</string>
     <string name="all_start">Старт</string>
     <string name="all_pause">Пауза</string>
@@ -14,32 +12,22 @@
     <string name="information">Информация</string>
     <string name="open_app">Открыть приложение</string>
     <string name="all_close">Закрыть</string>
-
     <string name="main_dnssurveillance_infotext">Имейте в виду, используемый DNS-сервер может вести логирование посещаемых вами доменов, а также запрашиваемых вашей системой. Сервер также может собирать метаданные. Проверьте соответствующее заявление о конфиденциальности.</string>
     <string name="main_dnssurveillance_privacystatement">Заявление о конфиденциальности %1s</string>
-
-    <string name="about_app">Это приложение с открытым исходным кодом. Исходный код опубликован на сайте &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
-\n 
-\nКроме того, приложение не содержит рекламу, не отслеживает и не собирает данные. 
-\n 
-\nВерсия приложения %1s 
-\n 
-\nВерсия сборки %2d 
-\n 
-\nВерсия базы данных %3d 
-\n 
-\nИдентификатор отчета об ошибках: %4s 
-\n 
+    <string name="about_app">Это приложение с открытым исходным кодом. Исходный код доступен по адресу &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
+\nКроме того, приложение не содержит рекламы и не отслеживает и не собирает данные о вас.
+\n
+\nВерсия %1s
+\nСтроить %2d
+\nВерсия базы данных %3d
+\nИдентификатор аварии: %4s
+\n
 \n© Daniel Wolf 2019–2020
-\n 
-\nРаспространяется в соответствии с лицензией GNU GPLv3. 
+\nРаспространяется в соответствии с лицензией GNU GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
     <string name="app_share_text">Приложение, которое шифрует ваши DNS запросы для большей приватности и безопасности. https://play.google.com/store/apps/details\?id=com.frostnerd.smokescreen</string>
-
     <string name="quicksettings_stop_text">остановить Nebulo</string>
     <string name="quicksettings_start_text">подключить Nebulo</string>
-
-
     <string name="about_share">Рассказать другу</string>
     <string name="about_licenses">Используемые лицензии</string>
     <string name="about_changelog">Список изменений</string>
@@ -49,5 +37,98 @@
     <string name="about_credits">Участники</string>
     <string name="about_info">О программе</string>
     <string name="about_help_translating">Помочь с переводом на другой язык</string>
-
+    <string name="activity_label_speed_test">Сравнение скорости сервера</string>
+    <string name="error_invalid_url">Пожалуйста, предоставьте действительный урл</string>
+    <string name="error_invalid_pin">Пожалуйста, укажите ваш PIN-код</string>
+    <string name="error_webview_missing">Пакет WebView не найден, обновляется ли он в настоящее время или удален\?</string>
+    <string name="error_cannot_open_settings">Невозможно открыть системные настройки</string>
+    <string name="app_share_fdroid">Эй, я нашел это приложение, которое шифрует ваши DNS-запросы, чтобы обеспечить вам больше конфиденциальности и безопасности. Проверьте его, скачав здесь: https://nebulo.app/source#installation</string>
+    <string name="appintro_second_description">Добавив шифрование к DNS, одному из старейших протоколов Интернета, вы получаете его в свои руки.
+\n
+\nСделайте более сложным для вашего провайдера отслеживание с помощью DNS-over-HTTPS и DNS-over-TLS с Nebulo.</string>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="one">%1d запрос был обработан правилами DNS</item>
+        <item quantity="few">%1d запроса были обработаны правилами DNS</item>
+        <item quantity="many">%1d запросов было обработано правилами DNS до сих пор</item>
+        <item quantity="other">%1d запросов было обработано правилами DNS до сих пор</item>
+    </plurals>
+    <string name="window_main_protected">Защищён!</string>
+    <string name="windows_querylogging_latency">Задержка</string>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="one">%1d запрос заблокирован до сих пор</item>
+        <item quantity="few">%1d запроса заблокированы до сих пор</item>
+        <item quantity="many">%1d запроса заблокированы до сих пор</item>
+        <item quantity="other">%1d запроса заблокированы до сих пор</item>
+    </plurals>
+    <string name="appintro_server_choose_adblock">Сервер, который блокирует рекламу и отслеживание</string>
+    <string name="appintro_server_choose_third">Настоящий сервер, ориентированный на конфиденциальность</string>
+    <string name="appintro_server_choose_forth">Сервер, который защищает меня от вредоносных веб-сайтов и приложений</string>
+    <string name="appintro_server_choose_first">Самый быстрый</string>
+    <string name="appintro_server_choose_second">Быстрый сервер, с акцентом на конфиденциальность</string>
+    <string name="appintro_server_choose_description">Какой сервер вы хотите использовать в Небуло\?</string>
+    <string name="appintro_server_choose_disclaimer">Существуют серверы, которые подходят для нескольких или даже всех категорий. Nebulo автоматически выбирает самый быстрый.</string>
+    <string name="appintro_server_choose_title">Первые дела</string>
+    <string name="appintro_forth_title">И последнее</string>
+    <string name="appintro_forth_description">Вы можете настроить Nebulo на использование в качестве общесистемного блокатора рекламы и отслеживания.
+\n
+\nВы даже можете использовать его вместе с некоторыми приложениями брандмауэра, чтобы еще больше усилить контроль над конфиденциальностью.</string>
+    <string name="appintro_third_title">Полностью оборудованный для величия</string>
+    <string name="appintro_third_description">Nebulo поставляется в комплекте с кучей полезных функций, таких как мониторинг DNS активности, PIN защита, тест скорости и многое другое.
+\n
+\nИзучите приложение, чтобы узнать, что может предложить свободное программное обеспечение с открытым исходным кодом.</string>
+    <string name="appintro_second_title">Ваши вопросы конфиденциальности</string>
+    <string name="appintro_first_title">Добро пожаловать в Небуло.</string>
+    <string name="appintro_first_description">Nebulo - это приложение для защиты конфиденциальности и безопасности вашего устройства.
+\n
+\nВозвращайте контроль над данными, которые ваш провайдер или другие организации обрабатывали как свои в течение длительного времени.</string>
+    <string name="warning_server_currently_unstable_expanded">Сервер %1s сейчас, кажется, нестабилен, что влияет на скорость просмотра. Подумайте о переходе на более стабильный сервер.</string>
+    <string name="window_querylog_information">Информация</string>
+    <string name="about_help_faq">Часто задаваемые вопросы</string>
+    <string name="warning_server_currently_unstable">Сервер %1s сейчас, кажется, нестабилен.</string>
+    <string name="iptables_not_supported">Ваше устройство не поддерживает iptables</string>
+    <string name="window_dnsrules_refresh_sources">Обновить правила импорта из источника</string>
+    <string name="iptables_supported">Поздравляем, iptables поддерживается вашим устройством!</string>
+    <string name="iptables_supported_ipv6_unsupported">Iptables поддерживается, но IPv6 не поддерживается.</string>
+    <string name="restart_app_for_changes">Перезапустите приложение, чтобы изменения вступили в силу.</string>
+    <string name="restart_app">Перезапустить</string>
+    <string name="window_main_unprotected">Не защищён</string>
+    <string name="window_main_click_to_enable">Нажмите, чтобы включить.</string>
+    <string name="window_main_privatedns_info">Приватный DNS активен, ваши запросы уже защищены. Включите Nebulo, если вы хотите использовать DNS-over-HTTPS или другие полезные функции.
+\nДля включения Nebulo отключите Приватный DNS.</string>
+    <string name="windows_querylogging_usedserver_cache">Решено с помощью кэша</string>
+    <string name="windows_querylogging_dnsrule_created">Создано правило DNS</string>
+    <string name="windows_querylogging_usedserver_dnsrules">Решено с помощью правил DNS</string>
+    <string name="windows_querylogging_responses">Ответы</string>
+    <string name="windows_querylogging_create_dnsrule">Создать правило DNS для этого узла</string>
+    <string name="windows_querylogging_hostsource__unknown">Неизвестный</string>
+    <string name="windows_querylogging_protocol">Протокол</string>
+    <string name="windows_querylogging_used_server">Использованный сервер</string>
+    <string name="windows_querylogging_hostsource">Источник правила DNS</string>
+    <string name="windows_querylogging_hostsource__user">Правила пользователя</string>
+    <string name="windows_querylogging_type">Тип</string>
+    <string name="windows_querylogging_question">Вопрос</string>
+    <string name="windows_querylogging_search_hint">Поиск хоста в журнале запросов</string>
+    <string name="windows_querylogging_search">Хост-поиск</string>
+    <string name="windows_querylogging_time">Время</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Правила из этого источника: %1s (%2s дубликаты не используются)</string>
+    <string name="window_dnsrules_customhosts_message">Определите здесь все ваши пользовательские хосты</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Правила из этого источника: -</string>
+    <plurals name="window_dnsrules_subtitle">
+        <item quantity="one">правило %1s</item>
+        <item quantity="few">%1s правила</item>
+        <item quantity="many">%1s правила</item>
+        <item quantity="other">%1s правила</item>
+    </plurals>
+    <string name="window_dnsrules_hostalreadyexists">Для этого хозяина уже есть правило</string>
+    <string name="button_main_dnsrules">правила DNS</string>
+    <string name="window_dnsrules_customhosts">Пользовательские хосты</string>
+    <string name="error_no_webbrowser_installed">У вас не установлено приложение для просмотра этой ссылки</string>
+    <string name="window_speedtest_runtest">Начните тест</string>
+    <string name="window_speedtest_information">Чем ниже значения, тем быстрее Nebulo сможет общаться с сервером. Это, например, увеличивает скорость работы в интернете.</string>
+    <string name="theme_true_black">истинная чернота</string>
+    <string name="theme_blue">Синий</string>
+    <string name="theme_mono">Моно</string>
+    <string name="theme_dark">Темный</string>
+    <string name="error_invalid_host">Пожалуйста, предоставьте действительного хозяина</string>
+    <string name="error_invalid_servername">Пожалуйста, укажите имя</string>
 </resources>
