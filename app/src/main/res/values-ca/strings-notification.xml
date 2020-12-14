@@ -7,15 +7,15 @@
     <string name="notification_service_killed_title">Informació sobre l’optimització de la bateria</string>
     <string name="notification_pin_message">El PIN és obligatori per realitzar aquesta acció. Feu clic aquí per confirmar-ho</string>
     <string name="notification_pin_title">PIN obligatori</string>
-    <string name="notification_ruleexportfinished_message">S\'han exportat %1d regles</string>
+    <string name="notification_ruleexportfinished_message">S\'han exportat %1$d regles</string>
     <string name="notification_ruleexportfinished_title">S\'ha finalitzat l\'exportació de regles DNS</string>
-    <string name="notification_ruleexport_message">Exportant regles (%1s/%2s)</string>
+    <string name="notification_ruleexport_message">Exportant regles (%1$s/%2$s)</string>
     <string name="notification_ruleexport_title">Exportació de regla DNS</string>
-    <string name="notification_ruleimportfinished_message">%1s regles han sigut importades (%2s duplicades omeses)</string>
+    <string name="notification_ruleimportfinished_message">%1$s regles han sigut importades (%2$s duplicades omeses)</string>
     <string name="notification_ruleimportfinished_title">Importació de regla DNS finalitzada</string>
     <string name="notification_ruleimport_tertiarymessage">Finalitzant importació…</string>
     <string name="notification_ruleimport_secondarymessage">Preparant importació…</string>
-    <string name="notification_ruleimport_message">Important regles DNS de %1s (%2s)</string>
+    <string name="notification_ruleimport_message">Important regles DNS de %1$s (%2$s)</string>
     <string name="notification_ruleimport_title">Importa regla DNS</string>
     <string name="notification_appcrash_message">Nebulo s\'ha estavellat. Feu clic aquí per anar al menú principal i reiniciar l\'aplicació, si és necessari</string>
     <string name="notification_appcrash_title">Nebulo s\'ha estavellat</string>
@@ -23,22 +23,22 @@
     <string name="notification_vpnrestart_title">Reiniciant Vpn</string>
     <string name="notification_noconnection_text">L’aplicació actualment no reenvia les vostres consultes DNS perquè la connexió es dolenta o no en teniu</string>
     <string name="notification_noconnection_title">Sense connexió</string>
-    <string name="notification_main_subtext">%1d consultes fins ara</string>
+    <string name="notification_main_subtext">%1$d consultes fins ara</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
-    <string name="notification_main_text_with_secondary_whitelist">Les consultes s’envien a %1s i %2s
+    <string name="notification_main_text_with_secondary_whitelist">Les consultes s’envien a %1$s i %2$s
 \n
-\n%3d Aplicacions fan servir DoH/DoT</string>
-    <string name="notification_main_text_whitelist">Les consultes s’envien a %1s
+\n%3$d Aplicacions fan servir DoH/DoT</string>
+    <string name="notification_main_text_whitelist">Les consultes s’envien a %1$s
 \n
-\n%2d Aplicacions fan servir DoH/DoT</string>
-    <string name="notification_main_text_with_secondary">Les consultes s’envien a %1s i %2s
+\n%2$d Aplicacions fan servir DoH/DoT</string>
+    <string name="notification_main_text_with_secondary">Les consultes s’envien a %1$s i %2$s
 \n
-\n%3d Aplicacions excloses de Nebulo</string>
-    <string name="notification_main_text">Les consultes s’envien a %1s
+\n%3$d Aplicacions excloses de Nebulo</string>
+    <string name="notification_main_text">Les consultes s’envien a %1$s
 \n
-\n%2d Aplicacions excloses de Nebulo</string>
-    <string name="notification_simple_text">Servidor actual: %1s</string>
+\n%2$d Aplicacions excloses de Nebulo</string>
+    <string name="notification_simple_text">Servidor actual: %1$s</string>
     <string name="notification_channel_high_priorty_description">Canal per a notificacions d\'alta prioritat, per exemple, quan l\'aplicació perd permís a la VPN</string>
     <string name="notification_channel_high_priorty">Alta prioritat</string>
     <string name="notification_channel_pin_description">Canal utilitzat per a les notificacions relacionades amb el PIN, és a dir, quan s\'ha de proporcionar</string>

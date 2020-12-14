@@ -6,7 +6,7 @@
     <string name="dialog_newserver_primaryserver">Serveur primaire</string>
     <string name="dialog_newserver_secondaryserver">Serveur secondaire (facultatif)</string>
     <string name="dialog_serverimport_done">Fait</string>
-    <string name="dialog_serverimport_priority">Priorité %1d</string>
+    <string name="dialog_serverimport_priority">Priorité %1$d</string>
     <string name="dialog_logexport_text">Comment voulez-vous partager les journaux \?</string>
     <string name="dialog_error_text">Il semble que l\'application ait planté. Voulez-vous envoyer les fichiers de journal d\'erreurs au développeur \?</string>
     <string name="dialog_batteryoptimization_title">Optimisation de la batterie</string>
@@ -15,7 +15,7 @@
 \n
 \nLes serveurs qui sont déjà importés seront dupliqués si vous les sélectionnez.</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Les serveurs n\'ont pas pu être importés.
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_deletelogs_text">Êtes-vous sûr de vouloir supprimer tous les journaux \?</string>
     <string name="dialog_batteryoptimization_message">Sur certains appareils, l\'application ne sera pas informée que l\'appareil a fini de démarrer à moins que les optimisations de la batterie ne soient désactivées pour lui.
 \nL\'application n\'est actuellement pas sur la liste blanche de l\'optimisation de la batterie, voulez-vous faire cela \?
@@ -28,7 +28,7 @@
     <string name="dialog_newserver_title_https">Ajouter un serveur (DoH)</string>
     <string name="dialog_newserver_title_tls">Ajouter un serveur (DoT)</string>
     <string name="dialog_newserver_name_hint">Exemple</string>
-    <string name="dialog_deleteconfig_text">Voulez-vous supprimer la configuration %1s \?</string>
+    <string name="dialog_deleteconfig_text">Voulez-vous supprimer la configuration %1$s \?</string>
     <string name="dialog_appchoosal_showsystemapps">Afficher les applications du système</string>
     <string name="dialog_appchoosal_whitelist">N\'utiliser que DoH/DoT dans les applications sélectionnées</string>
     <string name="dialog_serverimport_experimental">Expérimental</string>
@@ -43,27 +43,27 @@
     <string name="dialog_about_licenses">Licences</string>
     <string name="dialog_logexport_loading_title">Préparation des journaux</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d application est exclue par défaut et ne peut être désélectionnée</item>
-        <item quantity="other">%1d applications sont exclues par défaut et ne peuvent être désélectionnées</item>
+        <item quantity="one">%1$d application est exclue par défaut et ne peut être désélectionnée</item>
+        <item quantity="other">%1$d applications sont exclues par défaut et ne peuvent être désélectionnées</item>
     </plurals>
     <string name="dialog_deleteconfig_title">Supprimer la configuration \?</string>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Importation d %1d serveur</item>
-        <item quantity="other">Importation de %1d serveurs</item>
+        <item quantity="one">Importation d %1$d serveur</item>
+        <item quantity="other">Importation de %1$d serveurs</item>
     </plurals>
     <string name="dialog_error_title">Rapport d\'accident</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d serveurs testés
-\n %2d de serveurs DoT accessibles, %3d non accessibles
-\n %4d Serveurs du ministère de la santé accessibles, %5d non accessibles
-\n Temps de réponse moyen : %6d ms.
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1$d serveurs testés
+\n %2$d de serveurs DoT accessibles, %3$d non accessibles
+\n %4$d Serveurs du ministère de la santé accessibles, %5$d non accessibles
+\n Temps de réponse moyen : %6$d ms.
 \n
-\n Le serveur le plus rapide : %7s
-\n Le serveur le plus lent : %8s</string>
+\n Le serveur le plus rapide : %7$s
+\n Le serveur le plus lent : %8$s</string>
     <string name="dialog_join_group_message">Hé là !
 \n
 \nSaviez-vous que cette application dispose d\'un groupe Telegram \? Il contient des mises à jour régulières et est l\'endroit idéal pour les discussions et les questions.
 \nNous sommes une grande communauté de plus de 350 personnes, aimeriez-vous en faire partie \?</string>
-    <string name="dialog_deletehostsource_message">Êtes-vous sûr de vouloir supprimer la host source %1s \? Cela ne peut pas être annulé, les hôtes de cette source seront supprimés.</string>
+    <string name="dialog_deletehostsource_message">Êtes-vous sûr de vouloir supprimer la host source %1$s \? Cela ne peut pas être annulé, les hôtes de cette source seront supprimés.</string>
     <string name="dialog_newdnsrule_wildcard_info">L\'host supporte les wildcards. Utilisez un astérisque (*) pour toute quantité de caractères, de chiffres et de caractères spéciaux autorisés, à l\'exception du point (.). Utilisez deux astérisques (**) pour inclure le point (.).</string>
     <string name="dialog_credits_message" formatted="true">- Icône de l\'application réalisée par &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;.
 \n- Traduction en turc par Kemal Oktay Aktoğan
@@ -96,7 +96,7 @@
 \nCliquez sur \"Voir les données\" ci-dessous pour savoir quel type de données est transmis et pour obtenir un lien vers la politique de confidentialité.</string>
     <string name="dialog_clearqueries_message">Êtes-vous sûr de vouloir effacer les requêtes enregistrées \? Il n\'est pas possible de revenir en arrière.</string>
     <string name="dialog_join_group_positive">Ouais !</string>
-    <string name="dialog_speedtest_useserver_message">Voulez-vous utiliser le serveur %1s \? Il est classé %2d sur %3d avec un temps de réponse de %4d ms.</string>
+    <string name="dialog_speedtest_useserver_message">Voulez-vous utiliser le serveur %1$s \? Il est classé %2$d sur %3$d avec un temps de réponse de %4$d ms.</string>
     <string name="dialog_clearuserrules_message">Vous voulez clarifier toutes les règles du DNS \? Cela ne peut pas être annulé.</string>
     <string name="dialog_newhostsource_choose_file">Choisissez un fichier</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Veuillez fournir une adresse IPv4 valide</string>
@@ -130,7 +130,7 @@
     <string name="dialog_join_group_title">Rejoindre la communauté</string>
     <string name="dialog_speedresult_title">Résultats des tests de vitesse</string>
     <string name="dialog_speedtest_useserver_title">Sélectionner le serveur</string>
-    <string name="dialog_deletehostsource_title">Supprimer les %1s \?</string>
+    <string name="dialog_deletehostsource_title">Supprimer les %1$s \?</string>
     <string name="dialog_clearuserrules_title">Effacer toutes les règles du DNS \?</string>
     <string name="dialog_newhostsource_title">Nouvelle source de règles</string>
     <string name="dialog_newhostsource_name">Nom</string>
@@ -174,11 +174,11 @@
 \n - Cliquez sur \"Port Forwarding
 \n - Ajouter les règles suivantes :
 \n
-\n - Protocole UDP, port source 53, destination %1s, port de destination %2d, application de destination nobody
+\n - Protocole UDP, port source 53, destination %1$s, port de destination %2$d, application de destination nobody
 \n - Répéter pour TCP
 \n
 \n - Retour aux options avancées
-\n - Faites défiler vers le bas, réglez les deux champs DNS VPN sur %3s
+\n - Faites défiler vers le bas, réglez les deux champs DNS VPN sur %3$s
 \n - Démarrez Nebulo (en mode non-VPN) et lancez NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Bloquer cet hôte</string>
 </resources>

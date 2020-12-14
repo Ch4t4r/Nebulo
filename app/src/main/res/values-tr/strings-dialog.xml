@@ -9,19 +9,19 @@
     <string name="dialog_newserver_primaryserver">Birincil sunucu</string>
     <string name="dialog_newserver_secondaryserver">İkincil sunucu (İsteğe bağlı)</string>
     <string name="dialog_deleteconfig_title">Yapılandırma silinsin mi\?</string>
-    <string name="dialog_deleteconfig_text">%1s yapılandırmasını silmek istiyor musunuz\?</string>
+    <string name="dialog_deleteconfig_text">%1$s yapılandırmasını silmek istiyor musunuz\?</string>
     <string name="dialog_appchoosal_showsystemapps">Sistem uygulamalarını göster</string>
     <string name="dialog_appchoosal_whitelist">Yalnızca seçili uygulamalarda DoH/DoT kullanın</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d uygulaması varsayılan olarak hariç tutuldu ve seçilemez</item>
-        <item quantity="other">%1d uygulama varsayılan olarak hariç tutulur ve seçilemez</item>
+        <item quantity="one">%1$d uygulaması varsayılan olarak hariç tutuldu ve seçilemez</item>
+        <item quantity="other">%1$d uygulama varsayılan olarak hariç tutulur ve seçilemez</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">%1d sunucunun içe aktarılması</item>
-        <item quantity="other">%1d sunucunun içe aktarılması</item>
+        <item quantity="one">%1$d sunucunun içe aktarılması</item>
+        <item quantity="other">%1$d sunucunun içe aktarılması</item>
     </plurals>
     <string name="dialog_serverimport_done">Tamamlandı</string>
-    <string name="dialog_serverimport_priority">Öncelik %1d</string>
+    <string name="dialog_serverimport_priority">Öncelik %1$d</string>
     <string name="dialog_serverimport_experimental">Deneysel</string>
     <string name="dialog_serverimport_servertype_doh">Tür: HTTPS üzerinden DNS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Tür: TLS üzerinden DNS (DoT)</string>
@@ -31,7 +31,7 @@
     <string name="dialog_serverimportfailed_title">İçe aktarma başarısız oldu</string>
     <string name="dialog_serverimportfailed_text">Sunucu(lar) alınamadı.</string>
     <string name="dialog_serverimportfailed_text_exception">Sunucular alınamadı. 
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_text">Günlükleri nasıl paylaşmak istersiniz\?</string>
     <string name="dialog_logexport_general">Uygulamayı seçin</string>
     <string name="dialog_logexport_email">E-Posta</string>
@@ -95,17 +95,17 @@
 \n200 kişiden büyük bir topluluğuz, bunun bir parçası olmak ister misiniz\?</string>
     <string name="dialog_join_group_positive">Evet!</string>
     <string name="dialog_speedresult_title">Hız testi sonuçları</string>
-    <string name="dialog_speedresult_message">%1d sunucu test edildi
-\n  %2d DoT sunucularına erişilebiliyor, %3d erişilemiyor
-\n  %4d DoH sunucularına erişilebiliyor, %5d erişilemiyor
-\n  Ortalama tepki süresi: %6d ms.
+    <string name="dialog_speedresult_message">%1$d sunucu test edildi
+\n  %2$d DoT sunucularına erişilebiliyor, %3$d erişilemiyor
+\n  %4$d DoH sunucularına erişilebiliyor, %5$d erişilemiyor
+\n  Ortalama tepki süresi: %6$d ms.
 \n
-\n  En hızlı sunucu: %7s
-\n  En yavaş sunucu: %8s</string>
+\n  En hızlı sunucu: %7$s
+\n  En yavaş sunucu: %8$s</string>
     <string name="dialog_speedtest_useserver_title">Sunucu seç</string>
-    <string name="dialog_speedtest_useserver_message">%1s sunucusunu kullanmak istiyor musunuz\? Bu %4d ms bir tepki süresi ile %3d dışında %2d sırada yer aldı.</string>
-    <string name="dialog_deletehostsource_title">%1s silinsin mi\?</string>
-    <string name="dialog_deletehostsource_message">%1s ana bilgisayar kaynağını silmek istediğinize emin misiniz\? Bu işlem geri alınamaz, bu kaynaktan gelen ana bilgisayarlar kaldırılır.</string>
+    <string name="dialog_speedtest_useserver_message">%1$s sunucusunu kullanmak istiyor musunuz\? Bu %4$d ms bir tepki süresi ile %3$d dışında %2$d sırada yer aldı.</string>
+    <string name="dialog_deletehostsource_title">%1$s silinsin mi\?</string>
+    <string name="dialog_deletehostsource_message">%1$s ana bilgisayar kaynağını silmek istediğinize emin misiniz\? Bu işlem geri alınamaz, bu kaynaktan gelen ana bilgisayarlar kaldırılır.</string>
     <string name="dialog_clearuserrules_title">Tüm DNS kuralları temizlensin mi\?</string>
     <string name="dialog_clearuserrules_message">Tüm DNS kurallarını silmek istiyor musunuz\? Bu geri alınamaz.</string>
     <string name="dialog_newhostsource_title">Yeni kural kaynağı</string>

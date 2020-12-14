@@ -13,14 +13,14 @@
     <string name="open_app">Uygulamayı aç</string>
     <string name="all_close">Kapat</string>
     <string name="main_dnssurveillance_infotext">Bağlandığınız DNS sunucusunun hangi siteleri ziyaret ettiğinizi kaydedebildiğini unutmayın. Daha fazla bilgi için ilgili gizlilik bildirimlerini kontrol edin.</string>
-    <string name="main_dnssurveillance_privacystatement">%1s’in gizlilik beyanı</string>
+    <string name="main_dnssurveillance_privacystatement">%1$s’in gizlilik beyanı</string>
     <string name="about_app">Bu uygulama açık kaynak. Kaynak koduna &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt; adresinden erişilebilir.
 \nAyrıca, uygulama reklam içermez ve sizinle ilgili hiçbir veri izlemez veya toplamaz.
 \n
-\nSürüm: %1s
-\nDerleme: %2d
-\nVeritabanı sürümü: %3d
-\nCrashreport Kimliği: %4s
+\nSürüm: %1$s
+\nDerleme: %2$d
+\nVeritabanı sürümü: %3$d
+\nCrashreport Kimliği: %4$s
 \n
 \n© Daniel Wolf 2019–2020
 \nGPLv3 kapsamında lisanslanmıştır.
@@ -44,13 +44,13 @@
     <string name="window_dnsrules_customhosts">Özel Hosts</string>
     <string name="window_dnsrules_customhosts_message">Tüm özel Hostları burada tanımlayın</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Bu kaynaktan gelen kurallar: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Bu kaynaktan gelen kurallar: %1s (%2s kopya kullanılmıyor)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Bu kaynaktan gelen kurallar: %1$s (%2$s kopya kullanılmıyor)</string>
     <string name="error_invalid_url">Lütfen geçerli bir URL girin</string>
     <string name="error_invalid_pin">Lütfen PIN’inizi girin</string>
     <string name="error_invalid_servername">Lütfen bir isim girin</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1s kuralı</item>
-        <item quantity="other">%1s kuralları</item>
+        <item quantity="one">%1$s kuralı</item>
+        <item quantity="other">%1$s kuralları</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">Bu ana bilgisayar için zaten bir kural var</string>
     <string name="windows_querylogging_time">Zaman</string>

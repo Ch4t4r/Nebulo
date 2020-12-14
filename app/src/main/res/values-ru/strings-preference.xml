@@ -25,7 +25,7 @@
     <string name="summary_preference_pin_use_fingerprint">Разрешить использовать сканер отпечатка вместо PIN кода</string>
     <string name="title_preference_change_pin">Изменить PIN ко</string>
     <string name="summary_preference_change_pin">Изменить PIN код. Допустимы только циферные значения. 
-\nТекущий PIN: %1s</string>
+\nТекущий PIN: %1$s</string>
     <string name="preference_category_cache">Настройки кеширования</string>
     <string name="title_dnscache_enabled">Использовать кэш DNS</string>
     <string name="summary_dnscache_enabled">Включает DNS кэш приложений. Кэш запоминает старые запросы, чтобы быстрее отвечать на будущие вопросы.
@@ -39,13 +39,13 @@
     <string name="summary_dnscache_usedefaulttimes">Храните запросы в кэше до тех пор, пока DNS-сервер взаимодействует с помощью TTL</string>
     <string name="title_dnscache_minimum_cache_time">Минимальное время хранения кэша</string>
     <string name="summary_dnscache_minimum_cache_time">Минимальное время хранения кэшированных запросов. 
-\nТекущее значение: %1d Секунд</string>
+\nТекущее значение: %1$d Секунд</string>
     <string name="title_dnscache_customcachetime">Изменение времени хранения кэша (в секундах)</string>
     <string name="summary_dnscache_customcachetime">Изменяет длительность кэширования всех запросов, независимо от того, будет ли время кэширования по умолчанию дольше. Длительное время кэширования может привести к тому, что кэшированные данные будут не синхронизированы с реальными данными.
-\nТекущее значение: %1d секунды</string>
+\nТекущее значение: %1$d секунды</string>
     <string name="title_dnscache_nxdomaincachetime">Время кэширования для NXDomain (Секунды)</string>
     <string name="summary_dnscache_nxdomaincachetime">Изменить значение времени для кэшированных запросов NXDomain. Это повышает производительность для несуществующих доменов (например, если они заблокированы) 
-\nТекущее значение: %1d Секунд</string>
+\nТекущее значение: %1$d Секунд</string>
     <string name="preference_category_logging">Логирование</string>
     <string name="title_enable_logging">Включение логирования</string>
     <string name="summary_enable_logging">Включить лог для отладочной информации (содержит статистическую информацию). Этот лог не будет отправляться автоматически</string>
@@ -85,7 +85,7 @@
     <string name="title_log_queries">Логирование DNS запросов</string>
     <string name="summary_log_queries">Логировать все DNS запросы, а также ответы сервера</string>
     <string name="title_export_queries">Экспорт лога DNS запросов</string>
-    <string name="summary_export_queries">Экспортировать лог запросов в CSV файл (%1d queries)</string>
+    <string name="summary_export_queries">Экспортировать лог запросов в CSV файл (%1$d queries)</string>
     <string name="title_delete_queries">Очистить лог запросов</string>
     <string name="summary_delete_queries">Нажмите здесь для удаления всех запросов из лога</string>
     <string name="title_language">Язык</string>
@@ -118,7 +118,7 @@
     <string name="title_local_server_port">Порт сервера</string>
     <string name="title_nonvpn_use_lanip">Использовать IP устройства вместо локального хоста</string>
     <string name="summary_nonvpn_use_lanip">Некоторые приложения не позволяют локальному хосту быть введенным в качестве DNS. При такой настройке вместо нее используется IP-адрес устройств в сети. Адрес будет меняться в зависимости от вашей сети, обратите внимание на уведомления.</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Сервер будет размещен на %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Сервер будет размещен на %1$s:%2$s</string>
     <string name="summary_run_without_vpn">После проверки Nebulo разместил на вашем устройстве DNS-сервер</string>
     <string name="title_run_without_vpn">Работать без VPN</string>
     <string name="summary_category_nonvpnmode">Настройте Nebulo на работу в качестве DNS сервера на устройстве вместо использования фиктивного VPN. Когда эта функция включена, вам придется вручную пересылать DNS-запросы в Nebulo, используя приложения сторонних производителей</string>

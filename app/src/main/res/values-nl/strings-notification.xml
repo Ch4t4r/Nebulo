@@ -6,21 +6,21 @@
     <string name="notification_channel_foreground_service_description">Kanaal dat wordt gebruikt voor meldingen die niet door de gebruiker kunnen worden verwijderd</string>
     <string name="notification_channel_noconnection">Verbindings waarschuwingskanaal</string>
     <string name="notification_channel_noconnection_description">Kanaal dat wordt gebruikt voor het weergeven van meldingen wanneer er geen verbinding beschikbaar lijkt te zijn</string>
-    <string name="notification_main_text">Vragen worden verstuurd naar %1s
+    <string name="notification_main_text">Vragen worden verstuurd naar %1$s
 \n
-\n%2d Apps zijn uitgesloten van de Nebulo</string>
-    <string name="notification_main_text_with_secondary">Vragen worden verstuurd naar %1s en %2s
+\n%2$d Apps zijn uitgesloten van de Nebulo</string>
+    <string name="notification_main_text_with_secondary">Vragen worden verstuurd naar %1$s en %2$s
 \n
-\n%3d Apps zijn uitgesloten van de Nebulo</string>
-    <string name="notification_main_text_whitelist">Vragen worden verstuurd naar %1s
+\n%3$d Apps zijn uitgesloten van de Nebulo</string>
+    <string name="notification_main_text_whitelist">Vragen worden verstuurd naar %1$s
 \n
-\n%2d Apps gebruiken DoH/DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">Vragen worden verstuurd naar %1s en %2s
+\n%2$d Apps gebruiken DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Vragen worden verstuurd naar %1$s en %2$s
 \n
-\n%3d Apps gebruiken DoH/DoT</string>
+\n%3$d Apps gebruiken DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">%1d aanvragen tot nu toe</string>
+    <string name="notification_main_subtext">%1$d aanvragen tot nu toe</string>
     <string name="notification_noconnection_title">Geen verbinding</string>
     <string name="notification_noconnection_text">De app stuurt momenteel uw DNS-aanvragen niet door omdat u geen of een slechte verbinding heeft</string>
     <string name="notification_vpnrestart_title">Vpn herstarten</string>
@@ -28,16 +28,16 @@
     <string name="notification_appcrash_title">Nebulo is gecrasht</string>
     <string name="notification_appcrash_message">Nebulo is gecrasht. Klik hier om naar het hoofdmenu te gaan en de app indien nodig opnieuw te starten</string>
     <string name="notification_ruleimport_title">DNS-regels importeren</string>
-    <string name="notification_ruleimport_message">Importeren van DNS-regels uit %1s (%2s)</string>
+    <string name="notification_ruleimport_message">Importeren van DNS-regels uit %1$s (%2$s)</string>
     <string name="notification_ruleimport_secondarymessage">Importeren voorbereiden …</string>
     <string name="notification_ruleimportfinished_title">DNS-regels importeren voltooid</string>
-    <string name="notification_ruleimportfinished_message">%1s regels zijn geïmporteerd (%2s duplicaten weggelaten)</string>
+    <string name="notification_ruleimportfinished_message">%1$s regels zijn geïmporteerd (%2$s duplicaten weggelaten)</string>
     <string name="notification_ruleimport_tertiarymessage">Importeren voltooien…</string>
     <string name="notification_ruleexport_title">DNS-regels exporteren</string>
-    <string name="notification_ruleexport_message">Exporteer regels (%1s/%2s)</string>
+    <string name="notification_ruleexport_message">Exporteer regels (%1$s/%2$s)</string>
     <string name="notification_ruleexport_secondarymessage">Exporteren voorbereiden…</string>
     <string name="notification_ruleexportfinished_title">DNS-regels exporteren is voltooid</string>
-    <string name="notification_ruleexportfinished_message">%1d regels zijn geëxporteerd</string>
+    <string name="notification_ruleexportfinished_message">%1$d regels zijn geëxporteerd</string>
     <string name="notification_channel_pin">PIN-code gerelateerd kanaal</string>
     <string name="notification_channel_pin_description">Kanaal dat wordt gebruikt voor meldingen met betrekking tot de pincode, d.w.z. wanneer deze moet worden verstrekt</string>
     <string name="notification_pin_title">PIN-code vereist</string>
@@ -45,17 +45,17 @@
     <string name="notification_service_killed_title">Informatie over batterij optimalisatie</string>
     <string name="notification_service_killed_message">Het lijkt erop dat de app onlangs is gestopt door het systeem. Klik hier voor meer informatie</string>
     <string name="notification_service_killed_ignore">Negeren</string>
-    <string name="notification_simple_text">Huidige server: %1s</string>
+    <string name="notification_simple_text">Huidige server: %1$s</string>
     <string name="notification_channel_high_priorty">Hoge prioriteit</string>
     <string name="notification_channel_high_priorty_description">Kanaal voor meldingen met hoge prioriteit, bijvoorbeeld wanneer de app de machtiging voor de VPN verliest</string>
     <string name="notification_service_revoked_title">VPN-machtiging ingetrokken door systeem</string>
     <string name="notification_service_revoked_message">Klik hier om opnieuw te starten</string>
-    <string name="notification_dnsserver_portdiffers">Geconfigureerde Poort %1d kon niet worden gebruikt.</string>
-    <string name="notification_dnsserver_message_iptables_failed">DNS-server draait op %1s:%2d. Het initialiseren van iptables is mislukt, vragen moeten worden doorgestuurd met apps van derden</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS-server draait op %1s:%2d. Query\'s worden doorgestuurd met behulp van iptables.
+    <string name="notification_dnsserver_portdiffers">Geconfigureerde Poort %1$d kon niet worden gebruikt.</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNS-server draait op %1$s:%2$d. Het initialiseren van iptables is mislukt, vragen moeten worden doorgestuurd met apps van derden</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS-server draait op %1$s:%2$d. Query\'s worden doorgestuurd met behulp van iptables.
 \nWaarschuwing: IPv6 is actief, queries kunnen de Nebulo omzeilen.</string>
-    <string name="notification_dnsserver_message_iptables_active">DNS-server draait op %1s:%2d. Query\'s worden doorgestuurd met behulp van iptables</string>
-    <string name="notification_dnsserver_message">DNS-server draait op %1s:%2d. Vragen doorsturen met behulp van apps van derden</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS-server draait op %1$s:%2$d. Query\'s worden doorgestuurd met behulp van iptables</string>
+    <string name="notification_dnsserver_message">DNS-server draait op %1$s:%2$d. Vragen doorsturen met behulp van apps van derden</string>
     <string name="notification_dnsserver_title">In niet-VPN-modus</string>
     <string name="notification_cronet_failed_text">DNS-over-QUIC kan niet worden gebruikt omdat het niet kon worden geïnitialiseerd. Kies een andere server.</string>
     <string name="notification_cronet_failed_title">QUIC-initialisatie mislukt</string>

@@ -13,7 +13,7 @@
     <string name="open_app">Ouvrir l\'application</string>
     <string name="all_close">Fermer</string>
     <string name="main_dnssurveillance_infotext">Notez que le serveur DNS auquel vous êtes connecté peut enregistrer les sites que vous visitez. Consultez les déclarations de confidentialité respectives pour plus d\'informations.</string>
-    <string name="main_dnssurveillance_privacystatement">Déclaration de confidentialité de %1s</string>
+    <string name="main_dnssurveillance_privacystatement">Déclaration de confidentialité de %1$s</string>
     <string name="quicksettings_stop_text">Stopper Nebulo</string>
     <string name="quicksettings_start_text">Démarrer Nebulo</string>
     <string name="about_share">Partager</string>
@@ -26,16 +26,16 @@
     <string name="about_info">Information générale</string>
     <string name="about_help_translating">Aidez pour la traduction</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1s Règle DNS</item>
-        <item quantity="other">%1s Règles du DNS</item>
+        <item quantity="one">%1$s Règle DNS</item>
+        <item quantity="other">%1$s Règles du DNS</item>
     </plurals>
     <string name="about_app">Cette application est open source. Le code source peut être consulté à l\'adresse suivante : &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
 \nEn outre, l\'application ne contient pas de publicité et ne permet pas de suivre ou de collecter des données vous concernant.
 \n
-\nVersion %1s
-\nConstruire %2d
-\nVersion de la base de données %3d
-\nID du crashreport : %4s
+\nVersion %1$s
+\nConstruire %2$d
+\nVersion de la base de données %3$d
+\nID du crashreport : %4$s
 \n
 \nDaniel Wolf 2019–2020
 \nSous licence GPLv3.
@@ -62,7 +62,7 @@
     <string name="windows_querylogging_question">Question</string>
     <string name="windows_querylogging_type">Tapez</string>
     <string name="windows_querylogging_time">Heure</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Règles provenant de cette source : %1s (%2s doublons non utilisés)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Règles provenant de cette source : %1$s (%2$s doublons non utilisés)</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Règles provenant de cette source : -</string>
     <string name="button_main_dnsrules">Règles du DNS</string>
     <string name="error_no_webbrowser_installed">Vous n\'avez pas d\'application installée pour voir ce lien</string>
@@ -94,12 +94,12 @@
     <string name="appintro_server_choose_title">Commençons par le commencement</string>
     <string name="appintro_forth_title">Une dernière chose</string>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="one">La requête %1d a été traitée par les règles du DNS jusqu\'à présent</item>
-        <item quantity="other">%1d requêtes ont été traitées par les règles du DNS jusqu\'à présent</item>
+        <item quantity="one">La requête %1$d a été traitée par les règles du DNS jusqu\'à présent</item>
+        <item quantity="other">%1$d requêtes ont été traitées par les règles du DNS jusqu\'à présent</item>
     </plurals>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="one">La requête %1d a été bloquée jusqu\'à présent</item>
-        <item quantity="other">%1d requêtes ont été bloquées à ce jour</item>
+        <item quantity="one">La requête %1$d a été bloquée jusqu\'à présent</item>
+        <item quantity="other">%1$d requêtes ont été bloquées à ce jour</item>
     </plurals>
     <string name="appintro_server_choose_forth">Un serveur qui me protège des sites web et des applications nuisibles</string>
     <string name="appintro_server_choose_adblock">Un serveur qui bloque les annonces et le suivi</string>
@@ -123,6 +123,6 @@
 \nReprenez le contrôle des données que votre FAI ou d\'autres entités ont traitées comme les leurs depuis longtemps.</string>
     <string name="appintro_second_title">Votre vie privée est importante</string>
     <string name="appintro_first_title">Bienvenue à Nebulo.</string>
-    <string name="warning_server_currently_unstable">Le serveur %1s semble être instable en ce moment.</string>
-    <string name="warning_server_currently_unstable_expanded">Le serveur %1s semble être instable en ce moment, ce qui a un impact sur votre vitesse de navigation. Envisagez de passer à un serveur plus stable.</string>
+    <string name="warning_server_currently_unstable">Le serveur %1$s semble être instable en ce moment.</string>
+    <string name="warning_server_currently_unstable_expanded">Le serveur %1$s semble être instable en ce moment, ce qui a un impact sur votre vitesse de navigation. Envisagez de passer à un serveur plus stable.</string>
 </resources>

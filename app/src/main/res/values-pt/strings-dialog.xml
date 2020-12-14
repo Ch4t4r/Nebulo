@@ -9,19 +9,19 @@
     <string name="dialog_newserver_primaryserver">Servidor principal</string>
     <string name="dialog_newserver_secondaryserver">Servidor secundário (opcional)</string>
     <string name="dialog_deleteconfig_title">Excluir configuração\?</string>
-    <string name="dialog_deleteconfig_text">Deseja excluir a configuração %1s\?</string>
+    <string name="dialog_deleteconfig_text">Deseja excluir a configuração %1$s\?</string>
     <string name="dialog_appchoosal_showsystemapps">Mostrar aplicações do sistema</string>
     <string name="dialog_appchoosal_whitelist">Apenas use DoH/DoT em aplicações selecionadas</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d aplicação é excluída por padrão e não pode ser desmarcada</item>
-        <item quantity="other">%1d aplicações são excluídas por padrão e não podem ser desmarcadas</item>
+        <item quantity="one">%1$d aplicação é excluída por padrão e não pode ser desmarcada</item>
+        <item quantity="other">%1$d aplicações são excluídas por padrão e não podem ser desmarcadas</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Importação de %1d servidor</item>
-        <item quantity="other">Importação de %1d servidores</item>
+        <item quantity="one">Importação de %1$d servidor</item>
+        <item quantity="other">Importação de %1$d servidores</item>
     </plurals>
     <string name="dialog_serverimport_done">Feito</string>
-    <string name="dialog_serverimport_priority">Prioridade %1d</string>
+    <string name="dialog_serverimport_priority">Prioridade %1$d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Tipo: DNS-via-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Tipo: DNS-via-TLS (DoT)</string>
@@ -31,7 +31,7 @@
     <string name="dialog_serverimportfailed_title">Falhou ao importar</string>
     <string name="dialog_serverimportfailed_text">Não foi possível importar o(s) servidor(es).</string>
     <string name="dialog_serverimportfailed_text_exception">Não foi possível importar os servidores. 
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_text">Como deseja partilhar os registos\?</string>
     <string name="dialog_logexport_general">Escolha a aplicação</string>
     <string name="dialog_logexport_email">E-Mail</string>
@@ -95,17 +95,17 @@
 \nSomos uma grande comunidade com mais de 200 pessoas, gostaria de fazer parte dela\?</string>
     <string name="dialog_join_group_positive">Sim!</string>
     <string name="dialog_speedresult_title">Resultados do teste de velocidade</string>
-    <string name="dialog_speedresult_message">%1d servidores testados
-\n %2d servidores DoT alcançáveis, %3d inacessíveis
-\n %4d servidores DoH alcançáveis, %5d inacessíveis
-\n Tempo médio de resposta: %6d ms.
+    <string name="dialog_speedresult_message">%1$d servidores testados
+\n %2$d servidores DoT alcançáveis, %3$d inacessíveis
+\n %4$d servidores DoH alcançáveis, %5$d inacessíveis
+\n Tempo médio de resposta: %6$d ms.
 \n
-\n Servidor mais rápido: %7s
-\n Servidor mais lento: %8s</string>
+\n Servidor mais rápido: %7$s
+\n Servidor mais lento: %8$s</string>
     <string name="dialog_speedtest_useserver_title">Selecionar servidor</string>
-    <string name="dialog_speedtest_useserver_message">Quer usar o servidor %1s\? Ele se classificou como %2d de %3d, com um tempo de resposta de %4d ms.</string>
-    <string name="dialog_deletehostsource_title">Eliminar %1s\?</string>
-    <string name="dialog_deletehostsource_message">Tem certeza de que deseja eliminar %1s\? Isso não pode ser revertido, os hospedeiros dessa fonte serão removidos.</string>
+    <string name="dialog_speedtest_useserver_message">Quer usar o servidor %1$s\? Ele se classificou como %2$d de %3$d, com um tempo de resposta de %4$d ms.</string>
+    <string name="dialog_deletehostsource_title">Eliminar %1$s\?</string>
+    <string name="dialog_deletehostsource_message">Tem certeza de que deseja eliminar %1$s\? Isso não pode ser revertido, os hospedeiros dessa fonte serão removidos.</string>
     <string name="dialog_clearuserrules_title">Limpar todas as regras de DNS\?</string>
     <string name="dialog_clearuserrules_message">Quer limpar todas as regras de DNS\? Isto não pode ser desfeito.</string>
     <string name="dialog_newhostsource_title">Nova fonte de regras</string>
@@ -174,11 +174,11 @@
 \n - Clique em Port Forwarding
 \n - Adicione as seguintes regras:
 \n
-\n - Protocolo UDP, porta de origem 53, destino %1s, porta de destino %2d, aplicação de destino ninguém
+\n - Protocolo UDP, porta de origem 53, destino %1$s, porta de destino %2$d, aplicação de destino ninguém
 \n - Repetir para TCP
 \n
 \n - Voltar às opções avançadas
-\n - Role para baixo, defina ambos os campos DNS VPN para %3s
+\n - Role para baixo, defina ambos os campos DNS VPN para %3$s
 \n - Iniciar o Nebulo (em modo não-VPN) e iniciar o NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Bloquear este host</string>
 </resources>

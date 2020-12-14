@@ -25,7 +25,7 @@
     <string name="summary_preference_pin_use_fingerprint">Permita que su huella dactilar sea usada en lugar del código PIN</string>
     <string name="title_preference_change_pin">Cambiar PIN</string>
     <string name="summary_preference_change_pin">Cambie el pin. Solo se permiten valores numéricos. 
-\nPIN actual: %1s</string>
+\nPIN actual: %1$s</string>
     <string name="preference_category_cache">Control de caché</string>
     <string name="title_dnscache_enabled">Usar caché DNS</string>
     <string name="summary_dnscache_enabled">Activa la caché del DNS de las aplicaciones. El caché memoriza las antiguas solicitudes para responder más rápido a las futuras preguntas. 
@@ -39,13 +39,13 @@
     <string name="preference_category_network">Red</string>
     <string name="preference_category_querylogging">Registro de consulta</string>
     <string name="title_log_queries">Registro de consulta</string>
-    <string name="summary_export_queries">Exportación de las consultas como CSV (%1d consultas)</string>
+    <string name="summary_export_queries">Exportación de las consultas como CSV (%1$d consultas)</string>
     <string name="summary_show_noconnection_notification">Mostrar una notificación cuando la aplicación no tiene actualmente ninguna conexión con el servidor DNS</string>
     <string name="summary_dnscache_usedefaulttimes">Mantener las solicitudes en la caché durante todo el tiempo que el servidor DNS se comunique usando el TTL</string>
     <string name="summary_dnscache_minimum_cache_time">El tiempo mínimo de almacenamiento en caché de las entradas debe ser menor, independientemente de que el tiempo de almacenamiento en caché por defecto sea más corto. Tiempos de almacenamiento en caché largos podrían hacer que los datos almacenados en caché no estuvieran sincronizados con los datos reales. 
-\nActual: %1d Segundos</string>
+\nActual: %1$d Segundos</string>
     <string name="summary_dnscache_customcachetime">Cambia el tiempo de almacenamiento en caché de todas las solicitudes, sin importar si el tiempo de almacenamiento en caché predeterminado para ello sería más largo. Los tiempos de almacenamiento en caché largos podrían causar que los datos almacenados en caché no estén sincronizados con los datos reales. 
-\nActual: %1d Segundos</string>
+\nActual: %1$d Segundos</string>
     <string name="summary_enable_logging">Permite el registro de información de depuración (contiene datos estadísticos). Estos registros no se envían automáticamente</string>
     <string name="summary_send_logs">Haga clic aquí para enviar los registros al desarrollador</string>
     <string name="summary_delete_all_logs">Borra todos los registros almacenados en su dispositivo</string>
@@ -65,7 +65,7 @@
     <string name="title_dnscache_customcachetime">Tiempo de caché personalizado (segundos)</string>
     <string name="title_dnscache_nxdomaincachetime">Tiempo de caché para NXDomain (segundos)</string>
     <string name="summary_dnscache_nxdomaincachetime">Cambia la cantidad de tiempo que las solicitudes de NXDOMAIN se almacenan en caché. Esto mejora el rendimiento para los dominios no existentes (por ejemplo, si están bloqueados) 
-\nCorriente: %1d Segundos</string>
+\nCorriente: %1$d Segundos</string>
     <string name="title_send_logs">Envíe los registros</string>
     <string name="title_delete_all_logs">Borrar todos los registros</string>
     <string name="preference_category_ip">Ajustes de IP</string>
@@ -112,7 +112,7 @@
     <string name="title_local_server_port">Puerto del servidor</string>
     <string name="summary_run_without_vpn">Cuando está marcado, Nebulo aloja un servidor DNS en su dispositivo</string>
     <string name="title_run_without_vpn">Funciona sin VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">El servidor será alojado en %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">El servidor será alojado en %1$s:%2$s</string>
     <string name="summary_category_nonvpnmode">Configurar Nebulo para que actúe como un servidor DNS en el dispositivo en lugar de usar una VPN falsa. Cuando se activa, tienes que reenviar manualmente las consultas DNS a Nebulo usando aplicaciones de terceros</string>
     <string name="preference_category_nonvpnmode">Modo no VPN</string>
     <string name="summary_check_iptables">Compruebe si su dispositivo es compatible con los iptables</string>

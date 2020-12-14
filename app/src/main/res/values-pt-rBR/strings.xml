@@ -21,8 +21,8 @@
     <string name="error_webview_missing">O pacote WebView não foi encontrado, acaso está sendo atualizado ou foi removido?</string>
     <string name="error_cannot_open_settings">Não foi possível abrir as configurações do sistema</string>
     <string name="main_dnssurveillance_infotext">Esteja ciente de que o servidor de DNS ao qual você está conectado é capaz de registrar quais sites você está visitando. Verifique as respectivas políticas de privacidade para obter mais informações.</string>
-    <string name="main_dnssurveillance_privacystatement">Política de privacidade de %1s</string>
-    <string name="about_app"><![CDATA[Este App é de código livre. O código fonte pode ser acessado em <a href="https://nebulo.app/source">nebulo.app/source</a>.\nAlém disso, o App não contém anúncios e não rastreia ou coleta quaisquer dados sobre você.\n\nVersão %1s\nCompilação %2d\nVersão do base de dados %3d\nID do relatório de erros: %4s\n\n© Daniel Wolf 2019–2020\nLicenciado sob GPLv3.\n<a href="mailto:support@frostnerd.com">support@frostnerd.com</a>]]></string>
+    <string name="main_dnssurveillance_privacystatement">Política de privacidade de %1$s</string>
+    <string name="about_app"><![CDATA[Este App é de código livre. O código fonte pode ser acessado em <a href="https://nebulo.app/source">nebulo.app/source</a>.\nAlém disso, o App não contém anúncios e não rastreia ou coleta quaisquer dados sobre você.\n\nVersão %1$s\nCompilação %2$d\nVersão do base de dados %3$d\nID do relatório de erros: %4$s\n\n© Daniel Wolf 2019–2020\nLicenciado sob GPLv3.\n<a href="mailto:support@frostnerd.com">support@frostnerd.com</a>]]></string>
     <string name="support_contact_mail" translatable="false">support@frostnerd.com</string>
     <string name="app_share_text">Olá, encontrei este App que faz as consultas de DNS de forma segura usando criptografia para dar-lhe mais privacidade e segurança. Confira aqui: https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen</string>
     <string name="app_share_fdroid">Olá, encontrei este App que faz as consultas de DNS de forma segura, usando criptografia para dar-lhe mais privacidade e segurança. Confira, baixando aqui: https://nebulo.app/source#installation</string>
@@ -62,13 +62,13 @@
     <string name="button_main_dnsrules">Regras de DNS</string>
     <string name="window_dnsrules_customhosts">Hosts personalizados</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1s regra</item>
-        <item quantity="other">%1s regras</item>
+        <item quantity="one">%1$s regra</item>
+        <item quantity="other">%1$s regras</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">Já existe uma regra para este host</string>
     <string name="window_dnsrules_customhosts_message">Defina aqui todos os seus hosts personalizados</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regras desta fonte: -</string>
-    <string xmlns:tools="http://schemas.android.com/tools" name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regras desta fonte: %1s (%2s cópias não usadas)</string>
+    <string xmlns:tools="http://schemas.android.com/tools" name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regras desta fonte: %1$s (%2$s cópias não usadas)</string>
     <string name="windows_querylogging_search_hint">Pesquisar por um host no registro de consulta</string>
     <string name="windows_querylogging_search">Pesquisa de host</string>
     <string name="windows_querylogging_time">Hora</string>
@@ -97,8 +97,8 @@
     <string name="window_dnsrules_refresh_sources">Atualizar para importar as regras da fonte</string>
     <string name="window_querylog_information">Informação</string>
     <string name="about_help_faq">Perguntas mais freqüentes</string>
-    <string name="warning_server_currently_unstable">O servidor %1s parece estar instável neste momento.</string>
-    <string name="warning_server_currently_unstable_expanded">O servidor %1s parece estar instável neste momento, impactando sua velocidade de navegação. Considere mudar para um servidor mais estável.</string>
+    <string name="warning_server_currently_unstable">O servidor %1$s parece estar instável neste momento.</string>
+    <string name="warning_server_currently_unstable_expanded">O servidor %1$s parece estar instável neste momento, impactando sua velocidade de navegação. Considere mudar para um servidor mais estável.</string>
     <string name="appintro_first_title">Bem-vindo ao Nebulo.</string>
     <string name="appintro_first_description">O Nebulo é um App para proteger sua privacidade e proteger seu dispositivo.\n\nRetome o controle dos dados que seu provedor da Internet ou outras entidades têm tratado como seus desde sempre.</string>
     <string name="appintro_second_title">Sua privacidade é importante</string>
@@ -116,11 +116,11 @@
     <string name="appintro_server_choose_forth">Um servidor que me protege de sites e Apps nocivos</string>
     <string name="appintro_server_choose_adblock">Um servidor que bloqueia anúncios e rastreamento</string>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="one">até agora %1d consulta tem sido processada pelas regras do DNS</item>
-        <item quantity="other">até agora %1d consultas têm sido processadas pelas regras do DNS</item>
+        <item quantity="one">até agora %1$d consulta tem sido processada pelas regras do DNS</item>
+        <item quantity="other">até agora %1$d consultas têm sido processadas pelas regras do DNS</item>
     </plurals>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="one">até agora %1d consulta foi bloqueada</item>
-        <item quantity="other">até agora %1d consultas têm sido bloqueadas</item>
+        <item quantity="one">até agora %1$d consulta foi bloqueada</item>
+        <item quantity="other">até agora %1$d consultas têm sido bloqueadas</item>
     </plurals>
 </resources>

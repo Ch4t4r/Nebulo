@@ -30,14 +30,14 @@
     <string name="title_local_server_port">Port serwera</string>
     <string name="title_nonvpn_use_lanip">Użyj adresu IP urządzenia zamiast lokalnego hosta</string>
     <string name="summary_nonvpn_use_lanip">Niektóre aplikacje nie pozwalają na wpisanie lokalnego hosta jako DNS. Przy tym ustawieniu zamiast tego używane jest IP urządzeń w sieci. Adres zmieni się w zależności od sieci, zwróć uwagę na powiadomienie.</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Serwer będzie hostowany na %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Serwer będzie hostowany na %1$s:%2$s</string>
     <string name="summary_run_without_vpn">Po zaznaczeniu opcji Nebulo hostuje serwer DNS w urządzeniu</string>
     <string name="summary_category_nonvpnmode">Skonfiguruj Nebulo, aby działał jako serwer DNS w urządzeniu zamiast jako atrapa VPN. Po włączeniu tej opcji należy ręcznie przekierowywać zapytania DNS do Nebulo za pomocą aplikacji innych firm</string>
     <string name="title_delete_queries">Jasne pytania</string>
     <string name="preference_category_nonvpnmode">Tryb Non-VPN</string>
     <string name="summary_delete_queries">Kliknij tutaj, aby usunąć wszystkie zalogowane zapytania</string>
     <string name="title_export_queries">Pytania dotyczące eksportu</string>
-    <string name="summary_export_queries">Zapytania eksportowe jako CSV (%1d zapytań)</string>
+    <string name="summary_export_queries">Zapytania eksportowe jako CSV (%1$d zapytań)</string>
     <string name="title_log_queries">Logowanie zapytań</string>
     <string name="summary_log_queries">Zapisywanie wszystkich zapytań i ich odpowiedzi</string>
     <string name="preference_category_querylogging">Logowanie zapytań</string>
@@ -82,14 +82,14 @@
     <string name="title_enable_logging">Włączanie debugowania Logowanie</string>
     <string name="summary_enable_logging">Włącza logowanie informacji o debugowaniu (zawiera dane statystyczne). Te logi nie są wysyłane automatycznie</string>
     <string name="summary_dnscache_nxdomaincachetime">Zmienia ilość czasu, przez jaki żądania programu NXDOMAIN są buforowane. Zwiększa to wydajność dla nieistniejących domen (np. jeśli są one zablokowane).
-\nPrąd: %1d Sekundy</string>
+\nPrąd: %1$d Sekundy</string>
     <string name="preference_category_logging">Logowanie</string>
     <string name="title_dnscache_nxdomaincachetime">Czas pamięci podręcznej dla domeny NXDomain (sekundy)</string>
     <string name="summary_dnscache_customcachetime">Zmienia jak długo wszystkie żądania są buforowane, bez względu na to, czy domyślny czas buforowania byłby dłuższy. Długi czas buforowania może spowodować, że zbuforowane dane nie będą zsynchronizowane z rzeczywistymi danymi.
-\nAktualnie: %1d Sekundy</string>
+\nAktualnie: %1$d Sekundy</string>
     <string name="title_dnscache_customcachetime">Niestandardowy czas przechowywania w pamięci podręcznej (w sekundach)</string>
     <string name="summary_dnscache_minimum_cache_time">Minimalna ilość wpisów czasowych powinna być buforowana, bez względu na to, czy domyślny czas buforowania byłby krótszy. Długi czas buforowania może spowodować, że zbuforowane dane nie będą zsynchronizowane z rzeczywistymi danymi.
-\nAktualnie: %1d Sekundy</string>
+\nAktualnie: %1$d Sekundy</string>
     <string name="title_dnscache_minimum_cache_time">Minimalny czas przechowywania w pamięci podręcznej</string>
     <string name="summary_dnscache_usedefaulttimes">Przechowywanie żądań w pamięci podręcznej tak długo, jak długo serwer DNS komunikuje się za pomocą TTL</string>
     <string name="summary_dnscache_maxsize">Określa maksymalną liczbę wpisów, które mogą być przechowywane w pamięci podręcznej w dowolnym momencie</string>
@@ -106,7 +106,7 @@
     <string name="title_dnscache_enabled">Użyj pamięci podręcznej DNS</string>
     <string name="title_preference_change_pin">Zmień zawleczkę</string>
     <string name="summary_preference_change_pin">Zmień zawleczkę. Dozwolone są tylko wartości liczbowe.
-\nAktualny pin: %1s</string>
+\nAktualny pin: %1$s</string>
     <string name="title_preference_pin_use_fingerprint">Pozwól na pobranie odcisków palców</string>
     <string name="summary_preference_pin_use_fingerprint">Pozwól, aby zamiast pinezki użyto odcisku palca</string>
     <string name="title_preference_enable_pin">Szpilka</string>

@@ -9,19 +9,19 @@
     <string name="dialog_newserver_primaryserver">Server principale</string>
     <string name="dialog_newserver_secondaryserver">Server secondario (facoltativo)</string>
     <string name="dialog_deleteconfig_title">Eliminare la configurazione\?</string>
-    <string name="dialog_deleteconfig_text">Vuoi eliminare la configurazione %1s\?</string>
+    <string name="dialog_deleteconfig_text">Vuoi eliminare la configurazione %1$s\?</string>
     <string name="dialog_appchoosal_showsystemapps">Mostra app di sistema</string>
     <string name="dialog_appchoosal_whitelist">Usa DoH/DoT solo in app selezionate</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d app esclusa in modo predefinito e non può essere deselezionata</item>
-        <item quantity="other">%1d app escluse in modo predefinito e non possono essere deselezionate</item>
+        <item quantity="one">%1$d app esclusa in modo predefinito e non può essere deselezionata</item>
+        <item quantity="other">%1$d app escluse in modo predefinito e non possono essere deselezionate</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Importazione di %1d server</item>
-        <item quantity="other">Importazione di %1d server</item>
+        <item quantity="one">Importazione di %1$d server</item>
+        <item quantity="other">Importazione di %1$d server</item>
     </plurals>
     <string name="dialog_serverimport_done">Fatto</string>
-    <string name="dialog_serverimport_priority">Priorità %1d</string>
+    <string name="dialog_serverimport_priority">Priorità %1$d</string>
     <string name="dialog_serverimport_experimental">Sperimentale</string>
     <string name="dialog_serverimport_servertype_doh">Tipo: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Tipo: DNS-over-TLS (DoT)</string>
@@ -31,7 +31,7 @@
     <string name="dialog_serverimportfailed_title">Importazione fallita</string>
     <string name="dialog_serverimportfailed_text">Impossibile importare il/i server.</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Impossibile importare i server.
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_text">Come vuoi condividere i registri\?</string>
     <string name="dialog_logexport_general">Scegli app</string>
     <string name="dialog_logexport_email">Email</string>
@@ -96,17 +96,17 @@
 \nSiamo una grande comunità di oltre 200 persone, vorresti farne parte\?</string>
     <string name="dialog_join_group_positive">Certo!</string>
     <string name="dialog_speedresult_title">Risultati test velocità</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d server testati
-\n %2d server DoT raggiungibili, %3d non raggiungibili
-\n %4d server DoH raggiungibili, %5d non raggiungibili
-\n Tempo di risposta medio: %6d ms.
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1$d server testati
+\n %2$d server DoT raggiungibili, %3$d non raggiungibili
+\n %4$d server DoH raggiungibili, %5$d non raggiungibili
+\n Tempo di risposta medio: %6$d ms.
 \n
-\n Server più veloce: %7s
-\n Server più lento: %8s</string>
+\n Server più veloce: %7$s
+\n Server più lento: %8$s</string>
     <string name="dialog_speedtest_useserver_title">Seleziona server</string>
-    <string name="dialog_speedtest_useserver_message">Vuoi usare il server %1s\? Si è classificato %2d su %3d con un tempo di risposta di %4d ms.</string>
-    <string name="dialog_deletehostsource_title">Eliminare %1s\?</string>
-    <string name="dialog_deletehostsource_message">Sei sicuro di volere eliminare la fonte host %1s\? Non può essere annullato, gli host da questa fonte verranno rimossi.</string>
+    <string name="dialog_speedtest_useserver_message">Vuoi usare il server %1$s\? Si è classificato %2$d su %3$d con un tempo di risposta di %4$d ms.</string>
+    <string name="dialog_deletehostsource_title">Eliminare %1$s\?</string>
+    <string name="dialog_deletehostsource_message">Sei sicuro di volere eliminare la fonte host %1$s\? Non può essere annullato, gli host da questa fonte verranno rimossi.</string>
     <string name="dialog_clearuserrules_title">Eliminare tutte le regole DNS\?</string>
     <string name="dialog_clearuserrules_message">Sei sicuro di volere eliminare tutte le regole DNS\? Non può essere annullato.</string>
     <string name="dialog_newhostsource_title">Nuova fonte regole</string>
@@ -175,11 +175,11 @@
 \n - clicca su Port Forwarding
 \n - aggiungi le seguenti regole:
 \n
-\n • Protocollo UDP, porta di origine 53, destinazione %1s, porta di destinazione %2d, applicazione di destinazione nessuno
+\n • Protocollo UDP, porta di origine 53, destinazione %1$s, porta di destinazione %2$d, applicazione di destinazione nessuno
 \n • Ripeti per il TCP
 \n
 \n - torna alle opzioni avanzate
-\n - scorri giù, imposta entrambi i campi VPN DNS a %3s
+\n - scorri giù, imposta entrambi i campi VPN DNS a %3$s
 \n - avvia Nebulo (in modalità non-VPN) e avvia NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Blocca questo host</string>
     <string name="querylog_filter_type_blocked_by_server">Bloccato dal server DNS</string>
@@ -187,7 +187,7 @@
     <string name="querylog_filter_info">Seleziona quali tipi di richieste vuoi vedere</string>
     <string name="querylog_filter_title">Filtra il registro delle richieste</string>
     <string name="dialog_dnsrules_status_sourcenotfound">Questo host è nelle regole DNS, ma la fonte è sconosciuta.</string>
-    <string name="dialog_dnsrules_status_fromsource">Questo host fa parte della fonte %1s</string>
+    <string name="dialog_dnsrules_status_fromsource">Questo host fa parte della fonte %1$s</string>
     <string name="dialog_dnsrules_status_userrule">Questo host fa parte delle regole DNS da te definite.</string>
     <string name="dialog_dnsrules_status_not_found">Nessuna regola DNS trovata per questo host.</string>
     <string name="dialog_dnsrules_search_message">Inserisci un host qui sotto per cercarlo nelle regole DNS.</string>

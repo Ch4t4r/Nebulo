@@ -59,13 +59,13 @@
     <string name="title_enable_logging">启用日志记录</string>
     <string name="preference_category_logging">日志记录</string>
     <string name="summary_dnscache_nxdomaincachetime">更改NXDOMAIN请求项的缓存时长。可以提升解析不存在域名（例如是否被拦截）的性能
-\n当前： %1d 秒</string>
+\n当前： %1$d 秒</string>
     <string name="title_dnscache_nxdomaincachetime">NXDomain缓存时长（秒）</string>
     <string name="summary_dnscache_customcachetime">请求项应当被保留的时长，无论其默认缓存时长是否比定义值更长。过长的缓存时长可能导致被缓存的数据与实际数据不同步。
-\n当前： %1d 秒</string>
+\n当前： %1$d 秒</string>
     <string name="title_dnscache_customcachetime">自定义缓存时长（秒）</string>
     <string name="summary_dnscache_minimum_cache_time">请求项应当被保留的最短时长，无论其默认缓存时长是否比定义值更短。过长的缓存时长可能导致被缓存的数据与实际数据不同步。
-\n当前： %1d 秒</string>
+\n当前： %1$d 秒</string>
     <string name="title_dnscache_minimum_cache_time">最低缓存时长</string>
     <string name="summary_dnscache_usedefaulttimes">只要DNS服务器在使用TTL交流，请求项就会保留在缓存中</string>
     <string name="title_dnscache_usedefaulttimes">默认缓存时长</string>
@@ -80,7 +80,7 @@
 \n系统已有缓存，如果您想自定义缓存行为，则启用此项</string>
     <string name="preference_category_cache">缓存控制</string>
     <string name="summary_preference_change_pin">更改PIN。仅允许数字。
-\n当前使用PIN： %1s</string>
+\n当前使用PIN： %1$s</string>
     <string name="title_preference_change_pin">更改PIN</string>
     <string name="summary_preference_enable_pin">当启动或停止应用时，要求提供PIN以解锁应用</string>
     <string name="summary_preference_pin_use_fingerprint">允许使用指纹代替PIN来解锁应用</string>
@@ -94,7 +94,7 @@
     <string name="title_dnscache_enabled">使用DNS缓存</string>
     <string name="summary_delete_queries">点击此处以清除所有已记录的请求项</string>
     <string name="title_delete_queries">清除请求项</string>
-    <string name="summary_export_queries">将请求项以CSV格式导出（%1d 条请求）</string>
+    <string name="summary_export_queries">将请求项以CSV格式导出（%1$d 条请求）</string>
     <string name="title_export_queries">导出请求项</string>
     <string name="summary_log_queries">记录所有的请求项与回应</string>
     <string name="title_log_queries">记录请求项</string>
@@ -112,7 +112,7 @@
     <string name="title_local_server_port">服务器端口</string>
     <string name="summary_run_without_vpn">当选中后，Nebulo将在您的设备上设置DNS服务器</string>
     <string name="title_run_without_vpn">无VPN运行</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">服务器将在 %1s:%2s 上运行</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">服务器将在 %1$s:%2$s 上运行</string>
     <string name="summary_category_nonvpnmode">将Nebulo配置为设备上的DNS服务器，而不使用伪VPN。启用后，您必须使用第三方应用手动将DNS请求转发到Nebulo</string>
     <string name="preference_category_nonvpnmode">无VPN模式</string>
     <string name="fallbackdns_isp">服务提供商（未加密）</string>

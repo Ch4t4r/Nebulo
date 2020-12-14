@@ -6,21 +6,21 @@
     <string name="notification_channel_foreground_service_description">Kanal, welcher zum Anzeigen von permanenten Benachrichtigungen genutzt wird</string>
     <string name="notification_channel_noconnection">Kanal für Verbindungswarnungen</string>
     <string name="notification_channel_noconnection_description">Kanal, welcher benutzt wird, um Benachrichtungen zu zeigen, wenn der Betrieb der App unterbrochen ist</string>
-    <string name="notification_main_text">Anfragen werden an %1s gesendet
+    <string name="notification_main_text">Anfragen werden an %1$s gesendet
 \n
-\n%2d Apps sind von DoH/DoT ausgeschlossen</string>
-    <string name="notification_main_text_with_secondary">Anfragen werden an %1s und %2s gesendet
+\n%2$d Apps sind von DoH/DoT ausgeschlossen</string>
+    <string name="notification_main_text_with_secondary">Anfragen werden an %1$s und %2$s gesendet
 \n
-\n%3d Apps sind von DoH/DoT ausgeschlossen</string>
-    <string name="notification_main_text_whitelist">Anfragen werden an %1s gesendet
+\n%3$d Apps sind von DoH/DoT ausgeschlossen</string>
+    <string name="notification_main_text_whitelist">Anfragen werden an %1$s gesendet
 \n
-\n%2d Apps nutzen DoH/DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">Anfragen werden an %1s und %2s gesendet
+\n%2$d Apps nutzen DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Anfragen werden an %1$s und %2$s gesendet
 \n
-\n%3d Apps nutzen DoH/DoT</string>
+\n%3$d Apps nutzen DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">Bisher %1d Anfragen</string>
+    <string name="notification_main_subtext">Bisher %1$d Anfragen</string>
     <string name="notification_noconnection_title">Keine Verbindung</string>
     <string name="notification_noconnection_text">Die App leitet aktuell deine DNS Anfragen nicht weiter, da du entweder keine oder nur eine schlechte Verbindung hast</string>
     <string name="notification_vpnrestart_title">Starte VPN neu</string>
@@ -28,16 +28,16 @@
     <string name="notification_appcrash_title">Nebulo ist abgestürzt</string>
     <string name="notification_appcrash_message">Nebulo ist abgestürzt. Klicke hier, um in das Hauptmenü zu gelangen und, falls nötig, die App neuzustarten</string>
     <string name="notification_ruleimport_title">DNS Regel Import</string>
-    <string name="notification_ruleimport_message">Importiere Regeln von %1s (%2s)</string>
+    <string name="notification_ruleimport_message">Importiere Regeln von %1$s (%2$s)</string>
     <string name="notification_ruleimport_secondarymessage">Bereite Import vor…</string>
     <string name="notification_ruleimportfinished_title">DNS Regel Import fertig</string>
-    <string name="notification_ruleimportfinished_message">%1s Regeln wurden importiert (%2s Duplikate ausgelassen)</string>
+    <string name="notification_ruleimportfinished_message">%1$s Regeln wurden importiert (%2$s Duplikate ausgelassen)</string>
     <string name="notification_ruleimport_tertiarymessage">Beende Import…</string>
     <string name="notification_ruleexport_title">DNS Regel Export</string>
-    <string name="notification_ruleexport_message">Exportiere Regeln (%1s/%2s)</string>
+    <string name="notification_ruleexport_message">Exportiere Regeln (%1$s/%2$s)</string>
     <string name="notification_ruleexport_secondarymessage">Bereite Export vor…</string>
     <string name="notification_ruleexportfinished_title">DNS Regel Export fertiggestellt</string>
-    <string name="notification_ruleexportfinished_message">%1d Regeln wurden exportiert</string>
+    <string name="notification_ruleexportfinished_message">%1$d Regeln wurden exportiert</string>
     <string name="notification_channel_pin">Channel für PIN</string>
     <string name="notification_channel_pin_description">Kanal, welcher für Benachrichtigungen zur PIN benutzt wird, zum Beispiel wenn diese eingegeben werden muss</string>
     <string name="notification_pin_title">PIN Eingabe erforderlich</string>
@@ -45,18 +45,18 @@
     <string name="notification_service_killed_title">Informationen über Batterieoptimierungen</string>
     <string name="notification_service_killed_message">Es scheint, dass die App vor kurzem vom System gestoppt wurde. Klicke hier, um mehr zu erfahren</string>
     <string name="notification_service_killed_ignore">Ignorieren</string>
-    <string name="notification_simple_text">Aktueller Server: %1s</string>
+    <string name="notification_simple_text">Aktueller Server: %1$s</string>
     <string name="notification_channel_high_priorty">Hohe Priorität</string>
     <string name="notification_channel_high_priorty_description">Kanal für Benachrichtigungen mit hoher Priorität, zum Beispiel wenn die App den Zugriff auf den VPN verliert</string>
     <string name="notification_service_revoked_title">VPN Berechtigung vom System entzogen</string>
     <string name="notification_service_revoked_message">Klicke hier um Nebulo zu starten</string>
-    <string name="notification_dnsserver_message">DNS Server läuft unter %1s:%2d. Leite Anfragen mit Apps von Fremdanbietern weiter</string>
+    <string name="notification_dnsserver_message">DNS Server läuft unter %1$s:%2$d. Leite Anfragen mit Apps von Fremdanbietern weiter</string>
     <string name="notification_dnsserver_title">Nicht-VPN Modus</string>
-    <string name="notification_dnsserver_portdiffers">Eingestellter Port %1d konnte nicht genutzt werden.</string>
-    <string name="notification_dnsserver_message_iptables_failed">DNS Server läuft unter %1s:%2d. Initalisierung von iptables ist fehlgeschlagen, Anfragen müssen durch Drittanbieteapps weitergeleitet werden</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS Server läuft unter %1s:%2d. Anfragen werden mit iptables weitergeleitet.
+    <string name="notification_dnsserver_portdiffers">Eingestellter Port %1$d konnte nicht genutzt werden.</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNS Server läuft unter %1$s:%2$d. Initalisierung von iptables ist fehlgeschlagen, Anfragen müssen durch Drittanbieteapps weitergeleitet werden</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS Server läuft unter %1$s:%2$d. Anfragen werden mit iptables weitergeleitet.
 \nWarnung: IPv6 ist aktiv, Anfragen könnten Nebulo nicht erreichen.</string>
-    <string name="notification_dnsserver_message_iptables_active">DNS Server läuft unter %1s:%2d. Anfragen werden mit iptables weitergeleitet</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS Server läuft unter %1$s:%2$d. Anfragen werden mit iptables weitergeleitet</string>
     <string name="notification_multipleuserswarning_text">Nebulo konnte wegen eines Android-Fehlers den Dummy VPN nicht erstellen. Dieser Fehler tritt bei mehreren Nutzern auf einem Gerät auf.</string>
     <string name="notification_multipleuserswarning_title">Dummy VPN konnte nicht erstellt werden</string>
     <string name="notification_privatednswarning_text">Bitte deaktiviere Privates DNS in den Systemeinstellungen um Nebulo zu benutzen.</string>

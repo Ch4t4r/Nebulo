@@ -12,7 +12,7 @@
     <string name="open_app">Open app</string>
     <string name="all_close">Sluit</string>
     <string name="error_invalid_url">Geef a.u.b een geldige URL op</string>
-    <string name="main_dnssurveillance_privacystatement">Privacyverklaring van %1s</string>
+    <string name="main_dnssurveillance_privacystatement">Privacyverklaring van %1$s</string>
     <string name="quicksettings_stop_text">Stop Nebulo</string>
     <string name="quicksettings_start_text">Start Nebulo</string>
     <string name="about_share">Deel</string>
@@ -28,10 +28,10 @@
     <string name="about_app">Deze app is open source. De broncode is toegankelijk via &lt;a href=https://nebulo.app/source&gt; nebulo.app/source &lt;/a&gt;.
 \nVerder bevat de app geen advertenties en worden er geen gegevens over u bijgehouden of verzameld. 
 \n 
-\nVersie %1s 
-\nBuild %2d 
-\nDatabaseversie %3d 
-\nCrashreport-ID: %4s 
+\nVersie %1$s
+\nBuild %2$d
+\nDatabaseversie %3$d
+\nCrashreport-ID: %4$s
 \n 
 \n© Daniel Wolf 2019–2020
 \nGelicentieerd onder GPLv3. 
@@ -45,13 +45,13 @@
     <string name="window_dnsrules_customhosts">Aangepaste hosts</string>
     <string name="window_dnsrules_customhosts_message">Definieer hier al uw aangepaste hosts</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regels van deze bron: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regels van deze bron: %1s (%2s duplicaten niet in gebruik)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regels van deze bron: %1$s (%2$s duplicaten niet in gebruik)</string>
     <string name="error_invalid_pin">Geef uw PIN-code op</string>
     <string name="error_invalid_servername">Geef een naam op</string>
     <string name="window_dnsrules_hostalreadyexists">Er is al een regel voor deze host</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1s regel</item>
-        <item quantity="other">%1s regels</item>
+        <item quantity="one">%1$s regel</item>
+        <item quantity="other">%1$s regels</item>
     </plurals>
     <string name="windows_querylogging_time">Tijd</string>
     <string name="windows_querylogging_type">Type</string>
@@ -80,8 +80,8 @@
     <string name="restart_app">Herstart</string>
     <string name="restart_app_for_changes">Start de app opnieuw op om de veranderingen in werking te laten treden.</string>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="one">%1d query is tot nu toe geblokkeerd</item>
-        <item quantity="other">%1d query zijn tot nu toe geblokkeerd</item>
+        <item quantity="one">%1$d query is tot nu toe geblokkeerd</item>
+        <item quantity="other">%1$d query zijn tot nu toe geblokkeerd</item>
     </plurals>
     <string name="appintro_forth_description">U kunt de Nebulo configureren voor gebruik als een systeembrede advertentie- en tracking-blocker.
 \n
@@ -89,8 +89,8 @@
     <string name="appintro_server_choose_first">De snelste</string>
     <string name="appintro_server_choose_adblock">Een server die advertenties en tracking blokkeert</string>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="one">%1d query is tot nu toe behandeld door de DNS-regels</item>
-        <item quantity="other">%1d query\'s zijn tot nu toe door de DNS-regels afgehandeld</item>
+        <item quantity="one">%1$d query is tot nu toe behandeld door de DNS-regels</item>
+        <item quantity="other">%1$d query\'s zijn tot nu toe door de DNS-regels afgehandeld</item>
     </plurals>
     <string name="appintro_server_choose_third">Een echte privacy gerichte server</string>
     <string name="appintro_server_choose_forth">Een server die me beschermt tegen schadelijke websites en apps</string>
@@ -106,13 +106,13 @@
     <string name="appintro_second_description">Door encryptie toe te voegen aan DNS, een van de oudste protocollen van het internet, is het in uw handen.
 \n
 \nMaak het moeilijker voor uw ISP om u te volgen door gebruik te maken van DNS-over-HTTPS en DNS-over-TLS met Nebulo.</string>
-    <string name="warning_server_currently_unstable">De server %1s lijkt nu onstabiel te zijn.</string>
+    <string name="warning_server_currently_unstable">De server %1$s lijkt nu onstabiel te zijn.</string>
     <string name="appintro_second_title">Uw privacy is belangrijk</string>
     <string name="appintro_first_title">Welkom in Nebulo.</string>
     <string name="appintro_first_description">De Nebulo is een app om uw privacy te beschermen en uw apparaat te beveiligen.
 \n
 \nNeem de controle terug over de gegevens die uw ISP of andere entiteiten al lang als die van hen hebben behandeld.</string>
-    <string name="warning_server_currently_unstable_expanded">De server %1s lijkt op dit moment onstabiel te zijn, wat invloed heeft op je surfsnelheid. Overweeg om over te stappen op een stabielere server.</string>
+    <string name="warning_server_currently_unstable_expanded">De server %1$s lijkt op dit moment onstabiel te zijn, wat invloed heeft op je surfsnelheid. Overweeg om over te stappen op een stabielere server.</string>
     <string name="window_querylog_information">Informatie</string>
     <string name="about_help_faq">Veelgestelde vragen</string>
     <string name="window_main_protected">Beschermd!</string>

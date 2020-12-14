@@ -9,15 +9,15 @@
     <string name="dialog_newserver_primaryserver">Primärer Server</string>
     <string name="dialog_newserver_secondaryserver">Sekundärer Server (Optional)</string>
     <string name="dialog_deleteconfig_title">Konfiguration löschen\?</string>
-    <string name="dialog_deleteconfig_text">Möchtest du die Konfiguration %1s löschen\?</string>
+    <string name="dialog_deleteconfig_text">Möchtest du die Konfiguration %1$s löschen\?</string>
     <string name="dialog_appchoosal_showsystemapps">Zeige Systemapps</string>
     <string name="dialog_appchoosal_whitelist">Nutze DoH/DoT nur in ausgewählten Apps</string>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Import von %1d Server</item>
-        <item quantity="other">Import von %1d Servern</item>
+        <item quantity="one">Import von %1$d Server</item>
+        <item quantity="other">Import von %1$d Servern</item>
     </plurals>
     <string name="dialog_serverimport_done">Fertig</string>
-    <string name="dialog_serverimport_priority">Priorität %1d</string>
+    <string name="dialog_serverimport_priority">Priorität %1$d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Typ: DNS-über-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Typ: DNS-over-TLS (DoT)</string>
@@ -27,7 +27,7 @@
     <string name="dialog_serverimportfailed_title">Import fehlgeschlagen</string>
     <string name="dialog_serverimportfailed_text">Die Server konnten nicht importiert werden.</string>
     <string name="dialog_serverimportfailed_text_exception">Die Server konnten nicht importiert werden.
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_text">Wie möchtest du die Logs teilen\?</string>
     <string name="dialog_logexport_general">App auswählen</string>
     <string name="dialog_logexport_email">E-Mail</string>
@@ -91,17 +91,17 @@
 \nWir sind eine großartige Gemeinde von über 200 Personen, möchtest du ein Teil davon werden\?</string>
     <string name="dialog_join_group_positive">Gerne!</string>
     <string name="dialog_speedresult_title">Ergebnisse des Geschwindigkeitstests</string>
-    <string name="dialog_speedresult_message">%1d Server getestet
-\n%2d DoT Server erreichbar, %3d nicht erreichbar
-\n%4d DoH Server erreichbar, %5d nicht erreichbar
-\nDurchschnittliche Antwortzeit: %6d ms.
+    <string name="dialog_speedresult_message">%1$d Server getestet
+\n%2$d DoT Server erreichbar, %3$d nicht erreichbar
+\n%4$d DoH Server erreichbar, %5$d nicht erreichbar
+\nDurchschnittliche Antwortzeit: %6$d ms.
 \n
-\nSchnellster Server: %7s
-\nLangsamster Server: %8s</string>
+\nSchnellster Server: %7$s
+\nLangsamster Server: %8$s</string>
     <string name="dialog_speedtest_useserver_title">Server auswählen</string>
-    <string name="dialog_speedtest_useserver_message">Möchtest du den Server %1s nutzen\? Er erreichte Platz %2d von %3d mit einer durchschnittlichen Antwortzeit von %4d ms.</string>
-    <string name="dialog_deletehostsource_title">%1s löschen\?</string>
-    <string name="dialog_deletehostsource_message">Bist du dir sicher, dass du die Quelle %1s löschen willst\? Dies kann nicht rückgängig gemacht werden, Hosts aus dieser Quelle werden gelöscht.</string>
+    <string name="dialog_speedtest_useserver_message">Möchtest du den Server %1$s nutzen\? Er erreichte Platz %2$d von %3$d mit einer durchschnittlichen Antwortzeit von %4$d ms.</string>
+    <string name="dialog_deletehostsource_title">%1$s löschen\?</string>
+    <string name="dialog_deletehostsource_message">Bist du dir sicher, dass du die Quelle %1$s löschen willst\? Dies kann nicht rückgängig gemacht werden, Hosts aus dieser Quelle werden gelöscht.</string>
     <string name="dialog_clearuserrules_title">Alle DNS Regeln leeren\?</string>
     <string name="dialog_clearuserrules_message">Bist du dir sicher, dass du alle von dir definierten DNS Regeln löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="dialog_newhostsource_title">Neue Regel Quelle</string>
@@ -135,8 +135,8 @@
 \nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser). Klicke auf Einstellungen um in ein Menü zu kommen, wo die Batterieoptimierungen für Nebulo deaktivieren kannst.</string>
     <string name="dialog_servicekilled_more_info">Mehr Informationen</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d App ist standardmäßig ausgewählt und kann nicht abgewählt werden</item>
-        <item quantity="other">%1d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</item>
+        <item quantity="one">%1$d App ist standardmäßig ausgewählt und kann nicht abgewählt werden</item>
+        <item quantity="other">%1$d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</item>
     </plurals>
     <string name="dialog_newhostsource_wildcard_info">Es können Regelquellen genutzt werden, welche Wildcard Domains benutzen.</string>
     <string name="dialog_newdnsrule_wildcard_info">Der Host der Regel unterstützt Wildcards. Benutze einen Stern (*), um eine Beliebige Anzahl an Buchstaben, Nummern und Sonderzeichen, außer einem Punkt(.) abzudecken. Nutze zwei Sterne (**), um den Punkt (.) mit einzuschließen.</string>
@@ -174,11 +174,11 @@
 \n- Klicke auf \"Portweiterleitung\"
 \n- Füge die folgenden Regeln hinzu:
 \n
-\n• Protokoll UDP, Quellport 53, Zieladdresse %1s, Zielport %2d, Zielanwendung \"Keiner\"
+\n• Protokoll UDP, Quellport 53, Zieladdresse %1$s, Zielport %2$d, Zielanwendung \"Keiner\"
 \n• Wiederhole dies für Protokoll TCP
 \n
 \n- Gehe zurück zu den erweiterten Optionen
-\n- Scrolle nach unten, trage bei beiden \"VPN-DNS\" Feldern %3s ein
+\n- Scrolle nach unten, trage bei beiden \"VPN-DNS\" Feldern %3$s ein
 \n- Starte Nebulo (im nicht-VPN Modus) und starte NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Diesen Host blockieren</string>
     <string name="dialog_open_faq">Möchtest du dir die häufig gestellten Fragen und die Dokumentation zu dieser Funktion ansehen\?</string>

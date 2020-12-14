@@ -8,16 +8,16 @@
     <string name="about_app">このアプリはオープンソースです。ソースコードは&lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;から確認することができます。
 \nこのアプリは広告表示やユーザーの情報取得や収集をすることは一切ありません。
 \n
-\nVersion %1s
-\nBuild %2d
-\nDatabase version %3d
-\nCrashreport ID: %4s
+\nVersion %1$s
+\nBuild %2$d
+\nDatabase version %3$d
+\nCrashreport ID: %4$s
 \n
 \n© Daniel Wolf 2019–2020
 \nLicensed under GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
     <string name="main_dnssurveillance_infotext">接続したDNSサーバーは、あなたが訪れたサイト情報を記録することができることに注意してください。詳しい情報については、DNSサービスの個人情報保護方針を確認してください。</string>
-    <string name="main_dnssurveillance_privacystatement">%1sの個人情報保護方針</string>
+    <string name="main_dnssurveillance_privacystatement">%1$sの個人情報保護方針</string>
     <string name="activity_label_enable_logging">動作ログのエクスポート/ログ取得を有効にする</string>
     <string name="activity_label_speed_test">サーバー反応速度の比較</string>
     <string name="windows_querylogging_dnsrule_created">DNSルールが作成されました</string>
@@ -52,9 +52,9 @@
     <string name="windows_querylogging_search_hint">クエリログからホスト名を検索</string>
     <string name="window_dnsrules_hostalreadyexists">既にこのホスト名に対するルールが登録されています</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">取り込んだルール数: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">取り込んだルール数: %1s (重複未使用: %2s)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">取り込んだルール数: %1$s (重複未使用: %2$s)</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="other">%1sのルール</item>
+        <item quantity="other">%1$sのルール</item>
     </plurals>
     <string name="button_main_dnsrules">DNSルール</string>
     <string name="error_no_webbrowser_installed">このリンクを表示するためのアプリがインストールされていません</string>
@@ -80,13 +80,13 @@
     <string name="activity_label_import_queries">クエリのインポート</string>
     <string name="window_dnsrules_refresh_sources">ソースからルールをインポートするには更新してください</string>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="other">これまでに %1d ものクエリがブロックされています</item>
+        <item quantity="other">これまでに %1$d ものクエリがブロックされています</item>
     </plurals>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="other">ここまで %1d ものクエリがDNSルールにより処理されています</item>
+        <item quantity="other">ここまで %1$d ものクエリがDNSルールにより処理されています</item>
     </plurals>
-    <string name="warning_server_currently_unstable">サーバー %1s は現在不安定のようです。</string>
-    <string name="warning_server_currently_unstable_expanded">サーバー %1s は現在不安定のようです。これによりブラウジングの速度に影響が出る可能性があります。他の安定したサーバーに切り替えることをお勧めします。</string>
+    <string name="warning_server_currently_unstable">サーバー %1$s は現在不安定のようです。</string>
+    <string name="warning_server_currently_unstable_expanded">サーバー %1$s は現在不安定のようです。これによりブラウジングの速度に影響が出る可能性があります。他の安定したサーバーに切り替えることをお勧めします。</string>
     <string name="about_help_faq">よくある質問</string>
     <string name="window_querylog_information">情報</string>
     <string name="window_speedtest_information">この値が低ければ低いほど、サーバーとより高速に通信することができます。これにより例えばブラウジングの速度が向上します。</string>

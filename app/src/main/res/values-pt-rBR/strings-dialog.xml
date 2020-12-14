@@ -9,19 +9,19 @@
     <string name="dialog_newserver_primaryserver">Servidor principal</string>
     <string name="dialog_newserver_secondaryserver">Servidor secundário (Opcional)</string>
     <string name="dialog_deleteconfig_title">Excluir a configuração?</string>
-    <string name="dialog_deleteconfig_text">Deseja excluir a configuração %1s?</string>
+    <string name="dialog_deleteconfig_text">Deseja excluir a configuração %1$s?</string>
     <string name="dialog_appchoosal_showsystemapps">Mostrar os apps do sistema</string>
     <string name="dialog_appchoosal_whitelist">Apenas use DoH/DoT em apps selecionados</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d app é excluído por padrão e não pode ser desmarcado</item>
-        <item quantity="other">%1d apps são excluídos por padrão e não podem ser desmarcados</item>
+        <item quantity="one">%1$d app é excluído por padrão e não pode ser desmarcado</item>
+        <item quantity="other">%1$d apps são excluídos por padrão e não podem ser desmarcados</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Importação de %1d servidor</item>
-        <item quantity="other">Importação de %1d servidores</item>
+        <item quantity="one">Importação de %1$d servidor</item>
+        <item quantity="other">Importação de %1$d servidores</item>
     </plurals>
     <string name="dialog_serverimport_done">Feito</string>
-    <string name="dialog_serverimport_priority">Prioridade %1d</string>
+    <string name="dialog_serverimport_priority">Prioridade %1$d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Tipo: DNS-sobre-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Tipo: DNS-sobre-TLS (DoT)</string>
@@ -31,7 +31,7 @@
     <string name="dialog_serverimportfailed_title">Falhou ao importar</string>
     <string name="dialog_serverimportfailed_text">Não foi possível importar o(s) servidor(es).</string>
     <string name="dialog_serverimportfailed_text_exception">Não foi possível importar os servidores. 
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_text">Como quer compartilhar os registros?</string>
     <string name="dialog_logexport_general">Escolha o App</string>
     <string name="dialog_logexport_email">E-Mail</string>
@@ -95,17 +95,17 @@
 \nSomos uma grande comunidade com mais de 200 pessoas, gostaria de fazer parte dela?</string>
     <string name="dialog_join_group_positive">Sim!</string>
     <string name="dialog_speedresult_title">Resultados do teste de velocidade</string>
-    <string name="dialog_speedresult_message">%1d servidores testados
-\n %2d servidores DoT alcançáveis, %3d inacessíveis
-\n %4d servidores DoH alcançáveis, %5d inacessíveis
-\n Tempo médio de resposta: %6d ms.
+    <string name="dialog_speedresult_message">%1$d servidores testados
+\n %2$d servidores DoT alcançáveis, %3$d inacessíveis
+\n %4$d servidores DoH alcançáveis, %5$d inacessíveis
+\n Tempo médio de resposta: %6$d ms.
 \n
-\n Servidor mais rápido: %7s
-\n Servidor mais lento: %8s</string>
+\n Servidor mais rápido: %7$s
+\n Servidor mais lento: %8$s</string>
     <string name="dialog_speedtest_useserver_title">Selecionar um servidor</string>
-    <string name="dialog_speedtest_useserver_message">Quer usar o servidor %1s? Ele se classificou como %2d de %3d, com um tempo de resposta de %4d ms.</string>
-    <string name="dialog_deletehostsource_title">Excluir %1s\?</string>
-    <string name="dialog_deletehostsource_message">Tem certeza de que quer excluir host %1s\? Isso não pode ser desfeito, os hosts dessa fonte serão excluídos.</string>
+    <string name="dialog_speedtest_useserver_message">Quer usar o servidor %1$s? Ele se classificou como %2$d de %3$d, com um tempo de resposta de %4$d ms.</string>
+    <string name="dialog_deletehostsource_title">Excluir %1$s\?</string>
+    <string name="dialog_deletehostsource_message">Tem certeza de que quer excluir host %1$s\? Isso não pode ser desfeito, os hosts dessa fonte serão excluídos.</string>
     <string name="dialog_clearuserrules_title">Excluir todas as regras de DNS?</string>
     <string name="dialog_clearuserrules_message">Quer excluir todas as regras de DNS? Isto não pode ser desfeito.</string>
     <string name="dialog_newhostsource_title">Nova fonte de regras</string>
@@ -174,11 +174,11 @@
 \n - Clique em Encaminhamento de Portas
 \n - Adicione as seguintes regras:
 \n
-\n - Protocolo de UDP, Porta de origem 53, destino %1s, porta de destino %2d, destino do aplicativo nenhum
+\n - Protocolo de UDP, Porta de origem 53, destino %1$s, porta de destino %2$d, destino do aplicativo nenhum
 \n - Repetir para TCP
 \n
 \n - Voltar às opções avançadas
-\n - Deslize para baixo, defina ambos os campos DNS VPN para %3s
+\n - Deslize para baixo, defina ambos os campos DNS VPN para %3$s
 \n - Iniciar o Nebulo (em modo não-VPN) e iniciar o NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Bloquear este host</string>
     <string name="dialog_speedtestpasses_message">Defina com que freqüência o teste deve ser executado por servidor. Passes mais altos aumentam a probabilidade</string>
@@ -194,7 +194,7 @@
     <string name="querylog_filter_info">Selecione os tipos de consultas que deseja ver</string>
     <string name="querylog_filter_title">Filtrar o registro de consulta</string>
     <string name="dialog_dnsrules_status_sourcenotfound">Este host está nas regras do DNS, mas a fonte é desconhecida.</string>
-    <string name="dialog_dnsrules_status_fromsource">Este host forma parte da fonte %1s</string>
+    <string name="dialog_dnsrules_status_fromsource">Este host forma parte da fonte %1$s</string>
     <string name="dialog_dnsrules_status_userrule">Este host faz parte das regras de DNS definidas por você.</string>
     <string name="dialog_dnsrules_status_not_found">Não foi encontrada nenhuma regra de DNS para este host.</string>
     <string name="dialog_dnsrules_search_message">Digite um host abaixo para procurá-lo nas regras de DNS.</string>
@@ -212,7 +212,7 @@
 \n Isto pode dar a possibilidade de que o valor exibido seja mais alto do que realmente é porque ele se tornou agora mais baixo que no momento que foi medido.</string>
     <string name="dialog_latency_sidebar_title">Informações sobre a latência</string>
     <string name="dialog_nonvpn_help_generic">Para usar o Nebulo em modo Não-VPN junto com um outro aplicativo de VPN, você tem que alterar suas configurações de DNS dentro desse outro aplicativo.
-\nNem todos os aplicativos de VPN permitem que você altere as configurações de DNS. Se o seu permitir, simplesmente configure o servidor DNS para \'%1s:%2d\' (você pode configurar a Porta acima).
+\nNem todos os aplicativos de VPN permitem que você altere as configurações de DNS. Se o seu permitir, simplesmente configure o servidor DNS para \'%1$s:%2$d\' (você pode configurar a Porta acima).
 \n
 \nApós configurar os aplicativos, simplesmente inicie ambos.</string>
     <string name="dialog_help_translating_message" translatable="false">Este App é traduzido em alguns idiomas, mas muitos estão faltando ou estão incompletos - incluindo o seu.

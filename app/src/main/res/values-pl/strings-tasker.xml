@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tasker_start_app_custom_urls">Uruchomić aplikację z %1s i %2s (Tryb: %3s)</string>
-    <string name="tasker_start_app_custom_url">Uruchomić aplikację z %1s (Tryb: %2s)</string>
+    <string name="tasker_start_app_custom_urls">Uruchomić aplikację z %1$s i %2$s (Tryb: %3$s)</string>
+    <string name="tasker_start_app_custom_url">Uruchomić aplikację z %1$s (Tryb: %2$s)</string>
     <string name="tasker_action">Działanie</string>
     <string name="tasker_use_custom_server">Określanie serwerów niestandardowych</string>
     <string name="tasker_start_if_running">Uruchom, nawet jeśli już działa (może zastąpić konfigurację)</string>

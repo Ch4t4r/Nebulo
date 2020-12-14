@@ -17,14 +17,14 @@
     <string name="error_invalid_pin">Inserisci il tuo PIN</string>
     <string name="error_invalid_servername">Inserisci un nome</string>
     <string name="main_dnssurveillance_infotext">Ricorda che il server DNS a cui sei connesso è in grado di registrare i siti che stai visitando. Consulta le rispettive dichiarazioni sulla privacy per maggiori informazioni.</string>
-    <string name="main_dnssurveillance_privacystatement">Dichiarazione sulla privacy di %1s</string>
+    <string name="main_dnssurveillance_privacystatement">Dichiarazione sulla privacy di %1$s</string>
     <string name="about_app">Questa app è open source. Il codice sorgente è accessibile su &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
 \nInoltre l\'app non contiene pubblicità e non tiene traccia né raccoglie dati su di te.
 \n
-\nVersione %1s
-\nBuild %2d
-\nVersione database %3d
-\nID segnalazione errori: %4s
+\nVersione %1$s
+\nBuild %2$d
+\nVersione database %3$d
+\nID segnalazione errori: %4$s
 \n
 \n© Daniel Wolf 2019–2020
 \nConcesso in licenza GPLv3.
@@ -46,13 +46,13 @@
     <string name="button_main_dnsrules">Regole DNS</string>
     <string name="window_dnsrules_customhosts">Hosts personalizzati</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1s regola</item>
-        <item quantity="other">%1s regole</item>
+        <item quantity="one">%1$s regola</item>
+        <item quantity="other">%1$s regole</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">C\'è già una regola per questo host</string>
     <string name="window_dnsrules_customhosts_message">Definisci qui tutti i tuoi host personalizzati</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regole da questa fonte: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regole da questa fonte: %1s (%2s doppi non usati)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Regole da questa fonte: %1$s (%2$s doppi non usati)</string>
     <string name="windows_querylogging_search_hint">Cerca un host nel registro delle richieste</string>
     <string name="windows_querylogging_search">Ricerca host</string>
     <string name="windows_querylogging_time">Orario</string>
@@ -81,15 +81,15 @@
     <string name="iptables_supported">Congratulazioni, le iptables sono supportate dal tuo dispositivo!</string>
     <string name="window_dnsrules_refresh_sources">Aggiornare le regole di importazione dalla fonte</string>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="one">Finora %1d richiesta è stata bloccata</item>
-        <item quantity="other">Finora %1d richieste sono state bloccate</item>
+        <item quantity="one">Finora %1$d richiesta è stata bloccata</item>
+        <item quantity="other">Finora %1$d richieste sono state bloccate</item>
     </plurals>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="one">Finora %1d richiesta è stata gestita dalle regole DNS</item>
-        <item quantity="other">Finora %1d richieste sono state gestite dalle regole DNS</item>
+        <item quantity="one">Finora %1$d richiesta è stata gestita dalle regole DNS</item>
+        <item quantity="other">Finora %1$d richieste sono state gestite dalle regole DNS</item>
     </plurals>
-    <string name="warning_server_currently_unstable_expanded">Il server %1s sembra essere instabile in questo momento, con un impatto sulla velocità di navigazione. Considera il passaggio ad un server più stabile.</string>
-    <string name="warning_server_currently_unstable">Il server %1s sembra essere instabile in questo momento.</string>
+    <string name="warning_server_currently_unstable_expanded">Il server %1$s sembra essere instabile in questo momento, con un impatto sulla velocità di navigazione. Considera il passaggio ad un server più stabile.</string>
+    <string name="warning_server_currently_unstable">Il server %1$s sembra essere instabile in questo momento.</string>
     <string name="about_help_faq">Domande frequenti</string>
     <string name="window_querylog_information">Informazioni</string>
     <string name="window_speedtest_information">Più bassi sono i valori, più velocemente Nebulo è in grado di comunicare con il server. Questo per esempio aumenta la velocità di navigazione.</string>

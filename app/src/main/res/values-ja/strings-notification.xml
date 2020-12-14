@@ -3,13 +3,13 @@
     <string name="notification_channel_pin_description">PINに関連した通知に使用されるチャンネル、つまりPINを入力する場合に使用されます</string>
     <string name="notification_channel_high_priorty">高優先度</string>
     <string name="notification_service_revoked_title">システムによってVPNの許可が取り消されました</string>
-    <string name="notification_dnsserver_message_iptables_failed">DNSサーバーが %1s:%2dで起動中です。iptablesの初期化に失敗したため、DNSクエリはサードパーティアプリを使って転送されます</string>
-    <string name="notification_main_subtext">これまでのリクエストクエリ:%1d</string>
-    <string name="notification_dnsserver_portdiffers">ポート: %1dでDNSサーバーを起動することができません。</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNSサーバーが %1s:%2dで起動中です。DNSクエリはiptablesを使って転送されます。
+    <string name="notification_dnsserver_message_iptables_failed">DNSサーバーが %1$s:%2$dで起動中です。iptablesの初期化に失敗したため、DNSクエリはサードパーティアプリを使って転送されます</string>
+    <string name="notification_main_subtext">これまでのリクエストクエリ:%1$d</string>
+    <string name="notification_dnsserver_portdiffers">ポート: %1$dでDNSサーバーを起動することができません。</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNSサーバーが %1$s:%2$dで起動中です。DNSクエリはiptablesを使って転送されます。
 \n警告:IPv6が有効のため、クエリがNebuloをバイパスする場合があります。</string>
-    <string name="notification_dnsserver_message">DNS サーバーが%1s:%2dで起動中です。DNSクエリはサードパーティアプリを使って転送されます</string>
-    <string name="notification_dnsserver_message_iptables_active">DNSサーバーが %1s:%2dで起動中です。DNSクエリはiptablesを使って転送されます</string>
+    <string name="notification_dnsserver_message">DNS サーバーが%1$s:%2$dで起動中です。DNSクエリはサードパーティアプリを使って転送されます</string>
+    <string name="notification_dnsserver_message_iptables_active">DNSサーバーが %1$s:%2$dで起動中です。DNSクエリはiptablesを使って転送されます</string>
     <string name="notification_dnsserver_title">非VPNモードで起動中</string>
     <string name="notification_service_revoked_message">ここをタップして再起動</string>
     <string name="notification_service_killed_ignore">無視</string>
@@ -17,16 +17,16 @@
     <string name="notification_service_killed_title">バッテリー最適化に関する情報</string>
     <string name="notification_pin_message">その操作を実行するにはPINの入力が必要です。ここをタップして確認してください</string>
     <string name="notification_pin_title">PIN入力が必要</string>
-    <string name="notification_ruleexportfinished_message">%1d のルールがエクスポートされました</string>
+    <string name="notification_ruleexportfinished_message">%1$d のルールがエクスポートされました</string>
     <string name="notification_ruleexportfinished_title">DNSルールのエクスポート完了</string>
     <string name="notification_ruleexport_secondarymessage">エクスポートの準備中…</string>
-    <string name="notification_ruleexport_message">ルールのエクスポート (%1s/%2s)</string>
+    <string name="notification_ruleexport_message">ルールのエクスポート (%1$s/%2$s)</string>
     <string name="notification_ruleexport_title">DNSルールのエクスポート</string>
-    <string name="notification_ruleimportfinished_message">%1s 個のルールをインポートしました (%2s 個が重複のためスキップしました)</string>
+    <string name="notification_ruleimportfinished_message">%1$s 個のルールをインポートしました (%2$s 個が重複のためスキップしました)</string>
     <string name="notification_ruleimportfinished_title">DNSルールのインポート完了</string>
     <string name="notification_ruleimport_tertiarymessage">インポートを終了しています…</string>
     <string name="notification_ruleimport_secondarymessage">インポートの準備中…</string>
-    <string name="notification_ruleimport_message">%1s (%2s) からの DNS ルールのインポート</string>
+    <string name="notification_ruleimport_message">%1$s (%2$s) からの DNS ルールのインポート</string>
     <string name="notification_ruleimport_title">DNSルールのインポート</string>
     <string name="notification_appcrash_message">Nebuloがクラッシュしました。ここをタップしてメインメニューに移動し、必要に応じてアプリを再起動してください</string>
     <string name="notification_appcrash_title">Nebuloがクラッシュしました</string>
@@ -36,19 +36,19 @@
     <string name="notification_noconnection_title">未接続</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
-    <string name="notification_main_text_with_secondary_whitelist">クエリは %1s と %2s に送信中
+    <string name="notification_main_text_with_secondary_whitelist">クエリは %1$s と %2$s に送信中
 \n 
-\n%3d 個のアプリがDoH/DoTを使用中</string>
-    <string name="notification_main_text_whitelist">クエリは %1s に送信中
+\n%3$d 個のアプリがDoH/DoTを使用中</string>
+    <string name="notification_main_text_whitelist">クエリは %1$s に送信中
 \n 
-\n%2d個のアプリがDoH/DoTを使用中</string>
-    <string name="notification_main_text_with_secondary">クエリは %1s と %2s に送信中
+\n%2$d個のアプリがDoH/DoTを使用中</string>
+    <string name="notification_main_text_with_secondary">クエリは %1$s と %2$s に送信中
 \n 
-\n%3d 個のアプリがDoH/DoTから除外</string>
-    <string name="notification_main_text">クエリは %1s に送信中
+\n%3$d 個のアプリがDoH/DoTから除外</string>
+    <string name="notification_main_text">クエリは %1$s に送信中
 \n 
-\n%2d 個のアプリがDoH/DoTから除外</string>
-    <string name="notification_simple_text">現在のサーバー: %1s</string>
+\n%2$d 個のアプリがDoH/DoTから除外</string>
+    <string name="notification_simple_text">現在のサーバー: %1$s</string>
     <string name="notification_channel_high_priorty_description">アプリがVPNへのアクセス許可を失った場合など、優先度の高い通知用チャンネル</string>
     <string name="notification_channel_pin">PIN関連チャンネル</string>
     <string name="notification_channel_noconnection_description">接続ができないと思われる場合に通知を表示するために使用されるチャンネル</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="notification_ruleimportfinished_message">Reguły %1s zostały zaimportowane (pominięto duplikaty %2s)</string>
+    <string name="notification_ruleimportfinished_message">Reguły %1$s zostały zaimportowane (pominięto duplikaty %2$s)</string>
     <string name="notification_cronet_failed_text">DNS-over-QUIC nie może być używany, ponieważ nie można go było zainicjować. Proszę wybrać inny serwer.</string>
     <string name="notification_cronet_failed_title">Inicjalizacja QUIC nie powiodła się</string>
     <string name="notification_bad_connection_text">Twoje połączenie z serwerem DNS jest teraz złe. Może to negatywnie wpłynąć na szybkość Twojego surfowania. Zastanów się nad wyborem innego serwera.</string>
@@ -9,12 +9,12 @@
     <string name="notification_multipleuserswarning_title">Dummy VPN nie mógł zostać ustanowiony</string>
     <string name="notification_privatednswarning_text">Proszę wyłączyć Prywatne Dni w ustawieniach systemowych, aby używać Nebulo.</string>
     <string name="notification_privatednswarning_title">Prywatne Dni</string>
-    <string name="notification_dnsserver_portdiffers">Konfigurowany port %1d nie mógł być używany.</string>
-    <string name="notification_dnsserver_message_iptables_failed">Serwer DNS jest uruchomiony na %1s:%2d. Inicjalizacja iptables nie powiodła się, zapytania muszą być przekazywane z aplikacjami innych firm</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Serwer DNS jest uruchomiony na %1s:%2d. Zapytania są przekazywane za pomocą iptables.
+    <string name="notification_dnsserver_portdiffers">Konfigurowany port %1$d nie mógł być używany.</string>
+    <string name="notification_dnsserver_message_iptables_failed">Serwer DNS jest uruchomiony na %1$s:%2$d. Inicjalizacja iptables nie powiodła się, zapytania muszą być przekazywane z aplikacjami innych firm</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Serwer DNS jest uruchomiony na %1$s:%2$d. Zapytania są przekazywane za pomocą iptables.
 \nOstrzeżenie: IPv6 jest aktywne, zapytania mogą ominąć Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">Serwer DNS jest uruchomiony na %1s:%2d. Zapytania są przekazywane za pomocą iptables</string>
-    <string name="notification_dnsserver_message">Serwer DNS jest uruchomiony na %1s:%2d. Przesyłanie zapytań za pomocą aplikacji innych firm</string>
+    <string name="notification_dnsserver_message_iptables_active">Serwer DNS jest uruchomiony na %1$s:%2$d. Zapytania są przekazywane za pomocą iptables</string>
+    <string name="notification_dnsserver_message">Serwer DNS jest uruchomiony na %1$s:%2$d. Przesyłanie zapytań za pomocą aplikacji innych firm</string>
     <string name="notification_dnsserver_title">Praca w trybie innym niż VPN</string>
     <string name="notification_channel_badconnection_description">Kanał używany do powiadomień, gdy Nebulo ma złe połączenie</string>
     <string name="notification_channel_badconnection">Zły kanał powiadamiania o połączeniu</string>
@@ -27,15 +27,15 @@
     <string name="notification_service_killed_title">Informacje o optymalizacji baterii</string>
     <string name="notification_pin_message">Kod PIN jest wymagany do wykonania tej czynności. Kliknij tutaj, aby to potwierdzić</string>
     <string name="notification_pin_title">Wymagany kod PIN</string>
-    <string name="notification_ruleexportfinished_message">Reguły %1d zostały wyeksportowane</string>
+    <string name="notification_ruleexportfinished_message">Reguły %1$d zostały wyeksportowane</string>
     <string name="notification_ruleexportfinished_title">Eksport reguły DNS zakończony</string>
     <string name="notification_ruleexport_secondarymessage">Przygotowuję eksport…</string>
-    <string name="notification_ruleexport_message">Reguły eksportowania (%1s/%2s)</string>
+    <string name="notification_ruleexport_message">Reguły eksportowania (%1$s/%2$s)</string>
     <string name="notification_ruleexport_title">Eksport reguły DNS</string>
     <string name="notification_ruleimportfinished_title">Import reguły DNS zakończony</string>
     <string name="notification_ruleimport_tertiarymessage">Kończę import…</string>
     <string name="notification_ruleimport_secondarymessage">Przygotowuję import…</string>
-    <string name="notification_ruleimport_message">Importowanie reguł DNS z %1s (%2s)</string>
+    <string name="notification_ruleimport_message">Importowanie reguł DNS z %1$s (%2$s)</string>
     <string name="notification_ruleimport_title">Import reguły DNS</string>
     <string name="notification_appcrash_message">Nebulo rozbił się. Kliknij tutaj, aby przejść do menu głównego i ponownie uruchomić aplikację, jeśli to konieczne</string>
     <string name="notification_appcrash_title">Nebulo rozbił się</string>
@@ -43,22 +43,22 @@
     <string name="notification_vpnrestart_title">Ponowne uruchamianie VPN</string>
     <string name="notification_noconnection_text">Aplikacja obecnie nie przesyła dalej twoich zapytań DNS, ponieważ nie masz połączenia lub połączenie jest złe</string>
     <string name="notification_noconnection_title">Brak połączenia</string>
-    <string name="notification_main_subtext">%1d zapytania do tej pory</string>
+    <string name="notification_main_subtext">%1$d zapytania do tej pory</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
-    <string name="notification_main_text_with_secondary_whitelist">Zapytania są wysyłane do %1s i %2s
+    <string name="notification_main_text_with_secondary_whitelist">Zapytania są wysyłane do %1$s i %2$s
 \n
-\n%3d Aplikacje korzystają z DoH/DoT</string>
-    <string name="notification_main_text_whitelist">Zapytania są wysyłane do %1s
+\n%3$d Aplikacje korzystają z DoH/DoT</string>
+    <string name="notification_main_text_whitelist">Zapytania są wysyłane do %1$s
 \n
-\n%2d Aplikacje korzystają z DoH/DoT</string>
-    <string name="notification_main_text_with_secondary">Zapytania są wysyłane do %1s i %2s
+\n%2$d Aplikacje korzystają z DoH/DoT</string>
+    <string name="notification_main_text_with_secondary">Zapytania są wysyłane do %1$s i %2$s
 \n
-\n%3d Apps są wyłączone z Nebulo</string>
-    <string name="notification_main_text">Zapytania są wysyłane do %1s
+\n%3$d Apps są wyłączone z Nebulo</string>
+    <string name="notification_main_text">Zapytania są wysyłane do %1$s
 \n
-\n%2d Apps są wyłączone z Nebulo</string>
-    <string name="notification_simple_text">Bieżący serwer: %1s</string>
+\n%2$d Apps są wyłączone z Nebulo</string>
+    <string name="notification_simple_text">Bieżący serwer: %1$s</string>
     <string name="notification_channel_high_priorty_description">Kanał powiadomień o wysokim priorytecie, na przykład gdy aplikacja traci uprawnienia do VPN</string>
     <string name="notification_channel_high_priorty">Wysoki priorytet</string>
     <string name="notification_channel_pin_description">Kanał wykorzystywany do powiadomień związanych z kodem PIN, tj. Kiedy należy go podać</string>

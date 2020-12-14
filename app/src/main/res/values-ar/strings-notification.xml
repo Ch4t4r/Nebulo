@@ -3,16 +3,16 @@
     <string name="notification_service_killed_title">معلومات حول تحسين البطارية</string>
     <string name="notification_pin_message">رمز الحماية PIN مطلوب لتنفيذ هذا الإجراء. اضغط هنا للتاكيد</string>
     <string name="notification_pin_title">مطلوب رمز الحماية PIN</string>
-    <string name="notification_ruleexportfinished_message">%1d تم تصدير قواعد</string>
+    <string name="notification_ruleexportfinished_message">%1$d تم تصدير قواعد</string>
     <string name="notification_ruleexportfinished_title">انتهى تصدير قاعدة DNS</string>
     <string name="notification_ruleexport_secondarymessage">جارٍ تحضير التصدير …</string>
-    <string name="notification_ruleexport_message">قواعد التصدير (%2s/%1s)</string>
+    <string name="notification_ruleexport_message">قواعد التصدير (%2$s/%1$s)</string>
     <string name="notification_ruleexport_title">تصدير قاعدة DNS</string>
-    <string name="notification_ruleimportfinished_message">تم استيراد قواعد%1s (تم حذف%2s تكرار)</string>
+    <string name="notification_ruleimportfinished_message">تم استيراد قواعد%1$s (تم حذف%2$s تكرار)</string>
     <string name="notification_ruleimportfinished_title">انتهى استيراد قاعدة DNS</string>
     <string name="notification_ruleimport_tertiarymessage">جارٍ إنهاء الاستيراد …</string>
     <string name="notification_ruleimport_secondarymessage">جارٍ تحضير الاستيراد …</string>
-    <string name="notification_ruleimport_message">استيراد قواعد DNS من%1s (%2s)</string>
+    <string name="notification_ruleimport_message">استيراد قواعد DNS من%1$s (%2$s)</string>
     <string name="notification_ruleimport_title">استيراد قاعدة DNS</string>
     <string name="notification_appcrash_message">تحطم نيبولو. انقر هنا للذهاب إلى القائمة الرئيسية وإعادة تشغيل التطبيق ، إذا لزم الأمر</string>
     <string name="notification_appcrash_title">Nebulo تعطل</string>
@@ -20,17 +20,17 @@
     <string name="notification_vpnrestart_title">إعادة تشغيل Vpn</string>
     <string name="notification_noconnection_text">لا يقوم التطبيق حاليًا بإعادة توجيه استعلامات DNS الخاصة بك لأنه إما ليس لديك اتصال او اتصالك بالانترنت سيئ</string>
     <string name="notification_noconnection_title">لا يوجد اتصال</string>
-    <string name="notification_main_subtext">%1d من الاستعلامات حتى الآن</string>
+    <string name="notification_main_subtext">%1$d من الاستعلامات حتى الآن</string>
     <string name="notification_multipleuserswarning_text">لم يتمكن Nebulo من بدء تشغيل VPN الوهمي بسبب خطأ في Android. يحدث هذا عندما يكون هناك عدة مستسيرفراتين على جهازك.</string>
     <string name="notification_multipleuserswarning_title">تعذر إنشاء شبكة افتراضية خاصة وهمية</string>
     <string name="notification_privatednswarning_text">يرجى تعطيل نظام عنوان DNS الخاص في إعدادات النظام لاستخدام Nebulo.</string>
     <string name="notification_privatednswarning_title">عنوان DNS خاص</string>
-    <string name="notification_dnsserver_portdiffers">تعذر استخدام المنفذ المكون%1d.</string>
-    <string name="notification_dnsserver_message_iptables_failed">سيرفر DNS قيد التشغيل على %2s:%1d فشلت تهيئة iptables ، يجب إعادة توجيه الاستعلامات مع تطبيقات الطرف الثالث</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">سيرفر DNS قيد التشغيل على %2s:%1d يتم توجيه الاستعلامات باستخدام iptables.
+    <string name="notification_dnsserver_portdiffers">تعذر استخدام المنفذ المكون%1$d.</string>
+    <string name="notification_dnsserver_message_iptables_failed">سيرفر DNS قيد التشغيل على %2$d:%1$s فشلت تهيئة iptables ، يجب إعادة توجيه الاستعلامات مع تطبيقات الطرف الثالث</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">سيرفر DNS قيد التشغيل على %2$d:%1$s يتم توجيه الاستعلامات باستخدام iptables.
 \nتحذير: IPv6 نشط ، الاستعلامات قد تتجاوز Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">سيرفر DNS قيد التشغيل على %2s:%1d يتم توجيه الاستعلامات باستخدام الجدار الناري</string>
-    <string name="notification_dnsserver_message">سيرفر DNS قيد التشغيل على %2s:%1d. استعلامات إعادة التوجيه باستخدام تطبيقات الطرف الثالث</string>
+    <string name="notification_dnsserver_message_iptables_active">سيرفر DNS قيد التشغيل على %2$d:%1$s يتم توجيه الاستعلامات باستخدام الجدار الناري</string>
+    <string name="notification_dnsserver_message">سيرفر DNS قيد التشغيل على %2$d:%1$s. استعلامات إعادة التوجيه باستخدام تطبيقات الطرف الثالث</string>
     <string name="notification_dnsserver_title">يعمل بوضع بلا VPN</string>
     <string name="notification_service_revoked_message">انقر هنا لإعادة التشغيل</string>
     <string name="notification_service_revoked_title">تم إلغاء إذن VPN من قبل النظام</string>
@@ -38,19 +38,19 @@
     <string name="notification_service_killed_message">يبدو أن النظام قد أوقف التطبيق سابقًا. انقر هنا لمعرفة المزيد</string>
     <string name="notification_main_title_https">Nebulo (برتكول التشفير DoH)</string>
     <string name="notification_main_title_tls">Nebulo (برتكول الحماية DoT)</string>
-    <string name="notification_main_text_with_secondary_whitelist">يتم إرسال الاستعلامات إلى%1s و%2s 
+    <string name="notification_main_text_with_secondary_whitelist">يتم إرسال الاستعلامات إلى%1$s و%2$s
 \n 
-\n%3d تستخدم تطبيقات DoH / DoT</string>
-    <string name="notification_main_text_whitelist">يتم إرسال الاستعلامات إلى%1s 
+\n%3$d تستخدم تطبيقات DoH / DoT</string>
+    <string name="notification_main_text_whitelist">يتم إرسال الاستعلامات إلى%1$s
 \n 
-\n%2d تستخدم تطبيقات DoH / DoT</string>
-    <string name="notification_main_text_with_secondary">يتم إرسال الاستعلامات إلى%1s و %2s
+\n%2$d تستخدم تطبيقات DoH / DoT</string>
+    <string name="notification_main_text_with_secondary">يتم إرسال الاستعلامات إلى%1$s و %2$s
 \n
-\nتطبيقات %3d مستبعدة من DoH / DoT</string>
-    <string name="notification_main_text">يتم إرسال الاستعلامات إلى %1s
+\nتطبيقات %3$d مستبعدة من DoH / DoT</string>
+    <string name="notification_main_text">يتم إرسال الاستعلامات إلى %1$s
 \n
-\nتم %2d تطبيقات من DoH / DoT</string>
-    <string name="notification_simple_text">السيرفر الحالي: %1s</string>
+\nتم %2$d تطبيقات من DoH / DoT</string>
+    <string name="notification_simple_text">السيرفر الحالي: %1$s</string>
     <string name="notification_channel_badconnection_description">القناة المستخدمة للإشعارات عندما يكون لدى Nebulo اتصال سيئ</string>
     <string name="notification_channel_badconnection">قناة إعلام اتصال سيئة</string>
     <string name="notification_channel_dnsrules_description">القناة المستخدمة لاستيراد / تصدير قواعد DNS</string>

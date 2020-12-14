@@ -10,21 +10,21 @@
     <string name="notification_channel_pin_description">चैनल का उपयोग पिन से संबंधित सूचनाओं के लिए किया जाता है, अर्थात् जब इसे प्रदान करना होता है</string>
     <string name="notification_channel_high_priorty">उच्च प्राथमिकता</string>
     <string name="notification_channel_high_priorty_description">उच्च प्राथमिकता सूचनाओं के लिए माध्यम । उदाहरण - जब ऐप वीपीएन (VPN) की अनुमति खो देता है</string>
-    <string name="notification_simple_text">वर्तमान सर्वर: %1s</string>
-    <string name="notification_main_text">प्रश्न %1s को भेजे जाते हैं
+    <string name="notification_simple_text">वर्तमान सर्वर: %1$s</string>
+    <string name="notification_main_text">प्रश्न %1$s को भेजे जाते हैं
 \n
-\n%2d ऐप्स को नेबुलो से बाहर रखा गया है</string>
-    <string name="notification_main_text_with_secondary">प्रश्न यहाँ भेजें जा रहे है - %1s और %2s
+\n%2$d ऐप्स को नेबुलो से बाहर रखा गया है</string>
+    <string name="notification_main_text_with_secondary">प्रश्न यहाँ भेजें जा रहे है - %1$s और %2$s
 \n
-\n%3d ऐप्स को Nebulo से बाहर रखा गया है</string>
-    <string name="notification_main_text_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1s
+\n%3$d ऐप्स को Nebulo से बाहर रखा गया है</string>
+    <string name="notification_main_text_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1$s
 \n
-\n%2d ऐप्स DoH / DoT का उपयोग कर रहे हैं</string>
-    <string name="notification_main_text_with_secondary_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1s और %2s
+\n%2$d ऐप्स DoH / DoT का उपयोग कर रहे हैं</string>
+    <string name="notification_main_text_with_secondary_whitelist">प्रश्न यहाँ भेजें जा रहे है - %1$s और %2$s
 \n
-\n%3d ऐप्स DoH / DoT का उपयोग कर रहे हैं</string>
+\n%3$d ऐप्स DoH / DoT का उपयोग कर रहे हैं</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
-    <string name="notification_main_subtext">अब तक भेजें गए प्रश्न - %1d</string>
+    <string name="notification_main_subtext">अब तक भेजें गए प्रश्न - %1$d</string>
     <string name="notification_noconnection_title">कोई संपर्क नहीं</string>
     <string name="notification_noconnection_text">वर्तमान में ऍप आपके DNS प्रश्नों को भेज नहीं रहा है क्योंकि संपर्क खराब है या उपलब्ध नहीं है</string>
     <string name="notification_vpnrestart_title">VPN को फिर से शुरू किया जा रहा है</string>
@@ -32,16 +32,16 @@
     <string name="notification_appcrash_title">Nebulo क्रैश हो गया है</string>
     <string name="notification_appcrash_message">Nebulo क्रैश हो गया है। यदि आवश्यक हो, तो मुख्य मेनू पर जाने के लिए और ऐप को फिर से शुरू करने के लिए यहां क्लिक करें</string>
     <string name="notification_ruleimport_title">DNS नियम आयात</string>
-    <string name="notification_ruleimport_message">%1s (%2s) से DNS नियम आयात हो रहे है</string>
+    <string name="notification_ruleimport_message">%1$s (%2$s) से DNS नियम आयात हो रहे है</string>
     <string name="notification_ruleimport_secondarymessage">आयात की तैयारी हो रही है…</string>
     <string name="notification_ruleimport_tertiarymessage">आयात समाप्त हो रहा है…</string>
     <string name="notification_ruleimportfinished_title">DNS नियम आयात समाप्त</string>
-    <string name="notification_ruleimportfinished_message">%1s नियम आयात किए गए (%2s डुप्लिकेट छूट गए)</string>
+    <string name="notification_ruleimportfinished_message">%1$s नियम आयात किए गए (%2$s डुप्लिकेट छूट गए)</string>
     <string name="notification_ruleexport_title">DNS नियम निर्यात</string>
-    <string name="notification_ruleexport_message">नियमों की निर्यात हो रही है (%1s/%2s)</string>
+    <string name="notification_ruleexport_message">नियमों की निर्यात हो रही है (%1$s/%2$s)</string>
     <string name="notification_ruleexport_secondarymessage">निर्यात की तैयारी हो रही है…</string>
     <string name="notification_ruleexportfinished_title">DNS नियम निर्यात समाप्त हुई</string>
-    <string name="notification_ruleexportfinished_message">%1d नियमों का निर्यात किया गया</string>
+    <string name="notification_ruleexportfinished_message">%1$d नियमों का निर्यात किया गया</string>
     <string name="notification_pin_title">पिन की आवश्यकता है</string>
     <string name="notification_pin_message">इस क्रिया को करने के लिए आपका पिन आवश्यक है। इसकी पुष्टि के लिए यहां क्लिक करें</string>
     <string name="notification_service_killed_title">बैटरी अनुकूलन के बारे में जानकारी</string>
@@ -49,14 +49,14 @@
     <string name="notification_service_killed_ignore">नज़रअंदाज़</string>
     <string name="notification_service_revoked_title">VPN अनुमति को सिस्टम ने रद्द किया है</string>
     <string name="notification_service_revoked_message">फिर से शुरू करने के लिए यहां क्लिक करें</string>
-    <string name="notification_dnsserver_portdiffers">कॉन्फ़िगर किया गया पोर्ट %1d का उपयोग नहीं किया जा सका।</string>
-    <string name="notification_dnsserver_message">DNS सर्वर %1s:%2d पर चल रहा है। तृतीय-पक्ष एप्लिकेशन का उपयोग करके क्वेरी को अग्रेषित करेंं</string>
+    <string name="notification_dnsserver_portdiffers">कॉन्फ़िगर किया गया पोर्ट %1$d का उपयोग नहीं किया जा सका।</string>
+    <string name="notification_dnsserver_message">DNS सर्वर %1$s:%2$d पर चल रहा है। तृतीय-पक्ष एप्लिकेशन का उपयोग करके क्वेरी को अग्रेषित करेंं</string>
     <string name="notification_dnsserver_title">गैर-वीपीएन मोड में चल रहा है</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_dnsserver_message_iptables_failed">DNS सर्वर %1s:%2d पर चल रहा है। IPtables की शुरुआत विफल रही, प्रश्नों को तृतीय-पक्ष एप्लिकेशन के साथ अग्रेषित किया जाना है</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS सर्वर %1s:%2d पर चल रहा है। Iptables का उपयोग करके क्वेरी को अग्रेषित किया जाता है।
+    <string name="notification_dnsserver_message_iptables_failed">DNS सर्वर %1$s:%2$d पर चल रहा है। IPtables की शुरुआत विफल रही, प्रश्नों को तृतीय-पक्ष एप्लिकेशन के साथ अग्रेषित किया जाना है</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS सर्वर %1$s:%2$d पर चल रहा है। Iptables का उपयोग करके क्वेरी को अग्रेषित किया जाता है।
 \nचेतावनी: IPv6 सक्रिय है, प्रश्न Nebulo को बायपास कर सकते हैं।</string>
-    <string name="notification_dnsserver_message_iptables_active">DNS सर्वर %1s:%2d पर चल रहा है। IPtables का उपयोग करके क्वेरीज़ अग्रेषित की जाती हैं</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS सर्वर %1$s:%2$d पर चल रहा है। IPtables का उपयोग करके क्वेरीज़ अग्रेषित की जाती हैं</string>
     <string name="notification_multipleuserswarning_text">एंड्रॉइड बग के कारण नेबुलो अपनी डमी वीपीएन शुरू नहीं कर सका। यह तब होता है जब आपके डिवाइस पर कई उपयोगकर्ता होते हैं।</string>
     <string name="notification_multipleuserswarning_title">डमी वीपीएन स्थापित नहीं किया जा सका</string>
     <string name="notification_privatednswarning_text">Nebulo का उपयोग करने के लिए कृपया सिस्टम सेटिंग्स में निजी डीएनएस को अक्षम करें।</string>

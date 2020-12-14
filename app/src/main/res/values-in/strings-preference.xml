@@ -25,7 +25,7 @@
     <string name="summary_preference_pin_use_fingerprint">Izinkan sidik jari Anda digunakan sebagai PIN</string>
     <string name="title_preference_change_pin">Ubah pin</string>
     <string name="summary_preference_change_pin">Ubah pin. Hanya nilai numerik yang diizinkan.
-\nPin saat ini: %1s</string>
+\nPin saat ini: %1$s</string>
     <string name="preference_category_cache">Kontrol cache</string>
     <string name="title_dnscache_enabled">Gunakan cache DNS</string>
     <string name="summary_dnscache_enabled">Mengaktifkan cache DNS aplikasi. Cache mengingat permintaan lama untuk menjawab pertanyaan mendatang lebih cepat.
@@ -39,13 +39,13 @@
     <string name="summary_dnscache_usedefaulttimes">Permintaan cache untuk waktu default yang dikomunikasikan oleh server</string>
     <string name="title_dnscache_minimum_cache_time">Waktu cache minimal</string>
     <string name="summary_dnscache_minimum_cache_time">Jumlah minimal entri waktu harus di-cache. 
-\nSaat ini: %1d Detik</string>
+\nSaat ini: %1$d Detik</string>
     <string name="title_dnscache_customcachetime">Waktu cache khusus (Detik)</string>
     <string name="summary_dnscache_customcachetime">Mengubah jumlah waktu permintaan lama di-cache. 
-\nSaat ini: %1d Detik</string>
+\nSaat ini: %1$d Detik</string>
     <string name="title_dnscache_nxdomaincachetime">Waktu cache untuk NXDomain (Detik)</string>
     <string name="summary_dnscache_nxdomaincachetime">Mengubah jumlah waktu permintaan NXDOMAIN lama di-cache. Meningkatkan kinerja untuk domain yang tidak ada (misal. Jika diblokir) 
-\nSaat ini: %1d Detik</string>
+\nSaat ini: %1$d Detik</string>
     <string name="preference_category_logging">Pencatatan</string>
     <string name="title_enable_logging">Aktifkan pencatatan</string>
     <string name="summary_enable_logging">Mengaktifkan pencatatan informasi debug (berisi data statistik). Log ini tidak terkirim secara otomatis</string>
@@ -85,7 +85,7 @@
     <string name="title_log_queries">Catatan kueri</string>
     <string name="summary_log_queries">Catat semua pertanyaan dan tanggapan</string>
     <string name="title_export_queries">Ekspor kueri</string>
-    <string name="summary_export_queries">Ekspor kueri sebagai CSV (%1d kueri)</string>
+    <string name="summary_export_queries">Ekspor kueri sebagai CSV (%1$d kueri)</string>
     <string name="title_delete_queries">Hapus kueri</string>
     <string name="summary_delete_queries">Klik di sini untuk menghapus semua kueri yang dicatat</string>
     <string name="preference_category_nonvpnmode_help">Panduan untuk aplikasi pihak ketiga</string>
@@ -105,7 +105,7 @@
     <string name="title_local_server_port">Port server</string>
     <string name="summary_run_without_vpn">Saat dicentang, Nebulo menghosting server DNS di perangkat Anda</string>
     <string name="title_run_without_vpn">Jalankan tanpa VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Server akan dihosting di %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server akan dihosting di %1$s:%2$s</string>
     <string name="summary_category_nonvpnmode">Konfigurasikan Nebulo untuk bertindak sebagai server DNS pada perangkat daripada menggunakan VPN tiruan. Saat diaktifkan, Anda secara manual harus meneruskan kueri DNS ke Nebulo menggunakan aplikasi pihak ketiga</string>
     <string name="preference_category_nonvpnmode">Mode non-VPN</string>
     <string name="summary_map_query_refused">Beberapa server DNS mungkin menolak untuk menjawab pertanyaan jika host tidak diizinkan atau diblokir. Pengaturan ini memblokir host alih-alih menolak kueri, jika tidak, sistem mungkin akan bingung</string>

@@ -21,8 +21,8 @@
     <string name="error_webview_missing">WebView package not found, is it currently updating or removed?</string>
     <string name="error_cannot_open_settings">Cannot open system settings</string>
     <string name="main_dnssurveillance_infotext">Be aware that the DNS server you are connected to is able to record which sites you are visiting. Check the respective privacy statements for more information.</string>
-    <string name="main_dnssurveillance_privacystatement">Privacy statement of %1s</string>
-    <string name="about_app"><![CDATA[This app is open source. The source code can be accessed at <a href="https://nebulo.app/source">nebulo.app/source</a>.\nFurthermore the app doesn\'t contain ads and does not track or collect any data about you.\n\nVersion %1s\nBuild %2d\nDatabase version %3d\nCrashreport ID: %4s\n\n© Daniel Wolf 2019–2020\nLicensed under GPLv3.\n<a href="mailto:support@frostnerd.com">support@frostnerd.com</a>]]></string>
+    <string name="main_dnssurveillance_privacystatement">Privacy statement of %1$s</string>
+    <string name="about_app"><![CDATA[This app is open source. The source code can be accessed at <a href="https://nebulo.app/source">nebulo.app/source</a>.\nFurthermore the app doesn\'t contain ads and does not track or collect any data about you.\n\nVersion %1$s\nBuild %2$d\nDatabase version %3$d\nCrashreport ID: %4$s\n\n© Daniel Wolf 2019–2020\nLicensed under GPLv3.\n<a href="mailto:support@frostnerd.com">support@frostnerd.com</a>]]></string>
     <string name="support_contact_mail" translatable="false">support@frostnerd.com</string>
     <string name="app_share_text">Hey, I found this app which encrypts your DNS queries to give you more privacy and security. Check it out here: https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen</string>
     <string name="app_share_fdroid">Hey, I found this app which encrypts your DNS queries to give you more privacy and security. Check it out by downloading from here: https://nebulo.app/source#installation</string>
@@ -62,13 +62,13 @@
     <string name="button_main_dnsrules">DNS rules</string>
     <string name="window_dnsrules_customhosts">Custom hosts</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1s rule</item>
-        <item quantity="other">%1s rules</item>
+        <item quantity="one">%1$s rule</item>
+        <item quantity="other">%1$s rules</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">There already is a rule for this host</string>
     <string name="window_dnsrules_customhosts_message">Define all your custom hosts here</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Rules from this source: -</string>
-    <string xmlns:tools="http://schemas.android.com/tools" name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Rules from this source: %1s (%2s duplicates not in use)</string>
+    <string xmlns:tools="http://schemas.android.com/tools" name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Rules from this source: %1$s (%2$s duplicates not in use)</string>
     <string name="windows_querylogging_search_hint">Search for a host in the query log</string>
     <string name="windows_querylogging_search">Host-search</string>
     <string name="windows_querylogging_time">Time</string>
@@ -97,8 +97,8 @@
     <string name="window_dnsrules_refresh_sources">Refresh to import rules from source</string>
     <string name="window_querylog_information">Information</string>
     <string name="about_help_faq">Frequently asked questions</string>
-    <string name="warning_server_currently_unstable">The server %1s seems to be unstable right now.</string>
-    <string name="warning_server_currently_unstable_expanded">The server %1s seems to be unstable right now, impacting your browsing speed. Consider switching to a more stable server.</string>
+    <string name="warning_server_currently_unstable">The server %1$s seems to be unstable right now.</string>
+    <string name="warning_server_currently_unstable_expanded">The server %1$s seems to be unstable right now, impacting your browsing speed. Consider switching to a more stable server.</string>
     <string name="appintro_first_title">Welcome to Nebulo.</string>
     <string name="appintro_first_description">Nebulo is an app to protect your privacy and secure your device.\n\nTake back control of data your ISP or other entities have treated as theirs for a long time.</string>
     <string name="appintro_second_title">Your privacy matters</string>
@@ -116,11 +116,11 @@
     <string name="appintro_server_choose_forth">A server which protects me from harmful websites and apps</string>
     <string name="appintro_server_choose_adblock">A server which blocks ads and tracking</string>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="one">%1d query has been handled by DNS rules this far</item>
-        <item quantity="other">%1d queries have been handled by DNS rules this far</item>
+        <item quantity="one">%1$d query has been handled by DNS rules this far</item>
+        <item quantity="other">%1$d queries have been handled by DNS rules this far</item>
     </plurals>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="one">%1d query has been blocked this far</item>
-        <item quantity="other">%1d queries have been blocked this far</item>
+        <item quantity="one">%1$d query has been blocked this far</item>
+        <item quantity="other">%1$d queries have been blocked this far</item>
     </plurals>
 </resources>

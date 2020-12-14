@@ -49,11 +49,11 @@
 \n为使用Nebulo，请关闭私人DNS。</string>
     <string name="windows_querylogging_search">域名搜索</string>
     <string name="windows_querylogging_search_hint">在请求日志中搜索域名</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">来自此源的规则条数： %1s （未使用 %2s 条重复规则）</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">来自此源的规则条数： %1$s （未使用 %2$s 条重复规则）</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">来自此源的规则条数： -</string>
     <string name="window_dnsrules_customhosts_message">在此处设置您的所有自定义规则</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="other">%1s 条规则</item>
+        <item quantity="other">%1$s 条规则</item>
     </plurals>
     <string name="error_no_webbrowser_installed">您没有安装任何可以访问该链接的应用</string>
     <string name="about_help_translating">协助翻译</string>
@@ -62,15 +62,15 @@
     <string name="about_app">此应用为开源软件。源代码可于&lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;获取。
 \n此外，此应用不包含广告，同时也不会跟踪您或尝试收集关于您的任何信息。
 \n
-\n软件版本 %1s
-\n构建版本 %2d
-\n数据库版本 %3d
-\n崩溃报告ID：%4s
+\n软件版本 %1$s
+\n构建版本 %2$d
+\n数据库版本 %3$d
+\n崩溃报告ID：%4$s
 \n
 \n© Daniel Wolf 2019–2020
 \n使用 GPLv3 授权。
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
-    <string name="main_dnssurveillance_privacystatement">使用 %1s 的隐私声明</string>
+    <string name="main_dnssurveillance_privacystatement">使用 %1$s 的隐私声明</string>
     <string name="error_webview_missing">没有找到WebView软件包。当前它是正在更新，还是已被移除？</string>
     <string name="activity_label_import_queries">导入请求项</string>
     <string name="restart_app_for_changes">重启应用以使更改生效。</string>
@@ -78,10 +78,10 @@
     <string name="iptables_not_supported">您的设备不支持iptables</string>
     <string name="restart_app">重启应用</string>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="other">已有 %1d 个请求被屏蔽</item>
+        <item quantity="other">已有 %1$d 个请求被屏蔽</item>
     </plurals>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="other">现已有 %1d 个请求根据DNS规则处理</item>
+        <item quantity="other">现已有 %1$d 个请求根据DNS规则处理</item>
     </plurals>
     <string name="appintro_server_choose_adblock">屏蔽广告与跟踪的服务器</string>
     <string name="appintro_server_choose_forth">能保护我免于受有害网站及应用影响的服务器</string>
@@ -107,8 +107,8 @@
 \n
 \n是时候把被ISP或其他实体当成他们自己该拥有的您自己的数据控制权拿回来了。</string>
     <string name="appintro_first_title">欢迎使用 Nebulo。</string>
-    <string name="warning_server_currently_unstable_expanded">%1s 服务器现在似乎不稳定，且在影响您的浏览速度。请考虑切换至更加稳定的服务器。</string>
-    <string name="warning_server_currently_unstable">%1s 服务器现在似乎不稳定。</string>
+    <string name="warning_server_currently_unstable_expanded">%1$s 服务器现在似乎不稳定，且在影响您的浏览速度。请考虑切换至更加稳定的服务器。</string>
+    <string name="warning_server_currently_unstable">%1$s 服务器现在似乎不稳定。</string>
     <string name="about_help_faq">常见问题</string>
     <string name="window_querylog_information">信息</string>
     <string name="window_dnsrules_refresh_sources">刷新以从规则源导入规则</string>

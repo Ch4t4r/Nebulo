@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">默认有%1d个应用被选中，且不可被取消选中</item>
+        <item quantity="one">默认有%1$d个应用被选中，且不可被取消选中</item>
         <item quantity="other"/>
     </plurals>
     <string name="dialog_appchoosal_showsystemapps">显示系统应用</string>
-    <string name="dialog_deleteconfig_text">您是否想删除名为 %1s 的配置？</string>
+    <string name="dialog_deleteconfig_text">您是否想删除名为 %1$s 的配置？</string>
     <string name="dialog_deleteconfig_title">是否删除配置？</string>
     <string name="dialog_newserver_secondaryserver">次要服务器（可选）</string>
     <string name="dialog_newserver_primaryserver">首要服务器</string>
@@ -17,10 +17,10 @@
     <string name="dialog_appchoosal_whitelist">仅在选定的应用中使用DoH/DoT</string>
     <string name="dialog_newserver_name">服务器名称</string>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">导入%1d个服务器</item>
+        <item quantity="one">导入%1$d个服务器</item>
         <item quantity="other"/>
     </plurals>
-    <string name="dialog_serverimport_priority">优先级 %1d</string>
+    <string name="dialog_serverimport_priority">优先级 %1$d</string>
     <string name="dialog_serverimport_experimental">实验性功能</string>
     <string name="dialog_serverimport_servertype_doh">类型：DNS-over-HTTPS（DoH）</string>
     <string name="dialog_serverimport_servertype_dot">类型：DNS-over-TLS（DoT）</string>
@@ -31,7 +31,7 @@
     <string name="dialog_serverimportfailed_title">导入失败</string>
     <string name="dialog_serverimportfailed_text">无法导入服务器。</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">无法导入服务器。
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_text">您想如何分享日志？</string>
     <string name="dialog_logexport_email">电子邮件</string>
     <string name="dialog_deletelogs_text">您确定您想删除所有日志吗？</string>
@@ -96,17 +96,17 @@
 \n
 \n你知道这款应用有Telegram群组吗？群组包含有定期的更新，同时也是讨论与提问的极佳去处。
 \n我们是一个由超过200人组成的优质社群，你想成为其中的一分子吗？</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">已测试 %1d 个服务器
-\n %2d 个DoT服务器可用，%3d个不可用
-\n %4d 个DoH服务器可用，%5d个不可用
-\n 平均响应时间：%6d ms。
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">已测试 %1$d 个服务器
+\n %2$d 个DoT服务器可用，%3$d个不可用
+\n %4$d 个DoH服务器可用，%5$d个不可用
+\n 平均响应时间：%6$d ms。
 \n
-\n 最快的服务器：%7s
-\n 最慢的服务器：%8s</string>
+\n 最快的服务器：%7$s
+\n 最慢的服务器：%8$s</string>
     <string name="dialog_speedtest_useserver_title">选择服务器</string>
-    <string name="dialog_speedtest_useserver_message">您想使用 %1s 服务器吗？它在%3d个服务器中排名第%2d，响应时间为%4d毫秒。</string>
-    <string name="dialog_deletehostsource_title">是否删除 %1s？</string>
-    <string name="dialog_deletehostsource_message">您确定您要删除规则源 %1s 吗？此操作无法撤销，此规则源下的规则将被删除。</string>
+    <string name="dialog_speedtest_useserver_message">您想使用 %1$s 服务器吗？它在%3$d个服务器中排名第%2$d，响应时间为%4$d毫秒。</string>
+    <string name="dialog_deletehostsource_title">是否删除 %1$s？</string>
+    <string name="dialog_deletehostsource_message">您确定您要删除规则源 %1$s 吗？此操作无法撤销，此规则源下的规则将被删除。</string>
     <string name="dialog_newhostsource_name">名称</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newdnsrule_title">新建DNS规则</string>

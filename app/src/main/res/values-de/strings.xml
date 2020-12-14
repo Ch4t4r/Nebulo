@@ -14,14 +14,14 @@
     <string name="all_close">Schließen</string>
     <string name="error_invalid_url">Bitte gebe eine valide URL an</string>
     <string name="main_dnssurveillance_infotext">Bitte beachte, dass der DNS Server, mit welchem du verbunden bist, sehen kann, welche Webseiten zu besuchst. Überprüfe die Datenschutzerklärung des Servers für mehr Informationen.</string>
-    <string name="main_dnssurveillance_privacystatement">Datenschutzerklärung von %1s</string>
+    <string name="main_dnssurveillance_privacystatement">Datenschutzerklärung von %1$s</string>
     <string name="about_app">Diese App ist quelloffen. Der Quellcode kann unter &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt; abgerufen werden. 
 \nWeiterhin enthält diese App keine Werbung und setzt kein Tracking ein. 
 \n 
-\nVersion %1s 
-\nBuild %2d 
-\nDatenbankversion %3d 
-\nCrashreport ID: %4s 
+\nVersion %1$s
+\nBuild %2$d
+\nDatenbankversion %3$d
+\nCrashreport ID: %4$s
 \n 
 \n© Daniel Wolf 2019–2020
 \nLicensed under GPLv3. 
@@ -45,13 +45,13 @@
     <string name="window_dnsrules_customhosts">Eigene Hosts</string>
     <string name="window_dnsrules_customhosts_message">Gebe hier Hosts von Hand ein</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regeln aus dieser Quelle: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regeln aus dieser Quelle: %1s (%2s Duplikate werden nicht genutzt)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount">Regeln aus dieser Quelle: %1$s (%2$s Duplikate werden nicht genutzt)</string>
     <string name="error_invalid_pin">Bitte gebe deine PIN an</string>
     <string name="error_invalid_servername">Bitte gebe einen Namen an</string>
     <string name="window_dnsrules_hostalreadyexists">Es existiert bereits eine Regel für diesen Host</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1s Regel</item>
-        <item quantity="other">%1s Regeln</item>
+        <item quantity="one">%1$s Regel</item>
+        <item quantity="other">%1$s Regeln</item>
     </plurals>
     <string name="windows_querylogging_time">Zeitpunkt</string>
     <string name="windows_querylogging_type">Typ</string>
@@ -81,12 +81,12 @@
     <string name="iptables_supported">Glückwunsch, dein Gerät unterstützt iptables!</string>
     <string name="window_dnsrules_refresh_sources">Aktualisieren um die Regeln zu importieren</string>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="one">%1d Anfrage wurde bisher blockiert</item>
-        <item quantity="other">%1d Anfragen wurden bisher blockiert</item>
+        <item quantity="one">%1$d Anfrage wurde bisher blockiert</item>
+        <item quantity="other">%1$d Anfragen wurden bisher blockiert</item>
     </plurals>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="one">%1d Anfrage wurde bisher von den DNS Regeln aufgelöst</item>
-        <item quantity="other">%1d Anfragen wurden bisher von den DNS Regeln aufgelöst</item>
+        <item quantity="one">%1$d Anfrage wurde bisher von den DNS Regeln aufgelöst</item>
+        <item quantity="other">%1$d Anfragen wurden bisher von den DNS Regeln aufgelöst</item>
     </plurals>
     <string name="appintro_server_choose_adblock">Ein Server, welcher Werbung und Tracking blockiert</string>
     <string name="appintro_server_choose_forth">Ein Server, welcher mich vor böswilligen Webseiten und Apps beschützt</string>
@@ -112,8 +112,8 @@
 \n
 \nErlange die Kontrolle über deine Daten zurück, welche den Netzanbieter und andere für sich beanspruchen.</string>
     <string name="appintro_first_title">Willkommen zu Nebulo.</string>
-    <string name="warning_server_currently_unstable_expanded">Der Server %1s scheint gerade instabil zu sein. Dies könnte deine Surfgeschwindigkeit beeinträchtigen.</string>
-    <string name="warning_server_currently_unstable">Der Server %1s scheint gerade instabil zu sein.</string>
+    <string name="warning_server_currently_unstable_expanded">Der Server %1$s scheint gerade instabil zu sein. Dies könnte deine Surfgeschwindigkeit beeinträchtigen.</string>
+    <string name="warning_server_currently_unstable">Der Server %1$s scheint gerade instabil zu sein.</string>
     <string name="about_help_faq">Häufig gestellte Fragen</string>
     <string name="window_querylog_information">Information</string>
     <string name="window_main_click_to_enable">Klicke zum Aktivieren.</string>

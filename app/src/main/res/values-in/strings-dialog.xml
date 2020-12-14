@@ -9,17 +9,17 @@
     <string name="dialog_newserver_primaryserver">Server primer</string>
     <string name="dialog_newserver_secondaryserver">Server sekunder (Opsional)</string>
     <string name="dialog_deleteconfig_title">Hapus konfigurasi\?</string>
-    <string name="dialog_deleteconfig_text">Anda ingin menghapus konfigurasi %1s\?</string>
+    <string name="dialog_deleteconfig_text">Anda ingin menghapus konfigurasi %1$s\?</string>
     <string name="dialog_appchoosal_showsystemapps">Tampilkan apl sistem</string>
     <string name="dialog_appchoosal_whitelist">Hanya gunakan DoH/DoT di apl yang dipilih</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="other">%1d apl dikecualikan secara default dan tidak dapat dipilih</item>
+        <item quantity="other">%1$d apl dikecualikan secara default dan tidak dapat dipilih</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="other">Impor server %1d</item>
+        <item quantity="other">Impor server %1$d</item>
     </plurals>
     <string name="dialog_serverimport_done">Selesai</string>
-    <string name="dialog_serverimport_priority">Prioritas %1d</string>
+    <string name="dialog_serverimport_priority">Prioritas %1$d</string>
     <string name="dialog_serverimport_experimental">Eksperimental</string>
     <string name="dialog_serverimport_servertype_doh">Jenis: Dns-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Jenis: Dns-over-TLS (DoT)</string>
@@ -29,7 +29,7 @@
     <string name="dialog_serverimportfailed_title">Gagal mengimpor</string>
     <string name="dialog_serverimportfailed_text">Server tidak dapat diimpor.</string>
     <string name="dialog_serverimportfailed_text_exception">Server tidak dapat diimpor.
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_text">Bagaimana Anda ingin membagikan log\?</string>
     <string name="dialog_logexport_general">Pilih aplikasi</string>
     <string name="dialog_logexport_email">E-mail</string>
@@ -100,11 +100,11 @@
 \n - Klik pada Port Forwarding
 \n - Tambahkan aturan berikut:
 \n
-\n • Protokol UDP, port sumber 53, tujuan %1s, port tujuan %2d, tidak ada aplikasi tujuan
+\n • Protokol UDP, port sumber 53, tujuan %1$s, port tujuan %2$d, tidak ada aplikasi tujuan
 \n • Ulangi untuk TCP
 \n
 \n - Kembali ke opsi lanjutan
-\n - Gulir ke bawah, setel kedua bidang DNS VPN ke %3s
+\n - Gulir ke bawah, setel kedua bidang DNS VPN ke %3$s
 \n - Mulai Nebulo (dalam mode non-VPN) dan mulai NetGuard</string>
     <string name="dialog_doh_detect_type_message">Tolong tunggu sebentar.</string>
     <string name="dialog_doh_detect_type_title">Mendeteksi tipe server</string>
@@ -165,17 +165,17 @@
     <string name="dialog_newhostsource_title">Sumber aturan baru</string>
     <string name="dialog_clearuserrules_message">Anda akan menghapus semua aturan DNS\? Ini tidak dapat dikembalikan.</string>
     <string name="dialog_clearuserrules_title">Hapus semua aturan DNS\?</string>
-    <string name="dialog_deletehostsource_message">Apakah anda yakin ingin menghapus sumber host %1s\? Ini tidak dapat dikembalikan, host dari sumber ini akan hilang.</string>
-    <string name="dialog_deletehostsource_title">Hapus %1s\?</string>
-    <string name="dialog_speedtest_useserver_message">Apakah Anda ingin menggunakan server %1s\? Ini peringkat %2d dari %3d dengan waktu respon %4d ms.</string>
+    <string name="dialog_deletehostsource_message">Apakah anda yakin ingin menghapus sumber host %1$s\? Ini tidak dapat dikembalikan, host dari sumber ini akan hilang.</string>
+    <string name="dialog_deletehostsource_title">Hapus %1$s\?</string>
+    <string name="dialog_speedtest_useserver_message">Apakah Anda ingin menggunakan server %1$s\? Ini peringkat %2$d dari %3$d dengan waktu respon %4$d ms.</string>
     <string name="dialog_speedtest_useserver_title">Pilih server</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d server diuji
-\n%2d server DoT dapat dijangkau, %3d tidak dapat dijangkau
-\n%4d server DoH dapat dijangkau, %5d tidak dapat dijangkau
-\nWaktu respons rata-rata: %6d ms.
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1$d server diuji
+\n%2$d server DoT dapat dijangkau, %3$d tidak dapat dijangkau
+\n%4$d server DoH dapat dijangkau, %5$d tidak dapat dijangkau
+\nWaktu respons rata-rata: %6$d ms.
 \n
-\nServer tercepat: %7s
-\nServer paling lambat: %8s</string>
+\nServer tercepat: %7$s
+\nServer paling lambat: %8$s</string>
     <string name="dialog_speedresult_title">Hasil tes kecepatan</string>
     <string name="dialog_logexport_loading_title">Menyiapkan catatan</string>
     <string name="dialog_newdnsrule_block_host">Cekal domain ini</string>

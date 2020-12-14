@@ -8,22 +8,22 @@
     <string name="notification_channel_noconnection_description">推送无可用连接时的警告通知时，所使用的默认通知频道</string>
     <string name="notification_channel_high_priorty">高优先级通知频道</string>
     <string name="notification_channel_high_priorty_description">推送高优先级通知使用的默认通知频道，比如推送应用失去VPN权限等的通知</string>
-    <string name="notification_simple_text">当前服务器：%1s</string>
-    <string name="notification_main_text">解析请求被发往 %1s
+    <string name="notification_simple_text">当前服务器：%1$s</string>
+    <string name="notification_main_text">解析请求被发往 %1$s
 \n
-\n%2d 个应用不使用 DoH/DoT</string>
-    <string name="notification_main_text_with_secondary">解析请求被发往 %1s 和 %2s
+\n%2$d 个应用不使用 DoH/DoT</string>
+    <string name="notification_main_text_with_secondary">解析请求被发往 %1$s 和 %2$s
 \n
-\n%3d 个应用不使用 DoH/DoT</string>
-    <string name="notification_main_text_whitelist">解析请求被发往 %1s
+\n%3$d 个应用不使用 DoH/DoT</string>
+    <string name="notification_main_text_whitelist">解析请求被发往 %1$s
 \n
-\n%2d 个应用使用 DoH/DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">解析请求被发往 %1s 和 %2s
+\n%2$d 个应用使用 DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">解析请求被发往 %1$s 和 %2$s
 \n
-\n%3d 个应用使用 DoH/DoT</string>
+\n%3$d 个应用使用 DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">已有 %1d 个请求</string>
+    <string name="notification_main_subtext">已有 %1$d 个请求</string>
     <string name="notification_noconnection_title">无连接</string>
     <string name="notification_noconnection_text">因为无连接或连接太差，目前应用已停止转发您的DNS请求</string>
     <string name="notification_vpnrestart_title">重启VPN中</string>
@@ -31,16 +31,16 @@
     <string name="notification_appcrash_title">Nebulo已崩溃</string>
     <string name="notification_appcrash_message">Nebulo已崩溃。如有必要，请点击此处以进入主菜单或重启应用</string>
     <string name="notification_ruleimport_title">导入DNS规则</string>
-    <string name="notification_ruleimport_message">正在从 %1s (%2s) 导入DNS规则</string>
+    <string name="notification_ruleimport_message">正在从 %1$s (%2$s) 导入DNS规则</string>
     <string name="notification_ruleimport_secondarymessage">准备导入…</string>
     <string name="notification_ruleimport_tertiarymessage">正在完成导入…</string>
     <string name="notification_ruleimportfinished_title">DNS规则导入完成</string>
-    <string name="notification_ruleimportfinished_message">已导入 %1s 条规则（省略 %2s 条重复规则）</string>
+    <string name="notification_ruleimportfinished_message">已导入 %1$s 条规则（省略 %2$s 条重复规则）</string>
     <string name="notification_ruleexport_title">导出DNS规则</string>
-    <string name="notification_ruleexport_message">导出规则中 （%1s/%2s）</string>
+    <string name="notification_ruleexport_message">导出规则中 （%1$s/%2$s）</string>
     <string name="notification_ruleexport_secondarymessage">准备导出…</string>
     <string name="notification_ruleexportfinished_title">DNS规则导出完成</string>
-    <string name="notification_ruleexportfinished_message">已导出 %1d 条规则</string>
+    <string name="notification_ruleexportfinished_message">已导出 %1$d 条规则</string>
     <string name="notification_pin_title">请输入 PIN</string>
     <string name="notification_pin_message">完成此项操作需要输入您的PIN。点击此处以确认</string>
     <string name="notification_service_killed_title">关于电池优化的信息</string>
@@ -50,8 +50,8 @@
     <string name="notification_service_revoked_message">点此重启</string>
     <string name="notification_channel_pin_description">与PIN相关的通知频道，推送诸如必须提供PIN等的通知</string>
     <string name="notification_channel_pin">PIN相关通知频道</string>
-    <string name="notification_dnsserver_portdiffers">指定的 %1d 端口无法使用。</string>
-    <string name="notification_dnsserver_message">DNS服务器正在运行在 %1s:%2d 。使用第三方应用转发请求中</string>
+    <string name="notification_dnsserver_portdiffers">指定的 %1$d 端口无法使用。</string>
+    <string name="notification_dnsserver_message">DNS服务器正在运行在 %1$s:%2$d 。使用第三方应用转发请求中</string>
     <string name="notification_dnsserver_title">正在无VPN模式下运行</string>
     <string name="notification_privatednswarning_text">请在系统设置中禁用私人 DNS 以使用 Nebulo 。</string>
     <string name="notification_privatednswarning_title">私人DNS</string>
@@ -59,10 +59,10 @@
     <string name="notification_bad_connection_title">服务器网络不佳</string>
     <string name="notification_multipleuserswarning_text">由于某个 Android 漏洞， Nebulo 无法启动伪 VPN 。当您的设备上有多个用户时会发生这种情况。</string>
     <string name="notification_multipleuserswarning_title">伪 VPN 无法建立</string>
-    <string name="notification_dnsserver_message_iptables_failed">DNS 服务器运行于 %1s:%2d 。iptables 初始化失败，请求必须通过第三方应用转发</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS 服务器运行于 %1s:%2d 。请求通过 iptables 转发。
+    <string name="notification_dnsserver_message_iptables_failed">DNS 服务器运行于 %1$s:%2$d 。iptables 初始化失败，请求必须通过第三方应用转发</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS 服务器运行于 %1$s:%2$d 。请求通过 iptables 转发。
 \n注意：IPv6已启用，请求可能绕过Nebulo。</string>
-    <string name="notification_dnsserver_message_iptables_active">DNS 服务器运行于 %1s:%2d 。请求通过 iptables 转发</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS 服务器运行于 %1$s:%2$d 。请求通过 iptables 转发</string>
     <string name="notification_channel_badconnection_description">网络不佳时 Nebulo 用于通知的频道</string>
     <string name="notification_channel_badconnection">网络不佳通知通道</string>
     <string name="notification_channel_dnsrules_description">用于导入/导出 DNS 规则的频道</string>

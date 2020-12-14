@@ -4,8 +4,8 @@
     <string name="tasker_start_if_running">Start even if already running (may override configuration)</string>
     <string name="tasker_use_custom_server">Specify custom servers</string>
     <string name="tasker_action">Action</string>
-    <string name="tasker_start_app_custom_url">Start the app with %1s (Mode: %2s)</string>
-    <string name="tasker_start_app_custom_urls">Start the app with %1s and %2s (Mode: %3s)</string>
+    <string name="tasker_start_app_custom_url">Start the app with %1$s (Mode: %2$s)</string>
+    <string name="tasker_start_app_custom_urls">Start the app with %1$s and %2$s (Mode: %3$s)</string>
     <string name="tasker_mode_doh" translatable="false">DoH</string>
     <string name="tasker_mode_dot" translatable="false">DoT</string>
     <string name="tasker_mode_doq" translatable="false">DoQ</string>

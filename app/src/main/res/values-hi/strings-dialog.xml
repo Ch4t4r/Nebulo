@@ -9,19 +9,19 @@
     <string name="dialog_newserver_primaryserver">प्राथमिक सर्वर</string>
     <string name="dialog_newserver_secondaryserver">द्वितीय सर्वर (वैकल्पिक)</string>
     <string name="dialog_deleteconfig_title">सेटिंग्स हटाएं\?</string>
-    <string name="dialog_deleteconfig_text">क्या आप सेटिंग्स %1s को हटाना चाहते हैं\?</string>
+    <string name="dialog_deleteconfig_text">क्या आप सेटिंग्स %1$s को हटाना चाहते हैं\?</string>
     <string name="dialog_appchoosal_showsystemapps">सिस्टम ऐप्स दिखाएं</string>
     <string name="dialog_appchoosal_whitelist">केवल चयनित ऐप में DoH / DoT का उपयोग करें</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d ऐप पूर्व निर्धारित रूप से बाहर रखा गया है और इसे अचयनित नहीं किया जा सकता है</item>
-        <item quantity="other">%1d ऐप्स पूर्व निर्धारित रूप से बाहर रखे गये है और इन्हे अचयनित नहीं किया जा सकता है</item>
+        <item quantity="one">%1$d ऐप पूर्व निर्धारित रूप से बाहर रखा गया है और इसे अचयनित नहीं किया जा सकता है</item>
+        <item quantity="other">%1$d ऐप्स पूर्व निर्धारित रूप से बाहर रखे गये है और इन्हे अचयनित नहीं किया जा सकता है</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">%1d सर्वर का आयात</item>
-        <item quantity="other">%1d सर्वर की आयात</item>
+        <item quantity="one">%1$d सर्वर का आयात</item>
+        <item quantity="other">%1$d सर्वर की आयात</item>
     </plurals>
     <string name="dialog_serverimport_done">पूर्ण</string>
-    <string name="dialog_serverimport_priority">प्राथमिकता %1d</string>
+    <string name="dialog_serverimport_priority">प्राथमिकता %1$d</string>
     <string name="dialog_serverimport_experimental">प्रायोगिक</string>
     <string name="dialog_serverimport_servertype_doh">प्रकार: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">प्रकार: DNS-over-TLS (DoT)</string>
@@ -31,7 +31,7 @@
     <string name="dialog_serverimportfailed_title">आयात विफल रहा</string>
     <string name="dialog_serverimportfailed_text">सर्वर आयात नहीं किया जा सका।</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">सर्वर आयात नहीं किया जा सका।
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_loading_title">लॉग तैयार कर रहा है</string>
     <string name="dialog_logexport_text">आप लॉग को कैसे शेयर करना चाहते हैं\?</string>
     <string name="dialog_logexport_general">ऐप चुनें</string>
@@ -96,17 +96,17 @@
 \nहम 200 से अधिक लोगों का एक महान समुदाय हैं, क्या आप इसका हिस्सा बनना चाहेंगे\?</string>
     <string name="dialog_join_group_positive">हाँ!</string>
     <string name="dialog_speedresult_title">गति परीक्षण के परिणाम</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d सर्वरों का परीक्षण किया गया
-\n %2d DoT सर्वर उपलब्ध है, %3d उपलब्ध नहीं है
-\n %4d DoH सर्वर उपलब्ध है, %5d उपलब्ध नहीं है
-\n औसत प्रतिक्रिया समय: %6d ms.
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1$d सर्वरों का परीक्षण किया गया
+\n %2$d DoT सर्वर उपलब्ध है, %3$d उपलब्ध नहीं है
+\n %4$d DoH सर्वर उपलब्ध है, %5$d उपलब्ध नहीं है
+\n औसत प्रतिक्रिया समय: %6$d ms.
 \n
-\n सबसे तेज़ सर्वर: %7s
-\n सबसे धीमा सर्वर: %8s</string>
+\n सबसे तेज़ सर्वर: %7$s
+\n सबसे धीमा सर्वर: %8$s</string>
     <string name="dialog_speedtest_useserver_title">सर्वर का चयन करें</string>
-    <string name="dialog_speedtest_useserver_message">क्या आप सर्वर %1s का उपयोग करना चाहते हैं\? यह %4d ms की प्रतिक्रिया समय के साथ %3d में से %2d स्थान पर है|</string>
-    <string name="dialog_deletehostsource_title">%1s को हटाएं\?</string>
-    <string name="dialog_deletehostsource_message">क्या आप सुनिश्चित हैं कि आप होस्ट स्रोत %1s को हटाना चाहते हैं\? यह वापस नहीं किया जा सकता है, इस स्रोत से होस्ट हटा दिए जाएंगे।</string>
+    <string name="dialog_speedtest_useserver_message">क्या आप सर्वर %1$s का उपयोग करना चाहते हैं\? यह %4$d ms की प्रतिक्रिया समय के साथ %3$d में से %2$d स्थान पर है|</string>
+    <string name="dialog_deletehostsource_title">%1$s को हटाएं\?</string>
+    <string name="dialog_deletehostsource_message">क्या आप सुनिश्चित हैं कि आप होस्ट स्रोत %1$s को हटाना चाहते हैं\? यह वापस नहीं किया जा सकता है, इस स्रोत से होस्ट हटा दिए जाएंगे।</string>
     <string name="dialog_clearuserrules_title">सभी DNS नियम हटाएँ जाये\?</string>
     <string name="dialog_clearuserrules_message">क्या आप सभी DNS नियम हटा देना चाहते हैं\? इसे वापस नहीं किया जा सकता है।</string>
     <string name="dialog_newhostsource_title">नया नियम स्रोत</string>

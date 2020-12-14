@@ -25,7 +25,7 @@
     <string name="summary_preference_pin_use_fingerprint">Parmak izinizin PIN yerine kullanılmasına izin verin</string>
     <string name="title_preference_change_pin">PIN\'i değiştir</string>
     <string name="summary_preference_change_pin">PIN\'i değiştirin. Sadece sayısal değerlere izin verilir.
-\nGeçerli PIN: %1s</string>
+\nGeçerli PIN: %1$s</string>
     <string name="preference_category_cache">Önbellek kontrolü</string>
     <string name="title_dnscache_enabled">DNS önbelleğini kullan</string>
     <string name="summary_dnscache_enabled">Uygulamaların DNS önbelleğini etkinleştirir. Önbellek, gelecekteki soruları daha hızlı cevaplamak için eski istekleri ezberler. 
@@ -39,13 +39,13 @@
     <string name="summary_dnscache_usedefaulttimes">DNS sunucusu TTL kullanarak iletişim kurduğu sürece istekleri önbellekte tutun</string>
     <string name="title_dnscache_minimum_cache_time">Asgari önbellek süresi</string>
     <string name="summary_dnscache_minimum_cache_time">Varsayılan önbellekleme süresinin daha kısa olup olmamasına bakmaksızın, önbellekteki asgari saklama süresi. Uzun önbellekleme süreleri, önbellekteki verilerin gerçek verilerle eşitlenmemesine neden olabilir. 
-\nGeçerli: %1d Saniye</string>
+\nGeçerli: %1$d Saniye</string>
     <string name="title_dnscache_customcachetime">Özel önbellek süresi (Saniye)</string>
     <string name="summary_dnscache_customcachetime">Varsayılan önbellekleme süresinin daha uzun olup olmamasına bakmaksızın tüm isteklerin önbelleğe alınma süresini değiştirir. Uzun önbellekleme süreleri, önbellekteki verilerin gerçek verilerle eşitlenmemesine neden olabilir. 
-\nGeçerli: %1d Saniye</string>
+\nGeçerli: %1$d Saniye</string>
     <string name="title_dnscache_nxdomaincachetime">Nxdomain için önbellek süresi (saniye)</string>
     <string name="summary_dnscache_nxdomaincachetime">NXDOMAIN isteklerinin önbelleğe alınma süresini değiştirir. Bu, mevcut olmayan alan adlarının başarımını artırır (ör. Engellenmişlerse) 
-\nGeçerli: %1d Saniye</string>
+\nGeçerli: %1$d Saniye</string>
     <string name="preference_category_logging">Günlük</string>
     <string name="title_enable_logging">Günlüğü etkinleştir</string>
     <string name="summary_enable_logging">Hata ayıklama bilgilerinin günlüğe kaydedilmesini sağlar (istatistik verileri içerir). Bu günlükler otomatik olarak gönderilmez</string>
@@ -85,7 +85,7 @@
     <string name="title_log_queries">Sorgu günlüğü</string>
     <string name="summary_log_queries">Tüm sorguları ve cevaplarını günlüğe kaydet</string>
     <string name="title_export_queries">Sorguları dışa aktar</string>
-    <string name="summary_export_queries">Sorguları CSV olarak dışa aktar (%1d sorgu)</string>
+    <string name="summary_export_queries">Sorguları CSV olarak dışa aktar (%1$d sorgu)</string>
     <string name="title_delete_queries">Sorguları temizle</string>
     <string name="summary_delete_queries">Günlüğe kaydedilen tüm sorguları silmek için buraya tıklayın</string>
     <string name="title_advanced_logging">Gelişmiş günlükleme</string>

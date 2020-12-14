@@ -8,21 +8,21 @@
     <string name="notification_channel_noconnection_description">Canal usado para exibir as notificações quando nenhuma conexão está disponível</string>
     <string name="notification_channel_pin">Canal relacionado ao código PIN</string>
     <string name="notification_channel_pin_description">Canal que é usado para as notificações relacionadas ao código PIN como, por exemplo, quando precisa ser digitado</string>
-    <string name="notification_main_text">Consultas enviadas para %1s 
+    <string name="notification_main_text">Consultas enviadas para %1$s
 \n  
-\n%2d Apps excluídos do DoH/DoT</string>
-    <string name="notification_main_text_with_secondary">Consultas enviadas para %1s e %2s 
+\n%2$d Apps excluídos do DoH/DoT</string>
+    <string name="notification_main_text_with_secondary">Consultas enviadas para %1$s e %2$s
 \n  
-\n%3d Apps excluídos do DoH/DoT</string>
-    <string name="notification_main_text_whitelist">Consultas enviadas para %1s 
+\n%3$d Apps excluídos do DoH/DoT</string>
+    <string name="notification_main_text_whitelist">Consultas enviadas para %1$s
 \n  
-\n%2d Apps usando DoH/DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">Consultas enviadas para %1s e %2s 
+\n%2$d Apps usando DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Consultas enviadas para %1$s e %2$s
 \n  
-\n%3d Apps usando DoH/DoT</string>
+\n%3$d Apps usando DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">%1d consultas até agora</string>
+    <string name="notification_main_subtext">%1$d consultas até agora</string>
     <string name="notification_noconnection_title">Sem conexão</string>
     <string name="notification_noconnection_text">O App não está encaminhando as consultas de DNS, porque não há conexão ou ele é instável</string>
     <string name="notification_vpnrestart_title">Reiniciando o VPN</string>
@@ -30,16 +30,16 @@
     <string name="notification_appcrash_title">Nebulo parou inesperadamente</string>
     <string name="notification_appcrash_message">O Nebulo parou inesperadamente. Clique aqui para ir ao menu principal e se necessário, reiniciar o App</string>
     <string name="notification_ruleimport_title">Importação de regras de DNS</string>
-    <string name="notification_ruleimport_message">Importando a regras de DNS de %1s (%2s)</string>
+    <string name="notification_ruleimport_message">Importando a regras de DNS de %1$s (%2$s)</string>
     <string name="notification_ruleimport_secondarymessage">Preparando a importação…</string>
     <string name="notification_ruleimport_tertiarymessage">Finalizando a importação…</string>
     <string name="notification_ruleimportfinished_title">Importação de regras de DNS concluída</string>
-    <string name="notification_ruleimportfinished_message">%1s regras foram importadas (%2s duplicatas omitidas)</string>
+    <string name="notification_ruleimportfinished_message">%1$s regras foram importadas (%2$s duplicatas omitidas)</string>
     <string name="notification_ruleexport_title">Exportação de regras de DNS</string>
-    <string name="notification_ruleexport_message">Exportando as regras (%1s/%2s)</string>
+    <string name="notification_ruleexport_message">Exportando as regras (%1$s/%2$s)</string>
     <string name="notification_ruleexport_secondarymessage">Preparando a exportação…</string>
     <string name="notification_ruleexportfinished_title">Exportação de regras de DNS concluída</string>
-    <string name="notification_ruleexportfinished_message">%1d regras foram exportadas</string>
+    <string name="notification_ruleexportfinished_message">%1$d regras foram exportadas</string>
     <string name="notification_pin_title">PIN necessário</string>
     <string name="notification_pin_message">O código PIN é necessário para realizar essa ação. Clique aqui para confirmá-lo</string>
     <string name="notification_service_killed_title">Informações sobre otimização de bateria</string>
@@ -47,16 +47,16 @@
     <string name="notification_service_killed_ignore">Ignorar</string>
     <string name="notification_service_revoked_message">Clique aqui para reiniciar</string>
     <string name="notification_service_revoked_title">Permissão de VPN revogada pelo sistema</string>
-    <string name="notification_simple_text">Servidor actual: %1s</string>
+    <string name="notification_simple_text">Servidor actual: %1$s</string>
     <string name="notification_channel_high_priorty_description">Canal para as notificações de alta prioridade, por exemplo, quando o App perde a permissão para o VPN</string>
     <string name="notification_channel_high_priorty">Alta prioridade</string>
-    <string name="notification_dnsserver_portdiffers">Porta configurada %1d não pôde ser usada.</string>
-    <string name="notification_dnsserver_message">O servidor de DNS está em execução em %1s:%2d. Encaminhamento de consultas usando aplicativo de terceiros</string>
+    <string name="notification_dnsserver_portdiffers">Porta configurada %1$d não pôde ser usada.</string>
+    <string name="notification_dnsserver_message">O servidor de DNS está em execução em %1$s:%2$d. Encaminhamento de consultas usando aplicativo de terceiros</string>
     <string name="notification_dnsserver_title">Funcionamento em modo não-VPN</string>
-    <string name="notification_dnsserver_message_iptables_failed">O servidor de DNS está em execução em %1s:%2d. Inicializando o iptables falhou, as consultas têm de ser encaminhadas com aplicativos de terceiros</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">O servidor DNS está em execução em %1s:%2d. As consultas são encaminhadas utilizando iptables.
+    <string name="notification_dnsserver_message_iptables_failed">O servidor de DNS está em execução em %1$s:%2$d. Inicializando o iptables falhou, as consultas têm de ser encaminhadas com aplicativos de terceiros</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">O servidor DNS está em execução em %1$s:%2$d. As consultas são encaminhadas utilizando iptables.
 \nAtenção: IPv6 está ativo, as consultas podem contornar o Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">O servidor DNS está em execução em %1s:%2d. As consultas são encaminhadas utilizando iptables</string>
+    <string name="notification_dnsserver_message_iptables_active">O servidor DNS está em execução em %1$s:%2$d. As consultas são encaminhadas utilizando iptables</string>
     <string name="notification_multipleuserswarning_text">Nebulo não conseguiu iniciar o seu VPN fictício por causa de uma falha no Android. Isto acontece quando há vários usuários no seu dispositivo.</string>
     <string name="notification_multipleuserswarning_title">O VPN ficticio não pôde ser estabelecido</string>
     <string name="notification_privatednswarning_text">Por favor, desative o Dns privado nas configurações do sistema para usar o Nebulo.</string>

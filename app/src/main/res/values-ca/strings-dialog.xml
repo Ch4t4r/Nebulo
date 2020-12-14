@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="dialog_logexport_loading_title">Preparant els registres</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Els servidors no han pogut ser importats.
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_serverimportfailed_text">El servidor(s) no ha(n) pogut ser importat(s).</string>
     <string name="dialog_serverimportfailed_title">Importació fallida</string>
     <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Si us plau, seleccioneu els servidors que voleu importar.
@@ -11,19 +11,19 @@
     <string name="dialog_serverimport_servertype_dot">Tipus: DNS-over-TLS (DoT)</string>
     <string name="dialog_serverimport_servertype_doh">Tipus: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
-    <string name="dialog_serverimport_priority">Prioritat %1d</string>
+    <string name="dialog_serverimport_priority">Prioritat %1$d</string>
     <string name="dialog_serverimport_done">Fet</string>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Importació de %1d servidor</item>
-        <item quantity="other">Importació de %1d servidors</item>
+        <item quantity="one">Importació de %1$d servidor</item>
+        <item quantity="other">Importació de %1$d servidors</item>
     </plurals>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">L\'aplicació %1d està exclosa de manera predeterminada i no es pot seleccionar</item>
-        <item quantity="other">Les aplicacions %1d estan excloses de manera predeterminada i no es poden seleccionar</item>
+        <item quantity="one">L\'aplicació %1$d està exclosa de manera predeterminada i no es pot seleccionar</item>
+        <item quantity="other">Les aplicacions %1$d estan excloses de manera predeterminada i no es poden seleccionar</item>
     </plurals>
     <string name="dialog_appchoosal_whitelist">Només fes servir DoH/DoT en les aplicacions seleccionades</string>
     <string name="dialog_appchoosal_showsystemapps">Mostrar aplicacions del sistema</string>
-    <string name="dialog_deleteconfig_text">Vols esborrar la configuració %1s\?</string>
+    <string name="dialog_deleteconfig_text">Vols esborrar la configuració %1$s\?</string>
     <string name="dialog_deleteconfig_title">Esborrar configuració\?</string>
     <string name="dialog_newserver_secondaryserver">Servidor secundari (opcional)</string>
     <string name="dialog_newserver_primaryserver">Servidor primari</string>

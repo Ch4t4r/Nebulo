@@ -25,7 +25,7 @@
     <string name="summary_preference_pin_use_fingerprint">Permitir usar impressões digitais em vez do código PIN</string>
     <string name="title_preference_change_pin">Mudar o código PIN</string>
     <string name="summary_preference_change_pin">Clique aqui para mudar o PIN. Apenas dígitos numéricos são aceitos.
-\nCódigo PIN atual: %1s</string>
+\nCódigo PIN atual: %1$s</string>
     <string name="preference_category_cache">Configurações de cache</string>
     <string name="title_dnscache_enabled">Usar cache de DNS</string>
     <string name="summary_dnscache_enabled">Ativa cache do DNS. O cache memoriza consultas antigas para responder a estas mais rapidamente no futuro. 
@@ -39,13 +39,13 @@
     <string name="summary_dnscache_usedefaulttimes">Mantenha as requisições no cache enquanto o servidor DNS se comunicar usando o TTL</string>
     <string name="title_dnscache_minimum_cache_time">Tempo mínimo de cache</string>
     <string name="summary_dnscache_minimum_cache_time">A quantidade mínima de entradas de tempo deve ser colocada em cache, não importa se o tempo de cache padrão para isso seria menor. Tempos longos de cache podem fazer com que os dados em cache fiquem fora de sincronia com os dados reais.
-\nAtual: %1d Segundos</string>
+\nAtual: %1$d Segundos</string>
     <string name="title_dnscache_customcachetime">Tempo de cache (segundos)</string>
     <string name="summary_dnscache_customcachetime">Muda o tempo de cache de todas as solicitações, não importa se o tempo padrão de cache seria maior. Tempos longos de cache podem fazer com que os dados em cache fiquem fora de sincronia com os dados reais.
-\nAtual: %1d Segundos</string>
+\nAtual: %1$d Segundos</string>
     <string name="title_dnscache_nxdomaincachetime">Tempo de cache para NXDomain (segundos)</string>
     <string name="summary_dnscache_nxdomaincachetime">Alterar quanto tempo cada consulta com a resposta NXDOMAIN é mantida em cache. Isso melhora o desempenho para domínios não existentes (se eles estão bloqueados, por exemplo) 
-\nAtual: %1d Segundos</string>
+\nAtual: %1$d Segundos</string>
     <string name="preference_category_logging">Registro</string>
     <string name="title_enable_logging">Ativar registro de erros</string>
     <string name="summary_enable_logging">Ativar o registro de dados de teste (contém ações realizadas no App e dados estatísticos). Esses registros nunca são enviados automaticamente</string>
@@ -85,7 +85,7 @@
     <string name="title_log_queries">Registro de consultas de DNS</string>
     <string name="summary_log_queries">Registrar todas as consultas de DNS feitas pelo dispositivo e as respostas do servidor</string>
     <string name="title_export_queries">Exportar consultas de DNS</string>
-    <string name="summary_export_queries">Exportar consultas de DNS como CSV (%1d consultas)</string>
+    <string name="summary_export_queries">Exportar consultas de DNS como CSV (%1$d consultas)</string>
     <string name="title_delete_queries">Excluir as consultas de DNS</string>
     <string name="summary_delete_queries">Clique aqui para excluir todas as consultas de DNS do registro</string>
     <string name="title_advanced_logging">Registro avançado</string>
@@ -113,7 +113,7 @@
     <string name="summary_run_without_vpn">Quando verificado, o Nebulo hospeda um servidor de DNS no seu dispositivo</string>
     <string name="title_run_without_vpn">Funciona sem VPN</string>
     <string name="summary_category_nonvpnmode">Configure o Nebulo para agir como um servidor DNS no dispositivo em vez de usar um VPN fictício. Quando ativado, tem que encaminhar manualmente as consultas de DNS para o Nebulo usando aplicativos de terceiros</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">O servidor será hospedado em %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">O servidor será hospedado em %1$s:%2$s</string>
     <string name="preference_category_nonvpnmode">Modo não-VPN</string>
     <string name="summary_check_iptables">Verifique se o seu dispositivo suporta iptables</string>
     <string name="title_check_iptables">Verificar por iptables</string>

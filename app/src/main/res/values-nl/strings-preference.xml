@@ -25,7 +25,7 @@
     <string name="summary_preference_pin_use_fingerprint">Sta toe om uw vingerafdruk te gebruiken in plaats van pincode</string>
     <string name="title_preference_change_pin">Verander pincode</string>
     <string name="summary_preference_change_pin">Verander de pincode. Alleen numerieke waarden zijn toegestaan.
-\nHuidige pincode: %1s</string>
+\nHuidige pincode: %1$s</string>
     <string name="preference_category_cache">Cache controle</string>
     <string name="title_dnscache_enabled">Gebruik DNS-cache</string>
     <string name="summary_dnscache_enabled">Schakelt DNS-cache in. Het cachegeheugen onthoudt oude verzoeken om toekomstige vragen sneller te beantwoorden 
@@ -39,13 +39,13 @@
     <string name="summary_dnscache_usedefaulttimes">Houd DNS-aanvragen in de cache zoals aanbevolen door de DNS-server (met behulp van de TTL)</string>
     <string name="title_dnscache_minimum_cache_time">Minimale cache tijd</string>
     <string name="summary_dnscache_minimum_cache_time">De minimale opslag tijd in het cachegeheugen, ongeacht of de standaard cache tijd daarvoor korter zou zijn. Lange cache tijden kunnen ertoe leiden dat de gegevens in het cachegeheugen niet synchroon lopen met de werkelijke gegevens. 
-\nHuidig: %1d seconden</string>
+\nHuidig: %1$d seconden</string>
     <string name="title_dnscache_customcachetime">Aangepaste cache tijd (seconden)</string>
     <string name="summary_dnscache_customcachetime">Wijzigt hoe lang alle aanvragen in de cache worden opgeslagen, ongeacht of de standaard cache tijd langer is. Lange cache tijden kunnen ertoe leiden dat de gegevens in het cachegeheugen niet synchroon lopen met de werkelijke gegevens. 
-\nHuidig: %1d Seconden</string>
+\nHuidig: %1$d Seconden</string>
     <string name="title_dnscache_nxdomaincachetime">Cache tijd voor NXDomain (seconden)</string>
     <string name="summary_dnscache_nxdomaincachetime">Wijzigt de hoeveelheid tijd die NXDOMAIN verzoeken in het cachegeheugen hebben. Dit verbetert de prestaties voor niet bestaande domeinen (bijvoorbeeld als deze zijn geblokkeerd)
-\nHuidig: %1d seconden</string>
+\nHuidig: %1$d seconden</string>
     <string name="preference_category_logging">Loggen</string>
     <string name="title_enable_logging">Loggen inschakelen</string>
     <string name="summary_enable_logging">Maakt het loggen van foutopsporingsinformatie mogelijk (bevat statistische gegevens). Deze logs worden niet automatisch verzonden</string>
@@ -85,7 +85,7 @@
     <string name="title_log_queries">DNS-verzoeken loggen</string>
     <string name="summary_log_queries">Sla alle DNS-verzoeken en hun antwoorden op</string>
     <string name="title_export_queries">Exporteer DNS-verzoeken</string>
-    <string name="summary_export_queries">Exporteer DNS-verzoeken als CSV (%1d verzoeken)</string>
+    <string name="summary_export_queries">Exporteer DNS-verzoeken als CSV (%1$d verzoeken)</string>
     <string name="title_delete_queries">Wis DNS-verzoeken</string>
     <string name="summary_delete_queries">Klik hier om alle geregistreerde DNS-verzoeken te verwijderen</string>
     <string name="title_advanced_logging">Geavanceerd loggen</string>
@@ -116,7 +116,7 @@
     <string name="title_local_server_port">Server-poort</string>
     <string name="summary_run_without_vpn">Indien aangevinkt host de Nebulo een DNS server op uw apparaat</string>
     <string name="title_run_without_vpn">Rennen zonder VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Server wordt gehost op %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server wordt gehost op %1$s:%2$s</string>
     <string name="summary_category_nonvpnmode">Configureer de Nebulo om te fungeren als een DNS-server op het apparaat in plaats van een dummy VPN te gebruiken. Indien ingeschakeld moet u handmatig DNS-query\'s doorsturen naar de Nebulo met behulp van apps van derden</string>
     <string name="preference_category_nonvpnmode">Niet-VPN-modus</string>
     <string name="title_export_settings">Instellingen exporteren</string>

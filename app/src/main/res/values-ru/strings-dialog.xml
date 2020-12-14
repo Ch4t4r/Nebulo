@@ -9,23 +9,23 @@
     <string name="dialog_newserver_primaryserver">Первичный DNS сервер</string>
     <string name="dialog_newserver_secondaryserver">Вторичный DNS сервер (Опционально)</string>
     <string name="dialog_deleteconfig_title">Удалить сервер\?</string>
-    <string name="dialog_deleteconfig_text">Вы действительно хотите удалить сервер %1s\?</string>
+    <string name="dialog_deleteconfig_text">Вы действительно хотите удалить сервер %1$s\?</string>
     <string name="dialog_appchoosal_showsystemapps">Показать системные приложения</string>
     <string name="dialog_appchoosal_whitelist">Использовать DoH/DoT только в отмеченных приложениях</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d приложение исключено по умолчанию и не может быть отменено</item>
-        <item quantity="few">%1d приложения исключены по умолчанию и не могут быть отменены</item>
-        <item quantity="many">%1d приложений исключены по умолчанию и не могут быть отменены</item>
-        <item quantity="other">%1d приложений исключены по умолчанию и не могут быть отменены</item>
+        <item quantity="one">%1$d приложение исключено по умолчанию и не может быть отменено</item>
+        <item quantity="few">%1$d приложения исключены по умолчанию и не могут быть отменены</item>
+        <item quantity="many">%1$d приложений исключены по умолчанию и не могут быть отменены</item>
+        <item quantity="other">%1$d приложений исключены по умолчанию и не могут быть отменены</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Импортировать %1d сервер</item>
-        <item quantity="other">Импортировать %1d сервер(а)</item>
-        <item quantity="few">Импортировать %1d сервер(а)</item>
-        <item quantity="many">Импортировать %1d сервер(а)</item>
+        <item quantity="one">Импортировать %1$d сервер</item>
+        <item quantity="other">Импортировать %1$d сервер(а)</item>
+        <item quantity="few">Импортировать %1$d сервер(а)</item>
+        <item quantity="many">Импортировать %1$d сервер(а)</item>
     </plurals>
     <string name="dialog_serverimport_done">Готово</string>
-    <string name="dialog_serverimport_priority">Приоритет %1d</string>
+    <string name="dialog_serverimport_priority">Приоритет %1$d</string>
     <string name="dialog_serverimport_experimental">Экспериментальный</string>
     <string name="dialog_serverimport_servertype_doh">Используемый протокол: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Используемый протокол: DNS-over-TLS (DoT)</string>
@@ -35,7 +35,7 @@
     <string name="dialog_serverimportfailed_title">Ошибка импорта конфигурации</string>
     <string name="dialog_serverimportfailed_text">Ошибка импорта.</string>
     <string name="dialog_serverimportfailed_text_exception">Серверы не могли быть импортированы.
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_text">Выберите предпочитаемый способ экспорта лог файлов</string>
     <string name="dialog_logexport_general">Выберите приложение</string>
     <string name="dialog_logexport_email">Отправка e-mail разработчику</string>
@@ -162,16 +162,16 @@
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Недели</string>
     <string name="dialog_clearuserrules_message">Вы хотите очистить все правила DNS\? Это нельзя отменить.</string>
     <string name="dialog_clearuserrules_title">Очистить все правила DNS\?</string>
-    <string name="dialog_deletehostsource_message">Вы уверены, что хотите удалить хост-источник %1s\? Это не может быть отменено, хосты из этого источника будут удалены.</string>
-    <string name="dialog_deletehostsource_title">Удалить %1s\?</string>
-    <string name="dialog_speedtest_useserver_message">Вы хотите использовать сервер %1s\? Он ранжировал %2d из %3d со временем ответа %4d мс.</string>
+    <string name="dialog_deletehostsource_message">Вы уверены, что хотите удалить хост-источник %1$s\? Это не может быть отменено, хосты из этого источника будут удалены.</string>
+    <string name="dialog_deletehostsource_title">Удалить %1$s\?</string>
+    <string name="dialog_speedtest_useserver_message">Вы хотите использовать сервер %1$s\? Он ранжировал %2$d из %3$d со временем ответа %4$d мс.</string>
     <string name="dialog_speedtest_useserver_title">Выберите сервер</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">протестированные серверы %1d
-\n %2d Доступные DoT-серверы, %3d недоступные
-\n %4d Доступные серверы DoH, %5d недоступны
-\n Среднее время отклика: %6d мс.
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">протестированные серверы %1$d
+\n %2$d Доступные DoT-серверы, %3$d недоступные
+\n %4$d Доступные серверы DoH, %5$d недоступны
+\n Среднее время отклика: %6$d мс.
 \n
-\n Самый быстрый сервер: %7s
-\n Самый медленный сервер: %8s</string>
+\n Самый быстрый сервер: %7$s
+\n Самый медленный сервер: %8$s</string>
     <string name="dialog_speedresult_title">Результаты скоростного тестирования</string>
 </resources>

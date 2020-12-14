@@ -13,14 +13,14 @@
     <string name="open_app">Открыть приложение</string>
     <string name="all_close">Закрыть</string>
     <string name="main_dnssurveillance_infotext">Имейте в виду, используемый DNS-сервер может вести логирование посещаемых вами доменов, а также запрашиваемых вашей системой. Сервер также может собирать метаданные. Проверьте соответствующее заявление о конфиденциальности.</string>
-    <string name="main_dnssurveillance_privacystatement">Заявление о конфиденциальности %1s</string>
+    <string name="main_dnssurveillance_privacystatement">Заявление о конфиденциальности %1$s</string>
     <string name="about_app">Это приложение с открытым исходным кодом. Исходный код доступен по адресу &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
 \nКроме того, приложение не содержит рекламы и не отслеживает и не собирает данные о вас.
 \n
-\nВерсия %1s
-\nСтроить %2d
-\nВерсия базы данных %3d
-\nИдентификатор аварии: %4s
+\nВерсия %1$s
+\nСтроить %2$d
+\nВерсия базы данных %3$d
+\nИдентификатор аварии: %4$s
 \n
 \n© Daniel Wolf 2019–2020
 \nРаспространяется в соответствии с лицензией GNU GPLv3.
@@ -47,18 +47,18 @@
 \n
 \nСделайте более сложным для вашего провайдера отслеживание с помощью DNS-over-HTTPS и DNS-over-TLS с Nebulo.</string>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="one">%1d запрос был обработан правилами DNS</item>
-        <item quantity="few">%1d запроса были обработаны правилами DNS</item>
-        <item quantity="many">%1d запросов было обработано правилами DNS до сих пор</item>
-        <item quantity="other">%1d запросов было обработано правилами DNS до сих пор</item>
+        <item quantity="one">%1$d запрос был обработан правилами DNS</item>
+        <item quantity="few">%1$d запроса были обработаны правилами DNS</item>
+        <item quantity="many">%1$d запросов было обработано правилами DNS до сих пор</item>
+        <item quantity="other">%1$d запросов было обработано правилами DNS до сих пор</item>
     </plurals>
     <string name="window_main_protected">Защищён!</string>
     <string name="windows_querylogging_latency">Задержка</string>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="one">%1d запрос заблокирован до сих пор</item>
-        <item quantity="few">%1d запроса заблокированы до сих пор</item>
-        <item quantity="many">%1d запроса заблокированы до сих пор</item>
-        <item quantity="other">%1d запроса заблокированы до сих пор</item>
+        <item quantity="one">%1$d запрос заблокирован до сих пор</item>
+        <item quantity="few">%1$d запроса заблокированы до сих пор</item>
+        <item quantity="many">%1$d запроса заблокированы до сих пор</item>
+        <item quantity="other">%1$d запроса заблокированы до сих пор</item>
     </plurals>
     <string name="appintro_server_choose_adblock">Сервер, который блокирует рекламу и отслеживание</string>
     <string name="appintro_server_choose_third">Настоящий сервер, ориентированный на конфиденциальность</string>
@@ -81,10 +81,10 @@
     <string name="appintro_first_description">Nebulo - это приложение для защиты конфиденциальности и безопасности вашего устройства.
 \n
 \nВозвращайте контроль над данными, которые ваш провайдер или другие организации обрабатывали как свои в течение длительного времени.</string>
-    <string name="warning_server_currently_unstable_expanded">Сервер %1s сейчас, кажется, нестабилен, что влияет на скорость просмотра. Подумайте о переходе на более стабильный сервер.</string>
+    <string name="warning_server_currently_unstable_expanded">Сервер %1$s сейчас, кажется, нестабилен, что влияет на скорость просмотра. Подумайте о переходе на более стабильный сервер.</string>
     <string name="window_querylog_information">Информация</string>
     <string name="about_help_faq">Часто задаваемые вопросы</string>
-    <string name="warning_server_currently_unstable">Сервер %1s сейчас, кажется, нестабилен.</string>
+    <string name="warning_server_currently_unstable">Сервер %1$s сейчас, кажется, нестабилен.</string>
     <string name="iptables_not_supported">Ваше устройство не поддерживает iptables</string>
     <string name="window_dnsrules_refresh_sources">Обновить правила импорта из источника</string>
     <string name="iptables_supported">Поздравляем, iptables поддерживается вашим устройством!</string>
@@ -110,14 +110,14 @@
     <string name="windows_querylogging_search_hint">Поиск хоста в журнале запросов</string>
     <string name="windows_querylogging_search">Хост-поиск</string>
     <string name="windows_querylogging_time">Время</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Правила из этого источника: %1s (%2s дубликаты не используются)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Правила из этого источника: %1$s (%2$s дубликаты не используются)</string>
     <string name="window_dnsrules_customhosts_message">Определите здесь все ваши пользовательские хосты</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Правила из этого источника: -</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">правило %1s</item>
-        <item quantity="few">%1s правила</item>
-        <item quantity="many">%1s правила</item>
-        <item quantity="other">%1s правила</item>
+        <item quantity="one">правило %1$s</item>
+        <item quantity="few">%1$s правила</item>
+        <item quantity="many">%1$s правила</item>
+        <item quantity="other">%1$s правила</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">Для этого хозяина уже есть правило</string>
     <string name="button_main_dnsrules">правила DNS</string>

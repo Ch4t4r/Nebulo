@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tasker_start_app_custom_urls">%1s および %2s でアプリを起動します。 (モード: %3s)</string>
-    <string name="tasker_start_app_custom_url">%1s (モード: %2s) でアプリを起動します。</string>
+    <string name="tasker_start_app_custom_urls">%1$s および %2$s でアプリを起動します。 (モード: %3$s)</string>
+    <string name="tasker_start_app_custom_url">%1$s (モード: %2$s) でアプリを起動します。</string>
     <string name="tasker_action">アクション</string>
     <string name="tasker_use_custom_server">カスタムサーバーの指定</string>
     <string name="tasker_start_if_running">既に起動している場合でも起動する(設定を上書きすることがあります)</string>

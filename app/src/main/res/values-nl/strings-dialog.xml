@@ -9,19 +9,19 @@
     <string name="dialog_newserver_primaryserver">Primaire server</string>
     <string name="dialog_newserver_secondaryserver">Secundaire server (Optioneel)</string>
     <string name="dialog_deleteconfig_title">Verwijder configuratie\?</string>
-    <string name="dialog_deleteconfig_text">Wilt u de configuratie %1s\? verwijderen\?</string>
+    <string name="dialog_deleteconfig_text">Wilt u de configuratie %1$s\? verwijderen\?</string>
     <string name="dialog_appchoosal_showsystemapps">Systeem-apps weergeven</string>
     <string name="dialog_appchoosal_whitelist">Gebruik alleen DoH / DoT in geselecteerde apps</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d app is standaard uitgesloten en kan niet worden gedeselecteerd</item>
-        <item quantity="other">%1d apps zijn standaard uitgesloten en kunnen niet worden geselecteerd</item>
+        <item quantity="one">%1$d app is standaard uitgesloten en kan niet worden gedeselecteerd</item>
+        <item quantity="other">%1$d apps zijn standaard uitgesloten en kunnen niet worden geselecteerd</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Import van %1d server</item>
-        <item quantity="other">Import van %1d servers</item>
+        <item quantity="one">Import van %1$d server</item>
+        <item quantity="other">Import van %1$d servers</item>
     </plurals>
     <string name="dialog_serverimport_done">Klaar</string>
-    <string name="dialog_serverimport_priority">Prioriteit %1d</string>
+    <string name="dialog_serverimport_priority">Prioriteit %1$d</string>
     <string name="dialog_serverimport_experimental">Experimenteel</string>
     <string name="dialog_serverimport_servertype_doh">Type: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Type: DNS-over-TLS (DoT)</string>
@@ -31,7 +31,7 @@
     <string name="dialog_serverimportfailed_title">Importeren mislukt</string>
     <string name="dialog_serverimportfailed_text">De server(s) kunnen niet worden geïmporteerd.</string>
     <string name="dialog_serverimportfailed_text_exception">De servers kunnen niet worden geïmporteerd. 
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_logexport_text">Hoe wil je de logs delen\?</string>
     <string name="dialog_logexport_general">Kies app</string>
     <string name="dialog_logexport_email">E-Mail</string>
@@ -95,17 +95,17 @@
 \nWij zijn een geweldige community van meer dan 200 mensen, wilt u er deel van uitmaken\?</string>
     <string name="dialog_join_group_positive">Ja!</string>
     <string name="dialog_speedresult_title">Snelheid testresultaten</string>
-    <string name="dialog_speedresult_message">%1d servers getest
-\n %2d DoT servers bereikbaar, %3d niet bereikbaar
-\n %4d DoH servers bereikbaar, %5d niet bereikbaar
-\n Gemiddelde responstijd: %6d ms.
+    <string name="dialog_speedresult_message">%1$d servers getest
+\n %2$d DoT servers bereikbaar, %3$d niet bereikbaar
+\n %4$d DoH servers bereikbaar, %5$d niet bereikbaar
+\n Gemiddelde responstijd: %6$d ms.
 \n
-\n Snelste server: %7s
-\n Langzaamste server: %8s</string>
+\n Snelste server: %7$s
+\n Langzaamste server: %8$s</string>
     <string name="dialog_speedtest_useserver_title">Selecteer server</string>
-    <string name="dialog_speedtest_useserver_message">Wilt u de server %1s gebruiken\? Het staat op plaats %2d van %3d met een responstijd van %4d ms.</string>
-    <string name="dialog_deletehostsource_title">Verwijderen %1s\?</string>
-    <string name="dialog_deletehostsource_message">Weet u zeker dat u de host bron %1s wilt verwijderen\? Dit kan niet ongedaan worden gemaakt, de hosts van deze bron zullen worden verwijderd.</string>
+    <string name="dialog_speedtest_useserver_message">Wilt u de server %1$s gebruiken\? Het staat op plaats %2$d van %3$d met een responstijd van %4$d ms.</string>
+    <string name="dialog_deletehostsource_title">Verwijderen %1$s\?</string>
+    <string name="dialog_deletehostsource_message">Weet u zeker dat u de host bron %1$s wilt verwijderen\? Dit kan niet ongedaan worden gemaakt, de hosts van deze bron zullen worden verwijderd.</string>
     <string name="dialog_clearuserrules_title">Alle DNS regels wissen\?</string>
     <string name="dialog_clearuserrules_message">Wilt u alle DNS regels wissen\? Dit kan niet ongedaan gemaakt worden.</string>
     <string name="dialog_newhostsource_title">Nieuwe regel bron</string>

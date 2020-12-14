@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="summary_dnscache_minimum_cache_time">最小キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きい値を設定すると、キャッシュされたレコードが実際のレコードと一致しなくなり、サービスが正常に動作しなくなる可能性があります。
-\n現在の値: %1d 秒。</string>
+\n現在の値: %1$d 秒。</string>
     <string name="summary_dnscache_customcachetime">キャッシュ時間を任意の値に変更したい場合に指定します。ここで設定された値は、デフォルトのキャッシュ時間を無視して設定されます。デフォルトのキャッシュ値より大きく設定すると、キャッシュされたレコードと実際のレコードが一致しなくなり、サービスが正常に動作しなくなる可能性があります。
-\n現在の値: %1d 秒</string>
+\n現在の値: %1$d 秒</string>
     <string name="title_enable_logging">動作ログの取得</string>
     <string name="preference_category_logging">動作ログ</string>
     <string name="summary_dnscache_nxdomaincachetime">NXDOMAINリクエストがキャッシュされる時間を変更します。これにより、存在しないドメインに対する応答パフォーマンスが向上します（ブロックされている場合など）。
-\n現在の値：%1d秒</string>
+\n現在の値：%1$d秒</string>
     <string name="title_dnscache_nxdomaincachetime">NXDomainのキャッシュ時間(秒)</string>
     <string name="title_dnscache_customcachetime">カスタムキャッシュ時間(秒)</string>
     <string name="title_dnscache_minimum_cache_time">最小キャッシュ時間</string>
@@ -24,7 +24,7 @@
     <string name="title_dnscache_enabled">DNSキャッシュを有効にする</string>
     <string name="preference_category_cache">キャッシュ制御</string>
     <string name="summary_preference_change_pin">PINを変更します。半角数字のみ利用できます。
-\n現在のPIN: %1s</string>
+\n現在のPIN: %1$s</string>
     <string name="title_preference_change_pin">PINの変更</string>
     <string name="summary_show_revoked_notification">NebuloがVPNの権限を失った時に通知します。</string>
     <string name="summary_notification_allow_pause">通知からアプリの一時停止を許可します。</string>
@@ -68,12 +68,12 @@
     <string name="title_local_server_port">ポート番号</string>
     <string name="summary_run_without_vpn">チェックを入れると、Nebuloは端末内にDNSサーバーを設置します</string>
     <string name="title_run_without_vpn">非VPNで稼働</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">サーバーが %1s:%2s で稼働します</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">サーバーが %1$s:%2$s で稼働します</string>
     <string name="summary_category_nonvpnmode">ダミーのVPNを使用する替わりに、デバイス上にDNSサーバーを設置し機能するようNebuloを構成します。このモードを使う場合、サードパーティのアプリを使用してDNSクエリをNebuloに手動で転送する必要があります。</string>
     <string name="preference_category_nonvpnmode">非VPNモード</string>
     <string name="summary_delete_queries">記録されたクエリを削除する場合、ここをタップします。</string>
     <string name="title_delete_queries">クエリのクリア</string>
-    <string name="summary_export_queries">記録したクエリをCSVファイルでエクスポートします。 (%1d クエリ)</string>
+    <string name="summary_export_queries">記録したクエリをCSVファイルでエクスポートします。 (%1$d クエリ)</string>
     <string name="title_export_queries">クエリのエクスポート</string>
     <string name="summary_log_queries">すべてのDNSクエリとその回答をログとして記録します。</string>
     <string name="title_log_queries">クエリログ</string>

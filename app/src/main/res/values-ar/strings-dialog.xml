@@ -82,17 +82,17 @@
     <string name="dialog_newhostsource_title">مصدر قاعدة جديد</string>
     <string name="dialog_clearuserrules_message">هل تريد مسح جميع قواعد DNS؟ هذا لا يمكن التراجع عنها.</string>
     <string name="dialog_clearuserrules_title">مسح جميع قواعد DNS؟</string>
-    <string name="dialog_deletehostsource_message">هل تريد بالتأكيد حذف المصدر المضيف %1s؟ لا يمكن التراجع عن هذا ، ستتم إزالة المضيفين من هذا المصدر.</string>
-    <string name="dialog_deletehostsource_title">هل تريد حذف %1s؟</string>
-    <string name="dialog_speedtest_useserver_message">هل تريد استخدام السيرفر %1s؟ لقد صنفت %2d من %3d مع وقت استجابة %4d ms.</string>
+    <string name="dialog_deletehostsource_message">هل تريد بالتأكيد حذف المصدر المضيف %1$s؟ لا يمكن التراجع عن هذا ، ستتم إزالة المضيفين من هذا المصدر.</string>
+    <string name="dialog_deletehostsource_title">هل تريد حذف %1$s؟</string>
+    <string name="dialog_speedtest_useserver_message">هل تريد استخدام السيرفر %1$s؟ لقد صنفت %2$d من %3$d مع وقت استجابة %4$d ms.</string>
     <string name="dialog_speedtest_useserver_title">اختر سيرفر</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">تم اختبار%1d من الخوادم
-\n يمكن الوصول إلى %2d من خوادم DoT ، ولا يمكن الوصول إلى %3d
-\n يمكن الوصول إلى %4d DoH من الخوادم ، ولا يمكن الوصول إلى %5d
-\n متوسط وقت الاستجابة: %6d ms.
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">تم اختبار%1$d من الخوادم
+\n يمكن الوصول إلى %2$d من خوادم DoT ، ولا يمكن الوصول إلى %3$d
+\n يمكن الوصول إلى %4$d DoH من الخوادم ، ولا يمكن الوصول إلى %5$d
+\n متوسط وقت الاستجابة: %6$d ms.
 \n
-\n السيرفر الأسرع: %7s
-\n أبطأ سيرفر: %8s</string>
+\n السيرفر الأسرع: %7$s
+\n أبطأ سيرفر: %8$s</string>
     <string name="dialog_speedresult_title">نتائج اختبار السرعة</string>
     <string name="dialog_join_group_positive">أجل!</string>
     <string name="dialog_join_group_message">مرحبا!
@@ -158,7 +158,7 @@
     <string name="dialog_logexport_text">كيف تريد مشاركة السجلات؟</string>
     <string name="dialog_logexport_loading_title">تحضير السجلات</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">تعذر استيراد السيرفرات.
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_serverimportfailed_text">تعذر استيراد السيرفر (الخوادم).</string>
     <string name="dialog_serverimportfailed_title">فشل الاستيراد</string>
     <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">يرجى تحديد الخوادم التي ترغب في استيرادها.
@@ -167,27 +167,27 @@
     <string name="dialog_serverimport_servertype_dot">النوع: DNS-over-TLS (DoT) برتكول الحماية</string>
     <string name="dialog_serverimport_servertype_doh">النوع: DNS-over-HTTPS (DoH) برتكول التشفير</string>
     <string name="dialog_serverimport_experimental">تجريبي</string>
-    <string name="dialog_serverimport_priority">الأولوية%1d</string>
+    <string name="dialog_serverimport_priority">الأولوية%1$d</string>
     <string name="dialog_serverimport_done">تم</string>
     <plurals name="dialog_serverimport_title">
-        <item quantity="zero">لم يتم استيراد سيرفر %1d</item>
-        <item quantity="one">استيراد سيرفر %1d</item>
-        <item quantity="two">استيراد سيرفرين %1d</item>
-        <item quantity="few">استيراد سيرفر %1d</item>
-        <item quantity="many">استيراد سيرفرات %1d</item>
-        <item quantity="other">استيراد السيرفرات %1d</item>
+        <item quantity="zero">لم يتم استيراد سيرفر %1$d</item>
+        <item quantity="one">استيراد سيرفر %1$d</item>
+        <item quantity="two">استيراد سيرفرين %1$d</item>
+        <item quantity="few">استيراد سيرفر %1$d</item>
+        <item quantity="many">استيراد سيرفرات %1$d</item>
+        <item quantity="other">استيراد السيرفرات %1$d</item>
     </plurals>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="zero">لم يتم استبعاد اي تطبيق%1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="one">يتم استبعاد تطبيق واحد %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="two">يتم استبعاد تطبيقين %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="few">يتم استبعاد تطبيق %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="many">يتم استبعاد تطبيقات %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
-        <item quantity="other">يتم استبعاد التطبيقات %1d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="zero">لم يتم استبعاد اي تطبيق%1$d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="one">يتم استبعاد تطبيق واحد %1$d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="two">يتم استبعاد تطبيقين %1$d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="few">يتم استبعاد تطبيق %1$d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="many">يتم استبعاد تطبيقات %1$d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
+        <item quantity="other">يتم استبعاد التطبيقات %1$d بشكل افتراضي ولا يمكن إلغاء تحديده</item>
     </plurals>
     <string name="dialog_appchoosal_whitelist">استخدام DoH / DoT فقط في التطبيقات المحددة</string>
     <string name="dialog_appchoosal_showsystemapps">إظهار تطبيقات النظام</string>
-    <string name="dialog_deleteconfig_text">هل تريد حذف التكوين %1s؟</string>
+    <string name="dialog_deleteconfig_text">هل تريد حذف التكوين %1$s؟</string>
     <string name="dialog_deleteconfig_title">حذف التكوين؟</string>
     <string name="dialog_newserver_secondaryserver">السيرفر الثانوي (اختياري)</string>
     <string name="dialog_newserver_primaryserver">السيرفر الأساسي</string>

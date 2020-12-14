@@ -20,14 +20,14 @@
     <string name="error_webview_missing">WebView पैकेज नहीं मिला, क्या यह वर्तमान में अपडेट हो रहा है या हटाया जा रहा है \?</string>
     <string name="error_cannot_open_settings">सिस्टम सेटिंग नहीं खोल सकते</string>
     <string name="main_dnssurveillance_infotext">ध्यान रखें कि आप जिस DNS सर्वर से जुड़े हैं, वह यह रिकॉर्ड करने में सक्षम है कि आप किन साइटों पर जा रहे हैं। अधिक जानकारी के लिए संबंधित गोपनीयता विवरण की जाँच करें।</string>
-    <string name="main_dnssurveillance_privacystatement">गोपनीयता विवरण - %1s</string>
+    <string name="main_dnssurveillance_privacystatement">गोपनीयता विवरण - %1$s</string>
     <string name="about_app">यह ऐप ओपन सोर्स है | सोर्स कोड यहाँ पर उपलब्ध है &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt; |
 \nइसके अलावा ऐप में कोई विज्ञापन नहीं हैं और आपके बारे में कोई जानकारी जमा नहीं की जाती है या आप पर इंटरनेट द्वारा नज़र नहीं रखी जाती है |
 \n
-\nअनुवाद रूप - %1s
-\nरचना - %2d
-\nडेटाबेस अनुवाद रूप - %3d
-\nक्रैश रिपोर्ट पहचान - %4s
+\nअनुवाद रूप - %1$s
+\nरचना - %2$d
+\nडेटाबेस अनुवाद रूप - %3$d
+\nक्रैश रिपोर्ट पहचान - %4$s
 \n
 \n© Daniel Wolf 2019–2020
 \nGPLv3 के तहत लाइसेंस प्राप्त है|
@@ -49,13 +49,13 @@
     <string name="button_main_dnsrules">DNS नियम</string>
     <string name="window_dnsrules_customhosts">स्वनिर्धारित होस्ट</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1s नियम</item>
-        <item quantity="other">%1s - नियम</item>
+        <item quantity="one">%1$s नियम</item>
+        <item quantity="other">%1$s - नियम</item>
     </plurals>
     <string name="window_dnsrules_hostalreadyexists">इस होस्ट के लिए पहले से ही एक नियम है</string>
     <string name="window_dnsrules_customhosts_message">अपने सभी स्वनिर्धारित होस्ट को यहां लिखें</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">इस स्रोत से नियम: -</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">इस स्रोत से नियम: %1s (%2s डुप्लिकेट उपयोग में नहीं)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">इस स्रोत से नियम: %1$s (%2$s डुप्लिकेट उपयोग में नहीं)</string>
     <string name="windows_querylogging_search_hint">प्रश्नों की सूची में होस्ट की खोज करें</string>
     <string name="windows_querylogging_search">होस्ट-खोज</string>
     <string name="windows_querylogging_time">समय</string>

@@ -2,7 +2,7 @@
 <resources>
     <string name="tasker_start_if_running">Запустить, даже если уже запущен (может изменить конфигурацию)</string>
     <string name="tasker_action">Действие</string>
-    <string name="tasker_start_app_custom_url">Запуск с %1s (Mode: %2s)</string>
-    <string name="tasker_start_app_custom_urls">Запуск с %1s и %2s (Mode: %3s)</string>
+    <string name="tasker_start_app_custom_url">Запуск с %1$s (Mode: %2$s)</string>
+    <string name="tasker_start_app_custom_urls">Запуск с %1$s и %2$s (Mode: %3$s)</string>
     <string name="tasker_use_custom_server">Укажите пользовательские серверы</string>
 </resources>

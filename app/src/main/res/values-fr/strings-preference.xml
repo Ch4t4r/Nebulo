@@ -33,16 +33,16 @@
     <string name="summary_show_revoked_notification">Afficher une notification lorsque Nebulo perd la permission d\'accéder au VPN</string>
     <string name="title_preference_change_pin">Changer de code PIN</string>
     <string name="summary_preference_change_pin">Changez le code PIN. Seules les valeurs numériques sont autorisées.
-\nBroche actuelle : %1s</string>
+\nBroche actuelle : %1$s</string>
     <string name="title_dnscache_nxdomaincachetime">Temps de cache pour le NXDomain (secondes)</string>
     <string name="summary_clear_dnscache">Cliquez ici pour vider la mémoire cache du DNS, par exemple lorsque des sites web commencent à se comporter mal parce qu\'ils sont mis en cache</string>
     <string name="summary_dnscache_maxsize">Définit le nombre maximum d\'entrées que le cache peut contenir à tout moment</string>
     <string name="summary_dnscache_minimum_cache_time">La durée minimale des entrées doit être mise en cache, même si la durée de mise en cache par défaut est plus courte. De longues durées de mise en cache pourraient entraîner une désynchronisation des données mises en cache avec les données réelles. 
-\nCourant : %1d Secondes</string>
+\nCourant : %1$d Secondes</string>
     <string name="summary_dnscache_customcachetime">Modifie la durée de mise en cache de toutes les demandes, que la durée de mise en cache par défaut soit ou non plus longue. De longues durées de mise en cache pourraient entraîner une désynchronisation des données mises en cache avec les données réelles. 
-\nActuellement : %1d Secondes</string>
+\nActuellement : %1$d Secondes</string>
     <string name="summary_dnscache_nxdomaincachetime">Modifie la durée de mise en cache des demandes NXDOMAIN. Cela améliore les performances pour les domaines non existants (par exemple, s\'ils sont bloqués) 
-\nCourant : %1d Secondes</string>
+\nCourant : %1$d Secondes</string>
     <string name="summary_dnscache_enabled">Active le cache DNS de l\'application. Le cache mémorise les anciennes requêtes pour répondre plus rapidement aux futures questions. 
 \n 
 \nLe système dispose déjà d\'un cache, activez-le si vous souhaitez personnaliser le comportement</string>
@@ -104,7 +104,7 @@
     <string name="preference_category_querylogging">Enregistrement des requêtes</string>
     <string name="title_log_queries">Enregistrement des requêtes</string>
     <string name="summary_log_queries">Enregistrer toutes les demandes et leurs réponses</string>
-    <string name="summary_export_queries">Requêtes d\'exportation en CSV (%1d requêtes)</string>
+    <string name="summary_export_queries">Requêtes d\'exportation en CSV (%1$d requêtes)</string>
     <string name="title_catch_other_dns_servers">Interception d\'autres trafics DNS</string>
     <string name="crashreporting_type_full">Complet (Rapport statistique et données de débogage)</string>
     <string name="crashreporting_type_minimal">Minimale (Ne concerne que la version Android et App)</string>
@@ -112,7 +112,7 @@
     <string name="title_local_server_port">Port du serveur</string>
     <string name="summary_run_without_vpn">Si vous avez vérifié, Nebulo héberge un serveur DNS sur votre appareil</string>
     <string name="title_run_without_vpn">Fonctionner sans VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Le serveur sera hébergé sur %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Le serveur sera hébergé sur %1$s:%2$s</string>
     <string name="summary_category_nonvpnmode">Configurez Nebulo pour qu\'il agisse comme serveur DNS sur l\'appareil au lieu d\'utiliser un VPN fictif. Lorsque cette fonction est activée, vous devez manuellement transmettre les requêtes DNS à Nebulo en utilisant des applications tierces</string>
     <string name="preference_category_nonvpnmode">Mode non-VPN</string>
     <string name="summary_check_iptables">Vérifiez si votre appareil est compatible avec iptables</string>

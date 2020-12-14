@@ -9,17 +9,17 @@
     <string name="dialog_newserver_primaryserver">プライマリサーバー</string>
     <string name="dialog_newserver_secondaryserver">セカンダリサーバー（オプション）</string>
     <string name="dialog_deleteconfig_title">設定を削除しますか？</string>
-    <string name="dialog_deleteconfig_text">設定%1sを削除しますか？</string>
+    <string name="dialog_deleteconfig_text">設定%1$sを削除しますか？</string>
     <string name="dialog_appchoosal_showsystemapps">システムアプリを表示する</string>
     <string name="dialog_appchoosal_whitelist">選択したアプリでのみDoH / DoTを使用する</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="other">%1dのアプリはデフォルトで除外されており、選択を解除できません</item>
+        <item quantity="other">%1$dのアプリはデフォルトで除外されており、選択を解除できません</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
-        <item quantity="other">%1d サーバーのインポート</item>
+        <item quantity="other">%1$d サーバーのインポート</item>
     </plurals>
     <string name="dialog_serverimport_done">完了しました</string>
-    <string name="dialog_serverimport_priority">優先度%1d</string>
+    <string name="dialog_serverimport_priority">優先度%1$d</string>
     <string name="dialog_serverimport_experimental">実験的</string>
     <string name="dialog_serverimport_servertype_doh">タイプ：DNS-over-HTTPS（DoH）</string>
     <string name="dialog_serverimport_servertype_dot">タイプ：DNS-over-TLS（DoT）</string>
@@ -29,7 +29,7 @@
     <string name="dialog_serverimportfailed_title">インポートに失敗しました</string>
     <string name="dialog_serverimportfailed_text">サーバーをインポートできませんでした。</string>
     <string name="dialog_serverimportfailed_text_exception">サーバーをインポートできませんでした。
-\n（%1s）</string>
+\n（%1$s）</string>
     <string name="dialog_logexport_text">ログをどのように共有しますか？</string>
     <string name="dialog_logexport_general">アプリを選択</string>
     <string name="dialog_logexport_email">メール</string>
@@ -96,17 +96,17 @@
     <string name="dialog_newhostsource_title">新しいルールソース</string>
     <string name="dialog_clearuserrules_message">すべてのDNSルールをクリアしますか？これを元に戻すことはできません。</string>
     <string name="dialog_clearuserrules_title">すべてのDNSルールをクリアしますか？</string>
-    <string name="dialog_deletehostsource_message">ホスト・ソース「 %1s」 を削除してもよろしいですか\?これを元に戻すことはできません。このソースのホストは削除されます。</string>
-    <string name="dialog_deletehostsource_title">%1sを削除しますか\?</string>
-    <string name="dialog_speedtest_useserver_message">サーバー %1s を使用しますか？それは %3d 中 %2d にランク付けされ、応答時間は %4d ms です。</string>
+    <string name="dialog_deletehostsource_message">ホスト・ソース「 %1$s」 を削除してもよろしいですか\?これを元に戻すことはできません。このソースのホストは削除されます。</string>
+    <string name="dialog_deletehostsource_title">%1$sを削除しますか\?</string>
+    <string name="dialog_speedtest_useserver_message">サーバー %1$s を使用しますか？それは %3$d 中 %2$d にランク付けされ、応答時間は %4$d ms です。</string>
     <string name="dialog_speedtest_useserver_title">サーバーを選択</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d のサーバ ーをテストしました。 
-\n DoT サーバーのうち、%2d 個のサーバーはアクセス可能、%3d 個 のサーバーがアクセスできませんでした。 
-\n DoH サーバーのうち、%4d 個のサーバーはアクセス可能、%5d 個のサーバーがアクセスできませんでした。 
-\n 平均応答時間: %6d ms です。
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1$d のサーバ ーをテストしました。
+\n DoT サーバーのうち、%2$d 個のサーバーはアクセス可能、%3$d 個 のサーバーがアクセスできませんでした。
+\n DoH サーバーのうち、%4$d 個のサーバーはアクセス可能、%5$d 個のサーバーがアクセスできませんでした。
+\n 平均応答時間: %6$d ms です。
 \n 
-\n 最も速いサーバー: %7s 
-\n 最も遅いサーバー: %8s</string>
+\n 最も速いサーバー: %7$s
+\n 最も遅いサーバー: %8$s</string>
     <string name="dialog_speedresult_title">スピードテスト結果</string>
     <string name="dialog_join_group_positive">イェーイ！</string>
     <string name="dialog_join_group_message">こんにちは!
@@ -174,17 +174,17 @@
 \n
 \n ・プロトコル: UDP
 \n ・送信元ポート: 53
-\n ・宛先アドレス: %1s
-\n ・宛先ポート: %2d
+\n ・宛先アドレス: %1$s
+\n ・宛先ポート: %2$d
 \n ・送信先アプリ: nobody
 \n ※TCPプロトコルについても同じポートとアドレスを設定してルールを追加します。
 \n
 \n-高度なオプション に戻ります。
-\n-画画をスクロールさせ、VPN DNS(2箇所)に\"%3s\"を設定します。
+\n-画画をスクロールさせ、VPN DNS(2箇所)に\"%3$s\"を設定します。
 \n-非VPNモードでNebuloを起動します。その後NetGuardを起動してください</string>
     <string name="dialog_newdnsrule_block_host">このドメインをブロック</string>
     <string name="dialog_dnsrules_status_sourcenotfound">このホスト名はDNSルール内に存在しますが、ソースは不明です。</string>
-    <string name="dialog_dnsrules_status_fromsource">このホストは、ソースである %1s の一部です</string>
+    <string name="dialog_dnsrules_status_fromsource">このホストは、ソースである %1$s の一部です</string>
     <string name="dialog_dnsrules_status_userrule">このホスト名は、手動によって定義したDNSルールの一部です。</string>
     <string name="dialog_dnsrules_search_message">以下にホスト名を入力するとDNSルール内を検索します。</string>
     <string name="dialog_querylog_information_message">このリストは、Nebuloがアクティブな間に記録した、いままでのクエリを全て表示しています。 Nebuloが現在アクティブな場合、リストはほぼリアルタイムで更新されます。

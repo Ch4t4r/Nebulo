@@ -6,8 +6,8 @@
     <string name="window_dnsrules_customhosts_message">Define todos tus host personalizados aquí</string>
     <string name="window_dnsrules_hostalreadyexists">Ya hay una regla para este host</string>
     <plurals name="window_dnsrules_subtitle">
-        <item quantity="one">%1s regla</item>
-        <item quantity="other">%1s reglas</item>
+        <item quantity="one">%1$s regla</item>
+        <item quantity="other">%1$s reglas</item>
     </plurals>
     <string name="window_dnsrules_customhosts">Hosts personalizados</string>
     <string name="about_changelog">Changelog</string>
@@ -29,7 +29,7 @@
     <string name="windows_querylogging_used_server">Servidor usado</string>
     <string name="windows_querylogging_question">Consulta</string>
     <string name="windows_querylogging_time">Tiempo</string>
-    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Reglas de esta fuente: %1s (%2s duplicados no en uso)</string>
+    <string name="window_dnsrules_customhosts_hostsource_rulecount" tools:ignore="PluralsCandidate">Reglas de esta fuente: %1$s (%2$s duplicados no en uso)</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Reglas de esta fuente: -</string>
     <string name="button_main_dnsrules">Reglas de DNS</string>
     <string name="error_no_webbrowser_installed">No tienes ninguna aplicación instalada para ver este enlace</string>
@@ -48,15 +48,15 @@
     <string name="about_app">Esta aplicación es de código abierto. Se puede acceder al código fuente en &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt;.
 \nAdemás, la aplicación no contiene anuncios y no rastrea ni recoge ningún dato sobre usted.
 \n
-\nVersión %1s
-\nConstruir %2d
-\nVersión de la base de datos %3d
-\nIdentificación del informe del accidente: %4s
+\nVersión %1$s
+\nConstruir %2$d
+\nVersión de la base de datos %3$d
+\nIdentificación del informe del accidente: %4$s
 \n
 \n© Daniel Wolf 2019–2020
 \nLicenciado bajo GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
-    <string name="main_dnssurveillance_privacystatement">Declaración de privacidad de %1s</string>
+    <string name="main_dnssurveillance_privacystatement">Declaración de privacidad de %1$s</string>
     <string name="main_dnssurveillance_infotext">Tenga en cuenta que el servidor DNS al que está conectado es capaz de registrar qué sitios está visitando. Consulta las respectivas declaraciones de privacidad para obtener más información.</string>
     <string name="error_cannot_open_settings">No se puede abrir la configuración del sistema</string>
     <string name="error_webview_missing">No se encontró el paquete WebView, ¿se está actualizando o eliminando\?</string>
@@ -81,12 +81,12 @@
     <string name="iptables_supported">Felicitaciones, iptables es compatible con su dispositivo!</string>
     <string name="window_dnsrules_refresh_sources">Actualizar las normas de importación de la fuente</string>
     <plurals name="dnsrule_total_resolve_count_block">
-        <item quantity="one">%1d consulta ha sido bloqueada hasta ahora</item>
-        <item quantity="other">%1d consultas han sido bloqueadas hasta ahora</item>
+        <item quantity="one">%1$d consulta ha sido bloqueada hasta ahora</item>
+        <item quantity="other">%1$d consultas han sido bloqueadas hasta ahora</item>
     </plurals>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="one">%1d consulta ha sido manejada por las reglas del DNS hasta ahora</item>
-        <item quantity="other">%1d consultas han sido manejadas por las reglas del DNS hasta ahora</item>
+        <item quantity="one">%1$d consulta ha sido manejada por las reglas del DNS hasta ahora</item>
+        <item quantity="other">%1$d consultas han sido manejadas por las reglas del DNS hasta ahora</item>
     </plurals>
     <string name="appintro_server_choose_adblock">Un servidor que bloquea los anuncios y el seguimiento</string>
     <string name="appintro_server_choose_forth">Un servidor que me protege de sitios web y aplicaciones dañinas</string>
@@ -112,8 +112,8 @@
 \n
 \nRecuperar el control de los datos que su proveedor de servicios de Internet u otras entidades han tratado como suyos durante mucho tiempo.</string>
     <string name="appintro_first_title">Bienvenido a Nebulo.</string>
-    <string name="warning_server_currently_unstable_expanded">El servidor %1s parece estar inestable ahora mismo, impactando en su velocidad de navegación. Considera la posibilidad de cambiar a un servidor más estable.</string>
-    <string name="warning_server_currently_unstable">El servidor %1s parece estar inestable ahora mismo.</string>
+    <string name="warning_server_currently_unstable_expanded">El servidor %1$s parece estar inestable ahora mismo, impactando en su velocidad de navegación. Considera la posibilidad de cambiar a un servidor más estable.</string>
+    <string name="warning_server_currently_unstable">El servidor %1$s parece estar inestable ahora mismo.</string>
     <string name="about_help_faq">Preguntas frecuentes</string>
     <string name="window_querylog_information">Información</string>
     <string name="window_main_click_to_enable">Haga clic para activar.</string>

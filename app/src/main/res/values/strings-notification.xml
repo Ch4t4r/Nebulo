@@ -21,15 +21,15 @@
     <string name="notification_channel_badconnection">Bad connection notification channel</string>
     <string name="notification_channel_badconnection_description">Channel used for notifications when Nebulo has a bad connection</string>
 
-    <string name="notification_simple_text">Current server: %1s</string>
-    <string name="notification_main_text">Queries are sent to %1s\n\n%2d Apps are excluded from Nebulo</string>
-    <string name="notification_main_text_with_secondary">Queries are sent to %1s and %2s\n\n%3d Apps are excluded from Nebulo</string>
-    <string name="notification_main_text_whitelist">Queries are sent to %1s\n\n%2d Apps are using DoH/DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">Queries are sent to %1s and %2s\n\n%3d Apps are using DoH/DoT</string>
+    <string name="notification_simple_text">Current server: %1$s</string>
+    <string name="notification_main_text">Queries are sent to %1$s\n\n%2$d Apps are excluded from Nebulo</string>
+    <string name="notification_main_text_with_secondary">Queries are sent to %1$s and %2$s\n\n%3$d Apps are excluded from Nebulo</string>
+    <string name="notification_main_text_whitelist">Queries are sent to %1$s\n\n%2$d Apps are using DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Queries are sent to %1$s and %2$s\n\n%3$d Apps are using DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_quic" translatable="false">Nebulo (DoQ)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
-    <string name="notification_main_subtext">%1d queries so far</string>
+    <string name="notification_main_subtext">%1$d queries so far</string>
 
     <string name="notification_noconnection_title">No connection</string>
     <string name="notification_noconnection_text">The app currently isn\'t forwarding your DNS queries because you either have no or a bad connection</string>
@@ -41,19 +41,19 @@
     <string name="notification_appcrash_message">Nebulo has crashed. Click here to go to the main menu and to restart the app, if necessary</string>
 
     <string name="notification_ruleimport_title">DNS rule import</string>
-    <string name="notification_ruleimport_message">Importing DNS rules from %1s (%2s)</string>
+    <string name="notification_ruleimport_message">Importing DNS rules from %1$s (%2$s)</string>
     <string name="notification_ruleimport_secondarymessage">Preparing import…</string>
     <string name="notification_ruleimport_tertiarymessage">Finishing import…</string>
 
     <string name="notification_ruleimportfinished_title">DNS rule import finished</string>
-    <string name="notification_ruleimportfinished_message">%1s rules have been imported (%2s duplicates omitted)</string>
+    <string name="notification_ruleimportfinished_message">%1$s rules have been imported (%2$s duplicates omitted)</string>
 
     <string name="notification_ruleexport_title">DNS rule export</string>
-    <string name="notification_ruleexport_message">Exporting rules (%1s/%2s)</string>
+    <string name="notification_ruleexport_message">Exporting rules (%1$s/%2$s)</string>
     <string name="notification_ruleexport_secondarymessage">Preparing export…</string>
 
     <string name="notification_ruleexportfinished_title">DNS rule export finished</string>
-    <string name="notification_ruleexportfinished_message">%1d rules have been exported</string>
+    <string name="notification_ruleexportfinished_message">%1$d rules have been exported</string>
 
     <string name="notification_pin_title">PIN required</string>
     <string name="notification_pin_message">Your PIN is required to perform that action. Click here to confirm it</string>
@@ -66,11 +66,11 @@
     <string name="notification_service_revoked_message">Click here to restart</string>
 
     <string name="notification_dnsserver_title">Running in non-VPN mode</string>
-    <string name="notification_dnsserver_message">DNS server is running on %1s:%2d. Forward queries using third-party apps</string>
-    <string name="notification_dnsserver_message_iptables_active">DNS server is running on %1s:%2d. Queries are forwarded using iptables</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS server is running on %1s:%2d. Queries are forwarded using iptables.\nWarning: IPv6 is active, queries might bypass Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_failed">DNS server is running on %1s:%2d. Initializing iptables failed, queries have to be forwarded with third-party apps</string>
-    <string name="notification_dnsserver_portdiffers">Configured Port %1d could not be used.</string>
+    <string name="notification_dnsserver_message">DNS server is running on %1$s:%2$d. Forward queries using third-party apps</string>
+    <string name="notification_dnsserver_message_iptables_active">DNS server is running on %1$s:%2$d. Queries are forwarded using iptables</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">DNS server is running on %1$s:%2$d. Queries are forwarded using iptables.\nWarning: IPv6 is active, queries might bypass Nebulo.</string>
+    <string name="notification_dnsserver_message_iptables_failed">DNS server is running on %1$s:%2$d. Initializing iptables failed, queries have to be forwarded with third-party apps</string>
+    <string name="notification_dnsserver_portdiffers">Configured Port %1$d could not be used.</string>
 
     <string name="notification_privatednswarning_title">Private Dns</string>
     <string name="notification_privatednswarning_text">Please disable Private Dns in the system settings to use Nebulo.</string>

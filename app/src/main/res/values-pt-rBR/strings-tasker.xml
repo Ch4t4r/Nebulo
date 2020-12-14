@@ -2,7 +2,7 @@
 <resources>
     <string name="tasker_start_if_running">Iniciar, mesmo que já esteja em funcionamento (pode sobrescrever a configuração atual)</string>
     <string name="tasker_action">Ação</string>
-    <string name="tasker_start_app_custom_url">Inicie o App com %1s (modo: %2s)</string>
-    <string name="tasker_start_app_custom_urls">Inicie o App com %1s e %2s (modo: %3s)</string>
+    <string name="tasker_start_app_custom_url">Inicie o App com %1$s (modo: %2$s)</string>
+    <string name="tasker_start_app_custom_urls">Inicie o App com %1$s e %2$s (modo: %3$s)</string>
     <string name="tasker_use_custom_server">Especificar servidores personalizados</string>
 </resources>

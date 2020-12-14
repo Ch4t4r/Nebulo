@@ -27,7 +27,7 @@
     <string name="summary_preference_pin_use_fingerprint">Permetti l\'uso della mia impronta al posto del PIN</string>
     <string name="title_preference_change_pin">Cambia PIN</string>
     <string name="summary_preference_change_pin">Cambia il PIN. Sono ammessi solo numeri. 
-\nPIN attuale: %1s</string>
+\nPIN attuale: %1$s</string>
     <string name="preference_category_cache">Controllo della cache</string>
     <string name="title_dnscache_enabled">Usa la cache DNS</string>
     <string name="summary_dnscache_enabled">Attiva la cache DNS dell\'app. La cache memorizza le vecchie richieste per rispondere alle domande future più velocemente. 
@@ -41,13 +41,13 @@
     <string name="summary_dnscache_usedefaulttimes">Mantieni le richieste in cache per tutto il tempo in cui il server DNS comunica usando il TTL</string>
     <string name="title_dnscache_minimum_cache_time">Tempo di cache minimo</string>
     <string name="summary_dnscache_minimum_cache_time">Il minimo di tempo in cui gli elementi devono restare in cache, indipendentemente da un tempo di cache predefinito più breve. Tempi di cache lunghi possono causare la perdita di sincronizzazione dei dati in cache con i dati effettivi. 
-\nAttuale: %1d secondi</string>
+\nAttuale: %1$d secondi</string>
     <string name="title_dnscache_customcachetime">Tempo di cache personalizzato (secondi)</string>
     <string name="summary_dnscache_customcachetime">Cambia la durata della cache di tutte le richieste, indipendentemente da un tempo di cache predefinito più breve. Tempi di cache lunghi possono causare la perdita di sincronizzazione dei dati in cache con i dati effettivi. 
-\nAttuale: %1d secondi</string>
+\nAttuale: %1$d secondi</string>
     <string name="title_dnscache_nxdomaincachetime">Tempo di cache per NXDomain (secondi)</string>
     <string name="summary_dnscache_nxdomaincachetime">Cambia il tempo in cui le richieste di NXDOMAIN restano in cache. Questo migliora le prestazioni per i domini inesistenti (es. se sono bloccati) 
-\nAttuale: %1d secondi</string>
+\nAttuale: %1$d secondi</string>
     <string name="preference_category_logging">Registro</string>
     <string name="title_enable_logging">Attiva il registro</string>
     <string name="summary_enable_logging">Attiva la registrazione di informazioni di debug (contiene dati statistici). Queste informazioni non vengono inviate automaticamente</string>
@@ -91,7 +91,7 @@
     <string name="title_log_queries">Registro richieste</string>
     <string name="summary_log_queries">Registra tutte le richieste e le loro risposte</string>
     <string name="title_export_queries">Esporta richieste</string>
-    <string name="summary_export_queries">Esporta le richieste come CSV (%1d richieste)</string>
+    <string name="summary_export_queries">Esporta le richieste come CSV (%1$d richieste)</string>
     <string name="title_delete_queries">Svuota richieste</string>
     <string name="summary_delete_queries">Clicca qui per eliminare tutte le richieste registrate</string>
     <string name="title_simple_notification">Notifica semplice</string>
@@ -112,7 +112,7 @@
     <string name="title_local_server_port">Porta server</string>
     <string name="summary_run_without_vpn">Quando selezionato, Nebulo ospita un server DNS sul dispositivo</string>
     <string name="title_run_without_vpn">Esegui senza VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Il server sarà ospitato su %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Il server sarà ospitato su %1$s:%2$s</string>
     <string name="summary_category_nonvpnmode">Configura Nebulo per agire come server DNS sul dispositivo invece di utilizzare una VPN fittizia. Quando attivato, devi inoltrare manualmente le richieste DNS a Nebulo usando app di terze parti</string>
     <string name="preference_category_nonvpnmode">Modalità non-VPN</string>
     <string name="summary_check_iptables">Controlla se il tuo dispositivo supporta le iptables</string>

@@ -59,7 +59,7 @@
     <string name="summary_preference_pin_use_fingerprint">Allow your fingerprint to be used instead of the PIN</string>
 
     <string name="title_preference_change_pin">Change PIN</string>
-    <string name="summary_preference_change_pin">Change the PIN. Only numeric values are allowed.\nCurrent PIN: %1s</string>
+    <string name="summary_preference_change_pin">Change the PIN. Only numeric values are allowed.\nCurrent PIN: %1$s</string>
 
     <string name="preference_category_cache">Cache control</string>
 
@@ -79,13 +79,13 @@
     <string name="summary_dnscache_usedefaulttimes">Keep requests in the cache for as long as the DNS server communicates using the TTL</string>
 
     <string name="title_dnscache_minimum_cache_time">Minimum cache time</string>
-    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached, no matter whether the default caching time for it would be shorter. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds</string>
+    <string name="summary_dnscache_minimum_cache_time">The minimum amount of time entries should be cached, no matter whether the default caching time for it would be shorter. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1$d Seconds</string>
 
     <string name="title_dnscache_customcachetime">Custom cache time (Seconds)</string>
-    <string name="summary_dnscache_customcachetime">Changes how long all requests are cached, no matter whether the default caching time for it would be longer. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1d Seconds</string>
+    <string name="summary_dnscache_customcachetime">Changes how long all requests are cached, no matter whether the default caching time for it would be longer. Long caching times could cause the cached data to be out of sync with the actual data.\nCurrent: %1$d Seconds</string>
 
     <string name="title_dnscache_nxdomaincachetime">Cache time for NXDomain (Seconds)</string>
-    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1d Seconds</string>
+    <string name="summary_dnscache_nxdomaincachetime">Changes the amount of time NXDOMAIN requests are cached. This enhances performance for non-existing domains (e.g if they are blocked)\nCurrent: %1$d Seconds</string>
 
 
     <string name="preference_category_logging">Logging</string>
@@ -154,7 +154,7 @@
     <string name="summary_log_queries">Log all queries and their responses</string>
 
     <string name="title_export_queries">Export queries</string>
-    <string name="summary_export_queries">Export queries as CSV (%1d queries)</string>
+    <string name="summary_export_queries">Export queries as CSV (%1$d queries)</string>
 
     <string name="title_delete_queries">Clear queries</string>
     <string name="summary_delete_queries">Click here to delete all logged queries</string>
@@ -162,7 +162,7 @@
 
     <string name="preference_category_nonvpnmode">Non-VPN mode</string>
     <string name="summary_category_nonvpnmode">Configure Nebulo to act as a DNS server on the device instead of using a dummy VPN. When enabled you manually have to forward DNS queries to Nebulo using third party apps</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Server will be hosted on %1s:%2s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Server will be hosted on %1$s:%2$s</string>
 
     <string name="title_run_without_vpn">Run without VPN</string>
     <string name="summary_run_without_vpn">When checked Nebulo hosts a DNS server on your device</string>

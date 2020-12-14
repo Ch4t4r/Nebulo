@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tasker_start_app_custom_urls">Démarrez l\'application avec %1s et %2s (Mode : %3s)</string>
-    <string name="tasker_start_app_custom_url">Démarrer l\'application avec %1s (Mode : %2s)</string>
+    <string name="tasker_start_app_custom_urls">Démarrez l\'application avec %1$s et %2$s (Mode : %3$s)</string>
+    <string name="tasker_start_app_custom_url">Démarrer l\'application avec %1$s (Mode : %2$s)</string>
     <string name="tasker_action">Action</string>
     <string name="tasker_use_custom_server">Spécifier des serveurs personnalisés</string>
     <string name="tasker_start_if_running">Démarrer même si vous êtes déjà en cours d\'exécution (peut annuler la configuration)</string>

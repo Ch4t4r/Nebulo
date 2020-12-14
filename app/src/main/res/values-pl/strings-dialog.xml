@@ -19,7 +19,7 @@
     <string name="dialog_doh_detect_type_message">Proszę chwilę poczekać.</string>
     <string name="dialog_vpn_permission_denied_message">System odmówił Nebulo uruchomienia swojego VPN. Proszę otworzyć aplikację, aby udzielić zezwolenia na jej uruchomienie, klikając przycisk start.</string>
     <string name="dialog_doh_detect_type_title">Wykrywanie typu serwera</string>
-    <string name="dialog_deleteconfig_text">Czy chcesz usunąć konfigurację %1s\?</string>
+    <string name="dialog_deleteconfig_text">Czy chcesz usunąć konfigurację %1$s\?</string>
     <string name="dialog_raterequest_message">Hej tam! Jeśli podoba ci się Nebulo, czy mogłabyś poświęcić chwilę na ocenę tego w sklepie\?</string>
     <string name="dialog_raterequest_title">Podoba ci się Nebulo\?</string>
     <string name="dialog_vpninformation_title">Jak działa ta aplikacja</string>
@@ -75,20 +75,20 @@
     <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">Proszę wybrać serwery, które chcą Państwo importować.
 \n
 \nSerwery, które są już zaimportowane, zostaną zdublowane, jeśli je wybierzesz.</string>
-    <string name="dialog_serverimport_priority">Priorytet %1d</string>
+    <string name="dialog_serverimport_priority">Priorytet %1$d</string>
     <string name="dialog_serverimport_experimental">Eksperymentalny</string>
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Import %1d serwera</item>
-        <item quantity="few">Przywóz %1d serwerów</item>
-        <item quantity="many">Przywóz %1d serwerów</item>
-        <item quantity="other">Przywóz %1d serwerów</item>
+        <item quantity="one">Import %1$d serwera</item>
+        <item quantity="few">Przywóz %1$d serwerów</item>
+        <item quantity="many">Przywóz %1$d serwerów</item>
+        <item quantity="other">Przywóz %1$d serwerów</item>
     </plurals>
     <string name="dialog_serverimport_done">Sporządzono</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d app jest domyślnie wykluczony i nie może być usunięty z listy wyboru</item>
-        <item quantity="few">%1d aplikacje są domyślnie wykluczone i nie mogą zostać odznaczone</item>
-        <item quantity="many">%1d aplikacje są domyślnie wykluczone i nie mogą zostać odznaczone</item>
-        <item quantity="other">%1d aplikacje są domyślnie wykluczone i nie mogą zostać odznaczone</item>
+        <item quantity="one">%1$d app jest domyślnie wykluczony i nie może być usunięty z listy wyboru</item>
+        <item quantity="few">%1$d aplikacje są domyślnie wykluczone i nie mogą zostać odznaczone</item>
+        <item quantity="many">%1$d aplikacje są domyślnie wykluczone i nie mogą zostać odznaczone</item>
+        <item quantity="other">%1$d aplikacje są domyślnie wykluczone i nie mogą zostać odznaczone</item>
     </plurals>
     <string name="dialog_appchoosal_whitelist">Używaj DoH/DoT tylko w wybranych aplikacjach</string>
     <string name="dialog_appchoosal_showsystemapps">Pokaż aplikacje systemowe</string>
@@ -114,19 +114,19 @@
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Tygodnie</string>
     <string name="dialog_clearuserrules_message">Czy chcesz oczyścić wszystkie zasady DNS\? Tego nie da się cofnąć.</string>
     <string name="dialog_clearuserrules_title">Oczyścić wszystkie zasady DNS\?</string>
-    <string name="dialog_deletehostsource_message">Czy na pewno chcesz usunąć źródło hosta %1s\? To nie może być cofnięte, hosty z tego źródła zostaną usunięte.</string>
-    <string name="dialog_deletehostsource_title">Skasować %1s\?</string>
-    <string name="dialog_speedtest_useserver_message">Czy chcesz korzystać z serwera %1s\? Znalazł się on na pozycji %2d w stosunku do %3d z czasem odpowiedzi %4d ms.</string>
+    <string name="dialog_deletehostsource_message">Czy na pewno chcesz usunąć źródło hosta %1$s\? To nie może być cofnięte, hosty z tego źródła zostaną usunięte.</string>
+    <string name="dialog_deletehostsource_title">Skasować %1$s\?</string>
+    <string name="dialog_speedtest_useserver_message">Czy chcesz korzystać z serwera %1$s\? Znalazł się on na pozycji %2$d w stosunku do %3$d z czasem odpowiedzi %4$d ms.</string>
     <string name="dialog_speedtest_useserver_title">Wybierz serwer</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1d testowane serwery
-\n %2d Serwery DoT osiągalne, %3d nieosiągalne
-\n %4d Serwery DoH osiągalne, %5d nieosiągalne
-\n Średni czas reakcji: %6d ms.
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1$d testowane serwery
+\n %2$d Serwery DoT osiągalne, %3$d nieosiągalne
+\n %4$d Serwery DoH osiągalne, %5$d nieosiągalne
+\n Średni czas reakcji: %6$d ms.
 \n
-\n Najszybszy serwer: %7s
-\n Najwolniejszy serwer: %8s</string>
+\n Najszybszy serwer: %7$s
+\n Najwolniejszy serwer: %8$s</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">Serwery nie mogły być importowane.
-\n(%1s)</string>
+\n(%1$s)</string>
     <string name="dialog_vpninformation_message">Nebulo działa za pomocą atrapy VPN, która przechwytuje wszystkie żądania DNS, które są następnie przekazywane do wybranego przez Ciebie bezpiecznego serwera.
 \nTa atrapa VPN nie jest prawdziwym VPN i nie ukrywa twojej tożsamości, ani nie zmienia twojego adresu IP.
 \n

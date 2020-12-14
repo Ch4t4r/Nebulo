@@ -21,22 +21,22 @@
     <string name="dialog_newserver_secondaryserver_hint_doq" translatable="false">example-doq.com[/dns-query]</string>
 
     <string name="dialog_deleteconfig_title">Delete configuration?</string>
-    <string name="dialog_deleteconfig_text">Do you want to delete the configuration %1s?</string>
+    <string name="dialog_deleteconfig_text">Do you want to delete the configuration %1$s?</string>
 
     <string name="dialog_appchoosal_showsystemapps">Show system apps</string>
     <string name="dialog_appchoosal_whitelist">Only use DoH/DoT in selected apps</string>
     
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">%1d app is excluded by default and cannot be de-selected</item>
-        <item quantity="other">%1d apps are excluded by default and cannot be de-selected</item>
+        <item quantity="one">%1$d app is excluded by default and cannot be de-selected</item>
+        <item quantity="other">%1$d apps are excluded by default and cannot be de-selected</item>
     </plurals>
 
     <plurals name="dialog_serverimport_title">
-        <item quantity="one">Import of %1d server</item>
-        <item quantity="other">Import of %1d servers</item>
+        <item quantity="one">Import of %1$d server</item>
+        <item quantity="other">Import of %1$d servers</item>
     </plurals>
     <string name="dialog_serverimport_done">Done</string>
-    <string name="dialog_serverimport_priority">Priority %1d</string>
+    <string name="dialog_serverimport_priority">Priority %1$d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
     <string name="dialog_serverimport_servertype_doh">Type: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Type: DNS-over-TLS (DoT)</string>
@@ -45,7 +45,7 @@
 
     <string name="dialog_serverimportfailed_title">Import failed</string>
     <string name="dialog_serverimportfailed_text">The server(s) could not be imported.</string>
-    <string xmlns:tools="http://schemas.android.com/tools" name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">The servers could not be imported.\n(%1s)</string>
+    <string xmlns:tools="http://schemas.android.com/tools" name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">The servers could not be imported.\n(%1$s)</string>
 
     <string name="dialog_logexport_loading_title">Preparing logs</string>
     <string name="dialog_logexport_text">How do you want to share the logs?</string>
@@ -113,19 +113,19 @@
 
     <string name="dialog_speedresult_title">Speed test results</string>
     <string xmlns:tools="http://schemas.android.com/tools" name="dialog_speedresult_message" tools:ignore="PluralsCandidate">
-        %1d servers tested\n
-        %2d DoT servers reachable, %3d not reachable\n
-        %4d DoH servers reachable, %5d not reachable\n
-        Average response time: %6d ms.\n\n
-        Fastest server: %7s\n
-        Slowest server: %8s
+        %1$d servers tested\n
+        %2$d DoT servers reachable, %3$d not reachable\n
+        %4$d DoH servers reachable, %5$d not reachable\n
+        Average response time: %6$d ms.\n\n
+        Fastest server: %7$s\n
+        Slowest server: %8$s
     </string>
 
     <string name="dialog_speedtest_useserver_title">Select server</string>
-    <string name="dialog_speedtest_useserver_message">Do you want to use the server %1s? It ranked %2d out of %3d with a response time of %4d ms.</string>
+    <string name="dialog_speedtest_useserver_message">Do you want to use the server %1$s? It ranked %2$d out of %3$d with a response time of %4$d ms.</string>
 
-    <string name="dialog_deletehostsource_title">Delete %1s?</string>
-    <string name="dialog_deletehostsource_message">Are you sure you want to delete the host source %1s? This cannot be undone, the hosts from this source will be removed.</string>
+    <string name="dialog_deletehostsource_title">Delete %1$s?</string>
+    <string name="dialog_deletehostsource_message">Are you sure you want to delete the host source %1$s? This cannot be undone, the hosts from this source will be removed.</string>
 
     <string name="dialog_clearuserrules_title">Clear all DNS rules?</string>
     <string name="dialog_clearuserrules_message">Are you want to clear all DNS rules? This cannot be undone.</string>
@@ -203,14 +203,14 @@
         - Enable "Filter traffic" (if not enabled already)\n
         - Click on Port Forwarding\n
         - Add the following rules:\n\n
-        • Protocol UDP, source port 53, destination %1s, destination port %2d, destination app nobody\n
+        • Protocol UDP, source port 53, destination %1$s, destination port %2$d, destination app nobody\n
         • Repeat for TCP\n\n
         - Go back to advanced options\n
-        - Scroll down, set both VPN DNS fields to %3s\n
+        - Scroll down, set both VPN DNS fields to %3$s\n
         - Start Nebulo (in non-VPN mode) and start NetGuard
     </string>
 
-    <string name="dialog_nonvpn_help_generic">To use Nebulo in non-vpn mode together with a third-party VPN app you have to change your DNS settings inside this other app.\nNot all VPN apps allow you to change the DNS settings. If yours does, simply set the DNS server to \'%1s:%2d\' (you can configure the port above).\n\nAfter configuring the apps simply start both.</string>
+    <string name="dialog_nonvpn_help_generic">To use Nebulo in non-vpn mode together with a third-party VPN app you have to change your DNS settings inside this other app.\nNot all VPN apps allow you to change the DNS settings. If yours does, simply set the DNS server to \'%1$s:%2$d\' (you can configure the port above).\n\nAfter configuring the apps simply start both.</string>
 
     <string name="dialog_latency_sidebar_title">Information about latency</string>
     <string name="dialog_latency_sidebar_message">The latency shown here is not your ping or how fast your network is.\n It shows how long it takes for Nebulo to send a request and get an answer from the DNS server. The displayed value is not always the most current one and fluctuations can be possible.\n This can cause the value to be displayed higher than it is because it has become lower since it was measured.</string>
@@ -222,7 +222,7 @@
     <string name="dialog_dnsrules_search_message">Enter a host below to search for it in the DNS rules.</string>
     <string name="dialog_dnsrules_status_not_found">No DNS rule found for this host.</string>
     <string name="dialog_dnsrules_status_userrule">This host is part of the DNS rules defined by you.</string>
-    <string name="dialog_dnsrules_status_fromsource">This host is part of the source %1s</string>
+    <string name="dialog_dnsrules_status_fromsource">This host is part of the source %1$s</string>
     <string name="dialog_dnsrules_status_sourcenotfound">This host is in the DNS rules, but the source is unknown.</string>
 
     <string name="querylog_filter_title">Filter query log</string>
