@@ -239,5 +239,5 @@
     <string name="dialog_share_message">Which link do you want to share?</string>
 
     <string name="dialog_speedtestpasses_title">Configure test passes</string>
-    <string name="dialog_speedtestpasses_message">Set how often the test should be run per server. Higher passes increase actuarry</string>
+    <string name="dialog_speedtestpasses_message">Set how often the test should be run per server. Higher passes increase accuracy</string>
 </resources>
