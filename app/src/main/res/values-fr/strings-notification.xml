@@ -26,18 +26,18 @@
     <string name="notification_main_subtext">%1d requêtes jusqu\'à présent</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
-    <string name="notification_main_text_with_secondary_whitelist">Les demandes sont envoyées à %1s et %2s
+    <string name="notification_main_text_with_secondary_whitelist">Les demandes sont envoyées aux %1s et %2s
 \n
 \n%3d Les applications utilisent le DoH/DoT</string>
     <string name="notification_main_text_whitelist">Les demandes sont envoyées à %1s
 \n
 \n%2d Les applications utilisent le DoH/DoT</string>
-    <string name="notification_main_text_with_secondary">Les demandes sont envoyées à %1s et %2s
+    <string name="notification_main_text_with_secondary">Les demandes sont envoyées aux %1s et %2s
 \n
-\n%3d Les applications sont exclues du DoH/DoT</string>
+\n%3d Les applications sont exclues de Nebulo</string>
     <string name="notification_main_text">Les demandes sont envoyées à %1s
 \n
-\n%2d Les applications sont exclues du DoH/DoT</string>
+\n%2d Les applications sont exclues de Nebulo</string>
     <string name="notification_simple_text">Serveur actuel : %1s</string>
     <string name="notification_channel_high_priorty_description">Canal pour les notifications de haute priorité, par exemple lorsque l\'application perd l\'autorisation d\'utiliser le VPN</string>
     <string name="notification_channel_high_priorty">Haute priorité</string>
@@ -61,4 +61,12 @@
     <string name="notification_multipleuserswarning_title">Un VPN factice n\'a pas pu être mis en place</string>
     <string name="notification_privatednswarning_text">Veuillez désactiver les Dns privés dans les paramètres du système pour utiliser Nebulo.</string>
     <string name="notification_privatednswarning_title">Dns privés</string>
+    <string name="notification_cronet_failed_text">Le DNS-sur-QUIC ne peut pas être utilisé car il ne peut pas être initialisé. Veuillez choisir un autre serveur.</string>
+    <string name="notification_cronet_failed_title">Échec de l\'initialisation QUIC</string>
+    <string name="notification_bad_connection_text">Votre connexion au serveur DNS est mauvaise en ce moment. Cela pourrait avoir un impact négatif sur votre vitesse de navigation. Envisagez de choisir un autre serveur.</string>
+    <string name="notification_bad_connection_title">Mauvaise connexion au serveur</string>
+    <string name="notification_channel_badconnection_description">Canal utilisé pour les notifications lorsque Nebulo a une mauvaise connexion</string>
+    <string name="notification_channel_badconnection">Mauvais canal de notification de connexion</string>
+    <string name="notification_channel_dnsrules_description">Canal utilisé pour l\'importation/exportation des règles du DNS</string>
+    <string name="notification_channel_dnsrules">Canal de notification des règles du DNS</string>
 </resources>
