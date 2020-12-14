@@ -67,4 +67,6 @@
     <string name="notification_channel_badconnection_description">Canal utilizado para notificações quando o Nebulo tem uma má ligação</string>
     <string name="notification_channel_dnsrules_description">Canal utilizado para a importação/exportação de regras DNS</string>
     <string name="notification_channel_dnsrules">Canal de Notificação de Regras DNS</string>
+    <string name="notification_cronet_failed_text">O DNS-over-QUIC não pode ser utilizado porque não pôde ser inicializado. Por favor, escolha outro servidor.</string>
+    <string name="notification_cronet_failed_title">Inicialização do QUIC falhou</string>
 </resources>
