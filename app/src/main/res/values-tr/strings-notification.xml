@@ -6,12 +6,12 @@
     <string name="notification_channel_foreground_service_description">Kullanıcı tarafından kaldırılamayan bildirimler için kullanılan kanal</string>
     <string name="notification_channel_noconnection">Bağlantı uyarı kanalı</string>
     <string name="notification_channel_noconnection_description">Hiçbir bağlantı görünmediğinde bildirimleri göstermek için kullanılan kanal</string>
-    <string name="notification_main_text">Sorgular %1s adresine gönderilir
+    <string name="notification_main_text">Sorgular %1s \'e gönderildi
 \n
-\n%2d Uygulama, DoH/DoT’den hariç tutuldu</string>
-    <string name="notification_main_text_with_secondary">Sorgular %1s ve %2s adresine gönderilir
+\n%2d Uygulamalar Nebulo\'dan hariç tutuldu</string>
+    <string name="notification_main_text_with_secondary">Sorgular %1s ve %2s \'ye gönderildi
 \n
-\n%3d Uygulama, DoH/DoT’den hariç tutuldu</string>
+\n%3d Uygulamalar Nebulo\'dan hariç tutuldu</string>
     <string name="notification_main_text_whitelist">Sorgular %1s adresine gönderilir
 \n
 \n%2d Uygulama DoH/DoT kullanıyor</string>
