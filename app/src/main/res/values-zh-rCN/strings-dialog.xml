@@ -169,4 +169,52 @@
     <string name="dialog_doh_detect_type_title">检测服务器类型</string>
     <string name="dialog_share_message">您希望分享什么链接？</string>
     <string name="dialog_share_title">选择链接类型</string>
+    <string name="dialog_speedtestpasses_message">设置每台服务器运行测试的频率。通过率越高越好</string>
+    <string name="dialog_dnsrules_status_fromsource">该主机属于源码%1$s</string>
+    <string name="dialog_querylog_information_message">这个列表显示了Nebulo在活动时记录的所有过去的查询。当Nebulo当前处于活动状态时，该列表会实时更新。
+\n
+\n行开头的图标表示查询的情况。
+\n
+\n标志：该主机是由DNS规则解析出来的，或者是被DNS服务器屏蔽了。
+\n箭头。Nebulo将查询转发到DNS服务器。
+\n数据库。Nebulo从缓存中检索到了DNS的响应</string>
+    <string name="dialog_nonvpn_help_netguard">要将非VPN模式与NetGuard一起使用，请执行以下操作。
+\n - 检查你是否安装了F-Droid版本的NetGuard。它不能与GPlay的版本一起使用。
+\n - 进入设置&gt;高级选项
+\n - 启用过滤流量（如果尚未启用
+\n - 点击端口转发
+\n - 增加以下规则：
+\n
+\n - 协议UDP，源端口53，目的端口%1$s，目的端口%2$d，目的app nobody。
+\n - 重复TCP
+\n
+\n - 回到高级选项
+\n - 向下滚动，将两个VPN DNS字段都设置为%3$s。
+\n - 启动Nebulo（在非VPN模式下）并启动NetGuard</string>
+    <string name="dialog_speedtestpasses_title">配置测试通过</string>
+    <string name="dialog_open_faq">你想看看这个功能的常见问题和文档吗？</string>
+    <string name="querylog_filter_shorten_domain">在列表中显示域名的缩写</string>
+    <string name="querylog_filter_type_blocked_by_server">被DNS服务器阻止</string>
+    <string name="querylog_filter_type_dnsrules">由DNS规则解决</string>
+    <string name="querylog_filter_type_cache">通过DNS缓存解决</string>
+    <string name="querylog_filter_type_forwarded">由DNS服务器解决</string>
+    <string name="querylog_filter_info">选择您要查看的查询类型</string>
+    <string name="querylog_filter_title">筛选查询记录</string>
+    <string name="dialog_dnsrules_status_sourcenotfound">该host在DNS规则中，但来源不明。</string>
+    <string name="dialog_dnsrules_status_userrule">这个主机是您定义的DNS规则的一部分。</string>
+    <string name="dialog_dnsrules_status_not_found">没有找到该host的DNS规则。</string>
+    <string name="dialog_dnsrules_search_message">在下面输入一个host，在DNS规则中进行搜索。</string>
+    <string name="dialog_dnsrules_search_title">搜索host</string>
+    <string name="dialog_querylog_information_title">关于查询记录的信息</string>
+    <string name="dialog_latency_sidebar_message">这里显示的延迟并不是你的ping或者你的网络有多快，它显示的是Nebulo发送请求并从DNS服务器得到回复所需的时间。
+\n 它显示了Nebulo从发送请求到从DNS服务器得到回复所需的时间。显示的值并不总是最新的，可能会有波动。
+\n 这可能会导致显示的数值高于实际值，因为自测量以来，该数值已变得较低。</string>
+    <string name="dialog_latency_sidebar_title">关于延迟的信息</string>
+    <string name="dialog_nonvpn_help_generic">要在非vpn模式下与第三方VPN应用一起使用Nebulo，你必须在这个其他应用内更改你的DNS设置。
+\n并非所有的VPN应用都允许你更改DNS设置。如果你的应用程序允许，只需将DNS服务器设置为\'%1$s:%2$d\'（你可以在上面配置端口）。
+\n
+\n配置好应用程序后，只需启动这两个应用程序即可。</string>
+    <string name="dialog_newdnsrule_block_host">屏蔽该host</string>
+    <string name="dialog_serverimport_servertype_doq">类型：DNS-over-TLS（DoQ）</string>
+    <string name="dialog_newserver_title_quic">添加服务器（DoQ）</string>
 </resources>
