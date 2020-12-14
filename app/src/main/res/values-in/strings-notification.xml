@@ -11,7 +11,7 @@
 \n%2d Aplikasi dikecualikan dari DoH/DoT</string>
     <string name="notification_main_text_with_secondary">Kueri dikirim ke %1s dan %2s
 \n
-\n%3d Aplikasi dikecualikan dari DoH/DoT</string>
+\n%3d Aplikasi dikecualikan dari Nebulo</string>
     <string name="notification_main_text_whitelist">Kueri dikirim ke %1s
 \n
 \n%2d Aplikasi menggunakan DoH/DoT</string>
@@ -34,11 +34,11 @@
     <string name="notification_channel_high_priorty">Prioritas tinggi</string>
     <string name="notification_channel_pin">Pin-Saluran terkait</string>
     <string name="notification_dnsserver_portdiffers">Port yang dikonfigurasi %1d tidak dapat digunakan.</string>
-    <string name="notification_dnsserver_message_iptables_failed">Server DNS berjalan di %1s:%1d. Gagal menginisialisasi iptables, kueri harus diteruskan dengan aplikasi pihak ketiga</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Server DNS berjalan di %1s:%1d. Kueri diteruskan menggunakan iptables.
+    <string name="notification_dnsserver_message_iptables_failed">Server DNS berjalan di %1s:%2d. Gagal menginisialisasi iptables, kueri harus diteruskan dengan aplikasi pihak ketiga</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">Server DNS berjalan di %1s:%2d. Kueri diteruskan menggunakan iptables.
 \nPeringatan: IPv6 aktif, kueri mungkin melewati Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">Server DNS berjalan di %1s:%1d. Kueri diteruskan menggunakan iptables</string>
-    <string name="notification_dnsserver_message">Server DNS berjalan di %1s:%1d. Teruskan kueri menggunakan aplikasi pihak ketiga</string>
+    <string name="notification_dnsserver_message_iptables_active">Server DNS berjalan di %1s:%2d. Kueri diteruskan menggunakan iptables</string>
+    <string name="notification_dnsserver_message">Server DNS berjalan di %1s:%2d. Teruskan kueri menggunakan aplikasi pihak ketiga</string>
     <string name="notification_dnsserver_title">Berjalan pada mode non-VPN</string>
     <string name="notification_service_revoked_message">Klik disini untuk memulai</string>
     <string name="notification_service_revoked_title">Izin VPN dibatalkan oleh sistem</string>
