@@ -174,4 +174,54 @@
 \n Самый быстрый сервер: %7$s
 \n Самый медленный сервер: %8$s</string>
     <string name="dialog_speedresult_title">Результаты скоростного тестирования</string>
+    <string name="dialog_querylog_information_message">В этом списке показаны все прошлые запросы, которые Nebulo записывал в журнал, когда он был активен. Список обновляется близко к реальному времени, когда Nebulo активен в данный момент.
+\n
+\nЗначки в начале строки указывают, что произошло с запросом.
+\n
+\nФлаг: Хост был разрешен из правил DNS или заблокирован DNS-сервером.
+\nСтрела: Nebulo перенаправила запрос на DNS-сервер.
+\nБаза данных: Nebulo извлекла DNS ответ из кэша</string>
+    <string name="dialog_nonvpn_help_netguard">Чтобы использовать не-VPN режим вместе с NetGuard, сделайте следующее:
+\n - Убедитесь, что у вас установлена F-Droid-версия NetGuard. Она не работает с версией от GPlay.
+\n - Перейдите в настройки &gt; Дополнительные опции
+\n - Включить трафик фильтрации (если он еще не включен)
+\n - Нажмите на Переадресацию портов
+\n - Добавьте следующие правила:
+\n
+\n - Протокол UDP, порт источника 53, назначение %1$s, порт назначения %2$d, назначение приложение никто
+\n - Повторить для TCP
+\n
+\n - Вернуться к дополнительным опциям
+\n - Прокрутите вниз, установите оба поля VPN DNS на %3$s.
+\n - Запустите Nebulo (в режиме, отличном от VPN) и запустите NetGuard</string>
+    <string name="dialog_speedtestpasses_message">Укажите, как часто должен выполняться тест на каждом сервере. Более высокие проходы увеличить актуарий</string>
+    <string name="dialog_speedtestpasses_title">Настройка тестовых проходов</string>
+    <string name="dialog_share_message">Какой ссылкой вы хотите поделиться\?</string>
+    <string name="dialog_share_title">Выберите тип ссылки</string>
+    <string name="dialog_open_faq">Хотите взглянуть на часто задаваемые вопросы и документацию по этой функции\?</string>
+    <string name="querylog_filter_shorten_domain">Отобразить более короткую версию домена в списке</string>
+    <string name="querylog_filter_type_blocked_by_server">Заблокирован DNS-сервером</string>
+    <string name="querylog_filter_type_dnsrules">Решено правилами DNS</string>
+    <string name="querylog_filter_type_cache">Решено с помощью DNS-кэша</string>
+    <string name="querylog_filter_type_forwarded">Решено DNS-сервером</string>
+    <string name="querylog_filter_info">Выберите типы запросов, которые вы хотите видеть</string>
+    <string name="querylog_filter_title">Журнал запросов фильтра</string>
+    <string name="dialog_dnsrules_status_sourcenotfound">Этот host находится в правилах DNS, но источник неизвестен.</string>
+    <string name="dialog_dnsrules_status_fromsource">Этот host является частью источника %1$s</string>
+    <string name="dialog_dnsrules_status_userrule">Этот хост является частью правил DNS, определенных вами.</string>
+    <string name="dialog_dnsrules_status_not_found">Правило DNS не найдено для этого узла.</string>
+    <string name="dialog_dnsrules_search_message">Введите ниже host для поиска в правилах DNS.</string>
+    <string name="dialog_dnsrules_search_title">Поиск host</string>
+    <string name="dialog_querylog_information_title">Информация о журнале запросов</string>
+    <string name="dialog_latency_sidebar_message">Задержка, показанная здесь, не является ни вашим пингом, ни скоростью вашей сети.
+\n Она показывает, сколько времени требуется Nebulo для отправки запроса и получения ответа от DNS-сервера. Отображаемое значение не всегда является самым актуальным, и колебания могут быть возможны.
+\n Это может привести к тому, что отображаемое значение будет больше, чем есть на самом деле, потому что с момента измерения оно стало меньше.</string>
+    <string name="dialog_latency_sidebar_title">Информация о задержке</string>
+    <string name="dialog_nonvpn_help_generic">Чтобы использовать Nebulo в не vpn режиме вместе со сторонним VPN приложением, вы должны изменить ваши настройки DNS внутри этого другого приложения.
+\nНе все VPN приложения позволяют вам изменять настройки DNS. Если ваша позволяет, просто установите DNS сервер на \'%1$s:%2$d\'\' (вы можете настроить порт, указанный выше).
+\n
+\nПосле настройки приложений просто запустите оба.</string>
+    <string name="dialog_newdnsrule_block_host">Блокировать этот host</string>
+    <string name="dialog_serverimport_servertype_doq">Тип: DNS-over-QUIC (DoQ)</string>
+    <string name="dialog_newserver_title_quic">Добавить сервер (DoQ)</string>
 </resources>
