@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="dialog_doh_detect_type_message">請稍候。</string>
+    <string name="dialog_doh_detect_type_title">檢測服務器類型</string>
 </resources>
