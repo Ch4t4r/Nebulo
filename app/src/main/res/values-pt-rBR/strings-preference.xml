@@ -113,7 +113,7 @@
     <string name="summary_run_without_vpn">Quando verificado, o Nebulo hospeda um servidor de DNS no seu dispositivo</string>
     <string name="title_run_without_vpn">Funciona sem VPN</string>
     <string name="summary_category_nonvpnmode">Configure o Nebulo para agir como um servidor DNS no dispositivo em vez de usar um VPN fictício. Quando ativado, tem que encaminhar manualmente as consultas de DNS para o Nebulo usando aplicativos de terceiros</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">O servidor será hospedado em %1s:%1s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">O servidor será hospedado em %1s:%2s</string>
     <string name="preference_category_nonvpnmode">Modo não-VPN</string>
     <string name="summary_check_iptables">Verifique se o seu dispositivo suporta iptables</string>
     <string name="title_check_iptables">Verificar por iptables</string>
