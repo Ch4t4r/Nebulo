@@ -168,4 +168,53 @@
     <string name="dialog_doh_detect_type_message">Por favor, espere un momento.</string>
     <string name="dialog_doh_detect_type_title">Detectando tipo de servidor</string>
     <string name="dialog_newdnsrule_block_host">Bloquear este host</string>
+    <string name="dialog_speedtestpasses_message">Establezca la frecuencia con la que se debe ejecutar la prueba por servidor. Los pases más altos aumentan la actuación</string>
+    <string name="dialog_speedtestpasses_title">Configurar los pases de prueba</string>
+    <string name="dialog_share_message">¿Qué enlace quieres compartir\?</string>
+    <string name="dialog_share_title">Seleccione el tipo de enlace</string>
+    <string name="dialog_open_faq">¿Quiere echar un vistazo a las preguntas más frecuentes y a la documentación de esta función\?</string>
+    <string name="querylog_filter_shorten_domain">Mostrar la versión abreviada del dominio en la lista</string>
+    <string name="querylog_filter_type_blocked_by_server">Bloqueado por el servidor DNS</string>
+    <string name="querylog_filter_type_dnsrules">Resuelto por las reglas del DNS</string>
+    <string name="querylog_filter_type_cache">Resuelto por el caché del DNS</string>
+    <string name="querylog_filter_type_forwarded">Resuelto por el servidor DNS</string>
+    <string name="querylog_filter_info">Seleccione qué tipos de consultas desea ver</string>
+    <string name="querylog_filter_title">Filtrar el registro de consultas</string>
+    <string name="dialog_dnsrules_status_sourcenotfound">Este host está en las reglas del DNS, pero la fuente es desconocida.</string>
+    <string name="dialog_dnsrules_status_fromsource">Este anfitrión es parte de la fuente %1$s</string>
+    <string name="dialog_dnsrules_status_userrule">Este host es parte de las reglas del DNS definidas por usted.</string>
+    <string name="dialog_dnsrules_status_not_found">No se ha encontrado ninguna regla del DNS para este huésped.</string>
+    <string name="dialog_dnsrules_search_message">Introduce un host abajo para buscarlo en las reglas del DNS.</string>
+    <string name="dialog_dnsrules_search_title">Buscar un host</string>
+    <string name="dialog_querylog_information_message">Esta lista muestra todas las consultas anteriores que Nebulo registró mientras estuvo activo. La lista se actualiza casi en tiempo real cuando Nebulo está actualmente activo.
+\n
+\nLos iconos al principio de la fila indican lo que pasó con la consulta.
+\n
+\nBandera: El host se resolvió a partir de las reglas del DNS, o fue bloqueado por el servidor del DNS
+\nFlecha: Nebulo envió la consulta al servidor DNS
+\nBase de datos: Nebulo recuperó la respuesta del DNS de la caché</string>
+    <string name="dialog_querylog_information_title">Información sobre el registro de consultas</string>
+    <string name="dialog_latency_sidebar_message">La latencia que se muestra aquí no es tu ping o la velocidad de tu red.
+\n Muestra el tiempo que tarda Nebulo en enviar una petición y obtener una respuesta del servidor DNS. El valor mostrado no siempre es el más actual y pueden producirse fluctuaciones.
+\n Esto puede causar que el valor se muestre más alto de lo que es porque se ha vuelto más bajo desde que fue medido.</string>
+    <string name="dialog_latency_sidebar_title">Información sobre la latencia</string>
+    <string name="dialog_nonvpn_help_generic">Para usar Nebulo en modo no VPN junto con una aplicación VPN de terceros tienes que cambiar la configuración de DNS dentro de esta otra aplicación.
+\nNo todas las aplicaciones VPN te permiten cambiar la configuración de DNS. Si la tuya lo hace, simplemente configura el servidor DNS en \'%1$s:%2$d\' (puedes configurar el puerto de arriba).
+\n
+\nDespués de configurar las aplicaciones, simplemente inicia ambas.</string>
+    <string name="dialog_nonvpn_help_netguard">Para usar el modo no VPN junto con NetGuard, haga lo siguiente:
+\n - Compruebe que tiene instalada la versión F-Droid de NetGuard. No funciona con la versión de GPlay.
+\n - Vaya a Configuración &gt; Opciones avanzadas
+\n - Habilitar el tráfico de filtros (si no está ya habilitado)
+\n - Haga clic en Reenvío de puertos
+\n - Añade las siguientes reglas:
+\n
+\n - Protocolo UDP, puerto de origen 53, puerto de destino %1$s, puerto de destino %2$d, aplicación de destino nadie
+\n - Repita para el TCP
+\n
+\n - Volver a las opciones avanzadas
+\n - Desplácese hacia abajo, establezca ambos campos de DNS VPN en %3$s
+\n - Inicie Nebulo (en modo no-VPN) e inicie NetGuard</string>
+    <string name="dialog_serverimport_servertype_doq">Escriba: DNS-over-QUIC (DoQ)</string>
+    <string name="dialog_newserver_title_quic">Añadir un servidor (DoQ)</string>
 </resources>
