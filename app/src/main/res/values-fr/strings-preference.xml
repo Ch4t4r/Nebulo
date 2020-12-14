@@ -136,4 +136,5 @@
     <string name="summary_nonvpn_use_lanip">Certaines applications ne permettent pas de saisir localhost comme DNS. Avec ce réglage, les périphériques IP du réseau sont utilisés à la place. L\'adresse changera en fonction de votre réseau, faites attention à la notification.</string>
     <string name="title_nonvpn_use_lanip">Utiliser Device IP au lieu de localhost</string>
     <string name="title_inform_bad_connection">Informez-moi d\'une mauvaise connexion</string>
+    <string name="summary_inform_bad_connection">Informez-moi lorsque le serveur DNS est actuellement lent ou fonctionne mal</string>
 </resources>
