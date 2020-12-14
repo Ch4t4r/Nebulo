@@ -136,4 +136,5 @@
     <string name="summary_start_after_update">Uruchomić aplikację po jej aktualizacji</string>
     <string name="title_theme">Temat</string>
     <string name="summary_theme">Ustawia temat tej aplikacji</string>
+    <string name="summary_inform_bad_connection">Poinformuj mnie, kiedy serwer DNS jest obecnie wolny lub w inny sposób źle działa</string>
 </resources>
