@@ -25,14 +25,14 @@
     <string name="dialog_doh_detect_type_message">فضلا انتظر لحظة.</string>
     <string name="dialog_doh_detect_type_title">كشف نوع السيرفر</string>
     <string name="dialog_vpn_permission_denied_message">لم يستطع النظام تشغيل Nebulo VPN بشكل صحيح. يرجى فتح التطبيق لمنح الإذن من خلال النقر على زر البدء.</string>
-    <string name="dialog_raterequest_message">مرحبا! إذا كنت تستمتع بـ Nebulo ، فهل يمكنك قضاء بعض الوقت لتقييمه في المتجر؟</string>
+    <string name="dialog_raterequest_message">مرحبا! إذا كنت تستمتع ب Nebulo ، فهل يمكنك قضاء بعض الوقت لتقييمه في المتجر؟</string>
     <string name="dialog_raterequest_title">هل تستمتع بتطبيق نيبولو؟</string>
     <string name="dialog_vpninformation_message">يعمل Nebulo باستخدام شبكة افتراضية خاصة وهمية لالتقاط جميع طلبات DNS الخاصة بك ، والتي يتم إعادة توجيهها بعد ذلك إلى سيرفر آمن من اختيارك.
 \nهذه VPN الافتراضية ليست شبكة افتراضية خاصة ولا تخفي هويتك ولا تغير عنوان IP الخاص بك.
 \n
 \nلا يتم إرسال أي بيانات فعلية ، باستثناء طلبات DNS ، باستخدام هذا التطبيق.</string>
     <string name="dialog_vpninformation_title">كيف يعمل هذا التطبيق</string>
-    <string name="dialog_cleardnscache_message">هل أنت متأكد أنك تريد مسح ذاكرة التخزين المؤقت لـ DNS؟</string>
+    <string name="dialog_cleardnscache_message">هل أنت متأكد أنك تريد مسح ذاكرة التخزين المؤقت ل DNS؟</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">أسابيع</string>
     <string name="dialog_hostsourcerefresh_timeunit_days">أيام</string>
     <string name="dialog_hostsourcerefresh_timeunit_hours">ساعات</string>
@@ -52,7 +52,7 @@
 \nعلى معظم الأجهزة لديك بعض الخيارات لمنع أو على الأقل تأخير النظام من إيقاف التطبيق.
 \nيمكنك على سبيل المثال تعطيل تحسينات البطارية للتطبيق في إعدادات النظام أو تجنب مسح التطبيق من قائمة المستجدات.
 \n
-\nإذا اخترت تجاهل هذا فلن ترى مربع الحوار هذا مرة أخرى. يمكنك قراءة المزيد وتلقي نصائح لحل هذا باستخدام الزر أدناه (يفتح موقع ويب خارجي في المستعرض الخاص بك). انقر على الإعدادات لفتح إعدادات Android حيث يمكنك تعطيل تحسينات البطارية لـ Nebulo.</string>
+\nإذا اخترت تجاهل هذا فلن ترى مربع الحوار هذا مرة أخرى. يمكنك قراءة المزيد وتلقي نصائح لحل هذا باستخدام الزر أدناه (يفتح موقع ويب خارجي في المستعرض الخاص بك). انقر على الإعدادات لفتح إعدادات Android حيث يمكنك تعطيل تحسينات البطارية ل Nebulo.</string>
     <string name="dialog_editdelete_delete">حذف</string>
     <string name="dialog_editdelete_edit">تعديل</string>
     <string name="dialog_editdelete_title">ماذا تريد أن تفعل؟</string>
@@ -101,14 +101,15 @@
 \nنحن مجتمع رائع يضم أكثر من 200 شخص ، هل ترغب في أن تكون جزءًا منه؟</string>
     <string name="dialog_join_group_title">الانضمام إلى المجتمع</string>
     <string name="dialog_credits_message" formatted="true">- رمز التطبيق من خلال &lt;a href=https://dribbble.com/rkbdww RKBDI &lt;/a&gt;.
-\n- الترجمة التركية من قبل كمال Oktay Aktoğan
-\n- الترجمة الروسية عن طريق بروليتو
-\n- ترجمة هولندية من قبل باس Koedijk
-\n- الترجمة البرتغالية من قبل رافائيل و. Bohnenberger
-\n- الترجمة الإندونيسية بواسطة Gloeyisk
+\n- الترجمة التركية بواسطة كمال اوكتاي أكتوغان
+\n- الترجمة الروسية بواسطة bruleto
+\n- الترجمة الهولندية من قبل Bas Koedijk
+\n- الترجمة البرتغالية من قبل رافائيل دبليو بونينبيرغر
+\n- الترجمة الاندونيسية بواسطة Gloeyisk
 \n- الترجمة الكاتالونية لدانيال العمر
-\n- ترجمة إسبانية لدانيال العمر وفيكتور باياس
+\n- الترجمة الإسبانية لدانيال العمر وفيكتور باياس
 \n- بعض الرموز من Font Awesome
+\n- الترجمة الصينية (المبسطة) بواسطة Ediel Chedlyramber بعض الرموز من Font Awesome
 \n 
 \n تريد أن ترى اسمك هنا؟ لا تتردد في &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt; المساهمة &lt;/a&gt;.</string>
     <string name="dialog_credits_title">المساهمون</string>
@@ -156,8 +157,8 @@
     <string name="dialog_logexport_general">اختر تطبيق</string>
     <string name="dialog_logexport_text">كيف تريد مشاركة السجلات؟</string>
     <string name="dialog_logexport_loading_title">تحضير السجلات</string>
-    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">تعذر استيراد السيرفرات. 
-\n(% 1s)</string>
+    <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">تعذر استيراد السيرفرات.
+\n(%1s)</string>
     <string name="dialog_serverimportfailed_text">تعذر استيراد السيرفر (الخوادم).</string>
     <string name="dialog_serverimportfailed_title">فشل الاستيراد</string>
     <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">يرجى تحديد الخوادم التي ترغب في استيرادها.
