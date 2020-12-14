@@ -66,7 +66,8 @@
     <string name="windows_querylogging_usedserver_cache">Afgehandeld met cache</string>
     <string name="windows_querylogging_search_hint">Zoek naar een host in het DNS verzoek-logboek</string>
     <string name="windows_querylogging_search">Host zoeken</string>
-    <string name="window_main_privatedns_info">Privé-DNS is actief, uw aanvragen zijn al beveiligd. Schakel Nebulo in als u DNS-over-HTTPS of andere handige functies wilt gebruiken.</string>
+    <string name="window_main_privatedns_info">Private DNS is actief, uw query\'s zijn al beschermd. Schakel de Nebulo in als u DNS-over-HTTPS of andere nuttige functies wilt gebruiken.
+\nOm de Nebulo in te schakelen schakelt u Private DNS uit.</string>
     <string name="windows_querylogging_hostsource">Bron van DNS-regel</string>
     <string name="windows_querylogging_hostsource__user">Gebruikers regels</string>
     <string name="windows_querylogging_hostsource__unknown">Onbekend</string>
@@ -78,4 +79,50 @@
     <string name="iptables_supported">Gefeliciteerd, iptables wordt ondersteund door uw apparaat!</string>
     <string name="restart_app">Herstart</string>
     <string name="restart_app_for_changes">Start de app opnieuw op om de veranderingen in werking te laten treden.</string>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="one">%1d query is tot nu toe geblokkeerd</item>
+        <item quantity="other">%1d query zijn tot nu toe geblokkeerd</item>
+    </plurals>
+    <string name="appintro_forth_description">U kunt de Nebulo configureren voor gebruik als een systeembrede advertentie- en tracking-blocker.
+\n
+\nU kunt het zelfs samen met sommige firewall-apps gebruiken om uw controle over uw privacy nog verder te vergroten.</string>
+    <string name="appintro_server_choose_first">De snelste</string>
+    <string name="appintro_server_choose_adblock">Een server die advertenties en tracking blokkeert</string>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="one">%1d query is tot nu toe behandeld door de DNS-regels</item>
+        <item quantity="other">%1d query\'s zijn tot nu toe door de DNS-regels afgehandeld</item>
+    </plurals>
+    <string name="appintro_server_choose_third">Een echte privacy gerichte server</string>
+    <string name="appintro_server_choose_forth">Een server die me beschermt tegen schadelijke websites en apps</string>
+    <string name="appintro_server_choose_second">Een snelle server, met een focus op privacy</string>
+    <string name="appintro_server_choose_description">Wat voor soort server wilt u gebruiken in de Nebulo\?</string>
+    <string name="appintro_server_choose_disclaimer">Er zijn servers die in meerdere of zelfs alle categorieën passen. De Nebulo kiest automatisch de snelste.</string>
+    <string name="appintro_server_choose_title">De eerste dingen eerst</string>
+    <string name="appintro_forth_title">Nog één ding</string>
+    <string name="appintro_third_title">Volledig uitgerust voor grootsheid</string>
+    <string name="appintro_third_description">De Nebulo wordt geleverd met een heleboel handige functies zoals het monitoren van DNS-activiteiten, PIN-bescherming, een snelheidstest en nog veel meer.
+\n
+\nVerken de app om te ontdekken wat vrije open-source software te bieden heeft.</string>
+    <string name="appintro_second_description">Door encryptie toe te voegen aan DNS, een van de oudste protocollen van het internet, is het in uw handen.
+\n
+\nMaak het moeilijker voor uw ISP om u te volgen door gebruik te maken van DNS-over-HTTPS en DNS-over-TLS met Nebulo.</string>
+    <string name="warning_server_currently_unstable">De server %1s lijkt nu onstabiel te zijn.</string>
+    <string name="appintro_second_title">Uw privacy is belangrijk</string>
+    <string name="appintro_first_title">Welkom in Nebulo.</string>
+    <string name="appintro_first_description">De Nebulo is een app om uw privacy te beschermen en uw apparaat te beveiligen.
+\n
+\nNeem de controle terug over de gegevens die uw ISP of andere entiteiten al lang als die van hen hebben behandeld.</string>
+    <string name="warning_server_currently_unstable_expanded">De server %1s lijkt op dit moment onstabiel te zijn, wat invloed heeft op je surfsnelheid. Overweeg om over te stappen op een stabielere server.</string>
+    <string name="window_querylog_information">Informatie</string>
+    <string name="about_help_faq">Veelgestelde vragen</string>
+    <string name="window_main_protected">Beschermd!</string>
+    <string name="window_dnsrules_refresh_sources">Verfrissende regels voor de invoer uit de bron</string>
+    <string name="window_main_unprotected">Niet beschermd</string>
+    <string name="window_main_click_to_enable">Klik om in te schakelen.</string>
+    <string name="window_speedtest_information">Hoe lager de waarden, hoe sneller de Nebulo met de server kan communiceren. Dit verhoogt bijvoorbeeld uw surfsnelheid.</string>
+    <string name="theme_true_black">Echt zwart</string>
+    <string name="theme_blue">Blauw</string>
+    <string name="theme_mono">Mono</string>
+    <string name="theme_dark">Donker</string>
+    <string name="app_share_fdroid">Hé, ik heb deze app gevonden die je DNS-vragen versleutelt om je meer privacy en veiligheid te geven. Bekijk het door het te downloaden van hier: https://nebulo.app/source#installation</string>
 </resources>
