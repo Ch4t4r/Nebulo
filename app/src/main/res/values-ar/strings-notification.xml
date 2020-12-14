@@ -67,4 +67,6 @@
     <string name="notification_channel_default">القناة الإفتراضية</string>
     <string name="notification_bad_connection_text">اتصالك بخادم DNS سيء الآن. قد يؤثر ذلك سلبًا على سرعة تصفح الإنترنت لديك. ضع في اعتبارك اختيار خادم آخر.</string>
     <string name="notification_bad_connection_title">اتصال خادم غير صالح</string>
+    <string name="notification_cronet_failed_text">لا يمكن استخدام DNS-over-QUIC لأنه لا يمكن تهيئته. الرجاء اختيار خادم آخر.</string>
+    <string name="notification_cronet_failed_title">فشل تهيئة QUIC</string>
 </resources>
