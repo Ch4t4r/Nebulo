@@ -187,5 +187,34 @@
     <string name="querylog_filter_type_cache">Vom DNS Cache aufgelöst</string>
     <string name="dialog_share_message">Welchen Link möchtest du teilen\?</string>
     <string name="dialog_share_title">Linktypen wählen</string>
-    <string name="dialog_newserver_title_quic"></string>
+    <string name="dialog_newserver_title_quic">Neuer Server (DoQ)</string>
+    <string name="dialog_speedtestpasses_message">Stelle ein, wie oft der Test pro Server wiederholt werden soll. Mehr Durchläufe erhöhen die Genauigkeit</string>
+    <string name="dialog_speedtestpasses_title">Testdurchläufe einstellen</string>
+    <string name="querylog_filter_type_blocked_by_server">Durch den DNS-Server blockiert</string>
+    <string name="querylog_filter_type_forwarded">Vom DNS-Server aufgelöst</string>
+    <string name="querylog_filter_info">Wähle aus, welche Arten von Abfragen du sehen möchtest</string>
+    <string name="querylog_filter_title">Abfrageprotokoll filtern</string>
+    <string name="dialog_dnsrules_status_sourcenotfound">Dieser Host ist in den DNS-Regeln enthalten, aber die Quelle ist unbekannt.</string>
+    <string name="dialog_dnsrules_status_fromsource">Dieser Host ist Teil der Quelle %1$s</string>
+    <string name="dialog_dnsrules_status_userrule">Dieser Host ist Teil der von dir definierten DNS-Regeln.</string>
+    <string name="dialog_dnsrules_status_not_found">Für diesen Host wurde keine DNS-Regel gefunden.</string>
+    <string name="dialog_dnsrules_search_message">Gib unten einen Host ein, um in den DNS-Regeln nach ihm zu suchen.</string>
+    <string name="dialog_dnsrules_search_title">Suche nach einem Host</string>
+    <string name="dialog_querylog_information_message">Diese Liste zeigt alle vergangenen Abfragen, die Nebulo protokolliert hat, während es aktiv war. Die Liste wird nahezu in Echtzeit aktualisiert, wenn Nebulo gerade aktiv ist.
+\n
+\nSymbole am Anfang der Zeile zeigen an, was mit der Abfrage geschehen ist.
+\n
+\nFlag: Der Host wurde anhand der DNS-Regeln aufgelöst oder vom DNS-Server blockiert.
+\nPfeil: Nebulo leitete die Anfrage an den DNS-Server
+\nDatenbank: Nebulo hat die DNS-Antwort aus dem Cache abgerufen</string>
+    <string name="dialog_querylog_information_title">Informationen zum Anfrageprotokoll</string>
+    <string name="dialog_latency_sidebar_message">Die hier angezeigte Latenzzeit ist nicht dein Ping oder wie schnell dein Netzwerk ist.
+\nSie zeigt, wie lange es dauert, bis Nebulo eine Anfrage sendet und eine Antwort vom DNS-Server erhält. Der angezeigte Wert ist nicht immer der aktuellste und Schwankungen können möglich sein.
+\nDies kann dazu führen, dass der Wert höher angezeigt wird, als er ist, weil er seit der Messung niedriger geworden ist.</string>
+    <string name="dialog_latency_sidebar_title">Informationen zur Latenz</string>
+    <string name="dialog_nonvpn_help_generic">Um Nebulo im Nicht-VPN Modus zusammen mit anderen Apps zu nutzen musst du die DNS Einstellungen in diesen anderen Apps ändern.
+\nNicht alle VPN Apps erlauben dir dort die DNS-Einstellungen zu ändern. Sollte deine dies erlauben, setze den DNS Server auf \'%1$s:%2$d\' (der Port kann weiter oben konfiguriert werden).
+\n
+\nNach dem Einstellen starte einfach beide Apps.</string>
+    <string name="dialog_serverimport_servertype_doq">Typ: DNS-over-QUIC (DoQ)</string>
 </resources>
