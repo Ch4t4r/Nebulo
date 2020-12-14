@@ -22,7 +22,7 @@
     <string name="title_preference_enable_pin">PIN</string>
     <string name="summary_preference_enable_pin">Uygulamayı açarken veya durdururken bir PIN isteyin</string>
     <string name="title_preference_pin_use_fingerprint">Parmak izine izin ver</string>
-    <string name="summary_preference_pin_use_fingerprint">Parmak izinizin PIN yerine kullanılmasına izin verin.</string>
+    <string name="summary_preference_pin_use_fingerprint">Parmak izinizin PIN yerine kullanılmasına izin verin</string>
     <string name="title_preference_change_pin">PIN\'i değiştir</string>
     <string name="summary_preference_change_pin">PIN\'i değiştirin. Sadece sayısal değerlere izin verilir.
 \nGeçerli PIN: %1s</string>
@@ -41,8 +41,8 @@
     <string name="summary_dnscache_minimum_cache_time">Varsayılan önbellekleme süresinin daha kısa olup olmamasına bakmaksızın, önbellekteki asgari saklama süresi. Uzun önbellekleme süreleri, önbellekteki verilerin gerçek verilerle eşitlenmemesine neden olabilir. 
 \nGeçerli: %1d Saniye</string>
     <string name="title_dnscache_customcachetime">Özel önbellek süresi (Saniye)</string>
-    <string name="summary_dnscache_customcachetime">"Varsayılan önbellekleme süresinin daha uzun olup olmamasına bakmaksızın tüm isteklerin önbelleğe alınma süresini değiştirir.  Uzun önbellekleme süreleri, önbellekteki verilerin gerçek verilerle eşitlenmemesine neden olabilir. 
-\nGeçerli: %1d Saniye"</string>
+    <string name="summary_dnscache_customcachetime">Varsayılan önbellekleme süresinin daha uzun olup olmamasına bakmaksızın tüm isteklerin önbelleğe alınma süresini değiştirir. Uzun önbellekleme süreleri, önbellekteki verilerin gerçek verilerle eşitlenmemesine neden olabilir. 
+\nGeçerli: %1d Saniye</string>
     <string name="title_dnscache_nxdomaincachetime">Nxdomain için önbellek süresi (saniye)</string>
     <string name="summary_dnscache_nxdomaincachetime">NXDOMAIN isteklerinin önbelleğe alınma süresini değiştirir. Bu, mevcut olmayan alan adlarının başarımını artırır (ör. Engellenmişlerse) 
 \nGeçerli: %1d Saniye</string>
@@ -80,7 +80,7 @@
     <string name="summary_pause_on_captiveportal">Giriş portalı tespit edilirse DoH kullanmayın. Giriş yaptıktan kısa bir süre sonra otomatik olarak devam edilecektir. 
 \nDevre dışı bırakmak, oturum açmak için giriş portalını açmanızı engelleyebilir</string>
     <string name="title_show_noconnection_notification">Bağlantı yok bildirimi</string>
-    <string name="summary_show_noconnection_notification">Uygulamanın bağlantısı kötü ya da yokken bir bildirim göster</string>
+    <string name="summary_show_noconnection_notification">Uygulamanın şu anda DNS sunucusuyla bağlantısı olmadığında bir bildirim göster</string>
     <string name="preference_category_querylogging">Sorgu günlüğü</string>
     <string name="title_log_queries">Sorgu günlüğü</string>
     <string name="summary_log_queries">Tüm sorguları ve cevaplarını günlüğe kaydet</string>
@@ -100,8 +100,8 @@
     <string name="title_crashreporting_type">Otomatik kilitlenme raporlaması</string>
     <string name="summary_crashreporting_type">Uygulama çöktüğünde geliştiriciye hangi verilerin iletileceğini yapılandırın. Kilitlenme verileri hiçbir zaman kişisel veriler içermez ve sorunların daha hızlı düzeltilmesine yardımcı olur</string>
     <string name="title_restart_vpn_on_networkchange">Ağ değişikliğinde yeniden başlat</string>
-    <string name="summary_restart_vpn_on_networkchange">"Ağ değiştiğinde sessizce uygulamayı yeniden başlatın. Ağlar arasında geçiş yaparken sorunla karşılaştığınızda bunu etkinleştirin. 
-\n  Uygulama aktif olmadığında hiçbir etkisi olmaz"</string>
+    <string name="summary_restart_vpn_on_networkchange">Ağ değiştiğinde sessizce uygulamayı yeniden başlatın. Ağlar arasında geçiş yaparken sorunla karşılaştığınızda bunu etkinleştirin. 
+\nUygulama aktif olmadığında hiçbir etkisi olmaz</string>
     <string name="summary_map_query_refused">Bazı DNS sunucuları, ana bilgisayara izin verilmiyorsa veya engelleniyorsa sorguyu cevaplamayı reddedebilir. Bu ayar, sorguyu reddetmek yerine ana bilgisayarı engeller, aksi takdirde sistem karışabilir</string>
     <string name="crashreporting_type_full">Tam (İstatistiği ve hata ayıklama verilerini bildir)</string>
     <string name="crashreporting_type_minimal">Minimal (Sadece Android ve uygulama sürümü)</string>
