@@ -1,2 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="title_export_settings">Ustawienia eksportu</string>
+    <string name="summary_export_settings">Eksport wszystkich ustawień (w tym źródeł reguł DNS) do pliku. Plik można później otworzyć w celu zaimportowania go do Nebulo.</string>
+    <string name="preference_category_general">Ogólne</string>
+    <string name="title_start_on_boot">Zacznij od buta</string>
+    <string name="summary_start_on_boot">Uruchomić aplikację, gdy telefon jest włączony</string>
+    <string name="title_start_after_update">Start po aktualizacji</string>
+    <string name="summary_excluded_apps">Wykluczyć aplikacje z aplikacji tutaj, na przykład jeśli nie mogą już łączyć się z Internetem - wybrane aplikacje nie będą już używać DNS-over-HTTPS lub DNS-over-TLS</string>
+    <string name="title_run_without_vpn">Biegnij bez VPN</string>
+    <string name="title_send_logs">Wysyłaj dzienniki debugowania</string>
+    <string name="fallbackdns_isp">Dostawca usług (nieszyfrowany)</string>
+    <string name="crashreporting_type_minimal">Minimalny (zgłaszać tylko wersję z systemem Android i aplikacją)</string>
+    <string name="crashreporting_type_off">Wył. (Nie wysyłaj raportów o wypadkach)</string>
+    <string name="crashreporting_type_full">Pełny (dane statystyczne raportu i dane dotyczące debugowania)</string>
+    <string name="title_iptables_disable_ipv6">Wyłączenie IPv6</string>
+    <string name="title_nonvpn_help_faq">Dokumentacja</string>
+    <string name="summary_nonvpn_help_faq">Kliknij tutaj, aby otworzyć okno przeglądarki z pomocą i dokumentacją dotyczącą trybu innego niż VPN</string>
+    <string name="nonvpn_help_generic_title">Generyczne aplikacje VPN</string>
+    <string name="summary_nonvpn_help_generic">Kliknij tutaj, aby uzyskać instrukcje na temat konfiguracji aplikacji VPN</string>
+    <string name="preference_category_nonvpnmode_help">Instrukcje dla aplikacji innych firm</string>
+    <string name="summary_nonvpn_help">Kliknij tutaj, aby uzyskać instrukcje na temat korzystania z tej aplikacji</string>
+    <string name="title_check_iptables">Sprawdź, czy nie ma tabliczek znamionowych</string>
+    <string name="summary_check_iptables">Sprawdź, czy Twoje urządzenie obsługuje iptables</string>
+    <string name="summary_iptables_disable_ipv6">Wyłączenie IPv6 podczas używania iptables i IPv4 może być użyte zamiast niego. Może to naprawić zapytania DNS omijające iptables, gdy IPv6 jest włączone.</string>
+    <string name="title_iptables_mode">Korzystaj z iptables</string>
+    <string name="summary_iptables_mode">Przesyłanie zapytań do Nebulo za pomocą iptables. Wymaga to uprawnień roota. Po włączeniu tej opcji nie trzeba używać żadnych zewnętrznych aplikacji w trybie innym niż vpn. Może to nie działać, gdy użytkownik znajduje się w sieci IPv6.</string>
+    <string name="summary_local_server_port">Port serwera DNS, który będzie hostowany. Tylko porty powyżej 1024 są dozwolone</string>
+    <string name="preference_category_iptables">Iptables</string>
+    <string name="title_local_server_port">Port serwera</string>
+    <string name="title_nonvpn_use_lanip">Użyj adresu IP urządzenia zamiast lokalnego hosta</string>
+    <string name="summary_nonvpn_use_lanip">Niektóre aplikacje nie pozwalają na wpisanie lokalnego hosta jako DNS. Przy tym ustawieniu zamiast tego używane jest IP urządzeń w sieci. Adres zmieni się w zależności od sieci, zwróć uwagę na powiadomienie.</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Serwer będzie hostowany na %1s:%2s</string>
+    <string name="summary_run_without_vpn">Po zaznaczeniu opcji Nebulo hostuje serwer DNS w urządzeniu</string>
+    <string name="summary_category_nonvpnmode">Skonfiguruj Nebulo, aby działał jako serwer DNS w urządzeniu zamiast jako atrapa VPN. Po włączeniu tej opcji należy ręcznie przekierowywać zapytania DNS do Nebulo za pomocą aplikacji innych firm</string>
+    <string name="title_delete_queries">Jasne pytania</string>
+    <string name="preference_category_nonvpnmode">Tryb Non-VPN</string>
+    <string name="summary_delete_queries">Kliknij tutaj, aby usunąć wszystkie zalogowane zapytania</string>
+    <string name="title_export_queries">Pytania dotyczące eksportu</string>
+    <string name="summary_export_queries">Zapytania eksportowe jako CSV (%1d zapytań)</string>
+    <string name="title_log_queries">Logowanie zapytań</string>
+    <string name="summary_log_queries">Zapisywanie wszystkich zapytań i ich odpowiedzi</string>
+    <string name="preference_category_querylogging">Logowanie zapytań</string>
+    <string name="summary_pause_on_captiveportal">Nie używaj DoH, jeśli zostanie wykryty portal niewoli. Zostanie on automatycznie wznowiony wkrótce po zalogowaniu.
+\nWyłączenie go może uniemożliwić otwarcie strony portalu w celu zalogowania się</string>
+    <string name="summary_bypass_searchdomains">Wyślij wyszukiwane domeny (np. MyPC.local lub MyPc.fritz.box) do serwera Dns w Twojej sieci zamiast do serwera DoH.
+\nJest to bardzo zalecane. Te zapytania nie opuszczają Twojej sieci</string>
+    <string name="title_pause_on_captiveportal">Pauza na portalu jenieckim</string>
+    <string name="title_bypass_searchdomains">Ominięcie domen wyszukiwania</string>
+    <string name="summary_map_query_refused">Niektóre serwery DNS mogą odmówić odpowiedzi na zapytanie, jeśli host nie jest dozwolony lub jest zablokowany. To ustawienie blokuje hosta, zamiast odmawiać odpowiedzi na zapytanie, w przeciwnym razie system może się pomylić</string>
+    <string name="title_map_query_refused">Tłumaczyć odrzucone zapytania jako niedozwolone hosty</string>
+    <string name="title_catch_other_dns_servers">Przechwytywanie innego ruchu DNS</string>
+    <string name="summary_catch_other_dns_servers">Przechwytywanie ruchu znanych serwerów DNS i przesyłanie go za pomocą Nebulo</string>
+    <string name="summary_disallow_other_vpns">Nie zezwalaj innym VPN-om na start, jeśli aplikacja nie jest wyraźnie zatrzymana</string>
+    <string name="title_disallow_other_vpns">Pozbawienie innych VPN</string>
+    <string name="title_restart_vpn_on_networkchange">Restart przy zmianie sieci</string>
+    <string name="summary_restart_vpn_on_networkchange">Po cichu zrestartuj aplikację, gdy zmieni się sieć. Włącz to, gdy występują problemy przy przełączaniu między sieciami.
+\n Brak efektu, gdy aplikacja nie jest aktywna</string>
+    <string name="summary_allow_ipv6_traffic">Zezwolić na korzystanie z ruchu IPv6, nawet jeśli IPv4 jest wyłączone.
+\nJeśli jest wyłączona, podczas działania aplikacji nie są dozwolone żadne połączenia IPv6</string>
+    <string name="preference_category_network">Sieć</string>
+    <string name="title_allow_ipv6_traffic">Zezwolenie na ruch IPv6</string>
+    <string name="summary_allow_ipv4_traffic">Zezwolić na korzystanie z ruchu IPv4, nawet jeśli IPv4 jest wyłączone.
+\nJeśli jest wyłączony, nie są dozwolone żadne połączenia IPv4 podczas działania aplikacji</string>
+    <string name="summary_force_ipv4">Zmuś aplikację do akceptowania żądań IPv4, nawet jeśli urządzenie nie używa IPv4</string>
+    <string name="title_allow_ipv4_traffic">Zezwolenie na ruch IPv4</string>
+    <string name="title_force_ipv4">Siła IPv4</string>
+    <string name="summary_force_ipv6">Zmuś aplikację do akceptowania żądań IPv6, nawet jeśli urządzenie nie używa IPv6</string>
+    <string name="title_force_ipv6">Siła IPv6</string>
+    <string name="summary_enable_ipv6">Użyj IPv6, jeśli urządzenie ma przypisany adres IPv6</string>
+    <string name="title_enable_ipv4">Włącz IPv4</string>
+    <string name="summary_enable_ipv4">Użyj IPv4, jeśli urządzenie ma przypisany adres IPv4</string>
+    <string name="preference_category_ip">Ustawienia IP</string>
+    <string name="title_enable_ipv6">Włącz IPv6</string>
+    <string name="summary_crashreporting_type">Skonfiguruj, jakie dane mają być przesyłane do dewelopera w przypadku awarii aplikacji. Dane dotyczące awarii nigdy nie zawierają danych osobowych i pomagają szybciej rozwiązywać problemy</string>
+    <string name="summary_delete_all_logs">Usuwa wszystkie dzienniki zapisane w urządzeniu</string>
+    <string name="title_crashreporting_type">Automatyczne zgłaszanie awarii</string>
+    <string name="summary_send_logs">Kliknij tutaj, aby wysłać logi do dewelopera</string>
+    <string name="title_delete_all_logs">Usuń wszystkie kłody</string>
+    <string name="title_advanced_logging">Zaawansowane logowanie debugowania</string>
+    <string name="summary_advanced_logging">Dodaje więcej debug logowania, co może pomóc przy bardziej uporczywych problemach</string>
+    <string name="title_enable_logging">Włączanie debugowania Logowanie</string>
+    <string name="summary_enable_logging">Włącza logowanie informacji o debugowaniu (zawiera dane statystyczne). Te logi nie są wysyłane automatycznie</string>
+    <string name="summary_dnscache_nxdomaincachetime">Zmienia ilość czasu, przez jaki żądania programu NXDOMAIN są buforowane. Zwiększa to wydajność dla nieistniejących domen (np. jeśli są one zablokowane).
+\nPrąd: %1d Sekundy</string>
+    <string name="preference_category_logging">Logowanie</string>
+    <string name="title_dnscache_nxdomaincachetime">Czas pamięci podręcznej dla domeny NXDomain (sekundy)</string>
+    <string name="summary_dnscache_customcachetime">Zmienia jak długo wszystkie żądania są buforowane, bez względu na to, czy domyślny czas buforowania byłby dłuższy. Długi czas buforowania może spowodować, że zbuforowane dane nie będą zsynchronizowane z rzeczywistymi danymi.
+\nAktualnie: %1d Sekundy</string>
+    <string name="title_dnscache_customcachetime">Niestandardowy czas przechowywania w pamięci podręcznej (w sekundach)</string>
+    <string name="summary_dnscache_minimum_cache_time">Minimalna ilość wpisów czasowych powinna być buforowana, bez względu na to, czy domyślny czas buforowania byłby krótszy. Długi czas buforowania może spowodować, że zbuforowane dane nie będą zsynchronizowane z rzeczywistymi danymi.
+\nAktualnie: %1d Sekundy</string>
+    <string name="title_dnscache_minimum_cache_time">Minimalny czas przechowywania w pamięci podręcznej</string>
+    <string name="summary_dnscache_usedefaulttimes">Przechowywanie żądań w pamięci podręcznej tak długo, jak długo serwer DNS komunikuje się za pomocą TTL</string>
+    <string name="summary_dnscache_maxsize">Określa maksymalną liczbę wpisów, które mogą być przechowywane w pamięci podręcznej w dowolnym momencie</string>
+    <string name="title_dnscache_usedefaulttimes">Domyślny czas przechowywania w pamięci podręcznej</string>
+    <string name="title_dnscache_maxsize">Maksymalny rozmiar pamięci podręcznej</string>
+    <string name="summary_dnscache_keepacrosslaunches">Zachowaj pamięć podręczną DNS przy wielu uruchomieniach</string>
+    <string name="title_clear_dnscache">Czysta pamięć podręczna DNS</string>
+    <string name="summary_clear_dnscache">Kliknij tutaj, aby wyczyścić pamięć podręczną DNS, na przykład gdy strony internetowe zaczynają się źle zachowywać, ponieważ są buforowane</string>
+    <string name="title_dnscache_keepacrosslaunches">Trzymaj DNS cache</string>
+    <string name="summary_dnscache_enabled">Włącza pamięć podręczną DNS aplikacji. Pamięć podręczna zapamiętuje stare żądania, aby szybciej odpowiadać na przyszłe pytania.
+\n
+\nSystem ma już pamięć podręczną, włącz ją, jeśli chcesz dostosować zachowanie</string>
+    <string name="preference_category_cache">Kontrola pamięci podręcznej</string>
+    <string name="title_dnscache_enabled">Użyj pamięci podręcznej DNS</string>
+    <string name="title_preference_change_pin">Zmień zawleczkę</string>
+    <string name="summary_preference_change_pin">Zmień zawleczkę. Dozwolone są tylko wartości liczbowe.
+\nAktualny pin: %1s</string>
+    <string name="title_preference_pin_use_fingerprint">Pozwól na pobranie odcisków palców</string>
+    <string name="summary_preference_pin_use_fingerprint">Pozwól, aby zamiast pinezki użyto odcisku palca</string>
+    <string name="title_preference_enable_pin">Szpilka</string>
+    <string name="summary_preference_enable_pin">Poprosić o kod PIN przy otwieraniu lub zatrzymywaniu aplikacji</string>
+    <string name="preference_category_pin">Ochrona PIN</string>
+    <string name="title_inform_bad_connection">Poinformuj mnie o złym połączeniu</string>
+    <string name="title_show_revoked_notification">Powiadomienie o utracie pozwolenia</string>
+    <string name="summary_show_revoked_notification">Pokaż powiadomienie, gdy Nebulo utraci pozwolenie na korzystanie z VPN</string>
+    <string name="title_show_noconnection_notification">Powiadomienie o braku połączenia</string>
+    <string name="summary_show_noconnection_notification">Pokaż powiadomienie, gdy aplikacja nie ma połączenia lub ma złe połączenie</string>
+    <string name="title_notification_allow_pause">Pozwól na wstrzymanie</string>
+    <string name="summary_notification_allow_pause">Zezwolenie na wstrzymanie aplikacji od powiadomienia</string>
+    <string name="title_notification_allow_stop">Pozwól zatrzymać się</string>
+    <string name="summary_notification_allow_stop">Zezwolenie na zatrzymanie aplikacji od powiadomienia</string>
+    <string name="title_notification_hide_icon">Ukryj ikonę</string>
+    <string name="summary_notification_hide_icon">Ukryć ikonę z paska nawigacyjnego na górze</string>
+    <string name="summary_simple_notification">Użyj prostego tekstu w powiadomieniu</string>
+    <string name="summary_show_notification_on_lockscreen">Określa, czy powiadomienie ma być wyświetlane na ekranie blokady</string>
+    <string name="title_simple_notification">Proste zgłoszenie</string>
+    <string name="preference_category_notification">Powiadomienie</string>
+    <string name="title_show_notification_on_lockscreen">Pokaż na ekranie blokady</string>
+    <string name="title_fallback_dns">Wewnętrzny serwer DNS</string>
+    <string name="summary_fallback_dns">Skonfiguruj wewnętrznie serwer DNS, którego używa Nebulo. Jest to ustawienie domyślne dla serwera DNS dostawcy usług. Ten skonfigurowany serwer jest używany tylko do celów wewnętrznych i nie obsługuje zwykłych zapytań DNS.</string>
+    <string name="summary_language">Zmiana języka aplikacji</string>
+    <string name="title_language">Język</string>
+    <string name="title_excluded_apps">Wyłączone aplikacje</string>
+    <string name="summary_start_after_update">Uruchomić aplikację po jej aktualizacji</string>
+    <string name="title_theme">Temat</string>
+    <string name="summary_theme">Ustawia temat tej aplikacji</string>
+</resources>
