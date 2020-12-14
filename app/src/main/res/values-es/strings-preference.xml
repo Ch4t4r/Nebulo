@@ -112,7 +112,7 @@
     <string name="title_local_server_port">Puerto del servidor</string>
     <string name="summary_run_without_vpn">Cuando está marcado, Nebulo aloja un servidor DNS en su dispositivo</string>
     <string name="title_run_without_vpn">Funciona sin VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">El servidor será alojado en %1s:%1s</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">El servidor será alojado en %1s:%2s</string>
     <string name="summary_category_nonvpnmode">Configurar Nebulo para que actúe como un servidor DNS en el dispositivo en lugar de usar una VPN falsa. Cuando se activa, tienes que reenviar manualmente las consultas DNS a Nebulo usando aplicaciones de terceros</string>
     <string name="preference_category_nonvpnmode">Modo no VPN</string>
     <string name="summary_check_iptables">Compruebe si su dispositivo es compatible con los iptables</string>
