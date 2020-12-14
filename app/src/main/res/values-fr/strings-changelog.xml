@@ -136,4 +136,21 @@
     <string name="changelog_build_62_1">Lorsque vous démarrez Nebulo à partir d\'un raccourci du serveur, celui-ci est maintenant persistant</string>
     <string name="changelog_build_62_4">Le serveur DNS interne (fallback) peut maintenant être configuré</string>
     <string name="changelog_build_62_3">Les sources de règles DNS peuvent désormais être mises à jour individuellement</string>
+    <string name="changelog_build_69_1">Ajouter le support pour DNS-sur-QUIC</string>
+    <string name="changelog_build_69_2">Augmenter les performances des requêtes DNS-sur-HTTPS</string>
+    <string name="changelog_build_66_1">Ajout d\'une foire aux questions. Vous pouvez les trouver dans l\'élément de navigation \"À propos de cette application\"</string>
+    <string name="changelog_build_66_3">Ajout d\'un dialogue aux règles DNS pour vérifier si un hôte est répertorié quelque part</string>
+    <string name="changelog_build_66_4">Ajout d\'une entrée d\'aide dans le journal des requêtes pour expliquer la signification des icônes</string>
+    <string name="changelog_build_66_5">Le test de vitesse du DNS montre maintenant plus précisément la latence</string>
+    <string name="changelog_build_66_6">Ajout de la sécurité de BraveDNS et de Cloudflare</string>
+    <string name="changelog_build_66_8">Ajout d\'un écran de sélection du serveur lors du premier lancement de l\'application</string>
+    <string name="changelog_build_66_10">Ajout d\'un filtre au journal des requêtes</string>
+    <string name="changelog_build_66_11">Ajout d\'un champ indiquant combien de requêtes ont été résolues avec les règles du DNS</string>
+    <string name="changelog_build_67_1">Une adresse IPv6 différente (::) est maintenant utilisée en interne pour ignorer un hôte</string>
+    <string name="changelog_build_67_2">Ajout d\'une recherche dans le dialogue d\'exclusion de l\'application</string>
+    <string name="changelog_build_67_3">Correction de la latence du serveur qui n\'est pas affichée en mode non-VPN</string>
+    <string name="changelog_build_67_4">Ajout d\'un meilleur formatage des numéros dans les règles du DNS</string>
+    <string name="changelog_build_66_9">Ajout d\'une notification affichée lorsque le serveur actuel a une mauvaise connexion</string>
+    <string name="changelog_build_66_7">Ajout d\'écrans d\'introduction lors du premier lancement de l\'application</string>
+    <string name="changelog_build_66_2">L\'ajout de serveurs est désormais sensible à la casse. Cela corrige des problèmes avec NextDNS</string>
 </resources>
