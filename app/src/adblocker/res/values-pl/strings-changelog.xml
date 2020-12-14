@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="changelog_build_29_1">Serwery, które blokują reklamy, są teraz wyświetlane w budowlach nie-playstore (włącznie z tą!)</string>
+    <string name="changelog_build_29_2">Dodano AdGuard DNS</string>
+    <string name="changelog_build_41_adblocker_1">Dodano dwa nowe źródła reguł DNS</string>
+</resources>
