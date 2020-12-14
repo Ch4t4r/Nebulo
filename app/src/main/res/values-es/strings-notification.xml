@@ -67,4 +67,6 @@
     <string name="notification_channel_badconnection">Canal de notificación de mala conexión</string>
     <string name="notification_channel_dnsrules_description">Canal utilizado para la importación/exportación de reglas del DNS</string>
     <string name="notification_channel_dnsrules">Canal de notificación de la regla del DNS</string>
+    <string name="notification_cronet_failed_text">El DNS-over-QUIC no puede ser usado ya que no pudo ser inicializado. Por favor, elija otro servidor.</string>
+    <string name="notification_cronet_failed_title">La inicialización del QUIC falló</string>
 </resources>
