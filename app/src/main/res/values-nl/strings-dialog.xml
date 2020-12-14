@@ -167,4 +167,54 @@
     <string name="dialog_vpn_permission_denied_message">Het systeem heeft Nebulo geweigerd om zijn VPN te starten. Open de app om de toestemming daar te verlenen door op de startknop te klikken.</string>
     <string name="dialog_doh_detect_type_message">Wacht even, alsjeblieft.</string>
     <string name="dialog_doh_detect_type_title">Het opsporen van het type server</string>
+    <string name="dialog_dnsrules_status_fromsource">Deze gastheer maakt deel uit van de bron %1$s</string>
+    <string name="dialog_speedtestpasses_message">Stel in hoe vaak de test per server moet worden uitgevoerd. Hogere passes verhogen de actuarry</string>
+    <string name="dialog_speedtestpasses_title">Testpassen configureren</string>
+    <string name="dialog_share_message">Welke link wil je delen\?</string>
+    <string name="dialog_share_title">Selecteer type link</string>
+    <string name="dialog_open_faq">Wilt u de veelgestelde vragen en documentatie voor deze functie bekijken\?</string>
+    <string name="querylog_filter_shorten_domain">Toon kortere versie van het domein in de lijst</string>
+    <string name="querylog_filter_type_blocked_by_server">Geblokkeerd door de DNS-server</string>
+    <string name="querylog_filter_type_dnsrules">Opgelost door DNS-regels</string>
+    <string name="querylog_filter_type_cache">Opgelost door DNS-cache</string>
+    <string name="querylog_filter_type_forwarded">Opgelost door de DNS-server</string>
+    <string name="querylog_filter_info">Selecteer welke soorten vragen u wilt zien</string>
+    <string name="querylog_filter_title">Filter query logboek</string>
+    <string name="dialog_dnsrules_status_sourcenotfound">Deze host staat in de DNS-regels, maar de bron is onbekend.</string>
+    <string name="dialog_dnsrules_status_userrule">Deze host maakt deel uit van de door u gedefinieerde DNS-regels.</string>
+    <string name="dialog_dnsrules_status_not_found">Geen DNS-regel gevonden voor deze host.</string>
+    <string name="dialog_dnsrules_search_message">Voer hieronder een host in om deze te zoeken in de DNS-regels.</string>
+    <string name="dialog_dnsrules_search_title">Zoeken naar een host</string>
+    <string name="dialog_querylog_information_message">Deze lijst toont u alle vragen die de Nebulo in het verleden heeft gesteld terwijl hij actief was. De lijst wordt bijna realtime bijgewerkt als de Nebulo op dat moment actief is.
+\n
+\nIconen aan het begin van de rij geven aan wat er met de query is gebeurd.
+\n
+\nVlag: De host werd opgelost uit de DNS-regels, of werd geblokkeerd door de DNS-server.
+\nPijl: Nebulo stuurde de query door naar de DNS-server
+\nDatabase: Nebulo heeft de DNS-respons uit de cache gehaald</string>
+    <string name="dialog_querylog_information_title">Informatie over het logboek</string>
+    <string name="dialog_latency_sidebar_message">De hier getoonde latentie is niet je ping of hoe snel je netwerk is.
+\n Het laat zien hoe lang het duurt voordat de Nebulo een verzoek stuurt en een antwoord krijgt van de DNS-server. De getoonde waarde is niet altijd de meest actuele en fluctuaties kunnen mogelijk zijn.
+\n Dit kan ervoor zorgen dat de waarde hoger wordt weergegeven dan deze is, omdat deze lager is geworden sinds de meting.</string>
+    <string name="dialog_latency_sidebar_title">Informatie over latentie</string>
+    <string name="dialog_nonvpn_help_generic">Om de Nebulo in non-vpn modus te gebruiken in combinatie met een VPN-app van een derde partij, moet u uw DNS-instellingen in deze andere app wijzigen.
+\nNiet alle VPN apps geven u de mogelijkheid om de DNS instellingen te wijzigen. Als dat wel het geval is, stelt u de DNS-server in op \'%1$s:%2$d\' (u kunt de bovenstaande poort configureren).
+\n
+\nNa het configureren van de apps start je gewoon beide.</string>
+    <string name="dialog_nonvpn_help_netguard">Om de Non-VPN-modus samen met NetGuard te gebruiken, doet u het volgende:
+\n - Controleer of u de F-Droid versie van NetGuard hebt geïnstalleerd. Het werkt niet met de versie van GPlay.
+\n - Ga naar instellingen &gt; Geavanceerde opties
+\n - Filterverkeer inschakelen (indien nog niet ingeschakeld)
+\n - Klik op Port Forwarding
+\n - Voeg de volgende regels toe:
+\n
+\n - Protocol UDP, bronpoort 53, bestemming %1$s, bestemmingspoort %2$d, bestemmingsapp niemand
+\n - Herhaal voor TCP
+\n
+\n - Ga terug naar geavanceerde opties
+\n - Scroll naar beneden, zet beide VPN DNS-velden op %3$s.
+\n - Start de Nebulo (in niet-VPN-modus) en start NetGuard</string>
+    <string name="dialog_newdnsrule_block_host">Blokkeer deze host</string>
+    <string name="dialog_serverimport_servertype_doq">Type: DNS-over-QUIC (DoQ)</string>
+    <string name="dialog_newserver_title_quic">Voeg een server toe (DoQ)</string>
 </resources>
