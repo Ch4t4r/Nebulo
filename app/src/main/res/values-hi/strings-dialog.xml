@@ -40,10 +40,10 @@
     <string name="dialog_error_title">क्रैश रिपोर्ट</string>
     <string name="dialog_error_text">ऐसा लग रहा है कि ऐप क्रैश हो गया है। क्या आप डेवलपर को त्रुटि लॉग फ़ाइल भेजना चाहते हैं\?</string>
     <string name="dialog_batteryoptimization_title">बैटरी अनुकूलन</string>
-    <string name="dialog_batteryoptimization_message">"कुछ डिवाइस पर ऐप को सूचित नहीं किया जाएगा कि डिवाइस की शुरू होने की प्रक्रिया समाप्त हो गयी  है जब तक कि बैटरी अनुकूलन अक्षम न हो ।
+    <string name="dialog_batteryoptimization_message">कुछ डिवाइस पर ऐप को सूचित नहीं किया जाएगा कि डिवाइस की शुरू होने की प्रक्रिया समाप्त हो गयी है जब तक कि बैटरी अनुकूलन अक्षम न हो ।
 \nऐप वर्तमान में बैटरी अनुकूलन सूची में नहीं है, क्या आप ऐसा करना चाहते हैं\?
 \n
-\nआपको परीक्षण करना चाहिए कि यह बैटरी अनुकूलन अक्षम करने से पहले सक्षम बैटरी अनुकूलन के साथ काम करता है या नहीं।"</string>
+\nआपको परीक्षण करना चाहिए कि यह बैटरी अनुकूलन अक्षम करने से पहले सक्षम बैटरी अनुकूलन के साथ काम करता है या नहीं।</string>
     <string name="dialog_batteryoptimization_whitelist">अक्षम करे</string>
     <string name="dialog_batteryoptimization_ignore">नज़रअंदाज़ करे</string>
     <string name="dialog_rate_confirmation">क्या आप ऐप का मूल्यांकन करने के लिए प्ले स्टोर खोलना चाहते हैं\?</string>
@@ -55,7 +55,7 @@
     <string name="dialog_query_export_message">प्रश्न निर्यात किए जा रहे हैं, कृपया प्रतीक्षा करें</string>
     <string name="dialog_pin_message">कृपया अपना पिन डाले।</string>
     <string name="dialog_pin_hint">पिन</string>
-    <string name="dialog_enable_logging">"क्या आप लॉगिंग सक्षम करना चाहते हैं\? लॉग में ऐप की सांख्यिकीय जानकारी, डिबग जानकारी और क्रियाों  की जानकारी होती हैं। जब तक आप स्वयं सक्षम नहीं करते, तब तक लिखे गए लॉग शेयर नहीं किए जाते हैं।"</string>
+    <string name="dialog_enable_logging">क्या आप लॉगिंग सक्षम करना चाहते हैं\? लॉग में ऐप की सांख्यिकीय जानकारी, डिबग जानकारी और क्रियाों की जानकारी होती हैं। जब तक आप स्वयं सक्षम नहीं करते, तब तक लिखे गए लॉग शेयर नहीं किए जाते हैं।</string>
     <string name="dialog_crashreporting_title">स्वचालित क्रैश रिपोर्टिंग</string>
     <string name="dialog_crashreportingusages_title">संचारित डेटा</string>
     <string name="dialog_crashreportingusages_message">क्रैश पर कौन सी जानकारी संचारित होती है, यह देखने के लिए किसी एक समूह पर क्लिक करें।</string>
@@ -78,12 +78,15 @@
     <string name="dialog_clearqueries_message">क्या आप वाकई लॉग इन प्रश्नों को क्लियर करना चाहते हैं\? यह वापस नहीं लिया जा सकता है।</string>
     <string name="dialog_credits_title">आभार सूची</string>
     <string name="dialog_credits_message" formatted="true">- ऐप आइकन - &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;.
-\n- तुर्की अनुवाद - Kemal Oktay Aktoğan
-\n- रूसी अनुवाद - bruleto 
-\n- डच अनुवाद - Bas Koedijk
-\n- पुर्तगाली अनुवाद - Rafael W. Bohnenberger
-\n- इंडोनेशियाई अनुवाद - Gloeyisk 
-\n- कुछ आइकन - Font Awesome
+\n- केमल ओक्तेय अकतोआन द्वारा तुर्की अनुवाद
+\n- रूसी अनुवाद ब्रूलेटो द्वारा
+\n- बास Koedijk द्वारा डच अनुवाद
+\n- राफेल डब्ल्यू। बोहेनबर्गर द्वारा पुर्तगाली अनुवाद
+\n- ग्लोबिस्क द्वारा इंडोनेशियाई अनुवाद
+\n- डैनियल अलोमर द्वारा कैटलन अनुवाद
+\n- डैनियल अलोमर और विक्टर बेयस द्वारा स्पेनिश अनुवाद
+\n- फ़ॉन्ट विस्मयकारी से कुछ प्रतीक
+\n- एडियल चीडिलंबर द्वारा चीनी (सरलीकृत) अनुवाद
 \n
 \n यहां अपना नाम देखना चाहते हैं\? बेझिझक &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;योगदान दें&lt;/a&gt;.</string>
     <string name="dialog_join_group_title">समुदाय में शामिल हों</string>
@@ -121,7 +124,7 @@
     <string name="dialog_newdnsrule_hint_ipv4address">IPv4 पता</string>
     <string name="dialog_newdnsrule_hint_ipv6address">IPv6 पता</string>
     <string name="dialog_newdnsrule_host_invalid">कृपया उचित होस्ट डाले</string>
-    <string name="dialog_newdnsrule_ipv4_invalid">"कृपया उचित  IPv4 पता डाले"</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">कृपया उचित IPv4 पता डाले</string>
     <string name="dialog_newdnsrule_ipv6_invalid">कृपया उचित IPv6 पता डाले</string>
     <string name="dialog_newdnsrule_wildcard_info">होस्ट वाइल्डकार्ड का समर्थन करता है। किसी भी वर्ण, संख्या और अनुमत विशेष वर्णों की अवधि (.) को छोड़कर तारांकन चिह्न (*) का उपयोग करें। अवधि (.) को शामिल करने के लिए दो तारांकन (**) का उपयोग करें।</string>
     <string name="dialog_exportdnsrules_title">DNS नियम निर्यात करें</string>
