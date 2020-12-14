@@ -23,7 +23,7 @@
     <string name="title_notification_allow_pause">ठहरने की अनुमति दें</string>
     <string name="summary_notification_allow_pause">ऐप को सूचना से ठहरने की अनुमति दें</string>
     <string name="title_show_noconnection_notification">संचार न होने पर अधिसूचना</string>
-    <string name="summary_show_noconnection_notification">जब ऐप का कोई संचार नहीं है या खराब संचार है, तो एक अधिसूचना दिखाएं</string>
+    <string name="summary_show_noconnection_notification">एप्लिकेशन को DNS सर्वर से कोई संबंध नहीं होने पर एक अधिसूचना दिखाएं</string>
     <string name="title_show_revoked_notification">अनुमति खो जाने पर अधिसूचना</string>
     <string name="summary_show_revoked_notification">जब Nebulo VPN को अनुमति खो देता है, तो सूचना दिखाएं</string>
     <string name="preference_category_pin">पिन सुरक्षा</string>
@@ -108,15 +108,12 @@
     <string name="crashreporting_type_full">पूर्ण (सांख्यिकी और डीबग जानकारी रिपोर्ट)</string>
     <string name="crashreporting_type_minimal">न्यूनतम (केवल Android और ऐप संस्करण रिपोर्ट)</string>
     <string name="crashreporting_type_off">बंद (क्रैश रिपोर्ट न भेजें)</string>
-    <string name="summary_local_server_port">DNS सर्वर का पोर्ट जिसे होस्ट किया जाएगा। केवल 1024 से अधिक बंदरगाहों की अनुमति है।
-\nवर्तमान में: %1s</string>
+    <string name="summary_local_server_port">DNS सर्वर का पोर्ट जिसे होस्ट किया जाएगा। केवल 1024 से अधिक बंदरगाहों की अनुमति है</string>
     <string name="title_local_server_port">सर्वर पोर्ट</string>
     <string name="summary_run_without_vpn">जब चेक किया गया नेबुलो आपके डिवाइस पर एक DNS सर्वर को होस्ट करता है</string>
     <string name="title_run_without_vpn">वीपीएन के बिना चलाएं</string>
     <string name="summary_category_nonvpnmode_forwardinfo">सर्वर को %1s:%2s पर होस्ट किया जाएगा</string>
-    <string name="summary_category_nonvpnmode">एक डमी वीपीएन का उपयोग करने के बजाय डिवाइस पर DNS सर्वर के रूप में कार्य करने के लिए नेबुलो को कॉन्फ़िगर करें। जब आप सक्षम होते हैं तो आपको थर्ड पार्टी ऐप्स का उपयोग करके DNS प्रश्नों को नेबुलो में फॉरवर्ड करना होता है।
-\n
-\nयह सुविधा प्रायोगिक है।</string>
+    <string name="summary_category_nonvpnmode">एक डमी वीपीएन का उपयोग करने के बजाय डिवाइस पर DNS सर्वर के रूप में कार्य करने के लिए नेबुलो को कॉन्फ़िगर करें। जब आप सक्षम होते हैं तो आपको थर्ड पार्टी ऐप्स का उपयोग करके DNS प्रश्नों को नेबुलो में फॉरवर्ड करना होता है</string>
     <string name="preference_category_nonvpnmode">गैर-वीपीएन मोड</string>
     <string name="summary_check_iptables">जांचें कि आपका डिवाइस iptables का समर्थन करता है या नहीं</string>
     <string name="title_check_iptables">Iptables की जाँच करें</string>
