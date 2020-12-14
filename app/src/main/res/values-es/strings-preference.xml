@@ -136,4 +136,5 @@
     <string name="title_inform_bad_connection">Infórmame de una mala conexión</string>
     <string name="title_export_settings">Exportar ajustes</string>
     <string name="summary_export_settings">Exporta todos los ajustes (incluyendo las fuentes de reglas DNS) en un archivo. Más tarde puedes abrir el archivo para importarlo a Nebulo.</string>
+    <string name="summary_inform_bad_connection">Infórmame cuando el servidor DNS esté lento o funcione mal</string>
 </resources>
