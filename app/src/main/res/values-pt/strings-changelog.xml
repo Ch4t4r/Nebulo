@@ -147,4 +147,10 @@
     <string name="changelog_build_66_3">Adicionado um diálogo às regras do DNS para verificar se um hospedeiro está listado em algum lugar</string>
     <string name="changelog_build_66_2">Adicionar servidores agora diferencia maiúsculas de minúsculas. Isso corrige problemas com NextDNS</string>
     <string name="changelog_build_66_1">Adicionadas perguntas frequentes. Pode encontrá-las no item de navegação \'Sobre esta aplicação\'</string>
+    <string name="changelog_build_69_1">Adicionar suporte para DNS-over-QUIC</string>
+    <string name="changelog_build_69_2">Aumentar o desempenho das consultas DNS-over-HTTPS</string>
+    <string name="changelog_build_67_2">Acrescentou uma pesquisa ao diálogo de exclusão da aplicação</string>
+    <string name="changelog_build_67_4">Adicionada uma melhor formatação dos números nas regras do DNS</string>
+    <string name="changelog_build_67_3">Fixar a latência do servidor não sendo mostrada em modo não-VPN</string>
+    <string name="changelog_build_67_1">Um endereço IPv6 diferente (::) é agora utilizado internamente para ignorar um anfitrião</string>
 </resources>
