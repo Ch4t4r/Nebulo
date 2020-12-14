@@ -1,4 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="changelog_build_29_2">Добавлен AdGuard DNS</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_build_29_2">Добавлен AdGuard DNS</string>
     <string name="changelog_build_29_1">Серверы с блокировкой рекламы теперь доступны во всех сборках, включая эту! (за исключением сборки для Google Play)</string>
-    </resources>
+    <string name="changelog_build_41_adblocker_1">Добавлены два новых источника правил DNS</string>
+</resources>
