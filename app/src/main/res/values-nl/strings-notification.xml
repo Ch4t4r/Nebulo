@@ -6,18 +6,18 @@
     <string name="notification_channel_foreground_service_description">Kanaal dat wordt gebruikt voor meldingen die niet door de gebruiker kunnen worden verwijderd</string>
     <string name="notification_channel_noconnection">Verbindings waarschuwingskanaal</string>
     <string name="notification_channel_noconnection_description">Kanaal dat wordt gebruikt voor het weergeven van meldingen wanneer er geen verbinding beschikbaar lijkt te zijn</string>
-    <string name="notification_main_text">Aanvragen worden verzonden naar %1s
+    <string name="notification_main_text">Vragen worden verstuurd naar %1s
 \n
-\n%2d Apps zijn uitgesloten van DoH / DoT</string>
-    <string name="notification_main_text_with_secondary">Aanvragen worden verzonden naar %1s en %2s
+\n%2d Apps zijn uitgesloten van de Nebulo</string>
+    <string name="notification_main_text_with_secondary">Vragen worden verstuurd naar %1s en %2s
 \n
-\n%3d Apps zijn uitgesloten van DoH / DoT</string>
-    <string name="notification_main_text_whitelist">Aanvragen worden verzonden naar %1s
+\n%3d Apps zijn uitgesloten van de Nebulo</string>
+    <string name="notification_main_text_whitelist">Vragen worden verstuurd naar %1s
 \n
-\n%2d Apps gebruiken DoH / DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">Aanvragen worden verzonden naar %1s en %2s
+\n%2d Apps gebruiken DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Vragen worden verstuurd naar %1s en %2s
 \n
-\n%3d Apps gebruiken DoH / DoT</string>
+\n%3d Apps gebruiken DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1d aanvragen tot nu toe</string>
@@ -57,4 +57,16 @@
     <string name="notification_dnsserver_message_iptables_active">DNS-server draait op %1s:%2d. Query\'s worden doorgestuurd met behulp van iptables</string>
     <string name="notification_dnsserver_message">DNS-server draait op %1s:%2d. Vragen doorsturen met behulp van apps van derden</string>
     <string name="notification_dnsserver_title">In niet-VPN-modus</string>
+    <string name="notification_cronet_failed_text">DNS-over-QUIC kan niet worden gebruikt omdat het niet kon worden geïnitialiseerd. Kies een andere server.</string>
+    <string name="notification_cronet_failed_title">QUIC-initialisatie mislukt</string>
+    <string name="notification_bad_connection_text">Uw verbinding met de DNS-server is nu slecht. Dit kan een negatieve invloed hebben op uw surfsnelheid. Overweeg een andere server te selecteren.</string>
+    <string name="notification_bad_connection_title">Slechte serververbinding</string>
+    <string name="notification_multipleuserswarning_text">De Nebulo kon zijn dummy VPN niet starten vanwege een Android bug. Dit gebeurt wanneer er meerdere gebruikers op uw toestel zitten.</string>
+    <string name="notification_multipleuserswarning_title">Dummy VPN kon niet worden opgericht</string>
+    <string name="notification_privatednswarning_text">Schakel Private Dns uit in de systeeminstellingen om de Nebulo te gebruiken.</string>
+    <string name="notification_privatednswarning_title">Prive Dns</string>
+    <string name="notification_channel_badconnection_description">Kanaal gebruikt voor meldingen wanneer de Nebulo een slechte verbinding heeft</string>
+    <string name="notification_channel_badconnection">Slechte verbinding meldingskanaal</string>
+    <string name="notification_channel_dnsrules_description">Kanaal gebruikt voor de import/export van DNS-regels</string>
+    <string name="notification_channel_dnsrules">DNS-regel Kennisgevingskanaal</string>
 </resources>
