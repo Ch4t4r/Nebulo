@@ -136,4 +136,5 @@
     <string name="title_nonvpn_use_lanip">Usar o IP do dispositivo em vez de localhost</string>
     <string name="summary_export_settings">Exportar todas as configurações (incluindo as fontes de regras de DNS) para um arquivo. Depois disso você pode abrir o arquivo para importá-lo ao Nebulo.</string>
     <string name="title_export_settings">Exportar as configurações</string>
+    <string name="summary_inform_bad_connection">Informe-me quando o servidor DNS estiver lento ou tiver um mau desempenho</string>
 </resources>
