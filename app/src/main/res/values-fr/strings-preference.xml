@@ -20,7 +20,7 @@
     <string name="summary_notification_allow_stop">Permettre l\'arrêt de l\'application à partir de la notification</string>
     <string name="summary_notification_allow_pause">Permettre une pause de l\'application par rapport à la notification</string>
     <string name="title_show_noconnection_notification">Notification d\'absence de connexion</string>
-    <string name="summary_show_noconnection_notification">Afficher une notification lorsque l\'application n\'a pas de connexion ou a une mauvaise connexion</string>
+    <string name="summary_show_noconnection_notification">Afficher une notification lorsque l\'application n\'a actuellement aucune connexion au serveur DNS</string>
     <string name="title_show_revoked_notification">Notification de perte d\'autorisation</string>
     <string name="title_preference_enable_pin">PIN</string>
     <string name="summary_preference_pin_use_fingerprint">Permettez que votre empreinte digitale soit utilisée à la place du code PIN</string>
@@ -108,15 +108,12 @@
     <string name="title_catch_other_dns_servers">Interception d\'autres trafics DNS</string>
     <string name="crashreporting_type_full">Complet (Rapport statistique et données de débogage)</string>
     <string name="crashreporting_type_minimal">Minimale (Ne concerne que la version Android et App)</string>
-    <string name="summary_local_server_port">Port du serveur DNS qui sera hébergé. Seuls les ports supérieurs à 1024 sont autorisés.
-\nActuellement : %1s</string>
+    <string name="summary_local_server_port">Port du serveur DNS qui sera hébergé. Seuls les ports supérieurs à 1024 sont autorisés</string>
     <string name="title_local_server_port">Port du serveur</string>
     <string name="summary_run_without_vpn">Si vous avez vérifié, Nebulo héberge un serveur DNS sur votre appareil</string>
     <string name="title_run_without_vpn">Fonctionner sans VPN</string>
-    <string name="summary_category_nonvpnmode_forwardinfo">Le serveur sera hébergé sur %1s:%2s</string>
-    <string name="summary_category_nonvpnmode">Configurez Nebulo pour qu\'il agisse comme serveur DNS sur l\'appareil au lieu d\'utiliser un VPN fictif. Lorsque cette fonction est activée, vous devez manuellement transmettre les requêtes DNS à Nebulo en utilisant des applications tierces.
-\n
-\nCe dispositif est expérimental.</string>
+    <string name="summary_category_nonvpnmode_forwardinfo">Le serveur sera hébergé sur %1s:%1s</string>
+    <string name="summary_category_nonvpnmode">Configurez Nebulo pour qu\'il agisse comme serveur DNS sur l\'appareil au lieu d\'utiliser un VPN fictif. Lorsque cette fonction est activée, vous devez manuellement transmettre les requêtes DNS à Nebulo en utilisant des applications tierces</string>
     <string name="preference_category_nonvpnmode">Mode non-VPN</string>
     <string name="summary_check_iptables">Vérifiez si votre appareil est compatible avec iptables</string>
     <string name="title_check_iptables">Vérifier pour iptables</string>
@@ -132,4 +129,11 @@
     <string name="title_fallback_dns">Serveur DNS interne</string>
     <string name="summary_nonvpn_help_generic">Cliquez ici pour obtenir des instructions sur la configuration des applications VPN</string>
     <string name="nonvpn_help_generic_title">Applications VPN génériques</string>
+    <string name="title_export_settings">Paramètres d\'exportation</string>
+    <string name="summary_export_settings">Exportez tous les paramètres (y compris les sources de règles DNS) dans un fichier. Vous pouvez ensuite ouvrir le fichier pour l\'importer dans Nebulo.</string>
+    <string name="summary_nonvpn_help_faq">Cliquez ici pour ouvrir une fenêtre de navigateur avec aide et documentation pour le mode non-VPN</string>
+    <string name="title_nonvpn_help_faq">Documentation</string>
+    <string name="summary_nonvpn_use_lanip">Certaines applications ne permettent pas de saisir localhost comme DNS. Avec ce réglage, les périphériques IP du réseau sont utilisés à la place. L\'adresse changera en fonction de votre réseau, faites attention à la notification.</string>
+    <string name="title_nonvpn_use_lanip">Utiliser Device IP au lieu de localhost</string>
+    <string name="title_inform_bad_connection">Informez-moi d\'une mauvaise connexion</string>
 </resources>
