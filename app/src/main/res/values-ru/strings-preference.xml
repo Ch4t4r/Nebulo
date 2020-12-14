@@ -136,4 +136,5 @@
     <string name="summary_show_revoked_notification">Показывать уведомление, когда Небуло теряет разрешение на VPN</string>
     <string name="summary_simple_notification">Используйте простой текст в уведомлении</string>
     <string name="title_simple_notification">Простое уведомление</string>
+    <string name="summary_inform_bad_connection">Информируйте меня, когда DNS-сервер в настоящее время работает медленно или работает плохо</string>
 </resources>
