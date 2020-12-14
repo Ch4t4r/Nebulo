@@ -1,12 +1,12 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="contentdescription_main_infoimage">Информационный значок</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="contentdescription_main_infoimage">Информационный значок</string>
     <string name="contentdescription_main_servericon">Серверный значок</string>
     <string name="contentdescription_main_statusimage">Индикатор работающего приложения</string>
     <string name="contentdescription_shared_app_icon">Значок приложения</string>
     <string name="contentdescription_clear_search">Очистка истории поиска</string>
-
     <string name="contentdescription_start_app">Запуск приложения</string>
     <string name="contentdescription_stop_app">Остановка приложения</string>
-    
     <string name="hint_searchterm">Запрос для поиска</string>
+    <string name="hint_search">Поиск</string>
 </resources>
