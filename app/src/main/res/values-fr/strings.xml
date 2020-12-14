@@ -80,4 +80,15 @@
     <string name="iptables_supported_ipv6_unsupported">Iptables est supporté, mais IPv6 n\'est pas supporté.</string>
     <string name="iptables_supported">Félicitations, iptables est pris en charge par votre appareil !</string>
     <string name="window_dnsrules_refresh_sources">Rafraîchir les règles d\'importation à la source</string>
+    <string name="about_help_faq">Foire aux questions</string>
+    <string name="window_querylog_information">Informations</string>
+    <string name="window_main_click_to_enable">Cliquez pour activer.</string>
+    <string name="window_main_unprotected">Non protégé</string>
+    <string name="window_main_protected">Protégé !</string>
+    <string name="window_speedtest_information">Plus les valeurs sont basses, plus Nebulo est capable de communiquer rapidement avec le serveur. Cela permet par exemple d\'augmenter la vitesse de navigation.</string>
+    <string name="theme_blue">Bleu</string>
+    <string name="theme_true_black">Le vrai noir</string>
+    <string name="theme_dark">Foncé</string>
+    <string name="theme_mono">Mono</string>
+    <string name="app_share_fdroid">Hé, j\'ai trouvé cette application qui crypte vos requêtes DNS pour vous donner plus de confidentialité et de sécurité. Tu peux la voir en la téléchargeant à partir d\'ici : https://nebulo.app/source#installation</string>
 </resources>
