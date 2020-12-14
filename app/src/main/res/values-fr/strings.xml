@@ -91,4 +91,38 @@
     <string name="theme_dark">Foncé</string>
     <string name="theme_mono">Mono</string>
     <string name="app_share_fdroid">Hé, j\'ai trouvé cette application qui crypte vos requêtes DNS pour vous donner plus de confidentialité et de sécurité. Tu peux la voir en la téléchargeant à partir d\'ici : https://nebulo.app/source#installation</string>
+    <string name="appintro_server_choose_title">Commençons par le commencement</string>
+    <string name="appintro_forth_title">Une dernière chose</string>
+    <plurals name="dnsrule_total_resolve_count">
+        <item quantity="one">La requête %1d a été traitée par les règles du DNS jusqu\'à présent</item>
+        <item quantity="other">%1d requêtes ont été traitées par les règles du DNS jusqu\'à présent</item>
+    </plurals>
+    <plurals name="dnsrule_total_resolve_count_block">
+        <item quantity="one">La requête %1d a été bloquée jusqu\'à présent</item>
+        <item quantity="other">%1d requêtes ont été bloquées à ce jour</item>
+    </plurals>
+    <string name="appintro_server_choose_forth">Un serveur qui me protège des sites web et des applications nuisibles</string>
+    <string name="appintro_server_choose_adblock">Un serveur qui bloque les annonces et le suivi</string>
+    <string name="appintro_server_choose_second">Un serveur rapide, axé sur la protection de la vie privée</string>
+    <string name="appintro_server_choose_third">Un véritable serveur axé sur la protection de la vie privée</string>
+    <string name="appintro_server_choose_disclaimer">Il existe des serveurs qui correspondent à plusieurs, voire à toutes les catégories. Nebulo choisit automatiquement le plus rapide.</string>
+    <string name="appintro_server_choose_first">Le plus rapide</string>
+    <string name="appintro_server_choose_description">Quel type de serveur voulez-vous utiliser dans Nebulo \?</string>
+    <string name="appintro_forth_description">Vous pouvez configurer Nebulo pour qu\'il soit utilisé comme un bloqueur de publicité et de suivi à l\'échelle du système.
+\n
+\nVous pouvez même l\'utiliser avec certaines applications de pare-feu pour accroître encore plus votre contrôle sur votre vie privée.</string>
+    <string name="appintro_third_description">Nebulo est livré avec une tonne de fonctionnalités utiles comme la surveillance de l\'activité du DNS, la protection du code PIN, un test de vitesse et bien plus encore.
+\n
+\nExplorez l\'application pour découvrir ce que les logiciels libres ont à offrir.</string>
+    <string name="appintro_third_title">Entièrement équipés pour la grandeur</string>
+    <string name="appintro_second_description">En ajoutant le cryptage au DNS, l\'un des plus anciens protocoles de l\'internet, il est entre vos mains.
+\n
+\nRendez plus difficile pour votre FAI de vous suivre en utilisant le DNS-sur-HTTPS et le DNS-sur-TLS avec Nebulo.</string>
+    <string name="appintro_first_description">Nebulo est une application destinée à protéger votre vie privée et à sécuriser votre appareil.
+\n
+\nReprenez le contrôle des données que votre FAI ou d\'autres entités ont traitées comme les leurs depuis longtemps.</string>
+    <string name="appintro_second_title">Votre vie privée est importante</string>
+    <string name="appintro_first_title">Bienvenue à Nebulo.</string>
+    <string name="warning_server_currently_unstable">Le serveur %1s semble être instable en ce moment.</string>
+    <string name="warning_server_currently_unstable_expanded">Le serveur %1s semble être instable en ce moment, ce qui a un impact sur votre vitesse de navigation. Envisagez de passer à un serveur plus stable.</string>
 </resources>
