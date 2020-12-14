@@ -6,14 +6,14 @@
     <string name="summary_preference_change_pin">Canvieu el pin. Només s’admeten valors numèrics.
 \nPin actual: %1s</string>
     <string name="title_preference_change_pin">Canviar PIN</string>
-    <string name="summary_preference_pin_use_fingerprint">Permet que s\'utilitzi la seva empremta en lloc del PIN.</string>
+    <string name="summary_preference_pin_use_fingerprint">Permet que s\'utilitzi la seva empremta en lloc del PIN</string>
     <string name="title_preference_pin_use_fingerprint">Permet empremta</string>
     <string name="summary_preference_enable_pin">Demana un PIN quan obriu o atureu l\'aplicació</string>
     <string name="title_preference_enable_pin">PIN</string>
     <string name="preference_category_pin">Protecció amb PIN</string>
     <string name="summary_show_revoked_notification">Mostra una notificació quan Nebulo perdi permís a la VPN</string>
     <string name="title_show_revoked_notification">Notificació de pèrdua de permís</string>
-    <string name="summary_show_noconnection_notification">Mostra una notificació quan l\'aplicació no tingui connexió o sigui dolenta</string>
+    <string name="summary_show_noconnection_notification">Mostra una notificació quan l’aplicació actualment no té connexió amb el servidor DNS</string>
     <string name="title_show_noconnection_notification">Notificació de cap connexió</string>
     <string name="summary_notification_allow_pause">Permet fer una pausa de l’aplicació des de la notificació</string>
     <string name="title_notification_allow_pause">Permet fer una pausa</string>
