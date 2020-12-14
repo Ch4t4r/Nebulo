@@ -70,5 +70,6 @@
     <string name="windows_querylogging_hostsource">DNS kuralının kaynağı</string>
     <string name="windows_querylogging_hostsource__user">Kullanıcı kuralları</string>
     <string name="windows_querylogging_hostsource__unknown">Bilinmeyen</string>
-    <string name="window_main_privatedns_info">Özel DNS etkin, sorgularınız zaten korunuyor. DNS-over-HTTPS veya diğer kullanışlı özellikleri kullanmak istiyorsanız, Nebulo\'yu etkinleştirin.</string>
+    <string name="window_main_privatedns_info">Özel DNS etkin, sorgularınız zaten korunuyor. DNS-over-HTTPS veya diğer kullanışlı özellikleri kullanmak istiyorsanız, Nebulo\'yu etkinleştirin.
+\nNebulo\'yu etkinleştirmek için Özel DNS\'yi devre dışı bırakın.</string>
 </resources>
