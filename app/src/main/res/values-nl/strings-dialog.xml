@@ -77,16 +77,17 @@
     <string name="dialog_clearqueries_message">Weet u zeker dat u de geregistreerde zoekopdrachten wilt wissen\? Dit kan niet worden teruggedraaid.</string>
     <string name="dialog_credits_title">Dankwoord</string>
     <string name="dialog_credits_message" formatted="true">- App-icoon door &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt;.
-\n- Turkse vertaling door Kemal Oktay Aktoğan 
-\n- Russische vertaling door bruleto 
-\n- Nederlandse vertaling door Bas Koedijk 
-\n- Portugese vertaling door Rafael W. Bohnenberger
-\n- Indonesische vertaling door Gloeyisk 
+\n- Turkse vertaling door Kemal Oktay Aktoğan
+\n- Russische vertaling door bruleto
+\n- Nederlandse vertaling door Bas Koedijk
+\n- Portugese vertaling door Rafael W. Bohnenberger
+\n- Indonesische vertaling door Gloeyisk
 \n- Catalaanse vertaling door Daniel Alomar
 \n- Spaanse vertaling door Daniel Alomar en Victor Bayas
-\n- Enkele pictogrammen van Font Awesome
+\n- Enkele iconen van Font Awesome
+\n- Chinese (Vereenvoudigde) vertaling door Ediel Chedlyramber
 \n
-\n Wil je je naam hier zien\? Aarzel niet om &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;een bijdrage te leveren&lt;/a&gt;.</string>
+\n Wil je naam hier zien\? Aarzel niet om &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;een bijdrage te leveren&lt;/a&gt;.</string>
     <string name="dialog_join_group_title">Word lid van de community</string>
     <string name="dialog_join_group_message">Hallo daar!
 \n
@@ -125,7 +126,7 @@
     <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Adres</string>
     <string name="dialog_newhostsource_use_as_whitelist">Gebruik als whitelist</string>
-    <string name="dialog_newhostsource_edit_title">Nieuwe dns-regel bron</string>
+    <string name="dialog_newhostsource_edit_title">Bewerk regel bron</string>
     <string name="dialog_newdnsrule_edit">DNS-regel bewerken</string>
     <string name="dialog_editdelete_title">Wat wil je doen\?</string>
     <string name="dialog_editdelete_edit">Bewerken</string>
@@ -140,7 +141,9 @@
     <string name="dialog_newhostsource_wildcard_info">U kunt host bronnen gebruiken met wildcard domeinen.</string>
     <string name="dialog_newdnsrule_wildcard_info">De host ondersteunt wildcards. Gebruik een asterisk (*) voor een willekeurig aantal tekens, cijfers en toegestane speciale tekens behalve punt (.). Gebruik twee asteriksen (**) om de punt (.) Op te nemen.</string>
     <string name="dialog_overlaydetected_title">Systeem-brede overlay gedetecteerd</string>
-    <string name="dialog_overlaydetected_message">Er lijkt een systeem-brede overlay (bijv. Een chatballon, kleuren- of nachtfilter) actief te zijn. Met de meeste apparaten kunt u in dit geval geen VPN inschakelen. Als u in het volgende dialoogvenster niet op OK kunt klikken, schakelt u de overlay uit.</string>
+    <string name="dialog_overlaydetected_message">Er lijkt een systeembrede overlay (bijv. een chatbubbel, kleur- of nachtfilter) actief te zijn. De meeste apparaten staan niet toe dat u in dit geval een VPN inschakelt.
+\n
+\nAls u in het volgende dialoogvenster niet op OK kunt klikken, schakel dan de overlay uit.</string>
     <string name="dialog_hostsourcerefresh_title">Vernieuw host bronnen</string>
     <string name="dialog_hostsourcerefresh_automatic_refresh">Host bronnen automatisch vernieuwen</string>
     <string name="dialog_hostsourcerefresh_wifi_only">Vernieuw alleen op WIFI</string>
@@ -162,5 +165,6 @@
     <string name="dialog_raterequest_title">Bent u tevreden over Nebulo\?</string>
     <string name="dialog_raterequest_message">Hallo daar! Als u tevreden bent met Nebulo, wilt u dan even de tijd nemen om het in de Play Store ™ te beoordelen\?</string>
     <string name="dialog_vpn_permission_denied_message">Het systeem heeft Nebulo geweigerd om zijn VPN te starten. Open de app om de toestemming daar te verlenen door op de startknop te klikken.</string>
-
+    <string name="dialog_doh_detect_type_message">Wacht even, alsjeblieft.</string>
+    <string name="dialog_doh_detect_type_title">Het opsporen van het type server</string>
 </resources>
