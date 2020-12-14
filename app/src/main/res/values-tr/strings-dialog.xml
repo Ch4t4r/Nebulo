@@ -76,12 +76,16 @@
     <string name="dialog_clearqueries_title">Tüm sorguları temizle</string>
     <string name="dialog_clearqueries_message">Günlüğe kaydedilen sorguları silmek istediğinize emin misiniz\? Bu geri alınamaz.</string>
     <string name="dialog_credits_title">Katkıcılar</string>
-    <string name="dialog_credits_message" formatted="true">- &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; tarafından uygulama simgesi. 
-\n- Türkçe çeviri: Kemal Oktay Aktoğan
-\n- Rusça çeviri: bruleto
-\n- Almanca çeviri: Bas Koedjik
-\n- Portekizce çeviri: Rafael W. Bohnenberger
-\n- Endonezce çeviri: Gloeyisk
+    <string name="dialog_credits_message" formatted="true">- &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; tarafından uygulama simgesi.
+\n- Türkçe çevirisi Kemal Oktay Aktoğan
+\n- bruleto tarafından Rusça çeviri
+\n- Bas Koedijk\'in Hollandaca çevirisi
+\n- Portekizce çevirisi Rafael W. Bohnenberger tarafından yapılmıştır.
+\n- Gloeyisk tarafından Endonezce çevirisi
+\n- Daniel Alomar\'ın Katalanca çevirisi
+\n- Daniel Alomar ve Victor Bayas\'ın İspanyolca çevirisi
+\n- Font Awesome\'den bazı simgeler
+\n- Ediel Chedlyramber tarafından Çince (Basitleştirilmiş) çeviri
 \n
 \nİsmini burada görmek ister misin\? &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;Katkı&lt;/a&gt;da bulunmaktan çekinmeyin.</string>
     <string name="dialog_join_group_title">Topluluğa katıl</string>
@@ -105,7 +109,7 @@
     <string name="dialog_clearuserrules_title">Tüm DNS kuralları temizlensin mi\?</string>
     <string name="dialog_clearuserrules_message">Tüm DNS kurallarını silmek istiyor musunuz\? Bu geri alınamaz.</string>
     <string name="dialog_newhostsource_title">Yeni kural kaynağı</string>
-    <string name="dialog_newhostsource_edit_title">Yeni kural kaynağı</string>
+    <string name="dialog_newhostsource_edit_title">Kural kaynağını düzenleyin</string>
     <string name="dialog_newhostsource_name">İsim</string>
     <string name="dialog_newhostsource_wildcard_info">Joker karakter etki alanlarını kullanan ana bilgisayar listelerini kullanabilirsiniz.</string>
     <string name="dialog_newhostsource_url">URL</string>
@@ -160,4 +164,6 @@
 \nDNS istekleri dışında hiçbir gerçek veri, bu uygulamayı kullanarak iletilmez.</string>
     <string name="dialog_raterequest_title">Nebulo\'dan hoşlanıyor musunuz\?</string>
     <string name="dialog_raterequest_message">Selam! Nebulo\'dan keyif alıyorsanız, lütfen mağazada değerlendirmek için bir dakikanızı ayırır mısınız\?</string>
+    <string name="dialog_doh_detect_type_message">Bir süre bekleyin lütfen.</string>
+    <string name="dialog_doh_detect_type_title">Sunucu türü tespit ediliyor</string>
 </resources>
