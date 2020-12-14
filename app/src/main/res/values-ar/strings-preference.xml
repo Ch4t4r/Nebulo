@@ -82,7 +82,7 @@
     <string name="preference_category_pin">وضع رمز قفل PIN</string>
     <string name="summary_show_revoked_notification">إظهار إشعار عندما يفقد Nebulo الإذن للشبكة الظاهرية الخاصة</string>
     <string name="title_show_revoked_notification">اشعار عند فقدان الاذن</string>
-    <string name="summary_show_noconnection_notification">عرض اشعار عند عدم توفر اتصال او يوجد اتصال سيء</string>
+    <string name="summary_show_noconnection_notification">اعرض إشعارًا عندما لا يتصل التطبيق حاليًا بخادم DNS</string>
     <string name="title_show_noconnection_notification">اشعار بان التطبيق غير متصل</string>
     <string name="summary_notification_allow_pause">اسمح بإيقاف التطبيق مؤقتاً من الاشعارات</string>
     <string name="title_notification_allow_pause">اسمح بالتوقف المؤقت</string>
@@ -133,4 +133,8 @@
     <string name="title_run_without_vpn">تشغيل من غير VPN</string>
     <string name="summary_category_nonvpnmode_forwardinfo">سوف يتم استضافة السيرفر على الا %1s:%2s</string>
     <string name="summary_category_nonvpnmode">قم بتكوين Nebulo للعمل كسيرفر DNS على الجهاز بدلاً من استخدام VPN وهمية. عند التمكين ، يتعين عليك إعادة توجيه استعلامات DNS يدويًا إلى Nebulo باستخدام تطبيقات الطرف الثالث</string>
+    <string name="title_export_settings">إعدادات التصدير</string>
+    <string name="title_nonvpn_use_lanip">استخدم عنوان IP للجهاز بدلاً من المضيف المحلي</string>
+    <string name="summary_export_settings">قم بتصدير كافة الإعدادات (بما في ذلك مصادر قواعد DNS) في ملف. يمكنك لاحقًا فتح الملف لاستيراده إلى Nebulo.</string>
+    <string name="summary_nonvpn_use_lanip">لا تسمح بعض التطبيقات بإدخال المضيف المحلي على أنه DNS. باستخدام هذا الإعداد ، يتم استخدام IP للأجهزة في الشبكة بدلاً من ذلك. سيتغير العنوان اعتمادًا على شبكتك ، انتبه إلى الإشعار.</string>
 </resources>
