@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="dialog_serverconfiguration_title">Настройки сервера</string>
     <string name="dialog_serverconfiguration_addserver">Добавить сервер</string>
     <string name="dialog_newserver_title_https">Добавить сервер (DoH)</string>
@@ -13,10 +13,10 @@
     <string name="dialog_appchoosal_showsystemapps">Показать системные приложения</string>
     <string name="dialog_appchoosal_whitelist">Использовать DoH/DoT только в отмеченных приложениях</string>
     <plurals name="dialog_excludedapps_infotext">
-        <item quantity="one">Исключенные приложения по умолчанию (%1d)</item>
-        <item quantity="other">Исключенные приложения по умолчанию (%1d)</item>
-        <item quantity="many">Исключенные приложения по умолчанию (%1d)</item>
-        <item quantity="few">Исключенные приложения по умолчанию (%1d)</item>
+        <item quantity="one">%1d приложение исключено по умолчанию и не может быть отменено</item>
+        <item quantity="few">%1d приложения исключены по умолчанию и не могут быть отменены</item>
+        <item quantity="many">%1d приложений исключены по умолчанию и не могут быть отменены</item>
+        <item quantity="other">%1d приложений исключены по умолчанию и не могут быть отменены</item>
     </plurals>
     <plurals name="dialog_serverimport_title">
         <item quantity="one">Импортировать %1d сервер</item>
@@ -29,23 +29,24 @@
     <string name="dialog_serverimport_experimental">Экспериментальный</string>
     <string name="dialog_serverimport_servertype_doh">Используемый протокол: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Используемый протокол: DNS-over-TLS (DoT)</string>
-    <string name="dialog_serverimport_text">Выберите сервер(ы) для импорта.
-\nЕсли вы отметите уже добавленные ранее конфигурации сервера, то они будут продублированы.</string>
+    <string name="dialog_serverimport_text">Пожалуйста, выберите серверы, которые вы хотите импортировать.
+\n
+\nСерверы, которые уже импортированы, будут дублированы, если вы их выберете.</string>
     <string name="dialog_serverimportfailed_title">Ошибка импорта конфигурации</string>
     <string name="dialog_serverimportfailed_text">Ошибка импорта.</string>
-    <string name="dialog_serverimportfailed_text_exception">Конфигурации не могут быть импортированы.
+    <string name="dialog_serverimportfailed_text_exception">Серверы не могли быть импортированы.
 \n(%1s)</string>
     <string name="dialog_logexport_text">Выберите предпочитаемый способ экспорта лог файлов</string>
-    <string name="dialog_logexport_general">Общий экспорт в файл</string>
+    <string name="dialog_logexport_general">Выберите приложение</string>
     <string name="dialog_logexport_email">Отправка e-mail разработчику</string>
     <string name="dialog_deletelogs_text">Вы действительно хотите удалить все логи приложения\?</string>
     <string name="dialog_error_title">Отчет об ошибках</string>
     <string name="dialog_error_text">Похоже, что приложение неожиданно завершилось. Отправить отчет об ошибках разработчику приложения\?</string>
     <string name="dialog_batteryoptimization_title">Оптимизация расхода батареи</string>
-    <string name="dialog_batteryoptimization_message">На некоторых девайсах приложение не оповещается должным образом о перезагрузке системы, пока не отключена оптимизация батареи для этого приложения.
-\nВ данный момент включена оптимизация батареи для Nebulo, хотите ее отключить\?
+    <string name="dialog_batteryoptimization_message">На некоторых устройствах приложение не будет уведомлено о завершении загрузки, если для него не отключена оптимизация батареи.
+\nВ настоящее время приложение не внесено в белый список оптимизаций батареи, вы хотите сделать это\?
 \n
-\nЛучшим решением будет проверка самостоятельного запуска Nebulo после рестарта системы при включенной оптимизации батареи.</string>
+\nПрежде чем отключать оптимизацию, необходимо проверить, работает ли оно с включенной оптимизацией.</string>
     <string name="dialog_batteryoptimization_whitelist">Отключить энергосбережение для данного приложения</string>
     <string name="dialog_batteryoptimization_ignore">Не отключать</string>
     <string name="dialog_rate_confirmation">Запустить play store для оценки приложения\?</string>
@@ -64,15 +65,12 @@
     <string name="dialog_crashreporting_positive">Включить отчет об ошибках в случае падения приложения</string>
     <string name="dialog_crashreporting_negative">Нет, спасибо.</string>
     <string name="dialog_crashreporting_neutral">Посмотреть данные</string>
-    <string name="dialog_crashreporting_message">Спасибо за помощь в тестировании приложения!
+    <string name="dialog_crashreporting_message">Спасибо за использование Небуло!
 \n
-\nЭто приложение использует ПО с открытым исходным кодом, которое расположено на собственном сервере разработчика для более быстрой и качественной обработки отчетов. Отчеты будут сформированы и отправлены только в случае неожиданного падения приложения.
-\nОтчет о неожиданном завершении приложения содержит в себе необходимую информацию о приложении, а также некоторую информацию о вашей системе.
-\nВ отчете также будет передан идентификатор, который используется для понимания что отчеты приходят от одного и того же пользователя, и больше ни для чего.
-\nВключение формирования и отправки отчетов о неожиданном падении приложения является необязательным, но очень сильно помогает разработке.
-\nОтчеты отправляются через защищенный HTTPS канал.
+\nЭто приложение использует открытый исходный код и самохостинг стороннего программного обеспечения, чтобы легче отслеживать сбои приложения, как только они происходят. Если и только если приложение включено, оно будет передавать отчеты о сбоях при их возникновении. Эти отчеты содержат дополнительные данные о приложении и устройстве. Сюда входит идентификатор, который используется для отслеживания аварий, приходящих от одного и того же пользователя, но не может быть использован для отслеживания чего-либо еще. Включение отчетов о сбоях является необязательным, но это очень поможет.
+\nОтчеты надежно отправляются по HTTPS.
 \n
-\nНажмите на \'просмотр данных\' для ознакомления с данными, которые будут отправлены в отчете. Также вы можете ознакомиться с политикой конфиденциальности по ссылке.</string>
+\nНажмите на кнопку \'Смотреть данные\' ниже, чтобы посмотреть, какие данные передаются, и найдите ссылку на политику конфиденциальности.</string>
     <string name="dialog_crashreporting_message_notester">Спасибо за помощь в тестировании приложения!
 \n
 \nЭто приложение использует ПО с открытым исходным кодом, которое расположено на собственном сервере разработчика для более быстрой и качественной обработки отчетов. Отчеты будут сформированы и отправлены только в случае неожиданного падения приложения.
@@ -85,15 +83,95 @@
     <string name="dialog_clearqueries_title">Очистить список DNS запросов</string>
     <string name="dialog_clearqueries_message">Вы действительно хотите очистить список запросов\? Это действие необратимо.</string>
     <string name="dialog_credits_title">Участники</string>
-    <string name="dialog_credits_message" formatted="true">- Логотип приложения &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; . 
-\n- Перевод на турецкий язык Kemal Oktay Aktoğan 
-\n- Перевод на русский язык &lt;a href=https://t.me/bruleto&gt;bruleto&lt;/a&gt; 
-\n 
-\n 
-\n 
+    <string name="dialog_credits_message" formatted="true">- Логотип приложения &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; .
+\n- Перевод на турецкий язык Kemal Oktay Aktoğan
+\n- Перевод на русский язык &lt;a href=https://t.me/bruleto&gt;bruleto&lt;/a&gt;
+\n- голландский перевод Бас Кёдика
+\n- Перевод на португальский язык Рафаэля В. Боненбергера
+\n- индонезийский перевод Gloeyisk
+\n- Каталонский перевод Даниэля Аломара
+\n- Испанский перевод Даниэля Аломара и Виктора Байаса
+\n- Некоторые иконки из Font Awesome
+\n- Китайский (упрощенный) перевод Эдиэля Чедлиранбера
+\n
 \n Хотите увидеть свое имя здесь\? Можете внести свой &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;вклад в разработку &lt;/a&gt;.</string>
     <string name="dialog_join_group_title">Присоединиться к сообществу</string>
-    <string name="dialog_join_group_message">Эй, вы знаете, что у этого приложения есть свой чат в Telegram\? В нем выкладываются все последние обновления и также это лучшее место для вопросов и дискуссий о приложении.
-\nУ нас отличное комьюнити из более чем 200 человек, может хотите к нам присоединиться\?</string>
+    <string name="dialog_join_group_message">Привет!
+\n
+\nТы знал, что в этом приложении есть группа \"Телеграмма\"\? Она содержит регулярные обновления и является идеальным местом для обсуждений и вопросов.
+\nМы являемся отличным сообществом из более чем 200 человек, Вы хотели бы стать его частью\?</string>
     <string name="dialog_join_group_positive">О да!</string>
+    <string name="dialog_doh_detect_type_message">Пожалуйста, подождите минутку.</string>
+    <string name="dialog_vpn_permission_denied_message">Система отказала Nebulo в запуске VPN. Пожалуйста, откройте приложение, чтобы дать разрешение там, нажав кнопку \"Старт\".</string>
+    <string name="dialog_doh_detect_type_title">Обнаружение типа сервера</string>
+    <string name="dialog_raterequest_message">Привет! Если вам нравится Небуло, не могли бы вы воспользоваться моментом, чтобы оценить его в магазине\?</string>
+    <string name="dialog_raterequest_title">Тебе нравится Небуло\?</string>
+    <string name="dialog_vpninformation_message">Nebulo работает с помощью фиктивного VPN для перехвата всех ваших DNS запросов, которые затем пересылаются на безопасный сервер по вашему выбору.
+\nЭта поддельная VPN не является настоящей VPN и не скрывает вашу личность, а также не изменяет ваш IP адрес.
+\n
+\nС помощью этого приложения не передаются никакие фактические данные, за исключением DNS-запросов.</string>
+    <string name="dialog_vpninformation_title">Как работает это приложение</string>
+    <string name="dialog_cleardnscache_message">Вы уверены, что хотите очистить DNS кэш\?</string>
+    <string name="dialog_hostsourcerefresh_timeunit_days">Дни</string>
+    <string name="dialog_hostsourcerefresh_timeunit_hours">Часы</string>
+    <string name="dialog_hostsourcerefresh_timeunit_minutes">Протокол</string>
+    <string name="dialog_hostsourcerefresh_refresh_now">Обновить сейчас</string>
+    <string name="dialog_hostsourcerefresh_refresh_every">Освежайте каждый</string>
+    <string name="dialog_hostsourcerefresh_wifi_only">Обновляйте только на WIFI</string>
+    <string name="dialog_hostsourcerefresh_title">Обновить хост-источники</string>
+    <string name="dialog_hostsourcerefresh_automatic_refresh">Автоматически обновлять хост-источники</string>
+    <string name="dialog_overlaydetected_title">Обнаружено системное наложение</string>
+    <string name="dialog_servicekilled_more_info">Дополнительная информация</string>
+    <string name="dialog_editdelete_title">Что ты хочешь сделать\?</string>
+    <string name="dialog_editdelete_edit">Редактирование</string>
+    <string name="dialog_editdelete_delete">Удалить</string>
+    <string name="dialog_exportdnsrules_export_sources">Экспорт правил DNS из разрешенных источников хостов</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Экспорт пользовательских правил DNS хостов</string>
+    <string name="dialog_exportdnsrules_whitelist">Правила экспорта белого списка</string>
+    <string name="dialog_exportdnsrules_nonwhitelist">Нормальные правила экспорта</string>
+    <string name="dialog_newdnsrule_wildcard_info">Хозяин поддерживает спецсимволы. Используйте звездочку (*) для любого количества символов, цифр и разрешенных специальных символов, за исключением периода (...). Используйте две звездочки (**) для включения периода (...).</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Пожалуйста, укажите действительный адрес IPv6</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Пожалуйста, укажите действительный адрес IPv4</string>
+    <string name="dialog_newdnsrule_hint_ipv6address">адрес IPv6</string>
+    <string name="dialog_newdnsrule_host_invalid">Пожалуйста, предоставьте действительного хозяина</string>
+    <string name="dialog_newdnsrule_hint_host">Хост</string>
+    <string name="dialog_newdnsrule_hint_ipv4address">адрес IPv4</string>
+    <string name="dialog_newdnsrule_specify_address">Адрес</string>
+    <string name="dialog_newhostsource_edit_title">Источник нового правила</string>
+    <string name="dialog_logexport_loading_title">Подготовка отладочных журналов</string>
+    <string name="dialog_newhostsource_error_name_empty">Пожалуйста, укажите имя</string>
+    <string name="dialog_exportdnsrules_title">Правила экспорта DNS</string>
+    <string name="dialog_newdnsrule_edit">Редактировать правило DNS</string>
+    <string name="dialog_newdnsrule_whitelist">Белый список</string>
+    <string name="dialog_newhostsource_use_as_whitelist">Использовать как белый список</string>
+    <string name="dialog_newdnsrule_title">Новое правило DNS</string>
+    <string name="dialog_newhostsource_url">URL-АДРЕС</string>
+    <string name="dialog_newhostsource_choose_file">Выберите файл</string>
+    <string name="dialog_newhostsource_wildcard_info">Вы можете использовать списки хостов, которые используют wildcard домены.</string>
+    <string name="dialog_servicekilled_message">Приложение обнаружило, что оно не было остановлено должным образом в последний раз, когда оно было активным. Это сильно указывает на то, что ваша система решила принудительно остановить приложение без возможности его перезапуска.
+\n
+\nНа большинстве устройств у вас есть несколько вариантов, чтобы предотвратить или, по крайней мере, задержать остановку приложения.
+\nВы можете, например, отключить оптимизацию заряда батареи для приложения в системных настройках или избежать очистки приложения из списка повторных записей.
+\n
+\nЕсли вы решили это проигнорировать, вы больше не увидите этого диалога. Вы можете прочитать больше и получить советы по решению этой проблемы с помощью кнопки ниже (открывает внешний сайт в Вашем браузере). Нажмите на настройки, чтобы открыть настройки Android, где вы можете отключить оптимизацию батареи для Nebulo.</string>
+    <string name="dialog_newhostsource_name">Имя</string>
+    <string name="dialog_overlaydetected_message">Похоже, что активен общесистемный оверлей (например, пузырек чата, цветной или ночной фильтр). Большинство устройств не позволяют включить VPN в этом случае.
+\n
+\nЕсли вы не можете нажать OK в следующем диалоге, пожалуйста, отключите оверлей.</string>
+    <string name="dialog_newhostsource_title">Источник нового правила</string>
+    <string name="dialog_hostsourcerefresh_timeunit_weeks">Недели</string>
+    <string name="dialog_clearuserrules_message">Вы хотите очистить все правила DNS\? Это нельзя отменить.</string>
+    <string name="dialog_clearuserrules_title">Очистить все правила DNS\?</string>
+    <string name="dialog_deletehostsource_message">Вы уверены, что хотите удалить хост-источник %1s\? Это не может быть отменено, хосты из этого источника будут удалены.</string>
+    <string name="dialog_deletehostsource_title">Удалить %1s\?</string>
+    <string name="dialog_speedtest_useserver_message">Вы хотите использовать сервер %1s\? Он ранжировал %2d из %3d со временем ответа %4d мс.</string>
+    <string name="dialog_speedtest_useserver_title">Выберите сервер</string>
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">протестированные серверы %1d
+\n %2d Доступные DoT-серверы, %3d недоступные
+\n %4d Доступные серверы DoH, %5d недоступны
+\n Среднее время отклика: %6d мс.
+\n
+\n Самый быстрый сервер: %7s
+\n Самый медленный сервер: %8s</string>
+    <string name="dialog_speedresult_title">Результаты скоростного тестирования</string>
 </resources>
