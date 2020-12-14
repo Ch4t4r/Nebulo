@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dialog_doh_detect_type_message">একমুহূর্ত অপেক্ষা করুন.</string>
+    <string name="dialog_doh_detect_type_title">সার্ভারের প্রকার সনাক্ত করা হচ্ছে</string>
+</resources>
