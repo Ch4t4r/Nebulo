@@ -437,9 +437,11 @@ val Context.isPrivateDnsActive: Boolean
     get() = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
         false
     } else {
-        (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).let {
-            if (it.activeNetwork == null) false
-            else it.getLinkProperties(it.activeNetwork)?.isPrivateDnsActive ?: false
+        (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).let { mgr ->
+            if (mgr.activeNetwork == null) false
+            else mgr.getLinkProperties(mgr.activeNetwork)?.let {
+                it.isPrivateDnsActive && !it.privateDnsServerName.isNullOrBlank()
+            }?: false
         }
     }
 
