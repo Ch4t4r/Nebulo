@@ -217,4 +217,8 @@
     <string name="dialog_newserver_primaryserver_hint_doq" translatable="false">esempio-doq.com[/dns-query]</string>
     <string name="dialog_newserver_title_quic">Aggiungi un server (DoQ)</string>
     <string name="dialog_serverconfiguration_quic" translatable="false">DNS-over-QUIC (DoQ)</string>
+    <string name="dialog_nonvpn_help_generic">Per usare Nebulo in modalità non-vpn assieme ad un\'app VPN di terze parti devi cambiare le impostazioni DNS dentro quest\'altra app.
+\nNon tutte le app VPN ti permettono di cambiare le impostazioni DNS. Se la tua lo fa, imposta il server DNS a \'%1$s:%2$d\' (puoi configurare la porta qua sopra).
+\n
+\nUna volta configurate le app, avviale entrambe.</string>
 </resources>
