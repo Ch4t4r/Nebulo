@@ -3,6 +3,7 @@ package com.frostnerd.smokescreen.util.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
 import com.frostnerd.preferenceskt.typedpreferences.SimpleTypedPreferences
@@ -258,8 +259,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     }, cacheControl)
     override var dnsServerConfig: DnsServerInformation<*> by cache(DnsServerInformationPreference("dns_server_config"), cacheControl)
         .toNonOptionalPreference(true) {
-            AbstractTLSDnsHandle.waitUntilKnownServersArePopulated(-1) { knownServers ->
-                knownServers.getValue(9)
+            AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated(2500) { knownServers ->
+                knownServers.getValue(3) // Quad9
             }
         }
 
