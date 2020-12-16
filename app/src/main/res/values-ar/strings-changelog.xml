@@ -147,7 +147,6 @@
     <string name="changelog_build_23_3">يتم عرض نافذة بما يتم تحميله الان</string>
     <string name="changelog_build_23_2">تمت إضافة مربع الحوار هذا لإبراز التغييرات</string>
     <string name="changelog_build_23_1">تظهر المنافذ غير الافتراضية الآن لخوادم DoT</string>
-    <string name="changelog_build_67_1">يستخدم الان عنوان IPv6 (::) مختلف لتجاهل المضيف</string>
     <string name="changelog_build_69_2">زيادة أداء استعلامات DNS-over-HTTPS</string>
     <string name="changelog_build_69_1">أضف دعمًا ل DNS-over-QUIC</string>
     <string name="changelog_build_67_2">تمت إضافة بحث إلى مربع حوار استثناء التطبيق</string>

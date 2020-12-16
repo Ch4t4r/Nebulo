@@ -146,7 +146,6 @@
     <string name="changelog_build_66_8">Ajout d\'un écran de sélection du serveur lors du premier lancement de l\'application</string>
     <string name="changelog_build_66_10">Ajout d\'un filtre au journal des requêtes</string>
     <string name="changelog_build_66_11">Ajout d\'un champ indiquant combien de requêtes ont été résolues avec les règles du DNS</string>
-    <string name="changelog_build_67_1">Une adresse IPv6 différente (::) est maintenant utilisée en interne pour ignorer un hôte</string>
     <string name="changelog_build_67_2">Ajout d\'une recherche dans le dialogue d\'exclusion de l\'application</string>
     <string name="changelog_build_67_3">Correction de la latence du serveur qui n\'est pas affichée en mode non-VPN</string>
     <string name="changelog_build_67_4">Ajout d\'un meilleur formatage des numéros dans les règles du DNS</string>

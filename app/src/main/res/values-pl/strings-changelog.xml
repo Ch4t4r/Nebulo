@@ -50,7 +50,6 @@
     <string name="changelog_build_67_4">Dodano lepsze formatowanie liczb w regułach DNS</string>
     <string name="changelog_build_67_3">Napraw opóźnienie serwera nie jest wyświetlane w trybie Non-VPN</string>
     <string name="changelog_build_67_2">Dodano wyszukiwanie do okna dialogowego wyłączenia aplikacji</string>
-    <string name="changelog_build_67_1">Inny adres IPv6 (::) jest teraz używany wewnętrznie do ignorowania hosta</string>
     <string name="changelog_build_66_11">Dodano pole pokazujące, ile zapytań zostało rozwiązanych za pomocą reguł DNS</string>
     <string name="changelog_build_66_10">Dodano filtr do dziennika zapytań</string>
     <string name="changelog_build_66_9">Dodano powiadomienie wyświetlane w przypadku, gdy aktualny serwer ma złe połączenie</string>

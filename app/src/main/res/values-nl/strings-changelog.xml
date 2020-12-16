@@ -142,7 +142,6 @@
     <string name="changelog_build_67_4">Betere opmaak van nummers in de DNS-regels toegevoegd</string>
     <string name="changelog_build_67_3">Fix server latency die niet wordt weergegeven in de niet-VPN-modus</string>
     <string name="changelog_build_67_2">Een zoekopdracht toegevoegd aan het uitsluitingsdialoogvenster van de app</string>
-    <string name="changelog_build_67_1">Een ander IPv6-adres (::) wordt nu intern gebruikt om een host te negeren</string>
     <string name="changelog_build_66_11">Een veld toegevoegd dat laat zien hoeveel query\'s zijn opgelost met DNS-regels</string>
     <string name="changelog_build_66_10">Een filter toegevoegd aan het query logboek</string>
     <string name="changelog_build_66_9">Een melding toegevoegd die wordt getoond wanneer de huidige server een slechte verbinding heeft</string>

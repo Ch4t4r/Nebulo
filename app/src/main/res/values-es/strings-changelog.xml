@@ -145,7 +145,6 @@
     <string name="changelog_build_67_4">Añadido un mejor formato de los números en las reglas del DNS</string>
     <string name="changelog_build_67_2">Añadida una búsqueda en el diálogo de exclusión de aplicaciones</string>
     <string name="changelog_build_67_3">Arreglar la latencia del servidor que no se muestra en el modo no VPN</string>
-    <string name="changelog_build_67_1">Una dirección IPv6 diferente (::) se utiliza ahora internamente para ignorar un host</string>
     <string name="changelog_build_66_10">Añadido un filtro al registro de consultas</string>
     <string name="changelog_build_66_11">Añadido un campo que muestra cuántas consultas se han resuelto con las reglas del DNS</string>
     <string name="changelog_build_66_9">Añadido una notificación que se muestra cuando el servidor actual tiene una mala conexión</string>

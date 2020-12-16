@@ -19,7 +19,6 @@
     <string name="changelog_build_66_5">Тест скорости DNS теперь более точно показывает задержку</string>
     <string name="changelog_build_66_9">Добавлено уведомление, показывающее, что текущий сервер имеет плохое соединение</string>
     <string name="changelog_build_66_11">Добавлено поле, показывающее, сколько запросов было разрешено с помощью правил DNS</string>
-    <string name="changelog_build_67_1">Другой IPv6-адрес (::) теперь используется внутренне, чтобы игнорировать хост</string>
     <string name="changelog_build_67_3">Исправить задержку сервера, не отображаемого в режиме Non-VPN</string>
     <string name="changelog_build_59_1">Добавлены новые переводы</string>
     <string name="changelog_build_51_2">Исправлено некорректное экспортирование правил DNS подстановочного знака</string>

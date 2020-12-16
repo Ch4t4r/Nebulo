@@ -110,7 +110,6 @@
     <string name="changelog_build_67_4">在DNS规则中添加了更好的数字格式</string>
     <string name="changelog_build_67_3">修正非VPN模式下服务器延迟不显示的问题</string>
     <string name="changelog_build_67_2">在应用排除对话框中增加了搜索功能</string>
-    <string name="changelog_build_67_1">现在内部使用不同的IPv6地址(::)来忽略主机</string>
     <string name="changelog_build_66_11">添加了一个字段，显示有多少查询已通过DNS规则解决</string>
     <string name="changelog_build_66_9">增加了当当前服务器连接不良时显示的通知</string>
     <string name="changelog_build_66_8">在第一次启动应用程序时，增加了服务器选择界面</string>

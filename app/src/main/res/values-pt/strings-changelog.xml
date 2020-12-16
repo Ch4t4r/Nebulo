@@ -152,5 +152,4 @@
     <string name="changelog_build_67_2">Acrescentou uma pesquisa ao diálogo de exclusão da aplicação</string>
     <string name="changelog_build_67_4">Adicionada uma melhor formatação dos números nas regras do DNS</string>
     <string name="changelog_build_67_3">Fixar a latência do servidor não sendo mostrada em modo não-VPN</string>
-    <string name="changelog_build_67_1">Um endereço IPv6 diferente (::) é agora utilizado internamente para ignorar um anfitrião</string>
 </resources>

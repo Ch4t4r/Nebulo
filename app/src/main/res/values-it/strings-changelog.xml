@@ -150,7 +150,6 @@
     <string name="changelog_build_67_4">Aggiunta migliore formattazione dei numeri nelle regole DNS</string>
     <string name="changelog_build_67_3">Corretta la latenza server non mostrata in modalità Non-VPN</string>
     <string name="changelog_build_67_2">Aggiunta una ricerca alla finestra di esclusione di app</string>
-    <string name="changelog_build_67_1">Ora viene usato internamente un indirizzo IPv6 diverso (::) per ignorare un host</string>
     <string name="changelog_build_69_2">Migliorate le prestazioni delle richieste DNS-over-HTTPS</string>
     <string name="changelog_build_69_1">Aggiunto supporto a DNS-over-QUIC</string>
 </resources>
