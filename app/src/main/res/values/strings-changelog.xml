@@ -457,6 +457,11 @@
         <item>@string/changelog_build_69_2</item>
     </string-array>
 
+    <string name="changelog_build_70">
+        <item>Version 2.0 (Build 70)</item>
+        <item>@string/changelog_build_61_1</item>
+    </string>
+
     <string name="changelog_build_69_1">Add support for DNS-over-QUIC</string> <!-- Not yet added -->
     <string name="changelog_build_66_7">Added introduction screens when first launching the app</string> <!--- Both currently disabled -->
     <string name="changelog_build_66_8">Added a server selection screen when first launching the app</string>

@@ -12,8 +12,8 @@ android {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 69
-        versionName "2.0-alpha"
+        versionCode 70
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("Boolean", "FROM_CI", String.valueOf(getSystemVariableOrDefault("CI_COMMIT_SHORT_SHA", "") != ""))
@@ -96,6 +96,7 @@ android {
             matchingFallbacks = ['default']
             dimension "version"
             versionNameSuffix "-adblock"
+            versionCode 71
         }
         normal {
             matchingFallbacks = ['default']
