@@ -20,6 +20,7 @@ android {
         buildConfigField("String", "COMMIT_HASH", '"' + getGitCommitHash() + '"')
         buildConfigField("String", "SENTRY_DSN", '""')
         buildConfigField("Boolean", "SHOW_DOQ", 'false')
+        buildConfigField("Boolean", "SHOW_INTRO", 'false')
 
         kapt {
             arguments {

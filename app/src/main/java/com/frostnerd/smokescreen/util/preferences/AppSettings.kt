@@ -150,7 +150,7 @@ interface AppSettings {
         userServers = mutableServers
     }
 
-    fun shouldShowAppIntro() = totalAppLaunches == 0
+    fun shouldShowAppIntro() = totalAppLaunches == 0 && BuildConfig.SHOW_INTRO
 }
 
 class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedPreferences(context, version = 1, migrate = migration) {
