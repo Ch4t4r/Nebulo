@@ -50,11 +50,11 @@ class NebuloAppIntro:AppIntro() {
             it.values.map {
                 it to null
             }.toMap()
-        } + AbstractQuicDnsHandle.waitUntilKnownServersArePopulated(10) {
+        } + if(BuildConfig.SHOW_DOQ) AbstractQuicDnsHandle.waitUntilKnownServersArePopulated(10) {
             it.values.map {
                 it to null
             }.toMap()
-        }).filter { BuildConfig.SHOW_ALL_SERVERS || !it.key.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) }.toMutableMap()
+        } else emptyMap()).filter { BuildConfig.SHOW_ALL_SERVERS || !it.key.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) }.toMutableMap()
         private val jobSupervisor = SupervisorJob()
     }
 

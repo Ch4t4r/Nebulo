@@ -145,6 +145,8 @@ class SpeedTestActivity : BaseActivity() {
                 }
             }.filter {
                 !it.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) || BuildConfig.SHOW_ALL_SERVERS
+            }.filter {
+                BuildConfig.SHOW_DOQ || it.type != ServerType.DOQ
             }
             val testResults = dnsServers.map {
                 SpeedTest(it, null)
