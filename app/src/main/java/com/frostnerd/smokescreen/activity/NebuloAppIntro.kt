@@ -7,11 +7,11 @@ import com.frostnerd.dnstunnelproxy.*
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
+import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.createQuicCronetEngineIfInstalled
 import com.frostnerd.smokescreen.fragment.AppIntroServerChooseFragment
-import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.speedtest.DnsSpeedTest
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroFragment
@@ -50,11 +50,12 @@ class NebuloAppIntro:AppIntro() {
             it.values.map {
                 it to null
             }.toMap()
-        } + if(BuildConfig.SHOW_DOQ) AbstractQuicDnsHandle.waitUntilKnownServersArePopulated(10) {
+        } +  AbstractQuicDnsHandle.waitUntilKnownServersArePopulated(10) {
             it.values.map {
                 it to null
             }.toMap()
-        } else emptyMap()).filter { BuildConfig.SHOW_ALL_SERVERS || !it.key.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) }.toMutableMap()
+        }).filter { BuildConfig.SHOW_ALL_SERVERS || !it.key.hasCapability(DEFAULT_DNSERVER_CAPABILITIES.BLOCK_ADS) }
+            .filter { BuildConfig.SHOW_DOQ || it.key.type != ServerType.DOQ }.toMutableMap()
         private val jobSupervisor = SupervisorJob()
     }
 
