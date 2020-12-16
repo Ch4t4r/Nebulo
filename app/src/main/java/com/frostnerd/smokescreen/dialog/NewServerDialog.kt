@@ -18,6 +18,7 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseDialog
+import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
@@ -162,14 +163,17 @@ class NewServerDialog(
                     context.getString(R.string.dialog_serverconfiguration_https),
                     context.getString(R.string.dialog_serverconfiguration_tls),
                     context.getString(R.string.dialog_serverconfiguration_quic)
-                )
+                ).let {
+                    if(BuildConfig.SHOW_DOQ) it
+                    else it.subList(0, 2)
+                }
             )
             spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
             serverType.adapter = spinnerAdapter
             serverType.setSelection(when(type) {
                 ServerType.DOH -> 0
                 ServerType.DOT -> 1
-                ServerType.DOQ -> 2
+                ServerType.DOQ -> if(BuildConfig.SHOW_DOQ) 2 else 0
             })
             serverType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}

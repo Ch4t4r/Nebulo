@@ -45,7 +45,9 @@ import kotlinx.coroutines.launch
 class ServerChoosalDialog(
     context: AppCompatActivity,
     selectedServer:DnsServerInformation<*>?,
-    selectedType:ServerType = if(selectedServer == null) ServerType.DOT else ServerType.detect(selectedServer),
+    selectedType:ServerType = if(selectedServer == null) ServerType.DOT else ServerType.detect(selectedServer).let {
+        if(it == ServerType.DOQ && !BuildConfig.SHOW_DOQ) ServerType.DOH else it
+    },
     onEntrySelected: (config: DnsServerInformation<*>) -> Unit
 ) :
     BaseDialog(context, context.getPreferences().theme.dialogStyle) {
@@ -76,13 +78,17 @@ class ServerChoosalDialog(
         }
         loadServerData(selectedType)
 
+        val spinnerData = arrayListOf(
+            context.getString(R.string.dialog_serverconfiguration_https),
+            context.getString(R.string.dialog_serverconfiguration_tls),
+            context.getString(R.string.dialog_serverconfiguration_quic)
+        ).let {
+            if(BuildConfig.SHOW_DOQ) it
+            else it.subList(0, 2)
+        }
         val spinnerAdapter = ArrayAdapter(
             context, android.R.layout.simple_spinner_item,
-            arrayListOf(
-                context.getString(R.string.dialog_serverconfiguration_https),
-                context.getString(R.string.dialog_serverconfiguration_tls),
-                context.getString(R.string.dialog_serverconfiguration_quic)
-            )
+            spinnerData
         )
         spinnerAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
         val spinner = layout.findViewById<Spinner>(R.id.spinner)

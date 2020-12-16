@@ -157,7 +157,10 @@ class ConfigureActivity : BaseActivity() {
                 this.getString(R.string.dialog_serverconfiguration_https),
                 this.getString(R.string.dialog_serverconfiguration_tls),
                 this.getString(R.string.dialog_serverconfiguration_quic)
-            )
+            ).let {
+                if(BuildConfig.SHOW_DOQ) it
+                else it.subList(0, 2)
+            }
         )
         typeAdapter.setDropDownViewResource(R.layout.item_tasker_action_spinner_dropdown_item)
         serverType.adapter = typeAdapter

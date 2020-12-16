@@ -19,6 +19,7 @@ android {
         buildConfigField("Boolean", "FROM_CI", String.valueOf(getSystemVariableOrDefault("CI_COMMIT_SHORT_SHA", "") != ""))
         buildConfigField("String", "COMMIT_HASH", '"' + getGitCommitHash() + '"')
         buildConfigField("String", "SENTRY_DSN", '""')
+        buildConfigField("Boolean", "SHOW_DOQ", 'false')
 
         kapt {
             arguments {
