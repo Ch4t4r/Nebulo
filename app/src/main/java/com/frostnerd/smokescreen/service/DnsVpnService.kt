@@ -643,7 +643,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 }
                 Command.PAUSE_RESUME -> {
                     if (vpnProxy != null) {
-                        log("Received RESUME command while app running, destroying vpn.")
+                        log("Received PAUSE_RESUME command while app running, destroying vpn.")
                         destroy(false)
                         pauseNotificationAction?.title = getString(R.string.all_resume)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_resume
@@ -652,7 +652,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                             BROADCAST_VPN_PAUSED))
                         paused = true
                     } else {
-                        log("Received RESUME command while app paused, restarting vpn.")
+                        log("Received PAUSE_RESUME command while app paused, restarting vpn.")
                         recreateVpn(false, null)
                         pauseNotificationAction?.title = getString(R.string.all_pause)
                         pauseNotificationAction?.icon = R.drawable.ic_stat_pause
@@ -662,6 +662,30 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                         paused = false
                     }
                     updateNotification()
+                }
+                Command.RESUME -> {
+                    if(vpnProxy == null) {
+                        log("Received RESUME command while app not running, creating vpn.")
+                        recreateVpn(false, null)
+                        pauseNotificationAction?.title = getString(R.string.all_pause)
+                        pauseNotificationAction?.icon = R.drawable.ic_stat_pause
+                        notificationBuilder.setSmallIcon(R.drawable.ic_mainnotification)
+                        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(
+                            BROADCAST_VPN_RESUMED))
+                        paused = false
+                    }
+                }
+                Command.PAUSE -> {
+                    if(vpnProxy != null) {
+                        log("Received PAUSE command while app running, destroying vpn.")
+                        destroy(false)
+                        pauseNotificationAction?.title = getString(R.string.all_resume)
+                        pauseNotificationAction?.icon = R.drawable.ic_stat_resume
+                        notificationBuilder.setSmallIcon(R.drawable.ic_notification_paused)
+                        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(
+                            BROADCAST_VPN_PAUSED))
+                        paused = true
+                    }
                 }
                 Command.IGNORE_SERVICE_KILLED -> {
                     getPreferences().ignoreServiceKilled = true
@@ -1583,7 +1607,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
 }
 
 enum class Command : Serializable {
-    STOP, RESTART, PAUSE_RESUME, IGNORE_SERVICE_KILLED, INVALIDATE_DNS_CACHE, IGNORE_BAD_CONNECTION
+    STOP, RESTART, PAUSE_RESUME, IGNORE_SERVICE_KILLED, INVALIDATE_DNS_CACHE, IGNORE_BAD_CONNECTION,
+    PAUSE, RESUME
 }
 
 data class DnsServerConfiguration(

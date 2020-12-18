@@ -211,6 +211,11 @@
                 android:label="@string/activity_label_speed_test"
                 android:parentActivityName=".activity.MainActivity"
                 />
+        <activity android:name=".activity.automate.PauseDNSActivity"/>
+        <activity android:name=".activity.automate.ResumeDNSActivity"/>
+        <activity android:name=".activity.automate.StartDNSActivity"/>
+        <activity android:name=".activity.automate.StopDNSActivity"/>
+        <activity android:name=".activity.automate.ToggleDNSActivity"/>
 
         <service
                 android:name=".service.DnsVpnService"
