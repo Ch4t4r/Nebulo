@@ -89,7 +89,9 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
             if(intent == null) return null
             if(intent.extras?.containsKey(extraKeyServerConfig) == true) {
                 if(intent.extras?.containsKey(extraKeyServerType) == true) {
-                    return serverInfoFromJson(intent.extras!!.getString(extraKeyServerConfig)!!, intent.extras!!.getSerializable(extraKeyServerType)!! as ServerType)
+                    val typeRaw = intent.extras!!.getSerializable(extraKeyServerType)!!
+                    val type = (typeRaw.takeIf { it is ServerType } as? ServerType) ?: ServerType.from(typeRaw as String)
+                    return serverInfoFromJson(intent.extras!!.getString(extraKeyServerConfig)!!, type)
                 }
             }
             return null
@@ -99,7 +101,9 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
             if(bundle == null) return null
             if(bundle.containsKey(extraKeyServerConfig)) {
                 if(bundle.containsKey(extraKeyServerType)) {
-                    return serverInfoFromJson(bundle.getString(extraKeyServerConfig)!!, bundle.getSerializable(extraKeyServerType)!! as ServerType)
+                    val typeRaw =  bundle.getSerializable(extraKeyServerType)!!
+                    val type = (typeRaw.takeIf { it is ServerType } as? ServerType) ?: ServerType.from(typeRaw as String)
+                    return serverInfoFromJson(bundle.getString(extraKeyServerConfig)!!, type)
                 }
             }
             return null

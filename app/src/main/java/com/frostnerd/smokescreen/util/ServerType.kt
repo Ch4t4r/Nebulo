@@ -65,5 +65,11 @@ enum class ServerType(val index:Int) {
         fun from(index:Int): ServerType {
             return values().first { it.index == index }
         }
+
+        fun from(oldTypeString:String):ServerType {
+            return if(oldTypeString.equals("tls", true)) DOT
+            else if(oldTypeString.equals("https", true)) DOH
+            else error("Unknown type")
+        }
     }
 }
