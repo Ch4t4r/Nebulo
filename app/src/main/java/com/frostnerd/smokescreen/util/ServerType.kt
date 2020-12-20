@@ -23,8 +23,9 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-enum class ServerType(val index:Int) {
-    DOH(0), DOT(1), DOQ(2);
+enum class ServerType(val index:Int, val typeString:String) {
+    DOH(0, "https"), DOT(1, "tls"), DOQ(2, "quic");
+
 
     companion object {
         fun detect(from: DnsServerInformation<*>):ServerType {
@@ -66,10 +67,13 @@ enum class ServerType(val index:Int) {
             return values().first { it.index == index }
         }
 
-        fun from(oldTypeString:String):ServerType {
-            return if(oldTypeString.equals("tls", true)) DOT
-            else if(oldTypeString.equals("https", true)) DOH
-            else error("Unknown type")
+        fun from(typeString:String):ServerType {
+            return when {
+                typeString.equals("tls", true) -> DOT
+                typeString.equals("https", true) -> DOH
+                typeString.equals("quic", true) -> DOQ
+                else -> error("")
+            }
         }
     }
 }

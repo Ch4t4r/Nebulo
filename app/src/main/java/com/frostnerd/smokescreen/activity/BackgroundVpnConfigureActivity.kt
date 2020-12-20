@@ -77,21 +77,19 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
 
         fun writeServerInfoToIntent(info:DnsServerInformation<*>, intent:Intent) {
             intent.putExtra(extraKeyServerConfig, info.toJson())
-            intent.putExtra(extraKeyServerType, info.type)
+            intent.putExtra(extraKeyServerType, info.type.typeString)
         }
 
         fun writeServerInfoToIntent(info:DnsServerInformation<*>, bundle:Bundle) {
             bundle.putString(extraKeyServerConfig, info.toJson())
-            bundle.putSerializable(extraKeyServerType, info.type)
+            bundle.putSerializable(extraKeyServerType, info.type.typeString)
         }
 
         fun readServerInfoFromIntent(intent:Intent?):DnsServerInformation<*>? {
             if(intent == null) return null
             if(intent.extras?.containsKey(extraKeyServerConfig) == true) {
                 if(intent.extras?.containsKey(extraKeyServerType) == true) {
-                    val typeRaw = intent.extras!!.getSerializable(extraKeyServerType)!!
-                    val type = (typeRaw.takeIf { it is ServerType } as? ServerType) ?: ServerType.from(typeRaw as String)
-                    return serverInfoFromJson(intent.extras!!.getString(extraKeyServerConfig)!!, type)
+                    return serverInfoFromJson(intent.extras!!.getString(extraKeyServerConfig)!!, ServerType.from(intent.extras!!.getString(extraKeyServerType)!!))
                 }
             }
             return null
@@ -101,9 +99,7 @@ class BackgroundVpnConfigureActivity : BaseActivity() {
             if(bundle == null) return null
             if(bundle.containsKey(extraKeyServerConfig)) {
                 if(bundle.containsKey(extraKeyServerType)) {
-                    val typeRaw =  bundle.getSerializable(extraKeyServerType)!!
-                    val type = (typeRaw.takeIf { it is ServerType } as? ServerType) ?: ServerType.from(typeRaw as String)
-                    return serverInfoFromJson(bundle.getString(extraKeyServerConfig)!!, type)
+                    return serverInfoFromJson(bundle.getString(extraKeyServerConfig)!!, ServerType.from(bundle.getString(extraKeyServerType)!!))
                 }
             }
             return null
