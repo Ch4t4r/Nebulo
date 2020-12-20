@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.frostnerd.smokescreen">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.frostnerd.smokescreen">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.INSTALL_SHORTCUT"/>
-    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission
+            android:name="android.permission.INTERACT_ACROSS_USERS"
             tools:ignore="ProtectedPermissions" />
+
     <uses-feature
             android:name="android.software.leanback"
             android:required="false" />
@@ -23,35 +25,43 @@
     <application
             android:name=".SmokeScreen"
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
             android:banner="@mipmap/ic_launcher"
+            android:extractNativeLibs="true"
+            android:fullBackupContent="@xml/backup_descriptor"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme_Mono"
-            tools:ignore="GoogleAppIndexingWarning"
-            android:fullBackupContent="@xml/backup_descriptor">
+            tools:ignore="GoogleAppIndexingWarning">
 
-        <meta-data android:name="io.sentry.auto-init" android:value="false" />
+        <meta-data
+                android:name="io.sentry.auto-init"
+                android:value="false" />
 
         <activity
                 android:name=".activity.PinActivity"
-                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
-                android:launchMode="singleTask">
+                android:launchMode="singleTask"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.NebuloAppIntro" android:label="@string/app_name"/>
+        <activity
+                android:name=".activity.NebuloAppIntro"
+                android:label="@string/app_name" />
 
-        <activity android:name=".activity.MainActivity" android:launchMode="singleTask"
-                android:exported="false" >
+        <activity
+                android:name=".activity.MainActivity"
+                android:exported="false"
+                android:launchMode="singleTask">
 
         </activity>
         <activity
@@ -62,129 +72,129 @@
         </activity>
         <activity
                 android:name=".activity.ShortcutActivity"
+                android:autoRemoveFromRecents="true"
                 android:exported="true"
                 android:launchMode="singleTop"
                 android:noHistory="true"
-                android:autoRemoveFromRecents="true"
                 android:taskAffinity="com.frostnerd.smokescreen.ShortcutTask"
-                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity
                 android:name=".activity.LoggingDialogActivity"
                 android:autoRemoveFromRecents="true"
                 android:label="@string/activity_label_enable_logging"
+                android:noHistory="true"
                 android:process=":logexport"
-                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
-                android:noHistory="true">
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                        android:mimeType="*/*"
-                        android:scheme="content"
                         android:host="*"
+                        android:mimeType="*/*"
                         android:pathPattern=".*\\.nebulologgingkey"
-                        tools:ignore="AppLinkUrlError"/>
+                        android:scheme="content"
+                        tools:ignore="AppLinkUrlError" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                        android:mimeType="*/*"
-                        android:scheme="file"
                         android:host="*"
+                        android:mimeType="*/*"
                         android:pathPattern=".*\\.nebulologgingkey"
-                        tools:ignore="AppLinkUrlError"/>
+                        android:scheme="file"
+                        tools:ignore="AppLinkUrlError" />
             </intent-filter>
         </activity>
         <activity
                 android:name=".activity.ServerImportActivity"
                 android:autoRemoveFromRecents="true"
-                android:noHistory="true"
                 android:label="@string/activity_label_import_servers"
+                android:noHistory="true"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                        android:mimeType="*/*"
-                        android:scheme="content"
                         android:host="*"
+                        android:mimeType="*/*"
                         android:pathPattern=".*\\.dohserver"
-                        tools:ignore="AppLinkUrlError"/>
-                <data
-                        android:mimeType="*/*"
                         android:scheme="content"
+                        tools:ignore="AppLinkUrlError" />
+                <data
                         android:host="*"
+                        android:mimeType="*/*"
                         android:pathPattern=".*\\.nebuloserver"
-                        tools:ignore="AppLinkUrlError"/>
+                        android:scheme="content"
+                        tools:ignore="AppLinkUrlError" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
 
                 <data
+                        android:host="*"
                         android:mimeType="*/*"
+                        android:pathPattern=".*\\.dohserver"
                         android:scheme="file"
-                        android:host="*"
-                        android:pathPattern=".*\\.dohserver"
-                        tools:ignore="AppLinkUrlError"/>
+                        tools:ignore="AppLinkUrlError" />
                 <data
-                        android:mimeType="*/*"
-                        android:scheme="content"
                         android:host="*"
+                        android:mimeType="*/*"
                         android:pathPattern=".*\\.nebuloserver"
-                        tools:ignore="AppLinkUrlError"/>
+                        android:scheme="content"
+                        tools:ignore="AppLinkUrlError" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="https"/>
-                <data android:scheme="http"/>
-                <data android:pathPattern="/servers/.*"/>
-                <data android:host="www.smokescreen.app"/>
-                <data android:host="smokescreen.app"/>
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data android:pathPattern="/servers/.*" />
+                <data android:host="www.smokescreen.app" />
+                <data android:host="smokescreen.app" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="https"/>
-                <data android:scheme="http"/>
-                <data android:pathPattern="/servers/.*"/>
-                <data android:host="www.nebulo.app"/>
-                <data android:host="nebulo.app"/>
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data android:pathPattern="/servers/.*" />
+                <data android:host="www.nebulo.app" />
+                <data android:host="nebulo.app" />
             </intent-filter>
         </activity>
         <activity
                 android:name=".activity.QueryImportActivity"
                 android:autoRemoveFromRecents="true"
-                android:noHistory="true"
                 android:label="@string/activity_label_import_queries"
+                android:noHistory="true"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <data
-                        android:mimeType="*/*"
-                        android:scheme="content"
                         android:host="*"
+                        android:mimeType="*/*"
                         android:pathPattern=".*\\.querycsv"
-                        tools:ignore="AppLinkUrlError"/>
+                        android:scheme="content"
+                        tools:ignore="AppLinkUrlError" />
             </intent-filter>
 
         </activity>
         <activity
                 android:name=".activity.BackgroundVpnConfigureActivity"
                 android:launchMode="singleInstance"
-                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity
                 android:name=".activity.ErrorDialogActivity"
                 android:autoRemoveFromRecents="true"
@@ -193,7 +203,7 @@
                 android:launchMode="singleTop"
                 android:noHistory="true"
                 android:process=".ErrorProcess"
-                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity
                 android:name=".tasker.ConfigureActivity"
                 android:exported="true"
@@ -202,67 +212,67 @@
                 android:uiOptions="splitActionBarWhenNarrow"
                 android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING"/>
+                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
             </intent-filter>
         </activity>
         <activity
                 android:name=".activity.SpeedTestActivity"
-                android:theme="@style/AppTheme_Mono"
                 android:label="@string/activity_label_speed_test"
                 android:parentActivityName=".activity.MainActivity"
-                />
-        <activity android:name=".activity.automate.PauseDNSActivity"/>
-        <activity android:name=".activity.automate.ResumeDNSActivity"/>
-        <activity android:name=".activity.automate.StartDNSActivity"/>
-        <activity android:name=".activity.automate.StopDNSActivity"/>
-        <activity android:name=".activity.automate.ToggleDNSActivity"/>
+                android:theme="@style/AppTheme_Mono" />
+        <activity android:name=".activity.automate.PauseDNSActivity" />
+        <activity android:name=".activity.automate.ResumeDNSActivity" />
+        <activity android:name=".activity.automate.StartDNSActivity" />
+        <activity android:name=".activity.automate.StopDNSActivity" />
+        <activity android:name=".activity.automate.ToggleDNSActivity" />
 
         <service
                 android:name=".service.DnsVpnService"
                 android:permission="android.permission.BIND_VPN_SERVICE"
                 android:stopWithTask="false">
             <intent-filter>
-                <action android:name="android.net.VpnService"/>
+                <action android:name="android.net.VpnService" />
             </intent-filter>
             <meta-data
                     android:name="android.net.VpnService.SUPPORTS_ALWAYS_ON"
-                    android:value="true"/>
+                    android:value="true" />
         </service>
         <service
                 android:name=".service.VpnRestartService"
-                android:exported="false"/>
+                android:exported="false" />
         <service
                 android:name=".service.StartStopTileService"
-                android:label="@string/app_name"
                 android:icon="@drawable/ic_mainnotification"
+                android:label="@string/app_name"
                 android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
-            <meta-data android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true" />
+            <meta-data
+                    android:name="android.service.quicksettings.ACTIVE_TILE"
+                    android:value="true" />
         </service>
-        <service android:name=".service.RuleImportService"/>
-        <service android:name=".service.RuleExportService"/>
+        <service android:name=".service.RuleImportService" />
+        <service android:name=".service.RuleExportService" />
 
         <receiver
                 android:name=".receiver.AutostartReceiver"
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <!-- for htc -->
 
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
-                <data android:scheme="package"/>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" />
             </intent-filter>
         </receiver>
         <receiver
@@ -271,19 +281,18 @@
                 android:process=":background"
                 tools:ignore="ExportedReceiver">
             <intent-filter>
-                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING"/>
+                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
             </intent-filter>
         </receiver>
 
         <provider
-                android:authorities="com.frostnerd.smokescreen.LogZipProvider"
                 android:name="androidx.core.content.FileProvider"
+                android:authorities="com.frostnerd.smokescreen.LogZipProvider"
                 android:exported="false"
                 android:grantUriPermissions="true">
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/log_file_paths"
-                    />
+                    android:resource="@xml/log_file_paths" />
         </provider>
     </application>
 
