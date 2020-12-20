@@ -382,9 +382,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             askRestartApp()
             true
         }
-        findPreference("app_exclusion_list").setOnPreferenceClickListener {
-            showExcludedAppsDialog()
-            true
+        findPreference("app_exclusion_list").apply {
+            setOnPreferenceClickListener {
+                showExcludedAppsDialog()
+                true
+            }
+            if(getPreferences().runWithoutVpn) setSummary(R.string.summary_excluded_apps_non_vpn)
         }
         fallbackDns.setOnPreferenceChangeListener { _, newValue ->
             val pos = newValue.toString().toInt()

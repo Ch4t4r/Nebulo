@@ -16,6 +16,7 @@
 
     <string name="title_excluded_apps">Excluded apps</string>
     <string name="summary_excluded_apps">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use DNS-over-HTTPS or DNS-over-TLS anymore</string>
+    <string name="summary_excluded_apps_non_vpn">Exclude apps from the app here, for example if they cannot connect to the Internet anymore - selected apps won\'t use DNS-over-HTTPS or DNS-over-TLS anymore.\n\nThis has no effect in non-VPN mode.</string>
 
     <string name="title_fallback_dns">Internal DNS server</string>
     <string name="summary_fallback_dns">Configure the DNS server Nebulo uses internally. This defaults to your service providers DNS server. This configured server is only used for internal purposes and does not handle your normal DNS queries.</string>
