@@ -51,7 +51,7 @@ class RuleImportService : IntentService("RuleImportService") {
         Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:/?\$|\\s+.*)").matcher("") // address=/xyz.com/0.0.0.0
     private val dnsmasqBlockMatcher = Pattern.compile("^address=/([^/]+)/$").matcher("") // address=/xyz.com/
     private val hostsMatcher =
-        Pattern.compile("^((?:[A-Fa-f0-9:]|[0-9.])+)\\s+([*\\w._\\-]+).*")
+        Pattern.compile("^((?:[A-Fa-f0-9:.])+)\\s+([^\\s]+)")
             .matcher("") // 0.0.0.0 xyz.com
     private val domainsMatcher = Pattern.compile("^([_\\w*][*\\w_\\-.]+)(?:\$|\\s+.*)").matcher("") // xyz.com
     private val adblockMatcher = Pattern.compile("^\\|\\|(.*)\\^(?:\$|\\s+.*)").matcher("") // ||xyz.com^
