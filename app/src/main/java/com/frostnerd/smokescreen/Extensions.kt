@@ -38,9 +38,9 @@ import com.frostnerd.smokescreen.util.preferences.VpnServiceState
 import com.frostnerd.smokescreen.util.preferences.fromSharedPreferences
 import com.frostnerd.smokescreen.util.proxy.IpTablesPacketRedirector
 import com.google.android.gms.net.CronetProviderInstaller
+import io.sentry.NoOpLogger
 import io.sentry.android.core.BuildInfoProvider
 import io.sentry.android.core.util.RootChecker
-import io.sentry.core.NoOpLogger
 import leakcanary.LeakSentry
 import org.chromium.net.CronetEngine
 import org.chromium.net.CronetProvider

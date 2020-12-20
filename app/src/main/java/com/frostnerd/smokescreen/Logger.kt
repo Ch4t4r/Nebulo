@@ -7,10 +7,10 @@ import androidx.fragment.app.Fragment
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.database.EXECUTED_MIGRATIONS
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
-import io.sentry.core.Sentry
-import io.sentry.core.SentryEvent
-import io.sentry.core.SentryLevel
-import io.sentry.core.protocol.Message
+import io.sentry.Sentry
+import io.sentry.SentryEvent
+import io.sentry.SentryLevel
+import io.sentry.protocol.Message
 import leakcanary.LeakSentry
 import java.io.*
 import java.text.SimpleDateFormat

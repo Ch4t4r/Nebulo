@@ -2,11 +2,11 @@ package com.frostnerd.smokescreen.util.crashhelpers
 
 import android.os.Build
 import com.frostnerd.smokescreen.BuildConfig
-import io.sentry.core.EventProcessor
-import io.sentry.core.SentryEvent
-import io.sentry.core.protocol.App
-import io.sentry.core.protocol.Device
-import io.sentry.core.protocol.OperatingSystem
+import io.sentry.EventProcessor
+import io.sentry.SentryEvent
+import io.sentry.protocol.App
+import io.sentry.protocol.Device
+import io.sentry.protocol.OperatingSystem
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -26,7 +26,7 @@ import io.sentry.core.protocol.OperatingSystem
  * 
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-class DataSavingSentryEventProcessor:EventProcessor {
+class DataSavingSentryEventProcessor: EventProcessor {
 
     override fun process(event: SentryEvent, hint: Any?): SentryEvent? {
         event.contexts.device = Device()

@@ -136,12 +136,12 @@ android {
 //}
 
 dependencies {
-    def room_version = "2.2.5"
+    def room_version = "2.2.6"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
-    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1')
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2')
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 
 
     implementation 'com.frostnerd.utilskt:lifecycle:1.2.0'
@@ -154,7 +154,7 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.4.0'
     implementation 'androidx.appcompat:appcompat:1.3.0-alpha02'
     implementation "androidx.preference:preference:1.1.1"
-    implementation "com.google.android.material:material:1.3.0-alpha03"
+    implementation "com.google.android.material:material:1.3.0-beta01"
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-alpha01'
     implementation "androidx.core:core-ktx:1.3.2"
 
@@ -163,7 +163,7 @@ dependencies {
     implementation "androidx.room:room-coroutines:2.1.0-alpha04"
     testImplementation "androidx.room:room-testing:$room_version"
 
-    implementation 'io.sentry:sentry-android:2.3.1'
+    implementation 'io.sentry:sentry-android:3.2.0'
 
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
     implementation 'com.squareup.leakcanary:leaksentry:2.0-alpha-3'

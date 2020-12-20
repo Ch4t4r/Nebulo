@@ -21,11 +21,11 @@ import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.util.crashhelpers.DataSavingSentryEventProcessor
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
+import io.sentry.Integration
+import io.sentry.Sentry
+import io.sentry.SentryOptions
 import io.sentry.android.core.*
-import io.sentry.core.Integration
-import io.sentry.core.Sentry
-import io.sentry.core.SentryOptions
-import io.sentry.core.protocol.User
+import io.sentry.protocol.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
