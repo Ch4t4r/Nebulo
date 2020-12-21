@@ -83,6 +83,41 @@ class MainFragment : Fragment() {
         context?.clearPreviousIptablesRedirect()
         runLatencyCheck()
         determineLatencyBounds()
+        displayServer(getPreferences().dnsServerConfig)
+        GlobalScope.launch {
+            val context = context
+            if (isAdded && !isDetached && context != null) {
+                updatePrivacyPolicyLink(getPreferences().dnsServerConfig)
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        vpnStateReceiver = requireContext().registerLocalReceiver(
+            listOf(
+                DnsVpnService.BROADCAST_VPN_ACTIVE,
+                DnsVpnService.BROADCAST_VPN_INACTIVE,
+                DnsVpnService.BROADCAST_VPN_PAUSED,
+                DnsVpnService.BROADCAST_VPN_RESUMED
+            )
+        ) {
+            if (it != null && it.action != null) {
+                when (it.action) {
+                    DnsVpnService.BROADCAST_VPN_ACTIVE, DnsVpnService.BROADCAST_VPN_RESUMED -> {
+                        proxyState = ProxyState.RUNNING
+                    }
+                    DnsVpnService.BROADCAST_VPN_INACTIVE -> {
+                        proxyState = ProxyState.NOT_RUNNING
+                        displayServer(getPreferences().dnsServerConfig)
+                    }
+                    DnsVpnService.BROADCAST_VPN_PAUSED -> {
+                        proxyState = ProxyState.PAUSED
+                    }
+                }
+                updateVpnIndicators()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -139,29 +174,6 @@ class MainFragment : Fragment() {
         speedTest.setOnClickListener {
             startActivity(Intent(requireContext(), SpeedTestActivity::class.java))
         }
-        vpnStateReceiver = requireContext().registerLocalReceiver(
-            listOf(
-                DnsVpnService.BROADCAST_VPN_ACTIVE,
-                DnsVpnService.BROADCAST_VPN_INACTIVE,
-                DnsVpnService.BROADCAST_VPN_PAUSED,
-                DnsVpnService.BROADCAST_VPN_RESUMED
-            )
-        ) {
-            if (it != null && it.action != null) {
-                when (it.action) {
-                    DnsVpnService.BROADCAST_VPN_ACTIVE, DnsVpnService.BROADCAST_VPN_RESUMED -> {
-                        proxyState = ProxyState.RUNNING
-                    }
-                    DnsVpnService.BROADCAST_VPN_INACTIVE -> {
-                        proxyState = ProxyState.NOT_RUNNING
-                    }
-                    DnsVpnService.BROADCAST_VPN_PAUSED -> {
-                        proxyState = ProxyState.PAUSED
-                    }
-                }
-                updateVpnIndicators()
-            }
-        }
         mainServerWrap.setOnClickListener {
             ServerChoosalDialog(requireActivity() as AppCompatActivity) { config ->
                 updatePrivacyPolicyLink(config)
@@ -188,15 +200,6 @@ class MainFragment : Fragment() {
                 }
             }
         }
-        GlobalScope.launch {
-            val context = context
-            if (isAdded && !isDetached && context != null) {
-                val config = context.getPreferences().dnsServerConfig
-                updatePrivacyPolicyLink(config)
-            }
-        }
-        updateVpnIndicators()
-        displayServer(getPreferences().dnsServerConfig)
     }
 
     private fun displayServer(config: DnsServerInformation<*>) {
