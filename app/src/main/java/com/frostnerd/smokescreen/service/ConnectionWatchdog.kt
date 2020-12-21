@@ -80,17 +80,26 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
 
             logFine("Deeming this connection bad: $hasBadConnection")
 
-            if(hasBadConnection) {
+            if (hasBadConnection) {
                 measurementsWithBadConnection++
                 callCallback()
-            } else if(measurementsWithBadConnection != 0){
-                measurementsWithBadConnection = if(measurementsWithBadConnection <= 1) {
+            } else if (measurementsWithBadConnection != 0) {
+                measurementsWithBadConnection = maxOf(
+                    0, measurementsWithBadConnection - maxOf(3, measurementsWithBadConnection / 6) -
+                            if(measurementsWithBadConnection > 500) maxOf(32, measurementsWithBadConnection/8)
+                            else if (measurementsWithBadConnection > 300) 32
+                            else if(measurementsWithBadConnection > 200) 18
+                            else if(measurementsWithBadConnection > 100) 10
+                            else if(measurementsWithBadConnection > 50) 5
+                            else if(measurementsWithBadConnection > 20) 3
+                            else if(measurementsWithBadConnection > 10) 2 else 0
+                )
+                if (measurementsWithBadConnection <= 0) {
                     onBadConnectionResolved()
-                    0
+                    measurementsWithBadConnection = 0
                 } else {
                     logFine("Measurements left till calling callback with resolved status: $measurementsWithBadConnection")
-                    measurementsWithBadConnection - maxOf(2, measurementsWithBadConnection/7) -
-                            if(measurementsWithBadConnection > 100) 10 else 0
+
                 }
             }
 
