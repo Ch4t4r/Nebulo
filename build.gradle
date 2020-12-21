@@ -32,7 +32,7 @@ ext.nexus_user = getNexusUser()
 ext.nexus_password = getNexusPassword()
 
 buildscript {
-    ext.ANDROID_COMPILE_SDK = (System.getenv("ANDROID_COMPILE_SDK") == null ? 29 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
+    ext.ANDROID_COMPILE_SDK = (System.getenv("ANDROID_COMPILE_SDK") == null ? 30 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
     ext.ANDROID_TARGET_SDK = (System.getenv("ANDROID_TARGET_SDK") == null ? ANDROID_COMPILE_SDK : System.getenv("ANDROID_TARGET_SDK")).toInteger()
     ext.ANDROID_MIN_SDK = (System.getenv("ANDROID_MIN_SDK") == null ? 14 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
     ext.KOTLIN_VERSION = System.getenv("KOTLIN_VERSION") == null ? "1.4.10" : System.getenv("KOTLIN_VERSION")
