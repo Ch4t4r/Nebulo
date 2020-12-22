@@ -292,6 +292,8 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     var iptablesModeDisableIpv6:Boolean by booleanPref("nonvpn_iptables_disable_ipv6", false)
 
     var enableConnectionWatchDog:Boolean by booleanPref("connection_watchdog", true)
+
+    var holdUpdateUntil:Long? by longPref("hold_update_until")
 }
 
 fun AppSettings.Companion.fromSharedPreferences(context: Context): AppSettingsSharedPreferences {

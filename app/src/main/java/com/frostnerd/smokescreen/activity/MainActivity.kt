@@ -8,9 +8,6 @@ import android.net.*
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.frostnerd.dnstunnelproxy.KnownDnsServers
-import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
@@ -27,6 +24,12 @@ import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.tasks.Task
 import kotlinx.android.synthetic.main.menu_cardview.view.*
 import kotlin.random.Random
 
@@ -51,6 +54,7 @@ import kotlin.random.Random
 class MainActivity : NavigationDrawerActivity() {
     companion object {
         const val BROADCAST_RELOAD_MENU = "main.reloadMenu"
+        private const val REQUEST_APP_UPDATE = 91
         private const val PIN_TIMEOUT = 2*60*1000
     }
     override val drawerOverActionBar: Boolean = true
@@ -124,9 +128,11 @@ class MainActivity : NavigationDrawerActivity() {
                 }
             }
             view.infoButton.setOnClickListener {
-                showInfoTextDialogWithClose(this,
-                        getString(R.string.dialog_latency_sidebar_title),
-                        getString(R.string.dialog_latency_sidebar_message))
+                showInfoTextDialogWithClose(
+                    this,
+                    getString(R.string.dialog_latency_sidebar_title),
+                    getString(R.string.dialog_latency_sidebar_message)
+                )
             }
             networkManager.registerNetworkCallback(NetworkRequest.Builder().apply {
                 addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
@@ -138,17 +144,26 @@ class MainActivity : NavigationDrawerActivity() {
         getPreferences().totalAppLaunches += 1
         if(getPreferences().totalAppLaunches >= 7 &&
             !getPreferences().askedForGroupJoin &&
-            Random.nextInt(0,100) < 15 &&
+            Random.nextInt(0, 100) < 15 &&
                 isPackageInstalled(this, "org.telegram.messenger")) {
             getPreferences().askedForGroupJoin = true
-            showInfoTextDialog(this, getString(R.string.dialog_join_group_title), getString(R.string.dialog_join_group_message),
+            showInfoTextDialog(
+                this,
+                getString(R.string.dialog_join_group_title),
+                getString(R.string.dialog_join_group_message),
                 getString(R.string.dialog_join_group_positive) to { dialog, _ ->
                     dialog.dismiss()
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://join?invite=I54nRleveRGP8IPmcIdySg"))
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("tg://join?invite=I54nRleveRGP8IPmcIdySg")
+                    )
                     startActivity(intent)
-                }, getString(R.string.dialog_crashreporting_negative) to { dialog, _ ->
+                },
+                getString(R.string.dialog_crashreporting_negative) to { dialog, _ ->
                     dialog.dismiss()
-                }, null)
+                },
+                null
+            )
         } else if(getPreferences().totalAppLaunches > 6 && !getPreferences().hasAskedRateApp
             && Random.nextInt(0, 100) <= 15 && isPackageInstalled(this, "com.android.vending")
             && getPreferences().lastCrashTimeStamp?.let { System.currentTimeMillis() - it >= 12*60*60*1000 } != false
@@ -160,7 +175,8 @@ class MainActivity : NavigationDrawerActivity() {
                     rateApp()
                 }, getString(R.string.dialog_crashreporting_negative) to { dialog, _ ->
                     dialog.dismiss()
-                }, null)
+                }, null
+            )
             getPreferences().hasAskedRateApp = true
         }
         if(resources.getBoolean(R.bool.add_default_hostsources)) {
@@ -204,6 +220,21 @@ class MainActivity : NavigationDrawerActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        tryCheckUpdate()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == REQUEST_APP_UPDATE) {
+            if(resultCode != RESULT_OK) {
+                val updateAskDelay = (2 * 24 * 60 * 60 * 1000).toLong()
+                getPreferences().holdUpdateUntil = System.currentTimeMillis() + updateAskDelay
+            }
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         cardNetworkCallback?.let { networkManager.unregisterNetworkCallback(it) }
@@ -215,7 +246,7 @@ class MainActivity : NavigationDrawerActivity() {
         handleDeepAction(intent ?: this.intent)
     }
 
-    private fun handleDeepAction(intent:Intent? = null) {
+    private fun handleDeepAction(intent: Intent? = null) {
         if(intent?.hasExtra("deep_action") == true) {
             whenDrawerIsReady {
                 when(val deepAction = intent.getSerializableExtra("deep_action")) {
@@ -231,7 +262,12 @@ class MainActivity : NavigationDrawerActivity() {
                         drawerItems.find {
                             it is ClickableDrawerItem && it.title == getString(R.string.menu_settings)
                         }?.apply {
-                            clickItem(this, Bundle().apply { putSerializable("deep_action", deepAction) })
+                            clickItem(this, Bundle().apply {
+                                putSerializable(
+                                    "deep_action",
+                                    deepAction
+                                )
+                            })
                         }
                     }
                 }
@@ -249,8 +285,9 @@ class MainActivity : NavigationDrawerActivity() {
                 iconLeft = getDrawable(R.drawable.ic_menu_settings),
                 fragmentCreator = singleInstanceFragment { args ->
                     SettingsOverviewFragment().also {
-                    it.arguments = args
-                } })
+                        it.arguments = args
+                    }
+                })
             if (getPreferences().queryLoggingEnabled) {
                 divider()
                 fragmentItem(getString(R.string.menu_querylogging),
@@ -298,7 +335,12 @@ class MainActivity : NavigationDrawerActivity() {
                     iconLeft = getDrawable(R.drawable.ic_adb),
                     onLongClick = null,
                     onSimpleClick = { _, _, _ ->
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")).setPackage("org.fdroid.fdroid"))
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=$packageName")
+                            ).setPackage("org.fdroid.fdroid")
+                        )
                         false
                     }
                 )
@@ -343,10 +385,55 @@ class MainActivity : NavigationDrawerActivity() {
         getPreferences().hasRatedApp = true
     }
 
+    private fun tryCheckUpdate() {
+        try {
+            val appUpdateManager: AppUpdateManager = AppUpdateManagerFactory.create(this)
+            val appUpdateInfoTask: Task<AppUpdateInfo> = appUpdateManager.appUpdateInfo
+            appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+                try {
+                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                        val stalenessDays = appUpdateInfo.clientVersionStalenessDays() ?: Int.MIN_VALUE
+                        val shouldHoldUpdate: Boolean = getPreferences().holdUpdateUntil?.let { System.currentTimeMillis() >= it } ?: false
+                        val shouldUpdateImmediate = appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) && appUpdateInfo.updatePriority() >= 4
+                        var shouldUpdate = !shouldHoldUpdate && stalenessDays >= 24
+                        shouldUpdate =
+                            shouldUpdate || stalenessDays >= 14 && !shouldHoldUpdate && appUpdateInfo.updatePriority() >= 1
+                        shouldUpdate =
+                            shouldUpdate || stalenessDays >= 7 && !shouldHoldUpdate && appUpdateInfo.updatePriority() >= 2
+                        shouldUpdate =
+                            shouldUpdate || stalenessDays >= 3 && appUpdateInfo.updatePriority() >= 3
+                        shouldUpdate =
+                            shouldUpdate || stalenessDays >= 1 && appUpdateInfo.updatePriority() >= 4
+                        shouldUpdate = shouldUpdate || appUpdateInfo.updatePriority() >= 5
+                        if (shouldUpdate) {
+                            appUpdateManager.startUpdateFlowForResult(
+                                appUpdateInfo,
+                                if (shouldUpdateImmediate) AppUpdateType.IMMEDIATE else AppUpdateType.FLEXIBLE,
+                                this,
+                                REQUEST_APP_UPDATE
+                            )
+                        }
+                    }
+                } catch (ex2: Throwable) {
+                    ex2.printStackTrace()
+                }
+            }
+        } catch (ex: Throwable) {
+            ex.printStackTrace()
+        }
+    }
+
     override fun createStyleOptions(): StyleOptions {
-        backgroundColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.colorPrimary)
+        backgroundColor = getPreferences().theme.resolveAttribute(
+            theme,
+            android.R.attr.colorPrimary
+        )
         textColor = getPreferences().theme.resolveAttribute(theme, android.R.attr.textColor)
-        inputElementColor = getPreferences().theme.getColor(this, R.attr.inputElementColor, Color.WHITE)
+        inputElementColor = getPreferences().theme.getColor(
+            this,
+            R.attr.inputElementColor,
+            Color.WHITE
+        )
 
         val options = StyleOptions()
         options.useDefaults()
@@ -357,7 +444,10 @@ class MainActivity : NavigationDrawerActivity() {
         options.listItemTextColor = textColor
         options.headerTextColor = textColor
         options.alphaSelected = 1f
-        options.iconTintLeft = getPreferences().theme.resolveAttribute(theme, R.attr.navDrawableColor)
+        options.iconTintLeft = getPreferences().theme.resolveAttribute(
+            theme,
+            R.attr.navDrawableColor
+        )
         options.separatorColor = opaqueColor(options.iconTintLeft, 80)
         return options
     }
