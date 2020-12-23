@@ -2,7 +2,6 @@ package com.frostnerd.smokescreen.util
 
 import com.frostnerd.smokescreen.Logger
 import java.io.DataOutputStream
-import java.lang.Exception
 
 /*
  * Copyright (C) 2020 Daniel Wolf (Ch4t4r)

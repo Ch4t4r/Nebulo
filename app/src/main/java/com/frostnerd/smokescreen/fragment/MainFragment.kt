@@ -28,7 +28,6 @@ import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
 import com.frostnerd.smokescreen.*
-import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.activity.SpeedTestActivity
 import com.frostnerd.smokescreen.dialog.ServerChoosalDialog

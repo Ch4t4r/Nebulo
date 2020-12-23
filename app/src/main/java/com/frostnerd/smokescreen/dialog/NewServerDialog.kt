@@ -3,8 +3,6 @@ package com.frostnerd.smokescreen.dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Vibrator
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -18,14 +16,12 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseDialog
-import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_new_server.*
 import kotlinx.android.synthetic.main.dialog_new_server.view.*
 import kotlinx.coroutines.Dispatchers

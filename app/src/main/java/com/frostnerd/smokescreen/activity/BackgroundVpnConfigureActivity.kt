@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.Window
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.json.DnsServerInformationTypeAdapter
-import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformationTypeAdapter
 import com.frostnerd.encrypteddnstunnelproxy.HttpsUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress

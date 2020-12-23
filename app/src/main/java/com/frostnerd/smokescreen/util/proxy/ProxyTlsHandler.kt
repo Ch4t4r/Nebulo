@@ -6,7 +6,6 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.vpntunnelproxy.DeviceWriteToken
 import com.frostnerd.vpntunnelproxy.FutureAnswer
-import com.frostnerd.vpntunnelproxy.ReceivedAnswer
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.record.A
 import org.minidns.record.AAAA

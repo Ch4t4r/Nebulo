@@ -10,7 +10,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import android.widget.CheckBox
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -36,13 +35,12 @@ import com.frostnerd.smokescreen.dialog.QueryGeneratorDialog
 import com.frostnerd.smokescreen.service.DnsVpnService
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
 import com.frostnerd.smokescreen.util.preferences.Theme
-import com.google.android.material.snackbar.Snackbar
 import com.frostnerd.smokescreen.util.processSuCommand
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.net.InetAddress
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

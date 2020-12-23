@@ -8,7 +8,6 @@ import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.smokescreen.*
-import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.fragment.AppIntroServerChooseFragment
 import com.frostnerd.smokescreen.util.ServerType

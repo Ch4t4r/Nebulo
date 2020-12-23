@@ -12,7 +12,6 @@ import android.util.Base64
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.frostnerd.dnstunnelproxy.*
-import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
@@ -21,7 +20,6 @@ import com.frostnerd.general.CombinedIterator
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.*
-import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.BackgroundVpnConfigureActivity
 import com.frostnerd.smokescreen.activity.PinActivity

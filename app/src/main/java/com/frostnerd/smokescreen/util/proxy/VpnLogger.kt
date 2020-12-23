@@ -2,7 +2,6 @@ package com.frostnerd.smokescreen.util.proxy
 
 import android.content.Context
 import com.frostnerd.smokescreen.BuildConfig
-import com.frostnerd.smokescreen.compareTo
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.log
 import com.frostnerd.vpntunnelproxy.ErrorLogger

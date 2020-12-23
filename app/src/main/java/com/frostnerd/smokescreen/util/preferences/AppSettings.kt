@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
-import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.preferenceskt.restrictedpreferences.restrictedCollection
 import com.frostnerd.preferenceskt.typedpreferences.SimpleTypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.buildMigration

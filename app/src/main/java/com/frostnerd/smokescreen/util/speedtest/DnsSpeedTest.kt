@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.annotation.IntRange
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
-import com.frostnerd.encrypteddnstunnelproxy.HTTPSResponseHolder
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.closeSilently
@@ -26,7 +25,6 @@ import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
 import java.io.DataInputStream
 import java.io.DataOutputStream
-import java.lang.IllegalStateException
 import java.net.*
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLSocketFactory

@@ -6,9 +6,12 @@ import com.frostnerd.dnstunnelproxy.QueryListener
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
-import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.database.entities.DnsQuery
 import com.frostnerd.smokescreen.database.getDatabase
+import com.frostnerd.smokescreen.equalsAny
+import com.frostnerd.smokescreen.getPreferences
+import com.frostnerd.smokescreen.log
+import com.frostnerd.smokescreen.type
 import com.frostnerd.smokescreen.util.ServerType
 import kotlinx.coroutines.*
 import org.minidns.dnsmessage.DnsMessage

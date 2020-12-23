@@ -2,9 +2,6 @@ package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.smokescreen.Logger
 import com.frostnerd.smokescreen.util.processSuCommand
-import java.lang.Exception
-import java.lang.IllegalStateException
-import kotlin.math.log
 
 /*
  * Copyright (C) 2020 Daniel Wolf (Ch4t4r)

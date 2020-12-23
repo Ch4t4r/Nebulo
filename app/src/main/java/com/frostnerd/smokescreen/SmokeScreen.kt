@@ -10,12 +10,10 @@ import com.frostnerd.dnstunnelproxy.AddressCreator
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
-import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.smokescreen.activity.ErrorDialogActivity
 import com.frostnerd.smokescreen.activity.LoggingDialogActivity
 import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
-import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
 import com.frostnerd.smokescreen.util.crashhelpers.DataSavingSentryEventProcessor
@@ -30,7 +28,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import leakcanary.LeakSentry
-import okhttp3.OkHttpClient
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.A
@@ -38,7 +35,6 @@ import org.minidns.record.AAAA
 import org.minidns.record.Record
 import java.net.InetAddress
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 
 /*

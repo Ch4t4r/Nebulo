@@ -38,7 +38,6 @@ import kotlinx.android.synthetic.main.item_datasource.view.*
 import kotlinx.android.synthetic.main.item_datasource.view.cardContent
 import kotlinx.android.synthetic.main.item_datasource.view.delete
 import kotlinx.android.synthetic.main.item_datasource.view.enable
-import kotlinx.android.synthetic.main.item_datasource.view.refresh
 import kotlinx.android.synthetic.main.item_datasource.view.text
 import kotlinx.android.synthetic.main.item_datasource_rules.view.*
 import kotlinx.android.synthetic.main.item_dnsrule_host.view.*

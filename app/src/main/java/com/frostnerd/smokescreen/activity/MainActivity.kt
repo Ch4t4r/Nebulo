@@ -9,12 +9,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.general.service.isServiceRunning
-import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
 import com.frostnerd.navigationdraweractivity.items.*
 import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.database.getDatabase
 import com.frostnerd.smokescreen.dialog.BatteryOptimizationInfoDialog
 import com.frostnerd.smokescreen.dialog.ChangelogDialog
