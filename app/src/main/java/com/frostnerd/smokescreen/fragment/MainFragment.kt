@@ -101,7 +101,7 @@ class MainFragment : Fragment() {
                 DnsVpnService.BROADCAST_VPN_RESUMED
             )
         ) {
-            if (it != null && it.action != null) {
+            if (it != null && it.action != null && isAdded) {
                 when (it.action) {
                     DnsVpnService.BROADCAST_VPN_ACTIVE, DnsVpnService.BROADCAST_VPN_RESUMED -> {
                         proxyState = ProxyState.RUNNING
