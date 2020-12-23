@@ -21,6 +21,7 @@ android {
         buildConfigField("String", "SENTRY_DSN", '""')
         buildConfigField("Boolean", "SHOW_DOQ", 'false')
         buildConfigField("Boolean", "SHOW_INTRO", 'false')
+        buildConfigField("Boolean", "IN_APP_UPDATES", "false")
 
         kapt {
             arguments {
@@ -63,6 +64,7 @@ android {
             signingConfig signingConfigs.release
             buildConfigField("Boolean", "LEAK_DETECTION", "false")
             buildConfigField("Boolean", "SHOW_ALL_SERVERS", "false")
+            buildConfigField("Boolean", "IN_APP_UPDATES", "true")
         }
         debug {
             initWith buildTypes.debug
@@ -78,8 +80,9 @@ android {
         fdroid {
             matchingFallbacks = ['release']
             initWith release
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', "proguard-rules-fdroid.pro"
             buildConfigField("Boolean", "SHOW_ALL_SERVERS", "true")
+            buildConfigField("Boolean", "IN_APP_UPDATES", "false")
         }
         unsignedRelease {
             minifyEnabled true

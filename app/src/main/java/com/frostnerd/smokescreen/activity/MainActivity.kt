@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.general.service.isServiceRunning
+import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
 import com.frostnerd.navigationdraweractivity.StyleOptions
@@ -386,40 +387,42 @@ class MainActivity : NavigationDrawerActivity() {
     }
 
     private fun tryCheckUpdate() {
-        try {
-            val appUpdateManager: AppUpdateManager = AppUpdateManagerFactory.create(this)
-            val appUpdateInfoTask: Task<AppUpdateInfo> = appUpdateManager.appUpdateInfo
-            appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-                try {
-                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                        val stalenessDays = appUpdateInfo.clientVersionStalenessDays() ?: Int.MIN_VALUE
-                        val shouldHoldUpdate: Boolean = getPreferences().holdUpdateUntil?.let { System.currentTimeMillis() >= it } ?: false
-                        val shouldUpdateImmediate = appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) && appUpdateInfo.updatePriority() >= 4
-                        var shouldUpdate = !shouldHoldUpdate && stalenessDays >= 24
-                        shouldUpdate =
-                            shouldUpdate || stalenessDays >= 14 && !shouldHoldUpdate && appUpdateInfo.updatePriority() >= 1
-                        shouldUpdate =
-                            shouldUpdate || stalenessDays >= 7 && !shouldHoldUpdate && appUpdateInfo.updatePriority() >= 2
-                        shouldUpdate =
-                            shouldUpdate || stalenessDays >= 3 && appUpdateInfo.updatePriority() >= 3
-                        shouldUpdate =
-                            shouldUpdate || stalenessDays >= 1 && appUpdateInfo.updatePriority() >= 4
-                        shouldUpdate = shouldUpdate || appUpdateInfo.updatePriority() >= 5
-                        if (shouldUpdate) {
-                            appUpdateManager.startUpdateFlowForResult(
-                                appUpdateInfo,
-                                if (shouldUpdateImmediate) AppUpdateType.IMMEDIATE else AppUpdateType.FLEXIBLE,
-                                this,
-                                REQUEST_APP_UPDATE
-                            )
+        if(BuildConfig.IN_APP_UPDATES) {
+            try {
+                val appUpdateManager: AppUpdateManager = AppUpdateManagerFactory.create(this)
+                val appUpdateInfoTask: Task<AppUpdateInfo> = appUpdateManager.appUpdateInfo
+                appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+                    try {
+                        if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                            val stalenessDays = appUpdateInfo.clientVersionStalenessDays() ?: Int.MIN_VALUE
+                            val shouldHoldUpdate: Boolean = getPreferences().holdUpdateUntil?.let { System.currentTimeMillis() >= it } ?: false
+                            val shouldUpdateImmediate = appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) && appUpdateInfo.updatePriority() >= 4
+                            var shouldUpdate = !shouldHoldUpdate && stalenessDays >= 24
+                            shouldUpdate =
+                                shouldUpdate || stalenessDays >= 14 && !shouldHoldUpdate && appUpdateInfo.updatePriority() >= 1
+                            shouldUpdate =
+                                shouldUpdate || stalenessDays >= 7 && !shouldHoldUpdate && appUpdateInfo.updatePriority() >= 2
+                            shouldUpdate =
+                                shouldUpdate || stalenessDays >= 3 && appUpdateInfo.updatePriority() >= 3
+                            shouldUpdate =
+                                shouldUpdate || stalenessDays >= 1 && appUpdateInfo.updatePriority() >= 4
+                            shouldUpdate = shouldUpdate || appUpdateInfo.updatePriority() >= 5
+                            if (shouldUpdate) {
+                                appUpdateManager.startUpdateFlowForResult(
+                                    appUpdateInfo,
+                                    if (shouldUpdateImmediate) AppUpdateType.IMMEDIATE else AppUpdateType.FLEXIBLE,
+                                    this,
+                                    REQUEST_APP_UPDATE
+                                )
+                            }
                         }
+                    } catch (ex2: Throwable) {
+                        ex2.printStackTrace()
                     }
-                } catch (ex2: Throwable) {
-                    ex2.printStackTrace()
                 }
+            } catch (ex: Throwable) {
+                ex.printStackTrace()
             }
-        } catch (ex: Throwable) {
-            ex.printStackTrace()
         }
     }
 
