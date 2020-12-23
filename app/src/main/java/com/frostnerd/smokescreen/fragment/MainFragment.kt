@@ -265,7 +265,7 @@ class MainFragment : Fragment() {
     }
 
     private fun updateVpnIndicators() {
-        val privateDnsActive = requireContext().isPrivateDnsActive
+        val privateDnsActive = context?.isPrivateDnsActive ?: return
         var startButtonEnabled = true
         var privacyTextVisibility = View.VISIBLE
         var privateDNSVisibility = View.GONE
