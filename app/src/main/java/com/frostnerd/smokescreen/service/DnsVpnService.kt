@@ -48,7 +48,8 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.math.floor
 import kotlin.math.min
 import kotlin.math.pow
-
+import com.frostnerd.smokescreen.BuildConfig
+import com.frostnerd.smokescreen.util.proxy.QueryListener
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

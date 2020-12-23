@@ -34,6 +34,7 @@ import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
 import java.util.concurrent.TimeUnit
+import com.frostnerd.smokescreen.BuildConfig
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)

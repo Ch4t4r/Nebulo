@@ -17,6 +17,7 @@ import com.github.appintro.AppIntroFragment
 import com.github.appintro.AppIntroPageTransformerType
 import kotlinx.coroutines.*
 import kotlin.math.ceil
+import com.frostnerd.smokescreen.BuildConfig
 
 /*
  * Copyright (C) 2020 Daniel Wolf (Ch4t4r)
