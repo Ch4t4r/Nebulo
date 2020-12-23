@@ -293,7 +293,7 @@ class RuleImportService : IntentService("RuleImportService") {
                         lineCount++
                         if(remainingMatcher != null) {
                             if (remainingMatcher!!.reset(line).matches()) {
-                                val rule = processLine(remainingMatcher!!, sourceId, source.whitelistSource)
+                                val rule = processLine(remainingMatcher!!, source, source.whitelistSource)
                                 if (rule != null) hostsOfRemainingMatcher!!.add(rule.apply {
                                     stagingType = 2
                                 })
@@ -307,7 +307,7 @@ class RuleImportService : IntentService("RuleImportService") {
                             for ((matcher, hosts) in iterator) {
                                 if (matcher.reset(line).matches()) {
                                     successfulMatches+=1
-                                    val rule = processLine(matcher, sourceId, source.whitelistSource)
+                                    val rule = processLine(matcher, source, source.whitelistSource)
                                     if (rule != null) hosts.second.add(rule.apply {
                                         stagingType = 2
                                     })
@@ -364,14 +364,14 @@ class RuleImportService : IntentService("RuleImportService") {
     }
 
     private val wwwRegex = Regex("^www\\.")
-    private fun processLine(matcher: Matcher, sourceId: Long, isWhitelist:Boolean): DnsRule? {
+    private fun processLine(matcher: Matcher, source: HostSource, isWhitelist:Boolean): DnsRule? {
         val defaultTargetV4 = if(isWhitelist) "" else "0"
         val defaultTargetV6 = if(isWhitelist) "" else "1"
         when {
             matcher.groupCount() == 1 -> {
                 val host = if(matcher == dnsmasqBlockMatcher) "%%" + matcher.group(1)
                 else matcher.group(1).replace(wwwRegex, "")
-                return createRule(host, defaultTargetV4, defaultTargetV6, Record.TYPE.ANY, sourceId)
+                return createRule(host, defaultTargetV4, defaultTargetV6, Record.TYPE.ANY, source)
             }
             matcher == dnsmasqMatcher -> {
                 val host = "%%" + matcher.group(1)
@@ -384,12 +384,12 @@ class RuleImportService : IntentService("RuleImportService") {
                         else -> it
                     }
                 }
-                return createRule(host, target, null, type, sourceId)
+                return createRule(host, target, null, type, source)
             }
             matcher == hostsMatcher -> {
                 return if(isWhitelist) {
                     val host = matcher.group(2).replace(wwwRegex, "")
-                    DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = sourceId)
+                    DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = source.id)
                 } else {
                     var target = matcher.group(1)
                     val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
@@ -401,7 +401,7 @@ class RuleImportService : IntentService("RuleImportService") {
                         }
                     }
                     val host = matcher.group(2).replace(wwwRegex, "")
-                    return createRule(host, target, null, type, sourceId)
+                    return createRule(host, target, null, type, source)
                 }
             }
         }
@@ -409,15 +409,27 @@ class RuleImportService : IntentService("RuleImportService") {
     }
 
     private val wildcardNormalisationRegex = Regex("(?:^\\*\\*\\.)|(\\.\\*\\*$)")
-    private fun createRule(host: String, target: String, targetV6:String? = null, type: Record.TYPE, sourceId: Long): DnsRule? {
+    private fun createRule(
+        host: String,
+        target: String,
+        targetV6: String? = null,
+        type: Record.TYPE,
+        source: HostSource
+    ): DnsRule {
         var isWildcard = false
         val alteredHost = host.let {
-            if(it.contains("*")) {
+            if (it.contains("*")) {
                 isWildcard = true
-                it.replace("**", "%%").replace("*", "%").replace(wildcardNormalisationRegex, "**")
-        } else it
+                if (source.isFileSource) {
+                    it.replace("**", "%%").replace("*", "%")
+                        .replace(wildcardNormalisationRegex, "**")
+                } else {
+                    it.replace("**", "%%").replace("*", "%%")
+                        .replace(wildcardNormalisationRegex, "**")
+                }
+            } else it
         }
-        return DnsRule(type, alteredHost, target, targetV6, sourceId, isWildcard)
+        return DnsRule(type, alteredHost, target, targetV6, source.id, isWildcard)
     }
 
     override fun onDestroy() {
