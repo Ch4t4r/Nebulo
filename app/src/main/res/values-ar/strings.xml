@@ -138,4 +138,6 @@
     <string name="appintro_first_title">مرحبًا بكم في نيبولو.</string>
     <string name="app_share_fdroid">مرحبا، لقد وجدت هذا التطبيق يقوم بتشفير استعلامات DNS ويمنحك المزيد من الأمان والخصوصية، قم بتحميله الان :
 \nhttps://nebulo.app/source#installation</string>
+    <string name="settings_import_succeeded">تم استيراد الإعدادات بنجاح.</string>
+    <string name="settings_import_failed">فشل استيراد الإعدادات.</string>
 </resources>
