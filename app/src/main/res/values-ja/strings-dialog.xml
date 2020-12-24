@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="dialog_serverconfiguration_title">サーバー構成</string>
+    <string name="dialog_serverconfiguration_title">サーバー設定</string>
     <string name="dialog_serverconfiguration_addserver">サーバー追加</string>
     <string name="dialog_newserver_title_https">サーバー追加（DoH）</string>
     <string name="dialog_newserver_title_tls">サーバー追加（DoT）</string>
@@ -216,7 +216,7 @@
     <string name="dialog_serverimport_servertype_doq">タイプ: DNS-over-QUIC(DoQ)</string>
     <string name="dialog_newserver_secondaryserver_hint_doq" translatable="false">example-doq.com[/dns-query]</string>
     <string name="dialog_newserver_primaryserver_hint_doq" translatable="false">example-doq.com[/dns-query]</string>
-    <string name="dialog_newserver_title_quic">サーバーを追加(DoQ)</string>
+    <string name="dialog_newserver_title_quic">サーバー追加（DoQ）</string>
     <string name="dialog_serverconfiguration_quic" translatable="false">DNS-over-QUIC (DoQ)</string>
     <string name="dialog_nonvpn_help_generic">サードパーティ製VPNアプリを使って非VPNモードを使用する場合、 VPNアプリで設定しているDNSサーバーの設定を変更する必要があります。
 \n但しすべてのVPNアプリがDNS設定を変更できるとは限りません。可能な場合は、DNSサーバーを \" %1$s : %2$d \"に設定して下さい(上記のポートを設定します)。

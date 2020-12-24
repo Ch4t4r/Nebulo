@@ -115,8 +115,8 @@
 \n長い間インターネットプロバイダーまたは他のエンティティによってずっとコントロールされていたデータが、このアプリで思いのままに操ることができるようになります。</string>
     <string name="appintro_first_title">Nebuloにようこそ。</string>
     <string name="window_main_unprotected">保護されていません</string>
-    <string name="window_main_protected">保護されました!</string>
-    <string name="window_main_click_to_enable">タップして有効にする。</string>
+    <string name="window_main_protected">保護されています</string>
+    <string name="window_main_click_to_enable">タップすると有効になります</string>
     <string name="theme_blue">ブルー</string>
     <string name="theme_true_black">トゥルーブラック</string>
     <string name="theme_dark">ダーク</string>
