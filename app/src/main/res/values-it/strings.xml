@@ -125,4 +125,6 @@
     <string name="theme_dark">Scuro</string>
     <string name="theme_mono">Mono</string>
     <string name="app_share_fdroid">Ehi, ho trovato questa app che cripta le tue richieste DNS per offrirti più privacy e sicurezza. Provala scaricandola da qui: https://nebulo.app/source#installation</string>
+    <string name="settings_import_succeeded">L\'importazione delle impostazioni è avvenuta con successo.</string>
+    <string name="settings_import_failed">Importazione delle impostazioni non riuscita.</string>
 </resources>
