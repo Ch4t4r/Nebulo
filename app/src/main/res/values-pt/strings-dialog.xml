@@ -182,7 +182,7 @@
 \n - Iniciar o Nebulo (em modo não-VPN) e iniciar o NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Bloquear este host</string>
     <string name="dialog_dnsrules_status_fromsource">Este host faz parte da fonte %1$s</string>
-    <string name="dialog_speedtestpasses_message">Defina com que frequência o teste deve ser executado por servidor. Passes mais altos aumentam a actuação</string>
+    <string name="dialog_speedtestpasses_message">Defina com que frequência o teste deve ser executado por servidor. Passes mais altos aumentam a precisão</string>
     <string name="dialog_speedtestpasses_title">Configurar os passes de teste</string>
     <string name="dialog_share_message">Que link você quer compartilhar\?</string>
     <string name="dialog_share_title">Selecione o tipo de link</string>
