@@ -123,4 +123,7 @@
         <item quantity="one">%1$d query has been blocked this far</item>
         <item quantity="other">%1$d queries have been blocked this far</item>
     </plurals>
+
+    <string name="settings_import_failed">Settings import failed.</string>
+    <string name="settings_import_succeeded">Settings import successful.</string>
 </resources>

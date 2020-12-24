@@ -2,4 +2,6 @@
 <paths>
     <files-path path="logs/" name="logdir" />
     <files-path path="queryexport/" name="queryexport" />
+    <files-path
+            path="settings/" name="settingsdir" />
 </paths>

@@ -27,6 +27,9 @@ interface HostSourceDao {
     @Query("SELECT * FROM HostSource WHERE id=:sourceId")
     fun findById(sourceId: Long):HostSource?
 
+    @Query("SELECT * FROM HostSource WHERE source=:source")
+    fun findBySource(source:String):HostSource?
+
     @Insert
     fun insert(hostSource: HostSource):Long
 

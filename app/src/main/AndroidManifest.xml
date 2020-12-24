@@ -193,6 +193,34 @@
 
         </activity>
         <activity
+                android:name=".activity.ImportSettingsActivity"
+                android:autoRemoveFromRecents="true"
+                android:noHistory="true"
+                android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                        android:host="*"
+                        android:mimeType="*/*"
+                        android:pathPattern=".*\\.nebulosettings"
+                        android:scheme="content"
+                        tools:ignore="AppLinkUrlError" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                        android:host="*"
+                        android:mimeType="*/*"
+                        android:pathPattern=".*\\.nebulosettings"
+                        android:scheme="file"
+                        tools:ignore="AppLinkUrlError" />
+            </intent-filter>
+        </activity>
+        <activity
                 android:name=".activity.BackgroundVpnConfigureActivity"
                 android:launchMode="singleInstance"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />

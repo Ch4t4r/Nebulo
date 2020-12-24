@@ -112,7 +112,6 @@ class ServerImportActivity : BaseActivity() {
             if (uri.scheme == "content" || uri.schemeSpecificPart == "file") {
                 val resolver = contentResolver
                 inputStream = resolver.openInputStream(uri)
-
             } else if (uri.scheme == "https" || uri.scheme == "http") {
                 val url = URL(uri.toString())
                 val connection = url.openConnection() as HttpURLConnection

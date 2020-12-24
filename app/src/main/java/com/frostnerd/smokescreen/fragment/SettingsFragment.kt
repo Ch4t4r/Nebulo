@@ -23,6 +23,7 @@ import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.LifecycleCoroutineScope
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.lifecyclemanagement.launchWithLifecycleUi
+import com.frostnerd.preferenceskt.preferenceexport.PreferenceExport
 import com.frostnerd.smokescreen.*
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.activity.MainActivity
@@ -41,6 +42,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import kotlin.math.exp
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -406,6 +409,52 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
             true
         }
+        findPreference("export_settings").setOnPreferenceClickListener {
+            exportSettings()
+            true
+        }
+    }
+
+    private fun exportSettings() {
+        val hostSources = "Name;-;enabled;-;source;-;isWhitelist\n" + getDatabase().hostSourceDao().getAll().filterNot { it.isFileSource }.map {
+            it.name + ";-;" + it.enabled + ";-;" + it.source + ";-;" + it.whitelistSource
+        }.joinToString(separator="\n")
+        val exportedKeys = setOf("has_rated_app", "asked_rate_app", "show_changelog", "sentry_consent", "sentry_consent_asked",
+        "asked_group_join", "language", "theme", "start_on_boot", "start_after_update", "user_bypass_packages", "user_bypass_blacklist",
+        "fallback_dns_server", "show_notification_on_lockscreen", "simple_notification", "hide_notification_icon", "notification_allow_pause",
+        "notification_allow_stop", "show_vpn_revoked_notification", "enable_pin", "pin_allow_fingerprint", "pin", "dnscache_enabled",
+        "dnscache_keepacrosslaunches", "dnscache_maxsize", "dnscache_use_default_time", "dnscache_minimum_time", "dnscache_custom_time",
+        "dnscache_nxdomain_cachetime", "logging_enabled", "advanced_logging", "enable_sentry", "crashreporting_type", "ipv6_enabled",
+        "ipv4_enabled", "force_ipv6", "force_ipv4", "allow_ipv4_traffic", "allow_ipv6_traffic", "disallow_other_vpns",
+        "restart_vpn_networkchange", "bypass_searchdomains", "pause_on_captive_portal", "map_query_refused", "log_dns_queries",
+        "user_servers", "catch_known_servers", "dns_server_config", "custom_hosts", "dns_rules_enabled", "removed_dohserver_id",
+        "removed_dotserver_id", "removed_doqserver_id", "ignore_service_killed", "automatic_host_refresh", "automatic_host_refresh_wifi_only",
+        "automatic_host_refresh_timeunit", "automatic_host_refresh_timeamount", "vpn_information_shown", "run_without_vpn",
+        "nonvpn_use_lanip", "non_vpn_server_port", "nonvpn_use_iptables", "connection_watchdog")
+        val json = PreferenceExport.exportAll(exportedKeys, getPreferences().sharedPreferences)
+        val dir = File(requireContext().filesDir, "settings")
+        dir.mkdirs()
+        val file = File(dir, "export.nebulosettings")
+        file.writeBytes((hostSources + "\n" + json).toByteArray())
+
+        val fileUri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
+        val exportIntent = Intent(Intent.ACTION_SEND);
+        exportIntent.putExtra(Intent.EXTRA_TEXT, "")
+        exportIntent.type = "text/plain"
+        exportIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " -- settings")
+        exportIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+        exportIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        for (receivingApps in requireContext().packageManager.queryIntentActivities(
+            exportIntent,
+            PackageManager.MATCH_DEFAULT_ONLY
+        )) {
+            requireContext().grantUriPermission(
+                receivingApps.activityInfo.packageName,
+                fileUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+        }
+        startActivity(Intent.createChooser(exportIntent, getString(R.string.title_export_settings)))
     }
 
     private fun askRestartApp() {

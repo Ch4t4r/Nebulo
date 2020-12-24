@@ -36,12 +36,17 @@
                 android:title="@string/title_excluded_apps" />
 
         <androidx.preference.ListPreference
-                android:key="fallback_dns"
                 android:defaultValue="1"
                 android:entries="@array/fallbackDns"
                 android:entryValues="@array/fallbackDnsValues"
+                android:key="fallback_dns"
                 android:summary="@string/summary_fallback_dns"
                 android:title="@string/title_fallback_dns" />
+
+        <androidx.preference.Preference
+                android:key="export_settings"
+                android:summary="@string/summary_export_settings"
+                android:title="@string/title_export_settings" />
     </androidx.preference.PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>
