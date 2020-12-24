@@ -125,4 +125,6 @@
     <string name="theme_dark">Escuro</string>
     <string name="theme_mono">Mono</string>
     <string name="app_share_fdroid">Encontrei esta aplicação que encripta as suas consultas DNS para lhe dar mais privacidade e segurança. Consulte-a descarregando a partir daqui: https://nebulo.app/source#installation</string>
+    <string name="settings_import_succeeded">Configurações importadas com sucesso.</string>
+    <string name="settings_import_failed">A importação de configurações falhou.</string>
 </resources>
