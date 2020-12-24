@@ -125,4 +125,6 @@
     <string name="theme_dark">Dunkel</string>
     <string name="theme_mono">Mono</string>
     <string name="app_share_fdroid">Hey, ich habe diese App gefunden, welche deine DNS Anfragen verschlüsselt und dir so mehr Sicherheit und Privatsphäre gibt. Schau sie dir mal an: https://nebulo.app/source#installation</string>
+    <string name="settings_import_succeeded">Einstellungen erfolgreich importiert.</string>
+    <string name="settings_import_failed">Import der Einstellungen fehlgeschlagen.</string>
 </resources>
