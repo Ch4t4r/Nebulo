@@ -152,4 +152,5 @@
     <string name="changelog_build_66_2">Het toevoegen van servers is nu zaakgevoelig. Dit verhelpt problemen met NextDNS</string>
     <string name="changelog_build_62_4">De interne (fallback) DNS-server kan nu worden geconfigureerd</string>
     <string name="changelog_build_62_3">DNS-regelbronnen kunnen nu individueel worden bijgewerkt</string>
+    <string name="changelog_build_75_1">Een instelling toegevoegd in de algemene categorie om de instellingen te exporteren</string>
 </resources>
