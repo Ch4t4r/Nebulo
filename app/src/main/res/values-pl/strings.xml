@@ -131,4 +131,6 @@
 \nLicencjonowany na podstawie GPLv3.
 \n&lt;a href=mailto:support@frostnerd.com&gt;support@frostnerd.com&lt;/a&gt;</string>
     <string name="error_invalid_host">Podaj prawidłowy host</string>
+    <string name="settings_import_succeeded">Ustawienia importują się pomyślnie.</string>
+    <string name="settings_import_failed">Import ustawień nie powiódł się.</string>
 </resources>
