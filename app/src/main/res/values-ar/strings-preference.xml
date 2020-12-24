@@ -137,4 +137,7 @@
     <string name="title_nonvpn_use_lanip">استخدم عنوان IP للجهاز بدلاً من المضيف المحلي</string>
     <string name="summary_export_settings">قم بتصدير كافة الإعدادات (بما في ذلك مصادر قواعد DNS) في ملف. يمكنك لاحقًا فتح الملف لاستيراده إلى Nebulo.</string>
     <string name="summary_nonvpn_use_lanip">لا تسمح بعض التطبيقات بإدخال المضيف المحلي على أنه DNS. باستخدام هذا الإعداد ، يتم استخدام IP للأجهزة في الشبكة بدلاً من ذلك. سيتغير العنوان اعتمادًا على شبكتك ، انتبه إلى الإشعار.</string>
+    <string name="summary_excluded_apps_non_vpn">استبعد التطبيقات من التطبيق هنا ، على سبيل المثال إذا لم يعد بإمكانها الاتصال بالإنترنت - لن تستخدم التطبيقات المحددة DNS-over-HTTPS أو DNS-over-TLS بعد الآن.
+\n
+\nهذا ليس له أي تأثير في وضع غير VPN.</string>
 </resources>
