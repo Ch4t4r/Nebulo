@@ -176,7 +176,9 @@ class SmokeScreen : Application() {
 
     fun initSentry(forceStatus: Status = Status.NONE) {
         if (!BuildConfig.DEBUG && BuildConfig.SENTRY_DSN != "dummy") {
+            log("Sentry will be initialized.")
             GlobalScope.launch(Dispatchers.IO) {
+                log("Initializing Sentry.")
                 sentryReady = false
                 try {
                     val hostName = InetAddress.getLocalHost().hostName
@@ -240,6 +242,7 @@ class SmokeScreen : Application() {
                 } catch(ex:Throwable) {
                     ex.printStackTrace()
                 }
+                log("Sentry ready.")
             }
         }
     }
@@ -274,6 +277,7 @@ class SmokeScreen : Application() {
 
         override fun uncaughtException(t: Thread, e: Throwable) {
             e.printStackTrace()
+            log("Caught an uncaught exception.")
             log(e, extras)
             extras.clear()
             val isPrerelease = !AppSettings.isReleaseVersion

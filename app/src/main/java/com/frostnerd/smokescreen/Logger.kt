@@ -41,12 +41,18 @@ import kotlin.concurrent.withLock
 
 private val publishedExceptions = mutableMapOf<Throwable, Set<StackTraceElement>>()
 private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = null) {
-    if(getPreferences().crashreportingType == Crashreporting.OFF) return
+    if(getPreferences().crashreportingType == Crashreporting.OFF) {
+        log("Not published to Sentry, is turned off.")
+        return
+    }
     if (publishedExceptions.any {
             it.value.all { elem ->
                 e.stackTrace.contains(elem)
             }
-        } || publishedExceptions.put(e, e.stackTrace.toHashSet()) != null) return
+        } || publishedExceptions.put(e, e.stackTrace.toHashSet()) != null) {
+            log("Exception already published to Sentry, not publishing again.")
+            return
+    }
     else {
         EXECUTED_MIGRATIONS.sortedBy { it.first }.joinToString {
             "${it.first} -> ${it.second}"
@@ -62,6 +68,7 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                 setExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
             })
         } else if (getPreferences().crashreportingType == Crashreporting.FULL && extras != null && extras.isNotEmpty()) {
+            log("Sending exception with extras")
             // Extra data is only passed when not in data-saving mode.
             Sentry.captureEvent(SentryEvent(e).apply {
                 message = Message().apply {
@@ -74,8 +81,10 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                 setExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
             })
         } else {
+            log("Sending exception to Sentry without extras")
             Sentry.captureException(e)
         }
+        Sentry.flush(100000)
     }
 }
 
