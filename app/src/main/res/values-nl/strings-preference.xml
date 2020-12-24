@@ -137,4 +137,7 @@
     <string name="title_inform_bad_connection">Informeer me over een slechte verbinding</string>
     <string name="title_fallback_dns">Interne DNS-server</string>
     <string name="summary_inform_bad_connection">Informeer me wanneer de DNS-server op dit moment traag is of anderszins slecht presteert</string>
+    <string name="summary_excluded_apps_non_vpn">Sluit apps uit van de app hier, bijvoorbeeld als ze geen verbinding meer kunnen maken met het internet - geselecteerde apps gebruiken geen DNS-over-HTTPS of DNS-over-TLS meer.
+\n
+\nDit heeft geen effect in de niet-VPN-modus.</string>
 </resources>
