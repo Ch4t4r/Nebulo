@@ -137,4 +137,7 @@
     <string name="title_export_settings">Exportar ajustes</string>
     <string name="summary_export_settings">Exporta todos los ajustes (incluyendo las fuentes de reglas DNS) en un archivo. Más tarde puedes abrir el archivo para importarlo a Nebulo.</string>
     <string name="summary_inform_bad_connection">Infórmame cuando el servidor DNS esté lento o funcione mal</string>
+    <string name="summary_excluded_apps_non_vpn">Excluya las aplicaciones de la aplicación aquí, por ejemplo si ya no pueden conectarse a Internet: las aplicaciones seleccionadas ya no usarán DNS-over-HTTPS o DNS-over-TLS.
+\n
+\nEsto no tiene ningún efecto en el modo no VPN.</string>
 </resources>
