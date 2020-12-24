@@ -137,4 +137,7 @@
     <string name="summary_simple_notification">Используйте простой текст в уведомлении</string>
     <string name="title_simple_notification">Простое уведомление</string>
     <string name="summary_inform_bad_connection">Информируйте меня, когда DNS-сервер в настоящее время работает медленно или работает плохо</string>
+    <string name="summary_excluded_apps_non_vpn">Исключите приложения из приложения здесь, например, если они больше не могут подключаться к Интернету - выбранные приложения больше не будут использовать DNS-over-HTTPS или DNS-over-TLS.
+\n
+\nВ режиме, отличном от VPN, это не действует.</string>
 </resources>
