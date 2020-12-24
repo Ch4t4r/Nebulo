@@ -136,4 +136,7 @@
     <string name="title_nonvpn_use_lanip">localhostの代替としてデバイスIP使用</string>
     <string name="summary_export_settings">DNSルールのソースを含むすべての設定をファイルにして書き出します。このファイルをNebuloに読み込ませることで設定を元に戻すことができます。</string>
     <string name="title_export_settings">設定のエクスポート</string>
+    <string name="summary_excluded_apps_non_vpn">例えば、インターネットに接続できなくなった場合など、ここではアプリを除外します - 選択したアプリはDNS-over-HTTPSやDNS-over-TLSを使用しなくなります。
+\n
+\nこれは非VPNモードでは効果がありません。</string>
 </resources>
