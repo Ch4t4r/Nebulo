@@ -198,7 +198,7 @@
     <string name="dialog_serverconfiguration_addserver">اضف سيرفر</string>
     <string name="dialog_serverconfiguration_title">اعدادات السيرفر</string>
     <string name="querylog_filter_type_cache">تم حلها بواسطة ذاكرة التخزين المؤقت ل DNS</string>
-    <string name="dialog_speedtestpasses_message">قم بتعيين عدد مرات إجراء الاختبار لكل خادم. التمريرات الأعلى تزيد من اكتواري</string>
+    <string name="dialog_speedtestpasses_message">قم بتعيين عدد مرات إجراء الاختبار لكل خادم. التمريرات الأعلى تزيد الدقة</string>
     <string name="dialog_speedtestpasses_title">تكوين اجتياز الاختبار</string>
     <string name="dialog_share_message">أي رابط تريد مشاركته؟</string>
     <string name="dialog_share_title">حدد نوع الارتباط</string>
