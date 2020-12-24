@@ -152,4 +152,5 @@
     <string name="changelog_build_41_5">现在服务器列表只显示支持当前网络（IPv4或IPv6）的服务器</string>
     <string name="changelog_build_41_3">新增服务器</string>
     <string name="changelog_build_40_6">现在可以点击规则导入/导出通知</string>
+    <string name="changelog_build_75_1">在一般类别中添加了导出设置的设置</string>
 </resources>
