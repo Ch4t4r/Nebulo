@@ -137,4 +137,7 @@
     <string name="title_nonvpn_use_lanip">Utiliser Device IP au lieu de localhost</string>
     <string name="title_inform_bad_connection">Informez-moi d\'une mauvaise connexion</string>
     <string name="summary_inform_bad_connection">Informez-moi lorsque le serveur DNS est actuellement lent ou fonctionne mal</string>
+    <string name="summary_excluded_apps_non_vpn">Exclure les applications de l\'application ici, par exemple si elles ne peuvent plus se connecter à l\'Internet - les applications sélectionnées n\'utiliseront plus le DNS-sur-HTTPS ou le DNS-sur-TLS.
+\n
+\nCela n\'a aucun effet en mode non-VPN.</string>
 </resources>
