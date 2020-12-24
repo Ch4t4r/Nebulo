@@ -125,4 +125,6 @@
     <string name="appintro_first_title">Bienvenue à Nebulo.</string>
     <string name="warning_server_currently_unstable">Le serveur %1$s semble être instable en ce moment.</string>
     <string name="warning_server_currently_unstable_expanded">Le serveur %1$s semble être instable en ce moment, ce qui a un impact sur votre vitesse de navigation. Envisagez de passer à un serveur plus stable.</string>
+    <string name="settings_import_succeeded">Importation des paramètres réussie.</string>
+    <string name="settings_import_failed">L\'importation des paramètres a échoué.</string>
 </resources>
