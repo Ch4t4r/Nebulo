@@ -131,4 +131,6 @@
     <string name="theme_dark">Темный</string>
     <string name="error_invalid_host">Пожалуйста, предоставьте действительного хозяина</string>
     <string name="error_invalid_servername">Пожалуйста, укажите имя</string>
+    <string name="settings_import_succeeded">Настройки импортированы успешно.</string>
+    <string name="settings_import_failed">Импорт настроек не удался.</string>
 </resources>
