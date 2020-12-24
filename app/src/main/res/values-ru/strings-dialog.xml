@@ -194,7 +194,7 @@
 \n - Вернуться к дополнительным опциям
 \n - Прокрутите вниз, установите оба поля VPN DNS на %3$s.
 \n - Запустите Nebulo (в режиме, отличном от VPN) и запустите NetGuard</string>
-    <string name="dialog_speedtestpasses_message">Укажите, как часто должен выполняться тест на каждом сервере. Более высокие проходы увеличить актуарий</string>
+    <string name="dialog_speedtestpasses_message">Укажите, как часто должен выполняться тест на каждом сервере. Более высокие проходы увеличивают точность</string>
     <string name="dialog_speedtestpasses_title">Настройка тестовых проходов</string>
     <string name="dialog_share_message">Какой ссылкой вы хотите поделиться\?</string>
     <string name="dialog_share_title">Выберите тип ссылки</string>
