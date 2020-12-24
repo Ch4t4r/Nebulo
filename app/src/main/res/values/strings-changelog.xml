@@ -462,6 +462,13 @@
         <item>@string/changelog_build_61_1</item>
     </string>
 
+
+    <string name="changelog_build_75_1">Added a setting in the general category to export the settings</string>
+    <string name="changelog_build_75">
+        <item>Version 2.0.4 (Build 75)</item>
+        <item>@string/changelog_build_75_1</item>
+    </string>
+
     <string name="changelog_build_69_1">Add support for DNS-over-QUIC</string> <!-- Not yet added -->
     <string name="changelog_build_66_7">Added introduction screens when first launching the app</string> <!--- Both currently disabled -->
     <string name="changelog_build_66_8">Added a server selection screen when first launching the app</string>
