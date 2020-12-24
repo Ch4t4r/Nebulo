@@ -125,4 +125,6 @@
     <string name="theme_mono">Mono</string>
     <string name="theme_dark">Donker</string>
     <string name="app_share_fdroid">Hé, ik heb deze app gevonden die je DNS-vragen versleutelt om je meer privacy en veiligheid te geven. Bekijk het door het te downloaden van hier: https://nebulo.app/source#installation</string>
+    <string name="settings_import_succeeded">Instellingen importeren succesvol.</string>
+    <string name="settings_import_failed">De import van de instellingen is mislukt.</string>
 </resources>
