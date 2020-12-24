@@ -152,4 +152,5 @@
     <string name="changelog_build_67_2">تمت إضافة بحث إلى مربع حوار استثناء التطبيق</string>
     <string name="changelog_build_67_4">تمت إضافة تنسيق أفضل للأرقام في قواعد DNS</string>
     <string name="changelog_build_67_3">إصلاح وقت استجابة الخادم لا يظهر في وضع غير VPN</string>
+    <string name="changelog_build_75_1">تمت إضافة إعداد في الفئة العامة لتصدير الإعدادات</string>
 </resources>
