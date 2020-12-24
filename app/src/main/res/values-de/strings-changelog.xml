@@ -152,4 +152,5 @@
     <string name="changelog_build_67_2">Eine Suche zum Appauswahl-Dialog hinzugefügt</string>
     <string name="changelog_build_69_2">DNS-over-HTTPS verschnellert</string>
     <string name="changelog_build_69_1">Unterstützung für DNS-over-QUIC hinzugefügt</string>
+    <string name="changelog_build_75_1">Eine Einstellung in den Kategorie Generelles hinzugefügt, um alle Einstellungen zu exportieren</string>
 </resources>
