@@ -122,4 +122,6 @@
     <string name="theme_dark">暗色</string>
     <string name="theme_mono">单色</string>
     <string name="app_share_fdroid">嘿！我找到了这个应用，它可以加密你的DNS请求来更好地保护你的隐私和安全。在这里下载看看吧： https://nebulo.app/source#installation</string>
+    <string name="settings_import_succeeded">设置导入成功。</string>
+    <string name="settings_import_failed">设置导入失败。</string>
 </resources>
