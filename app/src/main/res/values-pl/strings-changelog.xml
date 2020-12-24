@@ -152,4 +152,5 @@
     <string name="changelog_build_23_5">Dziennik zapytań pokazuje teraz protokół używany do wysyłania zapytań</string>
     <string name="changelog_build_23_2">Dodano to okno dialogowe w celu podkreślenia zmian</string>
     <string name="changelog_build_25_2">Dodano nowe serwery DNS</string>
+    <string name="changelog_build_75_1">Dodano ustawienie w kategorii ogólnej w celu wyeksportowania ustawień</string>
 </resources>
