@@ -123,4 +123,6 @@
         <item quantity="one">até agora %1$d consulta foi bloqueada</item>
         <item quantity="other">até agora %1$d consultas têm sido bloqueadas</item>
     </plurals>
+    <string name="settings_import_succeeded">Configurações importadas com sucesso.</string>
+    <string name="settings_import_failed">A importação de configurações falhou.</string>
 </resources>
