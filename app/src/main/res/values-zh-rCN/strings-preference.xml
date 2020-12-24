@@ -137,4 +137,7 @@
     <string name="title_export_settings">出口设置</string>
     <string name="summary_export_settings">将所有设置（包括DNS规则源）导出到一个文件中。您以后可以打开该文件将其导入Nebulo。</string>
     <string name="summary_inform_bad_connection">当DNS服务器当前速度较慢或性能较差时，通知我</string>
+    <string name="summary_excluded_apps_non_vpn">在这里将应用程序排除在应用程序之外，例如，如果它们不能再连接到互联网--选定的应用程序不会再使用DNS-over-HTTPS或DNS-over-TLS。
+\n
+\n这在非VPN模式下没有影响。</string>
 </resources>
