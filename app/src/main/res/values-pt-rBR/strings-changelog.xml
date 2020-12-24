@@ -152,4 +152,5 @@
     <string name="changelog_build_67_4">Adicionada melhor formatação dos números nas regras de DNS</string>
     <string name="changelog_build_67_3">Agora a latência do servidor é mostrada no modo não-VPN</string>
     <string name="changelog_build_67_2">Foi adicionada uma busca ao diálogo de exclusão do app</string>
+    <string name="changelog_build_75_1">Adicionada uma definição na categoria geral para exportar as definições</string>
 </resources>
