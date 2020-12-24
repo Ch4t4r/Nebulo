@@ -122,4 +122,6 @@
     <string name="theme_dark">ダーク</string>
     <string name="theme_mono">モノトーン</string>
     <string name="app_share_fdroid">さらにプライバシーとセキュリティを保護するためのDNS暗号化アプリを見つけました。ここからダウンロードしてチェックしてください: https://nebulo.app/source#installation</string>
+    <string name="settings_import_succeeded">設定のインポートに成功しました。</string>
+    <string name="settings_import_failed">設定のインポートに失敗しました。</string>
 </resources>
