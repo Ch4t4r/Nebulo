@@ -152,4 +152,5 @@
     <string name="changelog_build_66_4">В журнал запросов добавлена справочная запись, объясняющая, что означают эти иконки</string>
     <string name="changelog_build_66_2">Добавление серверов теперь чувствительно к регистру. Это исправляет проблемы с NextDNS</string>
     <string name="changelog_build_25_2">Добавлены новые DNS-серверы</string>
+    <string name="changelog_build_75_1">Добавлена настройка в общей категории для экспорта настроек</string>
 </resources>
