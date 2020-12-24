@@ -152,4 +152,5 @@
     <string name="changelog_build_66_4">Añadido una entrada de ayuda al registro de consultas para explicar lo que significan los iconos</string>
     <string name="changelog_build_66_5">La prueba de velocidad del DNS ahora muestra con más precisión la latencia</string>
     <string name="changelog_build_66_2">La adición de servidores ahora distingue entre mayúsculas y minúsculas. Esto arregla los problemas con NextDNS</string>
+    <string name="changelog_build_75_1">Añadido un ajuste en la categoría general para exportar los ajustes</string>
 </resources>
