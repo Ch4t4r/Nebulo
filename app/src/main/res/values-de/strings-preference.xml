@@ -137,4 +137,7 @@
     <string name="summary_export_settings">Exportiere alle Einstellungen (schließt DNS Regel Quellen ein) in eine Datei. Diese Datei kann später von Nebulo geöffnet und importiert werden.</string>
     <string name="title_export_settings">Einstellungen exportieren</string>
     <string name="summary_inform_bad_connection">Informiere mich wenn der DNS Server gerade langsam ist</string>
+    <string name="summary_excluded_apps_non_vpn">Wähle hier aus, welche Apps DoH/DoT benutzen sollen und welche nicht. Dies sollte zum Beispiel gemacht werden, wenn diese keine Internetverbindung haben.
+\n
+\nDies hat im Nicht-VPN Modus keinen Effekt.</string>
 </resources>
