@@ -169,7 +169,7 @@
     <string name="dialog_doh_detect_type_title">检测服务器类型</string>
     <string name="dialog_share_message">您希望分享什么链接？</string>
     <string name="dialog_share_title">选择链接类型</string>
-    <string name="dialog_speedtestpasses_message">设置每台服务器运行测试的频率。通过率越高越好</string>
+    <string name="dialog_speedtestpasses_message">设置每台服务器运行测试的频率。测试次数越多，准确性越高</string>
     <string name="dialog_dnsrules_status_fromsource">该主机属于源码%1$s</string>
     <string name="dialog_querylog_information_message">这个列表显示了Nebulo在活动时记录的所有过去的查询。当Nebulo当前处于活动状态时，该列表会实时更新。
 \n
