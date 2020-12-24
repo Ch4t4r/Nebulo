@@ -168,7 +168,7 @@
     <string name="dialog_doh_detect_type_message">Por favor, espere un momento.</string>
     <string name="dialog_doh_detect_type_title">Detectando tipo de servidor</string>
     <string name="dialog_newdnsrule_block_host">Bloquear este host</string>
-    <string name="dialog_speedtestpasses_message">Establezca la frecuencia con la que se debe ejecutar la prueba por servidor. Los pases más altos aumentan la actuación</string>
+    <string name="dialog_speedtestpasses_message">Establezca la frecuencia con la que se debe ejecutar la prueba por servidor. Pasadas más altas aumentan la precisión</string>
     <string name="dialog_speedtestpasses_title">Configurar los pases de prueba</string>
     <string name="dialog_share_message">¿Qué enlace quieres compartir\?</string>
     <string name="dialog_share_title">Seleccione el tipo de enlace</string>
