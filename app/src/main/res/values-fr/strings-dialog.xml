@@ -181,7 +181,7 @@
 \n - Faites défiler vers le bas, réglez les deux champs DNS VPN sur %3$s
 \n - Démarrez Nebulo (en mode non-VPN) et lancez NetGuard</string>
     <string name="dialog_newdnsrule_block_host">Bloquer cet hôte</string>
-    <string name="dialog_speedtestpasses_message">Définissez la fréquence d\'exécution du test par serveur. Plus le taux de réussite est élevé, plus le nombre de tests effectués est élevé</string>
+    <string name="dialog_speedtestpasses_message">Définissez la fréquence d\'exécution du test par serveur. Plus le taux de réussite est élevé, plus la précision est élevée</string>
     <string name="dialog_speedtestpasses_title">Configurer la réussite aux tests</string>
     <string name="dialog_share_message">Quel lien souhaitez-vous partager \?</string>
     <string name="dialog_share_title">Sélectionnez le type de lien</string>
