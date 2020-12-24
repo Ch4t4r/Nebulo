@@ -137,4 +137,7 @@
     <string name="title_theme">Temat</string>
     <string name="summary_theme">Ustawia temat tej aplikacji</string>
     <string name="summary_inform_bad_connection">Poinformuj mnie, kiedy serwer DNS jest obecnie wolny lub w inny sposób źle działa</string>
+    <string name="summary_excluded_apps_non_vpn">Wyłącz aplikacje z aplikacji tutaj, na przykład jeśli nie mogą już łączyć się z Internetem - wybrane aplikacje nie będą już używać DNS-over-HTTPS lub DNS-over-TLS.
+\n
+\nNie ma to żadnego wpływu w trybie innym niż VPN.</string>
 </resources>
