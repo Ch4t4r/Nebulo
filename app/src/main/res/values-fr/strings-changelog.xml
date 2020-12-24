@@ -152,4 +152,5 @@
     <string name="changelog_build_66_9">Ajout d\'une notification affichée lorsque le serveur actuel a une mauvaise connexion</string>
     <string name="changelog_build_66_7">Ajout d\'écrans d\'introduction lors du premier lancement de l\'application</string>
     <string name="changelog_build_66_2">L\'ajout de serveurs est désormais sensible à la casse. Cela corrige des problèmes avec NextDNS</string>
+    <string name="changelog_build_75_1">Ajout d\'un paramètre dans la catégorie générale pour exporter les paramètres</string>
 </resources>
