@@ -168,7 +168,7 @@
     <string name="dialog_doh_detect_type_message">Wacht even, alsjeblieft.</string>
     <string name="dialog_doh_detect_type_title">Het opsporen van het type server</string>
     <string name="dialog_dnsrules_status_fromsource">Deze gastheer maakt deel uit van de bron %1$s</string>
-    <string name="dialog_speedtestpasses_message">Stel in hoe vaak de test per server moet worden uitgevoerd. Hogere passes verhogen de actuarry</string>
+    <string name="dialog_speedtestpasses_message">Stel in hoe vaak de test per server moet worden uitgevoerd. Hogere passes verhogen de nauwkeurigheid</string>
     <string name="dialog_speedtestpasses_title">Testpassen configureren</string>
     <string name="dialog_share_message">Welke link wil je delen\?</string>
     <string name="dialog_share_title">Selecteer type link</string>
