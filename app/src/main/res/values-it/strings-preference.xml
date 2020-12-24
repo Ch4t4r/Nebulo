@@ -137,4 +137,7 @@
     <string name="title_nonvpn_use_lanip">Usa l\'IP del dispositivo al posto di localhost</string>
     <string name="summary_export_settings">Esporta tutte le impostazioni (incluse le fonti di regole DNS) in un file. Poi potrai aprire il file per importarlo in Nebulo.</string>
     <string name="title_export_settings">Esporta impostazioni</string>
+    <string name="summary_excluded_apps_non_vpn">Escludete qui le applicazioni dall\'applicazione, ad esempio se non possono più collegarsi a Internet - le applicazioni selezionate non utilizzeranno più il DNS-over-HTTPS o il DNS-over-TLS.
+\n
+\nQuesto non ha alcun effetto in modalità non-VPN.</string>
 </resources>
