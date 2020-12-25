@@ -177,48 +177,50 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             !getPreferences().ignoreServiceKilled &&
             getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE
         ) { // The app didn't stop properly
-            val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra(
-                "command",
-                Command.IGNORE_SERVICE_KILLED
-            )
-            val ignorePendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                PendingIntent.getForegroundService(
-                    this@DnsVpnService,
-                    RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
-                    ignoreIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M|| !(getSystemService(POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)) {
+                val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra(
+                    "command",
+                    Command.IGNORE_SERVICE_KILLED
                 )
-            } else {
-                PendingIntent.getService(
-                    this@DnsVpnService,
-                    RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
-                    ignoreIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-                )
-            }
-            NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
-                .apply {
-                    setContentTitle(getString(R.string.notification_service_killed_title))
-                    setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_service_killed_message)))
-                    setSmallIcon(R.drawable.ic_cloud_warn)
-                    setAutoCancel(true)
-                    setOngoing(false)
-                    setContentIntent(
-                        DeepActionState.BATTERY_OPTIMIZATION_DIALOG.pendingIntentTo(
-                            this@DnsVpnService
-                        )
+                val ignorePendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    PendingIntent.getForegroundService(
+                        this@DnsVpnService,
+                        RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
+                        ignoreIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
                     )
-                    addAction(
-                        R.drawable.ic_eye,
-                        getString(R.string.notification_service_killed_ignore),
-                        ignorePendingIntent
-                    )
-                }.build().also {
-                    (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
-                        Notifications.ID_SERVICE_KILLED,
-                        it
+                } else {
+                    PendingIntent.getService(
+                        this@DnsVpnService,
+                        RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
+                        ignoreIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
                     )
                 }
+                NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
+                    .apply {
+                        setContentTitle(getString(R.string.notification_service_killed_title))
+                        setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_service_killed_message)))
+                        setSmallIcon(R.drawable.ic_cloud_warn)
+                        setAutoCancel(true)
+                        setOngoing(false)
+                        setContentIntent(
+                            DeepActionState.BATTERY_OPTIMIZATION_DIALOG.pendingIntentTo(
+                                this@DnsVpnService
+                            )
+                        )
+                        addAction(
+                            R.drawable.ic_eye,
+                            getString(R.string.notification_service_killed_ignore),
+                            ignorePendingIntent
+                        )
+                    }.build().also {
+                        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
+                            Notifications.ID_SERVICE_KILLED,
+                            it
+                        )
+                    }
+            }
         }
         getPreferences().vpnServiceState = VpnServiceState.STARTED
         getPreferences().vpnLaunchLastVersion = BuildConfig.VERSION_CODE
