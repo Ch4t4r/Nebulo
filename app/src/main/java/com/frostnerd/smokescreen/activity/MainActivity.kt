@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.*
+import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.general.service.isServiceRunning
@@ -209,7 +211,9 @@ class MainActivity : NavigationDrawerActivity() {
             !getPreferences().ignoreServiceKilled &&
                 getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE) {
             getPreferences().vpnServiceState = VpnServiceState.STOPPED
-            BatteryOptimizationInfoDialog(this).show()
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M|| !(getSystemService(POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)) {
+                BatteryOptimizationInfoDialog(this).show()
+            }
         }
         registerLocalReceiver(listOf(BROADCAST_RELOAD_MENU), true) {
             reloadMenuItems()
