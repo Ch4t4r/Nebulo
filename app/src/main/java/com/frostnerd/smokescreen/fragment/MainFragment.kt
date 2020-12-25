@@ -221,9 +221,9 @@ class MainFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (vpnStateReceiver != null) requireContext().unregisterLocalReceiver(vpnStateReceiver!!)
+    override fun onStop() {
+        super.onStop()
+        vpnStateReceiver?.also {  requireContext().unregisterLocalReceiver(it)  }
     }
 
     private fun startVpn() {
