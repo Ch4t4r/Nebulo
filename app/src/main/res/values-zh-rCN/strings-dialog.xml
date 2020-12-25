@@ -27,7 +27,7 @@
     <string name="dialog_serverimport_done">完成</string>
     <string name="dialog_serverimport_text" tools:ignore="PluralsCandidate">请选择您想导入的服务器。
 \n
-\n如果您选择了已被导入的服务器，那么服务器将会有重复。</string>
+\n如果您选择了已被导入的服务器，那么将会出现重复的服务器。</string>
     <string name="dialog_serverimportfailed_title">导入失败</string>
     <string name="dialog_serverimportfailed_text">无法导入服务器。</string>
     <string name="dialog_serverimportfailed_text_exception" tools:ignore="PluralsCandidate">无法导入服务器。
@@ -55,7 +55,7 @@
     <string name="dialog_query_export_message">正在导出请求项，请稍候</string>
     <string name="dialog_pin_message">请输入您的PIN。</string>
     <string name="dialog_pin_hint">PIN</string>
-    <string name="dialog_enable_logging">您是否要启用日志？日志包含统计信息、调试信息和应用所执行的操作。除非您自己想要共享日志，否则生成的日志不会被共享。</string>
+    <string name="dialog_enable_logging">您是否要启用日志？日志包含统计信息、调试信息和应用所执行的操作。生成的日志除您自行分享外不会被共享。</string>
     <string name="dialog_crashreporting_title">自动发送崩溃报告</string>
     <string name="dialog_crashreportingusages_title">被传送数据</string>
     <string name="dialog_crashreportingusages_message">请点击任一组别以查看崩溃时应用发送了什么信息。</string>
@@ -67,9 +67,9 @@
 \n本应用使用开源和自托管的第三方软件以便于在崩溃发生时第一时间追踪崩溃。当且仅当启用崩溃报告后，应用才会在崩溃时发送崩溃报告。这些崩溃报告包含关于应用与您的设备的一些附加信息，包括用于追踪同一用户崩溃的一个ID，而这个ID除此用途外无法用于他用。启用崩溃报告是可选的，但是如果您启用了崩溃报告，修复漏洞会更加简便快捷。
 \n崩溃报告一律使用HTTPS安全地传输。
 \n
-\n点击下方的“查看数据”以查看会传送什么数据，以及阅读隐私政策。</string>
+\n点击下方的“查看数据”以查看会被传送的数据及阅读隐私政策。</string>
     <string name="dialog_clearqueries_title">清除所有请求项</string>
-    <string name="dialog_clearqueries_message">您确定您要清除所有已记录请求吗？此操作无法撤销。</string>
+    <string name="dialog_clearqueries_message">您确定您要清除所有已记录请求项吗？此操作无法撤销。</string>
     <string name="dialog_credits_title">致谢名单</string>
     <string name="dialog_join_group_title">加入社区</string>
     <string name="dialog_join_group_positive">好啊！</string>
@@ -79,7 +79,7 @@
 \n本应用使用开源和自托管的第三方软件以便于在崩溃发生时第一时间追踪崩溃。当且仅当启用崩溃报告后，应用才会在崩溃时发送崩溃报告。这些崩溃报告包含关于应用与您的设备的一些附加信息，包括用于追踪同一用户崩溃的一个ID，而这个ID除此用途外无法用于他用。启用崩溃报告是可选的，但是如果您启用了崩溃报告，对我将会有很大帮助。
 \n崩溃报告一律使用HTTPS安全地传输。
 \n
-\n点击下方的“查看数据”以查看会传送什么数据，以及阅读隐私政策。</string>
+\n点击下方的“查看数据”以查看会被传送的数据及阅读隐私政策。</string>
     <string name="dialog_credits_message" formatted="true">- 应用图标由 &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 绘制。 
 \n- 土耳其语翻译由 Kemal Oktay Aktoğan 完成 
 \n- 俄语翻译由 bruleto 完成 
@@ -94,8 +94,8 @@
 \n想要在这里看到您的名字吗？您可以随意为此应用&lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;做出贡献&lt;/a&gt;。</string>
     <string name="dialog_join_group_message">嘿，你好！
 \n
-\n你知道这款应用有Telegram群组吗？群组包含有定期的更新，同时也是讨论与提问的极佳去处。
-\n我们是一个由超过200人组成的优质社群，你想成为其中的一分子吗？</string>
+\n你知道这款应用有对应的Telegram群组吗？群组里面有定期的更新，同时也是讨论与提问的极佳去处。
+\n我们是一个由超过200人组成的优质社群。你想成为其中的一员吗？</string>
     <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">已测试 %1$d 个服务器
 \n %2$d 个DoT服务器可用，%3$d个不可用
 \n %4$d 个DoH服务器可用，%5$d个不可用
@@ -106,7 +106,7 @@
     <string name="dialog_speedtest_useserver_title">选择服务器</string>
     <string name="dialog_speedtest_useserver_message">您想使用 %1$s 服务器吗？它在%3$d个服务器中排名第%2$d，响应时间为%4$d毫秒。</string>
     <string name="dialog_deletehostsource_title">是否删除 %1$s？</string>
-    <string name="dialog_deletehostsource_message">您确定您要删除规则源 %1$s 吗？此操作无法撤销，此规则源下的规则将被删除。</string>
+    <string name="dialog_deletehostsource_message">您确定您要删除 %1$s 规则源吗？此规则源下的所有规则将被删除，且此操作无法撤销。</string>
     <string name="dialog_newhostsource_name">名称</string>
     <string name="dialog_newhostsource_url">URL</string>
     <string name="dialog_newdnsrule_title">新建DNS规则</string>
@@ -136,17 +136,17 @@
     <string name="dialog_editdelete_title">您想做什么？</string>
     <string name="dialog_editdelete_delete">删除</string>
     <string name="dialog_editdelete_edit">编辑</string>
-    <string name="dialog_servicekilled_message">本应用检测到应用在上次活跃时没有被正确地中止运行。这表明您的系统选择了强行终止应用，而不允许让应用自行重启。
+    <string name="dialog_servicekilled_message">本应用检测到应用在上次运行时被异常地关闭。这表明您的系统强行终止了应用，且禁止让应用自行重启。
 \n
-\n在大多数设备上，您有几个选项可以防止或至少延迟系统终止应用运行的时间。
-\n比如，您可以在系统设置中禁用应用的电池优化功能，或者避免将应用从最近使用列表中清除。
+\n在大多数设备上，您有几个可选的操作来防止，或者至少延迟系统终止应用运行的时间。
+\n比如，您可以在系统设置中禁用针对应用的电池优化，或者避免将应用从最近使用列表中清除。
 \n
-\n如果您选择忽略，则不会再看到此对话框。您可以点击下面的按钮（在浏览器中打开外部网站）以阅读更多内容，并获得解决这种问题的方法。点击设置以进入Android设置，在这里您可以禁用Nebulo的电池优化。</string>
+\n如果您选择忽略，则不会再看到此对话框。您可以点击下面的按钮（将在浏览器中打开外部网站）以阅读更多内容，并获得解决这种问题的方法。点击设置以进入Android设置，在这里您可以禁用Nebulo的电池优化。</string>
     <string name="dialog_servicekilled_more_info">更多信息</string>
     <string name="dialog_overlaydetected_title">检测到系统遮罩层</string>
     <string name="dialog_overlaydetected_message">有一个系统范围内的遮罩层（如聊天气泡、滤色器或夜视过滤器）似乎正处于活跃状态。大多数设备不允许您在这种情况下启用VPN。
 \n
-\n如果您不能在即将出现的对话框中点击确定，请禁用覆盖层。</string>
+\n如果您不能在即将出现的对话框中点击确定，请禁用遮罩层。</string>
     <string name="dialog_vpninformation_message">Nebulo通过使用一个傀儡VPN连接来重定向您所有的DNS请求至一个您选择的安全的服务器。
 \n这个傀儡VPN并非真正的VPN，它也无法隐藏您的身份，无法更改您的IP地址。
 \n
@@ -161,7 +161,7 @@
     <string name="dialog_hostsourcerefresh_timeunit_days">天</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">周</string>
     <string name="dialog_cleardnscache_message">您确定您想清空DNS缓存吗？</string>
-    <string name="dialog_vpninformation_title">本应用如何工作</string>
+    <string name="dialog_vpninformation_title">应用工作方式</string>
     <string name="dialog_raterequest_title">您是否喜欢Nebulo？</string>
     <string name="dialog_raterequest_message">你好！如果你喜欢Nebulo，你愿意花一点时间在应用商店里为它打分吗？</string>
     <string name="dialog_vpn_permission_denied_message">系统拒绝了Nebulo启动VPN。请启动应用，并在应用内点击启动按钮以给予VPN权限。</string>
@@ -214,7 +214,7 @@
 \n并非所有的VPN应用都允许你更改DNS设置。如果你的应用程序允许，只需将DNS服务器设置为\'%1$s:%2$d\'（你可以在上面配置端口）。
 \n
 \n配置好应用程序后，只需启动这两个应用程序即可。</string>
-    <string name="dialog_newdnsrule_block_host">屏蔽该host</string>
+    <string name="dialog_newdnsrule_block_host">屏蔽此主机</string>
     <string name="dialog_serverimport_servertype_doq">类型：DNS-over-TLS（DoQ）</string>
     <string name="dialog_newserver_title_quic">添加服务器（DoQ）</string>
 </resources>
