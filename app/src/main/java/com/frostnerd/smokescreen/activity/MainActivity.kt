@@ -353,7 +353,7 @@ class MainActivity : NavigationDrawerActivity() {
     }
 
     override fun onBackPressed() {
-        val fragment = currentFragment
+        val fragment = supportFragmentManager.findFragmentById(R.id.drawerContent)
         if (fragment != null && fragment is BackpressFragment) {
             if (!fragment.onBackPressed()) super.onBackPressed()
         } else {
