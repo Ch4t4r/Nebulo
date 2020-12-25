@@ -27,7 +27,6 @@ import io.sentry.protocol.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import leakcanary.LeakCanary
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.A
