@@ -169,9 +169,8 @@ dependencies {
     implementation 'io.sentry:sentry-android:3.2.0'
 
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
-    implementation 'com.squareup.leakcanary:leaksentry:2.0-alpha-3'
 
-    leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+    leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
     implementation 'com.github.AppIntro:AppIntro:6.0.0'

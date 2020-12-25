@@ -17,7 +17,6 @@ import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
-import leakcanary.LeakSentry
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -77,7 +76,6 @@ class RuleImportService : IntentService("RuleImportService") {
 
     override fun onCreate() {
         super.onCreate()
-        LeakSentry.watchIfEnabled(this, "RuleImportService")
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_DNSRULE_IMPORT_FINISHED)
     }
 

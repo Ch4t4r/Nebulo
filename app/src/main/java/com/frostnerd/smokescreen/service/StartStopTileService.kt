@@ -14,8 +14,6 @@ import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.smokescreen.R
 import com.frostnerd.smokescreen.getPreferences
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
-import com.frostnerd.smokescreen.watchIfEnabled
-import leakcanary.LeakSentry
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -48,7 +46,6 @@ class StartStopTileService:TileService() {
 
     override fun onCreate() {
         super.onCreate()
-        LeakSentry.watchIfEnabled(this, "StartStopTileService")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

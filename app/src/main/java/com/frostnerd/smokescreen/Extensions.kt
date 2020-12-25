@@ -38,7 +38,6 @@ import com.frostnerd.smokescreen.util.proxy.IpTablesPacketRedirector
 import io.sentry.NoOpLogger
 import io.sentry.android.core.BuildInfoProvider
 import io.sentry.android.core.util.RootChecker
-import leakcanary.LeakSentry
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress
@@ -408,18 +407,6 @@ private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
     } else parsedHost = host
     return if (port != null) TLSUpstreamAddress(parsedHost, port)
     else TLSUpstreamAddress(parsedHost)
-}
-
-fun LeakSentry.watchIfEnabled(watchedInstance: Any) {
-    if(BuildConfig.LEAK_DETECTION) {
-        refWatcher.watch(watchedInstance)
-    }
-}
-
-fun LeakSentry.watchIfEnabled(watchedInstance: Any, name:String) {
-    if(BuildConfig.LEAK_DETECTION) {
-        refWatcher.watch(watchedInstance, name)
-    }
 }
 
 fun String.equalsAny(vararg options:String, ignoreCase:Boolean = false):Boolean {

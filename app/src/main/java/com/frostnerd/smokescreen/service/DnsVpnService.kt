@@ -34,7 +34,6 @@ import com.frostnerd.vpntunnelproxy.RetryingVPNTunnelProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import kotlinx.coroutines.*
-import leakcanary.LeakSentry
 import org.minidns.dnsname.DnsName
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
@@ -224,7 +223,6 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         }
         getPreferences().vpnServiceState = VpnServiceState.STARTED
         getPreferences().vpnLaunchLastVersion = BuildConfig.VERSION_CODE
-        LeakSentry.watchIfEnabled(this, "DnsVpnService")
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             log("Encountered an uncaught exception.")
             destroy()

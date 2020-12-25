@@ -11,7 +11,6 @@ import io.sentry.Sentry
 import io.sentry.SentryEvent
 import io.sentry.SentryLevel
 import io.sentry.protocol.Message
-import leakcanary.LeakSentry
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -65,7 +64,6 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                     this.message = e.message
                 }
                 level = SentryLevel.ERROR
-                setExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
             })
         } else if (getPreferences().crashreportingType == Crashreporting.FULL && extras != null && extras.isNotEmpty()) {
             log("Sending exception with extras")
@@ -78,7 +76,6 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                 extras.forEach { (key, value) ->
                     setTag(key, value)
                 }
-                setExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
             })
         } else {
             log("Sending exception to Sentry without extras")

@@ -18,8 +18,6 @@ import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
-import com.frostnerd.smokescreen.watchIfEnabled
-import leakcanary.LeakSentry
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.io.Serializable
@@ -58,7 +56,6 @@ class RuleExportService : IntentService("RuleExportService") {
 
     override fun onCreate() {
         super.onCreate()
-        LeakSentry.watchIfEnabled(this, "RuleExportService")
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_DNSRULE_EXPORT_FINISHED)
     }
 

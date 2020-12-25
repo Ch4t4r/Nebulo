@@ -27,7 +27,7 @@ import io.sentry.protocol.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import leakcanary.LeakSentry
+import leakcanary.LeakCanary
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.A
@@ -135,13 +135,11 @@ class SmokeScreen : Application() {
     }
 
     override fun onCreate() {
-        if(!BuildConfig.LEAK_DETECTION) LeakSentry.config = LeakSentry.config.copy(enabled = false)
         initSentry()
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
         log("Application created.")
-        LeakSentry.watchIfEnabled(this)
         handleFallbackDns()
         loadKnownDNSServers()
         AbstractQuicDnsHandle.installProvider(this, {})
