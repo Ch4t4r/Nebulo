@@ -29,7 +29,7 @@
     <string name="window_speedtest_runtest">开始测试</string>
     <string name="button_main_dnsrules">DNS 规则</string>
     <string name="window_dnsrules_customhosts">自定义 hosts</string>
-    <string name="window_dnsrules_hostalreadyexists">规则已存在</string>
+    <string name="window_dnsrules_hostalreadyexists">已存在针对此地址的规则</string>
     <string name="windows_querylogging_time">请求时间</string>
     <string name="windows_querylogging_type">记录类型</string>
     <string name="windows_querylogging_question">请求域名</string>
@@ -116,7 +116,7 @@
     <string name="window_main_click_to_enable">点击启用。</string>
     <string name="window_main_unprotected">未保护</string>
     <string name="window_main_protected">已保护！</string>
-    <string name="window_speedtest_information">这个值越低，Nebulo与服务器间通信的速度就会越快。例如，可以通过调整该值来加快网页浏览速度。</string>
+    <string name="window_speedtest_information">延迟越低，Nebulo与服务器间通信的速度就会越快，同时也可为浏览站点提速。</string>
     <string name="theme_blue">蓝色</string>
     <string name="theme_true_black">纯黑</string>
     <string name="theme_dark">暗色</string>
