@@ -16,10 +16,12 @@ android {
         versionName "2.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        def sentryDSN = String.valueOf(getSystemVariableOrDefault("NEBULO_SENTRY_DSN", "dummy"))
+        def sentryConfigServer = String.valueOf(getSystemVariableOrDefault("NEBULO_SENTRY_CONFIGSERVER", "dummy"))
         buildConfigField("Boolean", "FROM_CI", String.valueOf(getSystemVariableOrDefault("CI_COMMIT_SHORT_SHA", "") != ""))
         buildConfigField("String", "COMMIT_HASH", '"' + getGitCommitHash() + '"')
-        buildConfigField("String", "SENTRY_DSN", '"dummy"') // A valid Sentry DSN, or "dummy"
-        buildConfigField("String", "SENTRY_DSN_CONFIGSERVER", '"dummy"') // A host which returns a valid Sentry DSN on GET, or "dummy". If both are dummy Sentry is disabled.
+        buildConfigField("String", "SENTRY_DSN", '"' + sentryDSN+ '"') // A valid Sentry DSN, or "dummy"
+        buildConfigField("String", "SENTRY_DSN_CONFIGSERVER", '"' + sentryConfigServer + '"') // A host which returns a valid Sentry DSN on GET, or "dummy". If both are dummy Sentry is disabled.
         buildConfigField("Boolean", "SHOW_DOQ", 'false')
         buildConfigField("Boolean", "SHOW_INTRO", 'false')
         buildConfigField("Boolean", "IN_APP_UPDATES", "false")
