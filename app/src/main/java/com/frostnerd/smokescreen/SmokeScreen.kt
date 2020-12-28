@@ -24,15 +24,13 @@ import io.sentry.Sentry
 import io.sentry.SentryOptions
 import io.sentry.android.core.*
 import io.sentry.protocol.User
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import okhttp3.*
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.A
 import org.minidns.record.AAAA
 import org.minidns.record.Record
-import java.net.InetAddress
+import java.io.IOException
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -172,75 +170,121 @@ class SmokeScreen : Application() {
     }
 
     fun initSentry(forceStatus: Status = Status.NONE) {
-        if (!BuildConfig.DEBUG && BuildConfig.SENTRY_DSN != "dummy") {
-            log("Sentry will be initialized.")
-            GlobalScope.launch(Dispatchers.IO) {
-                log("Initializing Sentry.")
-                sentryReady = false
-                try {
-                    val hostName = InetAddress.getLocalHost().hostName
-                    if(!hostName.startsWith("mars-sandbox", true)) {
-                        val enabledType = getPreferences().crashreportingType
-                        if (forceStatus != Status.DATASAVING && (enabledType == Crashreporting.FULL || forceStatus == Status.ENABLED)) {
-                            // Enable Sentry in full mode
-                            // This passes some device-related data, but nothing which allows user actions to be tracked across the app
-                            // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
-
-                            SentryAndroid.init(this@SmokeScreen) {
-                                it.dsn = BuildConfig.SENTRY_DSN
-                            }
-                            Sentry.setUser(User().apply {
-                                this.username = getPreferences().crashReportingUUID
-                            })
-                            Sentry.setTag("user.language", Locale.getDefault().displayLanguage)
-                            Sentry.setTag(
-                                "app.database_version",
-                                AppDatabase.currentVersion.toString()
-                            )
-                            Sentry.setTag(
-                                "app.dns_server_name",
-                                getPreferences().dnsServerConfig.name
-                            )
-                            Sentry.setTag(
-                                "app.dns_server_primary",
-                                getPreferences().dnsServerConfig.servers[0].address.formatToString()
-                            )
-                            Sentry.setTag(
-                                "app.dns_server_secondary",
-                                getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
-                                    ?: ""
-                            )
-                            Sentry.setTag(
-                                "app.installer_package",
-                                packageManager.getInstallerPackageName(packageName) ?: ""
-                            )
-                            Sentry.setTag("richdata", "true")
-                            Sentry.setTag("app.fromCi", BuildConfig.FROM_CI.toString())
-                            Sentry.setTag("app.commit", BuildConfig.COMMIT_HASH)
-                            sentryReady = true
-                        } else if (enabledType == Crashreporting.MINIMAL || forceStatus == Status.DATASAVING) {
-                            // Inits Sentry in datasaving mode
-                            // Only data absolutely necessary is transmitted (Android version, app version).
-                            // Only crashes will be reported, no regular events.
-                            SentryAndroid.init(this@SmokeScreen) {
-                                it.dsn = BuildConfig.SENTRY_DSN
-                                setupSentryForDatasaving(it)
-                            }
-                            Sentry.setUser(User().apply {
-                                this.username = "anon-" + BuildConfig.VERSION_CODE
-                            })
-                            Sentry.setTag("richdata", "false")
-                            Sentry.setTag("dist", BuildConfig.VERSION_CODE.toString())
-                            Sentry.setTag("app.commit", BuildConfig.COMMIT_HASH)
-                            Sentry.setTag("app.fromCi", BuildConfig.FROM_CI.toString())
-                            sentryReady = true
-                        }
+        val enabledType = getPreferences().crashreportingType
+        if (forceStatus == Status.NONE &&
+            enabledType == Crashreporting.OFF) return
+        log("Maybe initializing Sentry")
+        getSentryDSN { resolvedDSN ->
+            log("Initializing Sentry.")
+            sentryReady = false
+            try {
+                if (sentryReady) {
+                    log("Reinitializing Sentry with new DSN")
+                    SentryAndroid.init(this@SmokeScreen) {
+                        it.dsn = resolvedDSN
                     }
-                } catch(ex:Throwable) {
-                    ex.printStackTrace()
+                } else {
+                    if (forceStatus != Status.DATASAVING && (enabledType == Crashreporting.FULL || forceStatus == Status.ENABLED)) {
+                        // Enable Sentry in full mode
+                        // This passes some device-related data, but nothing which allows user actions to be tracked across the app
+                        // Info: Some data is attached by the AndroidEventBuilderHelper class, which is present by default
+
+                        SentryAndroid.init(this@SmokeScreen) {
+                            it.dsn = resolvedDSN
+                        }
+                        Sentry.setUser(User().apply {
+                            this.username = getPreferences().crashReportingUUID
+                        })
+                        Sentry.setTag("user.language", Locale.getDefault().displayLanguage)
+                        Sentry.setTag(
+                            "app.database_version",
+                            AppDatabase.currentVersion.toString()
+                        )
+                        Sentry.setTag(
+                            "app.dns_server_name",
+                            getPreferences().dnsServerConfig.name
+                        )
+                        Sentry.setTag(
+                            "app.dns_server_primary",
+                            getPreferences().dnsServerConfig.servers[0].address.formatToString()
+                        )
+                        Sentry.setTag(
+                            "app.dns_server_secondary",
+                            getPreferences().dnsServerConfig.servers.getOrNull(1)?.address?.formatToString()
+                                ?: ""
+                        )
+                        Sentry.setTag(
+                            "app.installer_package",
+                            packageManager.getInstallerPackageName(packageName) ?: ""
+                        )
+                        Sentry.setTag("richdata", "true")
+                        Sentry.setTag("app.fromCi", BuildConfig.FROM_CI.toString())
+                        Sentry.setTag("app.commit", BuildConfig.COMMIT_HASH)
+                        sentryReady = true
+                    } else if (enabledType == Crashreporting.MINIMAL || forceStatus == Status.DATASAVING) {
+                        // Inits Sentry in datasaving mode
+                        // Only data absolutely necessary is transmitted (Android version, app version).
+                        // Only crashes will be reported, no regular events.
+                        SentryAndroid.init(this@SmokeScreen) {
+                            it.dsn = resolvedDSN
+                            setupSentryForDatasaving(it)
+                        }
+                        Sentry.setUser(User().apply {
+                            this.username = "anon-" + BuildConfig.VERSION_CODE
+                        })
+                        Sentry.setTag("richdata", "false")
+                        Sentry.setTag("dist", BuildConfig.VERSION_CODE.toString())
+                        Sentry.setTag("app.commit", BuildConfig.COMMIT_HASH)
+                        Sentry.setTag("app.fromCi", BuildConfig.FROM_CI.toString())
+                        sentryReady = true
+                    }
                 }
                 log("Sentry ready.")
+            } catch (ex: Throwable) {
+                log("Creating Sentry errored")
+                log(ex)
             }
+        }
+    }
+
+    private fun getSentryDSN(then:(dsn:String) -> Unit) {
+        try {
+            val primaryDSN = BuildConfig.SENTRY_DSN
+            val configServer = BuildConfig.SENTRY_DSN_CONFIGSERVER
+            if(primaryDSN.contains("@")) then(primaryDSN)
+            else log("Primary Sentry DSN not set, maybe retrieving from server")
+
+            if(configServer.isNotBlank() && configServer.startsWith("http") && !configServer.contains("@")) {
+                log("Dynamically retrieving Sentry DSN from $configServer")
+                val request = Request.Builder().url(configServer).build()
+                OkHttpClient.Builder().build().newCall(request).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        log("Sentry DSN retrieval failed with error: ${e.message}")
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        println("RESPONSE")
+                        if (!response.isSuccessful) {
+                            log("Sentry DSN retrieval failed with status ${response.code}")
+                        }
+                        val retrievedDSN = response.body?.string()?.trim()
+                        if (retrievedDSN.isNullOrBlank() || !retrievedDSN.contains("@") || !retrievedDSN.startsWith(
+                                "http"
+                            )
+                        ) {
+                            log("Sentry DSN retrieval returned invalid DSN '$retrievedDSN'.")
+                        } else {
+                            if (true || retrievedDSN != primaryDSN) {
+                                log("Sentry DSN successfuly resolved to '$retrievedDSN'")
+                                then(retrievedDSN)
+                            } else log("Retrieved Sentry DSN is the same as configured DSN, not re-configuring")
+                        }
+                    }
+                })
+            }
+        } catch (ex:Throwable) {
+            log("Getting Sentry DSN errorerd")
+            log(ex)
         }
     }
 
