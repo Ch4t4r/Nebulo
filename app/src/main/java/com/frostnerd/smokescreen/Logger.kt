@@ -118,7 +118,7 @@ fun Context.log(e: Throwable, extras: Map<String, String>? = null) {
                 "${Logger.logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err"
             )
 
-        if (errorFile.createNewFile()) {
+        if (errorFile.tryCreateNewFile()) {
             val writer = BufferedWriter(FileWriter(errorFile, false))
             writer.write("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}, Commit: ${BuildConfig.COMMIT_HASH})\n")
             writer.write("Android SDK version: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})\n")
@@ -178,7 +178,7 @@ class Logger private constructor(context: Context) {
             "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log"
         )
         logDir.mkdirs()
-        logFile.createNewFile()
+        logFile.tryCreateNewFile()
         fileWriter = BufferedWriter(FileWriter(logFile, false))
 
         log("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
@@ -306,8 +306,12 @@ class Logger private constructor(context: Context) {
                 if (printToConsole) {
                     (oldSystemOut ?: System.out).println(textBuilder)
                 }
-                fileWriter.write(textBuilder.toString())
-                fileWriter.flush()
+                try {
+                    fileWriter.write(textBuilder.toString())
+                    fileWriter.flush()
+                } catch (ex:Throwable) {
+
+                }
             }
         }
     }
@@ -322,7 +326,7 @@ class Logger private constructor(context: Context) {
                     "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err"
                 )
 
-            if (errorFile.createNewFile()) {
+            if (errorFile.tryCreateNewFile()) {
                 val writer = BufferedWriter(FileWriter(errorFile, false))
                 writer.write("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n")
                 writer.write("Android SDK version: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})\n")
@@ -337,6 +341,14 @@ class Logger private constructor(context: Context) {
 
     fun log(text: String, tag: String? = "Info", intent: Intent?, vararg formatArgs: Any) {
         log(text + " -- ${describeIntent(intent)}", tag, formatArgs)
+    }
+}
+
+fun File.tryCreateNewFile():Boolean {
+    return try {
+        createNewFile()
+    } catch (ex:Throwable) {
+        false
     }
 }
 
