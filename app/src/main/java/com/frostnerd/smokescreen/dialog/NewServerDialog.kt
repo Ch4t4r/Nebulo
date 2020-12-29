@@ -320,10 +320,6 @@ class NewServerDialog(
             R.string.dialog_doh_detect_type_title,
             R.string.dialog_doh_detect_type_message
         )
-        val httpClient = OkHttpClient.Builder()
-            .connectTimeout(1250, TimeUnit.MILLISECONDS)
-            .readTimeout(1250, TimeUnit.MILLISECONDS)
-            .build()
         dialog.show()
         GlobalScope.launch {
             val availableTypes = mapOf(

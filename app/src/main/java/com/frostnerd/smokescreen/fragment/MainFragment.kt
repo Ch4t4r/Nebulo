@@ -310,7 +310,7 @@ class MainFragment : Fragment() {
     }
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
-        activity?.let { activity ->
+        activity?.let { _ ->
             if (!serverInfo.specification.privacyPolicyURL.isNullOrBlank()) {
                 launchWithLifecycle {
                     val url = URL(serverInfo.specification.privacyPolicyURL)

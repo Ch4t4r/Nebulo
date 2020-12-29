@@ -213,9 +213,9 @@ class DnsRuleFragment : Fragment() {
         adapterDataSource = ListDataSource(sourceAdapterList)
         var showUserRules = false
         var userRuleCount = 0
-        sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder({ view, type ->
+        sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder({ itemView, type ->
             when (type) {
-                0 -> SourceViewHolder(view, deleteSource = {
+                0 -> SourceViewHolder(itemView, deleteSource = {
                     showInfoTextDialog(requireContext(),
                         getString(R.string.dialog_deletehostsource_title, it.name),
                         getString(R.string.dialog_deletehostsource_message, it.name),
@@ -268,7 +268,7 @@ class DnsRuleFragment : Fragment() {
                     refreshProgressShown = true
                 })
                 1 -> CustomRulesViewHolder(
-                    view,
+                    itemView,
                     changeSourceStatus = {
                         getPreferences().customHostsEnabled = it
                     },
@@ -364,7 +364,7 @@ class DnsRuleFragment : Fragment() {
                             }
                         }).show()
                     })
-                else -> CustomRuleHostViewHolder(view, deleteRule = {
+                else -> CustomRuleHostViewHolder(itemView, deleteRule = {
                     val index = userDnsRules.indexOf(it)
                     userDnsRules.remove(it)
                     getDatabase().dnsRuleRepository().removeAsync(it)

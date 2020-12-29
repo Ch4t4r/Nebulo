@@ -174,6 +174,7 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                             view.ipv4Address.setText(dnsRule.target)
                             view.ipv6Address.setText(dnsRule.ipv6Target)
                         }
+                        else -> {}
                     }
                     isBlockHost = dnsRule.target == "0.0.0.0" && dnsRule.ipv6Target?.equalsAny("::1", "::") == true
                 }

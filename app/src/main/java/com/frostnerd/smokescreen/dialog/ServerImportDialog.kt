@@ -98,7 +98,7 @@ class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformat
     private fun doImport() {
         val prefs = context.getPreferences()
         prefs.edit {
-            val servers = servers.filterIndexed { index, item ->
+            val servers = servers.filterIndexed { index, _ ->
                 selectedServerPositions.contains(index)
             }
             prefs.addUserServerConfiguration(servers)
@@ -109,7 +109,7 @@ class ServerImportDialog(context: Context, loadedServers: List<DnsServerInformat
         val name: TextView = itemView.findViewById(R.id.name)
         private val urls = itemView.findViewById<TextView>(R.id.urls)
         private val capabilities = itemView.findViewById<TextView>(R.id.capabilities)
-        val selected = itemView.findViewById<CheckBox>(R.id.checkbox)
+        val selected: CheckBox = itemView.findViewById(R.id.checkbox)
         private val serverType = itemView.findViewById<TextView>(R.id.serverType)
 
         override fun destroy() {

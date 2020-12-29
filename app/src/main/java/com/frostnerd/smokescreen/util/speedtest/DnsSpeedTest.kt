@@ -86,6 +86,7 @@ class DnsSpeedTest(context:Context,
         for (i in 0 until passes) {
             when(server.type) {
                 ServerType.DOT -> {
+                    @Suppress("UNCHECKED_CAST")
                     (server as DnsServerInformation<TLSUpstreamAddress>).servers.forEach {
                         if(firstPass) testTls(it.address)
                         latencies += testTls(it.address) ?: 0
@@ -105,6 +106,7 @@ class DnsSpeedTest(context:Context,
                     }
                 }
                 ServerType.DOQ -> {
+                    @Suppress("UNCHECKED_CAST")
                     (server as DnsServerInformation<QuicUpstreamAddress>).servers.forEach {
                         if(cronetEngine != null) {
                             if(firstPass) testQuic(it.address)
