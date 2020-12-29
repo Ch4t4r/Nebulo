@@ -524,7 +524,7 @@ class DnsRuleFragment : Fragment() {
     private fun updateRuleCountTitle() {
          activity?.runOnUiThread {
              (activity as AppCompatActivity?)?.supportActionBar?.subtitle = if(getPreferences().dnsRulesEnabled) {
-                 val formattedString = getPreferences().numberFormatter.format(totalRuleCount)
+                 val formattedString = getPreferences().numberFormatter.format(totalRuleCount ?: 0)
                  resources.getQuantityString(R.plurals.window_dnsrules_subtitle, totalRuleCount!!.toInt(), formattedString)
              } else null
         }
