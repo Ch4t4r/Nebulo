@@ -96,21 +96,21 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                         !view.ipv4Address.text.isNullOrBlank() -> Record.TYPE.A
                         else -> Record.TYPE.AAAA
                     }
-                    val primaryTarget = if (isWhitelist) {
-                        ""
-                    } else if(isBlockHost) {
-                      "0.0.0.0"
-                    } else when (type) {
-                        Record.TYPE.A, Record.TYPE.ANY -> view.ipv4Address.text.toString()
-                        else -> view.ipv6Address.text.toString()
+                    val primaryTarget = when {
+                        isWhitelist -> ""
+                        isBlockHost -> "0.0.0.0"
+                        else -> when (type) {
+                            Record.TYPE.A, Record.TYPE.ANY -> view.ipv4Address.text.toString()
+                            else -> view.ipv6Address.text.toString()
+                        }
                     }
-                    val secondaryTarget = if (isWhitelist) {
-                        null
-                    } else if(isBlockHost){
-                        "::"
-                    }else when (type) {
-                        Record.TYPE.AAAA, Record.TYPE.ANY -> view.ipv6Address.text.toString()
-                        else -> null
+                    val secondaryTarget = when {
+                        isWhitelist -> null
+                        isBlockHost -> "::"
+                        else -> when (type) {
+                            Record.TYPE.AAAA, Record.TYPE.ANY -> view.ipv6Address.text.toString()
+                            else -> null
+                        }
                     }
                     var isWildcard = false
                     val host = view.host.text.toString().let {

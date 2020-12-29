@@ -62,7 +62,12 @@ class QueryLogFilterDialog (
         val showAll = showForwarded && showCache && showDnsrules && showBlockedByDns
 
         companion object {
-            val showAllConfig = FilterConfig(true, true, true, true)
+            val showAllConfig = FilterConfig(
+                showForwarded = true,
+                showCache = true,
+                showDnsrules = true,
+                showBlockedByDns = true
+            )
         }
     }
 }

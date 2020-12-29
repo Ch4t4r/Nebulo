@@ -97,6 +97,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
     private var connectionWatchDog:ConnectionWatchdog? = null
     private var watchdogDisabledForSession = false
     private val coroutineSupervisor = SupervisorJob()
+    @Suppress("EXPERIMENTAL_API_USAGE")
     private val addressResolveScope:CoroutineScope by lazy {
         CoroutineScope(newSingleThreadContext("service-resolve-retry"))
     }
@@ -230,7 +231,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             stopSelf()
 
             (application as SmokeScreen).apply {
-                (dnsProxy?.queryListener as com.frostnerd.smokescreen.util.proxy.QueryListener?)?.apply {
+                (dnsProxy?.queryListener as QueryListener?)?.apply {
                     if (lastDnsResponse != null) {
                         customUncaughtExceptionHandler.addExtra(
                             "dns_packet",
@@ -1425,7 +1426,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
 
     private fun createQueryLogger(): QueryListener? {
         return if (getPreferences().shouldLogDnsQueriesToConsole() || getPreferences().queryLoggingEnabled) {
-            com.frostnerd.smokescreen.util.proxy.QueryListener(applicationContext)
+            QueryListener(applicationContext)
         } else null
     }
 

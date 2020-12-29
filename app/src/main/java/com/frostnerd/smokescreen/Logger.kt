@@ -138,7 +138,7 @@ fun Context.closeLogger() {
 fun Context.deleteAllLogs() {
     if (Logger.isOpen())
         Logger.getInstance(this).destroy()
-    Logger.getLogDir(this).listFiles().forEach {
+    Logger.getLogDir(this).listFiles()!!.forEach {
         it.delete()
     }
 }
@@ -360,7 +360,7 @@ fun Context.zipAllLogFiles(): File? {
     if (zipFile.exists() && (!zipFile.canRead() || !zipFile.canWrite())) return null
     if (zipFile.exists()) zipFile.delete()
 
-    var filesToBeZipped = dir.listFiles()
+    var filesToBeZipped = dir.listFiles()!!
     val dest = FileOutputStream(zipFile)
     val out = ZipOutputStream(BufferedOutputStream(dest))
     val buffer = ByteArray(2048)

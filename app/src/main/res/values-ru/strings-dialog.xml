@@ -129,7 +129,7 @@
     <string name="dialog_exportdnsrules_export_user_rules">Экспорт пользовательских правил DNS хостов</string>
     <string name="dialog_exportdnsrules_whitelist">Правила экспорта белого списка</string>
     <string name="dialog_exportdnsrules_nonwhitelist">Нормальные правила экспорта</string>
-    <string name="dialog_newdnsrule_wildcard_info">Хозяин поддерживает спецсимволы. Используйте звездочку (*) для любого количества символов, цифр и разрешенных специальных символов, за исключением периода (...). Используйте две звездочки (**) для включения периода (...).</string>
+    <string name="dialog_newdnsrule_wildcard_info">Хозяин поддерживает спецсимволы. Используйте звездочку (*) для любого количества символов, цифр и разрешенных специальных символов, за исключением периода (…). Используйте две звездочки (**) для включения периода (...).</string>
     <string name="dialog_newdnsrule_ipv6_invalid">Пожалуйста, укажите действительный адрес IPv6</string>
     <string name="dialog_newdnsrule_ipv4_invalid">Пожалуйста, укажите действительный адрес IPv4</string>
     <string name="dialog_newdnsrule_hint_ipv6address">адрес IPv6</string>

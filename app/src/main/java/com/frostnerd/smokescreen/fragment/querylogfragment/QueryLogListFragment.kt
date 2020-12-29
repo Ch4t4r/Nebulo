@@ -87,7 +87,7 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener, Backpres
 
     private fun createAdapter(forSource:LiveDataSource<DnsQuery>): RecyclerView.Adapter<DefaultViewHolder> {
         return ModelAdapterBuilder.newBuilder(forSource) {
-            viewBuilder = { parent, viewType ->
+            viewBuilder = { parent, _ ->
                 val createdView = layoutInflater.inflate(R.layout.item_logged_query, parent, false)
                 createdView.setOnClickListener {
                     displayQuery(it.tag as DnsQuery)
@@ -97,7 +97,7 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener, Backpres
             getItemCount = {
                 forSource.currentSize()
             }
-            bindModelView = { viewHolder, position, data ->
+            bindModelView = { viewHolder, _, data ->
                 viewHolder.itemView.findViewById<TextView>(R.id.text).text = if(shortenDomains) data.shortName else data.name
                 viewHolder.itemView.tag = data
                 viewHolder.itemView.typeImage.setImageResource(
@@ -112,7 +112,7 @@ class QueryLogListFragment: Fragment(), SearchView.OnQueryTextListener, Backpres
                 )
                 if (isDisplayingQuery(data)) displayQuery(data, false)
             }
-            bindNonModelView = { viewHolder, position ->
+            bindNonModelView = { _, _ ->
 
             }
             runOnUiThread = {

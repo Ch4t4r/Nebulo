@@ -36,7 +36,7 @@ import kotlin.coroutines.CoroutineContext
 class DnsRuleSearchDialog(
     context: Context
 ):AlertDialog(context, context.getPreferences().theme.dialogStyle), CoroutineScope {
-    val supervisor = SupervisorJob()
+    private val supervisor = SupervisorJob()
     override val coroutineContext: CoroutineContext = supervisor + Dispatchers.IO
     var currentSearchJob:Job? = null
 

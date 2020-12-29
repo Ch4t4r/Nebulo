@@ -46,7 +46,7 @@ There are two options on how to use the DNS rules:<br>
 You can either define your own rules - for example to block single hosts - or import *rule sources* which contain a list of rules.<br><br>
 There are multiple lists maintained by independent people you can use in Nebulo.
 They cover different topics, from blocking ads, tracking to blocking porn or social media.<br>
-I recommend checking out [Energized](energized.pro).
+I recommend checking out [Energized](https://energized.pro).
 It has multiple types of lists, covering use cases mentioned above.
 If you have the F-Droid version the Energized lists are already added as sources.
 

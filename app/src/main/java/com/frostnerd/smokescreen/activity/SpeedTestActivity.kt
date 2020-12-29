@@ -1,9 +1,13 @@
 package com.frostnerd.smokescreen.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frostnerd.cacheadapter.AdapterBuilder
@@ -47,6 +51,7 @@ import kotlinx.coroutines.Job
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
+@SuppressLint("SetTextI18n")
 class SpeedTestActivity : BaseActivity() {
     private var testRunning = false
     private var wasStartedBefore = false
@@ -98,13 +103,13 @@ class SpeedTestActivity : BaseActivity() {
                 val dohReachable = testResults!!.count {it.server.type == ServerType.DOH && it.latency != null}
                 val dohNotReachable = dohCount - dohReachable
 
-                val doqCount = testResults!!.count { it.server.type == ServerType.DOQ }
+                /*val doqCount = testResults!!.count { it.server.type == ServerType.DOQ }
                 val doqReachable = testResults!!.count {it.server.type == ServerType.DOQ && it.latency != null}
-                val doqNotReachable = dohCount - dohReachable
+                val doqNotReachable = dohCount - dohReachable */
 
                 val avgLatency = testResults!!.sumBy { it.latency ?: 0 }/testResults!!.size
-                val fastestServer = testResults!!.minBy { it.latency ?: Integer.MAX_VALUE}
-                val slowestServer = testResults!!.maxBy { it.latency ?: 0}
+                val fastestServer = testResults!!.minByOrNull { it.latency ?: Integer.MAX_VALUE }
+                val slowestServer = testResults!!.maxByOrNull { it.latency ?: 0 }
 
                 showInfoTextDialog(this,
                     getString(R.string.dialog_speedresult_title),
@@ -238,12 +243,12 @@ class SpeedTestActivity : BaseActivity() {
     }
 
     private inner class SpeedViewHolder(view: View, private val showUseServerDialog:(SpeedTest) -> Any) : BaseViewHolder(view) {
-        val name = view.name
-        val servers = view.servers
-        val progress = view.progress
-        val latency = view.latency
-        val serverType = view.serverType
-        val nameWrap = view.nameWrap
+        val name: TextView = view.name
+        val servers: TextView = view.servers
+        val progress: ProgressBar = view.progress
+        val latency: TextView = view.latency
+        val serverType: TextView = view.serverType
+        val nameWrap: LinearLayout = view.nameWrap
         private var defaultTextColor = latency.currentTextColor
 
         fun display(speedTest: SpeedTest) {

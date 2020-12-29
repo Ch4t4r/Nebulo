@@ -227,7 +227,6 @@ class RuleExportService : IntentService("RuleExportService") {
         isAborted = true
     }
 
-
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }

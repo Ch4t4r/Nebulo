@@ -39,12 +39,9 @@ interface AppSettings {
         val isReleaseVersion = BuildConfig.VERSION_NAME.let {
             !it.contains("alpha", true) && !it.contains("beta", true)
         }
-        val isBetaVersion = BuildConfig.VERSION_NAME.let {
-            it.contains("beta", true)
-        }
-        val isAlphaVersion = BuildConfig.VERSION_NAME.let {
-            it.contains("alpha", true)
-        }
+        @Suppress("unused")
+        val isBetaVersion = BuildConfig.VERSION_NAME.contains("beta", true)
+        val isAlphaVersion = BuildConfig.VERSION_NAME.contains("alpha", true)
     }
     val cacheControl:ExpirationCacheControl
 
@@ -178,6 +175,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
     override var lastLogId: Int by intPref("last_log_id", 0)
 
     var language:String by stringPref("language", "auto")
+    @Suppress("MemberVisibilityCanBePrivate")
     val languageAsLocale: Locale
         get() {
             if(language == "auto") return Locale.getDefault()
@@ -187,6 +185,7 @@ class AppSettingsSharedPreferences(context: Context) : AppSettings, SimpleTypedP
                 country
             ) else Locale(language)
         }
+    @Suppress("MemberVisibilityCanBePrivate")
     val numberFormatter by lazy(mode = LazyThreadSafetyMode.NONE) {
         NumberFormat.getInstance(languageAsLocale)
     }

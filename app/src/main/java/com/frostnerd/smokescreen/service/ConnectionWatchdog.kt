@@ -23,17 +23,17 @@ import kotlinx.coroutines.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class ConnectionWatchdog(private val trafficStats: TrafficStats,
-                         val checkIntervalMs:Long,
-                         val debounceCallbackByMs:Long? = null,
-                         val badLatencyThresholdMs:Int = 750,
-                         val badPacketLossThresholdPercent:Int = 30,
+                         private val checkIntervalMs:Long,
+                         private val debounceCallbackByMs:Long? = null,
+                         private val badLatencyThresholdMs:Int = 750,
+                         private val badPacketLossThresholdPercent:Int = 30,
                          private val onBadServerConnection:() -> Unit,
                          private val onBadConnectionResolved:() -> Unit,
                          private val logger:Logger?,
                          private val advancedLogging:Boolean = false
                          ) {
-    val supervisor = SupervisorJob()
-    val scope = CoroutineScope(supervisor + Dispatchers.IO)
+    private val supervisor = SupervisorJob()
+    private val scope = CoroutineScope(supervisor + Dispatchers.IO)
     private var running = true
     private var latencyAtLastCheck:Int? = null
     private var packetLossAtLastCheck:Int? = null
@@ -86,13 +86,16 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
             } else if (measurementsWithBadConnection != 0) {
                 measurementsWithBadConnection = maxOf(
                     0, measurementsWithBadConnection - maxOf(3, measurementsWithBadConnection / 6) -
-                            if(measurementsWithBadConnection > 500) maxOf(32, measurementsWithBadConnection/8)
-                            else if (measurementsWithBadConnection > 300) 32
-                            else if(measurementsWithBadConnection > 200) 18
-                            else if(measurementsWithBadConnection > 100) 10
-                            else if(measurementsWithBadConnection > 50) 5
-                            else if(measurementsWithBadConnection > 20) 3
-                            else if(measurementsWithBadConnection > 10) 2 else 0
+                            when {
+                                measurementsWithBadConnection > 500 -> maxOf(32, measurementsWithBadConnection/8)
+                                measurementsWithBadConnection > 300 -> 32
+                                measurementsWithBadConnection > 200 -> 18
+                                measurementsWithBadConnection > 100 -> 10
+                                measurementsWithBadConnection > 50 -> 5
+                                measurementsWithBadConnection > 20 -> 3
+                                measurementsWithBadConnection > 10 -> 2
+                                else -> 0
+                            }
                 )
                 if (measurementsWithBadConnection <= 0) {
                     onBadConnectionResolved()

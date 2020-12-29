@@ -50,4 +50,5 @@ class ParameterizedLazyWithLazyParam<ReturnType:Any, ParamType:Any>(creator:(par
 }
 
 fun <ReturnType:Any, ParamType:Any> parameterizedLazy(creator:(param:ParamType) -> ReturnType) = ParameterizedLazy(creator)
+@Suppress("unused")
 fun <ReturnType:Any, ParamType:Any> parameterizedLazyWithLazyParam(creator:(param:() -> ParamType) -> ReturnType) = ParameterizedLazyWithLazyParam(creator)

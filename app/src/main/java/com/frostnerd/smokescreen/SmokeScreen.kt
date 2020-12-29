@@ -65,15 +65,15 @@ class SmokeScreen : Application() {
             else {
                 context.log("Using fallback server: $to")
                 val configs = to.serverConfigurations.values
-                AddressCreator.globalResolve = {
-                    val responsesIpv4 = configs.random().query(Question(it, Record.TYPE.A))?.takeIf {
+                AddressCreator.globalResolve = { domain ->
+                    val responsesIpv4 = configs.random().query(Question(domain, Record.TYPE.A))?.takeIf {
                         it.responseCode == DnsMessage.RESPONSE_CODE.NO_ERROR
                     }?.answerSection?.map {
                         it.payload as A
                     }?.map {
                         it.inetAddress
                     }
-                    val responsesIpv6 = configs.random().query(Question(it, Record.TYPE.AAAA))?.takeIf {
+                    val responsesIpv6 = configs.random().query(Question(domain, Record.TYPE.AAAA))?.takeIf {
                         it.responseCode == DnsMessage.RESPONSE_CODE.NO_ERROR
                     }?.answerSection?.map {
                         it.payload as AAAA
@@ -139,7 +139,7 @@ class SmokeScreen : Application() {
         log("Application created.")
         handleFallbackDns()
         loadKnownDNSServers()
-        AbstractQuicDnsHandle.installProvider(this, {})
+        AbstractQuicDnsHandle.installProvider(this) {}
     }
 
     private fun handleFallbackDns() {
@@ -275,7 +275,7 @@ class SmokeScreen : Application() {
                         ) {
                             log("Sentry DSN retrieval returned invalid DSN '$retrievedDSN'.")
                         } else {
-                            if (true || retrievedDSN != primaryDSN) {
+                            if (retrievedDSN != primaryDSN) {
                                 log("Sentry DSN successfuly resolved to '$retrievedDSN'")
                                 then(retrievedDSN)
                             } else log("Retrieved Sentry DSN is the same as configured DSN, not re-configuring")

@@ -62,6 +62,7 @@ import java.util.logging.Level
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 
+@Suppress("DEPRECATION")
 fun Context.canUseFingerprintAuthentication(): Boolean {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false
     val mgr = getSystemService(Context.FINGERPRINT_SERVICE) as? FingerprintManager
@@ -72,6 +73,7 @@ fun Context.canUseFingerprintAuthentication(): Boolean {
     return true
 }
 
+@Suppress("unused")
 fun Context.registerReceiver(intentFilter: IntentFilter, receiver: (intent: Intent?) -> Unit): BroadcastReceiver {
     val actualReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -157,6 +159,7 @@ fun AppCompatActivity.registerLocalReceiver(
     mgr.registerReceiver(actualReceiver, filter)
     if(unregisterOnDestroy) lifecycle.addObserver(object:LifecycleObserver {
         @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        @Suppress("unused")
         fun onDestroy() {
             mgr.unregisterReceiver(actualReceiver)
         }
@@ -398,7 +401,7 @@ private fun createHttpsUpstreamAddress(url: String): HttpsUpstreamAddress {
 }
 
 private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
-    var parsedHost = ""
+    val parsedHost:String
     var port: Int? = null
     if (host.contains(":")) {
         parsedHost = host.split(":")[0]

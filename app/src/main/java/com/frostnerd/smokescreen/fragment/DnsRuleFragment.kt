@@ -7,7 +7,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.Switch
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -563,13 +563,13 @@ class DnsRuleFragment : Fragment() {
         editSource: (HostSource) -> Unit,
         refreshSource:(HostSource) -> Unit
     ) : BaseViewHolder(view) {
-        val text = view.text
-        val subText = view.subText
-        val enabled = view.enable
-        val delete = view.delete
-        val ruleCount = view.ruleCount
-        val refresh = view.refresh
-        val whitelistIndicator = view.sourceWhitelistIndicator
+        val text: TextView = view.text
+        val subText: TextView = view.subText
+        val enabled: Switch = view.enable
+        val delete: ImageButton = view.delete
+        val ruleCount: TextView = view.ruleCount
+        val refresh: ImageButton = view.refresh
+        val whitelistIndicator: ImageView = view.sourceWhitelistIndicator
         private var source: HostSource? = null
 
         init {
@@ -608,10 +608,10 @@ class DnsRuleFragment : Fragment() {
                                         changeRuleVisibility:(showRules:Boolean) -> Unit,
                                         createRule:() -> Unit) :
         BaseViewHolder(view) {
-        val clear = view.clear
-        val enabled = view.enable
-        val openList = view.openList
-        val add = view.add
+        val clear: ImageButton = view.clear
+        val enabled: Switch = view.enable
+        val openList: ImageButton = view.openList
+        val add: ImageButton = view.add
         var elementsShown = false
 
         init {
@@ -648,10 +648,10 @@ class DnsRuleFragment : Fragment() {
     private class CustomRuleHostViewHolder(view:View,
                                            deleteRule:(DnsRule) -> Unit,
                                            editRule:(DnsRule) -> Unit):BaseViewHolder(view) {
-        val text = view.text
-        val delete = view.delete
-        val cardContent = view.cardContent
-        val whitelistIndicator = view.whitelistIndicator
+        val text: TextView = view.text
+        val delete: ImageButton = view.delete
+        val cardContent: RelativeLayout = view.cardContent
+        val whitelistIndicator: ImageView = view.whitelistIndicator
         lateinit var dnsRule:DnsRule
 
         init {
@@ -688,15 +688,11 @@ class DnsRuleFragment : Fragment() {
                     HostSource("PiHoleBlocklist Android tracking", "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/android-tracking.txt"),
                     HostSource("Quidsup NoTrack Tracker Blocklist", "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt"),
                     HostSource("someonewhocares.org", "https://someonewhocares.org/hosts/zero/hosts")
-                ).apply {
-                    forEach { it.enabled = false }
-                })
+                ).onEach { it.enabled = false })
                 put(2, mutableListOf(
                     HostSource("Energized unblock", "https://raw.githubusercontent.com/EnergizedProtection/unblock/master/basic/formats/domains.txt", true),
                     HostSource("hblock", "https://hblock.molinero.dev/hosts")
-                ).apply {
-                    forEach { it.enabled = false }
-                })
+                ).onEach { it.enabled = false })
                 put(4, mutableListOf(
                     HostSource("Energized Unified", "https://block.energized.pro/unified/formats/domains.txt", false).apply {
                         enabled = false

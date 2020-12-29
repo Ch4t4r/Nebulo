@@ -19,7 +19,7 @@
     <string name="dialog_crashreportingusages_data_device_4">Stan naładowania (tak/nie)</string>
     <string name="dialog_crashreportingusages_data_device_3">Wolna/używana pamięć (RAM)</string>
     <string name="dialog_crashreportingusages_data_device_2">Orientacja (pejzaż, portret)</string>
-    <string name="dialog_crashreportingusages_data_device_1">Architektura (x86, ramię, ...)</string>
+    <string name="dialog_crashreportingusages_data_device_1">Architektura (x86, ramię, …)</string>
     <string name="dialog_crashreportingusages_data_user_1">Losowy identyfikator używany do śledzenia zderzeń</string>
     <string name="dialog_crashreportingusages_data_4">Dane systemu operacyjnego</string>
     <string name="dialog_crashreportingusages_data_3">Dane dotyczące aplikacji</string>

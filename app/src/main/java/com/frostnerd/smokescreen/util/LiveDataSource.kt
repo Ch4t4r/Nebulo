@@ -34,7 +34,7 @@ class LiveDataSource<T>(
     fun currentSize() = data.size
 
     override fun loadInitialData() {
-        liveData.observe(lifecycleOwner, Observer {
+        liveData.observe(lifecycleOwner, {
             if (it.size == data.size) {
                 val changedRanges = mutableListOf<IntRange>()
                 for ((index, item) in it.withIndex()) {

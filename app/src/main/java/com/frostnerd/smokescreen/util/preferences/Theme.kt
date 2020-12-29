@@ -32,7 +32,7 @@ import kotlin.reflect.KProperty
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
-
+@Suppress("unused")
 enum class Theme(val id: Int,
                  @StyleRes val layoutStyle: Int,
                  @StyleRes val dialogStyle: Int,
