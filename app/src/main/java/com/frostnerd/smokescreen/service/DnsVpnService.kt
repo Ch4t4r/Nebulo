@@ -34,7 +34,6 @@ import com.frostnerd.vpntunnelproxy.RetryingVPNTunnelProxy
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import com.frostnerd.vpntunnelproxy.VPNTunnelProxy
 import kotlinx.coroutines.*
-import leakcanary.LeakSentry
 import org.minidns.dnsname.DnsName
 import org.minidns.record.Record
 import java.io.ByteArrayInputStream
@@ -98,6 +97,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
     private var connectionWatchDog:ConnectionWatchdog? = null
     private var watchdogDisabledForSession = false
     private val coroutineSupervisor = SupervisorJob()
+    @Suppress("EXPERIMENTAL_API_USAGE")
     private val addressResolveScope:CoroutineScope by lazy {
         CoroutineScope(newSingleThreadContext("service-resolve-retry"))
     }
@@ -177,52 +177,53 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             !getPreferences().ignoreServiceKilled &&
             getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE
         ) { // The app didn't stop properly
-            val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra(
-                "command",
-                Command.IGNORE_SERVICE_KILLED
-            )
-            val ignorePendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                PendingIntent.getForegroundService(
-                    this@DnsVpnService,
-                    RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
-                    ignoreIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M|| !(getSystemService(POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)) {
+                val ignoreIntent = Intent(this, DnsVpnService::class.java).putExtra(
+                    "command",
+                    Command.IGNORE_SERVICE_KILLED
                 )
-            } else {
-                PendingIntent.getService(
-                    this@DnsVpnService,
-                    RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
-                    ignoreIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-                )
-            }
-            NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
-                .apply {
-                    setContentTitle(getString(R.string.notification_service_killed_title))
-                    setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_service_killed_message)))
-                    setSmallIcon(R.drawable.ic_cloud_warn)
-                    setAutoCancel(true)
-                    setOngoing(false)
-                    setContentIntent(
-                        DeepActionState.BATTERY_OPTIMIZATION_DIALOG.pendingIntentTo(
-                            this@DnsVpnService
-                        )
+                val ignorePendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    PendingIntent.getForegroundService(
+                        this@DnsVpnService,
+                        RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
+                        ignoreIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
                     )
-                    addAction(
-                        R.drawable.ic_eye,
-                        getString(R.string.notification_service_killed_ignore),
-                        ignorePendingIntent
-                    )
-                }.build().also {
-                    (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
-                        Notifications.ID_SERVICE_KILLED,
-                        it
+                } else {
+                    PendingIntent.getService(
+                        this@DnsVpnService,
+                        RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
+                        ignoreIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
                     )
                 }
+                NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
+                    .apply {
+                        setContentTitle(getString(R.string.notification_service_killed_title))
+                        setStyle(NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_service_killed_message)))
+                        setSmallIcon(R.drawable.ic_cloud_warn)
+                        setAutoCancel(true)
+                        setOngoing(false)
+                        setContentIntent(
+                            DeepActionState.BATTERY_OPTIMIZATION_DIALOG.pendingIntentTo(
+                                this@DnsVpnService
+                            )
+                        )
+                        addAction(
+                            R.drawable.ic_eye,
+                            getString(R.string.notification_service_killed_ignore),
+                            ignorePendingIntent
+                        )
+                    }.build().also {
+                        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
+                            Notifications.ID_SERVICE_KILLED,
+                            it
+                        )
+                    }
+            }
         }
         getPreferences().vpnServiceState = VpnServiceState.STARTED
         getPreferences().vpnLaunchLastVersion = BuildConfig.VERSION_CODE
-        LeakSentry.watchIfEnabled(this, "DnsVpnService")
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             log("Encountered an uncaught exception.")
             destroy()
@@ -230,7 +231,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             stopSelf()
 
             (application as SmokeScreen).apply {
-                (dnsProxy?.queryListener as com.frostnerd.smokescreen.util.proxy.QueryListener?)?.apply {
+                (dnsProxy?.queryListener as QueryListener?)?.apply {
                     if (lastDnsResponse != null) {
                         customUncaughtExceptionHandler.addExtra(
                             "dns_packet",
@@ -1425,7 +1426,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
 
     private fun createQueryLogger(): QueryListener? {
         return if (getPreferences().shouldLogDnsQueriesToConsole() || getPreferences().queryLoggingEnabled) {
-            com.frostnerd.smokescreen.util.proxy.QueryListener(applicationContext)
+            QueryListener(applicationContext)
         } else null
     }
 

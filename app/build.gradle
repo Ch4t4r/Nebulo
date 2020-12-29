@@ -12,13 +12,16 @@ android {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 74
-        versionName "2.0.3"
+        versionCode 75
+        versionName "2.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        def sentryDSN = String.valueOf(getSystemVariableOrDefault("NEBULO_SENTRY_DSN", "dummy"))
+        def sentryConfigServer = String.valueOf(getSystemVariableOrDefault("NEBULO_SENTRY_CONFIGSERVER", "dummy"))
         buildConfigField("Boolean", "FROM_CI", String.valueOf(getSystemVariableOrDefault("CI_COMMIT_SHORT_SHA", "") != ""))
         buildConfigField("String", "COMMIT_HASH", '"' + getGitCommitHash() + '"')
-        buildConfigField("String", "SENTRY_DSN", '""')
+        buildConfigField("String", "SENTRY_DSN", '"' + sentryDSN+ '"') // A valid Sentry DSN, or "dummy"
+        buildConfigField("String", "SENTRY_DSN_CONFIGSERVER", '"' + sentryConfigServer + '"') // A host which returns a valid Sentry DSN on GET, or "dummy". If both are dummy Sentry is disabled.
         buildConfigField("Boolean", "SHOW_DOQ", 'false')
         buildConfigField("Boolean", "SHOW_INTRO", 'false')
         buildConfigField("Boolean", "IN_APP_UPDATES", "false")
@@ -99,7 +102,7 @@ android {
             matchingFallbacks = ['default']
             dimension "version"
             versionNameSuffix "-adblock"
-            versionCode 75
+            versionCode 76
         }
         normal {
             matchingFallbacks = ['default']
@@ -147,10 +150,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 
 
-    implementation 'com.frostnerd.utilskt:lifecycle:1.2.0'
+    implementation 'com.frostnerd.utilskt:lifecycle:1.2.1'
     implementation 'com.frostnerd.utilskt:preferences:1.5.30' // https://git.frostnerd.com/AndroidUtils/preferenceskt
-    implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.4.0' // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
-    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:2.1.20' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+    implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.4.2' // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
+    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:2.1.21' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
     implementation 'com.frostnerd.utilskt:general:1.0.25' // https://git.frostnerd.com/AndroidUtils/generalkt
     implementation 'com.frostnerd.utilskt:adapters:1.2.0' // https://git.frostnerd.com/AndroidUtils/Adapters
 
@@ -169,9 +172,8 @@ dependencies {
     implementation 'io.sentry:sentry-android:3.2.0'
 
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
-    implementation 'com.squareup.leakcanary:leaksentry:2.0-alpha-3'
 
-    leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+    leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
     implementation 'com.github.AppIntro:AppIntro:6.0.0'

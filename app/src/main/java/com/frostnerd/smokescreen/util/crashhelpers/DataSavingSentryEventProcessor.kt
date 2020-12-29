@@ -28,7 +28,7 @@ import io.sentry.protocol.OperatingSystem
  */
 class DataSavingSentryEventProcessor: EventProcessor {
 
-    override fun process(event: SentryEvent, hint: Any?): SentryEvent? {
+    override fun process(event: SentryEvent, hint: Any?): SentryEvent {
         event.contexts.device = Device()
         event.contexts.app = App().apply {
             appVersion = BuildConfig.VERSION_NAME

@@ -17,7 +17,6 @@ import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
-import leakcanary.LeakSentry
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -46,6 +45,7 @@ import java.util.regex.Pattern
  *
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
+@Suppress("DEPRECATION")
 class RuleImportService : IntentService("RuleImportService") {
     private val dnsmasqMatcher =
         Pattern.compile("^address=/([^/]+)/(?:([0-9.]+)|([0-9a-fA-F:]+))(?:/?\$|\\s+.*)").matcher("") // address=/xyz.com/0.0.0.0
@@ -77,7 +77,6 @@ class RuleImportService : IntentService("RuleImportService") {
 
     override fun onCreate() {
         super.onCreate()
-        LeakSentry.watchIfEnabled(this, "RuleImportService")
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(Notifications.ID_DNSRULE_IMPORT_FINISHED)
     }
 
@@ -205,14 +204,14 @@ class RuleImportService : IntentService("RuleImportService") {
                         val realChecksum = it.checksum?.replace("<qt>", "\"")
                         if(realChecksum != null) request.header("If-None-Match", realChecksum)
                         response = httpClient.newCall(request.build()).execute()
-                        val receivedChecksum = response.headers.find {
-                            it.first.equals("etag", true)
+                        val receivedChecksum = response.headers.find { header ->
+                            header.first.equals("etag", true)
                         }?.second
                         val localDataIsRecent = response.code == 304 || (realChecksum != null && (receivedChecksum == realChecksum || receivedChecksum == "W/$realChecksum"))
                         when {
                             response.isSuccessful && !localDataIsRecent -> {
-                                response.headers.find {
-                                    it.first.equals("etag", true)
+                                response.headers.find { header ->
+                                    header.first.equals("etag", true)
                                 }?.second?.apply {
                                     newChecksums[it] = this.replace("\"", "<qt>")
                                 }
@@ -281,7 +280,6 @@ class RuleImportService : IntentService("RuleImportService") {
         )
         var lineCount = 0
         var ruleCount = 0
-        val sourceId = source.id
         BufferedReader(InputStreamReader(stream)).useLines { lines ->
             var remainingMatcher:Matcher? = null
             var hostsOfRemainingMatcher:MutableList<DnsRule>? = null
@@ -289,12 +287,12 @@ class RuleImportService : IntentService("RuleImportService") {
             lines.forEach { _line ->
                 val line = _line.trim()
                 if (!isAborted) {
-                    if (parsers.isNotEmpty() && !line.startsWith("#") && !line.startsWith("!") && !line.isBlank()) {
+                    if (parsers.isNotEmpty() && !line.startsWith("#") && !line.startsWith("!") && line.isNotBlank()) {
                         lineCount++
                         if(remainingMatcher != null) {
                             if (remainingMatcher!!.reset(line).matches()) {
                                 val rule = processLine(remainingMatcher!!, source, source.whitelistSource)
-                                if (rule != null) hostsOfRemainingMatcher!!.add(rule.apply {
+                                hostsOfRemainingMatcher!!.add(rule.apply {
                                     stagingType = 2
                                 })
                                 if (lineCount > ruleCommitSize) {
@@ -308,7 +306,7 @@ class RuleImportService : IntentService("RuleImportService") {
                                 if (matcher.reset(line).matches()) {
                                     successfulMatches+=1
                                     val rule = processLine(matcher, source, source.whitelistSource)
-                                    if (rule != null) hosts.second.add(rule.apply {
+                                    hosts.second.add(rule.apply {
                                         stagingType = 2
                                     })
                                     if (lineCount > ruleCommitSize) {
@@ -352,8 +350,8 @@ class RuleImportService : IntentService("RuleImportService") {
         forceCommit: Boolean = false
     ):Int {
         val hosts = parsers[parsers.keys.minByOrNull {
-            parsers[it]!!.first
-        } ?: parsers.keys.first()]!!.second
+            parsers[it]?.first!!
+        } ?: parsers.keys.first()]?.second!!
         return if (hosts.size > ruleCommitSize || forceCommit) {
             getDatabase().dnsRuleDao().insertAllIgnoreConflict(hosts)
             ruleCount += hosts.size
@@ -364,18 +362,18 @@ class RuleImportService : IntentService("RuleImportService") {
     }
 
     private val wwwRegex = Regex("^www\\.")
-    private fun processLine(matcher: Matcher, source: HostSource, isWhitelist:Boolean): DnsRule? {
+    private fun processLine(matcher: Matcher, source: HostSource, isWhitelist:Boolean): DnsRule {
         val defaultTargetV4 = if(isWhitelist) "" else "0"
         val defaultTargetV6 = if(isWhitelist) "" else "1"
         when {
             matcher.groupCount() == 1 -> {
                 val host = if(matcher == dnsmasqBlockMatcher) "%%" + matcher.group(1)
-                else matcher.group(1).replace(wwwRegex, "")
+                else matcher.group(1)!!.replace(wwwRegex, "")
                 return createRule(host, defaultTargetV4, defaultTargetV6, Record.TYPE.ANY, source)
             }
             matcher == dnsmasqMatcher -> {
                 val host = "%%" + matcher.group(1)
-                var target = matcher.group(2)
+                var target = matcher.group(2)!!
                 val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
                 target = target.let {
                     when (it) {
@@ -388,10 +386,10 @@ class RuleImportService : IntentService("RuleImportService") {
             }
             matcher == hostsMatcher -> {
                 return if(isWhitelist) {
-                    val host = matcher.group(2).replace(wwwRegex, "")
+                    val host = matcher.group(2)!!.replace(wwwRegex, "")
                     DnsRule(Record.TYPE.ANY, host, defaultTargetV4, defaultTargetV6, importedFrom = source.id)
                 } else {
-                    var target = matcher.group(1)
+                    var target = matcher.group(1)!!
                     val type = if (target.contains(":")) Record.TYPE.AAAA else Record.TYPE.A
                     target = target.let {
                         when (it) {
@@ -400,7 +398,7 @@ class RuleImportService : IntentService("RuleImportService") {
                             else -> it
                         }
                     }
-                    val host = matcher.group(2).replace(wwwRegex, "")
+                    val host = matcher.group(2)!!.replace(wwwRegex, "")
                     return createRule(host, target, null, type, source)
                 }
             }

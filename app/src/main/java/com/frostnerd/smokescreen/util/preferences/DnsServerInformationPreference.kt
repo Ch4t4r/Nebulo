@@ -88,6 +88,7 @@ class DnsServerInformationPreference(key: String) :
             thisRef.edit { listener ->
                 listener(key, null)
                 remove(key)
+                remove("${key}_type")
             }
         }
     }

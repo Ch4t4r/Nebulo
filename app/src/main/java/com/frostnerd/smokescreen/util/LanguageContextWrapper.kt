@@ -39,6 +39,7 @@ class LanguageContextWrapper(context:Context): ContextWrapper(context) {
             }
         }
 
+        @Suppress("MemberVisibilityCanBePrivate")
         fun wrap(context: Context, newLocale:Locale):Context {
             return context.resources.configuration.let {
                 it.setLocale(newLocale)

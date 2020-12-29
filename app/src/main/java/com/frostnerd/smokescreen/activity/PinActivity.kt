@@ -54,6 +54,7 @@ import java.security.NoSuchAlgorithmException
 class PinActivity: BaseActivity() {
 
     companion object {
+        @Suppress("MemberVisibilityCanBePrivate")
         const val PIN_TIMEOUTMS = 2*60*1000
 
         fun shouldValidatePin(context: Context, intent: Intent?): Boolean {
@@ -133,7 +134,7 @@ class PinActivity: BaseActivity() {
         setTheme(getPreferences().theme.dialogStyle)
         super.onCreate(savedInstanceState)
         if(!getPreferences().enablePin) {
-            onPinPassed(false)
+            onPinPassed()
         } else {
             val view = layoutInflater.inflate(R.layout.dialog_pin, null, false)
             val handler = Handler()
@@ -201,7 +202,7 @@ class PinActivity: BaseActivity() {
         return intent?.getSerializableExtra("pin_type") as? PinType ?: PinType.APP
     }
 
-    private fun onPinPassed(pinEnabled:Boolean = true) {
+    private fun onPinPassed() {
         when(getPinType()) {
             PinType.APP -> if(getPreferences().shouldShowAppIntro()) {
                 val startIntent = Intent(this, NebuloAppIntro::class.java)

@@ -136,26 +136,30 @@ class ServerChoosalDialog(
     }
 
     private fun loadServerData(type:ServerType) {
-        if (type == ServerType.DOT) {
-            val hiddenServers = context.getPreferences().removedDefaultDoTServers
-            defaultConfig = AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { servers ->
-                servers.filter {
-                    it.key !in hiddenServers
-                }.values.toList()
+        when (type) {
+            ServerType.DOT -> {
+                val hiddenServers = context.getPreferences().removedDefaultDoTServers
+                defaultConfig = AbstractTLSDnsHandle.waitUntilKnownServersArePopulated { servers ->
+                    servers.filter {
+                        it.key !in hiddenServers
+                    }.values.toList()
+                }
             }
-        } else if(type == ServerType.DOH){
-            val hiddenServers = context.getPreferences().removedDefaultDoHServers
-            defaultConfig = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {servers ->
-                servers.filter {
-                    it.key !in hiddenServers
-                }.values.toList()
+            ServerType.DOH -> {
+                val hiddenServers = context.getPreferences().removedDefaultDoHServers
+                defaultConfig = AbstractHttpsDNSHandle.waitUntilKnownServersArePopulated {servers ->
+                    servers.filter {
+                        it.key !in hiddenServers
+                    }.values.toList()
+                }
             }
-        } else if(type == ServerType.DOQ) {
-            val hiddenServers = context.getPreferences().removedDefaultDoQServers
-            defaultConfig = AbstractQuicDnsHandle.waitUntilKnownServersArePopulated { servers ->
-                servers.filter {
-                    it.key !in hiddenServers
-                }.values.toList()
+            ServerType.DOQ -> {
+                val hiddenServers = context.getPreferences().removedDefaultDoQServers
+                defaultConfig = AbstractQuicDnsHandle.waitUntilKnownServersArePopulated { servers ->
+                    servers.filter {
+                        it.key !in hiddenServers
+                    }.values.toList()
+                }
             }
         }
         userConfig = context.getPreferences().userServers.filter {
@@ -349,9 +353,9 @@ class ServerChoosalDialog(
 
                 if (button.isChecked) {
                     currentSelectedServer = when(userConfiguration.type) {
-                        ServerType.DOT ->AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
-                        ServerType.DOH -> AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
-                        ServerType.DOQ -> AbstractQuicDnsHandle.KNOWN_DNS_SERVERS.minBy { it.key }!!.value
+                        ServerType.DOT -> AbstractTLSDnsHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value
+                        ServerType.DOH -> AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value
+                        ServerType.DOQ -> AbstractQuicDnsHandle.KNOWN_DNS_SERVERS.minByOrNull { it.key }!!.value
                     }
                     markCurrentSelectedServer()
                     context.getPreferences().dnsServerConfig = currentSelectedServer!!

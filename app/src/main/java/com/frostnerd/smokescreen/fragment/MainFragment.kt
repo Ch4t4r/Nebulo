@@ -221,9 +221,9 @@ class MainFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (vpnStateReceiver != null) requireContext().unregisterLocalReceiver(vpnStateReceiver!!)
+    override fun onStop() {
+        super.onStop()
+        vpnStateReceiver?.also {  requireContext().unregisterLocalReceiver(it)  }
     }
 
     private fun startVpn() {
@@ -310,7 +310,7 @@ class MainFragment : Fragment() {
     }
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
-        activity?.let { activity ->
+        activity?.let { _ ->
             if (!serverInfo.specification.privacyPolicyURL.isNullOrBlank()) {
                 launchWithLifecycle {
                     val url = URL(serverInfo.specification.privacyPolicyURL)

@@ -29,10 +29,10 @@ import com.frostnerd.smokescreen.util.processSuCommand
  * Not all devices have an iptables binary present, thus this might fail.
  *
  */
-class IpTablesPacketRedirector(var dnsServerPort:Int,
-                               var dnsServerIpAddressIpv4:String?,
-                               var dnsServerIpAddressIpv6:String?,
-                               var disableIpv6IfIp6TablesFails:Boolean,
+class IpTablesPacketRedirector(private var dnsServerPort:Int,
+                               private var dnsServerIpAddressIpv4:String?,
+                               private var dnsServerIpAddressIpv6:String?,
+                               private var disableIpv6IfIp6TablesFails:Boolean,
                                private val logger:Logger?) {
     private val logTag = "IpTablesPacketRedirector"
 
@@ -66,10 +66,12 @@ class IpTablesPacketRedirector(var dnsServerPort:Int,
         ) || (disableIpv6IfIp6TablesFails && dnsServerIpAddressIpv4 != null && processDisableIpv6(true))
         val ipv6Success = ipv6CreateSuccess || (disableIpv6IfIp6TablesFails && dnsServerIpAddressIpv4 != null && processDisableIpv6(true))
         return if (ipv4Success) {
-            if(ipv6CreateSuccess) IpTablesMode.SUCCEEDED
-            else if (ipv6Success) IpTablesMode.SUCCEEDED_DISABLED_IPV6
-            else if(dnsServerIpAddressIpv4 == null) IpTablesMode.FAILED
-            else IpTablesMode.SUCCEEDED_NO_IPV6
+            when {
+                ipv6CreateSuccess -> IpTablesMode.SUCCEEDED
+                ipv6Success -> IpTablesMode.SUCCEEDED_DISABLED_IPV6
+                dnsServerIpAddressIpv4 == null -> IpTablesMode.FAILED
+                else -> IpTablesMode.SUCCEEDED_NO_IPV6
+            }
         } else IpTablesMode.FAILED
     }
 

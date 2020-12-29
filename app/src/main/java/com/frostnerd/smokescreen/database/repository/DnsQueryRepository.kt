@@ -38,15 +38,15 @@ import java.io.FileWriter
 class DnsQueryRepository(private val dnsQueryDao: DnsQueryDao) {
 
     fun getAllWithFilterLive(filterConfig: QueryLogFilterDialog.FilterConfig): LiveData<List<DnsQuery>> {
-        return dnsQueryDao.getAllWithFilterLive(filterConfig.showForwarded, filterConfig.showCache, filterConfig.showDnsrules, filterConfig.showBlockedByDns).let {
-            filterDnsQuery(filterConfig, it)
-        }
+        return filterDnsQuery(filterConfig,
+            dnsQueryDao.getAllWithFilterLive(filterConfig.showForwarded, filterConfig.showCache, filterConfig.showDnsrules, filterConfig.showBlockedByDns)
+        )
     }
 
     fun getAllWithHostAndFilterLive(hostPart:String, filterConfig: QueryLogFilterDialog.FilterConfig): LiveData<List<DnsQuery>> {
-        return dnsQueryDao.getAllWithHostAndFilterLive(hostPart, filterConfig.showForwarded, filterConfig.showCache, filterConfig.showDnsrules, filterConfig.showBlockedByDns).let {
-            filterDnsQuery(filterConfig, it)
-        }
+        return filterDnsQuery(filterConfig,
+            dnsQueryDao.getAllWithHostAndFilterLive(hostPart, filterConfig.showForwarded, filterConfig.showCache, filterConfig.showDnsrules, filterConfig.showBlockedByDns)
+        )
     }
 
     private fun filterDnsQuery(filterConfig: QueryLogFilterDialog.FilterConfig, liveData: LiveData<List<DnsQuery>>):LiveData<List<DnsQuery>> {

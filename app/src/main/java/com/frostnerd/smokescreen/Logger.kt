@@ -11,7 +11,6 @@ import io.sentry.Sentry
 import io.sentry.SentryEvent
 import io.sentry.SentryLevel
 import io.sentry.protocol.Message
-import leakcanary.LeakSentry
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -65,7 +64,6 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                     this.message = e.message
                 }
                 level = SentryLevel.ERROR
-                setExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
             })
         } else if (getPreferences().crashreportingType == Crashreporting.FULL && extras != null && extras.isNotEmpty()) {
             log("Sending exception with extras")
@@ -78,7 +76,6 @@ private fun Context.logErrorSentry(e: Throwable, extras: Map<String, String>? = 
                 extras.forEach { (key, value) ->
                     setTag(key, value)
                 }
-                setExtra("retainedInstanceCount", LeakSentry.refWatcher.retainedInstanceCount)
             })
         } else {
             log("Sending exception to Sentry without extras")
@@ -121,7 +118,7 @@ fun Context.log(e: Throwable, extras: Map<String, String>? = null) {
                 "${Logger.logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err"
             )
 
-        if (errorFile.createNewFile()) {
+        if (errorFile.tryCreateNewFile()) {
             val writer = BufferedWriter(FileWriter(errorFile, false))
             writer.write("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}, Commit: ${BuildConfig.COMMIT_HASH})\n")
             writer.write("Android SDK version: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})\n")
@@ -141,7 +138,7 @@ fun Context.closeLogger() {
 fun Context.deleteAllLogs() {
     if (Logger.isOpen())
         Logger.getInstance(this).destroy()
-    Logger.getLogDir(this).listFiles().forEach {
+    Logger.getLogDir(this).listFiles()!!.forEach {
         it.delete()
     }
 }
@@ -181,7 +178,7 @@ class Logger private constructor(context: Context) {
             "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.log"
         )
         logDir.mkdirs()
-        logFile.createNewFile()
+        logFile.tryCreateNewFile()
         fileWriter = BufferedWriter(FileWriter(logFile, false))
 
         log("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
@@ -309,8 +306,12 @@ class Logger private constructor(context: Context) {
                 if (printToConsole) {
                     (oldSystemOut ?: System.out).println(textBuilder)
                 }
-                fileWriter.write(textBuilder.toString())
-                fileWriter.flush()
+                try {
+                    fileWriter.write(textBuilder.toString())
+                    fileWriter.flush()
+                } catch (ex:Throwable) {
+
+                }
             }
         }
     }
@@ -325,7 +326,7 @@ class Logger private constructor(context: Context) {
                     "${id}_${logFileNameTimeStampFormatter.format(System.currentTimeMillis())}.err"
                 )
 
-            if (errorFile.createNewFile()) {
+            if (errorFile.tryCreateNewFile()) {
                 val writer = BufferedWriter(FileWriter(errorFile, false))
                 writer.write("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n")
                 writer.write("Android SDK version: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE} - ${Build.VERSION.CODENAME})\n")
@@ -343,6 +344,14 @@ class Logger private constructor(context: Context) {
     }
 }
 
+fun File.tryCreateNewFile():Boolean {
+    return try {
+        createNewFile()
+    } catch (ex:Throwable) {
+        false
+    }
+}
+
 fun Context.zipAllLogFiles(): File? {
     val dir = Logger.getLogDir(this)
     if (!dir.canWrite() || !dir.canRead()) return null
@@ -351,7 +360,7 @@ fun Context.zipAllLogFiles(): File? {
     if (zipFile.exists() && (!zipFile.canRead() || !zipFile.canWrite())) return null
     if (zipFile.exists()) zipFile.delete()
 
-    var filesToBeZipped = dir.listFiles()
+    var filesToBeZipped = dir.listFiles()!!
     val dest = FileOutputStream(zipFile)
     val out = ZipOutputStream(BufferedOutputStream(dest))
     val buffer = ByteArray(2048)

@@ -29,7 +29,7 @@ import kotlin.random.Random
 enum class DeepActionState {
     DNS_RULES, BATTERY_OPTIMIZATION_DIALOG, DNSSERVERMODE_SETTINGS;
 
-
+    @Suppress("MemberVisibilityCanBePrivate")
     fun intentTo(context:Context): Intent {
         return PinActivity.openAppIntent(context, asBundle())
     }

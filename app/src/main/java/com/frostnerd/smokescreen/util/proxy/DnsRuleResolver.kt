@@ -283,7 +283,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
                 val ruleData = resolveForCname(target, type)
                 if(ruleData != null) {
                     mappedTargets.add(target)
-                    mappedAnswers.add(Record(target, type, Record.CLASS.IN, originalTargetRecord?.ttl ?: message.answerSection.minBy {
+                    mappedAnswers.add(Record(target, type, Record.CLASS.IN, originalTargetRecord?.ttl ?: message.answerSection.minByOrNull {
                         it.ttl
                     }?.ttl ?: record.ttl, ruleData, originalTargetRecord?.unicastQuery ?: false))
                 }

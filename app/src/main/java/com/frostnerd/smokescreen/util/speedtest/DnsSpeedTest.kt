@@ -86,6 +86,7 @@ class DnsSpeedTest(context:Context,
         for (i in 0 until passes) {
             when(server.type) {
                 ServerType.DOT -> {
+                    @Suppress("UNCHECKED_CAST")
                     (server as DnsServerInformation<TLSUpstreamAddress>).servers.forEach {
                         if(firstPass) testTls(it.address)
                         latencies += testTls(it.address) ?: 0
@@ -105,6 +106,7 @@ class DnsSpeedTest(context:Context,
                     }
                 }
                 ServerType.DOQ -> {
+                    @Suppress("UNCHECKED_CAST")
                     (server as DnsServerInformation<QuicUpstreamAddress>).servers.forEach {
                         if(cronetEngine != null) {
                             if(firstPass) testQuic(it.address)
@@ -115,24 +117,28 @@ class DnsSpeedTest(context:Context,
             }
             firstPass = false
         }
-        return if(strategy == Strategy.BEST_CASE) {
-            latencies.minByOrNull {
-                it
+        return when (strategy) {
+            Strategy.BEST_CASE -> {
+                latencies.minByOrNull {
+                    it
+                }
             }
-        } else if(strategy == Strategy.AVERAGE){
-            latencies.sum().let {
-                if(it <= 0) null else it
-            }?.div(passes)
-        } else {
-            var pos = 0
-            latencies.sumBy {
-                // Weight first responses less (min 80%)
-                val minWeight = 90
-                val step = minOf(2, (100-minWeight)/passes)
-                val weight = maxOf(100, minOf(minWeight, 100-(passes - pos++)*step))
-                (it*weight)/100
-            }.let {
-                if(it <= 0) null else it
+            Strategy.AVERAGE -> {
+                latencies.sum().let {
+                    if(it <= 0) null else it
+                }?.div(passes)
+            }
+            else -> {
+                var pos = 0
+                latencies.sumBy {
+                    // Weight first responses less (min 80%)
+                    val minWeight = 90
+                    val step = minOf(2, (100-minWeight)/passes)
+                    val weight = maxOf(100, minOf(minWeight, 100-(passes - pos++)*step))
+                    (it*weight)/100
+                }.let {
+                    if(it <= 0) null else it
+                }
             }
         }
     }
@@ -277,8 +283,8 @@ class DnsSpeedTest(context:Context,
         }
     }
 
-    fun testQuic(address: QuicUpstreamAddress):Int? {
-        val url: URL = URL(address.getUrl(false))
+    private fun testQuic(address: QuicUpstreamAddress):Int? {
+        val url = URL(address.getUrl(false))
         var connection: HttpURLConnection? = null
         var wasEstablished = false
         val msg = createTestDnsPacket()
@@ -353,6 +359,8 @@ class DnsSpeedTest(context:Context,
     }
 
     enum class Strategy {
-        AVERAGE, BEST_CASE, WEIGHTED_AVERAGE
+        AVERAGE, BEST_CASE,
+        @Suppress("unused")
+        WEIGHTED_AVERAGE
     }
 }

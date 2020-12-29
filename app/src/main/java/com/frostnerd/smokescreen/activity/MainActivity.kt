@@ -5,9 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.*
+import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import com.frostnerd.general.service.isServiceRunning
 import com.frostnerd.lifecyclemanagement.launchWithLifecycle
 import com.frostnerd.navigationdraweractivity.NavigationDrawerActivity
@@ -92,7 +95,7 @@ class MainActivity : NavigationDrawerActivity() {
         setTheme(getPreferences().theme.layoutStyle)
         super.onCreate(savedInstanceState)
         Notifications.createAllChannels(this)
-        setCardView { viewParent, suggestedHeight ->
+        setCardView { viewParent, _ ->
             val view = layoutInflater.inflate(R.layout.menu_cardview, viewParent, false)
             val update = {
                 launchWithLifecycle {
@@ -209,7 +212,9 @@ class MainActivity : NavigationDrawerActivity() {
             !getPreferences().ignoreServiceKilled &&
                 getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE) {
             getPreferences().vpnServiceState = VpnServiceState.STOPPED
-            BatteryOptimizationInfoDialog(this).show()
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M|| !(getSystemService(POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)) {
+                BatteryOptimizationInfoDialog(this).show()
+            }
         }
         registerLocalReceiver(listOf(BROADCAST_RELOAD_MENU), true) {
             reloadMenuItems()
@@ -279,11 +284,11 @@ class MainActivity : NavigationDrawerActivity() {
     override fun createDrawerItems(): MutableList<DrawerItem> {
         return createMenu {
             fragmentItem(getString(R.string.menu_main),
-                iconLeft = getDrawable(R.drawable.ic_menu_dnsoverhttps),
+                iconLeft = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_menu_dnsoverhttps),
                 fragmentCreator = singleInstanceFragment { MainFragment() }
             )
             fragmentItem(getString(R.string.menu_settings),
-                iconLeft = getDrawable(R.drawable.ic_menu_settings),
+                iconLeft = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_menu_settings),
                 fragmentCreator = singleInstanceFragment { args ->
                     SettingsOverviewFragment().also {
                         it.arguments = args
@@ -292,7 +297,7 @@ class MainActivity : NavigationDrawerActivity() {
             if (getPreferences().queryLoggingEnabled) {
                 divider()
                 fragmentItem(getString(R.string.menu_querylogging),
-                    iconLeft = getDrawable(R.drawable.ic_eye),
+                    iconLeft = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_eye),
                     fragmentCreator = {
                         QueryLogFragment()
                     })
@@ -300,7 +305,7 @@ class MainActivity : NavigationDrawerActivity() {
             }
             divider()
             clickableItem(getString(R.string.menu_create_shortcut),
-                iconLeft = getDrawable(R.drawable.ic_external_link),
+                iconLeft = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_external_link),
                 onLongClick = null,
                 onSimpleClick = { _, _, _ ->
                     ServerChoosalDialog(this@MainActivity, onEntrySelected = {
@@ -309,14 +314,14 @@ class MainActivity : NavigationDrawerActivity() {
                     false
                 })
             fragmentItem(getString(R.string.button_main_dnsrules),
-                iconLeft = getDrawable(R.drawable.ic_view_list),
+                iconLeft = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_view_list),
                 fragmentCreator = {
                     DnsRuleFragment()
                 })
             divider()
             if (isPackageInstalled(this@MainActivity, "com.android.vending")) {
                 clickableItem(getString(R.string.menu_rate),
-                    iconLeft = getDrawable(R.drawable.ic_star),
+                    iconLeft = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_star),
                     onLongClick = null,
                     onSimpleClick = { _, _, _ ->
                         AlertDialog.Builder(this@MainActivity, getPreferences().theme.dialogStyle)
@@ -333,7 +338,7 @@ class MainActivity : NavigationDrawerActivity() {
             }
             if (isPackageInstalled(this@MainActivity, "org.fdroid.fdroid")) {
                 clickableItem(getString(R.string.menu_show_on_fdroid),
-                    iconLeft = getDrawable(R.drawable.ic_adb),
+                    iconLeft = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_adb),
                     onLongClick = null,
                     onSimpleClick = { _, _, _ ->
                         startActivity(
@@ -347,13 +352,13 @@ class MainActivity : NavigationDrawerActivity() {
                 )
             }
             fragmentItem(getString(R.string.menu_about),
-                iconLeft = getDrawable(R.drawable.ic_info),
+                iconLeft = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_info),
                 fragmentCreator = singleInstanceFragment { AboutFragment() })
         }
     }
 
     override fun onBackPressed() {
-        val fragment = currentFragment
+        val fragment = supportFragmentManager.findFragmentById(R.id.drawerContent)
         if (fragment != null && fragment is BackpressFragment) {
             if (!fragment.onBackPressed()) super.onBackPressed()
         } else {

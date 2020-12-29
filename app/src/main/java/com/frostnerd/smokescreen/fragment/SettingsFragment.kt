@@ -43,7 +43,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import kotlin.math.exp
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -310,9 +309,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
-        var installedThirdPartyApps = 0
         if(isPackageInstalled(requireContext(), "eu.faircode.netguard")) {
-            installedThirdPartyApps++
             helpNetguard.setOnPreferenceClickListener {
                 AlertDialog.Builder(requireContext(), getPreferences().theme.dialogStyle)
                     .setTitle("NetGuard")
@@ -355,7 +352,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val startOnBoot = findPreference("start_on_boot") as CheckBoxPreference
         val language = findPreference("language")
         val fallbackDns = findPreference("fallback_dns")
-        startOnBoot.setOnPreferenceChangeListener { preference, newValue ->
+        startOnBoot.setOnPreferenceChangeListener { _, newValue ->
             if (newValue == false) true
             else {
                 if (requireContext().isAppBatteryOptimized()) {
@@ -416,9 +413,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun exportSettings() {
-        val hostSources = "Name;-;enabled;-;source;-;isWhitelist\n" + getDatabase().hostSourceDao().getAll().filterNot { it.isFileSource }.map {
-            it.name + ";-;" + it.enabled + ";-;" + it.source + ";-;" + it.whitelistSource
-        }.joinToString(separator="\n")
+        val hostSources = "Name;-;enabled;-;source;-;isWhitelist\n" + getDatabase().hostSourceDao()
+            .getAll().filterNot { it.isFileSource }.joinToString(separator = "\n") {
+                it.name + ";-;" + it.enabled + ";-;" + it.source + ";-;" + it.whitelistSource
+            }
         val exportedKeys = setOf("has_rated_app", "asked_rate_app", "show_changelog", "sentry_consent", "sentry_consent_asked",
         "asked_group_join", "language", "theme", "start_on_boot", "start_after_update", "user_bypass_packages", "user_bypass_blacklist",
         "fallback_dns_server", "show_notification_on_lockscreen", "simple_notification", "hide_notification_icon", "notification_allow_pause",
@@ -438,7 +436,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         file.writeBytes((hostSources + "\n" + json).toByteArray())
 
         val fileUri = FileProvider.getUriForFile(requireContext(), "com.frostnerd.smokescreen.LogZipProvider", file)
-        val exportIntent = Intent(Intent.ACTION_SEND);
+        val exportIntent = Intent(Intent.ACTION_SEND)
         exportIntent.putExtra(Intent.EXTRA_TEXT, "")
         exportIntent.type = "text/plain"
         exportIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " -- settings")
@@ -585,7 +583,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     dialog.dismiss()
                 },
                 neutralButton = null,
-                negativeButton = getString(android.R.string.no) to { dialog, _ ->
+                negativeButton = getString(android.R.string.cancel) to { dialog, _ ->
                     dialog.dismiss()
                 }, withDialog = {
                     show()
@@ -612,7 +610,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             deleteLogs.isEnabled = enabled
             true
         }
-        crashReportingType.setOnPreferenceChangeListener { preference, newValue ->
+        crashReportingType.setOnPreferenceChangeListener { _, newValue ->
             newValue as String
             if(newValue == Crashreporting.FULL.value && !getPreferences().crashReportingConsent) {
                 CrashReportingEnableDialog(requireContext(), onConsentGiven = {

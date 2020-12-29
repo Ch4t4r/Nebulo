@@ -228,7 +228,7 @@ class ConfigureActivity : BaseActivity() {
             }
 
         })
-        editText.setOnFocusChangeListener { _, hasFocus ->
+        editText.setOnFocusChangeListener { _, _ ->
             setHints()
         }
     }

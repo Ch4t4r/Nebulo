@@ -154,6 +154,7 @@ private fun migration(
     }
 }
 
+@Suppress("unused")
 private fun emptyMigration(from: Int, to: Int = AppDatabase.currentVersion): Migration {
     return migration(from, to) { }
 }
