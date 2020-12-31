@@ -123,6 +123,7 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
     private fun printMemInfo() {
         val nativeHeapSize = Debug.getNativeHeapSize()
         val nativeHeapFreeSize = Debug.getNativeHeapFreeSize()
+        val memInfo = trafficStats.memInfo()
         log(buildString {
             append("MemInfo: [")
             append("OpenSockets: ")
@@ -135,6 +136,14 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
             append(trafficStats.bytesSentToDevice)
             append(", BytesQueued: ")
             append(trafficStats.bytesQueuedToDevice)
+            append(", MetaSize: ")
+            append(memInfo?.metaSize ?: "?")
+            append(", OutputSize: ")
+            append(memInfo?.outputSize ?: "?")
+            append(", OutputSizeBytes: ")
+            append(memInfo?.outputSizeBytes ?: "?")
+            append(", WaitingPackets: ")
+            append(memInfo?.waitingPacketSize ?: "?")
             append(", HeapSize: ")
             append(nativeHeapSize/1000/1000)
             append("mb")
