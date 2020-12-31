@@ -1,5 +1,7 @@
 package com.frostnerd.smokescreen.service
 
+import android.os.Debug
+import android.text.format.Formatter
 import com.frostnerd.smokescreen.Logger
 import com.frostnerd.vpntunnelproxy.TrafficStats
 import kotlinx.coroutines.*
@@ -60,6 +62,7 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
     private suspend fun checkConnection() {
         delay(checkIntervalMs)
         log("Beginning connection check")
+        printMemInfo()
         if(trafficStats.packetsReceivedFromDevice >= 15
             && trafficStats.bytesSentToDevice > 0
             && packetCountAtLastCheck?.let { trafficStats.packetsReceivedFromDevice - it > 10 } != false
@@ -115,6 +118,30 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
                 checkConnection()
             }
         }
+    }
+
+    private fun printMemInfo() {
+        val nativeHeapSize = Debug.getNativeHeapSize()
+        val nativeHeapFreeSize = Debug.getNativeHeapFreeSize()
+        log(buildString {
+            append("MemInfo: [")
+            append("OpenSockets: ")
+            append(trafficStats.openSockets)
+            append(", TotalSockets: ")
+            append(trafficStats.totalSockets)
+            append(", BytesFromDevice: ")
+            append(trafficStats.bytesFromDevice)
+            append(", BytesToDevice: ")
+            append(trafficStats.bytesSentToDevice)
+            append(", BytesQueued: ")
+            append(trafficStats.bytesQueuedToDevice)
+            append(", HeapSize: ")
+            append(nativeHeapSize/1000/1000)
+            append("mb")
+            append(", FreeHeap: ")
+            append(nativeHeapFreeSize/1000/1000)
+            append("mb")
+        })
     }
 
     private fun callCallback() {
