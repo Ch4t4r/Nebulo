@@ -130,7 +130,7 @@ class RuleImportService : IntentService("RuleImportService") {
     }
 
     private fun showSuccessNotification() {
-        val successNotification = NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
+        val successNotification = NotificationCompat.Builder(this, Notifications.getDnsRuleChannelId(this))
         successNotification.setSmallIcon(R.drawable.ic_mainnotification)
         successNotification.setAutoCancel(true)
         successNotification.setContentTitle(getString(R.string.notification_ruleimportfinished_title))
