@@ -89,7 +89,7 @@ class DnsRuleDialog(context: Context, dnsRule: DnsRule? = null, onRuleCreated: (
                 if (valid) {
                     dismiss()
                     val type = when {
-                        isWhitelist -> Record.TYPE.ANY
+                        isWhitelist || isBlockHost -> Record.TYPE.ANY
                         !view.ipv4Address.text.isNullOrBlank() && !view.ipv6Address.text.isNullOrBlank() -> {
                             Record.TYPE.ANY
                         }
