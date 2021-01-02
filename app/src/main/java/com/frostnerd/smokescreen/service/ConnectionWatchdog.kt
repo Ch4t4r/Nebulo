@@ -124,6 +124,9 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
         val nativeHeapSize = Debug.getNativeHeapSize()
         val nativeHeapFreeSize = Debug.getNativeHeapFreeSize()
         val memInfo = trafficStats.memInfo()
+        val runtimeTotalSize = Runtime.getRuntime().totalMemory()
+        val runtimeFreeSize = Runtime.getRuntime().freeMemory()
+
         log(buildString {
             append("MemInfo: [")
             append("OpenSockets: ")
@@ -146,9 +149,12 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
             append(memInfo?.waitingPacketSize ?: "?")
             append(", HeapSize: ")
             append(nativeHeapSize/1000/1000)
-            append("mb")
-            append(", FreeHeap: ")
+            append("mb, FreeHeap: ")
             append(nativeHeapFreeSize/1000/1000)
+            append("mb, RuntimeSize: ")
+            append(runtimeTotalSize/1000/1000)
+            append("mb, FreeRuntimeSize: ")
+            append(runtimeFreeSize/1000/1000)
             append("mb")
         })
     }
