@@ -188,4 +188,5 @@ object RequestCodes {
     const val RESTART_AFTER_REVOKE = 11
     const val RESTART_WHOLE_APP = 12
     const val REQUEST_CODE_IGNORE_BAD_CONNECTION = 13
+    const val NO_CONNECTION_NOTIFICATION = 14
 }

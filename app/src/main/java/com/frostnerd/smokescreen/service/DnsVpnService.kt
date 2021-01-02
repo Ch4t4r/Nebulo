@@ -461,6 +461,11 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             noConnectionNotificationBuilder.setSmallIcon(R.drawable.ic_cloud_strikethrough)
             noConnectionNotificationBuilder.setContentTitle(getString(R.string.notification_noconnection_title))
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
+            noConnectionNotificationBuilder.setContentIntent(PendingIntent.getActivity(
+                    this, RequestCodes.NO_CONNECTION_NOTIFICATION,
+                    PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            )
             noConnectionNotificationBuilder.setStyle(
                 NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_noconnection_text))
             )
