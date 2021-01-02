@@ -99,7 +99,7 @@ Want to be always up-to-date on the development of this app? Looking for a way t
 Join our [Telegram group](https://nebulo.app/community)!
 (Alternatively [the channel](https://nebulo.app/updateChannel) , which contains only updates and nothing else)<br>
 
-I also have a XDA-thread [here](https://forum.xda-developers.com/showthread.php?t=4156645).
+I also have a XDA-thread [here](https://forum.xda-developers.com/t/app-5-0-nebulo-dns-changer-for-doh-dot-against-censorship-open-source-no-root.4156645/).
 
 # Issues, feature requests and questions
 Have an idea, question or encountered a bug? Feel free to create an issue [right here in GitLab](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues).
