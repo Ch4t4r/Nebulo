@@ -56,8 +56,7 @@ class AboutFragment : Fragment() {
         }
         if(isPackageInstalled(requireContext(), "org.telegram.messenger")) {
             view.group.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://join?invite=I54nRleveRGP8IPmcIdySg"))
-                startActivity(intent)
+                context?.tryViewUri("https://nebulo.app/community", "tg://join?invite=I54nRleveRGP8IPmcIdySg")
             }
         } else {
             view.group.visibility = View.GONE
@@ -124,7 +123,7 @@ class AboutFragment : Fragment() {
             true
         }
         view.faq.setOnClickListener {
-            requireContext().tryOpenBrowser("https://nebulo.app/faq")
+            requireContext().tryViewUri("https://nebulo.app/faq")
         }
     }
 

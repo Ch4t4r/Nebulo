@@ -430,7 +430,7 @@ val Context.isPrivateDnsActive: Boolean
         }
     }
 
-fun Context.tryOpenBrowser(withLink:String) {
+fun Context.tryViewUri(withLink:String, alternativeLink:String? = null) {
     try {
         startActivity(
             Intent(
@@ -439,7 +439,10 @@ fun Context.tryOpenBrowser(withLink:String) {
             )
         )
     } catch (e: ActivityNotFoundException) {
-        Toast.makeText(this, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show()
+        log("Got ${e.message} when trying to open link: $withLink")
+        if(alternativeLink != null) {
+            tryViewUri(alternativeLink)
+        } else Toast.makeText(this, R.string.error_no_webbrowser_installed, Toast.LENGTH_LONG).show()
     }
 }
 
@@ -462,5 +465,5 @@ fun Context.askOpenFAQ(topic: FAQTopic?) {
 }
 
 fun Context.openFAQ(topic:FAQTopic?) {
-    tryOpenBrowser("https://nebulo.app/faq#${topic?.id ?: ""}")
+    tryViewUri("https://nebulo.app/faq#${topic?.id ?: ""}")
 }

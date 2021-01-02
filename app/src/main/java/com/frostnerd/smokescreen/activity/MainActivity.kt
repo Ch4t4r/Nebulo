@@ -157,11 +157,7 @@ class MainActivity : NavigationDrawerActivity() {
                 getString(R.string.dialog_join_group_message),
                 getString(R.string.dialog_join_group_positive) to { dialog, _ ->
                     dialog.dismiss()
-                    val intent = Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("tg://join?invite=I54nRleveRGP8IPmcIdySg")
-                    )
-                    startActivity(intent)
+                    tryViewUri("https://nebulo.app/community", "tg://join?invite=I54nRleveRGP8IPmcIdySg")
                 },
                 getString(R.string.dialog_crashreporting_negative) to { dialog, _ ->
                     dialog.dismiss()
