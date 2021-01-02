@@ -65,15 +65,14 @@ The app consists of a few core features:
 For a growing collection of frequenty asked questions (FAQ), take a look [here](FAQ.md).
 
 # Help wanted
-Requesting your support: the app is getting closer to a proper release but it's still missing an important aspect: translations.
 Translations are important to reach as broad of an audience as possible and for non-english speakers to be able to use the app to it's full extent.
 Head over to the [translation guide](TRANSLATING.md) to see how you can help!
 
 # Installation
-The app is distributed over the play store, F-Droid and as .apk file.
+The app is distributed over the play store, a custom F-Droid repo and as an .apk file.
 
 ## Play store
-Go to the [play store](https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen&), download the app and have fun.
+Go to the [play store](https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen) to download the app.
 
 ## F-Droid
 1. Add the repository on your F-Droid app by clicking [this link](https://fdroid.frostnerd.com/fdroid/repo?fingerprint=74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26).
@@ -90,20 +89,21 @@ Go to the [play store](https://play.google.com/store/apps/details?id=com.frostne
 
 ## Binary
 The file is distributed as .apk file in two places:
-- In the [telegram group](https://t.me/joinchat/I54nRleveRGP8IPmcIdySg)
+- In the [telegram group](https://nebulo.app/community)
 - In the automated build system (CI) here in GitLab. [Click here](https://git.frostnerd.com/PublicAndroidApps/smokescreen/-/jobs/artifacts/master/raw/app/build/outputs/apk/normal/release/app-normal-release.apk?job=build_release) to download the latest signed build.
     - The latest signed build isn't always the current release, keep in mind that those are merely signed development builds.
     
 # Community
 Want to be always up-to-date on the development of this app? Looking for a way to contact the developer?
 
-Join our [Telegram group](https://t.me/joinchat/I54nRleveRGP8IPmcIdySg)!
-(Alternativly [the channel](https://t.me/NebuloUpdates) , which contains only updates and nothing else)<br>
+Join our [Telegram group](https://nebulo.app/community)!
+(Alternatively [the channel](https://nebulo.app/updateChannel) , which contains only updates and nothing else)<br>
 
 I also have a XDA-thread [here](https://forum.xda-developers.com/showthread.php?t=4156645).
 
 # Issues, feature requests and questions
 Have an idea, question or encountered a bug? Feel free to create an issue [right here in GitLab](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues).
+Alternatively use the issue tracker in the mirror over on GitHub: https://github.com/Ch4t4r/Nebulo
 
 # Developer contact
 There are several ways for you to contact the developer:
@@ -131,10 +131,10 @@ A list of some extraordinary people who contributed to this project:
  
  
 # License
-This work is licensed under the GNU GPLv3 License. Different license-agreements can be made with the developer, if needed.
+This work is licensed under the GNU GPLv3 License. Different license-agreements can be made with the developer for parts of the app, if needed.
 
 
-Copyright (C) 2020   Daniel Wolf
+Copyright (C) 2021   Daniel Wolf
 
 <br>
 <br>
@@ -155,14 +155,17 @@ This work contains third-party content, namely:
 - [FABProgressCircle](https://github.com/JorgeCastilloPrz/FABProgressCircle) for showing a loading indicator around floating action buttons
    - License: [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 - [LeakCanary](https://github.com/square/leakcanary) for finding memory leaks
-   - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+   - License: [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 - [LeakSentry](https://github.com/square/leakcanary/tree/master/leakcanary-leaksentry) for finding memory leaks
-   - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+   - License: [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 - [Gson](https://github.com/google/gson)
-   - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+   - License: [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 - [OkHttp](https://github.com/square/okhttp)
-   - License:[Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
-
+   - License: [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+- [AppIntro](https://github.com/AppIntro/AppIntro)
+   - License: [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+- [MiniDNS](https://github.com/MiniDNS/minidns)
+   - License: Free choice of [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0), [WTFPL](https://github.com/MiniDNS/minidns/blob/master/LICENCE_WTFPL) and [GPL2.1](https://github.com/MiniDNS/minidns/blob/master/LICENCE_LGPL2.1)
 
 # Cloning
 Feel free to clone this software. However, there are a few things to notice:
