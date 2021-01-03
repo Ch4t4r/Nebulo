@@ -27,7 +27,7 @@ My mission is to provide access to dns-over-tls and dns-over-https as a tool aga
 The second topic, tracking, is nearly as important as the topic of censorship. Many ISPs use their own DNS servers as a way of tracking their users. Using DoH/DoT puts an end to this by encrypting the vulnerable DNS queries.
 
 # How it works
-Nebulo uses Android's VPN APIs to create a dummy (local) VPN which intercepts only DNS requests and encrypts them before sending it to a DNS resolver of your choice. This dummy (local) VPN is __not__ a real VPN and does not encrypt of your traffic or hide your IP. As only one VPN can be activate at any given time, you have to decice between using Nebulo or a real VPN.
+Nebulo uses Android's VPN APIs to create a dummy (local) VPN which intercepts only DNS requests and encrypts them before sending it to a DNS resolver of your choice. This dummy (local) VPN is __not__ a real VPN and does not encrypt any other traffic or hide your real IP. As only one VPN can be active per profile at any given time, you can decide between using Nebulo or a real VPN.
 
 ## Non-VPN mode
 Look for it in [the FAQ section](FAQ.md).
