@@ -38,12 +38,31 @@ Then follow these steps (Click on the step for a screenshot):
 That's it, now both are running at the same time! You should see the query count increase in Nebulos notification.
 
 
-### V2Ray
+### RethinkDNS
+[RethinkDNS](https://rethinkdns.com) is an app very similar to Nebulo which also offers encrypted DNS and has additional features like a firewall and the capability to use an upstream SOCKS5 proxy.
+By chaining Nebulo behind RethinkDNS you can keep all features Nebulo offers, whilst also being able to use a firewall or any VPN app which supports SOCKS5, like Orbot.
+Setting it up is simple:
+1. Open RethinkDNS, click on the `DNS` setting
+2. Click on configure, select `DNS Proxy` from the drop-down
+3. Click on add, use `127.0.0.1` for IP Address and `11053` (or your configured Non-VPN mode port) for port.
+4. Start Nebulo in Non-VPN mode, then start RethinkDNS
+(5. Not required, but recommended doing) In RethinkDNS, go to settings and exclude Nebulo from Firewall and DNS
+
+### Orbot/V2Ray
+Orbot/V2Ray can be used together with Nebulo through RehinkDNS.
+Follow the steps [above](#rethinkdns), additionally do the following:
+1. In RethinkDNS, go to settings and exclude Orbot/V2Ray from Firewall and DNS
+2. Scroll down a bit, enable the `SOCKS5 proxy` and `HTTP(S) Proxy` option
+  - For SOCKS5, set the port to 9050 (10808 if using V2Ray), App to Orbot/V2Ray
+  - For HTTPS, set the port to 8118 (10809 if using V2Ray), App to Orbot/V2Ray
+  
+#### V2Ray without RethinkDNS
 [V2Ray](https://github.com/hetykai/V2Ray-Android) is an app supporting multiple protocols like Shadowsocks to hide your identity and anonymize your browsing.<br>
 To use Nebulo with it you manually have to edit your config file to use the DNS server Nebulo hosts in non-VPN mode.
 It is available at 127.0.0.1 and the port you configured in the settings (default 11053).<br>
 You can use [this documentation](https://www.v2ray.com/en/configuration/dns.html) from V2Ray to see how you have to configure it.<br><br>
 After configuring both apps simply start them and the query count in Nebulos notification should increase.
+As this is complicated and cannot be done with V2Rays UI I recommend using RethinkDNS as described above.
 
 ## Battery usage
 There shouldn't be any difference in Nebulos battery usage when using non-VPN mode.
