@@ -19,7 +19,7 @@
 ---
 
 # About
-Nebulo is a free, open-source, no-root, light-weight dns-over-https, dns-over-tls, and dns-over-http-over-quic client for Android with emphasis on privacy and security. Nebulo is fast, highly-customizable, ad-free, efficient on the battery, contains zero analytics / tracking. Goto [installation](#installation) and set it up on your Android device.
+Nebulo is a free, open-source, no-root, light-weight dns-over-https, dns-over-tls, and dns-over-http-over-quic client for Android with emphasis on privacy and security. Nebulo is fast, highly-customizable, ad-free, efficient on the battery, contains zero analytics / tracking. Goto [the installation section](#installation) to set up Nebulo on your Android device.
 
 # My mission
 My mission is to provide access to dns-over-tls and dns-over-https as a tool against censorship and tracking. Many countries block controversial or government-critical websites using DNS which can possibly be circumvented using either of those protocols.
@@ -27,15 +27,15 @@ My mission is to provide access to dns-over-tls and dns-over-https as a tool aga
 The second topic, tracking, is nearly as important as the topic of censorship. Many ISPs use their own DNS servers as a way of tracking their users. Using DoH/DoT puts an end to this by encrypting the vulnerable DNS queries.
 
 # How it works
-Nebulo uses the VPN API of the Android system to create a dummy VPN which intercepts all packets for the dns servers of your device. This dummy VPN is __not__ a real VPN and does not tunnel your packets - it only handles dns packets. As only one VPN can be activate at any given time you have to decice between using Nebulo or a real VPN.
+Nebulo uses Android's VPN APIs to create a dummy (local) VPN which intercepts only DNS requests and encrypts them before sending it to a DNS resolver of your choice. This dummy (local) VPN is __not__ a real VPN and does not encrypt of your traffic or hide your IP. As only one VPN can be activate at any given time, you have to decice between using Nebulo or a real VPN.
 
 ## Non-VPN mode
-Look for it in the [FAQ](FAQ.md).
+Look for it in [the FAQ section](FAQ.md).
 
 ## What this is based on
-Nebulo is a completely original piece of software. It doesn't use any other dependency under the hood for the dns capabilities. Check the [dependencies](https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/app/build.gradle#L100) to see what is used for everything build around DoH/DoT.
+Nebulo is wholly an original piece of software: It doesn't use any other dependency for its core DNS capabilities. Inspect [the build file](https://git.frostnerd.com/PublicAndroidApps/smokescreen/blob/master/app/build.gradle#L100) to see what is used under the hood.
 
-## Incompatibilities, compatibilities, and possible problems 
+## Incompatibilities, compatibilities, and possible limitations
 - No other VPN can be active when Nebulo is running (at least when not running in Non-VPN mode mentioned above).
 - Nebulo works fine with non-VPN firewalls in place (such as AFWall+), but changes in firewall profiles [could break the VPN](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues/84), requiring a restart of Nebulo.
 - Other means of ad-blocking, like modifying the `/etc/hosts` file manually or using the AdAway app works alongside Nebulo just fine; though, the AdGuard app doesn't (that is, Nebulo does not receive any DNS queries when AdGuard's running).
@@ -61,17 +61,19 @@ Nebulo is a completely original piece of software. It doesn't use any other depe
 For a growing collection of frequenty asked questions, [take a look here](FAQ.md).
 
 # Help wanted
-Translations are important to reach as broad of an audience as possible and for non-english speakers to be able to use the app to its full extent.
-[Head over to the translation guide](TRANSLATING.md) to see how you can help!
+Translations are important to reach as broad of an audience as possible and for non-english speakers to be able to use the app to its full extent. [Head over to the translation guide](TRANSLATING.md) to see how you can help!
 
 # Installation
-The app is distributed over Google Play Store, a custom F-Droid repo, and as a standalone `.apk` file.
+Nebulo is distributed over Google Play Store, Aurora Store, a custom F-Droid repo, and as a standalone `.apk` file.
 
 ## Play Store
 [Download the latest version](https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen) from Google Play Store.
 
+## Aurora Store
+Search for Nebulo and download it from [the Aurora Store](https://gitlab.com/AuroraOSS/auroradroid), which is a F-Droid mirror.
+
 ## F-Droid
-Search for Nebulo and download it from [the Aurora Store](https://gitlab.com/AuroraOSS/auroradroid), which is a F-Droid mirror; or follow these steps if you're using F-Droid:
+Follow these steps if you're using F-Droid:
 
 1. [Click to add Nebulo](https://fdroid.frostnerd.com/fdroid/repo?fingerprint=74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26) to your F-Droid.
     - Or, add it manually, `fdroid.frostnerd.com/fdroid` with fingerprint `74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26`.
@@ -88,11 +90,12 @@ Search for Nebulo and download it from [the Aurora Store](https://gitlab.com/Aur
     
 # Community
 
-[Join the Nebulo community](https://nebulo.app/community) to ask for help or connect with the developer. Head over to [the announcements channel](https://nebulo.app/updateChannel) to get updates on upcoming releases and features.<br>
+[Join the Nebulo community on Telegram](https://nebulo.app/community) to ask for help or connect with the developer. Head over to [the announcements channel](https://nebulo.app/updateChannel) to get updates on upcoming releases and features.<br>
+
 Or, participate in [the XDA-Developers discussion thread](https://forum.xda-developers.com/t/app-5-0-nebulo-dns-changer-for-doh-dot-against-censorship-open-source-no-root.4156645/).
 
 # Issues, and feature requests
-Have an feature idea or stumbled upon bugs? Feel free to create issues [on GitLab](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues) or [on GitHub](https://github.com/Ch4t4r/Nebulo/issues).
+Have feature ideas or stumbled upon bugs? Feel free to create issues [on GitLab](https://git.frostnerd.com/PublicAndroidApps/smokescreen/issues) or [on GitHub](https://github.com/Ch4t4r/Nebulo/issues).
 
 # Developer contact
 
