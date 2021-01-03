@@ -144,6 +144,7 @@ class MainActivity : NavigationDrawerActivity() {
             view
         }
         supportActionBar?.elevation = 0f
+        val previousInstalledVersion = getPreferences().previousInstalledVersion
         ChangelogDialog.showNewVersionChangelog(this)
         getPreferences().totalAppLaunches += 1
         if(getPreferences().totalAppLaunches >= 7 &&
@@ -208,8 +209,12 @@ class MainActivity : NavigationDrawerActivity() {
             !getPreferences().ignoreServiceKilled &&
                 getPreferences().vpnLaunchLastVersion == BuildConfig.VERSION_CODE) {
             getPreferences().vpnServiceState = VpnServiceState.STOPPED
-            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M|| !(getSystemService(POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)) {
+            if((Build.VERSION.SDK_INT < Build.VERSION_CODES.M
+                || !(getSystemService(POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName))
+                && previousInstalledVersion == BuildConfig.VERSION_CODE) {
                 BatteryOptimizationInfoDialog(this).show()
+            } else if(previousInstalledVersion != BuildConfig.VERSION_CODE) {
+                getPreferences().vpnServiceState = VpnServiceState.STOPPED
             }
         }
         registerLocalReceiver(listOf(BROADCAST_RELOAD_MENU), true) {
