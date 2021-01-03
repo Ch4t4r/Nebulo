@@ -79,6 +79,8 @@ class DnsRuleFragment : Fragment() {
     private var userRulesJob: Job? = null
     private var totalRuleCount:Long? = null
     private var importSourceSnackbar:Snackbar? = null
+    var showUserRules = false
+    var userRuleCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,7 +119,8 @@ class DnsRuleFragment : Fragment() {
                         }
                     }
                     sourceAdapterList.add(insertPos, newSource)
-                    sourceAdapter.notifyItemInserted(insertPos)
+                    val offset = 1 + if(showUserRules) userRuleCount else 0
+                    sourceAdapter.notifyItemInserted(offset + insertPos)
                     list.scrollToPosition(insertPos)
                     newSource.id = getDatabase().hostSourceDao().insert(newSource)
                     importSourceSnackbar = Snackbar.make(contentFrame, R.string.window_dnsrules_refresh_sources, Snackbar.LENGTH_INDEFINITE)
@@ -210,9 +213,7 @@ class DnsRuleFragment : Fragment() {
         sourceRuleCount = sourceAdapterList.map {
             it to (null as Int?)
         }.toMap().toMutableMap()
-        adapterDataSource = ListDataSource(sourceAdapterList)
-        var showUserRules = false
-        var userRuleCount = 0
+        adapterDataSource = ListDataSource(sourceAdapterList, listOf(0))
         sourceAdapter = ModelAdapterBuilder.withModelAndViewHolder({ itemView, type ->
             when (type) {
                 0 -> SourceViewHolder(itemView, deleteSource = {
@@ -221,9 +222,10 @@ class DnsRuleFragment : Fragment() {
                         getString(R.string.dialog_deletehostsource_message, it.name),
                         getString(R.string.all_yes) to { dialog, _ ->
                             val pos = sourceAdapterList.indexOf(it)
-                            if(pos >= 0) {
+                            if (pos >= 0) {
+                                val offset = 1 + if (showUserRules) userRuleCount else 0
                                 sourceAdapterList.removeAt(pos)
-                                sourceAdapter.notifyItemRemoved(pos)
+                                sourceAdapter.notifyItemRemoved(offset + pos)
                             }
                             GlobalScope.launch {
                                 getDatabase().dnsRuleDao().deleteAllFromSource(it.id)
@@ -248,7 +250,8 @@ class DnsRuleFragment : Fragment() {
                         }?.also { source ->
                             getDatabase().hostSourceDao().update(source)
 
-                            val index = sourceAdapterList.indexOf(hostSource).takeIf { it >= 0 } ?: sourceAdapterList.indexOfFirst { it.id == hostSource.id }
+                            val index = sourceAdapterList.indexOf(hostSource).takeIf { it >= 0 }
+                                ?: sourceAdapterList.indexOfFirst { it.id == hostSource.id }
                             sourceAdapterList[index] = source
                             sourceRuleCount[source] = sourceRuleCount[hostSource]
                             sourceRuleCount.remove(hostSource)
@@ -263,7 +266,12 @@ class DnsRuleFragment : Fragment() {
                     }, hostSource = hostSource).show()
                 }, refreshSource = {
                     importSourceSnackbar?.dismiss()
-                    requireContext().startService(Intent(requireContext(), RuleImportService::class.java).putExtra("sources", longArrayOf(it.id)))
+                    requireContext().startService(
+                        Intent(
+                            requireContext(),
+                            RuleImportService::class.java
+                        ).putExtra("sources", longArrayOf(it.id))
+                    )
                     refreshProgress.show()
                     refreshProgressShown = true
                 })
@@ -280,7 +288,7 @@ class DnsRuleFragment : Fragment() {
                                 getDatabase().dnsRuleRepository().deleteAllUserRulesAsync()
                                 userDnsRules = mutableListOf()
                                 if (showUserRules) {
-                                    sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
+                                    sourceAdapter.notifyItemRangeRemoved(1, userRuleCount)
                                 }
                                 userRuleCount = 0
                                 notifyRulesChanged()
@@ -293,20 +301,22 @@ class DnsRuleFragment : Fragment() {
                     changeRuleVisibility = {
                         val changeVisibility = {
                             showUserRules = !showUserRules
+                            println("SHOW: $showUserRules")
                             if (showUserRules) {
                                 userRuleCount = userDnsRules.size
-                                activity?.runOnUiThread {
-                                    sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
-                                    list.smoothScrollToPosition(sourceAdapterList.size + 1)
+                                adapterDataSource.nonSourcePositions = (0..userRuleCount).toList()
+                                if (userRuleCount > 0) activity?.runOnUiThread {
+                                    sourceAdapter.notifyItemRangeInserted(1, userRuleCount)
                                 }
                             } else {
-                                activity?.runOnUiThread {
-                                    sourceAdapter.notifyItemRangeRemoved(sourceAdapterList.size + 1, userRuleCount)
+                                adapterDataSource.nonSourcePositions = listOf(0)
+                                if (userRuleCount > 0) activity?.runOnUiThread {
+                                    sourceAdapter.notifyItemRangeRemoved(1, userRuleCount)
                                 }
                                 userRuleCount = 0
                             }
                         }
-                        if(userRulesJob == null) changeVisibility()
+                        if (userRulesJob == null) changeVisibility()
                         else launchWithLifecycle {
                             userRulesJob?.join()
                             changeVisibility()
@@ -337,14 +347,17 @@ class DnsRuleFragment : Fragment() {
                                     showUserRules = true
                                     if (wereRulesShown) {
                                         userRuleCount += 1
+                                        adapterDataSource.nonSourcePositions += (1 + insertPos)
                                         activity?.runOnUiThread {
-                                            sourceAdapter.notifyItemInserted(sourceAdapterList.size + 1 + insertPos)
+                                            sourceAdapter.notifyItemInserted(1 + insertPos)
                                         }
                                     } else {
                                         userRuleCount = userDnsRules.size
                                         activity?.runOnUiThread {
-                                            sourceAdapter.notifyItemChanged(sourceAdapterList.size)
-                                            sourceAdapter.notifyItemRangeInserted(sourceAdapterList.size + 1, userRuleCount)
+                                            adapterDataSource.nonSourcePositions =
+                                                (0..userRuleCount).toList()
+                                            sourceAdapter.notifyItemChanged(0)
+                                            sourceAdapter.notifyItemRangeInserted(1, userRuleCount)
                                             list.smoothScrollToPosition(insertPos)
                                         }
                                     }
@@ -357,7 +370,7 @@ class DnsRuleFragment : Fragment() {
                                     ).show()
                                 }
                             }
-                            if(userRulesJob == null) insert()
+                            if (userRulesJob == null) insert()
                             else GlobalScope.launch {
                                 userRulesJob?.join()
                                 insert()
@@ -369,8 +382,8 @@ class DnsRuleFragment : Fragment() {
                     userDnsRules.remove(it)
                     getDatabase().dnsRuleRepository().removeAsync(it)
                     userRuleCount -= 1
-                    sourceAdapter.notifyItemRemoved(sourceAdapterList.size + 1 + index)
-                    if(totalRuleCount != null) {
+                    sourceAdapter.notifyItemRemoved(1 + index)
+                    if (totalRuleCount != null) {
                         totalRuleCount = totalRuleCount!! - 1
                         updateRuleCountTitle()
                     }
@@ -381,7 +394,7 @@ class DnsRuleFragment : Fragment() {
                         if (rows > 0) {
                             val index = userDnsRules.indexOf(it)
                             userDnsRules[index] = newRule
-                            sourceAdapter.notifyItemChanged(sourceAdapterList.size + 1 + index)
+                            sourceAdapter.notifyItemChanged(1 + index)
                         } else {
                             Snackbar.make(
                                 requireActivity().findViewById(android.R.id.content),
@@ -405,7 +418,7 @@ class DnsRuleFragment : Fragment() {
                 )
             }
             getItemCount = {
-                sourceAdapterList.size + 1 + userRuleCount
+                sourceAdapterList.size + 1 + if(showUserRules) userRuleCount else 0
             }
             bindModelView = { viewHolder, position, data ->
                 (viewHolder as SourceViewHolder).display(data)
@@ -426,8 +439,11 @@ class DnsRuleFragment : Fragment() {
                     data.enabled -> launchWithLifecycle {
                         val prev = sourceRuleCount[data]
                         sourceRuleCount[data] = getDatabase().dnsRuleDao().getCountForHostSource(data.id)
-                        if(prev != sourceRuleCount[data]) runOnUiThread {
-                            sourceAdapter.notifyItemChanged(position)
+                        if(prev != sourceRuleCount[data]) {
+                            val offset = 1 + if(showUserRules) userRuleCount else 0
+                            runOnUiThread {
+                                sourceAdapter.notifyItemChanged(offset + position)
+                            }
                         }
                     }
                     else -> viewHolder.ruleCount.text = getString(R.string.window_dnsrules_customhosts_hostsource_rulecount_pending)
@@ -441,20 +457,19 @@ class DnsRuleFragment : Fragment() {
                         viewHolder.elementsShown = true
                     }
                 } else if(viewHolder is CustomRuleHostViewHolder) {
-                    viewHolder.display(userDnsRules[position - sourceAdapterList.size - 1])
+                    viewHolder.display(userDnsRules[position - 1])
                 }
             }
             getViewType = { position ->
                 when {
-                    position < sourceAdapterList.size -> 0
-                    position == sourceAdapterList.size -> 1
-                    else -> 2
+                    position == 0 -> 1
+                    showUserRules && position <= userRuleCount -> 2
+                    else -> 0
                 }
             }
             runOnUiThread = {
                 activity?.runOnUiThread(it)
             }
-
         }.build()
         list.layoutManager = LinearLayoutManager(requireContext())
         list.recycledViewPool.setMaxRecycledViews(1, 1)
@@ -495,10 +510,11 @@ class DnsRuleFragment : Fragment() {
             launchWithLifecycle {
                 sourceRuleCount.keys.forEach {
                     val index = sourceAdapterList.indexOf(it)
+                    val offset = 1 + if(showUserRules) userRuleCount else 0
                     if(index >= 0 && (sourceAdapterList[index].enabled || sourceRuleCount[it] != null)) {
                         sourceRuleCount[it] = null
                         launchUi {
-                            sourceAdapter.notifyItemChanged(index)
+                            sourceAdapter.notifyItemChanged(offset +  index)
                         }
                     } else sourceRuleCount[it] = null
                 }
