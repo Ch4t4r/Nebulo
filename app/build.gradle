@@ -12,8 +12,8 @@ android {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 75
-        versionName "2.0.4"
+        versionCode 76
+        versionName "2.0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         def sentryDSN = String.valueOf(getSystemVariableOrDefault("NEBULO_SENTRY_DSN", "dummy"))
@@ -102,7 +102,7 @@ android {
             matchingFallbacks = ['default']
             dimension "version"
             versionNameSuffix "-adblock"
-            versionCode 76
+            versionCode 77
         }
         normal {
             matchingFallbacks = ['default']
