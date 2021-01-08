@@ -19,8 +19,8 @@ prepare_release:
 lint:
   stage: test
   script:
-    - ./gradlew lintNormalRelease
-    - ./gradlew lintAdblockerFdroid
+    - ./gradlew lintStoreRelease
+    - ./gradlew lintFdroidRelease
   except:
     - master
 
@@ -34,10 +34,10 @@ build_debug:
   script:
     - chmod +x changeVersion.sh
     - ./changeVersion.sh app/build.gradle " $CI_COMMIT_REF_NAME\_$CI_PIPELINE_ID" --append
-    - ./gradlew assembleNormalDebug --stacktrace -x test
+    - ./gradlew assembleStoreDebug --stacktrace -x test
   artifacts:
     paths:
-    - app/build/outputs/apk/normal/debug/*.apk
+    - app/build/outputs/apk/store/debug/*.apk
     expire_in: 5 days
   only:
     - translations
@@ -48,7 +48,7 @@ build_fdroid:
   stage: build
   script:
     - wget -O $KEYSTORE_FILE $KEYSTORE_URL -q
-    - ./gradlew clean assembleAdblockerFdroid --stacktrace -x test
+    - ./gradlew clean assembleFdroidRelease --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
@@ -56,8 +56,8 @@ build_fdroid:
     - /^no_build_no_deploy.*$/
   artifacts:
     paths:
-      - app/build/outputs/apk/adblocker/fdroid/*.apk
-      - app/build/outputs/mapping/adblocker/fdroid/mapping.txt
+      - app/build/outputs/apk/fdroid/release/*.apk
+      - app/build/outputs/mapping/fdroid/release/mapping.txt
     expire_in: 30 days
   only:
     - master
@@ -67,7 +67,7 @@ build_release:
   stage: build
   script:
    - wget -O $KEYSTORE_FILE $KEYSTORE_URL -q
-   - ./gradlew clean assembleNormalRelease --stacktrace -x test
+   - ./gradlew clean assembleStoreRelease --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
@@ -75,8 +75,8 @@ build_release:
     - /^no_build_no_deploy.*$/
   artifacts:
     paths:
-    - app/build/outputs/apk/normal/release/*.apk
-    - app/build/outputs/mapping/normal/release/mapping.txt
+    - app/build/outputs/apk/store/release/*.apk
+    - app/build/outputs/mapping/store/release/mapping.txt
     expire_in: 30 days
   only:
     - master
@@ -85,7 +85,7 @@ build_release:
 test_build_release:
   stage: test
   script:
-    - ./gradlew clean assembleNormalUnsignedRelease --stacktrace -x test
+    - ./gradlew clean assembleStoreUnsignedRelease --stacktrace -x test
   except:
     - /^no_ci.*$/
     - /^no_build.*$/
