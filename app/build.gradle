@@ -59,7 +59,7 @@ android {
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
         debug.assets.srcDirs += files("$projectDir/schemas".toString())
-        fdroidofficial.res.srcDirs += "fdroid/res"
+        fdroidofficial.res.srcDirs += "src/fdroid/res"
     }
     buildTypes {
         release {
@@ -93,7 +93,7 @@ android {
             buildConfigField("Boolean", "SHOW_ALL_SERVERS", "false")
         }
         fdroidofficial {
-            matchingFallbacks = ['default']
+            matchingFallbacks = ['fdroid']
             dimension "releaseChannel"
             versionNameSuffix "-adblock"
             versionCode 77
