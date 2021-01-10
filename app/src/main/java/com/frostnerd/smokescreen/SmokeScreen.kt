@@ -16,6 +16,7 @@ import com.frostnerd.smokescreen.activity.PinActivity
 import com.frostnerd.smokescreen.database.AppDatabase
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.RequestCodes
+import com.frostnerd.smokescreen.util.RunnableAsyncTask
 import com.frostnerd.smokescreen.util.crashhelpers.DataSavingSentryEventProcessor
 import com.frostnerd.smokescreen.util.preferences.AppSettings
 import com.frostnerd.smokescreen.util.preferences.Crashreporting
@@ -24,6 +25,9 @@ import io.sentry.Sentry
 import io.sentry.SentryOptions
 import io.sentry.android.core.*
 import io.sentry.protocol.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import okhttp3.*
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
@@ -133,6 +137,7 @@ class SmokeScreen : Application() {
 
     override fun onCreate() {
         initSentry()
+        preloadCoroutines()
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(customUncaughtExceptionHandler)
         super.onCreate()
@@ -164,17 +169,23 @@ class SmokeScreen : Application() {
         setFallbackDns(fallback, this)
     }
 
+    private fun preloadCoroutines() {
+        RunnableAsyncTask.launch {
+            getPreferences()
+            GlobalScope.launch(Dispatchers.IO) {}
+            GlobalScope.launch(Dispatchers.Default) {}
+        }
+    }
+
     fun closeSentry() {
         Sentry.close()
         sentryReady = false
     }
 
     fun initSentry(forceStatus: Status = Status.NONE) {
-        val enabledType = getPreferences().crashreportingType
-        if (forceStatus == Status.NONE &&
-            enabledType == Crashreporting.OFF) return
         log("Maybe initializing Sentry")
-        getSentryDSN { resolvedDSN ->
+        getSentryDSN { resolvedDSN, enabledType ->
+            if(enabledType == Crashreporting.OFF && forceStatus != Status.NONE) return@getSentryDSN
             log("Initializing Sentry.")
             sentryReady = false
             try {
@@ -247,12 +258,12 @@ class SmokeScreen : Application() {
         }
     }
 
-    private fun getSentryDSN(then:(dsn:String) -> Unit) {
+    private fun getSentryDSN(then:(dsn:String, enableType:Crashreporting) -> Unit) {
         if(BuildConfig.DEBUG) return
         try {
             val primaryDSN = BuildConfig.SENTRY_DSN
             val configServer = BuildConfig.SENTRY_DSN_CONFIGSERVER
-            if(primaryDSN.contains("@")) then(primaryDSN)
+            if(primaryDSN.contains("@")) then(primaryDSN, getPreferences().crashreportingType)
             else log("Primary Sentry DSN not set, maybe retrieving from server")
 
             if(configServer.isNotBlank() && configServer.startsWith("http") && !configServer.contains("@")) {
@@ -277,7 +288,7 @@ class SmokeScreen : Application() {
                         } else {
                             if (retrievedDSN != primaryDSN) {
                                 log("Sentry DSN successfuly resolved to '$retrievedDSN'")
-                                then(retrievedDSN)
+                                then(retrievedDSN, getPreferences().crashreportingType)
                             } else log("Retrieved Sentry DSN is the same as configured DSN, not re-configuring")
                         }
                     }
