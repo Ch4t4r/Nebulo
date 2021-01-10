@@ -60,7 +60,7 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
     }
 
     private suspend fun checkConnection() {
-        delay(checkIntervalMs)
+        delay(if (measurementsWithBadConnection > 0) checkIntervalMs / 5 else checkIntervalMs)
         log("Beginning connection check")
         printMemInfo()
         if(trafficStats.packetsReceivedFromDevice >= 15
