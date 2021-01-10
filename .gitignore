@@ -7,6 +7,7 @@ local.properties
 !app/build/outputs/mapping/**/mapping.txt
 !app/build/outputs/mapping/normalRelease/mapping.txt
 !app/build/outputs/mapping/fdroidRelease/mapping.txt
+!app/build/outputs/mapping/storeRelease/mapping.txt
 !app/build/outputs/mapping/adblockerFdroid/mapping.txt
 /build/**
 captures/
