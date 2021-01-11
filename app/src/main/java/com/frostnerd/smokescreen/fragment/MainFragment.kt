@@ -63,6 +63,7 @@ class MainFragment : Fragment() {
     private var proxyState:ProxyState = ProxyState.NOT_RUNNING
     private var vpnStateReceiver: BroadcastReceiver? = null
     private var latencyCheckJob:Job? = null
+    private var currentDisplayedServerHash:Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,25 +75,24 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        val previousProxyState = proxyState
         proxyState = if(requireContext().isServiceRunning(DnsVpnService::class.java)) {
             if(DnsVpnService.paused) ProxyState.PAUSED
             else ProxyState.RUNNING
         } else ProxyState.NOT_RUNNING
-        updateVpnIndicators()
-        context?.clearPreviousIptablesRedirect()
-        runLatencyCheck()
-        determineLatencyBounds()
-        displayServer(getPreferences().dnsServerConfig)
-        GlobalScope.launch {
-            val context = context
-            if (isAdded && !isDetached && context != null) {
-                updatePrivacyPolicyLink(getPreferences().dnsServerConfig)
-            }
+        if(proxyState != previousProxyState) {
+            updateVpnIndicators()
         }
+        if(proxyState != previousProxyState || currentDisplayedServerHash == null) {
+            displayServer(getPreferences().dnsServerConfig)
+        }
+        runLatencyCheck()
     }
 
     override fun onStart() {
         super.onStart()
+        context?.clearPreviousIptablesRedirect()
+        determineLatencyBounds()
         vpnStateReceiver = requireContext().registerLocalReceiver(
             listOf(
                 DnsVpnService.BROADCAST_VPN_ACTIVE,
@@ -199,9 +199,16 @@ class MainFragment : Fragment() {
                 }
             }
         }
+        mainServerWrap.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            serverIndicator.updateLayoutParams {
+                height = mainServerWrap.measuredHeight
+            }
+        }
     }
 
     private fun displayServer(config: DnsServerInformation<*>) {
+        if(config.hashCode() == currentDisplayedServerHash) return
+        currentDisplayedServerHash = config.hashCode()
         serverName.text = config.name
         serverURL.text = when(config.type) {
             ServerType.DOH -> (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(
@@ -214,11 +221,7 @@ class MainFragment : Fragment() {
         }
         serverLatency.text = "-\nms"
         serverIndicator.backgroundTintList = null
-        mainServerWrap.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            serverIndicator.updateLayoutParams {
-                height = mainServerWrap.measuredHeight
-            }
-        }
+        updatePrivacyPolicyLink(config)
     }
 
     override fun onStop() {
@@ -311,7 +314,7 @@ class MainFragment : Fragment() {
 
     private fun updatePrivacyPolicyLink(serverInfo: DnsServerInformation<*>) {
         activity?.let { _ ->
-            if (!serverInfo.specification.privacyPolicyURL.isNullOrBlank()) {
+            if (isAdded && !isDetached && !serverInfo.specification.privacyPolicyURL.isNullOrBlank()) {
                 launchWithLifecycle {
                     val url = URL(serverInfo.specification.privacyPolicyURL)
                     launchUi {
@@ -338,6 +341,7 @@ class MainFragment : Fragment() {
     private var goodLatencyThreshold = 200
     private  var averageLatencyThreshold = 310
     private fun runLatencyCheck() {
+        latencyCheckJob?.cancel()
         latencyCheckJob = launchWithLifecycle(cancelOn = setOf(Lifecycle.Event.ON_PAUSE)) {
             if(isActive) {
                 launchUi {
