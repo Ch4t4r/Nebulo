@@ -12,13 +12,10 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.smokescreen.createHttpCronetEngineIfInstalled
 import com.frostnerd.smokescreen.type
 import com.frostnerd.smokescreen.util.ServerType
-import okhttp3.Dns
+import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Response
 import org.chromium.net.CronetEngine
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
@@ -54,20 +51,23 @@ class DnsSpeedTest(context:Context,
                    private val connectTimeout: Int = 2500,
                    private val readTimeout:Int = 1500,
                    private val cronetEngine: CronetEngine?,
+                   httpsCronetEngine: CronetEngine? = null,
                    val log:(line:String) -> Unit) {
-    private val httpClient by lazy {
+    private val httpClient by lazy(LazyThreadSafetyMode.NONE) {
         OkHttpClient.Builder()
             .dns(httpsDnsClient)
             .connectTimeout(3, TimeUnit.SECONDS)
             .readTimeout(readTimeout.toLong(), TimeUnit.MILLISECONDS)
             .build()
     }
-    private val httpsDnsClient by lazy {
+    private val httpsDnsClient by lazy(LazyThreadSafetyMode.NONE) {
         PinnedDns((server as HttpsDnsServerInformation).serverConfigurations.values.map {
             it.urlCreator.address
         })
     }
-    private val httpsCronetEngine = createHttpCronetEngineIfInstalled(context)
+    private val _httpsCronetEngine by lazy(LazyThreadSafetyMode.NONE) {
+        httpsCronetEngine ?: createHttpCronetEngineIfInstalled(context)
+    }
 
     companion object {
         val testDomains = listOf("google.com", "frostnerd.com", "amazon.com", "youtube.com", "github.com",
@@ -79,7 +79,6 @@ class DnsSpeedTest(context:Context,
      * @return The average response time (in ms)
      */
     fun runTest(@IntRange(from = 1) passes: Int, strategy: Strategy = Strategy.AVERAGE): Int? {
-        log("Running with cronet: ${httpsCronetEngine != null}. Testing DoQ: ${cronetEngine != null}")
         val latencies = mutableListOf<Int>()
 
         var firstPass = true
@@ -95,7 +94,7 @@ class DnsSpeedTest(context:Context,
                 ServerType.DOH -> {
                     server as HttpsDnsServerInformation
                     server.serverConfigurations.values.forEach {
-                        latencies += if(httpsCronetEngine == null) {
+                        latencies += if(_httpsCronetEngine == null) {
                             if(firstPass) testHttps(it)
                             testHttps(it) ?: 0
                         } else {
@@ -116,6 +115,9 @@ class DnsSpeedTest(context:Context,
                 }
             }
             firstPass = false
+        }
+        if(server.type == ServerType.DOH) {
+            if(_httpsCronetEngine == null) httpClient.connectionPool.evictAll()
         }
         return when (strategy) {
             Strategy.BEST_CASE -> {
@@ -208,8 +210,10 @@ class DnsSpeedTest(context:Context,
             return null
         }
 
+        var connection:HttpURLConnection? = null
+        var wasEstablished = false
         try {
-            val connection = httpsCronetEngine!!.openConnection(url) as HttpURLConnection
+            connection = _httpsCronetEngine!!.openConnection(url) as HttpURLConnection
             connection.connectTimeout = connectTimeout
             if(config.requestHasBody) {
                 val body = config.bodyCreator?.createBody(msg, config.urlCreator.address) ?: return null
@@ -218,11 +222,13 @@ class DnsSpeedTest(context:Context,
                 connection.doOutput = true
                 body.mediaType?.also {connection.setRequestProperty("Accept", it) }
                 connection.readTimeout = (connectTimeout*1.5).toInt()
+                wasEstablished = true
                 val outputStream = connection.outputStream
                 outputStream.write(body.rawBody)
                 outputStream.flush()
             } else {
                 connection.requestMethod = "GET"
+                wasEstablished = true
                 connection.connect()
             }
             val status = connection.responseCode
@@ -240,6 +246,12 @@ class DnsSpeedTest(context:Context,
             }
         } catch (ex:Throwable) {
             return null
+        } finally {
+            connection?.disconnect()
+            if(wasEstablished) {
+                connection?.inputStream?.closeSilently()
+                connection?.outputStream?.closeSilently()
+            }
         }
     }
 
@@ -250,6 +262,7 @@ class DnsSpeedTest(context:Context,
                 return null
             }
         var socket:Socket? = null
+        var outputStream:DataOutputStream? = null
         try {
             socket = SSLSocketFactory.getDefault().createSocket()
             val msg = createTestDnsPacket()
@@ -257,7 +270,7 @@ class DnsSpeedTest(context:Context,
             socket!!.connect(InetSocketAddress(addr[0], address.port), connectTimeout)
             socket.soTimeout = readTimeout
             val data: ByteArray = msg.toArray()
-            val outputStream = DataOutputStream(socket.getOutputStream())
+            outputStream = DataOutputStream(socket.getOutputStream())
             val size = data.size
             val arr: ByteArray = byteArrayOf(((size shr 8) and 0xFF).toByte(), (size and 0xFF).toByte())
             outputStream.write(arr)
@@ -269,7 +282,6 @@ class DnsSpeedTest(context:Context,
             inStream.read(readData)
             val time = (System.currentTimeMillis() - start).toInt()
 
-            socket = null
             if(!testResponse(DnsMessage(readData))) {
                 log("DoT test failed once for ${server.name}: Testing the response for valid dns message failed")
                 return null
@@ -318,9 +330,11 @@ class DnsSpeedTest(context:Context,
         } catch (ex: java.lang.Exception) {
             return null
         } finally {
-            if(wasEstablished) try {
+            connection?.disconnect()
+            if(wasEstablished) {
+                connection?.outputStream?.closeSilently()
                 connection?.inputStream?.closeSilently()
-            } catch (ignored:Throwable) {}
+            }
         }
     }
 

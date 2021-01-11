@@ -195,7 +195,8 @@ class SpeedTestActivity : BaseActivity() {
         if(wasStartedBefore) prepareList()
         testJob = launchWithLifecycle {
             prepareListJob?.join()
-            val engine = createQuicCronetEngineIfInstalled(this@SpeedTestActivity)
+            val engine = if(BuildConfig.SHOW_DOQ) createQuicCronetEngineIfInstalled(this@SpeedTestActivity) else null
+            val httpsEngine =  createHttpCronetEngineIfInstalled(this@SpeedTestActivity)
             testRunning = true
             wasStartedBefore = true
             val testsLeft = testResults!!.shuffled()
@@ -208,7 +209,7 @@ class SpeedTestActivity : BaseActivity() {
                 if(testJob?.isCancelled == false) {
                     pendingTest.started = true
                     log("Running SpeedTest for ${pendingTest.server.name}")
-                    val res = DnsSpeedTest(this@SpeedTestActivity, pendingTest.server, highestLatency, highestLatency+250, engine) { line ->
+                    val res = DnsSpeedTest(this@SpeedTestActivity, pendingTest.server, highestLatency, highestLatency+250, engine, httpsEngine) { line ->
                         log(line)
                     }.runTest(passes)
 
@@ -226,7 +227,7 @@ class SpeedTestActivity : BaseActivity() {
                     }
                 }
             }
-
+            httpsEngine?.shutdown()
             if(testJob?.isCancelled == false)runOnUiThread {
                 startTest.isEnabled = true
                 abort.visibility = View.GONE
