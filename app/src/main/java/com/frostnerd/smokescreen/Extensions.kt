@@ -467,3 +467,16 @@ fun Context.askOpenFAQ(topic: FAQTopic?) {
 fun Context.openFAQ(topic:FAQTopic?) {
     tryViewUri("https://nebulo.app/faq#${topic?.id ?: ""}")
 }
+
+/**
+ * Enables stack-traces whenever `close()` wasn't called on a resource
+ */
+fun enableResourceCloseWatcher() {
+    try {
+        Class.forName("dalvik.system.CloseGuard")
+            .getMethod("setEnabled", Boolean::class.javaPrimitiveType)
+            .invoke(null, true)
+    } catch (e: ReflectiveOperationException) {
+        throw RuntimeException(e)
+    }
+}
