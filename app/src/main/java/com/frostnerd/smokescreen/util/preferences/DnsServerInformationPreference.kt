@@ -12,6 +12,7 @@ import com.frostnerd.preferenceskt.typedpreferences.TypedPreferences
 import com.frostnerd.preferenceskt.typedpreferences.types.PreferenceType
 import com.frostnerd.smokescreen.type
 import com.frostnerd.smokescreen.util.ServerType
+import java.lang.NullPointerException
 import kotlin.reflect.KProperty
 
 /*
@@ -46,20 +47,24 @@ class DnsServerInformationPreference(key: String) :
         thisRef: TypedPreferences<SharedPreferences>,
         property: KProperty<*>
     ): DnsServerInformation<*>? {
-        return if(thisRef.sharedPreferences.contains(key + "_type")) {
-            val type = thisRef.sharedPreferences.getString(key + "_type", "")
-            val json = thisRef.sharedPreferences.getString(key, "")
-            if(json.isNullOrBlank()) {
-                null
-            } else {
-                when (type) {
-                    "https" -> httpsTypeAdapter.fromJson(json)
-                    "tls" -> tlsTypeAdapter.fromJson(json) as DnsServerInformation<TLSUpstreamAddress>
-                    "quic" -> tlsTypeAdapter.fromJson(json) as DnsServerInformation<QuicUpstreamAddress>
-                    else -> throw IllegalStateException("Unknown type $type")
+        return try{
+            if(thisRef.sharedPreferences.contains(key + "_type")) {
+                val type = thisRef.sharedPreferences.getString(key + "_type", "")
+                val json = thisRef.sharedPreferences.getString(key, "")
+                if(json.isNullOrBlank()) {
+                    null
+                } else {
+                    when (type) {
+                        "https" -> httpsTypeAdapter.fromJson(json)
+                        "tls" -> tlsTypeAdapter.fromJson(json) as DnsServerInformation<TLSUpstreamAddress>
+                        "quic" -> tlsTypeAdapter.fromJson(json) as DnsServerInformation<QuicUpstreamAddress>
+                        else -> throw IllegalStateException("Unknown type $type")
+                    }
                 }
-            }
-        } else null
+            } else null
+        } catch (err:Throwable){
+            null
+        }
     }
 
     override fun setValue(
