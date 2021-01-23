@@ -44,30 +44,34 @@ class UserServerConfigurationPreference(key: String, defaultValue: (String) -> S
         thisRef: TypedPreferences<SharedPreferences>,
         property: KProperty<*>
     ): Set<UserServerConfiguration> {
-        return if (thisRef.sharedPreferences.contains(key)) {
-            val reader = JsonReader(StringReader(thisRef.sharedPreferences.getString(key, "")))
-            val servers = mutableSetOf<UserServerConfiguration>()
-            if (reader.peek() == JsonToken.BEGIN_ARRAY) {
-                reader.beginArray()
-                while (reader.peek() != JsonToken.END_ARRAY) {
-                    reader.beginObject()
-                    var id = 0
-                    var info: DnsServerInformation<*>? = null
-                    while (reader.peek() != JsonToken.END_OBJECT) {
-                        when (reader.nextName().toLowerCase(Locale.ROOT)) {
-                            "id" -> id = reader.nextInt()
-                            "server_https", "server" -> info = httpsTypeAdapter.read(reader)!!
-                            "server_tls" -> info = tlsTypeAdapter.read(reader)!!
+        return try {
+            if (thisRef.sharedPreferences.contains(key)) {
+                val reader = JsonReader(StringReader(thisRef.sharedPreferences.getString(key, "")))
+                val servers = mutableSetOf<UserServerConfiguration>()
+                if (reader.peek() == JsonToken.BEGIN_ARRAY) {
+                    reader.beginArray()
+                    while (reader.peek() != JsonToken.END_ARRAY) {
+                        reader.beginObject()
+                        var id = 0
+                        var info: DnsServerInformation<*>? = null
+                        while (reader.peek() != JsonToken.END_OBJECT) {
+                            when (reader.nextName().toLowerCase(Locale.ROOT)) {
+                                "id" -> id = reader.nextInt()
+                                "server_https", "server" -> info = httpsTypeAdapter.read(reader)!!
+                                "server_tls" -> info = tlsTypeAdapter.read(reader)!!
+                            }
                         }
+                        reader.endObject()
+                        servers.add(UserServerConfiguration(id, info!!))
                     }
-                    reader.endObject()
-                    servers.add(UserServerConfiguration(id, info!!))
+                    reader.endArray()
                 }
-                reader.endArray()
-            }
-            reader.close()
-            servers
-        } else defaultValue(key)
+                reader.close()
+                servers
+            } else defaultValue(key)
+        } catch (err:Throwable) {
+            defaultValue(key)
+        }
     }
 
     override fun setValue(
