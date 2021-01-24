@@ -16,9 +16,9 @@ import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLS
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
 import com.frostnerd.lifecyclemanagement.BaseDialog
+import com.frostnerd.smokescreen.*
+import com.frostnerd.smokescreen.BuildConfig
 import com.frostnerd.smokescreen.R
-import com.frostnerd.smokescreen.getPreferences
-import com.frostnerd.smokescreen.log
 import com.frostnerd.smokescreen.util.ServerType
 import com.frostnerd.smokescreen.util.preferences.UserServerConfiguration
 import com.google.android.material.textfield.TextInputEditText
@@ -34,7 +34,6 @@ import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
 import java.util.concurrent.TimeUnit
-import com.frostnerd.smokescreen.BuildConfig
 
 /*
  * Copyright (C) 2019 Daniel Wolf (Ch4t4r)
@@ -348,7 +347,7 @@ class NewServerDialog(
                 ))
             }
             GlobalScope.launch(Dispatchers.Main) {
-                dialog.dismiss()
+                dialog.dismissIfShowing()
                 onServerAdded.invoke(
                     HttpsDnsServerInformation(
                         name,

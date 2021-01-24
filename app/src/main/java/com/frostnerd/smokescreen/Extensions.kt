@@ -1,9 +1,6 @@
 package com.frostnerd.smokescreen
 
-import android.app.Activity
-import android.app.AlarmManager
-import android.app.KeyguardManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.*
 import android.hardware.fingerprint.FingerprintManager
 import android.net.ConnectivityManager
@@ -142,7 +139,7 @@ fun Context.registerLocalReceiver(
 
 fun AppCompatActivity.registerLocalReceiver(
     filteredActions: List<String>,
-    unregisterOnDestroy:Boolean,
+    unregisterOnDestroy: Boolean,
     receiver: (intent: Intent?) -> Unit
 ): BroadcastReceiver {
     val filter = IntentFilter()
@@ -157,7 +154,7 @@ fun AppCompatActivity.registerLocalReceiver(
     }
     val mgr = LocalBroadcastManager.getInstance(this)
     mgr.registerReceiver(actualReceiver, filter)
-    if(unregisterOnDestroy) lifecycle.addObserver(object:LifecycleObserver {
+    if(unregisterOnDestroy) lifecycle.addObserver(object : LifecycleObserver {
         @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         @Suppress("unused")
         fun onDestroy() {
@@ -189,13 +186,22 @@ fun Context.isAppBatteryOptimized(): Boolean {
     return !pwrm.isIgnoringBatteryOptimizations(packageName)
 }
 
-fun <T:Activity>Activity.restart(activityClass:Class<T>? = null, exitProcess:Boolean = false) {
+fun <T : Activity>Activity.restart(activityClass: Class<T>? = null, exitProcess: Boolean = false) {
     val intent = (if(activityClass != null) Intent(this, activityClass) else intent)
         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     if(exitProcess) {
         finish()
-        val pendingIntent = PendingIntent.getActivity(this, RequestCodes.RESTART_WHOLE_APP, intent, PendingIntent.FLAG_CANCEL_CURRENT)
-        (getSystemService(Context.ALARM_SERVICE) as AlarmManager).setExact(AlarmManager.RTC, System.currentTimeMillis() + 800, pendingIntent)
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            RequestCodes.RESTART_WHOLE_APP,
+            intent,
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
+        (getSystemService(Context.ALARM_SERVICE) as AlarmManager).setExact(
+            AlarmManager.RTC,
+            System.currentTimeMillis() + 800,
+            pendingIntent
+        )
         kotlin.system.exitProcess(0)
     } else {
         finish()
@@ -223,7 +229,7 @@ fun Context.hasDeviceIpv4Address(): Boolean {
         if(network == null) continue
         val info = try {
             mgr.getNetworkInfo(network)
-        } catch (ex:NullPointerException) {
+        } catch (ex: NullPointerException) {
             // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
             log("Exception when trying to determine IPv4 capability: $ex")
             null
@@ -252,7 +258,7 @@ fun Context.hasDeviceIpv6Address(): Boolean {
         if(network == null) continue
         val info =  try {
             mgr.getNetworkInfo(network)
-        } catch (ex:NullPointerException) {
+        } catch (ex: NullPointerException) {
             // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
             log("Exception when trying to determine IPv6 capability: $ex")
             null
@@ -274,13 +280,13 @@ fun Context.hasDeviceIpv6Address(): Boolean {
     return !hasNetwork
 }
 
-fun Context.getLanIP(ipv4:Boolean): InetAddress? {
+fun Context.getLanIP(ipv4: Boolean): InetAddress? {
     val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     for (network in mgr.allNetworks) {
         if(network == null) continue
         val info =  try {
             mgr.getNetworkInfo(network)
-        } catch (ex:NullPointerException) {
+        } catch (ex: NullPointerException) {
             // Android seems to love to throw NullPointerException with getNetworkInfo() - completely out of our control.
             log("Exception when trying to determine IPv6 capability: $ex")
             null
@@ -301,7 +307,7 @@ fun Context.isDeviceRooted():Boolean {
     return RootChecker(this, BuildInfoProvider(), NoOpLogger.getInstance()).isDeviceRooted
 }
 
-fun Context.clearPreviousIptablesRedirect(forceClear:Boolean = false) {
+fun Context.clearPreviousIptablesRedirect(forceClear: Boolean = false) {
     if(forceClear || !isServiceRunning(DnsVpnService::class.java) || getPreferences().vpnServiceState == VpnServiceState.STOPPED) {
         val ipv4 = getPreferences().lastIptablesRedirectAddress?.split(":")?.let {
             it[0] to it[1].toInt()
@@ -321,7 +327,7 @@ fun Context.clearPreviousIptablesRedirect(forceClear:Boolean = false) {
     }
 }
 
-operator fun Level.compareTo(otherLevel:Level):Int {
+operator fun Level.compareTo(otherLevel: Level):Int {
     return this.intValue() - otherLevel.intValue()
 }
 
@@ -330,20 +336,28 @@ val DnsServerInformation<*>.type
 
 fun DnsServerInformation<*>.toJson():String {
     return when(type) {
-        ServerType.DOH ->  HttpsDnsServerInformationTypeAdapter().toJson(this as HttpsDnsServerInformation)
+        ServerType.DOH -> HttpsDnsServerInformationTypeAdapter().toJson(this as HttpsDnsServerInformation)
         ServerType.DOT, ServerType.DOQ -> DnsServerInformationTypeAdapter().toJson(this)
     }
 }
 
-fun HttpsDnsServerInformation.Companion.fromServerUrls(primaryUrl:String, secondaryUrl:String?): HttpsDnsServerInformation {
+fun HttpsDnsServerInformation.Companion.fromServerUrls(primaryUrl: String, secondaryUrl: String?): HttpsDnsServerInformation {
     val serverInfo = mutableListOf<HttpsDnsServerConfiguration>()
     val requestType = mapOf(RequestType.WIREFORMAT_POST to ResponseType.WIREFORMAT)
     serverInfo.add(
-        HttpsDnsServerConfiguration(address = createHttpsUpstreamAddress(primaryUrl), experimental = false, requestTypes = requestType)
+        HttpsDnsServerConfiguration(
+            address = createHttpsUpstreamAddress(primaryUrl),
+            experimental = false,
+            requestTypes = requestType
+        )
     )
     if(secondaryUrl != null)
         serverInfo.add(
-            HttpsDnsServerConfiguration(address = createHttpsUpstreamAddress(secondaryUrl), experimental = false, requestTypes = requestType)
+            HttpsDnsServerConfiguration(
+                address = createHttpsUpstreamAddress(secondaryUrl),
+                experimental = false,
+                requestTypes = requestType
+            )
         )
     return HttpsDnsServerInformation(
         "shortcutServer",
@@ -358,14 +372,28 @@ fun HttpsDnsServerInformation.Companion.fromServerUrls(primaryUrl:String, second
     )
 }
 
-fun tlsServerFromHosts(primaryHost:String, secondaryHost:String?): DnsServerInformation<TLSUpstreamAddress> {
+fun tlsServerFromHosts(primaryHost: String, secondaryHost: String?): DnsServerInformation<TLSUpstreamAddress> {
     val serverInfo = mutableListOf<DnsServerConfiguration<TLSUpstreamAddress>>()
     serverInfo.add(
-        DnsServerConfiguration(address = createTlsUpstreamAddress(primaryHost), experimental = false, preferredProtocol = TLS, supportedProtocols = listOf(TLS))
+        DnsServerConfiguration(
+            address = createTlsUpstreamAddress(primaryHost),
+            experimental = false,
+            preferredProtocol = TLS,
+            supportedProtocols = listOf(
+                TLS
+            )
+        )
     )
     if(secondaryHost != null)
         serverInfo.add(
-            DnsServerConfiguration(address = createTlsUpstreamAddress(secondaryHost), experimental = false, preferredProtocol = TLS, supportedProtocols = listOf(TLS))
+            DnsServerConfiguration(
+                address = createTlsUpstreamAddress(secondaryHost),
+                experimental = false,
+                preferredProtocol = TLS,
+                supportedProtocols = listOf(
+                    TLS
+                )
+            )
         )
     return DnsServerInformation(
         "shortcutServer",
@@ -412,7 +440,7 @@ private fun createTlsUpstreamAddress(host: String): TLSUpstreamAddress {
     else TLSUpstreamAddress(parsedHost)
 }
 
-fun String.equalsAny(vararg options:String, ignoreCase:Boolean = false):Boolean {
+fun String.equalsAny(vararg options: String, ignoreCase: Boolean = false):Boolean {
     return options.any {
         it.equals(this, ignoreCase)
     }
@@ -430,7 +458,7 @@ val Context.isPrivateDnsActive: Boolean
         }
     }
 
-fun Context.tryViewUri(withLink:String, alternativeLink:String? = null) {
+fun Context.tryViewUri(withLink: String, alternativeLink: String? = null) {
     try {
         startActivity(
             Intent(
@@ -464,7 +492,7 @@ fun Context.askOpenFAQ(topic: FAQTopic?) {
     )
 }
 
-fun Context.openFAQ(topic:FAQTopic?) {
+fun Context.openFAQ(topic: FAQTopic?) {
     tryViewUri("https://nebulo.app/faq#${topic?.id ?: ""}")
 }
 
@@ -478,5 +506,13 @@ fun enableResourceCloseWatcher() {
             .invoke(null, true)
     } catch (e: ReflectiveOperationException) {
         throw RuntimeException(e)
+    }
+}
+
+fun Dialog.dismissIfShowing() {
+    if(isShowing) {
+        try {
+            dismiss()
+        } catch (ignored:Throwable){}
     }
 }
