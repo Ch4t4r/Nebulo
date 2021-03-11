@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="title_simple_notification">සරල දැනුම්දීම</string>
+    <string name="preference_category_notification">දැනුම්දීම</string>
+    <string name="summary_language">යෙදුමේ භාෂාව වෙනස් කරන්න</string>
+    <string name="title_language">භාෂාව</string>
+    <string name="title_theme">තේමාව</string>
+</resources>
