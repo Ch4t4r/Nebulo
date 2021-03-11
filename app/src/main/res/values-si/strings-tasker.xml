@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="tasker_start_app_custom_urls">%1$s සහ %2$s සමඟ යෙදුම ආරම්භ කරන්න (ආකාරය: %3$s)</string>
+    <string name="tasker_use_custom_server">අභිරුචි සේවාදායකයන් සඳහන් කරන්න</string>
+    <string name="tasker_start_if_running">දැනටමත් ක්‍රියාත්මක වුවද ආරම්භ කරන්න (වින්‍යාසය අභිබවා යා හැක)</string>
+    <string name="tasker_action">ක්‍රියාමාර්ග</string>
+</resources>
