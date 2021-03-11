@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dialog_crashreportingusages_data_2">උපාංග දත්ත</string>
+    <string name="dialog_crashreportingusages_data_1">පරිශීලක දත්ත</string>
+</resources>
