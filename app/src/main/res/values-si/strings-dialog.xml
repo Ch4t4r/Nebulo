@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dialog_newserver_primaryserver">ප්‍රාථමික සේවාදායකය</string>
+    <string name="dialog_newserver_name_hint">උදාහරණය</string>
+    <string name="dialog_newserver_name">සේවාදායකයේ නම</string>
+    <string name="dialog_serverconfiguration_addserver">සේවාදායකයක් එකතු කරන්න</string>
+</resources>
