@@ -1,12 +1,12 @@
 # Non-VPN mode
-As explained in the [FAQ](../FAQ.md) Nebulo has a non-VPN mode where it does not require the dummy VPN.<br>
+As explained in the [FAQ](../FAQ.md) Nebulo has a non-VPN mode where it does not require the dummy VPN (and thus allows you to use other VPN clients).<br>
 As this dummy VPN is normally used to force Android to send all DNS queries to Nebulo you have to configure this yourself.<br>
 If your phone is rooted you simply have to enable the iptables setting (which you also only see when your phone is rooted). If you want to know how it works scroll down.<br><br>
 If your phone is not rooted you have to use third-party apps to forward DNS queries to Nebulo.
 
 ## Server port
 Use this setting to configure the port Nebulo hosts the DNS server on.
-It cannot be lower than `1024` and not higher than `65534`.<br>
+It cannot be lower than `1024` and not higher than `65534` (`65534` is the maximum possible value and ports below `1024` are only available to system apps - even with root)<br>
 The default is `11053`.
 
 ## Supported third-party apps
