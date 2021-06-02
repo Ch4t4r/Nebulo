@@ -86,5 +86,13 @@
                     android:nextFocusDown="@id/primaryServer"
                     android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+                android:layout_width="match_parent"
+                android:id="@+id/avoidAutomaticPath"
+                android:textColor="?android:textColor"
+                android:visibility="gone"
+                android:text="@string/dialog_newserver_avoid_querypath"
+                android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>

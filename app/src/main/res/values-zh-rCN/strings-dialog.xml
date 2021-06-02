@@ -217,4 +217,5 @@
     <string name="dialog_newdnsrule_block_host">屏蔽该host</string>
     <string name="dialog_serverimport_servertype_doq">类型：DNS-over-TLS（DoQ）</string>
     <string name="dialog_newserver_title_quic">添加服务器（DoQ）</string>
+    <string name="dialog_newserver_avoid_querypath">不要自动附加查询路径(/dns-query)。</string>
 </resources>

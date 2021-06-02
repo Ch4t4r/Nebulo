@@ -222,4 +222,5 @@
 \n但しすべてのVPNアプリがDNS設定を変更できるとは限りません。可能な場合は、DNSサーバーを \" %1$s : %2$d \"に設定して下さい(上記のポートを設定します)。
 \n
 \nアプリを設定したら、両方を起動してください。</string>
+    <string name="dialog_newserver_avoid_querypath">クエリーパス（/dns-query）を自動的に追加しない。</string>
 </resources>

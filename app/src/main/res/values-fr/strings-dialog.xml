@@ -217,4 +217,5 @@
 \nAprès avoir configuré les applications, il suffit de lancer les deux.</string>
     <string name="dialog_serverimport_servertype_doq">Tapez : DNS-over-QUIC (DoQ)</string>
     <string name="dialog_newserver_title_quic">Ajouter un serveur (DoQ)</string>
+    <string name="dialog_newserver_avoid_querypath">Ne pas ajouter automatiquement le chemin de la requête (/dns-query)</string>
 </resources>

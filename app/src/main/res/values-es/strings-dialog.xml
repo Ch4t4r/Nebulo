@@ -217,4 +217,5 @@
 \n - Inicie Nebulo (en modo no-VPN) e inicie NetGuard</string>
     <string name="dialog_serverimport_servertype_doq">Escriba: DNS-over-QUIC (DoQ)</string>
     <string name="dialog_newserver_title_quic">Añadir un servidor (DoQ)</string>
+    <string name="dialog_newserver_avoid_querypath">No añadir automáticamente la ruta de consulta (/dns-query)</string>
 </resources>

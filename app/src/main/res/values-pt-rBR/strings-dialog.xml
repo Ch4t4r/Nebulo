@@ -229,4 +229,5 @@
     <string name="dialog_serverconfiguration_quic" translatable="false">DNS-sobre-QUIC (DoQ)</string>
     <string name="dialog_serverconfiguration_tls" translatable="false">DNS-sobre-TLS (DoT)</string>
     <string name="dialog_serverconfiguration_https" translatable="false">DNS-sobre-HTTPS (DoH)</string>
+    <string name="dialog_newserver_avoid_querypath">Não anexar automaticamente o caminho de consulta (/dns-query)</string>
 </resources>

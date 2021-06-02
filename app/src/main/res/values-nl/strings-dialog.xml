@@ -217,4 +217,5 @@
     <string name="dialog_newdnsrule_block_host">Blokkeer deze host</string>
     <string name="dialog_serverimport_servertype_doq">Type: DNS-over-QUIC (DoQ)</string>
     <string name="dialog_newserver_title_quic">Voeg een server toe (DoQ)</string>
+    <string name="dialog_newserver_avoid_querypath">Voeg niet automatisch query pad toe (/dns-query)</string>
 </resources>

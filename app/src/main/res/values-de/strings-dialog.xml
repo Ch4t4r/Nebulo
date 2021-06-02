@@ -217,4 +217,5 @@
 \n
 \nNach dem Einstellen starte einfach beide Apps.</string>
     <string name="dialog_serverimport_servertype_doq">Typ: DNS-over-QUIC (DoQ)</string>
+    <string name="dialog_newserver_avoid_querypath">Abfragepfad nicht automatisch anhängen (/dns-query)</string>
 </resources>

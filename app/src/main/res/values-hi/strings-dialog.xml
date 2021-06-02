@@ -175,4 +175,5 @@
     <string name="dialog_share_title"></string>
     <string name="dialog_serverimport_servertype_doq"></string>
     <string name="dialog_newserver_title_quic"></string>
+    <string name="dialog_newserver_avoid_querypath">क्वेरी पथ को स्वचालित रूप से न जोड़ें (/dns-query)</string>
 </resources>

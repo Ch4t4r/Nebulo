@@ -225,4 +225,5 @@
     <string name="dialog_newdnsrule_block_host">منع هذا المضيف</string>
     <string name="dialog_serverimport_servertype_doq">النوع: DNS-over-QUIC (DoQ)</string>
     <string name="dialog_newserver_title_quic">اضف سيرفر (DoQ)</string>
+    <string name="dialog_newserver_avoid_querypath">لا تقم بإلحاق مسار الاستعلام تلقائيًا (/ dns-query)</string>
 </resources>

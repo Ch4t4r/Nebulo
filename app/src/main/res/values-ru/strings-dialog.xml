@@ -224,4 +224,5 @@
     <string name="dialog_newdnsrule_block_host">Блокировать этот host</string>
     <string name="dialog_serverimport_servertype_doq">Тип: DNS-over-QUIC (DoQ)</string>
     <string name="dialog_newserver_title_quic">Добавить сервер (DoQ)</string>
+    <string name="dialog_newserver_avoid_querypath">Не добавлять автоматически путь запроса (/dns-query)</string>
 </resources>

@@ -221,4 +221,5 @@
 \nNon tutte le app VPN ti permettono di cambiare le impostazioni DNS. Se la tua lo fa, imposta il server DNS a \'%1$s:%2$d\' (puoi configurare la porta qua sopra).
 \n
 \nUna volta configurate le app, avviale entrambe.</string>
+    <string name="dialog_newserver_avoid_querypath">Non aggiungere automaticamente il percorso della query (/dns-query)</string>
 </resources>

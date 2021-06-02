@@ -182,6 +182,7 @@ class NewServerDialog(
                     setHintAndTitle(view, title)
                     primaryServer.text = primaryServer.text
                     secondaryServer.text = secondaryServer.text
+                    avoidAutomaticPath.visibility = if(type == ServerType.DOH) View.VISIBLE else View.GONE
                 }
             }
             if(server != null) {
@@ -390,6 +391,7 @@ class NewServerDialog(
         }.firstOrNull()?.servers?.firstOrNull {
             it.address.host == host
         }?.address ?: if (path != null) HttpsUpstreamAddress(host, port, path)
+        else if(avoidAutomaticPath.isChecked) HttpsUpstreamAddress(host, port, null)
         else HttpsUpstreamAddress(host, port)
     }
 
