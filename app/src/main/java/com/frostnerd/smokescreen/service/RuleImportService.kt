@@ -174,7 +174,7 @@ class RuleImportService : IntentService("RuleImportService") {
 
     private fun startWork() {
         val dnsRuleDao = getDatabase().dnsRuleDao()
-        dnsRuleDao.markNonUserRulesForDeletion(sourcesIds) // Stage all, ignoring if the source is actually processed in this run
+        dnsRuleDao.markNonUserRulesForDeletion() // Stage all, ignoring if the source is actually processed in this run
         dnsRuleDao.deleteStagedRules()
         var count = 0
         val newChecksums = mutableMapOf<HostSource, String>()
@@ -244,7 +244,7 @@ class RuleImportService : IntentService("RuleImportService") {
             updateNotificationFinishing()
             log("Delete rules staged for deletion")
             dnsRuleDao.deleteMarkedRules()
-            log("Commiting staging")
+            log("Committing staging")
             dnsRuleDao.commitStaging()
             dnsRuleDao.deleteStagedRules()
             log("Recreating database indices")
