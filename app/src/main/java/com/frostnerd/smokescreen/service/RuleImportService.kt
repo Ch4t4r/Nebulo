@@ -407,6 +407,7 @@ class RuleImportService : IntentService("RuleImportService") {
     }
 
     private val wildcardNormalisationRegex = Regex("(?:^\\*\\*\\.)|(\\.\\*\\*$)")
+    private val leadingWildcardRegex = Regex("^\\*\\.")
     private fun createRule(
         host: String,
         target: String,
@@ -419,10 +420,10 @@ class RuleImportService : IntentService("RuleImportService") {
             if (it.contains("*")) {
                 isWildcard = true
                 if (source.isFileSource) {
-                    it.replace("**", "%%").replace("*", "%")
+                    it.replace(leadingWildcardRegex, "**").replace("**", "%%").replace("*", "%")
                         .replace(wildcardNormalisationRegex, "**")
                 } else {
-                    it.replace("**", "%%").replace("*", "%%")
+                    it.replace(leadingWildcardRegex, "**").replace("**", "%%").replace("*", "%%")
                         .replace(wildcardNormalisationRegex, "**")
                 }
             } else it
