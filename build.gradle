@@ -32,15 +32,13 @@ ext.nexus_user = getNexusUser()
 ext.nexus_password = getNexusPassword()
 
 buildscript {
+    ext {
+        ext.KOTLIN_VERSION = '1.5.10'
+    }
     ext.ANDROID_COMPILE_SDK = (System.getenv("ANDROID_COMPILE_SDK") == null ? 30 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
     ext.ANDROID_TARGET_SDK = (System.getenv("ANDROID_TARGET_SDK") == null ? ANDROID_COMPILE_SDK : System.getenv("ANDROID_TARGET_SDK")).toInteger()
     ext.ANDROID_MIN_SDK = (System.getenv("ANDROID_MIN_SDK") == null ? 14 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
-    ext.KOTLIN_VERSION = System.getenv("KOTLIN_VERSION") == null ? "1.4.21" : System.getenv("KOTLIN_VERSION")
-    ext.ANDROID_GRADLE_PLUGIN_VERSION = System.getenv("ANDROID_GRADLE_PLUGIN_VERSION") == null ? "3.6.3" : System.getenv("ANDROID_GRADLE_PLUGIN_VERSION")
-    ext.APPCOMPAT_VERSION = "1.2.0"
-    ext.COROUTINE_VERSION = "1.3.9"
-    ext.RECYCLERVIEW_VERSION = "1.1.0"
-    ext.ROBOELECTRIC_VERSION = "4.3"
+    ext.ANDROID_GRADLE_PLUGIN_VERSION = System.getenv("ANDROID_GRADLE_PLUGIN_VERSION") == null ? "4.2.1" : System.getenv("ANDROID_GRADLE_PLUGIN_VERSION")
 
     println "COMPILE SDK Version: $ANDROID_COMPILE_SDK"
     println "TARGET SDK Version: $ANDROID_TARGET_SDK"
@@ -48,18 +46,16 @@ buildscript {
     println "---------------------"
 
     repositories {
+        mavenCentral()
         google()
-        jcenter()
         maven {
             url 'http://storage.googleapis.com/r8-releases/raw'
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath "com.android.tools.build:gradle:$ANDROID_GRADLE_PLUGIN_VERSION"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
         classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.18"
-
-        classpath 'app.cash.exhaustive:exhaustive-gradle:0.1.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -70,7 +66,7 @@ allprojects {
     apply plugin: 'maven-publish'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven {
             url 'https://nexus.frostnerd.com/repository/libs-release/'
             credentials {

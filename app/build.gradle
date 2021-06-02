@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'app.cash.exhaustive'
 
 def debugKeyPath = new File(System.properties['user.home'], ".android/debug.keystore")
 
@@ -138,27 +137,27 @@ android {
 //}
 
 dependencies {
-    def room_version = "2.2.6"
+    def room_version = "2.3.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
-    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2')
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0')
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
 
 
     implementation 'com.frostnerd.utilskt:lifecycle:1.2.1'
     implementation 'com.frostnerd.utilskt:preferences:1.5.30' // https://git.frostnerd.com/AndroidUtils/preferenceskt
     implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.4.2' // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
-    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:2.1.24' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+    implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:2.1.28' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
     implementation 'com.frostnerd.utilskt:general:1.0.25' // https://git.frostnerd.com/AndroidUtils/generalkt
     implementation 'com.frostnerd.utilskt:adapters:1.3.4' // https://git.frostnerd.com/AndroidUtils/Adapters
 
-    implementation 'androidx.work:work-runtime:2.4.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0-beta01'
+    implementation 'androidx.work:work-runtime:2.5.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0-rc01'
     implementation "androidx.preference:preference:1.1.1"
-    implementation "com.google.android.material:material:1.3.0-rc01"
+    implementation "com.google.android.material:material:1.3.0"
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-alpha01'
-    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "androidx.core:core-ktx:1.5.0-rc02"
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
@@ -169,12 +168,12 @@ dependencies {
 
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
 
-    leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
+    leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 
-    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation "com.squareup.okhttp3:okhttp:4.9.1"
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
 
-    implementation 'com.google.android.play:core:1.9.0'
+    implementation 'com.google.android.play:core:1.10.0'
 }
 
 def getGitCommitHash() {

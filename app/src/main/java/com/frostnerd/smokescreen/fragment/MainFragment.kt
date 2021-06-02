@@ -387,7 +387,7 @@ class MainFragment : Fragment() {
                 setOf(it[0], it[1], it[3]) // Google, CF, Quad9
             } + AbstractTLSDnsHandle.suspendUntilKnownServersArePopulated(1500) {
                 setOf(it[1], it[0]) //Quad9, CF
-            }).mapNotNull {
+            }).filterNotNull().mapNotNull {
                 DnsSpeedTest(
                     context,
                     it as DnsServerInformation<*>,

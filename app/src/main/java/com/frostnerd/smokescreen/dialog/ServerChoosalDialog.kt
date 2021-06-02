@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import app.cash.exhaustive.Exhaustive
 import com.frostnerd.dnstunnelproxy.DEFAULT_DNSERVER_CAPABILITIES
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.TransportProtocol
@@ -393,7 +392,6 @@ class ServerChoosalDialog(
             .setNegativeButton(R.string.all_no) { _, _ -> }
             .setPositiveButton(R.string.all_yes) { _, _ ->
                 val type = ServerType.from(layout.spinner.selectedItemPosition)
-                @Exhaustive
                 when(type) {
                     ServerType.DOH -> {
                         context.getPreferences().removedDefaultDoHServers = context.getPreferences().removedDefaultDoHServers + AbstractHttpsDNSHandle.KNOWN_DNS_SERVERS.keys.find {
