@@ -95,6 +95,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
     private var localResolver:LocalResolver? = null
     private var runInNonVpnMode:Boolean = getPreferences().runWithoutVpn
     private var connectionWatchDog:ConnectionWatchdog? = null
+    private var vpnWatchdog:VpnWatchDog? = null
     private var watchdogDisabledForSession = false
     private val coroutineSupervisor = SupervisorJob()
     @Suppress("EXPERIMENTAL_API_USAGE")
@@ -912,6 +913,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             vpnProxy?.stop()
             dnsServerProxy?.stop()
             connectionWatchDog?.stop()
+            vpnWatchdog?.stop()
             if(ipTablesRedirector == null || ipTablesRedirector?.endForward() == IpTablesPacketRedirector.IpTablesMode.SUCCEEDED) {
                 getPreferences().lastIptablesRedirectAddress = null
                 getPreferences().lastIptablesRedirectAddressIPv6 = null
@@ -973,16 +975,20 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 BackgroundVpnConfigureActivity.prepareVpn(this, userServerConfig)
             }, 250)
         } else if(getPreferences().showNotificationOnRevoked){
-            NotificationCompat.Builder(this, Notifications.getHighPriorityChannelId(this)).apply {
-                setSmallIcon(R.drawable.ic_cloud_warn)
-                setContentTitle(getString(R.string.notification_service_revoked_title))
-                setContentText(getString(R.string.notification_service_revoked_message))
-                setContentIntent(PendingIntent.getActivity(this@DnsVpnService, RequestCodes.RESTART_AFTER_REVOKE, Intent(this@DnsVpnService, BackgroundVpnConfigureActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
-                setAutoCancel(true)
-                priority = NotificationCompat.PRIORITY_HIGH
-            }.build().also {
-                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_SERVICE_REVOKED, it)
-            }
+            showVpnRevokedNotification()
+        }
+    }
+
+    private fun showVpnRevokedNotification() {
+        NotificationCompat.Builder(this, Notifications.getHighPriorityChannelId(this)).apply {
+            setSmallIcon(R.drawable.ic_cloud_warn)
+            setContentTitle(getString(R.string.notification_service_revoked_title))
+            setContentText(getString(R.string.notification_service_revoked_message))
+            setContentIntent(PendingIntent.getActivity(this@DnsVpnService, RequestCodes.RESTART_AFTER_REVOKE, Intent(this@DnsVpnService, BackgroundVpnConfigureActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
+            setAutoCancel(true)
+            priority = NotificationCompat.PRIORITY_HIGH
+        }.build().also {
+            (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_SERVICE_REVOKED, it)
         }
     }
 
@@ -1383,7 +1389,6 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 val usedAddress = if(bindAddress == defaultBindAddress) "localhost" else bindAddress.hostAddress
                 showDnsServerModeNotification(usedAddress, actualPort, preferredPort, iptablesMode)
                 currentTrafficStats = vpnProxy?.trafficStats
-                createConnectionWatchdog()
                 log("Non-VPN proxy started.")
             }
         } else {
@@ -1427,6 +1432,9 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                     hideBadConnectionNotification()
                 }, logger = this@DnsVpnService.logger, advancedLogging = getPreferences().advancedLogging)
             }
+        vpnWatchdog = VpnWatchDog({
+            showVpnRevokedNotification()
+        }, this)
     }
 
     private fun createQueryLogger(): QueryListener? {
