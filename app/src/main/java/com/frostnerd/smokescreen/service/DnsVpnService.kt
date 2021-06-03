@@ -1585,11 +1585,11 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         return dnsCache
     }
 
-    private fun createLocalResolver(): LocalResolver? {
+    private fun createLocalResolver(): LocalResolver {
         return if (getPreferences().dnsRulesEnabled) {
             DnsRuleResolver(applicationContext)
         } else {
-            null
+            StaticDnsRuleResolver()
         }
     }
 

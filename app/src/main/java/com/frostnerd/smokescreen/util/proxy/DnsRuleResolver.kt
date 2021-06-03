@@ -42,10 +42,6 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
     private var cachedWildcardResolved = MaxSizeMap<Int, String>(maxWildcardResolvedCacheSize, 30)
     private var cachedNonIncluded = HashSet<Int>(15)
 
-    private val staticRules = mapOf<String, List<Record<*>>>(
-        "use-application-dns.net" to emptyList()
-    )
-
     private var previousRefreshJob:Job? = null
 
     init {
@@ -204,7 +200,7 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
     }
 
     override fun canResolve(question: Question): Boolean {
-        if(staticRules.containsKey(question.name?.toString()?.lowercase())) {
+        if(StaticDnsRuleResolver.staticRules.containsKey(question.name?.toString()?.lowercase())) {
             return true
         }
         return if ((ruleCount == 0 || (ruleCount != null && ruleCount == whitelistCount)) || (question.type != Record.TYPE.A && question.type != Record.TYPE.AAAA)) {
@@ -230,8 +226,8 @@ class DnsRuleResolver(context: Context) : LocalResolver(false) {
     }
 
     override fun resolve(question: Question): List<Record<*>> {
-        if(staticRules.containsKey(question.name?.toString()?.lowercase())) {
-            return staticRules[question.name?.toString()?.lowercase()]!!
+        if(StaticDnsRuleResolver.staticRules.containsKey(question.name?.toString()?.lowercase())) {
+            return StaticDnsRuleResolver.staticRules[question.name?.toString()?.lowercase()] ?: emptyList()
         }
         val result = resolveResults.remove(question.hashCode())
         return result?.let {
