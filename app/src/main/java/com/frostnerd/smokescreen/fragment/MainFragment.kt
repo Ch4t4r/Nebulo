@@ -379,6 +379,8 @@ class MainFragment : Fragment() {
         // But if a "good" server has a bad connection, chances are the smaller ones do as well
         // And in that case the smaller server should be measured on the bigger ones to have a point of reference
         // as the values I chose are between average to best-case, not worst-case.
+        if(!context.getPreferences().compareDnsSpeedsAtLaunch) return
+
         launchWithLifecycle {
             val httpsEngine =  createHttpCronetEngineIfInstalled(context)
             val fastServerAverage = (AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(

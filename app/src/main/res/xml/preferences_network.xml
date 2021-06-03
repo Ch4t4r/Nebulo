@@ -37,5 +37,11 @@
                 android:key="pause_on_captive_portal"
                 android:summary="@string/summary_pause_on_captiveportal"
                 android:title="@string/title_pause_on_captiveportal" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="compare_dns_speeds"
+            android:summary="@string/summary_test_speed_comparison"
+            android:title="@string/title_test_speed_comparison"/>
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
