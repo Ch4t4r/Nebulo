@@ -11,8 +11,8 @@ android {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 78
-        versionName "2.1.0"
+        versionCode 79
+        versionName "2.1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         def sentryDSN = String.valueOf(getSystemVariableOrDefault("NEBULO_SENTRY_DSN", "dummy"))
@@ -95,13 +95,13 @@ android {
             matchingFallbacks = ['fdroid']
             dimension "releaseChannel"
             versionNameSuffix "-adblock"
-            versionCode 78
+            versionCode 79
         }
         fdroid {
             matchingFallbacks = ['default']
             dimension "releaseChannel"
             versionNameSuffix "-adblock"
-            versionCode 78
+            versionCode 79
         }
     }
     packagingOptions {
