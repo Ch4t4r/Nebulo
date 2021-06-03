@@ -45,7 +45,7 @@ class VpnWatchDog(private val onVpnDisconnected:() -> Unit,
     }
 
     private suspend fun checkConnection() {
-        delay(3000)
+        delay(30000)
         log("Beginning VPN-check")
         val networks = connectivityManager.allNetworks.toList().filterNotNull()
         val isStillRunning = networks.any { connectivityManager.isVpnNetwork(it) } || networks.isEmpty()
