@@ -245,12 +245,17 @@ class DnsSpeedTest(context:Context,
                 return null
             }
         } catch (ex:Throwable) {
+            log("Request to failed: $ex")
             return null
         } finally {
             connection?.disconnect()
             if(wasEstablished) {
-                connection?.inputStream?.closeSilently()
-                connection?.outputStream?.closeSilently()
+                try {
+                    connection?.inputStream?.closeSilently()
+                    connection?.outputStream?.closeSilently()
+                } catch (ex: java.lang.Exception) {
+                    log("Could not close streams of failed request: $ex")
+                }
             }
         }
     }
