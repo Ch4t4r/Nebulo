@@ -140,4 +140,6 @@
     <string name="summary_excluded_apps_non_vpn">Исключите приложения из приложения здесь, например, если они больше не могут подключаться к Интернету - выбранные приложения больше не будут использовать DNS-over-HTTPS или DNS-over-TLS.
 \n
 \nВ режиме, отличном от VPN, это не действует.</string>
+    <string name="title_test_speed_comparison">Сравнение скорости сервера</string>
+    <string name="summary_test_speed_comparison">Определите задержку до популярных серверов, чтобы лучше определить задержку текущего активного сервера</string>
 </resources>

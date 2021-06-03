@@ -106,4 +106,6 @@
     <string name="crashreporting_type_full">Tam (İstatistiği ve hata ayıklama verilerini bildir)</string>
     <string name="crashreporting_type_minimal">Minimal (Sadece Android ve uygulama sürümü)</string>
     <string name="crashreporting_type_off">Kapalı (Kilitlenme raporları göndermeyin)</string>
+    <string name="title_test_speed_comparison">Sunucu hızı karşılaştırması</string>
+    <string name="summary_test_speed_comparison">Mevcut aktif sunucunun gecikmesini daha iyi belirtmek için popüler sunucuların gecikmesini belirleyin</string>
 </resources>

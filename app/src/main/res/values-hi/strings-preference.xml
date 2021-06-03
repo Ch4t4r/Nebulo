@@ -129,4 +129,6 @@
     <string name="summary_nonvpn_help_generic">वीपीएन एप्लिकेशन को कॉन्फ़िगर करने के तरीके के बारे में निर्देश प्राप्त करने के लिए यहां क्लिक करें</string>
     <string name="nonvpn_help_generic_title">जेपीएन ऐप्स</string>
     <string name="title_fallback_dns">आंतरिक DNS सर्वर</string>
+    <string name="title_test_speed_comparison">सर्वर गति तुलना</string>
+    <string name="summary_test_speed_comparison">वर्तमान सक्रिय सर्वर की विलंबता को बेहतर ढंग से इंगित करने के लिए लोकप्रिय सर्वरों के लिए विलंबता निर्धारित करें</string>
 </resources>

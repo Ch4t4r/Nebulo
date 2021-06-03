@@ -149,7 +149,7 @@
     <string name="summary_pause_on_captiveportal">Don\'t use DoH if a captive portal is detected. It will automatically be resumed shortly after logging in.\nDisabling it might prevent you from opening the captive portal site to log in</string>
 
     <string name="title_test_speed_comparison">Server speed comparison</string>
-    <string name="summary_test_speed_comparison">When on the main screen, determine the latency to popular servers to better indicate the latency of the current active server</string>
+    <string name="summary_test_speed_comparison">Determine the latency to popular servers to better indicate the latency of the current active server</string>
 
     <string name="preference_category_querylogging">Query logging</string>
 

@@ -140,4 +140,7 @@
     <string name="summary_excluded_apps_non_vpn">Sluit apps uit van de app hier, bijvoorbeeld als ze geen verbinding meer kunnen maken met het internet - geselecteerde apps gebruiken geen DNS-over-HTTPS of DNS-over-TLS meer.
 \n
 \nDit heeft geen effect in de niet-VPN-modus.</string>
+
+    <string name="title_test_speed_comparison">Vergelijking van serversnelheid</string>
+    <string name="summary_test_speed_comparison">Bepaal in het hoofdscherm de latentie naar populaire servers om de latentie van de huidige actieve server beter weer te geven</string>
 </resources>

@@ -129,4 +129,6 @@
     <string name="title_language">Bahasa</string>
     <string name="summary_nonvpn_help_generic">Klik di sini untuk mendapatkan instruksi tentang cara mengkonfigurasi aplikasi VPN</string>
     <string name="nonvpn_help_generic_title">Aplikasi VPN umum</string>
+    <string name="title_test_speed_comparison">Perbandingan kecepatan server</string>
+    <string name="summary_test_speed_comparison">Tentukan latensi ke server populer untuk lebih menunjukkan latensi dari server aktif saat ini</string>
 </resources>

@@ -140,4 +140,6 @@
     <string name="summary_excluded_apps_non_vpn">Excluir aplicações da aplicação aqui, por exemplo, se elas não conseguirem mais se conectar à Internet - aplicações selecionadas não usarão mais DNS-over-HTTPS ou DNS-over-TLS.
 \n
 \nIsto não tem efeito no modo não VPN.</string>
+    <string name="title_test_speed_comparison">Comparação da velocidade do servidor</string>
+    <string name="summary_test_speed_comparison">Determinar a latência dos servidores populares para melhor indicar a latência do servidor activo actual</string>
 </resources>

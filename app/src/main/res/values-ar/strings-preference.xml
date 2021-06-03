@@ -140,4 +140,6 @@
     <string name="summary_excluded_apps_non_vpn">استبعد التطبيقات من التطبيق هنا ، على سبيل المثال إذا لم يعد بإمكانها الاتصال بالإنترنت - لن تستخدم التطبيقات المحددة DNS-over-HTTPS أو DNS-over-TLS بعد الآن.
 \n
 \nهذا ليس له أي تأثير في وضع غير VPN.</string>
+    <string name="title_test_speed_comparison">مقارنة سرعة الخادم</string>
+    <string name="summary_test_speed_comparison">حدد وقت الاستجابة للخوادم الشائعة للإشارة بشكل أفضل إلى زمن انتقال الخادم النشط الحالي</string>
 </resources>
