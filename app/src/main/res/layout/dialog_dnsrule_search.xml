@@ -2,43 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:padding="16dp">
 
     <TextView
             android:layout_width="wrap_content"
-            android:text="@string/dialog_dnsrules_search_message"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_dnsrules_search_message" />
 
     <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchTermTIL"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
-            android:layout_marginTop="32dp"
-            android:id="@+id/searchTermTIL"
-            android:visibility="visible"
-            app:errorEnabled="true"
             android:textColorHint="?android:attr/textColorSecondary"
-            android:layout_height="wrap_content">
+            android:visibility="visible"
+            app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:hint="@string/hint_searchterm"
                 android:id="@+id/searchTerm"
-                android:text="example.com"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_searchterm"
                 android:inputType="textUri"
-                android:textDirection="locale"
+                android:text="example.com"
                 android:textAlignment="viewStart"
-                tools:ignore="HardcodedText"
-                android:layout_height="wrap_content"/>
+                android:textDirection="locale"
+                tools:ignore="HardcodedText" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-            android:layout_width="wrap_content"
             android:id="@+id/searchResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    <TextView
+            android:id="@+id/searchResultRule"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
 </LinearLayout>

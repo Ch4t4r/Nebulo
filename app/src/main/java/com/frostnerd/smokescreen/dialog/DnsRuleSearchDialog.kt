@@ -59,7 +59,13 @@ class DnsRuleSearchDialog(
                 val hostSource = rule?.importedFrom?.let { getHostSourceForId(it) }
                 if(isActive) launch(Dispatchers.Main) {
                     if(rule == null) displayRuleSource(wasFound = false, isUserRule = false, null)
-                    else displayRuleSource(wasFound = true, isUserRule = rule.importedFrom == null, hostSource)
+                    else {
+                        displayRuleSource(wasFound = true, isUserRule = rule.importedFrom == null, hostSource)
+                        val readableHost = DnsRuleDialog.printableHost(rule.host)
+                        if(readableHost != rule.host) {
+                            view.searchResultRule.text = readableHost
+                        }
+                    }
                 }
             }
             else clearSearchResultText()
@@ -129,5 +135,6 @@ class DnsRuleSearchDialog(
 
     private fun clearSearchResultText() {
         view.searchResult.text = ""
+        view.searchResultRule.text = ""
     }
 }
