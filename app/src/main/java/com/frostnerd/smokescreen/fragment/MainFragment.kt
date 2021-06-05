@@ -63,7 +63,6 @@ class MainFragment : Fragment() {
     private var proxyState:ProxyState = ProxyState.NOT_RUNNING
     private var vpnStateReceiver: BroadcastReceiver? = null
     private var latencyCheckJob:Job? = null
-    private var currentDisplayedServerHash:Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,9 +82,7 @@ class MainFragment : Fragment() {
         if(proxyState != previousProxyState) {
             updateVpnIndicators()
         }
-        if(proxyState != previousProxyState || currentDisplayedServerHash == null) {
-            displayServer(getPreferences().dnsServerConfig)
-        }
+        displayServer(getPreferences().dnsServerConfig)
         runLatencyCheck()
     }
 
@@ -207,8 +204,6 @@ class MainFragment : Fragment() {
     }
 
     private fun displayServer(config: DnsServerInformation<*>) {
-        if(config.hashCode() == currentDisplayedServerHash) return
-        currentDisplayedServerHash = config.hashCode()
         serverName.text = config.name
         serverURL.text = when(config.type) {
             ServerType.DOH -> (config as HttpsDnsServerInformation).servers.firstOrNull()?.address?.getUrl(
