@@ -368,7 +368,7 @@ class RuleImportService : IntentService("RuleImportService") {
     }
 
     private val wwwRegex = Regex("^www\\.")
-    private fun processLine(matcher: Matcher, source: HostSource, isWhitelist:Boolean): Set<DnsRule> {
+    private fun processLine(matcher: Matcher, source: HostSource, isWhitelist:Boolean): Array<DnsRule> {
         val defaultTargetV4 = if(isWhitelist) "" else "0"
         val defaultTargetV6 = if(isWhitelist) "" else "1"
         when {
@@ -393,7 +393,7 @@ class RuleImportService : IntentService("RuleImportService") {
             matcher == hostsMatcher -> {
                 return if(isWhitelist) {
                     val host = matcher.group(2)!!.replace(wwwRegex, "")
-                    setOf(
+                    arrayOf(
                         DnsRule(
                             Record.TYPE.ANY,
                             host,
@@ -428,37 +428,37 @@ class RuleImportService : IntentService("RuleImportService") {
         targetV6: String? = null,
         type: Record.TYPE,
         source: HostSource
-    ): Set<DnsRule> {
+    ): Array<DnsRule> {
         var isWildcard = false
-        val alteredHost:Set<String> = host.let {
+        val alteredHost:Array<String> = host.let {
             if (it.contains("*")) {
                 isWildcard = true
                 if (source.isFileSource) {
-                    setOf(
+                    arrayOf(
                         it.replace("**", "%%").replace("*", "%")
                             .replace(wildcardNormalisationRegex, "**")
                     )
                 } else {
                     if (it.startsWith("*.")) {
-                        setOf(
+                        arrayOf(
                             it.replace(leadingWildcardRegex, ""),
                             it.replace(leadingWildcardRegex, "**.").replace("**", "%%")
                                 .replace("*", "%%")
                                 .replace(wildcardNormalisationRegex, "**")
                         )
                     } else {
-                        setOf(
+                        arrayOf(
                             it.replace("**", "%%")
                                 .replace("*", "%%")
                                 .replace(wildcardNormalisationRegex, "**")
                         )
                     }
                 }
-            } else setOf(it)
+            } else arrayOf(it)
         }
         return alteredHost.map {
             DnsRule(type, it, target, targetV6, source.id, isWildcard)
-        }.toSet()
+        }.toTypedArray()
     }
 
     override fun onDestroy() {
