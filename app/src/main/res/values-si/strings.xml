@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_invalid_url">කරුණාකර වලංගු ඒ.ස.නි. (url) ලබා දෙන්න</string>
+    <string name="all_close">වසන්න</string>
+    <string name="open_app">යෙදුම විවෘත කරන්න</string>
+    <string name="information">තොරතුරු</string>
+    <string name="all_yes">ඔව්</string>
+    <string name="all_no">නැහැ</string>
+    <string name="all_start">අරඹන්න</string>
+    <string name="all_stop">නවත්වන්න</string>
+</resources>

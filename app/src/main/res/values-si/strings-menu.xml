@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_show_on_fdroid">එෆ්-ඩ්‍රොයිඩ් හි පෙන්වන්න</string>
+    <string name="menu_about">මෙම යෙදුම ගැන</string>
+    <string name="menu_create_shortcut">සේවාදායක කෙටිමඟක් සාදන්න</string>
+    <string name="menu_settings">සැකසුම්</string>
+    <string name="menu_main">යෙදුම් තත්ත්වය</string>
+</resources>

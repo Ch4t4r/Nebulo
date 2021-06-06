@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="changelog_build_29_1">I server che bloccano le pubblicità vengono ora mostrati nelle build non-playstore (inclusa questa!)</string>
-    <string name="changelog_build_29_2">Aggiunto DNS AdGuard</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_build_29_1">I server che bloccano le pubblicità vengono ora mostrati nelle build non-playstore (inclusa questa!)</string>
+    <string name="changelog_build_29_2">Aggiunto AdGuard DNS</string>
     <string name="changelog_build_41_adblocker_1">Aggiunte due nuove fonti di regole DNS</string>
-    </resources>
+</resources>

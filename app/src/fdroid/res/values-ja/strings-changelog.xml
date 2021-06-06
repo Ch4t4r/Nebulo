@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog_build_29_1">広告をブロックするサーバはノンプレイストアで表示されます（これも含む）</string>
+    <string name="changelog_build_29_1">広告ブロックするサーバーは、GooglePlay以外から入手したアプリにのみ含まれています（この変更履歴も含みます）</string>
     <string name="changelog_build_29_2">AdGuard DNSを追加しました</string>
     <string name="changelog_build_41_adblocker_1">2つの新しいDNSルールソースを追加しました</string>
 </resources>

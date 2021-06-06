@@ -98,13 +98,13 @@
     <string name="dialog_clearuserrules_title">すべてのDNSルールをクリアしますか？</string>
     <string name="dialog_deletehostsource_message">ホスト・ソース「 %1$s」 を削除してもよろしいですか\?これを元に戻すことはできません。このソースのホストは削除されます。</string>
     <string name="dialog_deletehostsource_title">%1$sを削除しますか\?</string>
-    <string name="dialog_speedtest_useserver_message">サーバー %1$s を使用しますか？それは %3$d 中 %2$d にランク付けされ、応答時間は %4$d ms です。</string>
+    <string name="dialog_speedtest_useserver_message">サーバー %1$s を使用しますか？このサーバーは %3$d 個のサーバーのうち %2$d 位にランク付けされており、応答時間は %4$d ms です。</string>
     <string name="dialog_speedtest_useserver_title">サーバーを選択</string>
-    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1$d のサーバ ーをテストしました。
-\n DoT サーバーのうち、%2$d 個のサーバーはアクセス可能、%3$d 個 のサーバーがアクセスできませんでした。
-\n DoH サーバーのうち、%4$d 個のサーバーはアクセス可能、%5$d 個のサーバーがアクセスできませんでした。
+    <string name="dialog_speedresult_message" tools:ignore="PluralsCandidate">%1$d 個のサーバ ーのテストが完了しました。
+\n 登録済みのDoT サーバーのうち、%2$d 個のサーバーはアクセス可能、%3$d 個 のサーバーがアクセスできませんでした。
+\n 登録済みのDoH サーバーのうち、%4$d 個のサーバーはアクセス可能、%5$d 個のサーバーがアクセスできませんでした。
 \n 平均応答時間: %6$d ms です。
-\n 
+\n
 \n 最も速いサーバー: %7$s
 \n 最も遅いサーバー: %8$s</string>
     <string name="dialog_speedresult_title">スピードテスト結果</string>
