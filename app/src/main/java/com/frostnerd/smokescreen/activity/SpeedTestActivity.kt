@@ -195,8 +195,8 @@ class SpeedTestActivity : BaseActivity() {
         if(wasStartedBefore) prepareList()
         testJob = launchWithLifecycle {
             prepareListJob?.join()
-            val engine = if(BuildConfig.SHOW_DOQ) createQuicCronetEngineIfInstalled(this@SpeedTestActivity) else null
-            val httpsEngine =  createHttpCronetEngineIfInstalled(this@SpeedTestActivity)
+            val engine = if(BuildConfig.SHOW_DOQ) createQuicEngineIfInstalled(this@SpeedTestActivity, true) else null
+            val httpsEngine =  createQuicEngineIfInstalled(this@SpeedTestActivity, false)
             testRunning = true
             wasStartedBefore = true
             val testsLeft = testResults!!.shuffled()

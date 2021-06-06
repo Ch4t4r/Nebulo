@@ -68,7 +68,8 @@ class NebuloAppIntro:AppIntro() {
             scope.launch {
                 for(server in chunks[i]) {
                     if(!isActive) break
-                    val testResult = DnsSpeedTest(this@NebuloAppIntro, server, log = {}, cronetEngine = createQuicCronetEngineIfInstalled(this@NebuloAppIntro)).runTest(3)
+                    val testResult = DnsSpeedTest(this@NebuloAppIntro, server, log = {},
+                        quicOnlyEngine = createQuicEngineIfInstalled(this@NebuloAppIntro, true)).runTest(3)
                     synchronized(speedTestResults) {
                         speedTestResults[server] = testResult
                     }

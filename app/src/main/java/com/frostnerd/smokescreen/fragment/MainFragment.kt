@@ -377,7 +377,7 @@ class MainFragment : Fragment() {
         if(!context.getPreferences().compareDnsSpeedsAtLaunch) return
 
         launchWithLifecycle {
-            val httpsEngine =  createHttpCronetEngineIfInstalled(context)
+            val httpsEngine =  createQuicEngineIfInstalled(context, false)
             val fastServerAverage = (AbstractHttpsDNSHandle.suspendUntilKnownServersArePopulated(
                 1500
             ) {
@@ -389,8 +389,8 @@ class MainFragment : Fragment() {
                     context,
                     it as DnsServerInformation<*>,
                     log = {},
-                    cronetEngine = null, /* We do not need quic here*/
-                    httpsCronetEngine = httpsEngine
+                    quicOnlyEngine = null, /* We do not need quic here*/
+                    httpsQuicEngine = httpsEngine
                 ).runTest(4)
             }.takeIf {
                 it.isNotEmpty()

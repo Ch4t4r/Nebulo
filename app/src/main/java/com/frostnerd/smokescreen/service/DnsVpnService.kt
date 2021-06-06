@@ -1246,7 +1246,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
 
         var forwardingMode = VPNTunnelProxy.ForwardingMode.MIXED
 
-        val httpCronetEngine = createHttpCronetEngineIfInstalled(this)
+        val httpQuicEngine = createQuicEngineIfInstalled(this, false)
         serverConfig.httpsConfiguration?.forEach {
             forwardingMode = VPNTunnelProxy.ForwardingMode.NO_POLLABLE
             val addresses = serverConfig.getIpAddressesFor(ipv4Enabled, ipv6Enabled, it)
@@ -1264,7 +1264,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                     }
                 },
                 mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock,
-                cronetEngine = httpCronetEngine
+                quicEngine = httpQuicEngine
             )
             handle.ipv4Enabled = ipv4Enabled
             handle.ipv6Enabled = ipv6Enabled
@@ -1294,8 +1294,8 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             if (defaultHandle == null) defaultHandle = handle
             else handles.add(handle)
         }
-        val cronetEngine = serverConfig.quicConfiguration?.let { createQuicCronetEngineIfInstalled(this, *it.toTypedArray()) }
-        if(serverConfig.quicConfiguration != null && cronetEngine == null) {
+        val quicEngine = serverConfig.quicConfiguration?.let { createQuicEngineIfInstalled(this, true, *it.toTypedArray()) }
+        if(serverConfig.quicConfiguration != null && quicEngine == null) {
             showCronetErrorNotification()
             destroy(true)
             return
@@ -1315,7 +1315,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                         }
                     }
                 }, mapQueryRefusedToHostBlock = getPreferences().mapQueryRefusedToHostBlock,
-                cronetEngine!!
+                quicEngine!!
             )
             handle.ipv4Enabled = ipv4Enabled
             handle.ipv6Enabled = ipv6Enabled

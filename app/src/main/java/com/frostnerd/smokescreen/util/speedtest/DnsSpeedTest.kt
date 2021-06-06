@@ -5,18 +5,19 @@ import androidx.annotation.IntRange
 import com.frostnerd.dnstunnelproxy.DnsServerInformation
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
+import com.frostnerd.encrypteddnstunnelproxy.QuicEngine
 import com.frostnerd.encrypteddnstunnelproxy.ServerConfiguration
 import com.frostnerd.encrypteddnstunnelproxy.closeSilently
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.TLSUpstreamAddress
-import com.frostnerd.smokescreen.createHttpCronetEngineIfInstalled
+import com.frostnerd.smokescreen.QuicEngineImpl
+import com.frostnerd.smokescreen.createQuicEngineIfInstalled
 import com.frostnerd.smokescreen.type
 import com.frostnerd.smokescreen.util.ServerType
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.chromium.net.CronetEngine
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.dnsmessage.Question
 import org.minidns.record.Record
@@ -50,8 +51,8 @@ class DnsSpeedTest(context:Context,
                    val server: DnsServerInformation<*>,
                    private val connectTimeout: Int = 2500,
                    private val readTimeout:Int = 1500,
-                   private val cronetEngine: CronetEngine?,
-                   httpsCronetEngine: CronetEngine? = null,
+                   private val quicOnlyEngine: QuicEngine?,
+                   httpsQuicEngine: QuicEngine? = null,
                    val log:(line:String) -> Unit) {
     private val httpClient by lazy(LazyThreadSafetyMode.NONE) {
         OkHttpClient.Builder()
@@ -65,8 +66,8 @@ class DnsSpeedTest(context:Context,
             it.urlCreator.address
         })
     }
-    private val _httpsCronetEngine by lazy(LazyThreadSafetyMode.NONE) {
-        httpsCronetEngine ?: createHttpCronetEngineIfInstalled(context)
+    private val _quicEngine by lazy(LazyThreadSafetyMode.NONE) {
+        httpsQuicEngine ?: createQuicEngineIfInstalled(context, false)
     }
 
     companion object {
@@ -94,7 +95,7 @@ class DnsSpeedTest(context:Context,
                 ServerType.DOH -> {
                     server as HttpsDnsServerInformation
                     server.serverConfigurations.values.forEach {
-                        latencies += if(_httpsCronetEngine == null) {
+                        latencies += if(_quicEngine == null) {
                             if(firstPass) testHttps(it)
                             testHttps(it) ?: 0
                         } else {
@@ -107,7 +108,7 @@ class DnsSpeedTest(context:Context,
                 ServerType.DOQ -> {
                     @Suppress("UNCHECKED_CAST")
                     (server as DnsServerInformation<QuicUpstreamAddress>).servers.forEach {
-                        if(cronetEngine != null) {
+                        if(quicOnlyEngine != null) {
                             if(firstPass) testQuic(it.address)
                             latencies += testQuic(it.address) ?: 0
                         }
@@ -117,7 +118,7 @@ class DnsSpeedTest(context:Context,
             firstPass = false
         }
         if(server.type == ServerType.DOH) {
-            if(_httpsCronetEngine == null) httpClient.connectionPool.evictAll()
+            if(_quicEngine == null) httpClient.connectionPool.evictAll()
         }
         return when (strategy) {
             Strategy.BEST_CASE -> {
@@ -213,7 +214,7 @@ class DnsSpeedTest(context:Context,
         var connection:HttpURLConnection? = null
         var wasEstablished = false
         try {
-            connection = _httpsCronetEngine!!.openConnection(url) as HttpURLConnection
+            connection = _quicEngine!!.openConnection(url) as HttpURLConnection
             connection.connectTimeout = connectTimeout
             if(config.requestHasBody) {
                 val body = config.bodyCreator?.createBody(msg, config.urlCreator.address) ?: return null
@@ -307,7 +308,7 @@ class DnsSpeedTest(context:Context,
         val msg = createTestDnsPacket()
         try {
             val start = System.currentTimeMillis()
-            connection = cronetEngine!!.openConnection(url) as HttpURLConnection
+            connection = quicOnlyEngine!!.openConnection(url) as HttpURLConnection
             connection.connectTimeout = connectTimeout
             connection.requestMethod = "POST"
             connection.setRequestProperty("Content-Type", "application/dns-message")

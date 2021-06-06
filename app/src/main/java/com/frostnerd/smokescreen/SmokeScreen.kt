@@ -144,7 +144,7 @@ class SmokeScreen : Application() {
         log("Application created.")
         handleFallbackDns()
         loadKnownDNSServers()
-        AbstractQuicDnsHandle.installProvider(this) {}
+        QuicEngineImpl.installNetworkEngine(this)
     }
 
     private fun handleFallbackDns() {

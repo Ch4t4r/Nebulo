@@ -16,13 +16,12 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.dnstunnelproxy.KnownDnsServers
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.QuicEngine
 import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
-import com.google.android.gms.net.CronetProviderInstaller
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
 import okhttp3.internal.toHexString
-import org.chromium.net.CronetEngine
 import java.util.*
 
 
@@ -135,23 +134,8 @@ fun loadKnownDNSServers() {
     KnownDnsServers
 }
 
-fun createQuicCronetEngineIfInstalled(context: Context, vararg addresses: QuicUpstreamAddress): CronetEngine? {
-    return if(CronetProviderInstaller.isInstalled()) try {
-        AbstractQuicDnsHandle.createEngine(context, *addresses)
-    } catch (ex:Throwable) { null }
-    else null
-}
-
-fun createHttpCronetEngineIfInstalled(context: Context): CronetEngine? {
-    return if(CronetProviderInstaller.isInstalled()) try {
-        val cacheDir = context.cacheDir.resolve("cronetcachehttp")
-        cacheDir.mkdir()
-        return CronetEngine.Builder(context)
-            .enableHttp2(true)
-            .enableBrotli(true)
-            .enableQuic(true)
-            .setStoragePath(cacheDir.path)
-            .build()
-    } catch (ex:Throwable) { null }
-    else null
+fun createQuicEngineIfInstalled(context: Context, quicOnly:Boolean, vararg addresses: QuicUpstreamAddress): QuicEngine? {
+    return if (QuicEngineImpl.providerInstalled) {
+        QuicEngineImpl(context, quicOnly, *addresses)
+    } else null
 }

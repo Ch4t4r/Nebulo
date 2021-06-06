@@ -2,10 +2,10 @@ package com.frostnerd.smokescreen.util.proxy
 
 import com.frostnerd.dnstunnelproxy.AddressCreator
 import com.frostnerd.dnstunnelproxy.UpstreamAddress
+import com.frostnerd.encrypteddnstunnelproxy.QuicEngine
 import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.vpntunnelproxy.FutureAnswer
-import org.chromium.net.CronetEngine
 import org.minidns.dnsmessage.DnsMessage
 import org.minidns.record.A
 import org.minidns.record.AAAA
@@ -36,7 +36,7 @@ class ProxyQuicHandler(
     connectTimeout: Int,
     val queryCountCallback: (() -> Unit)? = null,
     val mapQueryRefusedToHostBlock:Boolean,
-    engine:CronetEngine
+    engine: QuicEngine
 ):AbstractQuicDnsHandle(upstreamAddresses, connectTimeout, engine) {
     override val handlesSpecificRequests: Boolean = ProxyBypassHandler.knownSearchDomains.isNotEmpty()
     private val dummyUpstreamAddress = UpstreamAddress(AddressCreator.fromHostAddress("0.0.0.0"), 1)
