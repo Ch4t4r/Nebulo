@@ -55,11 +55,6 @@ android {
             keyPassword getSystemVariableOrDefault("KEYSTORE_KEY_PASSWORD", "")
         }
     }
-    sourceSets {
-        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
-        debug.assets.srcDirs += files("$projectDir/schemas".toString())
-        fdroidofficial.res.srcDirs += "src/fdroid/res"
-    }
     buildTypes {
         release {
             minifyEnabled true
@@ -102,6 +97,17 @@ android {
             dimension "releaseChannel"
             versionNameSuffix "-adblock"
             versionCode 79
+        }
+    }
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        debug.assets.srcDirs += files("$projectDir/schemas".toString())
+        fdroidofficial.res.srcDirs += "src/fdroid/res"
+        fdroidofficial.java.srcDirs += "src/fdroidofficial/java"
+        fdroidofficial.java.srcDirs += "src/fdroidofficial/res"
+        fdroid.java.srcDirs += "src/cronet/java"
+        store {
+            java.srcDirs += "src/cronet/java"
         }
     }
     packagingOptions {
@@ -152,7 +158,8 @@ dependencies {
     implementation 'com.frostnerd.utilskt:general:1.0.26' // https://git.frostnerd.com/AndroidUtils/generalkt
     implementation 'com.frostnerd.utilskt:adapters:1.3.5' // https://git.frostnerd.com/AndroidUtils/Adapters
 
-    implementation 'com.google.android.gms:play-services-cronet:17.0.0'
+    storeImplementation 'com.google.android.gms:play-services-cronet:17.0.0'
+    fdroidImplementation 'com.google.android.gms:play-services-cronet:17.0.0'
 
     implementation 'androidx.work:work-runtime:2.5.0'
     implementation 'androidx.appcompat:appcompat:1.3.0-rc01'
