@@ -51,7 +51,12 @@ class QuicEngineImpl(context: Context, private val quicOnly:Boolean, vararg addr
 
     init {
         installNetworkEngine(context) {
-            engine = createEngine(context, *addresses)
+            engine = try {
+                createEngine(context, *addresses)
+            } catch (ex: Throwable) {
+                providerInstalled = false
+                null
+            }
         }
     }
 
