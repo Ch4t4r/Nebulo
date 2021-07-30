@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog_build_41_adblocker_1">Duas novas fontes de regras de DNS adicionadas</string>
-    <string name="changelog_build_29_2">AdGuard DNS adicionado</string>
-    <string name="changelog_build_29_1">A partir de agora os servidores que bloqueiam anúncios são mostrados em versões que não dependem de playstore (incluindo esta!)</string>
+    <string name="changelog_build_41_adblocker_1">Foram adicionadas duas novas fontes de regras de DNS</string>
+    <string name="changelog_build_29_2">Foi adicionado AdGuard DNS</string>
+    <string name="changelog_build_29_1">Agora os servidores que bloqueiam anúncios serão mostrados em versões que não dependem da Playstore (incluindo esta!)</string>
 </resources>
