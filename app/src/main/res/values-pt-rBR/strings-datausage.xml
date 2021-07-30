@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dialog_crashreportingusages_data_1">Dados de usuário</string>
+    <string name="dialog_crashreportingusages_data_1">Dados do usuário</string>
     <string name="dialog_crashreportingusages_data_2">Dados do dispositivo</string>
     <string name="dialog_crashreportingusages_data_3">Dados do App</string>
     <string name="dialog_crashreportingusages_data_4">Dados do sistema operativo</string>
-    <string name="dialog_crashreportingusages_data_user_1">ID aleatório para rastrear as falhas</string>
+    <string name="dialog_crashreportingusages_data_user_1">ID aleatória para rastrear bugs</string>
     <string name="dialog_crashreportingusages_data_device_1">Arquitetura do dispositivo (x86, arm, …)</string>
     <string name="dialog_crashreportingusages_data_device_2">Orientação da tela (retrato, paisagem)</string>
     <string name="dialog_crashreportingusages_data_device_3">Memória livre/usada (RAM)</string>
@@ -17,12 +17,12 @@
     <string name="dialog_crashreportingusages_data_device_10">Idioma</string>
     <string name="dialog_crashreportingusages_data_app_1">Hora de início do App</string>
     <string name="dialog_crashreportingusages_data_app_2">Versão do App</string>
-    <string name="dialog_crashreportingusages_data_app_3">Versão de base de dados</string>
+    <string name="dialog_crashreportingusages_data_app_3">Versão da base de dados</string>
     <string name="dialog_crashreportingusages_data_app_4">Nome do servidor de DNS</string>
-    <string name="dialog_crashreportingusages_data_app_5">Servidor de DNS principal</string>
-    <string name="dialog_crashreportingusages_data_app_6">Servidor de DNS secundário</string>
-    <string name="dialog_crashreportingusages_data_os_1">Nome (ex: android)</string>
-    <string name="dialog_crashreportingusages_data_os_2">Versão (ex: 8.1.0)</string>
+    <string name="dialog_crashreportingusages_data_app_5">Servidor principal de DNS</string>
+    <string name="dialog_crashreportingusages_data_app_6">Servidor secundário de DNS</string>
+    <string name="dialog_crashreportingusages_data_os_1">Nome (p.ex: Android)</string>
+    <string name="dialog_crashreportingusages_data_os_2">Versão (p.ex: 8.1.0)</string>
     <string name="dialog_crashreportingusages_data_os_3">Versão do kernel</string>
-    <string name="dialog_crashreportingusages_data_os_4">Com Root (sim/não)</string>
+    <string name="dialog_crashreportingusages_data_os_4">Acesso Root (sim/não)</string>
 </resources>
