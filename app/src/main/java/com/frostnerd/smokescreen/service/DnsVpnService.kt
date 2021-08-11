@@ -263,8 +263,10 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             screenStateReceiver =
                 registerReceiver(listOf(Intent.ACTION_SCREEN_OFF, Intent.ACTION_SCREEN_ON)) {
                     if (it?.action == Intent.ACTION_SCREEN_OFF) {
+                        log("Screen is now off")
                         lastScreenOff = System.currentTimeMillis()
                     } else {
+                        log("Screen is now on")
                         if (lastScreenOff != null && System.currentTimeMillis() - lastScreenOff!! >= 60000) {
                             if (fileDescriptor != null && getPreferences().restartVpnOnNetworkChange) recreateVpn(false, null)
                         }
@@ -781,6 +783,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                         false
                     }
                 } else if(resolveResult != null){
+                    log("Address resolved.")
                     hideNoConnectionNotification()
                     false
                 } else {

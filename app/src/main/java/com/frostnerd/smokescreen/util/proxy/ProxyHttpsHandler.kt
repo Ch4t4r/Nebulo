@@ -73,6 +73,8 @@ class ProxyHttpsHandler(
 
     override fun remapDestination(destinationAddress: InetAddress, port: Int): UpstreamAddress {
         queryCountCallback?.invoke()
+        // The packet is forwarded using HTTPs and not via socket. Thus the host is specified by it's domain and we do not need to map an IP address.
+        // This dummy address is used to ensure that even if it were used the packet would end up nowhere.
         return dummyUpstreamAddress
     }
 
