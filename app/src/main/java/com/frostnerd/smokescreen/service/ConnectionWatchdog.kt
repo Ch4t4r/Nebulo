@@ -28,7 +28,7 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
                          private val debounceCallbackByMs:Long? = null,
                          private val badLatencyThresholdMs:Int = 750,
                          private val badPacketLossThresholdPercent:Int = 30,
-                         private val onBadServerConnection:() -> Unit,
+                         private val onBadServerConnection:() -> Boolean, // Returns whether state has been handled. Will be called until it returned true.
                          private val onBadConnectionResolved:() -> Unit,
                          private val logger:Logger?,
                          private val advancedLogging:Boolean = false
@@ -160,9 +160,12 @@ class ConnectionWatchdog(private val trafficStats: TrafficStats,
     private fun callCallback() {
         if(!running) return
         logFine("Calling callback.")
-        if(debounceCallbackByMs == null || lastCallbackCall == null) onBadServerConnection()
+        val handled = if(debounceCallbackByMs == null || lastCallbackCall == null) onBadServerConnection()
         else if(System.currentTimeMillis() - lastCallbackCall!! > debounceCallbackByMs) onBadServerConnection()
-        lastCallbackCall = System.currentTimeMillis()
+        else false
+        if(handled) {
+            lastCallbackCall = System.currentTimeMillis()
+        }
     }
 
     fun stop() {

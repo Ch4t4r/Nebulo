@@ -1427,7 +1427,12 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         if (!watchdogDisabledForSession && getPreferences().enableConnectionWatchDog) connectionWatchDog =
             currentTrafficStats?.let {
                 ConnectionWatchdog(it, 30 * 1000, 10 * 60 * 10000, onBadServerConnection = {
-                    showBadConnectionNotification()
+                    if (isScreenOn()) {
+                        showBadConnectionNotification()
+                        true
+                    } else {
+                        false
+                    }
                 }, onBadConnectionResolved = {
                     hideBadConnectionNotification()
                 }, logger = this@DnsVpnService.logger, advancedLogging = getPreferences().advancedLogging)

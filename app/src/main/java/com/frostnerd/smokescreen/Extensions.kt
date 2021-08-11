@@ -2,6 +2,7 @@ package com.frostnerd.smokescreen
 
 import android.app.*
 import android.content.*
+import android.hardware.display.DisplayManager
 import android.hardware.fingerprint.FingerprintManager
 import android.net.ConnectivityManager
 import android.net.Network
@@ -9,6 +10,7 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
+import android.view.Display
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -135,6 +137,13 @@ fun Context.registerLocalReceiver(
     }
     LocalBroadcastManager.getInstance(this).registerReceiver(actualReceiver, filter)
     return actualReceiver
+}
+
+fun Context.isScreenOn():Boolean {
+    val mgr = getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+    return mgr.displays.any {
+        it.state == Display.STATE_ON
+    }
 }
 
 fun AppCompatActivity.registerLocalReceiver(
