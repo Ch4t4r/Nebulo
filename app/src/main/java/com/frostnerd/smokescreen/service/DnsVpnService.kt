@@ -760,7 +760,9 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         serverConfig.forEachAddress { _, address ->
             val listener = address.addressCreator.whenResolveFinished { resolveException, resolveResult ->
                 if(resolveException != null) {
-                    showNoConnectionNotification()
+                    if(totalTries >= 5) {
+                        showNoConnectionNotification()
+                    }
                     if (resolveException is TimeoutException || resolveException is UnknownHostException) {
                         log("Address resolve failed: $resolveException. Total tries $totalTries/70")
                         if (totalTries <= 70) {
