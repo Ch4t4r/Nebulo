@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="notification_channel_default">Canal predefinido</string>
-    <string name="notification_channel_default_description">Canal predefinido para exibir as notificações</string>
+    <string name="notification_channel_default_description">Canal predefinido para mostrar as notificações</string>
     <string name="notification_channel_foreground_service">Canal de notificação permanente</string>
-    <string name="notification_channel_foreground_service_description">Canal que é usado para exibir as notificações permanentes</string>
+    <string name="notification_channel_foreground_service_description">Canal utilizado para notificações que não podem ser removidas pelo usuário</string>
     <string name="notification_channel_noconnection">Canal para avisos de conexão</string>
-    <string name="notification_channel_noconnection_description">Canal usado para exibir as notificações quando nenhuma conexão está disponível</string>
+    <string name="notification_channel_noconnection_description">Canal usado para mostrar as notificações quando nenhuma conexão está disponível</string>
     <string name="notification_channel_pin">Canal relacionado ao código PIN</string>
-    <string name="notification_channel_pin_description">Canal que é usado para as notificações relacionadas ao código PIN como, por exemplo, quando precisa ser digitado</string>
-    <string name="notification_main_text">Consultas enviadas para %1$s
-\n  
-\n%2$d Apps excluídos do DoH/DoT</string>
-    <string name="notification_main_text_with_secondary">Consultas enviadas para %1$s e %2$s
-\n  
-\n%3$d Apps excluídos do DoH/DoT</string>
-    <string name="notification_main_text_whitelist">Consultas enviadas para %1$s
-\n  
-\n%2$d Apps usando DoH/DoT</string>
-    <string name="notification_main_text_with_secondary_whitelist">Consultas enviadas para %1$s e %2$s
-\n  
-\n%3$d Apps usando DoH/DoT</string>
+    <string name="notification_channel_pin_description">Canal que é usado para as notificações relacionadas ao código PIN, p.ex., quando precisa ser fornecido</string>
+    <string name="notification_main_text">Consultas enviadas para o %1$s
+\n
+\n%2$d apps excluídos do Nebulo</string>
+    <string name="notification_main_text_with_secondary">Consultas enviadas para o %1$s e %2$s
+\n
+\n%3$d apps excluídos do Nebulo</string>
+    <string name="notification_main_text_whitelist">Consultas enviadas para o %1$s
+\n
+\n%2$d apps usando DoH/DoT</string>
+    <string name="notification_main_text_with_secondary_whitelist">Consultas enviadas para o %1$s e %2$s
+\n
+\n%3$d apps usando DoH/DoT</string>
     <string name="notification_main_title_tls">Nebulo (DoT)</string>
     <string name="notification_main_title_https">Nebulo (DoH)</string>
     <string name="notification_main_subtext">%1$d consultas até agora</string>
     <string name="notification_noconnection_title">Sem conexão</string>
-    <string name="notification_noconnection_text">O App não está encaminhando as consultas de DNS, porque não há conexão ou ele é instável</string>
-    <string name="notification_vpnrestart_title">Reiniciando o VPN</string>
-    <string name="notification_vpnrestart_text">O serviço de VPN será reiniciado em breve</string>
+    <string name="notification_noconnection_text">O App não está encaminhando as consultas de DNS, porque está sem conexão ou está muito instável</string>
+    <string name="notification_vpnrestart_title">Reiniciando a VPN</string>
+    <string name="notification_vpnrestart_text">O serviço da VPN será reiniciado em breve</string>
     <string name="notification_appcrash_title">Nebulo parou inesperadamente</string>
-    <string name="notification_appcrash_message">O Nebulo parou inesperadamente. Clique aqui para ir ao menu principal e se necessário, reiniciar o App</string>
+    <string name="notification_appcrash_message">O Nebulo parou inesperadamente. Clique aqui para ir ao menu principal e se for necessário, reinicie o App</string>
     <string name="notification_ruleimport_title">Importação de regras de DNS</string>
     <string name="notification_ruleimport_message">Importando a regras de DNS de %1$s (%2$s)</string>
     <string name="notification_ruleimport_secondarymessage">Preparando a importação…</string>
@@ -40,33 +40,33 @@
     <string name="notification_ruleexport_secondarymessage">Preparando a exportação…</string>
     <string name="notification_ruleexportfinished_title">Exportação de regras de DNS concluída</string>
     <string name="notification_ruleexportfinished_message">%1$d regras foram exportadas</string>
-    <string name="notification_pin_title">PIN necessário</string>
+    <string name="notification_pin_title">O PIN é necessário</string>
     <string name="notification_pin_message">O código PIN é necessário para realizar essa ação. Clique aqui para confirmá-lo</string>
-    <string name="notification_service_killed_title">Informações sobre otimização de bateria</string>
+    <string name="notification_service_killed_title">Informações sobre otimização da bateria</string>
     <string name="notification_service_killed_message">Parece que o App foi recentemente interrompido pelo sistema. Clique aqui para mais informações</string>
     <string name="notification_service_killed_ignore">Ignorar</string>
     <string name="notification_service_revoked_message">Clique aqui para reiniciar</string>
-    <string name="notification_service_revoked_title">Permissão de VPN revogada pelo sistema</string>
-    <string name="notification_simple_text">Servidor actual: %1$s</string>
-    <string name="notification_channel_high_priorty_description">Canal para as notificações de alta prioridade, por exemplo, quando o App perde a permissão para o VPN</string>
+    <string name="notification_service_revoked_title">Permissão da VPN revogada pelo sistema</string>
+    <string name="notification_simple_text">O servidor atual: %1$s</string>
+    <string name="notification_channel_high_priorty_description">Canal para as notificações de alta prioridade, p.ex., quando o App perde a permissão à VPN</string>
     <string name="notification_channel_high_priorty">Alta prioridade</string>
-    <string name="notification_dnsserver_portdiffers">Porta configurada %1$d não pôde ser usada.</string>
-    <string name="notification_dnsserver_message">O servidor de DNS está em execução em %1$s:%2$d. Encaminhamento de consultas usando aplicativo de terceiros</string>
-    <string name="notification_dnsserver_title">Funcionamento em modo não-VPN</string>
-    <string name="notification_dnsserver_message_iptables_failed">O servidor de DNS está em execução em %1$s:%2$d. Inicializando o iptables falhou, as consultas têm de ser encaminhadas com aplicativos de terceiros</string>
-    <string name="notification_dnsserver_message_iptables_active_no_ipv6">O servidor DNS está em execução em %1$s:%2$d. As consultas são encaminhadas utilizando iptables.
+    <string name="notification_dnsserver_portdiffers">A Porta %1$d configurada não podia ser usada.</string>
+    <string name="notification_dnsserver_message">O servidor de DNS está em execução em %1$s:%2$d. Encaminhamento de consultas via apps de terceiros</string>
+    <string name="notification_dnsserver_title">Funcionando em modo não-VPN</string>
+    <string name="notification_dnsserver_message_iptables_failed">O servidor de DNS está em execução em %1$s:%2$d. Inicialização do Iptables falhou, as consultas têm de ser encaminhadas via apps de terceiros</string>
+    <string name="notification_dnsserver_message_iptables_active_no_ipv6">O servidor de DNS está em execução em %1$s:%2$d. As consultas são encaminhadas via Iptables.
 \nAtenção: IPv6 está ativo, as consultas podem contornar o Nebulo.</string>
-    <string name="notification_dnsserver_message_iptables_active">O servidor DNS está em execução em %1$s:%2$d. As consultas são encaminhadas utilizando iptables</string>
-    <string name="notification_multipleuserswarning_text">Nebulo não conseguiu iniciar o seu VPN fictício por causa de uma falha no Android. Isto acontece quando há vários usuários no seu dispositivo.</string>
-    <string name="notification_multipleuserswarning_title">O VPN ficticio não pôde ser estabelecido</string>
-    <string name="notification_privatednswarning_text">Por favor, desative o Dns privado nas configurações do sistema para usar o Nebulo.</string>
-    <string name="notification_privatednswarning_title">Dns privados</string>
-    <string name="notification_bad_connection_text">A sua conexão com o servidor de DNS está má neste mesmo. Isto pode ter um impacto negativo na sua velocidade de navegação. Considere selecionar outro servidor.</string>
-    <string name="notification_bad_connection_title">Má conexão ao servidor</string>
+    <string name="notification_dnsserver_message_iptables_active">O servidor de DNS está em execução em %1$s:%2$d. As consultas são encaminhadas via Iptables</string>
+    <string name="notification_multipleuserswarning_text">O Nebulo não conseguiu iniciar a VPN fictícia por causa de uma falha no Android. Isto acontece quando há vários usuários no seu dispositivo.</string>
+    <string name="notification_multipleuserswarning_title">A VPN ficticia não podia ser estabelecida</string>
+    <string name="notification_privatednswarning_text">Por favor, desative o DNS privado em Configurações do sistema para usar o Nebulo.</string>
+    <string name="notification_privatednswarning_title">DNS privado</string>
+    <string name="notification_bad_connection_text">Neste mesmo a sua conexão com o servidor de DNS está ruim. Isto pode ter um impacto negativo na sua velocidade de navegação. Considere selecionar outro servidor.</string>
+    <string name="notification_bad_connection_title">Má conexão do servidor</string>
     <string name="notification_channel_badconnection">Canal de notificação de má conexão</string>
     <string name="notification_channel_badconnection_description">Canal utilizado para as notificações quando o Nebulo tem uma má conexão</string>
     <string name="notification_channel_dnsrules_description">Canal utilizado para a importação/exportação de regras de DNS</string>
     <string name="notification_channel_dnsrules">Canal de Notificação de Regras de DNS</string>
-    <string name="notification_cronet_failed_text">O DNS-sobre-QUIC não pode ser utilizado, porque não podia ser iniciado. Por favor, escolha outro servidor.</string>
+    <string name="notification_cronet_failed_text">O DNS-sobre-QUIC não pode ser usado, porque não podia ser iniciado. Por favor, escolha outro servidor.</string>
     <string name="notification_cronet_failed_title">Inicialização do QUIC falhou</string>
 </resources>
