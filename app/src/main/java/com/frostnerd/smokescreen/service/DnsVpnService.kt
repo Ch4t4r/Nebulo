@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.*
 import android.content.pm.PackageManager
+import android.hardware.display.DisplayManager
 import android.net.*
 import android.os.*
 import android.system.OsConstants
@@ -597,6 +598,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
 
         builder.addAction(NotificationCompat.Action(null, getString(R.string.notification_service_killed_ignore), ignorePendingIntent))
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(Notifications.ID_BAD_SERVER_CONNECTION, builder.build())
+        log("Showing bad connection notification.")
     }
 
     private fun hideBadConnectionNotification() {
@@ -1498,6 +1500,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         bypassHandlers.add(
             NoConnectionDnsHandle(
                 getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager,
+                getSystemService(Context.DISPLAY_SERVICE) as DisplayManager,
                 NoConnectionDnsHandle.Behavior.DROP_PACKETS,
                 regularConnectionCheckIntervalMs = 60000,
                 connectionListener = {
