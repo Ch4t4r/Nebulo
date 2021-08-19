@@ -28,12 +28,6 @@ import com.frostnerd.smokescreen.util.DeepActionState
 import com.frostnerd.smokescreen.util.LanguageContextWrapper
 import com.frostnerd.smokescreen.util.Notifications
 import com.frostnerd.smokescreen.util.preferences.VpnServiceState
-import com.google.android.play.core.appupdate.AppUpdateInfo
-import com.google.android.play.core.appupdate.AppUpdateManager
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.tasks.Task
 import kotlinx.android.synthetic.main.menu_cardview.view.*
 import kotlin.random.Random
 
@@ -393,43 +387,7 @@ class MainActivity : NavigationDrawerActivity() {
     }
 
     private fun tryCheckUpdate() {
-        if(BuildConfig.IN_APP_UPDATES) {
-            try {
-                val appUpdateManager: AppUpdateManager = AppUpdateManagerFactory.create(this)
-                val appUpdateInfoTask: Task<AppUpdateInfo> = appUpdateManager.appUpdateInfo
-                appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-                    try {
-                        if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                            val stalenessDays = appUpdateInfo.clientVersionStalenessDays() ?: Int.MIN_VALUE
-                            val shouldHoldUpdate: Boolean = getPreferences().holdUpdateUntil?.let { System.currentTimeMillis() >= it } ?: false
-                            val shouldUpdateImmediate = appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) && appUpdateInfo.updatePriority() >= 4
-                            var shouldUpdate = !shouldHoldUpdate && stalenessDays >= 24
-                            shouldUpdate =
-                                shouldUpdate || stalenessDays >= 14 && !shouldHoldUpdate && appUpdateInfo.updatePriority() >= 1
-                            shouldUpdate =
-                                shouldUpdate || stalenessDays >= 7 && !shouldHoldUpdate && appUpdateInfo.updatePriority() >= 2
-                            shouldUpdate =
-                                shouldUpdate || stalenessDays >= 3 && appUpdateInfo.updatePriority() >= 3
-                            shouldUpdate =
-                                shouldUpdate || stalenessDays >= 1 && appUpdateInfo.updatePriority() >= 4
-                            shouldUpdate = shouldUpdate || appUpdateInfo.updatePriority() >= 5
-                            if (shouldUpdate) {
-                                appUpdateManager.startUpdateFlowForResult(
-                                    appUpdateInfo,
-                                    if (shouldUpdateImmediate) AppUpdateType.IMMEDIATE else AppUpdateType.FLEXIBLE,
-                                    this,
-                                    REQUEST_APP_UPDATE
-                                )
-                            }
-                        }
-                    } catch (ex2: Throwable) {
-                        ex2.printStackTrace()
-                    }
-                }
-            } catch (ex: Throwable) {
-                ex.printStackTrace()
-            }
-        }
+        AppUpdaterImpl().checkAndTriggerUpdate(this, REQUEST_APP_UPDATE)
     }
 
     override fun createStyleOptions(): StyleOptions {

@@ -182,7 +182,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.9.1"
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
 
-    implementation 'com.google.android.play:core:1.10.0'
+    storeImplementation 'com.google.android.play:core:1.10.0'
+    fdroidImplementation 'com.google.android.play:core:1.10.0'
 }
 
 def getGitCommitHash() {
