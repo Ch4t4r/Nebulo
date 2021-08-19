@@ -1514,8 +1514,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
     }
 
     private fun createDnsCache(): SimpleDnsCache? {
-        val dnsCache: SimpleDnsCache?
-        dnsCache = if (getPreferences().useDnsCache) {
+        val dnsCache: SimpleDnsCache? = if (getPreferences().useDnsCache) {
             log("Creating DNS Cache.")
             val cacheControl: CacheControl = if (!getPreferences().useDefaultDnsCacheTime) {
                 NxDomainCacheControl(applicationContext)
