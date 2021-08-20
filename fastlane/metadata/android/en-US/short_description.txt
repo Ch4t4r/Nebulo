@@ -1,1 +1,1 @@
-A safe alternative to old standards.
+No-root, light-weight encrypt DNS client with emphasis on privacy and security.
