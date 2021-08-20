@@ -173,7 +173,7 @@ fun okhttpClientWithDoh(context: Context, forceDefaultFallback: Boolean = false)
 
         val dns = if(hasKnownIPAddresses) {
             val addressCreator = fallback.servers.first().address.addressCreator
-            val addresses = addressCreator.getResolveResultOrNull()?.toMutableList() ?: mutableListOf()
+            val addresses = addressCreator.resolveOrGetResultOrNull()?.toMutableList() ?: mutableListOf()
             if (addresses.isNullOrEmpty() && addressCreator.hostAddress != null) {
                 addresses.add(InetAddress.getByName(addressCreator.hostAddress))
             }
