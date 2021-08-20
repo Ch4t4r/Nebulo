@@ -26,7 +26,7 @@ import kotlinx.coroutines.*
  * You can contact the developer at daniel.wolf@frostnerd.com.
  */
 class VpnWatchDog(private val onVpnDisconnected:() -> Unit,
-                  private val context: Context) {
+                  context: Context) {
     private val supervisor = SupervisorJob()
     private val scope = CoroutineScope(supervisor + Dispatchers.IO)
     private var running = true

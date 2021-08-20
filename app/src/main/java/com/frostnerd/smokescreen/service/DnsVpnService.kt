@@ -1444,9 +1444,15 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                     hideBadConnectionNotification()
                 }, logger = this@DnsVpnService.logger, advancedLogging = getPreferences().advancedLogging)
             }
-        vpnWatchdog = VpnWatchDog({
-            showVpnRevokedNotification()
-        }, this)
+        vpnWatchdog = if (!runInNonVpnMode) {
+            vpnWatchdog?.stop()
+            VpnWatchDog({
+                showVpnRevokedNotification()
+            }, this)
+        } else {
+            vpnWatchdog?.stop()
+            null
+        }
     }
 
     private fun createQueryLogger(): QueryListener? {
