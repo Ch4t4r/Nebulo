@@ -182,6 +182,7 @@ dependencies {
     leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.1"
+    implementation 'com.squareup.okhttp3:okhttp-dnsoverhttps:4.9.1'
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
 
     storeImplementation 'com.google.android.play:core:1.10.0'

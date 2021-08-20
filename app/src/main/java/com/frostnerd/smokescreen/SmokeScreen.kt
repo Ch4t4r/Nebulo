@@ -269,7 +269,7 @@ class SmokeScreen : Application() {
             if(configServer.isNotBlank() && configServer.startsWith("http") && !configServer.contains("@")) {
                 log("Dynamically retrieving Sentry DSN from $configServer")
                 val request = Request.Builder().url(configServer).build()
-                OkHttpClient.Builder().build().newCall(request).enqueue(object : Callback {
+                okhttpClientWithDoh().newCall(request).enqueue(object : Callback {
                     override fun onFailure(call: Call, e: IOException) {
                         log("Sentry DSN retrieval failed with error: ${e.message}")
                     }

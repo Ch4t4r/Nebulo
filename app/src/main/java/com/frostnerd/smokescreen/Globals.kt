@@ -21,7 +21,11 @@ import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.OkHttpClient
+import okhttp3.dnsoverhttps.DnsOverHttps
 import okhttp3.internal.toHexString
+import java.net.InetAddress
 import java.util.*
 
 
@@ -138,4 +142,11 @@ fun createQuicEngineIfInstalled(context: Context, quicOnly:Boolean, vararg addre
     return if (QuicEngineImpl.providerInstalled) {
         QuicEngineImpl(context, quicOnly, *addresses)
     } else null
+}
+
+fun okhttpClientWithDoh(): OkHttpClient {
+    val clientForDoh = OkHttpClient()
+    val dns = DnsOverHttps.Builder().client(clientForDoh).url("https://1.1.1.1/dns-query".toHttpUrl())
+        .bootstrapDnsHosts(InetAddress.getByName("1.1.1.1"), InetAddress.getByName("1.0.0.1")).build()
+    return OkHttpClient.Builder().dns(dns).build()
 }
