@@ -21,6 +21,7 @@ android {
         buildConfigField("String", "COMMIT_HASH", '"' + getGitCommitHash() + '"')
         buildConfigField("String", "SENTRY_DSN", '"' + sentryDSN+ '"') // A valid Sentry DSN, or "dummy"
         buildConfigField("String", "SENTRY_DSN_CONFIGSERVER", '"' + sentryConfigServer + '"') // A host which returns a valid Sentry DSN on GET, or "dummy". If both are dummy Sentry is disabled.
+        buildConfigField("Boolean", "SENTRY_ENABLED", 'true')
         buildConfigField("Boolean", "SHOW_DOQ", 'false')
         buildConfigField("Boolean", "SHOW_INTRO", 'false')
         buildConfigField("Boolean", "IN_APP_UPDATES", "false")
@@ -91,6 +92,7 @@ android {
             dimension "releaseChannel"
             versionNameSuffix "-adblock"
             versionCode 80
+            buildConfigField("Boolean", "SENTRY_ENABLED", 'false')
         }
         fdroid {
             matchingFallbacks = ['default']

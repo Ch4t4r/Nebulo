@@ -216,7 +216,7 @@ class MainActivity : NavigationDrawerActivity() {
         }
 
         @Suppress("ConstantConditionIf")
-        if(!BuildConfig.DEBUG && BuildConfig.SENTRY_DSN == "dummy") {
+        if(!BuildConfig.DEBUG && BuildConfig.SENTRY_DSN == "dummy" && !BuildConfig.SENTRY_ENABLED) {
             Toast.makeText(this, "Warning, Sentry DSN is not valid", Toast.LENGTH_LONG).show()
         }
     }

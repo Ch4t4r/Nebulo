@@ -259,7 +259,7 @@ class SmokeScreen : Application() {
     }
 
     private fun getSentryDSN(then:(dsn:String, enableType:Crashreporting) -> Unit) {
-        if(BuildConfig.DEBUG) return
+        if(BuildConfig.DEBUG or !BuildConfig.SENTRY_ENABLED) return
         try {
             val primaryDSN = BuildConfig.SENTRY_DSN
             val configServer = BuildConfig.SENTRY_DSN_CONFIGSERVER
