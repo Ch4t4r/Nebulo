@@ -16,11 +16,13 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import com.frostnerd.dnstunnelproxy.KnownDnsServers
 import com.frostnerd.encrypteddnstunnelproxy.AbstractHttpsDNSHandle
+import com.frostnerd.encrypteddnstunnelproxy.HttpsDnsServerInformation
 import com.frostnerd.encrypteddnstunnelproxy.QuicEngine
 import com.frostnerd.encrypteddnstunnelproxy.quic.AbstractQuicDnsHandle
 import com.frostnerd.encrypteddnstunnelproxy.quic.QuicUpstreamAddress
 import com.frostnerd.encrypteddnstunnelproxy.tls.AbstractTLSDnsHandle
 import kotlinx.android.synthetic.main.dialog_privacypolicy.view.*
+import okhttp3.Dns
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.dnsoverhttps.DnsOverHttps
@@ -144,9 +146,49 @@ fun createQuicEngineIfInstalled(context: Context, quicOnly:Boolean, vararg addre
     } else null
 }
 
-fun okhttpClientWithDoh(): OkHttpClient {
-    val clientForDoh = OkHttpClient()
-    val dns = DnsOverHttps.Builder().client(clientForDoh).url("https://1.1.1.1/dns-query".toHttpUrl())
-        .bootstrapDnsHosts(InetAddress.getByName("1.1.1.1"), InetAddress.getByName("1.0.0.1")).build()
-    return OkHttpClient.Builder().dns(dns).build()
+private fun httpClientWithoutDNS(): OkHttpClient {
+    return OkHttpClient.Builder().dns(object: Dns {
+        override fun lookup(hostname: String): List<InetAddress> {
+            return emptyList()
+        }
+    }).build()
+}
+
+fun okhttpClientWithDoh(context: Context, forceDefaultFallback: Boolean = false): OkHttpClient {
+    val fallback = context.getPreferences().fallbackDns as HttpsDnsServerInformation?
+
+    if(fallback == null || forceDefaultFallback) {
+        val dns = DnsOverHttps.Builder().client(httpClientWithoutDNS())
+            .url("https://9.9.9.9/dns-query".toHttpUrl())
+            .bootstrapDnsHosts(
+                InetAddress.getByName("9.9.9.9"),
+                InetAddress.getByName("149.112.112.112"),
+                InetAddress.getByName("2620:fe::9"),
+                InetAddress.getByName("2620:fe::fe")
+            ).build()
+        return OkHttpClient.Builder().dns(dns).build()
+    } else {
+        val url = fallback.servers.first().address.getUrl(false)
+        val hasKnownIPAddresses = fallback.servers.first().address.hasStaticAddresses
+
+        val dns = if(hasKnownIPAddresses) {
+            val addressCreator = fallback.servers.first().address.addressCreator
+            val addresses = addressCreator.getResolveResultOrNull()?.toMutableList() ?: mutableListOf()
+            if (addresses.isNullOrEmpty() && addressCreator.hostAddress != null) {
+                addresses.add(InetAddress.getByName(addressCreator.hostAddress))
+            }
+
+            if (addresses.isNullOrEmpty()) {
+                DnsOverHttps.Builder().client(okhttpClientWithDoh(context, true))
+                    .url(url.toHttpUrl()).build()
+            } else {
+                DnsOverHttps.Builder().client(httpClientWithoutDNS()).url(url.toHttpUrl())
+                    .bootstrapDnsHosts(addresses)
+                    .build()
+            }
+        } else {
+            DnsOverHttps.Builder().client(okhttpClientWithDoh(context, true)).url(url.toHttpUrl()).build()
+        }
+        return OkHttpClient.Builder().dns(dns).build()
+    }
 }

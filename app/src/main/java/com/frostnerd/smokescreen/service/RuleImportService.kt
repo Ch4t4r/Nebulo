@@ -68,7 +68,7 @@ class RuleImportService : IntentService("RuleImportService") {
     }
 
     private val httpClient by lazy(LazyThreadSafetyMode.NONE) {
-        okhttpClientWithDoh()
+        okhttpClientWithDoh(this)
     }
 
     override fun attachBaseContext(newBase: Context) {
