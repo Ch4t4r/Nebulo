@@ -153,7 +153,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
 
 
-    implementation 'com.frostnerd.utilskt:lifecycle:1.2.4'
+    implementation 'com.frostnerd.utilskt:lifecycle:1.2.4' // https://git.frostnerd.com/AndroidUtils/lifecyclekt
     implementation 'com.frostnerd.utilskt:preferences:1.5.33' // https://git.frostnerd.com/AndroidUtils/preferenceskt
     implementation 'com.frostnerd.utilskt:navigationdraweractivity:1.4.5' // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
     implementation 'com.frostnerd.utilskt:encrypteddnstunnelproxy:2.2.1' // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
