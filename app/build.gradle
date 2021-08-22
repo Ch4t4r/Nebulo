@@ -150,6 +150,10 @@ def frostnerdNavigationVersion = "1.4.5"
 def frostnerdDnsProxyVersion = "2.21"
 def frostnerdGeneralVersion = "1.0.28"
 def frostnerdAdaptersVersion = "1.3.8"
+
+// TODO Clone, build & publishToMavenLocal for libraries with versions defined above for fdroidofficial flavor
+// for https://gitlab.com/fdroid/fdroiddata/-/merge_requests/9142
+
 dependencies {
     def room_version = "2.3.0"
 
