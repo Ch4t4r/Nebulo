@@ -62,6 +62,7 @@ buildscript {
 allprojects {
     apply plugin: 'maven-publish'
     repositories {
+        mavenLocal()
         google()
         mavenCentral()
         maven {
