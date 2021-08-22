@@ -65,11 +65,13 @@ allprojects {
         mavenLocal()
         google()
         mavenCentral()
-        maven {
-            url 'https://nexus.frostnerd.com/repository/libs-release/'
-            credentials {
-                username = "$nexus_user"
-                password = "$nexus_password"
+        if(System.getenv("NO_PREBUILD_BINARIES") == null) {
+            maven {
+                url 'https://nexus.frostnerd.com/repository/libs-release/'
+                credentials {
+                    username = "$nexus_user"
+                    password = "$nexus_password"
+                }
             }
         }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
