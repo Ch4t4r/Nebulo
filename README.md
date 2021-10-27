@@ -70,7 +70,10 @@ Nebulo is distributed over Google Play Store, Aurora Store, a custom F-Droid rep
 [Download the latest version](https://play.google.com/store/apps/details?id=com.frostnerd.smokescreen) from Google Play Store.
 
 ## Aurora Store
-Search for Nebulo and download it from [the Aurora Store](https://gitlab.com/AuroraOSS/auroradroid), which is a F-Droid mirror.
+Search for Nebulo and download it from [the Aurora Store](https://gitlab.com/AuroraOSS/AuroraStore), which is a G-Play mirror.
+
+## Aurora Droid
+[Aurora Droid](https://gitlab.com/AuroraOSS/auroradroid) is an alternative to the F-Droid app. Follow the F-Droid instructions below.
 
 ## F-Droid
 Follow these steps if you're using F-Droid:
