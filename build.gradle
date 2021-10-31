@@ -33,12 +33,12 @@ ext.nexus_password = getNexusPassword()
 
 buildscript {
     ext {
-        ext.KOTLIN_VERSION = '1.5.21'
+        ext.KOTLIN_VERSION = '1.5.31'
     }
-    ext.ANDROID_COMPILE_SDK = (System.getenv("ANDROID_COMPILE_SDK") == null ? 30 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
+    ext.ANDROID_COMPILE_SDK = (System.getenv("ANDROID_COMPILE_SDK") == null ? 31 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
     ext.ANDROID_TARGET_SDK = (System.getenv("ANDROID_TARGET_SDK") == null ? ANDROID_COMPILE_SDK : System.getenv("ANDROID_TARGET_SDK")).toInteger()
     ext.ANDROID_MIN_SDK = (System.getenv("ANDROID_MIN_SDK") == null ? 14 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
-    ext.ANDROID_GRADLE_PLUGIN_VERSION = System.getenv("ANDROID_GRADLE_PLUGIN_VERSION") == null ? "7.0.1" : System.getenv("ANDROID_GRADLE_PLUGIN_VERSION")
+    ext.ANDROID_GRADLE_PLUGIN_VERSION = System.getenv("ANDROID_GRADLE_PLUGIN_VERSION") == null ? "7.0.3" : System.getenv("ANDROID_GRADLE_PLUGIN_VERSION")
 
     println "COMPILE SDK Version: $ANDROID_COMPILE_SDK"
     println "TARGET SDK Version: $ANDROID_TARGET_SDK"
