@@ -46,6 +46,7 @@
         <activity
                 android:name=".activity.PinActivity"
                 android:launchMode="singleTask"
+                android:exported="true"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,6 +60,7 @@
             </intent-filter>
         </activity>
         <activity
+                android:exported="false"
                 android:name=".activity.NebuloAppIntro"
                 android:label="@string/app_name" />
 
@@ -71,6 +73,7 @@
         <activity
                 android:name=".activity.SettingsActivity"
                 android:label="@string/menu_settings"
+                android:exported="false"
                 android:theme="@style/AppTheme_Mono_ActionBar">
 
         </activity>
@@ -87,6 +90,7 @@
                 android:autoRemoveFromRecents="true"
                 android:label="@string/activity_label_enable_logging"
                 android:noHistory="true"
+                android:exported="true"
                 android:process=":logexport"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
@@ -117,6 +121,7 @@
                 android:autoRemoveFromRecents="true"
                 android:label="@string/activity_label_import_servers"
                 android:noHistory="true"
+                android:exported="true"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -182,6 +187,7 @@
                 android:autoRemoveFromRecents="true"
                 android:label="@string/activity_label_import_queries"
                 android:noHistory="true"
+                android:exported="true"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -199,6 +205,7 @@
                 android:name=".activity.ImportSettingsActivity"
                 android:autoRemoveFromRecents="true"
                 android:noHistory="true"
+                android:exported="true"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -226,12 +233,14 @@
         <activity
                 android:name=".activity.BackgroundVpnConfigureActivity"
                 android:launchMode="singleInstance"
+                android:exported="false"
                 android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity
                 android:name=".activity.ErrorDialogActivity"
                 android:autoRemoveFromRecents="true"
                 android:clearTaskOnLaunch="true"
                 android:excludeFromRecents="true"
+                android:exported="false"
                 android:launchMode="singleTop"
                 android:noHistory="true"
                 android:process=".ErrorProcess"
@@ -260,6 +269,7 @@
 
         <service
                 android:name=".service.DnsVpnService"
+                android:exported="true"
                 android:permission="android.permission.BIND_VPN_SERVICE"
                 android:stopWithTask="false">
             <intent-filter>
@@ -273,6 +283,7 @@
                 android:name=".service.VpnRestartService"
                 android:exported="false" />
         <service
+                android:exported="true"
                 android:name=".service.StartStopTileService"
                 android:icon="@drawable/ic_mainnotification"
                 android:label="@string/app_name"

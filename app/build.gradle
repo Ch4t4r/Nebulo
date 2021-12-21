@@ -6,11 +6,11 @@ apply plugin: 'kotlin-kapt'
 def debugKeyPath = new File(System.properties['user.home'], ".android/debug.keystore")
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.frostnerd.smokescreen"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 80
         versionName "2.1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -144,18 +144,18 @@ android {
 //    }
 //}
 
-def frostnerdLifecycleVersion = "1.2.4"
-def frostnerdPreferencesVersion = "1.5.33"
-def frostnerdNavigationVersion = "1.4.5"
-def frostnerdDnsProxyVersion = "2.21"
-def frostnerdGeneralVersion = "1.0.28"
-def frostnerdAdaptersVersion = "1.3.8"
+def frostnerdLifecycleVersion = "1.2.5"
+def frostnerdPreferencesVersion = "1.5.35"
+def frostnerdNavigationVersion = "1.4.7"
+def frostnerdDnsProxyVersion = "2.2.2"
+def frostnerdGeneralVersion = "1.0.29"
+def frostnerdAdaptersVersion = "1.3.10"
 
 // TODO Clone, build & publishToMavenLocal for libraries with versions defined above for fdroidofficial flavor
 // for https://gitlab.com/fdroid/fdroiddata/-/merge_requests/9142
 
 dependencies {
-    def room_version = "2.3.0"
+    def room_version = "2.4.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
@@ -170,14 +170,14 @@ dependencies {
     implementation "com.frostnerd.utilskt:general:$frostnerdGeneralVersion" // https://git.frostnerd.com/AndroidUtils/generalkt
     implementation "com.frostnerd.utilskt:adapters:$frostnerdAdaptersVersion" // https://git.frostnerd.com/AndroidUtils/Adapters
 
-    storeImplementation 'com.google.android.gms:play-services-cronet:17.0.1'
-    fdroidImplementation 'com.google.android.gms:play-services-cronet:17.0.1'
+    storeImplementation 'com.google.android.gms:play-services-cronet:18.0.0'
+    fdroidImplementation 'com.google.android.gms:play-services-cronet:18.0.0'
 
-    implementation 'androidx.work:work-runtime:2.7.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.work:work-runtime:2.7.1'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation "androidx.preference:preference:1.1.1"
     implementation "com.google.android.material:material:1.4.0"
-    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-alpha01'
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-rc01'
     implementation "androidx.core:core-ktx:1.7.0"
 
     implementation "androidx.room:room-runtime:$room_version"
@@ -191,8 +191,8 @@ dependencies {
 
     leakCanaryImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 
-    implementation "com.squareup.okhttp3:okhttp:4.9.2"
-    implementation 'com.squareup.okhttp3:okhttp-dnsoverhttps:4.9.2'
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+    implementation 'com.squareup.okhttp3:okhttp-dnsoverhttps:4.9.3'
     implementation 'com.github.AppIntro:AppIntro:6.1.0'
 
     storeImplementation 'com.google.android.play:core:1.10.2'
