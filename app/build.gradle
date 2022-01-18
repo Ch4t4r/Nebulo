@@ -155,7 +155,7 @@ def frostnerdAdaptersVersion = "1.3.10"
 // for https://gitlab.com/fdroid/fdroiddata/-/merge_requests/9142
 
 dependencies {
-    def room_version = "2.4.0"
+    def room_version = "2.4.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
@@ -163,21 +163,35 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
 
-    implementation "com.frostnerd.utilskt:lifecycle:$frostnerdLifecycleVersion" // https://git.frostnerd.com/AndroidUtils/lifecyclekt
-    implementation "com.frostnerd.utilskt:preferences:$frostnerdPreferencesVersion" // https://git.frostnerd.com/AndroidUtils/preferenceskt
-    implementation "com.frostnerd.utilskt:navigationdraweractivity:$frostnerdNavigationVersion" // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
-    implementation "com.frostnerd.utilskt:encrypteddnstunnelproxy:$frostnerdDnsProxyVersion" // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
-    implementation "com.frostnerd.utilskt:general:$frostnerdGeneralVersion" // https://git.frostnerd.com/AndroidUtils/generalkt
-    implementation "com.frostnerd.utilskt:adapters:$frostnerdAdaptersVersion" // https://git.frostnerd.com/AndroidUtils/Adapters
+    storeImplementation "com.frostnerd.utilskt:lifecycle:$frostnerdLifecycleVersion" // https://git.frostnerd.com/AndroidUtils/lifecyclekt
+    storeImplementation "com.frostnerd.utilskt:preferences:$frostnerdPreferencesVersion" // https://git.frostnerd.com/AndroidUtils/preferenceskt
+    storeImplementation "com.frostnerd.utilskt:navigationdraweractivity:$frostnerdNavigationVersion" // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
+    storeImplementation "com.frostnerd.utilskt:encrypteddnstunnelproxy:$frostnerdDnsProxyVersion" // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+    storeImplementation "com.frostnerd.utilskt:general:$frostnerdGeneralVersion" // https://git.frostnerd.com/AndroidUtils/generalkt
+    storeImplementation "com.frostnerd.utilskt:adapters:$frostnerdAdaptersVersion" // https://git.frostnerd.com/AndroidUtils/Adapters
 
-    storeImplementation 'com.google.android.gms:play-services-cronet:18.0.0'
-    fdroidImplementation 'com.google.android.gms:play-services-cronet:18.0.0'
+    fdroidImplementation "com.frostnerd.utilskt:lifecycle:$frostnerdLifecycleVersion" // https://git.frostnerd.com/AndroidUtils/lifecyclekt
+    fdroidImplementation "com.frostnerd.utilskt:preferences:$frostnerdPreferencesVersion" // https://git.frostnerd.com/AndroidUtils/preferenceskt
+    fdroidImplementation "com.frostnerd.utilskt:navigationdraweractivity:$frostnerdNavigationVersion" // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
+    fdroidImplementation "com.frostnerd.utilskt:encrypteddnstunnelproxy:$frostnerdDnsProxyVersion" // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+    fdroidImplementation "com.frostnerd.utilskt:general:$frostnerdGeneralVersion" // https://git.frostnerd.com/AndroidUtils/generalkt
+    fdroidImplementation "com.frostnerd.utilskt:adapters:$frostnerdAdaptersVersion" // https://git.frostnerd.com/AndroidUtils/Adapters
+
+    fdroidofficialImplementation project(path: ':lifecycle:library') // https://git.frostnerd.com/AndroidUtils/lifecyclekt
+    fdroidofficialImplementation project(path: ':preferences:library') // https://git.frostnerd.com/AndroidUtils/preferenceskt
+    fdroidofficialImplementation project(path: ':navigationdraweractivity:library') // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
+    fdroidofficialImplementation "com.frostnerd.utilskt:encrypteddnstunnelproxy:$frostnerdDnsProxyVersion" // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+    fdroidofficialImplementation project(path: ':general:library') // https://git.frostnerd.com/AndroidUtils/generalkt
+    fdroidofficialImplementation project(path: ':adapters:library')
+
+    storeImplementation 'com.google.android.gms:play-services-cronet:18.0.1'
+    fdroidImplementation 'com.google.android.gms:play-services-cronet:18.0.1'
 
     implementation 'androidx.work:work-runtime:2.7.1'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation "androidx.preference:preference:1.1.1"
-    implementation "com.google.android.material:material:1.4.0"
-    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-rc01'
+    implementation "com.google.android.material:material:1.5.0"
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
     implementation "androidx.core:core-ktx:1.7.0"
 
     implementation "androidx.room:room-runtime:$room_version"
@@ -195,8 +209,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp-dnsoverhttps:4.9.3'
     implementation 'com.github.AppIntro:AppIntro:6.1.0'
 
-    storeImplementation 'com.google.android.play:core:1.10.2'
-    fdroidImplementation 'com.google.android.play:core:1.10.2'
+    storeImplementation 'com.google.android.play:core:1.10.3'
+    fdroidImplementation 'com.google.android.play:core:1.10.3'
 }
 
 def getGitCommitHash() {

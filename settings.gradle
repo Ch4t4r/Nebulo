@@ -1,6 +1,28 @@
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
     }
 }
 include ':app'
+
+def cloneRepoIfNotExists(String repoUrl, String libName) {
+    if(!file("libs/$libName").exists()){
+        Runtime.getRuntime().exec("git clone --depth 1 $repoUrl libs/$libName")
+    }
+}
+
+def includeLibrary(String repoUrl, String libName) {
+    cloneRepoIfNotExists(repoUrl, libName)
+    include ":$libName", ":$libName:library"
+    project(":$libName").projectDir = new File("./libs/$libName")
+    project(":$libName:library").projectDir = new File("./libs/$libName/library")
+}
+
+if(gradle.startParameter.taskNames.stream().anyMatch(task -> task.toLowerCase().contains("fdroidofficial"))) {
+    includeLibrary("https://git.frostnerd.com/AndroidUtils/Adapters", "adapters")
+    includeLibrary("https://git.frostnerd.com/AndroidUtils/lifecyclekt", "lifecycle")
+    includeLibrary("https://git.frostnerd.com/AndroidUtils/preferenceskt", "preferences")
+    includeLibrary("https://git.frostnerd.com/AndroidUtils/navigationdraweractivity", "navigationdraweractivity")
+    includeLibrary("https://git.frostnerd.com/AndroidUtils/generalkt", "general")
+}
