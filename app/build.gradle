@@ -177,12 +177,12 @@ dependencies {
     fdroidImplementation "com.frostnerd.utilskt:general:$frostnerdGeneralVersion" // https://git.frostnerd.com/AndroidUtils/generalkt
     fdroidImplementation "com.frostnerd.utilskt:adapters:$frostnerdAdaptersVersion" // https://git.frostnerd.com/AndroidUtils/Adapters
 
-    fdroidofficialImplementation project(path: ':lifecycle:library') // https://git.frostnerd.com/AndroidUtils/lifecyclekt
-    fdroidofficialImplementation project(path: ':preferences:library') // https://git.frostnerd.com/AndroidUtils/preferenceskt
-    fdroidofficialImplementation project(path: ':navigationdraweractivity:library') // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
-    fdroidofficialImplementation "com.frostnerd.utilskt:encrypteddnstunnelproxy:$frostnerdDnsProxyVersion" // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
-    fdroidofficialImplementation project(path: ':general:library') // https://git.frostnerd.com/AndroidUtils/generalkt
-    fdroidofficialImplementation project(path: ':adapters:library')
+    //fdroidofficialImplementation project(path: ':lifecycle:library') // https://git.frostnerd.com/AndroidUtils/lifecyclekt
+    //fdroidofficialImplementation project(path: ':preferences:library') // https://git.frostnerd.com/AndroidUtils/preferenceskt
+    //fdroidofficialImplementation project(path: ':navigationdraweractivity:library') // https://git.frostnerd.com/AndroidUtils/navigationdraweractivity
+    //fdroidofficialImplementation "com.frostnerd.utilskt:encrypteddnstunnelproxy:$frostnerdDnsProxyVersion" // https://git.frostnerd.com/AndroidUtils/encrypteddnstunnelproxy
+    //fdroidofficialImplementation project(path: ':general:library') // https://git.frostnerd.com/AndroidUtils/generalkt
+    //fdroidofficialImplementation project(path: ':adapters:library')
 
     storeImplementation 'com.google.android.gms:play-services-cronet:18.0.1'
     fdroidImplementation 'com.google.android.gms:play-services-cronet:18.0.1'
