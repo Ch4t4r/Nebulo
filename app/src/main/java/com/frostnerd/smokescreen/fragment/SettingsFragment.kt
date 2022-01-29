@@ -313,7 +313,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             helpNetguard.setOnPreferenceClickListener {
                 AlertDialog.Builder(requireContext(), getPreferences().theme.dialogStyle)
                     .setTitle("NetGuard")
-                    .setMessage(getString(R.string.dialog_nonvpn_help_netguard, bindAddressAsIP, port.text.toInt(), bindAddressAsIP))
+                    .setMessage(getString(R.string.dialog_nonvpn_help_netguard, bindAddressAsIP, port.text!!.toInt(), bindAddressAsIP))
                     .setPositiveButton(R.string.all_close, null)
                     .show()
                 true
@@ -323,7 +323,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         helpGeneric.setOnPreferenceClickListener {
-            val portValue = port.text.toInt()
+            val portValue = port.text!!.toInt()
             showInfoTextDialog(
                 requireContext(),
                 getString(R.string.preference_category_nonvpnmode_help),
