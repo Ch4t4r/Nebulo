@@ -38,7 +38,7 @@ buildscript {
     ext.ANDROID_COMPILE_SDK = (System.getenv("ANDROID_COMPILE_SDK") == null ? 31 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
     ext.ANDROID_TARGET_SDK = (System.getenv("ANDROID_TARGET_SDK") == null ? ANDROID_COMPILE_SDK : System.getenv("ANDROID_TARGET_SDK")).toInteger()
     ext.ANDROID_MIN_SDK = (System.getenv("ANDROID_MIN_SDK") == null ? 14 : System.getenv("ANDROID_COMPILE_SDK")).toInteger()
-    ext.ANDROID_GRADLE_PLUGIN_VERSION = System.getenv("ANDROID_GRADLE_PLUGIN_VERSION") == null ? "7.0.4" : System.getenv("ANDROID_GRADLE_PLUGIN_VERSION")
+    ext.ANDROID_GRADLE_PLUGIN_VERSION = System.getenv("ANDROID_GRADLE_PLUGIN_VERSION") == null ? "7.1.0" : System.getenv("ANDROID_GRADLE_PLUGIN_VERSION")
 
     println "COMPILE SDK Version: $ANDROID_COMPILE_SDK"
     println "TARGET SDK Version: $ANDROID_TARGET_SDK"
