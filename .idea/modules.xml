@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SmokeScreen.iml" filepath="$PROJECT_DIR$/SmokeScreen.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SmokeScreen.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SmokeScreen.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SmokeScreen.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SmokeScreen.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SmokeScreen.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SmokeScreen.app.unitTest.iml" />
     </modules>
   </component>
 </project>
