@@ -36,7 +36,7 @@ enum class DeepActionState {
 
     fun pendingIntentTo(context: Context):PendingIntent {
         val requestCode = RequestCodes.max + Random.nextInt(1, 9999)
-        return PendingIntent.getActivity(context, requestCode , intentTo(context), PendingIntent.FLAG_CANCEL_CURRENT)
+        return PendingIntent.getActivity(context, requestCode , intentTo(context), PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
 
     private fun asBundle() = Bundle().apply { putSerializable("deep_action", this@DeepActionState) }

@@ -120,7 +120,7 @@ class RuleImportService : IntentService("RuleImportService") {
                 this,
                 RequestCodes.RULE_IMPORT_ABORT,
                 Intent(this, RuleImportService::class.java).putExtra("abort", true),
-                PendingIntent.FLAG_CANCEL_CURRENT
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             val abortAction =
                 NotificationCompat.Action(R.drawable.ic_times, getString(android.R.string.cancel), abortPendingAction)

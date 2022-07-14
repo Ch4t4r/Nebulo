@@ -95,7 +95,7 @@ class RuleExportService : IntentService("RuleExportService") {
                 this,
                 RequestCodes.RULE_EXPORT_ABORT,
                 Intent(this, RuleExportService::class.java).putExtra("abort", true),
-                PendingIntent.FLAG_CANCEL_CURRENT
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             val abortAction =
                 NotificationCompat.Action(R.drawable.ic_times, getString(android.R.string.cancel), abortPendingAction)

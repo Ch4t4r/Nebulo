@@ -204,7 +204,7 @@ fun <T : Activity>Activity.restart(activityClass: Class<T>? = null, exitProcess:
             this,
             RequestCodes.RESTART_WHOLE_APP,
             intent,
-            PendingIntent.FLAG_CANCEL_CURRENT
+            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         (getSystemService(Context.ALARM_SERVICE) as AlarmManager).setExact(
             AlarmManager.RTC,

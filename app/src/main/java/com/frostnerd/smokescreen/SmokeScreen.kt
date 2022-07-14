@@ -107,7 +107,7 @@ class SmokeScreen : Application() {
                 .setContentIntent(
                     PendingIntent.getActivity(
                         this, RequestCodes.CRASH_NOTIFICATION,
-                        PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT
+                        PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                     )
                 )
                 .setContentTitle(getString(R.string.notification_appcrash_title))
@@ -119,7 +119,7 @@ class SmokeScreen : Application() {
                     this,
                     LoggingDialogActivity::class.java
                 ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-                PendingIntent.FLAG_CANCEL_CURRENT
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             notification.addAction(
                 R.drawable.ic_share,

@@ -189,14 +189,14 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                         this@DnsVpnService,
                         RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
                         ignoreIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                     )
                 } else {
                     PendingIntent.getService(
                         this@DnsVpnService,
                         RequestCodes.REQUEST_CODE_IGNORE_SERVICE_KILLED,
                         ignoreIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                     )
                 }
                 NotificationCompat.Builder(this, Notifications.getDefaultNotificationChannelId(this))
@@ -403,7 +403,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         notificationBuilder.setContentIntent(
             PendingIntent.getActivity(
                 this, RequestCodes.MAIN_NOTIFICATION,
-                PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT
+                PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         )
         if (getPreferences().allowStopInNotification) {
@@ -412,7 +412,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                     this,
                     RequestCodes.MAIN_NOTIFICATION_STOP,
                     commandIntent(this, Command.STOP),
-                    PendingIntent.FLAG_CANCEL_CURRENT
+                    PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
                 )
             val stopAction = NotificationCompat.Action(
                 R.drawable.ic_stop,
@@ -427,7 +427,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                     this,
                     RequestCodes.MAIN_NOTIFICATION_PAUSE,
                     commandIntent(this, Command.PAUSE_RESUME),
-                    PendingIntent.FLAG_CANCEL_CURRENT
+                    PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
                 )
             pauseNotificationAction = NotificationCompat.Action(
                 R.drawable.ic_stat_pause,
@@ -467,7 +467,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             noConnectionNotificationBuilder.setContentText(getString(R.string.notification_noconnection_text))
             noConnectionNotificationBuilder.setContentIntent(PendingIntent.getActivity(
                     this, RequestCodes.NO_CONNECTION_NOTIFICATION,
-                    PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT
+                    PinActivity.openAppIntent(this), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                 )
             )
             noConnectionNotificationBuilder.setStyle(
@@ -585,14 +585,14 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
                 this@DnsVpnService,
                 RequestCodes.REQUEST_CODE_IGNORE_BAD_CONNECTION,
                 ignoreIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         } else {
             PendingIntent.getService(
                 this@DnsVpnService,
                 RequestCodes.REQUEST_CODE_IGNORE_BAD_CONNECTION,
                 ignoreIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         }
 
@@ -991,7 +991,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
             setSmallIcon(R.drawable.ic_cloud_warn)
             setContentTitle(getString(R.string.notification_service_revoked_title))
             setContentText(getString(R.string.notification_service_revoked_message))
-            setContentIntent(PendingIntent.getActivity(this@DnsVpnService, RequestCodes.RESTART_AFTER_REVOKE, Intent(this@DnsVpnService, BackgroundVpnConfigureActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT))
+            setContentIntent(PendingIntent.getActivity(this@DnsVpnService, RequestCodes.RESTART_AFTER_REVOKE, Intent(this@DnsVpnService, BackgroundVpnConfigureActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE))
             setAutoCancel(true)
             priority = NotificationCompat.PRIORITY_HIGH
         }.build().also {
@@ -1046,7 +1046,7 @@ class DnsVpnService : VpnService(), Runnable, CoroutineScope {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             builder.setMetered(false)
         }
-        builder.setConfigureIntent(PendingIntent.getActivity(this, RequestCodes.VPN_CONFIGURE, PinActivity.openAppIntent(this), PendingIntent.FLAG_CANCEL_CURRENT))
+        builder.setConfigureIntent(PendingIntent.getActivity(this, RequestCodes.VPN_CONFIGURE, PinActivity.openAppIntent(this), PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_IMMUTABLE))
         val deviceHasIpv6 = hasDeviceIpv6Address()
         val deviceHasIpv4 = hasDeviceIpv4Address()
 

@@ -108,7 +108,7 @@ class PinActivity: BaseActivity() {
                     .setContentTitle(context.getString(R.string.notification_pin_title))
                     .setContentText(context.getString(R.string.notification_pin_message))
                     .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.notification_pin_message)))
-                    .setContentIntent(PendingIntent.getActivity(context, RequestCodes.PIN_NOTIFICATION, intent, PendingIntent.FLAG_CANCEL_CURRENT))
+                    .setContentIntent(PendingIntent.getActivity(context, RequestCodes.PIN_NOTIFICATION, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE))
                     .setAutoCancel(true)
                     .setDefaults(NotificationCompat.DEFAULT_ALL)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
