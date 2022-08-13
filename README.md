@@ -78,8 +78,8 @@ Search for Nebulo and download it from [the Aurora Store](https://gitlab.com/Aur
 ## F-Droid
 Follow these steps if you're using F-Droid:
 
-1. [Click to add Nebulo](https://fdroid.frostnerd.com/fdroid/repo?fingerprint=74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26) to your F-Droid.
-    - Or, add it manually, `fdroid.frostnerd.com/fdroid` with fingerprint `74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26`.
+1. [Click to add Nebulo](https://fdroid.frostnerd.com/?fingerprint=74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26) to your F-Droid.
+    - Or, add it manually, `fdroid.frostnerd.com` with fingerprint `74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26`.
     - Or, add it by [scanning this QR-Code](material/fdroid_qr.jpg).
 2. (Optional) For older versions of Nebulo, [click to add this repositorty instead](https://fdroidarchive.frostnerd.com/?fingerprint=74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26).
     -  Or, add it manually, `fdroidarchive.frostnerd.com` with fingerprint `74BB580F263EC89E15C207298DEC861B5069517550FE0F1D852F16FA611D2D26`.
