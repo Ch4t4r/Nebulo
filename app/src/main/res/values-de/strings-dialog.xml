@@ -19,7 +19,7 @@
     <string name="dialog_serverimport_done">Fertig</string>
     <string name="dialog_serverimport_priority">Priorität %1$d</string>
     <string name="dialog_serverimport_experimental">Experimental</string>
-    <string name="dialog_serverimport_servertype_doh">Typ: DNS-über-HTTPS (DoH)</string>
+    <string name="dialog_serverimport_servertype_doh">Typ: DNS-over-HTTPS (DoH)</string>
     <string name="dialog_serverimport_servertype_dot">Typ: DNS-over-TLS (DoT)</string>
     <string name="dialog_serverimport_text">Bitte wähle die Server aus, welche du importieren möchtest.
 \n
@@ -43,36 +43,36 @@
     <string name="dialog_batteryoptimization_ignore">Ignorieren</string>
     <string name="dialog_rate_confirmation">Möchtest du den Play Store öffnen, um die App zu bewerten\?</string>
     <string name="dialog_changelog_title">Änderungsprotokoll</string>
-    <string name="dialog_changelog_infotext">Die App wurde seitdem du sie zuletzt geöffnet hast geupdated. In the folgenden Liste siehst du die Änderungen. Klicke die Box unten an, um diesen Dialog in Zukunft nicht mehr zu sehen.</string>
+    <string name="dialog_changelog_infotext">Die App wurde seitdem du sie zuletzt geöffnet hast geupdated. In der folgenden Liste siehst du die Änderungen. Klicke die Box unten an, um diesen Dialog in Zukunft nicht mehr zu sehen.</string>
     <string name="dialog_changelog_dont_show_again">Nicht mehr zeigen</string>
     <string name="dialog_about_licenses">Lizenzen</string>
     <string name="dialog_query_export_title">Exportiere Anfragen…</string>
     <string name="dialog_query_export_message">Bitte warte solange bis die Anfragen exportiert wurden</string>
-    <string name="dialog_pin_message">Bitte gebe deine PIN an.</string>
+    <string name="dialog_pin_message">Bitte gib deine PIN an.</string>
     <string name="dialog_pin_hint">PIN</string>
     <string name="dialog_enable_logging">Möchtest du die Protokollierung aktivieren\? Die Protokolle enthalten statistische, sowie Testinformationen und ausgeführte Aktionen in der App. Die Protokolle werden niemals automatisch verschickt.</string>
     <string name="dialog_crashreporting_title">Automatische Absturzmeldung</string>
     <string name="dialog_crashreportingusages_title">Übertragene Daten</string>
-    <string name="dialog_crashreportingusages_message">Klicke auf eine der Gruppen um zu sehen, welche Daten bei einem Absturz übertragen werden.</string>
+    <string name="dialog_crashreportingusages_message">Klicke auf eine der Gruppen, um zu sehen welche Daten bei einem Absturz übertragen werden.</string>
     <string name="dialog_crashreporting_positive">Absturzmeldungen aktivieren</string>
     <string name="dialog_crashreporting_negative">Nein, Danke.</string>
     <string name="dialog_crashreporting_neutral">Daten ansehen</string>
     <string name="dialog_crashreporting_message">Danke, dass du Nebulo benutzt!
 \n 
-\nDiese App nutzt open-source und selbst gehostete Software aus dritter Hand, um die Verfolgung von Abstürzen leichter zu machen. Wenn (und auch nur wenn) aktiviert, wird die App bei einem Absturz automatisch Daten über den Absturz übermitteln. Diese Meldungen enthalten zusatzlich zur Absturzmeldung weitere statistische Daten über dein Gerät. Dies umfasst eine zufällig erstellte Zeichekette, welche zum Identifizieren von Abstürzen auf dem gleichen Gerät genutzt wird. Diese kann nicht dafür genutzt werden, anderweitige Aktionen zu verfolgen. Das Aktivieren der Absturzmeldungen ist optional, würde mir aber sehr helfen. 
+\nDiese App nutzt Open-Source-Software und selbst gehostete Software aus dritter Hand, um die Verfolgung von Abstürzen leichter zu machen. Wenn (und auch nur wenn) aktiviert, wird die App bei einem Absturz automatisch Daten über den Absturz übermitteln. Diese Meldungen enthalten zusatzlich zur Absturzmeldung weitere statistische Daten über dein Gerät. Dies umfasst eine zufällig erstellte Zeichekette, welche zum Identifizieren von Abstürzen auf dem gleichen Gerät genutzt wird. Diese kann nicht dafür genutzt werden, anderweitige Aktionen zu verfolgen. Das Aktivieren der Absturzmeldungen ist optional, würde mir aber sehr helfen. 
 \nMeldungen werden sicher über HTTPS übertragen. 
 \n 
 \nKlicke auf \"Daten ansehen\" um einzusehen, welche Arten von Daten übermittelt werden. Dort befindet sich ebenfalls ein Link zur Datenschutzerklärung.</string>
     <string name="dialog_crashreporting_message_notester">Danke, dass du Nebulo benutzt!
 \n
-\nDiese App nutzt open-source und selbst gehostete Software aus dritter Hand, um die Verfolgung von Abstürzen leichter zu machen. Wenn (und auch nur wenn) aktiviert, wird die App bei einem Absturz automatisch Daten über den Absturz übermitteln. Diese Meldungen enthalten zusatzlich zur Absturzmeldung weitere statistische Daten über dein Gerät. Dies umfasst eine zufällig erstellte Zeichekette, welche zum Identifizieren von Abstürzen auf dem gleichen Gerät genutzt wird. Diese kann nicht dafür genutzt werden, anderweitige Aktionen zu verfolgen. Das Aktivieren der Absturzmeldungen ist optional, würde mir aber sehr helfen.
+\nDiese App nutzt Open-Source-Software und selbst gehostete Software aus dritter Hand, um die Verfolgung von Abstürzen leichter zu machen. Wenn (und auch nur wenn) aktiviert, wird die App bei einem Absturz automatisch Daten über den Absturz übermitteln. Diese Meldungen enthalten zusatzlich zur Absturzmeldung weitere statistische Daten über dein Gerät. Dies umfasst eine zufällig erstellte Zeichekette, welche zum Identifizieren von Abstürzen auf dem gleichen Gerät genutzt wird. Diese kann nicht dafür genutzt werden, anderweitige Aktionen zu verfolgen. Das Aktivieren der Absturzmeldungen ist optional, würde mir aber sehr helfen.
 \nMeldungen werden sicher über HTTPS übertragen.
 \n
 \nKlicke auf \"Daten ansehen\" um einzusehen, welche Arten von Daten übermittelt werden. Dort befindet sich ebenfalls ein Link zur Datenschutzerklärung.</string>
     <string name="dialog_clearqueries_title">Alle Anfragen leeren</string>
     <string name="dialog_clearqueries_message">Bist du dir sicher, dass du alle gespeicherten Anfragen löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="dialog_credits_title">Danksagungen</string>
-    <string name="dialog_credits_message" formatted="true">- App icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 
+    <string name="dialog_credits_message" formatted="true">- App Icon von &lt;a href=https://dribbble.com/rkbdi&gt;RKBDI&lt;/a&gt; 
 \n- Türkische Übersetzung von Kemal Oktay Aktoğan 
 \n- Russische Übersetzung von bruleto 
 \n- Niederländische Übersetzung von Bas Koedijk 
@@ -84,10 +84,10 @@
 \n- Einige Icons von Font Awesome 
 \n 
 \nMöchtest du deinen Namen hier sehen\? Trage noch heute &lt;a href=https://git.frostnerd.com/PublicAndroidApps/smokescreen&gt;etwas bei&lt;/a&gt;.</string>
-    <string name="dialog_join_group_title">Der Gemeinde beitreten</string>
+    <string name="dialog_join_group_title">Der Community beitreten</string>
     <string name="dialog_join_group_message">Hallo!
 \n
-\nWusstest du schon, dass diese App eine Telegramgruppe hat\? Die Gruppe enthält reguläre Updates und ist der perfekte Platz, um Fragen zu stellen und Diskussionen anzuregen.
+\nWusstest du schon, dass diese App eine Telegram-Gruppe hat\? Die Gruppe enthält reguläre Updates und ist der perfekte Platz, um Fragen zu stellen und Diskussionen anzuregen.
 \nWir sind eine großartige Gemeinde von über 200 Personen, möchtest du ein Teil davon werden\?</string>
     <string name="dialog_join_group_positive">Gerne!</string>
     <string name="dialog_speedresult_title">Ergebnisse des Geschwindigkeitstests</string>
@@ -102,28 +102,28 @@
     <string name="dialog_speedtest_useserver_message">Möchtest du den Server %1$s nutzen\? Er erreichte Platz %2$d von %3$d mit einer durchschnittlichen Antwortzeit von %4$d ms.</string>
     <string name="dialog_deletehostsource_title">%1$s löschen\?</string>
     <string name="dialog_deletehostsource_message">Bist du dir sicher, dass du die Quelle %1$s löschen willst\? Dies kann nicht rückgängig gemacht werden, Hosts aus dieser Quelle werden gelöscht.</string>
-    <string name="dialog_clearuserrules_title">Alle DNS Regeln leeren\?</string>
-    <string name="dialog_clearuserrules_message">Bist du dir sicher, dass du alle von dir definierten DNS Regeln löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
+    <string name="dialog_clearuserrules_title">Alle DNS-Regeln leeren\?</string>
+    <string name="dialog_clearuserrules_message">Bist du dir sicher, dass du alle von dir definierten DNS-Regeln löschen willst\? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="dialog_newhostsource_title">Neue Regel Quelle</string>
     <string name="dialog_newhostsource_name">Name</string>
     <string name="dialog_newhostsource_url">URL</string>
-    <string name="dialog_newhostsource_error_name_empty">Bitte gebe einen Namen an</string>
-    <string name="dialog_newdnsrule_title">Neue DNS Regel</string>
+    <string name="dialog_newhostsource_error_name_empty">Bitte gib einen Namen an</string>
+    <string name="dialog_newdnsrule_title">Neue DNS-Regel</string>
     <string name="dialog_newdnsrule_hint_host">Host</string>
     <string name="dialog_newdnsrule_hint_ipv4address">IPv4 Adresse</string>
     <string name="dialog_newdnsrule_hint_ipv6address">IPv6 Adresse</string>
-    <string name="dialog_newdnsrule_host_invalid">Bitte gebe einen validen Host an</string>
-    <string name="dialog_newdnsrule_ipv4_invalid">Bitte gebe eine valide IPv4 Adresse an</string>
-    <string name="dialog_newdnsrule_ipv6_invalid">Bitte gebe eine valide IPv6 Adresse an</string>
+    <string name="dialog_newdnsrule_host_invalid">Bitte gib einen validen Host an</string>
+    <string name="dialog_newdnsrule_ipv4_invalid">Bitte gib eine valide IPv4 Adresse an</string>
+    <string name="dialog_newdnsrule_ipv6_invalid">Bitte gib eine valide IPv6 Adresse an</string>
     <string name="dialog_newhostsource_choose_file">Datei wählen</string>
-    <string name="dialog_exportdnsrules_title">DNS Regeln exportieren</string>
-    <string name="dialog_exportdnsrules_export_user_rules">Exportiere eigene DNS Regeln</string>
-    <string name="dialog_exportdnsrules_export_sources">Exportiere DNS Regeln aus angegebenen Quellen</string>
+    <string name="dialog_exportdnsrules_title">DNS-Regeln exportieren</string>
+    <string name="dialog_exportdnsrules_export_user_rules">Exportiere eigene DNS-Regeln</string>
+    <string name="dialog_exportdnsrules_export_sources">Exportiere DNS-Regeln aus angegebenen Quellen</string>
     <string name="dialog_newdnsrule_whitelist">Whitelist</string>
     <string name="dialog_newdnsrule_specify_address">Adressangabe</string>
     <string name="dialog_newhostsource_use_as_whitelist">Als Whitelist benutzen</string>
     <string name="dialog_newhostsource_edit_title">Regelquelle editieren</string>
-    <string name="dialog_newdnsrule_edit">DNS Regel bearbeiten</string>
+    <string name="dialog_newdnsrule_edit">DNS-Regel bearbeiten</string>
     <string name="dialog_editdelete_title">Was möchtest du tun\?</string>
     <string name="dialog_editdelete_edit">Editieren</string>
     <string name="dialog_editdelete_delete">Löschen</string>
@@ -132,14 +132,14 @@
 \nAuf den meisten Geräten existieren einige Optionen, welche dieses Verhalten seitens des System verhindern, mindestens aber verzögern können. 
 \nSo kannst du zum Beispiel in den Systemeinstellungen die Batterieoptimierungen für Nebulo deaktivieren, oder die App nicht aus der Liste der zuletzt verwendeten Apps entfernen. 
 \n 
-\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser). Klicke auf Einstellungen um in ein Menü zu kommen, wo die Batterieoptimierungen für Nebulo deaktivieren kannst.</string>
+\nDurch Klicken auf Ignorieren wird dieser Dialog nicht mehr angezeigt. Du kannst speziell für dein System abgestimmte Tipps lesen, indem du auf den Knopf für mehr Informationen drückst (Dies öffnet eine externe Webseite in deinem Browser). Klicke auf Einstellungen um in ein Menü zu kommen, wo du die Batterieoptimierungen für Nebulo deaktivieren kannst.</string>
     <string name="dialog_servicekilled_more_info">Mehr Informationen</string>
     <plurals name="dialog_excludedapps_infotext">
         <item quantity="one">%1$d App ist standardmäßig ausgewählt und kann nicht abgewählt werden</item>
         <item quantity="other">%1$d Apps sind standardmäßig ausgewählt und können nicht abgewählt werden</item>
     </plurals>
     <string name="dialog_newhostsource_wildcard_info">Es können Regelquellen genutzt werden, welche Wildcard Domains benutzen.</string>
-    <string name="dialog_newdnsrule_wildcard_info">Der Host der Regel unterstützt Wildcards. Benutze einen Stern (*), um eine Beliebige Anzahl an Buchstaben, Nummern und Sonderzeichen, außer einem Punkt(.) abzudecken. Nutze zwei Sterne (**), um den Punkt (.) mit einzuschließen.</string>
+    <string name="dialog_newdnsrule_wildcard_info">Der Host der Regel unterstützt Wildcards. Benutze einen Stern (*), um eine beliebige Anzahl an Buchstaben, Nummern und Sonderzeichen, außer einem Punkt(.) abzudecken. Nutze zwei Sterne (**), um den Punkt (.) mit einzuschließen.</string>
     <string name="dialog_overlaydetected_title">Systemweites Overlay festgestellt</string>
     <string name="dialog_overlaydetected_message">Es scheint ein systemweites Overlay (z.B. eine Chatblase, oder ein Farb-/Nachtfilter) aktiv zu sein. Auf den meisten Geräten ist es nicht möglich, der App den benötigten Zugang zum VPN zu gewähren, wenn ein Overlay sichtbar ist.
 \n
@@ -154,17 +154,17 @@
     <string name="dialog_hostsourcerefresh_timeunit_days">Tage</string>
     <string name="dialog_hostsourcerefresh_timeunit_weeks">Wochen</string>
     <string name="dialog_logexport_loading_title">Bereite Logdateien vor</string>
-    <string name="dialog_cleardnscache_message">Bist du dir sicher, dass du den DNS Cache leeren möchtest\?</string>
+    <string name="dialog_cleardnscache_message">Bist du dir sicher, dass du den DNS-Cache leeren möchtest\?</string>
     <string name="dialog_vpninformation_title">Wie diese App funktioniert</string>
-    <string name="dialog_vpninformation_message">Nebulo funktioniert, indem ein dummy-VPN aufgesetzt wird, welcher alle deine DNS Anfragen abfängt und zu einem sicheren Server deiner Wahl weiterleitet.
-\nEs handelt sich um keinen echten VPN, weder wird deine Identität versteckt, noch ändert es deine IP-Adresse. 
+    <string name="dialog_vpninformation_message">Nebulo funktioniert, indem ein dummy-VPN aufgesetzt wird, welches alle deine DNS Anfragen abfängt und zu einem sicheren Server deiner Wahl weiterleitet.
+\nEs handelt sich um kein echtes VPN, weder wird deine Identität versteckt, noch ändert es deine IP-Adresse. 
 \n 
 \nAußer DNS-Paketen werden keine Daten über diese App verschickt.</string>
     <string name="dialog_exportdnsrules_whitelist">Exportiere Whitelist Regeln</string>
     <string name="dialog_exportdnsrules_nonwhitelist">Exportiere normale Regeln</string>
     <string name="dialog_raterequest_title">Bist du mit Nebulo zufrieden\?</string>
     <string name="dialog_raterequest_message">Würdest du dir einen Moment Zeit nehmen die App im Store zu bewerten, wenn du mit ihr zufrieden bist\?</string>
-    <string name="dialog_vpn_permission_denied_message">Das System hat es Nebulo untersagt, den Dummy-VPN zu starten. Bitte öffne die App und gewähre dieses Recht durch Klicken auf den Startknopf.</string>
+    <string name="dialog_vpn_permission_denied_message">Das System hat es Nebulo untersagt, das Dummy-VPN zu starten. Bitte öffne die App und gewähre dieses Recht durch Klicken auf den Startknopf.</string>
     <string name="dialog_doh_detect_type_title">Erkenne Servertyp</string>
     <string name="dialog_doh_detect_type_message">Bitte warte einen kleinen Augenblick.</string>
     <string name="dialog_nonvpn_help_netguard">Um den nicht-VPN Modus mit NetGuard zu nutzen, tue folgendes:
@@ -183,8 +183,8 @@
     <string name="dialog_newdnsrule_block_host">Diesen Host blockieren</string>
     <string name="dialog_open_faq">Möchtest du dir die häufig gestellten Fragen und die Dokumentation zu dieser Funktion ansehen\?</string>
     <string name="querylog_filter_shorten_domain">Kürzere Version der Domain anzeigen</string>
-    <string name="querylog_filter_type_dnsrules">Von DNS Regeln aufgelöst</string>
-    <string name="querylog_filter_type_cache">Vom DNS Cache aufgelöst</string>
+    <string name="querylog_filter_type_dnsrules">Von DNS-Regeln aufgelöst</string>
+    <string name="querylog_filter_type_cache">Vom DNS-Cache aufgelöst</string>
     <string name="dialog_share_message">Welchen Link möchtest du teilen\?</string>
     <string name="dialog_share_title">Linktypen wählen</string>
     <string name="dialog_newserver_title_quic">Neuer Server (DoQ)</string>
@@ -213,7 +213,7 @@
 \nDies kann dazu führen, dass der Wert höher angezeigt wird, als er ist, weil er seit der Messung niedriger geworden ist.</string>
     <string name="dialog_latency_sidebar_title">Informationen zur Latenz</string>
     <string name="dialog_nonvpn_help_generic">Um Nebulo im Nicht-VPN Modus zusammen mit anderen Apps zu nutzen musst du die DNS Einstellungen in diesen anderen Apps ändern.
-\nNicht alle VPN Apps erlauben dir dort die DNS-Einstellungen zu ändern. Sollte deine dies erlauben, setze den DNS Server auf \'%1$s:%2$d\' (der Port kann weiter oben konfiguriert werden).
+\nNicht alle VPN Apps erlauben dir dort die DNS-Einstellungen zu ändern. Sollte deine dies erlauben, setze den DNS-Server auf \'%1$s:%2$d\' (der Port kann weiter oben konfiguriert werden).
 \n
 \nNach dem Einstellen starte einfach beide Apps.</string>
     <string name="dialog_serverimport_servertype_doq">Typ: DNS-over-QUIC (DoQ)</string>

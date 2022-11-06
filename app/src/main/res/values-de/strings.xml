@@ -12,8 +12,8 @@
     <string name="information">Information</string>
     <string name="open_app">App öffnen</string>
     <string name="all_close">Schließen</string>
-    <string name="error_invalid_url">Bitte gebe eine valide URL an</string>
-    <string name="main_dnssurveillance_infotext">Bitte beachte, dass der DNS Server, mit welchem du verbunden bist, sehen kann, welche Webseiten du besuchst. Überprüfe die Datenschutzerklärung des Servers für mehr Informationen.</string>
+    <string name="error_invalid_url">Bitte gib eine valide URL an</string>
+    <string name="main_dnssurveillance_infotext">Bitte beachte, dass der DNS-Server, mit welchem du verbunden bist, sehen kann, welche Webseiten du besuchst. Überprüfe die Datenschutzerklärung des Servers für mehr Informationen.</string>
     <string name="main_dnssurveillance_privacystatement">Datenschutzerklärung von %1$s</string>
     <string name="about_app">Diese App ist quelloffen. Der Quellcode kann unter &lt;a href=https://nebulo.app/source&gt;nebulo.app/source&lt;/a&gt; abgerufen werden. 
 \nWeiterhin enthält diese App keine Werbung und setzt kein Tracking ein. 
@@ -30,7 +30,7 @@
     <string name="quicksettings_stop_text">Nebulo stoppen</string>
     <string name="quicksettings_start_text">Nebulo starten</string>
     <string name="about_share">Teilen</string>
-    <string name="about_licenses">Open-source Lizenzen</string>
+    <string name="about_licenses">Open-Source-Lizenzen</string>
     <string name="about_changelog">Änderungsprotokoll</string>
     <string name="about_contact_developer">Den Entwickler kontaktieren</string>
     <string name="about_telegram_group">Telegramgruppe</string>
@@ -41,13 +41,13 @@
     <string name="activity_label_speed_test">Geschwindigkeitsvergleich</string>
     <string name="window_speedtest_runtest">Den Test starten</string>
     <string name="error_no_webbrowser_installed">Du hast keine App zum ansehen dieses Links installiert</string>
-    <string name="button_main_dnsrules">Dns Regeln</string>
+    <string name="button_main_dnsrules">DNS-Regeln</string>
     <string name="window_dnsrules_customhosts">Eigene Hosts</string>
-    <string name="window_dnsrules_customhosts_message">Gebe hier Hosts von Hand ein</string>
+    <string name="window_dnsrules_customhosts_message">Gib hier Hosts von Hand ein</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount_pending">Regeln aus dieser Quelle: -</string>
     <string name="window_dnsrules_customhosts_hostsource_rulecount">Regeln aus dieser Quelle: %1$s (%2$s Duplikate werden nicht genutzt)</string>
-    <string name="error_invalid_pin">Bitte gebe deine PIN an</string>
-    <string name="error_invalid_servername">Bitte gebe einen Namen an</string>
+    <string name="error_invalid_pin">Bitte gib deine PIN an</string>
+    <string name="error_invalid_servername">Bitte gib einen Namen an</string>
     <string name="window_dnsrules_hostalreadyexists">Es existiert bereits eine Regel für diesen Host</string>
     <plurals name="window_dnsrules_subtitle">
         <item quantity="one">%1$s Regel</item>
@@ -60,19 +60,19 @@
     <string name="windows_querylogging_protocol">Protokoll</string>
     <string name="windows_querylogging_latency">Latenz</string>
     <string name="windows_querylogging_responses">Antworten</string>
-    <string name="windows_querylogging_create_dnsrule">Host für DNS Regel benutzen</string>
-    <string name="windows_querylogging_dnsrule_created">DNS Regel wurde erstellt</string>
-    <string name="windows_querylogging_usedserver_dnsrules">Mit DNS Regeln aufgelöst</string>
+    <string name="windows_querylogging_create_dnsrule">Host für DNS-Regel benutzen</string>
+    <string name="windows_querylogging_dnsrule_created">DNS-Regel wurde erstellt</string>
+    <string name="windows_querylogging_usedserver_dnsrules">Mit DNS-Regeln aufgelöst</string>
     <string name="windows_querylogging_usedserver_cache">Mit dem Cache aufgelöst</string>
     <string name="windows_querylogging_search_hint">Suche nach einem Host in dem Anfrageprotokoll</string>
     <string name="windows_querylogging_search">Hostsuche</string>
     <string name="window_main_privatedns_info">Privates DNS ist aktiv, deine Anfragen sind bereits durch das System geschützt. Aktiviere Nebulo falls du DNS-over-HTTPS oder andere sinnvolle Features nutzen willst.
 \nUm Nebulo zu aktivieren musst du Privates DNS deaktivieren.</string>
-    <string name="windows_querylogging_hostsource">Quelle der DNS Regel</string>
+    <string name="windows_querylogging_hostsource">Quelle der DNS-Regel</string>
     <string name="windows_querylogging_hostsource__user">Nutzerregeln</string>
     <string name="windows_querylogging_hostsource__unknown">Unbekannt</string>
     <string name="error_webview_missing">Die WebView wurde nicht gefunden, wurde sie entfernt oder updated gerade\?</string>
-    <string name="error_invalid_host">Bitte gebe einen validen Host an</string>
+    <string name="error_invalid_host">Bitte gib einen validen Host an</string>
     <string name="error_cannot_open_settings">Systemeinstellungen können nicht geöffnet werden</string>
     <string name="restart_app">Neustarten</string>
     <string name="restart_app_for_changes">Die Änderungen werden nach einem Neustart aktiv.</string>
@@ -85,8 +85,8 @@
         <item quantity="other">%1$d Anfragen wurden bisher blockiert</item>
     </plurals>
     <plurals name="dnsrule_total_resolve_count">
-        <item quantity="one">%1$d Anfrage wurde bisher von den DNS Regeln aufgelöst</item>
-        <item quantity="other">%1$d Anfragen wurden bisher von den DNS Regeln aufgelöst</item>
+        <item quantity="one">%1$d Anfrage wurde bisher von den DNS-Regeln aufgelöst</item>
+        <item quantity="other">%1$d Anfragen wurden bisher von den DNS-Regeln aufgelöst</item>
     </plurals>
     <string name="appintro_server_choose_adblock">Ein Server, welcher Werbung und Tracking blockiert</string>
     <string name="appintro_server_choose_forth">Ein Server, welcher mich vor böswilligen Webseiten und Apps beschützt</string>
@@ -95,18 +95,18 @@
     <string name="appintro_server_choose_first">Den schnellsten</string>
     <string name="appintro_server_choose_disclaimer">Es existieren Server, welche mehrere Kategorien gleichzeitig erfüllen. Nebulo wählt automatisch den schnellsten.</string>
     <string name="appintro_server_choose_description">Welche Art von Server möchtest du in Nebulo verwenden\?</string>
-    <string name="appintro_server_choose_title">Das wichtigste zuerst</string>
+    <string name="appintro_server_choose_title">Das Wichtigste zuerst</string>
     <string name="appintro_forth_description">Du kannst Nebulo so konfigurieren, dass es als systemweiter Werbe- und Trackingblocker agiert.
 \n
-\nDo kannst Nebulo sogar zusammen mit manchen Firewall-Apps benutzen, um eine Privatsphäre noch mehr zu schützen.</string>
+\nDu kannst Nebulo sogar zusammen mit manchen Firewall-Apps benutzen, um eine Privatsphäre noch mehr zu schützen.</string>
     <string name="appintro_forth_title">Eine letzte Sache</string>
     <string name="appintro_third_description">Nebulo kommt mit einer Tonne an sinnvollen Funktionen wie beispielsweise PIN-Schutz, Geschwindigkeittests oder Überwachung der DNS-Aktivität.
 \n
-\nErkunde die App um zu entdecken, was Open-Source Software zu bieten hat.</string>
+\nErkunde die App um zu entdecken, was Open-Source-Software zu bieten hat.</string>
     <string name="appintro_third_title">Voll ausgestattet für große Dinge</string>
     <string name="appintro_second_description">Durch Verschlüsseln von DNS, einem der ältesten Protokolle des Internets, liegt es in deiner Hand.
 \n
-\nMache es schwieriger für deinen Netzbetreiber dich zu tracken, indem du DNS-über-HTTPS oder DNS-über-TLS in Nebulo verwendest.</string>
+\nMache es schwieriger für deinen Netzbetreiber dich zu tracken, indem du DNS-over-HTTPS oder DNS-over-TLS in Nebulo verwendest.</string>
     <string name="appintro_second_title">Deine Privatsphäre ist wichtig</string>
     <string name="appintro_first_description">Nebulo ist eine App um deine Privatsphäre und dein Gerät zu schützen.
 \n

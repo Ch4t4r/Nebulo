@@ -18,7 +18,7 @@
     <string name="dialog_crashreportingusages_data_app_1">Startzeit</string>
     <string name="dialog_crashreportingusages_data_app_2">Version</string>
     <string name="dialog_crashreportingusages_data_app_3">Datenbankversion</string>
-    <string name="dialog_crashreportingusages_data_app_4">DNS Servername</string>
+    <string name="dialog_crashreportingusages_data_app_4">DNS-Servername</string>
     <string name="dialog_crashreportingusages_data_app_5">Primärer DNS server</string>
     <string name="dialog_crashreportingusages_data_app_6">Sekundärer DNS server</string>
     <string name="dialog_crashreportingusages_data_os_1">Name (z.B. Android)</string>
