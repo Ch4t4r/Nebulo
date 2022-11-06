@@ -36,7 +36,7 @@
     <string name="title_dnscache_maxsize">Maximale Zwischenspeichergröße</string>
     <string name="summary_dnscache_maxsize">Setzt die maximal erlaubte Anzahl an Einträgen im Zwischenspeicher</string>
     <string name="title_dnscache_usedefaulttimes">Standard-Aufbewahrungszeit</string>
-    <string name="summary_dnscache_usedefaulttimes">Speichere DNS Anfragen solange im Cache, wie es der DNS Server (anhand der TTL) empfiehlt</string>
+    <string name="summary_dnscache_usedefaulttimes">Speichere DNS Anfragen solange im Cache, wie es der DNS-Server (anhand der TTL) empfiehlt</string>
     <string name="title_dnscache_minimum_cache_time">Minimale Aufbewahrungszeit</string>
     <string name="summary_dnscache_minimum_cache_time">Die minimale Aufbewahrungszeit im Zwischenspeicher. Egal, ob die Standardaufbewahrungszeit kürzer wäre. Lange Aufbewahrungszeiten könnten dazu führen, dass die Daten im Zwischenspeicher veraltet sind. 
 \nAktuell: %1$d Sekunden</string>
@@ -72,13 +72,13 @@
     <string name="title_disallow_other_vpns">Verbiete andere VPNs</string>
     <string name="summary_disallow_other_vpns">Erlaube es nicht, andere VPNs zu starten, solange die App nicht explizit gestoppt wurde</string>
     <string name="title_bypass_searchdomains">Suchdomain-Umgehung</string>
-    <string name="summary_bypass_searchdomains">Sende Suchdomains (z.B. MyPC.local oder MyPc.fritz.box) zu dem DNS Server deines aktuellen Netzwerkes, anstatt zum konfigurierten DNS Server. 
+    <string name="summary_bypass_searchdomains">Sende Suchdomains (z.B. MyPC.local oder MyPc.fritz.box) zu dem DNS-Server deines aktuellen Netzwerkes, anstatt zum konfigurierten DNS-Server. 
 \nDies wird ausdrücklich empfohlen. Diese Anfragen verlassen dein Netzwerk nicht</string>
     <string name="title_pause_on_captiveportal">Bei Anmeldeportal pausieren</string>
     <string name="summary_pause_on_captiveportal">Leite DNS Anfragen nicht an den konfigurierten Server weiter, wenn eine Anmeldung im Netzerk benötigt wird. Die Weiterleitung wird kurz nach der Anmeldung automatisch vorgesetzt. 
 \nDas Deaktivieren dieser Option macht es möglicherweise nicht möglich, die Anmeldeseite zu öffnen</string>
     <string name="title_show_noconnection_notification">Benachrichtigung bei keiner Verbindung</string>
-    <string name="summary_show_noconnection_notification">Zeige eine Benachrichtigung, wenn die App keine Verbindung zum DNS Server hat</string>
+    <string name="summary_show_noconnection_notification">Zeige eine Benachrichtigung, wenn die App keine Verbindung zum DNS-Server hat</string>
     <string name="preference_category_querylogging">Anfragenspeicherung</string>
     <string name="title_log_queries">Speichere Anfragen</string>
     <string name="summary_log_queries">Speichere alle vom Gerät gestellten DNS Anfragen und deren Antworten</string>
@@ -87,56 +87,56 @@
     <string name="title_delete_queries">Anfragen leeren</string>
     <string name="summary_delete_queries">Klicke hier, um alle gespeicherten Anfragen zu löschen</string>
     <string name="title_catch_other_dns_servers">Anderen DNS-Traffic abfangen</string>
-    <string name="summary_catch_other_dns_servers">Fange den Traffic von bekannten DNS Servern ab und leite ihn durch Nebulo sicher weiter</string>
+    <string name="summary_catch_other_dns_servers">Fange den Traffic von bekannten DNS-Servern ab und leite ihn durch Nebulo sicher weiter</string>
     <string name="title_advanced_logging">Erweiterte Protokollierung</string>
     <string name="summary_advanced_logging">Fügt mehr Protokollierung hinzu, was bei persistenteren Problemen unterstützen kann</string>
     <string name="title_language">Sprache</string>
     <string name="summary_language">Ändere die Sprache der App</string>
-    <string name="title_map_query_refused">Abgelehnte Anfragen als geblockte Hosts in­ter­pre­tie­ren</string>
-    <string name="summary_map_query_refused">Einige DNS Server lehnen möglicherweise die Bearbeitung einer Anfrage ab, wenn der Host blockiert ist. Diese Einstellung blockiert den Host, wenn die Anfrage abgelehnt wird, da das System sonst eventuell verwirrt wird</string>
+    <string name="title_map_query_refused">Abgelehnte Anfragen als geblockte Hosts interpretieren</string>
+    <string name="summary_map_query_refused">Einige DNS-Server lehnen möglicherweise die Bearbeitung einer Anfrage ab, wenn der Host blockiert ist. Diese Einstellung blockiert den Host, wenn die Anfrage abgelehnt wird, da das System sonst eventuell verwirrt wird</string>
     <string name="title_simple_notification">Simple Benachrichtigung</string>
     <string name="summary_simple_notification">Zeige eine simplifizierte Benachrichtigung</string>
-    <string name="title_clear_dnscache">DNS Cache leeren</string>
+    <string name="title_clear_dnscache">DNS-Cache leeren</string>
     <string name="title_crashreporting_type">Automatische Absturzmeldungen</string>
     <string name="summary_crashreporting_type">Stelle ein, was für Daten bei einem Absturz automatisch an den Entwickler geschickt werden sollen. Absturzdaten enthalten niemals persönliche Daten und helfen dabei, Probleme schneller zu beheben</string>
     <string name="crashreporting_type_full">Komplett (sende statistische &amp; debug Daten)</string>
     <string name="crashreporting_type_minimal">Minimal (sende nur Android &amp; App Version)</string>
     <string name="crashreporting_type_off">Aus (sende keine Abstürze)</string>
-    <string name="summary_clear_dnscache">Klicke hier, um den DNS Cache zu leeren. Zum Beispiel, wenn Webseiten nicht mehr richtig funktionieren, da sie gecached sind</string>
+    <string name="summary_clear_dnscache">Klicke hier, um den DNS-Cache zu leeren. Zum Beispiel, wenn Webseiten nicht mehr richtig funktionieren, da sie gecached sind</string>
     <string name="title_restart_vpn_on_networkchange">Bei Netzwechsel neustarten</string>
     <string name="summary_restart_vpn_on_networkchange">Starte die App neu, wenn das Gerät das Netzwerk ändert. Aktiviere dies, wenn du Probleme mit der App hast, wenn du zwischen mehreren Netzwerken wechselst.
 \nDies hat keinen Effekt, wenn die App nicht aktiv ist</string>
     <string name="title_show_revoked_notification">Benachrichtigung bei verlorener Berechtigung</string>
-    <string name="summary_show_revoked_notification">Zeige eine Benachrichtigung, wenn Nebulo die Berechtigung für den VPN verliert</string>
-    <string name="summary_local_server_port">Port des DNS Servers, welcher gestartet wird. Nur Ports über 1024 sind erlaubt</string>
+    <string name="summary_show_revoked_notification">Zeige eine Benachrichtigung, wenn Nebulo die Berechtigung für das VPN verliert</string>
+    <string name="summary_local_server_port">Port des DNS-Servers, welcher gestartet wird. Nur Ports über 1024 sind erlaubt</string>
     <string name="title_local_server_port">Serverport</string>
-    <string name="summary_run_without_vpn">Wenn aktiviert wird Nebulo einen DNS Server auf deinem Gerät starten</string>
+    <string name="summary_run_without_vpn">Wenn aktiviert wird Nebulo einen DNS-Server auf deinem Gerät starten</string>
     <string name="title_run_without_vpn">Ohne VPN nutzen</string>
     <string name="summary_category_nonvpnmode_forwardinfo">Server wird unter %1$s:%2$s bereitgestellt</string>
-    <string name="summary_category_nonvpnmode">Konfiguriert Nebulo als DNS Server zu agieren, anstatt einen Dummy VPN zu benutzen. Wenn diese Einstellung aktiviert ist, müssen DNS Anfragen von anderen Apps zu Nebulo weitergleitet werden</string>
+    <string name="summary_category_nonvpnmode">Konfiguriert Nebulo um als DNS-Server zu agieren, anstatt ein Dummy-VPN zu benutzen. Wenn diese Einstellung aktiviert ist, müssen DNS Anfragen von anderen Apps zu Nebulo weitergleitet werden</string>
     <string name="preference_category_nonvpnmode">Nicht-VPN Modus</string>
     <string name="summary_check_iptables">Hier klicken um Unerstützung von iptables zu überprüfen</string>
     <string name="title_check_iptables">Auf iptables überprüfen</string>
     <string name="summary_iptables_mode">DNS Anfragen mit iptables zu Nebulo weiterleiten. Dies benötigt root-Rechte. Wenn aktiviert wird keine weitere App im nicht-VPN Modus benötigt. Dies funktioniert möglicherweise nicht, wenn dein Netzwerk IPv6-fähig ist.</string>
-    <string name="title_iptables_mode">Nutzer iptables</string>
+    <string name="title_iptables_mode">Nutze iptables</string>
     <string name="summary_nonvpn_help">Klicke hier um Instruktionen für diese App zu erhalten</string>
     <string name="preference_category_nonvpnmode_help">Anleitungen für Apps von Fremdanbietern</string>
     <string name="summary_iptables_disable_ipv6">Deaktiviere IPv6 wenn iptables genutzt wird und stattdessen IPv4 genutzt werden kann. Dies behebt das Problem, dass DNS Anfragen in IPv6-Netzen möglicherweise Nebulo nicht erreichen.</string>
     <string name="title_iptables_disable_ipv6">IPv6 deaktivieren</string>
     <string name="preference_category_iptables">Iptables</string>
     <string name="fallbackdns_isp">Netzanbieter (unverschlüsselt)</string>
-    <string name="summary_fallback_dns">Konfiguriere den DNS Server, welcher intern von Nebulo genutzt wird. Standardmäßig ist dies der DNS Server deines Netzanbieters. Der hier konfigurierte Server wird nur für interne Zwecke genutzt und nicht für normale DNS Anfragen.</string>
-    <string name="title_fallback_dns">Interner DNS Server</string>
+    <string name="summary_fallback_dns">Konfiguriere den DNS-Server, welcher intern von Nebulo genutzt wird. Standardmäßig ist dies der DNS-Server deines Netzanbieters. Der hier konfigurierte Server wird nur für interne Zwecke genutzt und nicht für normale DNS Anfragen.</string>
+    <string name="title_fallback_dns">Interner DNS-Server</string>
     <string name="summary_nonvpn_help_generic">Klicke hier für eine Anleitung für VPN Apps</string>
     <string name="nonvpn_help_generic_title">Generische VPN Apps</string>
     <string name="summary_nonvpn_help_faq">Klicke hier um ein Browserfenster mit der Hilfe und Dokumentation zu öffnen</string>
     <string name="title_nonvpn_help_faq">Dokumantation</string>
     <string name="title_inform_bad_connection">Informiere mich bei schlechter Verbindung</string>
-    <string name="summary_nonvpn_use_lanip">Manche Apps erlauben es nicht, localhost als DNS Server einzutragen. Mit dieser Einstellung wird statt localhost die IP Adresse im Netzwerk genutzt. Der Nachteil hierbei ist, dass sich diese Adresse von Netzwerk zu Netzwerk ändert.</string>
-    <string name="title_nonvpn_use_lanip">Nutzer Geräte IP Addresse anstatt localhost</string>
-    <string name="summary_export_settings">Exportiere alle Einstellungen (schließt DNS Regel Quellen ein) in eine Datei. Diese Datei kann später von Nebulo geöffnet und importiert werden.</string>
+    <string name="summary_nonvpn_use_lanip">Manche Apps erlauben es nicht, localhost als DNS-Server einzutragen. Mit dieser Einstellung wird statt localhost die IP Adresse im Netzwerk genutzt. Der Nachteil hierbei ist, dass sich diese Adresse von Netzwerk zu Netzwerk ändert.</string>
+    <string name="title_nonvpn_use_lanip">Nutze die Geräte IP Addresse anstatt localhost</string>
+    <string name="summary_export_settings">Exportiere alle Einstellungen (schließt DNS-Regel Quellen ein) in eine Datei. Diese Datei kann später von Nebulo geöffnet und importiert werden.</string>
     <string name="title_export_settings">Einstellungen exportieren</string>
-    <string name="summary_inform_bad_connection">Informiere mich wenn der DNS Server gerade langsam ist</string>
+    <string name="summary_inform_bad_connection">Informiere mich wenn der DNS-Server gerade langsam ist</string>
     <string name="summary_excluded_apps_non_vpn">Wähle hier aus, welche Apps DoH/DoT benutzen sollen und welche nicht. Dies sollte zum Beispiel gemacht werden, wenn diese keine Internetverbindung haben.
 \n
 \nDies hat im Nicht-VPN Modus keinen Effekt.</string>

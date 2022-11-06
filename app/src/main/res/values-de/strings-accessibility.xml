@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="contentdescription_main_infoimage">Information Bild</string>
+<resources><string name="contentdescription_main_infoimage">Information Icon</string>
     <string name="contentdescription_main_servericon">Server Icon</string>
-    <string name="contentdescription_main_statusimage">Bild, welches anzeigt, ob die App läuft</string>
+    <string name="contentdescription_main_statusimage">Bild, welches anzeigt ob die App läuft</string>
     <string name="contentdescription_shared_app_icon">Icon der App</string>
     <string name="contentdescription_clear_search">Suche leeren</string>
 
